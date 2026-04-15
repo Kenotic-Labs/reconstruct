@@ -331,6 +331,30 @@ class RetrievalEngine:
                 survivors.append(c)
         return survivors
 
+    # ── Stage 5: Exit Cosine ─────────────────────────────────────
+
+    def _stage5_exit(
+        self, q_emb: np.ndarray, candidates: List[Candidate]
+    ) -> List[Candidate]:
+        for c in candidates:
+            c.exit_cosine = _cosine_from_blob(q_emb, c.edge.get("edge_embedding"))
+            c.source_stages.add("exit")
+        return sorted(candidates, key=lambda c: -c.exit_cosine)
+
+    # ── Stage 6: Validate (warn-only) ────────────────────────────
+
+    def _stage6_validate(
+        self, query_text: str, top: Candidate
+    ) -> Optional[str]:
+        """Warn-only. Returns warning string or None. Never drops."""
+        expected = parse_expected_answer_type(query_text)
+        if expected is None:
+            return None
+        if (top.edge.get("object_type") == expected
+                or top.edge.get("subject_type") == expected):
+            return None
+        return "type_mismatch"
+
     # ── Public API ───────────────────────────────────────────────
 
     def retrieve(self, user_id: int, query_text: str):

@@ -195,3 +195,31 @@ def test_stage4_relate_passes_through_when_no_entities(monkeypatch):
         user_id=999, query_text="x", candidates=[c],
     )
     assert out == [c]
+
+
+def test_stage5_exit_reranks_by_edge_embedding():
+    engine = RetrievalEngine()
+    q_emb = np.array([1.0, 0.0], dtype=np.float32)
+    c1 = Candidate(
+        relationship_id=1,
+        edge={"edge_embedding": np.array([0.9, 0.4], dtype=np.float32).tobytes()},
+        entry_cosine=0.4,
+    )
+    c2 = Candidate(
+        relationship_id=2,
+        edge={"edge_embedding": np.array([0.3, 0.95], dtype=np.float32).tobytes()},
+        entry_cosine=0.95,
+    )
+    out = engine._stage5_exit(q_emb=q_emb, candidates=[c2, c1])
+    assert out[0].relationship_id == 1
+    assert out[1].relationship_id == 2
+
+
+def test_stage5_exit_handles_null_edge_embedding():
+    engine = RetrievalEngine()
+    q_emb = np.array([1.0, 0.0], dtype=np.float32)
+    c = Candidate(relationship_id=1, edge={"edge_embedding": None},
+                  entry_cosine=0.8)
+    out = engine._stage5_exit(q_emb=q_emb, candidates=[c])
+    assert len(out) == 1
+    assert out[0].exit_cosine == 0.0
