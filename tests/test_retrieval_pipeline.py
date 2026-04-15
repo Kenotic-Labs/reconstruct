@@ -223,3 +223,33 @@ def test_stage5_exit_handles_null_edge_embedding():
     out = engine._stage5_exit(q_emb=q_emb, candidates=[c])
     assert len(out) == 1
     assert out[0].exit_cosine == 0.0
+
+
+def test_stage6_validate_warns_on_type_mismatch():
+    engine = RetrievalEngine()
+    c = Candidate(relationship_id=1,
+                  edge={"subject_type": "PERSON", "object_type": "TIME"})
+    warning = engine._stage6_validate(
+        query_text="Where does Maya work?", top=c,
+    )
+    assert warning == "type_mismatch"
+
+
+def test_stage6_validate_no_warning_when_match():
+    engine = RetrievalEngine()
+    c = Candidate(relationship_id=1,
+                  edge={"subject_type": "PERSON", "object_type": "LOCATION"})
+    warning = engine._stage6_validate(
+        query_text="Where does Maya work?", top=c,
+    )
+    assert warning is None
+
+
+def test_stage6_validate_no_warning_when_wh_unresolved():
+    engine = RetrievalEngine()
+    c = Candidate(relationship_id=1,
+                  edge={"subject_type": "PERSON", "object_type": "TIME"})
+    warning = engine._stage6_validate(
+        query_text="Tell me about Maya.", top=c,
+    )
+    assert warning is None
