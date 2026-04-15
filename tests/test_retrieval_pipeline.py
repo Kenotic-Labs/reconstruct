@@ -253,3 +253,24 @@ def test_stage6_validate_no_warning_when_wh_unresolved():
         query_text="Tell me about Maya.", top=c,
     )
     assert warning is None
+
+
+def test_retrieve_lookup_pipeline_returns_vantage(seeded_db, monkeypatch):
+    from app.vector import embedder
+    monkeypatch.setattr(
+        embedder, "embed_text",
+        lambda s: np.array([1.0, 0.0], dtype=np.float32),
+    )
+    engine = RetrievalEngine()
+    result = engine.retrieve(
+        user_id=seeded_db.user_id,
+        query_text="Where does Maya work?",
+    )
+    assert hasattr(result, "object")
+    assert result.object == "Vantage"
+    assert result.source == "moat_pipeline_lookup"
+    cd = result.convergence_details
+    assert set(cd.keys()) >= {
+        "entry_cosine", "entity_overlap", "cluster_members",
+        "hops_to_entity", "exit_cosine", "source_stages",
+    }

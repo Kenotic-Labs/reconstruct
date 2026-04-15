@@ -37,6 +37,7 @@ from typing import Any, Dict, List, Optional, Set, Tuple
 import numpy as np
 
 from app.db.session import get_db_context
+from app.vector import embedder as _embedder_module
 from app.vector.embedder import embed_text
 from app.engines.wh_type import parse_expected_answer_type
 from app.engines.retrieval_types import Candidate
@@ -358,75 +359,68 @@ class RetrievalEngine:
     # ── Public API ───────────────────────────────────────────────
 
     def retrieve(self, user_id: int, query_text: str):
-        """Returns Answer on success, StructuralRefusal on empty set."""
+        """Moat pipeline — Lookup mode.
+        Entry → Expand → Group → Relate → Exit Cosine → Validate (warn) → top-1."""
         query_text = (query_text or "").strip()
         if not query_text:
             return StructuralRefusal(reason="empty_query")
 
         try:
-            q_emb = embed_text(query_text)
+            q_emb = _embedder_module.embed_text(query_text)
         except Exception as e:
             return StructuralRefusal(
                 reason="embed_failed",
                 convergence_details={"error": str(e)[:200]},
             )
 
-        deduped = self._cosine_pool(user_id, q_emb)
-        if not deduped:
+        candidates = self._stage1_entry(user_id, q_emb)
+        candidates = self._stage2_expand(user_id, query_text, candidates)
+        if not candidates:
             return StructuralRefusal(
-                reason="no_edges",
+                reason="no_candidates",
                 convergence_details={"query": query_text},
             )
 
-        expected = parse_expected_answer_type(query_text)
-        if expected is not None:
-            coherent = [
-                (s, r) for (s, r) in deduped
-                if (r.get("object_type") == expected
-                    or r.get("subject_type") == expected)
-            ]
-            if not coherent:
-                return StructuralRefusal(
-                    reason="no_coherent_answer",
-                    convergence_details={
-                        "query": query_text,
-                        "expected_type": expected,
-                        "pool_size": len(deduped),
-                    },
-                )
-            candidates = coherent
-        else:
-            candidates = deduped
+        candidates = self._stage3_group(candidates)
+        candidates = self._stage4_relate(user_id, query_text, candidates)
+        if not candidates:
+            return StructuralRefusal(
+                reason="no_structural_match",
+                convergence_details={"query": query_text},
+            )
 
-        # Cosine is the relevance signal (question↔predicted-question, same
-        # semantic space). sequence_number breaks ties when cosines match —
-        # newer fact wins. Recency does not override relevance.
+        candidates = self._stage5_exit(q_emb, candidates)
+
+        # Tie-break by sequence_number DESC when exit cosines match.
         candidates.sort(
-            key=lambda sr: (
-                -sr[0],
-                -(sr[1].get("sequence_number") or 0),
+            key=lambda c: (
+                -c.exit_cosine,
+                -(c.edge.get("sequence_number") or 0),
             )
         )
 
-        top_score, top = candidates[0]
-        subj = top.get("subject") or ""
-        pred = top.get("predicate") or ""
-        obj = top.get("object") or ""
-        answer_text = self._triple_to_sentence(subj, pred, obj)
+        top = candidates[0]
+        warning = self._stage6_validate(query_text, top)
+
+        subj = top.edge.get("subject") or ""
+        pred = top.edge.get("predicate") or ""
+        obj = top.edge.get("object") or ""
+
         return Answer(
-            text=answer_text,
-            subject=subj,
-            predicate=pred,
-            object=obj,
-            confidence=1.0,
-            source="pq_cosine",
+            text=self._triple_to_sentence(subj, pred, obj),
+            subject=subj, predicate=pred, object=obj,
+            confidence=1.0, source="moat_pipeline_lookup",
             survivors=len(candidates),
             convergence_details={
                 "query": query_text,
-                "expected_type": expected,
-                "sequence_number": top.get("sequence_number"),
-                "cosine": top_score,
-                "pool_size": len(deduped),
+                "entry_cosine": top.entry_cosine,
+                "entity_overlap": top.entity_overlap,
+                "cluster_members": top.cluster_members,
+                "hops_to_entity": top.hops_to_entity,
+                "exit_cosine": top.exit_cosine,
+                "sequence_number": top.edge.get("sequence_number"),
+                "source_stages": sorted(top.source_stages),
+                "validate_warning": warning,
             },
         )
 
@@ -504,30 +498,7 @@ class RetrievalEngine:
             },
         )
 
-    # ── Cosine pool (steps 1..3 of the pipeline) ──────────────────
-
-    def _cosine_pool(
-        self, user_id: int, q_emb: np.ndarray
-    ) -> List[Tuple[float, Dict[str, Any]]]:
-        """Return [(cosine, edge_row_dict), ...] deduped by relationship_id,
-        sorted by cosine DESC, capped at _COSINE_POOL_SIZE.
-
-        Primary source: predicted_queries.question_embedding joined to
-        relationships. Fallback when no PQ rows exist for this user:
-        relationships.edge_embedding directly (legacy path for
-        pre-backfill DBs)."""
-        rows = self._fetch_pq_rows(user_id)
-        if rows:
-            return self._rank_rows(q_emb, rows, emb_col="question_embedding")
-
-        log.warning(
-            "pq_pool_empty for user_id=%s; falling back to edge_embedding",
-            user_id,
-        )
-        rows = self._fetch_edge_rows(user_id)
-        if not rows:
-            return []
-        return self._rank_rows(q_emb, rows, emb_col="edge_embedding")
+    # ── Fetchers (used by Stage 1 Entry) ──────────────────────────
 
     def _fetch_pq_rows(self, user_id: int) -> List[Dict[str, Any]]:
         sql = """
@@ -598,33 +569,6 @@ class RetrievalEngine:
         for r in rs:
             out.append(dict(r))
         return out
-
-    def _rank_rows(
-        self,
-        q_emb: np.ndarray,
-        rows: List[Dict[str, Any]],
-        emb_col: str,
-    ) -> List[Tuple[float, Dict[str, Any]]]:
-        scored: List[Tuple[float, Dict[str, Any]]] = []
-        for r in rows:
-            emb = _deserialize_emb(r.get(emb_col))
-            if emb is None:
-                continue
-            scored.append((_cosine(q_emb, emb), r))
-
-        scored.sort(key=lambda x: -x[0])
-
-        seen: Set[int] = set()
-        deduped: List[Tuple[float, Dict[str, Any]]] = []
-        for score, r in scored:
-            rid = r.get("relationship_id") or r.get("id")
-            if rid in seen:
-                continue
-            seen.add(rid)
-            deduped.append((score, r))
-            if len(deduped) >= _COSINE_POOL_SIZE:
-                break
-        return deduped
 
     # ── Cluster fusion (structural grammar engine) ───────────────
 
