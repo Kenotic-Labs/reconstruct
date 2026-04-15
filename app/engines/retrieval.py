@@ -171,33 +171,47 @@ class RetrievalEngine:
 
     def _stage1_entry(self, user_id: int, q_emb: np.ndarray) -> List[Candidate]:
         """Entry Cosine: max(pq_cosine, edge_cosine) per relationship_id,
-        top-K by entry_cosine. Both pools always run — no gating."""
+        top-K by entry_cosine. Both pools always run — no gating. Stores
+        pq_cosine and edge_cosine separately so Exit can rank by
+        answerability (PQ) while Entry cast the wide net (max)."""
         pq_rows = self._fetch_pq_rows(user_id)
         edge_rows = self._fetch_edge_rows(user_id)
 
         by_rid: Dict[int, Candidate] = {}
 
+        # PQ pool first — multiple PQs per edge possible; keep the max.
         for row in pq_rows:
             rid = row["relationship_id"]
             cos = _cosine_from_blob(q_emb, row.get("question_embedding"))
             existing = by_rid.get(rid)
             if existing is None:
-                cand = Candidate(relationship_id=rid, edge=dict(row), entry_cosine=cos)
+                cand = Candidate(
+                    relationship_id=rid, edge=dict(row),
+                    pq_cosine=cos,
+                )
                 cand.source_stages.add("entry")
                 by_rid[rid] = cand
-            elif cos > existing.entry_cosine:
-                existing.entry_cosine = cos
+            elif cos > existing.pq_cosine:
+                existing.pq_cosine = cos
 
+        # Edge pool.
         for row in edge_rows:
             rid = row["relationship_id"]
             cos = _cosine_from_blob(q_emb, row.get("edge_embedding"))
             existing = by_rid.get(rid)
             if existing is None:
-                cand = Candidate(relationship_id=rid, edge=dict(row), entry_cosine=cos)
+                cand = Candidate(
+                    relationship_id=rid, edge=dict(row),
+                    edge_cosine=cos,
+                )
                 cand.source_stages.add("entry")
                 by_rid[rid] = cand
-            elif cos > existing.entry_cosine:
-                existing.entry_cosine = cos
+            elif cos > existing.edge_cosine:
+                existing.edge_cosine = cos
+
+        # entry_cosine = max(pq, edge) — recall key.
+        for c in by_rid.values():
+            c.entry_cosine = max(c.pq_cosine, c.edge_cosine)
 
         out = sorted(by_rid.values(), key=lambda c: -c.entry_cosine)
         return out[: self._ENTRY_POOL_SIZE]
@@ -337,8 +351,15 @@ class RetrievalEngine:
     def _stage5_exit(
         self, q_emb: np.ndarray, candidates: List[Candidate]
     ) -> List[Candidate]:
+        """Exit Cosine: rank by PQ (answerability), fall back to edge
+        cosine (similarity) only when a candidate has no PQ. PQ measures
+        'does this edge answer the query?'; edge_embedding measures
+        surface similarity. Exit picks the answer, not the lookalike."""
         for c in candidates:
-            c.exit_cosine = _cosine_from_blob(q_emb, c.edge.get("edge_embedding"))
+            if c.pq_cosine > 0:
+                c.exit_cosine = c.pq_cosine
+            else:
+                c.exit_cosine = c.edge_cosine
             c.source_stages.add("exit")
         return sorted(candidates, key=lambda c: -c.exit_cosine)
 

@@ -197,32 +197,37 @@ def test_stage4_relate_passes_through_when_no_entities(monkeypatch):
     assert out == [c]
 
 
-def test_stage5_exit_reranks_by_edge_embedding():
+def test_stage5_exit_ranks_by_pq_cosine_not_edge():
+    """Exit measures answerability (PQ) — the edge whose PQ best
+    matches the query wins, even if another edge has a higher surface
+    similarity."""
     engine = RetrievalEngine()
     q_emb = np.array([1.0, 0.0], dtype=np.float32)
+    # c1: low edge similarity (0.2), HIGH pq answerability (0.9)
     c1 = Candidate(
-        relationship_id=1,
-        edge={"edge_embedding": np.array([0.9, 0.4], dtype=np.float32).tobytes()},
-        entry_cosine=0.4,
+        relationship_id=1, edge={},
+        pq_cosine=0.9, edge_cosine=0.2,
     )
+    # c2: HIGH edge similarity (0.95), low pq answerability (0.3)
     c2 = Candidate(
-        relationship_id=2,
-        edge={"edge_embedding": np.array([0.3, 0.95], dtype=np.float32).tobytes()},
-        entry_cosine=0.95,
+        relationship_id=2, edge={},
+        pq_cosine=0.3, edge_cosine=0.95,
     )
     out = engine._stage5_exit(q_emb=q_emb, candidates=[c2, c1])
-    assert out[0].relationship_id == 1
+    assert out[0].relationship_id == 1  # pq wins over surface
     assert out[1].relationship_id == 2
 
 
-def test_stage5_exit_handles_null_edge_embedding():
+def test_stage5_exit_falls_back_to_edge_when_no_pq():
+    """If a candidate has no PQ (edge-only write path), Exit falls back
+    to edge_cosine — something is better than 0.0."""
     engine = RetrievalEngine()
     q_emb = np.array([1.0, 0.0], dtype=np.float32)
-    c = Candidate(relationship_id=1, edge={"edge_embedding": None},
-                  entry_cosine=0.8)
+    c = Candidate(relationship_id=1, edge={},
+                  pq_cosine=0.0, edge_cosine=0.7)
     out = engine._stage5_exit(q_emb=q_emb, candidates=[c])
     assert len(out) == 1
-    assert out[0].exit_cosine == 0.0
+    assert out[0].exit_cosine == 0.7
 
 
 def test_stage6_validate_warns_on_type_mismatch():
