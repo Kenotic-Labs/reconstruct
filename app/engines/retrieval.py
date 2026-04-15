@@ -522,7 +522,9 @@ class RetrievalEngine:
                    r.edge_emotional_label    AS edge_emotional_label,
                    r.edge_episodic_significance AS edge_episodic_significance,
                    r.edge_temporal_context   AS edge_temporal_context,
-                   r.edge_relational_type    AS edge_relational_type
+                   r.edge_relational_type    AS edge_relational_type,
+                   r.edge_embedding          AS edge_embedding,
+                   r.arc_id                  AS arc_id
               FROM predicted_queries pq
               JOIN relationships r ON r.id = pq.relationship_id
              WHERE pq.user_id = ?
@@ -557,7 +559,8 @@ class RetrievalEngine:
                    r.edge_emotional_label    AS edge_emotional_label,
                    r.edge_episodic_significance AS edge_episodic_significance,
                    r.edge_temporal_context   AS edge_temporal_context,
-                   r.edge_relational_type    AS edge_relational_type
+                   r.edge_relational_type    AS edge_relational_type,
+                   r.arc_id                  AS arc_id
               FROM relationships r
              WHERE r.user_id = ?
                AND COALESCE(r.is_current, 1) = 1
