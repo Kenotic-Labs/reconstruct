@@ -121,3 +121,42 @@ def test_stage2_expand_passes_through_when_no_entities(seeded_db, monkeypatch):
     assert len(out) == 1
     assert out[0].relationship_id == 99
     assert out[0].entity_overlap == 0
+
+
+def test_stage3_group_keeps_cluster_peers_and_sets_members():
+    engine = RetrievalEngine()
+    c1 = Candidate(relationship_id=1,
+                   edge={"cluster_id": "cA", "arc_id": None},
+                   entity_overlap=1)
+    c2 = Candidate(relationship_id=2,
+                   edge={"cluster_id": "cA", "arc_id": None},
+                   entity_overlap=0)
+    c3 = Candidate(relationship_id=3,
+                   edge={"cluster_id": "cB", "arc_id": None},
+                   entity_overlap=0)
+    out = engine._stage3_group([c1, c2, c3])
+    kept = {c.relationship_id for c in out}
+    assert kept == {1, 2}
+    for c in out:
+        assert c.cluster_members == 2
+
+
+def test_stage3_group_uses_arc_id_as_secondary_anchor():
+    engine = RetrievalEngine()
+    c1 = Candidate(relationship_id=1,
+                   edge={"cluster_id": "cA", "arc_id": "arc1"},
+                   entity_overlap=1)
+    c2 = Candidate(relationship_id=2,
+                   edge={"cluster_id": "cB", "arc_id": "arc1"},
+                   entity_overlap=0)
+    out = engine._stage3_group([c1, c2])
+    kept = {c.relationship_id for c in out}
+    assert kept == {1, 2}
+
+
+def test_stage3_group_passes_through_when_no_overlap():
+    engine = RetrievalEngine()
+    c1 = Candidate(relationship_id=1, edge={"cluster_id": "cA"},
+                   entity_overlap=0)
+    out = engine._stage3_group([c1])
+    assert len(out) == 1

@@ -260,6 +260,38 @@ class RetrievalEngine:
 
         return list(by_rid.values())
 
+    # ── Stage 3: Group (cluster ∪ arc anchor) ────────────────────
+
+    def _stage3_group(self, candidates: List[Candidate]) -> List[Candidate]:
+        anchor_clusters = {
+            c.edge.get("cluster_id") for c in candidates
+            if c.entity_overlap > 0 and c.edge.get("cluster_id")
+        }
+        anchor_arcs = {
+            c.edge.get("arc_id") for c in candidates
+            if c.entity_overlap > 0 and c.edge.get("arc_id")
+        }
+        if not anchor_clusters and not anchor_arcs:
+            return candidates  # inapplicable — pass through
+
+        survivors = [
+            c for c in candidates
+            if (c.edge.get("cluster_id") in anchor_clusters
+                or c.edge.get("arc_id") in anchor_arcs)
+        ]
+
+        cluster_counts = Counter(
+            c.edge.get("cluster_id") for c in survivors
+            if c.edge.get("cluster_id")
+        )
+        for c in survivors:
+            cid = c.edge.get("cluster_id")
+            if cid:
+                c.cluster_members = cluster_counts.get(cid, 0)
+            c.source_stages.add("group")
+
+        return survivors
+
     # ── Public API ───────────────────────────────────────────────
 
     def retrieve(self, user_id: int, query_text: str):
