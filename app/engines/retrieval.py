@@ -424,40 +424,50 @@ class RetrievalEngine:
             },
         )
 
+    _RECONSTRUCT_TOP_N = 20
+
     def reconstruct(self, user_id: int, query_text: str) -> Situation:
-        """Group the cosine top-k by cluster_id and fuse each cluster via
-        the deterministic grammar engine."""
+        """Moat pipeline — Reconstruction mode. Same stages 1-5 as
+        retrieve(). Output: top-N grouped by cluster_id, fused via the
+        existing grammar engine."""
         query_text = (query_text or "").strip()
         if not query_text:
             return Situation(
-                narrative="",
-                source="structural_refusal",
+                narrative="", source="structural_refusal",
                 convergence_details={"reason": "empty_query"},
             )
         try:
-            q_emb = embed_text(query_text)
+            q_emb = _embedder_module.embed_text(query_text)
         except Exception as e:
             return Situation(
-                narrative="",
-                source="structural_refusal",
+                narrative="", source="structural_refusal",
                 convergence_details={"reason": "embed_failed",
                                      "error": str(e)[:200]},
             )
 
-        deduped = self._cosine_pool(user_id, q_emb)
-        if not deduped:
+        candidates = self._stage1_entry(user_id, q_emb)
+        candidates = self._stage2_expand(user_id, query_text, candidates)
+        if not candidates:
             return Situation(
-                narrative="",
-                source="structural_refusal",
-                survivors=0,
-                convergence_details={"reason": "no_edges"},
+                narrative="", source="structural_refusal", survivors=0,
+                convergence_details={"reason": "no_candidates"},
+            )
+        candidates = self._stage3_group(candidates)
+        candidates = self._stage4_relate(user_id, query_text, candidates)
+        candidates = self._stage5_exit(q_emb, candidates)
+
+        survivors = candidates[: self._RECONSTRUCT_TOP_N]
+        if not survivors:
+            return Situation(
+                narrative="", source="structural_refusal", survivors=0,
+                convergence_details={"reason": "no_structural_match"},
             )
 
-        # Group by cluster_id.
+        # Group by cluster_id — feed the existing fuser.
         groups: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
-        for _, r in deduped:
-            key = r.get("cluster_id") or "__unclustered__"
-            groups[key].append(r)
+        for c in survivors:
+            key = c.edge.get("cluster_id") or "__unclustered__"
+            groups[key].append(c.edge)
 
         cluster_tuples: List[Tuple[str, str, List[Dict[str, Any]]]] = []
         for key, edges in groups.items():
@@ -465,7 +475,6 @@ class RetrievalEngine:
             cluster_tuples.append((kt, key, edges))
 
         fused = [self._fuse_cluster(ct) for ct in cluster_tuples]
-
         narrative, grounding_map = self._render_situation_deterministic(fused)
 
         all_participants: Set[str] = set()
@@ -478,24 +487,19 @@ class RetrievalEngine:
             all_timeline.extend(c.timeline_edge_ids)
             if c.dominant_mood:
                 mood_votes[c.dominant_mood] += len(c.edges)
-
         dominant_mood = mood_votes.most_common(1)[0][0] if mood_votes else None
 
+        only_unclustered = (
+            set(groups.keys()) == {"__unclustered__"}
+        )
         return Situation(
-            narrative=narrative,
-            clusters=fused,
+            narrative=narrative, clusters=fused,
             participants=sorted(all_participants),
             dominant_mood=dominant_mood,
-            pivotal_events=all_pivotal,
-            timeline=all_timeline,
+            pivotal_events=all_pivotal, timeline=all_timeline,
             grounding_map=grounding_map,
-            source="reconstruct",
+            source="unclustered" if only_unclustered else "reconstruct",
             survivors=sum(len(c.edges) for c in fused),
-            convergence_details={
-                "query": query_text,
-                "cluster_count": len(fused),
-                "pool_size": len(deduped),
-            },
         )
 
     # ── Fetchers (used by Stage 1 Entry) ──────────────────────────

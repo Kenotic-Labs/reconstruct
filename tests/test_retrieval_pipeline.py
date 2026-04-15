@@ -274,3 +274,21 @@ def test_retrieve_lookup_pipeline_returns_vantage(seeded_db, monkeypatch):
         "entry_cosine", "entity_overlap", "cluster_members",
         "hops_to_entity", "exit_cosine", "source_stages",
     }
+
+
+def test_reconstruct_uses_same_pipeline_top_n_then_fuses(seeded_db, monkeypatch):
+    from app.vector import embedder
+    monkeypatch.setattr(
+        embedder, "embed_text",
+        lambda s: np.array([1.0, 0.0], dtype=np.float32),
+    )
+    engine = RetrievalEngine()
+    sit = engine.reconstruct(
+        user_id=seeded_db.user_id,
+        query_text="Tell me about Maya.",
+    )
+    assert sit.source in {"reconstruct", "unclustered"}
+    assert sit.survivors >= 1
+    assert "Maya" in (sit.narrative or "") or any(
+        "Maya" in (c.participants or []) for c in (sit.clusters or [])
+    )
