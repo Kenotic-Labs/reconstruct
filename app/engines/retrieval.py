@@ -430,24 +430,16 @@ class RetrievalEngine:
 
         candidates = self._stage5_exit(q_emb, candidates)
 
-        # Moat lexicographic ranking — each stage's signal contributes
-        # in structural priority order. No weights.
-        #   1. entity_overlap    — how many query entities this edge touches
-        #   2. cluster_members   — narrative connectedness within survivors
-        #   3. hops_to_entity    — graph proximity (smaller is better)
-        #   4. exit_cosine       — PQ answerability
-        #   5. sequence_number   — recency tie-break
-        # Within each tier, higher wins; ties fall through to the next.
-        def _hops_key(c):
-            # Unreachable (-1) is worst; treat as +inf for ordering.
-            return c.hops_to_entity if c.hops_to_entity >= 0 else 10_000
-
+        # Final ranking: PQ answerability (exit_cosine) with
+        # sequence_number DESC tie-break. Structural signals
+        # (entity_overlap, cluster_members, hops_to_entity) already
+        # gated the pool at Stages 2-4 — they decided who survives,
+        # not who wins at the top. PQ cosine is the right final
+        # discriminator because it measures answerability, not
+        # similarity.
         candidates.sort(
             key=lambda c: (
-                -c.entity_overlap,
                 -c.exit_cosine,
-                _hops_key(c),
-                -c.cluster_members,
                 -(c.edge.get("sequence_number") or 0),
             )
         )
@@ -510,14 +502,9 @@ class RetrievalEngine:
         candidates = self._stage5_exit(q_emb, candidates)
 
         # Same Moat lexicographic ranking as Lookup — pick top-N for fuse.
-        def _hops_key_r(c):
-            return c.hops_to_entity if c.hops_to_entity >= 0 else 10_000
         candidates.sort(
             key=lambda c: (
-                -c.entity_overlap,
                 -c.exit_cosine,
-                _hops_key_r(c),
-                -c.cluster_members,
                 -(c.edge.get("sequence_number") or 0),
             )
         )
