@@ -1,0 +1,168 @@
+story_id: 354
+story_name: "Kenji Lopez-Alt Video Obsession"
+category: "Food and Cooking"
+description: |
+  Tests memory of Maya obsessively watching Kenji Lopez-Alt cooking videos
+  to improve her ramen technique. Verifies learning progression and recipe research.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:30 PM"
+    user_input: |
+      so Lily at work told me about this guy Kenji Lopez-Alt who has a YouTube channel and also wrote this massive book called The Food Lab and apparently his ramen recipe is like the definitive one and I've been watching his videos all night
+    expected_memory_stores:
+      - "Kenji Lopez-Alt"
+      - "YouTube channel"
+      - "The Food Lab book"
+      - "Lily Tran recommendation"
+      - "ramen recipe"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      okay so Kenji says the key to tonkotsu is you need to basically destroy the bones like really smash them and boil them hard so the collagen breaks down and that's what makes it creamy not fat it's collagen and I've been doing it totally wrong
+    expected_memory_stores:
+      - "smash bones"
+      - "collagen not fat"
+      - "hard boil"
+      - "technique correction"
+    expected_adaptation:
+      emotion_detected: "enlightened"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      I ordered The Food Lab book from Powell's because like if I'm gonna be in Portland I should at least support the local bookstore right and it's like 800 pages and Julian was like you're gonna read an 800 page cookbook and I'm like absolutely I am
+    expected_memory_stores:
+      - "The Food Lab ordered"
+      - "Powell's bookstore"
+      - "800 pages"
+      - "Julian reaction"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 6:30 PM"
+    user_input: |
+      I've watched like maybe 20 Kenji videos at this point and I'm taking actual notes in a notebook like a psycho and Julian keeps finding me at midnight watching POV cooking videos with headphones on and Kobe sleeping on my feet
+    expected_memory_stores:
+      - "20 videos watched"
+      - "taking notes"
+      - "notebook"
+      - "midnight watching"
+      - "Kobe sleeping"
+    expected_adaptation:
+      emotion_detected: "obsessed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 5:00 PM"
+    user_input: |
+      Kenji also has this whole thing about the tare where you make it separately and combine it in the bowl not in the pot which is like genius because then you can adjust saltiness per serving and I was putting it all in the pot last time no wonder it was too salty
+    expected_memory_stores:
+      - "tare in bowl not pot"
+      - "adjust per serving"
+      - "previous mistake identified"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:00 AM"
+    user_input: |
+      the book arrived from Powell's and it's even bigger than I thought and the ramen section is like 30 pages with full science explanations about why each step works and honestly reading it feels like reading a textbook but in a good way like this is basically food engineering
+    expected_memory_stores:
+      - "Food Lab arrived"
+      - "30 page ramen section"
+      - "science explanations"
+      - "food engineering"
+    expected_adaptation:
+      emotion_detected: "fascinated"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 3:00 PM"
+    user_input: |
+      I made a spreadsheet yes a literal spreadsheet tracking what I learned from each video and what to try next time and Sam at work would be proud because I'm basically project managing my ramen journey
+    expected_memory_stores:
+      - "ramen spreadsheet"
+      - "tracking learnings"
+      - "Sam would be proud"
+      - "project managing cooking"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 5:00 PM"
+    user_input: |
+      who told me about Kenji Lopez-Alt again was it someone at work
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 11:00 AM"
+    user_input: |
+      okay second attempt is planned for next Saturday and this time I have a proper game plan like I wrote down every step with timing and temperatures and Julian said he'd be my sous chef which is cute but also I kinda need him because there's a lot of multitasking
+    expected_memory_stores:
+      - "second attempt next Saturday"
+      - "detailed game plan"
+      - "timing and temperatures"
+      - "Julian sous chef"
+    expected_adaptation:
+      emotion_detected: "optimistic"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 4:00 PM"
+    user_input: |
+      also I discovered Kenji has a video specifically about soft boiled eggs for ramen and the trick is 6 minutes and 30 seconds exactly in boiling water then ice bath immediately and I'm writing this down because my eggs were definitely overcooked last time
+    expected_memory_stores:
+      - "soft boiled egg technique"
+      - "6 minutes 30 seconds"
+      - "ice bath"
+      - "previous egg mistake"
+    expected_adaptation:
+      emotion_detected: "focused"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who recommended Kenji Lopez-Alt to Maya?"
+    expected_contains: ["Lily"]
+  - question: "What is Kenji Lopez-Alt's cookbook called?"
+    expected_contains: ["Food Lab"]
+  - question: "Where did Maya order the cookbook from?"
+    expected_contains: ["Powell's"]
+  - question: "What makes tonkotsu broth creamy according to Kenji?"
+    expected_contains: ["collagen"]
+  - question: "What technique did Maya learn about tare?"
+    expected_contains: ["bowl", "not", "pot"]
+  - question: "How long should soft boiled eggs cook for ramen?"
+    expected_contains: ["6 minutes", "30 seconds"]
+  - question: "How is Maya tracking her ramen learning?"
+    expected_contains: ["spreadsheet", "notes"]
+  - question: "Who is going to help Maya with her second attempt?"
+    expected_contains: ["Julian", "sous chef"]
+  - question: "How many Kenji videos has Maya watched?"
+    expected_contains: ["20"]
+  - question: "When is Maya's second ramen attempt?"
+    expected_contains: ["Saturday"]

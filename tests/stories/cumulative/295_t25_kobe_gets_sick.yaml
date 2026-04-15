@@ -1,0 +1,192 @@
+story_id: 295
+story_name: "Kobe Gets Sick"
+category: "Pet"
+description: |
+  Tests memory of Kobe getting sick with vomiting and lethargy. Maya initially thinks
+  it's a stomach bug but it turns out to be something more serious. Tests the initial
+  wrong diagnosis assumption.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 6:00 AM"
+    user_input: |
+      woke up to Kobe vomiting on the bedroom floor like a LOT of vomit and he looked at me with these sad eyes and Julian was like oh no buddy what happened and Kobe just laid back down which is not like him at all he's usually bouncing off the walls in the morning
+    expected_memory_stores:
+      - "Kobe vomiting"
+      - "bedroom floor"
+      - "sad eyes"
+      - "not bouncing"
+      - "unusual lethargy"
+    expected_adaptation:
+      emotion_detected: "worried"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 7:00 AM"
+    user_input: |
+      he threw up again and this time it was just yellow bile and he won't eat his breakfast and he's just lying on his bed barely moving and I'm getting really worried. Julian said maybe he ate something he shouldn't have or maybe it's just a stomach bug dogs get those right
+    expected_memory_stores:
+      - "vomited again"
+      - "yellow bile"
+      - "won't eat"
+      - "barely moving"
+      - "maybe ate something bad"
+      - "stomach bug theory"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 8:00 AM"
+    user_input: |
+      called Dr. Mills and she said if he's vomited multiple times and is lethargic to bring him in today and she can see us at 11 so I'm taking time off work and Julian said he'll come too and Kobe is just lying in his bed looking miserable
+    expected_memory_stores:
+      - "called Dr. Mills"
+      - "bring him in"
+      - "11 AM appointment"
+      - "taking time off work"
+      - "Julian coming"
+      - "Kobe miserable"
+    expected_adaptation:
+      emotion_detected: "scared"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 9:30 AM"
+    user_input: |
+      he vomited a third time and now there's nothing left in his stomach and he's drinking water but then throwing that up too and I'm googling dog vomiting causes which I KNOW I shouldn't do but I can't help it and it's saying everything from stomach bug to parvo to obstruction to pancreatitis
+    expected_memory_stores:
+      - "vomited third time"
+      - "nothing in stomach"
+      - "throwing up water"
+      - "googling symptoms"
+      - "parvo obstruction pancreatitis"
+    expected_adaptation:
+      emotion_detected: "terrified"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 11:00 AM"
+    user_input: |
+      at Dr. Mills now and she's examining him and feeling his abdomen and she said his belly is tender especially in the upper right quadrant and she wants to do blood work and maybe an ultrasound and I'm holding Kobe's head and he's just looking at me like mom fix it
+    expected_memory_stores:
+      - "at vet"
+      - "Dr. Mills examining"
+      - "tender abdomen"
+      - "upper right quadrant"
+      - "blood work"
+      - "ultrasound"
+      - "Kobe looking at Maya"
+    expected_adaptation:
+      emotion_detected: "heartbroken"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 12:30 PM"
+    user_input: |
+      blood work came back and his lipase levels are really elevated and Dr. Mills said she's concerned about pancreatitis not just a stomach bug and she wants to do the ultrasound to confirm and I'm like pancreatitis is that serious and she said it can be if not treated properly
+    expected_memory_stores:
+      - "elevated lipase"
+      - "pancreatitis concern"
+      - "not stomach bug"
+      - "correction from stomach bug"
+      - "ultrasound to confirm"
+      - "can be serious"
+    expected_adaptation:
+      emotion_detected: "scared"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 1:30 PM"
+    user_input: |
+      ultrasound confirmed it's pancreatitis the pancreas is inflamed and there's some fluid around it and Dr. Mills said it's moderate not severe which is good but he needs IV fluids and anti-nausea medication and possibly overnight monitoring and I started crying in the exam room
+    expected_memory_stores:
+      - "pancreatitis confirmed"
+      - "pancreas inflamed"
+      - "fluid around pancreas"
+      - "moderate not severe"
+      - "IV fluids needed"
+      - "anti-nausea meds"
+      - "overnight monitoring"
+      - "Maya crying"
+    expected_adaptation:
+      emotion_detected: "devastated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 2:00 PM"
+    user_input: |
+      Dr. Mills said pancreatitis in dogs is often caused by eating high-fat food and I was like wait we gave him bacon on Saturday from our brunch and she said yeah that could do it especially if he ate a lot and Julian looked at me and I looked at him and we both felt TERRIBLE
+    expected_memory_stores:
+      - "caused by high-fat food"
+      - "bacon on Saturday"
+      - "brunch bacon"
+      - "both felt terrible"
+      - "guilt"
+    expected_adaptation:
+      emotion_detected: "guilty"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 3:00 PM"
+    user_input: |
+      Dr. Mills said Woodstock Vet can handle moderate cases but if Kobe doesn't improve in 24 hours we should take him to Dove Lewis which is Portland's emergency animal hospital for more intensive care and the cost so far is $480 for the blood work ultrasound and first round of treatment
+    expected_memory_stores:
+      - "Woodstock Vet for now"
+      - "Dove Lewis if worse"
+      - "emergency animal hospital"
+      - "24 hour window"
+      - "$480 so far"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 10:00 PM"
+    user_input: |
+      Kobe is home on fluids and anti-nausea medication and he's still not eating but he stopped vomiting which Dr. Mills said is a good sign and he's sleeping on his bed and I'm sitting next to him on the floor and I can't sleep because I keep checking on him. Julian's asleep on the couch because he said he wanted to be close. what was the diagnosis again I want to make sure I tell my mom correctly
+    expected_memory_stores:
+      - "Kobe home"
+      - "on fluids and medication"
+      - "stopped vomiting"
+      - "not eating"
+      - "good sign"
+      - "Maya on floor"
+      - "Julian on couch"
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "vigilant"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is wrong with Kobe?"
+    expected_contains: ["pancreatitis"]
+  - question: "What did Maya initially think was wrong?"
+    expected_contains: ["stomach bug"]
+  - question: "What caused Kobe's pancreatitis?"
+    expected_contains: ["bacon", "high-fat", "food"]
+  - question: "What were the symptoms?"
+    expected_contains: ["vomiting", "letharg"]
+  - question: "What were Kobe's blood work results?"
+    expected_contains: ["lipase", "elevated"]
+  - question: "What emergency hospital might Kobe need?"
+    expected_contains: ["Dove Lewis"]
+  - question: "How much has the vet visit cost so far?"
+    expected_contains: ["480"]
+  - question: "Is the pancreatitis severe?"
+    expected_contains: ["moderate", "not severe"]
+  - question: "What treatment is Kobe getting?"
+    expected_contains: ["IV fluids", "anti-nausea"]
+  - question: "Who diagnosed Kobe?"
+    expected_contains: ["Dr. Mills", "Dr. Sara Mills"]

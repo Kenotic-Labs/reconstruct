@@ -1,0 +1,205 @@
+story_id: 293
+story_name: "Bark & Bond Training"
+category: "Pet"
+description: |
+  Tests memory of Maya and Julian enrolling Kobe in training at Bark & Bond.
+  Captures the trainer, the leash reactivity issue, and the beginning of positive
+  reinforcement work.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00 AM"
+    user_input: |
+      enrolled Kobe in a training program at Bark & Bond which is this place in SE Portland that Nadia's partner recommended and our trainer is a woman named Keiko Tanaka and she specializes in rescue dogs with behavioral issues
+    expected_memory_stores:
+      - "Bark & Bond"
+      - "SE Portland"
+      - "Nadia's partner recommended"
+      - "Keiko Tanaka trainer"
+      - "specializes rescue dogs"
+      - "behavioral issues"
+    expected_triples:
+      - ["user", "enrolled_dog_at", "Bark & Bond in SE Portland"]
+      - ["Keiko Tanaka", "is_trainer_at", "Bark & Bond"]
+      - ["Keiko Tanaka", "specializes_in", "rescue dogs with behavioral issues"]
+      - ["Nadia's partner", "recommended", "Bark & Bond"]
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:00 AM"
+    user_input: |
+      first session and Keiko asked us what our main concerns are and Julian immediately said THE SHOES and I was like okay but also he's reactive on leash like when we walk him and he sees another dog he lunges and barks and pulls and it's really stressful and kind of embarrassing
+    expected_memory_stores:
+      - "first training session"
+      - "shoe chewing concern"
+      - "leash reactive"
+      - "lunges at dogs"
+      - "barks and pulls"
+      - "stressful and embarrassing"
+    expected_triples:
+      - ["Kobe", "has_issue", "leash reactivity"]
+      - ["Kobe", "behavior", "lunges and barks at dogs on leash"]
+      - ["Julian", "top_concern", "shoe chewing"]
+      - ["user", "has_emotion", "embarrassed"]
+    expected_adaptation:
+      emotion_detected: "embarrassed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 10:30 AM"
+    user_input: |
+      Keiko said the leash reactivity is super common in rescue dogs because they often haven't been properly socialized and it's usually fear-based not aggression so the approach is positive reinforcement not punishment and we'll be using treats and a technique called look at me
+    expected_memory_stores:
+      - "leash reactivity common"
+      - "rescue dogs"
+      - "fear-based not aggression"
+      - "positive reinforcement"
+      - "no punishment"
+      - "treats"
+      - "look at me technique"
+    expected_triples:
+      - ["Keiko Tanaka", "explained", "leash reactivity is fear-based not aggression"]
+      - ["Keiko Tanaka", "uses_method", "positive reinforcement"]
+      - ["Kobe", "training_technique", "look at me"]
+    expected_adaptation:
+      emotion_detected: "learning"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 11:00 AM"
+    user_input: |
+      the look at me thing is basically you say look at me and when the dog makes eye contact you give them a treat and the idea is that when they see another dog they look at YOU instead of lunging and Keiko demonstrated with her own dog a border collie named Pepper wait that's the same name as our neighbor's cat lol
+    expected_memory_stores:
+      - "look at me training"
+      - "eye contact"
+      - "treat reward"
+      - "redirect attention"
+      - "Keiko's border collie"
+      - "Pepper same name as neighbor's cat"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 7:00 PM"
+    user_input: |
+      been practicing the look at me command all weekend and Kobe is getting it in the house like he'll look at me immediately when I say it but the second we're outside and there's a squirrel or another dog all bets are off he goes completely deaf
+    expected_memory_stores:
+      - "practicing look at me"
+      - "works inside"
+      - "fails outside"
+      - "squirrels and dogs"
+      - "goes deaf outside"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:00 AM"
+    user_input: |
+      second session with Keiko and she said it takes time like usually 6 to 8 weeks before you see real improvement with leash reactivity and she increased the difficulty by having another dog in the room at a distance and Kobe lost his mind at first but then we got two successful look at me's before he lunged
+    expected_memory_stores:
+      - "second session"
+      - "6-8 weeks for improvement"
+      - "another dog present"
+      - "at distance"
+      - "two successful look at me's"
+      - "then lunged"
+    expected_adaptation:
+      emotion_detected: "patient"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 6:30 PM"
+    user_input: |
+      the training program is $450 for eight sessions which is a lot but Keiko is really good and she also gave us homework like practice in increasingly distracting environments and reward with high value treats like chicken not kibble and Julian's been boiling chicken for Kobe every other day now
+    expected_memory_stores:
+      - "$450 for eight sessions"
+      - "homework"
+      - "increasing distraction"
+      - "high value treats"
+      - "chicken not kibble"
+      - "Julian boiling chicken"
+    expected_adaptation:
+      emotion_detected: "committed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 10:00 AM"
+    user_input: |
+      week three with Keiko and there was a BREAKTHROUGH today we were in the parking lot with another dog about 20 feet away and Kobe saw the dog and started to tense up and then he LOOKED AT ME on his own without me saying anything and I gave him the chicken and Keiko was like YES THAT'S IT
+    expected_memory_stores:
+      - "week three"
+      - "breakthrough"
+      - "parking lot"
+      - "dog 20 feet away"
+      - "Kobe looked at Maya voluntarily"
+      - "without command"
+      - "Keiko excited"
+    expected_adaptation:
+      emotion_detected: "thrilled"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 7:00 PM"
+    user_input: |
+      Kobe hasn't chewed any shoes in two weeks and Keiko said that's because we're giving him enough mental stimulation with the training and the chew toys and also she recommended a puzzle feeder which makes him work for his food and he loves it even though it takes him 20 minutes to eat now
+    expected_memory_stores:
+      - "no shoes chewed two weeks"
+      - "mental stimulation"
+      - "puzzle feeder"
+      - "works for food"
+      - "20 minutes to eat"
+      - "Keiko recommendation"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 8:00 PM"
+    user_input: |
+      Julian said the cutest thing tonight he was like I didn't know having a dog would make me a better person but like learning patience and consistency for Kobe's training has actually changed how I approach problems and I was like babe are you having a growth moment and he was like shut up
+    expected_memory_stores:
+      - "Julian growth"
+      - "patience from dog training"
+      - "consistency"
+      - "better person"
+      - "approach problems differently"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where does Kobe go for training?"
+    expected_contains: ["Bark & Bond"]
+  - question: "Who is Kobe's trainer?"
+    expected_contains: ["Keiko Tanaka"]
+  - question: "What is Kobe's main behavioral issue?"
+    expected_contains: ["leash reactive", "lunges"]
+  - question: "What training technique are they using?"
+    expected_contains: ["look at me", "positive reinforcement"]
+  - question: "How much does the training program cost?"
+    expected_contains: ["450"]
+  - question: "What breakthrough happened in week three?"
+    expected_contains: ["looked at Maya", "voluntarily", "without command"]
+  - question: "What high value treats does Kobe get?"
+    expected_contains: ["chicken"]
+  - question: "Is Kobe's reactivity aggression or fear-based?"
+    expected_contains: ["fear"]
+  - question: "What solved Kobe's shoe chewing?"
+    expected_contains: ["mental stimulation", "puzzle feeder", "training"]
+  - question: "How long does leash reactivity improvement typically take?"
+    expected_contains: ["6", "8", "weeks"]

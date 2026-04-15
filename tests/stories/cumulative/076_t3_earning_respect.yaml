@@ -1,0 +1,222 @@
+story_id: 76
+story_name: "Earning Respect"
+category: "Career"
+description: |
+  Tests memory of Maya solidifying her reputation at Conduit.
+  The incident fix leads to broader infrastructure improvements.
+  Verifies system tracks professional growth trajectory.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 9:00 AM"
+    user_input: |
+      started working on the race condition fix and it's actually a deep architectural issue like the reindex job and the live query path share the same lock manager and there's no isolation between them so I'm designing a proper isolation layer with separate lock scopes and it's the most interesting work I've done in years
+    expected_memory_stores:
+      - "race condition fix"
+      - "lock manager issue"
+      - "isolation layer design"
+      - "separate lock scopes"
+      - "most interesting work"
+    expected_triples:
+      - ["user", "working_on", "race condition fix"]
+      - ["reindex job", "shares", "lock manager with live query path"]
+      - ["user", "designing", "isolation layer with separate lock scopes"]
+      - ["user", "has_emotion", "engaged"]
+    expected_adaptation:
+      emotion_detected: "engaged"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 2:00 PM"
+    user_input: |
+      wrote up an RFC for the isolation layer and shared it with the team and Sam said it's one of the best RFCs he's seen at Conduit and Danny had three pages of comments but they were all constructive like genuinely trying to make it better not tear it down and I appreciated that
+    expected_memory_stores:
+      - "RFC written"
+      - "Sam best RFC"
+      - "Danny constructive feedback"
+      - "three pages comments"
+    expected_triples:
+      - ["user", "wrote", "RFC for isolation layer"]
+      - ["Sam", "praised", "RFC as one of the best at Conduit"]
+      - ["Danny", "gave", "three pages of constructive feedback"]
+      - ["user", "has_emotion", "proud"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 10:00 AM"
+    user_input: |
+      Lily and I paired on implementing the isolation layer and she's teaching me the parts of the codebase I don't know yet while I'm bringing the architecture vision and it's this perfect collaboration where we both bring something the other doesn't have and Sam said this is how engineering should work
+    expected_memory_stores:
+      - "Lily pairing"
+      - "implementation started"
+      - "complementary skills"
+      - "Sam praise"
+    expected_triples:
+      - ["user", "paired_with", "Lily on isolation layer"]
+      - ["Lily", "teaching", "user parts of codebase"]
+      - ["user", "bringing", "architecture vision"]
+      - ["Sam", "praised", "collaboration as how engineering should work"]
+    expected_adaptation:
+      emotion_detected: "collaborative"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 6:00 PM"
+    user_input: |
+      end of the week and I realized I haven't thought about Vantage or Derek in days which feels like progress and Julian noticed too he said you don't come home with that tension in your shoulders anymore and honestly he's right I feel lighter
+    expected_memory_stores:
+      - "haven't thought about Vantage"
+      - "tension gone"
+      - "Julian noticed"
+      - "feeling lighter"
+    expected_triples:
+      - ["user", "hasn't_thought_about", "Vantage or Derek in days"]
+      - ["Julian", "noticed", "user's shoulder tension is gone"]
+      - ["user", "has_emotion", "healed"]
+    expected_adaptation:
+      emotion_detected: "healed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Next Monday 11:00 AM"
+    user_input: |
+      oh wait I should mention my desk setup changed so um Sam moved me from the general engineering Slack channel to the infrastructure channel and also changed my role title in the system to search infrastructure engineer which isn't official yet but he said he's working on making it official
+    expected_memory_stores:
+      - "infrastructure channel"
+      - "role change"
+      - "search infrastructure engineer"
+      - "not official yet"
+      - "Sam working on it"
+      - "correction desk assignment"
+    expected_triples:
+      - ["Sam", "moved_user_to", "infrastructure Slack channel"]
+      - ["user", "role_title", "search infrastructure engineer"]
+      - ["user", "corrected", "role not official yet, Sam working on it"]
+      - ["user", "has_emotion", "pleased"]
+    expected_adaptation:
+      emotion_detected: "pleased"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Next Tuesday 3:00 PM"
+    user_input: |
+      Amir who barely talks approached me today and said he read my RFC and wants to collaborate on the monitoring side of the isolation layer and I was like yes absolutely and Lily said later that Amir almost never initiates collaboration so that's a huge compliment
+    expected_memory_stores:
+      - "Amir approached"
+      - "monitoring collaboration"
+      - "Amir rarely initiates"
+      - "Lily context"
+      - "huge compliment"
+    expected_triples:
+      - ["Amir", "approached_user_to", "collaborate on monitoring for isolation layer"]
+      - ["Amir", "trait", "rarely initiates collaboration"]
+      - ["Lily", "contextualized", "Amir approaching is a huge compliment"]
+      - ["user", "has_emotion", "honored"]
+    expected_adaptation:
+      emotion_detected: "honored"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Next Wednesday 10:00 AM"
+    user_input: |
+      what is Maya's current role title at Conduit
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Next Wednesday 4:00 PM"
+    user_input: |
+      the isolation layer PR is ready for review and it's 2300 lines of code with 97 percent test coverage and I tagged the whole team because it touches multiple services and I feel confident about it not arrogant just like I know this is good work
+    expected_memory_stores:
+      - "isolation layer PR"
+      - "2300 lines"
+      - "97 percent coverage"
+      - "whole team review"
+      - "confident"
+    expected_triples:
+      - ["isolation layer PR", "size", "2300 lines of code"]
+      - ["isolation layer PR", "test_coverage", "97 percent"]
+      - ["user", "tagged", "whole team for review"]
+      - ["user", "has_emotion", "confident"]
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Next Thursday 11:00 AM"
+    user_input: |
+      PR merged and we deployed it to production and the monitoring dashboards show zero lock contention issues since the deploy and Amir set up alerts to track it and Sam posted in the team channel saying Maya just shipped one of the most important infrastructure changes this quarter great work
+    expected_memory_stores:
+      - "PR merged"
+      - "deployed to production"
+      - "zero lock contention"
+      - "Amir monitoring"
+      - "Sam public praise"
+      - "most important change"
+    expected_triples:
+      - ["isolation layer", "deployed_to", "production"]
+      - ["production", "shows", "zero lock contention issues"]
+      - ["Amir", "set_up", "monitoring alerts"]
+      - ["Sam", "posted", "user shipped most important infra change this quarter"]
+      - ["user", "has_emotion", "accomplished"]
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Next Thursday 7:00 PM"
+    user_input: |
+      Julian took me out to dinner to celebrate at this nice Italian place on Alberta Street and he said you know what I'm most proud of and I said what and he said that you went from crying in a parking lot about Google to shipping infrastructure at a startup in like six weeks and when he put it that way I almost cried again but happy tears this time
+    expected_memory_stores:
+      - "dinner celebration"
+      - "Italian Alberta Street"
+      - "Julian reflection"
+      - "parking lot to shipping"
+      - "six weeks journey"
+      - "happy tears"
+    expected_triples:
+      - ["Julian", "took_user_to", "Italian restaurant on Alberta Street"]
+      - ["Julian", "reflected", "user went from crying in parking lot about Google to shipping infrastructure in six weeks"]
+      - ["user", "has_emotion", "emotional"]
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What infrastructure change did Maya ship at Conduit?"
+    expected_contains: ["isolation layer", "lock"]
+  - question: "What is Maya's current role title?"
+    expected_contains: ["search infrastructure engineer"]
+  - question: "How many lines of code was the isolation layer?"
+    expected_contains: ["2300"]
+  - question: "What test coverage did the isolation layer have?"
+    expected_contains: ["97 percent"]
+  - question: "Who wanted to collaborate with Maya on monitoring?"
+    expected_contains: ["Amir"]
+  - question: "What did Sam say about Maya's RFC?"
+    expected_contains: ["best", "seen at Conduit"]
+  - question: "Does Maya still think about Vantage?"
+    expected_contains: ["no", "not", "haven't"]
+  - question: "What results did the isolation layer show in production?"
+    expected_contains: ["zero lock contention"]
+  - question: "Where did Julian take Maya to dinner?"
+    expected_contains: ["Italian", "Alberta Street"]
+  - question: "What journey did Julian reflect on?"
+    expected_contains: ["parking lot", "Google", "shipping", "six weeks"]

@@ -1,0 +1,180 @@
+story_id: 531
+story_name: "Portland Winter Rain"
+category: "Weather and Seasons"
+description: |
+  Portland's November rain begins and Maya feels it. Low energy, SAD symptoms starting.
+  Cross-references mental health (T21), Dr. Pham, Wellbutrin, house (T41-T45),
+  and daily routines.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:30 AM"
+    user_input: |
+      it's November and it's been raining for nine straight days and I know I moved to Portland and I chose this and I love this city but NINE DAYS of rain is just like oppressive and I woke up this morning and it was still dark at 7:30 and I just laid there for twenty minutes not wanting to get up
+    expected_memory_stores:
+      - "nine straight days of rain"
+      - "November Portland"
+      - "dark at 7:30am"
+      - "couldn't get up for 20 minutes"
+      - "chose Portland"
+    expected_adaptation:
+      emotion_detected: "low"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 12:00 PM"
+    user_input: |
+      at work and I'm just dragging like I had two cups of coffee and I still feel foggy and Priya asked if I was ok during standup and I said yeah just tired and she gave me that look that says I don't believe you but ok and Marcus said he gets like this every November too and it's a Portland thing
+    expected_memory_stores:
+      - "dragging at work"
+      - "two coffees still foggy"
+      - "Priya noticed"
+      - "Marcus November thing"
+      - "Portland SAD common"
+    expected_adaptation:
+      emotion_detected: "drained"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      came home and went straight to bed at 6pm which is not normal for me and Julian found me under the covers and was like Maya it's 6 o'clock and I said I know I'm just so tired and he said this happened last November too remember and I was like wait it did and he said yeah you got really low energy around this time last year too
+    expected_memory_stores:
+      - "bed at 6pm"
+      - "Julian found her"
+      - "happened last November too"
+      - "pattern recognition"
+      - "low energy seasonal"
+    expected_adaptation:
+      emotion_detected: "exhausted"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 10:00 AM"
+    user_input: |
+      called Dr. Pham my psychiatrist because I think this might be SAD like seasonal affective disorder and she said it very well could be especially given my history with depression and she asked about my Wellbutrin dose and I said I'm still on 150 and she said let's try bumping to 200 for the winter months and see if that helps
+    expected_memory_stores:
+      - "Dr. Pham psychiatrist"
+      - "SAD possible"
+      - "history with depression"
+      - "Wellbutrin 150 to 200"
+      - "winter months adjustment"
+    expected_adaptation:
+      emotion_detected: "proactive"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      Dr. Pham also suggested a light therapy lamp and I found one on Amazon for 60 bucks and it's supposed to simulate sunlight and you use it for 30 minutes in the morning while you eat breakfast and I ordered it and Julian said if it works we're getting one for every room and I said Julian we're not turning our house into a tanning salon
+    expected_memory_stores:
+      - "light therapy lamp"
+      - "Amazon $60"
+      - "30 minutes morning use"
+      - "Julian jokes about every room"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 7:00 PM"
+    user_input: |
+      skipped climbing tonight because I just couldn't muster the energy and Omar texted and said we missed you and I said I'm in a November funk and he said same bro same and he sent me a meme about Portland weather that was like months of sadness but the coffee is good and I laughed a little
+    expected_memory_stores:
+      - "skipped climbing"
+      - "no energy"
+      - "Omar texts"
+      - "November funk"
+      - "Portland weather meme"
+    expected_adaptation:
+      emotion_detected: "withdrawn"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 8:00 PM"
+    user_input: |
+      Julian made soup tonight because he said soup is the only correct food when it rains for ten days and he made this amazing butternut squash soup and we ate it on the couch under a blanket with Kobe between us and I thought ok this is cozy this is fine the rain is fine when you have soup and a dog and a person
+    expected_memory_stores:
+      - "Julian made soup"
+      - "butternut squash"
+      - "couch blanket Kobe"
+      - "rain is fine with company"
+    expected_adaptation:
+      emotion_detected: "comforted"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 2:00 PM"
+    user_input: |
+      tried to take Kobe for a walk but the rain was coming down so hard that we both turned around after five minutes and he looked up at me like are you serious and I was like Kobe I agree let's go back and then he shook off inside the house and got water everywhere and Julian yelled KOBE from the other room
+    expected_memory_stores:
+      - "walk aborted after five minutes"
+      - "heavy rain"
+      - "Kobe turned around too"
+      - "shook off inside"
+      - "Julian yelled"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 6:00 PM"
+    user_input: |
+      been oversleeping this whole week like 9 to 10 hours which is way more than my usual 7 and I feel like I'm hibernating and Dr. Tate said oversleeping can be a sign of depression and I said I know but I think it's seasonal not clinical and she said the line between those can be thin so let's keep watching it
+    expected_memory_stores:
+      - "oversleeping 9-10 hours"
+      - "usual 7 hours"
+      - "hibernating feeling"
+      - "Dr. Tate depression warning"
+      - "seasonal vs clinical thin line"
+    expected_adaptation:
+      emotion_detected: "cautious"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 10:00 AM"
+    user_input: |
+      it's phone-free Sunday and I'm just lying on the couch watching the rain through the window and Kobe is asleep on my feet and the light therapy lamp arrived yesterday but I haven't set it up yet and Julian said do you want me to set it up and I said yeah I just don't have the energy and he said that's exactly why you need it and he's right
+    expected_memory_stores:
+      - "phone-free Sunday"
+      - "watching rain"
+      - "Kobe on feet"
+      - "lamp arrived not set up"
+      - "Julian will set up"
+      - "no energy paradox"
+    expected_adaptation:
+      emotion_detected: "listless"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How long has it been raining in Portland?"
+    expected_contains: ["nine", "ten", "days"]
+  - question: "What SAD symptoms is Maya experiencing?"
+    expected_contains: ["low energy", "oversleeping", "foggy"]
+  - question: "What medication change did Dr. Pham suggest?"
+    expected_contains: ["Wellbutrin", "150 to 200"]
+  - question: "What did Maya buy for SAD treatment?"
+    expected_contains: ["light therapy lamp", "$60"]
+  - question: "How long should Maya use the lamp?"
+    expected_contains: ["30 minutes", "morning"]
+  - question: "How much has Maya been sleeping?"
+    expected_contains: ["9 to 10 hours"]
+  - question: "What did Julian make during the rain?"
+    expected_contains: ["butternut squash soup"]
+  - question: "What happened on the walk with Kobe?"
+    expected_contains: ["turned around", "five minutes", "rain"]
+  - question: "What did Marcus say about November energy?"
+    expected_contains: ["Portland thing"]
+  - question: "What did Dr. Tate warn about?"
+    expected_contains: ["seasonal", "clinical", "thin line"]

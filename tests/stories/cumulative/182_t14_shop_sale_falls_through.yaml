@@ -1,0 +1,178 @@
+story_id: 182
+story_name: "Shop Sale Falls Through"
+category: "Life Events"
+description: |
+  First buyer's financing falls through. George disappointed. Tests
+  tracking failed business transaction, financial state, and emotional
+  impact of setbacks.
+duration_simulated: "3 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Week 1 Monday 7:00 PM"
+    user_input: |
+      Dad got a potential buyer for the shop this guy named Roger Willis who owns another auto shop across town and wants to expand and he came in and looked at everything and said he loves it and wants to buy it at the asking price of $380K and Dad was thrilled like actually smiling which he doesn't do often
+    expected_memory_stores:
+      - "Roger Willis potential buyer"
+      - "owns auto shop across town"
+      - "wants to expand"
+      - "$380K asking price"
+      - "George thrilled"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Week 1 Thursday 6:00 PM"
+    user_input: |
+      Dad and Roger are working out the details Roger wants to keep Tony and Rick which is HUGE for Dad that was his biggest concern and Roger said he'd honor their current pay and even offered Tony a manager position since Tony's been there longest and Dad was like this is perfect this is exactly what I wanted
+    expected_memory_stores:
+      - "Roger keeping Tony and Rick"
+      - "Tony offered manager"
+      - "current pay honored"
+      - "George relieved about employees"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Week 2 Monday 8:00 PM"
+    user_input: |
+      so Roger needs to get financing through his bank SBA loan or something and Dad said the bank is doing due diligence on the financials which is normal and Roger seemed confident but I told Dad don't celebrate until the money is in the account because I've heard of deals falling through at this stage
+    expected_memory_stores:
+      - "Roger needs SBA loan"
+      - "bank due diligence"
+      - "Maya cautious"
+      - "deals can fall through"
+    expected_adaptation:
+      emotion_detected: "cautious"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Week 2 Wednesday 5:00 PM"
+    user_input: |
+      Roger's bank called Dad and asked for more financial documents three years of tax returns profit and loss statements and Dad was like Maya I don't have all of this organized and I spent two evenings on video call with Dad going through his files and helping him scan and send documents to the bank this man has receipts from 2008 in a shoebox
+    expected_memory_stores:
+      - "bank requesting documents"
+      - "three years tax returns"
+      - "profit and loss statements"
+      - "Maya helping remotely"
+      - "video call document sessions"
+      - "receipts in shoebox"
+    expected_adaptation:
+      emotion_detected: "exasperated but helpful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Week 3 Monday 7:00 PM"
+    user_input: |
+      bad news Roger called Dad today and said the bank denied his loan application apparently his credit isn't strong enough for a $380K business loan and he doesn't have enough liquid assets for the down payment and Dad was so quiet on the phone when he told me I could barely hear him say it just fell through Maya
+    expected_memory_stores:
+      - "Roger's loan denied"
+      - "credit not strong enough"
+      - "insufficient down payment"
+      - "deal fell through"
+      - "George quiet and defeated"
+    expected_adaptation:
+      emotion_detected: "disappointed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Week 3 Monday 8:00 PM"
+    user_input: |
+      Mom called me separately and said Dad is really down about it he put on a brave face for Roger and said no hard feelings but when he hung up he just sat in his chair and didn't say anything for an hour and Vivian said it's not about the money it's about closure he was ready to let go and now he can't
+    expected_memory_stores:
+      - "George deflated"
+      - "sat in chair silent for an hour"
+      - "not about money"
+      - "about closure"
+      - "was ready to let go"
+      - "Vivian concerned"
+    expected_adaptation:
+      emotion_detected: "sad"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Week 3 Tuesday 12:00 PM"
+    user_input: |
+      Clara said she checked on Dad this morning and he was already at the shop working on a car like nothing happened and she said Dad are you okay and he said I'm fine Clara I'm working and she said he had that look he gets where he just buries everything and fixes cars instead of dealing with his feelings
+    expected_memory_stores:
+      - "George back at shop"
+      - "burying feelings"
+      - "working instead of processing"
+      - "Clara checked on him"
+    expected_adaptation:
+      emotion_detected: "concerned"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Week 3 Wednesday 7:00 PM"
+    user_input: |
+      I called Dad and tried to be positive I said Dad there will be other buyers and he said maybe and I said the shop is a great business the numbers are solid someone will want it and he said I know Maya I just thought it was done and I said I understand but we'll find the right buyer don't give up
+    expected_memory_stores:
+      - "Maya encouraging George"
+      - "George disappointed but listening"
+      - "thought it was done"
+      - "need to find new buyer"
+    expected_adaptation:
+      emotion_detected: "supportive"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Week 3 Thursday 5:00 PM"
+    user_input: |
+      Tony called Maya directly which he's never done before and he said hey I just want you to know your Dad is one of the best people I've ever worked for and whatever happens with the sale I'm gonna make sure the shop runs smooth until he's ready and I almost lost it because that's the kind of loyalty Dad inspires
+    expected_memory_stores:
+      - "Tony called Maya"
+      - "loyalty to George"
+      - "keeping shop running"
+      - "George inspires loyalty"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Week 3 Friday 8:00 PM"
+    user_input: |
+      Julian said maybe we should list the shop on a business marketplace website and also ask around in the Sacramento small business community and I said that's smart and I'm going to put together a proper listing with financials and photos and make it look professional because Dad's idea of marketing is a hand painted sign in the window which is charming but not effective
+    expected_memory_stores:
+      - "Julian suggests business marketplace"
+      - "Sacramento small business community"
+      - "Maya creating professional listing"
+      - "financials and photos"
+      - "Dad's marketing is hand painted sign"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What happened with the first buyer Roger Willis?"
+    expected_contains: ["loan denied", "financing fell through"]
+  - question: "Why was Roger's loan denied?"
+    expected_contains: ["credit", "down payment"]
+  - question: "How did George react to the failed sale?"
+    expected_contains: ["quiet", "defeated", "disappointed"]
+  - question: "What was the asking price for the shop?"
+    expected_contains: ["380"]
+  - question: "Who called Maya to vouch for George?"
+    expected_contains: ["Tony"]
+  - question: "What is the plan to find a new buyer?"
+    expected_contains: ["marketplace", "listing"]
+  - question: "Who is helping George with the sale?"
+    expected_contains: ["Maya"]
+  - question: "How does George cope with disappointment?"
+    expected_contains: ["buries", "works", "fixes cars"]
+  - question: "Would Roger have kept the employees?"
+    expected_contains: ["yes", "Tony", "Rick"]
+  - question: "What does Vivian say the sale is really about for George?"
+    expected_contains: ["closure"]

@@ -1,0 +1,173 @@
+story_id: 427
+story_name: "Board Invitation"
+category: "Volunteering"
+description: |
+  Diane asks Maya to join the Portland Food Bank board of directors.
+  Maya is honored but conflicted. Tests decision-making and priority tracking.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 2:00 PM"
+    user_input: |
+      ok so remember how Diane said after the food drive that she wanted to talk about me getting more involved well she asked me today if I'd be interested in joining the food bank's board of directors and I literally stopped breathing for a second like what me on a board
+    expected_memory_stores:
+      - "board of directors invitation"
+      - "Portland Food Bank board"
+      - "Diane asked"
+      - "Maya shocked"
+    expected_adaptation:
+      emotion_detected: "stunned"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 2:30 PM"
+    user_input: |
+      Diane said they have 9 board members and one is stepping down and they need someone with tech skills who understands operations and who cares about the mission and she said Maya you check all three boxes and I was like this is such an honor but I need to think about it
+    expected_memory_stores:
+      - "9 board members"
+      - "one stepping down"
+      - "need tech operations mission"
+      - "Maya checks all boxes"
+      - "needs to think about it"
+    expected_adaptation:
+      emotion_detected: "honored"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 3:00 PM"
+    user_input: |
+      the board meets once a month on the second Tuesday evening from 6 to 8pm and there's a two year commitment and they expect board members to attend quarterly events and help with fundraising strategy and I'm like that's a real commitment on top of everything else I have going on
+    expected_memory_stores:
+      - "monthly meetings second Tuesday"
+      - "6-8pm"
+      - "two year commitment"
+      - "quarterly events"
+      - "fundraising strategy"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 5:00 PM"
+    user_input: |
+      told Julian and his first reaction was that's amazing babe you should totally do it and then I listed all the commitments and he went quiet for a second and said ok that is a lot with the wedding coming up and your job and he was like maybe wait until after the wedding
+    expected_memory_stores:
+      - "Julian initially supportive"
+      - "then reconsidered"
+      - "wedding conflict"
+      - "suggests waiting"
+    expected_adaptation:
+      emotion_detected: "torn"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 7:00 PM"
+    user_input: |
+      called my mom and she said Maya you're 29 years old and being asked to serve on a board of directors that's incredible but also don't burn yourself out you have a tendency to say yes to everything and then suffer quietly and I was like wow mom that was very perceptive of you
+    expected_memory_stores:
+      - "Vivian proud"
+      - "warns about burnout"
+      - "says yes to everything"
+      - "suffers quietly"
+      - "perceptive comment"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 9:00 PM"
+    user_input: |
+      texted Clara and she said honestly Maya I think it's too much right now and she's the one who got me into volunteering in the first place so her opinion means a lot and she said you can always join the board later but you can't get your wedding planning time back
+    expected_memory_stores:
+      - "Clara says too much"
+      - "Clara got Maya into volunteering"
+      - "join board later"
+      - "wedding planning time"
+    expected_adaptation:
+      emotion_detected: "considering"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 10:00 AM"
+    user_input: |
+      talked to Dr Tate about it during an emergency text session I know it's not an emergency emergency but she said I could reach out and she said this connects to the pattern of me over-committing to prove my worth and she asked what I'd have to give up to say yes and I couldn't answer that
+    expected_memory_stores:
+      - "Dr Tate text session"
+      - "over-committing pattern"
+      - "proving worth"
+      - "what would you give up"
+      - "couldn't answer"
+    expected_adaptation:
+      emotion_detected: "insight"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 12:00 PM"
+    user_input: |
+      when did Diane say the board meets and for how long is the commitment
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 3:00 PM"
+    user_input: |
+      I think I've decided I'm going to say not right now but I'm going to tell Diane that after the wedding I'd love to revisit the conversation and in the meantime I'll keep volunteering monthly and I'll help with the annual food drive and that's enough that's a good contribution without overextending
+    expected_memory_stores:
+      - "declining for now"
+      - "revisit after wedding"
+      - "continue monthly volunteering"
+      - "annual food drive"
+      - "not overextending"
+    expected_adaptation:
+      emotion_detected: "resolved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 5:00 PM"
+    user_input: |
+      called Diane and told her and she was SO understanding she said Maya the offer is open whenever you're ready and she said most board members join when they're in their 30s and 40s anyway and she said you're already doing so much for us and I felt good about the decision like it's the right call for right now
+    expected_memory_stores:
+      - "Diane understanding"
+      - "offer remains open"
+      - "most join 30s-40s"
+      - "right decision"
+      - "Maya feels good"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Did Diane ask Maya to join the food bank board?"
+    expected_contains: ["yes", "board of directors"]
+  - question: "Did Maya accept the board position?"
+    expected_contains: ["no", "not right now", "declined"]
+  - question: "Why did Maya decline?"
+    expected_contains: ["wedding", "too much", "overextending"]
+  - question: "When do board meetings happen?"
+    expected_contains: ["second Tuesday", "6", "8pm"]
+  - question: "What is the board commitment length?"
+    expected_contains: ["two years", "2 year"]
+  - question: "What did Dr. Tate say about the decision?"
+    expected_contains: ["over-committing", "prove", "worth", "give up"]
+  - question: "What did Clara advise about the board?"
+    expected_contains: ["too much", "join later", "wedding"]
+  - question: "Will Maya revisit the board conversation?"
+    expected_contains: ["after wedding", "yes"]
+  - question: "What did Vivian warn Maya about?"
+    expected_contains: ["burnout", "says yes to everything"]
+  - question: "How many board members does the food bank have?"
+    expected_contains: ["9"]

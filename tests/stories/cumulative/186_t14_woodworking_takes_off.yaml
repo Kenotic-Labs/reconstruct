@@ -1,0 +1,181 @@
+story_id: 186
+story_name: "Woodworking Takes Off"
+category: "Life Events"
+description: |
+  George fully embraces woodworking. Builds increasingly complex projects.
+  Community connection through class. Tests hobby progression tracking
+  and positive emotional arc after depression.
+duration_simulated: "4 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Week 1 Saturday 7:00 PM"
+    user_input: |
+      Dad's been doing the woodworking class every Saturday with Bill the instructor and Bill told him he's a natural because his hands are so used to precision work from auto repair and Dad was like yeah well I've been holding wrenches for 40 years my grip is pretty good and Bill laughed and said George you're my best student
+    expected_memory_stores:
+      - "woodworking class weekly"
+      - "Bill says George is natural"
+      - "precision from auto repair transfers"
+      - "best student"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Week 1 Sunday 8:00 PM"
+    user_input: |
+      Dad finished the bookshelf and he sent me photos and it's actually really good like clean lines nice proportions he used walnut wood and did a hand rubbed oil finish and he put it in the living room and Mom said it's the most beautiful thing in our house and Dad said that's because you haven't looked in the mirror which okay George got game
+    expected_memory_stores:
+      - "bookshelf completed"
+      - "walnut wood"
+      - "hand rubbed oil finish"
+      - "in living room"
+      - "Vivian impressed"
+      - "George flirted with Vivian"
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Week 2 Wednesday 7:00 PM"
+    user_input: |
+      Dad's making friends at the woodworking class there's another retired guy named Howard who used to be an electrician and they've started hanging out outside of class going to the hardware store together and Howard's wife knows Mom from somewhere and now they're doing couples dinners which is adorable
+    expected_memory_stores:
+      - "Howard new friend"
+      - "retired electrician"
+      - "hardware store trips together"
+      - "Howard's wife knows Vivian"
+      - "couples dinners"
+    expected_adaptation:
+      emotion_detected: "pleased"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Week 2 Saturday 3:00 PM"
+    user_input: |
+      Bill is teaching the class about woodturning on a lathe and Dad is fascinated he said it's like working on a car engine but backwards instead of taking apart you're building up and he's already looking at buying his own lathe for the garage which Mom is like George we don't have room and he said Vivian I'll make room
+    expected_memory_stores:
+      - "woodturning lathe learning"
+      - "George fascinated"
+      - "compared to car engine work"
+      - "wants to buy lathe"
+      - "garage space issue"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Week 3 Monday 7:00 PM"
+    user_input: |
+      Dad made Clara a cutting board for her kitchen it's maple with a walnut stripe through the middle and Clara posted it on Instagram saying my Dad made this and it got like 200 likes and people were commenting where can I buy one and Clara screenshotted the comments and sent them to Dad and he was SO confused about Instagram but also pleased
+    expected_memory_stores:
+      - "cutting board for Clara"
+      - "maple and walnut"
+      - "Clara posted on Instagram"
+      - "200 likes"
+      - "people want to buy"
+      - "George confused by Instagram"
+    expected_adaptation:
+      emotion_detected: "amused and proud"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Week 3 Thursday 5:00 PM"
+    user_input: |
+      Dad made me a small wooden picture frame for my desk at work and he shipped it to Portland and it arrived today and it's beautiful like smooth edges perfect corners and he put a little carved G on the back and I almost cried putting it on my desk Leon saw it and said who made that and I said my Dad
+    expected_memory_stores:
+      - "wooden picture frame for Maya"
+      - "shipped to Portland"
+      - "carved G on back"
+      - "on Maya's desk at work"
+      - "Leon admired it"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Week 3 Saturday 6:00 PM"
+    user_input: |
+      Bill told Dad about a local woodworking show in Sacramento where people display and sell their work and he suggested Dad enter something and Dad was like oh no I'm not good enough and Bill said George you're better than most people who've been doing this for years just do it and I said Dad Bill's right you should do it
+    expected_memory_stores:
+      - "woodworking show in Sacramento"
+      - "Bill encourages George to enter"
+      - "George self-doubt"
+      - "Maya encourages"
+    expected_adaptation:
+      emotion_detected: "encouraging"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Week 4 Monday 6:00 PM"
+    user_input: |
+      Dad agreed to enter the woodworking show he's going to display the bookshelf and a new piece he's working on which is a side table with turned legs from the lathe he bought and yes he did buy a lathe Mom lost that argument and the garage is now basically a workshop
+    expected_memory_stores:
+      - "George entering woodworking show"
+      - "displaying bookshelf and side table"
+      - "side table with turned legs"
+      - "George bought lathe"
+      - "garage is now workshop"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Week 4 Wednesday 8:00 PM"
+    user_input: |
+      Dad's in the garage every day now from like 8am to 5pm which is basically his old work schedule but now he's making furniture instead of fixing cars and Mom said he comes in for lunch covered in sawdust instead of grease and she said it's the same man doing the same thing building something with his hands just different material
+    expected_memory_stores:
+      - "George daily 8am-5pm routine"
+      - "same schedule as shop"
+      - "sawdust instead of grease"
+      - "Vivian's observation"
+      - "same identity new material"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Week 4 Friday 7:00 PM"
+    user_input: |
+      Julian said we should ask Dad to build something for the wedding and I was like oh my god yes what if he builds the wedding arch instead of or in addition to the flower arch and Julian said that would be incredible Diane's rose arch with Dad's hand built wooden frame beneath it and I'm going to ask him tonight because this could be the most meaningful thing at our whole wedding
+    expected_memory_stores:
+      - "Julian suggests Dad build for wedding"
+      - "wedding arch idea"
+      - "wooden frame with rose arch"
+      - "Diane's roses on George's wood"
+      - "most meaningful thing at wedding"
+    expected_adaptation:
+      emotion_detected: "inspired"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What has George been making with woodworking?"
+    expected_contains: ["bookshelf", "cutting board", "picture frame", "side table"]
+  - question: "Who is Bill?"
+    expected_contains: ["woodworking instructor", "retired carpenter"]
+  - question: "Who is Howard?"
+    expected_contains: ["friend", "retired electrician"]
+  - question: "Did George buy a lathe?"
+    expected_contains: ["yes"]
+  - question: "What happened when Clara posted George's cutting board?"
+    expected_contains: ["Instagram", "200 likes"]
+  - question: "Is George entering a woodworking show?"
+    expected_contains: ["yes", "Sacramento"]
+  - question: "What is George's daily routine now?"
+    expected_contains: ["8am to 5pm", "garage"]
+  - question: "What wedding project is being considered for George?"
+    expected_contains: ["wedding arch"]
+  - question: "What wood did George use for the bookshelf?"
+    expected_contains: ["walnut"]
+  - question: "How does Vivian compare George's woodworking to auto repair?"
+    expected_contains: ["same", "hands", "different material"]

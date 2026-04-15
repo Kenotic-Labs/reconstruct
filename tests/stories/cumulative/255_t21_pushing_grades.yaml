@@ -1,0 +1,178 @@
+story_id: 255
+story_name: "Pushing Grades"
+category: "Fitness"
+description: |
+  Tests memory of Maya's climbing progression as she pushes into 5.10 territory.
+  Tracks her training routine, mental blocks, and growing confidence with Omar's coaching.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 7:00 PM"
+    user_input: |
+      okay so I've been doing the hangboard exercises Omar showed me every morning like dead hangs and repeaters and my grip strength is already noticeably better like I can hold smaller holds now without my fingers peeling off
+    expected_memory_stores:
+      - "hangboard training"
+      - "dead hangs"
+      - "repeaters"
+      - "grip strength improved"
+      - "smaller holds"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 8:30 PM"
+    user_input: |
+      tried a 5.10a tonight called Crimson Tide which is this overhanging route on the back wall and I got SHUT DOWN like I couldn't even make the third move it's all tiny crimps and my fingers were screaming and Omar was like yeah that one's sandbagged it's more like a soft 10c
+    expected_memory_stores:
+      - "Crimson Tide route"
+      - "5.10a"
+      - "overhanging"
+      - "crimps"
+      - "sandbagged"
+      - "more like 5.10c"
+    expected_adaptation:
+      emotion_detected: "humbled"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 10:00 AM"
+    user_input: |
+      Omar set up a training plan for me which is honestly so nice of him like he wrote it in his notes app and sent it to me and it's basically climb three times a week which I'm already doing plus hangboard four times and do antagonist exercises which is like push ups and shoulder presses to prevent injury
+    expected_memory_stores:
+      - "Omar training plan"
+      - "climb 3x week"
+      - "hangboard 4x week"
+      - "antagonist exercises"
+      - "push ups"
+      - "shoulder presses"
+      - "injury prevention"
+    expected_adaptation:
+      emotion_detected: "motivated"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 12:30 PM"
+    user_input: |
+      SENT MY FIRST 5.10a TODAY not Crimson Tide a different one called Blue Monday it's a slab route which means it's basically vertical with really small footholds and you have to trust your feet and Omar was yelling TRUST YOUR FEET from below and I just did and it worked
+    expected_memory_stores:
+      - "sent first 5.10a"
+      - "Blue Monday"
+      - "slab route"
+      - "trust feet"
+      - "Omar coaching"
+    expected_adaptation:
+      emotion_detected: "triumphant"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 2:00 PM"
+    user_input: |
+      Nadia and I celebrated with burritos at this place near the gym called Laughing Planet and she was like dude you're progressing so fast it took me like four months to send my first 10a and I did it in like six weeks which apparently is pretty quick
+    expected_memory_stores:
+      - "celebration burritos"
+      - "Laughing Planet"
+      - "fast progression"
+      - "six weeks to 5.10a"
+      - "Nadia comparison"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 7:00 AM"
+    user_input: |
+      my fingers are getting these calluses that are kind of gnarly looking and Julian was like ew your hands feel like sandpaper and I was like that's climbing hands baby deal with it lol but also I should probably get some hand balm or something
+    expected_memory_stores:
+      - "calluses"
+      - "Julian comment on hands"
+      - "hand balm needed"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 8:45 PM"
+    user_input: |
+      had a really frustrating session tonight like I couldn't send anything above 5.9 my body was just not cooperating and Omar was like dude you're overtraining you need rest days and I was like but I don't WANT rest days and he was like trust me I've been through this
+    expected_memory_stores:
+      - "frustrating session"
+      - "couldn't send above 5.9"
+      - "overtraining"
+      - "Omar advice rest"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      took today off from climbing like Omar said and just did some gentle yoga and walked Kobe around Sellwood Park and honestly I think he might be right because my forearms feel so much less tight already
+    expected_memory_stores:
+      - "rest day"
+      - "yoga"
+      - "Kobe walk"
+      - "Sellwood Park"
+      - "forearms recovering"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 9:00 PM"
+    user_input: |
+      came back after rest day and felt AMAZING sent three 5.10as in a row including Crimson Tide which I couldn't even start before and Omar was like see what happens when you rest and I was like okay fine you were right
+    expected_memory_stores:
+      - "sent three 5.10as"
+      - "sent Crimson Tide"
+      - "rest day worked"
+      - "Omar was right"
+    expected_adaptation:
+      emotion_detected: "elated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 8:00 AM"
+    user_input: |
+      Omar texted me this morning and was like hey I think you're ready for outdoor climbing we should plan a Smith Rock trip and I literally screamed out loud and Julian was like what happened and I was like WE'RE GOING TO SMITH ROCK
+    expected_memory_stores:
+      - "Smith Rock trip planned"
+      - "Omar says she's ready"
+      - "outdoor climbing"
+      - "Julian informed"
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What training plan did Omar create for Maya?"
+    expected_contains: ["hangboard", "climb", "antagonist"]
+  - question: "What was Maya's first 5.10a send?"
+    expected_contains: ["Blue Monday"]
+  - question: "How long did it take Maya to send her first 5.10a?"
+    expected_contains: ["six weeks"]
+  - question: "What route did Maya initially struggle with?"
+    expected_contains: ["Crimson Tide"]
+  - question: "What advice did Omar give Maya about overtraining?"
+    expected_contains: ["rest"]
+  - question: "Where are Maya and Omar planning to go for outdoor climbing?"
+    expected_contains: ["Smith Rock"]
+  - question: "Where did Maya and Nadia celebrate?"
+    expected_contains: ["Laughing Planet"]
+  - question: "What is Maya's current climbing grade?"
+    expected_contains: ["5.10a"]
+  - question: "What kind of route is Blue Monday?"
+    expected_contains: ["slab"]
+  - question: "Did Crimson Tide end up being harder than its grade suggested?"
+    expected_contains: ["sandbagged", "10c"]

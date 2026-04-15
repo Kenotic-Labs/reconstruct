@@ -1,0 +1,220 @@
+story_id: 128
+story_name: "Settling Into Rhythm"
+category: "Relationships"
+description: |
+  Tests whether the system tracks the development of shared routines, division of household
+  responsibilities, and the gradual comfort of living together. Cross-thread references
+  to work and social life.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 7:00am"
+    user_input: |
+      we're like two weeks into living together now and we've developed this morning routine. I wake up first, walk Kobe, come back, Julian has coffee ready. he showers while I eat breakfast. it's like a little choreography and I kind of love it
+    expected_memory_stores:
+      - "two weeks in"
+      - "morning routine"
+      - "Maya walks Kobe first"
+      - "Julian makes coffee"
+      - "choreography"
+    expected_triples:
+      - ["user", "developed", "morning routine with Julian"]
+      - ["user", "walks_Kobe", "first thing each morning"]
+      - ["Julian", "makes_coffee", "while user walks Kobe"]
+      - ["user", "has_emotion", "content"]
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 6:00pm"
+    user_input: |
+      we split chores pretty naturally actually. I cook most weeknights because I like cooking and Julian does dishes and laundry. weekends we share. he's weirdly good at folding fitted sheets which is a skill I do not possess
+    expected_memory_stores:
+      - "chore division"
+      - "Maya cooks"
+      - "Julian dishes and laundry"
+      - "weekends shared"
+      - "fitted sheets"
+    expected_triples:
+      - ["user", "cooks", "most weeknight dinners"]
+      - ["Julian", "does", "dishes and laundry"]
+      - ["user", "shares", "weekend chores with Julian"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 8:00pm"
+    user_input: |
+      Julian set up his design studio in the second bedroom and honestly it looks amazing. he put up a pegboard for his tools and installed these little LED strip lights and it actually has more personality than his setup at Westridge ever did
+    expected_memory_stores:
+      - "studio set up"
+      - "pegboard"
+      - "LED lights"
+      - "better than Westridge"
+    expected_triples:
+      - ["Julian", "set_up", "design studio in second bedroom"]
+      - ["Julian", "installed", "pegboard and LED strip lights"]
+      - ["Julian", "studio", "better than Westridge setup"]
+      - ["user", "has_emotion", "impressed"]
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 5:30pm"
+    user_input: |
+      had Aisha and Derek over for dinner which was the first time we hosted anyone. Julian made this amazing Thai curry and Aisha was like this apartment is SO cute. Derek said the Sellwood neighborhood reminds him of where he grew up in Beaverton
+    expected_memory_stores:
+      - "first hosting"
+      - "Aisha and Derek"
+      - "Julian Thai curry"
+      - "Aisha liked apartment"
+      - "Derek Beaverton"
+    expected_triples:
+      - ["user", "hosted", "Aisha and Derek for dinner"]
+      - ["Julian", "cooked", "Thai curry for dinner party"]
+      - ["Derek", "from", "Beaverton"]
+      - ["user", "has_emotion", "proud"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 10:00am"
+    user_input: |
+      Julian went to Alberta today for a figure drawing session at that arts collective he found. he took the bus and was gone for like four hours. and you know what? I loved having the apartment to myself. walked Kobe, did a face mask, listened to a podcast. the alone time thing is working
+    expected_memory_stores:
+      - "Julian Alberta trip"
+      - "figure drawing"
+      - "arts collective"
+      - "bus ride"
+      - "Maya alone time"
+      - "face mask podcast"
+      - "alone time working"
+    expected_triples:
+      - ["Julian", "attended", "figure drawing at Alberta arts collective"]
+      - ["Julian", "took", "bus to Alberta"]
+      - ["user", "enjoyed", "alone time in apartment"]
+      - ["user", "has_emotion", "peaceful"]
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 4:00pm"
+    user_input: |
+      Julian came home all energized from the drawing session and showed me his sketches and they're really good. he said the collective is full of cool people and he's thinking about joining monthly. see? he gets his creative community and I get my quiet. everybody wins
+    expected_memory_stores:
+      - "Julian energized"
+      - "sketches"
+      - "monthly membership"
+      - "creative community"
+      - "compromise working"
+    expected_triples:
+      - ["Julian", "considering", "monthly membership at arts collective"]
+      - ["Julian", "gets", "creative community via bus to Alberta"]
+      - ["user", "gets", "quiet home in Sellwood"]
+      - ["user", "has_emotion", "satisfied"]
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 2:00pm"
+    user_input: |
+      what chores does Julian do in the apartment
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 5:00pm"
+    user_input: |
+      found our first spot as a couple. the dog-friendly coffee shop across the street is called Bark and Brew and the barista already knows our order. mine is an oat milk latte and Julian gets a cortado. Kobe gets a puppuccino. it's our Sunday thing now
+    expected_memory_stores:
+      - "Bark and Brew"
+      - "couple spot"
+      - "oat milk latte"
+      - "cortado"
+      - "puppuccino"
+      - "Sunday routine"
+    expected_triples:
+      - ["user", "discovered", "Bark and Brew coffee shop as couple spot"]
+      - ["user", "orders", "oat milk latte at Bark and Brew"]
+      - ["Julian", "orders", "cortado at Bark and Brew"]
+      - ["Kobe", "gets", "puppuccino at Bark and Brew"]
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 9:00am"
+    user_input: |
+      told Rachel Kim we're settled into the new place and she goes how's living together and I said honestly better than I expected. she goes the first three months are the test, if you survive that you're golden. her and her wife have been together 8 years so she would know
+    expected_memory_stores:
+      - "Rachel Kim advice"
+      - "first three months test"
+      - "Rachel Kim wife 8 years"
+    expected_triples:
+      - ["Rachel Kim", "advised", "first three months are the test"]
+      - ["Rachel Kim", "has_been_with", "wife for 8 years"]
+      - ["user", "told", "Rachel Kim living together is better than expected"]
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Monday 8:00pm"
+    user_input: |
+      lying on the couch with Julian watching TV and Kobe's on the floor and the apartment smells like the candle Julian got from some craft market and I just thought... this is home. not my apartment or his apartment. our home. it took a while to feel that but I feel it now
+    expected_memory_stores:
+      - "home feeling"
+      - "our home"
+      - "candle"
+      - "craft market"
+      - "contentment"
+    expected_triples:
+      - ["user", "feels", "apartment is home not just a place"]
+      - ["user", "transitioned", "from my apartment to our home"]
+      - ["user", "has_emotion", "at peace"]
+    expected_adaptation:
+      emotion_detected: "at peace"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya and Julian's morning routine?"
+    expected_contains: ["Maya walks Kobe", "Julian makes coffee"]
+  - question: "How are chores divided?"
+    expected_contains: ["Maya cooks", "Julian dishes", "laundry"]
+  - question: "What is the name of their coffee shop?"
+    expected_contains: ["Bark and Brew"]
+  - question: "What does Maya order at the coffee shop?"
+    expected_contains: ["oat milk latte"]
+  - question: "What does Julian order?"
+    expected_contains: ["cortado"]
+  - question: "Where does Julian go for creative community?"
+    expected_contains: ["Alberta", "arts collective", "figure drawing"]
+  - question: "Is the alone time arrangement working?"
+    expected_contains: ["yes", "working"]
+  - question: "Who did Maya and Julian host for dinner?"
+    expected_contains: ["Aisha", "Derek"]
+  - question: "What did Julian cook for the dinner party?"
+    expected_contains: ["Thai curry"]
+  - question: "How does Maya feel about living together now?"
+    expected_contains: ["home", "better than expected"]

@@ -1,0 +1,173 @@
+story_id: 217
+story_name: "Grandpa's Engineering Stories"
+category: "Family"
+description: |
+  Tests system recalling and connecting scattered details about Grandpa Wei's engineering
+  history. Maya goes through his notebooks and pieces together his life story.
+  Verifies reconstruction from fragments across multiple conversations.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      my dad shipped me some of grandpa's stuff from Fresno and it arrived today and there's the engineering notebooks I saw at his apartment and some old tools and a framed photo of a bridge he helped build and I set up a little corner in the office for it
+    expected_memory_stores:
+      - "grandpa's stuff shipped"
+      - "engineering notebooks"
+      - "old tools"
+      - "bridge photo"
+      - "office corner memorial"
+    expected_adaptation:
+      emotion_detected: "sentimental"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 8:00 PM"
+    user_input: |
+      I asked my dad more about grandpa's career and apparently he worked on the Gezhouba Dam project in the 1970s which is like a massive hydroelectric dam on the Yangtze River and I looked it up and it's huge and I was like grandpa worked on THAT
+    expected_memory_stores:
+      - "Gezhouba Dam"
+      - "1970s"
+      - "Yangtze River"
+      - "hydroelectric"
+      - "George provided details"
+    expected_adaptation:
+      emotion_detected: "awed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 9:00 PM"
+    user_input: |
+      in the notebooks there's calculations I can't read the Chinese annotations but the math is universal and some of the structural formulas are things I learned in college and it's wild to think grandpa was doing this stuff by hand before computers
+    expected_memory_stores:
+      - "notebook calculations"
+      - "structural formulas"
+      - "by hand before computers"
+      - "math is universal"
+    expected_adaptation:
+      emotion_detected: "inspired"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      I had a coworker who reads Mandarin look at some of the notebook pages and she translated a few entries and one of them says never build for yourself build for the people who will use it after you and that's basically a software engineering principle too
+    expected_memory_stores:
+      - "coworker translated"
+      - "build for the people who use it"
+      - "software parallel"
+    expected_adaptation:
+      emotion_detected: "profound"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 3:00 PM"
+    user_input: |
+      called my mom and asked about grandpa leaving China and she said he and grandma left in 1980 because of the political situation and they went to San Francisco first and then moved to Fresno because it was cheaper and grandma had a cousin there
+    expected_memory_stores:
+      - "left China 1980"
+      - "political situation"
+      - "San Francisco first"
+      - "then Fresno"
+      - "cheaper"
+      - "grandma's cousin"
+    expected_adaptation:
+      emotion_detected: "interested"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 5:00 PM"
+    user_input: |
+      what dam project did grandpa work on in China
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      apparently after getting his US license grandpa worked for Caltrans for like twenty years designing freeway overpasses in the Central Valley and my dad said every time they drove past one grandpa would point and say I made that and my dad would roll his eyes
+    expected_memory_stores:
+      - "Caltrans"
+      - "twenty years"
+      - "freeway overpasses"
+      - "Central Valley"
+      - "I made that"
+    expected_adaptation:
+      emotion_detected: "charmed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      I'm thinking about writing up grandpa's story like a proper biography or at least a family document because so much of it would be lost if nobody writes it down and Clara said she'd help with the medical timeline parts and my dad has photos
+    expected_memory_stores:
+      - "biography idea"
+      - "family document"
+      - "preserve history"
+      - "Clara help"
+      - "George has photos"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 9:00 PM"
+    user_input: |
+      found a letter in one of the boxes it's from grandma Mei to grandpa and it's in Chinese but my coworker is going to help translate it next week and the paper is so thin and yellow and I'm afraid to touch it too much
+    expected_memory_stores:
+      - "letter from grandma Mei"
+      - "Chinese"
+      - "coworker will translate"
+      - "fragile paper"
+    expected_adaptation:
+      emotion_detected: "reverent"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 10:00 PM"
+    user_input: |
+      Julian looked at everything I spread out on the desk and he said babe your grandpa lived like three lifetimes and he's right from building dams in China to overpasses in California to raising a family in a new country and all I got from him was a watch and a whole worldview
+    expected_memory_stores:
+      - "Julian impressed"
+      - "three lifetimes"
+      - "dams to overpasses"
+      - "watch and worldview"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What major project did Grandpa Wei work on in China?"
+    expected_contains: ["Gezhouba Dam", "Yangtze"]
+  - question: "What did Grandpa Wei do in America for work?"
+    expected_contains: ["Caltrans", "freeway overpasses"]
+  - question: "When did Grandpa Wei leave China?"
+    expected_contains: ["1980"]
+  - question: "Why did they move to Fresno?"
+    expected_contains: ["cheaper", "cousin"]
+  - question: "What quote was found in his notebooks?"
+    expected_contains: ["build for the people who will use it"]
+  - question: "What is Maya planning to write?"
+    expected_contains: ["biography", "family document"]
+  - question: "What was found in the boxes from Fresno?"
+    expected_contains: ["letter", "grandma Mei", "notebooks"]
+  - question: "Where did Grandpa Wei work in California?"
+    expected_contains: ["Central Valley", "Caltrans"]
+  - question: "How long did Grandpa Wei work for Caltrans?"
+    expected_contains: ["twenty years"]
+  - question: "What did Julian say about Grandpa Wei's life?"
+    expected_contains: ["three lifetimes"]

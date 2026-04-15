@@ -1,0 +1,174 @@
+story_id: 334
+story_name: "The Group Splits"
+category: "Friendships"
+description: |
+  Tests memory of the friend group splitting along Team Marcus vs Team Nadia
+  lines. Tension, separate hangouts, awkward group texts. Verifies system
+  tracks faction dynamics and social fractures.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      the Round Table group chat has been dead for three days which has never happened and nobody's bringing up next month's dinner and it's the elephant in the room and I texted Julian saying should I say something and he said give it time
+    expected_memory_stores:
+      - "group chat dead"
+      - "three days silent"
+      - "no dinner planning"
+      - "elephant in room"
+      - "Julian said give time"
+    expected_adaptation:
+      emotion_detected: "uncomfortable"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      Marcus texted Omar to hang out and Omar went and I was kinda like really Omar and Omar said look I'm not picking sides Marcus is still my friend too and I said I get that but also what he did was shitty and Omar said yeah it was but people are complicated
+    expected_memory_stores:
+      - "Marcus and Omar hung out"
+      - "Maya annoyed"
+      - "Omar not picking sides"
+      - "people are complicated"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      Nadia and I climbed together and she asked if Omar was still hanging out with Marcus and I said yeah and she got quiet and said it feels like taking his side and I said it's not and she said it feels like it and I didn't know what to say
+    expected_memory_stores:
+      - "Nadia asked about Omar"
+      - "feels like taking sides"
+      - "Maya didn't know what to say"
+    expected_adaptation:
+      emotion_detected: "torn"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 7:00 PM"
+    user_input: |
+      Jenny sent a Marco Polo ranting about how men ruin everything and she said the group was perfect until Marcus couldn't keep it in his pants and I was like ok that's harsh but also not entirely wrong
+    expected_memory_stores:
+      - "Jenny ranting"
+      - "men ruin everything"
+      - "group was perfect"
+      - "harsh but not wrong"
+    expected_adaptation:
+      emotion_detected: "conflicted"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 8:00 PM"
+    user_input: |
+      so apparently Marcus told Omar that he feels like everyone hates him now and that he never meant to hurt Nadia and Omar relayed this to me and I was like well maybe he should tell NADIA that not Omar and Omar said he suggested that and Marcus said he's scared
+    expected_memory_stores:
+      - "Marcus feels hated"
+      - "never meant to hurt"
+      - "Omar relaying"
+      - "should tell Nadia"
+      - "Marcus scared"
+    expected_adaptation:
+      emotion_detected: "exasperated"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 12:00 PM"
+    user_input: |
+      Julian sat me down and said Maya you're making this worse by being so clearly on Nadia's side and he said both Marcus and Nadia made the choice to get together and both should deal with it and I was like that's easy for you to say and he said no it's not because it's my friend group too
+    expected_memory_stores:
+      - "Julian confronted Maya"
+      - "making it worse"
+      - "clearly on Nadia's side"
+      - "both made the choice"
+      - "Julian's group too"
+    expected_adaptation:
+      emotion_detected: "defensive"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 5:00 PM"
+    user_input: |
+      thought about what Julian said and he might have a point like I've been treating Marcus like a villain but he's not a villain he's just emotionally immature and that's different and maybe me icing him out is making the whole thing worse for everyone
+    expected_memory_stores:
+      - "reconsidering"
+      - "Julian might be right"
+      - "Marcus not villain"
+      - "emotionally immature"
+      - "icing out making worse"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 10:00 AM"
+    user_input: |
+      who has been relaying messages between Marcus and the rest of the group
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 3:00 PM"
+    user_input: |
+      Nadia called and said she doesn't want the group to fall apart because of her and she said she's ok enough to be in the same room as Marcus and she'd rather have an awkward dinner than no dinner and she said can you just make it happen Maya
+    expected_memory_stores:
+      - "Nadia doesn't want group apart"
+      - "ok to be with Marcus"
+      - "awkward better than none"
+      - "asked Maya to make it happen"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 PM"
+    user_input: |
+      ok so I need to be the grown up here and fix this because Nadia's being mature about it and Marcus is hiding and Omar is stuck in the middle and Jenny's remote so she can just be opinionated without consequences and Julian's right that I'm not helping by being angry so tomorrow I'm going to text the group
+    expected_memory_stores:
+      - "Maya decision to fix"
+      - "be the grown up"
+      - "Nadia mature"
+      - "Marcus hiding"
+      - "Omar middle"
+      - "Jenny opinionated remote"
+      - "text group tomorrow"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How has the friend group split?"
+    expected_contains: ["Team Marcus", "Team Nadia", "sides"]
+  - question: "Who has been hanging out with Marcus?"
+    expected_contains: ["Omar"]
+  - question: "What did Julian say to Maya about her behavior?"
+    expected_contains: ["making it worse", "clearly on Nadia's side"]
+  - question: "What did Nadia say about the group?"
+    expected_contains: ["doesn't want it to fall apart", "awkward better than none"]
+  - question: "How does Marcus feel about the situation?"
+    expected_contains: ["hated", "scared"]
+  - question: "Who has been relaying messages?"
+    expected_contains: ["Omar"]
+  - question: "What did Maya reconsider about Marcus?"
+    expected_contains: ["not villain", "emotionally immature"]
+  - question: "What did Jenny say about the situation?"
+    expected_contains: ["men ruin everything"]
+  - question: "What is Maya's plan?"
+    expected_contains: ["text the group", "fix it", "grown up"]
+  - question: "How long has the group chat been silent?"
+    expected_contains: ["three days"]

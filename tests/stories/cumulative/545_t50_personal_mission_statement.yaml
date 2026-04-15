@@ -1,0 +1,178 @@
+story_id: 545
+story_name: "Personal Mission Statement"
+category: "Identity and Future"
+description: |
+  Maya writes a personal mission statement after processing grandpa's legacy, Vivian's
+  story, and Dr. Tate's exercises. Cross-references therapy (T21), grandpa (T46),
+  mentoring (T6), career, and teaching aspirations.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      Dr. Tate suggested I write a personal mission statement and at first I thought that was corny like I'm a person not a company but she said it's not about business it's about knowing what you stand for and what you want your life to mean and ok fine that's actually a reasonable exercise
+    expected_memory_stores:
+      - "Dr. Tate suggests mission statement"
+      - "initially thought corny"
+      - "what you stand for"
+      - "what life means"
+    expected_adaptation:
+      emotion_detected: "skeptical"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 9:00 PM"
+    user_input: |
+      sat down to write it and immediately got stuck because where do you even start with something like this and I wrote like five versions and they all sounded like LinkedIn bios and I deleted everything and Julian said just write what's true and stop trying to make it sound impressive
+    expected_memory_stores:
+      - "writing attempts"
+      - "five versions deleted"
+      - "sounded like LinkedIn bios"
+      - "Julian's advice write what's true"
+    expected_adaptation:
+      emotion_detected: "stuck"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 7:00 AM"
+    user_input: |
+      woke up at like 5am with this clarity which never happens and I grabbed my journal and wrote I want to build things that matter and teach what I know and carry forward the people who carried me and I read it and it was simple but it felt true like actually true not LinkedIn true
+    expected_memory_stores:
+      - "woke up 5am with clarity"
+      - "mission statement draft"
+      - "build things that matter"
+      - "teach what I know"
+      - "carry forward people who carried me"
+    expected_adaptation:
+      emotion_detected: "clear"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      the build things that matter part is about engineering and how grandpa built water systems and I build software and the systems are different but the intent is the same making something that serves people and Conduit AI isn't saving lives but it's building something real and that counts
+    expected_memory_stores:
+      - "build things analysis"
+      - "grandpa water systems"
+      - "Maya software"
+      - "different systems same intent"
+      - "Conduit building something real"
+    expected_adaptation:
+      emotion_detected: "resolved"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 3:00 PM"
+    user_input: |
+      the teach what I know part surprised me because I didn't know I wanted that until I mentored Aisha and she grew so much and I realized I loved watching someone else level up and I thought about someday maybe teaching or mentoring more formally like maybe as a lead engineer or even eventually teaching at a bootcamp or something
+    expected_memory_stores:
+      - "teach what I know analysis"
+      - "Aisha mentoring experience"
+      - "loved watching someone grow"
+      - "lead engineer or bootcamp teaching"
+      - "mentoring aspiration"
+    expected_adaptation:
+      emotion_detected: "aspirational"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      the carry forward part is about grandpa and mom and even George like all these people who sacrificed and built and endured so that the next generation could have more and my job is to honor that by doing something with what they gave me not just consuming it but building on it
+    expected_memory_stores:
+      - "carry forward analysis"
+      - "grandpa Vivian George"
+      - "sacrifice and building"
+      - "honor by building on it"
+      - "not just consuming"
+    expected_adaptation:
+      emotion_detected: "purposeful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 10:00 AM"
+    user_input: |
+      showed Dr. Tate the mission statement and she read it slowly and then she said Maya this is beautiful and it captures everything we've talked about in one sentence and she asked if I noticed that it's outward facing not inward and I said what do you mean and she said it's about what you give not what you get and that's maturity
+    expected_memory_stores:
+      - "Dr. Tate read mission statement"
+      - "beautiful"
+      - "outward facing not inward"
+      - "what you give not get"
+      - "that's maturity"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      told Priya about the mission statement over coffee and she said that actually aligns perfectly with what I want from you as a lead engineer and she said we're going to need someone who can build AND teach because the team is growing and I said wait are you officially offering me the lead position and she smiled and said we'll talk
+    expected_memory_stores:
+      - "told Priya mission statement"
+      - "aligns with lead engineer role"
+      - "build and teach"
+      - "team growing"
+      - "lead position hint"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      Julian read the mission statement and said I love the carry forward part and he said you know my dad would love to hear this because he carried his family forward too with the shop and nobody ever framed it that way for him and I said maybe you should tell him and Julian said maybe I will
+    expected_memory_stores:
+      - "Julian loves carry forward"
+      - "George carried family forward"
+      - "shop as legacy"
+      - "Julian will tell George"
+    expected_adaptation:
+      emotion_detected: "rippling"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 10:00 PM"
+    user_input: |
+      wrote the mission statement on a card and put it in my journal and also taped a copy to my monitor at my desk next to a photo of grandpa and the watch is on my wrist and I feel like I know what I'm doing now not in a career way but in a life way and that's the thing I was missing at thirty I didn't need more accomplishments I needed a direction
+    expected_memory_stores:
+      - "mission statement on card"
+      - "in journal and at desk"
+      - "next to grandpa photo"
+      - "know what she's doing"
+      - "needed direction not accomplishments"
+    expected_adaptation:
+      emotion_detected: "oriented"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya's personal mission statement?"
+    expected_contains: ["build things that matter", "teach what I know", "carry forward"]
+  - question: "Where did Maya put the mission statement?"
+    expected_contains: ["journal", "monitor", "desk"]
+  - question: "What did Dr. Tate say about the statement being outward-facing?"
+    expected_contains: ["what you give not get", "maturity"]
+  - question: "How does mentoring Aisha connect to the mission?"
+    expected_contains: ["teach", "watched someone grow"]
+  - question: "What career path does Maya imagine?"
+    expected_contains: ["lead engineer", "teaching", "bootcamp"]
+  - question: "How did Priya respond to the mission statement?"
+    expected_contains: ["aligns", "lead engineer", "build and teach"]
+  - question: "Who are the people Maya wants to carry forward?"
+    expected_contains: ["grandpa", "Vivian", "George"]
+  - question: "What was Maya missing at thirty?"
+    expected_contains: ["direction", "not accomplishments"]
+  - question: "What time did Maya wake up to write the statement?"
+    expected_contains: ["5am"]
+  - question: "What did Julian say about George and the carry forward idea?"
+    expected_contains: ["shop", "carried family", "tell him"]

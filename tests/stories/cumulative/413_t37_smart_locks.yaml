@@ -1,0 +1,165 @@
+story_id: 413
+story_name: "Smart Locks Installed"
+category: "Smart Home"
+description: |
+  Julian adds smart locks to front and garage doors. Maya is skeptical about security
+  of keyless entry. Sets up the lockout disaster that comes later.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00 AM"
+    user_input: |
+      Julian bought smart locks now like August brand smart locks one for the front door and one for the garage entry and I was like do we really need smart locks we have keys that work fine and he was like babe we can let the dog sitter in remotely and I'm like we don't have a dog sitter
+    expected_memory_stores:
+      - "August smart locks"
+      - "front door and garage"
+      - "Maya skeptical"
+      - "remote access feature"
+    expected_adaptation:
+      emotion_detected: "skeptical"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 11:00 AM"
+    user_input: |
+      he's installing the front door lock now and it goes over the existing deadbolt which is cool because we don't have to change the actual lock and we can still use regular keys if we want which makes me feel better because what if the battery dies or something
+    expected_memory_stores:
+      - "goes over existing deadbolt"
+      - "regular keys still work"
+      - "battery concern"
+    expected_adaptation:
+      emotion_detected: "cautiously accepting"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 1:00 PM"
+    user_input: |
+      ok I have to admit the auto unlock feature is kind of amazing like when you walk up to the door with your phone in your pocket it detects the Bluetooth and just unlocks and the door clicked open when I walked up with groceries and I didn't have to put anything down that was genuinely useful
+    expected_memory_stores:
+      - "auto unlock Bluetooth"
+      - "phone in pocket"
+      - "grocery test"
+      - "hands free useful"
+    expected_adaptation:
+      emotion_detected: "converted"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 2:30 PM"
+    user_input: |
+      Julian set up auto lock too so 30 seconds after the door closes it automatically locks itself and we can also lock it remotely from the app which I tested from the bedroom and heard the deadbolt turn and that was satisfying not gonna lie
+    expected_memory_stores:
+      - "auto lock 30 seconds"
+      - "remote lock from app"
+      - "deadbolt turns automatically"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 4:00 PM"
+    user_input: |
+      set up entry codes too so we each have a code Julian is 1234 because he's basic and I chose something better and we made a guest code for Clara and one for Julian's parents when they visit and you can set them to expire which is smart for like Airbnb situations if we ever did that
+    expected_memory_stores:
+      - "entry codes set up"
+      - "Julian code 1234"
+      - "guest code for Clara"
+      - "guest code for Julian's parents"
+      - "expiring codes feature"
+    expected_adaptation:
+      emotion_detected: "engaged"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 5:30 PM"
+    user_input: |
+      my one concern is what happens if the WiFi goes down or the app crashes like then we're locked out right and Julian said no you can always use the physical key as backup and also the Bluetooth works without WiFi so it would still detect your phone and I was like ok fine but I'm keeping a spare key under the mat just in case
+    expected_memory_stores:
+      - "WiFi concern"
+      - "physical key backup"
+      - "Bluetooth works without WiFi"
+      - "spare key under mat"
+    expected_adaptation:
+      emotion_detected: "cautious"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 7:00 PM"
+    user_input: |
+      George called and Julian told him about the smart locks and George was like you know what I don't trust I don't trust anything that can be hacked and Julian was like dad everything can be hacked your garage door opener from 1998 can be hacked and George just grumbled
+    expected_memory_stores:
+      - "George doesn't trust smart locks"
+      - "hacking concerns"
+      - "Julian defends tech"
+      - "George's old garage opener"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 8:00 PM"
+    user_input: |
+      the lock sends notifications too every time someone locks or unlocks the door so now between the Ring doorbell alerts and the lock alerts my phone is just constantly going off and Julian said you can turn off the notifications and I'm like then what's the point of having it be smart
+    expected_memory_stores:
+      - "lock notifications"
+      - "too many phone alerts"
+      - "Ring plus lock notifications"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 9:00 PM"
+    user_input: |
+      what brand are the smart locks Julian installed and where did he put them
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 AM"
+    user_input: |
+      first morning with the smart lock and I left for my run and the door auto locked behind me and when I got back all sweaty and gross it auto unlocked as I walked up and Kobe was right there wagging his tail and I didn't have to fish for keys in my running shorts pocket which actually rules ok Julian is winning the smart home war
+    expected_memory_stores:
+      - "auto lock on leaving"
+      - "auto unlock returning"
+      - "running use case"
+      - "Julian winning smart home"
+    expected_adaptation:
+      emotion_detected: "won over"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What brand of smart locks did Julian install?"
+    expected_contains: ["August"]
+  - question: "Where are the smart locks installed?"
+    expected_contains: ["front door", "garage"]
+  - question: "What is Julian's entry code?"
+    expected_contains: ["1234"]
+  - question: "Who has guest codes for the smart lock?"
+    expected_contains: ["Clara", "Julian's parents"]
+  - question: "What backup does Maya have for the smart lock?"
+    expected_contains: ["key", "mat", "physical"]
+  - question: "What feature auto-unlocks the door?"
+    expected_contains: ["Bluetooth", "phone", "auto unlock"]
+  - question: "How long before the door auto-locks?"
+    expected_contains: ["30 seconds"]
+  - question: "What did George think about smart locks?"
+    expected_contains: ["doesn't trust", "hacked"]
+  - question: "What problem is Maya having with notifications?"
+    expected_contains: ["too many", "constantly", "Ring", "lock"]
+  - question: "Can the smart lock work without WiFi?"
+    expected_contains: ["yes", "Bluetooth", "physical key"]

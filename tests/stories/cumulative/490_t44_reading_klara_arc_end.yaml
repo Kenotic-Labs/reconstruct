@@ -1,0 +1,193 @@
+story_id: 490
+story_name: "Reading Piranesi Arc Continues"
+category: "Book Club"
+description: |
+  Tests memory of the book club arc ending while reading Piranesi.
+  Establishes ongoing tradition, looking forward to next meeting.
+  Verifies system captures the complete book club evolution.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Sunday 10:00 AM"
+    user_input: |
+      I started Piranesi this morning and it's the weirdest most beautiful thing I've ever read like the narrator lives in this house with infinite rooms full of statues and there are oceans inside the house and birds and he calls the house The House and I don't understand what's happening but I'm mesmerized
+    expected_memory_stores:
+      - "started Piranesi"
+      - "weird and beautiful"
+      - "infinite rooms statues"
+      - "oceans inside house"
+      - "birds"
+      - "narrator calls it The House"
+      - "mesmerized"
+    expected_adaptation:
+      emotion_detected: "captivated"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Sunday 12:00 PM"
+    user_input: |
+      I texted the book club chat and said um what is this book and Tessa replied with a smiley face and said just keep reading and Marcus said he's already on chapter 5 which is wild for Marcus and Nadia said she started last night and couldn't stop and Lily said she's pacing herself which is very Lily of her
+    expected_memory_stores:
+      - "texted group about book"
+      - "Tessa said keep reading"
+      - "Marcus chapter 5"
+      - "fast for Marcus"
+      - "Nadia couldn't stop"
+      - "Lily pacing herself"
+    expected_adaptation:
+      emotion_detected: "curious"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Sunday 2:00 PM"
+    user_input: |
+      I'm reading on the couch and Kobe is on my feet and Julian is working on something for Bold Studio and I took a break to practice guitar for a bit and then went back to reading and this alternating between guitar and reading is my perfect Sunday honestly and the house is quiet and warm and it smells like the coffee Julian made
+    expected_memory_stores:
+      - "reading on couch"
+      - "Kobe on feet"
+      - "Julian Bold Studio"
+      - "guitar break"
+      - "alternating guitar reading"
+      - "perfect Sunday"
+      - "quiet warm coffee"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Sunday 4:00 PM"
+    user_input: |
+      Piranesi is starting to make more sense like there's another character called The Other who visits the narrator and gives him tasks and I think something sinister is happening but I don't want to look it up because Tessa said the reveal is everything and I trust her literary taste at this point she hasn't steered us wrong yet
+    expected_memory_stores:
+      - "The Other character"
+      - "visits and tasks"
+      - "something sinister"
+      - "won't look it up"
+      - "Tessa said reveal is everything"
+      - "trusts Tessa taste"
+    expected_adaptation:
+      emotion_detected: "intrigued"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Sunday 5:30 PM"
+    user_input: |
+      Clara FaceTimed and I was telling her about book club and she said she wants to start one in her town and I was like do it I'll send you my whole restructuring plan and she laughed and said only you would have a restructuring plan for a book club and Tyler in the background said he'd join Clara's book club if there are themed snacks
+    expected_memory_stores:
+      - "Clara FaceTime"
+      - "Clara wants book club"
+      - "restructuring plan offer"
+      - "Clara laughed"
+      - "Tyler wants themed snacks"
+    expected_adaptation:
+      emotion_detected: "helpful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 6:30 PM"
+    user_input: |
+      I was reflecting on the book club journey and made a little note on my phone about the books we've read like The Midnight Library was about choosing your life Project Hail Mary was about friendship across difference House in the Cerulean Sea was about found family Anxious People was about hidden struggles Klara was about love and consciousness and now Piranesi is about mystery and wonder
+    expected_memory_stores:
+      - "book club journey"
+      - "Midnight Library choosing life"
+      - "Project Hail Mary friendship"
+      - "Cerulean Sea found family"
+      - "Anxious People hidden struggles"
+      - "Klara love consciousness"
+      - "Piranesi mystery wonder"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 7:30 PM"
+    user_input: |
+      the meeting for Piranesi is in two weeks and I already know what themed snacks I'm doing like the book has this oceanic quality so I'm thinking seafood appetizers and blue drinks again but different from the Cerulean Sea meeting and Tessa said she'll make bread because the narrator eats a lot of bread in the book which is such a Tessa detail
+    expected_memory_stores:
+      - "Piranesi meeting two weeks"
+      - "oceanic themed snacks"
+      - "seafood appetizers"
+      - "blue drinks"
+      - "different from Cerulean Sea"
+      - "Tessa making bread"
+      - "narrator eats bread"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 8:00 PM"
+    user_input: |
+      what books has the book club read in order and what themes did Maya identify
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 8:30 PM"
+    user_input: |
+      Omar texted me privately and said hey I just want you to know the book club means a lot to me and he said reading has helped him process some stuff about his family back in Lebanon and the discussions make him feel less alone and I almost cried because that's exactly why I fought for this thing not to die and it's working it's actually mattering to people
+    expected_memory_stores:
+      - "Omar private message"
+      - "book club means a lot"
+      - "processing family Lebanon"
+      - "feels less alone"
+      - "Maya almost cried"
+      - "fought for it to survive"
+      - "mattering to people"
+    expected_adaptation:
+      emotion_detected: "deeply moved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 9:30 PM"
+    user_input: |
+      end of a perfect Sunday and I was thinking about how this time last year I didn't have a book club or a tabletop group or a guitar or a road trip tradition and now I have all of these things and they're all connected because the people overlap and the themes overlap and Nadia is in like four of my activities and Tessa went from stranger to co-everything and this is what building a life looks like and I'm only 30 and there's so much more ahead
+    expected_memory_stores:
+      - "perfect Sunday"
+      - "last year comparison"
+      - "no book club tabletop guitar trips"
+      - "now has everything"
+      - "people overlap"
+      - "Nadia in four activities"
+      - "Tessa stranger to everything"
+      - "building a life"
+      - "only 30"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What book is the club currently reading?"
+    expected_contains: ["Piranesi"]
+  - question: "Who wrote Piranesi?"
+    expected_contains: ["Susanna Clarke"]
+  - question: "What books has the book club read in order?"
+    expected_contains: ["Midnight Library", "Project Hail Mary", "Cerulean Sea", "Anxious People", "Klara"]
+  - question: "What theme did Maya assign to each book?"
+    expected_contains: ["choosing life", "friendship", "found family"]
+  - question: "What did Omar privately tell Maya about book club?"
+    expected_contains: ["means a lot", "Lebanon", "less alone"]
+  - question: "What are the Piranesi themed snacks?"
+    expected_contains: ["seafood", "blue drinks", "bread"]
+  - question: "Who wants to start their own book club?"
+    expected_contains: ["Clara"]
+  - question: "How many activities does Nadia share with Maya?"
+    expected_contains: ["four"]
+  - question: "What is the narrator's relationship with The Other in Piranesi?"
+    expected_contains: ["visits", "tasks"]
+  - question: "How old is Maya now?"
+    expected_contains: ["30"]

@@ -1,0 +1,222 @@
+story_id: 74
+story_name: "First Real PR Merged"
+category: "Career"
+description: |
+  Tests memory of Maya's first significant code contribution at Conduit.
+  Not just a bug fix but a feature addition. Confidence starts rebuilding.
+  Verifies system tracks milestone events and emotional recovery.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00 AM"
+    user_input: |
+      Sam assigned me my first real feature ticket today not a bug fix but an actual feature I need to build a query expansion module for the search pipeline that takes user queries and expands them with synonyms and related terms to improve recall and I'm so excited because this is actual meaningful work
+    expected_memory_stores:
+      - "first feature ticket"
+      - "query expansion module"
+      - "search pipeline"
+      - "synonyms and related terms"
+      - "improve recall"
+    expected_triples:
+      - ["Sam", "assigned", "first feature ticket to user"]
+      - ["user", "building", "query expansion module for search pipeline"]
+      - ["query expansion module", "uses", "synonyms and related terms"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 3:00 PM"
+    user_input: |
+      spent the afternoon designing the architecture for the query expansion module and I drew up this whole diagram showing how it fits into the existing pipeline and shared it with Lily and she was like this is really well thought out and suggested adding a caching layer which is a great idea
+    expected_memory_stores:
+      - "architecture design"
+      - "diagram"
+      - "Lily feedback"
+      - "caching layer suggestion"
+    expected_triples:
+      - ["user", "designed", "architecture for query expansion module"]
+      - ["user", "shared_diagram_with", "Lily"]
+      - ["Lily", "suggested", "adding a caching layer"]
+      - ["Lily", "praised", "user's architecture design"]
+    expected_adaptation:
+      emotion_detected: "productive"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 10:00 AM"
+    user_input: |
+      coding all morning and I'm in the zone like that flow state where you lose track of time and the code just flows out of you and I built the core expansion logic with a configurable synonym dictionary and tested it locally and it works the search results are noticeably better with expansion enabled
+    expected_memory_stores:
+      - "flow state"
+      - "core expansion logic"
+      - "synonym dictionary"
+      - "configurable"
+      - "better results"
+    expected_triples:
+      - ["user", "built", "core expansion logic with configurable synonym dictionary"]
+      - ["user", "has_emotion", "focused"]
+      - ["query expansion", "improved", "search results noticeably"]
+    expected_adaptation:
+      emotion_detected: "focused"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 2:00 PM"
+    user_input: |
+      added Lily's caching suggestion and wrote comprehensive tests like 94 percent coverage which Sam would appreciate because he's big on test coverage and then I opened the PR and tagged Sam Lily and Danny for review and my heart is racing waiting for feedback
+    expected_memory_stores:
+      - "caching implemented"
+      - "94 percent test coverage"
+      - "PR opened"
+      - "tagged Sam Lily Danny"
+      - "waiting for feedback"
+    expected_triples:
+      - ["user", "implemented", "Lily's caching suggestion"]
+      - ["user", "achieved", "94 percent test coverage"]
+      - ["user", "opened_PR_tagging", "Sam, Lily, and Danny"]
+      - ["user", "has_emotion", "anxious"]
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 5:00 PM"
+    user_input: |
+      Lily approved the PR within an hour with a comment that said this is really clean code nice job and then Danny reviewed it and left three comments but they were all minor style things not structural issues and he approved it too and I'm like oh my god this might actually get merged today
+    expected_memory_stores:
+      - "Lily approved"
+      - "clean code comment"
+      - "Danny approved"
+      - "minor style comments"
+      - "might merge today"
+    expected_triples:
+      - ["Lily", "approved", "user's PR"]
+      - ["Lily", "commented", "really clean code nice job"]
+      - ["Danny", "approved", "user's PR"]
+      - ["Danny", "left", "three minor style comments"]
+      - ["user", "has_emotion", "elated"]
+    expected_adaptation:
+      emotion_detected: "elated"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      Sam reviewed it last and he approved and said excellent first feature Maya the caching layer was a smart addition and then he merged it and I literally stood up from my desk and fist pumped and Julian walked in and was like what happened and I said my first PR got merged and he high fived me
+    expected_memory_stores:
+      - "Sam approved"
+      - "excellent comment"
+      - "caching praised"
+      - "PR merged"
+      - "fist pump"
+      - "Julian high five"
+    expected_triples:
+      - ["Sam", "approved_and_merged", "user's first feature PR"]
+      - ["Sam", "commented", "excellent first feature, caching was smart"]
+      - ["user", "has_emotion", "triumphant"]
+      - ["Julian", "high_fived", "user"]
+    expected_adaptation:
+      emotion_detected: "triumphant"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      what was Maya's first feature at Conduit AI about
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 9:00 AM"
+    user_input: |
+      Sam mentioned my PR in standup today and said it's a great example of how to ramp up effectively and everyone clapped which was embarrassing but also amazing and Lily slacked me after saying see I told you you belong here
+    expected_memory_stores:
+      - "standup mention"
+      - "ramp up example"
+      - "team applause"
+      - "Lily belong message"
+    expected_triples:
+      - ["Sam", "mentioned", "user's PR in standup as ramp up example"]
+      - ["team", "applauded", "user"]
+      - ["Lily", "slacked", "user saying you belong here"]
+      - ["user", "has_emotion", "proud"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      the query expansion module is already showing results in the staging metrics like search recall improved by 12 percent which Ross saw and he sent me a direct message saying great work Maya this is exactly the kind of impact we hired you for and that made my entire week honestly my entire month
+    expected_memory_stores:
+      - "12 percent recall improvement"
+      - "staging metrics"
+      - "Ross direct message"
+      - "impact recognized"
+      - "made her month"
+    expected_triples:
+      - ["query expansion module", "improved_recall_by", "12 percent in staging"]
+      - ["Ross", "messaged", "user saying great work, exactly the impact we hired you for"]
+      - ["user", "has_emotion", "fulfilled"]
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      told Leon about the PR and the 12 percent improvement and he was like Maya that's production impact in your third week that's insane and I called my mom too and she didn't understand what a PR is but she said she's proud of me and Kobe was barking in the background because he heard grandma's voice on the phone
+    expected_memory_stores:
+      - "Leon impressed"
+      - "third week impact"
+      - "mom proud"
+      - "mom doesn't understand PR"
+      - "Kobe barking at grandma voice"
+    expected_triples:
+      - ["Leon", "impressed_by", "user's production impact in third week"]
+      - ["user", "called", "mom to share news"]
+      - ["user's mom", "is_proud_of", "user"]
+      - ["Kobe", "barked_at", "grandma's voice on phone"]
+      - ["user", "has_emotion", "happy"]
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What was Maya's first feature at Conduit?"
+    expected_contains: ["query expansion"]
+  - question: "How much did search recall improve?"
+    expected_contains: ["12 percent"]
+  - question: "What test coverage did Maya's PR have?"
+    expected_contains: ["94 percent"]
+  - question: "Who suggested the caching layer?"
+    expected_contains: ["Lily"]
+  - question: "Who reviewed Maya's first feature PR?"
+    expected_contains: ["Sam", "Lily", "Danny"]
+  - question: "What did Ross say about Maya's work?"
+    expected_contains: ["great work", "impact", "hired you for"]
+  - question: "What did Sam say in standup about Maya's PR?"
+    expected_contains: ["ramp up", "example"]
+  - question: "How did Danny's review go?"
+    expected_contains: ["minor", "style", "approved"]
+  - question: "What did Lily say to Maya after standup?"
+    expected_contains: ["belong"]
+  - question: "How is Maya's confidence at Conduit now?"
+    expected_contains: ["better", "proud", "growing"]

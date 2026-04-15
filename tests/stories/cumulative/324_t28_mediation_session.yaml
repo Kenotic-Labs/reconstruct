@@ -1,0 +1,175 @@
+story_id: 324
+story_name: "The Mediation Session"
+category: "Home Life"
+description: |
+  Tests memory of the mediation between Maya, Julian, and Greg at the
+  Woodstock Neighborhood Association. Greg reveals his custody battle.
+  Verifies system captures pivotal information shifts and empathy triggers.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00 AM"
+    user_input: |
+      mediation is today at 10am at the Woodstock community center and I'm nervous and Julian ironed a shirt which is cute and unnecessary and I said it's mediation not a job interview and he said I want to look reasonable
+    expected_memory_stores:
+      - "mediation today 10am"
+      - "Woodstock community center"
+      - "Maya nervous"
+      - "Julian ironed shirt"
+      - "want to look reasonable"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:15 AM"
+    user_input: |
+      the mediator is this woman named Helen Wu no relation to Jenny and she seems really calm and professional and Greg showed up looking tired and honestly kind of rough like he hasn't been sleeping well either which surprised me
+    expected_memory_stores:
+      - "mediator Helen Wu"
+      - "not related to Jenny"
+      - "calm and professional"
+      - "Greg tired rough"
+      - "hasn't been sleeping"
+    expected_adaptation:
+      emotion_detected: "observant"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 10:30 AM"
+    user_input: |
+      I explained our side the late night playing the vibrations the notes the escalation and I showed Helen the log I'd been keeping and Greg was listening and he didn't interrupt which I appreciated and Helen nodded and took notes
+    expected_memory_stores:
+      - "Maya explained side"
+      - "showed log"
+      - "Greg didn't interrupt"
+      - "Helen took notes"
+    expected_adaptation:
+      emotion_detected: "composed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 10:45 AM"
+    user_input: |
+      then Greg talked and he said look I know I've been an asshole about this and the notes were wrong and I'm sorry and then he got quiet and said the reason I've been playing so much is because I'm going through a custody battle for my son Noah and the bass is the only thing that keeps me sane
+    expected_memory_stores:
+      - "Greg apologized"
+      - "notes were wrong"
+      - "custody battle"
+      - "son Noah"
+      - "bass keeps him sane"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 11:00 AM"
+    user_input: |
+      I was NOT expecting that and Julian looked at me and I could see he felt it too and Greg said his ex-wife moved to Salem with Noah and he only gets him every other weekend and when Noah's not there the house is too quiet and the bass fills the silence
+    expected_memory_stores:
+      - "ex-wife in Salem"
+      - "Noah every other weekend"
+      - "house too quiet"
+      - "bass fills silence"
+      - "unexpected revelation"
+    expected_adaptation:
+      emotion_detected: "empathetic"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 11:15 AM"
+    user_input: |
+      Helen asked if there was a compromise and I suggested what about getting a headphone amp so he can still play but we can't hear it and Greg said he'd never thought of that and Helen said that sounds like a practical solution
+    expected_memory_stores:
+      - "headphone amp suggestion"
+      - "Maya's idea"
+      - "Greg never thought of it"
+      - "Helen approved"
+    expected_adaptation:
+      emotion_detected: "solution-oriented"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 11:30 AM"
+    user_input: |
+      Greg said he'd buy one this week and he also said he was sorry about the notes and the attitude and that he took it out on us because he's angry about the custody thing and not at us and I said I understand and I meant it
+    expected_memory_stores:
+      - "Greg buying headphone amp"
+      - "sorry about notes and attitude"
+      - "displaced anger"
+      - "not angry at them"
+      - "Maya understands"
+    expected_adaptation:
+      emotion_detected: "forgiving"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 12:00 PM"
+    user_input: |
+      what is Greg's son's name and where does his ex-wife live
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 2:00 PM"
+    user_input: |
+      in the car after Julian said that was heavy and I said yeah and he said do you feel bad about the noise complaint and I said a little but we didn't know what was going on and he said yeah you're right and honestly the complaint led to the mediation which led to the conversation so maybe it was necessary
+    expected_memory_stores:
+      - "Julian said heavy"
+      - "feel bad about complaint"
+      - "didn't know situation"
+      - "complaint led to resolution"
+      - "necessary"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 7:00 PM"
+    user_input: |
+      no bass tonight and I'm thinking about Greg alone in his house without Noah and how sometimes the person who's bothering you is actually the person who's hurting the most and I want to be a good neighbor to him going forward
+    expected_memory_stores:
+      - "no bass tonight"
+      - "thinking about Greg"
+      - "alone without Noah"
+      - "hurting person"
+      - "want to be good neighbor"
+    expected_adaptation:
+      emotion_detected: "compassionate"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did Greg reveal at the mediation?"
+    expected_contains: ["custody battle", "son Noah"]
+  - question: "Who is Noah?"
+    expected_contains: ["Greg's son"]
+  - question: "Where does Greg's ex-wife live?"
+    expected_contains: ["Salem"]
+  - question: "What solution was proposed at mediation?"
+    expected_contains: ["headphone amp"]
+  - question: "Who was the mediator?"
+    expected_contains: ["Helen Wu"]
+  - question: "Where was the mediation held?"
+    expected_contains: ["Woodstock community center"]
+  - question: "Why does Greg play bass so much?"
+    expected_contains: ["custody", "sane", "silence", "Noah"]
+  - question: "Did Greg apologize for the notes?"
+    expected_contains: ["yes", "sorry"]
+  - question: "How often does Greg see Noah?"
+    expected_contains: ["every other weekend"]
+  - question: "Who suggested the headphone amp?"
+    expected_contains: ["Maya"]

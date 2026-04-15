@@ -1,0 +1,178 @@
+story_id: 191
+story_name: "Clara Announces Pregnancy"
+category: "Life Events"
+description: |
+  Clara finally shares her news -- she's pregnant. Maya thrilled to
+  become an aunt. Tests surprise revelation tracking, emotional
+  response, and connecting Clara's earlier hints.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 8:00 PM"
+    user_input: |
+      OKAY so remember how Clara kept saying she had news she wanted to tell me and then kept putting it off well she FaceTimed me tonight and she looked nervous which Clara never looks nervous and she said Maya I need to tell you something and I said oh god what and she said I'm pregnant
+    expected_memory_stores:
+      - "Clara pregnant"
+      - "announcement"
+      - "Clara nervous"
+      - "connecting to earlier hints"
+    expected_adaptation:
+      emotion_detected: "shocked joy"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 8:15 PM"
+    user_input: |
+      I SCREAMED like actually screamed so loud that Julian came running in from the other room thinking something was wrong and Kobe started barking and I was just yelling CLARA'S PREGNANT and Julian was like wait really and I was like YES and then we were all just screaming including Kobe who had no idea why
+    expected_memory_stores:
+      - "Maya screamed"
+      - "Julian came running"
+      - "Kobe barking"
+      - "everyone excited"
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 8:30 PM"
+    user_input: |
+      okay so Clara is 12 weeks along she waited to tell people until after the first trimester because she wanted to be safe and her husband David is over the moon and they found out like two months ago but Clara said she wanted to tell me in person but then the thing with Mom happened and the timing was never right
+    expected_memory_stores:
+      - "Clara 12 weeks pregnant"
+      - "waited past first trimester"
+      - "husband David"
+      - "found out two months ago"
+      - "Mom's health scare delayed announcement"
+    expected_adaptation:
+      emotion_detected: "overjoyed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 9:00 PM"
+    user_input: |
+      the due date is April 15th so that's like five months from now and Clara said she's feeling good just tired and some morning sickness but as a nurse she's like very matter of fact about it she's like my body is doing exactly what it should and I'm monitoring my blood pressure because of family history given Mom's heart thing
+    expected_memory_stores:
+      - "due date April 15"
+      - "five months away"
+      - "tired and morning sickness"
+      - "Clara monitoring blood pressure"
+      - "family history concern"
+      - "Vivian's heart condition"
+    expected_adaptation:
+      emotion_detected: "excited and caring"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 9:30 PM"
+    user_input: |
+      I'm going to be an AUNT like Auntie Maya I can't stop saying it Julian said I'm going to be the cool uncle which LOL Julian you will be the cool uncle because you'll teach the kid to draw and I'll teach them to code and Kobe will be their first best friend oh my god I'm so happy
+    expected_memory_stores:
+      - "Auntie Maya"
+      - "Julian cool uncle"
+      - "Julian teach drawing"
+      - "Maya teach coding"
+      - "Kobe baby's first friend"
+    expected_adaptation:
+      emotion_detected: "pure joy"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 9:00 AM"
+    user_input: |
+      Clara told Mom and Dad already a few weeks ago and Mom said she knew before Clara even told her because a mother always knows and Dad apparently said well it's about time and then immediately started planning to build a crib which of course he did because George Chen builds things
+    expected_memory_stores:
+      - "parents already knew"
+      - "Vivian mother's intuition"
+      - "George said about time"
+      - "George planning to build crib"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 11:00 AM"
+    user_input: |
+      David called to chat he's Clara's husband he's a paramedic at the Sacramento fire department and he sounded so nervous and excited at the same time he said Maya I'm going to be a dad and I said David you're going to be an amazing dad and he said I hope so I've been reading baby books already which is very David
+    expected_memory_stores:
+      - "David called"
+      - "Clara's husband"
+      - "paramedic Sacramento fire department"
+      - "nervous and excited"
+      - "reading baby books"
+    expected_adaptation:
+      emotion_detected: "supportive"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 2:00 PM"
+    user_input: |
+      so this is HUGE news right before the wedding like my sister is pregnant and I'm getting married in the same year and Mom is going to be a grandmother and Dad is building a crib AND a wedding arch at the same time this family is just nonstop honestly and oh my god Clara is going to be pregnant at my wedding she'll be like 8 months along
+    expected_memory_stores:
+      - "Clara pregnant at wedding"
+      - "8 months at wedding"
+      - "Vivian becoming grandmother"
+      - "George building crib and arch"
+      - "huge year for family"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 5:00 PM"
+    user_input: |
+      Jenny texted asking what's new and I told her about Clara and Jenny was like girl your 2026 is INSANE wedding baby aunt life you're living a Hallmark movie and honestly she's not wrong this year has been the wildest ride between Mom's health Julian's job Dad's retirement and now this
+    expected_memory_stores:
+      - "Jenny's reaction"
+      - "2026 recap"
+      - "Hallmark movie comparison"
+      - "wedding baby aunt life"
+    expected_adaptation:
+      emotion_detected: "overwhelmed gratitude"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 9:00 PM"
+    user_input: |
+      laying in bed tonight and Julian's already asleep and Kobe's between us snoring and I just feel so full like my heart is literally full my sister is having a baby I'm getting married Mom is healthy Dad is happy and I'm about to become Auntie Maya and I can't wait to meet this tiny human who has no idea how loved they already are
+    expected_memory_stores:
+      - "Maya feeling full"
+      - "gratitude"
+      - "anticipating baby"
+      - "baby already loved"
+      - "family at peace"
+    expected_adaptation:
+      emotion_detected: "deeply content"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Is Clara pregnant?"
+    expected_contains: ["yes"]
+  - question: "When is Clara's due date?"
+    expected_contains: ["April 15"]
+  - question: "Who is Clara's husband?"
+    expected_contains: ["David"]
+  - question: "What does David do for work?"
+    expected_contains: ["paramedic", "fire department"]
+  - question: "How far along was Clara when she told Maya?"
+    expected_contains: ["12 weeks"]
+  - question: "Will Clara be pregnant at Maya's wedding?"
+    expected_contains: ["yes", "8 months"]
+  - question: "What is George building for the baby?"
+    expected_contains: ["crib"]
+  - question: "Why did Clara wait to share the news?"
+    expected_contains: ["first trimester", "Mom's health"]
+  - question: "Do Maya's parents already know about the pregnancy?"
+    expected_contains: ["yes"]
+  - question: "What will Maya be called by the baby?"
+    expected_contains: ["Auntie Maya"]

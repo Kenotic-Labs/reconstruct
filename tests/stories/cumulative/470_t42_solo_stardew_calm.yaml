@@ -1,0 +1,184 @@
+story_id: 470
+story_name: "Solo Stardew for Calm"
+category: "Gaming"
+description: |
+  Tests memory of Maya using Stardew Valley as intentional self-care tool.
+  Establishes mature relationship with gaming, seasonal farm reflection.
+  Verifies system tracks behavioral evolution to healthy endpoint.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 9:00 PM"
+    user_input: |
+      had a really intense day at Conduit like Danny and I were debugging this pipeline issue for six hours straight and my brain is fried and Julian can tell I'm tense because I came home and just stood in the kitchen not saying anything and he was like go play Stardew and I was like yeah okay that's exactly what I need right now
+    expected_memory_stores:
+      - "intense Conduit day"
+      - "Danny debugging"
+      - "pipeline issue six hours"
+      - "brain fried"
+      - "Julian noticed"
+      - "Stardew as prescription"
+    expected_adaptation:
+      emotion_detected: "stressed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 9:30 PM"
+    user_input: |
+      playing now and it's fall on the farm which is my favorite season because all the trees turn orange and there's pumpkins everywhere and the music changes to this gentle acoustic thing and I can literally feel my shoulders dropping and my breathing slowing down and Kobe is on the couch next to me with his head on my leg and this is medicine
+    expected_memory_stores:
+      - "fall season on farm"
+      - "orange trees pumpkins"
+      - "gentle acoustic music"
+      - "shoulders dropping"
+      - "breathing slowing"
+      - "Kobe on couch"
+      - "gaming as medicine"
+    expected_adaptation:
+      emotion_detected: "calming"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 10:00 PM"
+    user_input: |
+      I harvested all my pumpkins and cranberries and made preserves and checked on the animals and honestly the routine of it is what's calming like you water you harvest you check animals you mine a little you fish a little it's like a meditation loop and I get why Lily recommended it way back when she knew
+    expected_memory_stores:
+      - "pumpkins cranberries"
+      - "made preserves"
+      - "routine is calming"
+      - "meditation loop"
+      - "Lily knew"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 10:30 PM"
+    user_input: |
+      Julian brought me tea while I was playing without me asking and that's like the most loving thing because he knows when I'm in decompression mode and he sat down and watched for a bit and said your farm looks beautiful and I was like thanks your decorating laid the foundation back when we played co-op and he smiled
+    expected_memory_stores:
+      - "Julian brought tea"
+      - "unprompted kindness"
+      - "decompression mode"
+      - "farm looks beautiful"
+      - "co-op decorating reference"
+    expected_adaptation:
+      emotion_detected: "loved"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 10:45 PM"
+    user_input: |
+      I closed the game after about an hour and a half which is within my limit and then I picked up my guitar and just strummed softly not really playing any song just letting my fingers move and Julian was reading and Kobe was sleeping and the house was quiet and I thought about how different this is from three months ago when I would've played until 2 AM
+    expected_memory_stores:
+      - "closed after 90 minutes"
+      - "within limit"
+      - "strummed guitar softly"
+      - "quiet house"
+      - "contrast to three months ago"
+      - "growth awareness"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 7:00 AM"
+    user_input: |
+      woke up feeling so much better than yesterday and I think it's because I actually processed the stress instead of just pushing through like the Stardew plus guitar plus tea plus Julian plus Kobe combination is basically my perfect decompression toolkit and Dr Tate would be proud honestly
+    expected_memory_stores:
+      - "feeling better"
+      - "processed stress"
+      - "decompression toolkit"
+      - "Stardew guitar tea Julian Kobe"
+      - "Dr Tate reference"
+    expected_adaptation:
+      emotion_detected: "refreshed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 12:00 PM"
+    user_input: |
+      told Danny at lunch that I played Stardew to decompress last night and he was like isn't that the farming game and I said Danny one day you will understand the healing power of virtual agriculture and he just stared at me and Lily was laughing so hard she almost choked on her sandwich
+    expected_memory_stores:
+      - "told Danny"
+      - "virtual agriculture joke"
+      - "Danny confused"
+      - "Lily laughing"
+    expected_adaptation:
+      emotion_detected: "playful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 5:00 PM"
+    user_input: |
+      what does Maya use Stardew Valley for now
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 7:00 PM"
+    user_input: |
+      tabletop meetup tonight and I told Nadia about the intense day and she was like girl you need to come climbing more and I said I know but also Stardew is my indoor calm and climbing is my outdoor calm and she said that's fair and then Tessa beat all of us at Catan AGAIN and Omar is convinced she's cheating which she's absolutely not she's just that good
+    expected_memory_stores:
+      - "tabletop meetup"
+      - "told Nadia about stress"
+      - "indoor calm outdoor calm"
+      - "Tessa won Catan again"
+      - "Omar accusations"
+      - "Tessa just good"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 10:00 PM"
+    user_input: |
+      on the drive home from the meetup I was thinking about the whole gaming journey and it's kind of wild like six months ago I didn't play any games and now I have Stardew as self-care a tabletop friend group a mentee learning to code and a healthy relationship with screens and honestly the only thing that got me here was being willing to try stuff and mess up and adjust which is basically what Dr Tate has been trying to teach me for years
+    expected_memory_stores:
+      - "gaming journey reflection"
+      - "six months no games to now"
+      - "Stardew self-care"
+      - "tabletop friends"
+      - "mentee Alex"
+      - "healthy screen relationship"
+      - "try mess up adjust"
+      - "Dr Tate lesson"
+    expected_adaptation:
+      emotion_detected: "wise"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How does Maya use Stardew Valley now?"
+    expected_contains: ["decompression", "calm", "self-care", "stress"]
+  - question: "What is Maya's decompression toolkit?"
+    expected_contains: ["Stardew", "guitar", "tea", "Julian", "Kobe"]
+  - question: "How long does Maya play Stardew in a session?"
+    expected_contains: ["hour", "90 minutes"]
+  - question: "What is Maya's favorite season on her Stardew farm?"
+    expected_contains: ["fall"]
+  - question: "What's the difference between Stardew calm and climbing calm?"
+    expected_contains: ["indoor", "outdoor"]
+  - question: "Who keeps winning at Catan?"
+    expected_contains: ["Tessa"]
+  - question: "What was Maya's gaming situation six months ago?"
+    expected_contains: ["no games", "didn't play"]
+  - question: "What lesson did the gaming arc teach Maya?"
+    expected_contains: ["try", "mess up", "adjust"]
+  - question: "Who does Maya credit for starting her gaming journey?"
+    expected_contains: ["Lily"]
+  - question: "What did Julian bring Maya while she was playing Stardew?"
+    expected_contains: ["tea"]

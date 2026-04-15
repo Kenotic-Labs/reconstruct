@@ -1,0 +1,220 @@
+story_id: 72
+story_name: "Meeting the Team"
+category: "Career"
+description: |
+  Tests memory of Maya building relationships with new colleagues.
+  Lily Tran becomes a close ally. Sam's leadership style emerges.
+  Verifies entity relationship building in a new context.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 9:30 AM"
+    user_input: |
+      had a one on one with Lily today and she's awesome like she told me about her background she was at Uber for three years before Conduit working on their search team and she came to Conduit because she wanted to build something from scratch instead of maintaining someone else's system and I was like wow that resonates so hard
+    expected_memory_stores:
+      - "Lily one on one"
+      - "Uber three years"
+      - "search team background"
+      - "building from scratch"
+      - "resonance"
+    expected_triples:
+      - ["Lily_Tran", "previously_worked_at", "Uber for three years"]
+      - ["Lily_Tran", "worked_on", "search team at Uber"]
+      - ["Lily_Tran", "came_to_Conduit", "to build from scratch"]
+      - ["user", "has_emotion", "connected"]
+    expected_adaptation:
+      emotion_detected: "connected"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 11:00 AM"
+    user_input: |
+      Sam runs standup differently than anyone I've worked with before like he doesn't ask what you did yesterday and what you're doing today he asks what's blocking you and what excited you this week and I love that because it's about removing obstacles and staying motivated not micromanaging
+    expected_memory_stores:
+      - "Sam's standup style"
+      - "blocking and excitement questions"
+      - "no micromanaging"
+      - "leadership style"
+    expected_triples:
+      - ["Sam_Okafor", "standup_style", "asks what's blocking and what excited you"]
+      - ["Sam_Okafor", "leadership", "no micromanaging"]
+      - ["user", "has_emotion", "impressed"]
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 2:00 PM"
+    user_input: |
+      met some of the other engineers this week there's Danny Ruiz who works on the ingestion pipeline and he seems really smart but kind of intense like he's always the first to speak in meetings and has strong opinions about everything and then there's Amir who does infrastructure and is super quiet but Lily says he's brilliant
+    expected_memory_stores:
+      - "Danny Ruiz"
+      - "ingestion pipeline"
+      - "smart but intense"
+      - "first to speak"
+      - "Amir infrastructure"
+      - "quiet but brilliant"
+    expected_triples:
+      - ["Danny_Ruiz", "works_on", "ingestion pipeline"]
+      - ["Danny_Ruiz", "personality", "smart intense first to speak strong opinions"]
+      - ["Amir", "works_on", "infrastructure"]
+      - ["Amir", "personality", "quiet but brilliant"]
+      - ["user", "has_emotion", "observant"]
+    expected_adaptation:
+      emotion_detected: "observant"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 6:00 PM"
+    user_input: |
+      told Julian about the team dynamics and he was like any red flags and I said not really just Danny seems like he might be a lot to work with but otherwise everyone seems great and Julian said well at least there's no Derek and I literally knocked on wood when he said that
+    expected_memory_stores:
+      - "Julian question about team"
+      - "Danny potential concern"
+      - "no Derek"
+      - "knock on wood"
+    expected_triples:
+      - ["user", "told_Julian", "Danny might be a lot to work with"]
+      - ["Julian", "asked", "any red flags on new team"]
+      - ["Julian", "joked", "at least there's no Derek"]
+      - ["user", "has_emotion", "cautious"]
+    expected_adaptation:
+      emotion_detected: "cautious"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 10:00 AM"
+    user_input: |
+      Lily and I paired on a search relevance issue today and we work so well together like she thinks about problems differently than me but in a complementary way and she said the same thing about me and we fixed the issue in like two hours and Sam was like great teamwork you two
+    expected_memory_stores:
+      - "Lily pairing"
+      - "search relevance"
+      - "complementary thinking"
+      - "two hours fix"
+      - "Sam praise"
+    expected_triples:
+      - ["user", "paired_with", "Lily on search relevance issue"]
+      - ["user", "works_with_Lily", "complementary thinking styles"]
+      - ["Sam_Okafor", "praised", "user and Lily teamwork"]
+      - ["user", "has_emotion", "proud"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 3:00 PM"
+    user_input: |
+      team retrospective today and it was so different from Vantage people actually said honest things like Danny said the deploy pipeline is too slow and Amir said the monitoring needs work and nobody was afraid and Sam just wrote everything down and said let's fix it and that was it no politics no fear
+    expected_memory_stores:
+      - "team retro"
+      - "honest feedback"
+      - "Danny deploy concern"
+      - "Amir monitoring concern"
+      - "Sam responsive"
+      - "no politics"
+    expected_triples:
+      - ["team", "had", "honest retrospective"]
+      - ["Danny_Ruiz", "raised", "deploy pipeline too slow"]
+      - ["Amir", "raised", "monitoring needs work"]
+      - ["Sam_Okafor", "responded", "let's fix it no politics"]
+      - ["user", "has_emotion", "refreshed"]
+    expected_adaptation:
+      emotion_detected: "refreshed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 11:00 AM"
+    user_input: |
+      who works on the ingestion pipeline at Conduit AI
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 2:00 PM"
+    user_input: |
+      took Kobe for a walk and ran into Clara the neighbor and she asked about the new job and I actually told her this time I said I switched companies and I'm at a startup called Conduit AI and she was like oh that sounds exciting and it felt good to say it out loud
+    expected_memory_stores:
+      - "Clara neighbor"
+      - "told about Conduit"
+      - "saying it out loud"
+      - "Kobe walk"
+    expected_triples:
+      - ["Clara", "is", "user's neighbor"]
+      - ["user", "told_Clara", "about new job at Conduit AI"]
+      - ["user", "has_emotion", "proud"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 10:00 AM"
+    user_input: |
+      Julian is working on a new freelance project for a yoga studio and he asked me for feedback on the logo designs and I picked the minimalist one and he said that's the one I like too and we have good taste together I guess and Kobe was chewing on his toy the whole time just vibing
+    expected_memory_stores:
+      - "Julian yoga studio project"
+      - "logo designs"
+      - "minimalist choice"
+      - "Kobe chewing toy"
+    expected_triples:
+      - ["Julian", "freelance_project", "yoga studio"]
+      - ["user", "picked", "minimalist logo design"]
+      - ["Julian", "agreed_with", "user's logo choice"]
+      - ["user", "has_emotion", "content"]
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 7:00 PM"
+    user_input: |
+      end of week one at Conduit and I honestly can't believe how different it feels from Vantage like I'm actually excited to work tomorrow and that hasn't happened in months and I told Julian I think this was the right decision and he said obviously it was and gave me a look like of course
+    expected_memory_stores:
+      - "week one complete"
+      - "excited for work"
+      - "right decision"
+      - "Julian confidence"
+    expected_triples:
+      - ["user", "completed", "week one at Conduit AI"]
+      - ["user", "excited_for", "work tomorrow"]
+      - ["user", "believes", "leaving Vantage was the right decision"]
+      - ["user", "has_emotion", "fulfilled"]
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where did Lily Tran work before Conduit?"
+    expected_contains: ["Uber"]
+  - question: "Who is Danny Ruiz at Conduit?"
+    expected_contains: ["ingestion pipeline", "engineer"]
+  - question: "How does Sam run standup?"
+    expected_contains: ["blocking", "excited", "no micromanaging"]
+  - question: "Who is Amir?"
+    expected_contains: ["infrastructure", "quiet", "brilliant"]
+  - question: "How do Maya and Lily work together?"
+    expected_contains: ["complementary", "well"]
+  - question: "What did Danny say in the retrospective?"
+    expected_contains: ["deploy pipeline", "slow"]
+  - question: "What is Julian's new freelance project?"
+    expected_contains: ["yoga studio"]
+  - question: "Did Maya tell Clara about her new job?"
+    expected_contains: ["yes", "Conduit"]
+  - question: "How does Conduit's culture compare to Vantage?"
+    expected_contains: ["different", "better", "no politics"]
+  - question: "How is Maya feeling after week one at Conduit?"
+    expected_contains: ["excited", "fulfilled", "right decision"]

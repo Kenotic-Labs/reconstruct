@@ -1,0 +1,177 @@
+story_id: 517
+story_name: "Real Thanksgiving"
+category: "Hosting and Entertaining"
+description: |
+  Maya and Julian host real Thanksgiving with both families. Diane and Vivian meet.
+  Cultural fusion at the table. Cross-references Diane conflict (T16), Vivian relationship,
+  grandpa legacy (T46), and house (T41-T45).
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      ok so Diane and George arrived tonight they're staying at a hotel downtown because Julian said them staying in our guest room would be too much and I agree and my mom is flying in tomorrow morning from Sacramento and I'm already nervous about Diane and Vivian being in the same room because they've only met like twice
+    expected_memory_stores:
+      - "Diane and George arrived"
+      - "hotel downtown"
+      - "not staying at house"
+      - "Vivian flying in tomorrow"
+      - "Diane and Vivian rarely met"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 7:00 AM"
+    user_input: |
+      Thanksgiving morning and I've been up since 5:30 because the turkey goes in at 6 and Julian's following George's recipe again but starting earlier this time like the feedback said and I'm prepping sides and my mom's flight lands at 9 and Clara is picking her up from the airport because Julian and I can't leave the kitchen
+    expected_memory_stores:
+      - "up at 5:30"
+      - "turkey at 6am"
+      - "earlier start per feedback"
+      - "Vivian flight at 9"
+      - "Clara picking up Vivian"
+    expected_adaptation:
+      emotion_detected: "focused"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 10:30 AM"
+    user_input: |
+      my mom arrived and immediately came to the kitchen and started making dumplings without being asked and she just took over a corner of the counter and started rolling and folding and I looked at her and she looked at me and she said your grandfather would be here if he could and I said I know mom I know
+    expected_memory_stores:
+      - "Vivian arrived"
+      - "started making dumplings"
+      - "took over kitchen corner"
+      - "grandpa would be here"
+    expected_adaptation:
+      emotion_detected: "tender"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 12:00 PM"
+    user_input: |
+      Diane and George arrived and Diane brought flowers which was sweet and she walked into the kitchen and saw my mom making dumplings and she said oh how wonderful can you teach me and my mom looked surprised but said of course and then Diane and Vivian were standing side by side folding dumplings and Julian caught my eye from across the room and mouthed oh my god
+    expected_memory_stores:
+      - "Diane brought flowers"
+      - "Diane asked Vivian to teach dumplings"
+      - "Diane and Vivian bonding"
+      - "Julian shocked"
+    expected_adaptation:
+      emotion_detected: "amazed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 2:00 PM"
+    user_input: |
+      George and Julian are handling the turkey and George keeps giving Julian tips and Julian keeps saying dad I know I literally did this a month ago and George is like well excuse me for caring and it's funny because Julian and George have this dynamic that's so different from me and my mom like they're chill and we're intense
+    expected_memory_stores:
+      - "George and Julian turkey dynamic"
+      - "George giving tips"
+      - "Julian practiced"
+      - "family dynamic contrast"
+    expected_adaptation:
+      emotion_detected: "observant"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 4:00 PM"
+    user_input: |
+      dinner is served and the table is full like truly full turkey and mashed potatoes and sweet potatoes and cranberry sauce and grandpa's dumplings and Diane's green salad and George brought wine and Kobe is behind the baby gate looking absolutely devastated and this is real this is our first Thanksgiving as hosts
+    expected_memory_stores:
+      - "full table"
+      - "all dishes listed"
+      - "Diane's green salad"
+      - "George's wine"
+      - "Kobe behind gate"
+      - "first Thanksgiving as hosts"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 4:30 PM"
+    user_input: |
+      went around for thankful things and my mom said she's thankful her daughter built a home that brings people together and Diane said she's thankful for Julian finding someone who makes him better and George said he's thankful the turkey turned out and Julian said he's thankful for this table and the people at it and I said I'm thankful for all of you and for grandpa who isn't here but is
+    expected_memory_stores:
+      - "thankful round"
+      - "Vivian thankful for Maya's home"
+      - "Diane thankful for Maya and Julian"
+      - "George thankful for turkey"
+      - "Julian thankful"
+      - "Maya thankful including grandpa"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 6:00 PM"
+    user_input: |
+      after dinner Diane and my mom were having tea together in the living room and I overheard my mom telling Diane about grandpa being an engineer and Diane said she had no idea and she said your father sounds like an extraordinary man and my mom got emotional and Diane held her hand and I'm standing in the hallway crying quietly like a spy
+    expected_memory_stores:
+      - "Diane and Vivian having tea"
+      - "Vivian told grandpa story"
+      - "Diane held Vivian's hand"
+      - "Maya overheard crying"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 8:00 PM"
+    user_input: |
+      George fell asleep on the couch with Kobe on his lap and Diane took a photo and Julian and I were cleaning up and he said Maya this was perfect and I said the green beans were missing and he said nobody noticed and I said Clara noticed and he said Clara doesn't count and I laughed
+    expected_memory_stores:
+      - "George asleep with Kobe"
+      - "Diane took photo"
+      - "Julian says perfect"
+      - "green bean joke callback"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 10:00 PM"
+    user_input: |
+      everyone's gone and my mom is staying over in the guest room and she said goodnight and then came back and hugged me and said Maya I need you to know I'm proud of you and I know I don't say it enough and she's right she doesn't say it enough but tonight she said it and I'm lying in bed and I feel full in every possible way
+    expected_memory_stores:
+      - "Vivian staying in guest room"
+      - "Vivian said proud"
+      - "doesn't say it enough"
+      - "Maya feels full"
+    expected_adaptation:
+      emotion_detected: "complete"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where did Diane and George stay for Thanksgiving?"
+    expected_contains: ["hotel", "downtown"]
+  - question: "Who picked Vivian up from the airport?"
+    expected_contains: ["Clara"]
+  - question: "What surprised everyone about Diane and Vivian?"
+    expected_contains: ["dumplings", "bonding", "folding together"]
+  - question: "What time did the turkey go in?"
+    expected_contains: ["6"]
+  - question: "What did Diane say about Grandpa Wei?"
+    expected_contains: ["extraordinary man"]
+  - question: "What did Vivian say she was thankful for?"
+    expected_contains: ["daughter", "home", "brings people together"]
+  - question: "Where did George fall asleep?"
+    expected_contains: ["couch", "Kobe"]
+  - question: "What did Vivian tell Maya at bedtime?"
+    expected_contains: ["proud"]
+  - question: "Were green beans at this Thanksgiving?"
+    expected_contains: ["no", "missing", "skipped"]
+  - question: "What Chinese dish was at the Thanksgiving table?"
+    expected_contains: ["dumplings", "grandpa"]

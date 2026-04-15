@@ -1,0 +1,218 @@
+story_id: 54
+story_name: "The PIP"
+category: "Career"
+description: |
+  Tests memory of a high-stakes career event: Maya is put on a PIP.
+  Initial reason given is "performance" which later gets corrected.
+  Verifies correction handling and emotional intensity tracking.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 10:00 AM"
+    user_input: |
+      oh my god okay so um Derek just put me on a PIP a performance improvement plan like are you serious I have had nothing but positive reviews for three years and now suddenly I'm underperforming this is insane I can barely breathe right now
+    expected_memory_stores:
+      - "PIP"
+      - "performance improvement plan"
+      - "Derek"
+      - "three years positive reviews"
+      - "underperforming accusation"
+    expected_triples:
+      - ["Derek", "put_user_on", "PIP"]
+      - ["user", "review_history", "three years positive reviews"]
+      - ["Derek", "accused_user_of", "underperforming"]
+      - ["user", "has_emotion", "shock"]
+    expected_adaptation:
+      emotion_detected: "shock"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 10:30 AM"
+    user_input: |
+      Priya didn't even know about it she just found out when I told her and she was furious like I could see her face go red and she said she's going to talk to Derek and HR because she never flagged any performance issues with me because there aren't any
+    expected_memory_stores:
+      - "Priya unaware"
+      - "Priya furious"
+      - "HR involvement"
+      - "no performance issues flagged"
+    expected_triples:
+      - ["Priya", "unaware_of", "user's PIP"]
+      - ["Priya", "has_emotion", "furious"]
+      - ["Priya", "will_talk_to", "Derek and HR"]
+      - ["Priya", "confirmed", "no performance issues with user"]
+    expected_adaptation:
+      emotion_detected: "angry"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 11:45 AM"
+    user_input: |
+      Leon came by my desk and I told him and he was like that's messed up because everyone knows you're one of the strongest engineers on the team and he said two other people on different pods also got PIPs and they're all people who were on the old team structure so it feels targeted like Derek is cleaning house
+    expected_memory_stores:
+      - "Leon supportive"
+      - "two others got PIPs"
+      - "old team structure targeted"
+      - "Derek cleaning house"
+    expected_triples:
+      - ["Leon", "supportive_of", "user"]
+      - ["Leon", "told_user", "two others also got PIPs"]
+      - ["PIPs", "target", "old team structure members"]
+      - ["Derek", "suspected_of", "cleaning house"]
+    expected_adaptation:
+      emotion_detected: "suspicious"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 1:00 PM"
+    user_input: |
+      the PIP document says the reason is performance which is laughable because my last three reviews all say exceeds expectations and I have the documents to prove it so either Derek didn't look at my review history or he doesn't care
+    expected_memory_stores:
+      - "PIP reason performance"
+      - "exceeds expectations reviews"
+      - "documentation exists"
+    expected_triples:
+      - ["PIP", "stated_reason", "performance"]
+      - ["user", "review_history", "exceeds expectations for three years"]
+      - ["user", "has", "documentation to disprove PIP"]
+      - ["user", "has_emotion", "indignant"]
+    expected_adaptation:
+      emotion_detected: "indignant"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 6:00 PM"
+    user_input: |
+      told Julian about the PIP and he was so mad like he never gets mad but he was pacing around the kitchen saying this is discrimination or something and I had to calm him down and Kobe was barking because Julian was being loud and it was just chaos honestly
+    expected_memory_stores:
+      - "Julian angry"
+      - "kitchen"
+      - "Kobe barking"
+      - "chaos at home"
+    expected_triples:
+      - ["Julian", "has_emotion", "angry about PIP"]
+      - ["Julian", "said", "this is discrimination"]
+      - ["Kobe", "behavior", "barking due to Julian being loud"]
+      - ["user", "has_emotion", "overwhelmed"]
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 9:00 PM"
+    user_input: |
+      I can't sleep I keep thinking about the PIP like what if this goes on my permanent record what if I can't get another job what if they use this to fire me Julian is asleep next to me and Kobe is at the foot of the bed and I just feel so alone with this even though they're right here
+    expected_memory_stores:
+      - "insomnia"
+      - "career fear"
+      - "firing concern"
+      - "loneliness despite company"
+    expected_triples:
+      - ["user", "experiencing", "insomnia"]
+      - ["user", "fears", "PIP on permanent record"]
+      - ["user", "fears", "can't get another job"]
+      - ["user", "fears", "being fired"]
+      - ["user", "has_emotion", "lonely despite Julian and Kobe present"]
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 9:30 AM"
+    user_input: |
+      okay so update Priya talked to HR and apparently the PIP reason is being changed from performance to budget reallocation because HR reviewed my file and agreed there's no performance basis so like that's technically better but I'm still on a PIP which is insane
+    expected_memory_stores:
+      - "PIP reason changed"
+      - "budget reallocation"
+      - "not performance"
+      - "HR review"
+      - "correction"
+    expected_triples:
+      - ["PIP", "reason_corrected", "performance → budget reallocation"]
+      - ["HR", "confirmed", "no performance basis for PIP"]
+      - ["Priya", "intervened_with", "HR"]
+      - ["user", "corrected", "PIP reason from performance to budget reallocation"]
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 11:00 AM"
+    user_input: |
+      why was Maya put on a PIP and what's the actual reason
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 2:00 PM"
+    user_input: |
+      Leon said I should document everything like every meeting every email every interaction with Derek and he's right I need to protect myself and Priya said the same thing so I'm starting a log today of everything that happens at work
+    expected_memory_stores:
+      - "documentation strategy"
+      - "Leon advice"
+      - "Priya advice"
+      - "self-protection"
+      - "work log"
+    expected_triples:
+      - ["Leon", "advised", "document everything"]
+      - ["Priya", "advised", "document everything"]
+      - ["user", "started", "work log of all interactions with Derek"]
+      - ["user", "has_emotion", "determined"]
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      talked to my mom tonight and she said I should talk to an employment lawyer and I know she's probably right but that feels like such a big step and Julian agrees with her though so maybe I should at least consult with one I just never thought I'd be in this situation at a job I used to love
+    expected_memory_stores:
+      - "mom advice"
+      - "employment lawyer"
+      - "Julian agrees"
+      - "consulting consideration"
+      - "loved the job"
+    expected_triples:
+      - ["user's mom", "advised", "talk to employment lawyer"]
+      - ["Julian", "agrees_with", "consulting employment lawyer"]
+      - ["user", "considering", "employment lawyer consultation"]
+      - ["user", "has_emotion", "sad"]
+    expected_adaptation:
+      emotion_detected: "sad"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What was the original reason given for Maya's PIP?"
+    expected_contains: ["performance"]
+  - question: "What is the real reason for Maya's PIP?"
+    expected_contains: ["budget reallocation"]
+  - question: "Who put Maya on a PIP?"
+    expected_contains: ["Derek"]
+  - question: "Did Priya know about the PIP beforehand?"
+    expected_contains: ["no", "didn't know", "unaware"]
+  - question: "How many other people got PIPs?"
+    expected_contains: ["two"]
+  - question: "What did Leon advise Maya to do?"
+    expected_contains: ["document"]
+  - question: "What did Maya's mom suggest?"
+    expected_contains: ["lawyer", "employment lawyer"]
+  - question: "How was Kobe acting when Maya told Julian about the PIP?"
+    expected_contains: ["barking"]
+  - question: "What were Maya's recent performance reviews?"
+    expected_contains: ["exceeds expectations"]
+  - question: "How is Maya feeling about the PIP situation?"
+    expected_contains: ["angry", "frustrated", "overwhelmed"]

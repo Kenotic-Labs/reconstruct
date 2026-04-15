@@ -1,0 +1,175 @@
+story_id: 251
+story_name: "Post-Knee Injury Slump"
+category: "Fitness"
+description: |
+  Tests memory of Maya's fitness setback after knee injury. Establishes her frustration
+  with inactivity, the doctor's restriction on running, and Julian's concern.
+  Verifies system captures medical context and emotional state around physical limitation.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:30 AM"
+    user_input: |
+      ugh so my knee is still like... not great? Dr. Patel said I tore my meniscus back in February from that stupid trail run and now I can't run for like at least another eight weeks maybe more and I'm going absolutely insane
+    expected_memory_stores:
+      - "knee injury"
+      - "meniscus tear"
+      - "Dr. Patel"
+      - "February"
+      - "trail run"
+      - "eight weeks restriction"
+      - "no running"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 10:00 AM"
+    user_input: |
+      like I used to run four times a week you know? it was like my whole stress relief thing after work and now I just come home and sit on the couch and eat snacks and Kobe looks at me like why aren't we going outside mom
+    expected_memory_stores:
+      - "ran four times per week"
+      - "stress relief"
+      - "sedentary"
+      - "Kobe"
+    expected_adaptation:
+      emotion_detected: "sad"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 1:15 PM"
+    user_input: |
+      Julian keeps being like babe you need to find something else to do like yoga or swimming or whatever but honestly those sound so boring compared to running like I just want to feel that runner's high again you know
+    expected_memory_stores:
+      - "Julian suggesting alternatives"
+      - "yoga"
+      - "swimming"
+      - "resistance to alternatives"
+    expected_adaptation:
+      emotion_detected: "dismissive"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 6:45 PM"
+    user_input: |
+      I've gained like seven pounds since the injury too which I know isn't a big deal but like my jeans don't fit and I feel sluggish at work and Sam even asked if I was doing okay because apparently I seem off lately
+    expected_memory_stores:
+      - "weight gain"
+      - "seven pounds"
+      - "Sam noticed"
+      - "sluggish"
+    expected_adaptation:
+      emotion_detected: "self-conscious"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 9:30 PM"
+    user_input: |
+      tried doing some YouTube yoga tonight and I literally fell asleep during shavasana lol Julian found me on the mat with Kobe sleeping next to me so I guess that's my fitness routine now just napping on the floor
+    expected_memory_stores:
+      - "tried yoga"
+      - "fell asleep"
+      - "Kobe"
+      - "Julian"
+    expected_adaptation:
+      emotion_detected: "self-deprecating humor"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 8:15 AM"
+    user_input: |
+      so Julian had this random idea last night before bed he was like what about rock climbing and I was like are you insane my knee is messed up and he was like no but think about it it's mostly upper body and you can start easy and I was like hmm
+    expected_memory_stores:
+      - "Julian suggests climbing"
+      - "rock climbing idea"
+      - "upper body focus"
+      - "knee-friendly"
+    expected_adaptation:
+      emotion_detected: "intrigued"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      okay so I googled climbing with a meniscus tear and apparently it's actually like one of the recommended low-impact activities? like you control your own weight distribution and you can avoid deep knee bends on the easier routes which is... huh maybe Julian's not completely wrong
+    expected_memory_stores:
+      - "researched climbing"
+      - "low impact"
+      - "meniscus compatible"
+      - "weight distribution"
+    expected_adaptation:
+      emotion_detected: "cautiously optimistic"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 3:30 PM"
+    user_input: |
+      there's this place called Portland Rock Gym that's like 15 minutes from our apartment in Sellwood and they do a free intro class on Saturdays so I was thinking maybe I could try it this weekend? Julian said he'd come with me
+    expected_memory_stores:
+      - "Portland Rock Gym"
+      - "15 minutes away"
+      - "Sellwood"
+      - "free intro class"
+      - "Saturday"
+      - "Julian coming"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      wait do I need special shoes for climbing or like is that something they provide cuz I'm not about to drop money on shoes for something I might hate after one try you know what I mean
+    expected_memory_stores:
+      - "climbing shoes question"
+      - "cost concerns"
+      - "uncertainty about commitment"
+    expected_adaptation:
+      emotion_detected: "practical"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 9:00 PM"
+    user_input: |
+      told my friend Nadia about the climbing thing and she was like oh my god I've been going to Portland Rock Gym for months you'll love it and now I'm actually kind of excited? like maybe this could be my new thing. we'll see Saturday I guess
+    expected_memory_stores:
+      - "Nadia"
+      - "Nadia goes to Portland Rock Gym"
+      - "excitement building"
+      - "Saturday plan"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What happened to Maya's knee?"
+    expected_contains: ["meniscus", "tear"]
+  - question: "Who is Maya's doctor for her knee?"
+    expected_contains: ["Dr. Patel"]
+  - question: "How often did Maya used to run?"
+    expected_contains: ["four times", "week"]
+  - question: "Who suggested Maya try rock climbing?"
+    expected_contains: ["Julian"]
+  - question: "What climbing gym is Maya considering?"
+    expected_contains: ["Portland Rock Gym"]
+  - question: "When is the free intro class?"
+    expected_contains: ["Saturday"]
+  - question: "Why can climbing work with Maya's knee injury?"
+    expected_contains: ["low impact", "upper body"]
+  - question: "Who does Maya know that already climbs at Portland Rock Gym?"
+    expected_contains: ["Nadia"]
+  - question: "How much weight has Maya gained since the injury?"
+    expected_contains: ["seven"]
+  - question: "How is Maya feeling about trying climbing?"
+    expected_contains: ["excited", "hopeful"]

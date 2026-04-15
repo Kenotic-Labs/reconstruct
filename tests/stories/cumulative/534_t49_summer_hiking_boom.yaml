@@ -1,0 +1,179 @@
+story_id: 534
+story_name: "Summer Hiking Boom"
+category: "Weather and Seasons"
+description: |
+  Portland summer unleashes Maya's outdoor side. Every weekend hiking with Julian and
+  Kobe. Cross-references climbing (T21), relationship, Forest Park, Columbia Gorge (T41),
+  and physical health.
+duration_simulated: "6 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 7:00 AM"
+    user_input: |
+      it's June and Portland summer is GLORIOUS like it hasn't rained in two weeks and it's 75 degrees and the sun is up at 5:30am and I feel like a completely different person than the one lying under a blanket in November and Julian and I decided we're hiking every single weekend this summer
+    expected_memory_stores:
+      - "June Portland summer"
+      - "no rain two weeks"
+      - "75 degrees"
+      - "sun up at 5:30"
+      - "hiking every weekend"
+    expected_adaptation:
+      emotion_detected: "energized"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 12:00 PM"
+    user_input: |
+      did Multnomah Falls trail today which is touristy but I hadn't done it since moving here and it was packed but beautiful and Kobe was so good on the trail and Julian carried extra water for him and we got to the top and the view of the Gorge was insane and I thought about our first trip out here when we were looking at houses
+    expected_memory_stores:
+      - "Multnomah Falls trail"
+      - "Columbia Gorge"
+      - "Kobe on trail"
+      - "Julian carried water"
+      - "house hunting trip reference"
+    expected_adaptation:
+      emotion_detected: "adventurous"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday next week 9:00 AM"
+    user_input: |
+      hiking number two Eagle Creek Trail and this one is longer like 12 miles round trip and I was nervous about Kobe's endurance but he was a champion and the creek crossings were his favorite part he just plowed through the water and Julian was laughing so hard he almost fell in
+    expected_memory_stores:
+      - "Eagle Creek Trail"
+      - "12 miles round trip"
+      - "Kobe creek crossings"
+      - "Julian almost fell"
+    expected_adaptation:
+      emotion_detected: "thrilled"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Sunday 5:00 PM"
+    user_input: |
+      my legs are destroyed from Eagle Creek but in the best way and I went to the climbing gym on Monday and Omar said you look tan and I said I've been hiking every weekend and he said let's do a climbing plus hiking combo day and I said Omar that's like eight hours of exercise and he said exactly and I said you're insane but ok
+    expected_memory_stores:
+      - "sore from hiking"
+      - "Omar noticed tan"
+      - "hiking every weekend"
+      - "climbing plus hiking idea"
+      - "eight hours exercise"
+    expected_adaptation:
+      emotion_detected: "strong"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 7:00 AM"
+    user_input: |
+      Silver Falls State Park today which is like an hour south and has TEN waterfalls on one trail and it was the most beautiful thing I've ever hiked and Kobe lost his mind at every waterfall like he tried to bite the water coming off the rocks and Julian got video of it with the new phone and the video is absolutely hilarious
+    expected_memory_stores:
+      - "Silver Falls State Park"
+      - "hour south"
+      - "ten waterfalls"
+      - "Kobe biting waterfalls"
+      - "Julian got video"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 10:00 AM"
+    user_input: |
+      my mom asked for hiking photos and I sent her a bunch and she said Maya you look so healthy and happy and she said when I was your age in China there were no trails you just walked everywhere because you had to and I said mom that's hiking and she said no that's poverty there's a difference
+    expected_memory_stores:
+      - "sent hiking photos to Vivian"
+      - "Vivian says healthy and happy"
+      - "Vivian's China walking story"
+      - "hiking vs poverty distinction"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 8:00 AM"
+    user_input: |
+      Omar and Leila joined us for a hike today at Angels Rest Trail and it was great hiking with other people because Julian and I were starting to have the same conversations every trail and Omar brought his drone and got this aerial shot of all four of us plus Kobe on the cliff edge and it's our new lockscreen
+    expected_memory_stores:
+      - "Angels Rest Trail"
+      - "Omar and Leila joined"
+      - "drone aerial photo"
+      - "four people plus Kobe"
+      - "new lockscreen"
+    expected_adaptation:
+      emotion_detected: "social"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      we've done like eight hikes in six weeks and my fitness is the best it's ever been like I went to the climbing gym and sent a V5 first try and Omar said your hiking is making you a better climber and I think he's right my legs are so much stronger and my endurance is way up
+    expected_memory_stores:
+      - "eight hikes six weeks"
+      - "best fitness ever"
+      - "V5 first try"
+      - "hiking improves climbing"
+      - "stronger legs endurance"
+    expected_adaptation:
+      emotion_detected: "peak"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 6:00 PM"
+    user_input: |
+      did the Timberline Trail on Mt Hood today which is the most ambitious one yet and we only did a section not the whole loop but being above the treeline with the mountain right there and snow on the peak in July and wildflowers everywhere and Kobe sniffing every flower like he's never seen colors before it was just perfect
+    expected_memory_stores:
+      - "Timberline Trail Mt Hood"
+      - "above treeline"
+      - "snow in July"
+      - "wildflowers"
+      - "Kobe sniffing flowers"
+    expected_adaptation:
+      emotion_detected: "transcendent"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 PM"
+    user_input: |
+      looking back at all the hiking photos from this summer and I thought about how five months ago I couldn't get out of bed because of the rain and now I've hiked Multnomah Falls and Eagle Creek and Silver Falls and Angels Rest and Mt Hood and my body feels strong and my brain feels clear and Portland summer earned the rain
+    expected_memory_stores:
+      - "summer hiking review"
+      - "five months ago couldn't get up"
+      - "all trails listed"
+      - "body strong brain clear"
+      - "summer earned the rain"
+    expected_adaptation:
+      emotion_detected: "transformed"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How many hikes did Maya do in six weeks?"
+    expected_contains: ["eight"]
+  - question: "What trails has Maya hiked?"
+    expected_contains: ["Multnomah", "Eagle Creek", "Silver Falls", "Angels Rest", "Mt Hood"]
+  - question: "How has hiking affected Maya's climbing?"
+    expected_contains: ["stronger", "V5", "endurance"]
+  - question: "What did Kobe do at the waterfalls?"
+    expected_contains: ["bite", "water"]
+  - question: "Who joined for a hike with a drone?"
+    expected_contains: ["Omar", "Leila"]
+  - question: "What is Maya's new lockscreen?"
+    expected_contains: ["aerial", "drone", "cliff"]
+  - question: "What did Vivian say about hiking vs walking in China?"
+    expected_contains: ["poverty", "difference"]
+  - question: "How does Maya compare summer to her winter state?"
+    expected_contains: ["couldn't get out of bed", "now strong"]
+  - question: "What was the most ambitious hike?"
+    expected_contains: ["Timberline", "Mt Hood"]
+  - question: "What does Maya say about Portland summer and rain?"
+    expected_contains: ["earned the rain"]

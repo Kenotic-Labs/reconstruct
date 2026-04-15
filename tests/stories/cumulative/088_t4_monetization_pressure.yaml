@@ -1,0 +1,226 @@
+story_id: 88
+story_name: "Monetization Pressure"
+category: "Learning"
+description: |
+  Tests memory of external pressure to monetize fridgesearch.
+  VC interest, acquisition feelers, staying true to values.
+  Verifies system tracks ethical decisions and value-based reasoning.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      okay so something weird happened today I got a cold email from a VC firm called Meridian Ventures saying they saw fridgesearch on Hacker News and they want to chat about quote investing in the future of intelligent cooking which sounds like a pitch deck buzzword salad to me
+    expected_memory_stores:
+      - "Meridian Ventures"
+      - "VC cold email"
+      - "investing interest"
+      - "intelligent cooking"
+      - "Hacker News discovery"
+    expected_triples:
+      - ["Meridian_Ventures", "cold_emailed", "user about fridgesearch investment"]
+      - ["Meridian_Ventures", "is", "VC firm"]
+      - ["Meridian_Ventures", "found_fridgesearch_via", "Hacker News"]
+      - ["user", "has_emotion", "skeptical"]
+    expected_adaptation:
+      emotion_detected: "skeptical"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      told Julian about the VC email and he was like do you even want to turn this into a company and I said absolutely not and he said then don't take the call and I said yeah but part of me is curious what they'd say and he gave me the look again the you know better look
+    expected_memory_stores:
+      - "Julian don't take call"
+      - "don't want company"
+      - "curiosity"
+      - "the look"
+    expected_triples:
+      - ["Julian", "advised", "don't take the VC call"]
+      - ["user", "doesnt_want", "to turn fridgesearch into a company"]
+      - ["user", "feels", "curious about what VC would say"]
+      - ["user", "has_emotion", "tempted"]
+    expected_adaptation:
+      emotion_detected: "tempted"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      also got an email from a recipe aggregation company called RecipeBox asking if I'd be interested in selling fridgesearch and they said they'd offer quote a competitive acquisition price and I laughed out loud because this was literally a weekend project I built because I was bored while cooking
+    expected_memory_stores:
+      - "RecipeBox acquisition interest"
+      - "selling fridgesearch"
+      - "competitive price"
+      - "laughed"
+      - "weekend project origin"
+    expected_triples:
+      - ["RecipeBox", "offered", "competitive acquisition price for fridgesearch"]
+      - ["RecipeBox", "is", "recipe aggregation company"]
+      - ["user", "laughed_at", "acquisition offer for weekend project"]
+      - ["user", "has_emotion", "amused"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 6:00 PM"
+    user_input: |
+      Marcus said I should at least hear what RecipeBox is offering and Leon said the same thing but Julian is firmly against selling and honestly I'm with Julian because if I sell it they'll put ads in it or make it subscription only and that would ruin what makes it special which is that it's free and simple
+    expected_memory_stores:
+      - "Marcus says hear offer"
+      - "Leon agrees hear offer"
+      - "Julian against selling"
+      - "Maya against selling"
+      - "free and simple"
+      - "ads would ruin it"
+    expected_triples:
+      - ["Marcus", "advised", "at least hear RecipeBox offer"]
+      - ["Leon", "advised", "hear the offer"]
+      - ["Julian", "is_against", "selling fridgesearch"]
+      - ["user", "is_against", "selling because ads would ruin it"]
+      - ["user", "has_emotion", "firm"]
+    expected_adaptation:
+      emotion_detected: "firm"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 10:00 AM"
+    user_input: |
+      declined both the VC meeting and the RecipeBox inquiry and sent polite emails saying fridgesearch is a passion project and I have no plans to commercialize it and the VC responded saying well if you change your mind here's my number and RecipeBox didn't respond at all which like okay then
+    expected_memory_stores:
+      - "declined VC"
+      - "declined RecipeBox"
+      - "passion project"
+      - "no commercialization"
+      - "VC left door open"
+      - "RecipeBox silent"
+    expected_triples:
+      - ["user", "declined", "Meridian Ventures VC meeting"]
+      - ["user", "declined", "RecipeBox acquisition inquiry"]
+      - ["user", "stated", "fridgesearch is a passion project, no commercialization"]
+      - ["user", "has_emotion", "satisfied"]
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 3:00 PM"
+    user_input: |
+      posted on the subreddit about the VC and acquisition interest and told the community that fridgesearch will stay free forever and the response was overwhelmingly positive like 50 comments saying thank you and one person said this is why indie devs are the best and I felt really good about the decision
+    expected_memory_stores:
+      - "subreddit announcement"
+      - "free forever confirmed"
+      - "50 positive comments"
+      - "indie dev praise"
+      - "good about decision"
+    expected_triples:
+      - ["user", "announced", "fridgesearch free forever on subreddit"]
+      - ["subreddit", "responded", "50 positive comments"]
+      - ["community", "praised", "indie dev approach"]
+      - ["user", "has_emotion", "validated"]
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 9:00 AM"
+    user_input: |
+      did Maya decide to sell fridgesearch or get VC funding
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 12:00 PM"
+    user_input: |
+      Lily said she thinks I made the right call staying indie and she said at Uber she watched them acquire small tools and kill them within a year and she said fridgesearch being independent is what makes it trustworthy and I thought that was a really insightful point
+    expected_memory_stores:
+      - "Lily supports indie"
+      - "Uber killed acquisitions"
+      - "independence trustworthy"
+      - "insightful point"
+    expected_triples:
+      - ["Lily", "supports", "staying indie"]
+      - ["Lily", "shared", "Uber killed acquired tools within a year"]
+      - ["Lily", "said", "independence makes fridgesearch trustworthy"]
+      - ["user", "has_emotion", "affirmed"]
+    expected_adaptation:
+      emotion_detected: "affirmed"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 4:00 PM"
+    user_input: |
+      took Kobe to the waterfront and Julian and I talked about what success means for fridgesearch and we agreed that success is people cooking more at home eating better and wasting less food and if the app does that for even 3000 people that's more meaningful than any VC check
+    expected_memory_stores:
+      - "waterfront walk"
+      - "success definition"
+      - "cooking more"
+      - "eating better"
+      - "wasting less food"
+      - "meaningful over money"
+    expected_triples:
+      - ["user", "defined_success", "people cooking more, eating better, wasting less food"]
+      - ["Julian", "agreed", "success definition for fridgesearch"]
+      - ["user", "went_to", "waterfront with Julian and Kobe"]
+      - ["user", "has_emotion", "philosophical"]
+    expected_adaptation:
+      emotion_detected: "philosophical"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 PM"
+    user_input: |
+      ending the week feeling really clear about what fridgesearch is and isn't it's a gift to people who cook it's not a company it's not a product it's not an investment it's just a thing I built because I love search and I love food and Julian loved designing it and that's enough
+    expected_memory_stores:
+      - "clarity"
+      - "gift to cooks"
+      - "not a company"
+      - "love of search and food"
+      - "Julian design love"
+      - "enough"
+    expected_triples:
+      - ["fridgesearch", "is", "a gift to cooks, not a company"]
+      - ["user", "built_fridgesearch_from", "love of search and food"]
+      - ["Julian", "loved", "designing fridgesearch"]
+      - ["user", "has_emotion", "peaceful"]
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Did Maya accept VC funding for fridgesearch?"
+    expected_contains: ["no", "declined"]
+  - question: "Who wanted to acquire fridgesearch?"
+    expected_contains: ["RecipeBox"]
+  - question: "What VC firm contacted Maya?"
+    expected_contains: ["Meridian Ventures"]
+  - question: "Why did Maya keep fridgesearch free?"
+    expected_contains: ["passion", "free", "simple", "ads would ruin"]
+  - question: "What did the community say about the decision?"
+    expected_contains: ["positive", "thank you"]
+  - question: "What is Maya's definition of success for fridgesearch?"
+    expected_contains: ["cooking more", "eating better", "wasting less"]
+  - question: "What did Lily say about acquisitions?"
+    expected_contains: ["Uber", "killed", "independence"]
+  - question: "Who supported Maya's decision not to sell?"
+    expected_contains: ["Julian", "Lily"]
+  - question: "Who thought Maya should hear the offers?"
+    expected_contains: ["Marcus", "Leon"]
+  - question: "Is fridgesearch a company?"
+    expected_contains: ["no", "passion project"]

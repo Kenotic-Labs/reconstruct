@@ -1,0 +1,170 @@
+story_id: 363
+story_name: "Falling Behind After Week Three"
+category: "Career Development"
+description: |
+  Tests memory of Maya seriously falling behind after week 3 and considering dropping out.
+  Verifies system tracks escalating frustration and decision crisis.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 10:00 PM"
+    user_input: |
+      okay so week three of the ML course and I basically bombed the practice quiz I got like a 58 percent and the real exam is in two weeks and I'm seriously questioning whether I should've signed up for this
+    expected_memory_stores:
+      - "week three"
+      - "practice quiz 58%"
+      - "exam in two weeks"
+      - "questioning enrollment"
+    expected_adaptation:
+      emotion_detected: "discouraged"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      the worst part is the stuff that confused me in week two is the foundation for week three and now everything is building on things I don't fully understand and it's like trying to build a house on sand or whatever that metaphor is
+    expected_memory_stores:
+      - "compounding confusion"
+      - "foundation gaps"
+      - "week 2 gaps affecting week 3"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 8:30 PM"
+    user_input: |
+      study session with Lily tonight and I told her I'm thinking about dropping out and she was like absolutely not you're not dropping out you just need to go back and rewatch the week two lectures and actually do the optional exercises this time
+    expected_memory_stores:
+      - "considered dropping out"
+      - "Lily said no"
+      - "rewatch week 2"
+      - "optional exercises"
+    expected_adaptation:
+      emotion_detected: "conflicted"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 6:00 PM"
+    user_input: |
+      I looked up the refund policy and they only refund 50 percent after the first two weeks so I'd lose 800 bucks if I dropped now and Julian was like that's not the point the point is you wanted to learn this and you still do
+    expected_memory_stores:
+      - "50% refund"
+      - "lose 800 dollars"
+      - "Julian encouragement"
+      - "original motivation"
+    expected_adaptation:
+      emotion_detected: "conflicted"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 9:00 PM"
+    user_input: |
+      I skipped ramen night this week which is the first time and it felt weird but I needed the time to study and I spent Friday night rewatching the probability lectures from week two and actually taking proper notes this time
+    expected_memory_stores:
+      - "skipped ramen night"
+      - "first time"
+      - "studying instead"
+      - "rewatching week 2"
+      - "proper notes"
+    expected_adaptation:
+      emotion_detected: "disciplined"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 3:00 PM"
+    user_input: |
+      spent all morning on the optional exercises and something clicked like I finally understand why we need regularization it's to prevent overfitting and when I actually worked through the math it made sense and I was like oh THAT'S what they mean
+    expected_memory_stores:
+      - "optional exercises"
+      - "regularization clicked"
+      - "overfitting understanding"
+      - "math clicked"
+    expected_adaptation:
+      emotion_detected: "breakthrough"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 6:00 PM"
+    user_input: |
+      retook the practice quiz and got a 71 percent which is not great but way better than 58 and I feel like if I study hard for two more weeks I can actually pass the real exam and Lily said 70 is passing so I'm basically there
+    expected_memory_stores:
+      - "practice quiz 71%"
+      - "improvement from 58"
+      - "70 is passing"
+      - "two weeks to exam"
+    expected_adaptation:
+      emotion_detected: "encouraged"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 8:00 PM"
+    user_input: |
+      what did Maya score on the ML practice quiz the second time she took it
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 11:00 AM"
+    user_input: |
+      Clara called and I told her about almost dropping out and she was like Maya you've never quit anything in your life don't start now and she reminded me about the time I almost quit violin in 8th grade and mom made me stick with it and I ended up loving it
+    expected_memory_stores:
+      - "Clara pep talk"
+      - "never quit anything"
+      - "violin 8th grade"
+      - "mom made her continue"
+      - "parallel to current situation"
+    expected_adaptation:
+      emotion_detected: "motivated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 7:00 PM"
+    user_input: |
+      okay I'm not dropping out I'm going to push through this and I made a study schedule for the next two weeks with Lily on Tuesdays and solo study on Thursday nights and review on weekends and Julian promised to handle dinner on study nights
+    expected_memory_stores:
+      - "not dropping out"
+      - "study schedule"
+      - "Lily Tuesdays"
+      - "solo Thursdays"
+      - "weekends review"
+      - "Julian handles dinner"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did Maya score on the first ML practice quiz?"
+    expected_contains: ["58"]
+  - question: "What did Maya score on the second attempt?"
+    expected_contains: ["71"]
+  - question: "Did Maya consider dropping out of the ML course?"
+    expected_contains: ["yes"]
+  - question: "Who convinced Maya to stay in the course?"
+    expected_contains: ["Lily", "Julian", "Clara"]
+  - question: "What is the passing score?"
+    expected_contains: ["70"]
+  - question: "What concept finally clicked for Maya?"
+    expected_contains: ["regularization", "overfitting"]
+  - question: "What childhood parallel did Clara mention?"
+    expected_contains: ["violin", "8th grade"]
+  - question: "What is Maya's study schedule?"
+    expected_contains: ["Tuesday", "Lily", "Thursday"]
+  - question: "How much would Maya lose if she dropped out?"
+    expected_contains: ["800"]
+  - question: "Did Maya skip ramen night to study?"
+    expected_contains: ["yes", "first time"]

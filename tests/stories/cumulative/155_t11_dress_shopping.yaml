@@ -1,0 +1,221 @@
+story_id: 155
+story_name: "Dress Shopping with Jenny"
+category: "Life Events"
+description: |
+  Maya goes dress shopping with Jenny Wu. Multiple stores, trying on dresses,
+  emotional moments. Tests entity tracking across locations and emotional
+  progression from nervous to finding the one.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 8:00 AM"
+    user_input: |
+      today's the day Jenny and I are going dress shopping and I'm weirdly nervous like more nervous than I expected honestly I barely slept last night Julian was like babe it's shopping not surgery but like he doesn't get it this is THE dress you know
+    expected_memory_stores:
+      - "dress shopping day"
+      - "Jenny Wu going with her"
+      - "nervous"
+      - "Julian doesn't understand the significance"
+    expected_triples:
+      - ["user", "going_dress_shopping_with", "Jenny Wu"]
+      - ["user", "has_emotion", "anxious"]
+      - ["Julian", "downplayed", "dress shopping significance"]
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:00 AM"
+    user_input: |
+      first stop is this boutique called Adeline Bridal in the Pearl District Jenny found it on Instagram they have like romantic vintage vibes and the consultant's name is Brooke and she's super sweet she pulled like eight dresses for me already
+    expected_memory_stores:
+      - "Adeline Bridal"
+      - "Pearl District"
+      - "consultant Brooke"
+      - "eight dresses pulled"
+      - "romantic vintage style"
+    expected_triples:
+      - ["user", "visited", "Adeline Bridal in Pearl District"]
+      - ["Brooke", "is_consultant_at", "Adeline Bridal"]
+      - ["Adeline Bridal", "style", "romantic vintage"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:30 AM"
+    user_input: |
+      okay so I tried on four dresses at Adeline and they were all pretty but nothing made me go WOW you know like there's supposed to be this moment where you cry and Jenny was tearing up at every single one she's so dramatic but I just wasn't feeling it the ballgown was too much and the mermaid made me feel weird
+    expected_memory_stores:
+      - "four dresses tried at Adeline"
+      - "no strong reaction"
+      - "ballgown too much"
+      - "mermaid uncomfortable"
+      - "Jenny emotional"
+    expected_triples:
+      - ["user", "tried", "four dresses at Adeline Bridal"]
+      - ["user", "rejected", "ballgown as too much"]
+      - ["user", "rejected", "mermaid as uncomfortable"]
+      - ["user", "has_emotion", "disappointed"]
+    expected_adaptation:
+      emotion_detected: "disappointed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 1:00 PM"
+    user_input: |
+      second store is called The White Veil it's in Hawthorne and it's smaller more curated and the owner Mia is like this cool older woman who looked at me and said okay tell me about your venue and your partner before we even look at dresses and I was like oh I like this approach
+    expected_memory_stores:
+      - "The White Veil"
+      - "Hawthorne"
+      - "owner Mia"
+      - "personalized approach"
+    expected_triples:
+      - ["user", "visited", "The White Veil in Hawthorne"]
+      - ["Mia", "owns", "The White Veil"]
+      - ["Mia", "uses", "personalized consultation approach"]
+      - ["user", "has_emotion", "intrigued"]
+    expected_adaptation:
+      emotion_detected: "intrigued"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 2:30 PM"
+    user_input: |
+      so Mia pulled this one dress and when I put it on I literally couldn't breathe like in a good way it's this A-line with lace sleeves and a low back and it's got this like barely there sparkle in the fabric and Jenny started full on sobbing and Mia just smiled and said that's the one isn't it
+    expected_memory_stores:
+      - "the dress found"
+      - "A-line with lace sleeves"
+      - "low back"
+      - "subtle sparkle"
+      - "Jenny cried"
+      - "Mia identified the reaction"
+    expected_triples:
+      - ["user", "found_dress", "A-line with lace sleeves, low back, subtle sparkle"]
+      - ["user", "found_dress_at", "The White Veil"]
+      - ["Jenny", "has_emotion", "cried with joy"]
+      - ["user", "has_emotion", "overwhelmed"]
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 3:00 PM"
+    user_input: |
+      I FaceTimed my mom from the store and Vivian started crying immediately she was like oh Maya you look like an angel and even Dad walked by in the background and did a double take and said that's it kid and I just I can't even I'm so happy this is my dress
+    expected_memory_stores:
+      - "FaceTimed Vivian"
+      - "Vivian cried"
+      - "George approved"
+      - "dress confirmed"
+    expected_triples:
+      - ["Vivian", "reacted_to_dress", "cried and called user an angel"]
+      - ["George", "approved", "wedding dress"]
+      - ["user", "confirmed", "wedding dress choice"]
+      - ["user", "has_emotion", "emotional"]
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 3:30 PM"
+    user_input: |
+      okay so the dress is um a lot more than I was planning to spend it's $2800 and my budget was like $2000 but Mia said they can do a payment plan and honestly Jenny was like Maya you cannot put a price on how you looked in that dress and she's right but also money is real you know
+    expected_memory_stores:
+      - "dress costs $2800"
+      - "budget was $2000"
+      - "payment plan available"
+      - "over budget concern"
+    expected_triples:
+      - ["user", "dress_costs", "$2800"]
+      - ["user", "dress_budget_was", "$2000"]
+      - ["The White Veil", "offers", "payment plan"]
+      - ["user", "has_emotion", "conflicted"]
+    expected_adaptation:
+      emotion_detected: "conflicted"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 5:00 PM"
+    user_input: |
+      Julian said get the dress he didn't even hesitate he was like babe if it made you cry and it made Jenny cry and it made your mom cry then it's the dress and we'll figure out the money and god I love this man sometimes he just says the exact right thing
+    expected_memory_stores:
+      - "Julian says get the dress"
+      - "money not an issue"
+      - "Julian supportive"
+    expected_triples:
+      - ["Julian", "said", "get the dress"]
+      - ["Julian", "supportive_about", "dress cost"]
+      - ["user", "has_emotion", "loved"]
+    expected_adaptation:
+      emotion_detected: "loved"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 7:00 PM"
+    user_input: |
+      put down the deposit at The White Veil $700 and the rest we'll pay over three months the dress needs to be altered so Mia took my measurements and she said it'll be ready by May which gives us plenty of time before June 22nd
+    expected_memory_stores:
+      - "dress deposit $700"
+      - "payment over three months"
+      - "alterations needed"
+      - "ready by May"
+      - "Mia took measurements"
+    expected_triples:
+      - ["user", "paid_deposit", "$700 at The White Veil"]
+      - ["user", "dress_payment_plan", "three months"]
+      - ["user", "dress_ready_by", "May"]
+      - ["Mia", "took_measurements_for", "alterations"]
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 10:00 AM"
+    user_input: |
+      woke up still smiling about yesterday Jenny posted a story of us at the bridal shop with the caption she said yes to the dress which is so cheesy but I love it and then she texted me separately like okay now we need to find bridesmaids dresses and I was like girl can I have one day to just enjoy this moment please
+    expected_memory_stores:
+      - "Jenny posted about dress"
+      - "bridesmaids dresses next"
+      - "Maya savoring moment"
+    expected_triples:
+      - ["Jenny", "posted", "she said yes to the dress on social media"]
+      - ["user", "next_task", "bridesmaids dresses"]
+      - ["user", "has_emotion", "happy"]
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where did Maya find her wedding dress?"
+    expected_contains: ["The White Veil"]
+  - question: "What does Maya's dress look like?"
+    expected_contains: ["A-line", "lace sleeves", "low back"]
+  - question: "How much is the wedding dress?"
+    expected_contains: ["2800"]
+  - question: "Who helped Maya find the dress?"
+    expected_contains: ["Mia"]
+  - question: "Who went dress shopping with Maya?"
+    expected_contains: ["Jenny"]
+  - question: "Where is The White Veil located?"
+    expected_contains: ["Hawthorne"]
+  - question: "When will the dress be ready?"
+    expected_contains: ["May"]
+  - question: "How much was the dress deposit?"
+    expected_contains: ["700"]
+  - question: "What store did Maya visit first?"
+    expected_contains: ["Adeline Bridal"]
+  - question: "How did Vivian react to seeing Maya in the dress?"
+    expected_contains: ["cried", "angel"]

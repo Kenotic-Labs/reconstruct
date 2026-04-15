@@ -1,0 +1,186 @@
+story_id: 185
+story_name: "George Without Routine"
+category: "Life Events"
+description: |
+  George struggles without his work routine. Depression-like symptoms.
+  Tests tracking emotional deterioration of family member, identity
+  crisis, and concern from multiple family members.
+duration_simulated: "3 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Week 1 Monday 7:00 PM"
+    user_input: |
+      so it's been a week since Dad sold the shop and Mom says he's just kind of lost like he wakes up at 5am stares at the ceiling for a while gets up has coffee and then doesn't know what to do he fixed everything in the house already there's nothing left to fix and he keeps looking at the clock like he should be somewhere
+    expected_memory_stores:
+      - "George lost without routine"
+      - "wakes at 5am"
+      - "fixed everything in house"
+      - "looking at clock"
+      - "one week since sale"
+    expected_triples:
+      - ["George", "has_state", "lost without routine"]
+      - ["George", "wakes_at", "5am stares at ceiling"]
+      - ["George", "has_problem", "nothing left to fix in house"]
+    expected_adaptation:
+      emotion_detected: "worried"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Week 1 Wednesday 8:00 PM"
+    user_input: |
+      called Dad and asked how he's doing and he said fine which is Dad speak for not fine and I said Dad you can talk to me and he said there's nothing to talk about Maya I'm retired that's what people do and I said yeah but you're not just people you're George Chen who's been under a car since 1984 and he got quiet
+    expected_memory_stores:
+      - "George says fine means not fine"
+      - "Maya pushing to talk"
+      - "George deflecting"
+      - "working since 1984"
+      - "George got quiet"
+    expected_adaptation:
+      emotion_detected: "concerned"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Week 2 Monday 7:00 PM"
+    user_input: |
+      Mom's getting worried she says Dad barely eats he watches TV all day and he snapped at her yesterday for no reason which he NEVER does and she said George you need to find something and he said Vivian I ran a shop for 40 years I deserve to sit and she said yes but not like this and then they didn't talk for the rest of the evening
+    expected_memory_stores:
+      - "George not eating well"
+      - "watching TV all day"
+      - "snapped at Vivian"
+      - "argument about sitting around"
+      - "Vivian worried"
+    expected_adaptation:
+      emotion_detected: "alarmed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Week 2 Wednesday 6:00 PM"
+    user_input: |
+      Clara went over and tried to take Dad to lunch and he said he didn't want to go and Clara told me she thinks he might be actually depressed not just adjusting and she said as a nurse she's seen this in retired patients who lose their identity with their work and she wants to suggest he see someone but Dad would never agree to therapy
+    expected_memory_stores:
+      - "Clara suspects depression"
+      - "refuses to go out"
+      - "identity tied to work"
+      - "Clara's clinical perspective"
+      - "Dad wouldn't do therapy"
+    expected_adaptation:
+      emotion_detected: "deeply worried"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Week 2 Friday 7:00 PM"
+    user_input: |
+      Julian said something smart he said Maya your Dad doesn't need therapy he needs a project George is a builder a maker he needs to make something and I was like oh my god you're right Dad's not depressed because he's sad he's depressed because he has nothing to DO with his hands
+    expected_memory_stores:
+      - "Julian insight about George"
+      - "George is a maker"
+      - "needs a project"
+      - "needs to work with hands"
+      - "not sad depressed but purposeless"
+    expected_adaptation:
+      emotion_detected: "eureka moment"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Week 2 Saturday 10:00 AM"
+    user_input: |
+      I called Dad and said hey Dad what if you took up woodworking and he said what and I said woodworking like building things with wood you already have the skills the tools the hands for it and there was this long pause and he said actually your grandfather used to do woodworking he built all our furniture in Taiwan before we came to the US
+    expected_memory_stores:
+      - "Maya suggests woodworking"
+      - "George's father did woodworking"
+      - "built furniture in Taiwan"
+      - "family connection to craft"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Week 3 Monday 7:00 PM"
+    user_input: |
+      Mom said something happened over the weekend Dad went to the hardware store and bought some wood and basic woodworking tools and he spent all of Saturday in the garage with the door open sanding a piece of oak and she said he was humming Maya HUMMING your father was humming while working with wood and I was like that's the best thing you could have told me
+    expected_memory_stores:
+      - "George bought wood and tools"
+      - "working in garage"
+      - "sanding oak"
+      - "humming while working"
+      - "Vivian encouraged"
+    expected_adaptation:
+      emotion_detected: "relieved joy"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Week 3 Wednesday 5:00 PM"
+    user_input: |
+      Dad called ME for the first time in weeks and he said Maya look at this and sent me a photo of a small wooden box he made like a jewelry box with a hinged lid and he said it's rough but it's my first piece and I said Dad that's beautiful and he said it's not beautiful it's a box but he was smiling in the photo
+    expected_memory_stores:
+      - "George called Maya"
+      - "first woodworking piece"
+      - "wooden jewelry box"
+      - "hinged lid"
+      - "George proud but humble"
+      - "smiling"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Week 3 Thursday 7:00 PM"
+    user_input: |
+      Clara said Dad looked up woodworking classes at the Sacramento community center and there's one on weekends taught by this retired carpenter named Bill and Dad went to the first session and came home talking about joinery and dovetails and Clara was like I have no idea what that means but Dad was animated for the first time in weeks
+    expected_memory_stores:
+      - "woodworking class at community center"
+      - "instructor Bill"
+      - "retired carpenter"
+      - "joinery and dovetails"
+      - "George animated"
+    expected_adaptation:
+      emotion_detected: "encouraged"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Week 3 Friday 8:00 PM"
+    user_input: |
+      Mom told me tonight that Dad got up this morning and went straight to the garage and she brought him coffee out there and he was sketching designs for a bookshelf and she said George you look happy and he said I am Vivian I forgot what this felt like and she told me she almost cried because that's her George that's the man she married the one who makes things with his hands
+    expected_memory_stores:
+      - "George in garage every morning"
+      - "sketching bookshelf designs"
+      - "George said he's happy"
+      - "forgot what it felt like"
+      - "Vivian emotional"
+      - "George is a maker"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Was George depressed after retiring?"
+    expected_contains: ["yes", "lost", "depressed"]
+  - question: "What hobby did George take up?"
+    expected_contains: ["woodworking"]
+  - question: "Who suggested woodworking for George?"
+    expected_contains: ["Maya"]
+  - question: "What was George's first woodworking project?"
+    expected_contains: ["jewelry box", "wooden box"]
+  - question: "Is George taking woodworking classes?"
+    expected_contains: ["yes", "community center"]
+  - question: "Who teaches the woodworking class?"
+    expected_contains: ["Bill"]
+  - question: "Did George's grandfather do woodworking?"
+    expected_contains: ["yes", "Taiwan", "furniture"]
+  - question: "What did Julian say about George's depression?"
+    expected_contains: ["project", "maker", "hands"]
+  - question: "How did Vivian react when George started woodworking?"
+    expected_contains: ["emotional", "happy"]
+  - question: "What is George designing now?"
+    expected_contains: ["bookshelf"]

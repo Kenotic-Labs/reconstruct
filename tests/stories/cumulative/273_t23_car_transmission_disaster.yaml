@@ -1,0 +1,226 @@
+story_id: 273
+story_name: "Car Transmission Disaster"
+category: "Finance"
+description: |
+  Tests memory of an unexpected $2,800 car repair derailing Maya's aggressive loan
+  payoff plan. Captures the financial setback, emotional frustration, and the need
+  to recalibrate the budget.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:30 AM"
+    user_input: |
+      driving to work this morning and my car started making this horrible grinding noise when I shifted from second to third and the check engine light came on and I'm like no no no no not now please not now this is a 2018 Civic it should NOT be having transmission problems
+    expected_memory_stores:
+      - "car grinding noise"
+      - "shifting problem"
+      - "check engine light"
+      - "2018 Civic"
+      - "transmission issue"
+    expected_triples:
+      - ["user", "drives", "2018 Civic"]
+      - ["user_car", "has_problem", "transmission grinding noise"]
+      - ["user", "has_emotion", "panicked"]
+    expected_adaptation:
+      emotion_detected: "panicked"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 12:00 PM"
+    user_input: |
+      took it to Leif's Auto which is the shop Julian and I have been going to for years and the mechanic Brian said it's the transmission solenoid and possibly the torque converter and he needs to do a diagnostic which will take a day but initial estimate is between 2000 and 3000 dollars
+    expected_memory_stores:
+      - "Leif's Auto"
+      - "Brian mechanic"
+      - "transmission solenoid"
+      - "torque converter"
+      - "diagnostic needed"
+      - "$2,000-3,000 estimate"
+    expected_triples:
+      - ["user", "took_car_to", "Leif's Auto"]
+      - ["Brian", "is_mechanic_at", "Leif's Auto"]
+      - ["user_car", "needs_repair", "transmission solenoid and torque converter"]
+      - ["repair", "estimated_cost", "$2,000-3,000"]
+    expected_adaptation:
+      emotion_detected: "sick to stomach"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 3:00 PM"
+    user_input: |
+      Brian called and the repair is $2,800 it's the torque converter plus labor and parts and he said it's a necessary repair like the car won't drive safely without it and I'm sitting at my desk at Conduit trying not to cry because that's more than two months of extra loan payments just GONE
+    expected_memory_stores:
+      - "repair $2,800"
+      - "torque converter"
+      - "necessary repair"
+      - "two months of loan payments"
+      - "trying not to cry"
+      - "at work"
+    expected_triples:
+      - ["car_repair", "costs", "$2,800"]
+      - ["repair", "involves", "torque converter replacement"]
+      - ["user", "has_emotion", "devastated"]
+      - ["$2,800", "equals", "two months of loan payments"]
+    expected_adaptation:
+      emotion_detected: "devastated"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      told Julian and he was so sweet about it he was like it's a setback not a failure and we'll adjust the plan and then he was like wait can we use the emergency fund and I was like what emergency fund we used most of our savings on the house down payment remember we only have like $3,200 left
+    expected_memory_stores:
+      - "Julian supportive"
+      - "setback not failure"
+      - "emergency fund question"
+      - "savings depleted from house"
+      - "only $3,200 left"
+    expected_triples:
+      - ["Julian", "responded_supportively", "setback not failure"]
+      - ["user", "has_savings", "$3,200"]
+      - ["savings", "depleted_by", "house down payment"]
+    expected_adaptation:
+      emotion_detected: "stressed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      so the $2,800 repair basically wipes out almost all our remaining savings which means we have like $400 left as an emergency fund and we need to rebuild that AND keep paying down the loans and I feel like we're right back to square one
+    expected_memory_stores:
+      - "$2,800 from savings"
+      - "$400 remaining"
+      - "need to rebuild emergency fund"
+      - "still paying loans"
+      - "back to square one feeling"
+    expected_triples:
+      - ["car_repair", "costs_from_savings", "$2,800"]
+      - ["user", "has_emergency_fund", "$400"]
+      - ["user", "has_emotion", "hopeless"]
+    expected_adaptation:
+      emotion_detected: "hopeless"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 9:00 AM"
+    user_input: |
+      couldn't sleep last night and spent hours reworking the budget spreadsheet and I think what we have to do is drop the loan payment from $1,200 to $800 for the next three months while we rebuild the emergency fund to at least $2,000 and then go back to aggressive mode
+    expected_memory_stores:
+      - "reworked budget"
+      - "loan payment $1,200 to $800"
+      - "three months reduced"
+      - "rebuild emergency fund"
+      - "target $2,000"
+      - "then back to aggressive"
+    expected_triples:
+      - ["user", "reduced_loan_payment", "$1,200 to $800"]
+      - ["user", "plans_reduced_payments_for", "three months"]
+      - ["user", "targets_emergency_fund", "$2,000"]
+    expected_adaptation:
+      emotion_detected: "pragmatic"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 12:30 PM"
+    user_input: |
+      Nadia was like you should look into whether Navient has any hardship programs and I was like it's not really a hardship it's just a setback but she said some servicers let you do reduced payments temporarily without penalty and I should at least ask
+    expected_memory_stores:
+      - "Nadia suggestion"
+      - "Navient hardship programs"
+      - "reduced payments temporarily"
+      - "no penalty"
+    expected_triples:
+      - ["Nadia", "suggested", "Navient hardship programs"]
+      - ["Navient", "may_offer", "reduced payments without penalty"]
+    expected_adaptation:
+      emotion_detected: "receptive"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 10:00 AM"
+    user_input: |
+      called Navient and they actually do have a temporary forbearance option but I don't want to use it because interest still accrues and it would set me back even more in the long run so I'm sticking with $800 a month which is still above the minimum
+    expected_memory_stores:
+      - "called Navient"
+      - "forbearance available"
+      - "declined forbearance"
+      - "interest still accrues"
+      - "sticking with $800"
+      - "above minimum"
+    expected_triples:
+      - ["user", "called", "Navient"]
+      - ["user", "declined", "forbearance option"]
+      - ["user", "chose_payment", "$800 monthly"]
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 4:00 PM"
+    user_input: |
+      picked up the car from Brian and it drives perfectly now the transmission is smooth and quiet and Brian gave us a one year warranty on the work and Julian was like see silver lining we have a car that works and I was like yeah a $2,800 silver lining
+    expected_memory_stores:
+      - "car fixed"
+      - "drives perfectly"
+      - "one year warranty"
+      - "Brian warranty"
+      - "Julian positive"
+      - "Maya sarcastic"
+    expected_triples:
+      - ["user_car", "status", "fixed and driving perfectly"]
+      - ["Brian", "provided", "one year warranty"]
+      - ["user", "has_emotion", "mixed"]
+    expected_adaptation:
+      emotion_detected: "mixed"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 8:00 AM"
+    user_input: |
+      updated the payoff chart on the fridge and the timeline moved from 22 months to about 26 months with the reduced payments for three months factored in and Julian drew a little motivational doodle next to it of us high-fiving which okay fine it made me smile
+    expected_memory_stores:
+      - "payoff chart updated"
+      - "22 months to 26 months"
+      - "three months reduced"
+      - "Julian doodle"
+      - "made her smile"
+    expected_triples:
+      - ["user", "updated_payoff_timeline", "22 months to 26 months"]
+      - ["Julian", "drew_doodle", "high-fiving motivational doodle"]
+      - ["user", "has_emotion", "recovering"]
+    expected_adaptation:
+      emotion_detected: "recovering"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How much did Maya's car repair cost?"
+    expected_contains: ["2,800", "2800"]
+  - question: "What was wrong with Maya's car?"
+    expected_contains: ["transmission", "torque converter"]
+  - question: "What auto shop fixed the car?"
+    expected_contains: ["Leif's Auto"]
+  - question: "How did the repair affect the loan payoff plan?"
+    expected_contains: ["reduced", "800", "three months"]
+  - question: "How much is in Maya's emergency fund now?"
+    expected_contains: ["400"]
+  - question: "What is the new payoff timeline?"
+    expected_contains: ["26 months"]
+  - question: "Did Maya use Navient's forbearance option?"
+    expected_contains: ["no"]
+  - question: "What kind of car does Maya drive?"
+    expected_contains: ["2018", "Civic"]
+  - question: "How much warranty did the mechanic provide?"
+    expected_contains: ["one year"]
+  - question: "What did Julian draw on the payoff chart?"
+    expected_contains: ["high-fiving", "doodle"]

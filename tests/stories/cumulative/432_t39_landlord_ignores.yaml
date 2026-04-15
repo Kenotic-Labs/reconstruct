@@ -1,0 +1,174 @@
+story_id: 432
+story_name: "Landlord Ignores"
+category: "Lease Dispute"
+description: |
+  Greg Patterson ignores Maya's demand letter for 30 days. Maya prepares to
+  file in small claims court. Stress builds but Maya stays organized.
+duration_simulated: "4 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 6:00 PM"
+    user_input: |
+      it's been a week since I sent the demand letter and nothing no response no call no email nothing I checked the certified mail tracking and it was delivered and signed for 5 days ago so he definitely got it and he's just ignoring me
+    expected_memory_stores:
+      - "one week no response"
+      - "certified mail confirmed delivered"
+      - "signed for 5 days ago"
+      - "landlord ignoring"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 8:00 PM"
+    user_input: |
+      week two and still nothing from Greg Patterson and Julian keeps saying just file the court thing already and I said I gave him 14 days let me at least honor the deadline I set because I want to be the reasonable one in this situation
+    expected_memory_stores:
+      - "week two no response"
+      - "Julian pushes to file"
+      - "honoring 14 day deadline"
+      - "wants to be reasonable"
+    expected_adaptation:
+      emotion_detected: "patient but frustrated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 7:00 PM"
+    user_input: |
+      ok the 14 day deadline has passed and Greg Patterson has not responded at all and I looked into Oregon Small Claims Court and the filing fee is only 55 dollars and you don't need a lawyer and the max claim amount is 10000 so my 1800 is well within range
+    expected_memory_stores:
+      - "14 day deadline passed"
+      - "no response"
+      - "Oregon Small Claims Court"
+      - "$55 filing fee"
+      - "no lawyer needed"
+      - "max claim $10,000"
+    expected_adaptation:
+      emotion_detected: "resolved"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      researched the process and I need to file a claim at the Multnomah County courthouse and then the court serves the defendant and then they schedule a hearing usually 4 to 6 weeks out and I bring my evidence and tell the judge my side and it's relatively straightforward apparently
+    expected_memory_stores:
+      - "Multnomah County courthouse"
+      - "court serves defendant"
+      - "hearing 4-6 weeks out"
+      - "bring evidence"
+      - "straightforward process"
+    expected_adaptation:
+      emotion_detected: "informed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      went to the Multnomah County courthouse after work and filed the small claims case and the clerk was super helpful she helped me fill out the forms and I listed the claim as 1800 for the deposit and cited the move-in photos and inspection checklist as evidence and she said I have a strong case
+    expected_memory_stores:
+      - "filed small claims"
+      - "Multnomah County courthouse"
+      - "clerk helpful"
+      - "$1800 claim filed"
+      - "strong case per clerk"
+    expected_adaptation:
+      emotion_detected: "empowered"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      the hearing is scheduled for 6 weeks from now on a Thursday afternoon at 2pm and I already put it in my calendar and told Sam I'll need to leave work early that day and he was like of course just let me know and I'm like ok this is happening we're doing this
+    expected_memory_stores:
+      - "hearing 6 weeks out"
+      - "Thursday afternoon 2pm"
+      - "told Sam"
+      - "leaving work early"
+    expected_adaptation:
+      emotion_detected: "committed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 8:00 PM"
+    user_input: |
+      this whole deposit thing is stressing me out more than I want to admit like I know it's just money but it's the principle of it and I keep thinking about it at work and Julian noticed and said babe you've done everything right just let the process work and he's right but still
+    expected_memory_stores:
+      - "stress about dispute"
+      - "principle not just money"
+      - "thinking about it at work"
+      - "Julian notices stress"
+      - "let process work"
+    expected_adaptation:
+      emotion_detected: "stressed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 10:00 AM"
+    user_input: |
+      when is the small claims hearing scheduled for
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 3:00 PM"
+    user_input: |
+      organized all my evidence into a folder got the original move-in photos printed got the inspection checklist copied got the demand letter with certified mail receipt and even screenshots of the online reviews from other tenants about Greg Patterson doing this to them Dr Tate said channeling stress into preparation is healthy so that's what I'm doing
+    expected_memory_stores:
+      - "evidence folder organized"
+      - "photos printed"
+      - "checklist copied"
+      - "demand letter receipt"
+      - "online review screenshots"
+      - "Dr Tate advice"
+    expected_adaptation:
+      emotion_detected: "channeling stress"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 7:00 PM"
+    user_input: |
+      told my mom about the court thing and she was like Maya be careful with landlords they can be vindictive and I was like mom I don't live there anymore what's he gonna do and she said well just be careful and my dad said good for you stand up for yourself and it's nice that they're both supportive in their own ways
+    expected_memory_stores:
+      - "Vivian worried about landlord"
+      - "dad supportive"
+      - "both supportive differently"
+      - "doesn't live there anymore"
+    expected_adaptation:
+      emotion_detected: "assured"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How long did Greg Patterson ignore Maya's demand letter?"
+    expected_contains: ["14 days", "no response"]
+  - question: "Where did Maya file the small claims case?"
+    expected_contains: ["Multnomah County courthouse"]
+  - question: "How much is the filing fee for small claims court?"
+    expected_contains: ["55"]
+  - question: "When is the hearing scheduled?"
+    expected_contains: ["6 weeks", "Thursday", "2pm"]
+  - question: "What evidence is Maya bringing to court?"
+    expected_contains: ["photos", "checklist", "demand letter", "reviews"]
+  - question: "Does Maya need a lawyer for small claims?"
+    expected_contains: ["no"]
+  - question: "What is the maximum claim amount in Oregon small claims?"
+    expected_contains: ["10,000", "10000"]
+  - question: "How is the lease dispute affecting Maya?"
+    expected_contains: ["stress", "thinking about it at work"]
+  - question: "What did Dr. Tate say about Maya's stress response?"
+    expected_contains: ["channeling", "preparation", "healthy"]
+  - question: "How did Maya's parents react to the court filing?"
+    expected_contains: ["mom worried", "dad supportive"]

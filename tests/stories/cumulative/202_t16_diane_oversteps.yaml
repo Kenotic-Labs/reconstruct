@@ -1,0 +1,163 @@
+story_id: 202
+story_name: "Diane Oversteps Boundaries"
+category: "Relationships"
+description: |
+  Tests the system capturing boundary violations as they happen. Diane rearranges the kitchen,
+  makes comments about the house. Maya suppresses frustration. Verifies emotional layering
+  and entity disambiguation between Maya's feelings vs Julian's passivity.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      Diane got here this afternoon and it was fine at first like she hugged us and played with Kobe and brought this really nice candle from some shop in uh where do Julian's parents live again oh right Spokane and yeah it was all good for like the first two hours
+    expected_memory_stores:
+      - "Diane arrived"
+      - "Spokane"
+      - "candle gift"
+      - "Kobe"
+      - "initial good vibes"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 8:30 PM"
+    user_input: |
+      ok so she already started she went into the kitchen to make tea and then she was like oh Maya why do you keep the mugs up there that's so inconvenient and I said well that's where they go and she just kind of made this face like hmm ok
+    expected_memory_stores:
+      - "kitchen comments"
+      - "mug placement"
+      - "Diane criticizing"
+    expected_adaptation:
+      emotion_detected: "irritated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 8:00 AM"
+    user_input: |
+      I woke up this morning and I'm not even kidding she had rearranged the entire spice rack and moved the cutting boards to a different drawer and when I came in she was like oh I just thought this made more sense and I wanted to scream but I just said oh thanks Diane
+    expected_memory_stores:
+      - "rearranged spice rack"
+      - "moved cutting boards"
+      - "Maya suppressing anger"
+      - "passive response"
+    expected_adaptation:
+      emotion_detected: "angry"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 9:30 AM"
+    user_input: |
+      and Julian was RIGHT THERE eating cereal when she told me about the spice rack and he said NOTHING he literally just sat there chewing and I caught his eye and gave him the look and he just shrugged like what do you want me to do and I'm like ARE YOU SERIOUS
+    expected_memory_stores:
+      - "Julian didn't intervene"
+      - "broke promise"
+      - "Maya furious"
+    expected_adaptation:
+      emotion_detected: "furious"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      she also told me she thinks we should get a different dish soap because the one we use leaves residue and then she reorganized under the bathroom sink too like WHO DOES THAT in someone else's home Julian's mom that's who
+    expected_memory_stores:
+      - "dish soap comment"
+      - "bathroom reorganized"
+      - "escalating boundary violations"
+    expected_adaptation:
+      emotion_detected: "angry"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 3:00 PM"
+    user_input: |
+      Clara texted me and asked how it's going and I just sent her a string of like angry face emojis and she called me and I was whispering in the bedroom like Clara she moved my SPICES and Clara was laughing but also like yeah that's not ok
+    expected_memory_stores:
+      - "Clara call"
+      - "venting to sister"
+      - "hiding in bedroom"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      what has Diane rearranged so far I'm losing track honestly
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "exasperated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      dinner was awkward because Diane made this huge meal which was actually really good like she made her roast chicken recipe but then she was like you know if you had a bigger baking dish this would have been easier and I just bit my tongue so hard
+    expected_memory_stores:
+      - "Diane cooked dinner"
+      - "roast chicken"
+      - "baking dish comment"
+      - "Maya biting tongue"
+    expected_adaptation:
+      emotion_detected: "suppressed anger"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 10:00 PM"
+    user_input: |
+      I'm in bed and Julian is brushing his teeth and I'm just lying here fuming like this is day TWO and she's already rearranged the kitchen and the bathroom and criticized my soap and my bakeware and he hasn't said a single word to her about any of it
+    expected_memory_stores:
+      - "day two recap"
+      - "mounting frustration"
+      - "Julian silent"
+    expected_adaptation:
+      emotion_detected: "resentful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 7:00 AM"
+    user_input: |
+      woke up and she's already in the kitchen and I swear to god she moved the coffee maker to the other counter and I'm like ok that's it I can't do eight more days of this without saying something but I don't want to start a war you know
+    expected_memory_stores:
+      - "coffee maker moved"
+      - "eight days remaining"
+      - "about to break"
+    expected_adaptation:
+      emotion_detected: "at breaking point"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What has Diane rearranged in Maya's home?"
+    expected_contains: ["spice rack", "cutting boards", "bathroom", "coffee maker"]
+  - question: "How has Julian responded to his mom's behavior?"
+    expected_contains: ["nothing", "silent", "didn't intervene"]
+  - question: "What did Diane criticize about Maya's kitchen?"
+    expected_contains: ["mugs", "dish soap", "baking dish"]
+  - question: "How many days has Diane been visiting?"
+    expected_contains: ["two"]
+  - question: "How many days are left in Diane's visit?"
+    expected_contains: ["eight"]
+  - question: "Who did Maya vent to?"
+    expected_contains: ["Clara"]
+  - question: "What did Diane cook?"
+    expected_contains: ["roast chicken"]
+  - question: "Where do Julian's parents live?"
+    expected_contains: ["Spokane"]
+  - question: "What promise did Julian break?"
+    expected_contains: ["step in", "intervene"]
+  - question: "How is Maya feeling about the visit?"
+    expected_contains: ["angry", "frustrated", "furious"]

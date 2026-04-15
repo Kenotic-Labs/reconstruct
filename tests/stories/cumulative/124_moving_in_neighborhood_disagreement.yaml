@@ -1,0 +1,216 @@
+story_id: 124
+story_name: "Alberta vs Sellwood Disagreement"
+category: "Relationships"
+description: |
+  Tests whether the system tracks the deepening neighborhood disagreement, the underlying
+  values conflict, and how they navigate conflict as a couple. Cross-thread to Maya's
+  therapy work on communication.
+duration_simulated: "4 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Sunday 10:00am"
+    user_input: |
+      so Julian went to Alberta this morning by himself to like walk around and take photos for his Instagram and he came back all starry-eyed about it. he was like babe there's a printmaking studio two blocks from the apartment and a ceramics collective and I'm like... ok I hear you but DOGS NEED PARKS
+    expected_memory_stores:
+      - "Julian visited Alberta"
+      - "printmaking studio"
+      - "ceramics collective"
+      - "Maya dog park argument"
+    expected_triples:
+      - ["Julian", "visited", "Alberta neighborhood solo"]
+      - ["Julian", "found", "printmaking studio near Alberta"]
+      - ["Julian", "found", "ceramics collective near Alberta"]
+      - ["user", "insists_on", "parks for Kobe"]
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Sunday 2:00pm"
+    user_input: |
+      we keep going in circles. he says Alberta has character and community and I say Sellwood has space and nature and we're both right which makes it worse because there's no wrong answer just different priorities
+    expected_memory_stores:
+      - "going in circles"
+      - "both right"
+      - "different priorities"
+      - "Alberta character"
+      - "Sellwood space"
+    expected_triples:
+      - ["user", "stuck_in", "circular argument about neighborhoods"]
+      - ["Julian", "values", "character and community in Alberta"]
+      - ["user", "values", "space and nature in Sellwood"]
+      - ["user", "has_emotion", "stuck"]
+    expected_adaptation:
+      emotion_detected: "stuck"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 12:00pm"
+    user_input: |
+      brought it up in therapy with Dr. Tate and she goes this isn't actually about neighborhoods is it. and I was like what do you mean. and she said it sounds like Julian wants to be surrounded by creative energy and you want to feel grounded and safe. those are identity things not real estate things
+    expected_memory_stores:
+      - "Dr. Tate insight"
+      - "not about neighborhoods"
+      - "Julian creative energy"
+      - "Maya grounded and safe"
+      - "identity things"
+    expected_triples:
+      - ["Dr. Tate", "observed", "disagreement is about identity not real estate"]
+      - ["Julian", "needs", "creative energy around him"]
+      - ["user", "needs", "to feel grounded and safe"]
+      - ["user", "has_emotion", "enlightened"]
+    expected_adaptation:
+      emotion_detected: "enlightened"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 5:00pm"
+    user_input: |
+      told Julian what Dr. Tate said and he got quiet for a minute and then goes yeah she's right, I want to feel like I belong to a creative world because working from home is lonely sometimes. that hit me kind of hard honestly
+    expected_memory_stores:
+      - "Julian lonely"
+      - "creative belonging"
+      - "working from home isolation"
+      - "emotional revelation"
+    expected_triples:
+      - ["Julian", "revealed", "feels lonely working from home"]
+      - ["Julian", "wants", "creative belonging"]
+      - ["user", "has_emotion", "empathetic"]
+    expected_adaptation:
+      emotion_detected: "empathetic"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 9:00am"
+    user_input: |
+      woke up and Julian had made this whole spreadsheet comparing the two neighborhoods. pros cons cost walkability everything. he's a designer but he's secretly a spreadsheet nerd. it was actually really helpful for getting out of the feelings and into the facts
+    expected_memory_stores:
+      - "Julian spreadsheet"
+      - "neighborhood comparison"
+      - "pros cons"
+      - "facts over feelings"
+    expected_triples:
+      - ["Julian", "created", "neighborhood comparison spreadsheet"]
+      - ["user", "appreciates", "Julian's analytical approach"]
+      - ["user", "has_emotion", "appreciative"]
+    expected_adaptation:
+      emotion_detected: "appreciative"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 11:00am"
+    user_input: |
+      what's the name of the creative space Julian found near the Alberta apartment
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 3:00pm"
+    user_input: |
+      Julian had an idea. what if we look for places in between? like the area between Alberta and Sellwood. or what about the Milwaukie area which is close to Sellwood but has more going on? we never looked there
+    expected_memory_stores:
+      - "compromise idea"
+      - "between neighborhoods"
+      - "Milwaukie area"
+      - "new search"
+    expected_triples:
+      - ["Julian", "suggested", "looking between Alberta and Sellwood"]
+      - ["Julian", "suggested", "Milwaukie area as compromise"]
+      - ["user", "has_emotion", "hopeful"]
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 10:00am"
+    user_input: |
+      found something. there's a 2-bed 1-bath at 2847 Milwaukie Ave in Sellwood, technically still Sellwood but it's like the edge where Sellwood meets the more active area. it's 2375 a month, has parking, dog friendly, and there's a bus line that goes straight to Alberta in like 20 minutes
+    expected_memory_stores:
+      - "2847 Milwaukie Ave"
+      - "Sellwood"
+      - "2375"
+      - "2-bed 1-bath"
+      - "parking"
+      - "dog friendly"
+      - "bus to Alberta 20 min"
+    expected_triples:
+      - ["compromise apartment", "located_at", "2847 Milwaukie Ave in Sellwood"]
+      - ["compromise apartment", "costs", "$2375/month"]
+      - ["compromise apartment", "has_feature", "parking, dog friendly, bus to Alberta in 20 min"]
+      - ["compromise apartment", "has_layout", "2-bed 1-bath"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 10:15am"
+    user_input: |
+      showed Julian the listing and he paused and then goes... ok yeah this could work. the bus thing is actually clutch because he could go to Alberta for the creative stuff whenever he wants without us living there. and Kobe has the park. and it's under budget!
+    expected_memory_stores:
+      - "Julian approves"
+      - "bus compromise"
+      - "creative access"
+      - "park for Kobe"
+      - "under budget"
+    expected_triples:
+      - ["Julian", "approves", "compromise apartment"]
+      - ["compromise apartment", "provides", "bus access to Alberta for Julian"]
+      - ["compromise apartment", "provides", "park access for Kobe"]
+      - ["user", "has_emotion", "relieved"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 12:00pm"
+    user_input: |
+      scheduled a tour for Saturday morning. I'm cautiously optimistic but I don't wanna get too excited in case it sucks in person. Julian's already measuring his design desk to see if it fits in the second bedroom lol
+    expected_memory_stores:
+      - "tour Saturday"
+      - "cautiously optimistic"
+      - "Julian measuring desk"
+    expected_triples:
+      - ["user", "scheduled", "apartment tour for Saturday"]
+      - ["user", "has_emotion", "cautiously optimistic"]
+      - ["Julian", "measuring", "design desk for second bedroom"]
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is the underlying conflict about neighborhood choice?"
+    expected_contains: ["Julian creative energy", "Maya grounded", "identity"]
+  - question: "Why does Julian want to be near Alberta?"
+    expected_contains: ["creative", "lonely", "working from home"]
+  - question: "What apartment did they find as a compromise?"
+    expected_contains: ["2847 Milwaukie Ave", "Sellwood"]
+  - question: "How much is the compromise apartment?"
+    expected_contains: ["2375"]
+  - question: "How can Julian get to Alberta from the new place?"
+    expected_contains: ["bus", "20 minutes"]
+  - question: "What did Dr. Tate say about the neighborhood disagreement?"
+    expected_contains: ["not about neighborhoods", "identity"]
+  - question: "What did Julian create to compare options?"
+    expected_contains: ["spreadsheet"]
+  - question: "When is the tour of the Milwaukie Ave apartment?"
+    expected_contains: ["Saturday"]
+  - question: "Is the apartment dog-friendly?"
+    expected_contains: ["yes", "dog friendly"]
+  - question: "Is the apartment within their budget?"
+    expected_contains: ["under budget", "2375"]

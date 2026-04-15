@@ -1,0 +1,218 @@
+story_id: 126
+story_name: "Packing and Moving Chaos"
+category: "Life Events"
+description: |
+  Tests whether the system tracks the hectic moving process, logistical details, and
+  the emotional stress of combining two households. Cross-thread references to work
+  obligations.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00pm"
+    user_input: |
+      started packing tonight and wow I have so much stuff. like where did all these mugs come from?? I have 14 mugs for one person. Julian says he has even more because he collects vintage ones from thrift stores. we're gonna have a mug problem
+    expected_memory_stores:
+      - "packing started"
+      - "14 mugs"
+      - "Julian vintage mugs"
+      - "too much stuff"
+    expected_triples:
+      - ["user", "started", "packing for move"]
+      - ["user", "owns", "14 mugs"]
+      - ["Julian", "collects", "vintage mugs from thrift stores"]
+      - ["user", "has_emotion", "overwhelmed"]
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 6:00pm"
+    user_input: |
+      Julian packed up his whole design studio at Westridge today and he has SO much equipment. two monitors, a drawing tablet, a massive printer, like bins of art supplies. I'm starting to wonder if the second bedroom is big enough for all of it
+    expected_memory_stores:
+      - "Julian packing"
+      - "Westridge"
+      - "design equipment"
+      - "two monitors"
+      - "drawing tablet"
+      - "printer"
+      - "space concern"
+    expected_triples:
+      - ["Julian", "packed", "design studio at Westridge"]
+      - ["Julian", "owns", "two monitors, drawing tablet, massive printer, art supplies"]
+      - ["user", "worried_about", "second bedroom fitting all equipment"]
+    expected_adaptation:
+      emotion_detected: "worried"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 12:00pm"
+    user_input: |
+      took half day off work for the move prep. Aisha was like good luck!! and Derek and Priya said they'd hold down the fort with the Lens project. good team. Rachel Kim approved the time off without even asking why which is rare for her
+    expected_memory_stores:
+      - "half day off"
+      - "Aisha good luck"
+      - "Derek Priya Lens"
+      - "Rachel Kim approved"
+    expected_triples:
+      - ["user", "took", "half day off work for move prep"]
+      - ["Rachel Kim", "approved", "time off"]
+      - ["Derek", "covering", "Lens project with Priya"]
+      - ["user", "has_emotion", "grateful"]
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 8:00am"
+    user_input: |
+      U-Haul booked for Saturday. Julian's friend Marcus is helping plus my coworker Derek volunteered which was super nice. that gives us four people plus a 70-pound dog who will definitely be underfoot the entire time
+    expected_memory_stores:
+      - "U-Haul Saturday"
+      - "Marcus helping"
+      - "Derek volunteered"
+      - "four people"
+      - "Kobe underfoot"
+    expected_triples:
+      - ["user", "booked", "U-Haul for Saturday"]
+      - ["Marcus", "helping", "with move"]
+      - ["Derek", "volunteered", "to help with move"]
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 9:00pm"
+    user_input: |
+      my entire apartment is boxes. I'm sleeping on a mattress on the floor because I already disassembled the bed frame. Kobe keeps looking at me like what is happening woman. Julian's at Westridge doing his last night in his own place which is honestly kind of sad
+    expected_memory_stores:
+      - "boxes everywhere"
+      - "mattress on floor"
+      - "bed frame disassembled"
+      - "Julian last night at Westridge"
+    expected_triples:
+      - ["user", "sleeping_on", "mattress on floor surrounded by boxes"]
+      - ["user", "disassembled", "bed frame"]
+      - ["Julian", "spending", "last night at Westridge"]
+      - ["user", "has_emotion", "bittersweet"]
+    expected_adaptation:
+      emotion_detected: "bittersweet"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 7:00am"
+    user_input: |
+      MOVING DAY. I'm stressed and excited and I haven't had coffee because I packed the coffee maker. Julian just texted he's picking up the U-Haul now. Marcus and Derek are meeting us at my place at 8
+    expected_memory_stores:
+      - "moving day"
+      - "no coffee"
+      - "coffee maker packed"
+      - "Julian getting U-Haul"
+      - "8am meetup"
+    expected_triples:
+      - ["user", "experiencing", "moving day"]
+      - ["Julian", "picking_up", "U-Haul"]
+      - ["user", "packed", "coffee maker already"]
+      - ["user", "has_emotion", "stressed"]
+    expected_adaptation:
+      emotion_detected: "stressed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 11:00am"
+    user_input: |
+      my stuff is loaded. heading to Julian's Westridge place now to get his stuff. Marcus dropped a box of dishes and I THINK everything survived but we'll see when we unpack. Kobe is in the car looking very concerned
+    expected_memory_stores:
+      - "Maya stuff loaded"
+      - "heading to Westridge"
+      - "Marcus dropped dishes"
+      - "Kobe in car"
+    expected_triples:
+      - ["user", "loaded", "her stuff into U-Haul"]
+      - ["Marcus", "dropped", "box of dishes"]
+      - ["user", "heading_to", "Julian's Westridge place"]
+    expected_adaptation:
+      emotion_detected: "chaotic"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 2:00pm"
+    user_input: |
+      who is helping us move today
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 4:00pm"
+    user_input: |
+      everything is at 2847 Milwaukie Ave. well everything is in the living room in a giant pile but it's HERE. ordered pizza for everyone. Derek and Marcus are lifesavers honestly. Julian tipped them both which was sweet
+    expected_memory_stores:
+      - "everything at new place"
+      - "giant pile"
+      - "pizza"
+      - "Derek Marcus helped"
+      - "Julian tipped"
+    expected_triples:
+      - ["user", "moved_into", "2847 Milwaukie Ave"]
+      - ["user", "ordered", "pizza for move helpers"]
+      - ["Julian", "tipped", "Derek and Marcus"]
+      - ["user", "has_emotion", "relieved"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:00pm"
+    user_input: |
+      first night in the new apartment. we're on the mattress on the floor surrounded by boxes. Kobe found his bed somehow and is passed out on it. Julian goes well we live here now and I go yeah we do. then we just laid there and listened to the quiet. it's really quiet in Sellwood. I like that
+    expected_memory_stores:
+      - "first night"
+      - "mattress floor boxes"
+      - "Kobe found his bed"
+      - "quiet Sellwood"
+      - "peaceful moment"
+    expected_triples:
+      - ["user", "spent", "first night in new apartment"]
+      - ["Kobe", "found", "his bed among the boxes"]
+      - ["user", "appreciates", "quiet of Sellwood neighborhood"]
+      - ["user", "has_emotion", "content"]
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+final_verification:
+  - question: "When did they move in?"
+    expected_contains: ["Saturday"]
+  - question: "Who helped them move?"
+    expected_contains: ["Marcus", "Derek"]
+  - question: "What happened during the move?"
+    expected_contains: ["Marcus dropped", "dishes"]
+  - question: "What is the address of the new apartment?"
+    expected_contains: ["2847 Milwaukie Ave"]
+  - question: "What design equipment does Julian have?"
+    expected_contains: ["monitors", "drawing tablet", "printer"]
+  - question: "How many mugs does Maya own?"
+    expected_contains: ["14"]
+  - question: "What was Julian's last night at Westridge like?"
+    expected_contains: ["sad", "last night"]
+  - question: "What did they eat on moving day?"
+    expected_contains: ["pizza"]
+  - question: "Where did they sleep on the first night?"
+    expected_contains: ["mattress", "floor"]
+  - question: "How does Maya feel about the quiet in Sellwood?"
+    expected_contains: ["likes", "quiet"]

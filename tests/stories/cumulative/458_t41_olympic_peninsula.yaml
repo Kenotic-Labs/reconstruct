@@ -1,0 +1,184 @@
+story_id: 458
+story_name: "Olympic Peninsula Cross State"
+category: "Road Trips"
+description: |
+  Tests memory of Maya and Julian crossing into Washington for the Olympic Peninsula.
+  Establishes first out-of-state trip, rainforest visit, ambitious planning.
+  Verifies multi-day temporal tracking and cross-thread references.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 6:00 PM"
+    user_input: |
+      okay so we're being ambitious this time we're crossing into Washington for the Olympic Peninsula and it's gonna be a two day trip because there's so much to see and Julian took Friday afternoon off from Bold Studio and I told Sam Okafor I'm leaving early and he was like go have fun and we're car camping again in the Subaru since it worked at Crater Lake
+    expected_memory_stores:
+      - "Olympic Peninsula"
+      - "Washington state"
+      - "two day trip"
+      - "Julian off from Bold Studio"
+      - "Sam Okafor"
+      - "car camping again"
+      - "Crater Lake reference"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 9:30 PM"
+    user_input: |
+      we drove up through Olympia and stopped for gas and Julian got like a million snacks from the gas station and we made it to a campsite near Lake Quinault and its dark and rainy and super moody and Julian said this feels like a horror movie and Kobe is not loving the rain but he's being brave and we set up the car sleeping situation and it's actually cozy
+    expected_memory_stores:
+      - "drove through Olympia"
+      - "Lake Quinault campsite"
+      - "rainy and dark"
+      - "horror movie comment"
+      - "Kobe dislikes rain"
+      - "car sleeping setup"
+    expected_adaptation:
+      emotion_detected: "adventurous"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 7:00 AM"
+    user_input: |
+      woke up to the sound of rain on the car roof and honestly its the most peaceful sound and Julian made coffee on this little camp stove we bought and it tastes terrible but the setting makes up for it and Kobe is staring out the window at a deer like twenty feet away and I'm like buddy don't even think about it
+    expected_memory_stores:
+      - "rain on car roof"
+      - "camp stove coffee"
+      - "terrible coffee"
+      - "deer near campsite"
+      - "Kobe watching deer"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 9:30 AM"
+    user_input: |
+      okay so we went to the Hoh Rainforest and I just I cannot believe this place exists in the United States like it's covered in moss and ferns and these massive ancient trees and everything is green and dripping and it feels like a fairy tale and Julian is losing his mind photographically speaking he said this is the best shooting location he's ever been to
+    expected_memory_stores:
+      - "Hoh Rainforest"
+      - "moss and ferns"
+      - "ancient trees"
+      - "fairy tale feeling"
+      - "Julian best shooting location"
+    expected_adaptation:
+      emotion_detected: "awestruck"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 12:00 PM"
+    user_input: |
+      we hiked the Hall of Mosses trail which is like a mile loop and there are these trees that are literally draped in moss like curtains and Kobe was so good on the trail and this family with kids stopped to pet him and the little girl said he looks like a forest guardian and that was the cutest thing anyone has ever said and Julian got a photo of Kobe standing in the moss
+    expected_memory_stores:
+      - "Hall of Mosses trail"
+      - "mile loop"
+      - "moss curtains"
+      - "family with kids"
+      - "forest guardian comment"
+      - "Julian photo of Kobe"
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 2:30 PM"
+    user_input: |
+      drove out to Rialto Beach on the coast and it has these sea stacks just like Haystack Rock but there's tons of them and the waves are enormous and Kobe stayed far from the water because he's learned his lesson and Julian got this incredible long exposure shot of the waves around the stacks and I'm like you need to sell these prints for real at Bold Studio
+    expected_memory_stores:
+      - "Rialto Beach"
+      - "sea stacks"
+      - "like Haystack Rock"
+      - "enormous waves"
+      - "Kobe avoided water"
+      - "long exposure shot"
+      - "sell prints idea"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 5:00 PM"
+    user_input: |
+      stopped in the town of Forks which is apparently where Twilight was set and I don't care about that but Julian thought it was funny and we got burgers at this little diner and the waitress was like are you here for the Twilight tour and I was like no we're road trippers and she said that's refreshing
+    expected_memory_stores:
+      - "Forks"
+      - "Twilight town"
+      - "burgers at diner"
+      - "waitress conversation"
+      - "road trippers identity"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 7:00 PM"
+    user_input: |
+      where is the rainforest we visited on the Olympic Peninsula called
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 8:30 PM"
+    user_input: |
+      we're parked at this overlook for the night and the sunset over the Pacific is making the sky all pink and orange and Julian is doing a time lapse and I called my mom to tell her about the rainforest and she was like be careful and I'm like mom we're fine and then dad got on and asked if the Subaru is handling well because he helped us pick it out
+    expected_memory_stores:
+      - "overlook parking"
+      - "Pacific sunset"
+      - "Julian time lapse"
+      - "called Vivian"
+      - "George asked about Subaru"
+      - "George helped pick car"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 11:00 AM"
+    user_input: |
+      driving home now and this was easily the most epic trip we've done like it was basically a mini vacation and Julian has hundreds of photos to go through and he keeps saying the Hoh Rainforest photos might be good enough for a gallery show and I'm like DO IT and also we're now up to eight pins on our Google Map and I was like we should do ten by the end of the year and Julian said deal
+    expected_memory_stores:
+      - "most epic trip"
+      - "hundreds of photos"
+      - "gallery show idea"
+      - "eight pins on map"
+      - "ten by end of year goal"
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What state is the Olympic Peninsula in?"
+    expected_contains: ["Washington"]
+  - question: "What rainforest did they visit?"
+    expected_contains: ["Hoh"]
+  - question: "What trail did they hike in the rainforest?"
+    expected_contains: ["Hall of Mosses"]
+  - question: "What beach on the Olympic Peninsula had sea stacks?"
+    expected_contains: ["Rialto"]
+  - question: "What town is associated with Twilight?"
+    expected_contains: ["Forks"]
+  - question: "Where did they camp on the Olympic Peninsula?"
+    expected_contains: ["Lake Quinault"]
+  - question: "What does Julian want to do with his rainforest photos?"
+    expected_contains: ["gallery show"]
+  - question: "How many pins are on their Google Map now?"
+    expected_contains: ["eight"]
+  - question: "What is their road trip goal?"
+    expected_contains: ["ten", "end of year"]
+  - question: "Who helped Maya and Julian pick their Subaru?"
+    expected_contains: ["George", "dad"]

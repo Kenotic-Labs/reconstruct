@@ -1,0 +1,173 @@
+story_id: 327
+story_name: "Greg Opens Up"
+category: "Home Life"
+description: |
+  Tests memory of Greg sharing more about his custody battle and personal life.
+  Maya and Julian become sounding boards. Verifies system captures deepening
+  neighbor relationship and legal situation details.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 11:00 AM"
+    user_input: |
+      Greg and Noah were in the yard when I took Kobe out and Noah immediately ran over and Kobe was so happy and Greg came over to the fence and we just stood there chatting for like 20 minutes about nothing which is nice
+    expected_memory_stores:
+      - "yard conversation"
+      - "Noah and Kobe"
+      - "casual chatting"
+      - "20 minutes"
+    expected_adaptation:
+      emotion_detected: "comfortable"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 2:00 PM"
+    user_input: |
+      Greg mentioned his ex-wife's name is Lauren and she moved to Salem because her parents are there and he doesn't blame her for wanting family support but he wishes she hadn't taken Noah so far and Salem is like an hour drive each way
+    expected_memory_stores:
+      - "ex-wife Lauren"
+      - "moved to Salem"
+      - "Lauren's parents there"
+      - "doesn't blame her"
+      - "hour drive each way"
+    expected_adaptation:
+      emotion_detected: "empathetic"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 6:00 PM"
+    user_input: |
+      Greg texted me which is new we exchanged numbers after the cookies thing and he asked if we'd be ok with Noah coming over to play with Kobe sometimes on his weekends and I said absolutely anytime and Julian agreed
+    expected_memory_stores:
+      - "Greg texted"
+      - "exchanged numbers"
+      - "Noah play with Kobe"
+      - "anytime welcome"
+      - "Julian agreed"
+    expected_adaptation:
+      emotion_detected: "generous"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 7:30 PM"
+    user_input: |
+      told Julian I feel bad for Greg because he's basically alone on weekdays in that house and Julian said maybe we should invite him over for dinner sometime and I was like that's actually a great idea we could do pizza night
+    expected_memory_stores:
+      - "Greg alone weekdays"
+      - "Julian dinner idea"
+      - "pizza night"
+    expected_adaptation:
+      emotion_detected: "kind"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 6:30 PM"
+    user_input: |
+      invited Greg for pizza and he came over and it was actually really chill and he told us he works as a machinist at a shop in Southeast and he's been doing it for 15 years and he said the bass is his creative outlet because his day job is all precision and routine
+    expected_memory_stores:
+      - "pizza with Greg"
+      - "machinist"
+      - "Southeast shop"
+      - "15 years"
+      - "bass as creative outlet"
+      - "precision and routine day job"
+    expected_adaptation:
+      emotion_detected: "interested"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 8:00 PM"
+    user_input: |
+      Greg played some bass for us through the headphone amp but he let me listen through the headphones and honestly he's actually really good like actually talented and I was like dude you could still play in a band and he said nah that ship sailed
+    expected_memory_stores:
+      - "Greg played for them"
+      - "headphone amp"
+      - "actually talented"
+      - "could play in band"
+      - "that ship sailed"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 7:00 PM"
+    user_input: |
+      Greg sent a photo of Noah's report card and the kid got straight As and Greg was like I know I'm bragging but I'm so proud and I texted back like a bunch of celebration emojis because honestly that's adorable
+    expected_memory_stores:
+      - "Noah straight As"
+      - "Greg bragging proud"
+      - "shared report card"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 10:00 AM"
+    user_input: |
+      what does Greg do for work
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Noah came over with Greg today and he drew a picture of Kobe with crayons and gave it to me and I put it on our fridge and Greg said Noah talks about Kobe all week at his mom's house and asks when he can see the dog again
+    expected_memory_stores:
+      - "Noah drew Kobe"
+      - "crayons"
+      - "on fridge"
+      - "talks about Kobe at mom's"
+      - "asks to see dog"
+    expected_adaptation:
+      emotion_detected: "charmed"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 PM"
+    user_input: |
+      I was telling Nadia about the whole Greg arc and she was like Maya you turned a neighbor war into a friendship and I said I wouldn't call it a friendship exactly but it's definitely not enemies anymore and she said that's growth and I think she's right
+    expected_memory_stores:
+      - "told Nadia about Greg"
+      - "neighbor war to friendship"
+      - "not friendship exactly"
+      - "not enemies"
+      - "growth"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Greg's ex-wife's name?"
+    expected_contains: ["Lauren"]
+  - question: "Why did Lauren move to Salem?"
+    expected_contains: ["parents", "family support"]
+  - question: "What does Greg do for work?"
+    expected_contains: ["machinist"]
+  - question: "Can Greg actually play bass well?"
+    expected_contains: ["yes", "talented", "good"]
+  - question: "What did Noah draw for Maya?"
+    expected_contains: ["picture of Kobe", "crayons"]
+  - question: "Where is the drawing now?"
+    expected_contains: ["fridge"]
+  - question: "How are Noah's grades?"
+    expected_contains: ["straight As"]
+  - question: "What did Maya and Julian invite Greg over for?"
+    expected_contains: ["pizza"]
+  - question: "Why is bass important to Greg?"
+    expected_contains: ["creative outlet", "routine day job"]
+  - question: "How does Nadia describe the Greg situation?"
+    expected_contains: ["growth", "neighbor war to friendship"]

@@ -1,0 +1,166 @@
+story_id: 313
+story_name: "Nadia's Bad Days and Good Days"
+category: "Friendships"
+description: |
+  Tests memory of the emotional rollercoaster of Nadia's divorce recovery.
+  Good days and bad days. Maya learning to be present without fixing.
+  Verifies system captures emotional state oscillation for a secondary character.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:00 PM"
+    user_input: |
+      Nadia had a really bad day today she called me crying because Kwame's lawyer sent the divorce papers and seeing it in writing made it real and she was like I thought I was ok but I'm not ok and I just sat on the phone with her for an hour
+    expected_memory_stores:
+      - "divorce papers arrived"
+      - "Nadia crying"
+      - "not ok"
+      - "phone call one hour"
+    expected_adaptation:
+      emotion_detected: "concerned"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 6:30 PM"
+    user_input: |
+      climbing with Nadia today and she was actually great like she made it to the top of the V1 for the first time and she screamed at the top and everyone was looking and she didn't care and I was like THATS MY GIRL and it was the happiest I've seen her
+    expected_memory_stores:
+      - "Nadia topped V1"
+      - "screamed at top"
+      - "happiest in a while"
+      - "Maya cheering"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 9:00 PM"
+    user_input: |
+      bad day again for Nadia she found out Kwame is already on the dating apps because a mutual friend in Chicago told her and she's like it's been THREE MONTHS how is he already on Hinge and she came over and we watched trash TV and ate ice cream
+    expected_memory_stores:
+      - "Kwame on dating apps"
+      - "Hinge"
+      - "mutual friend told"
+      - "three months"
+      - "trash TV and ice cream"
+    expected_adaptation:
+      emotion_detected: "angry"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Week 2 Monday 7:00 PM"
+    user_input: |
+      Nadia started seeing a therapist finally her name is Dr Sarah Lin and she said the first session was hard but good and I was like that's exactly what Jenny said about therapy at first and Nadia was like who's Jenny and I realized I haven't told her about Jenny yet
+    expected_memory_stores:
+      - "Dr Sarah Lin"
+      - "therapist"
+      - "first session hard but good"
+      - "hasn't told Nadia about Jenny"
+    expected_adaptation:
+      emotion_detected: "encouraged"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Week 2 Tuesday 12:00 PM"
+    user_input: |
+      told Nadia about Jenny on our lunch break and she was like wow you really do understand what it's like to support someone through hard stuff and I was like yeah I guess I've had practice and she laughed and said well at least you're good at it
+    expected_memory_stores:
+      - "told Nadia about Jenny"
+      - "Nadia impressed"
+      - "Maya good at supporting"
+    expected_adaptation:
+      emotion_detected: "humbled"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Week 2 Wednesday 8:00 PM"
+    user_input: |
+      good day today Nadia got a promotion at work well not a promotion but a raise and a new title she's now senior graphic designer and she texted me with like twelve exclamation marks and I was so happy for her
+    expected_memory_stores:
+      - "Nadia raise and new title"
+      - "senior graphic designer"
+      - "celebration"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Week 2 Thursday 9:30 PM"
+    user_input: |
+      Nadia got a text from Kwame tonight just saying hope you're doing well and she showed me and she was like what does this MEAN does he want me back is he just being polite is he feeling guilty and I said honestly I don't know but Dr Lin will help you figure that out
+    expected_memory_stores:
+      - "Kwame texted"
+      - "hope you're doing well"
+      - "Nadia confused"
+      - "directed to Dr Lin"
+    expected_adaptation:
+      emotion_detected: "cautious"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Week 2 Friday 12:00 PM"
+    user_input: |
+      what's the name of Nadia's therapist
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Week 2 Saturday 11:00 AM"
+    user_input: |
+      took Nadia to brunch at Screen Door which is like the most Portland brunch place ever and she got the praline bacon which she said was life changing and she was laughing and being goofy and I thought like ok she's gonna be ok she has more good days than bad now
+    expected_memory_stores:
+      - "brunch at Screen Door"
+      - "praline bacon"
+      - "Nadia laughing"
+      - "more good days than bad"
+    expected_adaptation:
+      emotion_detected: "optimistic"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Week 2 Sunday 7:00 PM"
+    user_input: |
+      Nadia said the weirdest thing today she said she's almost grateful for the divorce because she never would have moved to Portland and never would have met me and I was like ok that's sweet but also don't tell Kwame that and she cracked up
+    expected_memory_stores:
+      - "grateful for divorce"
+      - "wouldn't have met Maya"
+      - "humor about it"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who is Nadia's therapist?"
+    expected_contains: ["Dr Sarah Lin"]
+  - question: "What happened with Kwame and dating apps?"
+    expected_contains: ["Hinge", "three months"]
+  - question: "What climbing milestone did Nadia achieve?"
+    expected_contains: ["V1", "top"]
+  - question: "What is Nadia's new job title?"
+    expected_contains: ["senior graphic designer"]
+  - question: "What did Kwame text Nadia?"
+    expected_contains: ["hope you're doing well"]
+  - question: "Where did Maya take Nadia for brunch?"
+    expected_contains: ["Screen Door"]
+  - question: "How is Nadia's emotional state trending?"
+    expected_contains: ["more good days", "better"]
+  - question: "What did Nadia say about being grateful?"
+    expected_contains: ["grateful", "divorce", "Portland", "met Maya"]
+  - question: "What do Maya and Nadia do on bad days?"
+    expected_contains: ["trash TV", "ice cream"]
+  - question: "Has Maya told Nadia about Jenny?"
+    expected_contains: ["yes"]

@@ -1,0 +1,171 @@
+story_id: 252
+story_name: "First Climbing Class"
+category: "Fitness"
+description: |
+  Tests memory of Maya's first experience at Portland Rock Gym. Captures her initial
+  reactions, instructor name, physical sensations, and emotional shift from nervous to hooked.
+  Verifies correction handling when she misremembers the instructor's name.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00 AM"
+    user_input: |
+      okay so today's the day we're heading to Portland Rock Gym for that intro class thing I'm actually kinda nervous like what if I can't even get off the ground that would be so embarrassing Julian's being all positive about it obviously
+    expected_memory_stores:
+      - "Portland Rock Gym"
+      - "intro class today"
+      - "nervous"
+      - "Julian positive"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:30 AM"
+    user_input: |
+      oh my god okay so we just finished the intro class and it was actually amazing? the instructor was this guy named um I think it was Jake... Jake something and he showed us how to belay and the basic foot positions and I actually made it to the top of a 5.6 route on my first try
+    expected_memory_stores:
+      - "intro class completed"
+      - "instructor Jake"
+      - "belay technique"
+      - "foot positions"
+      - "5.6 route"
+      - "topped first route"
+    expected_adaptation:
+      emotion_detected: "thrilled"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:00 AM"
+    user_input: |
+      wait no his name wasn't Jake it was actually Jason. Jason Park. sorry I'm bad with names when I'm excited lol but yeah he was super patient and explained everything really clearly and he said my upper body strength is actually pretty good from the running which is nice to hear
+    expected_memory_stores:
+      - "correction instructor name"
+      - "Jason Park"
+      - "not Jake"
+      - "upper body strength"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 12:15 PM"
+    user_input: |
+      Julian tried it too and he was like nope this is not for me lol he got about halfway up a route and was like I'm good and came back down but he was a really good sport about it and he said he'll still come with me to belay if I wanna keep going
+    expected_memory_stores:
+      - "Julian tried climbing"
+      - "Julian doesn't like climbing"
+      - "Julian will belay"
+      - "supportive partner"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 1:30 PM"
+    user_input: |
+      my knee felt totally fine by the way like not even a twinge which is huge because I was so worried about that. Jason said as long as I don't heel hook aggressively and stick to face climbing I should be completely fine with the meniscus thing
+    expected_memory_stores:
+      - "knee fine during climbing"
+      - "no pain"
+      - "avoid heel hooks"
+      - "face climbing safe"
+      - "meniscus compatible"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 3:00 PM"
+    user_input: |
+      so a monthly membership at Portland Rock Gym is like $79 which is honestly not bad? and they have rental gear included in that so I don't need to buy shoes yet. I think I'm gonna sign up Julian was like just do it if it makes you happy
+    expected_memory_stores:
+      - "membership $79"
+      - "rental gear included"
+      - "planning to sign up"
+      - "Julian supportive"
+    expected_adaptation:
+      emotion_detected: "decisive"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 5:00 PM"
+    user_input: |
+      dude my forearms are absolutely destroyed like I can barely grip my water bottle right now and my hands are raw but it's that good kind of sore you know? like runner's legs sore but for your whole upper body. I missed this feeling so much
+    expected_memory_stores:
+      - "forearm soreness"
+      - "hand soreness"
+      - "good pain"
+      - "missed exercise feeling"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 7:30 PM"
+    user_input: |
+      Nadia just texted me and was like sooo how was it and I sent her like fifteen messages in a row about how awesome it was and she was like told you!! she said she usually goes Tuesday and Thursday evenings and I should come with her
+    expected_memory_stores:
+      - "Nadia"
+      - "texted about climbing"
+      - "Tuesday Thursday evenings"
+      - "climbing with Nadia"
+    expected_adaptation:
+      emotion_detected: "enthusiastic"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 9:00 PM"
+    user_input: |
+      okay random but what was the name of the climbing instructor from today I already forgot
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:00 PM"
+    user_input: |
+      can't stop watching climbing videos on YouTube now lol Julian's asleep and I'm just here watching people boulder like V10s and I'm like that'll be me in six months haha probably not but still I signed up for the membership online just now it starts Tuesday
+    expected_memory_stores:
+      - "watching climbing videos"
+      - "signed up membership"
+      - "starts Tuesday"
+      - "bouldering interest"
+    expected_adaptation:
+      emotion_detected: "obsessed"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What was the name of Maya's climbing instructor?"
+    expected_contains: ["Jason Park"]
+  - question: "What grade did Maya climb on her first try?"
+    expected_contains: ["5.6"]
+  - question: "How did Julian feel about climbing?"
+    expected_contains: ["not for", "didn't like"]
+  - question: "How much is the monthly membership at Portland Rock Gym?"
+    expected_contains: ["79"]
+  - question: "Did Maya's knee hurt during climbing?"
+    expected_contains: ["no", "fine"]
+  - question: "What days does Nadia climb?"
+    expected_contains: ["Tuesday", "Thursday"]
+  - question: "What should Maya avoid with her knee injury while climbing?"
+    expected_contains: ["heel hook"]
+  - question: "Did Julian say he would still belay for Maya?"
+    expected_contains: ["yes"]
+  - question: "When does Maya's membership start?"
+    expected_contains: ["Tuesday"]
+  - question: "How did Maya feel after her first climbing session?"
+    expected_contains: ["amazing", "thrilled", "excited"]

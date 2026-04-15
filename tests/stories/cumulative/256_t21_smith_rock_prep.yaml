@@ -1,0 +1,175 @@
+story_id: 256
+story_name: "Smith Rock Trip Prep"
+category: "Fitness"
+description: |
+  Tests memory of Maya preparing for her first outdoor climbing trip to Smith Rock.
+  Captures gear purchases, logistical planning, fear of outdoor climbing, and Julian's involvement.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 12:00 PM"
+    user_input: |
+      so Omar and I are planning the Smith Rock trip for this Saturday and I'm like equal parts excited and terrified because outdoor climbing is so different from gym right like there's actual rock and actual heights and no padded floor if you fall
+    expected_memory_stores:
+      - "Smith Rock Saturday"
+      - "outdoor vs gym"
+      - "scared of heights"
+      - "no padded floor"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 3:00 PM"
+    user_input: |
+      Omar sent me a list of gear I need for outdoor climbing that I don't have already like a harness which I have and shoes which I have but also a helmet and my own belay device and he said I should get a Petzl GriGri because it has auto-braking and is safer for beginners outdoors
+    expected_memory_stores:
+      - "gear list"
+      - "helmet needed"
+      - "belay device needed"
+      - "Petzl GriGri"
+      - "auto-braking"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 6:30 PM"
+    user_input: |
+      went to REI after work and got a helmet and a GriGri and some quickdraws wait no Omar said he has enough quickdraws for both of us so I just got the helmet and the GriGri which was still like $140 total climbing is getting expensive lol
+    expected_memory_stores:
+      - "REI purchase"
+      - "helmet bought"
+      - "GriGri bought"
+      - "$140 total"
+      - "Omar has quickdraws"
+    expected_adaptation:
+      emotion_detected: "practical"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      Omar showed me how to clean anchors at the gym tonight on their outdoor simulation wall because apparently when you climb outside you have to know how to set up your own anchors and take them down and I was like oh so there's actual skills involved besides just climbing up
+    expected_memory_stores:
+      - "anchor cleaning"
+      - "outdoor simulation wall"
+      - "Omar teaching"
+      - "outdoor skills"
+    expected_adaptation:
+      emotion_detected: "focused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 7:00 AM"
+    user_input: |
+      Julian's not coming to Smith Rock by the way he said he has a design deadline for some branding project for Bold Studio and also outdoor climbing really isn't his thing so it'll just be me and Omar and maybe Omar's wife Leila might come too she hikes while he climbs apparently
+    expected_memory_stores:
+      - "Julian not coming"
+      - "Bold Studio deadline"
+      - "branding project"
+      - "Omar's wife Leila"
+      - "Leila hikes"
+    expected_adaptation:
+      emotion_detected: "understanding"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 9:00 PM"
+    user_input: |
+      so the route Omar picked for me at Smith Rock is called Wherever I May Roam and it's a 5.10a which is what I climb in the gym so it should be doable but Omar said outdoor grades feel harder because the holds aren't color coded and you have to read the rock yourself
+    expected_memory_stores:
+      - "Wherever I May Roam"
+      - "5.10a"
+      - "outdoor grades harder"
+      - "read the rock"
+      - "no color coding"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 6:00 PM"
+    user_input: |
+      packed my bag for tomorrow: shoes, harness, helmet, GriGri, chalk bag, sunscreen, snacks, two liters of water, and like three layers because Omar said the canyon gets cold in the morning even when it's warm in Portland
+    expected_memory_stores:
+      - "packed for trip"
+      - "gear list"
+      - "canyon cold morning"
+      - "layers needed"
+    expected_adaptation:
+      emotion_detected: "prepared"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 8:00 PM"
+    user_input: |
+      can't sleep I'm so nervous slash excited for tomorrow Omar said we need to leave by like 5:30 AM to get there by 8 and beat the crowds so I should probably try to sleep but I keep watching YouTube videos of Wherever I May Roam and it looks SO COOL but also kinda scary
+    expected_memory_stores:
+      - "can't sleep"
+      - "leaving 5:30 AM"
+      - "arrive by 8"
+      - "watching route videos"
+      - "nervous and excited"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 9:30 PM"
+    user_input: |
+      Julian just gave me a little good luck card with a drawing of me on a mountain and Kobe at the bottom looking up and it's so cute I almost cried he said text me when you get to the top
+    expected_memory_stores:
+      - "Julian card"
+      - "drawing"
+      - "emotional moment"
+      - "Julian supportive"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 10:00 PM"
+    user_input: |
+      okay alarm set for 5 AM Omar's picking me up at 5:30 in his Subaru. wish me luck. what's the name of the route I'm doing tomorrow again I'm blanking
+    expected_memory_stores:
+      - "GK trap"
+      - "5 AM alarm"
+      - "Omar driving"
+      - "Subaru"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What route is Maya attempting at Smith Rock?"
+    expected_contains: ["Wherever I May Roam"]
+  - question: "What grade is Wherever I May Roam?"
+    expected_contains: ["5.10a"]
+  - question: "What gear did Maya buy at REI?"
+    expected_contains: ["helmet", "GriGri"]
+  - question: "Why isn't Julian coming to Smith Rock?"
+    expected_contains: ["deadline", "Bold Studio"]
+  - question: "Who is Omar's wife?"
+    expected_contains: ["Leila"]
+  - question: "What time are they leaving for Smith Rock?"
+    expected_contains: ["5:30"]
+  - question: "Why are outdoor grades harder than gym grades?"
+    expected_contains: ["read the rock", "not color coded"]
+  - question: "What skills did Omar teach Maya for outdoor climbing?"
+    expected_contains: ["anchor", "clean"]
+  - question: "What car does Omar drive?"
+    expected_contains: ["Subaru"]
+  - question: "How much did Maya spend on the helmet and GriGri?"
+    expected_contains: ["140"]

@@ -1,0 +1,171 @@
+story_id: 419
+story_name: "Smart Home Stable"
+category: "Smart Home"
+description: |
+  The smart home finally reaches a stable equilibrium. Everything works reliably.
+  Maya and Julian find their groove with the tech. Tests arc resolution.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 AM"
+    user_input: |
+      it's been two weeks since the no more devices rule and honestly the smart home has been running perfectly like zero issues the Nest does its thing the cameras catch what they should and the locks work every single time and I'm like see Julian THIS is what I wanted from the beginning
+    expected_memory_stores:
+      - "two weeks stable"
+      - "zero issues"
+      - "all devices working"
+      - "Maya satisfied"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      came home from work today and the Hue lights turned on warm automatically and the door unlocked and Kobe was wagging his tail and the house was already at 68 degrees and Julian had dinner going and I was like ok this is what smart home living is supposed to feel like not chaos just smooth
+    expected_memory_stores:
+      - "seamless arrival"
+      - "lights door temperature"
+      - "smooth experience"
+      - "Julian cooking dinner"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 10:00 PM"
+    user_input: |
+      the Nest energy report came and apparently we saved 18 percent on heating compared to last month which Julian proudly showed me and I said ok fine that's genuinely impressive and he was like see the thermostat paid for itself and I was like in one month no but eventually sure
+    expected_memory_stores:
+      - "18% heating savings"
+      - "Nest energy report"
+      - "Julian proud"
+      - "thermostat ROI discussion"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 8:00 AM"
+    user_input: |
+      Julian does his weekly maintenance check now where he goes through the Home Assistant dashboard makes sure everything is connected checks the battery on the back Ring camera and tests the lockbox key and honestly I love that he takes it seriously now instead of just adding stuff carelessly
+    expected_memory_stores:
+      - "weekly maintenance check"
+      - "Home Assistant dashboard"
+      - "back camera battery check"
+      - "lockbox key test"
+      - "Julian responsible now"
+    expected_adaptation:
+      emotion_detected: "approving"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Sunday 5:00 PM"
+    user_input: |
+      Vivian called and asked to see the camera feed of the front door and Julian had set up a shared view for her so she can check it from her phone in Seattle and she checks it like 3 times a day which is a lot but it makes her happy and I'm like ok fine mom you can spy on our porch
+    expected_memory_stores:
+      - "Vivian has camera access"
+      - "checks 3 times daily"
+      - "shared view set up"
+      - "from Seattle"
+      - "Maya accepts it"
+    expected_adaptation:
+      emotion_detected: "tolerant"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 7:00 PM"
+    user_input: |
+      funny thing the Ring actually caught a package thief last week well not a thief exactly but someone walking up to our porch looking at our package and then walking away when they saw the camera and Julian was like see THAT'S why we have cameras and I was like ok yeah that's actually the point proven
+    expected_memory_stores:
+      - "potential thief deterred"
+      - "camera prevented theft"
+      - "cameras justified"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      I set up my own automation in Home Assistant which Julian was shocked by but I made it so when the alarm goes off at 6am on weekdays the thermostat starts heating the lights slowly brighten in the bedroom over 10 minutes and the coffee maker turns on yes I bought a smart plug for the coffee maker but that was MY purchase so it doesn't count
+    expected_memory_stores:
+      - "Maya created automation"
+      - "morning routine automation"
+      - "thermostat lights coffee"
+      - "smart plug for coffee"
+      - "Maya's own purchase"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 9:00 PM"
+    user_input: |
+      wait did I add a smart plug to the coffee maker I feel like Julian is gonna call me a hypocrite
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "sheepish"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 7:00 PM"
+    user_input: |
+      Julian absolutely did call me a hypocrite about the smart plug and he was like so you can buy smart devices but I can't and I was like this is a 15 dollar plug not a 200 dollar garage door opener and also I asked you before I bought it and he was like no you didn't and I was like ok fine I didn't but it's a plug Julian a PLUG
+    expected_memory_stores:
+      - "Julian calls Maya hypocrite"
+      - "smart plug $15"
+      - "garage opener $200 comparison"
+      - "Maya didn't ask first"
+      - "playful argument"
+    expected_adaptation:
+      emotion_detected: "sheepish amused"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 6:30 AM"
+    user_input: |
+      woke up this morning and the house was warm the lights faded on gently and by the time I walked to the kitchen the coffee was ready and Julian was still asleep and I stood there sipping coffee looking at the backyard through the back camera feed on my phone and I thought ok we got here through chaos but this is actually really nice
+    expected_memory_stores:
+      - "morning routine working"
+      - "warm house lights coffee"
+      - "peaceful morning"
+      - "got there through chaos"
+      - "smart home arc complete"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How much energy savings did the Nest report?"
+    expected_contains: ["18 percent", "18%"]
+  - question: "What automation did Maya create?"
+    expected_contains: ["morning", "thermostat", "lights", "coffee"]
+  - question: "What smart device did Maya buy herself?"
+    expected_contains: ["smart plug", "coffee maker"]
+  - question: "Does Vivian have access to the Ring cameras?"
+    expected_contains: ["yes", "shared view"]
+  - question: "How often does Vivian check the camera?"
+    expected_contains: ["3 times", "day"]
+  - question: "What did the Ring camera deter?"
+    expected_contains: ["package thief", "someone", "walked away"]
+  - question: "What weekly checks does Julian perform?"
+    expected_contains: ["Home Assistant", "battery", "lockbox", "key"]
+  - question: "Did Julian call Maya a hypocrite and why?"
+    expected_contains: ["smart plug", "didn't ask"]
+  - question: "How long has the system been stable?"
+    expected_contains: ["two weeks"]
+  - question: "How does Maya feel about the smart home now?"
+    expected_contains: ["nice", "peaceful", "through chaos"]

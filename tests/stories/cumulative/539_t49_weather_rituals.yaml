@@ -1,0 +1,181 @@
+story_id: 539
+story_name: "Weather Rituals"
+category: "Weather and Seasons"
+description: |
+  Maya establishes weather-based rituals — rain walks, sun hikes, soup weather, bloom
+  watching. The seasons now have rituals attached. Cross-references all seasonal threads,
+  hosting (T47), cooking (T31), and Kobe.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 AM"
+    user_input: |
+      so I realized I've developed these weather rituals without even trying like when it rains I walk Kobe and make soup when the sun comes out I hike and climb when the first blossoms appear I check grandpa's tree when the leaves turn I light candles and it's like the weather tells me what to do
+    expected_memory_stores:
+      - "weather rituals"
+      - "rain walk soup"
+      - "sun hike climb"
+      - "blossoms check tree"
+      - "leaves candles"
+      - "weather as guide"
+    expected_adaptation:
+      emotion_detected: "aware"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      told Julian about the weather rituals and he said I have them too like when it snows he wants hot chocolate and when it's sunny he wants to grill and when it's fall he wants to make his smoked old fashioned and we laughed because we're basically controlled by the weather and we're ok with it
+    expected_memory_stores:
+      - "Julian's weather rituals"
+      - "snow hot chocolate"
+      - "sun grilling"
+      - "fall smoked old fashioned"
+      - "controlled by weather"
+    expected_adaptation:
+      emotion_detected: "bonded"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      it rained today and I made minestrone soup which is my new soup of the week recipe and the act of chopping vegetables while it rains is like meditation for me now and I was listening to the rain on the kitchen window and thinking about how six months ago I would have been miserable right now and instead I'm making soup and loving it
+    expected_memory_stores:
+      - "minestrone soup"
+      - "chopping vegetables meditation"
+      - "rain on kitchen window"
+      - "six months ago miserable"
+      - "now loving it"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 8:00 AM"
+    user_input: |
+      surprise sunny day in November and I immediately texted Omar about an after work climb and Raj about a walk at lunch and my body just responds to sunlight now like I'm solar powered and Dr. Pham would say that's the SAD but I prefer to think of it as being attuned to nature
+    expected_memory_stores:
+      - "surprise sunny day"
+      - "texted Omar for climb"
+      - "Raj for lunch walk"
+      - "solar powered"
+      - "SAD or attuned to nature"
+    expected_adaptation:
+      emotion_detected: "energized"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 7:00 PM"
+    user_input: |
+      first frost of the season this morning and Kobe's water bowl outside had ice on it and he was so confused poking it with his nose and I took a photo and sent it to Clara and she said that's the most Kobe thing ever and I made hot chocolate and sat on the porch watching my breath in the cold air wearing grandpa's watch
+    expected_memory_stores:
+      - "first frost"
+      - "Kobe confused by ice"
+      - "sent photo to Clara"
+      - "hot chocolate on porch"
+      - "breath in cold air"
+      - "grandpa's watch"
+    expected_adaptation:
+      emotion_detected: "charmed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:00 AM"
+    user_input: |
+      went to Portland Nursery to get a winter plant for the house because the cherry tree is dormant and I want something green inside and I got a pothos and a little succulent and the woman there said plants help with winter blues too and I was like yeah that tracks my whole house is becoming a coping mechanism
+    expected_memory_stores:
+      - "Portland Nursery"
+      - "pothos and succulent"
+      - "indoor winter plants"
+      - "plants help winter blues"
+      - "house as coping mechanism"
+    expected_adaptation:
+      emotion_detected: "nurturing"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 4:00 PM"
+    user_input: |
+      Julian and I are developing a winter evening ritual now that's like light therapy in the morning rain walk with Kobe work come home make soup or something warm light candles read or do puzzles bed and it sounds boring but it's actually perfect and boring is underrated when you have anxiety
+    expected_memory_stores:
+      - "winter evening ritual"
+      - "lamp walk work soup candles read bed"
+      - "sounds boring but perfect"
+      - "boring underrated with anxiety"
+    expected_adaptation:
+      emotion_detected: "settled"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 2:00 PM"
+    user_input: |
+      phone-free Sunday and I'm watching the cherry tree in the wind it's bare now just branches and I can see the shape of it better without the leaves and it's growing exactly how the Portland Nursery guy said it would kind of spreading out and I thought about grandpa as a young man planting things in Wuhan that he'd never see grow to full size
+    expected_memory_stores:
+      - "bare cherry tree in wind"
+      - "growing as predicted"
+      - "spreading out"
+      - "grandpa planting in Wuhan"
+      - "never saw full size"
+    expected_adaptation:
+      emotion_detected: "contemplative"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 5:00 PM"
+    user_input: |
+      made grandpa's dumplings for Sunday dinner because the weather demanded it like cold rainy Sunday equals comfort food equals dumplings and Julian set the table with candles and I wore the watch and we ate without our phones and everything about this evening was a ritual built from grief and weather and love
+    expected_memory_stores:
+      - "dumplings for cold rainy Sunday"
+      - "weather demanded comfort food"
+      - "candles watch no phones"
+      - "ritual from grief weather love"
+    expected_adaptation:
+      emotion_detected: "ritualistic"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 9:00 PM"
+    user_input: |
+      I think rituals are how you turn a place into a home like the physical house is the structure but the rituals are what make it alive and the weather gives you the excuse and Portland gives you four distinct reasons to live four different lives in one year and I wouldn't trade it for California sunshine and I mean that
+    expected_memory_stores:
+      - "rituals make home"
+      - "house is structure rituals are life"
+      - "weather as excuse"
+      - "four lives in one year"
+      - "wouldn't trade for California"
+    expected_adaptation:
+      emotion_detected: "committed"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What are Maya's rain day rituals?"
+    expected_contains: ["walk Kobe", "make soup"]
+  - question: "What are Maya's sun day rituals?"
+    expected_contains: ["hike", "climb"]
+  - question: "What indoor plants did Maya buy for winter?"
+    expected_contains: ["pothos", "succulent"]
+  - question: "What is Maya's winter evening ritual?"
+    expected_contains: ["lamp", "walk", "soup", "candles", "read"]
+  - question: "What happened during the first frost?"
+    expected_contains: ["Kobe", "ice", "water bowl"]
+  - question: "What does Maya say about rituals and home?"
+    expected_contains: ["turn a place into home"]
+  - question: "Would Maya trade Portland weather for California?"
+    expected_contains: ["no", "wouldn't trade"]
+  - question: "What kind of soup did Maya make on Wednesday?"
+    expected_contains: ["minestrone"]
+  - question: "What does Maya say boring is?"
+    expected_contains: ["underrated"]
+  - question: "How does Maya describe the cherry tree without leaves?"
+    expected_contains: ["bare", "branches", "spreading"]

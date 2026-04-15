@@ -1,0 +1,172 @@
+story_id: 247
+story_name: "Toolkit for Hard Days"
+category: "Mental Health"
+description: |
+  Tests system tracking a personalized mental health toolkit. Maya has compiled her own
+  set of strategies for difficult days. Verifies system can reconstruct a learned skillset.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      Dr. Tate asked me in our biweekly session to write down my personal toolkit for hard days like what do I reach for when anxiety comes and I started listing and I have way more tools than I realized
+    expected_memory_stores:
+      - "biweekly session"
+      - "personal toolkit"
+      - "hard days"
+      - "more tools than realized"
+    expected_adaptation:
+      emotion_detected: "empowered"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 7:15 PM"
+    user_input: |
+      so my toolkit is like first the grounding 5-4-3-2-1 for acute panic then cognitive restructuring for spiraling thoughts then behavioral activation when I want to withdraw and then I also added swimming because it's like physical therapy for my brain
+    expected_memory_stores:
+      - "grounding for panic"
+      - "cognitive restructuring for spiraling"
+      - "behavioral activation for withdrawal"
+      - "swimming for brain therapy"
+      - "toolkit items"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 7:30 PM"
+    user_input: |
+      and there's more like I call Clara when I need reality checking and I talk to Julian when I need comfort and I cook when I need to feel productive and I touch grandpa's watch when I need to feel grounded in something bigger than my anxiety
+    expected_memory_stores:
+      - "Clara for reality checking"
+      - "Julian for comfort"
+      - "cooking for productivity"
+      - "grandpa's watch for grounding"
+      - "toolkit continued"
+    expected_adaptation:
+      emotion_detected: "aware"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 7:45 PM"
+    user_input: |
+      Dr. Tate said that's an impressive toolkit and she said most people have one or two strategies and I have like eight and she said the fact that I've personalized each one to a specific anxiety type shows real self-awareness
+    expected_memory_stores:
+      - "Dr. Tate impressed"
+      - "eight strategies"
+      - "personalized to anxiety type"
+      - "real self-awareness"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 9:00 AM"
+    user_input: |
+      had a hard morning actually like the PIP might be closed but I still get these moments where work stress triggers the old patterns and today I had this intrusive thought that I'm going to mess up the project and I used cognitive restructuring and it worked in like two minutes
+    expected_memory_stores:
+      - "hard morning"
+      - "old patterns triggered"
+      - "intrusive thought"
+      - "mess up project"
+      - "cognitive restructuring"
+      - "worked in two minutes"
+    expected_adaptation:
+      emotion_detected: "resilient"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      what's in my anxiety toolkit that I put together with Dr. Tate
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 2:00 PM"
+    user_input: |
+      Leon noticed I'm different and he said Maya you seem like you're in a really good place and I said thanks I've been working on it and he said well whatever you're doing keep doing it and I didn't tell him about therapy but I appreciated the observation
+    expected_memory_stores:
+      - "Leon noticed improvement"
+      - "really good place"
+      - "didn't tell about therapy"
+      - "appreciated observation"
+    expected_adaptation:
+      emotion_detected: "pleased"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      I actually wrote the toolkit down in a note on my phone so I have it with me always and it's titled Maya's Anxiety Playbook and it has each tool with when to use it and I feel like having it written down makes it more real like an instruction manual for my brain
+    expected_memory_stores:
+      - "written on phone"
+      - "Maya's Anxiety Playbook"
+      - "when to use each tool"
+      - "instruction manual for brain"
+    expected_adaptation:
+      emotion_detected: "empowered"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      showed Julian the playbook and he said babe this is basically engineering documentation for your mental health and I said YES that's exactly what it is and he said you literally debug your brain and I was like ok that's going on a t-shirt
+    expected_memory_stores:
+      - "showed Julian"
+      - "engineering documentation"
+      - "mental health"
+      - "debug your brain"
+      - "t-shirt joke"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 10:00 PM"
+    user_input: |
+      lying in bed and feeling genuinely equipped for whatever comes like I'm not naive I know hard days will come again but now I have a plan and tools and a therapist and medication and people who love me and that's the difference between drowning and surfing the same wave
+    expected_memory_stores:
+      - "equipped for hard days"
+      - "not naive"
+      - "plan tools therapist medication people"
+      - "drowning vs surfing"
+    expected_adaptation:
+      emotion_detected: "at peace"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What's in Maya's anxiety toolkit?"
+    expected_contains: ["grounding", "cognitive restructuring", "behavioral activation", "swimming"]
+  - question: "What did Maya call her written toolkit?"
+    expected_contains: ["Maya's Anxiety Playbook"]
+  - question: "When does Maya use grounding?"
+    expected_contains: ["acute panic"]
+  - question: "When does Maya use cognitive restructuring?"
+    expected_contains: ["spiraling thoughts"]
+  - question: "What did Julian compare the toolkit to?"
+    expected_contains: ["engineering documentation"]
+  - question: "How many strategies does Maya have?"
+    expected_contains: ["eight"]
+  - question: "What did Dr. Tate say about Maya's toolkit?"
+    expected_contains: ["impressive", "self-awareness"]
+  - question: "What does Maya use grandpa's watch for?"
+    expected_contains: ["grounding", "something bigger"]
+  - question: "How quickly can Maya use cognitive restructuring now?"
+    expected_contains: ["two minutes"]
+  - question: "What metaphor did Maya use about hard days?"
+    expected_contains: ["drowning vs surfing"]

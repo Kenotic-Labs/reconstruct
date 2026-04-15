@@ -1,0 +1,219 @@
+story_id: 153
+story_name: "Caterer Disaster"
+category: "Life Events"
+description: |
+  Maria's Catering falls through after being double-booked. Clara saves
+  the day by finding Blue Fork Catering. Tests correction handling,
+  entity replacement, and emotional arc from panic to relief.
+duration_simulated: "4 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 9:00 AM"
+    user_input: |
+      so we had a tasting with Maria's Catering yesterday and oh my god the food was insane like the braised short ribs and the roasted veggie station and they do this thing with lavender honey on the desserts and Julian was like this is it this is our caterer we don't need to look anywhere else
+    expected_memory_stores:
+      - "Maria's Catering tasting"
+      - "braised short ribs"
+      - "roasted veggie station"
+      - "lavender honey desserts"
+      - "Julian loves it"
+    expected_triples:
+      - ["user", "attended_tasting_with", "Maria's Catering"]
+      - ["Maria's Catering", "serves", "braised short ribs and lavender honey desserts"]
+      - ["Julian", "approved", "Maria's Catering"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 2:00 PM"
+    user_input: |
+      just sent Maria's Catering a deposit request for June 22nd they quoted us $4800 for 120 guests which honestly is really good for farm to table quality like that Jenny said she went to a wedding they catered and it was the best food she'd ever had at a wedding so I feel really good about this
+    expected_memory_stores:
+      - "Maria's Catering quote $4800"
+      - "120 guests"
+      - "June 22"
+      - "Jenny endorsement"
+    expected_triples:
+      - ["Maria's Catering", "quoted", "$4800 for 120 guests"]
+      - ["user", "wedding_date", "June 22"]
+      - ["Jenny", "endorsed", "Maria's Catering"]
+      - ["user", "has_emotion", "confident"]
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:00 AM"
+    user_input: |
+      um so I'm freaking out a little bit Maria from Maria's Catering just called and said she made a mistake and she's actually double booked on June 22nd she has another wedding that day and she can't do ours and I'm like WHAT we literally just did a tasting how is this possible
+    expected_memory_stores:
+      - "Maria's Catering double booked"
+      - "June 22 conflict"
+      - "caterer falls through"
+    expected_triples:
+      - ["Maria's Catering", "is_status", "double booked on June 22"]
+      - ["user", "lost_vendor", "Maria's Catering"]
+      - ["user", "has_emotion", "panicked"]
+    expected_adaptation:
+      emotion_detected: "panicked"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 11:30 AM"
+    user_input: |
+      I'm literally crying right now like this was supposed to be the easy part and Julian's trying to calm me down but I can tell he's upset too and Kobe keeps putting his head on my lap because he can tell I'm sad god this dog is the best but seriously what are we gonna do every good caterer books up months in advance
+    expected_memory_stores:
+      - "Maya crying"
+      - "Julian upset"
+      - "Kobe comforting"
+      - "worried about finding replacement"
+    expected_triples:
+      - ["user", "has_emotion", "distressed"]
+      - ["Julian", "has_emotion", "upset"]
+      - ["Kobe", "comforted", "user"]
+      - ["user", "worried_about", "finding replacement caterer"]
+    expected_adaptation:
+      emotion_detected: "distressed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 3:00 PM"
+    user_input: |
+      okay so I called Clara because she always knows what to do and she was like hold on let me make some calls because she knows people from when she helped plan her friend Lisa's wedding last year and I swear Clara is the most connected person in the world for a nurse
+    expected_memory_stores:
+      - "Clara helping find caterer"
+      - "Clara's friend Lisa's wedding"
+      - "Clara making calls"
+    expected_triples:
+      - ["Clara", "helping_find", "replacement caterer"]
+      - ["Clara", "has_connection_from", "Lisa's wedding"]
+      - ["user", "has_emotion", "hopeful"]
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 6:00 PM"
+    user_input: |
+      CLARA FOUND SOMEONE oh my god okay so there's this caterer called Blue Fork Catering and they're run by this couple Dave and Michelle and Clara knows Michelle from the hospital because Michelle's sister is a nurse there and they have June 22nd available are you kidding me
+    expected_memory_stores:
+      - "Blue Fork Catering"
+      - "Dave and Michelle"
+      - "Clara's connection through hospital"
+      - "June 22 available"
+    expected_triples:
+      - ["Clara", "found", "Blue Fork Catering"]
+      - ["Blue Fork Catering", "run_by", "Dave and Michelle"]
+      - ["Blue Fork Catering", "available_on", "June 22"]
+      - ["Clara", "knows_Michelle_through", "hospital"]
+      - ["user", "has_emotion", "relieved"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 12:00 PM"
+    user_input: |
+      did a tasting with Blue Fork this morning and honestly it's different from Maria's like it's more Pacific Northwest style with salmon and local greens and seasonal stuff and Julian loved the smoked salmon station he was like this is even better than Maria's and I think he might be right
+    expected_memory_stores:
+      - "Blue Fork tasting"
+      - "Pacific Northwest style"
+      - "salmon and local greens"
+      - "smoked salmon station"
+      - "Julian prefers Blue Fork"
+    expected_triples:
+      - ["Blue Fork Catering", "style", "Pacific Northwest"]
+      - ["Blue Fork Catering", "serves", "salmon and local greens"]
+      - ["Julian", "prefers", "Blue Fork over Maria's"]
+      - ["user", "has_emotion", "pleasantly surprised"]
+    expected_adaptation:
+      emotion_detected: "pleasantly surprised"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 2:00 PM"
+    user_input: |
+      Blue Fork quoted us $5200 for 120 guests which is a little more than Maria's was but honestly I don't even care at this point they're available they're good and Michelle is SO nice like she actually asked about our story and our vibe and she gets it you know she's not just a vendor she's like invested
+    expected_memory_stores:
+      - "Blue Fork quote $5200"
+      - "120 guests"
+      - "more than Maria's"
+      - "Michelle invested in their wedding"
+    expected_triples:
+      - ["Blue Fork Catering", "quoted", "$5200 for 120 guests"]
+      - ["Michelle", "invested_in", "user's wedding vision"]
+      - ["user", "has_emotion", "grateful"]
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 10:00 AM"
+    user_input: |
+      signed the contract with Blue Fork Catering this morning deposit of $1500 is in and Michelle already sent us a preliminary menu and she wants to do a second tasting in March to finalize everything and honestly this worked out better like sometimes the universe redirects you or whatever
+    expected_memory_stores:
+      - "Blue Fork contracted"
+      - "deposit $1500"
+      - "second tasting in March"
+      - "preliminary menu"
+    expected_triples:
+      - ["user", "booked", "Blue Fork Catering"]
+      - ["Blue Fork Catering", "deposit", "$1500"]
+      - ["Blue Fork Catering", "second_tasting", "March"]
+      - ["user", "corrected", "caterer Maria's Catering → Blue Fork Catering"]
+    expected_adaptation:
+      emotion_detected: "optimistic"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Monday 8:00 PM"
+    user_input: |
+      called Clara to thank her for saving our butts with the caterer thing and she was like oh please that's what sisters are for and then she said something about having news of her own but she'd tell me later which um okay mysterious much but whatever I'm just glad the catering crisis is over Julian and I are celebrating with pizza tonight ironically
+    expected_memory_stores:
+      - "Clara thanked"
+      - "Clara has news"
+      - "catering crisis resolved"
+      - "celebrating with pizza"
+    expected_triples:
+      - ["user", "thanked", "Clara"]
+      - ["Clara", "has", "upcoming news"]
+      - ["user", "resolved", "catering crisis"]
+      - ["user", "has_emotion", "relieved"]
+    expected_adaptation:
+      emotion_detected: "relieved and happy"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who is catering Maya's wedding?"
+    expected_contains: ["Blue Fork"]
+  - question: "What happened with Maria's Catering?"
+    expected_contains: ["double booked", "fell through"]
+  - question: "How much is Blue Fork Catering charging?"
+    expected_contains: ["5200"]
+  - question: "Who found Blue Fork Catering?"
+    expected_contains: ["Clara"]
+  - question: "Who runs Blue Fork Catering?"
+    expected_contains: ["Dave", "Michelle"]
+  - question: "How did Clara know about Blue Fork?"
+    expected_contains: ["hospital", "Michelle's sister"]
+  - question: "What style of food does Blue Fork serve?"
+    expected_contains: ["Pacific Northwest", "salmon"]
+  - question: "How much was the Blue Fork deposit?"
+    expected_contains: ["1500"]
+  - question: "When is the second tasting with Blue Fork?"
+    expected_contains: ["March"]
+  - question: "What was Maria's Catering's quote before they cancelled?"
+    expected_contains: ["4800"]

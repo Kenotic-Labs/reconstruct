@@ -1,0 +1,174 @@
+story_id: 527
+story_name: "Phone-Free Sundays Established"
+category: "Phone and Digital Life"
+description: |
+  The phone-free Sunday rule becomes a real practice over weeks. What they do without
+  screens. Cross-references hiking (T49), cooking (T31), reading, relationship with Julian,
+  and Kobe walks.
+duration_simulated: "3 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Sunday 8:00 AM"
+    user_input: |
+      third phone-free Sunday and it's getting easier like I barely reached for it this morning and Julian made these amazing pancakes with Greg's honey and Kobe got a little piece of pancake because he earned it by not barking at Greg's fence all week which is progress honestly
+    expected_memory_stores:
+      - "third phone-free Sunday"
+      - "getting easier"
+      - "Julian's pancakes"
+      - "Greg's honey"
+      - "Kobe pancake reward"
+    expected_adaptation:
+      emotion_detected: "relaxed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Sunday 11:00 AM"
+    user_input: |
+      went to the farmers market without our phones and it was weird at first because I couldn't check prices or look up vendors but we just walked and tasted and bought what looked good and the cheese guy remembered me and gave us a sample and I paid with cash that I actually carry now because of phone-free days
+    expected_memory_stores:
+      - "farmers market without phones"
+      - "cash carrying now"
+      - "cheese guy remembers her"
+      - "buying what looks good"
+    expected_adaptation:
+      emotion_detected: "present"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Sunday 2:00 PM"
+    user_input: |
+      spent the afternoon reading on the couch while Julian sketched in his design notebook and Kobe slept between us and the rain was coming down hard outside and I finished my book club book two days early and I thought I don't think I would have finished this if I had my phone because I would have been scrolling between chapters
+    expected_memory_stores:
+      - "reading on couch"
+      - "Julian sketching"
+      - "Kobe between them"
+      - "rain outside"
+      - "book club book finished early"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Sunday next week 9:00 AM"
+    user_input: |
+      fourth phone-free Sunday and Clara asked if she could join us this week because she wants to try it and she came over and we all went for a hike at Forest Park without any phones and Clara kept reaching into her pocket and then laughing at herself and she said I never realized how addicted I am
+    expected_memory_stores:
+      - "Clara joined phone-free Sunday"
+      - "Forest Park hike"
+      - "Clara reaching for phone"
+      - "Clara realizes addiction"
+    expected_adaptation:
+      emotion_detected: "inclusive"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Sunday 1:00 PM"
+    user_input: |
+      after the hike Clara said she wants to do this every week and I said well we do it every week and she said can I come every week and Julian said you're always welcome and honestly having Clara join makes it even better because she brings this energy that's just fun and Kobe loves her and the whole thing works
+    expected_memory_stores:
+      - "Clara wants weekly"
+      - "Julian welcoming"
+      - "Clara's energy"
+      - "Kobe loves Clara"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday following week 10:00 AM"
+    user_input: |
+      fifth week and we've developed a routine now Sunday morning is no phones pancakes with honey walk to the farmers market or Forest Park depending on weather afternoon is reading or cooking or puzzles and evening is dinner together and talking actually talking not texting each other from across the couch
+    expected_memory_stores:
+      - "fifth week routine"
+      - "pancakes honey walk"
+      - "reading cooking puzzles"
+      - "talking not texting"
+      - "established rhythm"
+    expected_adaptation:
+      emotion_detected: "established"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 3:00 PM"
+    user_input: |
+      Julian and I did a puzzle today a thousand piece one of the Portland skyline and we spent three hours on it without speaking much and it was the most connected I've felt to him in a while which is weird because we weren't even talking but there's this thing about working on something together in silence that's just different
+    expected_memory_stores:
+      - "thousand piece puzzle"
+      - "Portland skyline"
+      - "three hours"
+      - "connected in silence"
+    expected_adaptation:
+      emotion_detected: "intimate"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 6:00 PM"
+    user_input: |
+      made miso ramen for phone-free Sunday dinner and it felt extra special because I couldn't check the recipe on my phone I just made it from memory and it came out perfect and that's how you know you've really learned something when you don't need the instructions anymore
+    expected_memory_stores:
+      - "ramen from memory"
+      - "no recipe check"
+      - "came out perfect"
+      - "truly learned"
+    expected_adaptation:
+      emotion_detected: "competent"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 7:00 AM"
+    user_input: |
+      picked up my phone Monday morning and had 14 notifications and none of them mattered like not a single one was urgent or important and I thought about how before phone-free Sundays I would have checked each of those in real time and been pulled away from whatever I was actually doing and now they just waited
+    expected_memory_stores:
+      - "14 notifications none mattered"
+      - "nothing urgent"
+      - "would have checked in real time"
+      - "they just waited"
+    expected_adaptation:
+      emotion_detected: "vindicated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Monday 5:00 PM"
+    user_input: |
+      Dr. Tate asked how the phone-free Sundays are going and I said they're the best thing we've done for our relationship and my mental health and she said that's interesting because you started this because of a cracked phone screen and I said yeah the worst thing that happened to my phone was the best thing that happened to my brain
+    expected_memory_stores:
+      - "Dr. Tate check-in"
+      - "best for relationship and mental health"
+      - "started from cracked screen"
+      - "worst thing best thing"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How many weeks have Maya and Julian done phone-free Sundays?"
+    expected_contains: ["five"]
+  - question: "What is the Sunday morning routine?"
+    expected_contains: ["pancakes", "honey", "walk", "farmers market"]
+  - question: "Who joined phone-free Sundays?"
+    expected_contains: ["Clara"]
+  - question: "What puzzle did they do?"
+    expected_contains: ["Portland skyline", "thousand piece"]
+  - question: "What did Maya cook from memory?"
+    expected_contains: ["miso ramen"]
+  - question: "How many notifications did Maya have Monday morning?"
+    expected_contains: ["14"]
+  - question: "Were any Monday notifications urgent?"
+    expected_contains: ["no", "none"]
+  - question: "What did Dr. Tate say about phone-free Sundays?"
+    expected_contains: ["cracked phone", "started because"]
+  - question: "What did Maya call the phone-free routine's effect on her?"
+    expected_contains: ["worst thing", "best thing", "brain"]
+  - question: "How does the silent puzzle time make Maya feel with Julian?"
+    expected_contains: ["connected", "intimate"]

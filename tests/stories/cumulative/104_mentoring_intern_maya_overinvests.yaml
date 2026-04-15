@@ -1,0 +1,208 @@
+story_id: 104
+story_name: "Maya Overinvests in Mentoring"
+category: "Career"
+description: |
+  Tests whether the system detects Maya spending too much time on mentoring at the expense
+  of her own deliverables, tracks the building tension between roles, and maintains the
+  correction when meeting time changes.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00am"
+    user_input: |
+      so I stayed late like three nights last week helping Aisha with stuff and Julian actually got kind of annoyed about it? he was like you're not getting paid extra for this Maya and I mean he's right but also I can't just let her flounder
+    expected_memory_stores:
+      - "stayed late"
+      - "Julian annoyed"
+      - "not extra pay"
+      - "overinvesting"
+    expected_triples:
+      - ["user", "stayed_late", "three nights helping Aisha"]
+      - ["Julian", "has_emotion", "annoyed about mentoring time"]
+      - ["user", "is_not_getting", "extra pay for mentoring"]
+      - ["user", "has_emotion", "conflicted"]
+    expected_adaptation:
+      emotion_detected: "conflicted"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 11:00am"
+    user_input: |
+      I set up daily 30 minute check-ins with Aisha at 10am but honestly they always run to like an hour because she has so many questions and I don't wanna cut her off
+    expected_memory_stores:
+      - "daily check-ins"
+      - "10am"
+      - "30 minutes planned"
+      - "runs to hour"
+    expected_triples:
+      - ["user", "scheduled", "daily check-ins with Aisha"]
+      - ["check-ins", "scheduled_at", "10am"]
+      - ["check-ins", "planned_duration", "30 minutes"]
+      - ["check-ins", "actual_duration", "one hour"]
+    expected_adaptation:
+      emotion_detected: "stretched"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 2:00pm"
+    user_input: |
+      Rachel Kim pulled me aside and was like hey your velocity has dropped by like 40% since you started mentoring and it's showing up in the sprint metrics. she wasn't mean about it but it's like... what am I supposed to do
+    expected_memory_stores:
+      - "velocity dropped"
+      - "40 percent"
+      - "sprint metrics"
+      - "Rachel Kim feedback"
+    expected_triples:
+      - ["user", "velocity_dropped", "40 percent"]
+      - ["Rachel Kim", "gave_feedback", "velocity drop visible in sprint metrics"]
+      - ["user", "has_emotion", "stressed"]
+    expected_adaptation:
+      emotion_detected: "stressed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 6:00pm"
+    user_input: |
+      I feel like I'm failing at both things now. like I'm not a good enough mentor because I'm rushing through explanations and I'm not a good enough engineer because I'm spending all my time mentoring. it's like a lose-lose
+    expected_memory_stores:
+      - "failing both roles"
+      - "rushing explanations"
+      - "lose-lose"
+    expected_triples:
+      - ["user", "feels_failing", "mentor and engineer roles"]
+      - ["user", "is_rushing", "explanations to Aisha"]
+      - ["user", "has_emotion", "overwhelmed"]
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 10:30am"
+    user_input: |
+      actually wait I need to correct something, the check-ins aren't at 10am anymore we moved them to 9am because Aisha has a standup conflict at 10
+    expected_memory_stores:
+      - "correction"
+      - "check-in moved to 9am"
+      - "standup conflict"
+    expected_triples:
+      - ["user", "corrected", "check-in time 10am → 9am"]
+      - ["Aisha", "has_conflict", "standup at 10am"]
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 3:00pm"
+    user_input: |
+      wrote like a whole curriculum for Aisha last night instead of sleeping. it's got week-by-week goals and code exercises and reading recommendations. Julian caught me at 1am and was like seriously babe come to bed
+    expected_memory_stores:
+      - "curriculum created"
+      - "week-by-week goals"
+      - "code exercises"
+      - "1am"
+      - "Julian concerned"
+    expected_triples:
+      - ["user", "created", "curriculum for Aisha"]
+      - ["curriculum", "contains", "week-by-week goals and code exercises"]
+      - ["user", "stayed_up_until", "1am"]
+      - ["Julian", "has_emotion", "concerned about user staying up"]
+    expected_adaptation:
+      emotion_detected: "obsessive"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 9:00am"
+    user_input: |
+      do you remember exactly how many weeks Aisha's been at Conduit
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 4:00pm"
+    user_input: |
+      so get this, I was helping Aisha debug something and I missed my own standup. like completely forgot about it. Rachel Kim Slacked me like hey where were you and I had to lie and say I had a doctor's appointment. that felt bad
+    expected_memory_stores:
+      - "missed standup"
+      - "lied to Rachel"
+      - "doctor appointment excuse"
+      - "guilt"
+    expected_triples:
+      - ["user", "missed", "own standup"]
+      - ["user", "lied_to", "Rachel Kim about missing standup"]
+      - ["user", "gave_excuse", "doctor appointment"]
+      - ["user", "has_emotion", "guilty"]
+    expected_adaptation:
+      emotion_detected: "guilty"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 11:00am"
+    user_input: |
+      therapist session with Dr. Tate today and she was like Maya do you see a pattern here? you overcommit and then feel guilty no matter what you choose. and yeah like... she's not wrong
+    expected_memory_stores:
+      - "Dr. Tate"
+      - "therapy session"
+      - "overcommit pattern"
+      - "guilt pattern"
+    expected_triples:
+      - ["user", "has_therapist", "Dr. Tate"]
+      - ["Dr. Tate", "identified_pattern", "overcommit then guilt"]
+      - ["user", "has_emotion", "reflective"]
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 6:00pm"
+    user_input: |
+      gonna try to set better boundaries next week. Dr. Tate suggested I limit mentoring to specific hours and actually stick to the 30 minutes for check-ins. Julian agrees. Kobe needs a walk, gonna go decompress
+    expected_memory_stores:
+      - "boundaries"
+      - "limit mentoring hours"
+      - "30 minute limit"
+      - "Kobe walk"
+    expected_triples:
+      - ["user", "plans_to", "set mentoring boundaries"]
+      - ["Dr. Tate", "suggested", "limit mentoring to specific hours"]
+      - ["user", "plans_to", "stick to 30 minute check-ins"]
+      - ["user", "has_emotion", "hopeful"]
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How has mentoring affected Maya's work performance?"
+    expected_contains: ["velocity", "dropped", "40"]
+  - question: "What time are Maya and Aisha's check-ins?"
+    expected_contains: ["9am"]
+  - question: "What did Maya create for Aisha at 1am?"
+    expected_contains: ["curriculum", "goals", "exercises"]
+  - question: "What did Maya miss because of mentoring?"
+    expected_contains: ["standup"]
+  - question: "What did Dr. Tate identify as a pattern?"
+    expected_contains: ["overcommit", "guilt"]
+  - question: "How does Julian feel about Maya's mentoring time?"
+    expected_contains: ["annoyed", "concerned"]
+  - question: "What excuse did Maya give Rachel Kim for missing standup?"
+    expected_contains: ["doctor", "appointment"]
+  - question: "What boundaries is Maya planning to set?"
+    expected_contains: ["limit", "hours", "30 minutes"]
+  - question: "Who is Maya's therapist?"
+    expected_contains: ["Dr. Tate", "Helen Tate"]
+  - question: "What were the original check-in times before the change?"
+    expected_contains: ["10am"]

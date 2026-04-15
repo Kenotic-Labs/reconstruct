@@ -1,0 +1,174 @@
+story_id: 236
+story_name: "Wedding Caterer Update"
+category: "Health"
+description: |
+  Tests system tracking how the allergy impacts wedding planning. Maya and Diane work
+  with Blue Fork caterer to ensure safety. Verifies cross-thread detail integration.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 10:00 AM"
+    user_input: |
+      called Blue Fork today to talk about my shellfish allergy and the manager Amanda was really professional about it she said they handle allergy weddings all the time and she can create an entirely shellfish free menu and they'll flag it in the kitchen
+    expected_memory_stores:
+      - "called Blue Fork"
+      - "Amanda manager"
+      - "shellfish free menu"
+      - "flag in kitchen"
+      - "handle allergies often"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 10:30 AM"
+    user_input: |
+      she said we need to replace the shrimp cocktail appetizer obviously and she suggested either bruschetta or stuffed mushrooms or these little chicken satay skewers and I said the bruschetta sounds perfect and Diane was on the call too and agreed
+    expected_memory_stores:
+      - "replacing shrimp cocktail"
+      - "bruschetta chosen"
+      - "alternatives offered"
+      - "Diane on call"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 11:00 AM"
+    user_input: |
+      Amanda also said they'll put allergy labels on the buffet items and she'll have a separate prep station for my plate specifically so there's absolutely no cross contamination and I was like honestly this is above and beyond and she said it's standard for them
+    expected_memory_stores:
+      - "allergy labels"
+      - "separate prep station"
+      - "Maya's plate specific"
+      - "no cross contamination"
+      - "standard for Blue Fork"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 2:00 PM"
+    user_input: |
+      Diane suggested we also put a note on the wedding website about the menu being shellfish free so guests know and in case anyone else has allergies and I was like that's actually really thoughtful Diane and she said well we don't want anyone ending up in the ER at YOUR wedding
+    expected_memory_stores:
+      - "wedding website note"
+      - "shellfish free menu notice"
+      - "guest allergy awareness"
+      - "Diane's idea"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 5:00 PM"
+    user_input: |
+      told my mom about the caterer changes and Vivian was like oh good and she said your Aunt Lily will be relieved too since she's coming to the wedding and I forgot that Lily has the same allergy so the shellfish free menu helps her too
+    expected_memory_stores:
+      - "told Vivian"
+      - "Aunt Lily coming to wedding"
+      - "same allergy"
+      - "menu helps both"
+    expected_adaptation:
+      emotion_detected: "pleased"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 9:00 AM"
+    user_input: |
+      what appetizer replaced the shrimp cocktail at the wedding and who is the caterer
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 12:00 PM"
+    user_input: |
+      Amanda from Blue Fork emailed me a draft menu and it looks amazing like the main options are herb crusted salmon or braised short ribs or a vegetarian risotto and everything is shellfish free and she noted which items contain other common allergens like dairy and nuts
+    expected_memory_stores:
+      - "draft menu"
+      - "herb crusted salmon"
+      - "braised short ribs"
+      - "vegetarian risotto"
+      - "shellfish free"
+      - "other allergens noted"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 4:00 PM"
+    user_input: |
+      Julian actually got involved in the food for once and he said the short ribs sound incredible and he asked about a tasting and Amanda said they do tastings six weeks before the wedding and I said perfect Julian you finally care about wedding planning when FOOD is involved
+    expected_memory_stores:
+      - "Julian interested in food"
+      - "short ribs"
+      - "tasting"
+      - "six weeks before wedding"
+      - "Julian only cares about food"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 7:00 PM"
+    user_input: |
+      Diane texted me the updated guest list spreadsheet and she added an allergy column and ASKED guests about dietary restrictions which is so organized and three other guests have allergies too one nut one dairy one vegetarian and Amanda can accommodate all of it
+    expected_memory_stores:
+      - "Diane allergy column"
+      - "asked about restrictions"
+      - "three other guests with allergies"
+      - "nut dairy vegetarian"
+      - "Amanda accommodates all"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:00 AM"
+    user_input: |
+      you know this allergy thing could have been a nightmare for wedding planning but between Diane and Amanda and Blue Fork it's actually turning out fine and I feel like I have a team handling it and that's what matters and the food is going to be amazing shellfish or not
+    expected_memory_stores:
+      - "allergy not a nightmare"
+      - "team handling it"
+      - "Diane and Amanda"
+      - "food will be amazing"
+      - "positive outcome"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What appetizer replaced shrimp cocktail at the wedding?"
+    expected_contains: ["bruschetta"]
+  - question: "Who is the Blue Fork manager handling the allergy?"
+    expected_contains: ["Amanda"]
+  - question: "What are the main course options at the wedding?"
+    expected_contains: ["salmon", "short ribs", "risotto"]
+  - question: "What safety measures is Blue Fork taking?"
+    expected_contains: ["separate prep station", "allergy labels", "no cross contamination"]
+  - question: "What did Diane add to the guest list spreadsheet?"
+    expected_contains: ["allergy column"]
+  - question: "Who else at the wedding has a shellfish allergy?"
+    expected_contains: ["Aunt Lily"]
+  - question: "When is the food tasting?"
+    expected_contains: ["six weeks before"]
+  - question: "What was put on the wedding website?"
+    expected_contains: ["shellfish free", "allergy note"]
+  - question: "How many guests have dietary restrictions?"
+    expected_contains: ["three", "four"]
+  - question: "How does Maya feel about the wedding food situation?"
+    expected_contains: ["fine", "team", "amazing"]

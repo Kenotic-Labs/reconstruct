@@ -1,0 +1,178 @@
+story_id: 457
+story_name: "Astoria Goonies House"
+category: "Road Trips"
+description: |
+  Tests memory of Maya and Julian's nostalgic trip to Astoria.
+  Establishes Goonies house visit, Julian's childhood movie connection.
+  Verifies emotional memory tagging and cross-thread references.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 7:00 AM"
+    user_input: |
+      okay today is Julian's dream trip we're going to Astoria to see the Goonies house because he's been obsessed with that movie since he was like eight and Diane told me it was his favorite movie growing up and he used to watch it every single weekend and I've never actually seen it which Julian considers a crime against humanity
+    expected_memory_stores:
+      - "Astoria"
+      - "Goonies house"
+      - "Julian obsessed since age eight"
+      - "Diane told Maya"
+      - "Maya never seen it"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 9:00 AM"
+    user_input: |
+      the drive to Astoria is about two hours from Portland going northwest through all these little towns and over the coastal mountains and Julian made me watch The Goonies last night so I would quote understand the significance unquote and I mean it was cute but he was reciting every line and I was like please let me just watch it
+    expected_memory_stores:
+      - "two hour drive"
+      - "northwest route"
+      - "watched Goonies last night"
+      - "Julian recited lines"
+    expected_adaptation:
+      emotion_detected: "entertained"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 10:30 AM"
+    user_input: |
+      WE FOUND IT okay so the Goonies house is on this hill and you can see it from the street and Julian is literally bouncing up and down like a child and Kobe is confused by his energy and I'm taking photos of Julian being excited which is honestly more entertaining than the house itself it's just a regular house but to him it's like the Sistine Chapel
+    expected_memory_stores:
+      - "Goonies house on hill"
+      - "Julian bouncing"
+      - "Kobe confused"
+      - "Maya photographing Julian"
+      - "regular house"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 11:30 AM"
+    user_input: |
+      we also went to see the jail from the movie which is now the Oregon Film Museum and Julian paid for both our tickets and was like a kid in a candy store and there's all this movie memorabilia and he found a Goonies poster and bought it obviously and I found out they filmed Kindergarten Cop here too which I didn't know
+    expected_memory_stores:
+      - "Oregon Film Museum"
+      - "jail from movie"
+      - "Julian bought poster"
+      - "Kindergarten Cop filmed here"
+    expected_adaptation:
+      emotion_detected: "interested"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 1:00 PM"
+    user_input: |
+      lunch at this place called Bowpicker which is literally a converted fishing boat that serves fish and chips and its like the best fish and chips I've ever had even better than Mo's at Cannon Beach don't tell Mo's and Julian got a coffee from this cute shop called Astoria Coffee and we're sitting on the waterfront watching boats and Kobe is getting pet by every tourist who walks by
+    expected_memory_stores:
+      - "Bowpicker"
+      - "converted fishing boat"
+      - "fish and chips"
+      - "better than Mo's"
+      - "Cannon Beach reference"
+      - "Astoria Coffee"
+      - "waterfront"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 2:30 PM"
+    user_input: |
+      we walked along the Riverwalk which goes along the Columbia River and you can see Washington state on the other side and I was like you know we should do a trip across the border to the Olympic Peninsula and Julian was like yeah absolutely and also Astoria has this column thing called the Astoria Column that you can climb and the view is insane
+    expected_memory_stores:
+      - "Riverwalk"
+      - "Columbia River"
+      - "Washington visible"
+      - "Olympic Peninsula idea"
+      - "Astoria Column"
+      - "climbed column"
+    expected_adaptation:
+      emotion_detected: "adventurous"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 4:00 PM"
+    user_input: |
+      Julian called his mom from Astoria and told her about the Goonies house and Diane was so happy she was like I knew you'd love it and then she asked about wedding planning and Julian was like mom we're on a road trip not now and I could hear Diane laughing and honestly she's been way better about boundaries since we talked last year
+    expected_memory_stores:
+      - "Julian called Diane"
+      - "Diane happy"
+      - "wedding planning deflected"
+      - "Diane better with boundaries"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 5:30 PM"
+    user_input: |
+      what's the name of the fish and chips place in Astoria that was on a boat
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 6:30 PM"
+    user_input: |
+      driving home and Julian has the Goonies soundtrack playing which is very on brand and he thanked me for planning this trip and said it meant a lot that I took him to something from his childhood and I got a little choked up because like this is what the trips are about you know making each other happy and building memories
+    expected_memory_stores:
+      - "Goonies soundtrack"
+      - "Julian grateful"
+      - "childhood connection"
+      - "emotional moment"
+      - "building memories"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 8:30 PM"
+    user_input: |
+      home now and Julian hung the Goonies poster in his office and Kobe is asleep and I updated our Google Map with Astoria and the pin note says Julian's childhood pilgrimage and he approved it and also I played a little guitar tonight just the G C D progression and Julian clapped which was nice even though I'm still pretty bad honestly
+    expected_memory_stores:
+      - "Goonies poster in office"
+      - "Google Map updated"
+      - "pin note"
+      - "Maya played guitar"
+      - "G C D chords"
+      - "Julian clapped"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Why did Julian want to go to Astoria?"
+    expected_contains: ["Goonies", "house"]
+  - question: "What museum did they visit in Astoria?"
+    expected_contains: ["Oregon Film Museum"]
+  - question: "Where did they eat fish and chips in Astoria?"
+    expected_contains: ["Bowpicker"]
+  - question: "What is the Astoria Column?"
+    expected_contains: ["column", "climb", "view"]
+  - question: "What trip did Maya suggest while in Astoria?"
+    expected_contains: ["Olympic Peninsula"]
+  - question: "What did Julian buy in Astoria?"
+    expected_contains: ["Goonies poster"]
+  - question: "Where did Julian hang the poster?"
+    expected_contains: ["office"]
+  - question: "How long is the drive from Portland to Astoria?"
+    expected_contains: ["two hour"]
+  - question: "Who did Julian call from Astoria?"
+    expected_contains: ["Diane", "mom"]
+  - question: "What other movie was filmed in Astoria?"
+    expected_contains: ["Kindergarten Cop"]

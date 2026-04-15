@@ -1,0 +1,176 @@
+story_id: 166
+story_name: "Julian Thrives"
+category: "Career"
+description: |
+  Julian settles into Bold Studio over the first two months. Takes on
+  bigger projects, earns respect, develops relationship with Kevin.
+  Tests progressive career state tracking over time.
+duration_simulated: "2 months"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Week 3 Monday 6:00 PM"
+    user_input: |
+      Julian presented the Timber Roasters rebrand to the client today and they loved it like standing ovation loved it and Kevin sent him a message after saying you just earned your keep in three weeks which Julian showed me glowing and honestly I'm so happy for him he deserves this
+    expected_memory_stores:
+      - "Timber Roasters presentation success"
+      - "client loved it"
+      - "Kevin praised Julian"
+      - "three weeks in"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Week 4 Wednesday 7:00 PM"
+    user_input: |
+      Julian got assigned a second big project it's a brand identity for an outdoor gear startup called Summit Trail and this one's bigger budget and more creative freedom Kevin said he trusts Julian to lead it without much oversight which is like the ultimate compliment for a designer
+    expected_memory_stores:
+      - "Summit Trail brand identity"
+      - "outdoor gear startup"
+      - "bigger budget"
+      - "creative freedom"
+      - "Kevin trusts Julian"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Week 5 Friday 8:00 PM"
+    user_input: |
+      Sam and Alicia are doing really well under Julian's guidance Sam told Julian he's the best manager he's ever had which okay Sam is 24 so he probably hasn't had many managers but still it meant a lot to Julian because he was nervous about the management side
+    expected_memory_stores:
+      - "Sam praises Julian as manager"
+      - "Julian's management confidence growing"
+      - "Sam and Alicia doing well"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Week 6 Tuesday 6:30 PM"
+    user_input: |
+      Julian and Kevin went out for lunch together and Kevin told him about his own journey he said he ran a studio in Seattle for eight years and burned out and moved to Portland to start fresh at Bold Studio and he said Julian reminds him of himself at that age which is like whoa that's a huge compliment from a guy Julian really respects
+    expected_memory_stores:
+      - "Kevin's background"
+      - "eight years in Seattle"
+      - "burned out"
+      - "fresh start in Portland"
+      - "Kevin sees himself in Julian"
+    expected_adaptation:
+      emotion_detected: "meaningful connection"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Week 7 Thursday 5:00 PM"
+    user_input: |
+      Julian's been putting in extra hours not because anyone asked but because he actually wants to and I have to sometimes remind him to stop and come eat dinner Kobe helps by literally standing at Julian's desk and whining until he gets up which is effective
+    expected_memory_stores:
+      - "Julian working extra hours voluntarily"
+      - "Maya reminds him to eat"
+      - "Kobe makes Julian take breaks"
+    expected_adaptation:
+      emotion_detected: "amused concern"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Week 8 Monday 7:00 PM"
+    user_input: |
+      Bold Studio won a new client a Portland restaurant group called Feast Collective and Kevin asked Julian to pitch the creative direction and Julian NAILED the pitch and now he's the lead on that account too so he's managing three projects simultaneously Timber Roasters is wrapping up Summit Trail is in progress and Feast Collective is just starting
+    expected_memory_stores:
+      - "Feast Collective new client"
+      - "Portland restaurant group"
+      - "Julian pitched and won"
+      - "three simultaneous projects"
+      - "Timber Roasters wrapping up"
+      - "Summit Trail in progress"
+      - "Feast Collective starting"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Week 8 Friday 9:00 PM"
+    user_input: |
+      Julian said something funny tonight he said Maya I think I might be a better designer as part of a team than I ever was alone and I was like yeah no kidding you've been killing it and he said he thinks the collaboration pushes him to think differently like Sam had this idea for the Summit Trail logo that Julian would never have thought of and they built on it together
+    expected_memory_stores:
+      - "Julian better in team"
+      - "collaboration valuable"
+      - "Sam contributed to Summit Trail logo"
+      - "team dynamics improving Julian's work"
+    expected_adaptation:
+      emotion_detected: "insightful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Month 2 Wednesday 6:00 PM"
+    user_input: |
+      two months in and Julian is firmly established at Bold Studio he's got a reputation as the guy who brings Kobe and also the guy who makes incredible presentations apparently other teams have started asking him to help with their pitch decks which Kevin thinks is hilarious and great
+    expected_memory_stores:
+      - "two months at Bold Studio"
+      - "reputation established"
+      - "known for Kobe and presentations"
+      - "other teams requesting help"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Month 2 Thursday 7:00 PM"
+    user_input: |
+      Julian still does a little freelance on the side like he kept the $600/month social media client and he picks up occasional small projects on weekends and Kevin knows about it and is totally fine with it as long as there's no conflict of interest which there isn't
+    expected_memory_stores:
+      - "Julian still freelancing on side"
+      - "$600/month client kept"
+      - "weekend projects occasionally"
+      - "Kevin fine with it"
+      - "no conflict of interest"
+    expected_adaptation:
+      emotion_detected: "balanced"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Month 2 Friday 8:00 PM"
+    user_input: |
+      thinking about where we were two months ago with Julian losing Thornton and barely making $1400 a month and now he's making $78K with benefits and thriving and managing people and his confidence is back and honestly the whole vibe of our relationship is different in a good way like we're both stable both happy both doing what we love
+    expected_memory_stores:
+      - "reflection on Julian's journey"
+      - "from $1400 to $78K"
+      - "confidence restored"
+      - "relationship stronger"
+      - "both stable and happy"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What projects has Julian worked on at Bold Studio?"
+    expected_contains: ["Timber Roasters", "Summit Trail", "Feast Collective"]
+  - question: "How is Julian's relationship with Kevin Park?"
+    expected_contains: ["great", "trust", "mentor"]
+  - question: "Is Julian still freelancing?"
+    expected_contains: ["yes", "side", "$600"]
+  - question: "How has Julian's confidence changed since starting at Bold Studio?"
+    expected_contains: ["back", "restored", "improved"]
+  - question: "What is Feast Collective?"
+    expected_contains: ["Portland", "restaurant group"]
+  - question: "How did Sam contribute to Julian's work?"
+    expected_contains: ["Summit Trail", "logo", "idea"]
+  - question: "What is Kevin Park's background?"
+    expected_contains: ["Seattle", "own studio", "burned out"]
+  - question: "How has Julian changed since losing Thornton Group?"
+    expected_contains: ["thriving", "confident", "stable"]
+  - question: "What is Julian known for at the office?"
+    expected_contains: ["Kobe", "presentations"]
+  - question: "How many months has Julian been at Bold Studio?"
+    expected_contains: ["two"]

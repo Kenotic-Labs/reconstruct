@@ -1,0 +1,173 @@
+story_id: 505
+story_name: "Engineer Connection"
+category: "Grief and Legacy"
+description: |
+  Maya processes the revelation that she and her grandfather shared the same profession.
+  Discusses at work and with family. Cross-references Conduit AI (T6), Priya mentoring,
+  and the house renovation (T41-T45).
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00 AM"
+    user_input: |
+      so I can't stop thinking about the engineer thing like I keep sitting at my desk at Conduit and looking at my code and thinking my grandfather did a version of this sixty years ago in China with paper and pencils designing water systems and I'm sitting here with three monitors writing Python and it's the same brain just different tools
+    expected_memory_stores:
+      - "engineering parallel"
+      - "Conduit AI desk"
+      - "paper vs monitors"
+      - "same brain different tools"
+    expected_adaptation:
+      emotion_detected: "contemplative"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 12:00 PM"
+    user_input: |
+      told Marcus on the team about it at lunch and he said something cool he said you know in a lot of cultures they believe ancestors guide you toward your path without you knowing and I'm not like spiritual or whatever but that hit different like maybe grandpa was guiding me somehow
+    expected_memory_stores:
+      - "Marcus comment"
+      - "ancestors guiding path"
+      - "Maya not spiritual but moved"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 10:00 AM"
+    user_input: |
+      had a weird moment in standup today where Priya asked me to explain the architecture of this new microservice and I was explaining it and I thought about grandpa explaining water treatment systems to his colleagues in Mandarin in the 1960s and I almost choked up in the middle of a technical presentation which would have been extremely not cool
+    expected_memory_stores:
+      - "standup presentation"
+      - "microservice architecture"
+      - "Priya asked"
+      - "almost cried at work"
+      - "grandpa presenting parallel"
+    expected_adaptation:
+      emotion_detected: "vulnerable"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 3:00 PM"
+    user_input: |
+      I asked Dr. Zhao the translator if she could tell me more about what kind of engineer grandpa was and she found some context in the letters and she said he was specifically working on clean water infrastructure for rural communities outside Wuhan and like that's literally public service engineering and I'm over here building AI features for a startup
+    expected_memory_stores:
+      - "Dr. Zhao additional context"
+      - "clean water for rural communities"
+      - "public service engineering"
+      - "Maya comparing her work"
+    expected_adaptation:
+      emotion_detected: "humbled"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      Julian and I were doing house stuff tonight working on the back porch railing that still needs fixing from the renovation and Julian said you know your grandpa probably would have known exactly how to fix this and I was like yeah he definitely would have and then Julian said maybe we should name the house something like Wei House or something and I laughed but also kind of loved it
+    expected_memory_stores:
+      - "porch railing repair"
+      - "renovation reference"
+      - "Julian suggests naming house"
+      - "Wei House idea"
+      - "grandpa would know repairs"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 9:30 AM"
+    user_input: |
+      I've been wearing grandpa's watch to work every day and Raj noticed it today and asked about it and I told him the whole story about grandpa being an engineer and Raj said dude that's like generational destiny and I know that sounds dramatic but like when three people tell you the same thing maybe there's something to it
+    expected_memory_stores:
+      - "Raj noticed watch"
+      - "told Raj the story"
+      - "generational destiny"
+      - "multiple people saying same thing"
+    expected_adaptation:
+      emotion_detected: "affirmed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 12:30 PM"
+    user_input: |
+      went to Powell's on lunch break and bought this book about Chinese engineers during the Cultural Revolution and the stuff in here is brutal like they were persecuted for being intellectuals and some were sent to labor camps and I keep thinking about grandpa going through this and never telling anyone
+    expected_memory_stores:
+      - "Powell's bookstore"
+      - "book about Chinese engineers"
+      - "Cultural Revolution persecution"
+      - "labor camps"
+      - "grandpa's silence"
+    expected_adaptation:
+      emotion_detected: "disturbed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      called my mom and asked her did grandpa ever seem sad about giving up engineering and she was quiet for a long time and then she said Maya there was one time when I was maybe ten and I brought home a math test with a perfect score and he held it and cried and I never understood why until now
+    expected_memory_stores:
+      - "Vivian's childhood memory"
+      - "grandpa crying over math test"
+      - "understanding now"
+      - "suppressed engineering identity"
+    expected_adaptation:
+      emotion_detected: "heartbroken"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      I told Dr. Tate about all of this today and she said something interesting she said sometimes discovering an ancestor's hidden identity can feel like finding a missing piece of your own and she asked if my engineering career feels different now and I said yes it feels like it matters more like I'm carrying it for both of us
+    expected_memory_stores:
+      - "Dr. Tate session"
+      - "missing piece of identity"
+      - "career feels different"
+      - "carrying for both"
+    expected_adaptation:
+      emotion_detected: "purposeful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 10:00 PM"
+    user_input: |
+      before bed I looked at the two degrees on the wall again his and mine and I put my hand on his degree and just said thank you and I know he can't hear me obviously but it felt right and the watch is ticking on the nightstand and Julian is asleep and Kobe is snoring and everything is quiet and it's ok
+    expected_memory_stores:
+      - "two degrees on wall"
+      - "said thank you"
+      - "watch ticking"
+      - "peaceful moment"
+    expected_adaptation:
+      emotion_detected: "at peace"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How has the engineering discovery affected Maya's work?"
+    expected_contains: ["matters more", "carrying", "both"]
+  - question: "What was Grandpa Wei specifically engineering?"
+    expected_contains: ["clean water", "rural communities"]
+  - question: "What did Raj call the engineering connection?"
+    expected_contains: ["generational destiny"]
+  - question: "What book did Maya buy at Powell's?"
+    expected_contains: ["Chinese engineers", "Cultural Revolution"]
+  - question: "What childhood memory did Vivian share?"
+    expected_contains: ["math test", "perfect score", "cried"]
+  - question: "What did Julian suggest naming the house?"
+    expected_contains: ["Wei House"]
+  - question: "What did Marcus say about ancestors?"
+    expected_contains: ["guide", "path"]
+  - question: "How did Dr. Tate frame the discovery?"
+    expected_contains: ["missing piece", "identity"]
+  - question: "Who else at Conduit noticed the watch?"
+    expected_contains: ["Raj"]
+  - question: "What are the two degrees hanging on Maya's wall?"
+    expected_contains: ["grandfather", "Wuhan", "Maya", "software"]

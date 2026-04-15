@@ -1,0 +1,176 @@
+story_id: 453
+story_name: "Cannon Beach Kobe First Beach"
+category: "Road Trips"
+description: |
+  Tests memory of Kobe's first beach experience at Cannon Beach.
+  Establishes Haystack Rock visit, emotional resonance of the day.
+  Verifies cross-thread references and entity tracking for Kobe.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 7:00 AM"
+    user_input: |
+      today is the day we take Kobe to the beach for the first time and I am honestly more excited than he is like we're going to Cannon Beach to see Haystack Rock and Julian already has his camera charged and I packed towels and Kobe's favorite ball and treats and like basically everything
+    expected_memory_stores:
+      - "Cannon Beach"
+      - "Kobe first beach"
+      - "Haystack Rock"
+      - "Julian camera"
+      - "packed supplies"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 8:30 AM"
+    user_input: |
+      the drive to Cannon Beach is about an hour and a half from Portland and Kobe is like vibrating in the back seat he can probably smell the ocean already and Julian's playing Jack Johnson which feels very beach appropriate and I'm eating the leftover ramen I made last night for breakfast which is weird but whatever it was good
+    expected_memory_stores:
+      - "hour and a half drive"
+      - "Kobe excited"
+      - "Jack Johnson music"
+      - "leftover ramen for breakfast"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 10:00 AM"
+    user_input: |
+      WE ARE HERE and oh my god when Kobe saw the sand he just lost his mind like he was pulling on the leash so hard I almost fell over and then we let him off leash in the designated area and he just ran in circles for like five straight minutes barking at the waves and Julian got it all on video I'm literally crying laughing
+    expected_memory_stores:
+      - "Kobe on beach"
+      - "pulling on leash"
+      - "off leash area"
+      - "running circles"
+      - "barking at waves"
+      - "Julian video"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 11:15 AM"
+    user_input: |
+      so Haystack Rock is just massive like pictures don't do it justice and there's tide pools around the base with like starfish and anemones and Kobe tried to eat a piece of seaweed and made the funniest face and Julian is taking the most incredible photos of the rock with the fog rolling in behind it
+    expected_memory_stores:
+      - "Haystack Rock massive"
+      - "tide pools"
+      - "starfish and anemones"
+      - "Kobe ate seaweed"
+      - "Julian fog photos"
+    expected_adaptation:
+      emotion_detected: "awestruck"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 12:30 PM"
+    user_input: |
+      we got fish and chips from this place called Mo's and sat on the beach and Kobe was just lying there all sandy and happy and I was like this is literally the perfect day and Julian said he wants to come back for our anniversary and honestly yeah I'm in also I was thinking we should bring Nadia and Omar next time since they mentioned wanting to do a group trip
+    expected_memory_stores:
+      - "Mo's fish and chips"
+      - "Kobe sandy and happy"
+      - "anniversary return idea"
+      - "Nadia Omar group trip"
+    expected_adaptation:
+      emotion_detected: "blissful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 2:00 PM"
+    user_input: |
+      Kobe discovered he does NOT like waves actually going over his paws like he was fine barking at them from far away but when one actually touched him he jumped so high and ran behind Julian and I almost died laughing oh and also there was another golden retriever on the beach and they played together for like 20 minutes the owner was this nice lady named Beth
+    expected_memory_stores:
+      - "Kobe scared of waves"
+      - "jumped behind Julian"
+      - "other golden retriever"
+      - "played 20 minutes"
+      - "owner Beth"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 3:30 PM"
+    user_input: |
+      walked into the little town part of Cannon Beach and there's all these cute galleries and gift shops and I bought a Haystack Rock magnet for our fridge and Julian found this gallery with ocean photographs and he was like studying them for technique and I just let him nerd out while I got ice cream
+    expected_memory_stores:
+      - "Cannon Beach town"
+      - "galleries and gift shops"
+      - "Haystack Rock magnet"
+      - "Julian studying ocean photos"
+      - "ice cream"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 5:00 PM"
+    user_input: |
+      what was the name of the restaurant where we got fish and chips on the beach
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 6:00 PM"
+    user_input: |
+      watching the sunset at Cannon Beach right now and Julian has his arm around me and Kobe is asleep at our feet covered in sand and I just I don't even know how to describe this feeling like everything with the wedding planning and work stress and Stardew Valley keeping me up too late none of it matters right now this is perfect
+    expected_memory_stores:
+      - "sunset at Cannon Beach"
+      - "Julian arm around Maya"
+      - "Kobe asleep sandy"
+      - "wedding stress reference"
+      - "perfect moment"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 9:00 PM"
+    user_input: |
+      home and Kobe is SO tired like he's completely zonked and covered in sand still and I need to give him a bath tomorrow and Julian already printed one of the Haystack Rock photos and put it on the kitchen counter and said this is going in the photo book and I was like what photo book and he just smiled and didn't answer which is suspicious but also cute
+    expected_memory_stores:
+      - "Kobe exhausted sandy"
+      - "bath tomorrow"
+      - "Julian printed photo"
+      - "photo book mention"
+      - "Julian secretive"
+    expected_adaptation:
+      emotion_detected: "curious"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where did Maya take Kobe to the beach for the first time?"
+    expected_contains: ["Cannon Beach"]
+  - question: "How did Kobe react to the ocean waves?"
+    expected_contains: ["scared", "jumped", "barking"]
+  - question: "What landmark did they visit at Cannon Beach?"
+    expected_contains: ["Haystack Rock"]
+  - question: "Where did they eat fish and chips?"
+    expected_contains: ["Mo's"]
+  - question: "What did Kobe find in the tide pools?"
+    expected_contains: ["seaweed"]
+  - question: "What did Maya buy in town?"
+    expected_contains: ["magnet", "Haystack Rock"]
+  - question: "What did Julian mention about a photo book?"
+    expected_contains: ["photo book", "smiled", "didn't answer"]
+  - question: "How long is the drive from Portland to Cannon Beach?"
+    expected_contains: ["hour and a half"]
+  - question: "What other dog did Kobe play with?"
+    expected_contains: ["golden retriever", "Beth"]
+  - question: "When does Julian want to return to Cannon Beach?"
+    expected_contains: ["anniversary"]

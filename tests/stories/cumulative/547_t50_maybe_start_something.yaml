@@ -1,0 +1,187 @@
+story_id: 547
+story_name: "Maybe Start Something"
+category: "Identity and Future"
+description: |
+  Maya explores the "start something" idea more concretely. Engineering and teaching
+  combined. Cross-references mentoring Aisha (T6), career (T1), grandpa engineer (T46),
+  cooking journey (T31), and community building (T47).
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      ok so I've been noodling on the start something idea and I keep coming back to this intersection of engineering and teaching because those are the two things I'm good at and when I think about grandpa he was good at those too he just never got to do both in America and maybe I can
+    expected_memory_stores:
+      - "start something idea developing"
+      - "engineering and teaching intersection"
+      - "grandpa was good at both"
+      - "never got to do both in America"
+      - "Maya can"
+    expected_adaptation:
+      emotion_detected: "inspired"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      had lunch with Marcus and told him I'm thinking about eventually doing something in teaching or mentoring and he said you know Portland has a huge bootcamp scene right and he said Epicodus and Alchemy Code Lab are both here and he said he knows someone at Epicodus who might let me guest lecture
+    expected_memory_stores:
+      - "Marcus lunch"
+      - "Portland bootcamp scene"
+      - "Epicodus and Alchemy Code Lab"
+      - "Marcus knows someone"
+      - "guest lecture possibility"
+    expected_adaptation:
+      emotion_detected: "interested"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      Priya officially offered me the lead engineer position today and I accepted and the raise is twenty thousand which brings me to 180k and I'm going to be managing two junior engineers and mentoring them and I told Priya about my mission statement and she said that's exactly why I picked you because you care about growing people not just shipping code
+    expected_memory_stores:
+      - "lead engineer official"
+      - "$20k raise"
+      - "$180k salary"
+      - "managing two juniors"
+      - "Priya picked her for caring"
+      - "growing people not just code"
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      called everyone with the promotion news my mom cried obviously Julian was pumped Clara screamed Jenny texted seventeen fire emojis and George said I knew it and Diane sent a very polished congratulations text which is peak Diane and I called Dr. Tate to cancel our next appointment because I wanted to tell her in person that the girl who couldn't get off the couch is now a lead engineer
+    expected_memory_stores:
+      - "told everyone promotion"
+      - "Vivian cried"
+      - "Julian pumped"
+      - "Clara screamed"
+      - "Jenny fire emojis"
+      - "George knew it"
+      - "Diane polished text"
+      - "Dr. Tate in person"
+    expected_adaptation:
+      emotion_detected: "celebrated"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 9:00 AM"
+    user_input: |
+      first day as lead engineer and I've got two new direct reports named Kyle and Tanya and they're both fresh out of bootcamp and they looked terrified on their first day and I thought about Aisha and how scared she was and I said hey don't worry I've been where you are and we're gonna figure this out together and Tanya's shoulders literally dropped from relief
+    expected_memory_stores:
+      - "first day as lead"
+      - "Kyle and Tanya direct reports"
+      - "fresh out of bootcamp"
+      - "they looked terrified"
+      - "Aisha parallel"
+      - "we'll figure it out together"
+    expected_adaptation:
+      emotion_detected: "nurturing"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 6:00 PM"
+    user_input: |
+      end of first week as lead and it's harder than I thought like I'm still writing code but also doing one-on-ones and reviewing PRs and answering questions and I'm exhausted but the good kind of exhausted like I feel useful in a way that's different from just shipping features and this must be what teaching feels like
+    expected_memory_stores:
+      - "first week as lead hard"
+      - "code plus management"
+      - "one-on-ones PRs questions"
+      - "good exhaustion"
+      - "feeling useful differently"
+      - "this is teaching"
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 3:00 PM"
+    user_input: |
+      emailed Marcus's contact at Epicodus and introduced myself and asked about guest lecturing and she responded within an hour and said they'd love to have a working engineer come talk to students about real world engineering and I said I could do a session on like practical Python or debugging in production and she said YES
+    expected_memory_stores:
+      - "emailed Epicodus contact"
+      - "quick response"
+      - "guest lecture approved"
+      - "practical Python or debugging"
+      - "working engineer perspective"
+    expected_adaptation:
+      emotion_detected: "thrilled"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 10:00 AM"
+    user_input: |
+      phone-free Sunday and I'm sitting with my journal thinking about how grandpa designed water treatment systems to help communities and now I'm going to teach coding to help people get careers and it's not the same scale but it's the same impulse give people tools to build better lives and that's the mission statement made real
+    expected_memory_stores:
+      - "grandpa water systems parallel"
+      - "teaching coding for careers"
+      - "same impulse different scale"
+      - "give people tools"
+      - "mission statement real"
+    expected_adaptation:
+      emotion_detected: "aligned"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 3:00 PM"
+    user_input: |
+      Julian said you know what's funny and I said what and he said six months ago you thought you weren't enough and now you're leading a team mentoring engineers guest lecturing at a bootcamp and planning to teach cooking to neighbors and I said yeah that escalated quickly and he said no it was always there you just didn't see it
+    expected_memory_stores:
+      - "Julian's observation"
+      - "six months ago not enough"
+      - "now leading mentoring lecturing"
+      - "it was always there"
+    expected_adaptation:
+      emotion_detected: "recognized"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 7:00 PM"
+    user_input: |
+      the maybe in maybe start something is getting smaller and the start something is getting bigger and I don't know exactly what it'll be yet but it'll involve engineering and teaching and community and it'll honor grandpa and my mom and it'll be mine and right now that's enough to know right now that's everything
+    expected_memory_stores:
+      - "maybe getting smaller"
+      - "start something getting bigger"
+      - "engineering teaching community"
+      - "honor grandpa and mom"
+      - "it'll be mine"
+      - "enough to know"
+    expected_adaptation:
+      emotion_detected: "becoming"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya's new role at Conduit?"
+    expected_contains: ["lead engineer"]
+  - question: "What is Maya's new salary?"
+    expected_contains: ["180", "180k"]
+  - question: "Who are Maya's direct reports?"
+    expected_contains: ["Kyle", "Tanya"]
+  - question: "What bootcamp will Maya guest lecture at?"
+    expected_contains: ["Epicodus"]
+  - question: "What topics will Maya teach?"
+    expected_contains: ["Python", "debugging"]
+  - question: "Who connected Maya to Epicodus?"
+    expected_contains: ["Marcus"]
+  - question: "What did Priya say about why she picked Maya for lead?"
+    expected_contains: ["growing people", "not just code"]
+  - question: "What parallel does Maya draw between her teaching and grandpa?"
+    expected_contains: ["tools", "better lives", "communities"]
+  - question: "What did Julian say about Maya's evolution?"
+    expected_contains: ["always there", "didn't see it"]
+  - question: "What three things will Maya's future project involve?"
+    expected_contains: ["engineering", "teaching", "community"]

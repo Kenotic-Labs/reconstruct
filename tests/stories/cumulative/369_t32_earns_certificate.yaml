@@ -1,0 +1,172 @@
+story_id: 369
+story_name: "Earns ML Certificate"
+category: "Career Development"
+description: |
+  Tests memory of Maya completing the Stanford ML certificate program.
+  Verifies system tracks educational milestone and emotional payoff.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      final exam for the ML certificate is this Friday and I've been studying every night this week and I actually feel good about it this time like genuinely confident not fake confident and Lily and I did our last study session tonight
+    expected_memory_stores:
+      - "final exam Friday"
+      - "studying every night"
+      - "genuinely confident"
+      - "last study session with Lily"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 6:00 PM"
+    user_input: |
+      DONE I just finished the final exam and I think I crushed it like I recognized almost every concept and the neural network design question was basically what I built at Conduit and I finished with 30 minutes to spare
+    expected_memory_stores:
+      - "final exam completed"
+      - "felt good"
+      - "recognized concepts"
+      - "Conduit project helped"
+      - "30 minutes to spare"
+    expected_adaptation:
+      emotion_detected: "elated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 9:00 AM"
+    user_input: |
+      results came in already which is fast and I got an 88 on the final and my overall certificate grade is an 84 which is a B plus and honestly from a 72 on the first exam to an 88 on the final that's a huge arc
+    expected_memory_stores:
+      - "final exam 88"
+      - "overall grade 84"
+      - "B plus"
+      - "72 to 88 improvement"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 10:00 AM"
+    user_input: |
+      the certificate is official now like Stanford sent me a digital certificate and I can add it to LinkedIn and I literally cried a little which is embarrassing but like three months ago I almost dropped out and now it's done
+    expected_memory_stores:
+      - "official certificate"
+      - "Stanford digital certificate"
+      - "LinkedIn"
+      - "cried"
+      - "three month journey"
+      - "almost dropped out"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 12:00 PM"
+    user_input: |
+      Julian surprised me with flowers and a card that said Dr Chen PhD just kidding but seriously I'm so proud of you and I laughed so hard and then we went to Canard for brunch to celebrate which is our fancy spot
+    expected_memory_stores:
+      - "Julian flowers"
+      - "Dr Chen PhD joke"
+      - "Canard brunch"
+      - "celebration"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Sam sent me a Slack message that just said well done Chen with a trophy emoji and Lily sent a gif of confetti and Danny said beers are on him Monday and Aisha sent a super sweet message about how I inspired her to learn ML too
+    expected_memory_stores:
+      - "Sam congratulations"
+      - "Lily congratulations"
+      - "Danny beers Monday"
+      - "Aisha inspired"
+    expected_adaptation:
+      emotion_detected: "appreciated"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 5:00 PM"
+    user_input: |
+      mom doesn't fully understand what ML is but she was like congratulations baby I'm proud of you and dad was in the background saying that's my girl and Clara texted a bunch of heart emojis and Tyler sent a thumbs up
+    expected_memory_stores:
+      - "Vivian congratulations"
+      - "George proud"
+      - "Clara hearts"
+      - "Tyler thumbs up"
+      - "family support"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 7:00 PM"
+    user_input: |
+      what was Maya's final grade in the Stanford ML certificate program
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 10:00 AM"
+    user_input: |
+      Jenny called and was like so what's next a PhD and I was like ha no not yet and she was like I mean it though you should think about a master's degree and honestly the thought has crossed my mind but I think I need a break first
+    expected_memory_stores:
+      - "Jenny master's suggestion"
+      - "thought crossed mind"
+      - "needs break first"
+      - "not yet"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 4:00 PM"
+    user_input: |
+      looking back on the whole three months from enrollment to almost dropping out to Lily saving me with study sessions to applying it at work to now having this certificate it's one of the hardest things I've done and I'm really glad I didn't quit
+    expected_memory_stores:
+      - "three month reflection"
+      - "full journey"
+      - "Lily credit"
+      - "work application"
+      - "glad didn't quit"
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did Maya score on her ML final exam?"
+    expected_contains: ["88"]
+  - question: "What is Maya's overall certificate grade?"
+    expected_contains: ["84", "B plus"]
+  - question: "How did Maya's scores progress through the program?"
+    expected_contains: ["72", "88", "improved"]
+  - question: "Where did Julian take Maya to celebrate?"
+    expected_contains: ["Canard"]
+  - question: "Is Maya considering a master's degree?"
+    expected_contains: ["thought", "not yet", "break"]
+  - question: "Who inspired Aisha to learn ML?"
+    expected_contains: ["Maya"]
+  - question: "What joke did Julian make on his card?"
+    expected_contains: ["Dr Chen PhD"]
+  - question: "How long did the ML program take?"
+    expected_contains: ["three months"]
+  - question: "Who does Maya credit for helping her pass?"
+    expected_contains: ["Lily"]
+  - question: "Has Maya earned the Stanford ML certificate?"
+    expected_contains: ["yes"]

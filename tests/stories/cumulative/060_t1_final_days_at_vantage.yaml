@@ -1,0 +1,212 @@
+story_id: 60
+story_name: "Final Days at Vantage"
+category: "Career"
+description: |
+  Tests memory of Maya's last emotional stretch at Vantage.
+  Leon's farewell, Maya fully committing to leaving.
+  Closes Thread 1 and bridges to Thread 2 (active job search).
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00 AM"
+    user_input: |
+      Leon's last week and the office feels weird without him already being fully engaged like he's just doing knowledge transfer and cleaning up his stuff and I keep thinking this is going to be me soon hopefully sooner rather than later
+    expected_memory_stores:
+      - "Leon's last week"
+      - "knowledge transfer"
+      - "Maya wants to leave soon"
+    expected_triples:
+      - ["Leon", "status", "last week at Vantage"]
+      - ["Leon", "doing", "knowledge transfer"]
+      - ["user", "wants", "to leave soon too"]
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 2:00 PM"
+    user_input: |
+      got an email from Google and um they're not moving forward with my application they said I was strong on system design but didn't meet the bar on coding which like ouch but also honestly I'm not that surprised because I know I fumbled the DP question so yeah that door is closed
+    expected_memory_stores:
+      - "Google rejection"
+      - "system design strong"
+      - "coding below bar"
+      - "door closed"
+    expected_triples:
+      - ["Google", "rejected", "user's application"]
+      - ["Google", "feedback", "strong system design but coding below bar"]
+      - ["user", "has_emotion", "disappointed"]
+    expected_adaptation:
+      emotion_detected: "disappointed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      told Julian about the Google rejection and I was bummed but he was like okay so now you go all in on Conduit AI because honestly a startup might be better for you anyway more autonomy more impact and you won't have to deal with another Derek situation at Google they probably have ten Dereks
+    expected_memory_stores:
+      - "Julian's perspective"
+      - "Conduit AI focus"
+      - "startup advantages"
+      - "autonomy"
+      - "ten Dereks joke"
+    expected_triples:
+      - ["Julian", "advised", "go all in on Conduit AI"]
+      - ["Julian", "argued", "startup better - more autonomy more impact"]
+      - ["user", "focus_shifted_to", "Conduit AI"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 10:00 AM"
+    user_input: |
+      Nina Park was really cool about the Google rejection she said it happens all the time and she's going to prioritize getting me into the Conduit AI pipeline and she already set up an intro call with their CTO Ross Zhang for next Monday which is fast
+    expected_memory_stores:
+      - "Nina reassurance"
+      - "Conduit AI prioritized"
+      - "Ross Zhang CTO"
+      - "intro call Monday"
+    expected_triples:
+      - ["Nina Park", "reassured", "user about Google rejection"]
+      - ["Nina Park", "prioritizing", "Conduit AI for user"]
+      - ["Ross Zhang", "role", "CTO of Conduit AI"]
+      - ["user", "scheduled", "intro call with Ross Zhang Monday"]
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 3:00 PM"
+    user_input: |
+      Derek had a skip level meeting with our pod today and he asked me directly what I'm working on and I gave him the most professional boring answer possible and he seemed satisfied and Tanya looked at me after and was like wow you're good at that and I was like yeah three months of practice
+    expected_memory_stores:
+      - "Derek skip level"
+      - "professional answer"
+      - "Tanya impressed"
+      - "three months practice"
+    expected_triples:
+      - ["Derek", "held", "skip level with user's pod"]
+      - ["user", "gave", "professional boring answer to Derek"]
+      - ["Tanya", "impressed_by", "user's composure with Derek"]
+    expected_adaptation:
+      emotion_detected: "controlled"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 12:00 PM"
+    user_input: |
+      Leon's going away lunch was today and honestly it was really nice even though Derek showed up and gave this fake speech about what a great contributor Leon was and Leon just nodded and smiled and after Derek left Leon was like that man has zero self awareness and everyone cracked up
+    expected_memory_stores:
+      - "Leon going away lunch"
+      - "Derek fake speech"
+      - "Leon humor"
+      - "team bonding"
+    expected_triples:
+      - ["team", "had", "Leon's going away lunch"]
+      - ["Derek", "gave", "fake speech praising Leon"]
+      - ["Leon", "joked", "Derek has zero self awareness"]
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 5:00 PM"
+    user_input: |
+      Leon's officially gone walked him to his car and we hugged and he said don't stay too long and I said I won't and we promised to get lunch every month and I cried a little in the bathroom after because like that was my person at work and now he's gone
+    expected_memory_stores:
+      - "Leon's departure"
+      - "hug"
+      - "monthly lunch promise"
+      - "Maya cried"
+      - "loss of work friend"
+    expected_triples:
+      - ["Leon", "left", "Vantage officially"]
+      - ["Leon", "said", "don't stay too long"]
+      - ["user", "promised", "monthly lunch with Leon"]
+      - ["user", "has_emotion", "crying - loss of best work friend"]
+    expected_adaptation:
+      emotion_detected: "sad"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 7:00 PM"
+    user_input: |
+      who was Maya's closest friend at Vantage Systems
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 10:00 AM"
+    user_input: |
+      spent the morning researching Conduit AI for my call with Ross on Monday and they're actually doing really cool stuff they're building AI infrastructure for enterprise search and they just raised their Series B like 40 million dollars and their tech stack is Python and Go which is literally what I do
+    expected_memory_stores:
+      - "Conduit AI research"
+      - "AI infrastructure"
+      - "enterprise search"
+      - "Series B 40 million"
+      - "Python and Go"
+    expected_triples:
+      - ["Conduit AI", "builds", "AI infrastructure for enterprise search"]
+      - ["Conduit AI", "funding", "Series B - 40 million dollars"]
+      - ["Conduit AI", "tech_stack", "Python and Go"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 PM"
+    user_input: |
+      Julian helped me prep for the Ross Zhang call tomorrow and he even pretended to be the CTO and asked me tough questions and Kobe kept trying to sit on Julian's laptop which made us both laugh and I feel ready I feel like Conduit AI could be the move and I'm done being scared about leaving Vantage
+    expected_memory_stores:
+      - "Julian mock interview"
+      - "Kobe on laptop"
+      - "ready for call"
+      - "Conduit AI excitement"
+      - "done being scared"
+    expected_triples:
+      - ["Julian", "helped", "mock interview prep for Ross Zhang call"]
+      - ["Kobe", "behavior", "tried to sit on Julian's laptop"]
+      - ["user", "has_emotion", "ready and determined"]
+      - ["user", "decided", "Conduit AI could be the move"]
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Did Maya get the Google job?"
+    expected_contains: ["no", "rejected", "not moving forward"]
+  - question: "Why was Maya rejected from Google?"
+    expected_contains: ["coding", "below bar"]
+  - question: "Who is Ross Zhang?"
+    expected_contains: ["CTO", "Conduit AI"]
+  - question: "When is Maya's call with Ross Zhang?"
+    expected_contains: ["Monday"]
+  - question: "What does Conduit AI do?"
+    expected_contains: ["AI infrastructure", "enterprise search"]
+  - question: "How much did Conduit AI raise?"
+    expected_contains: ["40 million", "Series B"]
+  - question: "Is Leon still at Vantage?"
+    expected_contains: ["no", "left", "Stripe"]
+  - question: "What did Leon say to Maya when he left?"
+    expected_contains: ["don't stay too long"]
+  - question: "What tech stack does Conduit AI use?"
+    expected_contains: ["Python", "Go"]
+  - question: "How is Maya feeling about leaving Vantage now?"
+    expected_contains: ["determined", "ready", "done being scared"]

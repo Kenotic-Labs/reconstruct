@@ -1,0 +1,185 @@
+story_id: 471
+story_name: "Grandpa Wei's Guitar Found"
+category: "Music and Guitar"
+description: |
+  Tests memory of Maya finding her grandfather's old guitar during the move.
+  Establishes emotional connection to family heirloom, initial discovery.
+  Verifies system captures sentimental objects and family history.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 2:00 PM"
+    user_input: |
+      okay so we're unpacking boxes in the new Woodstock house and I opened this closet in the spare bedroom and there's a guitar case in there and I was like wait what and then I remembered oh my god this is Grandpa Wei's guitar like my mom gave it to me years ago and I just stuck it in a closet and forgot about it
+    expected_memory_stores:
+      - "unpacking boxes"
+      - "Woodstock house"
+      - "spare bedroom closet"
+      - "guitar case"
+      - "Grandpa Wei's guitar"
+      - "mom gave it to her"
+      - "forgot about it"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 2:15 PM"
+    user_input: |
+      I opened the case and the guitar is beautiful like it's this warm honey colored acoustic and it smells like old wood and memories and there's a pick stuck in the strings and the strings are totally shot like rusted and gross but the body is in great condition and Julian came over and was like whoa what's that
+    expected_memory_stores:
+      - "honey colored acoustic"
+      - "old wood smell"
+      - "pick in strings"
+      - "strings rusted"
+      - "body good condition"
+      - "Julian came over"
+    expected_adaptation:
+      emotion_detected: "nostalgic"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 2:30 PM"
+    user_input: |
+      I told Julian about Grandpa Wei and how he used to play guitar in the evenings after dinner and my mom said he wasn't great but he loved it and he taught himself from a book not YouTube because this was like the 60s and 70s and I never met him because he passed before I was born but mom talks about him all the time and apparently I have his stubbornness
+    expected_memory_stores:
+      - "Grandpa Wei played evenings"
+      - "after dinner"
+      - "self-taught from book"
+      - "60s and 70s"
+      - "passed before Maya born"
+      - "Vivian talks about him"
+      - "Maya has his stubbornness"
+    expected_adaptation:
+      emotion_detected: "sentimental"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 3:00 PM"
+    user_input: |
+      I called my mom and told her I found Grandpa Wei's guitar and she got so emotional and was like oh Maya I'm so glad you kept it and I said of course I kept it and she told me more about how he used to play folk songs and some traditional Chinese songs and he made up his own songs too and dad got on and said your grandfather would love that you're interested
+    expected_memory_stores:
+      - "called Vivian"
+      - "Vivian emotional"
+      - "folk songs"
+      - "Chinese songs"
+      - "made up own songs"
+      - "George said grandfather would love it"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 4:00 PM"
+    user_input: |
+      so the strings are definitely dead like they're corroded and one is actually broken so I can't play it right now and Julian was like you should take it to a guitar shop and I googled and there's a place called Trade Up Music on like Hawthorne and they do restrings and setups and I'm gonna take it there this week
+    expected_memory_stores:
+      - "strings corroded"
+      - "one string broken"
+      - "Trade Up Music"
+      - "Hawthorne"
+      - "restring and setup"
+      - "going this week"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 5:30 PM"
+    user_input: |
+      I've been holding the guitar for like an hour just kind of feeling it and there's some wear marks on the neck where Grandpa Wei's fingers would've been and that's making me really emotional like his hands were on this exact spot playing music decades ago and now my hands are here and I don't know it feels like a connection across time
+    expected_memory_stores:
+      - "holding guitar hour"
+      - "wear marks on neck"
+      - "Grandpa Wei's finger marks"
+      - "connection across time"
+      - "emotional moment"
+    expected_adaptation:
+      emotion_detected: "deeply moved"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 6:30 PM"
+    user_input: |
+      Julian said we should look up YouTube tutorials for restringing a guitar and I was like actually yeah I want to do it myself not take it to a shop I want to learn and he found this channel and the guy explains it really well and I ordered a new set of acoustic strings on Amazon they'll be here Tuesday and I'm gonna do this myself for Grandpa Wei
+    expected_memory_stores:
+      - "YouTube restringing"
+      - "Maya wants to DIY"
+      - "ordered strings Amazon"
+      - "arriving Tuesday"
+      - "doing it for Grandpa Wei"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 7:30 PM"
+    user_input: |
+      when did Grandpa Wei learn to play guitar and how
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 8:00 PM"
+    user_input: |
+      Clara FaceTimed and I showed her the guitar and she started crying because she remembers mom telling stories about Grandpa Wei playing and Sophie was reaching for the screen trying to grab it and Tyler said it's really cool that I have a piece of family history like that and Clara was like you HAVE to learn to play
+    expected_memory_stores:
+      - "Clara FaceTimed"
+      - "Clara crying"
+      - "mom's stories"
+      - "Sophie reaching for screen"
+      - "Tyler impressed"
+      - "Clara says must learn"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 9:30 PM"
+    user_input: |
+      I put the guitar on a stand in the living room so I can see it every day and Julian took a photo of it in the evening light and it's gorgeous and I told him I'm going to learn to play this guitar if it kills me and he said knowing you it might but you'll do it and honestly between the road trips and the gaming and book club I needed something that's just mine and this feels like it
+    expected_memory_stores:
+      - "guitar on stand living room"
+      - "Julian photographed it"
+      - "determination to learn"
+      - "something just hers"
+      - "road trips gaming book club"
+    expected_adaptation:
+      emotion_detected: "resolved"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Whose guitar did Maya find?"
+    expected_contains: ["Grandpa Wei"]
+  - question: "Where did Maya find the guitar?"
+    expected_contains: ["closet", "spare bedroom", "Woodstock"]
+  - question: "What condition was the guitar in?"
+    expected_contains: ["strings", "rusted", "broken", "body good"]
+  - question: "What color is the guitar?"
+    expected_contains: ["honey"]
+  - question: "What kind of music did Grandpa Wei play?"
+    expected_contains: ["folk", "Chinese"]
+  - question: "Where did Maya plan to get it restrung?"
+    expected_contains: ["Trade Up Music", "Hawthorne"]
+  - question: "Did Maya meet Grandpa Wei?"
+    expected_contains: ["no", "passed before"]
+  - question: "Who gave Maya the guitar originally?"
+    expected_contains: ["mom", "Vivian"]
+  - question: "How did Grandpa Wei learn guitar?"
+    expected_contains: ["book", "self-taught"]
+  - question: "Where did Maya put the guitar in the house?"
+    expected_contains: ["stand", "living room"]

@@ -1,0 +1,207 @@
+story_id: 117
+story_name: "Proposes Internal Tool Team"
+category: "Career"
+description: |
+  Tests whether the system tracks the pitch meeting, Sam's reaction, the specific details
+  of the proposal, and the outcome. Corrections test when meeting details change.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 8:00am"
+    user_input: |
+      Rachel Kim reviewed the proposal and had some good feedback. she said I should lead with the problem not the solution, like show how much time people waste on crappy tools before I pitch the team. she's right that's way more compelling
+    expected_memory_stores:
+      - "Rachel Kim review"
+      - "lead with problem"
+      - "time wasted"
+      - "proposal revision"
+    expected_triples:
+      - ["Rachel Kim", "advised", "lead proposal with problem not solution"]
+      - ["user", "revising", "proposal to show time wasted on crappy tools first"]
+      - ["user", "has_emotion", "receptive"]
+    expected_adaptation:
+      emotion_detected: "receptive"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 2:00pm"
+    user_input: |
+      we're pitching to Sam tomorrow at 3pm. Rachel Kim will be there and she got the VP of engineering to join too which is terrifying but also like if the VP approves it then it actually happens. go big or go home I guess
+    expected_memory_stores:
+      - "pitch tomorrow 3pm"
+      - "Rachel Kim attending"
+      - "VP of engineering"
+      - "high stakes"
+    expected_triples:
+      - ["user", "pitching_to", "Sam and VP of engineering tomorrow at 3pm"]
+      - ["Rachel Kim", "attending", "pitch meeting"]
+      - ["user", "has_emotion", "nervous"]
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 10:00am"
+    user_input: |
+      oh wait I got the time wrong the meeting got moved to 2pm not 3pm because the VP has a conflict later. Sam's assistant just Slacked me
+    expected_memory_stores:
+      - "correction"
+      - "meeting at 2pm"
+      - "VP conflict"
+    expected_triples:
+      - ["user", "corrected", "pitch meeting time 3pm → 2pm"]
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 1:30pm"
+    user_input: |
+      thirty minutes until the pitch. I feel like I'm about to do a TED talk or something. Aisha texted me good luck with three fire emojis which was cute. Julian sent a voice note that just said you got this babe
+    expected_memory_stores:
+      - "pre-pitch nerves"
+      - "Aisha good luck"
+      - "Julian voice note"
+    expected_triples:
+      - ["Aisha", "texted", "good luck with fire emojis"]
+      - ["Julian", "sent", "voice note saying you got this"]
+      - ["user", "has_emotion", "anxious"]
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 2:45pm"
+    user_input: |
+      OK SO. the pitch went really well I think?? Sam was nodding the whole time and the VP asked like five really engaged questions. Rachel Kim killed it on the cost analysis part. I handled the vision and the technical architecture
+    expected_memory_stores:
+      - "pitch went well"
+      - "Sam nodding"
+      - "VP engaged"
+      - "Rachel Kim cost analysis"
+      - "Maya vision and architecture"
+    expected_triples:
+      - ["user", "pitched", "internal platform team proposal successfully"]
+      - ["Rachel Kim", "presented", "cost analysis portion"]
+      - ["user", "presented", "vision and technical architecture"]
+      - ["VP of engineering", "asked", "five engaged questions"]
+      - ["user", "has_emotion", "hopeful"]
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 3:00pm"
+    user_input: |
+      the VP said something really interesting, she said Conduit has been thinking about developer experience as a priority for next year and this fits perfectly. she asked if we could do a 90-day pilot with three people to prove the concept
+    expected_memory_stores:
+      - "developer experience priority"
+      - "90-day pilot"
+      - "three people"
+      - "prove concept"
+    expected_triples:
+      - ["VP of engineering", "said", "developer experience is priority for next year"]
+      - ["VP of engineering", "proposed", "90-day pilot with three people"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 3:15pm"
+    user_input: |
+      Sam said he'd approve the pilot if I lead it. LEAD IT. like as in I'd be the team lead for the internal platform team. that's basically the promotion he hinted at after the Aisha thing. I said yes obviously
+    expected_memory_stores:
+      - "Sam approved pilot"
+      - "Maya as team lead"
+      - "promotion"
+      - "Aisha connection"
+    expected_triples:
+      - ["Sam", "approved", "internal platform team pilot"]
+      - ["user", "promoted_to", "team lead of internal platform team"]
+      - ["Sam", "connected", "promotion to mentoring Aisha experience"]
+      - ["user", "has_emotion", "ecstatic"]
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 3:30pm"
+    user_input: |
+      how many people would be on the pilot team
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 6:00pm"
+    user_input: |
+      told Julian EVERYTHING and he literally picked me up and spun me around. then Kobe got excited and started barking and jumping because he thought we were playing. we ordered sushi to celebrate and I ate way too much but whatever
+    expected_memory_stores:
+      - "Julian celebration"
+      - "Kobe excited"
+      - "sushi celebration"
+    expected_triples:
+      - ["Julian", "celebrated", "user's promotion by picking her up and spinning"]
+      - ["user", "celebrated_with", "sushi with Julian"]
+      - ["user", "has_emotion", "joyful"]
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 9:00pm"
+    user_input: |
+      called Clara and mom and dad. Mom cried which was embarrassing. Dad said he always knew I'd end up in charge of something. Clara goes does this mean you're staying in engineering and I said yes but better. I feel like this is the start of something
+    expected_memory_stores:
+      - "called family"
+      - "Mom cried"
+      - "Dad proud"
+      - "Clara happy"
+      - "staying in engineering"
+      - "new beginning"
+    expected_triples:
+      - ["user", "told_family", "about promotion and pilot team"]
+      - ["Mom", "reacted", "cried with pride"]
+      - ["Dad", "said", "always knew user would end up in charge"]
+      - ["user", "confirmed_to", "Clara that she is staying in engineering but better"]
+      - ["user", "has_emotion", "fulfilled"]
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What was the outcome of Maya's proposal pitch?"
+    expected_contains: ["approved", "pilot", "90-day"]
+  - question: "What role will Maya have on the new team?"
+    expected_contains: ["team lead"]
+  - question: "How many people will be on the pilot?"
+    expected_contains: ["three"]
+  - question: "What time was the pitch meeting?"
+    expected_contains: ["2pm"]
+  - question: "What did the VP say about developer experience?"
+    expected_contains: ["priority", "next year"]
+  - question: "Who presented the cost analysis?"
+    expected_contains: ["Rachel Kim"]
+  - question: "What did Sam connect this to?"
+    expected_contains: ["Aisha", "promotion", "lead"]
+  - question: "How did Maya's family react?"
+    expected_contains: ["Mom cried", "Dad proud"]
+  - question: "What was the original meeting time before the change?"
+    expected_contains: ["3pm"]
+  - question: "How did Maya and Julian celebrate?"
+    expected_contains: ["sushi"]

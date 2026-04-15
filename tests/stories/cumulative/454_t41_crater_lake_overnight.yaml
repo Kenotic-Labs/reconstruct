@@ -1,0 +1,178 @@
+story_id: 454
+story_name: "Crater Lake First Overnight"
+category: "Road Trips"
+description: |
+  Tests memory of Maya and Julian's first overnight trip camping in the car at Crater Lake.
+  Establishes overnight camping milestone, Crater Lake details.
+  Verifies temporal sequencing across two days and cross-thread references.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 5:30 AM"
+    user_input: |
+      okay so this is the big one we're doing Crater Lake which is like a four hour drive and we're actually staying overnight for the first time we set up the back of the Subaru as like a little sleeping area with a mattress pad and sleeping bags and Julian thinks we're crazy but I watched like ten YouTube videos on car camping so I think we'll be fine
+    expected_memory_stores:
+      - "Crater Lake"
+      - "four hour drive"
+      - "first overnight"
+      - "car camping"
+      - "Subaru sleeping setup"
+      - "mattress pad sleeping bags"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:00 AM"
+    user_input: |
+      we're here and I just I can't even like the lake is the bluest thing I've ever seen in my life it doesn't look real Julian literally gasped when we pulled up to the rim viewpoint and Kobe is just standing there with his ears perked up looking at it like what IS that and honestly same buddy same
+    expected_memory_stores:
+      - "Crater Lake blue"
+      - "rim viewpoint"
+      - "Julian gasped"
+      - "Kobe perked ears"
+    expected_adaptation:
+      emotion_detected: "awestruck"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 12:00 PM"
+    user_input: |
+      so we hiked down to the lake on this trail called Cleetwood Cove and it's like a mile down which doesn't sound bad but it's steep and Julian was complaining the whole way and I was like dude you need to come to climbing with me and Omar and Nadia you have zero cardio and he was like I have plenty of cardio I just don't like walking downhill
+    expected_memory_stores:
+      - "Cleetwood Cove trail"
+      - "mile down steep"
+      - "Julian complaining"
+      - "climbing reference"
+      - "Omar Nadia"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 2:00 PM"
+    user_input: |
+      the water is SO cold like Julian put his foot in and screamed and I got in up to my knees and my legs went numb in like 30 seconds but it's so clear you can see the bottom even though it's super deep and Kobe would not go in at all after the Cannon Beach wave incident he's like nope no water for me
+    expected_memory_stores:
+      - "water extremely cold"
+      - "Julian screamed"
+      - "Maya knees deep"
+      - "clear water"
+      - "Kobe refused water"
+      - "Cannon Beach reference"
+    expected_adaptation:
+      emotion_detected: "exhilarated"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 5:30 PM"
+    user_input: |
+      drove around the rim drive which is like 33 miles around the whole lake and every viewpoint is more insane than the last and Julian has taken so many photos his memory card is almost full and we saw Wizard Island which is this little island in the middle of the lake from an old volcano and I'm just like how is this real how is this in Oregon
+    expected_memory_stores:
+      - "Rim Drive"
+      - "33 miles"
+      - "Wizard Island"
+      - "volcano island"
+      - "Julian memory card full"
+    expected_adaptation:
+      emotion_detected: "amazed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 8:00 PM"
+    user_input: |
+      okay so setting up the car for sleeping and it's actually not bad like the back of the Outback is pretty spacious with the seats down and Julian made it all cozy with blankets and I brought a camping lantern and we're eating the chili I made yesterday and Kobe is just chilling between us like this is the most content dog in the world
+    expected_memory_stores:
+      - "car sleeping setup"
+      - "Outback spacious"
+      - "blankets and lantern"
+      - "chili dinner"
+      - "Kobe between them"
+    expected_adaptation:
+      emotion_detected: "cozy"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 10:30 PM"
+    user_input: |
+      um so the stars here are UNREAL like I've never seen this many stars in my life and Julian and I are lying on a blanket outside the car just staring up and he's trying to find constellations with an app and I'm just like this is so much better than playing Stardew Valley on the couch and he laughed so hard
+    expected_memory_stores:
+      - "stars at Crater Lake"
+      - "blanket outside car"
+      - "constellation app"
+      - "Stardew Valley joke"
+    expected_adaptation:
+      emotion_detected: "romantic"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 6:00 AM"
+    user_input: |
+      what trail did we hike down to get to the lake yesterday
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 7:30 AM"
+    user_input: |
+      slept surprisingly well in the car like it wasn't perfect but it worked and I woke up to the sunrise over the lake and Julian was still sleeping and Kobe was awake just looking at me with his big eyes and I took a photo of them both sleeping and it's the cutest thing I've ever captured honestly this trip might be my favorite so far even more than Julian's beloved Bend
+    expected_memory_stores:
+      - "slept well in car"
+      - "sunrise over lake"
+      - "Julian sleeping"
+      - "Kobe awake"
+      - "photo of Julian and Kobe"
+      - "favorite trip"
+      - "better than Bend"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 11:00 AM"
+    user_input: |
+      heading home and I told Julian we need to start a shared Google Map and pin all the places we've been to so far like the gorge and Bend and Cannon Beach and now Crater Lake and he was like yeah that's a great idea and I already started it on my phone marking all our stops and I added notes to each pin this is getting really special
+    expected_memory_stores:
+      - "shared Google Map idea"
+      - "pinning all trips"
+      - "gorge Bend Cannon Beach Crater Lake"
+      - "notes on pins"
+    expected_adaptation:
+      emotion_detected: "sentimental"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How far is Crater Lake from Portland?"
+    expected_contains: ["four hour"]
+  - question: "Where did they hike down to the lake?"
+    expected_contains: ["Cleetwood Cove"]
+  - question: "What island did they see in the lake?"
+    expected_contains: ["Wizard Island"]
+  - question: "How did they sleep at Crater Lake?"
+    expected_contains: ["car", "Subaru", "mattress"]
+  - question: "How long is the Rim Drive around Crater Lake?"
+    expected_contains: ["33 miles"]
+  - question: "Which trip does Maya say is her favorite?"
+    expected_contains: ["Crater Lake"]
+  - question: "Why wouldn't Kobe go in the water?"
+    expected_contains: ["Cannon Beach", "wave"]
+  - question: "What did Maya suggest creating to track trips?"
+    expected_contains: ["Google Map", "shared"]
+  - question: "What did they eat for dinner while car camping?"
+    expected_contains: ["chili"]
+  - question: "What did they do at night at Crater Lake?"
+    expected_contains: ["star", "constellation"]

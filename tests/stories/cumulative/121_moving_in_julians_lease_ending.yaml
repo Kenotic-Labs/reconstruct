@@ -1,0 +1,170 @@
+story_id: 121
+story_name: "Julian's Lease Ending"
+category: "Relationships"
+description: |
+  Tests whether the system captures the catalyst for the moving-in discussion, Julian's
+  living situation details, and Maya's initial mixed feelings about cohabitation.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00am"
+    user_input: |
+      so Julian's lease at Westridge Apartments is up at the end of next month and he brought it up at breakfast this morning like super casually. he goes so my lease is ending and I was like ok?? and he goes so should we talk about living together
+    expected_memory_stores:
+      - "Julian lease ending"
+      - "Westridge Apartments"
+      - "end of next month"
+      - "moving in discussion"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:15am"
+    user_input: |
+      like we've been together for two years and I know it's the logical next step but hearing him say it out loud made my heart do that thing where it beats really fast and I can't tell if it's excitement or panic
+    expected_memory_stores:
+      - "two years together"
+      - "logical next step"
+      - "mixed feelings"
+      - "excitement or panic"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 12:00pm"
+    user_input: |
+      we talked about it more over lunch. Julian said he basically spends 5 nights a week at my place anyway so we're already kind of living together. which is true but also having the option to go home to your own space is different from not having that option you know?
+    expected_memory_stores:
+      - "5 nights a week"
+      - "already basically living together"
+      - "own space important"
+      - "option to retreat"
+    expected_adaptation:
+      emotion_detected: "conflicted"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 3:00pm"
+    user_input: |
+      took Kobe for a walk to think about it. like on one hand I love Julian and I love waking up next to him and I love how he makes coffee exactly how I like it. but on the other hand I've lived alone since college and I really value my alone time
+    expected_memory_stores:
+      - "Kobe walk"
+      - "loves Julian"
+      - "morning routine"
+      - "lived alone since college"
+      - "values alone time"
+    expected_adaptation:
+      emotion_detected: "contemplative"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 5:00pm"
+    user_input: |
+      called Clara and she was like girl what are you even debating you've been dating for two years just move in together already. she moved in with her boyfriend after like 6 months so she doesn't get the hesitation
+    expected_memory_stores:
+      - "Clara called"
+      - "Clara supportive"
+      - "Clara's boyfriend"
+      - "6 months comparison"
+    expected_adaptation:
+      emotion_detected: "pressured"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 7:00pm"
+    user_input: |
+      Julian made dinner tonight and we didn't talk about the lease thing and it was actually nice? like we just hung out and watched a movie and it felt normal. but I know we need to decide because his lease runs out in like 5 weeks
+    expected_memory_stores:
+      - "Julian cooked"
+      - "avoided topic"
+      - "5 weeks deadline"
+    expected_adaptation:
+      emotion_detected: "avoidant"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 9:00am"
+    user_input: |
+      where does Julian currently live
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 11:00am"
+    user_input: |
+      brought it up again at brunch. told Julian honestly that I want to live with him but I'm scared of losing my alone time. and he was really sweet about it, he said babe I'll give you all the space you need, I can set up my design studio area and you don't have to talk to me if you don't want to
+    expected_memory_stores:
+      - "honest conversation"
+      - "afraid of losing alone time"
+      - "Julian understanding"
+      - "design studio area"
+      - "space promise"
+    expected_adaptation:
+      emotion_detected: "vulnerable"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 2:00pm"
+    user_input: |
+      we're gonna do it. we decided. we're moving in together. but we agreed to find a new place that's both of ours, not just him moving into my apartment or vice versa. fresh start for both of us. I'm terrified and excited
+    expected_memory_stores:
+      - "decided to move in"
+      - "new place"
+      - "not existing apartment"
+      - "fresh start"
+      - "terrified and excited"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 6:00pm"
+    user_input: |
+      started looking at apartments online together and Portland rent is INSANE right now. like a 2-bedroom is running 2200 to 2800 depending on neighborhood. we need at least 2 bedrooms because Julian needs a studio space. this is gonna be an adventure
+    expected_memory_stores:
+      - "apartment search"
+      - "Portland rent"
+      - "2200 to 2800"
+      - "2 bedrooms"
+      - "Julian studio space"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where does Julian currently live?"
+    expected_contains: ["Westridge Apartments"]
+  - question: "When does Julian's lease end?"
+    expected_contains: ["next month", "5 weeks"]
+  - question: "What is Maya's concern about moving in together?"
+    expected_contains: ["alone time"]
+  - question: "How long have Maya and Julian been together?"
+    expected_contains: ["two years"]
+  - question: "What did they decide about where to live?"
+    expected_contains: ["new place", "fresh start"]
+  - question: "How many bedrooms do they need?"
+    expected_contains: ["2", "two"]
+  - question: "Why do they need a second bedroom?"
+    expected_contains: ["Julian", "studio", "design"]
+  - question: "How many nights a week does Julian spend at Maya's?"
+    expected_contains: ["5"]
+  - question: "What is rent like in Portland?"
+    expected_contains: ["2200", "2800"]
+  - question: "What did Clara think about them moving in together?"
+    expected_contains: ["supportive", "already"]

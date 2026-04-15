@@ -1,0 +1,168 @@
+story_id: 422
+story_name: "Monthly Shifts"
+category: "Volunteering"
+description: |
+  Maya settles into her monthly food bank routine. Gets faster at sorting,
+  builds relationships with other volunteers. Growing sense of purpose.
+duration_simulated: "3 months"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 8:00 AM"
+    user_input: |
+      second month at the food bank and I'm already way faster at sorting like Harold was impressed he said most new volunteers take 3 or 4 months to get the system down and I got it in two and I was like well I'm a software engineer I'm good at systems and he laughed
+    expected_memory_stores:
+      - "second month"
+      - "faster at sorting"
+      - "Harold impressed"
+      - "systems skills transfer"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 11:00 AM"
+    user_input: |
+      met another regular volunteer named Tomas he's a retired teacher and he does the truck unloading which is the heavy lifting part and he's like 65 but built like a tank and he and Harold are hilarious together they bicker about everything from sports to which canned beans are the best
+    expected_memory_stores:
+      - "Tomas retired teacher"
+      - "does truck unloading"
+      - "65 years old strong"
+      - "Tomas and Harold bicker"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 2:00 PM"
+    user_input: |
+      third month and Diane asked me to help train a new volunteer which was cool because like two months ago I WAS the new volunteer and now I'm showing someone else the ropes and the new girl's name is Priti she's a college student at Portland State doing it for community service hours but she actually seems into it
+    expected_memory_stores:
+      - "third month"
+      - "training new volunteer"
+      - "Priti from Portland State"
+      - "community service hours"
+      - "Maya now experienced"
+    expected_adaptation:
+      emotion_detected: "capable"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Diane told me they're always short on volunteers during summer because people travel and she asked if I could maybe do two shifts over the summer like first and third Saturdays and I said I'd think about it because that's a lot with wedding planning but I want to help
+    expected_memory_stores:
+      - "summer volunteer shortage"
+      - "Diane asks for extra shifts"
+      - "first and third Saturdays"
+      - "conflict with wedding planning"
+    expected_adaptation:
+      emotion_detected: "torn"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 5:00 PM"
+    user_input: |
+      told Julian about the extra summer shifts and he was like babe you already have so much going on with work and the wedding and he's right but also I feel like the food bank needs me and it feels selfish to say no when people literally need food and I have the time on Saturdays I just have to manage it better
+    expected_memory_stores:
+      - "Julian concerned about overcommitting"
+      - "work wedding food bank balance"
+      - "feels selfish to say no"
+      - "manage time better"
+    expected_adaptation:
+      emotion_detected: "conflicted"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 10:00 AM"
+    user_input: |
+      actually talked to Dr Tate about the volunteering during our session and she said it's great that I found something purposeful but to be careful about over-committing as a way to feel needed and I was like whoa that's very therapist of you and she laughed but I get her point
+    expected_memory_stores:
+      - "Dr Tate session"
+      - "over-committing to feel needed"
+      - "therapist warning"
+      - "Maya takes point"
+    expected_adaptation:
+      emotion_detected: "self-aware"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Monday 8:00 PM"
+    user_input: |
+      decided to keep it at once a month for now and told Diane and she said totally understand and no pressure and she was genuinely cool about it which I appreciated because some organizations guilt trip you and Diane is not like that at all she just said whenever you can we're grateful
+    expected_memory_stores:
+      - "staying at monthly"
+      - "Diane understanding"
+      - "no guilt trip"
+      - "Diane is gracious"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      how often am I volunteering at the food bank right now
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      Clara and I did our food bank shift at the same time this month which was fun because we could catch up while sorting and she said she's been volunteering for about a year now and she's the one who introduced the online scheduling system which makes sense because she's an ops person
+    expected_memory_stores:
+      - "Clara and Maya same shift"
+      - "Clara volunteered one year"
+      - "Clara intro'd online scheduling"
+      - "ops background"
+    expected_adaptation:
+      emotion_detected: "connected"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 8:00 PM"
+    user_input: |
+      three months in and volunteering is like the anchor of my month now like everything else is chaotic with work and wedding planning and house stuff but the food bank is just simple and good and I show up I help people I go home and I feel better about being a human being in this world
+    expected_memory_stores:
+      - "three months in"
+      - "anchor of the month"
+      - "simple and good"
+      - "feel better about being human"
+    expected_adaptation:
+      emotion_detected: "grounded"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How often does Maya volunteer at the food bank?"
+    expected_contains: ["monthly", "once a month", "first Saturday"]
+  - question: "Who is Tomas at the food bank?"
+    expected_contains: ["retired teacher", "truck unloading"]
+  - question: "Who is Priti?"
+    expected_contains: ["new volunteer", "Portland State", "college"]
+  - question: "Did Maya agree to extra summer shifts?"
+    expected_contains: ["no", "staying monthly"]
+  - question: "What did Dr. Tate say about Maya's volunteering?"
+    expected_contains: ["over-committing", "feel needed"]
+  - question: "How long has Clara been volunteering?"
+    expected_contains: ["year", "one year"]
+  - question: "What system did Clara introduce at the food bank?"
+    expected_contains: ["online scheduling"]
+  - question: "How does Maya feel about volunteering after three months?"
+    expected_contains: ["anchor", "grounded", "simple and good"]
+  - question: "Did Diane guilt Maya about not doing extra shifts?"
+    expected_contains: ["no", "understanding", "cool about it"]
+  - question: "What did Maya help with for the first time in month three?"
+    expected_contains: ["training", "new volunteer"]

@@ -1,0 +1,198 @@
+story_id: 497
+story_name: "New Years Eve Friend Group"
+category: "Holiday Season"
+description: |
+  Tests memory of New Year's Eve party at the Woodstock house with friends.
+  Establishes celebration, champagne toast, friend group gathering.
+  Verifies system captures social connections across all threads.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "December 31 4:00 PM"
+    user_input: |
+      it's New Years Eve and we're hosting at the Woodstock house again because apparently we're the hosting people now and the guest list is Nadia Omar Tessa Marcus Lily Danny and Sam from work and Jenny is coming on FaceTime because she's in Austin and I made appetizers and Julian bought way too much champagne and Kobe is wearing a sparkly bow tie
+    expected_memory_stores:
+      - "New Years Eve"
+      - "hosting Woodstock"
+      - "hosting people now"
+      - "Nadia Omar Tessa Marcus Lily"
+      - "Danny Sam from work"
+      - "Jenny FaceTime Austin"
+      - "appetizers"
+      - "too much champagne"
+      - "Kobe bow tie"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "December 31 7:00 PM"
+    user_input: |
+      everyone's arriving and this is the biggest group we've had at the house and Danny and Sam are meeting the non-work friends for the first time and Danny immediately started talking to Omar about soccer which makes sense and Sam and Tessa are bonding over nonprofit work because Sam volunteers at a coding bootcamp for kids and it's so cool watching my worlds merge
+    expected_memory_stores:
+      - "biggest group"
+      - "Danny Sam first time"
+      - "Danny Omar soccer"
+      - "Sam Tessa nonprofits"
+      - "Sam coding bootcamp kids"
+      - "worlds merging"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "December 31 8:00 PM"
+    user_input: |
+      we set up Jenny on the big TV so she can be part of the party and she's sitting in her apartment in Austin with a glass of wine and she said she feels like she's there and everyone waved and Marcus yelled happy new year Austin and she said it's not midnight yet Marcus and he said it is somewhere and she laughed
+    expected_memory_stores:
+      - "Jenny on TV"
+      - "Austin apartment"
+      - "wine glass"
+      - "everyone waved"
+      - "Marcus happy new year early"
+      - "it is somewhere"
+    expected_adaptation:
+      emotion_detected: "festive"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "December 31 9:00 PM"
+    user_input: |
+      we did a year in review thing where everyone shared their best moment of the year and Omar said reaching a V6 climb and Nadia said the book club which made me so happy and Tessa said meeting all of you which got an aww and Marcus said honestly this friend group and Lily said getting promoted at Conduit which I didn't even know about and Sam said coaching his first bootcamp cohort
+    expected_memory_stores:
+      - "year in review"
+      - "Omar V6 climb"
+      - "Nadia book club"
+      - "Tessa meeting everyone"
+      - "Marcus friend group"
+      - "Lily promoted Conduit"
+      - "Sam first bootcamp cohort"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "December 31 9:30 PM"
+    user_input: |
+      my turn and I said the road trips and Julian squeezed my hand and then Julian said the photo book which was his gift to me and Jenny on the TV goes I said this would happen and Nadia and I looked at each other because we both know about the wedding song and we shared a look and Julian was like what and we both said nothing at the same time
+    expected_memory_stores:
+      - "Maya's best road trips"
+      - "Julian's best photo book"
+      - "Julian squeezed hand"
+      - "Jenny I said this"
+      - "Nadia Maya wedding song look"
+      - "both said nothing"
+    expected_adaptation:
+      emotion_detected: "secretive"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "December 31 10:00 PM"
+    user_input: |
+      Danny asked Maya to play guitar and I was like Danny no and everyone was like yes do it and I caved and played Knockin on Heavens Door and then I played Wonderwall because Julian groaned and everyone sang along and then Tessa got her ukulele from her car and we played together and it was actually pretty good and Sam was like I should've brought my bass
+    expected_memory_stores:
+      - "Danny asked guitar"
+      - "Maya caved"
+      - "Knockin on Heavens Door"
+      - "Wonderwall Julian groaned"
+      - "everyone sang along"
+      - "Tessa ukulele"
+      - "played together"
+      - "Sam bass"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "December 31 11:00 PM"
+    user_input: |
+      Julian set up the Settlers of Catan board and we played a speed round and Omar was as aggressive as ever and Tessa won AGAIN and Marcus flipped a game piece and Nadia was like this is why I love this group and Danny who has never played before was completely lost and Lily was patiently teaching him the rules while also winning her second game ever
+    expected_memory_stores:
+      - "Catan speed round"
+      - "Omar aggressive"
+      - "Tessa won again"
+      - "Marcus flipped piece"
+      - "Nadia loves group"
+      - "Danny first time lost"
+      - "Lily teaching Danny"
+    expected_adaptation:
+      emotion_detected: "entertained"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "December 31 11:30 PM"
+    user_input: |
+      who came to the New Years Eve party
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "December 31 11:55 PM"
+    user_input: |
+      five minutes to midnight and everyone has champagne and Julian turned on the countdown on the TV next to Jenny's FaceTime and we're all counting down and Kobe is getting anxious from the energy and I'm holding Julian's hand and looking around at all these people in my house that I love and I can't believe this is my life I really can't
+    expected_memory_stores:
+      - "five minutes midnight"
+      - "champagne"
+      - "countdown on TV"
+      - "Jenny's FaceTime"
+      - "Kobe anxious"
+      - "Julian's hand"
+      - "can't believe my life"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "January 1 12:01 AM"
+    user_input: |
+      HAPPY NEW YEAR and everyone screamed and Julian kissed me and champagne went everywhere and Marcus popped a confetti cannon that scared Kobe half to death and Nadia and Omar kissed and Tessa was hugging Lily and Danny and Sam were doing a bro handshake thing and Jenny was screaming happy new year from the TV and I toasted to everyone and said here's to another year of becoming who we are and Julian said that's your best one yet
+    expected_memory_stores:
+      - "midnight New Year"
+      - "everyone screamed"
+      - "Julian kissed Maya"
+      - "champagne everywhere"
+      - "Marcus confetti cannon"
+      - "Kobe scared"
+      - "Nadia Omar kissed"
+      - "Jenny screaming from TV"
+      - "Maya toast"
+      - "becoming who we are"
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where was the New Year's Eve party?"
+    expected_contains: ["Woodstock house"]
+  - question: "How did Jenny attend the party?"
+    expected_contains: ["FaceTime", "TV"]
+  - question: "What game did they play at the party?"
+    expected_contains: ["Settlers of Catan"]
+  - question: "Who won the Catan speed round?"
+    expected_contains: ["Tessa"]
+  - question: "What songs did Maya play on guitar?"
+    expected_contains: ["Knockin on Heaven", "Wonderwall"]
+  - question: "What was Maya's New Year's toast?"
+    expected_contains: ["becoming who we are"]
+  - question: "What scared Kobe at midnight?"
+    expected_contains: ["confetti cannon", "Marcus"]
+  - question: "What was Nadia's best moment of the year?"
+    expected_contains: ["book club"]
+  - question: "What was Lily's big news?"
+    expected_contains: ["promoted", "Conduit"]
+  - question: "Who played ukulele with Maya?"
+    expected_contains: ["Tessa"]

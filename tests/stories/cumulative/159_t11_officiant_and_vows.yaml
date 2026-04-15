@@ -1,0 +1,203 @@
+story_id: 159
+story_name: "Officiant and Vows"
+category: "Life Events"
+description: |
+  Finding an officiant and starting to think about vows. Julian's college
+  friend Marcus offers. Emotional discussions about what the ceremony
+  should feel like. Tests relational tracking and emotional depth.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      okay so we still need an officiant and I've been looking at like professional officiants online and they're fine but they all feel kind of generic you know like they have these template ceremonies and I want ours to feel personal and real not like a script
+    expected_memory_stores:
+      - "officiant search"
+      - "professional officiants feel generic"
+      - "wants personal ceremony"
+    expected_triples:
+      - ["user", "searching_for", "wedding officiant"]
+      - ["user", "dislikes", "generic professional officiants"]
+      - ["user", "wants", "personal and real ceremony"]
+    expected_adaptation:
+      emotion_detected: "discerning"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 8:30 PM"
+    user_input: |
+      so then Julian got this idea he was like what about Marcus and I was like your brother Marcus and he said yeah he's ordained online remember he did it for his friend's wedding two years ago and honestly Marcus is SO funny and warm and he knows our whole story because he's Julian's best friend basically AND his brother
+    expected_memory_stores:
+      - "Marcus Reeves suggested as officiant"
+      - "Julian's brother"
+      - "ordained online"
+      - "officiated friend's wedding"
+      - "knows their story"
+    expected_triples:
+      - ["Julian", "suggested", "Marcus Reeves as officiant"]
+      - ["Marcus Reeves", "is", "ordained online"]
+      - ["Marcus Reeves", "previously_officiated", "friend's wedding"]
+      - ["Marcus Reeves", "relationship", "Julian's brother and best friend"]
+    expected_adaptation:
+      emotion_detected: "intrigued"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 10:00 AM"
+    user_input: |
+      Julian called Marcus and he was like bro would you officiate our wedding and Marcus literally started crying on the phone like full on tears and he said it would be the greatest honor of his life and now I'M crying because that's so beautiful Julian's family is so sweet when they're not being Diane about flowers
+    expected_memory_stores:
+      - "Marcus agreed to officiate"
+      - "Marcus emotional"
+      - "Marcus cried"
+      - "honor of his life"
+    expected_triples:
+      - ["Marcus Reeves", "agreed_to", "officiate wedding"]
+      - ["Marcus Reeves", "has_emotion", "cried with joy"]
+      - ["user", "has_emotion", "moved"]
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 2:00 PM"
+    user_input: |
+      Diane was actually thrilled about Marcus officiating she called Julian and said oh that's wonderful your father would have loved that and um I didn't know Julian's dad passed away like I knew but hearing Diane say that really hit different Julian went quiet after the call and I just held his hand
+    expected_memory_stores:
+      - "Diane thrilled about Marcus"
+      - "Julian's father deceased"
+      - "emotional moment for Julian"
+      - "Diane referenced Julian's father"
+    expected_triples:
+      - ["Diane Reeves", "thrilled_about", "Marcus officiating"]
+      - ["Julian", "father_status", "deceased"]
+      - ["Diane Reeves", "referenced", "Julian's late father"]
+      - ["user", "has_emotion", "somber"]
+    expected_adaptation:
+      emotion_detected: "somber"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 9:00 AM"
+    user_input: |
+      Julian told me this morning that he wants to mention his dad somehow in the ceremony like leave an empty chair or have Marcus say something and I said of course absolutely whatever you need and he said thanks babe and honestly planning this wedding is bringing up a lot of stuff for him that I didn't expect
+    expected_memory_stores:
+      - "Julian wants to honor father"
+      - "empty chair idea"
+      - "Marcus to mention Julian's dad"
+      - "wedding bringing up grief"
+    expected_triples:
+      - ["Julian", "wants", "to honor late father at ceremony"]
+      - ["Julian", "considering", "empty chair for late father"]
+      - ["Marcus Reeves", "will_mention", "Julian's father in ceremony"]
+      - ["user", "has_emotion", "empathetic"]
+    expected_adaptation:
+      emotion_detected: "empathetic"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      we started talking about vows last night and we both want to write our own which terrifies me because like I'm a software engineer not a poet but Julian said just speak from the heart and I'm like easy for you to say you're a creative person I debug code for a living
+    expected_memory_stores:
+      - "writing own vows"
+      - "Maya scared about writing"
+      - "Julian encouraging"
+      - "Maya not a writer"
+    expected_triples:
+      - ["user", "decided", "writing own vows"]
+      - ["user", "worried_about", "writing vows as a software engineer"]
+      - ["Julian", "encouraging", "user to speak from the heart"]
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      Jenny said she'll help me with my vows she was like girl I will not let you say something cringe in front of 85 people and I was like thanks Jenny that's so reassuring but actually yeah I need help because right now all I've got is Julian you're nice and I like you which is true but not exactly wedding material
+    expected_memory_stores:
+      - "Jenny helping with vows"
+      - "85 guests"
+      - "Maya struggling with wording"
+    expected_triples:
+      - ["Jenny", "helping_with", "user's vows"]
+      - ["user", "guest_count", "85"]
+      - ["user", "has_emotion", "self-deprecating humor"]
+    expected_adaptation:
+      emotion_detected: "self-deprecating humor"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 8:00 AM"
+    user_input: |
+      Marcus called this morning to talk about the ceremony structure he was thinking opening remarks then a reading then vows then rings then the pronouncement and kiss and maybe a handfasting because Julian apparently mentioned wanting something Celtic which I didn't know about but I'm into it
+    expected_memory_stores:
+      - "Marcus planning ceremony"
+      - "ceremony structure outlined"
+      - "handfasting possible"
+      - "Celtic element"
+      - "Julian wants Celtic tradition"
+    expected_adaptation:
+      emotion_detected: "curious"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 5:00 PM"
+    user_input: |
+      so the reading is gonna be done by my mom Vivian and she's going to read this passage from like I think it's Khalil Gibran about love and freedom and it's so perfect because my parents have been married for 32 years and they still hold hands it's disgusting in the best way
+    expected_memory_stores:
+      - "Vivian doing reading"
+      - "Khalil Gibran passage"
+      - "love and freedom theme"
+      - "parents married 32 years"
+    expected_adaptation:
+      emotion_detected: "sentimental"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 9:00 PM"
+    user_input: |
+      started a draft of my vows tonight just bullet points for now and I got kind of emotional writing them like thinking about meeting Julian at that coffee shop and how he spilled his latte on my laptop and I was furious and he insisted on buying me dinner to make up for it and that dinner was our first date and now we're getting married wild
+    expected_memory_stores:
+      - "vow draft started"
+      - "how Maya and Julian met"
+      - "coffee shop"
+      - "Julian spilled latte on laptop"
+      - "dinner as first date"
+    expected_adaptation:
+      emotion_detected: "nostalgic"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who is officiating Maya's wedding?"
+    expected_contains: ["Marcus"]
+  - question: "What is Marcus's relationship to Julian?"
+    expected_contains: ["brother"]
+  - question: "Is Julian's father alive?"
+    expected_contains: ["passed", "deceased", "no"]
+  - question: "How does Julian want to honor his father at the wedding?"
+    expected_contains: ["empty chair", "mention"]
+  - question: "What Celtic tradition might be included?"
+    expected_contains: ["handfasting"]
+  - question: "Who is doing the ceremony reading?"
+    expected_contains: ["Vivian"]
+  - question: "How did Maya and Julian meet?"
+    expected_contains: ["coffee shop", "spilled", "latte"]
+  - question: "Who is helping Maya write her vows?"
+    expected_contains: ["Jenny"]
+  - question: "How long have Maya's parents been married?"
+    expected_contains: ["32"]
+  - question: "What author is the reading from?"
+    expected_contains: ["Gibran"]

@@ -1,0 +1,221 @@
+story_id: 213
+story_name: "Fresno Visit to Grandpa"
+category: "Family"
+description: |
+  Tests in-person visit details. Maya and Clara go to Fresno to see Grandpa Wei.
+  Emotional intensity of seeing him in person. Verifies location tracking and
+  multi-person family dynamics.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 3:00 PM"
+    user_input: |
+      Clara and I just landed in Fresno and dad picked us up from the airport and he looks tired like really tired and he said grandpa had a rough night and barely slept and I'm already fighting back tears in the car
+    expected_memory_stores:
+      - "landed Fresno"
+      - "Clara with Maya"
+      - "George picked them up"
+      - "George tired"
+      - "grandpa rough night"
+    expected_triples:
+      - ["user", "traveled_to", "Fresno"]
+      - ["Clara", "accompanied", "user on Fresno trip"]
+      - ["George", "picked_up", "user from airport"]
+      - ["Grandpa Wei", "had", "rough night"]
+      - ["user", "has_emotion", "anxious"]
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 4:30 PM"
+    user_input: |
+      we got to grandpa's apartment and it's this small one bedroom in a complex near downtown Fresno and the hospice nurse Linda was there and she's really kind and she pulled Clara aside since Clara is a nurse too and they talked about his vitals and medication
+    expected_memory_stores:
+      - "grandpa's apartment"
+      - "downtown Fresno"
+      - "hospice nurse Linda"
+      - "Clara nurse consultation"
+      - "vitals and medication"
+    expected_triples:
+      - ["Grandpa Wei", "lives_in", "apartment near downtown Fresno"]
+      - ["Linda", "is", "hospice nurse for Grandpa Wei"]
+      - ["Clara", "consulted_with", "Linda about vitals and medication"]
+    expected_adaptation:
+      emotion_detected: "worried"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 5:00 PM"
+    user_input: |
+      seeing him in person is so different from video he's so thin and his hands were shaking and he was in this hospital bed they brought in and the room smelled like medicine and old books and I held his hand and it was cold and I just said hi grandpa it's Maya
+    expected_memory_stores:
+      - "grandpa thin"
+      - "shaking hands"
+      - "hospital bed"
+      - "cold hands"
+      - "Maya held his hand"
+    expected_triples:
+      - ["Grandpa Wei", "condition", "very thin with shaking hands"]
+      - ["Grandpa Wei", "is_in", "hospital bed at home"]
+      - ["user", "held_hand_of", "Grandpa Wei"]
+      - ["user", "has_emotion", "heartbroken"]
+    expected_adaptation:
+      emotion_detected: "heartbroken"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 5:30 PM"
+    user_input: |
+      he recognized me this time he said Maya my engineer and I smiled and said that's right grandpa and he said tell me about your work and I told him about my project at Vantage wait I mean at um my company whatever and he listened with his eyes closed nodding
+    expected_memory_stores:
+      - "recognized Maya"
+      - "my engineer"
+      - "asked about work"
+      - "listening with eyes closed"
+    expected_triples:
+      - ["Grandpa Wei", "recognized", "user as Maya my engineer"]
+      - ["Grandpa Wei", "asked_about", "user's work"]
+      - ["user", "has_emotion", "bittersweet"]
+    expected_adaptation:
+      emotion_detected: "bittersweet"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 8:00 PM"
+    user_input: |
+      Clara and I took turns sitting with him and Clara was so calm and professional checking on him and adjusting his pillows and I was like how are you not falling apart and she said I am I'm just better at hiding it and that made me cry again
+    expected_memory_stores:
+      - "taking turns"
+      - "Clara calm professional"
+      - "hiding grief"
+      - "Maya crying"
+    expected_triples:
+      - ["Clara", "is", "calm and professional caregiver"]
+      - ["Clara", "said", "I am falling apart but better at hiding it"]
+      - ["user", "has_emotion", "raw"]
+    expected_adaptation:
+      emotion_detected: "raw"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 8:00 AM"
+    user_input: |
+      what's the name of grandpa's hospice nurse and where is his apartment
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 9:00 AM"
+    user_input: |
+      grandpa was more alert this morning and he wanted congee so dad made it and he ate a little bit and he told us about how he used to make congee for grandma Mei every Sunday morning and how she liked it with pickled vegetables and century egg and I could see dad tearing up
+    expected_memory_stores:
+      - "grandpa alert"
+      - "wanted congee"
+      - "George made congee"
+      - "ate a little"
+      - "grandma Mei Sunday congee"
+      - "pickled vegetables century egg"
+      - "George emotional"
+    expected_triples:
+      - ["Grandpa Wei", "wanted", "congee"]
+      - ["George", "made", "congee for Grandpa Wei"]
+      - ["Grandma Mei", "liked", "congee with pickled vegetables and century egg on Sundays"]
+      - ["user", "has_emotion", "tender"]
+    expected_adaptation:
+      emotion_detected: "tender"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 12:00 PM"
+    user_input: |
+      he asked to see a photo of Julian and I showed him and he said ah he looks kind Maya and I said he is grandpa and he said good good that's all that matters and then he asked about the wedding and I told him it's in October and he smiled but I don't think he thinks he'll be there
+    expected_memory_stores:
+      - "showed Julian photo"
+      - "he looks kind"
+      - "asked about wedding"
+      - "October wedding"
+      - "implied won't be there"
+    expected_triples:
+      - ["Grandpa Wei", "said_about_Julian", "he looks kind"]
+      - ["Grandpa Wei", "asked_about", "wedding in October"]
+      - ["Grandpa Wei", "implied", "won't be at the wedding"]
+    expected_adaptation:
+      emotion_detected: "devastated"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 4:00 PM"
+    user_input: |
+      before we left grandpa held my hand and said Maya build beautiful things and I said I will grandpa and he squeezed my hand and I don't know if that was a goodbye but it felt like one and I kissed his forehead and walked out and completely lost it in the hallway
+    expected_memory_stores:
+      - "build beautiful things"
+      - "hand squeeze"
+      - "felt like goodbye"
+      - "kissed forehead"
+      - "breakdown in hallway"
+    expected_triples:
+      - ["Grandpa Wei", "said", "build beautiful things"]
+      - ["user", "felt", "visit was a goodbye"]
+      - ["user", "kissed_forehead_of", "Grandpa Wei"]
+      - ["user", "has_emotion", "grief"]
+    expected_adaptation:
+      emotion_detected: "grief"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 9:00 PM"
+    user_input: |
+      on the flight home and Clara is asleep next to me and I'm just staring out the window thinking about how grandpa was the reason I became an engineer he used to show me blueprints when I was like seven and explain how buildings stand up and bridges don't fall down and now he's the one who can barely stand
+    expected_memory_stores:
+      - "flight home"
+      - "Clara sleeping"
+      - "grandpa inspired engineering"
+      - "blueprints at age seven"
+      - "buildings and bridges"
+      - "role reversal"
+    expected_triples:
+      - ["Grandpa Wei", "inspired", "user to become an engineer"]
+      - ["Grandpa Wei", "showed_user", "blueprints at age seven"]
+      - ["Grandpa Wei", "taught_about", "how buildings stand and bridges don't fall"]
+      - ["user", "has_emotion", "melancholic"]
+    expected_adaptation:
+      emotion_detected: "melancholic"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where is Grandpa Wei's apartment?"
+    expected_contains: ["Fresno", "downtown"]
+  - question: "Who is Grandpa Wei's hospice nurse?"
+    expected_contains: ["Linda"]
+  - question: "What did Grandpa Wei ask Maya to do?"
+    expected_contains: ["build beautiful things"]
+  - question: "What did Grandpa Wei call Maya?"
+    expected_contains: ["my engineer"]
+  - question: "What did Grandpa say about Julian?"
+    expected_contains: ["kind"]
+  - question: "What food did Grandpa want?"
+    expected_contains: ["congee"]
+  - question: "Who made the congee?"
+    expected_contains: ["George", "dad"]
+  - question: "How did Grandpa inspire Maya's career?"
+    expected_contains: ["blueprints", "engineer", "buildings", "bridges"]
+  - question: "What did Clara say about hiding her feelings?"
+    expected_contains: ["better at hiding it"]
+  - question: "Does Grandpa Wei think he'll make it to the wedding?"
+    expected_contains: ["no", "doesn't think"]

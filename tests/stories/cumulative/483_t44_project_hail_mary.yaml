@@ -1,0 +1,188 @@
+story_id: 483
+story_name: "Project Hail Mary Some Don't Finish"
+category: "Book Club"
+description: |
+  Tests memory of the second book club with Project Hail Mary.
+  Establishes attendance issues, some members not finishing.
+  Verifies system tracks group dynamics deterioration.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 6:00 PM"
+    user_input: |
+      okay so it's book club meeting number two and we're doing Project Hail Mary by Andy Weir and I finished it like two weeks ago and it was INCREDIBLE like the science and the alien friendship and the ending made me cry and honestly it might be my favorite book ever but the group chat has been quiet which is not a great sign
+    expected_memory_stores:
+      - "second meeting"
+      - "Project Hail Mary"
+      - "Andy Weir"
+      - "Maya finished early"
+      - "science alien friendship"
+      - "group chat quiet"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 7:00 PM"
+    user_input: |
+      so not everyone came tonight like Marcus texted at the last minute saying he can't make it and he didn't really give a reason and Omar came but he only read like the first 100 pages and said he got busy with work and Lily finished and Tessa finished but Nadia said she read most of it and by most she means like 60 percent
+    expected_memory_stores:
+      - "Marcus no-showed"
+      - "no reason given"
+      - "Omar read 100 pages"
+      - "busy with work"
+      - "Lily finished"
+      - "Tessa finished"
+      - "Nadia 60 percent"
+    expected_adaptation:
+      emotion_detected: "disappointed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 7:30 PM"
+    user_input: |
+      the discussion is still good but it's different because Omar keeps having to say wait what happened and we're like spoiler alert and he's like just tell me and its hard to have a deep conversation when half the people don't know how it ends and I'm trying not to be frustrated but like it's a book club you gotta read the book
+    expected_memory_stores:
+      - "discussion hampered"
+      - "Omar doesn't know ending"
+      - "spoiler issues"
+      - "Maya frustrated"
+      - "need to read the book"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 8:00 PM"
+    user_input: |
+      Lily and I had an amazing side conversation about the science in the book and she's an engineer so she appreciated all the physics and she said the relationship between Ryland and Rocky the alien is one of the best friendships in fiction and I completely agree and Tessa said Rocky is basically her spirit animal which is weird because he's an alien spider thing
+    expected_memory_stores:
+      - "Lily and Maya science talk"
+      - "Lily engineer"
+      - "Ryland and Rocky friendship"
+      - "best friendship in fiction"
+      - "Tessa Rocky spirit animal"
+      - "alien spider thing"
+    expected_adaptation:
+      emotion_detected: "engaged"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 8:30 PM"
+    user_input: |
+      Omar left early because he and Nadia have a climbing thing tomorrow morning and Nadia said sorry and I was like it's fine but honestly the vibe tonight is not as good as the first one and there's only four of us now and I'm worried the book club is already falling apart which happens to like every book club according to the internet
+    expected_memory_stores:
+      - "Omar left early"
+      - "climbing tomorrow"
+      - "Nadia apologized"
+      - "only four people"
+      - "vibe not as good"
+      - "worried falling apart"
+    expected_adaptation:
+      emotion_detected: "worried"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 9:00 PM"
+    user_input: |
+      Tessa stayed late and we talked about it and she said book clubs die when the book is too long or too hard and Project Hail Mary is like 500 pages which is a lot and she suggested shorter books next time and maybe sending discussion questions ahead of time so people feel prepared and I was like those are really good ideas Tessa
+    expected_memory_stores:
+      - "Tessa stayed late"
+      - "book clubs die reasons"
+      - "Project Hail Mary too long"
+      - "500 pages"
+      - "shorter books suggestion"
+      - "discussion questions ahead"
+      - "Tessa good ideas"
+    expected_adaptation:
+      emotion_detected: "receptive"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 9:30 PM"
+    user_input: |
+      Lily left and said she had a great time even if it was smaller and she wants to keep going and she suggested maybe we pick books that are under 300 pages and also she said themed snacks matching the book setting would be fun like for Project Hail Mary we could have done space themed snacks and I was like Lily that's genius
+    expected_memory_stores:
+      - "Lily wants to continue"
+      - "under 300 pages"
+      - "themed snacks idea"
+      - "space themed"
+      - "Lily genius"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 10:00 PM"
+    user_input: |
+      how many people came to the second book club and who didn't finish the book
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 10:30 PM"
+    user_input: |
+      Julian came down and asked how it went and I was like it was okay but not as good as last time and he said that's normal for groups the energy fluctuates and I said yeah but I don't want it to die and he said so don't let it die restructure it and that's exactly what Tessa said too so yeah I'm going to restructure it
+    expected_memory_stores:
+      - "Julian asked how it went"
+      - "okay not great"
+      - "energy fluctuates"
+      - "don't want it to die"
+      - "restructure idea"
+      - "Tessa said same thing"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 11:00 PM"
+    user_input: |
+      texted the group chat and said hey everyone let's regroup and make some changes for next month and I suggested shorter books and themed snacks and discussion questions sent a week ahead and Marcus replied and said sorry I missed tonight I'll be there next time and Omar said the changes sound great and Nadia sent a thumbs up so maybe this is salvageable
+    expected_memory_stores:
+      - "texted group chat"
+      - "suggested changes"
+      - "shorter books"
+      - "themed snacks"
+      - "discussion questions ahead"
+      - "Marcus will come next time"
+      - "Omar supports changes"
+      - "Nadia thumbs up"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What was the second book club book?"
+    expected_contains: ["Project Hail Mary"]
+  - question: "Who didn't come to the second meeting?"
+    expected_contains: ["Marcus"]
+  - question: "Who didn't finish the book?"
+    expected_contains: ["Omar", "Nadia", "Marcus"]
+  - question: "Why was the discussion harder this time?"
+    expected_contains: ["spoiler", "didn't finish", "didn't know ending"]
+  - question: "What changes did Tessa suggest?"
+    expected_contains: ["shorter books", "discussion questions"]
+  - question: "What fun idea did Lily suggest?"
+    expected_contains: ["themed snacks"]
+  - question: "How many pages was Project Hail Mary?"
+    expected_contains: ["500"]
+  - question: "Who is Rocky in Project Hail Mary?"
+    expected_contains: ["alien"]
+  - question: "What did Julian suggest about the book club?"
+    expected_contains: ["restructure"]
+  - question: "What maximum page count was suggested for future books?"
+    expected_contains: ["300"]

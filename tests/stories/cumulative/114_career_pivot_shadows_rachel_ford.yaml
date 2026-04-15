@@ -1,0 +1,213 @@
+story_id: 114
+story_name: "Shadows Rachel Ford in UX"
+category: "Career"
+description: |
+  Tests whether the system captures the shadow day experience, Maya's detailed observations
+  about UX research work, her mixed reactions, and the distinction between what she likes
+  and doesn't like about the role.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 8:30am"
+    user_input: |
+      shadow day today! met Rachel Ford at the UX team's area which is on the third floor, I've literally never been up there. it's all open concept with whiteboards everywhere and sticky notes on every surface. very different vibe from engineering
+    expected_memory_stores:
+      - "shadow day started"
+      - "Rachel Ford"
+      - "third floor"
+      - "open concept"
+      - "whiteboards"
+      - "different atmosphere"
+    expected_triples:
+      - ["user", "started", "shadow day with Rachel Ford"]
+      - ["UX team", "located_on", "third floor at Conduit"]
+      - ["UX team area", "has_style", "open concept with whiteboards and sticky notes"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 9:30am"
+    user_input: |
+      Rachel Ford is super cool, she's been doing UX research for like 8 years, started at a design agency in San Francisco and moved to Portland for the lifestyle. she has this very calm energy that's totally different from the engineering team
+    expected_memory_stores:
+      - "Rachel Ford background"
+      - "8 years UX"
+      - "San Francisco"
+      - "design agency"
+      - "calm energy"
+    expected_triples:
+      - ["Rachel Ford", "has_experience", "8 years in UX research"]
+      - ["Rachel Ford", "previously_worked_at", "design agency in San Francisco"]
+      - ["Rachel Ford", "moved_to", "Portland for lifestyle"]
+      - ["user", "has_emotion", "impressed"]
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 10:30am"
+    user_input: |
+      first thing we did was a user interview. Rachel was talking to this customer about their experience with the dashboard and like the way she asks questions is an art form. she never leads the user, she just listens and follows up with these perfect probes
+    expected_memory_stores:
+      - "user interview"
+      - "dashboard"
+      - "interviewing technique"
+      - "non-leading questions"
+    expected_triples:
+      - ["user", "observed", "Rachel Ford conducting user interview about dashboard"]
+      - ["Rachel Ford", "skilled_at", "non-leading interview questions"]
+      - ["user", "has_emotion", "fascinated"]
+    expected_adaptation:
+      emotion_detected: "fascinated"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 12:00pm"
+    user_input: |
+      lunch with the UX team and they're all super nice but um the conversation was very different from what I'm used to. lots of talk about personas and journey maps and empathy exercises. I like the empathy part but the personas thing feels kinda... made up? like you're inventing a fake person
+    expected_memory_stores:
+      - "UX team lunch"
+      - "personas"
+      - "journey maps"
+      - "empathy exercises"
+      - "personas feel fake"
+    expected_triples:
+      - ["user", "had_lunch_with", "UX team"]
+      - ["user", "likes", "empathy exercises in UX"]
+      - ["user", "dislikes", "personas as they feel made up"]
+      - ["user", "has_emotion", "skeptical"]
+    expected_adaptation:
+      emotion_detected: "skeptical"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 2:00pm"
+    user_input: |
+      afternoon was a synthesis session where they took all the interview data from the past month and tried to find patterns. this part was actually really cool, it's like detective work but with human behavior. I liked this way more than the interview part
+    expected_memory_stores:
+      - "synthesis session"
+      - "pattern finding"
+      - "detective work"
+      - "preferred over interviews"
+    expected_triples:
+      - ["user", "enjoyed", "synthesis session finding patterns in interview data"]
+      - ["user", "prefers", "synthesis over conducting interviews"]
+      - ["user", "has_emotion", "engaged"]
+    expected_adaptation:
+      emotion_detected: "engaged"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 3:30pm"
+    user_input: |
+      then Rachel had to make a slide deck to present findings to the product team and honestly? that part was boring as hell. like just making slides for an hour. she said that's like 40% of the job and I was like... oh
+    expected_memory_stores:
+      - "slide deck creation"
+      - "boring"
+      - "40 percent of job"
+      - "presenting findings"
+    expected_triples:
+      - ["user", "disliked", "making slide decks for UX findings"]
+      - ["UX research", "involves", "40% presentation/slide work"]
+      - ["user", "has_emotion", "disappointed"]
+    expected_adaptation:
+      emotion_detected: "disappointed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 4:00pm"
+    user_input: |
+      what percentage of UX research is making presentations
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 4:30pm"
+    user_input: |
+      asked Rachel the big question at the end, like if she could go back would she choose this over engineering. she said she was never an engineer so she can't compare but she said the best UX researchers she's worked with had engineering backgrounds because they could actually build the things they recommended
+    expected_memory_stores:
+      - "Rachel advice"
+      - "engineering background advantage"
+      - "build recommendations"
+    expected_triples:
+      - ["Rachel Ford", "said", "best UX researchers have engineering backgrounds"]
+      - ["Rachel Ford", "observed", "engineers can build what they recommend"]
+      - ["user", "has_emotion", "thoughtful"]
+    expected_adaptation:
+      emotion_detected: "thoughtful"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 6:00pm"
+    user_input: |
+      driving home and I'm processing the whole day. the user interview was interesting but I didn't love it. the synthesis was great. the slide-making was awful. and I kept having this thought like but what if I could just BUILD the thing instead of recommending someone else build it
+    expected_memory_stores:
+      - "processing"
+      - "interview ok"
+      - "synthesis great"
+      - "slides awful"
+      - "wants to build"
+    expected_triples:
+      - ["user", "prefers", "building things over recommending others build them"]
+      - ["user", "rated", "user interviews as interesting, synthesis as great, slides as awful"]
+      - ["user", "realized", "wants to build tools rather than do pure UX research"]
+      - ["user", "has_emotion", "clarifying"]
+    expected_adaptation:
+      emotion_detected: "clarifying"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 9:00pm"
+    user_input: |
+      talked through the whole day with Julian over Thai food from that Hawthorne place and his take was basically babe it sounds like you don't wanna be a UX researcher you wanna be an engineer who gives a shit about users. and honestly? that might be it
+    expected_memory_stores:
+      - "Julian analysis"
+      - "engineer who cares about users"
+      - "Thai food Hawthorne"
+      - "clarifying insight"
+    expected_triples:
+      - ["Julian", "said", "user wants to be an engineer who cares about users"]
+      - ["user", "ate", "Thai food from Hawthorne place with Julian"]
+      - ["user", "has_emotion", "enlightened"]
+    expected_adaptation:
+      emotion_detected: "enlightened"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did Maya like about UX research?"
+    expected_contains: ["synthesis", "pattern finding"]
+  - question: "What did Maya dislike about UX research?"
+    expected_contains: ["slides", "presentations", "boring"]
+  - question: "Where is the UX team located at Conduit?"
+    expected_contains: ["third floor"]
+  - question: "What is Rachel Ford's background?"
+    expected_contains: ["San Francisco", "design agency", "8 years"]
+  - question: "What realization did Maya have about building vs recommending?"
+    expected_contains: ["build", "instead of recommending"]
+  - question: "What did Julian say about Maya's shadow day experience?"
+    expected_contains: ["engineer who cares about users"]
+  - question: "What percentage of UX work is presentations?"
+    expected_contains: ["40"]
+  - question: "What part of UX felt fake to Maya?"
+    expected_contains: ["personas"]
+  - question: "What advantage do engineers have in UX research?"
+    expected_contains: ["build", "engineering background"]
+  - question: "What did Maya and Julian eat after shadow day?"
+    expected_contains: ["Thai", "Hawthorne"]

@@ -1,0 +1,181 @@
+story_id: 192
+story_name: "Gender Reveal Party"
+category: "Life Events"
+description: |
+  Clara and David host a gender reveal party. It's a girl! Tests
+  tracking baby gender, party details, family reactions, and name
+  discussions.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00 AM"
+    user_input: |
+      flying to Sacramento for Clara's gender reveal party today I am SO excited Julian couldn't come because Bold Studio has a big presentation Monday and he needs to prep but he said find out and call me immediately and I said obviously Kobe's with Julian's neighbor who dog sits for us sometimes her name is Pat
+    expected_memory_stores:
+      - "gender reveal party today"
+      - "Maya flying to Sacramento"
+      - "Julian staying for work"
+      - "Kobe with neighbor Pat"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 1:00 PM"
+    user_input: |
+      at Clara and David's house and it's decorated so cute they did this whole thing with pink and blue balloons and streamers and David's mom is here her name is Rose and she's so sweet and my parents are here obviously and Mom brought like four dishes of food because she's Vivian Chen and one dish is never enough
+    expected_memory_stores:
+      - "Clara and David's house"
+      - "pink and blue decorations"
+      - "David's mom Rose"
+      - "George and Vivian there"
+      - "Vivian brought four dishes"
+    expected_adaptation:
+      emotion_detected: "festive"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 2:00 PM"
+    user_input: |
+      there's about 15 people here Clara's friends from work some of David's firefighter friends and family and Clara looks so good she's showing a little now at like 16 weeks and she's glowing and David keeps putting his hand on her belly which is adorable oh and Dad built a little wooden sign that says baby Chen-Martinez which is Clara's married name
+    expected_memory_stores:
+      - "15 people at party"
+      - "Clara's coworkers"
+      - "David's firefighter friends"
+      - "Clara 16 weeks showing"
+      - "Clara glowing"
+      - "George made wooden sign"
+      - "baby Chen-Martinez"
+      - "Clara's married name"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 3:00 PM"
+    user_input: |
+      okay the big moment they had a box with balloons inside and Clara and David opened it together and PINK BALLOONS flew out and everyone screamed IT'S A GIRL and Mom started SOBBING and Dad was just grinning like his whole face was one big smile and I jumped up and down and screamed I'M HAVING A NIECE
+    expected_memory_stores:
+      - "it's a girl"
+      - "pink balloons"
+      - "gender revealed"
+      - "Vivian sobbing"
+      - "George grinning"
+      - "Maya screaming niece"
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 3:30 PM"
+    user_input: |
+      called Julian immediately and he answered on the first ring and I was like IT'S A GIRL and he yelled YES and I could hear Kobe bark in the background because Julian yelled and Julian said oh man I'm going to teach her to draw and I said babe you already claimed that for our hypothetical future kids and he said I have enough art for everyone
+    expected_memory_stores:
+      - "Julian told it's a girl"
+      - "Julian excited"
+      - "Julian wants to teach drawing"
+      - "Kobe barked"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 4:00 PM"
+    user_input: |
+      Clara and David said they have a few names they're considering and she said don't judge me okay and they're thinking about Sophie or Lily or Emma and I said those are all beautiful and Clara said she's leaning toward Sophie because it means wisdom and she wants her daughter to be wise and I was like Clara that's so you
+    expected_memory_stores:
+      - "names considered: Sophie Lily Emma"
+      - "Clara leaning toward Sophie"
+      - "Sophie means wisdom"
+      - "Clara values wisdom"
+    expected_adaptation:
+      emotion_detected: "tender"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 5:00 PM"
+    user_input: |
+      Mom pulled me aside and said Maya I'm going to be a grandmother and she got teary again and she said I never thought I'd live to see this especially after the health scare and I said Mom you have years and years ahead and she said I know but you don't take it for granted after something like that and she's right you really don't
+    expected_memory_stores:
+      - "Vivian emotional about grandmother role"
+      - "health scare perspective"
+      - "not taking things for granted"
+    expected_adaptation:
+      emotion_detected: "poignant"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 6:00 PM"
+    user_input: |
+      David's mom Rose told me she's already knitting baby clothes she made this tiny pink cardigan and it was the cutest thing I've ever seen and she said every baby in the Martinez family gets a hand knit welcome outfit and I said that's the sweetest tradition and she said you wait until it's your turn Maya wink wink
+    expected_memory_stores:
+      - "Rose knitting baby clothes"
+      - "pink cardigan"
+      - "Martinez family tradition"
+      - "hand knit welcome outfit"
+      - "Rose hinting at Maya's future"
+    expected_adaptation:
+      emotion_detected: "charmed"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 8:00 PM"
+    user_input: |
+      Dad showed Clara the crib he's been building well he showed her photos on Mom's phone because it's not done yet and it's going to be beautiful he's using cherry wood and it has these curved slats and a rocking mechanism that he engineered himself because he's George Chen half woodworker half engineer
+    expected_memory_stores:
+      - "crib progress photos"
+      - "cherry wood"
+      - "curved slats"
+      - "rocking mechanism"
+      - "George engineered it"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 9:00 AM"
+    user_input: |
+      flew home this morning and the whole flight I was just thinking about my niece like I'm going to have a NIECE a little girl and she's going to call me Auntie Maya and I'm going to spoil her rotten and teach her to code and Julian's going to teach her art and Kobe is going to be her best friend and honestly I've never been more excited about anything that isn't directly about me
+    expected_memory_stores:
+      - "flying home"
+      - "thinking about niece"
+      - "Auntie Maya"
+      - "plans to spoil niece"
+      - "coding art Kobe"
+      - "excited for someone else"
+    expected_adaptation:
+      emotion_detected: "pure happiness"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is the gender of Clara's baby?"
+    expected_contains: ["girl"]
+  - question: "What names is Clara considering?"
+    expected_contains: ["Sophie", "Lily", "Emma"]
+  - question: "Which name is Clara leaning toward?"
+    expected_contains: ["Sophie"]
+  - question: "Why does Clara like the name Sophie?"
+    expected_contains: ["wisdom"]
+  - question: "Who is David's mom?"
+    expected_contains: ["Rose"]
+  - question: "What is Clara's married name?"
+    expected_contains: ["Chen-Martinez"]
+  - question: "What family tradition does Rose maintain?"
+    expected_contains: ["knit", "welcome outfit"]
+  - question: "What wood is the crib made of?"
+    expected_contains: ["cherry"]
+  - question: "How far along was Clara at the gender reveal?"
+    expected_contains: ["16 weeks"]
+  - question: "Is George building a crib?"
+    expected_contains: ["yes"]

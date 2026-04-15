@@ -1,0 +1,180 @@
+story_id: 376
+story_name: "Portland Marathon Med Tent Volunteer"
+category: "Personal Development"
+description: |
+  Tests memory of Maya volunteering at the Portland Marathon medical tent.
+  Ironic connection to missing the marathon as a runner. Cross-thread verification.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 4:00 PM"
+    user_input: |
+      so Frank emailed the class group about a volunteer opportunity at the Portland Marathon med tent and I was like that's perfect because I was supposed to run the marathon this year but couldn't because of my knee so at least I can be there helping
+    expected_memory_stores:
+      - "Frank email"
+      - "Portland Marathon med tent"
+      - "volunteer opportunity"
+      - "was supposed to run"
+      - "knee injury prevented"
+    expected_adaptation:
+      emotion_detected: "bittersweet"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 5:00 PM"
+    user_input: |
+      signed up immediately and Raj is volunteering too which is cool and they said we'd be at the mile 20 station which is apparently where most people hit the wall and start having issues so it'll be busy
+    expected_memory_stores:
+      - "signed up"
+      - "Raj also volunteering"
+      - "mile 20 station"
+      - "where runners hit wall"
+      - "will be busy"
+    expected_adaptation:
+      emotion_detected: "eager"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Marathon Sunday 5:00 AM"
+    user_input: |
+      up at 4:30 for the marathon volunteer shift and Julian dropped me off at the med tent at mile 20 and it's still dark and there's like eight of us volunteers plus two actual EMTs named Karen and Mike who are running the show
+    expected_memory_stores:
+      - "4:30 AM wake up"
+      - "Julian dropped off"
+      - "mile 20 med tent"
+      - "eight volunteers"
+      - "two EMTs Karen Mike"
+    expected_adaptation:
+      emotion_detected: "alert"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Marathon Sunday 8:30 AM"
+    user_input: |
+      first runners coming through now and mostly they just need water and electrolytes but one woman was having leg cramps and I helped her stretch and gave her salt tablets and she thanked me and kept going and I was like this is actually awesome
+    expected_memory_stores:
+      - "first runners"
+      - "water electrolytes"
+      - "woman leg cramps"
+      - "stretching help"
+      - "salt tablets"
+      - "runner continued"
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Marathon Sunday 10:00 AM"
+    user_input: |
+      it's getting busier now and I've seen blisters heat exhaustion muscle cramps and one guy who was borderline delirious from dehydration and Karen had to step in for that one but I held his water and monitored his temperature which felt useful
+    expected_memory_stores:
+      - "getting busier"
+      - "blisters heat exhaustion cramps"
+      - "delirious runner"
+      - "Karen took over"
+      - "Maya assisted"
+      - "monitored temperature"
+    expected_adaptation:
+      emotion_detected: "engaged"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Marathon Sunday 11:30 AM"
+    user_input: |
+      okay so this is the big one a runner came in with a really badly sprained ankle she stepped in a pothole and her ankle was already swelling and I did exactly what Frank taught us RICE rest ice compression elevation and she was crying and I kept her calm and Karen said I handled it perfectly
+    expected_memory_stores:
+      - "sprained ankle runner"
+      - "pothole"
+      - "swelling"
+      - "RICE protocol"
+      - "kept runner calm"
+      - "Karen approved"
+    expected_adaptation:
+      emotion_detected: "competent"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Marathon Sunday 12:00 PM"
+    user_input: |
+      the runner with the sprained ankle her name was Sarah and she was crying not from the pain but because she'd been training for six months and couldn't finish and I sat with her and I was like I get it I was supposed to run this too and we had a moment
+    expected_memory_stores:
+      - "Sarah ankle runner"
+      - "six months training"
+      - "couldn't finish"
+      - "Maya empathized"
+      - "shared knee injury story"
+    expected_adaptation:
+      emotion_detected: "empathetic"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Marathon Sunday 1:00 PM"
+    user_input: |
+      what injury did Maya treat at the Portland Marathon
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Marathon Sunday 3:00 PM"
+    user_input: |
+      tent is closing down and we treated like 40 people total and Mike the EMT said we were one of the best volunteer groups he's worked with and Raj and I high-fived and I feel so tired but also so alive like this was the best day
+    expected_memory_stores:
+      - "tent closing"
+      - "40 people treated"
+      - "Mike compliment"
+      - "best volunteer group"
+      - "Raj high-five"
+      - "exhausted but alive"
+    expected_adaptation:
+      emotion_detected: "elated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Marathon Sunday 6:00 PM"
+    user_input: |
+      Julian picked me up and I talked his ear off the whole drive home about Sarah and the sprained ankle and all the people we helped and he was like babe you're literally glowing and honestly I feel like I found something that matters like cooking is fun but this felt meaningful
+    expected_memory_stores:
+      - "Julian picked up"
+      - "talked nonstop"
+      - "glowing"
+      - "meaningful experience"
+      - "more than cooking"
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where did Maya volunteer at the Portland Marathon?"
+    expected_contains: ["med tent", "mile 20"]
+  - question: "Why couldn't Maya run the marathon herself?"
+    expected_contains: ["knee"]
+  - question: "What injury did Maya treat at the marathon?"
+    expected_contains: ["sprained ankle"]
+  - question: "What protocol did Maya follow for the sprained ankle?"
+    expected_contains: ["RICE"]
+  - question: "Who was the runner Maya treated?"
+    expected_contains: ["Sarah"]
+  - question: "How many people did the med tent treat?"
+    expected_contains: ["40"]
+  - question: "Who were the EMTs at the med tent?"
+    expected_contains: ["Karen", "Mike"]
+  - question: "Who else from Maya's first aid class volunteered?"
+    expected_contains: ["Raj"]
+  - question: "How did the marathon volunteer experience make Maya feel?"
+    expected_contains: ["meaningful", "alive", "fulfilled"]
+  - question: "What ironic connection exists between Maya and the marathon?"
+    expected_contains: ["supposed to run", "knee", "helping instead"]

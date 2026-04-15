@@ -1,0 +1,220 @@
+story_id: 80
+story_name: "Settled In at Conduit"
+category: "Career"
+description: |
+  Tests memory of Maya fully established at Conduit AI.
+  She's confident, productive, and happy. Bridges to side project thread.
+  Verifies system can summarize a complete situation from multiple threads.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00 AM"
+    user_input: |
+      starting to feel like Conduit is home now like I know the codebase I know the team I know the rhythms of the sprints and standups and retros and it feels natural in a way that Vantage stopped feeling natural after Derek arrived
+    expected_memory_stores:
+      - "Conduit feels like home"
+      - "knows codebase"
+      - "knows team"
+      - "natural rhythm"
+      - "Vantage comparison"
+    expected_triples:
+      - ["user", "feels", "Conduit is home now"]
+      - ["user", "knows", "codebase, team, and sprint rhythms"]
+      - ["user", "contrasted", "Conduit natural vs Vantage stopped being natural after Derek"]
+      - ["user", "has_emotion", "content"]
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 3:00 PM"
+    user_input: |
+      mentoring Lily on the search ranking model and she's picking it up fast like she's already understanding the feature engineering part and she asked really good questions about how we weight different signals and I told her she's going to be a great ML engineer someday and she beamed
+    expected_memory_stores:
+      - "mentoring Lily"
+      - "ranking model"
+      - "feature engineering"
+      - "signal weighting"
+      - "Lily progressing"
+    expected_triples:
+      - ["user", "mentoring", "Lily on search ranking model"]
+      - ["Lily", "learning", "feature engineering and signal weighting"]
+      - ["user", "told_Lily", "she'll be a great ML engineer someday"]
+      - ["user", "has_emotion", "fulfilled"]
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 10:00 AM"
+    user_input: |
+      Danny and I finished the relevance tuning framework and it allows the product team to adjust search ranking weights without engineering involvement which Grace from the product team said is going to save them like 20 hours a week of back and forth and Danny and I high fived on camera
+    expected_memory_stores:
+      - "relevance tuning framework done"
+      - "product team self-service"
+      - "Grace feedback"
+      - "20 hours saved"
+      - "Danny collaboration"
+    expected_triples:
+      - ["user", "finished", "relevance tuning framework with Danny"]
+      - ["relevance tuning framework", "allows", "product team to adjust ranking weights without engineering"]
+      - ["Grace", "said", "framework saves 20 hours a week"]
+      - ["user", "has_emotion", "accomplished"]
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      so random thought but I've been cooking a lot lately because I have more energy after work and tonight I made this amazing Thai curry from scratch and Julian was like wow this is restaurant quality and I think having a job I love gives me energy to enjoy other parts of life too
+    expected_memory_stores:
+      - "cooking more"
+      - "Thai curry"
+      - "energy from job"
+      - "Julian impressed"
+      - "life energy connection"
+    expected_triples:
+      - ["user", "cooking_more", "because of energy from job"]
+      - ["user", "made", "Thai curry from scratch"]
+      - ["Julian", "said", "restaurant quality"]
+      - ["user", "has_emotion", "joyful"]
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 9:00 AM"
+    user_input: |
+      had a thought last night while I was cooking actually I realized there isn't a good recipe app that organizes recipes the way I want like by ingredients I already have not just by category and I mentioned it to Julian and he was like you should build one and I was like huh maybe
+    expected_memory_stores:
+      - "recipe app idea"
+      - "ingredient-based organization"
+      - "Julian suggested building it"
+      - "initial interest"
+    expected_triples:
+      - ["user", "had_idea_for", "recipe app organized by ingredients user already has"]
+      - ["Julian", "suggested", "user should build it"]
+      - ["user", "has_emotion", "curious"]
+    expected_adaptation:
+      emotion_detected: "curious"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      can't stop thinking about the recipe app idea like what if it used search infrastructure which is literally my expertise to match recipes to whatever ingredients you have in your fridge and Julian said he could design the UI and now we're getting into dangerous territory because I actually want to do this
+    expected_memory_stores:
+      - "recipe app expanding"
+      - "search infrastructure for recipes"
+      - "ingredient matching"
+      - "Julian UI design"
+      - "wanting to build it"
+    expected_triples:
+      - ["recipe app", "would_use", "search infrastructure to match recipes to fridge ingredients"]
+      - ["Julian", "offered_to", "design the UI"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 3:00 PM"
+    user_input: |
+      what is Maya working on as a side project
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      Priya texted me today just checking in and she said she finally gave her notice at Vantage and she's going to a company called Vercel and I was so happy for her and I said it's about time Priya and she said watching you leave gave her the courage to do it
+    expected_memory_stores:
+      - "Priya left Vantage"
+      - "Priya going to Vercel"
+      - "Maya inspired Priya"
+      - "courage"
+    expected_triples:
+      - ["Priya", "left", "Vantage"]
+      - ["Priya", "going_to", "Vercel"]
+      - ["Priya", "said", "watching user leave gave her courage"]
+      - ["user", "has_emotion", "proud"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 10:00 AM"
+    user_input: |
+      Sam's quarterly goals meeting and my search infra work got highlighted as one of the top three engineering achievements this quarter alongside the new ML model Danny shipped and the monitoring overhaul Amir did and Sam said this team is on fire right now
+    expected_memory_stores:
+      - "top three achievements"
+      - "search infra highlighted"
+      - "Danny ML model"
+      - "Amir monitoring"
+      - "team on fire"
+    expected_triples:
+      - ["user's search infra", "highlighted_as", "top three engineering achievements this quarter"]
+      - ["Danny", "shipped", "new ML model"]
+      - ["Amir", "did", "monitoring overhaul"]
+      - ["Sam", "said", "team is on fire"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 8:00 PM"
+    user_input: |
+      sitting on the couch with Julian sketching out the recipe app on his iPad while Kobe sleeps between us and I'm writing down feature ideas in my notebook and this is exactly the kind of evening I always wanted like meaningful work good partner creative projects and a snoring dog what more could you want
+    expected_memory_stores:
+      - "recipe app planning"
+      - "Julian sketching"
+      - "feature ideas"
+      - "Kobe sleeping"
+      - "ideal evening"
+      - "contentment"
+    expected_triples:
+      - ["user", "planning", "recipe app with Julian"]
+      - ["Julian", "sketching", "recipe app on iPad"]
+      - ["user", "writing", "feature ideas in notebook"]
+      - ["user", "has_emotion", "grateful"]
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How is Maya feeling at Conduit after 90 days?"
+    expected_contains: ["home", "content", "settled"]
+  - question: "What framework did Maya and Danny build?"
+    expected_contains: ["relevance tuning"]
+  - question: "What side project is Maya thinking about?"
+    expected_contains: ["recipe app"]
+  - question: "How would the recipe app work?"
+    expected_contains: ["ingredients", "search", "fridge"]
+  - question: "Did Priya leave Vantage?"
+    expected_contains: ["yes", "Vercel"]
+  - question: "What were the top three engineering achievements?"
+    expected_contains: ["search infra", "ML model", "monitoring"]
+  - question: "Is Maya mentoring anyone?"
+    expected_contains: ["Lily"]
+  - question: "How much time did the relevance framework save?"
+    expected_contains: ["20 hours"]
+  - question: "Who is designing the recipe app UI?"
+    expected_contains: ["Julian"]
+  - question: "What's the current state of Maya's career?"
+    expected_contains: ["Conduit", "search infrastructure", "promotion"]

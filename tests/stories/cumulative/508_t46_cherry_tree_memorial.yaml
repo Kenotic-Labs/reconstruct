@@ -1,0 +1,176 @@
+story_id: 508
+story_name: "Cherry Tree Memorial"
+category: "Grief and Legacy"
+description: |
+  Maya plants a cherry tree at the Woodstock house in Grandpa Wei's memory.
+  A physical monument connecting grief, home, and legacy. Cross-references
+  house purchase (T41-T45), Portland seasons (T49), and Julian relationship.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 8:00 AM"
+    user_input: |
+      ok so today is the day we're planting the cherry tree for grandpa and I've been thinking about this for weeks like ever since we saw the cherry blossoms on that walk in April and I just knew I wanted one in our yard and Julian dug the hole yesterday because it's a big hole apparently for a tree
+    expected_memory_stores:
+      - "planting cherry tree"
+      - "memorial for grandpa"
+      - "cherry blossoms inspiration"
+      - "Julian dug hole"
+      - "Woodstock house yard"
+    expected_adaptation:
+      emotion_detected: "purposeful"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 9:30 AM"
+    user_input: |
+      went to Portland Nursery on Division Street and they had this beautiful Yoshino cherry tree it's the same kind they have in Japan at the parks we visited during the trip and the guy there said it'll bloom every March or April and grow to about 25 feet and I said perfect that's the one
+    expected_memory_stores:
+      - "Portland Nursery Division Street"
+      - "Yoshino cherry tree"
+      - "same as Japan trip"
+      - "blooms March/April"
+      - "grows to 25 feet"
+    expected_adaptation:
+      emotion_detected: "decisive"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:00 AM"
+    user_input: |
+      Julian helped me get the tree in the truck and we drove it home and Kobe immediately started sniffing it and tried to pee on it and Julian was like KOBE NO and I was like grandpa would have thought that was hilarious honestly he loved dogs he would have loved Kobe so much
+    expected_memory_stores:
+      - "tree in Julian's truck"
+      - "Kobe tried to pee on tree"
+      - "grandpa loved dogs"
+      - "grandpa would have loved Kobe"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 12:30 PM"
+    user_input: |
+      my mom is on FaceTime watching us plant it and she's being very emotional and she keeps saying make sure you put it where it gets morning sun because your grandfather always woke up early and she wants it to catch the first light and I'm like mom it's a tree not a person but also I totally get it
+    expected_memory_stores:
+      - "Vivian on FaceTime"
+      - "morning sun placement"
+      - "grandpa woke up early"
+      - "tree as person metaphor"
+    expected_adaptation:
+      emotion_detected: "tender"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 1:30 PM"
+    user_input: |
+      we put it in the ground and Julian tamped down the soil and I watered it and then we just stood there looking at it and it's small right now like maybe five feet tall but it's alive and it's here and it'll be here long after we're gone which is both comforting and kind of scary
+    expected_memory_stores:
+      - "tree planted"
+      - "five feet tall currently"
+      - "permanence of tree"
+      - "long after us"
+    expected_adaptation:
+      emotion_detected: "reverent"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 2:00 PM"
+    user_input: |
+      I put one of grandpa's tea tins at the base of the tree like buried it a little in the soil as kind of a time capsule thing and Julian said we should put a little plaque or something and I said maybe just a stone with his name I don't want it to look like a grave I want it to look like a tree
+    expected_memory_stores:
+      - "tea tin buried at base"
+      - "time capsule gesture"
+      - "Julian suggests plaque"
+      - "Maya wants simplicity"
+      - "stone with name"
+    expected_adaptation:
+      emotion_detected: "deliberate"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 4:00 PM"
+    user_input: |
+      Clara and Ben came by and Clara brought a bottle of champagne and we toasted to grandpa standing around this tiny little tree in our backyard in Portland Oregon and I said grandpa this is your tree in my yard in the city I chose and you helped make me the person who chose it even though you didn't know it
+    expected_memory_stores:
+      - "Clara and Ben visited"
+      - "champagne toast"
+      - "speech to grandpa"
+      - "city I chose"
+      - "he shaped her without knowing"
+    expected_adaptation:
+      emotion_detected: "eloquent"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 6:00 PM"
+    user_input: |
+      Greg from next door came over because he saw us doing yard stuff and I told him about the cherry tree and he was surprisingly sweet about it he said his grandmother had a magnolia tree for the same reason and he said when it blooms you'll know he's saying hello and I was like ok Greg maybe you're not so bad
+    expected_memory_stores:
+      - "Greg neighbor came over"
+      - "Greg's grandmother magnolia"
+      - "blooming as hello"
+      - "Maya warming to Greg"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 8:00 PM"
+    user_input: |
+      sent a photo of the tree to the family group chat and my uncle David who I barely talk to replied and said dad would have loved this and that's the first time uncle David has acknowledged grandpa since the funeral and my mom texted me separately and said you're bringing the family together Maya
+    expected_memory_stores:
+      - "photo to family group chat"
+      - "uncle David responded"
+      - "David first acknowledgment since funeral"
+      - "Vivian says bringing family together"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:00 PM"
+    user_input: |
+      sitting on the back porch looking at the tree before bed and it's just a stick basically a stick with some leaves but next spring it'll bloom and the spring after that it'll be bigger and in ten years it'll shade the whole yard and I'll be almost 40 and maybe there'll be a kid out here playing under grandpa's tree and that thought made me smile so hard
+    expected_memory_stores:
+      - "porch at night with tree"
+      - "spring blooming anticipation"
+      - "ten year vision"
+      - "almost 40"
+      - "kid playing under tree"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What kind of tree did Maya plant for Grandpa Wei?"
+    expected_contains: ["Yoshino cherry"]
+  - question: "Where did Maya buy the tree?"
+    expected_contains: ["Portland Nursery", "Division"]
+  - question: "What did Maya bury at the base of the tree?"
+    expected_contains: ["tea tin"]
+  - question: "Who toasted to grandpa at the planting?"
+    expected_contains: ["Clara", "Ben", "Julian"]
+  - question: "What did the neighbor Greg share about the tree?"
+    expected_contains: ["grandmother", "magnolia", "blooming", "hello"]
+  - question: "Who responded in the family group chat?"
+    expected_contains: ["uncle David"]
+  - question: "What did Vivian want about the tree's placement?"
+    expected_contains: ["morning sun"]
+  - question: "When will the cherry tree bloom?"
+    expected_contains: ["March", "April", "spring"]
+  - question: "What connection does the tree have to Japan?"
+    expected_contains: ["Yoshino", "same kind", "Japan trip"]
+  - question: "What future vision did Maya have about the tree?"
+    expected_contains: ["kid", "playing", "shade"]

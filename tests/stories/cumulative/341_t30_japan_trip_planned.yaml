@@ -1,0 +1,176 @@
+story_id: 341
+story_name: "Japan Trip Planned"
+category: "Travel"
+description: |
+  Tests memory of Maya and Julian's dream Japan trip being planned. Budget,
+  flights, itinerary basics. Two years in the making. Verifies system captures
+  travel planning details and financial tracking.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00 AM"
+    user_input: |
+      ok so we are finally doing it we are going to JAPAN and Julian and I have been talking about this trip for two years TWO YEARS and we finally have enough saved up and I am freaking out in the best way
+    expected_memory_stores:
+      - "Japan trip"
+      - "planned for two years"
+      - "saved enough"
+      - "freaking out"
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:00 AM"
+    user_input: |
+      our budget is $6,000 total for both of us which Julian says is tight but doable if we stay at hostels and eat cheap and I was like Julian we are NOT staying at hostels in Japan we at least need like budget hotels and he said ok fine
+    expected_memory_stores:
+      - "budget $6000"
+      - "total for both"
+      - "Julian wanted hostels"
+      - "Maya wants budget hotels"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:30 AM"
+    user_input: |
+      booked flights on ANA Airlines Portland to Tokyo Narita with a layover in San Francisco and it was $1,400 for both tickets round trip which is actually a decent deal we're leaving March 15th and coming back March 25th so 10 days
+    expected_memory_stores:
+      - "ANA Airlines"
+      - "Portland to Tokyo Narita"
+      - "layover San Francisco"
+      - "$1400 both tickets"
+      - "March 15th to March 25th"
+      - "10 days"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 1:00 PM"
+    user_input: |
+      the plan is 5 days Tokyo then 3 days Kyoto then 2 days Osaka and Julian wants to do all the food things like Tsukiji fish market and ramen alley and I want to do the cultural stuff like temples and teamLab and we can do both
+    expected_memory_stores:
+      - "5 days Tokyo"
+      - "3 days Kyoto"
+      - "2 days Osaka"
+      - "Tsukiji fish market"
+      - "ramen alley"
+      - "temples"
+      - "teamLab"
+    expected_adaptation:
+      emotion_detected: "enthusiastic"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 3:00 PM"
+    user_input: |
+      booked a hotel in Tokyo near Shibuya Station it's called Hotel Emit and it's small but clean looking and like $90 a night which adds up but whatever and for Kyoto we found an Airbnb near Fushimi Inari for $70 a night and Osaka is still TBD
+    expected_memory_stores:
+      - "Hotel Emit Shibuya"
+      - "$90 a night"
+      - "Kyoto Airbnb"
+      - "near Fushimi Inari"
+      - "$70 a night"
+      - "Osaka TBD"
+    expected_adaptation:
+      emotion_detected: "productive"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 5:00 PM"
+    user_input: |
+      told Clara about the trip and she immediately offered to dog-sit Kobe and I was like are you sure that's 10 days and she said Maya I love that dog more than I love Tyler sometimes and Tyler in the background went HEY and we all laughed
+    expected_memory_stores:
+      - "Clara dog-sitting Kobe"
+      - "10 days"
+      - "loves Kobe more than Tyler"
+      - "Tyler heard"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 7:00 PM"
+    user_input: |
+      Jenny is so excited for us she sent like 15 Marco Polos of her screaming and she went to Japan two years ago and she said you HAVE to go to this tiny sushi place in Ginza called Sushi Saito wait no that's the expensive one she means some other place she'll find the name
+    expected_memory_stores:
+      - "Jenny excited"
+      - "Jenny went to Japan"
+      - "sushi place Ginza"
+      - "will find name"
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 8:00 PM"
+    user_input: |
+      what airline are we flying to Japan on
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 9:00 PM"
+    user_input: |
+      Julian made a spreadsheet because of course he did with like budget categories flights hotels food activities transport and we've already spent about $2100 on flights and hotels so we have like $3900 left for 10 days which is $390 a day for two people
+    expected_memory_stores:
+      - "Julian spreadsheet"
+      - "budget categories"
+      - "$2100 spent"
+      - "$3900 remaining"
+      - "$390 per day"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:30 PM"
+    user_input: |
+      lying in bed looking at photos of Tokyo and Kyoto on Julian's laptop and I cannot believe this is actually happening we've been dreaming about this since we started dating and Julian said this is going to be the trip of our lives and I said it better be for $6000
+    expected_memory_stores:
+      - "looking at photos"
+      - "dreaming since dating"
+      - "trip of our lives"
+      - "$6000"
+    expected_adaptation:
+      emotion_detected: "dreamy"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is the budget for the Japan trip?"
+    expected_contains: ["$6000", "6000"]
+  - question: "What airline are they flying?"
+    expected_contains: ["ANA"]
+  - question: "When are they leaving and returning?"
+    expected_contains: ["March 15", "March 25"]
+  - question: "What is the itinerary?"
+    expected_contains: ["Tokyo", "Kyoto", "Osaka"]
+  - question: "How many days in each city?"
+    expected_contains: ["5 Tokyo", "3 Kyoto", "2 Osaka"]
+  - question: "Where is the Tokyo hotel?"
+    expected_contains: ["Hotel Emit", "Shibuya"]
+  - question: "What is the Kyoto accommodation?"
+    expected_contains: ["Airbnb", "Fushimi Inari"]
+  - question: "Who is dog-sitting Kobe?"
+    expected_contains: ["Clara"]
+  - question: "What has been spent so far?"
+    expected_contains: ["$2100"]
+  - question: "What places does Maya want to visit?"
+    expected_contains: ["teamLab", "temples"]

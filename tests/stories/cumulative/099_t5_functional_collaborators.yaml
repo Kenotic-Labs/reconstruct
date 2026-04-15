@@ -1,0 +1,219 @@
+story_id: 99
+story_name: "Functional Collaborators"
+category: "Career"
+description: |
+  Tests memory of Danny and Maya settling into their new dynamic.
+  They work well together professionally with clear boundaries.
+  Verifies system tracks stable post-conflict relationship state.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00 AM"
+    user_input: |
+      new week and Danny and I are working on a joint project now a search analytics dashboard that Ross wants and Sam deliberately put us together on it and I think it's partly a test to see if we can collaborate and partly because we're genuinely the best people for it
+    expected_memory_stores:
+      - "joint project"
+      - "search analytics dashboard"
+      - "Ross wants"
+      - "Sam deliberate pairing"
+      - "test and best people"
+    expected_triples:
+      - ["user", "assigned_to", "search analytics dashboard with Danny"]
+      - ["Ross", "requested", "search analytics dashboard"]
+      - ["Sam", "deliberately_paired", "user and Danny"]
+    expected_adaptation:
+      emotion_detected: "professional"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 3:00 PM"
+    user_input: |
+      we divided the work clearly upfront like I'm doing the data aggregation pipeline and the search metrics calculations and Danny is doing the visualization layer and the real-time streaming component and we documented who owns what so there's no ambiguity and it felt good to establish that norm between us
+    expected_memory_stores:
+      - "work divided clearly"
+      - "Maya data aggregation"
+      - "Maya search metrics"
+      - "Danny visualization"
+      - "Danny streaming"
+      - "ownership documented"
+      - "norm established"
+    expected_triples:
+      - ["user", "owns", "data aggregation pipeline and search metrics"]
+      - ["Danny", "owns", "visualization layer and real-time streaming"]
+      - ["user", "documented", "ownership division"]
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 11:00 AM"
+    user_input: |
+      Danny and I had a really productive design session today and he actually deferred to me on the search metrics architecture saying Maya you know this domain better than anyone and I should follow your lead and that would never have happened a month ago so like growth is real
+    expected_memory_stores:
+      - "productive design"
+      - "Danny deferred"
+      - "domain expertise"
+      - "follow your lead"
+      - "month ago comparison"
+      - "growth"
+    expected_triples:
+      - ["Danny", "deferred_to", "user on search metrics architecture"]
+      - ["Danny", "acknowledged", "user's domain expertise"]
+      - ["user", "has_emotion", "surprised"]
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      told Julian about Danny deferring to me and he said see that's what accountability looks like when it actually works and he made a point that most workplace conflicts either escalate until someone leaves or get swept under the rug and the fact that this one actually led to change is rare and I agree
+    expected_memory_stores:
+      - "Julian accountability comment"
+      - "conflicts usually escalate or hide"
+      - "actual change rare"
+      - "positive outcome"
+    expected_triples:
+      - ["Julian", "observed", "accountability actually worked"]
+      - ["Julian", "noted", "most conflicts escalate or get hidden"]
+      - ["Danny_situation", "is", "rare positive resolution"]
+    expected_adaptation:
+      emotion_detected: "thoughtful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 2:00 PM"
+    user_input: |
+      Danny showed me pictures of Penny at the dog park and she was playing with a corgi and he asked about Kobe and I told him Kobe has been sleeping more than usual lately and Julian thinks he's getting lazy in his old age even though he's only four and Danny laughed and said Penny does the same thing
+    expected_memory_stores:
+      - "Penny pictures"
+      - "dog park corgi"
+      - "Kobe sleeping more"
+      - "Kobe four years old"
+      - "dog conversation"
+      - "normal banter returning"
+    expected_triples:
+      - ["Danny", "shared_photos_of", "Penny at dog park"]
+      - ["Kobe", "has_age", "four years old"]
+      - ["Kobe", "is", "sleeping more than usual"]
+      - ["Danny_Maya_relationship", "has", "normal banter returning"]
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 10:00 AM"
+    user_input: |
+      the analytics dashboard MVP is done in just one week and Sam demoed it to Ross and Ross was impressed and Sam made sure to say Maya built the data layer and Danny built the visualization and they both did excellent work and both our names were in the demo slides which felt right
+    expected_memory_stores:
+      - "dashboard MVP done"
+      - "one week"
+      - "Ross impressed"
+      - "Sam proper attribution"
+      - "both names in slides"
+      - "felt right"
+    expected_triples:
+      - ["analytics_dashboard", "completed_in", "one week"]
+      - ["Ross", "was_impressed_by", "dashboard demo"]
+      - ["Sam", "credited", "user for data layer and Danny for visualization"]
+      - ["user", "has_emotion", "proud"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 12:00 PM"
+    user_input: |
+      how is the Danny and Maya collaboration going on the dashboard project
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 5:00 PM"
+    user_input: |
+      Danny said to me at the end of the day good working with you this week Maya and it was genuine not performative and I said good working with you too Danny and we both smiled and it wasn't the old friendship exactly but it was something new and maybe something better because now it's honest
+    expected_memory_stores:
+      - "genuine exchange"
+      - "good working with you"
+      - "not old friendship"
+      - "something new"
+      - "honest"
+    expected_triples:
+      - ["Danny", "said", "good working with you Maya"]
+      - ["Danny_Maya_relationship", "is", "new and honest"]
+      - ["user", "has_emotion", "hopeful"]
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 10:00 AM"
+    user_input: |
+      Lily and I went for an actual in person coffee at this place on Hawthorne and she said watching the Danny situation resolve has been like watching a masterclass in workplace conflict resolution and I was like Lily that's dramatic and she said no it's genuinely impressive and anyway she paid for my coffee
+    expected_memory_stores:
+      - "Lily in person coffee"
+      - "Hawthorne coffee shop"
+      - "masterclass comment"
+      - "Lily paid"
+    expected_triples:
+      - ["user", "had_coffee_with", "Lily on Hawthorne"]
+      - ["Lily", "called_user's_handling", "masterclass in conflict resolution"]
+      - ["user", "has_emotion", "amused"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 7:00 PM"
+    user_input: |
+      sitting on the porch with Julian and Kobe watching the sunset and I said you know what I think this whole thing with Danny made me a better engineer and a better person and Julian said that's a very mature take and then Kobe yawned loudly and we both laughed and it was a perfect Sunday
+    expected_memory_stores:
+      - "porch sunset"
+      - "better engineer better person"
+      - "Julian mature comment"
+      - "Kobe yawn"
+      - "perfect Sunday"
+    expected_triples:
+      - ["user", "reflects", "Danny situation made me better engineer and person"]
+      - ["Julian", "called_user's_take", "very mature"]
+      - ["user", "has_emotion", "content"]
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What joint project are Danny and Maya working on?"
+    expected_contains: ["analytics dashboard"]
+  - question: "How did they divide the work?"
+    expected_contains: ["Maya data", "Danny visualization"]
+  - question: "Did the dashboard demo go well?"
+    expected_contains: ["yes", "Ross impressed"]
+  - question: "Were both names in the demo slides?"
+    expected_contains: ["yes", "both"]
+  - question: "Did Danny defer to Maya on anything?"
+    expected_contains: ["yes", "search metrics", "domain"]
+  - question: "How is the Danny-Maya relationship described?"
+    expected_contains: ["new", "honest", "functional"]
+  - question: "Where did Lily and Maya get coffee?"
+    expected_contains: ["Hawthorne"]
+  - question: "How old is Kobe?"
+    expected_contains: ["four"]
+  - question: "What did Lily call Maya's conflict resolution?"
+    expected_contains: ["masterclass"]
+  - question: "Is the credit attribution working now?"
+    expected_contains: ["yes", "both names"]

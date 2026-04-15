@@ -1,0 +1,181 @@
+story_id: 533
+story_name: "Spring Cherry Blossoms"
+category: "Weather and Seasons"
+description: |
+  Spring arrives and Grandpa Wei's cherry tree blooms for the first time. Mood lifts
+  dramatically. Cross-references grief (T46), house (T41-T45), mental health (T21),
+  and relationships.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 AM"
+    user_input: |
+      woke up and THE SUN IS OUT for the first time in what feels like forever and it's March and it's not raining and I opened the curtains and literally gasped because the cherry tree has BUDS on it like little pink buds and I screamed Julian come look and he stumbled out of bed and I pointed and he got this huge smile
+    expected_memory_stores:
+      - "sun out in March"
+      - "cherry tree buds"
+      - "pink buds"
+      - "Julian smiling"
+      - "first sun in a long time"
+    expected_adaptation:
+      emotion_detected: "elated"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 8:00 AM"
+    user_input: |
+      took a photo of the buds with the new iPhone and it's stunning and I sent it to my mom and she called immediately and she was crying and saying they're here Maya your grandfather's tree is blooming and Greg the neighbor said something about blooming meaning hello and it's happening
+    expected_memory_stores:
+      - "photo of buds"
+      - "sent to Vivian"
+      - "Vivian crying"
+      - "grandfather's tree blooming"
+      - "Greg's hello reference"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 7:00 AM"
+    user_input: |
+      the buds are opening and there are actual cherry blossoms now and they're this pale pink that's almost white and they look exactly like the ones we saw in Japan and I'm standing in my backyard in Portland wearing grandpa's watch looking at his tree blooming and it's so beautiful I can't even process it
+    expected_memory_stores:
+      - "buds opening"
+      - "pale pink blossoms"
+      - "same as Japan"
+      - "backyard Portland"
+      - "wearing grandpa's watch"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      my mood has done a complete 180 in the last week like I went from barely getting out of bed to waking up early just to look at the tree and Dr. Tate said the combination of spring light and the emotional meaning of the tree is powerful and she asked if I want to drop back to 150 Wellbutrin and I said let me check with Dr. Pham first
+    expected_memory_stores:
+      - "mood 180 turnaround"
+      - "waking up early for tree"
+      - "spring light plus emotional meaning"
+      - "Wellbutrin discussion"
+      - "check with Dr. Pham"
+    expected_adaptation:
+      emotion_detected: "transformed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 6:00 PM"
+    user_input: |
+      Kobe loves the cherry tree too like he lies under it and the petals fall on him and he looks like a painting and I took maybe twenty photos of him under the tree which violates my three photos rule but like this is an exception and Julian said if you don't stop photographing the dog I'm going to be jealous
+    expected_memory_stores:
+      - "Kobe under cherry tree"
+      - "petals falling on him"
+      - "twenty photos"
+      - "three photos rule exception"
+      - "Julian jealous joke"
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 7:00 PM"
+    user_input: |
+      invited Clara and Ben over just to see the tree in bloom and Clara said Maya this is the most beautiful thing and Ben said he's never seen a Yoshino this young bloom this well and he said it must be happy in this spot and I said my mom wanted it in morning sun and I think she was right
+    expected_memory_stores:
+      - "Clara and Ben see tree"
+      - "Clara most beautiful thing"
+      - "Ben Yoshino knowledge"
+      - "tree happy in this spot"
+      - "Vivian morning sun correct"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 10:00 AM"
+    user_input: |
+      went on a walk around the neighborhood and Portland in spring is INSANE like there are cherry blossoms and magnolias and rhododendrons everywhere and the air smells different it smells like life after months of just wet pavement and I walked for two hours without my phone just taking it in
+    expected_memory_stores:
+      - "neighborhood spring walk"
+      - "cherry blossoms magnolias rhododendrons"
+      - "air smells like life"
+      - "two hour walk no phone"
+      - "Portland spring"
+    expected_adaptation:
+      emotion_detected: "alive"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 3:00 PM"
+    user_input: |
+      called Dr. Pham and asked about lowering Wellbutrin back to 150 and she said let's wait until April to make sure it's not just the initial spring excitement and that's fair because I've done this before where I feel great and then drop the meds too early and crash so I'll listen to her
+    expected_memory_stores:
+      - "Dr. Pham wait until April"
+      - "not just spring excitement"
+      - "dropped meds too early before"
+      - "listening to doctor"
+    expected_adaptation:
+      emotion_detected: "mature"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 9:00 AM"
+    user_input: |
+      phone-free Sunday and I'm sitting under the cherry tree with my book and tea from grandpa's tin and the petals are drifting down and landing on the pages and Kobe is asleep next to me and I wrote in my journal this is what healing looks like it looks like spring
+    expected_memory_stores:
+      - "sitting under cherry tree"
+      - "book and tea"
+      - "grandpa's tin"
+      - "petals on pages"
+      - "journal entry"
+      - "healing looks like spring"
+    expected_adaptation:
+      emotion_detected: "serene"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 6:00 PM"
+    user_input: |
+      the tree is in full bloom now and I took one perfect photo of it with the sunset and put it in the Wei folder and I thought Greg was right when the tree blooms grandpa is saying hello and I said hi grandpa out loud in the backyard and I didn't even feel silly because it felt true
+    expected_memory_stores:
+      - "tree in full bloom"
+      - "sunset photo"
+      - "Wei folder addition"
+      - "grandpa saying hello"
+      - "said hi out loud"
+    expected_adaptation:
+      emotion_detected: "at peace"
+      warmth_direction: increase
+
+final_verification:
+  - question: "When did the cherry tree first show buds?"
+    expected_contains: ["March"]
+  - question: "What color are the cherry blossoms?"
+    expected_contains: ["pale pink", "almost white"]
+  - question: "How did the cherry blossoms affect Maya's mood?"
+    expected_contains: ["180", "turnaround", "transformed"]
+  - question: "What did Maya write in her journal about spring?"
+    expected_contains: ["healing looks like spring"]
+  - question: "What did Dr. Pham say about lowering Wellbutrin?"
+    expected_contains: ["wait", "April"]
+  - question: "What does Kobe do under the cherry tree?"
+    expected_contains: ["lies", "petals fall on him"]
+  - question: "Who said the tree blooming means hello?"
+    expected_contains: ["Greg"]
+  - question: "How do Portland springs compare to winter?"
+    expected_contains: ["cherry blossoms", "magnolias", "rhododendrons"]
+  - question: "Was Vivian right about the tree placement?"
+    expected_contains: ["yes", "morning sun"]
+  - question: "How long did Maya walk without her phone?"
+    expected_contains: ["two hours"]

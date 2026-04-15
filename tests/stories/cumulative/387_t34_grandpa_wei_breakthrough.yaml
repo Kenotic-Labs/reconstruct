@@ -1,0 +1,179 @@
+story_id: 387
+story_name: "Grandpa Wei Breakthrough"
+category: "Mental Health"
+description: |
+  Tests memory of Maya processing grief about Grandpa Wei after the retreat breakthrough.
+  Verifies system tracks deep emotional processing and family connections.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Sunday 5:00 PM"
+    user_input: |
+      got home from Breitenbush and Julian could tell something happened he said I look different like softer and I told him about Grandpa Wei coming up in meditation and I started crying again and he just held me and didn't say anything which was perfect
+    expected_memory_stores:
+      - "home from retreat"
+      - "Julian noticed change"
+      - "softer"
+      - "told about Grandpa Wei"
+      - "crying again"
+      - "Julian held her"
+    expected_adaptation:
+      emotion_detected: "vulnerable"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 7:00 PM"
+    user_input: |
+      called mom and asked her to tell me about Grandpa Wei like stories from when she was growing up and she was surprised because I never ask about him and she told me about how he used to take her fishing at Sun Moon Lake in Taiwan and how he smelled like machine oil and jasmine tea
+    expected_memory_stores:
+      - "called Vivian"
+      - "asked about Grandpa Wei"
+      - "never asks"
+      - "fishing Sun Moon Lake"
+      - "Taiwan"
+      - "machine oil jasmine tea"
+    expected_adaptation:
+      emotion_detected: "nostalgic"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 5:00 PM"
+    user_input: |
+      Dr Tate session today and I told her everything about the retreat and she said grief doesn't expire it waits and the meditation created a safe enough space for it to finally surface and I was like well it picked a hell of a time to surface
+    expected_memory_stores:
+      - "Dr. Tate session"
+      - "grief doesn't expire"
+      - "grief waits"
+      - "safe space surfaced"
+      - "timing comment"
+    expected_adaptation:
+      emotion_detected: "processing"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 7:00 AM"
+    user_input: |
+      morning meditation today and Grandpa Wei was there again in my thoughts and instead of pushing it away I let it be there and I remembered how he used to call me his little architect because I was always building things with Legos and blocks
+    expected_memory_stores:
+      - "meditation about Grandpa Wei"
+      - "let thoughts be"
+      - "little architect nickname"
+      - "Legos and blocks"
+    expected_adaptation:
+      emotion_detected: "tender"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 8:00 PM"
+    user_input: |
+      asked Clara if she remembers Grandpa Wei and she said of course and she started crying too and she said he used to sing this Taiwanese lullaby to us and she tried to sing it and couldn't remember all the words and we both lost it
+    expected_memory_stores:
+      - "Clara remembers"
+      - "both crying"
+      - "Taiwanese lullaby"
+      - "couldn't remember words"
+      - "shared grief"
+    expected_adaptation:
+      emotion_detected: "grieving"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 7:00 PM"
+    user_input: |
+      mom texted me a photo of Grandpa Wei holding me as a baby that I've never seen before and I stared at it for like twenty minutes and he looks so happy and young and I saved it as my phone wallpaper and Julian said that's beautiful
+    expected_memory_stores:
+      - "Vivian sent photo"
+      - "Grandpa Wei holding baby Maya"
+      - "never seen before"
+      - "phone wallpaper"
+      - "Julian approved"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 8:00 AM"
+    user_input: |
+      meditation this morning and I focused on gratitude toward Grandpa Wei for being the reason I build things because he's the one who noticed that in me first before anyone else and I think my whole career traces back to him seeing that little architect
+    expected_memory_stores:
+      - "gratitude meditation"
+      - "Grandpa Wei reason she builds"
+      - "noticed first"
+      - "career traces to him"
+      - "little architect connection"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 11:00 AM"
+    user_input: |
+      what did Grandpa Wei used to call Maya when she was little
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 10:00 AM"
+    user_input: |
+      dad called which is rare and he said mom told him I've been asking about Grandpa Wei and he got quiet and said your grandfather would be so proud of you and then he changed the subject because dad doesn't do emotions but I could tell he meant it
+    expected_memory_stores:
+      - "George called"
+      - "rare call"
+      - "Vivian told him"
+      - "grandfather proud"
+      - "changed subject"
+      - "George doesn't do emotions"
+      - "meant it"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 4:00 PM"
+    user_input: |
+      I feel like the Grandpa Wei grief isn't gone but it's different now like it's not stuck anymore it moves through me when it needs to and that's okay and Dr Tate would probably call that integration and I think the meditation gave me that
+    expected_memory_stores:
+      - "grief not gone"
+      - "not stuck anymore"
+      - "moves through"
+      - "integration"
+      - "meditation gave this"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What nickname did Grandpa Wei have for Maya?"
+    expected_contains: ["little architect"]
+  - question: "What did Grandpa Wei smell like?"
+    expected_contains: ["machine oil", "jasmine tea"]
+  - question: "Where did Grandpa Wei take Vivian fishing?"
+    expected_contains: ["Sun Moon Lake", "Taiwan"]
+  - question: "When did Grandpa Wei die?"
+    expected_contains: ["22", "college"]
+  - question: "What photo did Vivian send Maya?"
+    expected_contains: ["Grandpa Wei", "holding", "baby"]
+  - question: "What did Clara remember about Grandpa Wei?"
+    expected_contains: ["lullaby", "Taiwanese"]
+  - question: "How does Maya connect Grandpa Wei to her career?"
+    expected_contains: ["building", "architect", "noticed"]
+  - question: "What did George say about Grandpa Wei?"
+    expected_contains: ["proud"]
+  - question: "What did Dr. Tate say about grief?"
+    expected_contains: ["doesn't expire", "waits"]
+  - question: "How does Maya describe her grief now?"
+    expected_contains: ["not stuck", "moves through", "integration"]

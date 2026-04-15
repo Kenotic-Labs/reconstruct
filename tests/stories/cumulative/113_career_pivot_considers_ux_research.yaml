@@ -1,0 +1,207 @@
+story_id: 113
+story_name: "Considering UX Research"
+category: "Career"
+description: |
+  Tests whether the system tracks Maya's deeper investigation into UX research as a
+  career, her conversations with multiple people about it, and the emotional tension
+  between excitement and fear of change.
+duration_simulated: "4 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:00am"
+    user_input: |
+      so I've been reading like everything I can find about UX research transitions for engineers. there's actually a bunch of blog posts from people who made the switch and they all say the same thing, engineers make great UX researchers because they understand the technical constraints
+    expected_memory_stores:
+      - "UX research reading"
+      - "engineer transition"
+      - "technical constraints advantage"
+    expected_triples:
+      - ["user", "researching", "UX research career transitions"]
+      - ["user", "learned", "engineers make great UX researchers due to technical constraints understanding"]
+      - ["user", "has_emotion", "curious"]
+    expected_adaptation:
+      emotion_detected: "curious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 12:00pm"
+    user_input: |
+      my sister Clara thinks I'm crazy for even considering leaving engineering. she was like Maya you make six figures and you wanna go do what exactly, ask people how they feel about buttons?? which is reductive but like I get where she's coming from
+    expected_memory_stores:
+      - "Clara skeptical"
+      - "salary concern"
+      - "six figures"
+      - "reductive view"
+    expected_triples:
+      - ["Clara", "opposes", "user leaving engineering"]
+      - ["Clara", "concerned_about", "salary loss from career change"]
+      - ["user", "earns", "six figures in engineering"]
+      - ["user", "has_emotion", "conflicted"]
+    expected_adaptation:
+      emotion_detected: "conflicted"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 10:00am"
+    user_input: |
+      Rachel Kim set up the shadow day with Rachel Ford for next Wednesday. I'm gonna spend the whole day with the UX team watching how they work. I'm low-key nervous about it like what if I love it and then what do I do
+    expected_memory_stores:
+      - "shadow day next Wednesday"
+      - "Rachel Ford"
+      - "UX team"
+      - "nervous"
+    expected_triples:
+      - ["Rachel Kim", "arranged", "shadow day with Rachel Ford"]
+      - ["user", "scheduled", "shadow day next Wednesday with UX team"]
+      - ["user", "has_emotion", "anxious"]
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 2:00pm"
+    user_input: |
+      Aisha noticed I've been distracted and she goes is everything ok with you and Julian? which is sweet that she assumes it's relationship stuff. I told her I'm just thinking about career stuff and she was like oh ok, you'd be great at anything Maya
+    expected_memory_stores:
+      - "Aisha noticed"
+      - "assumed relationship issue"
+      - "career stuff"
+      - "Aisha supportive"
+    expected_triples:
+      - ["Aisha", "noticed", "user is distracted"]
+      - ["Aisha", "assumed", "user has relationship issues"]
+      - ["Aisha", "expressed", "user would be great at anything"]
+      - ["user", "has_emotion", "touched"]
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 9:00am"
+    user_input: |
+      looked at UX researcher salaries in Portland and they're like 90 to 120K for mid-level which is... less than what I make now. I make 135 as a senior engineer. so it would be a pay cut for sure
+    expected_memory_stores:
+      - "UX salary range"
+      - "90 to 120K"
+      - "Maya salary 135K"
+      - "pay cut"
+    expected_triples:
+      - ["user", "earns", "135K as senior engineer"]
+      - ["UX researcher salary", "ranges", "90K to 120K mid-level in Portland"]
+      - ["user", "would_face", "pay cut switching to UX research"]
+      - ["user", "has_emotion", "concerned"]
+    expected_adaptation:
+      emotion_detected: "concerned"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 3:00pm"
+    user_input: |
+      told Julian about the salary thing and he goes money isn't everything Maya. which is easy for him to say honestly because he's a freelancer and his income is all over the place. but also he's not wrong? ugh
+    expected_memory_stores:
+      - "Julian money perspective"
+      - "freelancer income"
+      - "money isn't everything"
+    expected_triples:
+      - ["Julian", "said", "money isn't everything"]
+      - ["Julian", "works_as", "freelancer with variable income"]
+      - ["user", "has_emotion", "frustrated"]
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 11:00am"
+    user_input: |
+      how much do senior engineers make in Portland
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 4:00pm"
+    user_input: |
+      found out there's actually a UX Engineering role that some companies have which is like a hybrid. you do engineering but focused on the user experience side, building prototypes, design systems, that kind of thing. that sounds MORE like me than pure UX research honestly
+    expected_memory_stores:
+      - "UX Engineering"
+      - "hybrid role"
+      - "prototypes"
+      - "design systems"
+      - "better fit"
+    expected_triples:
+      - ["user", "discovered", "UX Engineering hybrid role"]
+      - ["UX Engineering", "involves", "building prototypes and design systems"]
+      - ["user", "considers", "UX Engineering a better fit than pure UX research"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 8:00pm"
+    user_input: |
+      Dr. Tate said something in our last session that keeps coming back to me. she said you don't have to choose between engineer and not-engineer, you can be an engineer who works differently. that's sticking with me
+    expected_memory_stores:
+      - "Dr. Tate advice"
+      - "engineer who works differently"
+      - "not binary choice"
+    expected_triples:
+      - ["Dr. Tate", "advised", "user can be an engineer who works differently"]
+      - ["Dr. Tate", "reframed", "career choice as not binary engineer vs not-engineer"]
+      - ["user", "has_emotion", "hopeful"]
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 6:00pm"
+    user_input: |
+      shadow day with Rachel Ford is next Wednesday. I'm gonna make a list of questions tonight. Julian offered to help me think through them because he works with UX people on his freelance projects all the time. date night turned into career planning night lol
+    expected_memory_stores:
+      - "shadow day Wednesday"
+      - "question list"
+      - "Julian helps"
+      - "date night repurposed"
+    expected_triples:
+      - ["user", "preparing", "questions for shadow day with Rachel Ford"]
+      - ["Julian", "helping", "user prepare shadow day questions"]
+      - ["user", "has_emotion", "amused"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What salary would Maya take as a UX researcher?"
+    expected_contains: ["90", "120", "pay cut"]
+  - question: "What does Maya currently make?"
+    expected_contains: ["135"]
+  - question: "What hybrid role did Maya discover?"
+    expected_contains: ["UX Engineering"]
+  - question: "When is the shadow day with Rachel Ford?"
+    expected_contains: ["Wednesday"]
+  - question: "What did Clara think about Maya's career exploration?"
+    expected_contains: ["crazy", "skeptical"]
+  - question: "What did Dr. Tate say about the career choice?"
+    expected_contains: ["engineer who works differently", "not binary"]
+  - question: "What does UX Engineering involve?"
+    expected_contains: ["prototypes", "design systems"]
+  - question: "How much does Julian make?"
+    expected_contains: ["freelancer", "all over"]
+  - question: "Who set up the shadow day?"
+    expected_contains: ["Rachel Kim"]
+  - question: "What did Aisha think was bothering Maya?"
+    expected_contains: ["relationship", "Julian"]

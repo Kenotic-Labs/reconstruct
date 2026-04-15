@@ -1,0 +1,183 @@
+story_id: 285
+story_name: "Anna Petrova Takes Over"
+category: "Home"
+description: |
+  Tests memory of new contractor Anna Petrova assessing the half-finished kitchen and
+  taking over the project. Captures her professionalism, honest assessment, and
+  the budget further increasing.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 10:00 AM"
+    user_input: |
+      Anna Petrova is here and she is INTENSE like she walked in with steel-toed boots and a clipboard and immediately started checking Miguel's work and she's not saying anything just writing notes and occasionally doing this thing where she pushes on a wall and frowns
+    expected_memory_stores:
+      - "Anna arrived"
+      - "steel-toed boots"
+      - "clipboard"
+      - "checking Miguel's work"
+      - "writing notes"
+      - "pushing on walls"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 10:30 AM"
+    user_input: |
+      okay good news and bad news. Anna said Miguel's subfloor work is solid and the drywall is acceptable but the plumbing rough-in is not up to code because he didn't use the right fittings for the dishwasher line and she needs to redo that section which adds cost
+    expected_memory_stores:
+      - "subfloor solid"
+      - "drywall acceptable"
+      - "plumbing not up to code"
+      - "wrong fittings"
+      - "dishwasher line"
+      - "redo section"
+      - "adds cost"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 11:00 AM"
+    user_input: |
+      Anna's quote to finish the project is $8,000 which includes fixing the plumbing installing the IKEA cabinets fitting the counters finishing the electrical new backsplash and painting so our total project cost is now... hold on let me add... $15K to Miguel plus $8K to Anna plus the $7,500 in materials that's $30,500 and the original budget was $15K
+    expected_memory_stores:
+      - "Anna quote $8,000"
+      - "total $30,500"
+      - "original budget $15K"
+      - "$15,500 over budget"
+      - "Miguel $15K"
+      - "materials $7,500"
+    expected_adaptation:
+      emotion_detected: "sticker shock"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 11:15 AM"
+    user_input: |
+      wait I did the math wrong the total to Miguel was $15K but wait no it was the deposit $5K plus two payments of $5K so that's $15K for work that was maybe $10K worth of actual labor so we kind of overpaid because of the ghosting but the materials we already bought are $7,500 and Anna is $8K so total is actually... $30,500 wait I already said that okay yeah it's $30,500 ugh
+    expected_memory_stores:
+      - "math confusion"
+      - "Miguel overpaid"
+      - "$10K worth of actual labor"
+      - "paid $15K"
+      - "total confirmed $30,500"
+    expected_adaptation:
+      emotion_detected: "flustered"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      Julian and I discussed it and we're going with Anna because honestly what choice do we have and she can start Thursday and she said the timeline is four weeks from when she starts because she needs to redo the plumbing and take her time with the cabinet install so now we're looking at SEVEN total weeks of construction not the original three
+    expected_memory_stores:
+      - "going with Anna"
+      - "starts Thursday"
+      - "four weeks timeline"
+      - "seven total weeks"
+      - "original three weeks"
+      - "timeline correction"
+    expected_adaptation:
+      emotion_detected: "resigned"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      so the budget went from $15K to now basically $23K if I only count what we're actually spending going forward which is $8K for Anna and the $15K kitchen fund is gone and we need another $8K which means more from savings ugh. actually wait let me recalculate... the kitchen fund was $15K, we spent $7.5K on materials and $15K to Miguel so we're already $7.5K in the hole and need $8K more for Anna so we need $15.5K total beyond what we budgeted
+    expected_memory_stores:
+      - "budget recalculation"
+      - "$23K new budget"
+      - "$15.5K over original"
+      - "more from savings needed"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 9:00 AM"
+    user_input: |
+      Anna showed up at exactly 8 AM with two crew members named Rosa and Tyler and they immediately got to work ripping out Miguel's bad plumbing and I already feel better about this like she's organized and communicative and she texts updates every few hours
+    expected_memory_stores:
+      - "Anna started"
+      - "exactly 8 AM"
+      - "Rosa and Tyler crew"
+      - "ripping out bad plumbing"
+      - "organized"
+      - "communicative"
+      - "texts updates"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 5:00 PM"
+    user_input: |
+      end of day two with Anna and the difference is night and day compared to Miguel like the plumbing is already redone correctly and she started prepping for the cabinet install and she even noticed that the electrical rough-in Miguel did needs a GFCI outlet near the sink which he missed
+    expected_memory_stores:
+      - "two days with Anna"
+      - "plumbing redone"
+      - "cabinet prep started"
+      - "GFCI outlet missing"
+      - "Miguel missed electrical"
+      - "night and day difference"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 10:00 AM"
+    user_input: |
+      Anna doesn't work weekends which is fine and she left the kitchen in a really clean state compared to how Miguel's crew used to leave it and Julian was like I think we got lucky finding her even though it cost more and I was like yeah she's worth every penny
+    expected_memory_stores:
+      - "Anna no weekends"
+      - "clean workspace"
+      - "Miguel comparison"
+      - "worth every penny"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 7:00 PM"
+    user_input: |
+      what was the original kitchen renovation budget and what's it at now and also what's the name of the contractor who ghosted us versus the one who's doing the work now because I want to text my friend Nadia an update and get the facts right
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "practical"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How much is Anna Petrova charging to finish the kitchen?"
+    expected_contains: ["8,000", "8000"]
+  - question: "What was wrong with Miguel's plumbing work?"
+    expected_contains: ["not up to code", "wrong fittings", "dishwasher"]
+  - question: "What is the total kitchen renovation cost now?"
+    expected_contains: ["23", "30"]
+  - question: "How long is Anna's timeline?"
+    expected_contains: ["four weeks"]
+  - question: "What is the total renovation timeline from start to finish?"
+    expected_contains: ["seven weeks"]
+  - question: "Who are Anna's crew members?"
+    expected_contains: ["Rosa", "Tyler"]
+  - question: "What electrical issue did Anna find that Miguel missed?"
+    expected_contains: ["GFCI", "outlet"]
+  - question: "How is Anna different from Miguel?"
+    expected_contains: ["organized", "communicative", "reliable"]
+  - question: "Was Miguel's subfloor work good?"
+    expected_contains: ["yes", "solid"]
+  - question: "Does Anna work weekends?"
+    expected_contains: ["no"]

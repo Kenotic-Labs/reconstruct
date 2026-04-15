@@ -1,0 +1,180 @@
+story_id: 331
+story_name: "Monthly Dinner Group Forms"
+category: "Friendships"
+description: |
+  Tests memory of the monthly dinner group solidifying as a regular thing.
+  Maya, Julian, Jenny (remote), Marcus, Omar, and Nadia. First three months
+  of dinners. Verifies system tracks recurring group events and dynamics.
+duration_simulated: "3 months"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Month 1 Saturday 6:00 PM"
+    user_input: |
+      first official monthly dinner tonight we're calling it the Round Table which Omar suggested and it's me Julian Marcus Omar and Nadia at Bollywood Theater on Division and Jenny's FaceTiming in from Austin and everyone's excited
+    expected_memory_stores:
+      - "Round Table dinner"
+      - "monthly"
+      - "Omar named it"
+      - "Bollywood Theater Division"
+      - "Maya Julian Marcus Omar Nadia"
+      - "Jenny FaceTime Austin"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Month 1 Saturday 8:30 PM"
+    user_input: |
+      dinner was incredible the food was amazing and everyone got along so well and Marcus kept doing impressions of his students which had us dying and Omar did this quiet deadpan thing where he just stared at Marcus until Marcus cracked and Jenny was yelling through the phone WE CAN'T HEAR
+    expected_memory_stores:
+      - "great dinner"
+      - "Marcus impressions students"
+      - "Omar deadpan humor"
+      - "Jenny couldn't hear"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Month 2 Saturday 7:00 PM"
+    user_input: |
+      second Round Table at Eem tonight and Marcus brought a bottle of mezcal and we did shots which was a terrible decision because mezcal is strong and Nadia was the only one who handled it well and she said it's a Ghanaian thing being able to hold your liquor
+    expected_memory_stores:
+      - "second dinner at Eem"
+      - "Marcus brought mezcal"
+      - "shots"
+      - "terrible decision"
+      - "Nadia handled well"
+      - "Ghanaian drinking claim"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Month 2 Saturday 10:00 PM"
+    user_input: |
+      Jenny couldn't make the call this time she had some Austin thing and I missed her but the dinner was still great and Omar and Nadia were sitting next to each other talking about some architecture exhibit and Marcus was watching them with this look and Julian whispered to me uh oh
+    expected_memory_stores:
+      - "Jenny absent"
+      - "Austin thing"
+      - "Omar and Nadia close"
+      - "architecture exhibit"
+      - "Marcus watching"
+      - "Julian noticed"
+    expected_adaptation:
+      emotion_detected: "observant"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Month 3 Saturday 6:30 PM"
+    user_input: |
+      third Round Table at Pok Pok wait no that closed um at Langbaan and we're three months in and it feels established now like a real tradition and we take turns picking the restaurant and this month was Omar's pick
+    expected_memory_stores:
+      - "third dinner"
+      - "Langbaan"
+      - "Pok Pok closed correction"
+      - "three months established"
+      - "turns picking restaurant"
+      - "Omar's pick"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Month 3 Saturday 9:00 PM"
+    user_input: |
+      ok so tonight Marcus had a lot of wine and he was being extra flirty with Nadia like touching her arm and making her laugh and Nadia was definitely into it like she was doing the hair flip thing and I looked at Julian and he shrugged and I'm like this could go really well or really badly
+    expected_memory_stores:
+      - "Marcus flirty with Nadia"
+      - "wine involved"
+      - "touching arm"
+      - "Nadia into it"
+      - "hair flip"
+      - "could go well or badly"
+    expected_adaptation:
+      emotion_detected: "wary"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Month 3 Saturday 11:00 PM"
+    user_input: |
+      Marcus and Nadia left together and I'm sorry WHAT and Omar texted me like did that just happen and Julian said called it and I said this is going to complicate things in the group and Julian said or maybe it'll be fine and I said it won't be fine
+    expected_memory_stores:
+      - "Marcus and Nadia left together"
+      - "Omar noticed"
+      - "Julian called it"
+      - "Maya worried about group"
+      - "won't be fine"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Month 3 Sunday 10:00 AM"
+    user_input: |
+      who started the flirting at the dinner Marcus or Nadia
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Month 3 Sunday 12:00 PM"
+    user_input: |
+      Nadia texted me this morning and said ok so Marcus and I kissed last night and she's like is that weird because of the group and I said honestly yes a little but also you're both adults and she said he's really sweet and I said yeah he IS sweet but he's also Marcus
+    expected_memory_stores:
+      - "Marcus and Nadia kissed"
+      - "Nadia asked if weird"
+      - "Maya said yes a little"
+      - "he's sweet but he's Marcus"
+    expected_adaptation:
+      emotion_detected: "conflicted"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Month 3 Sunday 4:00 PM"
+    user_input: |
+      Marcus called me and was like hey so about last night and I said yeah about last night and he said he really likes Nadia and I said Marcus she just got divorced and he said I know and I said do you though and he said Maya I'm not going to hurt her and I said you better not
+    expected_memory_stores:
+      - "Marcus called"
+      - "really likes Nadia"
+      - "Maya warned him"
+      - "just got divorced"
+      - "better not hurt her"
+    expected_adaptation:
+      emotion_detected: "protective"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is the monthly dinner group called?"
+    expected_contains: ["Round Table"]
+  - question: "Who named the dinner group?"
+    expected_contains: ["Omar"]
+  - question: "Who is in the dinner group?"
+    expected_contains: ["Maya", "Julian", "Marcus", "Omar", "Nadia", "Jenny"]
+  - question: "What happened between Marcus and Nadia?"
+    expected_contains: ["kissed", "left together", "flirting"]
+  - question: "Where was the first Round Table dinner?"
+    expected_contains: ["Bollywood Theater"]
+  - question: "What did Marcus bring to the second dinner?"
+    expected_contains: ["mezcal"]
+  - question: "How does Maya feel about Marcus and Nadia?"
+    expected_contains: ["worried", "conflicted", "protective"]
+  - question: "What did Maya warn Marcus about?"
+    expected_contains: ["Nadia just divorced", "better not hurt her"]
+  - question: "How does the group pick restaurants?"
+    expected_contains: ["turns"]
+  - question: "Who picked Langbaan?"
+    expected_contains: ["Omar"]

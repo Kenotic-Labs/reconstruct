@@ -1,0 +1,201 @@
+story_id: 140
+story_name: "Stronger After the Storm"
+category: "Relationships"
+description: |
+  Tests whether the system captures the resolution of the relationship tension arc,
+  the new patterns established, and the growth both individually and as a couple.
+  Cross-thread references to career and mentoring.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00am"
+    user_input: |
+      first Monday after the budget thing and the morning routine is back. Julian made coffee, I walked Kobe, breakfast together. but it feels different now? like there's this new layer of honesty between us that wasn't there before. we went through something and came out the other side
+    expected_memory_stores:
+      - "routine restored"
+      - "new honesty"
+      - "came through it"
+      - "different feeling"
+    expected_triples:
+      - ["user", "restored", "morning routine with Julian"]
+      - ["user", "feels", "new layer of honesty with Julian"]
+      - ["user", "has_emotion", "grateful"]
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 5:00pm"
+    user_input: |
+      Julian got a call today from a branding agency in Portland that wants to hire him for a 3-month contract. like actual steady work, not just gigs. it would pay 4000 a month which is more than his average freelance. he's meeting them Wednesday
+    expected_memory_stores:
+      - "branding agency"
+      - "3-month contract"
+      - "4000 a month"
+      - "steady work"
+      - "meeting Wednesday"
+    expected_triples:
+      - ["Julian", "offered", "3-month branding agency contract in Portland"]
+      - ["Julian", "contract_pays", "$4000/month"]
+      - ["Julian", "meeting", "agency on Wednesday"]
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 12:00pm"
+    user_input: |
+      Aisha noticed I seem happier and she goes things better at home? and I said yeah we worked it out. she said good because sad Maya is scary Maya and I was like rude but fair. she's not wrong I was kind of awful last week
+    expected_memory_stores:
+      - "Aisha noticed improvement"
+      - "sad Maya is scary"
+      - "worked it out"
+      - "self-awareness"
+    expected_triples:
+      - ["Aisha", "noticed", "user is happier"]
+      - ["Aisha", "said", "sad Maya is scary Maya"]
+      - ["user", "admitted", "she was awful last week"]
+    expected_adaptation:
+      emotion_detected: "sheepish"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 3:00pm"
+    user_input: |
+      Julian's meeting at the agency went well! they loved his portfolio and they want to start next Monday. he called me right after and he sounded like the old Julian, all excited and fast-talking. I haven't heard that energy in weeks
+    expected_memory_stores:
+      - "agency loved portfolio"
+      - "starts next Monday"
+      - "Julian excited"
+      - "old Julian energy"
+      - "weeks since happy"
+    expected_triples:
+      - ["Julian", "hired_by", "branding agency starting next Monday"]
+      - ["Julian", "portfolio", "loved by agency"]
+      - ["Julian", "has_emotion", "excited like his old self"]
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 7:00pm"
+    user_input: |
+      we updated the budget spreadsheet with Julian's new contract income. his monthly will go up to about 4000 plus any side gigs. our proportional split adjusts automatically because I built the formula to recalculate based on actual income each month. engineering brain for the win
+    expected_memory_stores:
+      - "budget updated"
+      - "Julian 4000"
+      - "auto-recalculating formula"
+      - "proportional adjustment"
+    expected_triples:
+      - ["user", "updated", "budget with Julian's $4000 contract income"]
+      - ["user", "built", "auto-recalculating formula for proportional split"]
+      - ["Julian", "income_updated", "$4000/month plus side gigs"]
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 9:00am"
+    user_input: |
+      what is Julian's new monthly income from the contract
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 5:00pm"
+    user_input: |
+      Dr. Tate session today and she said she's really proud of how I handled all of this. she said the pattern I was afraid of, becoming like my mom and silently bearing things, I actually BROKE that pattern by speaking up. that felt huge
+    expected_memory_stores:
+      - "Dr. Tate proud"
+      - "broke the pattern"
+      - "mom pattern"
+      - "spoke up"
+      - "huge realization"
+    expected_triples:
+      - ["Dr. Tate", "said", "proud of how user handled it"]
+      - ["user", "broke", "mom's pattern of silently bearing things"]
+      - ["user", "has_emotion", "proud"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 10:00am"
+    user_input: |
+      first Sunday... wait no it's Saturday. first fiscal date night is tomorrow actually. Julian already has the spreadsheet pulled up on his iPad with some entries. he's treating it like a design project and honestly I think that's what makes it work for him. if it's ugly he won't use it
+    expected_memory_stores:
+      - "fiscal date night tomorrow"
+      - "Julian iPad"
+      - "treating like design project"
+      - "aesthetic matters"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 11:00am"
+    user_input: |
+      fiscal date night went great. we reviewed the month, adjusted some estimates, and Julian even suggested we start a shared emergency fund with 200 a month each. he's taking ownership of the finances now not just participating. that's the shift
+    expected_memory_stores:
+      - "fiscal date night"
+      - "reviewed month"
+      - "emergency fund"
+      - "200 each"
+      - "Julian taking ownership"
+      - "shift in dynamic"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 6:00pm"
+    user_input: |
+      went to Bark and Brew and Julian paid. and this time it didn't feel like a performance or a guilt thing. it just felt normal. like two people sharing a life and sometimes one pays and sometimes the other pays and it's not a score it's just love. I think we're gonna be ok. more than ok
+    expected_memory_stores:
+      - "Bark and Brew"
+      - "Julian paid"
+      - "no guilt"
+      - "normal"
+      - "sharing a life"
+      - "not a score"
+      - "gonna be ok"
+    expected_adaptation:
+      emotion_detected: "at peace"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What new job opportunity did Julian get?"
+    expected_contains: ["branding agency", "3-month contract", "4000"]
+  - question: "How does the budget formula work?"
+    expected_contains: ["auto-recalculate", "actual income"]
+  - question: "What did Dr. Tate say about the pattern?"
+    expected_contains: ["broke", "mom pattern", "speaking up"]
+  - question: "What did Julian suggest at the fiscal date night?"
+    expected_contains: ["emergency fund", "200"]
+  - question: "How has Julian's attitude toward finances changed?"
+    expected_contains: ["ownership", "not just participating"]
+  - question: "How did the first fiscal date night go?"
+    expected_contains: ["great", "reviewed"]
+  - question: "Is Maya still scorekeeping?"
+    expected_contains: ["no", "not a score"]
+  - question: "How does Julian paying at Bark and Brew feel now?"
+    expected_contains: ["normal", "no guilt"]
+  - question: "How is Maya's mood at work?"
+    expected_contains: ["happier", "better"]
+  - question: "When does Julian start the contract?"
+    expected_contains: ["Monday"]

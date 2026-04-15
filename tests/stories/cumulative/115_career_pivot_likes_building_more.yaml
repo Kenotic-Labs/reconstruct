@@ -1,0 +1,207 @@
+story_id: 115
+story_name: "Realizes She Likes Building More"
+category: "Career"
+description: |
+  Tests whether the system tracks Maya's realization that she prefers building over
+  researching, processes the distinction correctly, and connects this to her engineering
+  identity and the mentoring experience.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 9:00am"
+    user_input: |
+      been thinking about the shadow day nonstop and I keep coming back to the same thing. when Rachel was showing me the interview data I wanted to build a tool for it. when she was making slides I wanted to build a dashboard instead. I'm a builder. that's just who I am
+    expected_memory_stores:
+      - "builder identity"
+      - "tool for interview data"
+      - "dashboard instead of slides"
+      - "self-knowledge"
+    expected_triples:
+      - ["user", "identifies_as", "a builder"]
+      - ["user", "wanted_to_build", "tool for interview data during shadow day"]
+      - ["user", "wanted_to_build", "dashboard instead of slides"]
+      - ["user", "has_emotion", "clear"]
+    expected_adaptation:
+      emotion_detected: "clear"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 10:30am"
+    user_input: |
+      told Rachel Kim about my shadow day experience and she goes yeah I could've told you that, you're an engineer through and through. but she said the GOOD news is that engineers who understand users are rare and valuable
+    expected_memory_stores:
+      - "Rachel Kim feedback"
+      - "engineer through and through"
+      - "engineers who understand users"
+      - "rare and valuable"
+    expected_triples:
+      - ["Rachel Kim", "said", "user is an engineer through and through"]
+      - ["Rachel Kim", "said", "engineers who understand users are rare and valuable"]
+      - ["user", "has_emotion", "affirmed"]
+    expected_adaptation:
+      emotion_detected: "affirmed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 2:00pm"
+    user_input: |
+      went back to the third floor to thank Rachel Ford for the shadow day and we ended up talking for like an hour. she said something interesting, she said the best products she's worked on had engineers embedded with the UX team not just engineers building from specs
+    expected_memory_stores:
+      - "Rachel Ford follow-up"
+      - "embedded engineers"
+      - "not building from specs"
+      - "best products"
+    expected_triples:
+      - ["Rachel Ford", "said", "best products had engineers embedded with UX team"]
+      - ["Rachel Ford", "believes", "engineers should not just build from specs"]
+      - ["user", "has_emotion", "inspired"]
+    expected_adaptation:
+      emotion_detected: "inspired"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 9:00am"
+    user_input: |
+      Dr. Tate session today and I told her I don't think UX research is for me and she was like that's great, not because UX is wrong but because you went and found out instead of just wondering forever. she called it active values clarification
+    expected_memory_stores:
+      - "Dr. Tate session"
+      - "UX not for me"
+      - "active values clarification"
+      - "finding out vs wondering"
+    expected_triples:
+      - ["user", "decided", "UX research is not for her"]
+      - ["Dr. Tate", "called_process", "active values clarification"]
+      - ["Dr. Tate", "praised", "user for finding out instead of wondering forever"]
+      - ["user", "has_emotion", "validated"]
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 11:00am"
+    user_input: |
+      she also said something about how the mentoring with Aisha and the shadow day are both data points about what I want. the through line is I want to make things that help people. whether that's code or curriculums or tools. it's about the helping
+    expected_memory_stores:
+      - "Dr. Tate insight"
+      - "through line"
+      - "making things that help people"
+      - "code curriculums tools"
+    expected_triples:
+      - ["Dr. Tate", "identified", "through line is making things that help people"]
+      - ["user", "motivated_by", "helping people through code, curriculums, or tools"]
+      - ["user", "has_emotion", "clarity"]
+    expected_adaptation:
+      emotion_detected: "clarity"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 3:00pm"
+    user_input: |
+      wait actually I think I said Dr. Tate's session was this morning but it was actually at noon not 9am. I moved it last week remember? anyway doesn't matter
+    expected_memory_stores:
+      - "correction"
+      - "therapy at noon"
+      - "schedule correction"
+    expected_triples:
+      - ["user", "corrected", "Dr. Tate session time 9am → noon"]
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 10:00am"
+    user_input: |
+      who was the UX person I shadowed at Conduit
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 2:00pm"
+    user_input: |
+      Julian and I took Kobe to the dog park in Sellwood and I was telling him about this idea I've been forming. what if instead of switching to UX, I push for a role at Conduit where engineering builds internal tools that make the whole company more productive
+    expected_memory_stores:
+      - "internal tools idea"
+      - "Sellwood dog park"
+      - "engineering for productivity"
+      - "idea forming"
+    expected_triples:
+      - ["user", "forming_idea", "internal tools team at Conduit for company productivity"]
+      - ["user", "visited", "Sellwood dog park with Julian and Kobe"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 5:00pm"
+    user_input: |
+      the more I think about it the more it makes sense. like at Conduit the UX team has crappy tools, the support team uses like five different systems, the onboarding for new engineers is a mess... what if there was a team whose whole job was building tools for other teams
+    expected_memory_stores:
+      - "internal tools team concept"
+      - "UX team crappy tools"
+      - "support team systems"
+      - "onboarding mess"
+    expected_triples:
+      - ["Conduit UX team", "has_problem", "crappy tools"]
+      - ["Conduit support team", "has_problem", "five different fragmented systems"]
+      - ["Conduit", "has_problem", "messy engineer onboarding"]
+      - ["user", "proposes", "team to build tools for other teams"]
+      - ["user", "has_emotion", "energized"]
+    expected_adaptation:
+      emotion_detected: "energized"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 9:00pm"
+    user_input: |
+      told Clara about the internal tools idea and she goes oh so you DO wanna stay in engineering and I was like yes but a different flavor of it. she seemed relieved honestly. my parents would freak out if I left a six figure tech job lol
+    expected_memory_stores:
+      - "Clara relieved"
+      - "different flavor of engineering"
+      - "parents concern"
+      - "staying in engineering"
+    expected_triples:
+      - ["Clara", "relieved", "user staying in engineering"]
+      - ["user", "describes_goal", "different flavor of engineering"]
+      - ["user", "concerned_about", "parents reaction to leaving six figure tech job"]
+      - ["user", "has_emotion", "amused"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Did Maya decide to switch to UX research?"
+    expected_contains: ["no", "not"]
+  - question: "What did Maya realize about herself?"
+    expected_contains: ["builder", "building"]
+  - question: "What idea is Maya forming about her career?"
+    expected_contains: ["internal tools", "team"]
+  - question: "What did Dr. Tate call Maya's exploration process?"
+    expected_contains: ["active values clarification"]
+  - question: "What through line did Dr. Tate identify?"
+    expected_contains: ["help people", "making things"]
+  - question: "What problems at Conduit could an internal tools team solve?"
+    expected_contains: ["UX team tools", "support team", "onboarding"]
+  - question: "What did Rachel Ford say about embedded engineers?"
+    expected_contains: ["best products", "embedded", "UX team"]
+  - question: "How did Clara react to Maya staying in engineering?"
+    expected_contains: ["relieved"]
+  - question: "What did Rachel Kim say about Maya as an engineer?"
+    expected_contains: ["through and through", "rare", "valuable"]
+  - question: "Where did Maya and Julian take Kobe?"
+    expected_contains: ["dog park", "Sellwood"]

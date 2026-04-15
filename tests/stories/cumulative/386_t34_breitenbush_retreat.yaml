@@ -1,0 +1,186 @@
+story_id: 386
+story_name: "Breitenbush Weekend Retreat"
+category: "Mental Health"
+description: |
+  Tests memory of Maya attending a weekend meditation retreat at Breitenbush Hot Springs.
+  Verifies system tracks significant emotional experience and location details.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 7:00 PM"
+    user_input: |
+      so Dr Tate mentioned this weekend meditation retreat at Breitenbush Hot Springs which is like two hours east of Portland in the Cascades and it's a mindfulness weekend with group meditation and silence hours and soaking in hot springs and I signed up on impulse
+    expected_memory_stores:
+      - "Breitenbush Hot Springs"
+      - "weekend retreat"
+      - "two hours east Portland"
+      - "Cascades"
+      - "group meditation"
+      - "silence hours"
+      - "hot springs"
+      - "impulse signup"
+    expected_adaptation:
+      emotion_detected: "impulsive"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 2:00 PM"
+    user_input: |
+      driving to Breitenbush now Julian is staying home with Kobe and he was like have fun being quiet for 48 hours we both know that's your biggest challenge and he's not wrong I talk a LOT but that's kind of the point right
+    expected_memory_stores:
+      - "driving to Breitenbush"
+      - "Julian home with Kobe"
+      - "quiet challenge"
+      - "talks a lot"
+      - "that's the point"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 5:00 PM"
+    user_input: |
+      arrived and this place is stunning like it's in the middle of old-growth forest and there are natural hot springs with wooden pools and the cabins have no wifi and no cell service and I'm simultaneously panicking and excited
+    expected_memory_stores:
+      - "arrived Breitenbush"
+      - "old-growth forest"
+      - "natural hot springs"
+      - "wooden pools"
+      - "no wifi no cell"
+      - "panicking and excited"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 8:00 PM"
+    user_input: |
+      first group meditation session was 30 minutes which is the longest I've ever sat and the teacher is this woman named Kira who's been teaching for 20 years and her voice is like warm honey and I made it through without opening my eyes once
+    expected_memory_stores:
+      - "30 minute session"
+      - "longest ever"
+      - "teacher Kira"
+      - "20 years teaching"
+      - "warm honey voice"
+      - "didn't open eyes"
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 7:00 AM"
+    user_input: |
+      morning session at 6 AM in the meditation hall with the windows open to the forest and fog coming in and I could hear the river and birds and I cried and I don't know why I just started crying silently and Kira said that's normal and to let it happen
+    expected_memory_stores:
+      - "6 AM session"
+      - "meditation hall"
+      - "forest fog river birds"
+      - "crying silently"
+      - "don't know why"
+      - "Kira said normal"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:00 AM"
+    user_input: |
+      soaked in the hot springs during silence hours and I was just sitting in the water surrounded by trees and steam and I realized I haven't been still like truly still in maybe ever and it was overwhelming in the best way
+    expected_memory_stores:
+      - "hot springs soaking"
+      - "silence hours"
+      - "trees and steam"
+      - "truly still"
+      - "first time ever"
+      - "overwhelmingly positive"
+    expected_adaptation:
+      emotion_detected: "transcendent"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Kira did a talk about grief and impermanence and she said sometimes meditation unlocks emotions we've been carrying without knowing and she asked if anyone had something come up and I raised my hand and said I keep thinking about my Grandpa Wei and I don't know why
+    expected_memory_stores:
+      - "Kira talk"
+      - "grief and impermanence"
+      - "unlocks emotions"
+      - "Grandpa Wei came up"
+      - "don't know why"
+    expected_adaptation:
+      emotion_detected: "vulnerable"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 5:00 PM"
+    user_input: |
+      where is Maya's meditation retreat and who is leading it
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 7:00 PM"
+    user_input: |
+      Kira talked to me privately after and she said Grandpa Wei coming up makes sense because he probably represents something unresolved and I told her he died when I was 22 and I never really processed it because I was in college and just pushed through and she said this is the processing finally happening
+    expected_memory_stores:
+      - "Kira private talk"
+      - "Grandpa Wei unresolved"
+      - "died when Maya was 22"
+      - "never processed"
+      - "pushed through college"
+      - "processing now"
+    expected_adaptation:
+      emotion_detected: "raw"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 12:00 PM"
+    user_input: |
+      leaving Breitenbush and I feel like a different person I know that sounds dramatic but something shifted like I'm lighter and I cried on and off for probably an hour total over the weekend about Grandpa Wei and it wasn't sad crying it was more like release crying like letting something go that I've been carrying
+    expected_memory_stores:
+      - "leaving Breitenbush"
+      - "feels different"
+      - "something shifted"
+      - "lighter"
+      - "cried about Grandpa Wei"
+      - "release crying"
+      - "letting go"
+    expected_adaptation:
+      emotion_detected: "transformed"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where is Breitenbush Hot Springs?"
+    expected_contains: ["Cascades", "east", "Portland"]
+  - question: "Who led the meditation retreat?"
+    expected_contains: ["Kira"]
+  - question: "What emotional breakthrough did Maya have at the retreat?"
+    expected_contains: ["Grandpa Wei", "crying"]
+  - question: "When did Grandpa Wei die?"
+    expected_contains: ["22"]
+  - question: "Why hadn't Maya processed her grandfather's death?"
+    expected_contains: ["college", "pushed through"]
+  - question: "What was the longest meditation Maya sat for?"
+    expected_contains: ["30 minutes"]
+  - question: "What made Maya cry during morning meditation?"
+    expected_contains: ["don't know", "forest", "river"]
+  - question: "Was there wifi at Breitenbush?"
+    expected_contains: ["no"]
+  - question: "What did Kira say about emotions during meditation?"
+    expected_contains: ["unlock", "carrying", "normal"]
+  - question: "How did Maya describe the crying?"
+    expected_contains: ["release", "letting go"]

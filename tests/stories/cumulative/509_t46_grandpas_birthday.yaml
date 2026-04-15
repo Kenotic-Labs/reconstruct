@@ -1,0 +1,174 @@
+story_id: 509
+story_name: "Grandpa's Birthday"
+category: "Grief and Legacy"
+description: |
+  Grandpa Wei's birthday arrives — the first one since his death. Maya navigates
+  the day with Vivian, Julian, and memories. Cross-references cooking (T31),
+  phone/digital (T48), mental health (T21), and hosting (T47).
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 6:30 AM"
+    user_input: |
+      woke up and immediately knew what day it is it's grandpa's birthday he would have been 84 today and I've been dreading this for weeks like I marked it in my calendar and every time I saw it coming I felt this weight in my chest getting heavier and Julian said good morning and I just said it's his birthday and Julian just held me
+    expected_memory_stores:
+      - "Grandpa Wei birthday"
+      - "would be 84"
+      - "dreading the day"
+      - "Julian held Maya"
+    expected_adaptation:
+      emotion_detected: "heavy"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 8:00 AM"
+    user_input: |
+      my mom called at like 7:45 and she was already crying and she said I made his tea this morning and set out a cup for him and I know that sounds crazy but it felt right and I said mom that's not crazy at all because I literally did the same thing with his tin of jasmine tea in my kitchen
+    expected_memory_stores:
+      - "Vivian called early"
+      - "both made tea for grandpa"
+      - "parallel ritual"
+      - "jasmine tea from his tin"
+    expected_adaptation:
+      emotion_detected: "connected"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 9:30 AM"
+    user_input: |
+      told Priya I might be a little off today and she said take whatever time you need and I said no I want to work actually because grandpa worked every single day for like 40 years and if he can show up I can show up and Priya kind of smiled and said ok but I'm here if you need to step out
+    expected_memory_stores:
+      - "told Priya about birthday"
+      - "chose to work"
+      - "grandpa's work ethic"
+      - "Priya supportive"
+    expected_adaptation:
+      emotion_detected: "resolute"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 12:00 PM"
+    user_input: |
+      during lunch I watched the video of grandpa laughing at Kobe stealing the dumpling and I've watched it so many times now but today it hits different because it's his birthday and he should be laughing somewhere today he should be eating cake and drinking tea and instead there's just this video on my phone
+    expected_memory_stores:
+      - "watched laughing video"
+      - "birthday grief intensity"
+      - "should be laughing"
+      - "video on phone"
+    expected_adaptation:
+      emotion_detected: "anguished"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 3:00 PM"
+    user_input: |
+      got a text from uncle David saying happy birthday Dad with a heart emoji and I texted back with a heart and it's the most we've communicated since the cherry tree photo and I think grief is slowly bringing our family closer which is like the worst best thing
+    expected_memory_stores:
+      - "uncle David text"
+      - "happy birthday Dad"
+      - "cherry tree photo previous contact"
+      - "grief bringing family closer"
+    expected_adaptation:
+      emotion_detected: "bittersweet"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 5:30 PM"
+    user_input: |
+      came home and Julian had set up this whole thing in the dining room he made dumplings using grandpa's recipe the one I reconstructed and he lit a candle and put grandpa's photo next to it and poured two cups of tea one for us and one for grandpa and I just stood in the doorway and cried because how did I find this person
+    expected_memory_stores:
+      - "Julian's surprise"
+      - "dumplings from grandpa's recipe"
+      - "candle and photo"
+      - "tea cup for grandpa"
+      - "Maya grateful for Julian"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 7:00 PM"
+    user_input: |
+      we ate the dumplings and Julian's version was actually pretty good he's been practicing since we made them together and Kobe sat under the table being extremely patient which is not like him at all and Julian said even Kobe knows it's a special night
+    expected_memory_stores:
+      - "eating dumplings"
+      - "Julian's been practicing"
+      - "Kobe patient under table"
+      - "special night"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 8:30 PM"
+    user_input: |
+      called my mom after dinner and told her what Julian did and she cried again but like good crying and she said Maya I know I've been hard on you sometimes and we've fought about things but you have built a beautiful life and your grandfather knew that and I said thanks mom and I actually meant it this time like really really meant it
+    expected_memory_stores:
+      - "called Vivian after dinner"
+      - "Vivian emotional"
+      - "acknowledgment of past conflicts"
+      - "beautiful life"
+      - "Maya genuinely thanks Vivian"
+    expected_adaptation:
+      emotion_detected: "healing"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 9:30 PM"
+    user_input: |
+      went outside and looked at the cherry tree in the dark and I said happy birthday grandpa and I'm wearing your watch and I ate your dumplings and your tree is growing and I'm ok I'm really ok and the wind moved the little branches and I know it's just wind but still
+    expected_memory_stores:
+      - "talked to cherry tree"
+      - "happy birthday grandpa"
+      - "watch dumplings tree"
+      - "wind moved branches"
+    expected_adaptation:
+      emotion_detected: "spiritual"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 11:00 PM"
+    user_input: |
+      lying in bed and Julian's asleep and I'm looking at the ceiling and today was hard and beautiful at the same time and I think that's what grief is honestly it's just love with nowhere to go and Dr. Tate said something like that once and it didn't make sense then but it does now on this day his birthday the first one without him
+    expected_memory_stores:
+      - "end of birthday"
+      - "hard and beautiful"
+      - "grief is love with nowhere to go"
+      - "Dr. Tate quote"
+      - "first birthday without him"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How old would Grandpa Wei have been on his birthday?"
+    expected_contains: ["84"]
+  - question: "What did Julian set up for Grandpa Wei's birthday?"
+    expected_contains: ["dumplings", "candle", "photo", "tea"]
+  - question: "What ritual did both Maya and Vivian independently do?"
+    expected_contains: ["tea", "cup"]
+  - question: "Who texted on Grandpa's birthday?"
+    expected_contains: ["uncle David"]
+  - question: "What did Maya say to the cherry tree?"
+    expected_contains: ["happy birthday"]
+  - question: "What did Vivian say to Maya after hearing about Julian's gesture?"
+    expected_contains: ["beautiful life"]
+  - question: "How did Maya describe grief at the end of the day?"
+    expected_contains: ["love with nowhere to go"]
+  - question: "Why did Maya choose to go to work on his birthday?"
+    expected_contains: ["grandpa worked", "show up"]
+  - question: "Has Julian been practicing the dumpling recipe?"
+    expected_contains: ["yes", "practicing"]
+  - question: "What did Maya watch during her lunch break?"
+    expected_contains: ["video", "laughing", "Kobe", "dumpling"]

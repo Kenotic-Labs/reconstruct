@@ -1,0 +1,176 @@
+story_id: 167
+story_name: "Kevin Park Mentorship"
+category: "Career"
+description: |
+  Kevin Park becomes a mentor to Julian. Deeper relationship develops.
+  Kevin shares industry wisdom and helps Julian grow as a leader.
+  Tests deep relational tracking through secondhand narrative.
+duration_simulated: "3 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      Julian told me Kevin took him aside today and said he wants to be more intentional about developing Julian's leadership skills because he sees Julian eventually running the entire creative department and Julian was like wait what and Kevin said yeah I'm not gonna be here forever and I need someone to take over
+    expected_memory_stores:
+      - "Kevin mentoring Julian"
+      - "leadership development"
+      - "Julian as future creative department head"
+      - "Kevin succession planning"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      Kevin started doing weekly one-on-ones with Julian not just about projects but about career growth and design philosophy and industry stuff and Julian said it's like having a design dad which is kind of sweet because you know Julian lost his actual dad and I think Kevin fills a bit of that void not that Julian would ever say that out loud
+    expected_memory_stores:
+      - "weekly one-on-ones"
+      - "career growth focus"
+      - "design philosophy discussions"
+      - "Kevin as father figure"
+      - "Julian's dad deceased"
+    expected_adaptation:
+      emotion_detected: "poignant"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 6:30 PM"
+    user_input: |
+      Kevin invited Julian to a design conference in Seattle next month called Pacific Design Summit and Bold Studio is paying for it and Julian gets to sit in on panels and Kevin's even introducing him to some people in the industry which is like networking gold for someone who was isolated freelancing from his home office
+    expected_memory_stores:
+      - "Pacific Design Summit"
+      - "Seattle next month"
+      - "Bold Studio paying"
+      - "networking opportunity"
+      - "Kevin introducing Julian to people"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 7:00 PM"
+    user_input: |
+      Julian's learning so much from Kevin about like the business side of design which freelancing never really taught him like how to price projects for clients how to manage team bandwidth and when to push back on scope creep and Julian said this is like getting an MBA in design for free
+    expected_memory_stores:
+      - "Julian learning business of design"
+      - "pricing projects"
+      - "managing bandwidth"
+      - "scope creep"
+      - "like a free MBA"
+    expected_adaptation:
+      emotion_detected: "appreciative"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 5:00 PM"
+    user_input: |
+      Kevin let Julian run the all-hands meeting today like the full company meeting and Julian said he was nervous but Kevin said you need to get comfortable presenting to groups not just clients and Julian did great apparently like Sam told him afterward you're a natural and Julian texted me like three fire emojis
+    expected_memory_stores:
+      - "Julian ran all-hands meeting"
+      - "Kevin building Julian's presentation skills"
+      - "Sam said natural"
+      - "Julian excited"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 6:00 PM"
+    user_input: |
+      Kevin told Julian about a mistake he made early in his career where he over-promised a client and had to pull three all-nighters to deliver and he said it taught him that honesty about timelines is more important than impressing people and Julian was like that's the kind of advice you can't get from a YouTube video or a design blog
+    expected_memory_stores:
+      - "Kevin shared career mistake"
+      - "over-promised client"
+      - "honesty about timelines"
+      - "Julian values real experience"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      I met Kevin for the first time at the Bold Studio happy hour he's like this calm laid back guy maybe 42 43 and he has this quiet confidence that's just like reassuring and he told me Maya I'm so glad Julian's here he's genuinely talented and a great person and I almost cried because it felt so validating
+    expected_memory_stores:
+      - "Maya met Kevin"
+      - "Kevin in his 40s"
+      - "calm quiet confidence"
+      - "Kevin praised Julian to Maya"
+      - "Maya emotional"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 7:00 PM"
+    user_input: |
+      Julian's starting to think about his own design philosophy more seriously Kevin encouraged him to write it down and Julian's been journaling about it which he's never done before like actual written reflections on what design means to him and how he approaches problems and it's honestly making him a deeper thinker
+    expected_memory_stores:
+      - "Julian developing design philosophy"
+      - "Kevin encouraged journaling"
+      - "Julian journaling first time"
+      - "deeper thinking"
+    expected_adaptation:
+      emotion_detected: "admiring"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 6:00 PM"
+    user_input: |
+      Kevin also connected Julian with a woman named Patricia Torres who runs a design nonprofit that teaches design skills to underserved communities and Julian's interested in volunteering there on weekends and I love that because Julian's always been about giving back he just never had the connection before
+    expected_memory_stores:
+      - "Patricia Torres"
+      - "design nonprofit"
+      - "teaches underserved communities"
+      - "Julian interested in volunteering"
+      - "Kevin made the connection"
+    expected_adaptation:
+      emotion_detected: "inspired"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 9:00 AM"
+    user_input: |
+      Julian said to me this morning I think meeting Kevin might be one of the most important things that's happened to me professionally and I said I think losing Thornton was the best thing that could have happened because it led you here and he paused and said yeah actually you're right and then he kissed me and went to walk Kobe and honestly life is good
+    expected_memory_stores:
+      - "Julian values Kevin relationship"
+      - "Thornton loss led to Bold Studio"
+      - "everything worked out"
+      - "life is good"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How is Kevin mentoring Julian?"
+    expected_contains: ["one-on-ones", "leadership", "career"]
+  - question: "What conference is Julian attending?"
+    expected_contains: ["Pacific Design Summit", "Seattle"]
+  - question: "What is Kevin teaching Julian about?"
+    expected_contains: ["business", "pricing", "leadership"]
+  - question: "Who is Patricia Torres?"
+    expected_contains: ["design nonprofit", "underserved"]
+  - question: "Does Kevin see Julian as a future leader?"
+    expected_contains: ["yes", "creative department"]
+  - question: "Has Maya met Kevin Park?"
+    expected_contains: ["yes", "happy hour"]
+  - question: "What is Julian journaling about?"
+    expected_contains: ["design philosophy"]
+  - question: "How old is Kevin Park?"
+    expected_contains: ["42", "43", "40s"]
+  - question: "How does Julian feel about Kevin's mentorship?"
+    expected_contains: ["important", "valuable"]
+  - question: "Did Julian run a company meeting?"
+    expected_contains: ["yes", "all-hands"]

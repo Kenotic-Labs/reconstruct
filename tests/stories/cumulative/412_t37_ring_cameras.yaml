@@ -1,0 +1,167 @@
+story_id: 412
+story_name: "Ring Cameras"
+category: "Smart Home"
+description: |
+  Julian installs Ring cameras at front and back doors. Vivian's safety concerns
+  drive the decision. Kobe triggers constant motion alerts.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 8:00 AM"
+    user_input: |
+      ok so Julian ordered two Ring cameras one for the front door and one for the back and I was like why and he said your mom keeps asking if we're safe and the neighborhood has had a few package thefts lately and I'm like fair enough I guess Vivian will sleep better knowing we have cameras
+    expected_memory_stores:
+      - "two Ring cameras ordered"
+      - "front and back door"
+      - "Vivian safety concerns"
+      - "package thefts neighborhood"
+    expected_adaptation:
+      emotion_detected: "accepting"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 11:00 AM"
+    user_input: |
+      Julian is installing the front door Ring now and it's a doorbell one so it replaces the existing doorbell and the wiring is being annoying apparently because our house is older and the wires are like barely long enough but he got it working
+    expected_memory_stores:
+      - "Ring doorbell front"
+      - "older house wiring"
+      - "barely long enough wires"
+      - "installation working"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 2:00 PM"
+    user_input: |
+      the back door camera is the battery one not wired and Julian mounted it above the back porch and the view covers like the whole backyard including the gate and I tested it from inside and the video is actually really clear like HD quality which is impressive for a little camera
+    expected_memory_stores:
+      - "back camera battery powered"
+      - "above back porch"
+      - "covers whole backyard"
+      - "HD quality video"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 3:30 PM"
+    user_input: |
+      FaceTimed mom and showed her the camera feeds and she was SO happy like she was like oh Maya now I can see who comes to your door and I'm like mom it's not a livestream for you but she was like can't you share it with me and Julian quietly said yes and I glared at him
+    expected_memory_stores:
+      - "Vivian loves cameras"
+      - "wants shared access"
+      - "Julian offered to share"
+      - "Maya annoyed"
+    expected_adaptation:
+      emotion_detected: "exasperated"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 5:00 PM"
+    user_input: |
+      so the motion alerts are already driving me insane like every time Kobe goes in the backyard the camera sends me a notification and he's been out there like 8 times today so my phone has been buzzing nonstop and Julian is like we'll adjust the sensitivity and I'm like you better
+    expected_memory_stores:
+      - "motion alerts constant"
+      - "Kobe triggering alerts"
+      - "8 notifications today"
+      - "need to adjust sensitivity"
+    expected_adaptation:
+      emotion_detected: "annoyed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 7:00 PM"
+    user_input: |
+      Julian lowered the motion sensitivity on the back camera but now it's not picking up actual people either like the delivery guy came and it didn't alert us so we're back to square one basically the sensitivity is either too high catching Kobe 50 times or too low catching nothing
+    expected_memory_stores:
+      - "sensitivity lowered too much"
+      - "missed delivery person"
+      - "can't find right setting"
+      - "Kobe problem"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 9:00 AM"
+    user_input: |
+      Julian found the motion zones setting where you can draw specific areas for it to watch so he drew a zone that covers the gate and the porch but excludes the middle of the yard where Kobe runs around and that seems to actually work like I got a notification when the mail carrier came but nothing when Kobe was playing
+    expected_memory_stores:
+      - "motion zones configured"
+      - "covers gate and porch"
+      - "excludes yard middle"
+      - "working now"
+      - "mail carrier test passed"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 12:00 PM"
+    user_input: |
+      the Ring subscription is 10 bucks a month for video history and I was like do we really need that and Julian was like yes otherwise it only saves the last 24 hours and I said fine but this smart home stuff is nickel and diming us between the Nest and the Ring subscription we're paying like 120 a year in subscriptions just for house stuff
+    expected_memory_stores:
+      - "Ring subscription $10/month"
+      - "24 hour limit without"
+      - "$120/year smart home subscriptions"
+      - "cost concern"
+    expected_adaptation:
+      emotion_detected: "budget conscious"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 3:00 PM"
+    user_input: |
+      how many Ring cameras did we install and where are they I'm telling Jenny about our setup and I keep mixing up the details
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 6:00 PM"
+    user_input: |
+      ok I'll admit the Ring is actually nice for one specific thing which is when I'm at work and the delivery comes I can see it on my phone and tell the driver where to leave it instead of worrying about packages sitting on the porch all day so yeah fine Julian you were right about this one too
+    expected_memory_stores:
+      - "delivery monitoring useful"
+      - "at work benefit"
+      - "Julian right again"
+    expected_adaptation:
+      emotion_detected: "conceding"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How many Ring cameras does Maya have?"
+    expected_contains: ["two", "2"]
+  - question: "Where are the Ring cameras located?"
+    expected_contains: ["front door", "back door"]
+  - question: "Why did Julian want cameras?"
+    expected_contains: ["Vivian", "safety", "package theft"]
+  - question: "What problem did Kobe cause with the cameras?"
+    expected_contains: ["motion alerts", "triggering", "notifications"]
+  - question: "How did Julian fix the Kobe motion alert problem?"
+    expected_contains: ["motion zones", "drew", "exclude"]
+  - question: "How much is the Ring subscription?"
+    expected_contains: ["10", "month"]
+  - question: "Did Vivian want camera access?"
+    expected_contains: ["yes", "shared"]
+  - question: "What type is the back door camera?"
+    expected_contains: ["battery"]
+  - question: "How much are Maya's annual smart home subscriptions?"
+    expected_contains: ["120"]
+  - question: "What useful feature did Maya discover about the Ring?"
+    expected_contains: ["delivery", "packages", "work"]

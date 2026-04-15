@@ -1,0 +1,218 @@
+story_id: 146
+story_name: "Ring Needs Resizing"
+category: "Life Events"
+description: |
+  Tests whether the system tracks the ring sizing correction from 7 to 6.5, the
+  process of getting it resized, and Julian's emotional reaction to the imperfection.
+  Key correction: ring size changes from 7 to 6.5.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00am"
+    user_input: |
+      went back to Bridgeport Jewelers today to get the ring resized. it's a size 7 and I need a 6.5. the jeweler said it'll take about a week because they have to be careful with the setting. Julian felt SO bad about getting the wrong size but I told him it's a half size it's fine
+    expected_memory_stores:
+      - "Bridgeport Jewelers"
+      - "resize"
+      - "size 7 to 6.5"
+      - "one week"
+      - "careful with setting"
+      - "Julian felt bad"
+    expected_triples:
+      - ["user", "ring_resizing_at", "Bridgeport Jewelers"]
+      - ["user", "corrected", "ring size 7 → 6.5"]
+      - ["user", "ring_ready_in", "about one week"]
+      - ["user", "has_emotion", "reassuring"]
+    expected_adaptation:
+      emotion_detected: "reassuring"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:30am"
+    user_input: |
+      Julian said he guessed the size because he didn't want to ask me and ruin the surprise. he apparently traced one of my other rings on paper and brought it to the jeweler but the ring he traced was one I wear on my right hand which is slightly bigger than my left. poor guy
+    expected_memory_stores:
+      - "guessed size"
+      - "traced ring on paper"
+      - "wrong hand"
+      - "right hand bigger"
+    expected_triples:
+      - ["Julian", "guessed_ring_size", "traced ring from wrong hand"]
+      - ["Julian", "sizing_mistake", "right hand ring slightly bigger than left"]
+      - ["user", "has_emotion", "endeared"]
+    expected_adaptation:
+      emotion_detected: "endeared"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 12:00pm"
+    user_input: |
+      it feels weird not wearing the ring. like I had it for one day and I already miss it. I keep looking at my left hand and expecting it to be there. Julian noticed and goes you're doing the hand thing again and I was like what hand thing and he said you keep touching your ring finger
+    expected_memory_stores:
+      - "missing ring"
+      - "one day"
+      - "touching ring finger"
+      - "Julian noticed"
+    expected_triples:
+      - ["user", "missing", "engagement ring while being resized"]
+      - ["user", "habit", "touching ring finger"]
+      - ["user", "has_emotion", "bittersweet"]
+    expected_adaptation:
+      emotion_detected: "bittersweet"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 9:00am"
+    user_input: |
+      Aisha at work noticed the ring is gone and she was like OH NO WHAT HAPPENED and I had to explain it's just being resized and she literally put her hand on her chest and said don't scare me like that. the whole team keeps asking to see the ring but I don't have it lol
+    expected_memory_stores:
+      - "Aisha panicked"
+      - "explained resizing"
+      - "team wants to see ring"
+      - "don't have it"
+    expected_triples:
+      - ["Aisha", "panicked", "thought engagement was off"]
+      - ["user", "explained", "ring just being resized"]
+      - ["user", "has_emotion", "amused"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 3:00pm"
+    user_input: |
+      the jeweler called and said the resizing is taking a little longer because they want to reinforce the prongs while they have it. so it'll be ready Friday not Thursday like they originally said. Julian's tracking the status like it's a FedEx package
+    expected_memory_stores:
+      - "resizing delay"
+      - "prongs reinforced"
+      - "ready Friday"
+      - "originally Thursday"
+      - "Julian tracking"
+    expected_triples:
+      - ["user", "corrected", "ring ready Thursday → Friday"]
+      - ["jeweler", "reinforcing", "prongs during resize"]
+      - ["Julian", "tracking", "ring status obsessively"]
+    expected_adaptation:
+      emotion_detected: "patient"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 6:00pm"
+    user_input: |
+      what size is Maya's ring finger
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 12:00pm"
+    user_input: |
+      RING IS READY. Julian picked it up during lunch and surprised me at work. he came to the office with a little bag from Bridgeport and got down on one knee AGAIN in front of my whole team and said round two, this time it fits. Aisha filmed it on her phone. Rachel Kim was clapping
+    expected_memory_stores:
+      - "ring ready"
+      - "Julian at office"
+      - "one knee again"
+      - "round two"
+      - "fits now"
+      - "Aisha filmed"
+      - "Rachel Kim clapping"
+    expected_triples:
+      - ["Julian", "second_proposal", "at user's office on one knee"]
+      - ["user", "ring_status", "resized and fits now"]
+      - ["Aisha", "filmed", "second proposal"]
+      - ["user", "has_emotion", "ecstatic"]
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 12:15pm"
+    user_input: |
+      the ring fits PERFECTLY now. 6.5 is exactly right. it's snug but not tight and it doesn't spin. the jeweler did an amazing job with the prongs too, it feels more secure. I'm never taking this off. ever. well except for hand washing and stuff but you know what I mean
+    expected_memory_stores:
+      - "perfect fit"
+      - "6.5 correct"
+      - "snug not tight"
+      - "doesn't spin"
+      - "prongs secure"
+      - "never taking off"
+    expected_triples:
+      - ["user", "ring_size_confirmed", "6.5 perfect fit"]
+      - ["user", "ring_description", "snug not tight, doesn't spin, prongs secure"]
+      - ["user", "has_emotion", "overjoyed"]
+    expected_adaptation:
+      emotion_detected: "overjoyed"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 5:00pm"
+    user_input: |
+      Aisha sent me the video of Julian's second proposal and it's so good. you can hear Derek going OH SHIT in the background and Priya laughing. I'm gonna cherish this video. Julian said he planned it on purpose because the first proposal was private and he wanted my work family to be part of it too
+    expected_memory_stores:
+      - "video of second proposal"
+      - "Derek reaction"
+      - "Priya laughing"
+      - "cherish video"
+      - "work family"
+      - "Julian planned this"
+    expected_triples:
+      - ["Aisha", "sent_video", "second proposal at office"]
+      - ["Julian", "planned_office_proposal", "wanted work family to be part of it"]
+      - ["user", "has_emotion", "touched"]
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 9:00pm"
+    user_input: |
+      the ring went from size 7 to size 6.5 and honestly the whole resizing saga is part of our story now. nothing about this engagement has gone according to Julian's plan, rain cancellation work conflict wrong size, but somehow all of it made it better. imperfect is our thing I guess
+    expected_memory_stores:
+      - "7 to 6.5"
+      - "resizing saga"
+      - "part of story"
+      - "nothing according to plan"
+      - "imperfect is their thing"
+    expected_triples:
+      - ["user", "ring_resized", "size 7 to 6.5"]
+      - ["user", "reflects", "nothing went according to plan but all of it made it better"]
+      - ["user", "has_emotion", "content"]
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What size was the ring originally?"
+    expected_contains: ["7"]
+  - question: "What size is Maya's ring finger?"
+    expected_contains: ["6.5"]
+  - question: "Where was the ring resized?"
+    expected_contains: ["Bridgeport Jewelers"]
+  - question: "How long did resizing take?"
+    expected_contains: ["week"]
+  - question: "Why was the size wrong?"
+    expected_contains: ["traced", "wrong hand", "right hand"]
+  - question: "What did Julian do when he picked up the resized ring?"
+    expected_contains: ["office", "one knee", "second proposal"]
+  - question: "Who filmed the second proposal?"
+    expected_contains: ["Aisha"]
+  - question: "What additional work did the jeweler do?"
+    expected_contains: ["prongs", "reinforced"]
+  - question: "Does the ring fit now?"
+    expected_contains: ["yes", "perfectly", "6.5"]
+  - question: "What things went wrong with the engagement plan?"
+    expected_contains: ["rain", "work", "wrong size"]

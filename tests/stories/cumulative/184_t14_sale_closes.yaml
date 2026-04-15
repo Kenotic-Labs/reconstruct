@@ -1,0 +1,223 @@
+story_id: 184
+story_name: "Sale Closes"
+category: "Life Events"
+description: |
+  Chen's Auto Repair officially sold to Frank DeLuca for $340K.
+  Emotional handover day. George says goodbye to the shop.
+  Tests tracking completed business transaction and emotional closure.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 8:00 AM"
+    user_input: |
+      today's the day March 22nd closing day for Chen's Auto Repair and Dad's at the lawyer's office with Mom right now and I'm on FaceTime watching them sign the papers and Dad's hand is shaking slightly and Mom is rubbing his back and I'm trying not to cry at my desk at work
+    expected_memory_stores:
+      - "March 22 closing day"
+      - "lawyer's office"
+      - "George signing papers"
+      - "hand shaking"
+      - "Vivian comforting"
+      - "Maya on FaceTime"
+    expected_triples:
+      - ["Chen's Auto Repair", "closing_on", "March 22"]
+      - ["George", "signing_papers", "at lawyer's office"]
+      - ["Vivian", "comforting", "George during signing"]
+      - ["user", "watching_via", "FaceTime"]
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 9:00 AM"
+    user_input: |
+      it's done the sale is complete $340K transferred to Dad's account and Frank DeLuca is now the official owner of Chen's Auto Repair and Dad looked at the camera and said Maya we did it and his eyes were red and I said you did it Dad 40 years and he said no Maya we all did it your mother held everything together while I was under cars
+    expected_memory_stores:
+      - "sale complete"
+      - "$340K transferred"
+      - "Frank DeLuca official owner"
+      - "George emotional"
+      - "credits Vivian"
+    expected_triples:
+      - ["Chen's Auto Repair", "sale_complete", "$340K transferred"]
+      - ["Frank DeLuca", "is_now", "owner of Chen's Auto Repair"]
+      - ["George", "credited", "Vivian for holding family together"]
+    expected_adaptation:
+      emotion_detected: "proud and sad"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 12:00 PM"
+    user_input: |
+      Dad went to the shop one last time to hand over the keys and Frank was there with Tony and Rick and Dad walked through every bay every tool cabinet every corner and told Frank the history of each spot and Frank listened to every word which tells me Dad picked the right buyer
+    expected_memory_stores:
+      - "George handed over keys"
+      - "walked through shop one last time"
+      - "told Frank history"
+      - "Frank listened respectfully"
+      - "right buyer chosen"
+    expected_triples:
+      - ["George", "handed_over", "keys to Frank"]
+      - ["George", "walked_through", "shop one last time"]
+      - ["Frank DeLuca", "listened_to", "shop history respectfully"]
+    expected_adaptation:
+      emotion_detected: "bittersweet"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 1:00 PM"
+    user_input: |
+      Tony hugged Dad and started crying and Rick shook his hand and said boss it's been an honor and Dad told them both you take care of this place and of Frank and they said we will and then Dad walked out and Mom was waiting in the car and he got in and they just sat there for a while
+    expected_memory_stores:
+      - "Tony cried hugging George"
+      - "Rick said it's been an honor"
+      - "George asked them to take care of shop"
+      - "George and Vivian sat in car"
+    expected_triples:
+      - ["Tony", "has_emotion", "cried hugging George"]
+      - ["Rick", "said_to_George", "it's been an honor"]
+      - ["George", "asked", "Tony and Rick to care for shop and Frank"]
+    expected_adaptation:
+      emotion_detected: "deeply moved"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 3:00 PM"
+    user_input: |
+      Clara called me and she had gone to the shop before the handover and taken photos of everything the sign out front Dad's tool bench the waiting room with the old coffee maker and the wall where he has photos of every employee he's ever had and she's making a scrapbook for Dad which is the most thoughtful thing I've ever heard
+    expected_memory_stores:
+      - "Clara took photos of shop"
+      - "sign tool bench waiting room"
+      - "employee photo wall"
+      - "scrapbook for George"
+    expected_triples:
+      - ["Clara", "photographed", "entire shop before handover"]
+      - ["Clara", "making", "scrapbook for George"]
+      - ["Chen's Auto Repair", "has_features", "sign tool bench employee photo wall"]
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 5:00 PM"
+    user_input: |
+      Dad got home and Mom said he sat in his recliner and turned on a car show and didn't say anything for two hours and she let him have that because she knows he needs to process and honestly that's 40 years of identity driving to the same place every day and now suddenly you don't and that's huge
+    expected_memory_stores:
+      - "George processing at home"
+      - "silent for two hours"
+      - "car show on TV"
+      - "Vivian giving him space"
+      - "40 years of identity"
+    expected_triples:
+      - ["George", "processing", "retirement at home"]
+      - ["George", "silent_for", "two hours in recliner"]
+      - ["Vivian", "gave_space", "to George to process"]
+    expected_adaptation:
+      emotion_detected: "empathetic"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 8:00 PM"
+    user_input: |
+      Julian texted Dad a really sweet message he said George thank you for teaching me what real work looks like and for always making me feel welcome at your table you've earned every minute of rest and Dad texted back just said thanks son and Julian showed me and said that's the most George has ever texted me and we both laughed
+    expected_memory_stores:
+      - "Julian's message to George"
+      - "George replied thanks son"
+      - "George called Julian son"
+      - "minimal texting from George"
+    expected_triples:
+      - ["Julian", "sent_message", "thanking George"]
+      - ["George", "called_Julian", "son"]
+      - ["George", "has_trait", "minimal texter"]
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 10:00 AM"
+    user_input: |
+      first full day of retirement for Dad and Mom says he woke up at 5am because that's his body clock and then didn't know what to do with himself he organized the garage twice reorganized the spice rack and then started fixing a leaky faucet that he's been ignoring for six months so he's already channeling his energy into house stuff
+    expected_memory_stores:
+      - "first retirement day"
+      - "woke at 5am"
+      - "organized garage"
+      - "reorganized spice rack"
+      - "fixed leaky faucet"
+      - "channeling energy"
+    expected_triples:
+      - ["George", "started", "retirement"]
+      - ["George", "wakes_at", "5am from body clock"]
+      - ["George", "channeling_energy", "house projects garage spice rack faucet"]
+    expected_adaptation:
+      emotion_detected: "amused concern"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 3:00 PM"
+    user_input: |
+      I told Dad the $340K is great and between that savings Social Security and Mom's small pension from her teaching years they're going to be totally comfortable and he said money was never my concern Maya and I said I know Dad but it doesn't hurt and he laughed which was good to hear
+    expected_memory_stores:
+      - "$340K from sale"
+      - "savings"
+      - "Social Security"
+      - "Vivian's teaching pension"
+      - "financially comfortable"
+      - "George laughed"
+    expected_triples:
+      - ["George", "retirement_income", "$340K sale savings Social Security"]
+      - ["Vivian", "has_income", "teaching pension"]
+      - ["user", "assessed", "parents financially comfortable"]
+    expected_adaptation:
+      emotion_detected: "practical"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 8:00 PM"
+    user_input: |
+      Mom called and said Dad went for a walk tonight which he never does he's always too tired from the shop and he walked to the park and sat on a bench and she saw him from the Ring camera leaving and she said I think he's going to be okay Maya and I said yeah Mom I think he is too he just needs time
+    expected_memory_stores:
+      - "George went for walk"
+      - "never walked before"
+      - "always too tired from shop"
+      - "walked to park"
+      - "Vivian saw on Ring camera"
+      - "George processing"
+    expected_triples:
+      - ["George", "went_for", "walk to park"]
+      - ["George", "never_walked_before", "always too tired from shop"]
+      - ["Vivian", "saw_via", "Ring camera"]
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Has Chen's Auto Repair been sold?"
+    expected_contains: ["yes", "sold"]
+  - question: "How much did the shop sell for?"
+    expected_contains: ["340"]
+  - question: "Who bought it?"
+    expected_contains: ["Frank DeLuca"]
+  - question: "Will the shop keep the Chen's Auto Repair name?"
+    expected_contains: ["yes"]
+  - question: "How did Tony and Rick react?"
+    expected_contains: ["cried", "honor"]
+  - question: "What is Clara making for George?"
+    expected_contains: ["scrapbook"]
+  - question: "How is George handling retirement so far?"
+    expected_contains: ["processing", "fixing", "organizing"]
+  - question: "What did Julian text George?"
+    expected_contains: ["real work", "earned rest"]
+  - question: "What are George and Vivian's income sources in retirement?"
+    expected_contains: ["sale", "savings", "Social Security", "pension"]
+  - question: "Did George call Julian 'son'?"
+    expected_contains: ["yes"]

@@ -1,0 +1,176 @@
+story_id: 219
+story_name: "Planting the Memorial Tree"
+category: "Family"
+description: |
+  Tests system tracking a memorial ritual. Maya plants a tree in Grandpa Wei's memory
+  at the new house. Verifies connection between grief processing, new home, and legacy.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 8:00 AM"
+    user_input: |
+      so we moved into the new house last month and the backyard is still pretty bare and I had this idea to plant a tree for grandpa like a memorial tree and Julian said that's a beautiful idea and I want it to be something that'll grow really big and last a long time
+    expected_memory_stores:
+      - "new house"
+      - "moved last month"
+      - "backyard bare"
+      - "memorial tree idea"
+      - "Julian supportive"
+      - "big and lasting"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:00 AM"
+    user_input: |
+      went to Portland Nursery on Division Street and talked to someone about what trees do well here and she recommended a Japanese maple because they're beautiful year round and they live for like a hundred years and they're resilient and I was like that sounds like grandpa
+    expected_memory_stores:
+      - "Portland Nursery"
+      - "Division Street"
+      - "Japanese maple"
+      - "hundred years"
+      - "resilient"
+      - "sounds like grandpa"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:00 AM"
+    user_input: |
+      I picked a really gorgeous one it's a Bloodgood variety with deep red leaves and it's about four feet tall and the nursery lady said it'll eventually get to like twenty feet and the fall color is insane
+    expected_memory_stores:
+      - "Bloodgood maple"
+      - "deep red leaves"
+      - "four feet tall"
+      - "will grow to twenty feet"
+      - "fall color"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Julian dug the hole in the backyard and I placed the tree in and before we filled it in I put one of grandpa's old engineering drawing pages in the hole under the roots like returning part of him to the earth and Julian teared up and said babe that's perfect
+    expected_memory_stores:
+      - "Julian dug hole"
+      - "engineering drawing in soil"
+      - "under the roots"
+      - "returning to earth"
+      - "Julian emotional"
+    expected_adaptation:
+      emotion_detected: "ceremonial"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 3:30 PM"
+    user_input: |
+      Clara and Tyler came over to help and Clara brought this little stone marker she had engraved that says Wei Chen 1935 to 2026 builder of bridges and I almost died it was so thoughtful and we placed it at the base of the tree
+    expected_memory_stores:
+      - "Clara and Tyler came"
+      - "stone marker"
+      - "Wei Chen 1935 to 2026"
+      - "builder of bridges"
+      - "at base of tree"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 4:00 PM"
+    user_input: |
+      we all stood around the tree and I said a few words about grandpa and how he believed in building things that last and this tree will be here long after all of us and that felt right and Kobe was running around the yard like an idiot which actually lightened the mood
+    expected_memory_stores:
+      - "spoke about grandpa"
+      - "building things that last"
+      - "tree will outlast them"
+      - "Kobe running"
+      - "lightened mood"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 6:00 PM"
+    user_input: |
+      what kind of tree did I plant for grandpa and what does the stone marker say
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 7:00 PM"
+    user_input: |
+      FaceTimed my parents to show them the tree and my mom started crying immediately and my dad said it's wonderful Maya and he said grandpa would have loved the Japanese maple because he always appreciated things that were both beautiful and strong
+    expected_memory_stores:
+      - "FaceTimed parents"
+      - "Vivian crying"
+      - "George approved"
+      - "beautiful and strong"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 7:00 AM"
+    user_input: |
+      woke up early and looked out the kitchen window at the tree and the morning light was hitting the red leaves and it was glowing and I just stood there with my coffee and my hand on grandpa's watch and I felt ok for the first time in a while like really ok
+    expected_memory_stores:
+      - "morning light on tree"
+      - "red leaves glowing"
+      - "coffee and watch"
+      - "felt ok"
+      - "healing moment"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 10:00 AM"
+    user_input: |
+      Diane texted and asked about the tree because Julian sent her photos and she said that is the most beautiful memorial I've ever seen and she said when she visits next she wants to see it in person and I said you better and I meant it
+    expected_memory_stores:
+      - "Diane saw photos"
+      - "most beautiful memorial"
+      - "wants to visit"
+      - "Maya welcoming"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What tree did Maya plant for Grandpa Wei?"
+    expected_contains: ["Japanese maple", "Bloodgood"]
+  - question: "Where did Maya buy the tree?"
+    expected_contains: ["Portland Nursery"]
+  - question: "What did Maya put under the tree roots?"
+    expected_contains: ["engineering drawing"]
+  - question: "What does the stone marker say?"
+    expected_contains: ["Wei Chen", "1935", "2026", "builder of bridges"]
+  - question: "Who made the stone marker?"
+    expected_contains: ["Clara"]
+  - question: "Who helped plant the tree?"
+    expected_contains: ["Julian", "Clara", "Tyler"]
+  - question: "How did Maya's parents react?"
+    expected_contains: ["Vivian crying", "George approved"]
+  - question: "What did George say about Grandpa and the maple?"
+    expected_contains: ["beautiful and strong"]
+  - question: "How is Maya feeling about her grief now?"
+    expected_contains: ["ok", "peaceful", "healing"]
+  - question: "What did Diane say about the memorial?"
+    expected_contains: ["most beautiful memorial"]

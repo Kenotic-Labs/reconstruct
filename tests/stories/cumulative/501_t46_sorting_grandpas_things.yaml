@@ -1,0 +1,173 @@
+story_id: 501
+story_name: "Sorting Grandpa's Things"
+category: "Grief and Legacy"
+description: |
+  Months after Grandpa Wei's death, Maya and her mother Vivian fly to Fresno to sort through
+  his belongings. Grief resurfaces unexpectedly through physical objects. Cross-references
+  the Japan trip (T31), house purchase (T36-T40), and relationship with Vivian (T16).
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 6:15 AM"
+    user_input: |
+      ok so I'm at PDX right now waiting for my flight to Fresno and um I haven't been back since the funeral which was like what three months ago maybe four and I'm already feeling weird about it like my mom is meeting me there she flew in from Sacramento last night
+    expected_memory_stores:
+      - "flying to Fresno"
+      - "Grandpa Wei funeral 3-4 months ago"
+      - "Vivian meeting in Fresno"
+      - "Sacramento"
+      - "PDX airport"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 11:30 AM"
+    user_input: |
+      just got to grandpa's apartment and oh my god it still smells like him you know that combination of like jasmine tea and old books and I just walked in and lost it completely like I thought I was fine I really did but the smell just hit me and my mom was already crying when I got here
+    expected_memory_stores:
+      - "Grandpa Wei apartment"
+      - "jasmine tea smell"
+      - "grief triggered by smell"
+      - "Vivian crying"
+    expected_adaptation:
+      emotion_detected: "grief"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 1:45 PM"
+    user_input: |
+      we started in the kitchen because my mom said that would be easiest and we found all these tea tins like maybe 20 of them some are from actual China like he must have brought them or had someone send them and there's this one mug that says World's Best Engineer on it and I was like wait what engineer and my mom just shrugged and said oh you know your grandpa
+    expected_memory_stores:
+      - "tea tins from China"
+      - "World's Best Engineer mug"
+      - "Maya questions engineer reference"
+      - "Vivian dismissive"
+    expected_adaptation:
+      emotion_detected: "curious"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 4:00 PM"
+    user_input: |
+      found his watch in the bedroom drawer it's this old Seiko automatic like not fancy or anything but he wore it every single day I can remember and the back is all scratched up and I just put it on and it still fits and I don't think I want to take it off honestly Julian would probably think it's cool he likes vintage stuff like that
+    expected_memory_stores:
+      - "Grandpa Wei Seiko watch"
+      - "automatic watch"
+      - "Maya wearing it"
+      - "Julian likes vintage"
+    expected_adaptation:
+      emotion_detected: "tender"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 7:30 PM"
+    user_input: |
+      mom and I got Chinese food from this place grandpa used to go to like every week called Golden Dragon and the lady at the counter recognized us and she started crying and said your grandfather was the kindest man and gave us extra dumplings on the house and I'm just sitting here eating his usual order and it's so weird like he should be here
+    expected_memory_stores:
+      - "Golden Dragon restaurant"
+      - "Grandpa Wei regular customer"
+      - "staff recognized family"
+      - "eating his usual order"
+    expected_adaptation:
+      emotion_detected: "sad"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 9:00 PM"
+    user_input: |
+      Julian called to check on me and I told him about the watch and the mug and he was so sweet about it he said Kobe's been sleeping by the front door waiting for me to come home which honestly made me cry more like everything is making me cry today I should probably take my Wellbutrin I keep forgetting when I travel
+    expected_memory_stores:
+      - "Julian called"
+      - "Kobe sleeping by door"
+      - "Wellbutrin reminder"
+      - "emotional day"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 9:00 AM"
+    user_input: |
+      ok day two and we're tackling the closets today and my mom keeps wanting to throw everything away and I'm like mom we should go through it carefully and she's like Maya it's just stuff and I'm like it's NOT just stuff it's his life and we kind of snapped at each other which is like very on brand for us you know after the whole thing when she visited Portland that time
+    expected_memory_stores:
+      - "conflict with Vivian over belongings"
+      - "Vivian wants to discard"
+      - "Maya wants to preserve"
+      - "reference to Portland visit conflict"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 2:15 PM"
+    user_input: |
+      found a box in the back of the closet like way in the back behind old coats and it's full of letters all in Mandarin I can't read any of them and there are photographs too of people I don't recognize and what looks like some kind of certificate or diploma or something and my mom got really quiet when she saw it
+    expected_memory_stores:
+      - "box of letters in Mandarin"
+      - "old photographs"
+      - "certificate or diploma"
+      - "Vivian became quiet"
+    expected_adaptation:
+      emotion_detected: "intrigued"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 5:00 PM"
+    user_input: |
+      my mom finally told me she thinks the letters are from before grandpa came to America like from when he lived in Wuhan and she said he never really talked about his life in China and now I'm like holding these letters that are maybe 50 years old and I can't even read them and it feels so important and I don't know why
+    expected_memory_stores:
+      - "letters from Wuhan"
+      - "Grandpa Wei from Wuhan"
+      - "pre-immigration life"
+      - "Vivian doesn't know details"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 8:30 PM"
+    user_input: |
+      I'm taking the box home with me tomorrow and the watch and a few of his tea tins and I told my mom I want to get the letters translated and she said ok but be prepared because you might learn things that change how you see him and that honestly scared me a little but also like I need to know right like this is my family this is where I come from
+    expected_memory_stores:
+      - "taking box home"
+      - "taking watch and tea tins"
+      - "plan to translate letters"
+      - "Vivian warning"
+      - "identity connection"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where did Maya go to sort through Grandpa Wei's belongings?"
+    expected_contains: ["Fresno"]
+  - question: "What triggered Maya's grief when she entered the apartment?"
+    expected_contains: ["smell", "jasmine", "tea"]
+  - question: "What watch did Maya find and start wearing?"
+    expected_contains: ["Seiko", "grandpa"]
+  - question: "What was found in the back of the closet?"
+    expected_contains: ["box", "letters", "Mandarin"]
+  - question: "Where was Grandpa Wei from originally?"
+    expected_contains: ["Wuhan"]
+  - question: "What restaurant did Maya and Vivian eat at in Fresno?"
+    expected_contains: ["Golden Dragon"]
+  - question: "What does the mug found in the kitchen say?"
+    expected_contains: ["World's Best Engineer"]
+  - question: "What is Maya planning to do with the letters?"
+    expected_contains: ["translate"]
+  - question: "How is Kobe handling Maya being away?"
+    expected_contains: ["sleeping", "door", "waiting"]
+  - question: "What medication does Maya need to remember while traveling?"
+    expected_contains: ["Wellbutrin"]

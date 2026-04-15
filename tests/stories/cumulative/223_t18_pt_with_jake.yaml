@@ -1,0 +1,206 @@
+story_id: 223
+story_name: "Physical Therapy with Jake"
+category: "Health"
+description: |
+  Tests system tracking ongoing medical treatment. Maya starts PT with Jake Russo.
+  Recovery is slow and frustrating. Verifies treatment detail tracking and
+  emotional arc through rehabilitation.
+duration_simulated: "4 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 2:00 PM"
+    user_input: |
+      just had my first PT session with Jake Russo at Rose City Physical Therapy and he's really nice actually like mid thirties kinda chill and he said the tear is manageable and he's going to focus on strengthening the quad and hamstring around the knee to stabilize it
+    expected_memory_stores:
+      - "first PT session"
+      - "Jake Russo"
+      - "Rose City Physical Therapy"
+      - "tear manageable"
+      - "quad and hamstring strengthening"
+      - "stabilize knee"
+    expected_triples:
+      - ["user", "started_pt_with", "Jake Russo"]
+      - ["Jake Russo", "works_at", "Rose City Physical Therapy"]
+      - ["Jake Russo", "diagnosed", "tear is manageable"]
+      - ["user", "treatment_plan", "quad and hamstring strengthening to stabilize knee"]
+    expected_adaptation:
+      emotion_detected: "cautiously optimistic"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 2:30 PM"
+    user_input: |
+      he gave me these exercises to do at home like wall sits and leg raises and clamshells and something with a resistance band and I have to do them twice a day and he said consistency is the only thing that works with meniscus tears
+    expected_memory_stores:
+      - "home exercises"
+      - "wall sits"
+      - "leg raises"
+      - "clamshells"
+      - "resistance band"
+      - "twice a day"
+      - "consistency"
+    expected_triples:
+      - ["Jake Russo", "prescribed", "wall sits, leg raises, clamshells, resistance band"]
+      - ["user", "exercise_frequency", "twice a day"]
+      - ["Jake Russo", "advised", "consistency is key for meniscus tears"]
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 3:00 PM"
+    user_input: |
+      second session with Jake today and he did some manual therapy on the knee and it HURT like he was pressing on the medial side and I was gripping the table and he was like you're doing great and I was like I'm DYING Jake
+    expected_memory_stores:
+      - "second session"
+      - "manual therapy"
+      - "painful"
+      - "medial side"
+    expected_triples:
+      - ["user", "had_session", "second PT session with Jake"]
+      - ["Jake Russo", "performed", "manual therapy on medial side"]
+      - ["user", "has_emotion", "suffering"]
+    expected_adaptation:
+      emotion_detected: "suffering"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 7:00 PM"
+    user_input: |
+      doing the exercises at home and they're boring and my knee still hurts and I can see my running shoes by the door and I want to scream because they're just sitting there mocking me and Julian hid them in the closet eventually because he caught me staring at them
+    expected_memory_stores:
+      - "exercises at home"
+      - "boring"
+      - "knee still hurts"
+      - "running shoes"
+      - "Julian hid shoes"
+    expected_triples:
+      - ["user", "has_emotion", "frustrated"]
+      - ["user", "doing_exercises_at", "home"]
+      - ["Julian", "hid", "running shoes in closet"]
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 10:00 AM"
+    user_input: |
+      Jake said I should consider low impact cardio to keep my fitness up while the knee heals and he suggested swimming or cycling and I was like I hate the pool but maybe cycling and he said no actually swimming is better for meniscus recovery because it's zero impact
+    expected_memory_stores:
+      - "low impact cardio"
+      - "swimming recommended"
+      - "cycling option"
+      - "swimming better for meniscus"
+      - "zero impact"
+    expected_triples:
+      - ["Jake Russo", "recommended", "swimming over cycling for meniscus recovery"]
+      - ["user", "has_emotion", "reluctant"]
+      - ["user", "dislikes", "the pool"]
+    expected_adaptation:
+      emotion_detected: "reluctant"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 12:00 PM"
+    user_input: |
+      who is my physical therapist and what exercises did he give me
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 5:00 PM"
+    user_input: |
+      Jake also said something that bummed me out he said six weeks might have been optimistic and given how the knee is responding it could be more like eight weeks before I can even try jogging again and I was like eight weeks that's two months
+    expected_memory_stores:
+      - "timeline extended"
+      - "eight weeks now"
+      - "six was optimistic"
+      - "correction"
+      - "two months"
+    expected_triples:
+      - ["user", "corrected", "recovery timeline six weeks → eight weeks"]
+      - ["Jake Russo", "revised", "timeline to eight weeks"]
+      - ["user", "has_emotion", "dismayed"]
+    expected_adaptation:
+      emotion_detected: "dismayed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 9:00 AM"
+    user_input: |
+      woke up and my first thought was I should go for a run and then I remembered and that sucks like it's been a week and the routine is already so ingrained and I just lay there petting Kobe feeling sorry for myself
+    expected_memory_stores:
+      - "forgot can't run"
+      - "routine ingrained"
+      - "feeling sorry for self"
+      - "Kobe comfort"
+    expected_triples:
+      - ["user", "has_emotion", "depressed"]
+      - ["user", "misses", "running routine"]
+      - ["Kobe", "provided", "comfort"]
+    expected_adaptation:
+      emotion_detected: "depressed"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 2:00 PM"
+    user_input: |
+      Julian suggested we go for a walk at least since I can still walk and we went to Forest Park and it was nice actually like slow and the knee was fine and Kobe was happy and Julian held my hand and it wasn't running but it was something
+    expected_memory_stores:
+      - "walk in Forest Park"
+      - "Julian suggested"
+      - "knee fine walking"
+      - "not running but something"
+    expected_adaptation:
+      emotion_detected: "bittersweet"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 7:00 PM"
+    user_input: |
+      Clara checked in and asked about PT and I said it's ok but slow and she said meniscus tears are marathon recoveries not sprints and then paused and said oh wait that was a bad metaphor and we both laughed and it was the first time I laughed about any of this
+    expected_memory_stores:
+      - "Clara checked in"
+      - "marathon metaphor"
+      - "bad metaphor joke"
+      - "first laugh about injury"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How often does Maya see Jake Russo for PT?"
+    expected_contains: ["twice a week", "multiple"]
+  - question: "What exercises does Maya do at home?"
+    expected_contains: ["wall sits", "leg raises", "clamshells", "resistance band"]
+  - question: "How has the recovery timeline changed?"
+    expected_contains: ["six weeks", "eight weeks", "extended"]
+  - question: "What low impact exercise was recommended?"
+    expected_contains: ["swimming"]
+  - question: "Where did Maya and Julian walk?"
+    expected_contains: ["Forest Park"]
+  - question: "What was the treatment approach for Maya's meniscus?"
+    expected_contains: ["strengthen", "quad", "hamstring"]
+  - question: "How does Maya feel about not running?"
+    expected_contains: ["frustrated", "depressed"]
+  - question: "What did Julian do with Maya's running shoes?"
+    expected_contains: ["hid", "closet"]
+  - question: "What joke did Clara make?"
+    expected_contains: ["marathon", "bad metaphor"]
+  - question: "How often does Maya do home exercises?"
+    expected_contains: ["twice a day"]

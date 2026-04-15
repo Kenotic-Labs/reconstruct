@@ -1,0 +1,168 @@
+story_id: 364
+story_name: "Study Group With Lily"
+category: "Career Development"
+description: |
+  Tests memory of Maya and Lily's study partnership deepening.
+  Verifies system tracks collaborative learning and friendship growth.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 8:30 PM"
+    user_input: |
+      study session with Lily at Stumptown tonight and we went over the whole logistic regression section and she has this way of drawing diagrams that makes everything clearer like she drew the decision boundary thing on a napkin and I finally got it
+    expected_memory_stores:
+      - "Stumptown study session"
+      - "logistic regression"
+      - "Lily draws diagrams"
+      - "decision boundary napkin"
+    expected_adaptation:
+      emotion_detected: "engaged"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 9:30 PM"
+    user_input: |
+      Lily told me she almost failed the first exam too when she took the course and that made me feel way less alone and she said the trick is to really understand the intuition behind the math not just memorize the formulas
+    expected_memory_stores:
+      - "Lily almost failed too"
+      - "Maya felt less alone"
+      - "intuition over memorization"
+      - "study advice"
+    expected_adaptation:
+      emotion_detected: "comforted"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 9:00 PM"
+    user_input: |
+      solo study night and I'm going through the gradient descent optimization section and I think I actually understand it now like if you imagine rolling a ball down a hill trying to find the lowest point that's literally what the algorithm does
+    expected_memory_stores:
+      - "solo study Thursday"
+      - "gradient descent"
+      - "ball rolling analogy"
+      - "understanding improving"
+    expected_adaptation:
+      emotion_detected: "enlightened"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Next Tuesday 8:00 PM"
+    user_input: |
+      Lily and I started doing practice problems together and timing ourselves and I'm getting faster and more accurate and she said I should've been an engineer from the start which like I AM an engineer but I know what she meant
+    expected_memory_stores:
+      - "practice problems"
+      - "timed practice"
+      - "getting faster"
+      - "Lily compliment"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Next Wednesday 7:00 PM"
+    user_input: |
+      Danny asked if he could join our study sessions because he's also interested in ML and Lily and I were like sure the more the merrier and he's bringing his laptop with some Kaggle datasets he wants to try
+    expected_memory_stores:
+      - "Danny joining study group"
+      - "Kaggle datasets"
+      - "expanding group"
+    expected_adaptation:
+      emotion_detected: "welcoming"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Next Thursday 8:30 PM"
+    user_input: |
+      I wrote my own implementation of linear regression from scratch in Python tonight not using sklearn just numpy and it actually worked and I tested it against a dataset and the predictions were close and I literally screamed in the apartment and Kobe barked
+    expected_memory_stores:
+      - "linear regression from scratch"
+      - "Python numpy"
+      - "no sklearn"
+      - "predictions worked"
+      - "Maya screamed"
+      - "Kobe barked"
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 6:00 PM"
+    user_input: |
+      exam is next Wednesday and I feel so much better about it than I did two weeks ago like going from almost dropping out to feeling like I might actually do okay is a wild ride and Lily said she's proud of me which was really sweet
+    expected_memory_stores:
+      - "exam next Wednesday"
+      - "feeling better"
+      - "emotional journey"
+      - "Lily proud"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 11:00 AM"
+    user_input: |
+      where do Maya and Lily study together for the ML course
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Lily and Danny and I did a marathon study session today at Stumptown for like four hours and we went through every practice exam question and I got 82 percent on the latest practice test which is like genuinely good
+    expected_memory_stores:
+      - "marathon study session"
+      - "four hours"
+      - "Lily Danny Maya"
+      - "82% practice test"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 6:00 PM"
+    user_input: |
+      Julian made me a care package for exam week with snacks and a new notebook and a card that said you got this nerd and honestly I don't deserve him and I feel ready like actually ready for this exam
+    expected_memory_stores:
+      - "Julian care package"
+      - "snacks and notebook"
+      - "you got this nerd card"
+      - "feeling ready"
+    expected_adaptation:
+      emotion_detected: "loved"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where do Maya and Lily study?"
+    expected_contains: ["Stumptown"]
+  - question: "Who else joined the study group?"
+    expected_contains: ["Danny"]
+  - question: "What did Maya code from scratch?"
+    expected_contains: ["linear regression", "Python"]
+  - question: "What is Maya's latest practice test score?"
+    expected_contains: ["82"]
+  - question: "What analogy does Maya use for gradient descent?"
+    expected_contains: ["ball", "hill"]
+  - question: "What study advice did Lily give?"
+    expected_contains: ["intuition", "not memorize"]
+  - question: "When is the ML exam?"
+    expected_contains: ["Wednesday"]
+  - question: "What did Julian's card say?"
+    expected_contains: ["you got this nerd"]
+  - question: "What datasets is Danny bringing?"
+    expected_contains: ["Kaggle"]
+  - question: "How has Maya's confidence changed?"
+    expected_contains: ["better", "ready", "improved"]

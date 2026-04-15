@@ -1,0 +1,167 @@
+story_id: 201
+story_name: "Diane Visits Portland"
+category: "Relationships"
+description: |
+  Tests memory of Julian's mom Diane Reeves arriving for a visit. Establishes the in-law
+  dynamic, Maya's initial nervousness, and sets up the boundary tension arc.
+  Verifies system captures family relationships and emotional subtext.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 7:30 AM"
+    user_input: |
+      ok so um Julian just told me his mom is coming to visit next week like Tuesday and staying for TEN DAYS and I'm like ten days?? that's a lot of Diane you know and he's like she's my mom Maya and I'm like yeah I know but still
+    expected_memory_stores:
+      - "Diane Reeves"
+      - "Julian's mom"
+      - "visiting next Tuesday"
+      - "ten days"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 9:00 AM"
+    user_input: |
+      like don't get me wrong Diane is nice she's totally fine it's just she has opinions about EVERYTHING like last time she came she kept making these little comments about how our apartment was organized and how I fold towels wrong or whatever and Julian just sits there
+    expected_memory_stores:
+      - "Diane opinionated"
+      - "past visit tension"
+      - "towel folding"
+      - "Julian passive"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 12:15 PM"
+    user_input: |
+      told Clara about Diane coming and she was like oh girl good luck because she knows how MILs can be and Tyler's mom is apparently the same way so at least someone gets it lol Clara said just smile and nod
+    expected_memory_stores:
+      - "Clara"
+      - "sister support"
+      - "Tyler's mom similar"
+      - "smile and nod advice"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 5:30 PM"
+    user_input: |
+      Julian's dad Bob won't be coming this time apparently he has some knee surgery coming up so it's just Diane solo which honestly might be worse because when Bob's there at least he like dilutes her energy you know
+    expected_memory_stores:
+      - "Bob Reeves"
+      - "Julian's dad"
+      - "knee surgery"
+      - "not coming"
+      - "Diane solo"
+    expected_adaptation:
+      emotion_detected: "worried"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 8:00 PM"
+    user_input: |
+      spent the evening cleaning the guest room and Julian helped a little but mostly he was playing with Kobe and I was like you know your mom is going to judge how this room looks not mine and he just laughed it off
+    expected_memory_stores:
+      - "guest room preparation"
+      - "Julian not helping enough"
+      - "Kobe"
+    expected_adaptation:
+      emotion_detected: "annoyed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 8:30 AM"
+    user_input: |
+      wait when is Julian's mom arriving again I keep going back and forth in my head
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 12:00 PM"
+    user_input: |
+      my mom called and I told her about Diane visiting and Vivian was like oh be gracious Maya she's Julian's mother and I'm like mom you don't understand and she's like I do understand I just think you should be the bigger person which is such a mom thing to say
+    expected_memory_stores:
+      - "Vivian Chen"
+      - "Maya's mom"
+      - "be gracious advice"
+    expected_adaptation:
+      emotion_detected: "annoyed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 4:00 PM"
+    user_input: |
+      Diane texted our group chat and she's like I can't wait to see the new house oh wait no we're still in the apartment right we haven't moved yet that's not til um I think it's in like two months or something anyway she wants to cook for us which is nice I guess
+    expected_memory_stores:
+      - "Diane group chat"
+      - "wants to cook"
+      - "still in apartment"
+      - "house move in two months"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 10:00 AM"
+    user_input: |
+      ok so I'm trying to be positive about this Diane visit and Julian pointed out that she brought us that really nice Dutch oven last Christmas and she did watch Kobe when we went to Bend so she's not all bad I just need to like set boundaries this time
+    expected_memory_stores:
+      - "Dutch oven gift"
+      - "Diane watched Kobe"
+      - "Bend trip"
+      - "boundaries"
+    expected_adaptation:
+      emotion_detected: "resolute"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 7:00 PM"
+    user_input: |
+      Julian and I talked about it over dinner and he promised he'd step in if his mom starts doing the thing where she like reorganizes stuff without asking and I said good because I'm not going to just sit there this time and he said he gets it so we'll see
+    expected_memory_stores:
+      - "Julian promised to intervene"
+      - "reorganizing concern"
+      - "dinner conversation"
+      - "boundaries agreement"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who is coming to visit Maya and Julian?"
+    expected_contains: ["Diane Reeves", "Julian's mom"]
+  - question: "How long is Diane staying?"
+    expected_contains: ["ten days"]
+  - question: "Why isn't Bob Reeves coming?"
+    expected_contains: ["knee surgery"]
+  - question: "What did Diane do that bothered Maya during previous visits?"
+    expected_contains: ["reorganize", "comments", "opinions"]
+  - question: "What did Julian promise about the visit?"
+    expected_contains: ["step in", "intervene"]
+  - question: "What advice did Maya's mom Vivian give?"
+    expected_contains: ["gracious", "bigger person"]
+  - question: "What advice did Clara give Maya?"
+    expected_contains: ["smile and nod"]
+  - question: "What nice things has Diane done for Maya?"
+    expected_contains: ["Dutch oven", "Kobe"]
+  - question: "When is Diane arriving?"
+    expected_contains: ["Tuesday"]
+  - question: "What is Maya's main concern about the visit?"
+    expected_contains: ["boundaries", "reorganizing"]

@@ -1,0 +1,184 @@
+story_id: 347
+story_name: "Osaka and the Food Poisoning"
+category: "Travel"
+description: |
+  Tests memory of Osaka street food scene and Julian getting food poisoning.
+  Recovery in the hotel. Verifies system captures health events during travel
+  and their impact on itinerary.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Day 7 Monday 5:00 PM JST"
+    user_input: |
+      arrived in Osaka and it's SO different from Kyoto like Kyoto is elegant and quiet and Osaka is loud and neon and there's street food EVERYWHERE and we walked through Dotonbori and it's insane the giant crab sign the Glico running man sign everything is lit up
+    expected_memory_stores:
+      - "arrived Osaka"
+      - "different from Kyoto"
+      - "loud neon"
+      - "street food everywhere"
+      - "Dotonbori"
+      - "giant crab sign"
+      - "Glico running man"
+    expected_adaptation:
+      emotion_detected: "energized"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Day 7 Monday 7:00 PM JST"
+    user_input: |
+      went full street food mode and we ate takoyaki which is octopus balls and okonomiyaki which is like a savory pancake and gyoza and some sketchy looking kushikatsu from a stand that didn't look super clean but Julian said when in Osaka and ate like four sticks
+    expected_memory_stores:
+      - "takoyaki octopus balls"
+      - "okonomiyaki savory pancake"
+      - "gyoza"
+      - "kushikatsu"
+      - "sketchy stand"
+      - "Julian ate four sticks"
+    expected_adaptation:
+      emotion_detected: "adventurous"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Day 7 Monday 11:00 PM JST"
+    user_input: |
+      checked into our hotel in Namba it's a business hotel nothing fancy called Hotel Monterey Namba and Julian was like I don't feel great and I was like probably jet lag no wait we've been here for days maybe it was the kushikatsu
+    expected_memory_stores:
+      - "Hotel Monterey Namba"
+      - "business hotel"
+      - "Julian not feeling great"
+      - "suspected kushikatsu"
+    expected_adaptation:
+      emotion_detected: "concerned"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Day 8 Tuesday 2:00 AM JST"
+    user_input: |
+      Julian has been in the bathroom for two hours throwing up and I think it's definitely food poisoning from that street kushikatsu and he looks terrible and I'm trying to figure out if we need a doctor but it's 2am and I don't speak Japanese and I'm panicking a little
+    expected_memory_stores:
+      - "Julian throwing up"
+      - "two hours bathroom"
+      - "food poisoning"
+      - "kushikatsu cause"
+      - "need doctor question"
+      - "2am panic"
+    expected_adaptation:
+      emotion_detected: "scared"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Day 8 Tuesday 6:00 AM JST"
+    user_input: |
+      hotel front desk was amazing they sent up electrolyte drinks and crackers and gave me the number for a 24 hour English-speaking medical line and the nurse on the phone said it sounds like standard food poisoning keep hydrated and rest and if there's blood in the vomit go to ER
+    expected_memory_stores:
+      - "hotel helped"
+      - "electrolyte drinks crackers"
+      - "English medical line"
+      - "nurse diagnosis"
+      - "standard food poisoning"
+      - "keep hydrated"
+      - "ER if blood"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Day 8 Tuesday 12:00 PM JST"
+    user_input: |
+      Julian is sleeping finally after being sick all morning and he looks pale but he's keeping water down now and I went out alone to get him some miso soup from a konbini which is a convenience store and they have everything in these stores it's incredible and I got rice balls too
+    expected_memory_stores:
+      - "Julian sleeping"
+      - "keeping water down"
+      - "Maya went alone"
+      - "miso soup konbini"
+      - "convenience store"
+      - "rice balls"
+    expected_adaptation:
+      emotion_detected: "nurturing"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Day 8 Tuesday 4:00 PM JST"
+    user_input: |
+      Julian ate some miso soup and rice and he's feeling better but he's still weak and he said go out and explore don't waste the day and I said are you sure and he said Maya we only have today in Osaka go do something and I'll rest so I went to Osaka Castle by myself
+    expected_memory_stores:
+      - "Julian ate soup"
+      - "feeling better weak"
+      - "told Maya to explore"
+      - "Osaka Castle alone"
+    expected_adaptation:
+      emotion_detected: "conflicted"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Day 8 Tuesday 5:00 PM JST"
+    user_input: |
+      what street food made Julian sick
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Day 8 Tuesday 7:00 PM JST"
+    user_input: |
+      Osaka Castle was beautiful with the cherry blossom trees just starting to bloom and I took photos for Julian and I walked through the castle museum and the view from the top was amazing and I missed having him there but also it was kind of special being alone with it
+    expected_memory_stores:
+      - "Osaka Castle"
+      - "cherry blossoms starting"
+      - "photos for Julian"
+      - "castle museum"
+      - "view from top"
+      - "special being alone"
+    expected_adaptation:
+      emotion_detected: "bittersweet"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Day 8 Tuesday 9:00 PM JST"
+    user_input: |
+      Julian felt good enough to come out for dinner and we found a quiet udon place and he had plain udon and I had tempura udon and he said I'm never eating street kushikatsu again and I said noted and we sat there quietly and I thought about how even the bad parts of this trip are good memories
+    expected_memory_stores:
+      - "Julian came out for dinner"
+      - "quiet udon place"
+      - "plain udon Julian"
+      - "tempura udon Maya"
+      - "never kushikatsu again"
+      - "bad parts are good memories"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What made Julian sick in Osaka?"
+    expected_contains: ["kushikatsu", "street food"]
+  - question: "How did the hotel help with the food poisoning?"
+    expected_contains: ["electrolyte", "medical line", "crackers"]
+  - question: "Where is the Osaka hotel?"
+    expected_contains: ["Hotel Monterey Namba"]
+  - question: "What did Maya do while Julian rested?"
+    expected_contains: ["Osaka Castle"]
+  - question: "What famous street did they walk in Osaka?"
+    expected_contains: ["Dotonbori"]
+  - question: "What street foods did they try?"
+    expected_contains: ["takoyaki", "okonomiyaki", "kushikatsu"]
+  - question: "What were starting to bloom at Osaka Castle?"
+    expected_contains: ["cherry blossoms"]
+  - question: "What did Julian eat when he recovered?"
+    expected_contains: ["miso soup", "udon"]
+  - question: "What is a konbini?"
+    expected_contains: ["convenience store"]
+  - question: "How does Maya feel about the food poisoning incident?"
+    expected_contains: ["bad parts", "good memories"]

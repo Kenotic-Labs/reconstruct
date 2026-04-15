@@ -1,0 +1,177 @@
+story_id: 444
+story_name: "The 6pm Boundary"
+category: "Work-Life Balance"
+description: |
+  Maya tries the hard 6pm boundary for the first time. Internal struggle,
+  anxiety, but she does it. First week of the experiment.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 5:55 PM"
+    user_input: |
+      ok it's 5:55 and I'm looking at my screen and there's still stuff to do but I told myself 6pm and I'm staring at the clock and my heart is literally racing like I'm about to do something dangerous which is insane because all I'm doing is going home at a normal time
+    expected_memory_stores:
+      - "5:55pm"
+      - "stuff still to do"
+      - "6pm boundary"
+      - "heart racing"
+      - "feels dangerous"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 6:05 PM"
+    user_input: |
+      I did it I closed my laptop at 6:02 and walked out and it felt WRONG like physically wrong like I left the stove on or something and I kept wanting to check Slack on my phone but I didn't and I'm in the car now driving home and my brain is screaming at me to go back and finish that PR review
+    expected_memory_stores:
+      - "left at 6:02"
+      - "felt physically wrong"
+      - "wanted to check Slack"
+      - "didn't check"
+      - "brain screaming go back"
+    expected_adaptation:
+      emotion_detected: "uncomfortable"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 6:30 PM"
+    user_input: |
+      walked in the door and Julian looked up from the couch and said you're home and I said I'm home and he smiled like genuinely smiled and Kobe went absolutely nuts like full body wiggle and I thought when was the last time I saw this this reaction from both of them because I came home at a normal hour
+    expected_memory_stores:
+      - "home at 6:30"
+      - "Julian genuinely smiled"
+      - "Kobe full body wiggle"
+      - "first normal hour in weeks"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 8:00 PM"
+    user_input: |
+      we cooked dinner together for the first time on a weeknight in I don't even know how long like Julian made pasta and I did the salad and we ate at the table not the couch and talked about actual stuff not logistics not work just like how are you really and it felt like being alive again
+    expected_memory_stores:
+      - "cooked together weeknight"
+      - "first time long while"
+      - "ate at table"
+      - "talked about real stuff"
+      - "felt alive"
+    expected_adaptation:
+      emotion_detected: "reconnecting"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 6:00 PM"
+    user_input: |
+      second day of the 6pm boundary and it was harder because Monday is usually my worst day and I had a meeting that ran to 5:45 and I started working on the notes and then caught myself at 6:10 and was like NO shut the laptop and leave and I texted Dr Tate and said I almost broke it and she said almost isn't broke
+    expected_memory_stores:
+      - "Monday harder"
+      - "meeting ran late"
+      - "caught herself at 6:10"
+      - "shut laptop"
+      - "texted Dr Tate"
+      - "almost isn't broke"
+    expected_adaptation:
+      emotion_detected: "struggling"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 5:50 PM"
+    user_input: |
+      day four and I noticed something interesting I actually got MORE done today because I knew I had to leave at 6 so I was laser focused all day no Twitter breaks no long coffee chats no rabbit hole debugging sessions just heads down work and I finished everything I needed to finish by 5:45
+    expected_memory_stores:
+      - "more productive"
+      - "laser focused"
+      - "no distractions"
+      - "finished by 5:45"
+      - "constraint improved output"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 6:30 PM"
+    user_input: |
+      full week of leaving at 6 and the anxiety is still there every day but it's getting smaller like day one it was this massive thing and now on day five it's more like a whisper in the back of my head saying you should stay and I'm getting better at ignoring it
+    expected_memory_stores:
+      - "full week 6pm boundary"
+      - "anxiety still there"
+      - "getting smaller"
+      - "massive to whisper"
+      - "getting better at ignoring"
+    expected_adaptation:
+      emotion_detected: "progressing"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 7:00 PM"
+    user_input: |
+      what time have I been leaving work this week
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 8:00 PM"
+    user_input: |
+      Julian and I watched a movie tonight an actual movie on the couch like normal people and Kobe was between us and Julian kept looking at me like he couldn't believe I was there and I said stop looking at me like I'm a ghost and he said you kind of were one for a while and ouch but fair
+    expected_memory_stores:
+      - "watched movie together"
+      - "normal couple thing"
+      - "Julian couldn't believe she was there"
+      - "you were a ghost"
+      - "fair assessment"
+    expected_adaptation:
+      emotion_detected: "tender"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 6:15 PM"
+    user_input: |
+      end of week one and I survived and nothing bad happened at work nobody noticed nobody said anything and every single evening this week I had with Julian was a gift I didn't know I was missing and Dr Tate was right the boundary is hard but it's working and I feel more like myself than I have in months
+    expected_memory_stores:
+      - "week one survived"
+      - "nothing bad at work"
+      - "nobody noticed"
+      - "evenings with Julian"
+      - "feels like herself"
+      - "boundary working"
+    expected_adaptation:
+      emotion_detected: "triumphant"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What time boundary did Maya set for leaving work?"
+    expected_contains: ["6pm", "6 PM"]
+  - question: "How did the boundary feel on day one?"
+    expected_contains: ["wrong", "dangerous", "heart racing"]
+  - question: "What happened to Maya's productivity with the boundary?"
+    expected_contains: ["increased", "more", "laser focused"]
+  - question: "How did Julian react when Maya came home at 6:30?"
+    expected_contains: ["smiled", "genuinely"]
+  - question: "Did anyone at work notice Maya leaving at 6?"
+    expected_contains: ["no", "nobody"]
+  - question: "How did the anxiety change over the week?"
+    expected_contains: ["getting smaller", "massive to whisper"]
+  - question: "What did Maya and Julian do together for the first time in a while?"
+    expected_contains: ["cooked dinner", "watched movie"]
+  - question: "What did Dr. Tate say when Maya almost broke the boundary?"
+    expected_contains: ["almost isn't broke"]
+  - question: "What did Julian call Maya?"
+    expected_contains: ["ghost"]
+  - question: "How does Maya feel after week one of the boundary?"
+    expected_contains: ["like herself", "working"]

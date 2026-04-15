@@ -1,0 +1,182 @@
+story_id: 287
+story_name: "Budget Overrun Reality"
+category: "Home"
+description: |
+  Tests memory of the kitchen renovation budget blowing past all estimates. Captures
+  the correction from $15K to $23K as Maya tracks the real costs and handles financial stress.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      okay so I sat down and did a full accounting of the kitchen renovation costs because I've been kind of avoiding the real number and here it is: Miguel got $15K, IKEA cabinets $4,200, counters $1,800, other materials like $1,500, Anna's quote is $8,000 plus the extra $400 sealant so $8,400, and the total is... $30,900
+    expected_memory_stores:
+      - "full accounting"
+      - "Miguel $15K"
+      - "IKEA $4,200"
+      - "counters $1,800"
+      - "materials $1,500"
+      - "Anna $8,400"
+      - "total $30,900"
+    expected_adaptation:
+      emotion_detected: "sobered"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 7:30 PM"
+    user_input: |
+      wait that's not right because some of Miguel's $15K was for the asbestos abatement which was $3,500 that we would have paid anyone so really the waste from Miguel ghosting is the difference between what he did versus what he was paid which is... okay honestly it's confusing. bottom line total spend is about $31K and we budgeted $15K so we're $16K over
+    expected_memory_stores:
+      - "correction"
+      - "asbestos $3,500 separate"
+      - "Miguel waste calculation"
+      - "total about $31K"
+      - "$16K over budget"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      actually you know what I keep going back and forth on the number let me just say the budget was $15K and it ended up being $23K in total spending from OUR pocket because some of what we paid Miguel was legitimate work and the real overage is about $8K when you factor that properly. the budget went from $15K to $23K. that's the story.
+    expected_memory_stores:
+      - "final budget correction"
+      - "budget $15K to $23K"
+      - "$8K over budget"
+      - "Miguel work was partially legitimate"
+      - "settling on number"
+    expected_adaptation:
+      emotion_detected: "definitive"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      Julian asked about the legal situation with Miguel and I looked into it and apparently we'd need to file in small claims court for anything under $10K and an attorney said the cost of pursuing it might not be worth it given Miguel's situation and we might never collect anyway
+    expected_memory_stores:
+      - "legal situation"
+      - "small claims court"
+      - "under $10K"
+      - "attorney advice"
+      - "not worth pursuing"
+      - "might never collect"
+    expected_adaptation:
+      emotion_detected: "resigned"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 8:00 PM"
+    user_input: |
+      the $8K overage came from savings the emergency fund dropped to $2,800 and the Fidelity account took another hit and Julian was like we'll rebuild it just like we did after the car repair and he's right we know how to do this now but it still stings
+    expected_memory_stores:
+      - "$8K from savings"
+      - "emergency fund $2,800"
+      - "Fidelity hit again"
+      - "rebuild again"
+      - "like after car repair"
+      - "stings"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 6:00 PM"
+    user_input: |
+      Anna texted her weekly summary and she's right on schedule week three of four and the backsplash tile is going in Monday and painting Tuesday and Wednesday and she said she's actually going to come in $200 under her quote because the plumbing fix was simpler than expected
+    expected_memory_stores:
+      - "Anna weekly summary"
+      - "on schedule"
+      - "week three of four"
+      - "tile Monday"
+      - "painting Tuesday Wednesday"
+      - "$200 under quote"
+      - "plumbing simpler"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 10:00 AM"
+    user_input: |
+      you know what really bothers me is that if we'd hired Anna from the start instead of Miguel we would have spent about $22K total and been done in four weeks instead of seven and saved ourselves weeks of living without a kitchen but Eddie recommended Miguel so nobody could have known
+    expected_memory_stores:
+      - "hindsight calculation"
+      - "Anna from start $22K"
+      - "four weeks vs seven"
+      - "Eddie recommended Miguel"
+      - "nobody could have known"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 7:00 PM"
+    user_input: |
+      Nadia said something wise she was like every homeowner has a contractor horror story it's basically a rite of passage and her parents had a contractor who installed their bathroom floor wrong twice and they still talk about it at family dinners so I guess we have our story now
+    expected_memory_stores:
+      - "Nadia wisdom"
+      - "contractor horror story"
+      - "rite of passage"
+      - "Nadia's parents story"
+      - "bathroom floor wrong twice"
+    expected_adaptation:
+      emotion_detected: "accepting"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 6:00 PM"
+    user_input: |
+      the subway tile backsplash is going in and it looks GORGEOUS the off-white against the butcher block and the white cabinets with that matte black faucet and Julian walked in and was like this is literally a kitchen from a design magazine and Anna was like thank you I try
+    expected_memory_stores:
+      - "subway tile going in"
+      - "off-white tiles"
+      - "beautiful combination"
+      - "design magazine quality"
+      - "Anna proud"
+    expected_adaptation:
+      emotion_detected: "thrilled"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Monday 9:00 PM"
+    user_input: |
+      what's the current budget situation for the kitchen renovation I need a clean summary because I keep getting confused by all the numbers and corrections. what did we budget what did we spend and how much over are we
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What was the original kitchen renovation budget?"
+    expected_contains: ["15"]
+  - question: "What is the actual kitchen renovation cost?"
+    expected_contains: ["23"]
+  - question: "How much over budget is the renovation?"
+    expected_contains: ["8"]
+  - question: "Is Maya pursuing legal action against Miguel?"
+    expected_contains: ["no", "not worth"]
+  - question: "How much is Anna actually charging?"
+    expected_contains: ["under", "200"]
+  - question: "What is the emergency fund at now?"
+    expected_contains: ["2,800", "2800"]
+  - question: "How long is the total renovation taking?"
+    expected_contains: ["seven weeks"]
+  - question: "What backsplash tile did they choose?"
+    expected_contains: ["subway", "off-white"]
+  - question: "Is Anna on schedule?"
+    expected_contains: ["yes"]
+  - question: "What would the project have cost if they hired Anna from the start?"
+    expected_contains: ["22"]

@@ -1,0 +1,220 @@
+story_id: 93
+story_name: "The Confrontation"
+category: "Career"
+description: |
+  Tests memory of Maya confronting Danny directly about taking credit.
+  Danny denies it. The conversation doesn't go well.
+  Verifies system tracks confrontation details and denial.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00 AM"
+    user_input: |
+      scheduled a one on one with Danny for 11am today and my stomach is in knots like I almost cancelled three times but Julian texted me this morning saying you got this Maya remember the data and Lily messaged saying I'm here if you need me
+    expected_memory_stores:
+      - "one on one scheduled"
+      - "11am"
+      - "stomach knots"
+      - "almost cancelled"
+      - "Julian text"
+      - "Lily support"
+    expected_triples:
+      - ["user", "scheduled_meeting_with", "Danny"]
+      - ["user", "has_emotion", "nervous"]
+      - ["Julian", "sent_encouragement_to", "user"]
+      - ["Lily", "offered_support_to", "user"]
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 11:05 AM"
+    user_input: |
+      okay so I just had the conversation with Danny and um it did not go the way I hoped I said Danny I've noticed that in two recent meetings you presented work that I primarily did as if you did it and I want to talk about attribution and he immediately got defensive
+    expected_memory_stores:
+      - "confrontation happened"
+      - "attribution discussed"
+      - "two meetings mentioned"
+      - "Danny defensive"
+    expected_triples:
+      - ["user", "confronted", "Danny"]
+      - ["user", "raised_issue", "work attribution"]
+      - ["Danny", "became", "defensive"]
+    expected_adaptation:
+      emotion_detected: "tense"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 11:30 AM"
+    user_input: |
+      Danny said he didn't take credit for anything he said we're a team and when he presents he presents team work and he said I'm being oversensitive and making a big deal out of nothing and I was like Danny you literally said I built the relevance tuning framework and he said I don't remember saying that
+    expected_memory_stores:
+      - "Danny denied"
+      - "team work excuse"
+      - "oversensitive accusation"
+      - "big deal out of nothing"
+      - "doesn't remember"
+    expected_triples:
+      - ["Danny", "denied", "taking credit"]
+      - ["Danny", "claimed", "presenting team work"]
+      - ["Danny", "called_user", "oversensitive"]
+      - ["Danny", "does_not_remember", "saying I built"]
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 11:45 AM"
+    user_input: |
+      I showed him the meeting notes where it's documented that he said I built and he looked at it and was quiet for a second and then said well even if I said that I meant we like I as in the infrastructure team not I as in me personally and that's such BS and he knows it
+    expected_memory_stores:
+      - "showed meeting notes"
+      - "documented evidence"
+      - "I meant we excuse"
+      - "infrastructure team"
+      - "BS excuse"
+    expected_triples:
+      - ["user", "showed_evidence", "meeting notes"]
+      - ["Danny", "reinterpreted", "I meant we not I"]
+      - ["user", "has_emotion", "angry"]
+    expected_adaptation:
+      emotion_detected: "angry"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 12:00 PM"
+    user_input: |
+      the conversation ended with Danny saying he'll be more careful about attribution going forward but his tone was cold and dismissive and he didn't apologize at all and I could tell he thinks I'm the problem not him and Lily could hear some of it because she was in the next room on the same Zoom call floor
+    expected_memory_stores:
+      - "Danny will be careful"
+      - "cold dismissive tone"
+      - "no apology"
+      - "Danny thinks Maya is problem"
+      - "Lily overheard"
+    expected_triples:
+      - ["Danny", "promised", "more careful attribution"]
+      - ["Danny", "did_not", "apologize"]
+      - ["Danny", "has_tone", "cold and dismissive"]
+      - ["Lily", "overheard", "confrontation"]
+    expected_adaptation:
+      emotion_detected: "disappointed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 1:00 PM"
+    user_input: |
+      Lily called me after and said she heard Danny's tone and it was not great and she said she's documenting what she heard as a witness in case I need it later and she also said don't let him gaslight you Maya you have the git commits the PRs the RFCs it's all there
+    expected_memory_stores:
+      - "Lily call"
+      - "Danny's tone noted"
+      - "Lily documenting as witness"
+      - "gaslighting warning"
+      - "evidence exists"
+    expected_triples:
+      - ["Lily", "documenting_as", "witness"]
+      - ["Lily", "warned_user_about", "gaslighting"]
+      - ["user", "has_evidence", "git commits, PRs, RFCs"]
+      - ["user", "has_emotion", "supported"]
+    expected_adaptation:
+      emotion_detected: "supported"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Monday 3:00 PM"
+    user_input: |
+      did Danny apologize when Maya confronted him
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Monday 5:00 PM"
+    user_input: |
+      rest of the day was awkward Danny and I had to be on a code review call together and he was cordial but distant and there was none of the usual banter about our dogs or fridgesearch and I could feel the tension and everyone else on the call probably could too
+    expected_memory_stores:
+      - "awkward afternoon"
+      - "cordial but distant"
+      - "no banter"
+      - "tension"
+      - "others noticed"
+    expected_triples:
+      - ["Danny", "behaved", "cordial but distant"]
+      - ["user", "has_emotion", "uncomfortable"]
+      - ["Danny_Maya_relationship", "has_state", "tense"]
+    expected_adaptation:
+      emotion_detected: "uncomfortable"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 7:00 PM"
+    user_input: |
+      Julian was waiting for me when I finished work and he asked how it went and I told him everything and he said you did the right thing even though it didn't go well and I said what if he does it again and Julian said then you go to Sam with your documentation that's the plan
+    expected_memory_stores:
+      - "Julian debrief"
+      - "did the right thing"
+      - "what if again"
+      - "plan to go to Sam"
+    expected_triples:
+      - ["Julian", "validated", "user's confrontation"]
+      - ["user", "has_plan", "escalate to Sam if repeated"]
+      - ["user", "has_emotion", "validated"]
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Monday 10:00 PM"
+    user_input: |
+      can't sleep thinking about the confrontation and I keep replaying Danny's face when he said I'm being oversensitive and it reminds me of Derek dismissing my concerns at Vantage and I don't want to go through that again but at least this time I have Lily and Sam and a company that seems to care about doing the right thing
+    expected_memory_stores:
+      - "insomnia"
+      - "replaying confrontation"
+      - "oversensitive trigger"
+      - "Derek parallel"
+      - "Vantage PTSD"
+      - "Lily Sam support"
+      - "company cares"
+    expected_triples:
+      - ["user", "has_emotion", "anxious"]
+      - ["user", "cannot_sleep", "replaying confrontation"]
+      - ["Danny_oversensitive_comment", "reminds_user_of", "Derek at Vantage"]
+      - ["user", "has_support_from", "Lily and Sam"]
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Did Danny admit to taking credit?"
+    expected_contains: ["no", "denied", "doesn't remember"]
+  - question: "What excuse did Danny give?"
+    expected_contains: ["team", "we", "I meant we"]
+  - question: "Did Danny apologize?"
+    expected_contains: ["no"]
+  - question: "What evidence did Maya show Danny?"
+    expected_contains: ["meeting notes", "documented"]
+  - question: "What did Danny call Maya?"
+    expected_contains: ["oversensitive"]
+  - question: "Who is witnessing for Maya?"
+    expected_contains: ["Lily"]
+  - question: "How is the relationship between Maya and Danny now?"
+    expected_contains: ["tense", "awkward", "distant"]
+  - question: "What parallel does Maya draw to Vantage?"
+    expected_contains: ["Derek", "dismissing"]
+  - question: "What's the plan if Danny does it again?"
+    expected_contains: ["Sam", "escalate", "documentation"]
+  - question: "How is Maya sleeping?"
+    expected_contains: ["can't sleep", "insomnia"]

@@ -1,0 +1,184 @@
+story_id: 485
+story_name: "Maya Restructures Book Club"
+category: "Book Club"
+description: |
+  Tests memory of Maya's deliberate restructuring of book club.
+  Establishes personal outreach, new format, themed approach.
+  Verifies system tracks organizational decisions and motivations.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      okay so I'm restructuring this book club and first step is personal outreach so I called Marcus and was like hey dude you've missed the last two and he was honest and said he felt like he couldn't keep up and the books were too long and I said we're doing shorter ones now and he said okay I'll give it another shot if you promise under 300 pages and I said deal
+    expected_memory_stores:
+      - "called Marcus"
+      - "missed last two"
+      - "couldn't keep up"
+      - "books too long"
+      - "shorter books"
+      - "under 300 pages deal"
+    expected_adaptation:
+      emotion_detected: "proactive"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      texted Omar individually and he said he really does want to come he just keeps letting work get in the way and I said I get it but like put it in your calendar as a non-negotiable and he said yeah you're right and I also told him about the themed snacks and he said what kind of snacks and I said that's part of the surprise and he was way more interested than before
+    expected_memory_stores:
+      - "texted Omar"
+      - "work getting in way"
+      - "calendar non-negotiable"
+      - "themed snacks interest"
+      - "surprise element"
+    expected_adaptation:
+      emotion_detected: "strategic"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      had coffee with Lily and she said she loves book club and will always come when she can and she helped me pick the next book and she suggested Anxious People by Fredrik Backman because it's funny and short and about like a failed bank robber who takes people hostage during an apartment viewing and it sounds amazing and it's only 340 pages but close enough to 300
+    expected_memory_stores:
+      - "coffee with Lily"
+      - "Lily committed"
+      - "Anxious People suggested"
+      - "Fredrik Backman"
+      - "funny and short"
+      - "bank robber hostage"
+      - "340 pages"
+    expected_adaptation:
+      emotion_detected: "collaborative"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 6:00 PM"
+    user_input: |
+      made discussion questions for Anxious People and sent them to the group THREE WEEKS before the meeting so nobody has an excuse and I also made a reading schedule like chapters 1 through 10 by week one chapters 11 through 20 by week two etc and Tessa said this is so organized and I said I'm a software engineer I optimize things it's what I do
+    expected_memory_stores:
+      - "discussion questions made"
+      - "sent three weeks ahead"
+      - "reading schedule"
+      - "chapters per week"
+      - "Tessa said organized"
+      - "engineer optimization"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 8:00 PM"
+    user_input: |
+      I planned the themed snacks for Anxious People and since the book is set in Sweden I'm making Swedish meatballs and Nadia said she'll bring Swedish Fish candy which is hilarious and Tessa said she'll make a Swedish apple cake she found a recipe for and I said see this is why themed snacks are genius because people are excited about food even if they haven't finished the book
+    expected_memory_stores:
+      - "Swedish themed snacks"
+      - "Swedish meatballs Maya"
+      - "Swedish Fish Nadia"
+      - "Swedish apple cake Tessa"
+      - "food excitement"
+    expected_adaptation:
+      emotion_detected: "creative"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 11:00 AM"
+    user_input: |
+      I'm reading Anxious People and it's really good like Backman writes these characters that are so flawed and human and there's this thread about how everyone is struggling with something and nobody talks about it and it connects to my life in like a hundred ways and I told Julian about the bridge scene and he was like maybe I should read it too
+    expected_memory_stores:
+      - "reading Anxious People"
+      - "really good"
+      - "flawed human characters"
+      - "everyone struggling"
+      - "connects to Maya's life"
+      - "Julian interested"
+    expected_adaptation:
+      emotion_detected: "engrossed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 3:00 PM"
+    user_input: |
+      made a group chat poll for what time works best and everyone voted for Saturday at 7 PM which is what we've been doing but now it's official and locked in and I also created a shared Google Doc with our reading list and upcoming books and Lily and Tessa already added suggestions and Marcus said he finished the first ten chapters which is progress for Marcus
+    expected_memory_stores:
+      - "group chat poll"
+      - "Saturday 7 PM locked"
+      - "Google Doc reading list"
+      - "Lily Tessa added suggestions"
+      - "Marcus reading on schedule"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 5:00 PM"
+    user_input: |
+      what changes did Maya make to the book club format
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 7:00 PM"
+    user_input: |
+      Nadia came over to help me plan and she said you know what you're doing with this book club is the same thing you did with the tabletop meetup and climbing and guitar you find something that matters and you refuse to let it die and I was like okay that's the nicest thing anyone's said about my stubbornness and she said it's not stubbornness it's dedication
+    expected_memory_stores:
+      - "Nadia helped plan"
+      - "pattern recognition"
+      - "tabletop climbing guitar parallel"
+      - "refuse to let it die"
+      - "not stubbornness dedication"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 9:00 PM"
+    user_input: |
+      I feel good about this restructure like the personal outreach worked and people are actually reading and the themed snacks give everyone something to contribute and the discussion questions take pressure off and honestly this is kind of how I debug code at Conduit too identify the problem isolate the variables test the fix and iterate and maybe everything is engineering when you think about it
+    expected_memory_stores:
+      - "feels good about restructure"
+      - "personal outreach worked"
+      - "people reading"
+      - "themed snacks contribution"
+      - "discussion questions remove pressure"
+      - "debugging parallel"
+      - "everything is engineering"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is the next book club book after restructuring?"
+    expected_contains: ["Anxious People"]
+  - question: "Who is the author of Anxious People?"
+    expected_contains: ["Fredrik Backman"]
+  - question: "What themed snacks are planned?"
+    expected_contains: ["Swedish", "meatballs", "fish", "apple cake"]
+  - question: "What did Maya do differently in outreach?"
+    expected_contains: ["personal", "individual", "call", "text"]
+  - question: "How far ahead are discussion questions sent?"
+    expected_contains: ["three weeks"]
+  - question: "What time is book club locked in?"
+    expected_contains: ["Saturday", "7 PM"]
+  - question: "What tool did Maya create for tracking books?"
+    expected_contains: ["Google Doc"]
+  - question: "What did Nadia say about Maya's pattern?"
+    expected_contains: ["dedication", "refuse to let it die"]
+  - question: "Who suggested Anxious People?"
+    expected_contains: ["Lily"]
+  - question: "What is Marcus's reading progress?"
+    expected_contains: ["first ten chapters"]

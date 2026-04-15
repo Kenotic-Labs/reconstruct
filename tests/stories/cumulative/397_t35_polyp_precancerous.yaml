@@ -1,0 +1,174 @@
+story_id: 397
+story_name: "Polyp Results - Precancerous"
+category: "Health"
+description: |
+  Tests memory of learning George's polyp was precancerous.
+  Verifies system tracks critical medical results and family emotional responses.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 2:00 PM"
+    user_input: |
+      Dr Ramirez's office called dad with the pathology results and he called me immediately and said they said the polyp was pre something and I said precancerous and he said yeah that and I felt my whole body go cold
+    expected_memory_stores:
+      - "Dr. Ramirez results"
+      - "pathology results"
+      - "polyp precancerous"
+      - "George called Maya"
+      - "Maya body went cold"
+    expected_adaptation:
+      emotion_detected: "scared"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 2:30 PM"
+    user_input: |
+      called Clara immediately and she said okay precancerous does NOT mean cancer it means it was on a pathway that could have eventually become cancer but they caught it and removed it and now dad needs more frequent screenings like every three years instead of ten
+    expected_memory_stores:
+      - "called Clara"
+      - "precancerous not cancer"
+      - "could have become cancer"
+      - "caught and removed"
+      - "screening every three years"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 3:00 PM"
+    user_input: |
+      Clara went into full nurse mode and explained that the type of polyp matters and she asked dad what Dr Ramirez said the type was and he didn't remember so I called the office back and they said it was a tubular adenoma which Clara said is the most common precancerous type
+    expected_memory_stores:
+      - "Clara nurse mode"
+      - "polyp type important"
+      - "called office back"
+      - "tubular adenoma"
+      - "most common precancerous type"
+    expected_adaptation:
+      emotion_detected: "focused"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 4:00 PM"
+    user_input: |
+      dad is being really quiet and I think the word precancerous scared him way more than the actual procedure did and mom called me crying and said what does this mean and I had to explain that they already removed it and he's fine but she's spiraling
+    expected_memory_stores:
+      - "George quiet scared"
+      - "Vivian crying"
+      - "explained already removed"
+      - "Vivian spiraling"
+    expected_adaptation:
+      emotion_detected: "caretaking"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      I'm feeling this weird mix of like see I was RIGHT to push for this and also oh my god what if I hadn't pushed for this like if I hadn't made the stupid spreadsheet and noticed the missing colonoscopy this polyp would've just sat there growing for who knows how long
+    expected_memory_stores:
+      - "vindicated and scared"
+      - "what if didn't push"
+      - "spreadsheet discovery"
+      - "polyp would have grown"
+    expected_adaptation:
+      emotion_detected: "shaken"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      Julian held me when I got home and I cried not because anything is wrong now but because of how close it could have been and he said Maya you saved your dad and I know that's dramatic but in a way it might actually be true
+    expected_memory_stores:
+      - "Julian held her"
+      - "cried from relief"
+      - "how close it was"
+      - "you saved your dad"
+      - "might be true"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      dad called me tonight and his voice was different like softer and he said thank you for making me do this and that if it was up to him he would've kept putting it off and I said I know dad that's why it wasn't up to you and we both laughed but it was the serious kind of laugh
+    expected_memory_stores:
+      - "George thanked Maya"
+      - "voice softer"
+      - "would have kept putting off"
+      - "wasn't up to him"
+      - "serious laugh"
+    expected_adaptation:
+      emotion_detected: "tender"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 9:00 AM"
+    user_input: |
+      what type of polyp did George have and was it cancerous
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 5:00 PM"
+    user_input: |
+      Dr Tate said this is going to change the family dynamic because now everyone sees Maya as the health person and she said that's a lot of responsibility and I should be careful not to take on everyone's health anxiety as my own
+    expected_memory_stores:
+      - "Dr. Tate warning"
+      - "family dynamic change"
+      - "Maya the health person"
+      - "responsibility"
+      - "don't take on their anxiety"
+    expected_adaptation:
+      emotion_detected: "thoughtful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 8:00 PM"
+    user_input: |
+      mom called and she finally calmed down and she said Maya you are the bravest person in this family for making your father do this and I was like mom I just made a spreadsheet and she said no you made him face something he was running from and that takes courage
+    expected_memory_stores:
+      - "Vivian calmed down"
+      - "bravest in family"
+      - "just a spreadsheet"
+      - "made him face it"
+      - "courage"
+    expected_adaptation:
+      emotion_detected: "humbled"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What type was George's polyp?"
+    expected_contains: ["tubular adenoma"]
+  - question: "Was the polyp cancerous?"
+    expected_contains: ["precancerous", "not cancer"]
+  - question: "How often does George need screening now?"
+    expected_contains: ["three years"]
+  - question: "What would have happened if the polyp wasn't found?"
+    expected_contains: ["could", "cancer", "growing"]
+  - question: "How did George react to the results?"
+    expected_contains: ["quiet", "scared", "thanked"]
+  - question: "What did Dr. Tate warn Maya about?"
+    expected_contains: ["responsibility", "anxiety", "take on"]
+  - question: "What did Vivian say about Maya's courage?"
+    expected_contains: ["bravest", "face", "running from"]
+  - question: "What did Julian say about Maya's advocacy?"
+    expected_contains: ["saved", "dad"]
+  - question: "What role does Maya now have in the family?"
+    expected_contains: ["health person"]
+  - question: "Who explained the polyp type to the family?"
+    expected_contains: ["Clara"]

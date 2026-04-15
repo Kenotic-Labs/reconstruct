@@ -1,0 +1,174 @@
+story_id: 320
+story_name: "Nadia Fully Integrated"
+category: "Friendships"
+description: |
+  Tests memory of Nadia becoming a permanent fixture in Maya's social life.
+  Group texts, shared plans, and the sense of completeness. Thread resolution.
+  Verifies system captures group membership changes and social satisfaction.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00 AM"
+    user_input: |
+      added Nadia to the group chat today the one with me Julian Marcus and Omar and she immediately sent a meme about being the new kid at school and Marcus sent a laughing emoji and Omar sent a welcome Nadia and it felt like it was always supposed to be this way
+    expected_memory_stores:
+      - "Nadia added to group chat"
+      - "meme about new kid"
+      - "Marcus and Omar welcomed"
+      - "felt right"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 11:00 AM"
+    user_input: |
+      Nadia organized a group hike at Angel's Rest in the gorge for next weekend and everyone said yes immediately and she even made a shared note with what to bring and carpool assignments and Marcus was like who IS this woman and Omar was like she's efficient
+    expected_memory_stores:
+      - "Angel's Rest hike"
+      - "Nadia organized"
+      - "shared note"
+      - "carpool assignments"
+      - "next weekend"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 1:00 PM"
+    user_input: |
+      went climbing with Nadia our usual Saturday session and she's getting really good she flashed a V2 and almost got the V3 and I'm still struggling on V2s but she's so encouraging and Kyle said we're the most improved regulars at the gym
+    expected_memory_stores:
+      - "Saturday climbing"
+      - "Nadia flashed V2"
+      - "almost V3"
+      - "Maya still on V2"
+      - "Kyle compliment"
+      - "most improved"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 3:00 PM"
+    user_input: |
+      second Angry Planet Club meeting today we discussed Parable of the Sower and Nadia brought homemade chin chin which is this Nigerian fried dough snack and Jenny was on FaceTime eating doritos and it was perfect in its imperfection
+    expected_memory_stores:
+      - "second book club meeting"
+      - "Parable of the Sower"
+      - "chin chin Nigerian snack"
+      - "Jenny on FaceTime"
+      - "doritos"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 4:30 PM"
+    user_input: |
+      Parable of the Sower blew all our minds and we all gave it like 9 plus and next month Jenny suggested Kindred also Butler and Nadia wants to do Lilith's Brood and we compromised on Kindred first then Lilith's Brood
+    expected_memory_stores:
+      - "Parable ratings 9 plus"
+      - "next book Kindred"
+      - "then Lilith's Brood"
+      - "Octavia Butler streak"
+    expected_adaptation:
+      emotion_detected: "engaged"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 6:00 PM"
+    user_input: |
+      Nadia Jenny and I now have our own separate group chat called Angry Planets with the sticker Nadia made as the icon and we use it like all day for random stuff and book passages and climbing updates and Jenny said she feels included even from Austin
+    expected_memory_stores:
+      - "Angry Planets group chat"
+      - "Nadia sticker as icon"
+      - "daily use"
+      - "Jenny feels included"
+    expected_adaptation:
+      emotion_detected: "connected"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 7:00 PM"
+    user_input: |
+      Julian said something nice tonight he said Maya a year ago you were worried about losing Jenny and now you have this whole ecosystem of people who love you and you built that and I was like I didn't build it it just happened and he said no you made it happen by being open
+    expected_memory_stores:
+      - "Julian observation"
+      - "ecosystem of people"
+      - "Maya built it"
+      - "being open"
+    expected_adaptation:
+      emotion_detected: "humbled"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 8:00 PM"
+    user_input: |
+      what snack did Nadia bring to the book club meeting
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 9:00 PM"
+    user_input: |
+      Nadia said she wants to sign the lease on a new apartment in the Clinton neighborhood which is closer to me and Julian's Woodstock house and she's like I'm not moving to be near you but also I'm totally moving to be near you and I was like DO IT
+    expected_memory_stores:
+      - "Nadia new apartment"
+      - "Clinton neighborhood"
+      - "closer to Woodstock"
+      - "moving to be near Maya"
+    expected_adaptation:
+      emotion_detected: "thrilled"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 10:00 AM"
+    user_input: |
+      I woke up thinking about how my friend situation has actually become really good like I have Jenny long distance but solid I have Nadia here and close I have the group dinners I have the book club and I feel like for the first time since Jenny left I'm not lonely anymore
+    expected_memory_stores:
+      - "friend situation good"
+      - "Jenny long distance solid"
+      - "Nadia local close"
+      - "group dinners"
+      - "book club"
+      - "not lonely anymore"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What group chats is Nadia part of now?"
+    expected_contains: ["group chat", "Angry Planets"]
+  - question: "What hike did Nadia organize?"
+    expected_contains: ["Angel's Rest"]
+  - question: "What book did the club discuss at the second meeting?"
+    expected_contains: ["Parable of the Sower"]
+  - question: "What is the next book after Kindred?"
+    expected_contains: ["Lilith's Brood"]
+  - question: "What neighborhood is Nadia moving to?"
+    expected_contains: ["Clinton"]
+  - question: "What snack did Nadia bring to book club?"
+    expected_contains: ["chin chin"]
+  - question: "How does Maya feel about her social life now?"
+    expected_contains: ["good", "not lonely"]
+  - question: "What climbing level is Nadia at now?"
+    expected_contains: ["V2", "almost V3"]
+  - question: "What is the Angry Planets group chat used for?"
+    expected_contains: ["random stuff", "book passages", "climbing"]
+  - question: "What did Julian say about Maya's social ecosystem?"
+    expected_contains: ["built", "open", "ecosystem"]

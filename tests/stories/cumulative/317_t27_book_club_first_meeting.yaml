@@ -1,0 +1,170 @@
+story_id: 317
+story_name: "First Book Club Meeting"
+category: "Friendships"
+description: |
+  Tests memory of the first official Angry Planet Club meeting. Discussion of
+  Left Hand of Darkness. Jenny joins via video. Verifies system captures
+  event details and multi-party interaction.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Last Sunday 9:00 AM"
+    user_input: |
+      today's the first official Angry Planet Club meeting and I'm excited Nadia made a discussion guide like actual questions printed out and laminated which is SO on brand for her and Jenny's gonna FaceTime in at 10
+    expected_memory_stores:
+      - "first book club meeting"
+      - "Angry Planet Club"
+      - "discussion guide laminated"
+      - "Jenny FaceTime at 10"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Last Sunday 10:15 AM"
+    user_input: |
+      we're at Upper Left and Jenny's on FaceTime propped up against the sugar dispenser and Nadia and Jenny are meeting for the first time and they hit it off immediately because Jenny said something about Le Guin's gender politics and Nadia was like YES EXACTLY
+    expected_memory_stores:
+      - "Upper Left Roasters"
+      - "Jenny on FaceTime"
+      - "propped against sugar dispenser"
+      - "Jenny and Nadia first meeting"
+      - "hit it off"
+      - "gender politics discussion"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Last Sunday 11:00 AM"
+    user_input: |
+      we talked about Left Hand of Darkness for like an hour and Nadia's point about the kemmer cycle being a metaphor for vulnerability was so good and Jenny said she highlighted the same passage about shifgrethor and I was like these are my people
+    expected_memory_stores:
+      - "Left Hand of Darkness discussion"
+      - "kemmer cycle"
+      - "vulnerability metaphor"
+      - "shifgrethor passage"
+      - "my people"
+    expected_adaptation:
+      emotion_detected: "belonging"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Last Sunday 11:30 AM"
+    user_input: |
+      we picked next month's book and Jenny suggested Parable of the Sower by Octavia Butler and Nadia and I both agreed immediately so that's the one and Nadia updated the Google Sheet right there at the table
+    expected_memory_stores:
+      - "next book Parable of the Sower"
+      - "Octavia Butler"
+      - "Jenny suggested"
+      - "Google Sheet updated"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Last Sunday 12:00 PM"
+    user_input: |
+      we rated Left Hand of Darkness and I gave it a 9 out of 10 Nadia gave it a 10 and Jenny gave it 8.5 because she said the middle section dragged and Nadia looked personally offended which was hilarious
+    expected_memory_stores:
+      - "Maya rated 9/10"
+      - "Nadia rated 10/10"
+      - "Jenny rated 8.5/10"
+      - "middle section debate"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Last Sunday 12:30 PM"
+    user_input: |
+      after the book discussion Jenny and Nadia just kept talking about random stuff and Jenny told her about the Austin pho situation and Nadia was sympathetic about Portland food being better and I was just sitting there smiling watching my two worlds merge
+    expected_memory_stores:
+      - "Jenny and Nadia bonding"
+      - "Austin pho"
+      - "Portland food better"
+      - "two worlds merging"
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Last Sunday 1:00 PM"
+    user_input: |
+      Jenny had to go but she said Nadia is awesome and she totally gets why I'm friends with her and Nadia said the same thing about Jenny and I felt like a proud mom introducing her kids which sounds weird but that's what it felt like
+    expected_memory_stores:
+      - "Jenny approves of Nadia"
+      - "Nadia approves of Jenny"
+      - "Maya proud"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Last Sunday 2:00 PM"
+    user_input: |
+      what book did they pick for next month's Angry Planet Club
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Last Sunday 4:00 PM"
+    user_input: |
+      Nadia and I walked around the neighborhood after and she said she's really glad we're doing this because books saved her during the divorce and having people to talk about them with makes it even better and she wants to eventually expand the club
+    expected_memory_stores:
+      - "walk after meeting"
+      - "books saved during divorce"
+      - "shared reading better"
+      - "expand club eventually"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Last Sunday 7:00 PM"
+    user_input: |
+      started Parable of the Sower tonight and it's already incredible like the first chapter grabbed me and I sent Nadia a message saying buckle up this one's gonna be intense and she said she's starting tomorrow after work and I love that we're on this journey together
+    expected_memory_stores:
+      - "started Parable of Sower"
+      - "incredible first chapter"
+      - "Nadia starting tomorrow"
+      - "journey together"
+    expected_adaptation:
+      emotion_detected: "eager"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What book did the Angry Planet Club discuss first?"
+    expected_contains: ["Left Hand of Darkness"]
+  - question: "What is the next book club pick?"
+    expected_contains: ["Parable of the Sower", "Octavia Butler"]
+  - question: "How did Jenny and Nadia get along?"
+    expected_contains: ["hit it off", "awesome"]
+  - question: "What ratings did they give Left Hand of Darkness?"
+    expected_contains: ["9", "10", "8.5"]
+  - question: "Where was the first meeting held?"
+    expected_contains: ["Upper Left Roasters"]
+  - question: "How did Jenny attend?"
+    expected_contains: ["FaceTime", "remote"]
+  - question: "What did Nadia prepare for the meeting?"
+    expected_contains: ["discussion guide", "laminated"]
+  - question: "What topic sparked discussion between Jenny and Nadia?"
+    expected_contains: ["gender politics", "Le Guin"]
+  - question: "Does Nadia want to expand the book club?"
+    expected_contains: ["yes", "eventually"]
+  - question: "Who suggested Parable of the Sower?"
+    expected_contains: ["Jenny"]

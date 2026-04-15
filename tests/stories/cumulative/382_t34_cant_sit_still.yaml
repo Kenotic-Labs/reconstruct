@@ -1,0 +1,172 @@
+story_id: 382
+story_name: "Can't Sit Still for Two Minutes"
+category: "Mental Health"
+description: |
+  Tests memory of Maya struggling with basic meditation practice.
+  Verifies system tracks early frustration and difficulty with stillness.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 7:00 AM"
+    user_input: |
+      day three of trying to meditate and I literally opened my eyes after what felt like ten minutes and it had been one minute and twenty seconds and I'm like HOW is time this slow when you're doing nothing
+    expected_memory_stores:
+      - "day three"
+      - "time distortion"
+      - "1 minute 20 seconds"
+      - "felt like ten minutes"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 7:30 AM"
+    user_input: |
+      also my back hurts from sitting on the floor and my foot fell asleep and I kept hearing the neighbor's dog barking and a truck outside and I'm like meditation requires absolute silence which I do not have in this apartment
+    expected_memory_stores:
+      - "back pain"
+      - "foot fell asleep"
+      - "noise distractions"
+      - "needs silence"
+    expected_adaptation:
+      emotion_detected: "irritated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 7:00 AM"
+    user_input: |
+      tried a different guided meditation today one called Body Scan for Anxious Minds and it was actually less boring because you focus on different body parts instead of just breathing and I made it the full two minutes without opening my eyes
+    expected_memory_stores:
+      - "body scan meditation"
+      - "Anxious Minds"
+      - "focus on body parts"
+      - "full two minutes"
+      - "eyes stayed closed"
+    expected_adaptation:
+      emotion_detected: "encouraged"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 8:00 AM"
+    user_input: |
+      skipped meditation today because I had to get up early for ramen prep and I feel guilty about it which is ironic because I've only been doing this for four days and somehow I already feel bad about missing one
+    expected_memory_stores:
+      - "skipped meditation"
+      - "ramen prep conflict"
+      - "guilt"
+      - "four days in"
+      - "ironic guilt"
+    expected_adaptation:
+      emotion_detected: "guilty"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Sunday 9:00 AM"
+    user_input: |
+      tried again and my brain would NOT shut up like I kept thinking about the presentation at work and whether my ramen broth is milky enough and whether I should text Jenny back and Dr Tate said the thoughts are like clouds passing and I'm like these clouds are a thunderstorm
+    expected_memory_stores:
+      - "racing thoughts"
+      - "work ramen Jenny"
+      - "clouds metaphor"
+      - "thunderstorm analogy"
+      - "Dr. Tate advice"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 7:00 AM"
+    user_input: |
+      bumped up to three minutes today which feels like an Olympic achievement honestly and I used the body scan one again and at one point my mind was actually quiet for like maybe five seconds and it was weird like this gap of nothing and then my brain went wait what just happened
+    expected_memory_stores:
+      - "three minutes"
+      - "body scan"
+      - "five seconds of quiet"
+      - "gap of nothing"
+      - "brain interrupted"
+    expected_adaptation:
+      emotion_detected: "curious"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 5:00 PM"
+    user_input: |
+      told Dr Tate about the five seconds of quiet and she got genuinely excited and said that's a micro-moment of awareness and that's what we're building toward and she said most people never notice those and the fact that I did means something
+    expected_memory_stores:
+      - "Dr. Tate excited"
+      - "micro-moment of awareness"
+      - "building toward"
+      - "most don't notice"
+      - "meaningful progress"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 7:00 AM"
+    user_input: |
+      how many minutes is Maya up to with her meditation practice
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      Julian noticed I'm crankier on days I skip meditation which is only after one week which doesn't make sense but he said it was noticeable and I was like great now I HAVE to do it because Julian is tracking my moods apparently
+    expected_memory_stores:
+      - "crankier on skip days"
+      - "Julian noticed"
+      - "one week"
+      - "mood tracking"
+    expected_adaptation:
+      emotion_detected: "annoyed"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 7:00 AM"
+    user_input: |
+      okay so I have a new problem the sitting thing is really uncomfortable and I'm wondering if there's like a way to meditate while moving because I have all this energy in the morning and sitting still feels like fighting my body
+    expected_memory_stores:
+      - "sitting uncomfortable"
+      - "wants moving meditation"
+      - "morning energy"
+      - "fighting body"
+    expected_adaptation:
+      emotion_detected: "searching"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How long could Maya meditate by the end of week one?"
+    expected_contains: ["three minutes"]
+  - question: "What type of meditation works better for Maya?"
+    expected_contains: ["body scan"]
+  - question: "What did Dr. Tate call Maya's five seconds of quiet?"
+    expected_contains: ["micro-moment", "awareness"]
+  - question: "Does Maya feel different on days she skips meditation?"
+    expected_contains: ["crankier", "noticeable"]
+  - question: "Who noticed Maya's mood changes?"
+    expected_contains: ["Julian"]
+  - question: "What physical discomforts does Maya have while meditating?"
+    expected_contains: ["back", "foot", "sitting"]
+  - question: "What metaphor does Dr. Tate use for thoughts?"
+    expected_contains: ["clouds"]
+  - question: "What did Maya compare her thoughts to?"
+    expected_contains: ["thunderstorm"]
+  - question: "Is Maya looking for a different way to meditate?"
+    expected_contains: ["yes", "moving", "walking"]
+  - question: "How long did Maya's gap of mental quiet last?"
+    expected_contains: ["five seconds"]

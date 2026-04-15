@@ -1,0 +1,172 @@
+story_id: 357
+story_name: "Shellfish Allergy Discovery"
+category: "Food and Cooking"
+description: |
+  Tests cross-thread memory when Maya discovers her shellfish allergy mid-cooking-arc.
+  Cross-thread with T19 (health). Verifies system tracks medical emergencies
+  and their impact on an ongoing hobby.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 4:00 PM"
+    user_input: |
+      so I was trying a new recipe today shrimp and miso ramen because I wanted to branch out from tonkotsu and I used these shell-on shrimp to make the broth and it smelled incredible
+    expected_memory_stores:
+      - "shrimp miso ramen"
+      - "new recipe"
+      - "shell-on shrimp"
+      - "branching out"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 5:30 PM"
+    user_input: |
+      okay so um I need to tell you something kind of scary so I ate the shrimp ramen and like 20 minutes later my lips started swelling and I got these hives on my arms and I was like what is happening and Julian freaked out
+    expected_memory_stores:
+      - "allergic reaction"
+      - "lips swelling"
+      - "hives on arms"
+      - "20 minutes after eating"
+      - "Julian scared"
+    expected_adaptation:
+      emotion_detected: "scared"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 6:30 PM"
+    user_input: |
+      Julian drove me to the ER at Providence Portland and I took Benadryl in the car and by the time we got there my throat was starting to feel tight and I was honestly terrified like I've never had an allergic reaction before
+    expected_memory_stores:
+      - "ER visit"
+      - "Providence Portland"
+      - "Benadryl"
+      - "throat tightening"
+      - "first allergic reaction"
+    expected_adaptation:
+      emotion_detected: "terrified"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 8:00 PM"
+    user_input: |
+      they gave me epinephrine and steroids and monitored me for like two hours and the doctor said it's almost certainly a shellfish allergy and that I need to see an allergist and get tested properly and also I need to carry an EpiPen from now on
+    expected_memory_stores:
+      - "epinephrine"
+      - "steroids"
+      - "shellfish allergy"
+      - "need allergist"
+      - "EpiPen prescription"
+    expected_adaptation:
+      emotion_detected: "shaken"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 10:00 PM"
+    user_input: |
+      I'm home now and Julian won't stop hovering and honestly I'm fine... okay no I'm freaking out a little because like what if it had been worse what if my throat closed all the way and Julian keeps saying we should've called 911 instead of driving
+    expected_memory_stores:
+      - "home from ER"
+      - "Julian hovering"
+      - "anxiety about severity"
+      - "throat could have closed"
+      - "should have called 911"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 9:00 AM"
+    user_input: |
+      Clara called this morning because Julian texted her last night and she went into full nurse mode and was like okay here's what you need to do and she said I need to see an allergist named Dr Amy Nassif who's supposed to be really good
+    expected_memory_stores:
+      - "Clara called"
+      - "nurse mode"
+      - "Dr. Amy Nassif"
+      - "allergist referral"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 11:00 AM"
+    user_input: |
+      the thing that sucks the most is like half my ramen research involved dashi which uses katsuobushi which is bonito which is FISH and shrimp paste shows up in a lot of Asian recipes and I'm like great now I have to rethink everything
+    expected_memory_stores:
+      - "dashi concerns"
+      - "katsuobushi is bonito fish"
+      - "shrimp paste in recipes"
+      - "rethink all recipes"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 1:00 PM"
+    user_input: |
+      wait is bonito the same as shellfish or is fish different from shellfish like do I need to avoid all seafood or just shellfish specifically
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "confused"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 3:00 PM"
+    user_input: |
+      mom called and she was upset because she said she should have known because apparently Grandpa Wei had some kind of seafood sensitivity too and she never thought to tell me which like okay that's helpful information to have MOM
+    expected_memory_stores:
+      - "Vivian called"
+      - "Grandpa Wei seafood sensitivity"
+      - "genetic component"
+      - "Maya frustrated with mom"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 6:00 PM"
+    user_input: |
+      okay so I'm not letting this ruin ramen for me I just need to adapt right like tonkotsu doesn't use shellfish anyway so my main recipe is fine I just need to be careful about what I add and I already made an appointment with Dr Nassif for next Thursday
+    expected_memory_stores:
+      - "adapting not quitting"
+      - "tonkotsu is safe"
+      - "Dr. Nassif appointment"
+      - "next Thursday"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya allergic to?"
+    expected_contains: ["shellfish"]
+  - question: "How was the allergy discovered?"
+    expected_contains: ["shrimp", "ramen", "reaction"]
+  - question: "Where did Maya go during the allergic reaction?"
+    expected_contains: ["ER", "Providence Portland"]
+  - question: "Who is Maya's allergist?"
+    expected_contains: ["Dr. Amy Nassif"]
+  - question: "Who referred Maya to the allergist?"
+    expected_contains: ["Clara"]
+  - question: "Does Maya need to carry an EpiPen?"
+    expected_contains: ["yes", "EpiPen"]
+  - question: "Is there a family history of seafood allergies?"
+    expected_contains: ["Grandpa Wei", "sensitivity"]
+  - question: "Can Maya still make tonkotsu ramen?"
+    expected_contains: ["yes", "safe", "no shellfish"]
+  - question: "What symptoms did Maya have?"
+    expected_contains: ["swelling", "hives", "throat"]
+  - question: "When is Maya's allergist appointment?"
+    expected_contains: ["Thursday"]

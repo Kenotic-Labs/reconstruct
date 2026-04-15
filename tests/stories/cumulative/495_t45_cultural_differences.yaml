@@ -1,0 +1,192 @@
+story_id: 495
+story_name: "Cultural Differences Christmas"
+category: "Holiday Season"
+description: |
+  Tests memory of Maya processing the cultural differences around Christmas.
+  Establishes identity reflection, negotiating two family cultures.
+  Verifies system captures internal emotional processing.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "December 26 9:00 AM"
+    user_input: |
+      we're still at the Reeves house and I woke up early and I've been thinking about the cultural difference thing and it's not just Christmas Eve versus Christmas morning it's like the whole vibe is different like the Chen house is quieter and more intimate and the food is different and my parents do this thing where they write letters to each other and it's all very understated
+    expected_memory_stores:
+      - "still at Reeves"
+      - "cultural differences reflection"
+      - "not just timing"
+      - "whole vibe different"
+      - "Chen quiet intimate"
+      - "different food"
+      - "letters to each other"
+      - "understated"
+    expected_adaptation:
+      emotion_detected: "contemplative"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "December 26 10:30 AM"
+    user_input: |
+      Diane does everything BIG like big decorations big energy big emotions and my mom does everything small and meaningful and neither is wrong but they're really different and Julian grew up with the big version and I grew up with the small version and merging those is harder than I thought like the Thanksgiving fusion worked because it was food but Christmas is emotional
+    expected_memory_stores:
+      - "Diane big everything"
+      - "Vivian small meaningful"
+      - "neither wrong"
+      - "Julian grew up big"
+      - "Maya grew up small"
+      - "merging harder"
+      - "food vs emotional"
+    expected_adaptation:
+      emotion_detected: "processing"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "December 26 12:00 PM"
+    user_input: |
+      I called Dr Tate because I had an emergency session credit and she said what I'm feeling is completely normal for intercultural couples and she said the homesickness isn't about not liking the Reeves it's about grieving the parts of your childhood that can't be replicated and that hit me hard because yeah that's exactly it
+    expected_memory_stores:
+      - "Dr Tate emergency session"
+      - "normal for intercultural"
+      - "homesickness not about Reeves"
+      - "grieving childhood"
+      - "can't be replicated"
+      - "hit hard"
+    expected_adaptation:
+      emotion_detected: "understood"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "December 26 2:00 PM"
+    user_input: |
+      Julian and I went for a walk in his parents neighborhood and I told him about the Dr Tate session and he said he never thought about how hard it must be to leave your cultural traditions to join someone else's and I said it's not leaving it's more like stretching and he said that's a good way to put it and he wants to learn more about the Chen traditions
+    expected_memory_stores:
+      - "walk in neighborhood"
+      - "told Julian about session"
+      - "Julian didn't realize"
+      - "not leaving stretching"
+      - "wants to learn Chen traditions"
+    expected_adaptation:
+      emotion_detected: "connected"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "December 26 3:30 PM"
+    user_input: |
+      I FaceTimed mom and asked her to tell me more about the Christmas Eve letter tradition and she said she and dad have been writing letters to each other every Christmas Eve since their first year married and she reads hers aloud and he reads his silently because that's just who they are and I started crying because I want that I want a tradition that's OURS
+    expected_memory_stores:
+      - "FaceTimed Vivian"
+      - "Christmas Eve letters"
+      - "since first year married"
+      - "Vivian reads aloud"
+      - "George reads silently"
+      - "Maya crying"
+      - "wants own tradition"
+    expected_adaptation:
+      emotion_detected: "longing"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "December 26 5:00 PM"
+    user_input: |
+      I had an idea and told Julian what if WE start our own Christmas tradition something that combines both families and he was really into it and I said what if on Christmas Eve we write letters to each other like my parents do AND on Christmas morning we do stockings like yours and he said that's perfect and also he said we should add one thing that's only ours and I was like what and he said road trip ornaments for the tree one for each trip
+    expected_memory_stores:
+      - "new combined tradition"
+      - "Christmas Eve letters"
+      - "Christmas morning stockings"
+      - "from both families"
+      - "add something ours"
+      - "road trip ornaments"
+      - "one per trip"
+    expected_adaptation:
+      emotion_detected: "inspired"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "December 26 6:30 PM"
+    user_input: |
+      I told Diane and Bob about our new combined tradition idea and Diane was so touched she said that's beautiful and Bob said every couple needs their own rituals and Diane said she started the matching pajamas thing as her own tradition when Julian was a kid and now it's part of the family fabric and she gets it
+    expected_memory_stores:
+      - "told Diane Bob"
+      - "Diane touched"
+      - "Bob rituals comment"
+      - "Diane started pajamas"
+      - "Julian was a kid"
+      - "family fabric"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "December 26 7:30 PM"
+    user_input: |
+      what new Christmas tradition are Maya and Julian creating
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "December 26 8:30 PM"
+    user_input: |
+      drove home from Eugene tonight and the whole drive Julian and I were planning our new traditions and he said he wants the first road trip ornament to be for Columbia Gorge since that was our first trip and I said yes and also maybe each ornament can be a little photo of that trip and he said I have a WHOLE photo book of options and we laughed
+    expected_memory_stores:
+      - "drove home Eugene"
+      - "planning traditions"
+      - "first ornament Columbia Gorge"
+      - "first trip"
+      - "photo ornaments"
+      - "photo book reference"
+      - "laughed together"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "December 26 10:00 PM"
+    user_input: |
+      home in the Woodstock house and it feels like ours again and Kobe is doing zoomies because he missed the house and I'm sitting in the living room looking at Grandpa Wei's guitar on the stand and thinking about traditions and continuity and how things get passed down and changed and kept alive and lost and found again and this is what life is made of honestly
+    expected_memory_stores:
+      - "home Woodstock"
+      - "feels like ours"
+      - "Kobe zoomies"
+      - "Grandpa Wei guitar"
+      - "traditions continuity"
+      - "passed down changed"
+      - "kept alive lost found"
+    expected_adaptation:
+      emotion_detected: "philosophical"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What cultural differences exist between Chen and Reeves Christmases?"
+    expected_contains: ["Eve", "morning", "quiet", "big"]
+  - question: "What is the Chen family Christmas Eve letter tradition?"
+    expected_contains: ["write letters", "read"]
+  - question: "What did Dr. Tate say about Maya's homesickness?"
+    expected_contains: ["normal", "intercultural", "grieving childhood"]
+  - question: "What is Maya and Julian's new combined Christmas tradition?"
+    expected_contains: ["letters Eve", "stockings morning", "road trip ornaments"]
+  - question: "What will the road trip ornaments look like?"
+    expected_contains: ["photo", "each trip"]
+  - question: "What will the first ornament be for?"
+    expected_contains: ["Columbia Gorge"]
+  - question: "How did Diane react to the new tradition idea?"
+    expected_contains: ["touched", "beautiful"]
+  - question: "What did Bob say about couple rituals?"
+    expected_contains: ["every couple needs", "rituals"]
+  - question: "How long have Maya's parents done the letter tradition?"
+    expected_contains: ["first year married"]
+  - question: "What word does Maya use instead of 'leaving' her traditions?"
+    expected_contains: ["stretching"]

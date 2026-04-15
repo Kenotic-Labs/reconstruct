@@ -1,0 +1,176 @@
+story_id: 529
+story_name: "Documenting Life"
+category: "Phone and Digital Life"
+description: |
+  Maya finds a healthy relationship with her phone camera — documenting intentionally
+  not compulsively. Photo journal grows. Cross-references grandpa archive (T46),
+  hosting (T47), cherry tree, and Kobe.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 6:00 PM"
+    user_input: |
+      so one thing the new phone is amazing for is the camera and I've been trying to figure out the right balance between taking photos and being present because before I would take like 50 photos at every event and never look at them and now I'm trying to take fewer better ones that actually mean something
+    expected_memory_stores:
+      - "camera balance"
+      - "fewer better photos"
+      - "50 photos never looked at"
+      - "intentional photography"
+    expected_adaptation:
+      emotion_detected: "thoughtful"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      took one photo today of the cherry tree with the sunset behind it and it's gorgeous like the colors are insane and I thought about grandpa and how he never had a phone to take photos with and all his memories were just in his head or in those letters and maybe that's actually purer but I also really like having this photo
+    expected_memory_stores:
+      - "cherry tree sunset photo"
+      - "grandpa comparison"
+      - "memories in head vs photos"
+      - "both have value"
+    expected_adaptation:
+      emotion_detected: "philosophical"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 5:00 PM"
+    user_input: |
+      dinner party tonight and I decided to take exactly three photos the food before people eat one candid of people laughing and one of the whole table and that's it the rest of the time the phone goes in the drawer and I told everyone this and Omar said three photos that's it and I said quality over quantity Omar
+    expected_memory_stores:
+      - "three photos rule for events"
+      - "food candid table"
+      - "phone in drawer after"
+      - "quality over quantity"
+    expected_adaptation:
+      emotion_detected: "disciplined"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 10:00 PM"
+    user_input: |
+      the three photos came out perfect like the food photo could be in a magazine and the candid is Clara mid laugh with her eyes closed and it's the most Clara photo ever and the table shot has everyone and you can see grandpa's recipe card in the center and I got more from three photos than I ever got from fifty
+    expected_memory_stores:
+      - "three photos perfect"
+      - "food photo magazine quality"
+      - "Clara laughing candid"
+      - "recipe card visible"
+      - "more from three than fifty"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Sunday 10:00 AM"
+    user_input: |
+      phone-free Sunday and I picked this week's photo for the journal and I chose the Clara laughing one and I wrote about how Clara has been there since the beginning since Vantage since the PIP since everything and she was the first person I told about the Conduit job and she was at the first dinner party and she's in this photo laughing at my table in my house
+    expected_memory_stores:
+      - "photo journal entry"
+      - "chose Clara laughing"
+      - "Clara history"
+      - "since Vantage PIP everything"
+      - "first at Conduit news"
+    expected_adaptation:
+      emotion_detected: "sentimental"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      started taking photos of small things that I want to remember like Kobe's paw on my lap while I work and the way the light hits the kitchen in the morning and Julian's hands when he's making cocktails and nobody will ever see these photos but me and that's the point they're for my memory not for Instagram
+    expected_memory_stores:
+      - "photos of small things"
+      - "Kobe's paw"
+      - "kitchen light"
+      - "Julian's hands cocktails"
+      - "for memory not Instagram"
+    expected_adaptation:
+      emotion_detected: "intimate"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 5:00 PM"
+    user_input: |
+      showed Julian the collection of small-moment photos and he got really emotional he said Maya these are beautiful and I said they're just like random things and he said no they're not random they're the things you chose to notice and that says everything about how you see the world
+    expected_memory_stores:
+      - "showed Julian photos"
+      - "Julian emotional"
+      - "not random"
+      - "things she chose to notice"
+      - "how she sees the world"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 3:00 PM"
+    user_input: |
+      added a new photo to the Wei folder on my laptop a photo of the cherry tree with the new growth and grandpa's watch next to it and I've been building this archive since Fresno and it's getting real like it's a record of his life and my life and how they connect
+    expected_memory_stores:
+      - "new photo in Wei folder"
+      - "cherry tree and watch"
+      - "growing archive"
+      - "his life and hers connecting"
+    expected_adaptation:
+      emotion_detected: "purposeful"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 11:00 AM"
+    user_input: |
+      photo journal has seven entries now one for each phone-free Sunday and looking back through them is like a highlight reel of the things that actually matter not the LinkedIn highlights but the real ones Julian making pancakes Clara laughing Kobe at the park the cherry tree the dumplings the sunset
+    expected_memory_stores:
+      - "seven journal entries"
+      - "real highlight reel"
+      - "not LinkedIn highlights"
+      - "pancakes Clara Kobe tree dumplings sunset"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 6:00 PM"
+    user_input: |
+      I think I've finally figured out my relationship with my phone and with photos and with documenting life and it comes down to this the phone is a tool not a companion and the photos are memories not performances and the journal is for me not for followers and that simple framework changed everything and it started with dropping a phone on a kitchen tile
+    expected_memory_stores:
+      - "phone is tool not companion"
+      - "photos are memories not performances"
+      - "journal for self not followers"
+      - "started with cracked phone"
+      - "framework for digital life"
+    expected_adaptation:
+      emotion_detected: "wise"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya's photo rule for events?"
+    expected_contains: ["three photos"]
+  - question: "What are the three types of event photos?"
+    expected_contains: ["food", "candid", "table"]
+  - question: "What small-moment photos does Maya take?"
+    expected_contains: ["Kobe's paw", "kitchen light", "Julian's hands"]
+  - question: "What did Julian say about Maya's small-moment photos?"
+    expected_contains: ["chose to notice", "how you see the world"]
+  - question: "How many photo journal entries does Maya have?"
+    expected_contains: ["seven"]
+  - question: "What is Maya's phone philosophy?"
+    expected_contains: ["tool not companion"]
+  - question: "What does Maya say photos should be?"
+    expected_contains: ["memories not performances"]
+  - question: "What started Maya's digital transformation?"
+    expected_contains: ["cracked phone", "dropped", "kitchen tile"]
+  - question: "What's in the Wei folder now?"
+    expected_contains: ["cherry tree", "watch", "archive"]
+  - question: "What photo did Maya choose for the Clara journal entry?"
+    expected_contains: ["laughing", "eyes closed"]

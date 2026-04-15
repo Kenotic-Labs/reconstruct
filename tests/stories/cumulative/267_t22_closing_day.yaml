@@ -1,0 +1,181 @@
+story_id: 267
+story_name: "Closing Day"
+category: "Housing"
+description: |
+  Tests memory of Maya and Julian closing on the Woodstock house. Captures the signing
+  process, the emotional weight of becoming homeowners, and the first moments in the house.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 8:00 AM"
+    user_input: |
+      today is closing day CLOSING DAY we're going to the title company at 10 and I've barely slept and Julian's ironing a shirt for some reason like the house cares what you're wearing and I'm re-reading the closing disclosure for the tenth time making sure the numbers are right
+    expected_memory_stores:
+      - "closing day"
+      - "title company at 10"
+      - "barely slept"
+      - "Julian ironing"
+      - "closing disclosure review"
+    expected_adaptation:
+      emotion_detected: "nervous excitement"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 10:30 AM"
+    user_input: |
+      at the title company now signing approximately one million documents Sarah is here and Tamara from Guild called in to walk us through the final numbers the total we're bringing to close is $47,200 which includes the down payment and closing costs minus the seller credit for the foundation
+    expected_memory_stores:
+      - "at title company"
+      - "signing documents"
+      - "Sarah present"
+      - "Tamara on phone"
+      - "bringing $47,200"
+      - "includes down payment and closing costs"
+      - "minus seller credit"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 11:00 AM"
+    user_input: |
+      my hand is cramping from signing I'm not joking there's like a hundred pages and Julian keeps making jokes to the notary and she's laughing and I'm like can we please focus and he's like babe we're buying a house let me enjoy this
+    expected_memory_stores:
+      - "hand cramping"
+      - "hundred pages"
+      - "Julian joking with notary"
+      - "Maya focused"
+    expected_adaptation:
+      emotion_detected: "impatient"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 11:30 AM"
+    user_input: |
+      IT'S DONE we signed everything the wire transfer went through and the title company rep handed us the keys and I'm holding keys to OUR HOUSE and Julian and I are just standing in the parking lot hugging and I think we're both crying a little
+    expected_memory_stores:
+      - "closing complete"
+      - "wire transfer done"
+      - "received keys"
+      - "hugging in parking lot"
+      - "both crying"
+      - "homeowners"
+    expected_adaptation:
+      emotion_detected: "overwhelmed with joy"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 12:30 PM"
+    user_input: |
+      drove straight to the house and opened the front door with OUR KEY and the house is empty and echoing and it smells like old wood and dust and Julian walked to the middle of the living room and just stood there looking up at the ceiling and said we did it
+    expected_memory_stores:
+      - "first time entering as owners"
+      - "empty house"
+      - "old wood smell"
+      - "Julian in living room"
+      - "we did it"
+    expected_adaptation:
+      emotion_detected: "awe"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 1:00 PM"
+    user_input: |
+      walked through every room and it's so different when it's yours like the ugly kitchen is OUR ugly kitchen and the cracked bathroom tile is OUR cracked tile and we get to fix all of it and make it exactly what we want and Julian's already talking about paint colors
+    expected_memory_stores:
+      - "walked every room"
+      - "ownership feeling"
+      - "ugly kitchen ours"
+      - "cracked tile ours"
+      - "Julian planning paint"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 2:00 PM"
+    user_input: |
+      brought Kobe over to see the house and he went NUTS running around the yard and sniffing every corner and he found the shed and was barking at it and Julian was like buddy there's nothing in there and Kobe was like I disagree and it was the cutest thing
+    expected_memory_stores:
+      - "Kobe first visit"
+      - "running in yard"
+      - "sniffing everywhere"
+      - "barking at shed"
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 5:00 PM"
+    user_input: |
+      Sarah stopped by with a bottle of wine and a card that said welcome home and she was like I'm so happy for you guys this house is going to be amazing and honestly she was the best realtor we could have asked for Nadia was right
+    expected_memory_stores:
+      - "Sarah gift"
+      - "wine and card"
+      - "welcome home"
+      - "great realtor"
+      - "Nadia was right"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 7:00 PM"
+    user_input: |
+      sitting on the floor of our empty living room eating pizza from Dove Vivi which Julian picked up and Kobe is sprawled out on the hardwood and Julian's playing music from his phone and this is technically the worst the house will ever look and it's still perfect
+    expected_memory_stores:
+      - "pizza on floor"
+      - "Dove Vivi"
+      - "Kobe on hardwood"
+      - "music playing"
+      - "perfect moment"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 10:00 PM"
+    user_input: |
+      back at the apartment for the last couple weeks before we move and it feels weird being here now like this isn't really home anymore the Woodstock house is home. Julian's already making a renovation priority list and number one is obviously the kitchen. what address is the new house again I should memorize it
+    expected_memory_stores:
+      - "apartment not home"
+      - "Woodstock is home"
+      - "renovation priority list"
+      - "kitchen first"
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "transitioning"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How much did Maya and Julian bring to closing?"
+    expected_contains: ["47,200", "47200"]
+  - question: "What was the final purchase price?"
+    expected_contains: ["445"]
+  - question: "Who gave them a housewarming gift?"
+    expected_contains: ["Sarah"]
+  - question: "Where did they eat their first meal in the house?"
+    expected_contains: ["floor", "Dove Vivi"]
+  - question: "How did Kobe react to the new house?"
+    expected_contains: ["running", "yard", "barking", "shed"]
+  - question: "What is the first renovation priority?"
+    expected_contains: ["kitchen"]
+  - question: "What neighborhood is the house in?"
+    expected_contains: ["Woodstock"]
+  - question: "What mortgage company did they use?"
+    expected_contains: ["Guild"]
+  - question: "Who was their realtor?"
+    expected_contains: ["Sarah Kimball"]
+  - question: "How did Maya feel about the apartment after closing?"
+    expected_contains: ["not home", "weird"]

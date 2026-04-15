@@ -1,0 +1,174 @@
+story_id: 322
+story_name: "Bass Resumes Louder"
+category: "Home Life"
+description: |
+  Tests memory of Greg resuming the bass playing after a 3-day break, louder
+  than before. Maya's frustration escalates. Verifies system tracks broken
+  promises and escalating conflict.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 11:20 PM"
+    user_input: |
+      HE'S PLAYING AGAIN and it's 11:20 at night and it's LOUDER than before like did he get a new amp or something and it stopped for three days THREE DAYS and now it's back and I am so mad right now
+    expected_memory_stores:
+      - "bass resumed"
+      - "11:20 PM"
+      - "louder than before"
+      - "stopped for three days"
+      - "new amp possible"
+      - "very angry"
+    expected_adaptation:
+      emotion_detected: "furious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 11:45 PM"
+    user_input: |
+      Julian went over and knocked and Greg didn't even answer the door like the bass was so loud he probably couldn't hear the knocking and Kobe is losing it and I have a 9am meeting tomorrow with the Conduit AI product team
+    expected_memory_stores:
+      - "Julian knocked"
+      - "Greg didn't answer"
+      - "too loud to hear"
+      - "Kobe upset"
+      - "9am meeting Conduit AI"
+    expected_adaptation:
+      emotion_detected: "furious"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 6:30 AM"
+    user_input: |
+      slept maybe four hours and I look terrible and I am NOT in the mood and Julian said maybe we should go talk to him again during the day when he's not playing and I said I already talked to him once and he clearly didn't care enough to follow through
+    expected_memory_stores:
+      - "four hours sleep"
+      - "Julian wants to try again"
+      - "Maya says already tried"
+      - "Greg didn't follow through"
+    expected_adaptation:
+      emotion_detected: "exhausted"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      told Nadia about the bass situation at lunch and she was like file a noise complaint and I was like isn't that aggressive and she said no that's what they're for and in Portland you can file one through the non-emergency line and I was like hmm ok let me think about it
+    expected_memory_stores:
+      - "Nadia advice"
+      - "noise complaint"
+      - "non-emergency line"
+      - "Portland process"
+      - "Maya considering"
+    expected_adaptation:
+      emotion_detected: "conflicted"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      came home and there was a UPS package on Greg's porch that said like guitar center on it so he definitely bought new equipment which means he's not planning to stop he's doubling down and Julian saw it too and was like ok yeah this might need to escalate
+    expected_memory_stores:
+      - "Guitar Center package"
+      - "new equipment"
+      - "Greg doubling down"
+      - "Julian agrees escalate"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 11:00 PM"
+    user_input: |
+      it's 11 and I can hear him tuning up and I just texted Julian who's in bed already and I said that's it I'm filing the complaint tomorrow and he said do it and honestly I just want to sleep in my own house without my walls vibrating
+    expected_memory_stores:
+      - "tuning up at 11"
+      - "decided to file complaint"
+      - "Julian agrees"
+      - "walls vibrating"
+    expected_adaptation:
+      emotion_detected: "resolved"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 9:00 AM"
+    user_input: |
+      filed the noise complaint online through Portland's non-emergency system and I felt kind of bad doing it because Greg seemed nice when we met but also I asked nicely and he stopped for three days and then came back louder so what am I supposed to do
+    expected_memory_stores:
+      - "noise complaint filed"
+      - "online Portland system"
+      - "felt bad"
+      - "asked nicely first"
+      - "came back louder"
+    expected_adaptation:
+      emotion_detected: "guilty"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      how many days did Greg stop playing bass after Maya first asked him
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 4:00 PM"
+    user_input: |
+      Clara said I did the right thing filing the complaint and she said Tyler dealt with something similar at their old place and the complaint actually worked because the city sends a warning letter first and that usually scares people into complying
+    expected_memory_stores:
+      - "Clara supports complaint"
+      - "Tyler similar experience"
+      - "warning letter first"
+      - "usually works"
+    expected_adaptation:
+      emotion_detected: "reassured"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 9:00 PM"
+    user_input: |
+      Greg's playing again right now at 9 which is technically before 10 but it's still annoying and Julian said well at least it'll stop when the warning letter comes and I said yeah IF it stops and I'm starting to really resent this guy
+    expected_memory_stores:
+      - "playing at 9pm"
+      - "technically before 10"
+      - "still annoying"
+      - "waiting for warning letter"
+      - "growing resentment"
+    expected_adaptation:
+      emotion_detected: "resentful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How long did Greg stop playing bass after Maya's first request?"
+    expected_contains: ["three days"]
+  - question: "What did Greg buy from Guitar Center?"
+    expected_contains: ["new equipment", "amp"]
+  - question: "Did Maya file a noise complaint?"
+    expected_contains: ["yes", "filed"]
+  - question: "How did Maya file the complaint?"
+    expected_contains: ["online", "non-emergency"]
+  - question: "What happens after a noise complaint in Portland?"
+    expected_contains: ["warning letter"]
+  - question: "Who advised Maya to file a complaint?"
+    expected_contains: ["Nadia"]
+  - question: "How did Julian react to the bass resuming?"
+    expected_contains: ["escalate", "agrees"]
+  - question: "Is the bass louder than before?"
+    expected_contains: ["yes", "louder"]
+  - question: "What time was Greg playing when it resumed?"
+    expected_contains: ["11:20", "11"]
+  - question: "How does Maya feel about filing the complaint?"
+    expected_contains: ["guilty", "bad", "right thing"]

@@ -1,0 +1,172 @@
+story_id: 435
+story_name: "Settlement Day"
+category: "Lease Dispute"
+description: |
+  Settlement agreement signed the day before the hearing. Maya officially
+  resolves the dispute. Relief and reflection on the process.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 9:00 AM"
+    user_input: |
+      settlement agreement arrived this morning by email from Rachel Kim and I read through every word because I don't trust landlords and everything looks correct 1600 dollars to be paid within 10 business days in exchange for dismissal of the small claims case and both parties release all claims
+    expected_memory_stores:
+      - "settlement agreement received"
+      - "Rachel Kim emailed"
+      - "$1600 confirmed"
+      - "10 business days"
+      - "dismiss case"
+      - "release all claims"
+    expected_adaptation:
+      emotion_detected: "careful"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 10:00 AM"
+    user_input: |
+      had Julian read it too and he said it looks standard and clean and we both signed the digital copy and I sent it back and saved a copy to my files and backed it up on Google Drive because I'm paranoid now and honestly you should be paranoid when dealing with someone like Greg Patterson
+    expected_memory_stores:
+      - "Julian reviewed"
+      - "both signed"
+      - "saved copies"
+      - "backed up Google Drive"
+      - "paranoid about Patterson"
+    expected_adaptation:
+      emotion_detected: "cautious"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 11:00 AM"
+    user_input: |
+      called the Multnomah County courthouse to ask about dismissing the case and they said I can file a voluntary dismissal once the check clears and it's a simple form and no fees so I'll wait until the money is actually in my account before I dismiss anything because trust but verify
+    expected_memory_stores:
+      - "voluntary dismissal process"
+      - "simple form no fees"
+      - "wait for check to clear first"
+      - "trust but verify"
+    expected_adaptation:
+      emotion_detected: "prudent"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      texted Clara that I don't need her at the hearing tomorrow since we settled and she was like aww I was gonna wear my power blazer and I said save it for my wedding rehearsal and she laughed and said she's glad it's resolved and honestly so am I
+    expected_memory_stores:
+      - "told Clara no hearing"
+      - "Clara's power blazer"
+      - "wedding rehearsal joke"
+      - "glad it's resolved"
+    expected_adaptation:
+      emotion_detected: "lighthearted"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 2:00 PM"
+    user_input: |
+      told Sam I don't need to leave early tomorrow anymore and he was like good news and I said yeah settled the landlord thing and he said you know Maya you handle things really well under pressure and I said thanks Sam that means a lot and it actually did because Sam doesn't give compliments often
+    expected_memory_stores:
+      - "told Sam no early leave needed"
+      - "Sam compliment"
+      - "handles pressure well"
+      - "Sam rarely compliments"
+    expected_adaptation:
+      emotion_detected: "appreciated"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      the hearing would have been tomorrow at 2pm and honestly I'm relieved I don't have to go even though part of me wanted the judge to like officially tell Greg Patterson he was wrong but getting 1600 back without the stress of court is the better outcome for my mental health
+    expected_memory_stores:
+      - "hearing was tomorrow 2pm"
+      - "relieved to avoid court"
+      - "wanted official ruling"
+      - "mental health better outcome"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      Julian and I talked about where to put the 1600 when it comes and we agreed to put it directly toward the remaining closing costs on the house which we still owe about 2200 on so this basically covers most of it which is perfect because that was hanging over us
+    expected_memory_stores:
+      - "$1600 toward closing costs"
+      - "remaining closing costs $2200"
+      - "covers most of it"
+      - "was hanging over them"
+    expected_adaptation:
+      emotion_detected: "practical"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      what are we going to use the settlement money for
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 9:00 PM"
+    user_input: |
+      mom called to check on the landlord situation and I told her we settled and she was like oh thank god I've been worried about you going to court alone and I was like mom I had Julian and Clara coming and she said still I'm your mother I worry and honestly her worrying is kind of comforting even when it's unnecessary
+    expected_memory_stores:
+      - "Vivian relieved about settlement"
+      - "worried about court"
+      - "Maya had support"
+      - "mom worrying is comforting"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 10:00 PM"
+    user_input: |
+      one thing this whole experience taught me is to always document everything when you're renting like take photos of every scratch and stain on move-in day and keep copies of everything signed because without those move-in photos I would have been out 1800 dollars and I'm going to tell everyone I know this
+    expected_memory_stores:
+      - "lesson learned"
+      - "document everything"
+      - "take photos move-in"
+      - "keep signed copies"
+      - "photos saved her $1600"
+      - "will tell everyone"
+    expected_adaptation:
+      emotion_detected: "wise"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Was the settlement agreement signed before the hearing?"
+    expected_contains: ["yes", "day before"]
+  - question: "How much are the remaining house closing costs?"
+    expected_contains: ["2200"]
+  - question: "What will Maya do with the settlement money?"
+    expected_contains: ["closing costs", "house"]
+  - question: "Has Maya dismissed the small claims case yet?"
+    expected_contains: ["no", "waiting", "check to clear"]
+  - question: "When was the hearing originally scheduled?"
+    expected_contains: ["Thursday", "2pm"]
+  - question: "What lesson did Maya learn from the experience?"
+    expected_contains: ["document everything", "photos", "move-in"]
+  - question: "Who reviewed the settlement agreement with Maya?"
+    expected_contains: ["Julian"]
+  - question: "What compliment did Sam give Maya?"
+    expected_contains: ["handles", "pressure well"]
+  - question: "Was Vivian worried about the court hearing?"
+    expected_contains: ["yes", "worried"]
+  - question: "Where did Maya back up the settlement agreement?"
+    expected_contains: ["Google Drive"]

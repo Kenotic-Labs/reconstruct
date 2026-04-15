@@ -1,0 +1,68 @@
+# Environment
+.env
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+eggs/
+.eggs/
+
+# Data and models (large files)
+data/
+models/
+*.bin
+*.pt
+*.pth
+*.onnx
+*.gguf
+unsloth_compiled_cache/
+
+# Memory storage (user data)
+Memory Storage/
+
+# Temporary files
+tmp/
+*.tmp
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Installer builds
+installer/build/
+installer/dist/
+*.exe
+*.msi
+
+# Claude Code session artifacts
+.claude/
+
+# Large training data / model artifacts (keep scripts, skip data)
+raya-srl-training/data/
+raya-srl-training/models/
+raya-srl-training/checkpoints/
+raya-srl-training/outputs/
+raya-srl-training/logs/
+raya-srl-training/wandb/
+raya-srl-training/hf_cache/
+
+# HF release artifacts
+tools/hf_release/

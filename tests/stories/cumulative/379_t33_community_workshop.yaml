@@ -1,0 +1,173 @@
+story_id: 379
+story_name: "Teaching Community First Aid Workshop"
+category: "Personal Development"
+description: |
+  Tests memory of Maya helping teach Raj's community first aid workshop.
+  Verifies system tracks teaching experience and community involvement.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 7:00 PM"
+    user_input: |
+      the community workshop Raj organized is tomorrow at his outdoor center in Hillsboro and I've been prepping my section which is basic wound care and I made these little handouts with diagrams that Clara helped me design
+    expected_memory_stores:
+      - "workshop tomorrow"
+      - "Raj outdoor center"
+      - "Hillsboro"
+      - "Maya teaches wound care"
+      - "handouts with diagrams"
+      - "Clara helped design"
+    expected_adaptation:
+      emotion_detected: "prepared"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 9:00 PM"
+    user_input: |
+      practiced my presentation in front of Julian and he gave me the same feedback as last time when I did the work presentation that I talk too fast and I need to pause between points and I was like okay apparently this is just a me thing
+    expected_memory_stores:
+      - "practiced presentation"
+      - "Julian feedback"
+      - "talks too fast again"
+      - "needs to pause"
+      - "recurring pattern"
+    expected_adaptation:
+      emotion_detected: "self-aware"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 9:00 AM"
+    user_input: |
+      workshop started and there's like 25 people and most of them are hikers and outdoor types which makes sense given Raj's center and some of them have zero first aid knowledge like they didn't even know what an AED is
+    expected_memory_stores:
+      - "25 attendees"
+      - "hikers outdoor types"
+      - "Raj's center"
+      - "zero knowledge baseline"
+      - "didn't know AED"
+    expected_adaptation:
+      emotion_detected: "focused"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 11:00 AM"
+    user_input: |
+      my wound care section went really well and people were asking good questions and one woman asked about wound care for dogs and I was like actually I don't know that but I should find out given Kobe's history and everyone laughed
+    expected_memory_stores:
+      - "wound care section success"
+      - "good questions"
+      - "dog wound question"
+      - "Kobe mention"
+      - "doesn't know dog first aid"
+    expected_adaptation:
+      emotion_detected: "engaging"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 1:00 PM"
+    user_input: |
+      Raj did the outdoor-specific section about things like snake bites and hypothermia and altitude sickness and he's such a natural teacher like he tells these stories from his hiking trips that make everything memorable
+    expected_memory_stores:
+      - "Raj outdoor section"
+      - "snake bites hypothermia altitude"
+      - "natural teacher"
+      - "hiking stories"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 3:00 PM"
+    user_input: |
+      we did a hands-on CPR practice section and I was the one walking around checking people's technique and correcting their hand placement and compression depth and I felt like Frank for a minute and it was surreal
+    expected_memory_stores:
+      - "CPR practice section"
+      - "Maya checking technique"
+      - "correcting form"
+      - "felt like Frank"
+    expected_adaptation:
+      emotion_detected: "empowered"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 4:00 PM"
+    user_input: |
+      at the end a bunch of people came up and thanked us and one guy said this was more useful than any class he took in school and a woman said she finally feels like she could help in an emergency and that hit me so hard
+    expected_memory_stores:
+      - "thank yous"
+      - "more useful than school"
+      - "feel prepared now"
+      - "emotional impact on Maya"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 5:00 PM"
+    user_input: |
+      where was the community first aid workshop held
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 7:00 PM"
+    user_input: |
+      Raj and I went for coffee after and he said we should do this quarterly and maybe expand to other topics like water safety and outdoor survival and I'm like yes absolutely count me in and he said he'd talk to his center about making it official
+    expected_memory_stores:
+      - "coffee with Raj"
+      - "quarterly workshops"
+      - "water safety"
+      - "outdoor survival"
+      - "making it official"
+    expected_adaptation:
+      emotion_detected: "enthusiastic"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 10:00 AM"
+    user_input: |
+      told Clara about the workshop and she was like Maya you're literally becoming a community health advocate and I was like I dunno about that but she said that's exactly what she sees and she's never been more proud of her little sister
+    expected_memory_stores:
+      - "Clara community health advocate"
+      - "Maya downplays"
+      - "Clara proud of sister"
+      - "identity affirmation"
+    expected_adaptation:
+      emotion_detected: "humbled"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where was Raj's community workshop held?"
+    expected_contains: ["Hillsboro", "outdoor center"]
+  - question: "What did Maya teach at the workshop?"
+    expected_contains: ["wound care"]
+  - question: "How many people attended the workshop?"
+    expected_contains: ["25"]
+  - question: "Who helped Maya design her handouts?"
+    expected_contains: ["Clara"]
+  - question: "What outdoor topics did Raj teach?"
+    expected_contains: ["snake bites", "hypothermia", "altitude"]
+  - question: "How often do Maya and Raj plan to hold workshops?"
+    expected_contains: ["quarterly"]
+  - question: "What recurring feedback does Maya get about presenting?"
+    expected_contains: ["talks too fast"]
+  - question: "What did Clara call Maya?"
+    expected_contains: ["community health advocate"]
+  - question: "What future topics are planned?"
+    expected_contains: ["water safety", "outdoor survival"]
+  - question: "What did attendees say about the workshop?"
+    expected_contains: ["useful", "prepared", "help in emergency"]

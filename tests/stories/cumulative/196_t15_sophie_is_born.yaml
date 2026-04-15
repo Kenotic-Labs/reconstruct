@@ -1,0 +1,191 @@
+story_id: 196
+story_name: "Sophie Is Born"
+category: "Life Events"
+description: |
+  Baby Sophie born via C-section at 36 weeks. 5 lbs 8 oz (ultrasound
+  estimated wrong). Healthy despite being early. Tests birth event
+  tracking, weight correction, and emotional peak.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 6:00 AM"
+    user_input: |
+      today is the day March 25th Sophie is coming I'm already at UC Davis Medical Center I flew in last night and David's parents are here and Mom and Dad are here and Clara is being prepped for the C-section she looks calm but her hands are shaking and she said Maya I'm about to be a mom and I said yes you are
+    expected_memory_stores:
+      - "March 25 delivery day"
+      - "UC Davis Medical Center"
+      - "C-section prep"
+      - "Maya flew in"
+      - "David's parents there"
+      - "George and Vivian there"
+      - "Clara calm but shaking"
+    expected_adaptation:
+      emotion_detected: "nervous excitement"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 7:00 AM"
+    user_input: |
+      Clara went into the OR David is with her in scrubs and the rest of us are in the waiting room and I'm sitting next to Mom who's praying quietly and Dad is pacing and David's mom Rose is knitting because apparently she knits when she's nervous and I'm just staring at the clock like every second is a year
+    expected_memory_stores:
+      - "Clara in OR"
+      - "David in scrubs with her"
+      - "waiting room"
+      - "Vivian praying"
+      - "George pacing"
+      - "Rose knitting"
+      - "Maya watching clock"
+    expected_adaptation:
+      emotion_detected: "tense anticipation"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 7:45 AM"
+    user_input: |
+      DAVID JUST CAME OUT and he's CRYING and he said SHE'S HERE SOPHIE IS HERE and we all jumped up and he said she's healthy she's crying she's beautiful and I lost it completely Mom was screaming Dad was crying Rose dropped her knitting and everyone was just hugging and crying in this hospital waiting room
+    expected_memory_stores:
+      - "Sophie born"
+      - "David crying"
+      - "Sophie healthy and crying"
+      - "everyone emotional"
+      - "Vivian screaming"
+      - "George crying"
+    expected_adaptation:
+      emotion_detected: "overwhelmed joy"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 8:00 AM"
+    user_input: |
+      David said Sophie weighs 5 pounds 8 ounces which is actually more than the ultrasound estimated the last ultrasound said she might be like 4 and a half pounds but she's 5 eight so the ultrasound was off by almost a pound which Clara will probably have opinions about as a nurse lol and she's 18 inches long
+    expected_memory_stores:
+      - "Sophie 5 pounds 8 ounces"
+      - "ultrasound estimate was wrong"
+      - "estimated 4.5 pounds actual 5.8"
+      - "correction: weight heavier than estimated"
+      - "18 inches long"
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 9:00 AM"
+    user_input: |
+      they let us see Clara and Sophie and oh my god she is the most perfect little human I have ever seen she has dark hair like Clara and these tiny fingers and she was wrapped in a pink blanket and Clara was holding her and just staring at her with this look I've never seen on my sister's face before pure absolute love
+    expected_memory_stores:
+      - "first time seeing Sophie"
+      - "dark hair like Clara"
+      - "tiny fingers"
+      - "pink blanket"
+      - "Clara holding Sophie"
+      - "pure love"
+    expected_adaptation:
+      emotion_detected: "awestruck"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 10:00 AM"
+    user_input: |
+      I held her I held my niece and she's so light like a warm little bundle and she opened her eyes for a second and looked right at me well maybe not at me but in my direction and I whispered hi Sophie I'm your Auntie Maya and Julian is going to teach you to draw and I started crying again because apparently that's all I do now
+    expected_memory_stores:
+      - "Maya held Sophie"
+      - "light warm bundle"
+      - "Sophie opened eyes"
+      - "Auntie Maya introduction"
+      - "mentioned Julian"
+      - "Maya crying"
+    expected_adaptation:
+      emotion_detected: "profound love"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 11:00 AM"
+    user_input: |
+      Dad held Sophie and his big mechanic woodworker hands just completely engulfed this tiny baby and he said she's perfect and Mom said of course she is she's a Chen and then David said she's also a Martinez and Rose said hear hear and there was this beautiful moment of both families claiming this baby as their own
+    expected_memory_stores:
+      - "George held Sophie"
+      - "big hands tiny baby"
+      - "George said perfect"
+      - "Vivian said she's a Chen"
+      - "David said also Martinez"
+      - "Rose agreed"
+      - "both families claiming baby"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 2:00 PM"
+    user_input: |
+      Sophie is in the NICU for monitoring just as a precaution because she's 36 weeks not full term but the neonatal team said she's breathing on her own good muscle tone strong cry and they expect she'll be out of the NICU within 24 to 48 hours and Clara and David can hear her crying from their room which Clara said is the best sound she's ever heard
+    expected_memory_stores:
+      - "Sophie in NICU precautionary"
+      - "36 weeks not full term"
+      - "breathing on own"
+      - "good muscle tone"
+      - "strong cry"
+      - "expected out in 24-48 hours"
+    expected_adaptation:
+      emotion_detected: "cautiously positive"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 5:00 PM"
+    user_input: |
+      FaceTimed Julian and held the phone up to the NICU window and he saw Sophie and he got so quiet and then he said Maya she's beautiful and I could see tears on his face and then Kobe barked and Julian said Kobe says hi Sophie and I swear the nurse laughed because she heard it through the phone
+    expected_memory_stores:
+      - "Julian FaceTimed"
+      - "saw Sophie through NICU window"
+      - "Julian cried"
+      - "Kobe barked hello"
+      - "nurse laughed"
+    expected_adaptation:
+      emotion_detected: "tender joy"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 9:00 PM"
+    user_input: |
+      sitting in the hospital waiting area everyone else went to get food and I'm just sitting here looking at the photo I took of Sophie and I keep zooming in on her face and she looks like Clara who looks like Mom and I'm thinking about how life just keeps going you know one generation to the next and now there's a new person in our family and she has no idea how much she's already changed all of us
+    expected_memory_stores:
+      - "Maya alone with thoughts"
+      - "Sophie looks like Clara and Vivian"
+      - "generational connection"
+      - "new person in family"
+      - "Sophie changed everyone"
+    expected_adaptation:
+      emotion_detected: "profound"
+      warmth_direction: increase
+
+final_verification:
+  - question: "When was Sophie born?"
+    expected_contains: ["March 25"]
+  - question: "How much does Sophie weigh?"
+    expected_contains: ["5 pounds 8 ounces"]
+  - question: "Was the ultrasound weight estimate accurate?"
+    expected_contains: ["no", "off", "more"]
+  - question: "How was Sophie delivered?"
+    expected_contains: ["C-section"]
+  - question: "Is Sophie in the NICU?"
+    expected_contains: ["yes", "precaution"]
+  - question: "How long will Sophie be in the NICU?"
+    expected_contains: ["24", "48 hours"]
+  - question: "How long is Sophie?"
+    expected_contains: ["18 inches"]
+  - question: "Who was in the waiting room during the delivery?"
+    expected_contains: ["Maya", "Vivian", "George", "Rose"]
+  - question: "What does Sophie look like?"
+    expected_contains: ["dark hair", "Clara"]
+  - question: "Did Julian see Sophie?"
+    expected_contains: ["yes", "FaceTime"]

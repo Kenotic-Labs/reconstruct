@@ -1,0 +1,176 @@
+story_id: 307
+story_name: "Wine and Truth"
+category: "Friendships"
+description: |
+  Tests memory of the deep reconnection night where Jenny reveals she's been
+  depressed and started taking Zoloft. Heavy emotional content. Verifies
+  system captures sensitive health disclosures and relationship turning points.
+duration_simulated: "1 evening"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:30 PM"
+    user_input: |
+      Julian went to bed early and Jenny and I opened a second bottle of wine that pinot noir from Willamette Valley and we're just sitting on the living room floor like we used to in college and Kobe's asleep between us
+    expected_memory_stores:
+      - "second bottle of wine"
+      - "pinot noir Willamette Valley"
+      - "living room floor"
+      - "like college"
+      - "Kobe asleep"
+    expected_adaptation:
+      emotion_detected: "intimate"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:00 PM"
+    user_input: |
+      Jenny got quiet and she was like Maya I need to tell you something and I was like ok and she said the reason she's been so distant isn't because she doesn't care about me it's because she's been having a really hard time
+    expected_memory_stores:
+      - "Jenny quiet"
+      - "need to tell something"
+      - "distance not about Maya"
+      - "having hard time"
+    expected_adaptation:
+      emotion_detected: "concerned"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 10:15 PM"
+    user_input: |
+      she said she's been um she's been depressed like actually clinically and she went to a doctor in Austin about two months ago and they diagnosed her with depression and put her on Zoloft 50mg and she didn't tell anyone
+    expected_memory_stores:
+      - "Jenny depressed"
+      - "clinical diagnosis"
+      - "doctor in Austin"
+      - "two months ago"
+      - "Zoloft 50mg"
+      - "told no one"
+    expected_adaptation:
+      emotion_detected: "shocked"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 10:30 PM"
+    user_input: |
+      she said moving to Austin was harder than she expected and she felt really alone and the new friends are nice but surface level and she missed me and Portland but she didn't know how to say it without sounding like she made a mistake
+    expected_memory_stores:
+      - "Austin harder than expected"
+      - "felt alone"
+      - "new friends surface level"
+      - "missed Maya and Portland"
+      - "afraid to admit mistake"
+    expected_adaptation:
+      emotion_detected: "empathetic"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 10:45 PM"
+    user_input: |
+      I feel so bad now like I was sitting here being mad about a birthday text while she was literally going through it and I told her that and she was like no Maya you had every right to be upset I was being a bad friend and I was like no you were surviving
+    expected_memory_stores:
+      - "Maya feels guilty"
+      - "birthday resentment in context"
+      - "Jenny said Maya had right"
+      - "Maya said surviving"
+    expected_adaptation:
+      emotion_detected: "guilty"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 11:00 PM"
+    user_input: |
+      she said the Zoloft is helping though like the first few weeks were rough with nausea and stuff but now she feels more stable and she's seeing a therapist too a woman named Dr Okafor and she goes every other week
+    expected_memory_stores:
+      - "Zoloft helping"
+      - "initial nausea"
+      - "more stable now"
+      - "therapist Dr Okafor"
+      - "every other week"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 11:15 PM"
+    user_input: |
+      I asked if Kim knows and she said yeah Kim knows and her mom knows but she didn't tell anyone else because she didn't want people to worry and I was like Jenny I'm your best friend you can tell me anything and she cried
+    expected_memory_stores:
+      - "Kim knows"
+      - "Jenny's mom knows"
+      - "didn't tell others"
+      - "didn't want worry"
+      - "Jenny cried"
+    expected_adaptation:
+      emotion_detected: "protective"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 11:30 PM"
+    user_input: |
+      we hugged for like five minutes and I told her she never has to go through anything alone and that I don't care if she's in Austin or the moon I'm her person and she laughed through tears and said you're definitely my person not Ashley
+    expected_memory_stores:
+      - "long hug"
+      - "never alone"
+      - "her person"
+      - "not Ashley"
+      - "laughed through tears"
+    expected_adaptation:
+      emotion_detected: "loving"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 11:45 PM"
+    user_input: |
+      wait what medication is Jenny taking and what dose
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 12:00 AM"
+    user_input: |
+      we stayed up talking until midnight and she fell asleep on the couch with Kobe and I put a blanket on her and I just sat there thinking about how you never really know what someone's going through even your best friend and I'm glad she told me
+    expected_memory_stores:
+      - "talked until midnight"
+      - "Jenny fell asleep on couch"
+      - "blanket on Jenny"
+      - "reflection on not knowing"
+      - "glad she told"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did Jenny reveal to Maya?"
+    expected_contains: ["depressed", "depression", "Zoloft"]
+  - question: "What medication is Jenny on and what dose?"
+    expected_contains: ["Zoloft", "50mg"]
+  - question: "Who is Jenny's therapist?"
+    expected_contains: ["Dr Okafor"]
+  - question: "How often does Jenny see her therapist?"
+    expected_contains: ["every other week"]
+  - question: "Why was Jenny being distant?"
+    expected_contains: ["depressed", "hard time", "alone"]
+  - question: "Who else knows about Jenny's depression?"
+    expected_contains: ["Kim", "mom"]
+  - question: "How does Maya feel about being mad about the birthday now?"
+    expected_contains: ["guilty", "bad"]
+  - question: "What did Jenny say about Ashley?"
+    expected_contains: ["not Ashley", "you're my person"]
+  - question: "What wine were Maya and Jenny drinking?"
+    expected_contains: ["pinot noir", "Willamette Valley"]
+  - question: "How are the Zoloft side effects?"
+    expected_contains: ["nausea", "first weeks", "stable now"]

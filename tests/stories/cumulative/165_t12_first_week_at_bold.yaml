@@ -1,0 +1,189 @@
+story_id: 165
+story_name: "First Week at Bold Studio"
+category: "Career"
+description: |
+  Julian starts at Bold Studio. New coworkers, learning the culture,
+  bringing Kobe to work. Tests tracking new entity introductions through
+  Maya's secondhand reporting.
+duration_simulated: "5 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 AM"
+    user_input: |
+      Julian's first day at Bold Studio today and he's up at like 6am which never happens for this man honestly freelance Julian would sleep until 9 but corporate Julian is apparently an early riser he's ironing a shirt right now and I'm like babe they're a design studio not a law firm relax
+    expected_memory_stores:
+      - "Julian's first day at Bold Studio"
+      - "woke up early"
+      - "nervous about clothes again"
+    expected_triples:
+      - ["Julian", "started_at", "Bold Studio"]
+      - ["Julian", "has_emotion", "nervous"]
+      - ["user", "has_emotion", "amused"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 6:00 PM"
+    user_input: |
+      Julian came home and he's GLOWING like actual human glow he said everyone was so welcoming and Kevin introduced him to the whole team which is like 12 people total and his two direct reports are named Sam and Alicia and they seem great and they have a espresso machine and he said he had three coffees which tracks
+    expected_memory_stores:
+      - "first day went well"
+      - "12 people at Bold Studio"
+      - "direct reports Sam and Alicia"
+      - "Kevin introduced him"
+      - "espresso machine"
+    expected_triples:
+      - ["Bold Studio", "has_team_size", "12 people"]
+      - ["Julian", "manages", "Sam and Alicia"]
+      - ["Julian", "has_emotion", "glowing"]
+      - ["user", "has_emotion", "happy"]
+    expected_adaptation:
+      emotion_detected: "happy vicariously"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 5:30 PM"
+    user_input: |
+      day two Julian brought Kobe to work and apparently Kobe was the star of the office everyone was petting him and Kevin's dog is there too it's a French bulldog named Brutus and Kobe and Brutus became instant friends which is amazing because Kobe is usually shy with other dogs
+    expected_memory_stores:
+      - "Kobe at Bold Studio"
+      - "Kobe popular at office"
+      - "Kevin's dog Brutus"
+      - "French bulldog"
+      - "Kobe and Brutus friends"
+    expected_triples:
+      - ["Kobe", "went_to", "Bold Studio office"]
+      - ["Kevin Park", "has_dog", "Brutus"]
+      - ["Brutus", "is_breed", "French bulldog"]
+      - ["Kobe", "befriended", "Brutus"]
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      Julian's already working on his first project it's a rebrand for a coffee company called Timber Roasters and he's so into it he came home and immediately started sketching more ideas at his desk and I was like uh sir work life balance and he said this IS balance I'm excited Maya let me be excited
+    expected_memory_stores:
+      - "first project Timber Roasters rebrand"
+      - "coffee company"
+      - "Julian excited about work"
+      - "working after hours willingly"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 8:00 AM"
+    user_input: |
+      Julian said Kevin does this thing where every morning they do a 15 minute standup just like we do at Vantage actually and Kevin asks everyone what they're working on and if they need help and Julian said it's the first time a boss has actually asked how he can help instead of just assigning work
+    expected_memory_stores:
+      - "morning standup at Bold Studio"
+      - "Kevin asks how to help"
+      - "Kevin supportive boss"
+      - "similar to Vantage standup"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 6:00 PM"
+    user_input: |
+      Julian took Sam and Alicia to lunch today to get to know them Sam is like 24 fresh out of design school really eager and Alicia is 27 been there for a year and knows the systems and Julian said they both seem really receptive to learning from him which made him feel good
+    expected_memory_stores:
+      - "Julian lunched with team"
+      - "Sam 24 fresh from design school"
+      - "Alicia 27 been there a year"
+      - "team receptive to Julian"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 12:00 PM"
+    user_input: |
+      end of week one and Julian said he loves it which um wow I don't think I've ever heard him say he loves a job before he's always been like meh about structure and here he is thriving Kevin apparently told him that his Timber Roasters concepts are quote some of the freshest thinking we've had in a while unquote
+    expected_memory_stores:
+      - "first week complete"
+      - "Julian loves it"
+      - "Kevin praised Timber Roasters work"
+      - "freshest thinking"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 5:00 PM"
+    user_input: |
+      Bold Studio does Friday afternoon beers apparently which is so Portland and Julian said Kevin brought craft beers from like four different local breweries and the whole team just hung out and talked about life not work and Julian said it reminded him of why he got into design in the first place to be around creative people
+    expected_memory_stores:
+      - "Friday beers tradition"
+      - "craft beer culture"
+      - "team bonding"
+      - "Julian inspired by creative community"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 9:00 PM"
+    user_input: |
+      Julian said something tonight that made me cry he said Maya I'm sorry I was so resistant to this you were right that I needed a change and it took losing Thornton to realize that freelancing was making me lonely and I didn't even know it and I was like babe don't apologize I'm just glad you're happy
+    expected_memory_stores:
+      - "Julian grateful to Maya"
+      - "acknowledges resistance"
+      - "freelancing was lonely"
+      - "Thornton loss was catalyst"
+      - "Maya emotional"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:00 AM"
+    user_input: |
+      one week in and Julian is a different person honestly he's sleeping better eating better more energetic and he already has ideas for how to grow the brand team at Bold Studio Kevin said he wants to add two more designers next quarter and Julian could help with hiring which is exciting Kobe also now expects car rides every day because he thinks we're going to the office lol
+    expected_memory_stores:
+      - "Julian improved wellbeing"
+      - "sleeping and eating better"
+      - "Bold Studio expanding"
+      - "two more designers next quarter"
+      - "Julian helping with hiring"
+      - "Kobe expects daily office visits"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How is Julian doing at Bold Studio?"
+    expected_contains: ["loves", "thriving", "happy"]
+  - question: "Who are Julian's direct reports?"
+    expected_contains: ["Sam", "Alicia"]
+  - question: "What is Julian's first project at Bold Studio?"
+    expected_contains: ["Timber Roasters", "rebrand"]
+  - question: "Does Kobe go to Bold Studio?"
+    expected_contains: ["yes"]
+  - question: "What dog does Kevin Park have?"
+    expected_contains: ["Brutus", "French bulldog"]
+  - question: "What did Julian say about freelancing being lonely?"
+    expected_contains: ["lonely", "didn't know"]
+  - question: "Does Bold Studio have a Friday tradition?"
+    expected_contains: ["beers", "Friday"]
+  - question: "How many people work at Bold Studio?"
+    expected_contains: ["12"]
+  - question: "What did Kevin say about Julian's work?"
+    expected_contains: ["freshest"]
+  - question: "Is Bold Studio planning to expand?"
+    expected_contains: ["two more designers", "next quarter"]

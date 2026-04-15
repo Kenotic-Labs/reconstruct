@@ -1,0 +1,175 @@
+story_id: 395
+story_name: "Nagging Dad for Weeks"
+category: "Health"
+description: |
+  Tests memory of Maya persistently pushing George to actually follow through on the colonoscopy.
+  Verifies system tracks multi-week advocacy campaign and family dynamics.
+duration_simulated: "3 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 6:00 PM"
+    user_input: |
+      called the gastroenterologist this morning and scheduled dad's colonoscopy for three weeks from now and the doctor's name is Dr Ramirez and the office is at Good Samaritan Medical Center and I texted dad all the details and he left me on read
+    expected_memory_stores:
+      - "scheduled colonoscopy"
+      - "three weeks out"
+      - "Dr. Ramirez"
+      - "Good Samaritan Medical Center"
+      - "George left on read"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      dad called and said he's thinking about canceling because Frank told him his cousin had complications from a colonoscopy and I was like Dad Frank also thought the earth was flat until last year please stop listening to Frank about medical stuff
+    expected_memory_stores:
+      - "George wants to cancel"
+      - "Frank DeLuca complications story"
+      - "Maya pushback"
+      - "Frank earth flat"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 8:00 PM"
+    user_input: |
+      Clara called dad and used medical facts to convince him like she told him the complication rate is less than one percent and that colon cancer is the third most common cancer in men and that it's almost 100 percent curable if caught early and he said okay okay I'll think about it
+    expected_memory_stores:
+      - "Clara medical facts"
+      - "less than 1% complication"
+      - "third most common cancer"
+      - "100% curable early"
+      - "George thinking about it"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Next Monday 7:00 PM"
+    user_input: |
+      texted dad a photo of me and Clara as kids with him and said we want you around for a long time and he called me and his voice was cracking and he said fine I'll do it and I was like finally and then I felt bad for being snarky because he's obviously scared
+    expected_memory_stores:
+      - "childhood photo"
+      - "want him around"
+      - "George voice cracking"
+      - "agreed for real"
+      - "Maya felt bad being snarky"
+      - "George scared"
+    expected_adaptation:
+      emotion_detected: "tender"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Next Wednesday 6:00 PM"
+    user_input: |
+      dad called again and asked what the prep is like because he heard you have to drink this disgusting liquid and I was like yes it's not fun but it's one day and Clara sent him a list of approved foods for the day before and tips to make the prep liquid taste better
+    expected_memory_stores:
+      - "George asking about prep"
+      - "disgusting liquid"
+      - "one day"
+      - "Clara sent food list"
+      - "prep tips"
+    expected_adaptation:
+      emotion_detected: "patient"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Week before 7:00 PM"
+    user_input: |
+      one week until the appointment and dad is being weirdly quiet about it which mom says means he's nervous and she said he keeps watching TV with this faraway look and I told Julian I feel guilty for pushing so hard but Julian said you're possibly saving his life Maya
+    expected_memory_stores:
+      - "one week out"
+      - "George quiet nervous"
+      - "Vivian reported"
+      - "faraway look"
+      - "Maya guilty"
+      - "Julian saving his life"
+    expected_adaptation:
+      emotion_detected: "guilty"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Two days before 8:00 PM"
+    user_input: |
+      dad's doing his prep tomorrow and he called to make sure I'm still driving him and I said yes I took the day off work and he said you didn't have to do that and I said yes I did and he got quiet and said thanks kiddo and I almost lost it
+    expected_memory_stores:
+      - "prep tomorrow"
+      - "Maya took day off"
+      - "driving confirmed"
+      - "thanks kiddo"
+      - "Maya emotional"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Two days before 9:00 PM"
+    user_input: |
+      who is the doctor performing George's colonoscopy and where
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Day before 6:00 PM"
+    user_input: |
+      dad's doing the prep drink right now and he keeps texting me updates like this is the worst thing I've ever tasted and I'm never forgiving you and Clara and I are in a group chat laughing because he's being so dramatic about it
+    expected_memory_stores:
+      - "George doing prep"
+      - "worst thing ever tasted"
+      - "never forgiving"
+      - "dramatic texts"
+      - "Clara and Maya laughing"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Day before 9:00 PM"
+    user_input: |
+      dad's last text was okay fine this wasn't as bad as Frank said it would be and I was like SEE and Clara said I swear to god if Frank gives dad one more piece of medical advice I'm going to lose it
+    expected_memory_stores:
+      - "George admitted not bad"
+      - "Frank was wrong"
+      - "Clara frustrated with Frank"
+    expected_adaptation:
+      emotion_detected: "vindicated"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who is George's gastroenterologist?"
+    expected_contains: ["Dr. Ramirez"]
+  - question: "Where is the colonoscopy being done?"
+    expected_contains: ["Good Samaritan"]
+  - question: "Who kept trying to scare George about the procedure?"
+    expected_contains: ["Frank DeLuca"]
+  - question: "What did Maya do to convince George emotionally?"
+    expected_contains: ["childhood photo", "want him around"]
+  - question: "Did Maya take time off for the appointment?"
+    expected_contains: ["yes", "day off"]
+  - question: "What did George call Maya?"
+    expected_contains: ["kiddo"]
+  - question: "What statistics did Clara cite about colon cancer?"
+    expected_contains: ["third most common", "curable"]
+  - question: "How did George describe the prep drink?"
+    expected_contains: ["worst", "tasted"]
+  - question: "Was the prep as bad as Frank predicted?"
+    expected_contains: ["no", "not as bad"]
+  - question: "How long did Maya push George before the appointment?"
+    expected_contains: ["weeks"]

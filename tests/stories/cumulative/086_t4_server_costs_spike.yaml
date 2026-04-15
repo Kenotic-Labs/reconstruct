@@ -1,0 +1,229 @@
+story_id: 86
+story_name: "Server Costs Spike"
+category: "Learning"
+description: |
+  Tests memory of financial pressure from fridgesearch growth.
+  Costs increase, Maya debates monetization options.
+  Verifies system tracks financial decisions and ethical considerations.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      okay so the server bill came in and it's $127 this month because the database is growing with all the user data and the search index is getting bigger and I know $127 isn't a lot but like it was free before and now it's going to keep growing and Julian and I need to talk about it
+    expected_memory_stores:
+      - "server bill $127"
+      - "database growing"
+      - "search index bigger"
+      - "cost concern"
+      - "need to discuss"
+    expected_triples:
+      - ["fridgesearch", "costs", "$127 this month"]
+      - ["fridgesearch", "has_issue", "database and search index growing"]
+      - ["user", "needs_to_discuss", "costs with Julian"]
+      - ["user", "has_emotion", "concerned"]
+    expected_adaptation:
+      emotion_detected: "concerned"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 9:00 PM"
+    user_input: |
+      Julian and I did the math and at this growth rate the server costs will be about $250 a month by year end and he said look we can afford it but is that what you want spending 3000 a year on a free app and I was like no but also I don't want to charge people for something I built for fun
+    expected_memory_stores:
+      - "$250 by year end"
+      - "$3000 annually"
+      - "can afford it"
+      - "don't want to charge"
+      - "built for fun"
+    expected_triples:
+      - ["fridgesearch", "projected_cost", "$250/month by year end"]
+      - ["fridgesearch", "projected_cost", "$3000 annually"]
+      - ["Julian", "said", "can afford it but is that what you want"]
+      - ["user", "doesnt_want", "to charge for a fun project"]
+      - ["user", "has_emotion", "conflicted"]
+    expected_adaptation:
+      emotion_detected: "conflicted"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      asked Marcus what he thinks about monetization and he said there are a few options like ads which he hates or a premium tier with extra features or donations or just keeping it free and eating the cost and he said whatever you do don't put ads in it they'll ruin the experience
+    expected_memory_stores:
+      - "Marcus monetization opinions"
+      - "ads hated"
+      - "premium tier option"
+      - "donations option"
+      - "free option"
+      - "no ads recommendation"
+    expected_triples:
+      - ["Marcus", "advised", "don't put ads in fridgesearch"]
+      - ["Marcus", "suggested", "premium tier or donations as alternatives"]
+      - ["user", "considering", "monetization options"]
+      - ["user", "has_emotion", "thoughtful"]
+    expected_adaptation:
+      emotion_detected: "thoughtful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 10:00 AM"
+    user_input: |
+      Leon weighed in and said he'd happily pay for fridgesearch like maybe $5 a month for a pro version with meal planning and advanced filters and the free version stays free with basic functionality and that way you only monetize the power users who get the most value
+    expected_memory_stores:
+      - "Leon suggests freemium"
+      - "$5 per month pro"
+      - "meal planning premium"
+      - "advanced filters premium"
+      - "free stays free"
+      - "power user monetization"
+    expected_triples:
+      - ["Leon", "suggested", "freemium model at $5/month"]
+      - ["Leon", "would_pay_for", "meal planning and advanced filters"]
+      - ["Leon", "advised", "monetize power users, keep free tier"]
+      - ["user", "has_emotion", "interested"]
+    expected_adaptation:
+      emotion_detected: "interested"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 3:00 PM"
+    user_input: |
+      talked to Lily about it and she said honestly if even 5 percent of your 2000 users pay $5 a month that's $500 a month which more than covers your costs and I was like wait the math actually works and she said yeah that's how freemium models work and I felt dumb for not seeing it earlier
+    expected_memory_stores:
+      - "Lily freemium math"
+      - "5 percent conversion"
+      - "$500 revenue"
+      - "covers costs"
+      - "felt dumb"
+    expected_triples:
+      - ["Lily", "explained", "5% of 2000 users at $5 = $500/month"]
+      - ["Lily", "taught", "freemium model math"]
+      - ["user", "realized", "freemium math works"]
+      - ["user", "has_emotion", "enlightened"]
+    expected_adaptation:
+      emotion_detected: "enlightened"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 11:00 AM"
+    user_input: |
+      but then I thought about it more and I realized I don't actually want to run a business I just want to build cool stuff and if I add a premium tier now I'll have to deal with payments and billing and customer support and that's not fun for me so maybe I just keep it free and cap the costs somehow
+    expected_memory_stores:
+      - "doesn't want business"
+      - "just build cool stuff"
+      - "payments billing support"
+      - "not fun"
+      - "keep free"
+      - "cap costs"
+    expected_triples:
+      - ["user", "doesnt_want", "to run a business"]
+      - ["user", "wants", "to just build cool stuff"]
+      - ["user", "concerned_about", "payments billing customer support"]
+      - ["user", "leaning_toward", "keeping fridgesearch free"]
+      - ["user", "has_emotion", "conflicted"]
+    expected_adaptation:
+      emotion_detected: "conflicted"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 2:00 PM"
+    user_input: |
+      what are the current monthly server costs for fridgesearch
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 5:00 PM"
+    user_input: |
+      Julian had a great idea he said what if you add a donate button and a simple message saying this is a free app built by one person if you enjoy it consider buying me a coffee and that way it's not a business it's just gratitude and I was like Julian that's perfect
+    expected_memory_stores:
+      - "Julian donation idea"
+      - "buy me a coffee"
+      - "not a business"
+      - "gratitude based"
+      - "perfect solution"
+    expected_triples:
+      - ["Julian", "suggested", "donate button with buy me a coffee message"]
+      - ["user", "accepted", "donation model instead of business"]
+      - ["user", "has_emotion", "relieved"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Next Saturday 10:00 AM"
+    user_input: |
+      added the donate button this weekend using Buy Me a Coffee and within the first day eight people donated totaling $47 which is not nothing and the messages people left are so sweet like one said this app changed how I cook and another said best free tool I've ever used
+    expected_memory_stores:
+      - "donate button added"
+      - "Buy Me a Coffee"
+      - "eight donors day one"
+      - "$47 donations"
+      - "sweet messages"
+      - "changed how I cook"
+    expected_triples:
+      - ["user", "added", "Buy Me a Coffee donate button"]
+      - ["fridgesearch", "received", "8 donations totaling $47 on day one"]
+      - ["donor", "said", "this app changed how I cook"]
+      - ["user", "has_emotion", "touched"]
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Next Sunday 7:00 PM"
+    user_input: |
+      decided to keep fridgesearch free forever and just use donations to offset server costs and if the donations don't cover it Julian and I will pay the difference because this app brings joy to people and that's worth more than money and Kobe agrees because he wagged his tail when I said that out loud
+    expected_memory_stores:
+      - "free forever decision"
+      - "donations offset costs"
+      - "Julian share costs"
+      - "joy over money"
+      - "Kobe tail wag"
+    expected_triples:
+      - ["user", "decided", "fridgesearch free forever"]
+      - ["user", "will_use", "donations to offset server costs"]
+      - ["Julian", "will_help", "pay cost difference"]
+      - ["user", "values", "joy over money"]
+      - ["user", "has_emotion", "resolved"]
+    expected_adaptation:
+      emotion_detected: "resolved"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How much are fridgesearch server costs?"
+    expected_contains: ["127"]
+  - question: "Is Maya going to charge for fridgesearch?"
+    expected_contains: ["no", "free forever"]
+  - question: "How is Maya covering server costs?"
+    expected_contains: ["donations", "Buy Me a Coffee"]
+  - question: "How much was donated on the first day?"
+    expected_contains: ["47"]
+  - question: "What monetization options did Maya consider?"
+    expected_contains: ["ads", "premium", "donations", "free"]
+  - question: "Why doesn't Maya want a premium tier?"
+    expected_contains: ["business", "billing", "support", "not fun"]
+  - question: "Who suggested the donation approach?"
+    expected_contains: ["Julian"]
+  - question: "What did Leon suggest for pricing?"
+    expected_contains: ["$5", "freemium"]
+  - question: "What was Lily's freemium math?"
+    expected_contains: ["5 percent", "$500"]
+  - question: "What donor messages did Maya receive?"
+    expected_contains: ["changed how I cook"]

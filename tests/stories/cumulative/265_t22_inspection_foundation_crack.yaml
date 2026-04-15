@@ -1,0 +1,181 @@
+story_id: 265
+story_name: "Inspection Reveals Foundation Crack"
+category: "Housing"
+description: |
+  Tests memory of the home inspection revealing a foundation crack in the Woodstock house.
+  Captures the initial panic, the negotiation that follows, and the correction from the
+  original offer amount to the renegotiated price.
+duration_simulated: "5 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 3:00 PM"
+    user_input: |
+      OH MY GOD so the sellers accepted our offer at 415 but they countered at 430 and Sarah negotiated it down to 425 so we're under contract at 425K for the Woodstock house pending inspection which is next Monday and I can't believe this is happening
+    expected_memory_stores:
+      - "sellers countered $430K"
+      - "negotiated to $425K"
+      - "under contract"
+      - "pending inspection"
+      - "inspection Monday"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 9:00 AM"
+    user_input: |
+      inspector is here his name is Greg Novak and Sarah recommended him and he's been going through the house for like two hours now with this thermal camera thing and a moisture meter and Julian keeps following him around asking questions
+    expected_memory_stores:
+      - "Greg Novak inspector"
+      - "Sarah recommended"
+      - "thermal camera"
+      - "moisture meter"
+      - "two hours"
+      - "Julian following"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 11:00 AM"
+    user_input: |
+      so Greg found the knob and tube wiring that Eddie mentioned and the bathroom plumbing has a slow leak under the sink and the water heater is 15 years old which is at the end of its life but all of that was expected and Eddie already priced it in
+    expected_memory_stores:
+      - "knob and tube confirmed"
+      - "bathroom leak"
+      - "water heater 15 years"
+      - "expected issues"
+      - "Eddie already priced"
+    expected_adaptation:
+      emotion_detected: "okay"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 12:00 PM"
+    user_input: |
+      and then Greg went to the basement and found a crack in the foundation. not like a hairline crack but like a structural crack about 4 feet long running along the east wall and he got really quiet and took a bunch of photos and I could feel my stomach drop
+    expected_memory_stores:
+      - "foundation crack"
+      - "4 feet long"
+      - "east wall"
+      - "structural crack"
+      - "basement"
+      - "Greg concerned"
+    expected_adaptation:
+      emotion_detected: "panic"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 1:00 PM"
+    user_input: |
+      Greg said the foundation crack needs to be assessed by a structural engineer but in his experience it could cost anywhere from 8K for a simple epoxy repair to 25K if the whole wall needs to be reinforced and now I'm freaking out because we didn't budget for this at all
+    expected_memory_stores:
+      - "structural engineer needed"
+      - "repair cost $8K to $25K"
+      - "epoxy repair vs wall reinforcement"
+      - "not in budget"
+    expected_adaptation:
+      emotion_detected: "panicked"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 6:00 PM"
+    user_input: |
+      called Eddie and he said a crack like that on the east wall is probably from water pressure against the foundation and a structural engineer friend of his named Ruth Gaines could come look at it this week and give us a real number and he said don't panic yet
+    expected_memory_stores:
+      - "Eddie reassuring"
+      - "water pressure cause"
+      - "Ruth Gaines"
+      - "structural engineer"
+      - "coming this week"
+    expected_adaptation:
+      emotion_detected: "slightly calmer"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 2:00 PM"
+    user_input: |
+      Ruth came and looked at the crack and she said it's not catastrophic it's a Type 2 crack caused by lateral soil pressure and she can fix it with carbon fiber strapping and some drainage work for about 12K and that's the actual number not a range which is better than worst case but still 12K we didn't plan for
+    expected_memory_stores:
+      - "Ruth assessment"
+      - "Type 2 crack"
+      - "lateral soil pressure"
+      - "carbon fiber strapping"
+      - "drainage work"
+      - "repair cost $12K"
+    expected_adaptation:
+      emotion_detected: "relieved but concerned"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 7:00 PM"
+    user_input: |
+      Sarah is a genius okay she said we should go back to the sellers and renegotiate the price because of the foundation issue and she's asking them to come down from 425 to 395 which accounts for the 12K repair plus some buffer and I was like will they go for that and she was like they might not go to 395 but they'll come down
+    expected_memory_stores:
+      - "renegotiation"
+      - "asking $395K"
+      - "from $425K"
+      - "foundation as leverage"
+      - "Sarah strategy"
+    expected_adaptation:
+      emotion_detected: "strategic"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 10:00 AM"
+    user_input: |
+      okay so after two days of back and forth the sellers agreed to 445K wait no sorry that's not right they came down to 445 from their counter of 485 wait I'm getting confused. let me think. we were at 425, Sarah asked for 395, they countered at 460, Sarah countered at 430, and they finally agreed to 445. wait that doesn't sound right either. hold on Sarah just texted the final number is 445K.
+    expected_memory_stores:
+      - "negotiation confusion"
+      - "final price $445K"
+      - "correction"
+      - "back and forth"
+    expected_adaptation:
+      emotion_detected: "confused"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 12:00 PM"
+    user_input: |
+      wait no I'm sorry I just re-read Sarah's text the final agreed price is $445K and we're moving forward and the sellers agreed to credit us the foundation repair cost at closing so really it's like buying at 445 minus 12K credit so effectively 433K which is actually under our original offer of 425 wait no 433 is more than 425 but the house is in better shape once the foundation is fixed ugh math is hard when you're emotional
+    expected_memory_stores:
+      - "final price $445K"
+      - "seller credit $12K for foundation"
+      - "effective cost $433K"
+      - "moving forward"
+    expected_adaptation:
+      emotion_detected: "overwhelmed but positive"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did the home inspection reveal?"
+    expected_contains: ["foundation crack"]
+  - question: "How much will the foundation repair cost?"
+    expected_contains: ["12"]
+  - question: "Who is the structural engineer?"
+    expected_contains: ["Ruth Gaines"]
+  - question: "What is the final purchase price of the Woodstock house?"
+    expected_contains: ["445"]
+  - question: "What type of foundation repair is needed?"
+    expected_contains: ["carbon fiber", "strapping"]
+  - question: "Are the sellers giving a credit for the foundation?"
+    expected_contains: ["yes", "12"]
+  - question: "Who was the home inspector?"
+    expected_contains: ["Greg Novak"]
+  - question: "What caused the foundation crack?"
+    expected_contains: ["soil pressure", "water"]
+  - question: "What other issues did the inspection find?"
+    expected_contains: ["knob and tube", "leak", "water heater"]
+  - question: "Who negotiated the price reduction?"
+    expected_contains: ["Sarah"]

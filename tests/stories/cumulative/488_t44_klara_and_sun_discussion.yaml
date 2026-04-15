@@ -1,0 +1,190 @@
+story_id: 488
+story_name: "Klara and the Sun Discussion"
+category: "Book Club"
+description: |
+  Tests memory of the Klara and the Sun book club meeting.
+  Establishes the AI theme resonance, deepening group trust.
+  Verifies system captures thematic connections to Maya's work.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 6:30 PM"
+    user_input: |
+      book club night for Klara and the Sun and I'm so excited because this one really got to me and the house is decorated with Nadia's blue and silver stuff and I made these little sun shaped sugar cookies because the sun is like a main character in the book and Julian helped me with the frosting and then left as usual
+    expected_memory_stores:
+      - "Klara and Sun meeting"
+      - "blue silver decorations"
+      - "sun shaped cookies"
+      - "sun as character"
+      - "Julian helped frosting"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 7:15 PM"
+    user_input: |
+      everyone's here all five of us which is now the norm and Tessa's robot cookies are incredible like she used a cookie cutter and everything and Marcus DID bring Artificial Intelligence wine and it's actually pretty good and Omar brought Japanese rice crackers which has nothing to do with the theme but nobody cares because they're delicious
+    expected_memory_stores:
+      - "all five present"
+      - "now the norm"
+      - "Tessa robot cookies"
+      - "Marcus AI wine"
+      - "Omar rice crackers"
+      - "off theme but good"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 7:45 PM"
+    user_input: |
+      so everyone read the book which is amazing and I opened with the discussion question about whether Klara the AI truly loves or just simulates love and it got HEATED like Marcus said AI can't love it's just code and Lily said how do you know human love isn't just biochemistry and Omar said love is love no matter the substrate and Tessa said the question itself is an act of power
+    expected_memory_stores:
+      - "everyone finished"
+      - "AI love debate"
+      - "Marcus AI can't love"
+      - "Lily biochemistry argument"
+      - "Omar love is love"
+      - "Tessa power question"
+      - "heated discussion"
+    expected_adaptation:
+      emotion_detected: "stimulated"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 8:15 PM"
+    user_input: |
+      I shared my perspective from working at Conduit and said when you build AI systems you realize how different their cognition is from ours and Klara's observation of human behavior felt really accurate to me and everyone was asking me technical questions and I felt like the resident expert for once and not just because I optimize code but because I think about this stuff deeply
+    expected_memory_stores:
+      - "Maya Conduit perspective"
+      - "AI cognition difference"
+      - "Klara observation accurate"
+      - "technical questions"
+      - "resident expert"
+      - "thinks deeply"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 8:45 PM"
+    user_input: |
+      Nadia brought up the theme of sacrifice in the book and how Klara is willing to sacrifice herself for her human and she connected it to being a project manager and giving up your own recognition for the team's success and Marcus was like Nadia that's incredibly selfless and she said it's just my job but you could tell she was moved
+    expected_memory_stores:
+      - "Nadia sacrifice theme"
+      - "Klara sacrifices for human"
+      - "project manager parallel"
+      - "team recognition"
+      - "Marcus impressed"
+      - "Nadia moved"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 9:15 PM"
+    user_input: |
+      the ending of Klara made me cry when I read it and I admitted that to the group and Omar said same and Lily said she cried twice and Marcus said he didn't cry but his eyes were moist which is Marcus language for he absolutely cried and Tessa said the ending is about being remembered and what it means to have mattered and that connection to the Midnight Library theme of choosing your life was really powerful
+    expected_memory_stores:
+      - "ending made Maya cry"
+      - "Omar cried"
+      - "Lily cried twice"
+      - "Marcus eyes moist"
+      - "Tessa being remembered"
+      - "Midnight Library connection"
+      - "choosing your life"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 9:45 PM"
+    user_input: |
+      we talked about what book to do next and everyone threw out ideas and we ended up picking Piranesi by Susanna Clarke because Tessa read it and said it's short and beautiful and mysterious and about like a man living in a house full of statues and oceans and nobody knows what's going on and that sounds amazing honestly
+    expected_memory_stores:
+      - "next book discussion"
+      - "Piranesi"
+      - "Susanna Clarke"
+      - "Tessa recommended"
+      - "short beautiful mysterious"
+      - "house of statues and oceans"
+    expected_adaptation:
+      emotion_detected: "curious"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 10:00 PM"
+    user_input: |
+      which book club books have they read so far in order
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 10:15 PM"
+    user_input: |
+      we took our group photo and this one is the best yet like everyone is genuinely laughing and Marcus is holding up the AI wine bottle and Tessa has a robot cookie in her mouth and I'm in the middle with my arm around Nadia and Omar is doing a peace sign and Lily is photobombing from behind and Julian sneakily took a candid version from the stairs that's even better
+    expected_memory_stores:
+      - "group photo best yet"
+      - "genuine laughter"
+      - "Marcus wine bottle"
+      - "Tessa cookie in mouth"
+      - "Maya arm around Nadia"
+      - "Omar peace sign"
+      - "Lily photobombing"
+      - "Julian candid from stairs"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:45 PM"
+    user_input: |
+      cleaning up and Julian said he heard the AI debate from upstairs and he said it sounded really intellectually stimulating and I said it was the best one yet and he said you built something special with this group and I said WE built something because honestly without his support and bruschetta and disappearing upstairs none of this would work and he kissed me and Kobe barked
+    expected_memory_stores:
+      - "Julian heard debate"
+      - "intellectually stimulating"
+      - "best meeting yet"
+      - "built something special"
+      - "Julian's support"
+      - "bruschetta and disappearing"
+      - "Kobe barked"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What was the main debate topic during Klara and the Sun?"
+    expected_contains: ["AI", "love", "simulate"]
+  - question: "What did Marcus say about AI and love?"
+    expected_contains: ["can't love", "just code"]
+  - question: "What was Maya's unique perspective on the book?"
+    expected_contains: ["Conduit", "AI systems", "cognition"]
+  - question: "What theme did Nadia connect to her work?"
+    expected_contains: ["sacrifice", "project manager"]
+  - question: "What is the next book after Klara and the Sun?"
+    expected_contains: ["Piranesi"]
+  - question: "Who wrote Piranesi?"
+    expected_contains: ["Susanna Clarke"]
+  - question: "What books has the book club read in order?"
+    expected_contains: ["Midnight Library", "Project Hail Mary", "Anxious People", "Klara"]
+  - question: "What did Julian contribute to the book club?"
+    expected_contains: ["support", "bruschetta", "disappearing"]
+  - question: "What did Marcus bring as wine?"
+    expected_contains: ["Artificial Intelligence"]
+  - question: "Who took a candid photo of the group?"
+    expected_contains: ["Julian"]

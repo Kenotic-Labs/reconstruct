@@ -1,0 +1,194 @@
+story_id: 300
+story_name: "Kobe and Maya"
+category: "Pet"
+description: |
+  Tests memory of the complete Kobe arc culminating in the bond between dog and owner.
+  Captures the CGC test, the reflection on the journey from shelter to therapy dog
+  candidate, and Kobe's place in Maya's life. Completes T25.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 8:00 AM"
+    user_input: |
+      CGC test day and Julian and I are driving to Beaverton with Kobe in the back seat and I have a bag of boiled chicken treats and the front-clip harness and Kobe is just chilling like he has no idea what's about to happen and I'm the one who's a wreck
+    expected_memory_stores:
+      - "CGC test day"
+      - "driving to Beaverton"
+      - "chicken treats"
+      - "front-clip harness"
+      - "Kobe calm"
+      - "Maya nervous"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 9:30 AM"
+    user_input: |
+      at the test facility and there are like 12 other dogs here also testing and Kobe is doing great so far he greeted the evaluator calmly sat politely while she pet him and walked on a loose leash through the cone course and I'm breathing again
+    expected_memory_stores:
+      - "test facility"
+      - "12 other dogs"
+      - "greeted evaluator calmly"
+      - "sat politely"
+      - "loose leash through cones"
+      - "doing great"
+    expected_adaptation:
+      emotion_detected: "cautiously optimistic"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 10:00 AM"
+    user_input: |
+      passed the walking through a crowd test and the supervised separation test where I left the room for 3 minutes and Kobe stayed calm with the stranger and the grooming test where someone handled his ears and paws and now it's the big one the reaction to another dog
+    expected_memory_stores:
+      - "crowd test passed"
+      - "separation test passed"
+      - "3 minutes away"
+      - "grooming test passed"
+      - "dog reaction test next"
+    expected_adaptation:
+      emotion_detected: "tense"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 10:15 AM"
+    user_input: |
+      a handler brought a golden doodle past us at about 8 feet and Kobe watched the dog and I felt him tense on the leash and time stopped for a second and then... he looked at me. he looked at me and sat and the golden doodle walked past and Kobe didn't pull didn't bark didn't lunge. the evaluator marked it as a pass and I had to bite my lip so hard to not scream
+    expected_memory_stores:
+      - "golden doodle at 8 feet"
+      - "Kobe tensed"
+      - "then looked at Maya"
+      - "sat"
+      - "no pull no bark no lunge"
+      - "PASSED"
+      - "Maya holding back scream"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 10:30 AM"
+    user_input: |
+      KOBE PASSED THE CANINE GOOD CITIZEN TEST ALL TEN ITEMS he got his certificate and the evaluator said he did really well and I'm holding this certificate and Kobe is sitting next to me wagging his tail and Julian is taking photos and I'm crying OBVIOUSLY
+    expected_memory_stores:
+      - "CGC PASSED"
+      - "all ten items"
+      - "certificate received"
+      - "evaluator praised"
+      - "Julian photos"
+      - "Maya crying"
+      - "Kobe wagging"
+    expected_adaptation:
+      emotion_detected: "overjoyed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 12:00 PM"
+    user_input: |
+      texted Keiko a photo of the certificate and she sent back about 20 heart emojis and said I always knew he could do it and then I texted Nadia and Omar and my mom and everyone is so excited and Nadia was like therapy dog Kobe in a vest I can't handle it
+    expected_memory_stores:
+      - "texted Keiko"
+      - "Keiko proud"
+      - "texted everyone"
+      - "Nadia excited"
+      - "Omar"
+      - "mom"
+      - "vest comment"
+    expected_adaptation:
+      emotion_detected: "celebratory"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 3:00 PM"
+    user_input: |
+      got Kobe a special beef bone from the pet store to celebrate and he's in the yard gnawing on it and I'm sitting on the back porch watching him and thinking about this whole journey from the shelter to chewing shoes to reactivity training to pancreatitis to this moment and it's a lot
+    expected_memory_stores:
+      - "beef bone celebration"
+      - "yard"
+      - "watching from porch"
+      - "journey reflection"
+      - "shelter to now"
+      - "shoes reactivity pancreatitis"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 10:00 AM"
+    user_input: |
+      next step is the Pet Partners therapy dog evaluation which is more involved than the CGC and includes a simulation of a therapy visit and Keiko said she'll help us prepare and the evaluation is offered monthly in Portland and we're signing up for next month's session
+    expected_memory_stores:
+      - "Pet Partners evaluation"
+      - "more involved than CGC"
+      - "therapy visit simulation"
+      - "Keiko helping"
+      - "monthly in Portland"
+      - "next month"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 3:00 PM"
+    user_input: |
+      Julian framed Kobe's CGC certificate and hung it in the hallway next to the kitchen plaque and he was like our wall of achievements and I was like technically that's Kobe's achievement and he was like we're a family all achievements are shared
+    expected_memory_stores:
+      - "CGC certificate framed"
+      - "hallway"
+      - "next to kitchen plaque"
+      - "wall of achievements"
+      - "family achievements shared"
+      - "Julian quote"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 PM"
+    user_input: |
+      lying on the couch with Kobe's head on my chest and Julian's reading in his chair and the house is quiet and I'm just thinking about how this dog came into our lives from a shelter with an uncertain past and a wrong age and a shoe-chewing habit and leash problems and then almost died from pancreatitis and now he's a certified good citizen on his way to being a therapy dog and I love him more than I can explain. can you tell me everything you know about Kobe
+    expected_memory_stores:
+      - "couch with Kobe"
+      - "head on chest"
+      - "Julian reading"
+      - "quiet house"
+      - "full reflection"
+      - "shelter to therapy dog"
+      - "GK trap comprehensive"
+    expected_adaptation:
+      emotion_detected: "deep love"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Did Kobe pass the Canine Good Citizen test?"
+    expected_contains: ["yes", "passed"]
+  - question: "What is the next certification step for Kobe?"
+    expected_contains: ["Pet Partners"]
+  - question: "Where was the CGC test held?"
+    expected_contains: ["Beaverton"]
+  - question: "How did Kobe handle the dog reaction test?"
+    expected_contains: ["looked at Maya", "sat", "no pull"]
+  - question: "Where is Kobe's CGC certificate displayed?"
+    expected_contains: ["hallway", "framed"]
+  - question: "What is Kobe's breed?"
+    expected_contains: ["golden retriever"]
+  - question: "How old is Kobe?"
+    expected_contains: ["4", "four"]
+  - question: "Where was Kobe adopted from?"
+    expected_contains: ["Oregon Humane Society"]
+  - question: "What health issue did Kobe have?"
+    expected_contains: ["pancreatitis"]
+  - question: "Who trained Kobe?"
+    expected_contains: ["Keiko Tanaka", "Bark & Bond"]

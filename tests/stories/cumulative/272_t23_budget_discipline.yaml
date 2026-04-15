@@ -1,0 +1,182 @@
+story_id: 272
+story_name: "Budget Discipline"
+category: "Finance"
+description: |
+  Tests memory of Maya and Julian's first months of aggressive budgeting. Captures the
+  difficulty of cutting back, small wins, and the recipe app growing as a side income source.
+duration_simulated: "6 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 7:00 PM"
+    user_input: |
+      first month of the aggressive payoff plan is done and we survived lol it was hard though like we literally ate at home every single night and Julian complained about not being able to order art supplies and I missed getting coffee at Heart Roasters before work
+    expected_memory_stores:
+      - "first month complete"
+      - "ate at home every night"
+      - "Julian no art supplies"
+      - "Heart Roasters missed"
+      - "sacrifices"
+    expected_adaptation:
+      emotion_detected: "proud but strained"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 9:00 AM"
+    user_input: |
+      checked Navient and the balance is down to $33,100 from $34,200 which means we knocked off $1,100 in one month and seeing that number drop felt SO GOOD like better than I expected. the interest ate some of the payment but still real progress
+    expected_memory_stores:
+      - "balance $33,100"
+      - "down from $34,200"
+      - "$1,100 paid off"
+      - "one month"
+      - "interest took some"
+      - "progress feels good"
+    expected_adaptation:
+      emotion_detected: "motivated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 6:00 PM"
+    user_input: |
+      so I put some work into the recipe app over the weekend added a meal planning feature and pushed it to the app store and my monthly active users went from 4000 to like 5500 in a week and ad revenue bumped up to $210 this month which is nice extra cash
+    expected_memory_stores:
+      - "recipe app update"
+      - "meal planning feature"
+      - "users 4000 to 5500"
+      - "ad revenue $210"
+      - "increase from $150"
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      Julian started doing extra freelance work on the side to help with the debt payoff he picked up a logo design job for this local brewery called Breakside and he's getting paid $800 for it which he said he'll put entirely toward the loans
+    expected_memory_stores:
+      - "Julian extra freelance"
+      - "Breakside brewery"
+      - "logo design"
+      - "$800"
+      - "all toward loans"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 10:00 AM"
+    user_input: |
+      month two done and the balance is at $31,850 we paid $1,250 this month because I added the extra recipe app income and Julian's Breakside payment and it's crazy how fast it goes down when you're actually throwing money at it
+    expected_memory_stores:
+      - "month two"
+      - "balance $31,850"
+      - "paid $1,250"
+      - "extra income helped"
+      - "going down fast"
+    expected_adaptation:
+      emotion_detected: "motivated"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      had a moment of weakness and ordered sushi delivery for like $65 and then felt guilty about it which Julian said is not healthy like he was like we can have a sushi night once in a while we're not monks and he's right but still I could feel the budget brain yelling at me
+    expected_memory_stores:
+      - "sushi delivery $65"
+      - "guilt"
+      - "Julian says it's okay"
+      - "not monks"
+      - "budget brain"
+    expected_adaptation:
+      emotion_detected: "guilty"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 12:00 PM"
+    user_input: |
+      started meal prepping on Sundays which saves a ton of money and time during the week like I make a big batch of curry or chili or something and portion it out and Julian's been making lunches too and our grocery bill dropped from like $600 to $420
+    expected_memory_stores:
+      - "meal prepping Sundays"
+      - "curry chili"
+      - "Julian meal prepping too"
+      - "grocery bill dropped"
+      - "$600 to $420"
+    expected_adaptation:
+      emotion_detected: "efficient"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 9:00 AM"
+    user_input: |
+      month three and we're at $30,500 and I made a chart that shows the payoff trajectory and if we keep this pace we'll be done in like 22 months which is under two years and I put the chart on the fridge and Julian was like you are so type A and I was like you love it
+    expected_memory_stores:
+      - "month three"
+      - "balance $30,500"
+      - "22 months to payoff"
+      - "chart on fridge"
+      - "under two years"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      the recipe app is blowing up a little bit I added a social sharing feature and it got picked up by some food blogger and now I have like 12,000 active users and ad revenue is at $380 a month which is honestly significant like that's a third of my loan payment
+    expected_memory_stores:
+      - "recipe app growing"
+      - "social sharing feature"
+      - "food blogger coverage"
+      - "12,000 active users"
+      - "$380 monthly revenue"
+      - "third of loan payment"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 8:00 PM"
+    user_input: |
+      Omar noticed I haven't been buying any climbing gear lately and I told him about the loan payoff plan and he was like respect that's super disciplined and then he literally gave me a pair of aggressive climbing shoes he outgrew and was like consider it a loan payoff gift and I was like dude you're too nice
+    expected_memory_stores:
+      - "Omar noticed budget"
+      - "told Omar about loan plan"
+      - "Omar gave climbing shoes"
+      - "aggressive shoes"
+      - "loan payoff gift"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya's current student loan balance?"
+    expected_contains: ["30,500", "30500"]
+  - question: "How many months into the payoff plan is Maya?"
+    expected_contains: ["three"]
+  - question: "How much does the recipe app make now?"
+    expected_contains: ["380"]
+  - question: "How many active users does the recipe app have?"
+    expected_contains: ["12,000", "12000"]
+  - question: "What extra freelance job did Julian take?"
+    expected_contains: ["Breakside", "logo"]
+  - question: "How much has Maya's grocery bill dropped to?"
+    expected_contains: ["420"]
+  - question: "What is the projected payoff timeline?"
+    expected_contains: ["22 months", "under two years"]
+  - question: "What did Omar give Maya?"
+    expected_contains: ["climbing shoes"]
+  - question: "What new feature boosted the recipe app's growth?"
+    expected_contains: ["social sharing"]
+  - question: "How much did Julian earn from the Breakside job?"
+    expected_contains: ["800"]

@@ -1,0 +1,180 @@
+story_id: 476
+story_name: "Everyone Loves It Aftermath"
+category: "Music and Guitar"
+description: |
+  Tests memory of the aftermath of Maya's first performance and growing confidence.
+  Establishes expanding repertoire, positive reinforcement loop.
+  Verifies system tracks emotional shift from fear to confidence.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Sunday 10:00 AM"
+    user_input: |
+      okay so I can't stop thinking about last night like I played guitar in front of people and they loved it and I keep replaying the moment in my head where everyone clapped and Nadia was crying and I feel like I unlocked something like a confidence thing I didn't know I had and Julian says he's never seen me this energized
+    expected_memory_stores:
+      - "can't stop thinking"
+      - "replaying moment"
+      - "confidence unlocked"
+      - "Julian noticed energy"
+    expected_adaptation:
+      emotion_detected: "energized"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 12:00 PM"
+    user_input: |
+      Lily came up to me at lunch and was like I still can't believe you play guitar and I said I play three chords Lily that's not playing and she said it doesn't matter you got up and did it and that takes guts and Sam overheard and said he used to play bass in college and maybe we should jam and I was like Sam that is very premature but I appreciate the enthusiasm
+    expected_memory_stores:
+      - "Lily impressed"
+      - "Lily said takes guts"
+      - "Sam played bass college"
+      - "Sam wants to jam"
+      - "Maya said premature"
+    expected_adaptation:
+      emotion_detected: "flattered"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      I'm learning a new song called Wonderwall by Oasis because apparently every guitar beginner learns Wonderwall and Julian groaned when I told him and said please don't be that person and I was like Julian it has four chords I can actually play this and he was like yeah but it's Wonderwall and I was like IT'S A GOOD SONG JULIAN
+    expected_memory_stores:
+      - "learning Wonderwall"
+      - "Oasis"
+      - "Julian groaned"
+      - "four chords"
+      - "beginner classic"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 7:30 PM"
+    user_input: |
+      so Wonderwall actually has an Em chord which is new for me but it's supposedly the easiest chord on guitar because you only use two fingers and yeah it's way easier than C and now I have four chords G C D Em and my repertoire is expanding and Justin Guitar would be proud honestly
+    expected_memory_stores:
+      - "Em chord new"
+      - "easiest chord"
+      - "two fingers"
+      - "four chords total"
+      - "G C D Em"
+      - "Justin Guitar reference"
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 8:00 PM"
+    user_input: |
+      played at the tabletop meetup tonight and I can't believe I did this but Dave asked and I was like okay fine one song and I played Knockin on Heavens Door and everyone at the bar applauded and the bartender gave me a free beer and Omar was like you're famous and I was like I played one song badly but thank you
+    expected_memory_stores:
+      - "played at tabletop meetup"
+      - "Dave asked"
+      - "one song"
+      - "bar applauded"
+      - "bartender free beer"
+      - "Omar famous joke"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 6:00 PM"
+    user_input: |
+      Jenny called from Austin and demanded I play for her over FaceTime again and she said I sounded better than last time and I played Wonderwall and she was like oh no you're a Wonderwall person and I was like WHY DOES EVERYONE SAY THAT and she just laughed and said she misses me and I should bring my guitar when I visit for the wedding dress shopping
+    expected_memory_stores:
+      - "Jenny FaceTime"
+      - "sounded better"
+      - "played Wonderwall"
+      - "Jenny teased"
+      - "bring guitar to Austin"
+      - "wedding dress shopping"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 2:00 PM"
+    user_input: |
+      I've been thinking about what Julian said about writing a song and I have this melody in my head that's just three notes over the G to C progression and I tried humming it while playing and it kind of works and I'm not saying I'm writing a song but I'm also not NOT writing a song you know what I mean
+    expected_memory_stores:
+      - "Julian song suggestion"
+      - "melody in head"
+      - "three notes G to C"
+      - "humming while playing"
+      - "maybe writing a song"
+    expected_adaptation:
+      emotion_detected: "creative"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 4:00 PM"
+    user_input: |
+      what new song is Maya learning on guitar besides Knockin on Heavens Door
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 6:00 PM"
+    user_input: |
+      I told Clara about the dinner performance and she was like Maya that's amazing you should play for Sophie when you visit and I said Clara Sophie is a baby she doesn't care about music and Clara said actually she loves music she dances to everything and Tyler plays guitar too so you guys could play together and I was like wait Tyler plays guitar why didn't I know this
+    expected_memory_stores:
+      - "told Clara about dinner"
+      - "play for Sophie"
+      - "Sophie loves music"
+      - "Tyler plays guitar"
+      - "Maya didn't know"
+      - "play together idea"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 9:00 PM"
+    user_input: |
+      practiced for an hour and then played some Stardew and then went back to guitar and this alternating thing is actually perfect because Stardew calms me down and guitar fires me up and I need both and I'm thinking about learning more songs and maybe eventually writing that wedding song that Julian planted in my head because oh my god what if I wrote a song for our wedding
+    expected_memory_stores:
+      - "alternating Stardew guitar"
+      - "calm vs fire up"
+      - "learning more songs"
+      - "wedding song idea"
+      - "Julian planted idea"
+    expected_adaptation:
+      emotion_detected: "inspired"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What new song is Maya learning?"
+    expected_contains: ["Wonderwall"]
+  - question: "What new chord did Maya learn for Wonderwall?"
+    expected_contains: ["Em"]
+  - question: "How many chords does Maya know now?"
+    expected_contains: ["four"]
+  - question: "Where did Maya perform besides the friend dinner?"
+    expected_contains: ["tabletop meetup", "Lucky Lab"]
+  - question: "Who played bass in college?"
+    expected_contains: ["Sam"]
+  - question: "Who in Maya's family also plays guitar?"
+    expected_contains: ["Tyler"]
+  - question: "What did the bartender give Maya after playing?"
+    expected_contains: ["free beer"]
+  - question: "Is Maya thinking about writing a song?"
+    expected_contains: ["yes", "wedding"]
+  - question: "What wedding event does Jenny mention?"
+    expected_contains: ["dress shopping"]
+  - question: "Does Sophie like music?"
+    expected_contains: ["yes", "dances"]

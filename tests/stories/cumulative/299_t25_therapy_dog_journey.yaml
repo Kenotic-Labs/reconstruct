@@ -1,0 +1,193 @@
+story_id: 299
+story_name: "Therapy Dog Journey Begins"
+category: "Pet"
+description: |
+  Tests memory of Maya beginning the therapy dog certification process with Kobe.
+  Captures Dr. Mills's evaluation, Keiko's advanced training sessions, and the
+  Canine Good Citizen test preparation.
+duration_simulated: "3 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 10:00 AM"
+    user_input: |
+      Dr. Mills appointment today for the therapy dog evaluation and she did a full physical and behavioral assessment and she said Kobe is an excellent candidate because he's calm around strangers gentle with handling and his health is stable post-pancreatitis and she gave us a letter of recommendation for the certification program
+    expected_memory_stores:
+      - "Dr. Mills evaluation"
+      - "excellent candidate"
+      - "calm around strangers"
+      - "gentle with handling"
+      - "health stable"
+      - "letter of recommendation"
+    expected_adaptation:
+      emotion_detected: "thrilled"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      showed Keiko the letter and she was like amazing let me design a training plan specifically for the Canine Good Citizen test which has ten parts including things like sitting politely for petting walking through a crowd and the big one reacting calmly to another dog
+    expected_memory_stores:
+      - "Keiko training plan"
+      - "Canine Good Citizen"
+      - "ten parts"
+      - "sitting for petting"
+      - "walking through crowd"
+      - "calm around dogs"
+    expected_adaptation:
+      emotion_detected: "motivated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 10:00 AM"
+    user_input: |
+      first CGC prep session with Keiko and she tested Kobe on all ten items and he passed 7 out of 10 right away. the three he failed were reaction to another dog obviously, accepting a friendly stranger, and walking on a loose leash which surprised me because I thought his leash walking was better
+    expected_memory_stores:
+      - "CGC prep session"
+      - "passed 7 of 10"
+      - "failed three items"
+      - "reaction to dog"
+      - "accepting friendly stranger"
+      - "loose leash walking"
+    expected_adaptation:
+      emotion_detected: "mixed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 7:00 PM"
+    user_input: |
+      been working on the friendly stranger item where someone approaches and shakes my hand and Kobe has to sit calmly and not jump and the problem is Kobe gets SO EXCITED when anyone comes near and he wants to lick their face and Keiko was like enthusiasm is better than aggression but he still needs to be calm
+    expected_memory_stores:
+      - "friendly stranger practice"
+      - "Kobe too excited"
+      - "jumps and licks"
+      - "enthusiasm vs calm"
+      - "needs to be calm"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 10:00 AM"
+    user_input: |
+      week two of CGC prep and Kobe is now passing 9 out of 10 items. the only one left is the dog reaction test and Keiko set up a controlled scenario with her border collie Pepper walking past and Kobe did okay at 15 feet but at 10 feet he still pulled toward the dog though he didn't lunge or bark which is progress
+    expected_memory_stores:
+      - "week two"
+      - "passing 9 of 10"
+      - "dog reaction remaining"
+      - "controlled scenario"
+      - "Pepper the border collie"
+      - "okay at 15 feet"
+      - "pulled at 10 feet"
+      - "no lunge or bark"
+    expected_adaptation:
+      emotion_detected: "encouraged"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 6:30 PM"
+    user_input: |
+      practiced dog reactions at Sellwood Park today had Julian walk Kobe while I walked toward them with Nadia's partner's dog a poodle named Scout and Kobe watched Scout approach and at about 8 feet he tensed but then looked at Julian and sat and Julian was like OH MY GOD DID YOU SEE THAT
+    expected_memory_stores:
+      - "Sellwood Park practice"
+      - "Julian walking Kobe"
+      - "Scout the poodle"
+      - "Nadia's partner's dog"
+      - "tensed at 8 feet"
+      - "looked at Julian and sat"
+      - "Julian amazed"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 10:00 AM"
+    user_input: |
+      week three and Keiko did a full mock CGC test and Kobe PASSED ALL TEN ITEMS including the dog reaction test where Keiko's assistant walked a lab past at 6 feet and Kobe stayed seated and looked at me and Keiko literally clapped and was like he's ready
+    expected_memory_stores:
+      - "mock CGC test"
+      - "passed all ten"
+      - "dog reaction passed"
+      - "lab at 6 feet"
+      - "stayed seated"
+      - "looked at Maya"
+      - "Keiko says ready"
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 12:00 PM"
+    user_input: |
+      Keiko signed us up for the official CGC test which is in two weeks it's administered by the American Kennel Club and it's at a facility in Beaverton and the test fee is $30 and if he passes we can then apply for therapy dog certification through an organization called Pet Partners
+    expected_memory_stores:
+      - "official CGC test"
+      - "two weeks"
+      - "American Kennel Club"
+      - "Beaverton"
+      - "$30 fee"
+      - "Pet Partners"
+      - "therapy dog certification"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 8:00 PM"
+    user_input: |
+      told Omar about the therapy dog thing at climbing and he was like that's so cool my wife Leila volunteers at a senior center and she said they're always looking for therapy dogs and I was like oh that could be perfect for Kobe's first visits
+    expected_memory_stores:
+      - "told Omar"
+      - "Leila volunteers"
+      - "senior center"
+      - "looking for therapy dogs"
+      - "Kobe's first visits"
+    expected_adaptation:
+      emotion_detected: "connected"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 9:00 PM"
+    user_input: |
+      two weeks until the CGC test and I'm honestly more nervous about this than I was about any test in college Julian was like babe it's a DOG test and I was like yeah but it's KOBE'S test and what if he sees a squirrel at the wrong moment or something and Julian was like you're spiraling
+    expected_memory_stores:
+      - "two weeks until test"
+      - "more nervous than college"
+      - "Julian calming"
+      - "squirrel concern"
+      - "spiraling"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Did Dr. Mills recommend Kobe for therapy dog certification?"
+    expected_contains: ["yes", "excellent candidate"]
+  - question: "How many CGC test items can Kobe pass?"
+    expected_contains: ["ten", "all"]
+  - question: "When is the official CGC test?"
+    expected_contains: ["two weeks"]
+  - question: "Where is the CGC test?"
+    expected_contains: ["Beaverton"]
+  - question: "What organization administers the CGC test?"
+    expected_contains: ["American Kennel Club"]
+  - question: "What therapy dog certification organization will they apply to?"
+    expected_contains: ["Pet Partners"]
+  - question: "What was the hardest CGC item for Kobe?"
+    expected_contains: ["dog reaction", "another dog"]
+  - question: "Who might provide Kobe's first therapy dog visits?"
+    expected_contains: ["Leila", "senior center"]
+  - question: "What is the CGC test fee?"
+    expected_contains: ["30"]
+  - question: "Who trained Kobe for the CGC test?"
+    expected_contains: ["Keiko Tanaka"]

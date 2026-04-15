@@ -1,0 +1,204 @@
+story_id: 108
+story_name: "Aisha Gets Extended"
+category: "Career"
+description: |
+  Tests whether the system captures the good news of Aisha's extension, the emotional
+  payoff of Maya's advocacy, the specific terms of the extension, and tracks the
+  correction about extension duration.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 9:30am"
+    user_input: |
+      SAM SAID YES. oh my god oh my god. he just called me into his office and said he found room in the budget to extend Aisha for another six months. I am literally shaking right now
+    expected_memory_stores:
+      - "Aisha extended"
+      - "six months"
+      - "Sam approved"
+      - "budget found"
+    expected_triples:
+      - ["Sam Okafor", "approved", "Aisha's extension"]
+      - ["Aisha", "extended_for", "six months"]
+      - ["user", "has_emotion", "ecstatic"]
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 9:35am"
+    user_input: |
+      he said my presentation actually helped because he took the ROI numbers I put together and showed them to the VP of engineering and she signed off on it. like MY numbers convinced the VP. that's insane
+    expected_memory_stores:
+      - "presentation helped"
+      - "ROI numbers"
+      - "VP of engineering"
+      - "VP signed off"
+    expected_triples:
+      - ["user's presentation", "convinced", "VP of engineering"]
+      - ["VP of engineering", "signed_off_on", "Aisha's extension"]
+      - ["user", "has_emotion", "proud"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 10:00am"
+    user_input: |
+      ok wait Sam just clarified it's actually not six months it's four months with a review at the end to potentially convert to full-time. which is actually even better because there's a path to permanent?? I misheard the first time
+    expected_memory_stores:
+      - "correction"
+      - "four months not six"
+      - "review for full-time"
+      - "conversion path"
+    expected_triples:
+      - ["user", "corrected", "Aisha extension six months → four months"]
+      - ["Aisha", "has_review_for", "full-time conversion"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 10:30am"
+    user_input: |
+      they told Aisha at 10 and she came to my desk literally crying. she was like I can't believe you did this for me and I was trying not to cry too but I totally cried. Rachel Kim walked by and was like what's happening and we were like happy tears!!!
+    expected_memory_stores:
+      - "Aisha told"
+      - "both crying"
+      - "gratitude"
+      - "Rachel Kim witnessed"
+    expected_triples:
+      - ["Aisha", "was_told", "about extension at 10am"]
+      - ["Aisha", "has_emotion", "grateful and crying"]
+      - ["user", "has_emotion", "joyful"]
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 12:00pm"
+    user_input: |
+      took Aisha and a couple other people to lunch to celebrate. she ordered like the most expensive thing on the menu which honestly good for her she deserves it lol
+    expected_memory_stores:
+      - "celebration lunch"
+      - "team celebration"
+    expected_triples:
+      - ["user", "took", "Aisha and team to celebration lunch"]
+      - ["user", "has_emotion", "celebratory"]
+    expected_adaptation:
+      emotion_detected: "celebratory"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 2:00pm"
+    user_input: |
+      what was the VP of engineering's name that approved it
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 3:00pm"
+    user_input: |
+      Aisha's mom apparently called her during lunch and SHE was crying too. like this internship is her first real tech job and her family is so proud of her. it hit me how much this stuff matters beyond just like code and metrics
+    expected_memory_stores:
+      - "Aisha's mom"
+      - "family impact"
+      - "first tech job"
+      - "deeper meaning"
+    expected_triples:
+      - ["Aisha's mom", "reacted", "crying with pride"]
+      - ["Aisha internship", "is", "first real tech job"]
+      - ["user", "realized", "impact goes beyond code and metrics"]
+      - ["user", "has_emotion", "moved"]
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 5:00pm"
+    user_input: |
+      Sam stopped by before leaving and said hey Maya that was really good advocacy, I don't see that enough from ICs. you should think about growing into a lead role. and I was like uhhh what
+    expected_memory_stores:
+      - "Sam feedback"
+      - "advocacy praised"
+      - "lead role suggestion"
+      - "IC to lead"
+    expected_triples:
+      - ["Sam Okafor", "praised", "user's advocacy"]
+      - ["Sam Okafor", "suggested", "user consider lead role"]
+      - ["user", "has_emotion", "surprised"]
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 7:00pm"
+    user_input: |
+      told Julian everything and he opened a bottle of wine to celebrate. he was like I'm proud of you babe, you fought for something and it actually worked. Kobe got extra treats tonight because why not everyone's celebrating
+    expected_memory_stores:
+      - "Julian celebration"
+      - "wine"
+      - "proud"
+      - "Kobe treats"
+    expected_triples:
+      - ["Julian", "celebrated_with", "wine"]
+      - ["Julian", "said", "proud of user for fighting"]
+      - ["Kobe", "got", "extra treats"]
+      - ["user", "has_emotion", "happy"]
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 10:00pm"
+    user_input: |
+      you know what's funny is I keep thinking about what Sam said about the lead role. like I never thought about management before but today felt like... maybe I'm good at the people side of things? not just the code side. something to think about
+    expected_memory_stores:
+      - "lead role reflection"
+      - "management consideration"
+      - "people skills"
+      - "identity shift"
+    expected_triples:
+      - ["user", "considering", "lead role / management"]
+      - ["user", "realized", "may be good at people side not just code"]
+      - ["user", "has_emotion", "contemplative"]
+    expected_adaptation:
+      emotion_detected: "contemplative"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How long is Aisha's extension?"
+    expected_contains: ["four months"]
+  - question: "Is there a path to full-time for Aisha?"
+    expected_contains: ["review", "convert", "full-time"]
+  - question: "Who ultimately approved the extension?"
+    expected_contains: ["VP of engineering"]
+  - question: "What did Sam say about Maya's advocacy?"
+    expected_contains: ["lead role", "good advocacy"]
+  - question: "How did Aisha react to the news?"
+    expected_contains: ["crying", "grateful"]
+  - question: "What was the initial misunderstanding about the extension?"
+    expected_contains: ["six months", "four months"]
+  - question: "How did Aisha's family react?"
+    expected_contains: ["mom", "crying", "proud"]
+  - question: "What did Maya use to convince Sam?"
+    expected_contains: ["ROI", "numbers", "presentation"]
+  - question: "Is Maya considering a role change?"
+    expected_contains: ["lead", "management", "people"]
+  - question: "How did Julian celebrate?"
+    expected_contains: ["wine"]

@@ -1,0 +1,173 @@
+story_id: 342
+story_name: "Julian's Passport Crisis"
+category: "Travel"
+description: |
+  Tests memory of Julian discovering his passport is expired three weeks before
+  the trip. Rush renewal panic. Verifies system captures urgent problem tracking
+  and correction handling (timeline shifts).
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      OH MY GOD Julian just found his passport and it expired in JANUARY and the trip is in THREE WEEKS and I am going to kill him like I literally asked him two months ago if his passport was current and he said yes WITHOUT CHECKING
+    expected_memory_stores:
+      - "Julian passport expired"
+      - "expired January"
+      - "three weeks before trip"
+      - "Maya furious"
+      - "said yes without checking"
+    expected_adaptation:
+      emotion_detected: "panicked"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 7:30 PM"
+    user_input: |
+      googling passport renewal right now and regular renewal takes 6 to 8 weeks which is way too long but there's an expedited option for $60 extra that takes 2 to 3 weeks which is cutting it SO close and there's also a rush option for I think $200 that does it in like 5 to 7 business days
+    expected_memory_stores:
+      - "regular 6-8 weeks"
+      - "expedited $60"
+      - "2-3 weeks"
+      - "rush $200"
+      - "5-7 business days"
+    expected_adaptation:
+      emotion_detected: "stressed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      Julian said he'll do the $200 rush option and I said you're damn right you will and he's filling out the DS-82 form right now and he needs new passport photos and the post office in Sellwood takes them but it closes at 5 so he has to go tomorrow during lunch
+    expected_memory_stores:
+      - "$200 rush option"
+      - "DS-82 form"
+      - "needs passport photos"
+      - "Sellwood post office"
+      - "tomorrow lunch"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 12:30 PM"
+    user_input: |
+      Julian got the photos and submitted the rush renewal at the post office and they said 5 to 7 business days and he asked if they could guarantee it and they said no guarantees which is terrifying and I'm looking at backup plans just in case
+    expected_memory_stores:
+      - "photos done"
+      - "rush renewal submitted"
+      - "5-7 business days"
+      - "no guarantees"
+      - "backup plans"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      told Nadia about the passport situation and she was like Maya breathe it's going to be fine the rush thing always comes through and she said her brother had the same issue before his honeymoon and it came in 4 days and I was like ok that makes me feel slightly better
+    expected_memory_stores:
+      - "Nadia reassurance"
+      - "brother same issue"
+      - "came in 4 days"
+      - "slightly better"
+    expected_adaptation:
+      emotion_detected: "slightly relieved"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 8:00 PM"
+    user_input: |
+      I've been checking the passport tracking status obsessively like every hour and it just says in process and Julian said stop checking and I said you don't get to tell me to stop checking when YOU'RE the one who didn't check your passport
+    expected_memory_stores:
+      - "tracking obsessively"
+      - "in process"
+      - "Julian said stop"
+      - "Maya snapped back"
+    expected_adaptation:
+      emotion_detected: "irritable"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 5:00 PM"
+    user_input: |
+      status changed to PROCESSING today which Nadia says is a good sign and it means it's being made and I am praying to every god that this passport shows up next week because the trip is in 16 days now
+    expected_memory_stores:
+      - "status processing"
+      - "Nadia says good sign"
+      - "being made"
+      - "16 days until trip"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 10:00 AM"
+    user_input: |
+      how much is Julian paying for the passport rush renewal
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Julian is being super apologetic and he made dinner and cleaned the whole house and he said I promise I will never forget to check something important again and I said I'm making a checklist for you from now on and he said that's fair
+    expected_memory_stores:
+      - "Julian apologetic"
+      - "made dinner cleaned"
+      - "promise to check things"
+      - "Maya making checklist"
+    expected_adaptation:
+      emotion_detected: "softening"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Monday 11:00 AM"
+    user_input: |
+      THE PASSPORT ARRIVED TODAY it came in 6 business days and Julian called me at work yelling IT'S HERE and I could barely hear him over the Conduit AI office noise and I literally cried at my desk with relief and my coworker was like are you ok
+    expected_memory_stores:
+      - "passport arrived"
+      - "6 business days"
+      - "Julian called at work"
+      - "Maya cried at desk"
+      - "relief"
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What happened with Julian's passport?"
+    expected_contains: ["expired", "January"]
+  - question: "How much was the rush renewal?"
+    expected_contains: ["$200"]
+  - question: "How long did the passport take to arrive?"
+    expected_contains: ["6 business days"]
+  - question: "Where did Julian get passport photos?"
+    expected_contains: ["Sellwood post office"]
+  - question: "How did Maya feel about Julian not checking?"
+    expected_contains: ["furious", "angry"]
+  - question: "Who reassured Maya about the passport?"
+    expected_contains: ["Nadia"]
+  - question: "Did the passport arrive in time?"
+    expected_contains: ["yes"]
+  - question: "What form did Julian fill out?"
+    expected_contains: ["DS-82"]
+  - question: "How far in advance did they discover the passport issue?"
+    expected_contains: ["three weeks"]
+  - question: "What did Maya do when the passport arrived?"
+    expected_contains: ["cried", "relief"]

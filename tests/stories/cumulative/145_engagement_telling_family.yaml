@@ -1,0 +1,217 @@
+story_id: 145
+story_name: "Telling Family the News"
+category: "Life Events"
+description: |
+  Tests whether the system captures the family notification sequence, each person's
+  reaction, and the emotional cascade of sharing the engagement news. Cross-thread
+  references to family relationships.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 8:00am"
+    user_input: |
+      woke up and the first thing I did was look at my hand and yep ring still there. well kind of there it's loose and I'm afraid it'll fall off. Julian's already up making coffee and he goes good morning fiancee and I almost dropped my phone
+    expected_memory_stores:
+      - "ring still there"
+      - "loose ring"
+      - "Julian said fiancee"
+      - "morning after"
+    expected_triples:
+      - ["user", "wearing_ring", "still there but loose"]
+      - ["Julian", "called_user", "fiancee"]
+      - ["user", "has_emotion", "giddy"]
+    expected_adaptation:
+      emotion_detected: "giddy"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 8:30am"
+    user_input: |
+      called Mom first because she'd never forgive me if she wasn't the first to know. she SCREAMED. like actual blood-curdling scream and then she started crying and then Dad got on the phone and he was crying too. Dad never cries. Julian could hear them from across the room and he was grinning
+    expected_memory_stores:
+      - "called Mom first"
+      - "Mom screamed"
+      - "Mom crying"
+      - "Dad crying"
+      - "Dad never cries"
+      - "Julian grinning"
+    expected_triples:
+      - ["user", "told_first", "Mom about engagement"]
+      - ["user", "mom_reacted", "screamed and cried"]
+      - ["user", "dad_reacted", "cried, never cries"]
+      - ["user", "has_emotion", "joyful"]
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 9:00am"
+    user_input: |
+      called Clara next and she picked up and I said I'm engaged and she goes I KNEW IT I KNEW SOMETHING WAS HAPPENING YOU'VE BEEN WEIRD FOR WEEKS. she's been suspicious apparently because I kept dodging questions about Julian. she's so mad I didn't tell her about the receipt lol
+    expected_memory_stores:
+      - "told Clara"
+      - "Clara knew something"
+      - "been weird for weeks"
+      - "mad about receipt secret"
+    expected_triples:
+      - ["user", "told", "Clara about engagement"]
+      - ["Clara", "suspected", "something happening for weeks"]
+      - ["Clara", "mad_about", "receipt secret"]
+      - ["user", "has_emotion", "amused"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 9:30am"
+    user_input: |
+      Julian called his parents and his mom was SO happy. she said she's been waiting for this since they met me at Thanksgiving. his dad said welcome to the Reeves family officially and that was really sweet. they're already talking about visiting from Denver
+    expected_memory_stores:
+      - "Julian's parents called"
+      - "Julian's mom happy"
+      - "met at Thanksgiving"
+      - "Julian's dad welcome"
+      - "Reeves family"
+      - "Denver"
+      - "visiting"
+    expected_triples:
+      - ["Julian", "told_parents", "about engagement"]
+      - ["Julian", "parents_live_in", "Denver"]
+      - ["Julian", "mom_met_user", "at Thanksgiving"]
+      - ["user", "has_emotion", "warm"]
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 10:00am"
+    user_input: |
+      texted Aisha a photo of the ring and she replied with like 47 emojis and then called me immediately. she goes MAYA I'M SO HAPPY FOR YOU and I could hear her crying at her desk. Derek walked by and was like what now and Aisha goes MAYA'S ENGAGED and suddenly my whole team knows
+    expected_memory_stores:
+      - "Aisha ring photo"
+      - "47 emojis"
+      - "Aisha crying at desk"
+      - "Derek found out"
+      - "whole team knows"
+    expected_triples:
+      - ["user", "sent_ring_photo", "Aisha"]
+      - ["Aisha", "reacted", "47 emojis and crying at desk"]
+      - ["Derek", "spread_news", "whole team knows"]
+      - ["user", "has_emotion", "overwhelmed"]
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 11:00am"
+    user_input: |
+      Rachel Kim sent me a congratulations email cc'ing the whole engineering department which was unexpected but nice. Sam Okafor stopped by my desk and said congratulations Maya that's wonderful news. Rachel Ford from UX brought me flowers from the third floor
+    expected_memory_stores:
+      - "Rachel Kim email"
+      - "whole department"
+      - "Sam Okafor congratulated"
+      - "Rachel Ford flowers"
+    expected_triples:
+      - ["Rachel Kim", "emailed_congratulations", "cc'd whole engineering department"]
+      - ["Sam Okafor", "congratulated", "user at desk"]
+      - ["Rachel Ford", "brought_flowers", "from third floor"]
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 12:00pm"
+    user_input: |
+      who was the first person Maya told about the engagement
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 3:00pm"
+    user_input: |
+      Julian's friend Marcus texted me separately and said I'm really happy for you guys, he's been planning this for months and I've never seen him more sure about anything. MONTHS. he's been planning this for months. that got me emotional all over again
+    expected_memory_stores:
+      - "Marcus texted"
+      - "planning for months"
+      - "never more sure"
+      - "emotional again"
+    expected_triples:
+      - ["Marcus", "texted_user", "happy for you guys"]
+      - ["Julian", "planned_proposal_for", "months"]
+      - ["user", "has_emotion", "moved"]
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 6:00pm"
+    user_input: |
+      posted a photo of us on Instagram with the ring and it got like 300 likes in the first hour. Julian posted on his too with a caption that said she said yes under the neon sign. I'm reading all the comments and crying which is becoming a theme today
+    expected_memory_stores:
+      - "Instagram post"
+      - "300 likes"
+      - "Julian's caption"
+      - "neon sign reference"
+      - "comments crying"
+    expected_triples:
+      - ["user", "posted_engagement", "Instagram with ring photo"]
+      - ["Julian", "instagram_caption", "she said yes under the neon sign"]
+      - ["user", "has_emotion", "overwhelmed"]
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 10:00pm"
+    user_input: |
+      most emotionally exhausting day of my life in the best way. everyone we love knows now. Julian's asleep and Kobe's still wearing his bowtie from yesterday because we forgot to take it off and honestly I think Kobe likes it. my face hurts from smiling. I'm engaged. we're engaged. this is real
+    expected_memory_stores:
+      - "emotionally exhausting"
+      - "everyone knows"
+      - "Kobe bowtie still on"
+      - "face hurts smiling"
+      - "engaged is real"
+    expected_triples:
+      - ["user", "shared_news_with", "everyone they love"]
+      - ["Kobe", "still_wearing", "bowtie from yesterday"]
+      - ["user", "has_emotion", "euphoric"]
+    expected_adaptation:
+      emotion_detected: "euphoric"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who did Maya call first about the engagement?"
+    expected_contains: ["Mom"]
+  - question: "How did Maya's dad react?"
+    expected_contains: ["crying", "never cries"]
+  - question: "Was Clara surprised?"
+    expected_contains: ["knew something", "suspicious"]
+  - question: "Where do Julian's parents live?"
+    expected_contains: ["Denver"]
+  - question: "When did Julian's parents first meet Maya?"
+    expected_contains: ["Thanksgiving"]
+  - question: "Who brought Maya flowers at work?"
+    expected_contains: ["Rachel Ford"]
+  - question: "How long had Julian been planning the proposal?"
+    expected_contains: ["months"]
+  - question: "What was Julian's Instagram caption?"
+    expected_contains: ["she said yes", "neon sign"]
+  - question: "Who told the whole engineering team?"
+    expected_contains: ["Aisha", "Derek"]
+  - question: "Who congratulated Maya from management?"
+    expected_contains: ["Rachel Kim", "Sam Okafor"]

@@ -1,0 +1,180 @@
+story_id: 176
+story_name: "Back in Portland"
+category: "Health"
+description: |
+  Maya returns to Portland, adjusts to monitoring Mom remotely. Daily
+  calls, worry management. Tests ongoing state tracking of remote
+  health situation and multi-thread blending with work and wedding.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 5:00 PM"
+    user_input: |
+      landed back in Portland and Julian and Kobe picked me up at PDX and Kobe jumped on me so hard he almost knocked me over and Julian hugged me and said welcome home and I just stood there in the arrivals area holding them both and I almost cried again because I missed them so much but also because leaving Mom was hard
+    expected_memory_stores:
+      - "Maya back in Portland"
+      - "Julian and Kobe picked her up"
+      - "Kobe jumped on Maya"
+      - "missed them"
+      - "leaving Mom was hard"
+    expected_adaptation:
+      emotion_detected: "mixed emotions"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 8:00 PM"
+    user_input: |
+      called Mom first thing when we got home and she said Maya I'm fine I took my diltiazem at 8pm Dad made dinner and Clara came by after work you don't need to worry and I said okay but I'm going to worry anyway and she laughed and said I know you are just like your father
+    expected_memory_stores:
+      - "called Mom"
+      - "Vivian fine"
+      - "diltiazem taken"
+      - "George made dinner"
+      - "Clara visited"
+      - "Maya worrying"
+    expected_adaptation:
+      emotion_detected: "caring worry"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 9:00 AM"
+    user_input: |
+      back at work today and Priya was really understanding she said take it easy this week and Leon brought me a coffee and said we missed you and the data pipeline project is on hold so I don't have to jump back into anything intense which is nice because my brain is still in Sacramento mode
+    expected_memory_stores:
+      - "back at Vantage"
+      - "Priya understanding"
+      - "Leon brought coffee"
+      - "data pipeline on hold"
+      - "brain still in Sacramento mode"
+    expected_adaptation:
+      emotion_detected: "distracted"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      Clara texted me the update Mom's doing well on the diltiazem no dizziness and her energy is coming back and Dad took her on a walk to the park and she made soup for dinner which Clara said is a good sign because Mom only cooks when she feels like herself
+    expected_memory_stores:
+      - "Clara update"
+      - "diltiazem working well"
+      - "no dizziness"
+      - "energy returning"
+      - "Vivian cooking again"
+      - "walking to park"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 6:00 PM"
+    user_input: |
+      Julian noticed I've been checking my phone obsessively like every 20 minutes and he said Maya you need to trust Clara and I said I do trust Clara I just also need to know and he said okay but maybe set a rule like you call Mom once a day at 7pm and otherwise put the phone down and honestly that's smart
+    expected_memory_stores:
+      - "Maya checking phone obsessively"
+      - "Julian suggests once daily call"
+      - "7pm call rule"
+      - "Maya needs to let go"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 7:00 PM"
+    user_input: |
+      did the 7pm call and Mom sounded great she said she walked for 30 minutes today and felt fine and she's been cutting back on caffeine which she's grumpy about but doing it and she asked about the wedding planning and I was like Mom we're focused on you right now and she said Maya Chen I raised you to multitask so tell me about the flowers
+    expected_memory_stores:
+      - "7pm call"
+      - "Vivian walked 30 minutes"
+      - "cutting back caffeine"
+      - "Vivian asking about wedding"
+      - "Vivian wants to multitask"
+    expected_adaptation:
+      emotion_detected: "amused relief"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 10:00 AM"
+    user_input: |
+      woke up and had a thought I want to install one of those Ring cameras at my parents house so we can check in visually and make sure they're moving around and okay Julian said that's either really caring or really controlling and I said it's both but mostly caring and he said fair
+    expected_memory_stores:
+      - "Ring camera idea"
+      - "visual check-in for parents"
+      - "Julian jokes about control"
+      - "Maya cares"
+    expected_adaptation:
+      emotion_detected: "proactive"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 3:00 PM"
+    user_input: |
+      ordered a Ring camera on Amazon with next day delivery to my parents house and also a Ring doorbell and I called Dad and told him and he said what's a Ring camera and I said it's so I can see who comes to the door and make sure you guys are okay and he said we don't need surveillance Maya and I said Dad just let me do this one thing please
+    expected_memory_stores:
+      - "Ring camera ordered"
+      - "Ring doorbell ordered"
+      - "shipping to parents house"
+      - "George resistant"
+      - "Maya insisting"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 4:00 PM"
+    user_input: |
+      Clara texted that the Ring stuff arrived and she's going to help Dad set it up because Dad and technology are not friends like the man still uses a flip phone for calls and a tablet for YouTube that's it but Clara's patient with tech stuff so she'll handle it
+    expected_memory_stores:
+      - "Ring arrived"
+      - "Clara setting up"
+      - "George not tech savvy"
+      - "flip phone"
+    expected_adaptation:
+      emotion_detected: "practical"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 PM"
+    user_input: |
+      Ring camera is set up and working I can see the front porch and the living room and I checked it and saw Dad sitting in his recliner watching TV and Mom was in the kitchen and everything looked normal and I felt this wave of relief like I can breathe now even from five hundred miles away I know they're okay oh also need to follow up on wedding photographer engagement shoot that's coming up soon
+    expected_memory_stores:
+      - "Ring camera installed and working"
+      - "can see porch and living room"
+      - "parents looked normal"
+      - "Maya relieved"
+      - "engagement shoot coming up"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Did Maya install cameras at her parents' house?"
+    expected_contains: ["Ring camera", "Ring doorbell"]
+  - question: "How often does Maya call her mom?"
+    expected_contains: ["once a day", "7pm"]
+  - question: "How is Vivian doing on diltiazem?"
+    expected_contains: ["well", "no dizziness"]
+  - question: "Is Vivian reducing caffeine?"
+    expected_contains: ["yes", "cutting back"]
+  - question: "Who set up the Ring camera?"
+    expected_contains: ["Clara"]
+  - question: "How far is Maya from her parents?"
+    expected_contains: ["five hundred miles"]
+  - question: "Is Vivian walking?"
+    expected_contains: ["yes", "30 minutes"]
+  - question: "Who suggested the once-daily call rule?"
+    expected_contains: ["Julian"]
+  - question: "Is George tech-savvy?"
+    expected_contains: ["no", "flip phone"]
+  - question: "Is Vivian interested in wedding planning?"
+    expected_contains: ["yes", "asking about"]

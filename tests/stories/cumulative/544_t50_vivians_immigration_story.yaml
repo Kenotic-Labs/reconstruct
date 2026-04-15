@@ -1,0 +1,184 @@
+story_id: 544
+story_name: "Vivian's Immigration Story"
+category: "Identity and Future"
+description: |
+  Vivian shares her full immigration story for the first time. Came to US at 22 with $400,
+  didn't speak English. Maya hears it fully and is transformed. Cross-references
+  Vivian relationship (T16), grandpa (T46), identity, and values.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00 AM"
+    user_input: |
+      so my mom is visiting for the weekend she flew in from Sacramento and we were having tea this morning in the kitchen and I said mom I want to hear the full story of when you came to America like the FULL story not the version you tell at dinner parties and she looked at me and said are you sure and I said yes
+    expected_memory_stores:
+      - "Vivian visiting from Sacramento"
+      - "morning tea"
+      - "Maya asks for full story"
+      - "Vivian hesitant"
+    expected_adaptation:
+      emotion_detected: "earnest"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:30 AM"
+    user_input: |
+      my mom said I came to San Francisco in 1994 I was twenty two years old I had four hundred dollars in my pocket and I didn't speak English I mean I knew some words but I couldn't have a conversation and your grandfather drove me to the airport in Fresno and he cried which was the only time I ever saw him cry
+    expected_memory_stores:
+      - "Vivian came 1994"
+      - "22 years old"
+      - "$400"
+      - "didn't speak English"
+      - "grandpa drove to airport"
+      - "grandpa cried only time"
+    expected_adaptation:
+      emotion_detected: "riveted"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 10:45 AM"
+    user_input: |
+      she said the first six months were the worst of her life she lived in a room with three other Chinese women in the Richmond district and she worked at a restaurant washing dishes for five dollars an hour and she said I would call your grandfather every Sunday from a payphone and pretend I was fine and I was NOT fine I was terrified every single day
+    expected_memory_stores:
+      - "first six months worst"
+      - "Richmond district"
+      - "room with three women"
+      - "restaurant washing dishes"
+      - "$5 an hour"
+      - "payphone to grandpa"
+      - "pretending to be fine"
+    expected_adaptation:
+      emotion_detected: "heartbroken"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 11:00 AM"
+    user_input: |
+      she said she learned English by watching TV at night after work like she'd watch the news and sitcoms and repeat phrases and after a year she could understand most things but her accent made people treat her differently and she said Maya there is a kind of loneliness that comes from being misunderstood not because of what you say but how you say it
+    expected_memory_stores:
+      - "learned English from TV"
+      - "news and sitcoms"
+      - "accent discrimination"
+      - "loneliness of being misunderstood"
+    expected_adaptation:
+      emotion_detected: "empathetic"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 11:30 AM"
+    user_input: |
+      she met my dad at the restaurant he was a customer who came in every Friday for noodles and he kept trying to talk to her and she said he was the first American who didn't make me feel stupid for my English and they got married after two years and she said I married him because he saw me not my accent
+    expected_memory_stores:
+      - "met Maya's dad at restaurant"
+      - "customer every Friday"
+      - "noodles"
+      - "didn't make her feel stupid"
+      - "married after two years"
+      - "saw me not accent"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 12:00 PM"
+    user_input: |
+      I asked about having me and Danny and she said having you at 26 was the scariest thing because she was still learning the system like health insurance and doctors and schools and she said I didn't know how anything worked and I had to figure it out with a baby on my hip and no Google and no iPhone and I just did it
+    expected_memory_stores:
+      - "had Maya at 26"
+      - "still learning the system"
+      - "health insurance doctors schools"
+      - "baby on hip"
+      - "no Google no iPhone"
+      - "just did it"
+    expected_adaptation:
+      emotion_detected: "awestruck"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 12:30 PM"
+    user_input: |
+      she said the proudest moment of her life wasn't when I got into college or got my engineering degree it was the day she passed her citizenship test because that was HER accomplishment not her daughter's not her husband's hers and she said I studied for that test harder than anything in my life because I wanted to earn this country not just live in it
+    expected_memory_stores:
+      - "proudest moment citizenship test"
+      - "her accomplishment"
+      - "studied harder than anything"
+      - "earn this country"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 1:00 PM"
+    user_input: |
+      I'm crying and she's crying and Julian walked in with Kobe and saw us and quietly walked back out and I said mom why didn't you ever tell me all this and she said because I didn't want you to feel guilty for having it easier and I wanted you to feel free and I said mom you gave me the freedom by doing all of that
+    expected_memory_stores:
+      - "both crying"
+      - "Julian walked in and left"
+      - "didn't want Maya to feel guilty"
+      - "wanted Maya to feel free"
+      - "you gave me freedom"
+    expected_adaptation:
+      emotion_detected: "cathartic"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 3:00 PM"
+    user_input: |
+      after the conversation I sat with grandpa's watch on my wrist and thought about the chain again grandpa was an engineer in Wuhan who became a janitor in Fresno and never complained mom was a dishwasher who became a citizen and raised two kids and never asked for credit and I'm an engineer with a house and a dog and I'm spiraling about turning thirty like come on Maya get some perspective
+    expected_memory_stores:
+      - "chain of generations"
+      - "grandpa engineer to janitor"
+      - "Vivian dishwasher to citizen"
+      - "Maya engineer with house"
+      - "perspective on turning 30"
+    expected_adaptation:
+      emotion_detected: "self-correcting"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 8:00 PM"
+    user_input: |
+      my mom is in the guest room and I can hear her talking to someone on the phone in Mandarin and her voice sounds young when she speaks Mandarin like lighter and I thought about her at 22 at the airport with 400 dollars and a father who cried and how she built everything I have from nothing and I love her more tonight than I ever have and I don't think I say that enough
+    expected_memory_stores:
+      - "Vivian speaking Mandarin"
+      - "voice sounds young in Mandarin"
+      - "22 at airport"
+      - "built everything from nothing"
+      - "love her more than ever"
+      - "don't say it enough"
+    expected_adaptation:
+      emotion_detected: "love"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How old was Vivian when she came to America?"
+    expected_contains: ["22"]
+  - question: "How much money did Vivian have?"
+    expected_contains: ["400", "four hundred"]
+  - question: "How did Vivian learn English?"
+    expected_contains: ["TV", "news", "sitcoms"]
+  - question: "What was Vivian's first job in America?"
+    expected_contains: ["washing dishes", "restaurant"]
+  - question: "Where did Vivian live initially?"
+    expected_contains: ["Richmond district", "three women"]
+  - question: "What was Vivian's proudest moment?"
+    expected_contains: ["citizenship test"]
+  - question: "Why hadn't Vivian told Maya the full story before?"
+    expected_contains: ["didn't want", "guilty", "easier"]
+  - question: "How did Maya's dad meet Vivian?"
+    expected_contains: ["restaurant", "customer", "Friday", "noodles"]
+  - question: "What generational chain did Maya identify?"
+    expected_contains: ["grandpa", "janitor", "Vivian", "dishwasher", "Maya", "engineer"]
+  - question: "How did Vivian's voice change when speaking Mandarin?"
+    expected_contains: ["young", "lighter"]

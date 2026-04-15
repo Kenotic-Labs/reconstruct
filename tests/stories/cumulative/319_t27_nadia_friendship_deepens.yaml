@@ -1,0 +1,172 @@
+story_id: 319
+story_name: "Friendship Deepens"
+category: "Friendships"
+description: |
+  Tests memory of the deepening friendship between Maya and Nadia. Shared
+  vulnerabilities, inside jokes, and a growing trust. Verifies system captures
+  relationship evolution beyond initial meeting.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:00 PM"
+    user_input: |
+      Nadia came over for the first time just spontaneously like she was in the neighborhood and texted hey can I come hang and I said yes obviously and she met Kobe properly and he was ALL over her and she was on the floor with him for 20 minutes
+    expected_memory_stores:
+      - "Nadia spontaneous visit"
+      - "first time at Maya's"
+      - "Kobe loved her"
+      - "floor for 20 minutes"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 9:00 PM"
+    user_input: |
+      told Nadia about the Jenny situation like the whole arc the drifting the birthday the visit the depression everything and she was such a good listener and she said it sounds like you and Jenny are stronger than geography and I loved that
+    expected_memory_stores:
+      - "told Nadia about Jenny arc"
+      - "whole story"
+      - "Nadia good listener"
+      - "stronger than geography"
+    expected_adaptation:
+      emotion_detected: "vulnerable"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 7:00 PM"
+    user_input: |
+      climbed with Nadia and I finally topped a V2 today and she screamed louder than I did and we have this thing now where we yell SUMMIT at the top and people look at us funny and I don't care it's our thing
+    expected_memory_stores:
+      - "Maya topped V2"
+      - "Nadia screamed"
+      - "SUMMIT yell tradition"
+      - "inside joke"
+    expected_adaptation:
+      emotion_detected: "triumphant"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Week 2 Monday 7:30 PM"
+    user_input: |
+      Nadia opened up about her childhood tonight she grew up in Accra Ghana before her family moved to Chicago when she was 10 and she said she always felt between two worlds like not Ghanaian enough and not American enough and that hit me because I feel that as a Chinese American too
+    expected_memory_stores:
+      - "Nadia from Accra Ghana"
+      - "moved to Chicago at 10"
+      - "between two worlds"
+      - "not enough of either"
+      - "Maya relates Chinese American"
+    expected_adaptation:
+      emotion_detected: "connected"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Week 2 Tuesday 8:00 PM"
+    user_input: |
+      Nadia showed me photos of her parents they still live in Chicago her mom's name is Ama and her dad is Kofi and they seem really sweet and she said they're worried about her being alone in Portland but she told them she has me
+    expected_memory_stores:
+      - "Nadia's parents in Chicago"
+      - "mom Ama"
+      - "dad Kofi"
+      - "parents worried"
+      - "told them about Maya"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Week 2 Wednesday 6:00 PM"
+    user_input: |
+      we have all these inside jokes now like she calls me Mountain Goat because I scramble up the climbing wall weird and I call her Nature Documentary because of the climbing commentary thing from day one and Julian's like you two are exhausting
+    expected_memory_stores:
+      - "Mountain Goat nickname"
+      - "Nature Documentary nickname"
+      - "Julian calls them exhausting"
+      - "inside jokes accumulating"
+    expected_adaptation:
+      emotion_detected: "playful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Week 2 Thursday 9:00 PM"
+    user_input: |
+      Nadia said something tonight that really struck me she said Maya you're the first person who met me after Kwame and still sees me as a whole person not just a sad divorced woman and I was like Nadia you are SO much more than your divorce
+    expected_memory_stores:
+      - "first person after Kwame"
+      - "whole person"
+      - "not just divorced woman"
+      - "more than divorce"
+    expected_adaptation:
+      emotion_detected: "fierce"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Week 2 Friday 12:00 PM"
+    user_input: |
+      where did Nadia grow up before Chicago
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Week 2 Saturday 4:00 PM"
+    user_input: |
+      Nadia made jollof rice at her place and invited me and Julian and it was the best thing I've ever eaten and she said it's her mom Ama's recipe and Julian had three plates and Nadia was so proud and it felt like family honestly
+    expected_memory_stores:
+      - "jollof rice"
+      - "Ama's recipe"
+      - "Julian three plates"
+      - "Nadia proud"
+      - "felt like family"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Week 2 Sunday 8:00 PM"
+    user_input: |
+      I was thinking tonight about how six months ago I was devastated about Jenny leaving and now I have this incredible friendship with Nadia that I never would have made room for if Jenny was still here and life is weird like that sometimes the loss makes space for something new
+    expected_memory_stores:
+      - "six months reflection"
+      - "Jenny leaving"
+      - "Nadia friendship"
+      - "loss making space"
+      - "life is weird"
+    expected_adaptation:
+      emotion_detected: "philosophical"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where is Nadia originally from?"
+    expected_contains: ["Accra", "Ghana"]
+  - question: "What are Nadia's parents' names?"
+    expected_contains: ["Ama", "Kofi"]
+  - question: "What nicknames do Maya and Nadia have for each other?"
+    expected_contains: ["Mountain Goat", "Nature Documentary"]
+  - question: "What did Nadia say about Maya seeing her as a whole person?"
+    expected_contains: ["first person", "after Kwame", "whole person"]
+  - question: "What dish did Nadia cook for Maya and Julian?"
+    expected_contains: ["jollof rice"]
+  - question: "Whose recipe is the jollof rice?"
+    expected_contains: ["Ama", "mom"]
+  - question: "What climbing milestone has Maya reached?"
+    expected_contains: ["V2"]
+  - question: "What do Maya and Nadia yell at the top of climbs?"
+    expected_contains: ["SUMMIT"]
+  - question: "What cultural identity do Maya and Nadia bond over?"
+    expected_contains: ["between two worlds", "immigrant"]
+  - question: "How does Maya reflect on Jenny leaving and meeting Nadia?"
+    expected_contains: ["loss", "space", "new"]

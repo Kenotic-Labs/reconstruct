@@ -1,0 +1,177 @@
+story_id: 349
+story_name: "Coming Home Changed"
+category: "Travel"
+description: |
+  Tests memory of the return journey from Japan. Flight home, reuniting with
+  Kobe, jet lag, and the feeling of being changed by travel. Verifies system
+  captures homecoming and post-travel emotional state.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Day 10 Thursday 6:00 AM JST"
+    user_input: |
+      leaving Japan today and I'm genuinely sad like I teared up at the airport and Julian said we'll be back and I said promise and he said promise and we went through security at Kansai Airport in Osaka and everything is so efficient even leaving
+    expected_memory_stores:
+      - "leaving Japan"
+      - "teared up at airport"
+      - "Kansai Airport Osaka"
+      - "promise to return"
+      - "efficient even leaving"
+    expected_adaptation:
+      emotion_detected: "sad"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Day 10 Thursday 10:00 AM JST"
+    user_input: |
+      on the plane back and it's ANA again with the layover in San Francisco and I'm looking through my phone photos and I have like 800 photos from 8 days and Julian has another 2000 on his camera and he's editing them on the plane already
+    expected_memory_stores:
+      - "ANA flight home"
+      - "San Francisco layover"
+      - "800 phone photos"
+      - "Julian 2000 camera photos"
+      - "editing on plane"
+    expected_adaptation:
+      emotion_detected: "nostalgic"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Day 10 Thursday 11:00 AM PDT"
+    user_input: |
+      landed in Portland at like 11pm our time and Clara picked us up from the airport and Kobe was IN THE CAR and he lost his absolute mind when he saw us like jumping and whining and licking our faces and I was on the airport floor hugging my dog crying
+    expected_memory_stores:
+      - "landed Portland 11pm"
+      - "Clara picked up"
+      - "Kobe in car"
+      - "dog lost his mind"
+      - "floor hugging dog"
+      - "crying"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Day 10 Thursday 11:30 PM PDT"
+    user_input: |
+      Clara said Kobe was perfect the whole time but he did chew up one of Julian's slippers and Julian was like of course he did and Clara said she left the house clean and there's groceries in the fridge and she wouldn't take any money for dog sitting and I said Clara you're a saint
+    expected_memory_stores:
+      - "Kobe chewed slipper"
+      - "house clean"
+      - "groceries in fridge"
+      - "Clara refused money"
+      - "Clara is a saint"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 6:00 AM PDT"
+    user_input: |
+      woke up at 4am because reverse jet lag and I'm lying in our Woodstock house with Kobe on the bed and Julian snoring and I can hear birds outside and it's quiet and I thought I just went to Japan I actually did that and it feels like a dream
+    expected_memory_stores:
+      - "reverse jet lag 4am"
+      - "Woodstock house"
+      - "Kobe on bed"
+      - "birds outside"
+      - "feels like dream"
+    expected_adaptation:
+      emotion_detected: "surreal"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 12:00 PM PDT"
+    user_input: |
+      sent Marco Polos to Jenny and Nadia showing them all the souvenirs and Jenny was like YES the Kit Kats green tea ones are the best and Nadia said the Totoro keychain made her cry and she put it on her backpack immediately
+    expected_memory_stores:
+      - "Marco Polos souvenirs"
+      - "Jenny loved Kit Kats"
+      - "Nadia cried Totoro"
+      - "on backpack"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 5:00 PM PDT"
+    user_input: |
+      gave out the Round Table souvenirs at an impromptu group hangout and Marcus opened his Japanese whiskey and said we're drinking this RIGHT NOW and Omar appreciated the matcha wait no I got Omar umm oh yeah I got him a ceramic sake cup because he likes ceramics
+    expected_memory_stores:
+      - "Round Table souvenirs"
+      - "Marcus whiskey immediately"
+      - "Omar ceramic sake cup"
+      - "correction"
+      - "Omar likes ceramics"
+    expected_adaptation:
+      emotion_detected: "generous"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 7:00 PM PDT"
+    user_input: |
+      what did Maya get Clara and Tyler as a souvenir from Japan
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 9:00 PM PDT"
+    user_input: |
+      Julian and I went to bed early because jet lag and he said this was the best thing we've ever done together and I said better than the time we drove to Crater Lake and got lost and he said way better and I said yeah way better and we fell asleep holding hands with Kobe between us
+    expected_memory_stores:
+      - "early bed jet lag"
+      - "best thing together"
+      - "better than Crater Lake"
+      - "fell asleep holding hands"
+      - "Kobe between them"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 8:00 AM PDT"
+    user_input: |
+      first full morning home and I made Japanese-style rice and miso for breakfast and Julian said are we going to eat Japanese food every day now and I said yes for at least a month and Greg texted welcome back neighbors hope the trip was good and I said it was Greg it really was
+    expected_memory_stores:
+      - "first morning home"
+      - "Japanese breakfast"
+      - "rice and miso"
+      - "Japanese food daily"
+      - "Greg welcome back text"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who picked Maya and Julian up from the airport?"
+    expected_contains: ["Clara"]
+  - question: "Was Kobe at the airport?"
+    expected_contains: ["yes", "in the car"]
+  - question: "What did Kobe chew while they were gone?"
+    expected_contains: ["slipper", "Julian's"]
+  - question: "Did Clara accept money for dog sitting?"
+    expected_contains: ["no", "refused"]
+  - question: "What souvenir did Nadia put on her backpack?"
+    expected_contains: ["Totoro keychain"]
+  - question: "What did Omar get as a souvenir?"
+    expected_contains: ["ceramic sake cup"]
+  - question: "What did Marcus do with his souvenir?"
+    expected_contains: ["opened", "drink right now", "whiskey"]
+  - question: "How is Maya coping with jet lag?"
+    expected_contains: ["woke up 4am", "reverse jet lag"]
+  - question: "What did Julian say about the trip?"
+    expected_contains: ["best thing", "together"]
+  - question: "What did Maya make for breakfast at home?"
+    expected_contains: ["Japanese", "rice", "miso"]

@@ -1,0 +1,171 @@
+story_id: 503
+story_name: "Grief Waves"
+category: "Grief and Legacy"
+description: |
+  Grief hits Maya in unexpected waves — songs, smells, Kobe's behavior. She processes
+  with Dr. Tate and Julian. Cross-references mental health (T21), dog (T26-T30),
+  cooking (T31), and daily routines.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:30 AM"
+    user_input: |
+      so the weirdest thing happened this morning I was making tea like I do every morning right and I opened one of grandpa's tea tins the ones I brought back from Fresno and the smell of the jasmine tea just like transported me and I stood in the kitchen crying for ten minutes and Kobe came over and put his head on my foot
+    expected_memory_stores:
+      - "grief triggered by jasmine tea"
+      - "grandpa's tea tins"
+      - "crying in kitchen"
+      - "Kobe comforting"
+    expected_adaptation:
+      emotion_detected: "grief"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 2:00 PM"
+    user_input: |
+      I was at the climbing gym today trying to do my usual V4 route and I just couldn't focus like Omar was there and he was like you ok and I said yeah just tired but really I was thinking about how grandpa never saw this house never met Julian never knew I moved to Portland and that's just so much he missed
+    expected_memory_stores:
+      - "climbing gym distraction"
+      - "V4 route"
+      - "Omar noticed"
+      - "grief about what grandpa missed"
+    expected_adaptation:
+      emotion_detected: "melancholy"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 10:00 AM"
+    user_input: |
+      had my session with Dr. Tate today and I told her about the grief waves and she said that's totally normal it's called like um she said a term for it like grief bursts or something and that they can be triggered by sensory things like smells and sounds and she said I should let them happen not fight them
+    expected_memory_stores:
+      - "Dr. Tate session"
+      - "grief bursts"
+      - "sensory triggers"
+      - "advice to let them happen"
+    expected_adaptation:
+      emotion_detected: "processing"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 8:00 PM"
+    user_input: |
+      Julian was playing music while making dinner and this old Teresa Teng song came on like the Mandarin one that grandpa used to play on his little radio and I didn't even know Julian had it in his playlist and I just froze in the hallway and Julian saw my face and turned it off immediately and I said no leave it on I want to hear it
+    expected_memory_stores:
+      - "Teresa Teng song"
+      - "grandpa's radio"
+      - "Julian playing music"
+      - "Maya chose to listen"
+    expected_adaptation:
+      emotion_detected: "bittersweet"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 6:00 PM"
+    user_input: |
+      made miso ramen tonight using my recipe the one I developed after the Japan trip and while I was making the broth I remembered grandpa used to make this soup I think it was a wonton soup and he'd stand at the stove for hours and I never asked him to teach me and that's the thing about grief right it's all the questions you can't ask anymore
+    expected_memory_stores:
+      - "miso ramen recipe"
+      - "Japan trip reference"
+      - "grandpa's wonton soup"
+      - "regret not learning"
+      - "unasked questions grief"
+    expected_adaptation:
+      emotion_detected: "regretful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 11:00 AM"
+    user_input: |
+      went for a hike with Julian and Kobe at Forest Park and I was doing ok like actually enjoying it and then we passed this older Chinese man on the trail walking alone and he had the same build as grandpa and he nodded at me and I just burst into tears on the trail like a crazy person
+    expected_memory_stores:
+      - "Forest Park hike"
+      - "older Chinese man trigger"
+      - "crying on trail"
+      - "Julian and Kobe present"
+    expected_adaptation:
+      emotion_detected: "grief"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 4:00 PM"
+    user_input: |
+      Julian held my hand the whole hike back and didn't say anything which is exactly what I needed like he just gets it sometimes and when we got home Kobe jumped on the couch next to me and wouldn't move for two hours and dogs just know right they just know when you're hurting
+    expected_memory_stores:
+      - "Julian silent support"
+      - "Kobe on couch"
+      - "dogs sensing grief"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 10:00 AM"
+    user_input: |
+      I keep looking at grandpa's watch on my wrist and I noticed today that it loses about a minute per day and I could get it serviced but honestly I kind of like that it's imperfect like it's running on his time not mine and that feels right somehow is that weird
+    expected_memory_stores:
+      - "watch loses a minute per day"
+      - "chose not to service it"
+      - "running on his time"
+      - "sentimental imperfection"
+    expected_adaptation:
+      emotion_detected: "tender"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 3:00 PM"
+    user_input: |
+      my dad George called today which he doesn't do often and he asked how I'm doing with the grandpa stuff and he said when his own father died he didn't cry for a year and then one day he was at the hardware store and saw a specific type of wrench and just lost it in aisle 7 and I laughed for the first time in days
+    expected_memory_stores:
+      - "George called"
+      - "George's father's death story"
+      - "wrench in hardware store"
+      - "Maya laughed"
+    expected_adaptation:
+      emotion_detected: "lighter"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 PM"
+    user_input: |
+      wearing the watch to bed again and I told Julian I think I'm gonna wear it every day like permanently and he said that's beautiful and I looked at it and thought about grandpa putting this watch on every morning in Fresno after losing everything in China and still getting up and going to work and I want to be that strong
+    expected_memory_stores:
+      - "wearing watch daily decision"
+      - "Julian approves"
+      - "grandpa's daily resilience"
+      - "aspiration to be strong"
+    expected_adaptation:
+      emotion_detected: "resolute"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What keeps triggering Maya's grief?"
+    expected_contains: ["smell", "tea", "song", "sensory"]
+  - question: "What did Dr. Tate call the sudden grief episodes?"
+    expected_contains: ["grief bursts"]
+  - question: "What Teresa Teng song reminded Maya of her grandfather?"
+    expected_contains: ["Mandarin", "radio"]
+  - question: "What happened on the Forest Park hike?"
+    expected_contains: ["older", "Chinese man", "cried"]
+  - question: "What's wrong with Grandpa Wei's watch?"
+    expected_contains: ["loses", "minute"]
+  - question: "What story did George share about grief?"
+    expected_contains: ["wrench", "hardware store", "aisle"]
+  - question: "What did Maya decide about wearing the watch?"
+    expected_contains: ["every day", "permanently"]
+  - question: "What cooking memory connected to grandpa?"
+    expected_contains: ["wonton soup", "miso ramen"]
+  - question: "How does Kobe respond to Maya's grief?"
+    expected_contains: ["couch", "foot", "comforting"]
+  - question: "What did Dr. Tate advise about the grief waves?"
+    expected_contains: ["let them happen", "not fight"]

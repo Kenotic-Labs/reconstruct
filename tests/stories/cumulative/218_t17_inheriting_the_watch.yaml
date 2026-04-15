@@ -1,0 +1,171 @@
+story_id: 218
+story_name: "Inheriting the Watch"
+category: "Family"
+description: |
+  Tests object-level memory tracking. The watch becomes a symbol of grandpa's legacy.
+  Maya gets it serviced, wears it daily, it becomes part of her identity.
+  Verifies object state tracking and emotional significance mapping.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      the watch is running a little slow like losing about two minutes a day and I looked it up and apparently old automatic watches need servicing and I found a place called Cascade Watch Repair on um Burnside I think that specializes in vintage Seikos
+    expected_memory_stores:
+      - "watch running slow"
+      - "two minutes a day"
+      - "needs servicing"
+      - "Cascade Watch Repair"
+      - "Burnside"
+      - "vintage Seikos"
+    expected_adaptation:
+      emotion_detected: "practical"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      took the watch to Cascade and the guy there his name is Frank and he's like this old school watchmaker with a loupe and everything and he looked at it and said oh this is a Seiko 6139 from 1972 and it's in beautiful condition and I was like please be careful with it it was my grandfather's
+    expected_memory_stores:
+      - "Frank watchmaker"
+      - "Seiko 6139"
+      - "1972"
+      - "beautiful condition"
+      - "Maya protective"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 5:30 PM"
+    user_input: |
+      Frank said it needs a new gasket and the movement needs cleaning and it'll be like $180 and take about a week and I said that's fine and when I handed it over I felt physically weird like I was giving away a piece of grandpa
+    expected_memory_stores:
+      - "new gasket"
+      - "movement cleaning"
+      - "$180"
+      - "one week"
+      - "felt weird handing it over"
+    expected_adaptation:
+      emotion_detected: "uneasy"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 7:00 AM"
+    user_input: |
+      woke up and reached for the watch on the nightstand and it's not there because it's at the shop and I felt a jolt of panic like I forgot something vital and then remembered and it's just a watch Maya calm down but it's NOT just a watch it's grandpa
+    expected_memory_stores:
+      - "watch not there"
+      - "panic"
+      - "emotional attachment"
+      - "not just a watch"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 2:00 PM"
+    user_input: |
+      Julian got me a temporary watch to wear while the Seiko is being fixed and it's a nice Timex but it feels wrong on my wrist and he was like Maya you're being dramatic and I was like probably but also leave me alone about it
+    expected_memory_stores:
+      - "Julian got Timex"
+      - "feels wrong"
+      - "Maya being dramatic"
+    expected_adaptation:
+      emotion_detected: "stubborn"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 10:00 AM"
+    user_input: |
+      where did I take grandpa's watch to be serviced and what year is the watch from
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 4:00 PM"
+    user_input: |
+      Frank called and said the watch is ready and I practically ran there after work and when he put it on my wrist it was keeping perfect time and he polished the crystal and it looks brand new and I could see the engraving on the back so clearly now time is the bridge between dreams and reality
+    expected_memory_stores:
+      - "watch ready"
+      - "perfect time"
+      - "polished crystal"
+      - "engraving visible"
+      - "picked up immediately"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      wearing the watch again and it feels right and Clara asked me to send her a photo so I did and she said it looks beautiful on you and she said grandpa would be so happy and I said I know and I meant it
+    expected_memory_stores:
+      - "wearing again"
+      - "Clara photo request"
+      - "grandpa would be happy"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 9:00 AM"
+    user_input: |
+      someone at work noticed the watch and said oh cool vintage piece and I said thanks it was my grandfather's and they said oh sorry and I was like no it's good I like talking about him and that felt like progress like I can mention him without falling apart now
+    expected_memory_stores:
+      - "coworker noticed watch"
+      - "talked about grandpa"
+      - "progress"
+      - "can mention without breaking down"
+    expected_adaptation:
+      emotion_detected: "growth"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 8:00 PM"
+    user_input: |
+      told my dad I got the watch serviced and he said good that watch survived the Cultural Revolution and a move across the Pacific and now it's keeping time in Portland and I was like dad stop you're going to make me cry AGAIN and he laughed
+    expected_memory_stores:
+      - "Cultural Revolution"
+      - "survived history"
+      - "George proud"
+      - "Portland now"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What kind of watch did Maya inherit?"
+    expected_contains: ["Seiko 6139", "1972"]
+  - question: "Where did Maya get the watch serviced?"
+    expected_contains: ["Cascade Watch Repair"]
+  - question: "Who is Frank?"
+    expected_contains: ["watchmaker"]
+  - question: "How much did the watch repair cost?"
+    expected_contains: ["$180"]
+  - question: "What does the watch engraving say?"
+    expected_contains: ["time is the bridge between dreams and reality"]
+  - question: "What history has the watch survived?"
+    expected_contains: ["Cultural Revolution", "Pacific"]
+  - question: "How is Maya's grief evolving?"
+    expected_contains: ["progress", "talk about him", "without breaking down"]
+  - question: "What was wrong with the watch?"
+    expected_contains: ["gasket", "movement", "slow"]
+  - question: "What temporary watch did Julian get Maya?"
+    expected_contains: ["Timex"]
+  - question: "What street is the watch repair shop on?"
+    expected_contains: ["Burnside"]

@@ -1,0 +1,183 @@
+story_id: 540
+story_name: "City Chose Me Back"
+category: "Weather and Seasons"
+description: |
+  Maya fully embraces Portland as her city. Weather as identity. The journal entry
+  becomes her mantra. Cross-references house (T41-T45), grandpa (T46), identity (T50),
+  and all seasonal threads.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 8:00 AM"
+    user_input: |
+      it's a weird day today like it rained this morning and then the sun came out and now it's raining again and I used to hate that about Portland the inconsistency but now I think it's actually kind of poetic like the sky can't make up its mind and neither can I sometimes and that's ok
+    expected_memory_stores:
+      - "rain sun rain cycle"
+      - "used to hate inconsistency"
+      - "now finds it poetic"
+      - "sky can't decide neither can she"
+    expected_adaptation:
+      emotion_detected: "accepting"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:00 AM"
+    user_input: |
+      walked to the coffee shop on Woodstock Boulevard the one I go to every Saturday now and the barista knows my order which is an oat milk latte and she had it started when she saw me walk in and that is such a small thing but it means I belong here I'm known here this is my neighborhood
+    expected_memory_stores:
+      - "Woodstock coffee shop"
+      - "barista knows order"
+      - "oat milk latte"
+      - "started before she ordered"
+      - "belonging"
+    expected_adaptation:
+      emotion_detected: "rooted"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:30 AM"
+    user_input: |
+      walked home through the neighborhood and I know the names of things now like that's the Henderson's house and that's the lemon tree I discovered when my phone was broken and that's the park where Kobe jumped in the puddle and that's the path to Forest Park and I know this place in my body not just my GPS
+    expected_memory_stores:
+      - "knows neighborhood names"
+      - "Henderson's house"
+      - "lemon tree from phone break"
+      - "Kobe puddle park"
+      - "Forest Park path"
+      - "knows in body not GPS"
+    expected_adaptation:
+      emotion_detected: "grounded"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 1:00 PM"
+    user_input: |
+      Greg waved at me over the fence and said looks like more rain coming and I said good and he looked surprised and said since when do you like rain and I said since I got a dog who taught me and a house with a good roof and he laughed and said well welcome to Portland then
+    expected_memory_stores:
+      - "Greg wave"
+      - "good response to rain"
+      - "Greg surprised"
+      - "dog and roof reason"
+      - "welcome to Portland"
+    expected_adaptation:
+      emotion_detected: "arrived"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 3:00 PM"
+    user_input: |
+      sat in the backyard looking at the cherry tree and the sky and the houses and the mountains in the distance you can see Mt Hood on clear days and I thought about how I moved here from the Bay Area because it was cheaper and I thought I was settling and instead I was arriving and there's such a big difference between those two things
+    expected_memory_stores:
+      - "backyard contemplation"
+      - "Mt Hood visible"
+      - "moved from Bay Area"
+      - "thought was settling"
+      - "was actually arriving"
+      - "settling vs arriving"
+    expected_adaptation:
+      emotion_detected: "realized"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 5:00 PM"
+    user_input: |
+      called my mom and told her I love Portland and she said Maya you've been there for years and I said yeah but I didn't love it I was just here and now I love it and she said what changed and I said I think I finally stopped comparing it to where I came from and started seeing it for what it is
+    expected_memory_stores:
+      - "told Vivian she loves Portland"
+      - "Vivian surprised"
+      - "stopped comparing"
+      - "seeing it for what it is"
+    expected_adaptation:
+      emotion_detected: "clear"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 6:30 PM"
+    user_input: |
+      Julian and I cooked together tonight and we made ramen because it was cold and soup because we had extra ingredients and dumplings because it's Sunday and the kitchen was warm and chaotic and Kobe was behind the gate and Julian was humming and this is the life I built and it's in this city and the city is part of it
+    expected_memory_stores:
+      - "cooking together"
+      - "ramen soup dumplings"
+      - "warm chaotic kitchen"
+      - "Julian humming"
+      - "life she built in this city"
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 8:00 PM"
+    user_input: |
+      after dinner I went to the porch with tea from grandpa's tin and the rain had stopped and there was a rainbow which almost never happens in Portland in winter and Julian came out and said is that a rainbow in November and I said I think it's a sign and he said of what and I said that I'm exactly where I should be
+    expected_memory_stores:
+      - "porch with grandpa's tea"
+      - "rainbow in November"
+      - "rare Portland winter rainbow"
+      - "it's a sign"
+      - "exactly where she should be"
+    expected_adaptation:
+      emotion_detected: "spiritual"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 9:00 PM"
+    user_input: |
+      opened my journal and reread the line I wrote I chose this city and it chose me back and it's still the truest thing I've written and I added underneath it Portland is not the sunshine It's not the summers It's the rain on your roof when you finally have a roof Portland is the whole weather the whole year and you have to be here for all of it to understand any of it
+    expected_memory_stores:
+      - "journal reread"
+      - "chose this city chose me back"
+      - "Portland is the whole weather"
+      - "rain on your roof"
+      - "have to be here for all of it"
+    expected_adaptation:
+      emotion_detected: "eloquent"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:30 PM"
+    user_input: |
+      turning off the lights and the rain is starting again and the house is warm and the candle I forgot to blow out is flickering in the kitchen and Kobe is snoring and Julian is reading and the cherry tree is out there in the dark growing and the watch is on my wrist ticking and this is home this is home this is home
+    expected_memory_stores:
+      - "lights off rain starting"
+      - "warm house candle"
+      - "Kobe snoring"
+      - "Julian reading"
+      - "cherry tree growing dark"
+      - "watch ticking"
+      - "this is home repeated"
+    expected_adaptation:
+      emotion_detected: "home"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya's Portland mantra?"
+    expected_contains: ["chose this city", "chose me back"]
+  - question: "What does the barista at the Woodstock coffee shop know?"
+    expected_contains: ["oat milk latte", "order"]
+  - question: "What did Greg say about Maya liking rain?"
+    expected_contains: ["welcome to Portland"]
+  - question: "What is the difference between settling and arriving?"
+    expected_contains: ["thought settling", "was arriving"]
+  - question: "What did Maya say changed about her view of Portland?"
+    expected_contains: ["stopped comparing"]
+  - question: "What rare weather event happened?"
+    expected_contains: ["rainbow", "November"]
+  - question: "What does Maya say Portland is?"
+    expected_contains: ["whole weather", "whole year"]
+  - question: "Where did Maya move from?"
+    expected_contains: ["Bay Area"]
+  - question: "What mountain can Maya see from the backyard?"
+    expected_contains: ["Mt Hood"]
+  - question: "What is Maya's final feeling about Portland?"
+    expected_contains: ["home"]

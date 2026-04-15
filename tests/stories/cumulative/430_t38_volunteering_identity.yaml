@@ -1,0 +1,173 @@
+story_id: 430
+story_name: "Volunteering Identity"
+category: "Volunteering"
+description: |
+  Thread 38 conclusion. Maya has fully integrated volunteering into her identity.
+  Plans for the future and connections across life domains. Arc resolution.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 8:00 AM"
+    user_input: |
+      Saturday morning food bank shift and I realized something funny I actually look forward to this more than most things in my week like even on Friday nights I'm thinking about what we'll sort tomorrow and who I'll work with and that's kind of wild considering I was nervous on day one
+    expected_memory_stores:
+      - "looks forward to food bank"
+      - "more than most things"
+      - "Friday night anticipation"
+      - "contrast with first day"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:00 AM"
+    user_input: |
+      Diane showed me the impact report for the year and our food drive alone accounted for like 13 percent of their annual donations and she said Maya you single handedly changed our budget outlook and I was like it wasn't just me it was the whole Conduit team but she insisted I was the catalyst
+    expected_memory_stores:
+      - "annual impact report"
+      - "13% of donations"
+      - "changed budget outlook"
+      - "Maya the catalyst"
+      - "credits whole team"
+    expected_adaptation:
+      emotion_detected: "humble pride"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:30 AM"
+    user_input: |
+      Harold pulled me aside and said something that I'll never forget he said Maya I've watched a lot of volunteers come and go in 12 years and most of them show up a few times and disappear but you you're the real thing and I almost hugged him but Harold's not a hugger so I just said thank you Harold
+    expected_memory_stores:
+      - "Harold's words"
+      - "watched volunteers come and go"
+      - "you're the real thing"
+      - "12 years experience"
+      - "Harold not a hugger"
+    expected_adaptation:
+      emotion_detected: "deeply touched"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 1:00 PM"
+    user_input: |
+      during lunch Tomas asked about the wedding and I was showing him pictures of the venue and he said his daughter just got married last year at a winery in the Willamette Valley and he started tearing up talking about walking her down the aisle and I was like Tomas you're going to make ME cry
+    expected_memory_stores:
+      - "Tomas asked about wedding"
+      - "Tomas daughter married"
+      - "winery Willamette Valley"
+      - "walking her down aisle"
+      - "both emotional"
+    expected_adaptation:
+      emotion_detected: "tender"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 2:00 PM"
+    user_input: |
+      Diane mentioned the board position is still open and they haven't filled it yet and she gave me this look and I said Diane I promise after the wedding we'll talk and she said I'm going to hold you to that and honestly I think I do want to do it eventually just not right now
+    expected_memory_stores:
+      - "board still open"
+      - "Diane persistent gently"
+      - "after wedding promise"
+      - "Maya wants to eventually"
+    expected_adaptation:
+      emotion_detected: "committed future"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Patricia the retired nurse brought homemade tamales for all the volunteers today and they were incredible and she said her grandmother taught her the recipe and food is love in her family and I was thinking about my own grandmother who I never met who fed the whole block and how food really is love for so many of us
+    expected_memory_stores:
+      - "Patricia brought tamales"
+      - "grandmother's recipe"
+      - "food is love"
+      - "Maya's grandmother connection"
+    expected_adaptation:
+      emotion_detected: "connected"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 5:00 PM"
+    user_input: |
+      driving home in Stella and I passed a restaurant where Julian and I had our first date and I thought about how many threads in my life are running at the same time like the wedding and work and volunteering and the house and friends and somehow they all weave together into this thing called my life
+    expected_memory_stores:
+      - "driving Stella home"
+      - "first date restaurant"
+      - "multiple life threads"
+      - "weave together"
+    expected_adaptation:
+      emotion_detected: "philosophical"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 6:00 PM"
+    user_input: |
+      who brought food for the volunteers today and what did they make
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 7:30 PM"
+    user_input: |
+      Julian asked how the shift was and I said do you know what Harold said to me today and I told him and Julian said Harold sounds like a good dude and I said he's the best and Julian was like you always find good people Maya like everywhere you go you find the good ones and I was like well you're one of them
+    expected_memory_stores:
+      - "Julian asks about shift"
+      - "told him about Harold"
+      - "Julian compliment"
+      - "Maya finds good people"
+      - "Julian is one of them"
+    expected_adaptation:
+      emotion_detected: "loving"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 9:00 PM"
+    user_input: |
+      end of another food bank Saturday and I know this is going to be part of my life for a long time like I can see myself still doing this in 10 years bringing my kids to volunteer with me someday and teaching them that community matters and your time is the most valuable thing you can give and yeah this is who I am now
+    expected_memory_stores:
+      - "long term commitment"
+      - "10 years vision"
+      - "bringing future kids"
+      - "community matters"
+      - "time is most valuable gift"
+      - "identity integration"
+    expected_adaptation:
+      emotion_detected: "purposeful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did Harold say to Maya about her volunteering?"
+    expected_contains: ["real thing", "come and go"]
+  - question: "Is the food bank board position still open?"
+    expected_contains: ["yes", "still open"]
+  - question: "What did Tomas share about his daughter?"
+    expected_contains: ["married", "winery", "Willamette Valley"]
+  - question: "Who made tamales for the volunteers?"
+    expected_contains: ["Patricia"]
+  - question: "What percentage of annual donations came from Maya's food drive?"
+    expected_contains: ["13"]
+  - question: "Does Maya plan to join the board eventually?"
+    expected_contains: ["yes", "after wedding"]
+  - question: "What long-term vision does Maya have for volunteering?"
+    expected_contains: ["10 years", "kids", "teach"]
+  - question: "How does Maya describe what Harold is like?"
+    expected_contains: ["not a hugger"]
+  - question: "What did Julian say about Maya's character?"
+    expected_contains: ["find good people", "everywhere"]
+  - question: "What connection does Maya draw between Patricia and her grandmother?"
+    expected_contains: ["food is love", "grandmother"]

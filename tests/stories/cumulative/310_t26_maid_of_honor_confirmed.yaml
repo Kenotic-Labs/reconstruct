@@ -1,0 +1,170 @@
+story_id: 310
+story_name: "Maid of Honor Confirmed"
+category: "Friendships"
+description: |
+  Tests memory of Jenny formally confirming her role as maid of honor.
+  They discuss wedding planning logistics. The friendship arc resolves
+  with a new sustainable rhythm. Verifies thread completion and emotional resolution.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00 AM"
+    user_input: |
+      had the best Marco Polo conversation with Jenny this morning she sent one while making breakfast tacos which is so Austin of her and she was like ok let's talk wedding stuff for real because I'm your maid of honor and I need to start planning
+    expected_memory_stores:
+      - "Marco Polo morning"
+      - "breakfast tacos"
+      - "wedding planning"
+      - "maid of honor"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 11:00 AM"
+    user_input: |
+      sent her a Marco Polo back and I was like ok so the wedding is in September at um that venue in the gorge wait no we haven't picked the venue yet but we're looking at this place in Hood River on the Columbia River and she was like oh my god that sounds gorgeous
+    expected_memory_stores:
+      - "wedding September"
+      - "Hood River venue"
+      - "Columbia River"
+      - "venue not confirmed yet"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 12:30 PM"
+    user_input: |
+      Jenny said she'll fly up for the bachelorette party obviously and she wants to plan it and she was thinking like a wine weekend in Willamette Valley which honestly sounds perfect because she knows I hate the whole Vegas bachelorette thing
+    expected_memory_stores:
+      - "bachelorette party"
+      - "Jenny planning"
+      - "Willamette Valley wine weekend"
+      - "Maya hates Vegas bachelorette"
+    expected_adaptation:
+      emotion_detected: "pleased"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 2:00 PM"
+    user_input: |
+      we FaceTimed for real this time because there was too much to cover in Marco Polos and she had a whole Google doc with like colors and timeline and vendor suggestions and I was like dude you've been thinking about this and she said of course I have it's your wedding Maya
+    expected_memory_stores:
+      - "FaceTime call"
+      - "Google doc"
+      - "colors timeline vendors"
+      - "Jenny prepared"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 3:30 PM"
+    user_input: |
+      she said she's gonna come up to Portland like once a month for wedding stuff starting in March and she already looked at flights and Alaska Airlines has the Portland Austin route for like 180 bucks each way if you book early
+    expected_memory_stores:
+      - "monthly Portland visits"
+      - "starting March"
+      - "Alaska Airlines"
+      - "180 each way"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 5:00 PM"
+    user_input: |
+      told Julian that Jenny is fully committed to the maid of honor thing and he was like I never doubted her and I was like well I kinda did for a minute there and he gave me that look like see I told you and I hate when he's right
+    expected_memory_stores:
+      - "Julian never doubted"
+      - "Maya doubted"
+      - "Julian right"
+    expected_adaptation:
+      emotion_detected: "sheepish"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 6:30 PM"
+    user_input: |
+      Jenny also said she's doing better like the Zoloft got adjusted to 75mg and she feels more like herself now and Dr Okafor said she's making really good progress and I think having the wedding to look forward to is helping her too
+    expected_memory_stores:
+      - "Zoloft adjusted 75mg"
+      - "feeling more like herself"
+      - "Dr Okafor good progress"
+      - "wedding motivation"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 7:30 PM"
+    user_input: |
+      what dose is Jenny's Zoloft at now
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 8:00 PM"
+    user_input: |
+      I was thinking about the whole Jenny arc and like two months ago I thought I was losing my best friend and now I feel like we're actually stronger than before because we went through something real and came out the other side and that matters more than proximity
+    expected_memory_stores:
+      - "reflection on arc"
+      - "thought losing friend"
+      - "stronger than before"
+      - "went through something"
+      - "matters more than proximity"
+    expected_adaptation:
+      emotion_detected: "wise"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 9:30 PM"
+    user_input: |
+      Jenny sent one last Marco Polo tonight and she was holding a glass of wine and she said here's to us and to the wedding and to figuring it out and she looked happy like actually truly happy and I sent one back saying I love you weirdo and she said I love you more and yeah I think we're good
+    expected_memory_stores:
+      - "toast Marco Polo"
+      - "wine"
+      - "here's to us"
+      - "Jenny happy"
+      - "I love you exchange"
+      - "we're good"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Is Jenny confirmed as maid of honor?"
+    expected_contains: ["yes", "confirmed"]
+  - question: "What is Jenny planning for the bachelorette party?"
+    expected_contains: ["Willamette Valley", "wine weekend"]
+  - question: "How often will Jenny visit Portland for wedding planning?"
+    expected_contains: ["once a month", "monthly"]
+  - question: "What is Jenny's current Zoloft dose?"
+    expected_contains: ["75mg"]
+  - question: "Where is Maya considering for the wedding venue?"
+    expected_contains: ["Hood River", "Columbia River"]
+  - question: "When is the wedding planned for?"
+    expected_contains: ["September"]
+  - question: "How much are flights between Austin and Portland?"
+    expected_contains: ["180"]
+  - question: "What tools did Jenny prepare for wedding planning?"
+    expected_contains: ["Google doc"]
+  - question: "How does Maya feel about the friendship now?"
+    expected_contains: ["stronger", "good"]
+  - question: "How is Jenny's mental health now?"
+    expected_contains: ["better", "happy", "progress"]

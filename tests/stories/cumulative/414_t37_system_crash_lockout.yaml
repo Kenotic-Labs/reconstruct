@@ -1,0 +1,171 @@
+story_id: 414
+story_name: "System Crash Lockout"
+category: "Smart Home"
+description: |
+  The entire smart home system crashes at 11pm, locking Maya and Julian out in the rain.
+  They call a locksmith. Maya is furious. Major turning point in smart home arc.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 11:05 PM"
+    user_input: |
+      ok I am LIVID right now we just got back from dinner with Clara and Nadia and we walk up to our front door and the smart lock is just dead like the display is blank nothing happens when I put in the code Julian's phone app says device offline and the Ring doorbell is dead too like EVERYTHING is down
+    expected_memory_stores:
+      - "smart lock dead"
+      - "display blank"
+      - "code not working"
+      - "app says offline"
+      - "Ring also dead"
+      - "dinner with Clara and Nadia"
+    expected_adaptation:
+      emotion_detected: "furious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 11:15 PM"
+    user_input: |
+      and it's RAINING like pouring rain and we're standing on our own porch unable to get into our own house because Julian wanted a smart home and I'm like where's the spare key under the mat and Julian looks at me and says he moved it inside because having a key under the mat defeats the purpose of a smart lock and I wanted to scream
+    expected_memory_stores:
+      - "raining pouring"
+      - "locked out"
+      - "spare key moved inside"
+      - "Julian moved the key"
+      - "Maya furious at Julian"
+    expected_adaptation:
+      emotion_detected: "enraged"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 11:25 PM"
+    user_input: |
+      Julian tried the garage door but the smart lock on that is dead too and the back door has a regular lock but we don't carry that key anymore because Julian said we don't need keys remember and I'm standing in the rain in a dress and heels and Kobe is inside probably wondering why we're on the porch
+    expected_memory_stores:
+      - "garage lock also dead"
+      - "back door regular lock"
+      - "no keys carried anymore"
+      - "Maya in dress and heels"
+      - "Kobe inside"
+    expected_adaptation:
+      emotion_detected: "miserable"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 11:35 PM"
+    user_input: |
+      Julian called a locksmith and the guy said he could be here in 45 minutes and it's gonna cost 180 dollars for an after hours call and I'm like ONE HUNDRED AND EIGHTY DOLLARS because your stupid smart locks crashed and Julian just said nothing because he knows he's in trouble
+    expected_memory_stores:
+      - "locksmith called"
+      - "45 minute wait"
+      - "$180 after hours"
+      - "Julian knows he's in trouble"
+    expected_adaptation:
+      emotion_detected: "seething"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 11:50 PM"
+    user_input: |
+      we're sitting in Julian's truck waiting for the locksmith with the heater on and I'm not talking to Julian because if I open my mouth right now I'm going to say things I regret and he tried to say something and I held up my hand and he stopped smart man
+    expected_memory_stores:
+      - "sitting in truck"
+      - "not speaking to Julian"
+      - "silent treatment"
+    expected_adaptation:
+      emotion_detected: "cold fury"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 12:20 AM"
+    user_input: |
+      locksmith is here his name is Dave and he's super chill about it and he said this happens all the time with smart locks he sees it at least twice a week and he got the front door open in literally 4 minutes which makes me feel great about our home security by the way like 4 minutes and he's in
+    expected_memory_stores:
+      - "locksmith Dave"
+      - "opened in 4 minutes"
+      - "happens twice a week"
+      - "security concern"
+    expected_adaptation:
+      emotion_detected: "sarcastic"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 12:30 AM"
+    user_input: |
+      so what happened was apparently there was a firmware update that pushed to all the smart devices at the same time and it bricked everything temporarily like the Nest the Ring and both August locks all went down at once because they all updated and rebooted and lost connection to the hub or whatever Julian is explaining this and I'm like I DON'T CARE WHY it happened
+    expected_memory_stores:
+      - "firmware update caused crash"
+      - "all devices updated simultaneously"
+      - "Nest Ring August all down"
+      - "lost connection to hub"
+    expected_adaptation:
+      emotion_detected: "not interested in excuses"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 12:45 AM"
+    user_input: |
+      Julian reset everything and the locks are working again and the Ring is back and the Nest came back on its own but I told him straight up this can never happen again and he agreed and said he'd disable automatic updates and I said you better and also we're putting a key back under the mat immediately
+    expected_memory_stores:
+      - "everything reset"
+      - "disable automatic updates"
+      - "key back under mat"
+      - "Maya ultimatum"
+    expected_adaptation:
+      emotion_detected: "firm"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 1:00 AM"
+    user_input: |
+      how much did the locksmith cost and why did the smart home system crash I need to tell this story to Clara tomorrow she's gonna die
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 8:00 AM"
+    user_input: |
+      woke up this morning and Julian had already put a spare key in a lockbox under the porch with a combination and he also ordered a regular deadbolt for the back door as a backup and he made me breakfast and I can tell he feels terrible which he should but also it was kind of sweet the breakfast part not the locking us out part
+    expected_memory_stores:
+      - "lockbox under porch"
+      - "combination lockbox"
+      - "regular deadbolt ordered"
+      - "Julian made breakfast"
+      - "Julian feeling guilty"
+    expected_adaptation:
+      emotion_detected: "softening"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Why were Maya and Julian locked out?"
+    expected_contains: ["firmware update", "smart lock", "crash"]
+  - question: "How much did the locksmith cost?"
+    expected_contains: ["180"]
+  - question: "What time were they locked out?"
+    expected_contains: ["11", "PM"]
+  - question: "Where was the spare key?"
+    expected_contains: ["inside", "Julian moved"]
+  - question: "What was the weather during the lockout?"
+    expected_contains: ["rain"]
+  - question: "How long did the locksmith take to open the door?"
+    expected_contains: ["4 minutes"]
+  - question: "What caused all the smart devices to crash?"
+    expected_contains: ["firmware update", "simultaneous"]
+  - question: "What backup measures did Julian add after?"
+    expected_contains: ["lockbox", "combination", "regular deadbolt"]
+  - question: "What devices were affected by the crash?"
+    expected_contains: ["Nest", "Ring", "August", "locks"]
+  - question: "Who was the locksmith?"
+    expected_contains: ["Dave"]

@@ -1,0 +1,177 @@
+story_id: 224
+story_name: "Missing Marathon Depression"
+category: "Health"
+description: |
+  Tests system tracking emotional fallout from lost goal. Marathon day arrives and Maya
+  can't participate. Depression sets in. Verifies system links physical injury to mental
+  health impact.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 6:00 AM"
+    user_input: |
+      it's marathon day and I can't stop checking the Portland Marathon instagram and seeing all these runners at the start line and I should be there I TRAINED for this and instead I'm on the couch with a knee brace and ice packs at 6 am watching other people live my dream
+    expected_memory_stores:
+      - "marathon day"
+      - "watching on instagram"
+      - "should be there"
+      - "on couch"
+      - "knee brace"
+    expected_adaptation:
+      emotion_detected: "bitter"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 8:00 AM"
+    user_input: |
+      Julian tried to cheer me up by making pancakes and suggesting we go watch the race somewhere and I snapped at him and said I don't want to WATCH it I want to RUN it and he just went quiet and I felt bad immediately but I didn't apologize
+    expected_memory_stores:
+      - "Julian pancakes"
+      - "suggested watching race"
+      - "Maya snapped"
+      - "didn't apologize"
+    expected_adaptation:
+      emotion_detected: "angry"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 12:00 PM"
+    user_input: |
+      a girl from my running group Naomi texted me a photo from mile 13 saying wish you were here and I threw my phone on the bed and started crying and Julian came in and just sat with me and this time I let him hold me and I said I'm sorry for snapping
+    expected_memory_stores:
+      - "Naomi text"
+      - "running group"
+      - "mile 13 photo"
+      - "crying"
+      - "apologized to Julian"
+    expected_adaptation:
+      emotion_detected: "devastated"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 4:00 PM"
+    user_input: |
+      Naomi finished in 4 hours 12 minutes and I'm happy for her I really am but I'm also so jealous and sad and I feel pathetic for being sad about a race when like there are real problems in the world but it was MY thing and I lost it
+    expected_memory_stores:
+      - "Naomi finished"
+      - "4 hours 12 minutes"
+      - "jealous"
+      - "sad"
+      - "feels pathetic"
+      - "running was my thing"
+    expected_adaptation:
+      emotion_detected: "self-pitying"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Sunday 9:00 AM"
+    user_input: |
+      didn't get out of bed until noon yesterday and barely ate and Julian is worried and honestly I think this is more than just the marathon thing I think not being able to run has messed with my whole mental state like I've been low for weeks and this was the breaking point
+    expected_memory_stores:
+      - "stayed in bed"
+      - "barely ate"
+      - "Julian worried"
+      - "more than marathon"
+      - "low for weeks"
+      - "mental state affected"
+    expected_adaptation:
+      emotion_detected: "depressed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 2:00 PM"
+    user_input: |
+      when is my next PT appointment with Jake
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 4:00 PM"
+    user_input: |
+      Clara called because Julian texted her and she was like Maya are you ok and I said I'm fine and she said you're not fine and she said losing something that gives you identity is a real loss and it's ok to grieve it and she said have you thought about talking to someone
+    expected_memory_stores:
+      - "Clara called"
+      - "Julian texted Clara"
+      - "identity loss"
+      - "ok to grieve"
+      - "talking to someone suggested"
+    expected_adaptation:
+      emotion_detected: "resistant"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Monday 10:00 AM"
+    user_input: |
+      told Jake about how I've been feeling at PT and he was like yeah I see this a lot with runners who get injured it's like runners high withdrawal combined with identity disruption and he said the swimming idea is partially about mental health too not just physical
+    expected_memory_stores:
+      - "Jake understands"
+      - "runners high withdrawal"
+      - "identity disruption"
+      - "swimming for mental health"
+    expected_adaptation:
+      emotion_detected: "seen"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 5:00 PM"
+    user_input: |
+      I've been wearing pajamas for three days and the house is a mess and I haven't walked Kobe Julian has been doing it and I know this isn't ok and I need to pull myself together but the couch has like gravity right now
+    expected_memory_stores:
+      - "pajamas three days"
+      - "house messy"
+      - "Julian walking Kobe"
+      - "can't get up"
+      - "couch gravity"
+    expected_adaptation:
+      emotion_detected: "depressed"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 8:00 AM"
+    user_input: |
+      ok I'm going to try the swimming thing today because I can't just sit here rotting and there's a pool at um I think it's called Matt Dishman Community Center and they have lap swim and Jake said water would make the knee feel better and maybe it'll make my brain feel better too
+    expected_memory_stores:
+      - "trying swimming"
+      - "Matt Dishman Community Center"
+      - "lap swim"
+      - "Jake's suggestion"
+      - "brain and body"
+    expected_adaptation:
+      emotion_detected: "trying"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Did Maya run the Portland Marathon?"
+    expected_contains: ["no", "withdrew", "knee"]
+  - question: "How did Maya feel on marathon day?"
+    expected_contains: ["bitter", "devastated", "sad"]
+  - question: "Who is Naomi?"
+    expected_contains: ["running group"]
+  - question: "What was Naomi's marathon time?"
+    expected_contains: ["4 hours 12 minutes"]
+  - question: "How has the injury affected Maya's mental health?"
+    expected_contains: ["depressed", "low", "identity"]
+  - question: "What did Jake say about runners and injury?"
+    expected_contains: ["runners high withdrawal", "identity disruption"]
+  - question: "What exercise is Maya going to try?"
+    expected_contains: ["swimming"]
+  - question: "Where is Maya going to swim?"
+    expected_contains: ["Matt Dishman Community Center"]
+  - question: "Who suggested Maya talk to someone?"
+    expected_contains: ["Clara"]
+  - question: "How has Julian been helping?"
+    expected_contains: ["walking Kobe", "supportive"]

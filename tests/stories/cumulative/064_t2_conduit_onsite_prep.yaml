@@ -1,0 +1,220 @@
+story_id: 64
+story_name: "Conduit AI Onsite Prep"
+category: "Career"
+description: |
+  Tests memory of Maya's intensive preparation for the Conduit AI onsite.
+  She studies the company, their product, and tech stack deeply.
+  Verifies system tracks preparation details and emotional buildup.
+duration_simulated: "4 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:00 AM"
+    user_input: |
+      okay so the Conduit onsite is Thursday and I have four days to prep and I made a study plan with Julian's help like day one is system design deep dive day two is coding practice day three is company research and culture prep and day four is just review and rest
+    expected_memory_stores:
+      - "Conduit onsite Thursday"
+      - "study plan"
+      - "four day prep"
+      - "Julian helped plan"
+    expected_triples:
+      - ["Conduit_onsite", "scheduled_for", "Thursday"]
+      - ["user", "created", "four day study plan"]
+      - ["Julian", "helped_with", "study plan"]
+      - ["user", "has_emotion", "organized"]
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 2:00 PM"
+    user_input: |
+      spent all morning on system design and I focused on search infrastructure because that's what Conduit does and I designed three different architectures for distributed search indexing and inverted indexes and ranking pipelines and I feel solid on this stuff like this is genuinely what I love doing
+    expected_memory_stores:
+      - "system design prep"
+      - "search infrastructure"
+      - "distributed search indexing"
+      - "inverted indexes"
+      - "ranking pipelines"
+      - "passion for topic"
+    expected_triples:
+      - ["user", "studied", "search infrastructure for system design"]
+      - ["user", "designed", "distributed search indexing architectures"]
+      - ["user", "passionate_about", "search infrastructure"]
+      - ["user", "has_emotion", "confident"]
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 7:00 PM"
+    user_input: |
+      Derek sent a passive aggressive email today about velocity metrics for the customer portal pod and I just responded with the bare minimum because honestly I cannot bring myself to care about portal velocity when I'm potentially four days away from never having to see Derek's name in my inbox again
+    expected_memory_stores:
+      - "Derek email"
+      - "velocity metrics"
+      - "bare minimum response"
+      - "leaving soon potentially"
+    expected_triples:
+      - ["Derek", "sent", "passive aggressive email about velocity metrics"]
+      - ["user", "responded", "bare minimum"]
+      - ["user", "has_emotion", "dismissive"]
+    expected_adaptation:
+      emotion_detected: "dismissive"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 9:00 AM"
+    user_input: |
+      coding practice day and I'm doing practical problems not leetcode because Conduit's coding round is supposed to be more real world according to Nina and Sam apparently designs the coding questions himself and they're based on actual problems Conduit has solved which I love
+    expected_memory_stores:
+      - "practical coding"
+      - "not leetcode"
+      - "real world problems"
+      - "Sam designs questions"
+      - "actual Conduit problems"
+    expected_triples:
+      - ["user", "practicing", "practical coding not leetcode"]
+      - ["Conduit", "coding_round_style", "real world problems"]
+      - ["Sam_Okafor", "designs", "Conduit coding questions"]
+      - ["user", "has_emotion", "enthusiastic"]
+    expected_adaptation:
+      emotion_detected: "enthusiastic"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      Kobe was being extra clingy today like he kept putting his head on my keyboard while I was studying and Julian was like he knows you're stressed dogs can sense that and honestly maybe Kobe is right maybe I need to take a break so we went for a walk around the neighborhood
+    expected_memory_stores:
+      - "Kobe clingy"
+      - "head on keyboard"
+      - "dog sensing stress"
+      - "Julian observation"
+      - "neighborhood walk"
+    expected_triples:
+      - ["Kobe", "being", "clingy putting head on keyboard"]
+      - ["Julian", "observed", "Kobe senses user's stress"]
+      - ["user", "took_break", "neighborhood walk"]
+      - ["user", "has_emotion", "stressed"]
+    expected_adaptation:
+      emotion_detected: "stressed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 10:00 AM"
+    user_input: |
+      company research day and I read everything about Conduit AI their blog posts their engineering blog their Series B announcement their Glassdoor reviews and honestly the culture seems amazing like people talk about autonomy and ownership and no micromanagement which is literally the opposite of Derek
+    expected_memory_stores:
+      - "Conduit research"
+      - "blog posts"
+      - "engineering blog"
+      - "Glassdoor reviews"
+      - "autonomy culture"
+      - "no micromanagement"
+      - "opposite of Derek"
+    expected_triples:
+      - ["user", "researched", "Conduit AI blog and Glassdoor reviews"]
+      - ["Conduit", "culture", "autonomy and ownership"]
+      - ["Conduit", "culture", "no micromanagement"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 3:00 PM"
+    user_input: |
+      prepped my culture fit answers and I have stories ready for like tell me about a time you dealt with conflict which hello the entire Derek PIP saga and a time you showed initiative which is the data pipeline project I tried to lead and a time you failed which is the Google interviews honestly my recent life is full of interview material
+    expected_memory_stores:
+      - "culture fit prep"
+      - "conflict story - Derek PIP"
+      - "initiative story - data pipeline"
+      - "failure story - Google"
+    expected_triples:
+      - ["user", "prepped", "culture fit answers"]
+      - ["user", "conflict_story", "Derek PIP saga"]
+      - ["user", "initiative_story", "data pipeline project"]
+      - ["user", "failure_story", "Google interviews"]
+    expected_adaptation:
+      emotion_detected: "wry"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      what day is Maya's Conduit AI onsite interview
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      Julian set up the office with good lighting and a clean background for my video interviews tomorrow and he even ironed my nicest blouse and I was like Julian it's a video call from the waist up and he said first impressions matter even on zoom and I love that he cares this much
+    expected_memory_stores:
+      - "Julian setup help"
+      - "lighting and background"
+      - "ironed blouse"
+      - "video call prep"
+      - "Julian caring"
+    expected_triples:
+      - ["Julian", "set_up", "office with lighting and clean background"]
+      - ["Julian", "ironed", "user's blouse"]
+      - ["user", "has_emotion", "loved"]
+    expected_adaptation:
+      emotion_detected: "loved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 11:00 PM"
+    user_input: |
+      can't sleep again of course and tomorrow is the biggest interview of my life probably and I keep running through scenarios in my head and Julian just squeezed my hand in his sleep like he doesn't even know he did it but it calmed me down and I think I'm ready I really think I'm ready
+    expected_memory_stores:
+      - "insomnia"
+      - "pre-interview nerves"
+      - "Julian hand squeeze"
+      - "feeling ready"
+    expected_triples:
+      - ["user", "experiencing", "insomnia before interview"]
+      - ["Julian", "squeezed", "user's hand in sleep"]
+      - ["user", "feels", "ready for interview"]
+      - ["user", "has_emotion", "nervous"]
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+final_verification:
+  - question: "When is Maya's Conduit AI onsite?"
+    expected_contains: ["Thursday"]
+  - question: "How many rounds is the Conduit onsite?"
+    expected_contains: ["four"]
+  - question: "What did Maya study for system design?"
+    expected_contains: ["search infrastructure", "distributed", "indexing"]
+  - question: "What type of coding questions does Conduit use?"
+    expected_contains: ["practical", "real world", "not leetcode"]
+  - question: "Who designs the coding questions at Conduit?"
+    expected_contains: ["Sam"]
+  - question: "What culture fit stories did Maya prepare?"
+    expected_contains: ["Derek", "PIP", "data pipeline", "Google"]
+  - question: "How did Julian help Maya prepare?"
+    expected_contains: ["lighting", "background", "ironed", "study plan"]
+  - question: "What was Kobe doing while Maya studied?"
+    expected_contains: ["head on keyboard", "clingy"]
+  - question: "What does Maya like about Conduit's culture?"
+    expected_contains: ["autonomy", "no micromanagement"]
+  - question: "How is Maya feeling the night before the interview?"
+    expected_contains: ["nervous", "ready"]

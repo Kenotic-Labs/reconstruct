@@ -1,0 +1,173 @@
+story_id: 502
+story_name: "Letters Translated"
+category: "Grief and Legacy"
+description: |
+  Maya gets Grandpa Wei's Mandarin letters translated and discovers he was a mechanical
+  engineer in Wuhan. The revelation shakes her sense of identity. Cross-references
+  her own engineering career (T1), Conduit AI job (T6), and cooking journey (T31).
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 10:00 AM"
+    user_input: |
+      ok so I found this woman online her name is Dr. Lin Zhao and she does Mandarin translation at Portland State and I emailed her the photos of the letters and she said she can do it for like 200 dollars for the whole batch and I said yes immediately I don't even care about the money right now
+    expected_memory_stores:
+      - "Dr. Lin Zhao"
+      - "Portland State"
+      - "Mandarin translation"
+      - "$200 for batch"
+    expected_adaptation:
+      emotion_detected: "eager"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 3:00 PM"
+    user_input: |
+      Dr. Zhao emailed me back today with the first batch of translations and I am literally shaking right now like my hands are shaking because the letters are from grandpa to his brother back in China and in one of them he talks about how he misses his work at the Wuhan Municipal Engineering Bureau
+    expected_memory_stores:
+      - "translations received"
+      - "letters to brother in China"
+      - "Wuhan Municipal Engineering Bureau"
+      - "Grandpa Wei was engineer"
+    expected_adaptation:
+      emotion_detected: "shocked"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 3:30 PM"
+    user_input: |
+      I'm still reading these and like he was a mechanical engineer he designed water treatment systems in Wuhan in the 1960s and 70s and he NEVER told anyone like my mom didn't even know the details and here I am a software engineer and I became an engineer without ever knowing my grandfather was one too like what are the chances of that
+    expected_memory_stores:
+      - "mechanical engineer"
+      - "water treatment systems"
+      - "1960s-1970s Wuhan"
+      - "Maya also engineer"
+      - "unknown family connection"
+    expected_adaptation:
+      emotion_detected: "stunned"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 4:15 PM"
+    user_input: |
+      called my mom and she's crying and she said she knew he did something technical but he never wanted to talk about China and she always respected that and now she feels guilty for not pushing him to share more and I'm like mom it's not your fault he chose to keep it private but also like HOW did we not know this
+    expected_memory_stores:
+      - "called Vivian"
+      - "Vivian feels guilty"
+      - "Grandpa chose privacy"
+      - "family not knowing"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      Julian came home and I showed him the translations and he got this look on his face and said Maya that's incredible and then he pointed at the Seiko watch on my wrist and said you're literally wearing his watch while doing the same thing he did and that broke me I just completely lost it
+    expected_memory_stores:
+      - "Julian sees translations"
+      - "Seiko watch connection"
+      - "engineering parallel"
+      - "Maya emotional breakdown"
+    expected_adaptation:
+      emotion_detected: "grief"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 9:00 AM"
+    user_input: |
+      couldn't sleep last night I kept reading the translations over and over and there's one letter where he talks about having to leave his position because of the Cultural Revolution and how he lost everything his work his colleagues his reputation and he came to America with nothing and started over as a janitor at a hospital in Fresno
+    expected_memory_stores:
+      - "Cultural Revolution"
+      - "lost position"
+      - "came to America with nothing"
+      - "janitor at hospital Fresno"
+      - "started over"
+    expected_adaptation:
+      emotion_detected: "heartbroken"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      told Priya at work about it during lunch and she got really moved she said something like the paths our grandparents walk shape the paths we don't even know we're walking and I keep thinking about that like did grandpa's engineering brain somehow get passed down to me even though I never knew about it
+    expected_memory_stores:
+      - "told Priya"
+      - "Priya's quote about grandparents"
+      - "inherited aptitude question"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 3:00 PM"
+    user_input: |
+      the certificate in the box was his engineering degree from Wuhan University Dr. Zhao confirmed it and it's dated 1962 and I'm sitting here at Conduit AI writing code and my grandfather got an engineering degree 60 years ago in a completely different world and I just I can't process this
+    expected_memory_stores:
+      - "engineering degree Wuhan University 1962"
+      - "certificate confirmed"
+      - "Conduit AI parallel"
+      - "60 year gap"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      I put the degree certificate in a frame and hung it in my home office next to my own degree and Julian helped me find the right frame at that place on Hawthorne and it looks so good and I keep looking at it like Chen Wei mechanical engineering and Chen Maya software engineering side by side
+    expected_memory_stores:
+      - "framed grandfather's degree"
+      - "hung in home office"
+      - "next to Maya's degree"
+      - "Hawthorne frame shop"
+      - "side by side degrees"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 10:00 PM"
+    user_input: |
+      I'm lying in bed wearing his watch and looking at the rest of the translations and there's one where he writes about Maya the word not me he's describing a concept and Dr. Zhao said it means something like illusion or magic in Sanskrit and Buddhism and my parents never told me if I was named after anything but now I'm wondering
+    expected_memory_stores:
+      - "wearing watch to bed"
+      - "Maya means illusion in Sanskrit"
+      - "Buddhist connection"
+      - "name origin question"
+    expected_adaptation:
+      emotion_detected: "wonder"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who translated Grandpa Wei's letters?"
+    expected_contains: ["Dr. Lin Zhao", "Portland State"]
+  - question: "What was Grandpa Wei's profession in China?"
+    expected_contains: ["mechanical engineer"]
+  - question: "Where did Grandpa Wei work in Wuhan?"
+    expected_contains: ["Municipal Engineering Bureau"]
+  - question: "What did Grandpa Wei design?"
+    expected_contains: ["water treatment"]
+  - question: "What happened to Grandpa Wei during the Cultural Revolution?"
+    expected_contains: ["lost", "position", "left"]
+  - question: "What was his first job in America?"
+    expected_contains: ["janitor", "hospital", "Fresno"]
+  - question: "Where did Grandpa Wei get his engineering degree?"
+    expected_contains: ["Wuhan University", "1962"]
+  - question: "Where did Maya hang her grandfather's degree?"
+    expected_contains: ["home office", "next to"]
+  - question: "What did Julian point out about the Seiko watch?"
+    expected_contains: ["wearing", "same thing"]
+  - question: "What does the word Maya mean according to the translations?"
+    expected_contains: ["illusion", "magic", "Sanskrit"]

@@ -1,0 +1,171 @@
+story_id: 356
+story_name: "Dinner Parties Begin"
+category: "Food and Cooking"
+description: |
+  Tests memory of Maya hosting her first ramen dinner parties.
+  Verifies system tracks social events, guest lists, and reactions.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      okay so I'm doing it I'm hosting my first ramen night this Saturday and I invited Omar and Nadia and Lily and Danny from work and Julian obviously and I'm honestly kinda nervous because cooking for friends is different than cooking for just us
+    expected_memory_stores:
+      - "first ramen night"
+      - "Saturday"
+      - "Omar"
+      - "Nadia Osei"
+      - "Lily Tran"
+      - "Danny Ruiz"
+      - "nervous about hosting"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      went back to Uwajimaya for more supplies and Ken remembered me he was like oh ramen girl and I was like yep that's me and I got enough bones and ingredients for like eight servings because I want extra in case people want seconds
+    expected_memory_stores:
+      - "Uwajimaya again"
+      - "Ken remembers Maya"
+      - "ramen girl"
+      - "eight servings"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 10:00 PM"
+    user_input: |
+      I'm prepping everything tonight so tomorrow I just have to do the broth and assembly and I made the tare already and the chashu is marinating overnight and the eggs are in the soy marinade and Julian is helping me clean the apartment because it's kind of a mess
+    expected_memory_stores:
+      - "prep night before"
+      - "tare ready"
+      - "chashu marinating"
+      - "eggs in marinade"
+      - "Julian helping clean"
+    expected_adaptation:
+      emotion_detected: "focused"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 5:00 AM"
+    user_input: |
+      up at five because the broth needs the full time and I'm doing 14 hours this time because I read that extra time doesn't hurt it only helps and Kobe is confused why I'm up this early on a weekend he keeps looking at me like are you okay
+    expected_memory_stores:
+      - "5 AM start"
+      - "14 hour broth"
+      - "Kobe confused"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 6:30 PM"
+    user_input: |
+      everyone's here and oh my god it smells amazing in the apartment and Omar walked in and was like dude what is that smell and I'm like that's 14 hours of pork bones baby and Nadia brought wine and Lily brought these little Japanese snacks from Uwajimaya
+    expected_memory_stores:
+      - "everyone arrived"
+      - "Omar impressed by smell"
+      - "Nadia brought wine"
+      - "Lily brought snacks"
+      - "14 hour broth"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 7:30 PM"
+    user_input: |
+      everyone is freaking out about the ramen like Danny had two bowls and he keeps saying this is insane and Omar said he's never had ramen this good including at restaurants and I'm trying to be humble but inside I'm like SCREAMING
+    expected_memory_stores:
+      - "Danny two bowls"
+      - "Omar best ramen ever"
+      - "everyone loved it"
+      - "Maya thrilled"
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 9:00 PM"
+    user_input: |
+      Julian took photos of everyone eating and the bowls looked so good and Nadia was like you should start an Instagram for this and I was like ha ha but then Lily was like no seriously you should and I'm like hmm maybe
+    expected_memory_stores:
+      - "Julian photos"
+      - "Nadia Instagram suggestion"
+      - "Lily agreed"
+      - "Maya considering"
+    expected_adaptation:
+      emotion_detected: "flattered"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 10:00 PM"
+    user_input: |
+      who suggested I start an Instagram for my cooking
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 10:30 PM"
+    user_input: |
+      everyone left and the apartment is a disaster like every pot I own is dirty and there's broth splattered on the stove but Julian and I are just sitting on the couch exhausted and happy and he said we should do this every month
+    expected_memory_stores:
+      - "messy kitchen"
+      - "exhausted but happy"
+      - "Julian wants monthly"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 11:00 AM"
+    user_input: |
+      woke up to like six texts from last night Danny said it was the best meal he's had this year and Omar wants the recipe and Nadia said she's telling all her friends and I'm like wow okay maybe I'm actually good at this
+    expected_memory_stores:
+      - "follow-up texts"
+      - "Danny best meal"
+      - "Omar wants recipe"
+      - "Nadia spreading word"
+      - "confidence boost"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who came to Maya's first ramen dinner party?"
+    expected_contains: ["Omar", "Nadia", "Lily", "Danny", "Julian"]
+  - question: "Who suggested Maya start a food Instagram?"
+    expected_contains: ["Nadia"]
+  - question: "How long did Maya cook the broth for the dinner party?"
+    expected_contains: ["14 hours"]
+  - question: "What did Danny think of the ramen?"
+    expected_contains: ["best meal", "insane"]
+  - question: "What did Julian suggest about future dinners?"
+    expected_contains: ["every month", "monthly"]
+  - question: "What did Omar say about the ramen?"
+    expected_contains: ["never had", "this good", "restaurants"]
+  - question: "What did Nadia bring to the dinner?"
+    expected_contains: ["wine"]
+  - question: "What does Ken at Uwajimaya call Maya?"
+    expected_contains: ["ramen girl"]
+  - question: "What time did Maya start cooking for the dinner party?"
+    expected_contains: ["5 AM", "five"]
+  - question: "How many bowls did Danny eat?"
+    expected_contains: ["two"]

@@ -1,0 +1,173 @@
+story_id: 373
+story_name: "Clara Coaches Her Through"
+category: "Personal Development"
+description: |
+  Tests memory of Clara's detailed coaching role in Maya's first aid training.
+  Verifies system tracks sibling support dynamics and knowledge transfer.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      Clara is being amazing about this first aid thing like she texts me quiz questions at random times during the day and today at lunch I got what do you do if someone is unconscious but breathing and I was like recovery position boom
+    expected_memory_stores:
+      - "Clara random quizzes"
+      - "during work day"
+      - "unconscious but breathing"
+      - "recovery position correct"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      Clara told me about the time a patient coded on her floor during her first year as a nurse and she froze for like three seconds before training kicked in and she said those three seconds felt like an eternity and that's why drilling matters
+    expected_memory_stores:
+      - "Clara patient coded"
+      - "first year nurse"
+      - "froze three seconds"
+      - "training kicked in"
+      - "drilling matters"
+    expected_adaptation:
+      emotion_detected: "sobered"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      she sent me these YouTube videos of real emergency scenarios not gory ones but like training simulations and she said watch how the first responders assess the scene before they even touch the patient because that's the most important step
+    expected_memory_stores:
+      - "Clara sent training videos"
+      - "emergency scenarios"
+      - "scene assessment first"
+      - "before touching patient"
+    expected_adaptation:
+      emotion_detected: "focused"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 7:30 PM"
+    user_input: |
+      Tyler was like Clara you're being a drill sergeant about this and Clara was like someone in this family needs to be and Sophie was just sitting there chewing on a teething ring not caring about any of it which was honestly the comic relief we needed
+    expected_memory_stores:
+      - "Tyler drill sergeant comment"
+      - "Clara dedication"
+      - "Sophie teething ring"
+      - "comic relief"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 8:00 PM"
+    user_input: |
+      Clara quizzed me on the signs of a heart attack versus signs of a stroke and I got them mixed up at first but she said remember FAST for stroke that's Face Arms Speech Time and for heart attack think chest pressure and arm pain
+    expected_memory_stores:
+      - "heart attack vs stroke"
+      - "FAST mnemonic stroke"
+      - "Face Arms Speech Time"
+      - "heart attack chest arm pain"
+    expected_adaptation:
+      emotion_detected: "learning"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:00 AM"
+    user_input: |
+      class day and Frank tested us on everything Clara already drilled me on and I nailed it like I was answering before people finished reading the question and Frank was like someone's been studying and I was like I have a nurse sister
+    expected_memory_stores:
+      - "nailed class quiz"
+      - "Clara's drilling paid off"
+      - "answered quickly"
+      - "Frank noticed"
+      - "credited Clara"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 3:00 PM"
+    user_input: |
+      today we did the practical scenarios where they set up fake emergencies and you have to respond and I got the unconscious person at a pool scenario and I assessed the scene called 911 checked breathing started rescue breaths and Frank said perfect textbook
+    expected_memory_stores:
+      - "practical scenarios"
+      - "unconscious at pool"
+      - "assessed scene"
+      - "called 911"
+      - "rescue breaths"
+      - "Frank said perfect"
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 5:00 PM"
+    user_input: |
+      what mnemonic did Clara teach Maya for recognizing a stroke
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 7:00 PM"
+    user_input: |
+      called Clara after class and she was like so how'd it go and I was like I crushed it thanks to you and she got all emotional and said having a family member who knows first aid means a lot to her because she can't always be there
+    expected_memory_stores:
+      - "called Clara"
+      - "crushed it"
+      - "Clara emotional"
+      - "can't always be there"
+      - "family safety"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 4:00 PM"
+    user_input: |
+      Clara said next she's gonna teach me how to take blood pressure and check pulse properly which isn't part of the Red Cross course but she said it's useful and honestly I'm kind of into it I feel like I'm unlocking a whole new skill tree
+    expected_memory_stores:
+      - "blood pressure next"
+      - "pulse checking"
+      - "beyond Red Cross"
+      - "Clara extra training"
+      - "skill tree analogy"
+    expected_adaptation:
+      emotion_detected: "enthusiastic"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How is Clara helping Maya with first aid training?"
+    expected_contains: ["quiz", "text", "materials", "coaching"]
+  - question: "What is the FAST mnemonic for?"
+    expected_contains: ["stroke"]
+  - question: "What does FAST stand for?"
+    expected_contains: ["Face", "Arms", "Speech", "Time"]
+  - question: "What practical scenario did Maya ace?"
+    expected_contains: ["unconscious", "pool"]
+  - question: "What did Frank say about Maya's practical performance?"
+    expected_contains: ["perfect", "textbook"]
+  - question: "Why did Clara get emotional about Maya's training?"
+    expected_contains: ["can't always be there", "family"]
+  - question: "What extra medical skills is Clara teaching Maya?"
+    expected_contains: ["blood pressure", "pulse"]
+  - question: "What happened Clara's first year as a nurse?"
+    expected_contains: ["patient coded", "froze"]
+  - question: "What signs indicate a heart attack?"
+    expected_contains: ["chest pressure", "arm pain"]
+  - question: "How did Maya describe the learning process?"
+    expected_contains: ["skill tree"]

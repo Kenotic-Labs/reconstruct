@@ -1,0 +1,196 @@
+story_id: 499
+story_name: "Word of the Year Roots"
+category: "Holiday Season"
+description: |
+  Tests memory of Maya deepening the roots theme into her daily life.
+  Establishes the word as an organizing principle for the new year.
+  Verifies system captures intention-setting and thematic connections.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "January 2 8:00 AM"
+    user_input: |
+      second day of the new year and I see roots on my bathroom mirror and it makes me smile and I'm thinking about what it means practically like not just as a word but as a way of living and I think it means deepening everything I already have instead of starting new things like go deeper with guitar not wider go deeper with the friend group not bigger
+    expected_memory_stores:
+      - "second day new year"
+      - "roots on mirror"
+      - "practical meaning"
+      - "deepening not starting new"
+      - "deeper not wider"
+      - "guitar deeper"
+      - "friends deeper not bigger"
+    expected_adaptation:
+      emotion_detected: "intentional"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "January 2 10:00 AM"
+    user_input: |
+      I made a list of my roots right now like the things I want to deepen this year and it's guitar get to ten songs and write the wedding song the book club keep it alive and thriving the road trips hit ten pins on the map climbing go for that V5 grade the friend group invest in individual relationships not just group stuff and the wedding obviously make it meaningful
+    expected_memory_stores:
+      - "roots list"
+      - "guitar ten songs wedding song"
+      - "book club alive thriving"
+      - "road trips ten pins"
+      - "climbing V5"
+      - "individual relationships"
+      - "wedding meaningful"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "January 2 12:00 PM"
+    user_input: |
+      Julian looked at my list and added his own roots underneath like photography sell prints or do a show Bold Studio grow the brand road trips same ten pin goal cooking learn five new dishes and he wrote support Maya's guitar journey which made me laugh and also tear up simultaneously
+    expected_memory_stores:
+      - "Julian's roots"
+      - "photography sell prints show"
+      - "Bold Studio grow"
+      - "road trips ten pins"
+      - "cooking five dishes"
+      - "support Maya guitar"
+      - "laugh and tear up"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "January 2 2:00 PM"
+    user_input: |
+      I looked at the bookshelf where the letter box sits next to the photo book and the Google Map printout and I realized that shelf is like a physical representation of our roots and I want to add things to it throughout the year like maybe the wedding invitation and Kobe's first bandana from Diane and the Stardew game case and a pressed flower from a road trip
+    expected_memory_stores:
+      - "bookshelf roots"
+      - "letter box photo book map"
+      - "physical roots"
+      - "add throughout year"
+      - "wedding invitation"
+      - "Kobe bandana Diane"
+      - "Stardew game case"
+      - "pressed flower road trip"
+    expected_adaptation:
+      emotion_detected: "sentimental"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "January 2 4:00 PM"
+    user_input: |
+      went for a long walk with Kobe around the Woodstock neighborhood and I love this neighborhood so much like there's the coffee shop and the little bookstore and the park where Kobe plays and the neighbors who wave and the big tree on the corner that's been there for a hundred years and THAT'S roots that tree is the ultimate root
+    expected_memory_stores:
+      - "walked Woodstock"
+      - "love neighborhood"
+      - "coffee shop bookstore park"
+      - "neighbors wave"
+      - "big tree corner"
+      - "hundred year tree"
+      - "ultimate root"
+    expected_adaptation:
+      emotion_detected: "grounded"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "January 2 5:30 PM"
+    user_input: |
+      Nadia called and said she's been thinking about her word courage and she said she wants to be braver about telling people how she feels and she said Maya you're my best friend and I've never actually said that out loud and I was like Nadia and she said I know I'm being courageous and I said you're my best friend too and it felt so good to just say it
+    expected_memory_stores:
+      - "Nadia called"
+      - "courage word application"
+      - "braver about feelings"
+      - "you're my best friend"
+      - "never said out loud"
+      - "Maya reciprocated"
+      - "felt good"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "January 2 7:00 PM"
+    user_input: |
+      I told Dr Tate about the word roots in our session and she said it's interesting because a year ago I was in a very different place like anxious about the future uncertain about the move unsure about the relationship trajectory and now I'm actively planting and she said the guitar is a root and the book club is a root and the traditions are roots and I'm not just surviving anymore I'm cultivating
+    expected_memory_stores:
+      - "Dr Tate roots"
+      - "year ago different place"
+      - "anxious uncertain unsure"
+      - "now actively planting"
+      - "guitar book club traditions roots"
+      - "not surviving cultivating"
+    expected_adaptation:
+      emotion_detected: "insightful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "January 2 8:00 PM"
+    user_input: |
+      what is Maya's list of roots she wants to deepen this year
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "January 2 9:00 PM"
+    user_input: |
+      played guitar tonight and tried a new song called Let It Be by the Beatles which uses the same chords I already know and it sounded pretty good actually and Julian said that one's better than Wonderwall and I was like everything is better than Wonderwall according to you and he said correct and Kobe stayed in the room the whole time which means my playing is officially Kobe-approved
+    expected_memory_stores:
+      - "learned Let It Be"
+      - "Beatles"
+      - "same chords"
+      - "sounded pretty good"
+      - "Julian prefers to Wonderwall"
+      - "Kobe stayed"
+      - "Kobe approved"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "January 2 10:30 PM"
+    user_input: |
+      before bed I looked at the roots note on the mirror and thought about Grandpa Wei who planted roots in a new country and mom who planted roots in Portland and now me planting roots in Woodstock with Julian and Kobe and a guitar and a community and a wedding coming and a word on a sticky note that holds it all together and I whispered to the mirror roots and went to bed and that's the last thing I'll say about that
+    expected_memory_stores:
+      - "mirror roots"
+      - "Grandpa Wei new country roots"
+      - "Vivian Portland roots"
+      - "Maya Woodstock roots"
+      - "guitar community wedding"
+      - "sticky note holds it"
+      - "whispered roots"
+      - "generational parallel"
+    expected_adaptation:
+      emotion_detected: "profound"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What goals does Maya have for deepening her roots?"
+    expected_contains: ["guitar ten songs", "book club", "road trips ten pins", "climbing V5"]
+  - question: "What are Julian's roots goals?"
+    expected_contains: ["photography", "prints", "Bold Studio", "cooking"]
+  - question: "What new song is Maya learning?"
+    expected_contains: ["Let It Be"]
+  - question: "What did Dr. Tate say about Maya's change?"
+    expected_contains: ["surviving", "cultivating"]
+  - question: "What did Nadia tell Maya?"
+    expected_contains: ["best friend"]
+  - question: "What items does Maya want to add to the bookshelf?"
+    expected_contains: ["wedding invitation", "bandana", "pressed flower"]
+  - question: "What generational pattern does Maya see?"
+    expected_contains: ["Grandpa Wei", "Vivian", "Maya", "roots"]
+  - question: "What big tree is in Maya's neighborhood?"
+    expected_contains: ["corner", "hundred year"]
+  - question: "Is Kobe now okay with Maya's guitar playing?"
+    expected_contains: ["yes", "stayed", "approved"]
+  - question: "What is Maya's deeper meaning of roots?"
+    expected_contains: ["deepening", "not wider", "not new"]

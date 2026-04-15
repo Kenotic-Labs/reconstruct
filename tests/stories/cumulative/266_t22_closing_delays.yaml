@@ -1,0 +1,181 @@
+story_id: 266
+story_name: "Closing Delays"
+category: "Housing"
+description: |
+  Tests memory of the closing process being delayed twice. Tracks changing dates,
+  lender issues, and the frustration of bureaucratic slowdowns. Tests correction
+  handling as the closing date moves.
+duration_simulated: "3 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00 AM"
+    user_input: |
+      okay so we're officially in the mortgage process with Guild Mortgage and our loan officer is this woman named Tamara Wells and she said our rate is 6.2% on a 30 year fixed and closing should be in about four weeks so like March 28th
+    expected_memory_stores:
+      - "Guild Mortgage"
+      - "Tamara Wells"
+      - "loan officer"
+      - "6.2% rate"
+      - "30 year fixed"
+      - "closing March 28"
+      - "four weeks"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 2:00 PM"
+    user_input: |
+      the amount of paperwork for a mortgage is actually insane like they want three months of bank statements and two years of tax returns and proof of employment and Julian's freelance income made it complicated because he doesn't have traditional pay stubs so we had to get a CPA letter
+    expected_memory_stores:
+      - "mortgage paperwork"
+      - "bank statements"
+      - "tax returns"
+      - "Julian freelance complication"
+      - "CPA letter needed"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 4:00 PM"
+    user_input: |
+      Tamara called and said there's a delay with the appraisal because the appraiser they sent flagged the foundation crack even though we already have Ruth's repair plan and now they want a second opinion from their own structural engineer before they'll approve the loan
+    expected_memory_stores:
+      - "appraisal delay"
+      - "foundation crack flagged"
+      - "second structural opinion needed"
+      - "loan approval delayed"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 10:00 AM"
+    user_input: |
+      closing is now pushed to April 11th instead of March 28th because of the structural assessment thing and Sarah said the sellers are getting antsy and I'm like WE'RE antsy too we already gave notice to our landlord for end of March which means we might need temporary housing oh god
+    expected_memory_stores:
+      - "closing delayed"
+      - "April 11 not March 28"
+      - "sellers antsy"
+      - "gave notice to landlord"
+      - "end of March"
+      - "temporary housing needed"
+    expected_adaptation:
+      emotion_detected: "stressed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 3:00 PM"
+    user_input: |
+      talked to our landlord and she said we can do month to month at $2,100 which is MORE than our current rent and I was like are you kidding me and she was like that's the rate for month to month and Julian was like this is literally highway robbery
+    expected_memory_stores:
+      - "month to month $2,100"
+      - "more than current rent"
+      - "landlord firm"
+      - "Julian upset"
+    expected_adaptation:
+      emotion_detected: "angry"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 2:00 PM"
+    user_input: |
+      Guild's structural engineer came and actually agreed with Ruth that the crack is repairable and not a dealbreaker for the loan so that's good but now there's ANOTHER delay because apparently their underwriter needs additional documentation about Julian's freelance income from Bold Studio
+    expected_memory_stores:
+      - "structural engineer approved"
+      - "crack repairable confirmed"
+      - "another delay"
+      - "underwriter needs docs"
+      - "Julian freelance Bold Studio"
+    expected_adaptation:
+      emotion_detected: "exasperated"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Monday 9:00 AM"
+    user_input: |
+      closing pushed AGAIN to April 18th now Tamara said the underwriter wants a profit and loss statement from Julian's freelance work and a letter from Bold Studio confirming his contractor status and Julian had to scramble to get those done over the weekend
+    expected_memory_stores:
+      - "closing delayed again"
+      - "April 18 now"
+      - "profit and loss statement"
+      - "Bold Studio letter"
+      - "contractor status"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      I swear if this closing gets delayed one more time I'm going to lose it Julian said maybe we should switch lenders and Sarah was like absolutely not switching lenders would restart the entire process and add months so we're stuck with Guild
+    expected_memory_stores:
+      - "frustration peak"
+      - "Julian suggests switching"
+      - "Sarah says no"
+      - "would restart process"
+      - "stuck with Guild"
+    expected_adaptation:
+      emotion_detected: "angry"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 11:00 AM"
+    user_input: |
+      Tamara just called and said we are CLEAR TO CLOSE on April 18th everything is approved the underwriter signed off and I literally screamed in the middle of the Conduit office and Sam was like are you okay and I was like WE'RE CLOSING ON OUR HOUSE
+    expected_memory_stores:
+      - "clear to close"
+      - "April 18 confirmed"
+      - "everything approved"
+      - "screamed at office"
+      - "Sam witnessed"
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 7:00 PM"
+    user_input: |
+      Julian and I are celebrating at Canard tonight which is our favorite restaurant and he got the duck and I got the hanger steak and we're toasting to being almost homeowners and what was our final closing date again I've been so stressed I can't remember
+    expected_memory_stores:
+      - "Canard restaurant"
+      - "celebration dinner"
+      - "duck and steak"
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What mortgage company are Maya and Julian using?"
+    expected_contains: ["Guild Mortgage"]
+  - question: "Who is their loan officer?"
+    expected_contains: ["Tamara Wells"]
+  - question: "What is their mortgage interest rate?"
+    expected_contains: ["6.2"]
+  - question: "What is the current closing date?"
+    expected_contains: ["April 18"]
+  - question: "How many times was closing delayed?"
+    expected_contains: ["two", "twice"]
+  - question: "What caused the first closing delay?"
+    expected_contains: ["appraisal", "foundation", "structural"]
+  - question: "What caused the second closing delay?"
+    expected_contains: ["underwriter", "Julian", "freelance"]
+  - question: "What is the month to month rent if they need to stay?"
+    expected_contains: ["2100"]
+  - question: "Where did Maya and Julian celebrate the clear to close?"
+    expected_contains: ["Canard"]
+  - question: "What was the original closing date before delays?"
+    expected_contains: ["March 28"]

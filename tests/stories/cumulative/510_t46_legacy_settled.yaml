@@ -1,0 +1,171 @@
+story_id: 510
+story_name: "Legacy Settled"
+category: "Grief and Legacy"
+description: |
+  Maya reaches a settled place with grief. The watch, the tree, the recipe, the degrees —
+  all woven into daily life. Grief becomes presence. Cross-references all T46 stories
+  plus career (T1-T6), house (T41-T45), relationship, therapy.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 AM"
+    user_input: |
+      something shifted this weekend and I can't exactly explain it but I woke up and put on grandpa's watch like I do every morning and it didn't make me sad it just felt like putting on my own watch like it's mine now not his not mine it's ours and that distinction feels important
+    expected_memory_stores:
+      - "grief shift"
+      - "watch feels like hers now"
+      - "ours not his or hers"
+      - "new relationship with grief"
+    expected_adaptation:
+      emotion_detected: "settled"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 12:00 PM"
+    user_input: |
+      told Dr. Tate about the shift and she said that's integration which is like the healthy end point of grief where the person becomes part of you instead of someone you're missing and I said yeah that's exactly it he's part of me now not a hole in me and she looked really proud
+    expected_memory_stores:
+      - "Dr. Tate session"
+      - "grief integration"
+      - "part of me not hole"
+      - "Dr. Tate proud"
+    expected_adaptation:
+      emotion_detected: "growth"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 9:00 AM"
+    user_input: |
+      at work today and I'm writing this new module for Conduit and Priya asked me to document my design decisions and I thought about grandpa's engineering drawings that Dr. Zhao found in the letters and I wondered if he documented his decisions too and then I wrote the best documentation I've ever written like genuinely thorough
+    expected_memory_stores:
+      - "writing module at Conduit"
+      - "Priya documentation request"
+      - "grandpa's engineering drawings"
+      - "inspired documentation"
+    expected_adaptation:
+      emotion_detected: "inspired"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 5:00 PM"
+    user_input: |
+      went for a walk after work around the neighborhood and passed by the cherry tree and it's got new growth like little green shoots at the tips of the branches and I texted a photo to my mom and she sent back like twelve heart emojis and a prayer hands and I swear that tree is the best thing I've done all year
+    expected_memory_stores:
+      - "cherry tree new growth"
+      - "green shoots"
+      - "photo to Vivian"
+      - "best thing all year"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      made dumplings for dinner again and this time I didn't cry I just cooked them and Julian came in and said smells amazing and Kobe did his perfect-boy-begging routine and I thought this is just life now grandpa's dumplings are just part of our life and that's how legacy works isn't it
+    expected_memory_stores:
+      - "dumplings without crying"
+      - "routine established"
+      - "legacy as daily life"
+      - "Kobe begging"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 10:00 AM"
+    user_input: |
+      Omar noticed the watch at the climbing gym and asked about it and I told the whole story and he said that's heavy and I said it was but now it's not heavy it's just there and he said that's the goal right and I said yeah I think so and then I sent a V5 which is a new personal best so maybe grandpa is giving me climbing powers from beyond or whatever
+    expected_memory_stores:
+      - "Omar asks about watch"
+      - "told story at climbing gym"
+      - "not heavy anymore"
+      - "V5 personal best"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 1:00 PM"
+    user_input: |
+      had lunch with Aisha the former intern she's at another company now but we still get lunch sometimes and I told her about the grandpa engineer thing and she said Maya you should write about this and I was like write what and she said write about how you discovered you were following a path you didn't even know existed
+    expected_memory_stores:
+      - "lunch with Aisha"
+      - "Aisha at another company"
+      - "suggestion to write"
+      - "following unknown path"
+    expected_adaptation:
+      emotion_detected: "intrigued"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      thinking about what Aisha said and maybe she's right like the story of discovering your grandfather was an engineer and you became one without knowing and the letters and the watch and the tree like that IS a story worth telling and I put it in my journal anyway just for me not for anyone else
+    expected_memory_stores:
+      - "considering writing"
+      - "journal entry"
+      - "story of discovery"
+      - "just for herself"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      Julian read my journal entry because I showed it to him and he said this is really beautiful Maya and he said you should share it at some point and I said maybe and he said it doesn't have to be now but the story wants to be told and since when did Julian get all philosophical I blame the cocktail making
+    expected_memory_stores:
+      - "Julian read journal"
+      - "Julian says share it"
+      - "story wants to be told"
+      - "cocktail making joke"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 10:00 PM"
+    user_input: |
+      end of the day and I'm in bed and the degrees are on the wall and the watch is on the nightstand and the tree is outside growing in the dark and the recipe is on the fridge and grandpa is everywhere and nowhere and that's ok now it's really ok and I think he would be proud of me and I think I'm proud of me too
+    expected_memory_stores:
+      - "all legacy items listed"
+      - "everywhere and nowhere"
+      - "grief at peace"
+      - "proud of herself"
+    expected_adaptation:
+      emotion_detected: "at peace"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did Dr. Tate call Maya's grief shift?"
+    expected_contains: ["integration"]
+  - question: "How does Maya now feel putting on grandpa's watch?"
+    expected_contains: ["ours", "not sad", "part of"]
+  - question: "What new climbing grade did Maya achieve?"
+    expected_contains: ["V5"]
+  - question: "What did Aisha suggest Maya should do?"
+    expected_contains: ["write"]
+  - question: "How is the cherry tree doing?"
+    expected_contains: ["new growth", "green shoots"]
+  - question: "What inspired Maya to write better documentation at work?"
+    expected_contains: ["grandpa", "engineering"]
+  - question: "Can Maya now cook the dumplings without crying?"
+    expected_contains: ["yes", "didn't cry"]
+  - question: "Where did Maya write the story of her grandfather?"
+    expected_contains: ["journal"]
+  - question: "What does Maya's legacy collection include?"
+    expected_contains: ["watch", "degrees", "tree", "recipe"]
+  - question: "How does Maya feel about her grief now?"
+    expected_contains: ["ok", "peace", "settled", "integrated"]

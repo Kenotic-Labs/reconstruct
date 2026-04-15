@@ -1,0 +1,167 @@
+story_id: 360
+story_name: "One Thousand Followers"
+category: "Food and Cooking"
+description: |
+  Tests memory of Maya reaching 1K followers on @mayacooks and Julian's
+  growing role as photographer. Caps off the food and cooking thread.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      so mayacooks is at like 850 followers now and I'm getting DMs from people asking about my ramen recipes and someone asked if I do meal prep workshops which is like what no I'm just a software engineer who makes soup
+    expected_memory_stores:
+      - "850 followers"
+      - "recipe DMs"
+      - "meal prep workshop request"
+      - "Maya surprised"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      Julian is really getting into the photography side like he bought a special lens for food photography it's a macro — no wait a 50mm prime lens and the detail he gets on the noodle texture is insane and he posted some of the shots on his own portfolio
+    expected_memory_stores:
+      - "Julian new lens"
+      - "50mm prime"
+      - "food photography"
+      - "Julian portfolio"
+    expected_adaptation:
+      emotion_detected: "appreciative"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 7:30 PM"
+    user_input: |
+      made a chicken shoyu ramen tonight because I wanted to expand beyond tonkotsu and it turned out amazing like the clear golden broth is so different from the milky tonkotsu and Julian said the photos look even better because you can see through the broth to the noodles
+    expected_memory_stores:
+      - "chicken shoyu ramen"
+      - "expanding repertoire"
+      - "clear golden broth"
+      - "Julian photography note"
+    expected_adaptation:
+      emotion_detected: "creative"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 8:00 PM"
+    user_input: |
+      I did a little reel showing the process of making the chashu from raw pork belly to finished slices and it got like 2000 views which is insane and people are commenting asking where to get the pork belly and I'm like Uwajimaya obviously
+    expected_memory_stores:
+      - "chashu reel"
+      - "2000 views"
+      - "process video"
+      - "Uwajimaya mention"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 6:00 PM"
+    user_input: |
+      Sam at work saw my Instagram and he was like Chen I didn't know you could cook and I was like yeah well I didn't either until like two months ago and he actually asked me to bring ramen for the team lunch next week
+    expected_memory_stores:
+      - "Sam saw Instagram"
+      - "Sam impressed"
+      - "team lunch request"
+      - "two months cooking"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 3:00 PM"
+    user_input: |
+      OH MY GOD I just hit 1000 followers on mayacooks and I know in the grand scheme of Instagram that's nothing but for like a month of posting ramen photos that feels really good and Julian literally popped a bottle of prosecco
+    expected_memory_stores:
+      - "1000 followers"
+      - "one month milestone"
+      - "Julian prosecco celebration"
+      - "mayacooks growth"
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 5:00 PM"
+    user_input: |
+      Jenny texted congratulations and she said she's been showing my page to all her Austin friends and some of them followed and she said I should come to Austin and do a popup ramen thing which is obviously insane but also fun to think about
+    expected_memory_stores:
+      - "Jenny congratulations"
+      - "Austin friends following"
+      - "popup idea"
+    expected_adaptation:
+      emotion_detected: "flattered"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 7:00 PM"
+    user_input: |
+      when did Maya start her food Instagram and how many followers does she have now
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 10:00 AM"
+    user_input: |
+      did another ramen night last night for the second time and this time I invited Aisha from work too and she was like this is the best thing I've ever eaten and she said she's vegetarian so next time I'm gonna make a vegetarian ramen just for her
+    expected_memory_stores:
+      - "second ramen night"
+      - "Aisha invited"
+      - "Aisha vegetarian"
+      - "vegetarian ramen plan"
+    expected_adaptation:
+      emotion_detected: "inclusive"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 4:00 PM"
+    user_input: |
+      looking back at this whole journey from that first terrible watery bowl to 1K followers and people actually wanting my recipes it's been like two months and honestly it's one of the best things I've done for myself in a while and Julian says it's brought us closer too because we do it together
+    expected_memory_stores:
+      - "two month reflection"
+      - "growth journey"
+      - "1K milestone"
+      - "Julian closer together"
+      - "best personal project"
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How many followers does @mayacooks have?"
+    expected_contains: ["1000", "1K"]
+  - question: "What lens did Julian buy for food photography?"
+    expected_contains: ["50mm", "prime"]
+  - question: "What new type of ramen did Maya learn to make?"
+    expected_contains: ["chicken shoyu"]
+  - question: "Who asked Maya to bring ramen to work?"
+    expected_contains: ["Sam"]
+  - question: "How long has Maya been on her ramen journey?"
+    expected_contains: ["two months"]
+  - question: "What did Julian do to celebrate 1K followers?"
+    expected_contains: ["prosecco"]
+  - question: "Who is vegetarian among Maya's dinner guests?"
+    expected_contains: ["Aisha"]
+  - question: "What reel got 2000 views?"
+    expected_contains: ["chashu"]
+  - question: "What popup idea did Jenny suggest?"
+    expected_contains: ["Austin", "popup", "ramen"]
+  - question: "How has cooking affected Maya and Julian's relationship?"
+    expected_contains: ["closer", "together"]

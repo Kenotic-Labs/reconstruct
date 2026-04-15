@@ -1,0 +1,180 @@
+story_id: 466
+story_name: "Steps Back from Discord"
+category: "Gaming"
+description: |
+  Tests memory of Maya pulling away from Discord and online gaming.
+  Establishes the transition from online to IRL social gaming.
+  Verifies system tracks motivational shift and boundary evolution.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00 AM"
+    user_input: |
+      so I've been thinking about it and I'm gonna step back from the Stardew Discord like I'll keep my account but I'm not gonna be active in the server anymore because honestly it was taking up too much mental energy and between work at Conduit and guitar practice and book club and road trips I just don't have the bandwidth
+    expected_memory_stores:
+      - "stepping back from Discord"
+      - "keeping account"
+      - "not active in server"
+      - "too much mental energy"
+      - "bandwidth limited"
+    expected_adaptation:
+      emotion_detected: "decisive"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:30 AM"
+    user_input: |
+      I messaged Alex privately and said hey I'm gonna be less active on Discord but you can still message me about coding stuff anytime and they said no worries and honestly they've gotten so much better at Python in just a few weeks that they probably don't need me as much anymore and that's a good thing
+    expected_memory_stores:
+      - "messaged Alex"
+      - "less active notice"
+      - "coding channel still open"
+      - "Alex improved at Python"
+      - "less dependency"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 12:00 PM"
+    user_input: |
+      Julian was like finally you're getting off that thing and I was like it wasn't THAT bad and he said babe you were on Discord at 2 AM last Tuesday and I was like okay fair point and he's right like the online stuff was creeping into my sleep schedule which is not good especially because I've been staying up late for Stardew AND Discord
+    expected_memory_stores:
+      - "Julian relieved"
+      - "2 AM Discord"
+      - "sleep schedule impact"
+      - "Stardew and Discord combined"
+    expected_adaptation:
+      emotion_detected: "sheepish"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 2:00 PM"
+    user_input: |
+      I deleted the Discord app from my phone but kept it on my laptop so I can check it occasionally and then I went and played guitar for like 45 minutes and my calluses are finally forming and I can switch between G C and D without looking now which feels like such a win after weeks of barely practicing
+    expected_memory_stores:
+      - "deleted Discord from phone"
+      - "kept on laptop"
+      - "guitar 45 minutes"
+      - "calluses forming"
+      - "G C D without looking"
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 4:00 PM"
+    user_input: |
+      went climbing with Nadia and Omar for the first time in weeks and it felt SO good like my forearms were screaming because I lost some grip strength from not going but the mental clarity from climbing is just different from gaming you know like gaming is passive calm and climbing is active calm and I need both but was only getting one
+    expected_memory_stores:
+      - "climbing with Nadia Omar"
+      - "first time in weeks"
+      - "lost grip strength"
+      - "mental clarity"
+      - "passive calm vs active calm"
+      - "need both"
+    expected_adaptation:
+      emotion_detected: "refreshed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 6:30 PM"
+    user_input: |
+      Nadia and I were talking after climbing about the tabletop meetup Thursday and she said she's definitely coming and she's bringing a friend from work named Tessa who she met at the food bank volunteering and I was like oh cool the more the merrier and Omar said he'll try to make it too
+    expected_memory_stores:
+      - "tabletop Thursday"
+      - "Nadia confirmed"
+      - "Tessa from food bank"
+      - "Nadia's work friend"
+      - "Omar will try"
+    expected_adaptation:
+      emotion_detected: "social"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 8:00 PM"
+    user_input: |
+      Julian asked if I'm okay giving up the Discord thing and I said yeah honestly it was fun but it was becoming a crutch and the PixelDruid thing made me realize I should be more intentional about where I put my social energy and he hugged me and said he's proud of me which was nice because sometimes I feel like I'm bad at knowing my own limits
+    expected_memory_stores:
+      - "Julian supportive"
+      - "Discord was a crutch"
+      - "intentional social energy"
+      - "Julian proud"
+      - "knowing limits"
+    expected_adaptation:
+      emotion_detected: "vulnerable"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 10:00 AM"
+    user_input: |
+      what was the reason I decided to step back from the Stardew Discord
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 2:00 PM"
+    user_input: |
+      spent the morning actually reading Project Hail Mary for book club and I'm halfway through and it's incredible like the science is so cool and I texted the book club group chat that I'm loving it and Marcus was like finally Maya catches up and Lily said she cried at chapter 14 and now I'm scared but excited
+    expected_memory_stores:
+      - "reading Project Hail Mary"
+      - "halfway through"
+      - "science is cool"
+      - "book club group chat"
+      - "Marcus teasing"
+      - "Lily cried chapter 14"
+    expected_adaptation:
+      emotion_detected: "engaged"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 6:00 PM"
+    user_input: |
+      today was really productive like I climbed I read I practiced guitar I took Kobe for a long walk and I played zero Stardew and you know what I don't even miss it today and Julian and I made dinner together actual dinner not DoorDash and I feel like myself again like the version of me that does things instead of watches a screen
+    expected_memory_stores:
+      - "productive day"
+      - "climbing reading guitar walking"
+      - "zero Stardew"
+      - "don't miss it"
+      - "cooked dinner together"
+      - "no DoorDash"
+      - "feels like herself"
+    expected_adaptation:
+      emotion_detected: "revitalized"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Why did Maya step back from the Stardew Discord?"
+    expected_contains: ["mental energy", "bandwidth", "crutch"]
+  - question: "Did Maya delete her Discord account?"
+    expected_contains: ["no", "kept", "laptop"]
+  - question: "What physical change happened from guitar practice?"
+    expected_contains: ["calluses"]
+  - question: "Who is Tessa and how did Nadia meet her?"
+    expected_contains: ["food bank", "Nadia's friend"]
+  - question: "What's the difference between gaming calm and climbing calm?"
+    expected_contains: ["passive", "active"]
+  - question: "How far along is Maya in Project Hail Mary?"
+    expected_contains: ["halfway"]
+  - question: "What did Julian say about Maya's Discord decision?"
+    expected_contains: ["proud"]
+  - question: "Was Maya staying up late on Discord?"
+    expected_contains: ["2 AM"]
+  - question: "What chords can Maya play without looking?"
+    expected_contains: ["G", "C", "D"]
+  - question: "What was Maya's productive day like?"
+    expected_contains: ["climb", "read", "guitar", "walk", "cook"]

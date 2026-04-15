@@ -1,0 +1,225 @@
+story_id: 83
+story_name: "Beta Feedback Loop"
+category: "Learning"
+description: |
+  Tests memory of iterative feedback from beta testers.
+  Marcus Hill becomes the power user and primary feedback source.
+  Verifies system tracks feature requests and bug reports.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      Marcus is using fridgesearch every single day and he's sending me feedback constantly like he found that the search breaks when you have more than 15 ingredients in your fridge because the query gets too long and he also wants a feature to filter by dietary restrictions like vegan or gluten free
+    expected_memory_stores:
+      - "Marcus daily use"
+      - "constant feedback"
+      - "15 ingredient bug"
+      - "query too long"
+      - "dietary filter request"
+      - "vegan gluten free"
+    expected_triples:
+      - ["Marcus", "uses", "fridgesearch daily"]
+      - ["Marcus", "reported_bug", "15 ingredient search break"]
+      - ["Marcus", "requested_feature", "dietary restriction filter"]
+      - ["user", "has_emotion", "engaged"]
+    expected_adaptation:
+      emotion_detected: "engaged"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      fixed the 15 ingredient bug it was a URL length limit issue and now it uses POST instead of GET for the search query and also added the dietary restriction filter which Marcus immediately tested with vegan and said it works perfectly except there's a typo in the label it says vegen instead of vegan lol
+    expected_memory_stores:
+      - "bug fixed"
+      - "POST instead of GET"
+      - "dietary filter added"
+      - "typo vegen"
+      - "Marcus tested"
+    expected_triples:
+      - ["user", "fixed_bug", "15 ingredient URL length limit"]
+      - ["user", "changed", "GET → POST for search query"]
+      - ["user", "added_feature", "dietary restriction filter"]
+      - ["fridgesearch", "has_bug", "typo vegen instead of vegan"]
+      - ["Marcus", "tested", "dietary filter"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 10:00 AM"
+    user_input: |
+      Lily said she's been using fridgesearch to actually cook which she's never done before like she was always an order-in person but now she's cooking three times a week because the app makes it easy to find recipes with stuff she already has and I was like Lily that's the whole point that's exactly what I built it for
+    expected_memory_stores:
+      - "Lily cooking"
+      - "never cooked before"
+      - "three times a week"
+      - "order-in converted"
+      - "exactly the point"
+    expected_triples:
+      - ["Lily", "started_cooking", "three times a week"]
+      - ["Lily", "was_previously", "order-in person"]
+      - ["Lily", "uses", "fridgesearch to find recipes"]
+      - ["user", "has_emotion", "fulfilled"]
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Julian's sister Elena she's one of the beta testers asked if I could add a meal planning feature where you plan your whole week and it generates one combined shopping list and that's actually brilliant but it's a lot of work so I'm putting it on the roadmap for later
+    expected_memory_stores:
+      - "Elena Julian's sister"
+      - "meal planning request"
+      - "weekly plan"
+      - "combined shopping list"
+      - "roadmap later"
+    expected_triples:
+      - ["Elena", "is_sister_of", "Julian"]
+      - ["Elena", "is_role", "beta tester"]
+      - ["Elena", "requested_feature", "meal planning with combined shopping list"]
+      - ["user", "deferred_to", "roadmap"]
+    expected_adaptation:
+      emotion_detected: "thoughtful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Next Monday 7:00 PM"
+    user_input: |
+      so the usage numbers for the beta are actually crazy like in the first two weeks we have 12 testers but they've done over 500 searches collectively and saved over 200 recipes and Marcus alone accounts for like 150 of those searches because he's obsessed
+    expected_memory_stores:
+      - "usage numbers"
+      - "500 searches"
+      - "200 saved recipes"
+      - "Marcus 150 searches"
+      - "two weeks data"
+    expected_triples:
+      - ["fridgesearch_beta", "has_metric", "500 searches in two weeks"]
+      - ["fridgesearch_beta", "has_metric", "200 saved recipes"]
+      - ["fridgesearch_beta", "has_metric", "12 testers"]
+      - ["Marcus", "has_metric", "150 searches"]
+      - ["user", "has_emotion", "amazed"]
+    expected_adaptation:
+      emotion_detected: "amazed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Next Wednesday 9:00 PM"
+    user_input: |
+      Clara the neighbor stopped me during a Kobe walk and said she made her husband's birthday dinner using a fridgesearch recipe she found by putting in what she had plus salmon which she was going to buy anyway and she said it was the best dinner she's ever made and I was like Clara that makes my whole week
+    expected_memory_stores:
+      - "Clara success story"
+      - "husband birthday dinner"
+      - "salmon recipe"
+      - "best dinner ever"
+      - "Kobe walk"
+    expected_triples:
+      - ["Clara", "made", "husband's birthday dinner using fridgesearch"]
+      - ["Clara", "used_ingredient", "salmon"]
+      - ["Clara", "said", "best dinner she's ever made"]
+      - ["user", "has_emotion", "touched"]
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Next Thursday 8:00 PM"
+    user_input: |
+      how many searches have fridgesearch beta testers done so far
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Next Saturday 11:00 AM"
+    user_input: |
+      Marcus sent me this long email with like 20 feature requests and bug reports and honestly most of them are good ideas but some are way too complex for a side project and I had to tell him like Marcus this is just me building on weekends I can't add AI-generated recipe variations right now
+    expected_memory_stores:
+      - "Marcus 20 requests"
+      - "some too complex"
+      - "AI recipe variations"
+      - "managing expectations"
+      - "solo developer reality"
+    expected_triples:
+      - ["Marcus", "sent", "20 feature requests and bug reports"]
+      - ["Marcus", "requested_feature", "AI-generated recipe variations"]
+      - ["user", "told_marcus", "solo weekend developer limitations"]
+      - ["user", "has_emotion", "overwhelmed"]
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Next Saturday 4:00 PM"
+    user_input: |
+      Julian noticed I was stressed about keeping up with beta feedback and he said remember this is supposed to be fun and the moment it stops being fun you should step back and he's right I need to enjoy this not treat it like a second job I already have a great day job
+    expected_memory_stores:
+      - "Julian advice"
+      - "supposed to be fun"
+      - "step back when not fun"
+      - "not second job"
+      - "great day job"
+    expected_triples:
+      - ["Julian", "advised", "remember this is supposed to be fun"]
+      - ["Julian", "advised", "step back when it stops being fun"]
+      - ["user", "has_emotion", "grounded"]
+    expected_adaptation:
+      emotion_detected: "grounded"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Next Sunday 6:00 PM"
+    user_input: |
+      took a step back today and just enjoyed cooking with Julian using a fridgesearch recipe actually and we made homemade pasta with a mushroom cream sauce and Kobe was sitting at our feet waiting for something to drop which it did because Julian dropped a mushroom and Kobe ate it before I could grab it
+    expected_memory_stores:
+      - "cooking with Julian"
+      - "fridgesearch recipe used"
+      - "homemade pasta"
+      - "mushroom cream sauce"
+      - "Kobe ate mushroom"
+    expected_triples:
+      - ["user", "cooked_with", "Julian using fridgesearch recipe"]
+      - ["user", "made", "homemade pasta with mushroom cream sauce"]
+      - ["Kobe", "ate", "dropped mushroom"]
+      - ["user", "has_emotion", "relaxed"]
+    expected_adaptation:
+      emotion_detected: "relaxed"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How many searches have beta testers done?"
+    expected_contains: ["500"]
+  - question: "Who is the most active beta tester?"
+    expected_contains: ["Marcus"]
+  - question: "What bug did Marcus find about ingredients?"
+    expected_contains: ["15", "query", "URL"]
+  - question: "What feature did Elena request?"
+    expected_contains: ["meal planning"]
+  - question: "Has Lily started cooking because of fridgesearch?"
+    expected_contains: ["yes", "three times a week"]
+  - question: "What did Clara use fridgesearch for?"
+    expected_contains: ["husband", "birthday dinner", "salmon"]
+  - question: "How many feature requests did Marcus send?"
+    expected_contains: ["20"]
+  - question: "What did Julian say about the side project?"
+    expected_contains: ["fun", "step back"]
+  - question: "How many saved recipes do beta testers have?"
+    expected_contains: ["200"]
+  - question: "Who is Elena?"
+    expected_contains: ["Julian's sister"]

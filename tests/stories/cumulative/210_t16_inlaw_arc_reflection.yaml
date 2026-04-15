@@ -1,0 +1,171 @@
+story_id: 210
+story_name: "In-Law Arc Reflection"
+category: "Relationships"
+description: |
+  Tests full arc reconstruction. Maya reflects on the entire in-law journey. System must
+  reconstruct the complete trajectory from tension to genuine family bond.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      Diane called tonight to update us on Bob and he's doing better apparently he walked to the mailbox today which for Bob is like climbing Everest and she was laughing about it and we talked for like twenty minutes just the two of us
+    expected_memory_stores:
+      - "Bob improving"
+      - "walked to mailbox"
+      - "Diane called Maya"
+      - "twenty minute talk"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 8:30 PM"
+    user_input: |
+      she's sending wedding venue contracts for Timber Ridge and she negotiated a better rate than what they quoted us she got them down like $2000 and I was like Diane you're a queen
+    expected_memory_stores:
+      - "venue contracts"
+      - "Timber Ridge"
+      - "Diane negotiated"
+      - "$2000 savings"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 9:00 PM"
+    user_input: |
+      Julian was watching us FaceTime and he said you know six weeks ago you were panic texting Clara about my mom and now you FaceTime her more than I do and he's right that's so weird how life works
+    expected_memory_stores:
+      - "six weeks ago comparison"
+      - "panic texting Clara"
+      - "now FaceTimes more than Julian"
+      - "relationship reversal"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 7:00 AM"
+    user_input: |
+      thinking about it the whole Diane thing taught me a lot about like assumptions and patience because I had built her up in my head as this villain and she was just a mom who felt useless and didn't know how to express it
+    expected_memory_stores:
+      - "lesson learned"
+      - "assumptions"
+      - "patience"
+      - "Diane felt useless"
+      - "self-reflection"
+    expected_adaptation:
+      emotion_detected: "thoughtful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 12:00 PM"
+    user_input: |
+      Clara said something smart she said the best in-law relationships happen when both people stop performing and start being real and I think that's what happened when Diane cried and apologized it broke something open between us
+    expected_memory_stores:
+      - "Clara insight"
+      - "stop performing"
+      - "be real"
+      - "apology broke something open"
+    expected_adaptation:
+      emotion_detected: "wise"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 3:00 PM"
+    user_input: |
+      um when did Diane first visit and how long did she stay I want to tell someone the story but I keep mixing up the timeline
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 5:00 PM"
+    user_input: |
+      my mom and Diane actually talked on the phone for the first time about the wedding and Vivian called me after and said she's actually very sweet isn't she and I was like YES MOM I've been telling you and Vivian goes well she still folds towels wrong and I was like MOM
+    expected_memory_stores:
+      - "Vivian and Diane talked"
+      - "first phone call"
+      - "Vivian likes Diane"
+      - "towel joke callback"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 7:00 PM"
+    user_input: |
+      Julian said his mom told him she's never felt closer to a partner of his and she said Maya is the real thing and I got all mushy about it because like coming from Diane who I know doesn't say stuff like that lightly it means a lot
+    expected_memory_stores:
+      - "Diane told Julian"
+      - "never felt closer"
+      - "Maya is the real thing"
+      - "meaningful validation"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 9:00 PM"
+    user_input: |
+      so basically to sum it up Diane came to Portland I wanted to die she rearranged my entire kitchen I had a meltdown Julian grew a spine Diane cried we bonded she helped us plan a wedding she became family and now I love her and that is the in-law arc nobody saw coming
+    expected_memory_stores:
+      - "full arc summary"
+      - "kitchen rearranging"
+      - "meltdown"
+      - "Julian grew a spine"
+      - "wedding planning"
+      - "love"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 8:00 AM"
+    user_input: |
+      woke up to a text from Diane that just said good morning sweetheart with a photo of Bob trying to do his PT exercises and Kobe photo I sent her yesterday and she put them side by side with the caption my two favorite patients and I just I can't even she's the best
+    expected_memory_stores:
+      - "Diane morning text"
+      - "Bob PT photo"
+      - "Kobe photo"
+      - "sweetheart"
+      - "genuine affection"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Summarize how Maya's relationship with Diane changed over time."
+    expected_contains: ["tension", "apology", "bonded", "wedding", "family"]
+  - question: "What lesson did Maya learn from the Diane experience?"
+    expected_contains: ["assumptions", "patience"]
+  - question: "How is Bob's recovery going?"
+    expected_contains: ["improving", "walked", "PT"]
+  - question: "Did Vivian and Diane ever connect?"
+    expected_contains: ["phone call", "sweet"]
+  - question: "What did Diane say about Maya to Julian?"
+    expected_contains: ["real thing", "never felt closer"]
+  - question: "How much did Diane save on the venue?"
+    expected_contains: ["$2000"]
+  - question: "What was Clara's insight about in-law relationships?"
+    expected_contains: ["stop performing", "be real"]
+  - question: "How often do Maya and Diane talk now?"
+    expected_contains: ["FaceTime", "daily", "text"]
+  - question: "What did Diane caption the photo?"
+    expected_contains: ["favorite patients"]
+  - question: "How does Julian feel about Maya and Diane's relationship?"
+    expected_contains: ["happy", "thrilled"]

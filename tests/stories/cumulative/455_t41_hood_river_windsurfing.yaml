@@ -1,0 +1,178 @@
+story_id: 455
+story_name: "Hood River Windsurfing Disaster"
+category: "Road Trips"
+description: |
+  Tests memory of the Hood River trip where Julian falls in the water windsurfing.
+  Establishes comedic failure, relationship dynamics under stress.
+  Verifies correction handling and cross-thread references.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 8:00 AM"
+    user_input: |
+      so today we're doing Hood River which is like an hour and a half east of Portland along the gorge again and Julian wants to try windsurfing because apparently Hood River is like the windsurfing capital of the world or something and I was like babe you've never even been on a surfboard and he was like how hard can it be spoiler alert it's gonna be hard
+    expected_memory_stores:
+      - "Hood River"
+      - "hour and a half east"
+      - "windsurfing"
+      - "windsurfing capital"
+      - "Julian no experience"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:30 AM"
+    user_input: |
+      we signed up for a beginner lesson at this place called Big Winds and the instructor is this super tan dude named Travis who's been doing this for like 20 years and he looked at Julian and was like have you done any board sports and Julian said no and Travis just said okay this'll be interesting and I'm already filming
+    expected_memory_stores:
+      - "Big Winds"
+      - "beginner lesson"
+      - "instructor Travis"
+      - "20 years experience"
+      - "Maya filming"
+    expected_adaptation:
+      emotion_detected: "entertained"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:45 AM"
+    user_input: |
+      so Julian got on the board and lasted literally like 12 seconds before falling in face first and the water is COLD from the Columbia River and he came up sputtering and Travis was trying not to laugh and I was absolutely dying and got it all on video and he tried again and fell again and then AGAIN and by the fourth time he was just floating there like a sad wet Julian
+    expected_memory_stores:
+      - "Julian fell in"
+      - "12 seconds"
+      - "Columbia River cold"
+      - "fell four times"
+      - "Maya video"
+      - "Travis trying not to laugh"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 12:30 PM"
+    user_input: |
+      okay so he actually got up on his like fifth try and stayed up for maybe a minute and Travis was cheering and Julian looked SO proud of himself and then a gust of wind hit and he went flying into the water again and his rental wetsuit got caught on something and ripped and he had to pay for it which was fifty bucks and he was so annoyed
+    expected_memory_stores:
+      - "fifth try success"
+      - "one minute standing"
+      - "wind gust"
+      - "fell again"
+      - "wetsuit ripped"
+      - "fifty dollars"
+    expected_adaptation:
+      emotion_detected: "sympathetic"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 1:30 PM"
+    user_input: |
+      we're getting lunch now at this place called um wait no not pFriem actually it was — no wait it WAS pFriem Brewery they have a restaurant right on the river and Julian is still damp and kind of grumpy about the wetsuit thing and I'm trying not to bring it up but I keep accidentally laughing and he's like it's not funny and I'm like it's a little funny
+    expected_memory_stores:
+      - "pFriem Brewery restaurant"
+      - "on the river"
+      - "Julian grumpy"
+      - "Maya laughing"
+    expected_adaptation:
+      emotion_detected: "playful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 3:00 PM"
+    user_input: |
+      okay so Julian has recovered emotionally and we're walking around Hood River and it's actually really charming like there's all these fruit orchards and farm stands and we got pears and apples and Julian found a gallery with gorge photography and he was like I could do better and honestly after seeing his Crater Lake shots yeah he probably could
+    expected_memory_stores:
+      - "Hood River town"
+      - "fruit orchards"
+      - "pears and apples"
+      - "gorge photography gallery"
+      - "Julian confident"
+      - "Crater Lake photos"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 4:30 PM"
+    user_input: |
+      we drove up to this viewpoint where you can see both Mt Hood and Mt Adams and it's insane and Julian is in photographer mode again and I tried to play Knockin on Heavens Door on my phone speaker as a joke because I've been learning it on guitar and Julian was like please don't and then he actually said it sounds way better when you play it for real which was sweet
+    expected_memory_stores:
+      - "Mt Hood and Mt Adams viewpoint"
+      - "Julian photographing"
+      - "Knockin on Heavens Door"
+      - "guitar reference"
+      - "Julian compliment"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 6:00 PM"
+    user_input: |
+      what was the name of the windsurfing place where Julian took the lesson
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 7:00 PM"
+    user_input: |
+      Julian admitted in the car that the windsurfing was actually fun even though he ate it like five times and he wants to try again next summer and I was like sure babe and then he said something really nice about how these road trips have been the best part of this year for him and I got a little emotional honestly because same
+    expected_memory_stores:
+      - "Julian enjoyed windsurfing"
+      - "try again next summer"
+      - "road trips best part of year"
+      - "both emotional"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 8:30 PM"
+    user_input: |
+      added Hood River to our Google Map with the pin note that says Julian's windsurfing disaster and he was like hey and I was like it's accurate and also I sent the video to Jenny and she replied with like 47 laughing emojis and then Clara called and she was dying too and Julian is now famous in my family for eating it on a windsurf board
+    expected_memory_stores:
+      - "Google Map updated"
+      - "pin note"
+      - "video sent to Jenny"
+      - "Clara called laughing"
+      - "Julian famous for falling"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where did Julian try windsurfing?"
+    expected_contains: ["Hood River"]
+  - question: "What was the windsurfing school called?"
+    expected_contains: ["Big Winds"]
+  - question: "How many times did Julian fall in the water?"
+    expected_contains: ["five", "four"]
+  - question: "What happened to the rental wetsuit?"
+    expected_contains: ["ripped", "fifty"]
+  - question: "Where did they eat lunch in Hood River?"
+    expected_contains: ["pFriem"]
+  - question: "What mountains can you see from the viewpoint?"
+    expected_contains: ["Hood", "Adams"]
+  - question: "Who did Maya send the windsurfing video to?"
+    expected_contains: ["Jenny"]
+  - question: "Who was the windsurfing instructor?"
+    expected_contains: ["Travis"]
+  - question: "Does Julian want to try windsurfing again?"
+    expected_contains: ["yes", "next summer"]
+  - question: "What did Julian say about the road trips?"
+    expected_contains: ["best part", "year"]

@@ -1,0 +1,186 @@
+story_id: 478
+story_name: "Practicing in Car at Lunch"
+category: "Music and Guitar"
+description: |
+  Tests memory of Maya's dedicated car practice routine for the wedding song.
+  Establishes commitment to secrecy, physical improvement, coworker suspicions.
+  Verifies temporal tracking of practice routine.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 12:15 PM"
+    user_input: |
+      okay so the car practice thing is now a daily routine like every lunch break I go to the parking garage at Conduit sit in the Subaru and play the wedding song for 30 minutes and Lily asked me today why I always disappear at lunch and I said I'm doing a personal project and she was like is it code related and I said no it's more of a creative thing
+    expected_memory_stores:
+      - "daily car practice"
+      - "parking garage Conduit"
+      - "30 minutes lunch"
+      - "Lily asked"
+      - "creative project"
+    expected_adaptation:
+      emotion_detected: "dedicated"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 12:30 PM"
+    user_input: |
+      the song is getting better like the chord transitions are smoother and I added a little fingerpicking intro which is way beyond my skill level but I watched a Justin Guitar fingerpicking tutorial and it's just thumb and index finger alternating on the bass strings and it sounds so pretty I can't believe I'm doing this
+    expected_memory_stores:
+      - "song improving"
+      - "smoother transitions"
+      - "fingerpicking intro"
+      - "Justin Guitar tutorial"
+      - "thumb and index finger"
+      - "bass strings"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 12:00 PM"
+    user_input: |
+      so a security guard knocked on my car window today while I was playing and scared the absolute daylights out of me and he was like ma'am are you okay and I was like yes sir I'm practicing guitar and he looked at me like I was insane and walked away and now I'm paranoid everyone in the parking garage can hear me
+    expected_memory_stores:
+      - "security guard knocked"
+      - "scared Maya"
+      - "security confused"
+      - "paranoid about noise"
+      - "parking garage acoustics"
+    expected_adaptation:
+      emotion_detected: "embarrassed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 12:15 PM"
+    user_input: |
+      second week of car practice and I've memorized the whole song now like I don't need the notebook and I can sing and play at the same time which was the hardest part because your brain has to do two different things at once and Justin Guitar has a whole module on singing while playing and it's basically about making the guitar automatic so your brain can focus on singing
+    expected_memory_stores:
+      - "second week practice"
+      - "memorized whole song"
+      - "sing and play simultaneously"
+      - "brain coordination"
+      - "Justin Guitar singing module"
+      - "guitar automatic"
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      Jenny called and asked for an update and I played the song for her over the phone and she said Maya it's night and day from the first version and the fingerpicking intro is gorgeous and the lyrics about the maps we've made literally made her cry again and she said Julian is going to propose at his own wedding because he'll want to marry me twice
+    expected_memory_stores:
+      - "Jenny update call"
+      - "night and day improvement"
+      - "fingerpicking praised"
+      - "maps lyrics"
+      - "Jenny cried again"
+      - "marry twice joke"
+    expected_adaptation:
+      emotion_detected: "encouraged"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 6:30 PM"
+    user_input: |
+      Julian noticed my fingertips have calluses now and he was like are you playing more than I think and I said no just the usual and he gave me a look and said Maya you're up to something and I was like I am not up to anything Julian Reeves and he dropped it but I could tell he's suspicious oh and also Danny asked me at work if my diary is going well and I was like what and he said you know your secret notebook and I turned bright red
+    expected_memory_stores:
+      - "Julian noticed calluses"
+      - "Julian suspicious"
+      - "Maya denied"
+      - "Danny notebook comment"
+      - "Maya turned red"
+      - "secret hard to keep"
+    expected_adaptation:
+      emotion_detected: "flustered"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 8:00 PM"
+    user_input: |
+      practiced at home tonight with the door closed while Julian was at a Bold Studio event and I recorded myself and played it back and for the first time it actually sounds like a real song like a real actual song that a person wrote and plays and I got emotional because six months ago I found this guitar in a closet with rusted strings and now it's singing again with my words
+    expected_memory_stores:
+      - "practiced at home"
+      - "Julian at Bold Studio"
+      - "recorded and played back"
+      - "sounds like real song"
+      - "six months progress"
+      - "guitar singing again"
+      - "emotional realization"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 12:00 PM"
+    user_input: |
+      how often does Maya practice the wedding song and where
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 7:00 PM"
+    user_input: |
+      I told Nadia about the wedding song because I need another person to know in case Jenny can't help coordinate on the day and Nadia literally put her hands over her mouth and then hugged me and said that's the most Maya thing ever and she promised not to tell Omar because Omar would definitely tell Julian accidentally
+    expected_memory_stores:
+      - "told Nadia"
+      - "Nadia hands over mouth"
+      - "Nadia hugged"
+      - "most Maya thing ever"
+      - "don't tell Omar"
+      - "Omar would slip"
+    expected_adaptation:
+      emotion_detected: "trusting"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 3:00 PM"
+    user_input: |
+      on a road trip today to Multnomah Falls again a return trip and while Julian was taking photos I sat on a bench and quietly hummed the wedding song and thought about how the road trips inspired the lyrics and how the guitar connects me to Grandpa Wei and how the song connects me to Julian and everything is just so intertwined and beautiful and I'm getting married on Kobe Farm I mean at our house I'm naming things after Stardew now help
+    expected_memory_stores:
+      - "Multnomah Falls return"
+      - "hummed song quietly"
+      - "road trips inspired lyrics"
+      - "guitar connects to Grandpa Wei"
+      - "song connects to Julian"
+      - "intertwined themes"
+      - "Kobe Farm Stardew joke"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where does Maya practice the wedding song daily?"
+    expected_contains: ["car", "parking garage", "lunch"]
+  - question: "What new technique did Maya add to the song?"
+    expected_contains: ["fingerpicking"]
+  - question: "Has Maya memorized the wedding song?"
+    expected_contains: ["yes", "memorized"]
+  - question: "Who knows about the wedding song?"
+    expected_contains: ["Jenny", "Nadia"]
+  - question: "Why can't Omar know about the song?"
+    expected_contains: ["slip", "tell Julian"]
+  - question: "What did the security guard do?"
+    expected_contains: ["knocked", "window"]
+  - question: "Is Julian suspicious about Maya's guitar activity?"
+    expected_contains: ["yes", "suspicious", "calluses"]
+  - question: "What does Jenny think of the latest version of the song?"
+    expected_contains: ["night and day", "gorgeous"]
+  - question: "What road trip location did Maya return to?"
+    expected_contains: ["Multnomah Falls"]
+  - question: "Can Maya sing and play guitar at the same time now?"
+    expected_contains: ["yes"]

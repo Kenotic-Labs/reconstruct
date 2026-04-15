@@ -1,0 +1,180 @@
+story_id: 248
+story_name: "Biweekly Sessions Working"
+category: "Mental Health"
+description: |
+  Tests system tracking reduced therapy frequency as progress indicator.
+  Maya thrives with biweekly sessions. Verifies session frequency tracking and
+  independence growth.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 3:00 PM"
+    user_input: |
+      biweekly session with Dr. Tate and the gap between sessions felt fine this time like the first time I went two weeks without seeing her I was nervous but now it feels natural and she said that's exactly the point the goal is for you to not need me
+    expected_memory_stores:
+      - "biweekly session"
+      - "gap felt fine"
+      - "first time was nervous"
+      - "now natural"
+      - "goal not to need therapist"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 3:30 PM"
+    user_input: |
+      she said my GAD-7 score this week was a 3 which is basically normal range anxiety like everyone has some and she said I've gone from severe to minimal in about two months and she's really proud of me
+    expected_memory_stores:
+      - "GAD-7 score 3"
+      - "normal range"
+      - "severe to minimal"
+      - "two months"
+      - "Dr. Tate proud"
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 4:00 PM"
+    user_input: |
+      we talked about what maintenance looks like and she said eventually we can go to monthly check-ins and then quarterly and she said the Wellbutrin can be tapered after about a year if I'm stable and the CBT tools are mine forever
+    expected_memory_stores:
+      - "maintenance plan"
+      - "monthly then quarterly"
+      - "Wellbutrin taper after year"
+      - "if stable"
+      - "CBT tools permanent"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 8:00 AM"
+    user_input: |
+      had a work deadline today that would have destroyed me three months ago and I just handled it like I felt the stress and did the breathing and knocked out the code and submitted it and then went for a walk and it was just a normal stressful day not a crisis
+    expected_memory_stores:
+      - "work deadline"
+      - "would have destroyed before"
+      - "felt stress and handled it"
+      - "breathing"
+      - "normal stressful day"
+      - "not a crisis"
+    expected_adaptation:
+      emotion_detected: "resilient"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 6:00 PM"
+    user_input: |
+      Julian and I had a minor disagreement about wedding planning and normally that would spiral into me thinking our whole relationship is falling apart but I caught the thought and restructured it and said babe we're just disagreeing about napkin folds this is not a sign of doom and he laughed
+    expected_memory_stores:
+      - "disagreement about wedding"
+      - "caught catastrophizing"
+      - "restructured thought"
+      - "napkin folds not doom"
+      - "Julian laughed"
+    expected_adaptation:
+      emotion_detected: "self-aware"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 9:00 AM"
+    user_input: |
+      what's my current GAD-7 score and how has it changed
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 2:00 PM"
+    user_input: |
+      swam thirty laps today which is my all time best and Doris said I'm getting faster and she said my stroke is cleaner and she asked if I wanted to enter a local swim meet in January and I said Doris I'm not ready for competition and she said girl you are you just don't know it
+    expected_memory_stores:
+      - "thirty laps"
+      - "all time best"
+      - "Doris noticed improvement"
+      - "local swim meet January"
+      - "Doris thinks ready"
+    expected_adaptation:
+      emotion_detected: "flattered"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 10:00 AM"
+    user_input: |
+      went to brunch with Clara and Tyler and talked openly about therapy and Clara said she actually goes to therapy too for work stress as a nurse and Tyler does too for some family stuff and it's like everyone goes and no one talks about it which is dumb
+    expected_memory_stores:
+      - "brunch with Clara Tyler"
+      - "Clara in therapy too"
+      - "work stress nurse"
+      - "Tyler in therapy"
+      - "everyone goes"
+      - "no one talks about it"
+    expected_adaptation:
+      emotion_detected: "normalized"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 4:00 PM"
+    user_input: |
+      had a random grief wave about grandpa today just out of nowhere and I felt the sadness and used grounding and then let myself feel it instead of fighting it and Dr. Tate said grief doesn't need to be fixed it needs to be felt and I'm learning that difference
+    expected_memory_stores:
+      - "grief wave"
+      - "grandpa"
+      - "used grounding"
+      - "let herself feel it"
+      - "grief felt not fixed"
+      - "learning difference"
+    expected_adaptation:
+      emotion_detected: "bittersweet"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 9:00 PM"
+    user_input: |
+      reflecting on the fact that two months ago I couldn't breathe in a parking lot and now I'm swimming thirty laps and handling deadlines and going to brunch and using my toolkit and it doesn't mean the anxiety is gone it means I know how to meet it now
+    expected_memory_stores:
+      - "two months ago comparison"
+      - "parking lot couldn't breathe"
+      - "now swimming deadlines brunch"
+      - "anxiety not gone"
+      - "know how to meet it"
+    expected_adaptation:
+      emotion_detected: "wise"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya's latest GAD-7 score?"
+    expected_contains: ["3"]
+  - question: "How has the score changed since starting therapy?"
+    expected_contains: ["17", "3", "severe", "minimal"]
+  - question: "What is the long-term therapy plan?"
+    expected_contains: ["biweekly", "monthly", "quarterly"]
+  - question: "When might Maya taper Wellbutrin?"
+    expected_contains: ["after a year"]
+  - question: "How many laps can Maya swim now?"
+    expected_contains: ["thirty"]
+  - question: "What event did Doris suggest?"
+    expected_contains: ["swim meet", "January"]
+  - question: "Who else goes to therapy?"
+    expected_contains: ["Clara", "Tyler"]
+  - question: "What did Dr. Tate say about grief?"
+    expected_contains: ["felt not fixed"]
+  - question: "How does Maya handle work stress now?"
+    expected_contains: ["breathing", "walk", "normal", "not a crisis"]
+  - question: "Does Maya still have anxiety?"
+    expected_contains: ["yes", "knows how to meet it"]

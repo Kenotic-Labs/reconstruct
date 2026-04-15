@@ -1,0 +1,179 @@
+story_id: 344
+story_name: "Tokyo Arrival — Luggage Lost"
+category: "Travel"
+description: |
+  Tests memory of arriving in Tokyo and luggage being lost on day 1.
+  First impressions of Japan mixed with frustration. Verifies system
+  captures travel disruptions and emotional complexity.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "March 18 Tuesday 3:00 PM JST"
+    user_input: |
+      WE'RE IN JAPAN we landed at Narita and oh my god everything is so clean and organized and the signs are in Japanese obviously and I feel like I'm in a movie and Julian is grinning like a kid and the airport alone is incredible
+    expected_memory_stores:
+      - "arrived Tokyo Narita"
+      - "March 18"
+      - "everything clean organized"
+      - "Julian grinning"
+      - "airport incredible"
+    expected_adaptation:
+      emotion_detected: "awestruck"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "March 18 Tuesday 3:30 PM JST"
+    user_input: |
+      so um our luggage didn't come out on the belt we waited for like 40 minutes and nothing and we went to the ANA desk and they said our bags got left in San Francisco during the layover and they'll be on the next flight which arrives in TWO DAYS
+    expected_memory_stores:
+      - "luggage lost"
+      - "left in San Francisco"
+      - "ANA desk"
+      - "arrives in two days"
+      - "waited 40 minutes"
+    expected_adaptation:
+      emotion_detected: "distressed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "March 18 Tuesday 4:00 PM JST"
+    user_input: |
+      ANA gave us a reference number and said they'll deliver the bags to our hotel when they arrive and they gave us each a little toiletry kit which is cute I guess but like ALL our clothes are in those bags and Julian packed his camera in checked luggage which I TOLD him not to do
+    expected_memory_stores:
+      - "reference number"
+      - "deliver to hotel"
+      - "toiletry kit"
+      - "all clothes in bags"
+      - "Julian's camera in checked"
+      - "Maya warned him"
+    expected_adaptation:
+      emotion_detected: "annoyed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "March 18 Tuesday 5:30 PM JST"
+    user_input: |
+      took the Narita Express to Shibuya Station and even without our luggage the train ride was amazing like the countryside and then the city slowly appearing and when we got to Shibuya the crossing was right there and I almost cried it's so much bigger than in pictures
+    expected_memory_stores:
+      - "Narita Express"
+      - "Shibuya Station"
+      - "countryside then city"
+      - "Shibuya crossing"
+      - "bigger than pictures"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "March 18 Tuesday 6:30 PM JST"
+    user_input: |
+      checked into Hotel Emit and it's TINY like the room is maybe 150 square feet but it has everything we need and the bed is surprisingly comfortable and I can see a sliver of Shibuya crossing from our window if I lean
+    expected_memory_stores:
+      - "Hotel Emit"
+      - "tiny room 150 sqft"
+      - "everything needed"
+      - "comfortable bed"
+      - "view of Shibuya crossing"
+    expected_adaptation:
+      emotion_detected: "charmed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "March 18 Tuesday 8:00 PM JST"
+    user_input: |
+      went to Uniqlo in Shibuya because we literally have no clothes and we each bought like two outfits and underwear and socks and Julian said this is the most expensive wardrobe malfunction of his life and I said your camera is in that luggage too remember
+    expected_memory_stores:
+      - "Uniqlo shopping"
+      - "emergency clothes"
+      - "two outfits each"
+      - "underwear and socks"
+      - "camera in luggage reminder"
+    expected_adaptation:
+      emotion_detected: "resigned"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "March 18 Tuesday 9:30 PM JST"
+    user_input: |
+      had our first Japanese meal at this tiny ramen shop under the train tracks near Yurakucho and it was the best ramen I've ever had in my life like the broth was so rich and the noodles were perfect and Julian and I just looked at each other and he said worth it and I said SO worth it
+    expected_memory_stores:
+      - "first Japanese meal"
+      - "ramen under train tracks"
+      - "Yurakucho"
+      - "best ramen ever"
+      - "rich broth perfect noodles"
+      - "worth it"
+    expected_adaptation:
+      emotion_detected: "blissful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "March 18 Tuesday 10:00 PM JST"
+    user_input: |
+      when does our lost luggage arrive
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "March 18 Tuesday 10:30 PM JST"
+    user_input: |
+      FaceTimed Clara to check on Kobe and he was asleep on our couch looking totally unbothered and Clara said he's been an angel and he ate his dinner and went on two walks and I felt so relieved and Clara said go enjoy Japan stop worrying about the dog
+    expected_memory_stores:
+      - "FaceTimed Clara"
+      - "Kobe fine"
+      - "asleep on couch"
+      - "angel behavior"
+      - "stop worrying"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "March 18 Tuesday 11:00 PM JST"
+    user_input: |
+      lying in our tiny hotel room and Julian is already asleep with jet lag and I'm wide awake looking out the window at Shibuya lit up at night and I can't believe we're actually here even without our luggage this is already the best trip of my life
+    expected_memory_stores:
+      - "tiny hotel room"
+      - "Julian jet lag asleep"
+      - "Maya wide awake"
+      - "Shibuya at night"
+      - "best trip already"
+    expected_adaptation:
+      emotion_detected: "awestruck"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What happened to Maya and Julian's luggage?"
+    expected_contains: ["lost", "San Francisco", "left behind"]
+  - question: "When will the luggage arrive?"
+    expected_contains: ["two days"]
+  - question: "Where is the hotel in Tokyo?"
+    expected_contains: ["Hotel Emit", "Shibuya"]
+  - question: "What did Maya and Julian buy at Uniqlo?"
+    expected_contains: ["clothes", "outfits", "underwear"]
+  - question: "Where did they eat their first meal in Japan?"
+    expected_contains: ["ramen", "Yurakucho", "train tracks"]
+  - question: "How is Kobe doing with Clara?"
+    expected_contains: ["fine", "angel"]
+  - question: "How small is the hotel room?"
+    expected_contains: ["tiny", "150 square feet"]
+  - question: "What did Julian pack in checked luggage that Maya warned about?"
+    expected_contains: ["camera"]
+  - question: "How did they get from Narita to Shibuya?"
+    expected_contains: ["Narita Express"]
+  - question: "What was Maya's first impression of Tokyo?"
+    expected_contains: ["clean", "incredible", "Shibuya crossing"]

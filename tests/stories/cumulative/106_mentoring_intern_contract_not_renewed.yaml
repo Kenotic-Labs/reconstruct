@@ -1,0 +1,207 @@
+story_id: 106
+story_name: "Aisha's Contract Not Renewed"
+category: "Career"
+description: |
+  Tests whether the system captures the emotional impact of Aisha's contract not being
+  renewed due to budget cuts, tracks Maya's anger and sense of injustice, and maintains
+  the correction about who made the budget decision.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 10:00am"
+    user_input: |
+      so um I just found out that Aisha's contract isn't getting renewed. like her internship ends in three weeks and they're just... not extending it. I am so pissed right now
+    expected_memory_stores:
+      - "Aisha contract not renewed"
+      - "internship ending"
+      - "three weeks"
+      - "angry"
+    expected_triples:
+      - ["Aisha", "contract_status", "not renewed"]
+      - ["Aisha internship", "ends_in", "three weeks"]
+      - ["user", "has_emotion", "angry"]
+    expected_adaptation:
+      emotion_detected: "angry"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 10:15am"
+    user_input: |
+      apparently it's a budget thing? like engineering budget got cut by 15% for Q3 and all intern extensions are frozen. Rachel Kim told me this morning and she seemed upset about it too honestly
+    expected_memory_stores:
+      - "budget cut"
+      - "15 percent"
+      - "Q3"
+      - "intern extensions frozen"
+      - "Rachel Kim upset"
+    expected_triples:
+      - ["engineering budget", "cut_by", "15 percent for Q3"]
+      - ["intern extensions", "status", "frozen"]
+      - ["Rachel Kim", "has_emotion", "upset about budget"]
+      - ["user", "has_emotion", "frustrated"]
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 12:00pm"
+    user_input: |
+      this is so unfair though like she found a production bug that nobody else caught and she's been getting better every single week. I've literally been pouring my time and energy into mentoring her and now what it was all for nothing??
+    expected_memory_stores:
+      - "injustice"
+      - "mentoring wasted"
+      - "production bug reference"
+    expected_triples:
+      - ["user", "feels", "mentoring investment was wasted"]
+      - ["user", "perceives", "injustice in Aisha not being renewed"]
+      - ["user", "has_emotion", "angry"]
+    expected_adaptation:
+      emotion_detected: "angry"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 2:00pm"
+    user_input: |
+      I haven't told Aisha yet. Rachel said HR will tell her on Wednesday but I feel like I should tell her first because she trusts me? but also is that overstepping? I don't even know
+    expected_memory_stores:
+      - "Aisha doesn't know yet"
+      - "HR tells Wednesday"
+      - "Maya conflicted"
+      - "trust"
+    expected_triples:
+      - ["Aisha", "does_not_know", "contract not renewed"]
+      - ["HR", "will_tell_Aisha", "Wednesday"]
+      - ["user", "considers", "telling Aisha first"]
+      - ["user", "has_emotion", "conflicted"]
+    expected_adaptation:
+      emotion_detected: "conflicted"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 5:30pm"
+    user_input: |
+      Julian says I shouldn't take it personally but how can I not?? like I basically made a promise to this girl that if she worked hard it would pay off and now the company is just like lol nope sorry budget
+    expected_memory_stores:
+      - "Julian advice"
+      - "broken promise feeling"
+      - "taking it personally"
+    expected_triples:
+      - ["Julian", "advised", "don't take it personally"]
+      - ["user", "feels", "broke promise to Aisha"]
+      - ["user", "has_emotion", "hurt"]
+    expected_adaptation:
+      emotion_detected: "hurt"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 9:00am"
+    user_input: |
+      actually I was wrong about who decides the budget stuff, it's not just a company-wide freeze. Sam Okafor actually has discretion over intern extensions if he can justify the ROI. Rachel Kim confirmed this morning
+    expected_memory_stores:
+      - "correction"
+      - "Sam Okafor has discretion"
+      - "ROI justification"
+      - "not company-wide"
+    expected_triples:
+      - ["user", "corrected", "budget freeze company-wide → Sam Okafor has discretion"]
+      - ["Sam Okafor", "can_extend", "interns if ROI justified"]
+      - ["user", "has_emotion", "determined"]
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 10:30am"
+    user_input: |
+      how much was the engineering budget cut by
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 11:00am"
+    user_input: |
+      ok I'm gonna go talk to Sam. I'm gonna make the case for Aisha. I have the bug she found, the code quality metrics, the PR history. I can show actual ROI. I'm not letting this happen without a fight
+    expected_memory_stores:
+      - "plan to advocate"
+      - "talk to Sam"
+      - "ROI case"
+      - "evidence gathering"
+    expected_triples:
+      - ["user", "plans_to", "advocate to Sam Okafor for Aisha"]
+      - ["user", "gathering_evidence", "bug found, code quality metrics, PR history"]
+      - ["user", "will_present", "ROI case"]
+      - ["user", "has_emotion", "determined"]
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 3:00pm"
+    user_input: |
+      Aisha came by my desk looking all nervous and was like hey is everything ok you seem stressed and I almost lost it right there. had to be like yeah just deadline stuff. I hate lying to her
+    expected_memory_stores:
+      - "Aisha noticed stress"
+      - "Maya lied"
+      - "guilt"
+    expected_triples:
+      - ["Aisha", "noticed", "user is stressed"]
+      - ["user", "lied_to", "Aisha about reason for stress"]
+      - ["user", "has_emotion", "guilty"]
+    expected_adaptation:
+      emotion_detected: "guilty"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 8:00pm"
+    user_input: |
+      spent the evening putting together a presentation for Sam. like actual slides with metrics and a cost-benefit analysis. Julian helped me with the design because obviously he's the designer. Kobe slept through the whole thing on the couch
+    expected_memory_stores:
+      - "presentation for Sam"
+      - "metrics"
+      - "cost-benefit analysis"
+      - "Julian helped design"
+      - "Kobe sleeping"
+    expected_triples:
+      - ["user", "created", "presentation with metrics and cost-benefit analysis"]
+      - ["Julian", "helped_with", "presentation design"]
+      - ["user", "has_emotion", "focused"]
+    expected_adaptation:
+      emotion_detected: "focused"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Why is Aisha's contract not being renewed?"
+    expected_contains: ["budget", "cut"]
+  - question: "Who has discretion over intern extensions?"
+    expected_contains: ["Sam Okafor"]
+  - question: "How much was the engineering budget cut?"
+    expected_contains: ["15"]
+  - question: "What evidence is Maya preparing for Sam?"
+    expected_contains: ["bug", "metrics", "ROI", "cost-benefit"]
+  - question: "When is Aisha supposed to find out?"
+    expected_contains: ["Wednesday", "HR"]
+  - question: "Does Aisha know her contract isn't being renewed?"
+    expected_contains: ["no", "not yet"]
+  - question: "How is Maya feeling about the situation?"
+    expected_contains: ["angry", "unfair"]
+  - question: "Who helped Maya with the presentation?"
+    expected_contains: ["Julian"]
+  - question: "What did Maya tell Aisha when she asked about the stress?"
+    expected_contains: ["deadline", "lied"]
+  - question: "What was the initial understanding about the budget freeze?"
+    expected_contains: ["company-wide", "frozen"]

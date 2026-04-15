@@ -1,0 +1,179 @@
+story_id: 178
+story_name: "Ongoing Monitoring"
+category: "Health"
+description: |
+  Continued monitoring of Vivian's health from Portland. Ring camera
+  moments, daily calls, Clara updates. Tests long-term health state
+  tracking and thread blending with wedding prep.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      nightly call with Mom and she told me she's feeling so good she wants to come up to Portland for a visit before the wedding to see the venue and meet the caterer and I'm like Mom that's amazing but also don't overdo it and she said Maya I have an arrhythmia not a broken leg I can fly
+    expected_memory_stores:
+      - "Vivian wants to visit Portland"
+      - "see venue and meet caterer"
+      - "before the wedding"
+      - "Vivian feeling strong"
+      - "Maya cautious"
+    expected_adaptation:
+      emotion_detected: "cautious excitement"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      Clara and I had a long call about Mom's visit she thinks it's fine as long as Mom takes her medication and doesn't try to do everything in one day Clara said I'll come too and we can make it a girls trip and check out the venue together and honestly that sounds amazing the three of us haven't had a trip together in years
+    expected_memory_stores:
+      - "Clara approves visit"
+      - "girls trip idea"
+      - "Clara coming too"
+      - "venue visit together"
+      - "haven't traveled together in years"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 6:00 PM"
+    user_input: |
+      checked the Ring camera and saw Mom doing her stretches in the living room which the walking group ladies taught her and Dad was in the kitchen making tea and it was just this peaceful domestic scene and I thought about how close we came to this not being our reality and I got emotional at my desk again
+    expected_memory_stores:
+      - "Ring camera check"
+      - "Vivian doing stretches"
+      - "walking group taught her"
+      - "George making tea"
+      - "Maya emotional about what could have been"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 7:00 PM"
+    user_input: |
+      Mom said on the phone tonight that Dr. Nair wants her to do another blood work panel before the next appointment and she needs to go next week and Clara said she'll take her because Dad always gets nervous at medical places which is funny because he owns an auto repair shop and isn't scared of anything else but put him in a hospital and he's a mess
+    expected_memory_stores:
+      - "blood work panel needed"
+      - "next week"
+      - "Clara taking her"
+      - "George scared of hospitals"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 11:00 AM"
+    user_input: |
+      Julian and I were talking about the wedding and I said I really want Mom to be healthy enough to dance at the reception and he said babe she's going to dance she's going to dance harder than anyone there and I said you don't know my mom she literally won a cha cha contest in 1998 she takes dancing seriously
+    expected_memory_stores:
+      - "Maya wants Vivian to dance at wedding"
+      - "Julian reassuring"
+      - "Vivian won cha cha contest 1998"
+      - "Vivian serious about dancing"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 7:00 PM"
+    user_input: |
+      Mom said something on the call tonight that hit me she said Maya this health scare made me realize I need to be around for a long time because I want to see my grandchildren and I was like MOM we're not even married yet and she said I know I'm just saying and I was like okay noted Vivian
+    expected_memory_stores:
+      - "Vivian wants grandchildren"
+      - "health scare gave perspective"
+      - "Maya not ready for that conversation"
+      - "Vivian thinking long term"
+    expected_adaptation:
+      emotion_detected: "flustered amusement"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      Clara took Mom for blood work today and the results came back fast because Dr. Nair's office does same day stuff and Clara said everything looks great cholesterol is good blood sugar normal kidney and liver function normal diltiazem isn't causing any systemic issues and I said thank you for being her nurse and her daughter
+    expected_memory_stores:
+      - "blood work done"
+      - "results great"
+      - "cholesterol good"
+      - "blood sugar normal"
+      - "kidney liver normal"
+      - "diltiazem no systemic issues"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 5:00 PM"
+    user_input: |
+      Priya asked about my mom today at work and I said she's doing well and Priya said I'm glad and then she told me her own mother had a similar thing years ago and is totally fine now on medication and she said the first few weeks are the scariest but once you adjust it becomes your new normal and honestly that was really helpful to hear
+    expected_memory_stores:
+      - "Priya's mother had similar issue"
+      - "Priya's reassurance"
+      - "new normal concept"
+      - "first weeks are scariest"
+    expected_adaptation:
+      emotion_detected: "comforted"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 7:00 PM"
+    user_input: |
+      Mom confirmed she and Clara are coming to Portland in three weeks for a long weekend to see the venue and help with wedding stuff and I already told Blue Fork to expect us for the second tasting and Sarah at Pine Ridge Lodge said she'd love to give them a tour and I'm so excited to show my mom where I'm getting married
+    expected_memory_stores:
+      - "Vivian and Clara visiting in three weeks"
+      - "long weekend"
+      - "venue tour planned"
+      - "Blue Fork second tasting"
+      - "Sarah at Pine Ridge"
+      - "Maya excited"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 9:00 PM"
+    user_input: |
+      end of another week of monitoring Mom and honestly it's become routine now in the best way possible 7pm call check the Ring once or twice and get Clara updates and Mom sounds better every time she calls like she's got more energy more humor she even made a joke about her heart being dramatic like her daughters and I was like okay Mom your comedy career is alive at least
+    expected_memory_stores:
+      - "monitoring is routine now"
+      - "Mom improving continuously"
+      - "more energy more humor"
+      - "Vivian joking about heart"
+      - "routine: 7pm call Ring Clara updates"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Are Vivian and Clara visiting Portland?"
+    expected_contains: ["yes", "three weeks", "long weekend"]
+  - question: "How is Vivian's blood work?"
+    expected_contains: ["great", "normal"]
+  - question: "Is diltiazem causing any problems?"
+    expected_contains: ["no"]
+  - question: "What does Vivian want to see in Portland?"
+    expected_contains: ["venue", "Pine Ridge"]
+  - question: "Does Vivian want grandchildren?"
+    expected_contains: ["yes"]
+  - question: "What is Maya's daily monitoring routine?"
+    expected_contains: ["7pm call", "Ring camera", "Clara updates"]
+  - question: "What did Priya share about her own mother?"
+    expected_contains: ["similar", "medication", "fine now"]
+  - question: "What event is planned with Blue Fork during the visit?"
+    expected_contains: ["second tasting"]
+  - question: "How is Vivian's mood now?"
+    expected_contains: ["better", "humor", "joking"]
+  - question: "Did Vivian win a dance contest?"
+    expected_contains: ["cha cha", "1998"]

@@ -1,0 +1,179 @@
+story_id: 189
+story_name: "Retirement Party"
+category: "Life Events"
+description: |
+  Family throws George a retirement/new chapter party. Tony and Rick
+  attend. Clara presents scrapbook. Tests multi-entity event tracking
+  and emotional culmination of thread arc.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00 AM"
+    user_input: |
+      okay so we're throwing Dad a retirement slash new chapter party today at my parents house and I flew down to Sacramento yesterday Clara and I have been planning this secretly for two weeks and Dad thinks we're just coming for a normal family dinner he has no idea Tony and Rick are coming and Howard and Bill from the woodworking class
+    expected_memory_stores:
+      - "surprise retirement party"
+      - "Maya flew to Sacramento"
+      - "Clara and Maya planned secretly"
+      - "George doesn't know"
+      - "Tony Rick Howard Bill attending"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 11:00 AM"
+    user_input: |
+      Julian stayed in Portland with Kobe because someone needs to watch the dog but he sent a video message for Dad that we're going to play at the party and Marcus recorded one too from Austin and even Kevin Park recorded a short one saying Julian talks about you all the time George congratulations on an incredible career
+    expected_memory_stores:
+      - "Julian video message"
+      - "Marcus video from Austin"
+      - "Kevin Park video message"
+      - "Julian stayed with Kobe"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 3:00 PM"
+    user_input: |
+      people are arriving and we told Dad to stay in the bedroom until 4pm because we're setting up and he keeps trying to come out and Mom is literally blocking the door saying George sit down and watch your car show and he's like Vivian what is going on and she says nothing just sit
+    expected_memory_stores:
+      - "party setup"
+      - "George suspicious"
+      - "Vivian blocking bedroom door"
+      - "guests arriving secretly"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 4:00 PM"
+    user_input: |
+      SURPRISE Dad walked out and everyone yelled surprise and his face was just pure shock like mouth open eyes wide and then he saw Tony and Rick and he started walking toward them and Tony said hey boss and Dad hugged both of them and didn't let go for like a full minute and everyone was crying including me
+    expected_memory_stores:
+      - "surprise moment"
+      - "George shocked"
+      - "Tony and Rick there"
+      - "George hugged them"
+      - "everyone crying"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 5:00 PM"
+    user_input: |
+      Howard brought his wife Janet and Bill came with his daughter and there were about 20 people total in my parents small house and Mom made enough food for 40 because that's Mom and Dad was walking around hugging everyone and I haven't seen him this happy since well since I can't even remember
+    expected_memory_stores:
+      - "Howard's wife Janet"
+      - "Bill's daughter"
+      - "about 20 people"
+      - "Vivian cooked for 40"
+      - "George walking around hugging everyone"
+      - "happiest in a long time"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 6:00 PM"
+    user_input: |
+      we played the video messages Julian's made everyone laugh because he told this story about the first time Dad taught him to change oil and Julian used the wrong filter and Dad just looked at him and said son we all learn and Kevin's video was short but really sweet and Marcus said George you're the only father figure I need besides my own Dad who's watching this video so sorry Dad
+    expected_memory_stores:
+      - "video messages played"
+      - "Julian oil change story"
+      - "Kevin's message"
+      - "Marcus father figure comment"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 7:00 PM"
+    user_input: |
+      Clara presented the scrapbook she made with photos from the shop every page is a year from 1984 to now with photos of the shop sign the bays the tools the employees over the years and Dad sat down and went through every single page slowly touching the photos and not saying a word and you could hear a pin drop in that room
+    expected_memory_stores:
+      - "Clara's scrapbook presented"
+      - "photos from 1984 to now"
+      - "every year documented"
+      - "George went through every page"
+      - "silent emotional reaction"
+    expected_adaptation:
+      emotion_detected: "profound"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 7:30 PM"
+    user_input: |
+      Dad stood up after looking at the scrapbook and he gave this little speech he's not a speech guy at all but he said I spent 40 years fixing other people's cars and I thought that was my purpose but my real purpose was being here with all of you and he looked at Mom and said Vivian you made all of this possible and she just nodded and cried
+    expected_memory_stores:
+      - "George's speech"
+      - "40 years fixing cars"
+      - "real purpose is family"
+      - "credited Vivian"
+      - "Vivian cried"
+    expected_adaptation:
+      emotion_detected: "deeply moved"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 9:00 PM"
+    user_input: |
+      Tony pulled me aside and said Maya your Dad saved my life he hired me when no one else would because I had a record and he gave me a second chance and I'll never forget that and I said Tony my Dad never told me that and he said that's because George doesn't talk about the good he does he just does it
+    expected_memory_stores:
+      - "Tony's revelation"
+      - "George hired Tony despite record"
+      - "gave second chance"
+      - "George doesn't talk about good deeds"
+    expected_adaptation:
+      emotion_detected: "profoundly moved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 11:00 PM"
+    user_input: |
+      party's over everyone's gone and Dad's sitting in his recliner with the scrapbook on his lap and Mom is cleaning up and Clara and I are helping and Dad looked up and said girls thank you and Clara said for what and he said for reminding me that 40 years wasn't just work it was a life and then he fell asleep in the chair with the scrapbook still open and we covered him with a blanket
+    expected_memory_stores:
+      - "party over"
+      - "George with scrapbook"
+      - "thanked daughters"
+      - "40 years was a life not just work"
+      - "fell asleep with scrapbook"
+      - "daughters covered him"
+    expected_adaptation:
+      emotion_detected: "tender"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Was George's retirement party a surprise?"
+    expected_contains: ["yes", "surprise"]
+  - question: "Who attended the retirement party?"
+    expected_contains: ["Tony", "Rick", "Howard", "Bill"]
+  - question: "What did Clara give George?"
+    expected_contains: ["scrapbook"]
+  - question: "What did George say in his speech?"
+    expected_contains: ["purpose", "family"]
+  - question: "What did Tony reveal about George?"
+    expected_contains: ["hired", "record", "second chance"]
+  - question: "Did Julian attend the party?"
+    expected_contains: ["no", "video message"]
+  - question: "Where did Marcus send his video from?"
+    expected_contains: ["Austin"]
+  - question: "How many people were at the party?"
+    expected_contains: ["20"]
+  - question: "How did George react to the surprise?"
+    expected_contains: ["shocked", "hugged"]
+  - question: "What did Kevin Park say in his video?"
+    expected_contains: ["Julian talks about you", "congratulations"]

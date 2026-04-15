@@ -1,0 +1,180 @@
+story_id: 241
+story_name: "Anxiety Spikes After PIP"
+category: "Mental Health"
+description: |
+  Tests system capturing the onset of mental health struggles. Maya's anxiety spikes after
+  receiving a PIP at Vantage. Verifies emotional escalation tracking and work stress capture.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 4:00 PM"
+    user_input: |
+      ok so um I got put on a PIP at Vantage today and I'm freaking out like actually freaking out my hands are shaking right now and Priya said it's about my performance over the last quarter and I know I've been distracted with everything else going on but a PIP feels like a death sentence
+    expected_memory_stores:
+      - "PIP at Vantage"
+      - "Priya delivered"
+      - "last quarter performance"
+      - "hands shaking"
+      - "death sentence feeling"
+    expected_adaptation:
+      emotion_detected: "panicking"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 4:30 PM"
+    user_input: |
+      I can't breathe properly right now like my chest is tight and I keep going to the bathroom at work to splash water on my face and I know logically a PIP isn't getting fired but my brain is spiraling like what if I lose my job what if we can't afford the house what if everything falls apart
+    expected_memory_stores:
+      - "can't breathe"
+      - "chest tight"
+      - "bathroom at work"
+      - "spiraling thoughts"
+      - "what if lose job"
+      - "what if house"
+    expected_adaptation:
+      emotion_detected: "anxiety attack"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 6:00 PM"
+    user_input: |
+      told Julian about the PIP and I could barely get the words out and he held me and said babe a PIP is just a plan it's not a sentence and he said lots of people get PIPs and come out fine and I know he's right but my brain won't stop racing
+    expected_memory_stores:
+      - "told Julian"
+      - "barely got words out"
+      - "Julian reassured"
+      - "PIP is a plan"
+      - "brain racing"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 11:00 PM"
+    user_input: |
+      can't sleep at all like I've been lying here for three hours and every time I close my eyes I start thinking about work and the PIP and my heart starts pounding and I got up and made tea and I'm just sitting in the kitchen at midnight staring at nothing
+    expected_memory_stores:
+      - "insomnia"
+      - "three hours"
+      - "heart pounding"
+      - "midnight tea"
+      - "staring at nothing"
+    expected_adaptation:
+      emotion_detected: "distressed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 8:00 AM"
+    user_input: |
+      barely slept and I'm at my desk and I feel like everyone knows about the PIP and is judging me even though Priya said it's confidential and Leon can probably tell something is wrong because I'm not talking and I keep checking my email obsessively
+    expected_memory_stores:
+      - "barely slept"
+      - "feels everyone knows"
+      - "paranoid about judgment"
+      - "not talking"
+      - "checking email obsessively"
+    expected_adaptation:
+      emotion_detected: "paranoid"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      what did I get at work that's stressing me out and who told me about it
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 5:00 PM"
+    user_input: |
+      Clara called and she could hear in my voice that something was wrong and I told her about the PIP and the anxiety and she was quiet for a second and then she said Maya have you ever thought about talking to someone like a therapist and I said no I'm fine and she said Maya you are NOT fine
+    expected_memory_stores:
+      - "Clara called"
+      - "heard it in voice"
+      - "told about PIP"
+      - "therapy suggestion"
+      - "Maya said fine"
+      - "Clara said not fine"
+    expected_adaptation:
+      emotion_detected: "resistant"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 7:00 AM"
+    user_input: |
+      third night of terrible sleep and I had a panic attack this morning like a real one where I couldn't breathe and my vision went fuzzy and Julian was there and he talked me through it but afterwards he sat me down and said Maya I love you and I think Clara is right you need to talk to someone
+    expected_memory_stores:
+      - "panic attack"
+      - "couldn't breathe"
+      - "vision fuzzy"
+      - "Julian talked through it"
+      - "Julian agrees with Clara"
+      - "need to talk to someone"
+    expected_adaptation:
+      emotion_detected: "scared"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 10:00 AM"
+    user_input: |
+      I hate admitting this but I think they're right because this isn't normal like I've been stressed before but this is different this feels like my brain is broken and I can't turn it off and the PIP was just the trigger but I think this has been building for a while with grandpa dying and the knee and the allergy and moving
+    expected_memory_stores:
+      - "admitting it"
+      - "not normal"
+      - "brain feels broken"
+      - "PIP was trigger"
+      - "building for a while"
+      - "grandpa knee allergy moving"
+    expected_adaptation:
+      emotion_detected: "self-aware"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      looked up therapists near me and there's someone named Dr. Helen Tate who specializes in anxiety and she has availability next week and I made an appointment before I could talk myself out of it and I'm scared but also relieved that I'm doing something
+    expected_memory_stores:
+      - "Dr. Helen Tate"
+      - "therapist"
+      - "specializes in anxiety"
+      - "appointment next week"
+      - "scared but relieved"
+    expected_adaptation:
+      emotion_detected: "brave"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What happened at Maya's work?"
+    expected_contains: ["PIP"]
+  - question: "Who put Maya on a PIP?"
+    expected_contains: ["Priya"]
+  - question: "What physical symptoms is Maya experiencing?"
+    expected_contains: ["can't breathe", "chest tight", "heart pounding", "insomnia"]
+  - question: "Has Maya had panic attacks?"
+    expected_contains: ["yes", "vision fuzzy"]
+  - question: "Who suggested therapy?"
+    expected_contains: ["Clara", "Julian"]
+  - question: "What does Maya think triggered the anxiety?"
+    expected_contains: ["PIP", "grandpa", "knee", "allergy", "moving"]
+  - question: "Who is Maya's therapist going to be?"
+    expected_contains: ["Dr. Helen Tate"]
+  - question: "What does Dr. Tate specialize in?"
+    expected_contains: ["anxiety"]
+  - question: "When is Maya's first therapy appointment?"
+    expected_contains: ["next week"]
+  - question: "How is Maya sleeping?"
+    expected_contains: ["barely", "insomnia", "can't sleep"]

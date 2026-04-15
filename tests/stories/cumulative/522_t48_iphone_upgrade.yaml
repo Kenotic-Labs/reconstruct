@@ -1,0 +1,178 @@
+story_id: 522
+story_name: "iPhone Upgrade"
+category: "Phone and Digital Life"
+description: |
+  Maya buys an iPhone 15 Pro and sets up proper backups. The new phone represents
+  a fresh start digitally. Cross-references financial stress (T36-T40),
+  photo loss, and work at Conduit AI.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00 AM"
+    user_input: |
+      ok I finally decided to bite the bullet and get a new phone because the iPhone 8 is killing me like I tried to take a photo of the cherry tree blooming and it looked like it was taken in 2015 and Julian said just get the new phone Maya you deserve a working camera and I said with what money and he said we budgeted for emergencies
+    expected_memory_stores:
+      - "deciding on new phone"
+      - "iPhone 8 camera bad"
+      - "cherry tree photo attempt"
+      - "Julian encouraging"
+      - "emergency budget"
+    expected_adaptation:
+      emotion_detected: "decisive"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 11:30 AM"
+    user_input: |
+      at the Apple Store again and I'm looking at the iPhone 15 Pro and it's 999 dollars which makes me want to vomit but the camera is incredible like the guy showed me the photo capabilities and I could take amazing food photos for our dinner parties and Kobe portraits and just everything and the 48 megapixel thing is nuts
+    expected_memory_stores:
+      - "iPhone 15 Pro"
+      - "$999"
+      - "amazing camera"
+      - "48 megapixel"
+      - "dinner party food photos"
+      - "Kobe portraits"
+    expected_adaptation:
+      emotion_detected: "torn"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 12:00 PM"
+    user_input: |
+      did the trade in on the broken iPhone 12 and got 150 off so the total is 849 and I'm doing the monthly payment plan which is like 35 a month and Julian said think of it as an investment and I said Julian it's a phone not a stock and he said your phone IS your stock portfolio your photos are your dividends and I was like that doesn't make sense but ok
+    expected_memory_stores:
+      - "trade in $150 off"
+      - "total $849"
+      - "monthly plan $35"
+      - "Julian investment metaphor"
+    expected_adaptation:
+      emotion_detected: "committed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 2:00 PM"
+    user_input: |
+      setting up the new phone and this time I'm doing EVERYTHING right like iCloud is on and auto backup is on and Google Photos is on as a secondary backup and Julian showed me how to enable the automatic photo library sync and I feel like I'm building a fortress around my photos so I never lose anything again
+    expected_memory_stores:
+      - "iCloud setup"
+      - "auto backup enabled"
+      - "Google Photos secondary"
+      - "photo library sync"
+      - "fortress around photos"
+    expected_adaptation:
+      emotion_detected: "meticulous"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 3:30 PM"
+    user_input: |
+      the camera on this thing is insane I just took a photo of Kobe in the backyard and you can see every single hair on his face and Julian took a portrait of me wearing grandpa's watch and the watch face is so sharp you can read the Seiko logo and I'm like ok 999 dollars was worth it for this
+    expected_memory_stores:
+      - "amazing camera test"
+      - "Kobe photo every hair"
+      - "portrait with grandpa's watch"
+      - "Seiko logo visible"
+      - "$999 worth it"
+    expected_adaptation:
+      emotion_detected: "thrilled"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 5:00 PM"
+    user_input: |
+      took a photo of the cherry tree with the new phone and texted it to my mom and she said Maya that looks like a painting and it does the colors are incredible and then she said wait is that the tree and I said yes mom that's grandpa's tree and she said it's grown so much
+    expected_memory_stores:
+      - "cherry tree photo"
+      - "sent to Vivian"
+      - "Vivian says like painting"
+      - "tree has grown"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 9:00 AM"
+    user_input: |
+      started going through my old photos that I recovered and organizing them into albums and I made albums for Japan Trip and Kobe and House Renovation and Dinner Parties and Grandpa Wei and it feels so much better having everything organized instead of just a massive camera roll
+    expected_memory_stores:
+      - "organizing photos into albums"
+      - "Japan Trip Kobe House Renovation"
+      - "Dinner Parties Grandpa Wei albums"
+      - "organization feels better"
+    expected_adaptation:
+      emotion_detected: "orderly"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 12:00 PM"
+    user_input: |
+      realized how many apps I had on my old phone that I never used and I'm only installing the ones I actually need on this one so far it's like Messages Camera Maps Music Spotify my banking app Slack for work the climbing gym app and that's basically it and I'm not putting Instagram back on for at least a week
+    expected_memory_stores:
+      - "selective app installation"
+      - "only needed apps"
+      - "Messages Camera Maps Music"
+      - "Spotify banking Slack climbing"
+      - "no Instagram for a week"
+    expected_adaptation:
+      emotion_detected: "intentional"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 3:00 PM"
+    user_input: |
+      Julian said he likes the new me with the phone because during the iPhone 8 weeks I was more present like I was reading and walking Kobe and cooking without looking at my phone and he said please don't go back to the old way and I said I'm gonna try but Instagram is calling me and he gave me a look
+    expected_memory_stores:
+      - "Julian likes reduced phone use"
+      - "more present during iPhone 8"
+      - "reading walking cooking"
+      - "Instagram temptation"
+    expected_adaptation:
+      emotion_detected: "self-aware"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 7:00 PM"
+    user_input: |
+      first full day with the new phone and my screen time is only 1 hour and 45 minutes which is insane compared to the 4.5 hours I used to do and it's because I only have essential apps and no social media yet and I feel lighter like actually mentally lighter and I want to keep it this way but I know the real test is when I install Instagram
+    expected_memory_stores:
+      - "screen time 1hr 45min"
+      - "versus old 4.5 hours"
+      - "essential apps only"
+      - "mentally lighter"
+      - "Instagram test coming"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What phone did Maya upgrade to?"
+    expected_contains: ["iPhone 15 Pro"]
+  - question: "How much did the new phone cost?"
+    expected_contains: ["999", "849"]
+  - question: "What backup systems did Maya set up?"
+    expected_contains: ["iCloud", "Google Photos"]
+  - question: "What photo albums did Maya create?"
+    expected_contains: ["Japan Trip", "Kobe", "Grandpa Wei"]
+  - question: "What was Maya's screen time before the phone broke?"
+    expected_contains: ["4.5 hours"]
+  - question: "What was her screen time on the first day with the new phone?"
+    expected_contains: ["1 hour 45", "1:45"]
+  - question: "What app is Maya delaying installing?"
+    expected_contains: ["Instagram"]
+  - question: "What monthly payment is Maya making for the phone?"
+    expected_contains: ["35"]
+  - question: "What photo impressed Maya most on the new phone?"
+    expected_contains: ["Kobe", "every hair"]
+  - question: "What did Julian observe about Maya during the iPhone 8 period?"
+    expected_contains: ["more present", "reading", "walking"]

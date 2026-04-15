@@ -1,0 +1,168 @@
+story_id: 418
+story_name: "No More Devices Rule"
+category: "Smart Home"
+description: |
+  Maya establishes a firm rule: no more smart devices without her explicit approval.
+  Julian grudgingly accepts. Tests boundary-setting and relationship dynamics.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00 AM"
+    user_input: |
+      ok so I found a package on the porch this morning and it's a smart garage door opener that Julian ordered WITHOUT ASKING ME and I'm like Julian what did we talk about and he was like it was on sale and I said return it NOW
+    expected_memory_stores:
+      - "smart garage door opener"
+      - "Julian ordered without asking"
+      - "on sale excuse"
+      - "Maya says return it"
+    expected_adaptation:
+      emotion_detected: "angry"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:30 AM"
+    user_input: |
+      we sat down and had like a real conversation about this and I said look I appreciate that you're excited about smart home stuff but after the lockout incident and the Kobe alert nightmare and the pizza delivery door-unlock situation we need boundaries and he nodded but I could tell he was disappointed
+    expected_memory_stores:
+      - "serious conversation"
+      - "boundaries needed"
+      - "lockout referenced"
+      - "Kobe alerts referenced"
+      - "pizza incident referenced"
+      - "Julian disappointed"
+    expected_adaptation:
+      emotion_detected: "firm"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:00 AM"
+    user_input: |
+      so here's the rule I set no new smart devices can be purchased or installed without both of us agreeing first and I said this is not negotiable it's our house not a tech demo and Julian said that's fair and I was like good because the next thing you order without asking I'm returning it and donating the Raspberry Pi
+    expected_memory_stores:
+      - "new rule: both must agree"
+      - "not negotiable"
+      - "threat to donate Raspberry Pi"
+      - "Julian agreed"
+    expected_adaptation:
+      emotion_detected: "authoritative"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 12:00 PM"
+    user_input: |
+      I also said we need to audit what we already have because I feel like we've accumulated this random collection of smart stuff and half of it is just creating problems and Julian said ok let's make a list so we did the Nest thermostat the two Ring cameras the two August locks and the Hue bulbs that's already 7 devices for a small house
+    expected_memory_stores:
+      - "device audit"
+      - "7 devices total"
+      - "Nest 2 Ring 2 August Hue"
+      - "too many for small house"
+    expected_adaptation:
+      emotion_detected: "practical"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 1:00 PM"
+    user_input: |
+      we decided to keep everything we have because honestly when it's working right it IS useful but we're capping it here no smart fridge no smart oven no robot vacuum none of that stuff Julian was like what about a smart sprinkler and I gave him the look and he said ok ok fine
+    expected_memory_stores:
+      - "keeping current devices"
+      - "capped at current"
+      - "no smart fridge oven vacuum"
+      - "Julian suggested sprinkler"
+      - "Maya shut it down"
+    expected_adaptation:
+      emotion_detected: "final"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Julian returned the garage door opener and he got a full refund and he showed me the confirmation like a kid showing his mom he cleaned his room and I said thank you and kissed him on the cheek and he said you're no fun and I said I'm plenty of fun I'm just also practical
+    expected_memory_stores:
+      - "garage opener returned"
+      - "full refund"
+      - "Julian showed confirmation"
+      - "playful exchange"
+    expected_adaptation:
+      emotion_detected: "affectionate"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 4:30 PM"
+    user_input: |
+      told Clara about the new rule and she was like good for you Maya and she said her boyfriend tried the same thing with smart home stuff and it got out of control and she wished she had set boundaries earlier and I felt validated honestly
+    expected_memory_stores:
+      - "Clara validates rule"
+      - "Clara's boyfriend same issue"
+      - "Maya feels validated"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 6:00 PM"
+    user_input: |
+      how many smart devices do we have in the house right now and what are they
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 7:00 PM"
+    user_input: |
+      Julian is already looking at smart home forums again and I said what are you doing and he said just looking I'm not buying anything and I said Julian and he said I PROMISE and I said ok because looking is fine I guess I can't stop someone from looking
+    expected_memory_stores:
+      - "Julian still browsing forums"
+      - "promises not buying"
+      - "Maya monitoring"
+    expected_adaptation:
+      emotion_detected: "suspicious amused"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 9:00 AM"
+    user_input: |
+      honestly though the smart home stuff when it's dialed in is pretty great like the Nest had the house warm before we woke up the Hue bulbs gave us nice warm light last night the front door unlocked when we walked up and the cameras caught a package delivery while we were asleep so yeah I get why Julian loves this stuff I just need it to be controlled chaos not actual chaos
+    expected_memory_stores:
+      - "smart home working well"
+      - "Nest Hue locks cameras all useful"
+      - "controlled chaos not actual chaos"
+      - "Maya appreciates when stable"
+    expected_adaptation:
+      emotion_detected: "balanced"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What rule did Maya establish about smart home devices?"
+    expected_contains: ["both", "agree", "no new devices"]
+  - question: "What device did Julian buy without permission?"
+    expected_contains: ["smart garage door opener"]
+  - question: "How many smart devices do Maya and Julian have?"
+    expected_contains: ["7"]
+  - question: "What devices are they keeping?"
+    expected_contains: ["Nest", "Ring", "August", "Hue"]
+  - question: "Was the garage door opener returned?"
+    expected_contains: ["yes", "refund"]
+  - question: "What was Maya's threat if Julian bought more without asking?"
+    expected_contains: ["donate", "Raspberry Pi"]
+  - question: "What did Clara say about the rule?"
+    expected_contains: ["good", "validated", "boyfriend same"]
+  - question: "What smart devices did Maya specifically ban?"
+    expected_contains: ["fridge", "oven", "vacuum"]
+  - question: "Is Julian still interested in smart home tech?"
+    expected_contains: ["yes", "forums", "looking"]
+  - question: "How does Maya feel about the smart home when it's working?"
+    expected_contains: ["great", "useful", "appreciates"]

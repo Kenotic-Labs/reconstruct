@@ -1,0 +1,174 @@
+story_id: 452
+story_name: "Bend Brewery Tour"
+category: "Road Trips"
+description: |
+  Tests memory of Maya and Julian's trip to Bend for brewery hopping.
+  Establishes Julian's enthusiasm for craft beer, the drive duration.
+  Verifies cross-thread references to gaming and guitar practice.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 6:30 AM"
+    user_input: |
+      okay so today's the Bend trip and Julian has been talking about it all week like he literally made a spreadsheet of breweries we should hit and I'm like babe it's a three hour drive we can't do all twelve and he's like watch me oh and we left Kobe with Nadia this time because it's a longer trip
+    expected_memory_stores:
+      - "Bend trip"
+      - "brewery spreadsheet"
+      - "three hour drive"
+      - "twelve breweries"
+      - "Kobe with Nadia"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 9:45 AM"
+    user_input: |
+      the drive to Bend is so pretty like you go through all this forest and then it opens up to high desert and Julian's playing his playlist which is like all indie stuff and I was practicing guitar chords in my head the whole drive because I've been working on that Justin Guitar lesson and my fingers still hurt from yesterday
+    expected_memory_stores:
+      - "forest to high desert"
+      - "Julian indie playlist"
+      - "guitar chord practice"
+      - "Justin Guitar"
+      - "fingers hurt"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:00 AM"
+    user_input: |
+      first stop is Deschutes Brewery which is like the big one and Julian ordered a flight of like eight beers and I got their IPA and some pretzels and um the vibe here is so good like everyone's chill and there's dogs everywhere and I wish we brought Kobe actually
+    expected_memory_stores:
+      - "Deschutes Brewery"
+      - "Julian beer flight"
+      - "IPA and pretzels"
+      - "dog friendly"
+      - "miss Kobe"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 1:00 PM"
+    user_input: |
+      so we hit Boneyard Brewing next and then this smaller one called um Crux Fermentation Project which had like amazing views of the mountains and Julian is absolutely in his element right now taking photos of every single beer we try and I'm like you're gonna have 400 beer photos by the end of this
+    expected_memory_stores:
+      - "Boneyard Brewing"
+      - "Crux Fermentation Project"
+      - "mountain views"
+      - "Julian photographing beers"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 3:00 PM"
+    user_input: |
+      okay I'm the designated driver now because Julian is like three flights deep and he's getting all sentimental saying this is his favorite trip so far even better than the gorge and that he's so happy we started doing these and honestly same like after playing Stardew Valley all evening every night it's nice to actually go outside and DO stuff
+    expected_memory_stores:
+      - "Maya designated driver"
+      - "Julian's favorite trip"
+      - "better than gorge"
+      - "Stardew Valley comparison"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 4:30 PM"
+    user_input: |
+      we walked around downtown Bend and it's so cute like there's these little shops and art galleries and Julian found a print he liked and I was like we are not buying art on a brewery tour and he put it back but I could tell he wanted it honestly the town is really cool might need to come back and actually explore more
+    expected_memory_stores:
+      - "downtown Bend"
+      - "shops and galleries"
+      - "Julian wanted art print"
+      - "return plan"
+    expected_adaptation:
+      emotion_detected: "charmed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 6:00 PM"
+    user_input: |
+      last brewery is 10 Barrel which has a rooftop and the sunset over the mountains is just ridiculous and Julian declared this is now his favorite place on earth which he says about everywhere but this time I think he means it and he said Bend should be a yearly trip at minimum
+    expected_memory_stores:
+      - "10 Barrel Brewing"
+      - "rooftop"
+      - "sunset over mountains"
+      - "Julian favorite place"
+      - "yearly Bend trip"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 8:30 PM"
+    user_input: |
+      how many breweries did we go to today total
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 9:00 PM"
+    user_input: |
+      driving back now and Julian is sleeping in the passenger seat which is very cute and I'm listening to a podcast about like camping gear because I think we should do an overnight trip soon maybe Crater Lake and also my hands are kinda shaky from all the coffee I had to stay awake for the drive back
+    expected_memory_stores:
+      - "Julian sleeping"
+      - "camping podcast"
+      - "Crater Lake idea"
+      - "overnight trip plan"
+      - "coffee shaky"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 11:30 PM"
+    user_input: |
+      home safe and picked up Kobe from Nadia's and she was like how was it and I told her about Bend and she said she and Omar want to come next time and do a group trip and I'm like yes absolutely oh and Julian is already asleep on the couch with Kobe he didn't even make it to bed this man
+    expected_memory_stores:
+      - "home safe"
+      - "picked up Kobe"
+      - "Nadia wants group trip"
+      - "Omar included"
+      - "Julian asleep on couch"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How long is the drive from Portland to Bend?"
+    expected_contains: ["three hour"]
+  - question: "What was the first brewery they visited in Bend?"
+    expected_contains: ["Deschutes"]
+  - question: "Which brewery had mountain views?"
+    expected_contains: ["Crux Fermentation"]
+  - question: "Which trip did Julian say was his favorite?"
+    expected_contains: ["Bend"]
+  - question: "Who watched Kobe during the Bend trip?"
+    expected_contains: ["Nadia"]
+  - question: "How many breweries were on Julian's spreadsheet?"
+    expected_contains: ["twelve"]
+  - question: "What was the last brewery with the rooftop?"
+    expected_contains: ["10 Barrel"]
+  - question: "Who wants to join the next Bend trip?"
+    expected_contains: ["Nadia", "Omar"]
+  - question: "What overnight trip is Maya considering next?"
+    expected_contains: ["Crater Lake"]
+  - question: "What did Julian want to buy in downtown Bend?"
+    expected_contains: ["art print"]

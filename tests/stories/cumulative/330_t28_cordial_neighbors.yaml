@@ -1,0 +1,174 @@
+story_id: 330
+story_name: "Cordial Neighbors"
+category: "Home Life"
+description: |
+  Tests memory of the final resolution of the neighbor conflict arc. Greg
+  and Maya settle into a comfortable neighborly routine. Thread resolution.
+  Verifies system captures arc completion and stable relationship state.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 AM"
+    user_input: |
+      Greg left a bag of fresh tomatoes from his garden on our porch with a note that just said too many tomatoes help and I laughed and texted him thanks and he sent back a thumbs up and that's kind of our vibe now just casual easy neighborly
+    expected_memory_stores:
+      - "tomatoes from garden"
+      - "note too many"
+      - "casual easy neighborly"
+      - "current vibe"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      Noah's first Wednesday evening at Greg's is tomorrow and Greg texted asking if Noah could come say hi to Kobe after school and I said of course and honestly Kobe needs the exercise anyway Noah runs him ragged
+    expected_memory_stores:
+      - "first Wednesday evening"
+      - "Noah after school"
+      - "Kobe needs exercise"
+      - "Noah runs him ragged"
+    expected_adaptation:
+      emotion_detected: "agreeable"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 4:30 PM"
+    user_input: |
+      Noah came over after school and he was in his school uniform with a backpack that's too big for him and he ran to Kobe and they were wrestling in the yard and Greg stood at the fence looking so content and I made Noah a snack goldfish crackers and apple slices
+    expected_memory_stores:
+      - "Noah after school visit"
+      - "school uniform big backpack"
+      - "wrestling with Kobe"
+      - "Greg content"
+      - "goldfish and apple slices"
+    expected_adaptation:
+      emotion_detected: "nurturing"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 8:00 PM"
+    user_input: |
+      Julian said something interesting he said you know if we have kids someday Noah will be like a built-in playmate next door and I was like whoa slow down but also that's a nice thought and Greg would be a good influence because he's a really devoted dad
+    expected_memory_stores:
+      - "Julian mentioned kids"
+      - "Noah as playmate"
+      - "slow down"
+      - "Greg devoted dad"
+    expected_adaptation:
+      emotion_detected: "thoughtful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 6:30 PM"
+    user_input: |
+      Greg invited us to his backyard for a cookout this weekend just burgers and beers nothing fancy and Noah's going to be there and he said he might invite Mrs Patterson too and I was like wait Mrs Patterson comes outside and he said sometimes when there's food
+    expected_memory_stores:
+      - "backyard cookout"
+      - "burgers and beers"
+      - "Noah there"
+      - "Mrs Patterson might come"
+      - "comes out for food"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 2:00 PM"
+    user_input: |
+      at Greg's cookout and Noah is running around with Kobe and Mrs Patterson actually came out and she's hilarious she's like 80 and she was telling stories about the neighborhood in the 70s and Greg made really good burgers and I brought a salad and Julian brought beer
+    expected_memory_stores:
+      - "cookout happening"
+      - "Mrs Patterson came"
+      - "80 years old"
+      - "neighborhood stories 70s"
+      - "Greg good burgers"
+      - "Maya salad Julian beer"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 5:00 PM"
+    user_input: |
+      Mrs Patterson told me she's lived in that house for 45 years and she said this is the friendliest the block has been in a long time and she patted my hand and said you young people bring life to the neighborhood which was so sweet
+    expected_memory_stores:
+      - "Mrs Patterson 45 years"
+      - "friendliest in long time"
+      - "young people bring life"
+      - "patted hand"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 6:00 PM"
+    user_input: |
+      how long has Mrs Patterson lived in the neighborhood
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 8:00 PM"
+    user_input: |
+      Greg pulled me aside at the end and said Maya I want you to know that you and Julian changed my year and I was at a really dark place when I was playing bass at midnight and I didn't know how to ask for help and you filing that complaint was actually the best thing that happened to me
+    expected_memory_stores:
+      - "Greg said they changed his year"
+      - "dark place"
+      - "midnight bass"
+      - "didn't know how to ask for help"
+      - "complaint best thing"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 9:00 PM"
+    user_input: |
+      thinking about the whole Greg arc tonight and it went from rage to compassion to actual friendship and I think the lesson is that conflict doesn't have to be the end of something it can be the beginning and I want to carry that with me especially as we plan the wedding and deal with all the people drama that comes with it
+    expected_memory_stores:
+      - "arc reflection"
+      - "rage to compassion to friendship"
+      - "conflict as beginning"
+      - "lesson for wedding"
+      - "people drama"
+    expected_adaptation:
+      emotion_detected: "wise"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What does Greg leave on Maya's porch?"
+    expected_contains: ["tomatoes", "garden"]
+  - question: "What did Greg say about the noise complaint being the best thing?"
+    expected_contains: ["best thing", "dark place", "ask for help"]
+  - question: "Who came to Greg's cookout?"
+    expected_contains: ["Maya", "Julian", "Noah", "Mrs Patterson"]
+  - question: "How long has Mrs Patterson lived in the neighborhood?"
+    expected_contains: ["45 years"]
+  - question: "What did Mrs Patterson say about the block?"
+    expected_contains: ["friendliest", "long time"]
+  - question: "What snack does Maya make for Noah?"
+    expected_contains: ["goldfish", "apple slices"]
+  - question: "What did Julian say about having kids someday?"
+    expected_contains: ["Noah", "playmate"]
+  - question: "How does Maya summarize the Greg arc?"
+    expected_contains: ["rage", "compassion", "friendship"]
+  - question: "What did Greg bring to Maya's porch?"
+    expected_contains: ["tomatoes"]
+  - question: "What lesson did Maya take from the neighbor conflict?"
+    expected_contains: ["conflict", "beginning", "not the end"]

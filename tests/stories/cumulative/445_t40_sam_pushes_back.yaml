@@ -1,0 +1,175 @@
+story_id: 445
+story_name: "Sam Pushes Back"
+category: "Work-Life Balance"
+description: |
+  Sam Okafor assigns a tight deadline that conflicts with Maya's 6pm boundary.
+  Maya holds firm. First real test of the new boundary at work.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 2:00 PM"
+    user_input: |
+      Sam came to my desk today and said we need the authentication refactor done by Wednesday morning and I was like Sam that's two days and it's a 3 day task minimum and he said I know but the client demo is Wednesday afternoon and we need it ready
+    expected_memory_stores:
+      - "authentication refactor"
+      - "Wednesday deadline"
+      - "3 day task in 2 days"
+      - "client demo Wednesday"
+    expected_adaptation:
+      emotion_detected: "pressured"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 2:30 PM"
+    user_input: |
+      old Maya would have said yes absolutely and then worked until midnight both nights to make it happen but new Maya took a breath and said Sam I can get 80 percent of this done by Wednesday if I focus but the full refactor needs until Thursday and he looked surprised because I usually just say yes
+    expected_memory_stores:
+      - "old Maya would say yes"
+      - "new Maya negotiated"
+      - "80% by Wednesday"
+      - "full by Thursday"
+      - "Sam surprised"
+    expected_adaptation:
+      emotion_detected: "assertive"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 3:00 PM"
+    user_input: |
+      Sam pushed back and said Maya I really need the full thing by Wednesday and I felt that old PIP fear rising up in my chest but I remembered Dr Tate saying sit with the discomfort and I said Sam I want to deliver quality work and rushing it means bugs and he paused and said ok what do you need
+    expected_memory_stores:
+      - "Sam pushed back"
+      - "PIP fear rising"
+      - "sat with discomfort"
+      - "quality over speed"
+      - "Sam asked what she needs"
+    expected_adaptation:
+      emotion_detected: "holding firm"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 3:15 PM"
+    user_input: |
+      I said I need Omar to take the unit tests for the auth module while I do the core refactor and that way we can split the work and both finish by Wednesday EOD and Sam said that's actually a better plan and he went and talked to Omar who said sure and I felt like I'd just climbed a mountain
+    expected_memory_stores:
+      - "suggested Omar take tests"
+      - "split work plan"
+      - "Wednesday EOD possible"
+      - "Sam approved"
+      - "Omar agreed"
+      - "felt like climbing mountain"
+    expected_adaptation:
+      emotion_detected: "empowered"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 6:00 PM"
+    user_input: |
+      left at 6 today even with the tight deadline and I won't lie the anxiety was LOUD like screaming loud because part of me was like this is the time to stay late this is justified but I heard Dr Tate's voice saying the boundary is especially important when it's hardest and I walked out
+    expected_memory_stores:
+      - "left at 6 despite deadline"
+      - "anxiety screaming"
+      - "justified to stay"
+      - "Dr Tate's voice"
+      - "boundary hardest = most important"
+    expected_adaptation:
+      emotion_detected: "proud struggle"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 9:00 AM"
+    user_input: |
+      came in early today at 7:30 instead of my usual 9 and I'm being incredibly efficient like blocking all distractions and I realized I can work the same number of hours by coming in at 7:30 and leaving at 6 that I used to work by coming in at 9 and leaving at 10 except now I have evenings
+    expected_memory_stores:
+      - "came in early 7:30"
+      - "same hours different distribution"
+      - "7:30-6 vs 9-10"
+      - "now has evenings"
+    expected_adaptation:
+      emotion_detected: "strategic"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 5:00 PM"
+    user_input: |
+      finished my part of the refactor at 4:45 and Omar finished the tests by 5:15 and we merged everything and it builds clean and I sent Sam a message saying auth refactor complete and tested and he replied with a thumbs up and a fire emoji and said great work you two
+    expected_memory_stores:
+      - "refactor complete 4:45"
+      - "Omar tests 5:15"
+      - "merged clean"
+      - "Sam praised"
+      - "done before 6pm"
+    expected_adaptation:
+      emotion_detected: "triumphant"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 5:30 PM"
+    user_input: |
+      what time did Maya leave work today and was the refactor done
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 6:30 PM"
+    user_input: |
+      told Julian I delivered the refactor AND left at 6 and he was like BOTH and I said both and he picked me up and spun me around and Kobe started barking and it was chaos in the best way and he said see you don't have to sacrifice everything to be good at your job
+    expected_memory_stores:
+      - "delivered and left on time"
+      - "Julian celebration"
+      - "picked her up"
+      - "Kobe barking"
+      - "don't sacrifice everything"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      this was the first real test of the boundary at work and I passed like Sam pushed and I didn't cave and the work still got done well and on time and I feel like something shifted in how I see myself at work like I'm not the person who needs to sacrifice everything to be valuable I'm the person who delivers quality work during reasonable hours
+    expected_memory_stores:
+      - "first real test passed"
+      - "Sam pushed didn't cave"
+      - "work done well on time"
+      - "identity shift at work"
+      - "quality in reasonable hours"
+    expected_adaptation:
+      emotion_detected: "transformed"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did Sam need done by Wednesday?"
+    expected_contains: ["authentication refactor"]
+  - question: "How did Maya negotiate the deadline?"
+    expected_contains: ["Omar", "split work", "tests"]
+  - question: "Did Maya stay late to meet the deadline?"
+    expected_contains: ["no", "left at 6"]
+  - question: "What time did Maya start coming to work?"
+    expected_contains: ["7:30"]
+  - question: "Was the refactor completed on time?"
+    expected_contains: ["yes", "before 6pm"]
+  - question: "How did Sam react to the completed work?"
+    expected_contains: ["great work", "thumbs up"]
+  - question: "What fear came up when Sam pushed back?"
+    expected_contains: ["PIP", "old fear"]
+  - question: "What did Maya realize about work hours?"
+    expected_contains: ["same hours", "7:30-6 vs 9-10"]
+  - question: "How did Julian react to Maya's success?"
+    expected_contains: ["picked her up", "spun", "celebration"]
+  - question: "How does Maya see herself at work now?"
+    expected_contains: ["quality", "reasonable hours", "don't sacrifice"]

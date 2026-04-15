@@ -1,0 +1,167 @@
+story_id: 204
+story_name: "Diane Apologizes Tearfully"
+category: "Relationships"
+description: |
+  Tests emotional pivot detection. Diane comes to Maya directly and apologizes, crying.
+  Maya must process surprise empathy. Verifies system can track relationship state changes
+  and emotional reversals.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 2:00 PM"
+    user_input: |
+      oh my god ok so Diane just came to me like literally knocked on the bedroom door and asked if we could talk and I was like uh sure and my heart was racing because I thought she was going to be mad
+    expected_memory_stores:
+      - "Diane came to Maya"
+      - "knocked on door"
+      - "asked to talk"
+      - "Maya expected anger"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 2:05 PM"
+    user_input: |
+      she sat down on the bed and she started CRYING and she was like Maya I'm so sorry I didn't realize I was overstepping and she said she does it because she wants to feel useful and needed and that since Bob's surgery she's been feeling like she's losing her purpose
+    expected_memory_stores:
+      - "Diane crying"
+      - "apology"
+      - "wants to feel useful"
+      - "feeling purposeless"
+      - "Bob's surgery context"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 2:10 PM"
+    user_input: |
+      and I was NOT expecting that at all like I went from being defensive to just feeling so bad for her and I hugged her and I was like Diane it's ok we just need to communicate better and she was nodding and wiping her eyes
+    expected_memory_stores:
+      - "Maya hugged Diane"
+      - "unexpected empathy"
+      - "communicate better"
+    expected_adaptation:
+      emotion_detected: "compassionate"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 2:20 PM"
+    user_input: |
+      she told me that when her kids were growing up she ran everything the house the schedule the meals and now that Julian and his brother wait does Julian have a brother I don't think I've mentioned that um yeah his older brother Marcus lives in Denver anyway now that they're grown she doesn't know what to do with herself
+    expected_memory_stores:
+      - "Diane was homemaker"
+      - "Marcus Reeves"
+      - "Julian's brother"
+      - "Denver"
+      - "empty nest feelings"
+    expected_adaptation:
+      emotion_detected: "empathetic"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 3:00 PM"
+    user_input: |
+      we ended up talking for like an hour and she asked about my work and actually listened and she said she thinks I'm really smart and that Julian is lucky and I was like ok Diane you're making ME cry now
+    expected_memory_stores:
+      - "hour long conversation"
+      - "Diane compliments Maya"
+      - "Julian is lucky"
+      - "both emotional"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 5:00 PM"
+    user_input: |
+      Julian came home from the store and saw us in the kitchen laughing and he was like wait what happened and Diane was like oh we had a talk and Julian looked at me like he was confused and I just smiled and said it's fine babe
+    expected_memory_stores:
+      - "Julian confused"
+      - "Maya and Diane laughing"
+      - "kitchen together"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 7:00 PM"
+    user_input: |
+      she asked me if she could help cook dinner ASKED this time and I said yeah let's make something together and we made pasta with this garlic sauce recipe she knows and honestly it was kinda fun
+    expected_memory_stores:
+      - "Diane asked permission"
+      - "cooked together"
+      - "pasta garlic sauce"
+      - "boundary respected"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 9:00 PM"
+    user_input: |
+      told Clara about the whole apology thing and Clara was like wow that actually sounds really healthy and mature and I was like yeah I know I'm kind of shocked too and then Clara said Tyler's mom would never do that in a million years lol
+    expected_memory_stores:
+      - "Clara impressed"
+      - "Tyler's mom comparison"
+      - "healthy resolution"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 8:00 AM"
+    user_input: |
+      who is Julian's brother and where does he live again Diane mentioned him yesterday
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:00 AM"
+    user_input: |
+      woke up and Diane had made coffee but she ASKED where I keep the good beans first before touching anything and it was such a small thing but it meant everything like she's really trying and I feel like we actually turned a corner
+    expected_memory_stores:
+      - "Diane asked before acting"
+      - "coffee beans"
+      - "turning a corner"
+      - "relationship improving"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did Diane apologize for?"
+    expected_contains: ["overstepping", "rearranging"]
+  - question: "Why did Diane say she oversteps?"
+    expected_contains: ["useful", "needed", "purpose"]
+  - question: "What is happening with Bob Reeves?"
+    expected_contains: ["surgery", "knee"]
+  - question: "Who is Marcus Reeves?"
+    expected_contains: ["Julian's brother", "Denver"]
+  - question: "How did Maya react to Diane's apology?"
+    expected_contains: ["hugged", "empathy", "surprised"]
+  - question: "How did Diane change her behavior after the apology?"
+    expected_contains: ["asked", "permission"]
+  - question: "What did Maya and Diane cook together?"
+    expected_contains: ["pasta", "garlic sauce"]
+  - question: "How did Clara react to the resolution?"
+    expected_contains: ["impressed", "healthy", "mature"]
+  - question: "How is the relationship between Maya and Diane now?"
+    expected_contains: ["improving", "turned a corner"]
+  - question: "What was Diane's role when her kids were growing up?"
+    expected_contains: ["ran everything", "homemaker"]

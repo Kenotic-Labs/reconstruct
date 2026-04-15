@@ -1,0 +1,181 @@
+story_id: 383
+story_name: "Walking Meditation in Sellwood Park"
+category: "Mental Health"
+description: |
+  Tests memory of Maya discovering walking meditation as an alternative.
+  Verifies system tracks location-based routines and practice adaptation.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 5:30 PM"
+    user_input: |
+      Dr Tate suggested walking meditation today and she said it's actually a really established practice in Buddhism not some cheater version and the idea is you walk slowly and pay attention to each step and your surroundings and I'm like okay that sounds way more my speed
+    expected_memory_stores:
+      - "Dr. Tate suggestion"
+      - "walking meditation"
+      - "Buddhism practice"
+      - "not cheating"
+      - "walk slowly"
+      - "attention to steps"
+    expected_adaptation:
+      emotion_detected: "interested"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 7:00 AM"
+    user_input: |
+      tried walking meditation in Sellwood Park this morning and oh my god it's SO much better than sitting like I'm still moving which calms my fidgety energy but I'm also paying attention to the feeling of my feet on the ground and the sounds around me
+    expected_memory_stores:
+      - "Sellwood Park"
+      - "walking meditation"
+      - "much better than sitting"
+      - "feet on ground"
+      - "sounds around"
+      - "fidgety energy calmed"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 7:30 AM"
+    user_input: |
+      I went for like 15 minutes without even realizing it because I was so focused on the trees and the morning light and the sound of birds and my footsteps and when I checked the time I was like wait I just meditated for 15 minutes without suffering
+    expected_memory_stores:
+      - "15 minutes"
+      - "didn't notice time"
+      - "trees light birds"
+      - "without suffering"
+      - "breakthrough"
+    expected_adaptation:
+      emotion_detected: "amazed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Sunday 7:00 AM"
+    user_input: |
+      did it again this morning and took Kobe with me but he's not exactly a meditation companion because he kept pulling the leash to sniff stuff but honestly even with Kobe being Kobe it was still peaceful and I managed about 10 minutes of actual focused walking
+    expected_memory_stores:
+      - "second morning"
+      - "Kobe along"
+      - "pulling leash"
+      - "still peaceful"
+      - "10 minutes focused"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 7:00 AM"
+    user_input: |
+      made it a thing three mornings in a row now and I go to the same loop in Sellwood Park the one that goes past the big oak tree and along the river and it's becoming like my morning sanctuary and Julian said I've been calmer at breakfast
+    expected_memory_stores:
+      - "three mornings"
+      - "same loop"
+      - "big oak tree"
+      - "along river"
+      - "morning sanctuary"
+      - "Julian noticed calm"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 7:30 AM"
+    user_input: |
+      it rained today and I almost skipped but then I was like no this is part of it and I walked in the rain and it was honestly magical like the sound of rain on leaves and the smell of wet earth and I was completely present for the first time maybe ever
+    expected_memory_stores:
+      - "rain walk"
+      - "almost skipped"
+      - "rain on leaves"
+      - "wet earth smell"
+      - "completely present"
+      - "first time ever"
+    expected_adaptation:
+      emotion_detected: "transcendent"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 8:00 PM"
+    user_input: |
+      told Dr Tate about the rain walk and she got teary and said Maya that's exactly what we've been working toward that moment of being fully here not in the past not in the future just here and I was like are you crying and she was like no I just have allergies
+    expected_memory_stores:
+      - "Dr. Tate emotional"
+      - "fully present moment"
+      - "not past not future"
+      - "therapist moved"
+      - "allergies joke"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 7:00 AM"
+    user_input: |
+      where does Maya do her walking meditation
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 8:00 AM"
+    user_input: |
+      one week of walking meditation and I've done it six out of seven days and my average is about 12 minutes and I notice that on mornings I do it the whole day feels different like I'm less reactive and more patient and even Lily said you seem chill today
+    expected_memory_stores:
+      - "one week"
+      - "six of seven days"
+      - "12 minute average"
+      - "less reactive"
+      - "more patient"
+      - "Lily noticed"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 9:00 AM"
+    user_input: |
+      Julian asked if he could join me for the walk and we did it together in silence and it was honestly one of the most intimate things we've done like just walking together not talking not on our phones just being and he squeezed my hand at the end
+    expected_memory_stores:
+      - "Julian joined"
+      - "walked in silence"
+      - "intimate experience"
+      - "no talking no phones"
+      - "hand squeeze"
+    expected_adaptation:
+      emotion_detected: "connected"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where does Maya do walking meditation?"
+    expected_contains: ["Sellwood Park"]
+  - question: "How long does Maya's walking meditation typically last?"
+    expected_contains: ["12", "15", "minutes"]
+  - question: "What landmark is on Maya's meditation loop?"
+    expected_contains: ["oak tree", "river"]
+  - question: "What happened during the rain walk?"
+    expected_contains: ["present", "rain", "leaves", "magical"]
+  - question: "How did walking meditation compare to sitting?"
+    expected_contains: ["better", "much better"]
+  - question: "What changes has Julian noticed since Maya started meditating?"
+    expected_contains: ["calmer"]
+  - question: "What did Dr. Tate say about Maya's rain walk experience?"
+    expected_contains: ["fully here", "present", "working toward"]
+  - question: "How consistent is Maya's meditation practice?"
+    expected_contains: ["six", "seven days"]
+  - question: "How has meditation affected Maya's daily behavior?"
+    expected_contains: ["less reactive", "more patient"]
+  - question: "What happened when Julian joined the walking meditation?"
+    expected_contains: ["silence", "intimate", "hand"]

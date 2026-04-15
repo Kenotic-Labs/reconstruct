@@ -1,0 +1,176 @@
+story_id: 448
+story_name: "Evenings Together Again"
+category: "Work-Life Balance"
+description: |
+  Maya and Julian rebuild their evening routine. Date nights return.
+  The relationship heals as Maya is consistently present.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 6:30 PM"
+    user_input: |
+      three weeks into the boundary and Julian and I have fallen into this really nice evening routine where I get home by 6:30 we walk Kobe together then we cook dinner and eat at the table and it sounds so basic but after weeks of eating alone this feels like luxury to Julian and honestly to me too
+    expected_memory_stores:
+      - "three weeks of boundary"
+      - "evening routine"
+      - "walk Kobe together"
+      - "cook dinner together"
+      - "eat at table"
+      - "feels like luxury"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      Julian planned a date night for Friday at that Thai place on Hawthorne the one Nadia took us to and I was like wait a date night and he said yeah remember those and I laughed and said vaguely and he booked it and I put it in my calendar and it felt exciting like we're dating again
+    expected_memory_stores:
+      - "date night planned"
+      - "Thai place Hawthorne"
+      - "Nadia's restaurant"
+      - "Friday night"
+      - "feels like dating again"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 7:30 PM"
+    user_input: |
+      date night was amazing like we got dressed up and went to the Thai place and we talked for like 2 hours about everything not work not wedding logistics not house stuff just us like our dreams and memories and silly stories and Julian said this is what I was missing and I said me too
+    expected_memory_stores:
+      - "date night happened"
+      - "dressed up"
+      - "talked 2 hours"
+      - "not work or logistics"
+      - "dreams memories stories"
+      - "both missed this"
+    expected_adaptation:
+      emotion_detected: "reconnected"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 9:00 AM"
+    user_input: |
+      woke up this morning and Julian was already making pancakes with Kobe sitting at his feet waiting for dropped batter and I joined them in the kitchen and helped and Julian said do you know the last time you made Saturday morning pancakes with me and I said no and he said 11 weeks ago
+    expected_memory_stores:
+      - "Saturday pancakes together"
+      - "Kobe waiting for batter"
+      - "11 weeks since last time"
+      - "Julian tracked"
+    expected_adaptation:
+      emotion_detected: "guilty but present"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Sunday 2:00 PM"
+    user_input: |
+      we took Kobe to Forest Park for a hike today which we used to do every Sunday before I started working weekends and Julian said it feels like we got our Sundays back and Kobe was in heaven just running through the ferns and splashing in the creek and it was the most peaceful day I've had in months
+    expected_memory_stores:
+      - "Forest Park hike"
+      - "used to do every Sunday"
+      - "got Sundays back"
+      - "Kobe in ferns and creek"
+      - "most peaceful day"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 7:00 PM"
+    user_input: |
+      Julian said something tonight that stuck with me he said I fell in love with you not your job title and when you're present you're the most incredible person to be around and when you're not here I lose the best part of my day and I swear this man is trying to make me cry every day now
+    expected_memory_stores:
+      - "Julian's words"
+      - "fell in love with you not title"
+      - "most incredible when present"
+      - "lose best part of day"
+      - "Maya emotional"
+    expected_adaptation:
+      emotion_detected: "deeply loved"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      we started a thing where we put phones away during dinner like physically in another room and we just talk or sometimes we don't talk we just sit together and eat and listen to music and that silence is so different from the lonely silence Julian described when I wasn't here
+    expected_memory_stores:
+      - "phones away during dinner"
+      - "talk or comfortable silence"
+      - "listen to music"
+      - "different from lonely silence"
+    expected_adaptation:
+      emotion_detected: "intimate"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      what did Julian and I start doing during dinner that's new
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 8:30 PM"
+    user_input: |
+      Clara came over for dinner and she said you two seem different like lighter and Maya you look less tired and I said I've been leaving work at 6 and she was like WHAT since when and I told her the whole story the Dr Tate insight the boundary the productivity increase and she was like wow I need a Dr Tate
+    expected_memory_stores:
+      - "Clara noticed difference"
+      - "lighter and less tired"
+      - "told Clara the story"
+      - "Clara wants a Dr Tate"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 9:00 PM"
+    user_input: |
+      one month of the 6pm boundary and Julian and I are genuinely stronger than before like the overwork period was painful but going through it and coming out the other side made us talk about things we needed to talk about and now we protect our time together instead of taking it for granted
+    expected_memory_stores:
+      - "one month boundary"
+      - "stronger than before"
+      - "painful but necessary"
+      - "came out other side"
+      - "protect time together"
+      - "not taking for granted"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What evening routine did Maya and Julian establish?"
+    expected_contains: ["walk Kobe", "cook dinner", "eat at table"]
+  - question: "Where did they go for their first date night back?"
+    expected_contains: ["Thai", "Hawthorne"]
+  - question: "How long had it been since Maya made Saturday pancakes?"
+    expected_contains: ["11 weeks"]
+  - question: "What do they do with phones during dinner?"
+    expected_contains: ["put away", "another room"]
+  - question: "What did Julian say about why he loves Maya?"
+    expected_contains: ["you not job title", "incredible when present"]
+  - question: "Where do Maya and Julian hike on Sundays?"
+    expected_contains: ["Forest Park"]
+  - question: "What did Clara notice about Maya?"
+    expected_contains: ["lighter", "less tired", "different"]
+  - question: "How long has the 6pm boundary been in effect?"
+    expected_contains: ["one month"]
+  - question: "How is Maya and Julian's relationship now?"
+    expected_contains: ["stronger", "protect time"]
+  - question: "What lesson did the overwork period teach them?"
+    expected_contains: ["not take for granted", "protect time"]

@@ -1,0 +1,170 @@
+story_id: 309
+story_name: "Finding the Marco Polo Rhythm"
+category: "Friendships"
+description: |
+  Tests memory of Maya and Jenny discovering the Marco Polo app as their
+  new communication method. They find a sustainable long-distance rhythm.
+  Verifies system tracks tool adoption and relationship stabilization.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:30 PM"
+    user_input: |
+      ok so Jenny told me about this app called Marco Polo have you heard of it it's like video messages but not live so you send like a little video and the other person watches it whenever and responds whenever and it's way better than texting
+    expected_memory_stores:
+      - "Marco Polo app"
+      - "video messages"
+      - "asynchronous"
+      - "better than texting"
+    expected_adaptation:
+      emotion_detected: "curious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 8:00 AM"
+    user_input: |
+      downloaded Marco Polo and sent Jenny my first one this morning just me and Kobe on the couch and I was like hey this is kind of fun actually and she sent one back from her desk at the coworking space and it was like seeing her face which I miss
+    expected_memory_stores:
+      - "downloaded Marco Polo"
+      - "first video with Kobe"
+      - "Jenny replied from coworking"
+      - "miss seeing her face"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      we sent like eight Marco Polos back and forth today and it's so much better than texting because you can see expressions and it doesn't require coordinating schedules like FaceTime does and Jenny was sending them from the grocery store and I was sending from my lunch break at work
+    expected_memory_stores:
+      - "eight Marco Polos"
+      - "better than texting"
+      - "no schedule coordination"
+      - "grocery store and work"
+    expected_adaptation:
+      emotion_detected: "enthusiastic"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 9:00 PM"
+    user_input: |
+      Jenny sent a Marco Polo tonight talking about her therapy session and she looked like she'd been crying but she said it was a good cry and Dr Okafor helped her process some stuff about her dad and I just love that I can see her face when she tells me these things now
+    expected_memory_stores:
+      - "Jenny therapy update"
+      - "good cry"
+      - "dad processing"
+      - "Dr Okafor"
+      - "seeing face matters"
+    expected_adaptation:
+      emotion_detected: "empathetic"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 7:00 PM"
+    user_input: |
+      Julian thinks the Marco Polo thing is hilarious he's like you guys are literally just sending video diaries to each other and I'm like yeah that's kind of exactly what it is and what's wrong with that
+    expected_memory_stores:
+      - "Julian amused by Marco Polo"
+      - "video diaries comparison"
+      - "Maya defensive"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 11:00 AM"
+    user_input: |
+      Jenny sent the funniest Marco Polo this morning she was at some farmer's market in Austin and she found a stand selling Portland-style coffee and she was like look Maya they're trying to be you but failing and the vendor's face in the background was priceless
+    expected_memory_stores:
+      - "funny Marco Polo"
+      - "Austin farmer's market"
+      - "Portland-style coffee"
+      - "vendor's face"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 4:00 PM"
+    user_input: |
+      told Clara about Marco Polo and she was like oh my god my friend uses that with her sister in London and it actually saves friendships and Clara said maybe we should do it too and I said sure why not
+    expected_memory_stores:
+      - "Clara interested in Marco Polo"
+      - "friend uses it with London sister"
+      - "saves friendships"
+    expected_adaptation:
+      emotion_detected: "pleased"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 10:00 AM"
+    user_input: |
+      what's the name of that video message app Jenny and I started using
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 3:00 PM"
+    user_input: |
+      we've been doing Marco Polo for a week now and I feel closer to Jenny than I have since she moved like it's not the same as being in the same city obviously but it's the next best thing and the pressure of scheduling calls is gone
+    expected_memory_stores:
+      - "one week of Marco Polo"
+      - "feeling closer"
+      - "not same as in person"
+      - "next best thing"
+      - "no scheduling pressure"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 PM"
+    user_input: |
+      Jenny sent a night time Marco Polo and she was in bed and she said Maya I think we found our thing and she looked so much better than she did a month ago like her eyes are brighter and she's smiling more and I think the Zoloft and therapy are really working and I told her I'm proud of her
+    expected_memory_stores:
+      - "nighttime Marco Polo"
+      - "found our thing"
+      - "Jenny looks better"
+      - "eyes brighter"
+      - "Zoloft and therapy working"
+      - "Maya proud"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What app did Maya and Jenny start using?"
+    expected_contains: ["Marco Polo"]
+  - question: "How does Marco Polo work?"
+    expected_contains: ["video messages", "asynchronous"]
+  - question: "Why is Marco Polo better than FaceTime for them?"
+    expected_contains: ["no scheduling", "whenever"]
+  - question: "How is Jenny's mental health improving?"
+    expected_contains: ["better", "brighter", "Zoloft", "therapy"]
+  - question: "What did Julian think about Marco Polo?"
+    expected_contains: ["video diaries", "hilarious"]
+  - question: "What funny Marco Polo did Jenny send from the farmer's market?"
+    expected_contains: ["Portland-style coffee", "vendor"]
+  - question: "Who else is interested in using Marco Polo?"
+    expected_contains: ["Clara"]
+  - question: "How does Maya feel about the friendship now?"
+    expected_contains: ["closer", "content"]
+  - question: "What did Jenny say about finding their rhythm?"
+    expected_contains: ["found our thing"]
+  - question: "How often do they send Marco Polos?"
+    expected_contains: ["multiple", "daily", "eight"]

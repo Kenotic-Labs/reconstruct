@@ -1,0 +1,172 @@
+story_id: 507
+story_name: "Dumpling Recipe"
+category: "Grief and Legacy"
+description: |
+  Maya tries to reconstruct Grandpa Wei's dumpling recipe from memory and Vivian's
+  guidance. Cooking as grief processing. Cross-references cooking thread (T31),
+  hosting (T47), and relationship with Vivian (T16).
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00 AM"
+    user_input: |
+      ok so I've decided I need to figure out grandpa's dumpling recipe like the actual one not the one my mom texted me because hers is close but it's not the same and I called her this morning and said mom can we actually try to reconstruct it together and she said yes but you have to understand he never measured anything
+    expected_memory_stores:
+      - "reconstructing grandpa's dumpling recipe"
+      - "Vivian's version not exact"
+      - "grandpa never measured"
+      - "collaborative project"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 11:30 AM"
+    user_input: |
+      FaceTimed my mom while we both cooked and she's walking me through what she remembers and she said the key was the ginger he used way more ginger than you'd think and also he folded them in this specific way that she's trying to show me over the phone and I keep getting it wrong and she keeps saying no Maya like this and it's hilarious and frustrating at the same time
+    expected_memory_stores:
+      - "FaceTime cooking with Vivian"
+      - "key ingredient ginger"
+      - "specific folding technique"
+      - "Maya struggling with folds"
+    expected_adaptation:
+      emotion_detected: "engaged"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 1:00 PM"
+    user_input: |
+      Julian is helping me and he's actually really good at the folding part which makes zero sense because he's never made dumplings before and I told him my hands are better suited for keyboards not dough and he said that's because you're a software engineer not a mechanical engineer and then we both got quiet because grandpa
+    expected_memory_stores:
+      - "Julian good at folding"
+      - "keyboard vs dough joke"
+      - "software vs mechanical engineer"
+      - "quiet moment about grandpa"
+    expected_adaptation:
+      emotion_detected: "bittersweet"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 3:00 PM"
+    user_input: |
+      first batch came out and they're good but not right like the filling is close but my mom said grandpa used to add a tiny bit of sesame oil at the end and I forgot that part and also the wrapper is too thick I think he made them thinner and this is so hard because I'm basically reverse engineering a recipe from sense memory
+    expected_memory_stores:
+      - "first batch not right"
+      - "sesame oil missing"
+      - "wrapper too thick"
+      - "reverse engineering from memory"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 5:00 PM"
+    user_input: |
+      second batch is better with the sesame oil and thinner wrappers and Kobe is going absolutely insane because the kitchen smells like pork and ginger and he keeps doing that thing where he sits perfectly still pretending to be good but his tail is just going crazy behind him
+    expected_memory_stores:
+      - "second batch improved"
+      - "sesame oil added"
+      - "thinner wrappers"
+      - "Kobe begging"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 7:00 PM"
+    user_input: |
+      my mom is still on FaceTime and she tasted her version and I tasted mine and we're comparing and she said yours is actually closer than mine to dad's and I could see she was proud and sad at the same time and she said it's because you have his hands and I was like mom I just told you I can't fold and she said I don't mean the folding I mean the way you handle things
+    expected_memory_stores:
+      - "Maya's version closer to grandpa's"
+      - "Vivian proud and sad"
+      - "you have his hands"
+      - "deeper meaning of hands"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 9:00 PM"
+    user_input: |
+      I wrote down the recipe with all the adjustments and I'm keeping it in the Wei folder on my laptop and also I'm writing it by hand on a card because digital isn't enough for this one and Julian suggested we frame it too and I was like we cannot frame everything related to grandpa our house will be a museum and he laughed
+    expected_memory_stores:
+      - "wrote recipe down"
+      - "Wei folder and handwritten card"
+      - "Julian suggests framing"
+      - "museum joke"
+    expected_adaptation:
+      emotion_detected: "lighter"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 11:00 AM"
+    user_input: |
+      woke up and the house still smells like dumplings and it's the closest I've felt to grandpa's apartment since we were in Fresno and I made tea in one of his tins and sat in the kitchen with Kobe and just like existed for a minute without trying to DO anything and it was the most peaceful I've felt in weeks honestly since before the phone screen cracked and all that digital chaos
+    expected_memory_stores:
+      - "house smells like dumplings"
+      - "grandpa's apartment connection"
+      - "tea in his tin"
+      - "peaceful moment"
+      - "phone screen reference"
+    expected_adaptation:
+      emotion_detected: "serene"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 2:00 PM"
+    user_input: |
+      Clara texted and asked if Julian and I want to host a dumpling night and I said actually yes that's a great idea and I could make grandpa's recipe for everyone and Clara said she'd bring wine and honestly the idea of sharing this recipe with friends feels like exactly what grandpa would have wanted he loved feeding people
+    expected_memory_stores:
+      - "Clara suggests dumpling night"
+      - "hosting idea"
+      - "sharing grandpa's recipe"
+      - "grandpa loved feeding people"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 6:00 PM"
+    user_input: |
+      saved the last few dumplings from yesterday and heated them up for dinner and Julian said these are really good Maya and I said they're grandpa's not mine and he said they're both and I looked at the watch on my wrist and the recipe card on the fridge and the degrees on the wall and I thought yeah ok they're both
+    expected_memory_stores:
+      - "dumplings for dinner"
+      - "Julian's both comment"
+      - "watch recipe degrees connection"
+      - "accepting dual ownership"
+    expected_adaptation:
+      emotion_detected: "whole"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is the key ingredient in Grandpa Wei's dumplings?"
+    expected_contains: ["ginger"]
+  - question: "What did Maya forget in the first batch?"
+    expected_contains: ["sesame oil"]
+  - question: "Who helped Maya fold dumplings?"
+    expected_contains: ["Julian"]
+  - question: "How are Maya and Vivian cooking together?"
+    expected_contains: ["FaceTime"]
+  - question: "What did Vivian mean by 'you have his hands'?"
+    expected_contains: ["handle things", "not folding"]
+  - question: "Where did Maya store the recipe?"
+    expected_contains: ["Wei folder", "handwritten card"]
+  - question: "What event is planned around the dumpling recipe?"
+    expected_contains: ["dumpling night", "hosting", "Clara"]
+  - question: "What did Julian say about the dumplings?"
+    expected_contains: ["both", "grandpa's", "yours"]
+  - question: "How does the dumpling smell connect to Fresno?"
+    expected_contains: ["grandpa's apartment"]
+  - question: "Who was better at folding dumplings?"
+    expected_contains: ["Julian"]

@@ -1,0 +1,171 @@
+story_id: 168
+story_name: "Six Month Review and Raise"
+category: "Career"
+description: |
+  Julian's six month performance review at Bold Studio. Gets a raise
+  from $78K to $85K. Tests temporal tracking of career milestones
+  and salary progression.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:00 AM"
+    user_input: |
+      Julian's six month review at Bold Studio is today and he's nervous which is ridiculous because everyone loves him there but that's Julian he always thinks he's not doing well enough Kevin scheduled it for 2pm and Julian's been rehearsing talking points all morning like babe you're not on trial
+    expected_memory_stores:
+      - "six month review today"
+      - "Julian nervous"
+      - "review at 2pm with Kevin"
+    expected_adaptation:
+      emotion_detected: "amused concern"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 3:00 PM"
+    user_input: |
+      JULIAN JUST CALLED me from the parking lot at Bold Studio and he's basically yelling into the phone saying Kevin gave him an outstanding review across the board and said he's exceeded expectations in every area leadership creativity client relationships team management literally everything
+    expected_memory_stores:
+      - "outstanding review"
+      - "exceeded expectations"
+      - "leadership creativity client team"
+      - "all areas excellent"
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 3:15 PM"
+    user_input: |
+      and HERE'S THE BIG THING Kevin said he's getting a raise from $78K to $85K effective immediately which is a $7000 raise in six months and Julian said Kevin told him it was the fastest raise he's ever given at Bold Studio and I'm literally tearing up at my desk again Priya's gonna think I have a problem
+    expected_memory_stores:
+      - "raise from $78K to $85K"
+      - "$7000 increase"
+      - "effective immediately"
+      - "fastest raise at Bold Studio"
+      - "Kevin impressed"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 5:00 PM"
+    user_input: |
+      Kevin also told Julian he wants him to take on a new title senior creative lead which is above senior designer and it comes with more responsibility over the team direction and Julian gets to hire the two new designers they've been planning which means he's shaping the culture of the creative team
+    expected_memory_stores:
+      - "new title senior creative lead"
+      - "above senior designer"
+      - "more team responsibility"
+      - "hiring two new designers"
+      - "shaping team culture"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 7:00 PM"
+    user_input: |
+      we're celebrating tonight at this nice restaurant on Alberta Street called Ava Gene's Julian's treating because he said it's his raise money and I said sir you haven't even gotten the first paycheck at the new rate yet and he said Maya let me have this and okay fine I'll let him have this
+    expected_memory_stores:
+      - "celebrating at Ava Gene's"
+      - "Alberta Street"
+      - "Julian treating"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 9:00 PM"
+    user_input: |
+      at dinner Julian said Kevin pulled him aside after the official review and said off the record I see you running this place in five years and Julian was like okay that's pressure but also wow and I said babe he wouldn't say that if he didn't mean it Kevin doesn't do empty flattery from what you've told me
+    expected_memory_stores:
+      - "Kevin sees Julian running Bold Studio in 5 years"
+      - "off the record comment"
+      - "Kevin doesn't do empty flattery"
+      - "Julian processing"
+    expected_adaptation:
+      emotion_detected: "awe"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 8:00 AM"
+    user_input: |
+      told my mom about Julian's raise and she said see I always knew that boy was talented and Dad said $85K that's not bad for a drawing job which is so Dad honestly he still doesn't fully understand what graphic design is but he means well and he genuinely likes Julian
+    expected_memory_stores:
+      - "parents told about raise"
+      - "Vivian always believed in Julian"
+      - "George doesn't understand design"
+      - "George likes Julian"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      so quick math our household income just went from $218K to $225K with Julian's raise and that means we can actually build our savings back up after the wedding expenses which is such a relief because we were dipping into savings pretty hard for all the deposits and stuff
+    expected_memory_stores:
+      - "household income now $225K"
+      - "savings recovering"
+      - "wedding expenses impacted savings"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 10:00 AM"
+    user_input: |
+      Julian's already posted on LinkedIn about his new title and the comments are pouring in and Nathan his design school friend commented saying proud of you man and even his old Thornton Group contact liked the post which is kind of ironic like yeah bet you regret dropping him now huh
+    expected_memory_stores:
+      - "LinkedIn post about new title"
+      - "Nathan congratulated"
+      - "Thornton Group contact liked it"
+      - "ironic vindication"
+    expected_adaptation:
+      emotion_detected: "vindicated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      reflecting on Julian's whole arc like six months ago he was devastated and questioning himself and barely making rent with freelancing and now he's senior creative lead at $85K with a mentor who believes in him and a team that respects him and I just feel so proud of him for taking the leap even when it scared him
+    expected_memory_stores:
+      - "Julian's career arc reflection"
+      - "from devastation to thriving"
+      - "senior creative lead $85K"
+      - "mentor and team"
+      - "Maya proud"
+    expected_adaptation:
+      emotion_detected: "deeply proud"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Julian's current salary?"
+    expected_contains: ["85"]
+  - question: "What was Julian's salary before the raise?"
+    expected_contains: ["78"]
+  - question: "What is Julian's new title at Bold Studio?"
+    expected_contains: ["senior creative lead"]
+  - question: "How did Kevin rate Julian's performance?"
+    expected_contains: ["outstanding", "exceeded"]
+  - question: "What did Kevin say about Julian's future at Bold Studio?"
+    expected_contains: ["running", "five years"]
+  - question: "What is the household income now?"
+    expected_contains: ["225"]
+  - question: "How long has Julian been at Bold Studio?"
+    expected_contains: ["six months"]
+  - question: "Is Julian hiring at Bold Studio?"
+    expected_contains: ["yes", "two designers"]
+  - question: "Where did they celebrate the raise?"
+    expected_contains: ["Ava Gene's"]
+  - question: "How much was Julian's raise?"
+    expected_contains: ["7000"]

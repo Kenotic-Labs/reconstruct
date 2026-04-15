@@ -1,0 +1,172 @@
+story_id: 141
+story_name: "Maya Finds Ring Receipt"
+category: "Life Events"
+description: |
+  Tests whether the system captures the ring receipt discovery, Maya's secret excitement,
+  and her careful concealment. Must track the ring details and emotional state while
+  recognizing she can't discuss this with Julian.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00am"
+    user_input: |
+      oh my god oh my GOD. ok so I was doing laundry and I checked Julian's jacket pockets like I always do because he leaves receipts everywhere and I found... a receipt from a jewelry store. a RING receipt. from Bridgeport Jewelers. oh my god
+    expected_memory_stores:
+      - "ring receipt found"
+      - "Bridgeport Jewelers"
+      - "Julian's jacket"
+      - "laundry"
+    expected_adaptation:
+      emotion_detected: "shocked"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:05am"
+    user_input: |
+      the receipt says platinum band with diamond, size 7, and the total was 3200 dollars. three thousand two hundred dollars. Julian spent three thousand dollars on a ring. FOR ME. I'm shaking right now literally my hands are shaking
+    expected_memory_stores:
+      - "platinum band diamond"
+      - "size 7"
+      - "3200 dollars"
+      - "engagement ring"
+      - "shaking"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 10:15am"
+    user_input: |
+      I put the receipt back EXACTLY where I found it and put the jacket in the laundry pile like normal. he cannot know that I know. I need to act normal. I am NOT acting normal right now. I'm in the bathroom pretending to take a shower so he doesn't see my face
+    expected_memory_stores:
+      - "receipt back"
+      - "pretending not to know"
+      - "hiding in bathroom"
+      - "acting normal"
+    expected_adaptation:
+      emotion_detected: "giddy"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 11:00am"
+    user_input: |
+      ok composed myself. went out and Julian was at his desk working on the agency stuff and he goes hey you ok you were in the bathroom forever and I said yeah just doing a face mask. he bought it. I think. oh god what if he knows I know
+    expected_memory_stores:
+      - "face mask excuse"
+      - "Julian working"
+      - "paranoia"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 12:00pm"
+    user_input: |
+      I NEED to tell someone. I can't tell Julian obviously. I can't tell Clara because she'll tell Mom and Mom will call Julian's mom and it'll be a whole thing. I'm telling YOU. you're my secret keeper right now. Julian is going to propose and I found the ring receipt
+    expected_memory_stores:
+      - "can't tell anyone"
+      - "Clara would tell Mom"
+      - "Mom would tell Julian's mom"
+      - "secret"
+      - "proposal coming"
+    expected_adaptation:
+      emotion_detected: "bursting"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 2:00pm"
+    user_input: |
+      tried to act normal at Bark and Brew but I kept looking at his hands and thinking about him putting a ring on mine and almost spilled my oat milk latte everywhere. Julian goes what's with you today and I said just happy I guess. which is true
+    expected_memory_stores:
+      - "Bark and Brew"
+      - "looking at hands"
+      - "almost spilled"
+      - "just happy"
+    expected_adaptation:
+      emotion_detected: "giddy"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 4:00pm"
+    user_input: |
+      where did Julian buy the ring
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 6:00pm"
+    user_input: |
+      I keep thinking about the 3200 dollars though. like how did he afford that? he just got the agency contract but before that he was barely making 2100 a month. did he save up? did he use the emergency fund? I don't want to check the spreadsheet because that would be weird but I'm curious
+    expected_memory_stores:
+      - "how did he afford"
+      - "3200 dollars"
+      - "agency contract"
+      - "savings question"
+      - "emergency fund concern"
+    expected_adaptation:
+      emotion_detected: "curious"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 9:00pm"
+    user_input: |
+      lying in bed and Julian's asleep and I keep looking at him and thinking this man is going to ask me to marry him. and I know the answer. the answer has been yes for a long time probably. even through the money fight and the silent treatment and the closet thing. yes
+    expected_memory_stores:
+      - "answer is yes"
+      - "always been yes"
+      - "through everything"
+      - "money fight"
+      - "silent treatment"
+      - "closet fight"
+    expected_adaptation:
+      emotion_detected: "deeply in love"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 11:00pm"
+    user_input: |
+      I wonder when he's planning to do it. like is there a date? does he have a plan? is it gonna be romantic or casual? I honestly don't care how it happens I just... I'm ready. I'm so ready. ok I need to sleep and stop smiling at the ceiling
+    expected_memory_stores:
+      - "wondering when"
+      - "doesn't care how"
+      - "ready"
+      - "smiling at ceiling"
+    expected_adaptation:
+      emotion_detected: "elated"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where did Julian buy the ring?"
+    expected_contains: ["Bridgeport Jewelers"]
+  - question: "How much did the ring cost?"
+    expected_contains: ["3200"]
+  - question: "What type of ring is it?"
+    expected_contains: ["platinum", "diamond"]
+  - question: "What size is the ring?"
+    expected_contains: ["7"]
+  - question: "How did Maya find out about the ring?"
+    expected_contains: ["receipt", "jacket", "laundry"]
+  - question: "Does Julian know that Maya found the receipt?"
+    expected_contains: ["no"]
+  - question: "Who has Maya told about the ring?"
+    expected_contains: ["nobody", "no one"]
+  - question: "Why can't Maya tell Clara?"
+    expected_contains: ["Mom", "Julian's mom"]
+  - question: "What excuse did Maya give for being in the bathroom?"
+    expected_contains: ["face mask"]
+  - question: "What is Maya's answer going to be?"
+    expected_contains: ["yes"]

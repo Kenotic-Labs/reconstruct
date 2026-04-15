@@ -1,0 +1,167 @@
+story_id: 112
+story_name: "Career Assessment Deep Dive"
+category: "Career"
+description: |
+  Tests whether the system tracks the detailed career assessment results, Maya's emotional
+  reactions to different career possibilities, and corrections when she revisits results.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 7:00pm"
+    user_input: |
+      so I did another assessment today, this one was more like career-specific. the Strong Interest Inventory or something like that. cost me $50 but Dr. Tate said it was worth it
+    expected_memory_stores:
+      - "Strong Interest Inventory"
+      - "$50"
+      - "Dr. Tate recommended"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 8:30pm"
+    user_input: |
+      ok results are in and it's wild. my top career matches were like software engineering obviously but also UX research, instructional design, and organizational development. UX research was actually ranked higher than pure engineering which is... huh
+    expected_memory_stores:
+      - "career matches"
+      - "UX research"
+      - "instructional design"
+      - "organizational development"
+      - "UX higher than engineering"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 9:00pm"
+    user_input: |
+      Julian saw UX research on the list and was like oh that actually makes total sense, you're always the one on the team who asks about the users, like you literally redesigned that onboarding flow because you talked to actual customers
+    expected_memory_stores:
+      - "Julian agrees with UX"
+      - "user-focused"
+      - "onboarding flow redesign"
+      - "customer interviews"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 10:00am"
+    user_input: |
+      told Rachel Kim about the assessment at work, not like I'm thinking of leaving just like hey I took this career thing and she was actually really interested. she said she almost went into UX research before becoming an engineering manager
+    expected_memory_stores:
+      - "Rachel Kim conversation"
+      - "Rachel Kim UX background"
+      - "not announcing departure"
+    expected_adaptation:
+      emotion_detected: "curious"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 12:00pm"
+    user_input: |
+      actually I need to correct something, Rachel Kim didn't almost go into UX research, she said she considered product management not UX research. I got confused. sorry about that
+    expected_memory_stores:
+      - "correction"
+      - "product management not UX"
+      - "Rachel Kim corrected"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 3:00pm"
+    user_input: |
+      looked up what UX researchers actually do day to day and it's like user interviews, usability testing, data analysis, presenting findings to product teams. some of that sounds cool and some of it sounds honestly boring? like I don't wanna just run surveys all day
+    expected_memory_stores:
+      - "UX research activities"
+      - "user interviews"
+      - "usability testing"
+      - "mixed feelings"
+      - "surveys boring"
+    expected_adaptation:
+      emotion_detected: "ambivalent"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 9:00am"
+    user_input: |
+      what career was ranked highest on my assessment
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 11:00am"
+    user_input: |
+      had coffee with Aisha and told her I was doing some career soul-searching and she goes wait you're not leaving are you?? and I was like no no I'm just exploring. she looked relieved which was honestly sweet
+    expected_memory_stores:
+      - "Aisha concerned"
+      - "not leaving"
+      - "exploring"
+      - "Aisha relieved"
+    expected_adaptation:
+      emotion_detected: "caring"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 5:00pm"
+    user_input: |
+      Dr. Tate session today. she said the point of the assessment isn't to find your one true calling it's to see patterns. and the pattern she sees is people-centered roles. whether it's engineering or UX or teaching it's about connecting with humans
+    expected_memory_stores:
+      - "Dr. Tate session"
+      - "patterns not calling"
+      - "people-centered"
+      - "connecting with humans"
+    expected_adaptation:
+      emotion_detected: "enlightened"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 8:00pm"
+    user_input: |
+      decided I'm gonna shadow someone in UX research before making any decisions. Rachel Kim mentioned someone named Rachel Ford who does UX at Conduit and she said she might be able to set up a shadow day. two Rachels at one company is confusing btw
+    expected_memory_stores:
+      - "shadow UX researcher"
+      - "Rachel Ford"
+      - "UX at Conduit"
+      - "Rachel Kim connection"
+      - "two Rachels"
+    expected_adaptation:
+      emotion_detected: "proactive"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What career assessment did Maya take?"
+    expected_contains: ["Strong Interest Inventory"]
+  - question: "What were Maya's top career matches?"
+    expected_contains: ["UX research", "instructional design", "organizational development"]
+  - question: "What did Rachel Kim almost go into?"
+    expected_contains: ["product management"]
+  - question: "What pattern does Dr. Tate see in Maya's results?"
+    expected_contains: ["people-centered"]
+  - question: "Who is Maya planning to shadow?"
+    expected_contains: ["Rachel Ford", "UX"]
+  - question: "How did Aisha react to Maya's exploration?"
+    expected_contains: ["concerned", "relieved"]
+  - question: "What aspect of UX research doesn't appeal to Maya?"
+    expected_contains: ["surveys", "boring"]
+  - question: "Who connected Maya to Rachel Ford?"
+    expected_contains: ["Rachel Kim"]
+  - question: "What did Julian say about Maya and UX?"
+    expected_contains: ["users", "onboarding flow"]
+  - question: "How much did the career assessment cost?"
+    expected_contains: ["$50"]

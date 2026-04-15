@@ -1,0 +1,180 @@
+story_id: 160
+story_name: "Final Wedding Details"
+category: "Life Events"
+description: |
+  Wrapping up remaining wedding details: cake, hotel block, transportation,
+  Julian's tux, and a summary review of all wedding plans. Tests full
+  wedding state reconstruction across all prior stories.
+duration_simulated: "4 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 10:00 AM"
+    user_input: |
+      we still need a cake and I don't want anything too fancy like a simple three tier white cake with flowers on it to match the wildflower theme and Julian wants chocolate filling on at least one tier because he's a chocolate fiend honestly the man would eat chocolate for every meal if I let him
+    expected_memory_stores:
+      - "wedding cake needed"
+      - "three tier white cake"
+      - "flowers on cake"
+      - "wildflower theme"
+      - "Julian wants chocolate filling"
+    expected_adaptation:
+      emotion_detected: "lighthearted"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 2:00 PM"
+    user_input: |
+      Jenny recommended this bakery called Sweet Flour they're in Northeast Portland and she brought home samples and the vanilla lavender was INSANE like I could eat that every day and the chocolate raspberry was Julian's pick so we're thinking vanilla lavender for two tiers and chocolate raspberry for one and they quoted $650 for 85 servings
+    expected_memory_stores:
+      - "Sweet Flour bakery"
+      - "Northeast Portland"
+      - "vanilla lavender two tiers"
+      - "chocolate raspberry one tier"
+      - "$650 for 85 servings"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:00 AM"
+    user_input: |
+      Julian went tux shopping with Marcus today and he won't tell me what he picked because he says it's a surprise which is so Julian but Marcus texted me secretly and said he looks incredible and now I'm dying to know but I'm also kind of into the surprise element
+    expected_memory_stores:
+      - "Julian tux shopping"
+      - "Marcus went with him"
+      - "Julian keeping it secret"
+      - "Marcus says he looks great"
+    expected_adaptation:
+      emotion_detected: "curious excitement"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 3:00 PM"
+    user_input: |
+      booked a hotel block at the Hampton Inn near Pine Ridge Lodge for out of town guests we got 15 rooms at $129 per night and Marcus is flying in from Austin and my Aunt Patricia is coming from Chicago and Clara's driving up from Sacramento so that should cover everyone who needs a place
+    expected_memory_stores:
+      - "Hampton Inn hotel block"
+      - "15 rooms at $129/night"
+      - "Marcus from Austin"
+      - "Aunt Patricia from Chicago"
+      - "Clara from Sacramento"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Sunday 10:00 AM"
+    user_input: |
+      rented a shuttle bus for guests from the Hampton Inn to Pine Ridge Lodge and back it's $400 for the day because some people will definitely be drinking and I don't want anyone driving those windy hill roads after the reception you know safety first
+    expected_memory_stores:
+      - "shuttle bus rented"
+      - "$400 for the day"
+      - "Hampton Inn to Pine Ridge Lodge"
+      - "safety concern"
+    expected_adaptation:
+      emotion_detected: "responsible"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 4:00 PM"
+    user_input: |
+      I made a day of timeline with Julian and here's how it goes um makeup and hair at 10am first look photos with Rachel at 1pm ceremony at 4pm cocktail hour at 5 dinner at 6 speeches at 7 dancing until 10 and then after party at the hotel bar for whoever's still standing
+    expected_memory_stores:
+      - "wedding day timeline"
+      - "makeup 10am"
+      - "first look 1pm"
+      - "ceremony 4pm"
+      - "cocktail hour 5pm"
+      - "dinner 6pm"
+      - "speeches 7pm"
+      - "dancing until 10pm"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Monday 9:00 AM"
+    user_input: |
+      so let me do a full wedding summary because honestly I keep losing track um venue Pine Ridge Lodge June 22nd caterer Blue Fork Catering florist Bloom & Thistle photographer Rachel Kim DJ Brian Tomlinson officiant Marcus Reeves cake Sweet Flour bakery dress from The White Veil 85 guests total budget about $21000 which is a tiny bit over but manageable
+    expected_memory_stores:
+      - "wedding summary"
+      - "all vendors listed"
+      - "total budget $21000"
+      - "slightly over budget"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Monday 12:00 PM"
+    user_input: |
+      oh also I forgot to mention Julian's groomsmen are Marcus obviously and his college friend Daniel and my brother wait no I don't have a brother what am I saying and his coworker from Bold Studio named Kevin wait that's his boss hmm I think it's actually his friend Tyler from the gym yeah Marcus Daniel and Tyler
+    expected_memory_stores:
+      - "groomsmen: Marcus, Daniel, Tyler"
+      - "correction: not Kevin"
+      - "correction: Maya has no brother"
+      - "Tyler from gym"
+      - "Daniel college friend"
+    expected_adaptation:
+      emotion_detected: "scattered"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 5:00 PM"
+    user_input: |
+      bridesmaids are Jenny Wu obviously as maid of honor and Clara and my friend from work Nisha who I've gotten really close to and that's three which is perfect to match Julian's three groomsmen Clara's already ordered her dress she went with a sage green which is actually the color we picked for the wedding party
+    expected_memory_stores:
+      - "bridesmaids: Jenny, Clara, Nisha"
+      - "Jenny is maid of honor"
+      - "sage green dresses"
+      - "wedding party color"
+      - "three bridesmaids match three groomsmen"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Monday 9:00 PM"
+    user_input: |
+      Julian and I are laying in bed and he said something really sweet he said I can't believe in a few months you're gonna be my wife and I said technically I'm already your partner this is just the party and he said yeah but it matters and it does it really does I'm marrying my best friend and Kobe's gonna walk down that aisle with our rings and everything is going to be perfect
+    expected_memory_stores:
+      - "Julian emotional about wedding"
+      - "few months until wedding"
+      - "Kobe ring bearer confirmed"
+      - "Maya content"
+    expected_adaptation:
+      emotion_detected: "deeply happy"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is the full wedding day timeline?"
+    expected_contains: ["ceremony", "4pm", "dinner", "dancing"]
+  - question: "Where are out of town guests staying?"
+    expected_contains: ["Hampton Inn"]
+  - question: "Who are the groomsmen?"
+    expected_contains: ["Marcus", "Daniel", "Tyler"]
+  - question: "Who are the bridesmaids?"
+    expected_contains: ["Jenny", "Clara", "Nisha"]
+  - question: "What color are the bridesmaid dresses?"
+    expected_contains: ["sage green"]
+  - question: "Who is making the wedding cake?"
+    expected_contains: ["Sweet Flour"]
+  - question: "What cake flavors did they choose?"
+    expected_contains: ["vanilla lavender", "chocolate raspberry"]
+  - question: "How much is the shuttle bus?"
+    expected_contains: ["400"]
+  - question: "What is the total wedding budget estimate?"
+    expected_contains: ["21000"]
+  - question: "What time is the ceremony?"
+    expected_contains: ["4"]

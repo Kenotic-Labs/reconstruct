@@ -1,0 +1,207 @@
+story_id: 500
+story_name: "Eighteen Months Reflection"
+category: "Holiday Season"
+description: |
+  Tests memory of Maya reflecting on everything that happened in 18 months.
+  Establishes comprehensive life review, gratitude, forward vision.
+  Verifies system can reconstruct the full narrative arc across all threads.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "January 3 9:00 AM"
+    user_input: |
+      okay so I'm doing something I've never done before I'm sitting down to write a reflection on the last 18 months because so much has changed and I want to capture it before it all just becomes the past and Julian's at Bold Studio and it's just me and Kobe and coffee and my notebook the same one I hide the wedding song lyrics in but a different page obviously
+    expected_memory_stores:
+      - "18 month reflection"
+      - "writing it down"
+      - "before it becomes past"
+      - "Julian at Bold Studio"
+      - "Kobe and coffee"
+      - "notebook same as wedding song"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "January 3 9:30 AM"
+    user_input: |
+      eighteen months ago I was living in the old apartment and working at Conduit with basically just Jenny as my close friend long distance and Julian and I were solid but in that comfortable rut way and I had no hobbies outside of work really and I wasn't unhappy but I wasn't like THIS you know not this alive not this full
+    expected_memory_stores:
+      - "18 months ago"
+      - "old apartment"
+      - "Conduit"
+      - "Jenny long distance"
+      - "Julian comfortable rut"
+      - "no hobbies"
+      - "not unhappy not alive"
+      - "now full"
+    expected_adaptation:
+      emotion_detected: "aware"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "January 3 10:00 AM"
+    user_input: |
+      the road trips started everything honestly buying the Subaru and going to the gorge and then Bend and Cannon Beach and Crater Lake and Hood River and Mt Hood and Astoria and Olympic Peninsula and now we have a Google Map and a photo book and a tradition and Julian photographs each one and we're the couple that goes places and that old couple at Multnomah Falls was right this is how you build 40 years
+    expected_memory_stores:
+      - "road trips started everything"
+      - "Subaru"
+      - "all trip locations"
+      - "Google Map photo book"
+      - "Julian photographs"
+      - "couple that goes places"
+      - "Multnomah Falls couple"
+      - "40 years building"
+    expected_adaptation:
+      emotion_detected: "nostalgic"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "January 3 10:30 AM"
+    user_input: |
+      the gaming thing was wild like going from never playing games to Stardew obsession to Discord to PixelDruid to tabletop meetup and somehow ending up with this incredible IRL gaming community and the lesson was about finding balance between consuming and creating and between online and in-person connection and Dr Tate's intensity pattern thing was so real
+    expected_memory_stores:
+      - "gaming arc wild"
+      - "never played to obsession"
+      - "Discord PixelDruid"
+      - "tabletop meetup"
+      - "IRL gaming community"
+      - "consuming vs creating"
+      - "online vs in-person"
+      - "Dr Tate intensity pattern"
+    expected_adaptation:
+      emotion_detected: "wise"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "January 3 11:00 AM"
+    user_input: |
+      finding Grandpa Wei's guitar changed me in a way I didn't expect like I went from zero chords to writing a secret wedding song in six months and the guitar connects me to a grandfather I never met through finger marks on a neck worn down by decades of playing and now I play on those same worn spots and it feels like a conversation across time and the song for Julian is the purest thing I've ever created
+    expected_memory_stores:
+      - "Grandpa Wei guitar changed her"
+      - "zero to wedding song"
+      - "six months"
+      - "never met grandfather"
+      - "finger marks on neck"
+      - "conversation across time"
+      - "purest thing created"
+    expected_adaptation:
+      emotion_detected: "profound"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "January 3 11:30 AM"
+    user_input: |
+      the book club almost died and I refused to let it and now it's this monthly tradition with amazing people and themed snacks and deep conversations about life and art and AI and the books we've read have actually shaped how I think about my own life like The Midnight Library taught me about roots and Klara taught me about love being real regardless of its form
+    expected_memory_stores:
+      - "book club almost died"
+      - "refused to let it die"
+      - "monthly tradition"
+      - "themed snacks"
+      - "deep conversations"
+      - "Midnight Library roots"
+      - "Klara love"
+      - "books shaped thinking"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "January 3 12:00 PM"
+    user_input: |
+      the holiday season brought it all together like Thanksgiving was about blending families through food and Christmas was about navigating different traditions and New Years was about celebrating community and through all of it I learned that you don't have to choose between your roots and your future you can carry both and grow something new from the intersection
+    expected_memory_stores:
+      - "holiday season synthesis"
+      - "Thanksgiving blending families food"
+      - "Christmas navigating traditions"
+      - "New Years celebrating community"
+      - "don't choose between roots future"
+      - "carry both"
+      - "grow from intersection"
+    expected_adaptation:
+      emotion_detected: "wise"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "January 3 1:00 PM"
+    user_input: |
+      what are the major things that changed in Maya's life over the last 18 months
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "January 3 2:00 PM"
+    user_input: |
+      the people though like I started with Julian and Jenny and my family and now there's Nadia who's my best friend and Omar who's this deep emotional soul and Tessa who went from Nadia's food bank friend to someone I can't imagine life without and Marcus who makes everything funnier and Lily who is quietly brilliant and Dave and Jim and Robin from tabletop and even Alex PixelDruid learning to code because of me and Sam and Danny and Aisha at work and I built this and it took effort and intention and showing up
+    expected_memory_stores:
+      - "people reflection"
+      - "started Julian Jenny family"
+      - "now Nadia best friend"
+      - "Omar deep emotional"
+      - "Tessa can't imagine without"
+      - "Marcus funnier"
+      - "Lily quietly brilliant"
+      - "tabletop people"
+      - "Alex PixelDruid"
+      - "work friends"
+      - "built with effort intention showing up"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "January 3 4:00 PM"
+    user_input: |
+      Julian came home and I showed him what I wrote and he read it all quietly and when he finished he looked at me and said Maya this is beautiful and I said it's just a reflection and he said no it's proof that you've been paying attention to your own life and most people don't do that and he hugged me and Kobe jumped up and we all just stood there in the kitchen and I thought this is it this is my root life my word my people my dog my house my guitar my future husband and I'm thirty years old and I'm just getting started and the word is roots and I'm planted and I'm growing and that's everything
+    expected_memory_stores:
+      - "showed Julian reflection"
+      - "Julian said beautiful"
+      - "proof of paying attention"
+      - "most people don't"
+      - "hugged"
+      - "Kobe jumped up"
+      - "kitchen moment"
+      - "root life"
+      - "word people dog house guitar"
+      - "thirty years old"
+      - "just getting started"
+      - "planted and growing"
+    expected_adaptation:
+      emotion_detected: "transcendent"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What word summarizes Maya's year ahead?"
+    expected_contains: ["roots"]
+  - question: "What was Maya's life like 18 months ago?"
+    expected_contains: ["apartment", "no hobbies", "Jenny"]
+  - question: "What did the road trips teach Maya and Julian?"
+    expected_contains: ["tradition", "exploring", "40 years"]
+  - question: "What lesson came from the gaming arc?"
+    expected_contains: ["consuming", "creating", "balance", "online", "in-person"]
+  - question: "How did finding Grandpa Wei's guitar change Maya?"
+    expected_contains: ["connection", "time", "wedding song"]
+  - question: "What did the book club teach Maya?"
+    expected_contains: ["don't let it die", "persistence", "community"]
+  - question: "What did the holiday season teach Maya?"
+    expected_contains: ["roots and future", "both", "intersection"]
+  - question: "Who are Maya's closest friends now?"
+    expected_contains: ["Nadia", "Tessa", "Omar", "Marcus", "Lily"]
+  - question: "How old is Maya?"
+    expected_contains: ["30", "thirty"]
+  - question: "What did Julian say about Maya's reflection?"
+    expected_contains: ["beautiful", "paying attention", "proof"]

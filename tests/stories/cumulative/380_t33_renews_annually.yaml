@@ -1,0 +1,170 @@
+story_id: 380
+story_name: "Renews Annually - First Aid as Identity"
+category: "Personal Development"
+description: |
+  Tests memory of Maya committing to annual first aid renewal and integrating
+  it into her identity. Caps off the first aid certification thread.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      so Clara's calendar reminder actually went off today about my certification renewal even though it's not due for like 20 more months but she said she set an early reminder so I wouldn't forget and I'm like Clara it's not even close yet
+    expected_memory_stores:
+      - "Clara calendar reminder"
+      - "20 months early"
+      - "certification renewal"
+      - "Clara overprepared"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 7:30 PM"
+    user_input: |
+      but it did make me think about whether I want to just renew or actually upgrade to like a wilderness first aid or even a first responder certification which is a step up from basic and Raj said he'd do the wilderness one with me
+    expected_memory_stores:
+      - "upgrade consideration"
+      - "wilderness first aid"
+      - "first responder cert"
+      - "Raj would join"
+    expected_adaptation:
+      emotion_detected: "ambitious"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      I told Frank about wanting to upgrade and he said the wilderness first aid is excellent especially for someone who climbs and hikes and he said he could connect me with a friend who teaches it at the National Outdoor Leadership School NOLS
+    expected_memory_stores:
+      - "Frank recommendation"
+      - "wilderness FA for climbers"
+      - "NOLS connection"
+      - "Frank's friend teaches"
+    expected_adaptation:
+      emotion_detected: "eager"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      looked up NOLS wilderness first aid and it's a weekend course that costs 275 and they do it at outdoor locations in Oregon and honestly that sounds amazing like learning first aid in the actual wilderness makes so much more sense than a classroom
+    expected_memory_stores:
+      - "NOLS wilderness FA"
+      - "weekend course"
+      - "275 dollars"
+      - "outdoor locations Oregon"
+      - "better than classroom"
+    expected_adaptation:
+      emotion_detected: "interested"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 7:00 PM"
+    user_input: |
+      Julian was like okay so your hobby progression is ramen cooking then machine learning then first aid then wilderness medicine what's next and I was like honestly I don't know but I like that I keep surprising myself
+    expected_memory_stores:
+      - "Julian lists hobbies"
+      - "progression ramen ML first aid"
+      - "wilderness medicine next"
+      - "surprising herself"
+    expected_adaptation:
+      emotion_detected: "self-aware"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 6:00 PM"
+    user_input: |
+      put it on my mayacooks Instagram story that I'm first aid certified and got a bunch of DMs like wait you cook AND save lives and I was like lol just basic first aid but it's cool that people think it's impressive
+    expected_memory_stores:
+      - "Instagram story"
+      - "first aid certified"
+      - "DMs impressed"
+      - "cook and save lives"
+    expected_adaptation:
+      emotion_detected: "flattered"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 11:00 AM"
+    user_input: |
+      I set up my own calendar reminder for the renewal 90 days before expiration because I'm NOT going to let Clara be more organized than me about my own certification and I also set one for the NOLS course registration opening next spring
+    expected_memory_stores:
+      - "own calendar reminder"
+      - "90 days before expiration"
+      - "compete with Clara"
+      - "NOLS spring registration"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 2:00 PM"
+    user_input: |
+      how long is Maya's first aid certification valid for and when does it expire
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 4:00 PM"
+    user_input: |
+      Patricia from class texted the group chat and said she used the Heimlich on her grandson last week when he choked on a grape and the kid is fine and she was crying and everyone in the chat was like oh my god Patricia you hero
+    expected_memory_stores:
+      - "Patricia Heimlich"
+      - "grandson choked grape"
+      - "kid fine"
+      - "real emergency use"
+      - "group celebration"
+    expected_adaptation:
+      emotion_detected: "amazed"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 3:00 PM"
+    user_input: |
+      honestly the first aid thing has been one of the most unexpectedly meaningful things I've done like I signed up because Kobe got sick and I ended up finding this whole community and sense of purpose and Julian said it changed me for the better and I think he's right
+    expected_memory_stores:
+      - "unexpectedly meaningful"
+      - "started from Kobe"
+      - "found community and purpose"
+      - "Julian says changed for better"
+      - "full circle reflection"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Is Maya planning to renew her first aid certification?"
+    expected_contains: ["yes", "renew"]
+  - question: "What advanced certification is Maya considering?"
+    expected_contains: ["wilderness first aid", "NOLS"]
+  - question: "How much does the NOLS wilderness first aid cost?"
+    expected_contains: ["275"]
+  - question: "Who is doing wilderness first aid with Maya?"
+    expected_contains: ["Raj"]
+  - question: "What real emergency did Patricia handle?"
+    expected_contains: ["Heimlich", "grandson", "choked", "grape"]
+  - question: "Who connected Maya with NOLS?"
+    expected_contains: ["Frank"]
+  - question: "How did first aid start for Maya?"
+    expected_contains: ["Kobe", "sick", "pancreatitis"]
+  - question: "What has Maya found through first aid beyond skills?"
+    expected_contains: ["community", "purpose"]
+  - question: "How long before expiration did Maya set her renewal reminder?"
+    expected_contains: ["90 days"]
+  - question: "How has first aid changed Maya according to Julian?"
+    expected_contains: ["changed", "better"]

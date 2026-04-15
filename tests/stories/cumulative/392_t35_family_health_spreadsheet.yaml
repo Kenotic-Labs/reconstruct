@@ -1,0 +1,178 @@
+story_id: 392
+story_name: "Family Health Google Sheet"
+category: "Health"
+description: |
+  Tests memory of Maya creating the comprehensive family health Google Sheet.
+  Verifies system tracks detailed health data organization and categories.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Sunday 9:00 AM"
+    user_input: |
+      okay so I spent last night designing the Google Sheet structure and it has tabs for each family member plus a master tab and each person's tab has sections for allergies current medications doctors and their phone numbers insurance info blood type and emergency contacts
+    expected_memory_stores:
+      - "Google Sheet structure"
+      - "tabs per family member"
+      - "master tab"
+      - "allergies medications doctors"
+      - "insurance blood type"
+      - "emergency contacts"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Sunday 10:00 AM"
+    user_input: |
+      starting with my own tab and I know my stuff pretty well like allergies shellfish and um that's it I think medications are sertraline 50mg and lorazepam as needed and my doctors are Dr Tate therapist Dr Pham psychiatrist and Dr Amy Nassif allergist and my regular doctor is Dr Kemp
+    expected_memory_stores:
+      - "Maya allergies shellfish"
+      - "sertraline 50mg"
+      - "lorazepam as needed"
+      - "Dr. Tate therapist"
+      - "Dr. Pham psychiatrist"
+      - "Dr. Amy Nassif allergist"
+      - "Dr. Kemp primary"
+    expected_adaptation:
+      emotion_detected: "thorough"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Sunday 11:00 AM"
+    user_input: |
+      Julian's tab was easy too he's got no allergies no medications and his doctor is Dr Patel and his blood type is O positive which he only knows because he donates blood regularly which is honestly one of the sweetest things about him
+    expected_memory_stores:
+      - "Julian no allergies"
+      - "no medications"
+      - "Dr. Patel"
+      - "O positive"
+      - "donates blood"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Sunday 12:00 PM"
+    user_input: |
+      Kobe's tab includes Dr Sara Mills as his vet and the emergency vet clinic is Dove Lewis and his medications are a probiotic for his pancreas and he's allergic to chicken apparently which we found out after the pancreatitis thing
+    expected_memory_stores:
+      - "Kobe vet Dr. Sara Mills"
+      - "Dove Lewis emergency vet"
+      - "probiotic medication"
+      - "allergic to chicken"
+      - "pancreatitis connection"
+    expected_adaptation:
+      emotion_detected: "thorough"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Sunday 2:00 PM"
+    user_input: |
+      called mom to get her info and she was being difficult about it like she didn't want to share her medication list and I was like mom this is literally for emergencies and Clara got on the phone and was like Mom just tell her and she finally said she takes lisinopril for blood pressure and metformin for pre-diabetes
+    expected_memory_stores:
+      - "Vivian reluctant"
+      - "Clara convinced her"
+      - "lisinopril blood pressure"
+      - "metformin pre-diabetes"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 3:00 PM"
+    user_input: |
+      dad was easier he was like sure whatever you need and he told me his doctor is Dr Okonkwo and he takes baby aspirin daily and a statin for cholesterol and he doesn't know his blood type which is a problem and I was like dad you're 67 how do you not know your blood type
+    expected_memory_stores:
+      - "George cooperative"
+      - "Dr. Okonkwo"
+      - "baby aspirin"
+      - "statin cholesterol"
+      - "doesn't know blood type"
+      - "67 years old"
+    expected_adaptation:
+      emotion_detected: "exasperated"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 5:00 PM"
+    user_input: |
+      Clara filled in her own tab and Tyler's and Sophie's and she was impressively thorough like she even included Sophie's vaccine schedule and Tyler's wisdom teeth removal from last year and she added a column I didn't think of which is last physical exam date
+    expected_memory_stores:
+      - "Clara filled tabs"
+      - "Tyler and Sophie"
+      - "Sophie vaccine schedule"
+      - "Tyler wisdom teeth"
+      - "last physical exam column"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 6:00 PM"
+    user_input: |
+      what medications is Maya's mom on
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 7:00 PM"
+    user_input: |
+      the sheet is basically done and I shared it with everyone and Julian said it looks like a database and I was like it IS a database and Clara said she's going to print her section and keep it in her wallet and I think that's actually smart
+    expected_memory_stores:
+      - "sheet done"
+      - "shared with everyone"
+      - "Julian database comment"
+      - "Clara printing wallet copy"
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 PM"
+    user_input: |
+      also added a section for Kobe with his vet records and vaccine dates and weight history because Dr Sara Mills said tracking weight is important for detecting health issues early in golden retrievers and his current weight is 72 pounds
+    expected_memory_stores:
+      - "Kobe vet records"
+      - "vaccine dates"
+      - "weight history"
+      - "Dr. Sara Mills advice"
+      - "72 pounds"
+    expected_adaptation:
+      emotion_detected: "thorough"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What medications does Vivian take?"
+    expected_contains: ["lisinopril", "metformin"]
+  - question: "What is Julian's blood type?"
+    expected_contains: ["O positive"]
+  - question: "Who is Kobe's vet?"
+    expected_contains: ["Dr. Sara Mills"]
+  - question: "What emergency vet clinic does Maya use?"
+    expected_contains: ["Dove Lewis"]
+  - question: "What is Kobe allergic to?"
+    expected_contains: ["chicken"]
+  - question: "Who is George's doctor?"
+    expected_contains: ["Dr. Okonkwo"]
+  - question: "What medications does George take?"
+    expected_contains: ["aspirin", "statin"]
+  - question: "What column did Clara add to the spreadsheet?"
+    expected_contains: ["last physical exam"]
+  - question: "What is Maya's medication?"
+    expected_contains: ["sertraline"]
+  - question: "How much does Kobe weigh?"
+    expected_contains: ["72"]

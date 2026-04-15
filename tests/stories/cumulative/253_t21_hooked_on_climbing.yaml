@@ -1,0 +1,213 @@
+story_id: 253
+story_name: "Hooked on Climbing"
+category: "Fitness"
+description: |
+  Tests memory of Maya's growing climbing obsession. She goes from once to three times a week.
+  Tracks her progression on grades, new gear purchases, and the physical changes she notices.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      okay first real session at Portland Rock Gym tonight with Nadia and it was SO GOOD like we climbed for two hours straight and I sent two 5.7s and almost got a 5.8 my forearms are like jelly but I'm already planning to go Thursday
+    expected_memory_stores:
+      - "first membership session"
+      - "Nadia"
+      - "two hours"
+      - "5.7 completed"
+      - "attempted 5.8"
+      - "Thursday plan"
+    expected_triples:
+      - ["user", "started_climbing_at", "Portland Rock Gym"]
+      - ["user", "climbed_with", "Nadia"]
+      - ["user", "sent_grade", "5.7"]
+      - ["user", "has_emotion", "exhilarated"]
+    expected_adaptation:
+      emotion_detected: "exhilarated"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 9:15 PM"
+    user_input: |
+      went again tonight and SENT the 5.8 that I couldn't finish Tuesday!! Nadia was cheering me on from below it was so hype and then she flashed a 5.10b like it was nothing and I'm like okay goals
+    expected_memory_stores:
+      - "sent 5.8"
+      - "Nadia climbs 5.10b"
+      - "Nadia flashed route"
+      - "progression"
+    expected_triples:
+      - ["user", "sent_grade", "5.8"]
+      - ["Nadia", "flashed_grade", "5.10b"]
+      - ["user", "has_emotion", "proud"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:00 AM"
+    user_input: |
+      came in this morning too so that's three times this week already I think I'm officially addicted lol Julian dropped me off because he was taking Kobe to Sellwood Park and I was like cool I'll be here for a while
+    expected_memory_stores:
+      - "three times this week"
+      - "Saturday session"
+      - "Julian dropped off"
+      - "Kobe at Sellwood Park"
+    expected_triples:
+      - ["user", "climbs_frequency", "three times this week"]
+      - ["Julian", "dropped_off_at", "Portland Rock Gym"]
+      - ["Kobe", "visited", "Sellwood Park"]
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 1:00 PM"
+    user_input: |
+      okay so I caved and bought my own climbing shoes they're La Sportiva Tarantulas and they were like $85 at Next Adventure which is the outdoor store on Grand Ave and honestly they make such a difference compared to the rental shoes which were all stretched out and gross
+    expected_memory_stores:
+      - "bought climbing shoes"
+      - "La Sportiva Tarantulas"
+      - "$85"
+      - "Next Adventure"
+      - "Grand Ave"
+    expected_triples:
+      - ["user", "bought", "La Sportiva Tarantula climbing shoes"]
+      - ["user", "spent", "$85 at Next Adventure"]
+      - ["Next Adventure", "located_on", "Grand Ave"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 7:00 AM"
+    user_input: |
+      my arms are so defined now it's only been like two weeks but I can already see a difference especially in my shoulders and Julian was like whoa your back looks different and I'm like yeah turns out pulling yourself up a wall repeatedly does that
+    expected_memory_stores:
+      - "physical changes"
+      - "two weeks in"
+      - "shoulders"
+      - "back muscles"
+      - "Julian noticed"
+    expected_triples:
+      - ["user", "noticed_physical_change", "shoulders and back more defined"]
+      - ["Julian", "commented_on", "user's back looking different"]
+      - ["user", "has_been_climbing_for", "two weeks"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 8:30 PM"
+    user_input: |
+      Nadia couldn't come tonight so I climbed alone and it was actually kinda nice? like meditative almost. just me and the wall figuring out the puzzle. I tried my first 5.9 and got about three quarters up before my arms gave out
+    expected_memory_stores:
+      - "climbed alone"
+      - "meditative"
+      - "attempted 5.9"
+      - "three quarters up"
+    expected_triples:
+      - ["user", "climbed_alone", "solo session at gym"]
+      - ["user", "found_climbing", "meditative"]
+      - ["user", "attempted_grade", "5.9"]
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      so my coworker Priya was asking why I'm suddenly in such a good mood all the time and I was like oh I started climbing and she was like that's so cool my husband does that and now she wants to come try it sometime
+    expected_memory_stores:
+      - "Priya noticed mood"
+      - "Priya's husband climbs"
+      - "Priya interested"
+      - "good mood"
+    expected_triples:
+      - ["Priya", "noticed", "user in better mood"]
+      - ["Priya", "has_husband_who", "climbs"]
+      - ["Priya", "wants_to_try", "climbing"]
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 9:00 PM"
+    user_input: |
+      SENT THE 5.9 TONIGHT oh my god I'm so happy Nadia was there and she literally screamed when I topped out and like three other people in the gym clapped it was amazing I feel like I'm actually progressing really fast
+    expected_memory_stores:
+      - "sent 5.9"
+      - "Nadia present"
+      - "quick progression"
+      - "gym community"
+    expected_triples:
+      - ["user", "sent_grade", "5.9"]
+      - ["Nadia", "present_for", "user's 5.9 send"]
+      - ["user", "has_emotion", "elated"]
+    expected_adaptation:
+      emotion_detected: "elated"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 6:00 PM"
+    user_input: |
+      Dr. Patel cleared me for more activity at my checkup today and she was like whatever you're doing keep doing it your knee stability has improved a lot and I was like yeah it's climbing and she was like oh that's perfect for meniscus recovery actually
+    expected_memory_stores:
+      - "Dr. Patel checkup"
+      - "knee improving"
+      - "cleared for more activity"
+      - "climbing good for recovery"
+    expected_triples:
+      - ["Dr. Patel", "cleared_for", "more activity"]
+      - ["user", "has_improving", "knee stability"]
+      - ["Dr. Patel", "endorsed", "climbing for meniscus recovery"]
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:00 AM"
+    user_input: |
+      three weeks in and I'm climbing three times a week Tuesday Thursday Saturday this is officially my thing now like running was before but honestly I think I might like climbing even more because there's so much problem solving involved it's not just cardio
+    expected_memory_stores:
+      - "three times per week"
+      - "Tuesday Thursday Saturday"
+      - "three weeks in"
+      - "prefer climbing to running"
+      - "problem solving"
+    expected_adaptation:
+      emotion_detected: "passionate"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How often does Maya climb per week?"
+    expected_contains: ["three times"]
+  - question: "What days does Maya typically climb?"
+    expected_contains: ["Tuesday", "Thursday", "Saturday"]
+  - question: "What climbing shoes did Maya buy?"
+    expected_contains: ["La Sportiva", "Tarantula"]
+  - question: "What is the hardest grade Maya has sent?"
+    expected_contains: ["5.9"]
+  - question: "What did Dr. Patel say about Maya's climbing?"
+    expected_contains: ["good", "recovery", "knee"]
+  - question: "Who usually climbs with Maya?"
+    expected_contains: ["Nadia"]
+  - question: "Where did Maya buy her climbing shoes?"
+    expected_contains: ["Next Adventure"]
+  - question: "How does Maya compare climbing to running?"
+    expected_contains: ["problem solving", "more"]
+  - question: "What physical changes has Maya noticed from climbing?"
+    expected_contains: ["shoulders", "back", "arms"]
+  - question: "How long has Maya been climbing?"
+    expected_contains: ["three weeks"]

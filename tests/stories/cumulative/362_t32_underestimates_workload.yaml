@@ -1,0 +1,170 @@
+story_id: 362
+story_name: "Underestimates Workload"
+category: "Career Development"
+description: |
+  Tests memory of Maya struggling with the ML course workload on top of her job.
+  Verifies system tracks stress accumulation and time management challenges.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 10:30 PM"
+    user_input: |
+      so the first week of the ML course wasn't bad like it was mostly review stuff I kinda knew but this second week is hitting different the math is way more intense than I expected like linear algebra and probability and I haven't done this since undergrad
+    expected_memory_stores:
+      - "week 1 easy"
+      - "week 2 harder"
+      - "linear algebra"
+      - "probability"
+      - "rusty math"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 11:00 PM"
+    user_input: |
+      I was up until midnight doing the problem set and I still have like three questions left and I have to submit by Friday and also there's a work deadline on Thursday and I'm starting to wonder if 10 hours a week was an underestimate
+    expected_memory_stores:
+      - "up until midnight"
+      - "problem set incomplete"
+      - "Friday deadline"
+      - "work deadline Thursday"
+      - "10 hours underestimate"
+    expected_adaptation:
+      emotion_detected: "stressed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      Julian noticed I've been super stressed and he was like maybe you should take a break from the ramen stuff for a few weeks and focus on the course and I was like no I need my ramen it's my stress relief which doesn't make sense because it takes like 14 hours but whatever
+    expected_memory_stores:
+      - "Julian concerned"
+      - "suggested pause ramen"
+      - "Maya refused"
+      - "ramen as stress relief"
+    expected_adaptation:
+      emotion_detected: "defensive"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 6:00 PM"
+    user_input: |
+      okay so I basically didn't study at all this week because work was crazy we had a production incident and I spent two days debugging and the course material just piled up and I'm like three lectures behind now
+    expected_memory_stores:
+      - "no studying this week"
+      - "production incident at work"
+      - "two days debugging"
+      - "three lectures behind"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 2:00 PM"
+    user_input: |
+      spent all morning catching up on lectures and I'm watching them at 1.5x speed which I never do because I feel like you miss stuff but I'm desperate and the gradient descent stuff makes sense but the regularization section is killing me
+    expected_memory_stores:
+      - "catching up"
+      - "1.5x speed"
+      - "gradient descent okay"
+      - "regularization confusing"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 4:00 PM"
+    user_input: |
+      I told Dr Tate about the course stress in our session today and she was like Maya you always take on too much and I was like I know but I need this for my career and she said it's okay to struggle as long as I'm not sacrificing sleep which I definitely am
+    expected_memory_stores:
+      - "Dr. Tate session"
+      - "takes on too much pattern"
+      - "career necessity"
+      - "sacrificing sleep"
+    expected_adaptation:
+      emotion_detected: "self-aware"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 8:00 PM"
+    user_input: |
+      barely finished the problem set and I'm pretty sure I got at least two questions wrong but at this point I just need to submit something and move on and I can't believe I thought this was gonna be easy
+    expected_memory_stores:
+      - "problem set submitted"
+      - "likely wrong answers"
+      - "humbled"
+      - "harder than expected"
+    expected_adaptation:
+      emotion_detected: "defeated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Monday 7:00 PM"
+    user_input: |
+      how many lectures behind is Maya on the ML course
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 9:00 PM"
+    user_input: |
+      Lily could tell I was struggling at work today and she was like do you want to study together and I was like yes please because honestly trying to learn this alone while working full time is brutal and she said Tuesdays after work at Stumptown coffee
+    expected_memory_stores:
+      - "Lily noticed struggling"
+      - "study together offer"
+      - "Tuesdays after work"
+      - "Stumptown coffee"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 9:00 PM"
+    user_input: |
+      first study session with Lily tonight and oh my god it helped so much like she explained regularization in five minutes in a way the lecture couldn't in an hour and I feel like maybe I can actually do this if I have someone to bounce things off of
+    expected_memory_stores:
+      - "first study session"
+      - "Lily explained regularization"
+      - "five minute explanation"
+      - "study buddy helping"
+      - "renewed confidence"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Why is Maya falling behind in the ML course?"
+    expected_contains: ["work", "production incident", "time"]
+  - question: "Who is Maya studying with?"
+    expected_contains: ["Lily Tran"]
+  - question: "Where do Maya and Lily study?"
+    expected_contains: ["Stumptown"]
+  - question: "What topic is Maya struggling with most?"
+    expected_contains: ["regularization"]
+  - question: "What did Dr. Tate say about the course stress?"
+    expected_contains: ["too much", "sleep"]
+  - question: "How far behind is Maya on lectures?"
+    expected_contains: ["three"]
+  - question: "What speed is Maya watching lectures at?"
+    expected_contains: ["1.5x"]
+  - question: "Is Maya sleeping enough?"
+    expected_contains: ["no", "sacrificing"]
+  - question: "When do Maya and Lily study together?"
+    expected_contains: ["Tuesday"]
+  - question: "What did Julian suggest about the ramen?"
+    expected_contains: ["take a break", "pause"]

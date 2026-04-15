@@ -1,0 +1,177 @@
+story_id: 169
+story_name: "Julian Finds His Groove"
+category: "Career"
+description: |
+  Julian fully integrates work and side projects. Starts volunteering.
+  Balances Bold Studio with wedding prep. Tests multi-thread awareness
+  through career lens.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00 AM"
+    user_input: |
+      Julian went to his first volunteer session at Patricia Torres's nonprofit it's called Design for All and he taught a workshop on logo design basics to a group of high school students and he came home absolutely buzzing he said Maya those kids were so creative and eager it was the best morning I've had in months
+    expected_memory_stores:
+      - "Design for All nonprofit"
+      - "Patricia Torres"
+      - "logo design workshop"
+      - "high school students"
+      - "Julian energized"
+    expected_adaptation:
+      emotion_detected: "inspired"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Julian showed me some of the logos the kids made and honestly some of them were really good like this one girl named Destiny made this incredible minimalist logo for a fictional skateboard brand and Julian was like she has natural talent and I need to make sure she knows about design school programs
+    expected_memory_stores:
+      - "student Destiny"
+      - "skateboard brand logo"
+      - "Julian mentoring student"
+      - "design school programs"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 6:00 PM"
+    user_input: |
+      Julian hired the first of the two new designers at Bold Studio her name is Rosa and she starts next week she's got five years experience and Kevin and Julian both interviewed her and Kevin said Julian's instinct for talent is spot on which made Julian's day honestly
+    expected_memory_stores:
+      - "Rosa hired at Bold Studio"
+      - "five years experience"
+      - "starts next week"
+      - "Kevin and Julian interviewed"
+      - "Kevin praised Julian's instinct"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      Julian's juggling a lot right now Bold Studio full time Design for All on Saturdays occasional freelance gigs wedding planning and somehow he's handling it all better than when he was just freelancing alone like having structure actually helps him manage everything weird how that works
+    expected_memory_stores:
+      - "Julian juggling many responsibilities"
+      - "Bold Studio full time"
+      - "Design for All Saturdays"
+      - "freelance side"
+      - "wedding planning"
+      - "structure helps him"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 8:00 PM"
+    user_input: |
+      Julian designed our wedding programs tonight like the actual ceremony programs and they're stunning he used the same pine tree motif from the save the dates and it all feels so cohesive and he did it in like an hour because that's what happens when your partner is a professional designer you get free wedding stationery
+    expected_memory_stores:
+      - "Julian designed wedding programs"
+      - "pine tree motif"
+      - "matches save the dates"
+      - "cohesive design"
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 5:00 PM"
+    user_input: |
+      Kevin asked Julian to represent Bold Studio at a local design meetup next week like give a short talk about their brand process and Julian said yes immediately which the old Julian would never have done the old Julian would have said um I'll think about it and then avoided it but studio Julian is confident Julian
+    expected_memory_stores:
+      - "Julian speaking at design meetup"
+      - "representing Bold Studio"
+      - "brand process talk"
+      - "Julian's confidence growth"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 11:00 AM"
+    user_input: |
+      second Saturday at Design for All and Destiny brought a friend this time and Julian taught them about color theory and he texted me a photo of the classroom and it was just chaos with paint and markers everywhere and he captioned it this is what joy looks like and I saved that photo because it made my whole day
+    expected_memory_stores:
+      - "second Design for All session"
+      - "Destiny brought friend"
+      - "color theory workshop"
+      - "joyful photo"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Monday 12:00 PM"
+    user_input: |
+      Julian's still keeping that one freelance client the social media one at $600/month and he's actually thinking of transitioning that client to Alicia as a side project because Alicia wants to build her portfolio with real client work and Julian thinks it would be a great learning opportunity for her
+    expected_memory_stores:
+      - "freelance client $600/month"
+      - "considering giving to Alicia"
+      - "Alicia wants portfolio work"
+      - "Julian as mentor"
+    expected_adaptation:
+      emotion_detected: "generous"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      Julian gave the design meetup talk tonight and I went to watch and he was SO GOOD like funny and insightful and he showed the Timber Roasters case study and people were asking great questions and afterward three people gave him their cards for potential projects and Kevin was in the audience just grinning
+    expected_memory_stores:
+      - "design meetup talk successful"
+      - "Timber Roasters case study"
+      - "three new contacts"
+      - "Kevin in audience"
+      - "Maya attended"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 9:00 PM"
+    user_input: |
+      Julian said to me tonight Maya six months ago I was eating cereal at my desk alone with Kobe feeling like a failure and now I have a team I love a boss who's basically a mentor a raise a volunteer thing that fills my soul and I'm about to marry the most amazing person and I just I don't take any of it for granted and I was like okay now you're making ME cry
+    expected_memory_stores:
+      - "Julian grateful reflection"
+      - "contrasts past to present"
+      - "team love mentor raise volunteering marriage"
+      - "doesn't take it for granted"
+      - "emotional moment"
+    expected_adaptation:
+      emotion_detected: "deeply moved"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What volunteer work does Julian do?"
+    expected_contains: ["Design for All", "Patricia Torres"]
+  - question: "Who is Destiny?"
+    expected_contains: ["student", "Design for All"]
+  - question: "Who is Rosa?"
+    expected_contains: ["new designer", "Bold Studio"]
+  - question: "What did Julian design for the wedding?"
+    expected_contains: ["programs", "pine tree"]
+  - question: "Did Julian give a public talk?"
+    expected_contains: ["yes", "meetup", "design"]
+  - question: "What is Julian considering giving to Alicia?"
+    expected_contains: ["freelance client", "$600"]
+  - question: "How is Julian balancing everything?"
+    expected_contains: ["well", "structure", "juggling"]
+  - question: "What did Julian present at the meetup?"
+    expected_contains: ["Timber Roasters"]
+  - question: "How has Julian changed since starting Bold Studio?"
+    expected_contains: ["confident", "thriving"]
+  - question: "What is Design for All?"
+    expected_contains: ["nonprofit", "design", "underserved"]

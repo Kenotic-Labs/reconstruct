@@ -1,0 +1,176 @@
+story_id: 333
+story_name: "The Three Week Breakup"
+category: "Friendships"
+description: |
+  Tests memory of Marcus ending things with Nadia after exactly three weeks.
+  Omar was right. Nadia is hurt. Maya is furious at Marcus. Verifies system
+  tracks predicted outcomes and emotional fallout.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 9:30 PM"
+    user_input: |
+      Nadia just called me sobbing and she said Marcus told her he doesn't think he's ready for a relationship and it's been exactly THREE WEEKS like Omar literally PREDICTED this to the day and I am so angry right now
+    expected_memory_stores:
+      - "Marcus ended it"
+      - "not ready for relationship"
+      - "exactly three weeks"
+      - "Omar predicted"
+      - "Nadia sobbing"
+      - "Maya furious"
+    expected_adaptation:
+      emotion_detected: "furious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 10:00 PM"
+    user_input: |
+      drove to Nadia's apartment and she was on her couch wrapped in a blanket and she said I feel so stupid and I said you're not stupid HE'S stupid and she said but he was so nice and I said yeah that's what makes it worse
+    expected_memory_stores:
+      - "drove to Nadia's"
+      - "blanket on couch"
+      - "feels stupid"
+      - "Maya reassured"
+      - "he was nice"
+    expected_adaptation:
+      emotion_detected: "protective"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 10:30 PM"
+    user_input: |
+      she said Marcus literally said it's not you it's me and she was like I thought only people in movies say that and she laughed but it wasn't a happy laugh and I held her hand and Kobe wasn't there because I left him at home but I wished he was
+    expected_memory_stores:
+      - "it's not you it's me"
+      - "movie line"
+      - "unhappy laugh"
+      - "held hand"
+      - "wished Kobe was there"
+    expected_adaptation:
+      emotion_detected: "empathetic"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 7:00 AM"
+    user_input: |
+      texted Marcus this morning and I said what the hell Marcus and he said I know I know and I said she literally JUST got divorced and you knew that and he said I really did like her Maya I just panicked and I said well your panic just wrecked someone I care about
+    expected_memory_stores:
+      - "texted Marcus"
+      - "what the hell"
+      - "he panicked"
+      - "really did like her"
+      - "wrecked someone Maya cares about"
+    expected_adaptation:
+      emotion_detected: "angry"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      Omar called and was like I heard and I said yeah and he said I wish I wasn't right and I said me too and he said the problem with Marcus is he wants connection but runs the moment it gets real and it's been this way since college
+    expected_memory_stores:
+      - "Omar heard"
+      - "wished he wasn't right"
+      - "Marcus wants connection"
+      - "runs when real"
+      - "since college"
+    expected_adaptation:
+      emotion_detected: "sad"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      Nadia said the worst part is she has to see Marcus at the Round Table dinners and she doesn't want to lose the friend group because of this and I said you are NOT losing the friend group HE should be the one who's embarrassed not you
+    expected_memory_stores:
+      - "worried about Round Table"
+      - "doesn't want to lose group"
+      - "Maya said she won't"
+      - "Marcus should be embarrassed"
+    expected_adaptation:
+      emotion_detected: "fierce"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      Julian said we shouldn't take sides and I looked at him and said I am absolutely taking sides and he said that'll split the group and I said well Marcus shouldn't have hooked up with our friend then and Julian went quiet
+    expected_memory_stores:
+      - "Julian said no sides"
+      - "Maya taking sides"
+      - "Julian warned about split"
+      - "Marcus shouldn't have"
+      - "Julian went quiet"
+    expected_adaptation:
+      emotion_detected: "defiant"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 10:00 AM"
+    user_input: |
+      how long did Marcus and Nadia date before he ended it
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 6:00 PM"
+    user_input: |
+      Jenny sent me a Marco Polo about it and she was like I KNEW IT I said dating in friend groups is complicated and she said the question now is whether the group can survive this and she said she's Team Nadia obviously
+    expected_memory_stores:
+      - "Jenny knew it"
+      - "dating in friend groups"
+      - "can group survive"
+      - "Jenny Team Nadia"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 9:00 PM"
+    user_input: |
+      Nadia called and she sounded a little better and she said Dr Lin told her that this isn't a reflection of her worth and that Marcus's pattern existed before her and will exist after her and Nadia said knowing that helps and I said Dr Lin is smart
+    expected_memory_stores:
+      - "Nadia sounding better"
+      - "Dr Lin therapy"
+      - "pattern not about her"
+      - "existed before and after"
+      - "Dr Lin is smart"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How long did Marcus and Nadia date?"
+    expected_contains: ["three weeks"]
+  - question: "What did Marcus say when he ended it?"
+    expected_contains: ["not ready", "not you it's me"]
+  - question: "Did Omar predict the timing?"
+    expected_contains: ["yes", "three weeks"]
+  - question: "How did Maya react to Marcus?"
+    expected_contains: ["furious", "texted", "angry"]
+  - question: "What did Julian say about taking sides?"
+    expected_contains: ["shouldn't take sides"]
+  - question: "What is Nadia worried about regarding the group?"
+    expected_contains: ["losing friend group", "Round Table"]
+  - question: "What did Jenny say?"
+    expected_contains: ["Team Nadia", "complicated"]
+  - question: "What did Dr Lin tell Nadia?"
+    expected_contains: ["pattern", "not reflection of worth"]
+  - question: "What does Omar say about Marcus's pattern?"
+    expected_contains: ["wants connection", "runs when real"]
+  - question: "How is Nadia feeling?"
+    expected_contains: ["hurt", "stupid", "little better"]

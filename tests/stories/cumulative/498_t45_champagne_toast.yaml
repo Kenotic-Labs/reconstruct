@@ -1,0 +1,194 @@
+story_id: 498
+story_name: "Champagne Toast and Reflections"
+category: "Holiday Season"
+description: |
+  Tests memory of the aftermath of New Year's Eve and early reflections.
+  Establishes Maya's word of the year concept, looking back on growth.
+  Verifies system captures retrospective emotional assessment.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "January 1 1:00 AM"
+    user_input: |
+      everyone's leaving and there are hugs everywhere and Marcus is a little drunk and keeps saying best night ever and Tessa hugged me so tight and said this group saved my year and Nadia whispered you're the glue Maya and I was like I'm not the glue and she said you are and I almost lost it but I held it together because I've cried enough this holiday season honestly
+    expected_memory_stores:
+      - "everyone leaving"
+      - "hugs everywhere"
+      - "Marcus best night ever"
+      - "Tessa group saved year"
+      - "Nadia you're the glue"
+      - "Maya held it together"
+      - "cried enough this season"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "January 1 1:30 AM"
+    user_input: |
+      Julian and I are cleaning up and there's champagne glasses everywhere and confetti on the floor and Kobe is eating cracker crumbs and Julian said you know what I love about you and I said what and he said you build things like you didn't just make friends you built a community and I said that's what the book club taught me right if you care about something you don't let it die
+    expected_memory_stores:
+      - "cleaning up"
+      - "champagne confetti"
+      - "Kobe eating crumbs"
+      - "Julian said build things"
+      - "built community"
+      - "book club lesson"
+      - "don't let it die"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "January 1 10:00 AM"
+    user_input: |
+      woke up and it's the first day of the new year and Julian is still sleeping and Kobe is lying next to me and the house is a mess from last night but I don't care and I'm lying here thinking about the word of the year thing that people do and I want one word that captures everything I want this year to be about
+    expected_memory_stores:
+      - "first day new year"
+      - "Julian sleeping"
+      - "house messy"
+      - "word of the year"
+      - "one word"
+      - "captures everything"
+    expected_adaptation:
+      emotion_detected: "contemplative"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "January 1 11:00 AM"
+    user_input: |
+      I keep coming back to the word roots like from The Midnight Library the root life and how I said I was building roots at the Woodstock house and the Thanksgiving fusion was about blending roots and the Christmas tradition is about planting new roots and the road trips are about exploring from a rooted place and it just keeps coming back to that word
+    expected_memory_stores:
+      - "word: roots"
+      - "Midnight Library reference"
+      - "building roots Woodstock"
+      - "Thanksgiving blending roots"
+      - "Christmas planting roots"
+      - "road trips from rooted place"
+      - "word keeps coming back"
+    expected_adaptation:
+      emotion_detected: "clear"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "January 1 12:00 PM"
+    user_input: |
+      Julian woke up and I said my word of the year is roots and he said that's perfect and he said his word is light because he wants to focus on finding the light in everything through photography and life and together we're like a tree roots and light and I was like Julian that's actually beautiful and he said he's still half asleep but thank you
+    expected_memory_stores:
+      - "Maya's word: roots"
+      - "Julian's word: light"
+      - "finding light photography"
+      - "tree metaphor"
+      - "roots and light"
+      - "Julian half asleep"
+    expected_adaptation:
+      emotion_detected: "inspired"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "January 1 2:00 PM"
+    user_input: |
+      I texted the friend group chat and asked everyone for their word of the year and Nadia said courage Omar said patience Tessa said community Lily said growth Marcus said less which is hilarious and very Marcus and Danny said adventure and Sam said consistency and Jenny from Austin said reunion because she's coming to Portland more this year
+    expected_memory_stores:
+      - "group word of year"
+      - "Nadia courage"
+      - "Omar patience"
+      - "Tessa community"
+      - "Lily growth"
+      - "Marcus less"
+      - "Danny adventure"
+      - "Sam consistency"
+      - "Jenny reunion Portland"
+    expected_adaptation:
+      emotion_detected: "connected"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "January 1 4:00 PM"
+    user_input: |
+      I played guitar for a while and worked on the wedding song with the capo on second fret and it sounded really good and I thought about how roots connects to the song too because the song is about finding home and putting down roots and the guitar itself has roots in Grandpa Wei's hands decades ago and everything is just so connected
+    expected_memory_stores:
+      - "guitar practice"
+      - "wedding song capo second fret"
+      - "sounded good"
+      - "roots connects to song"
+      - "finding home putting down roots"
+      - "Grandpa Wei roots"
+      - "everything connected"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "January 1 5:00 PM"
+    user_input: |
+      what is Maya's word of the year and what is Julian's
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "January 1 7:00 PM"
+    user_input: |
+      called Clara and told her my word is roots and she said that's so you and she said her word is presence because with Sophie she wants to be more present and Tyler's word is rest which Clara said he needs badly and I told her about the toast I gave at midnight and she said she wished she could have been there and I said next year we're doing New Years Eve together ALL of us
+    expected_memory_stores:
+      - "Clara's word presence"
+      - "Tyler's word rest"
+      - "Sophie being present"
+      - "told about toast"
+      - "Clara wished there"
+      - "next year all together"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "January 1 9:00 PM"
+    user_input: |
+      ending the first day of the new year on the couch with Julian and Kobe and a cup of tea and Stardew Valley on for a quiet session and the house still has confetti in weird places and I wrote roots on a sticky note and put it on my bathroom mirror and Julian put light on his and we're going into this new year rooted and bright and I'm ready for whatever comes next
+    expected_memory_stores:
+      - "couch Julian Kobe tea"
+      - "quiet Stardew session"
+      - "confetti in weird places"
+      - "roots sticky note mirror"
+      - "Julian light sticky note"
+      - "rooted and bright"
+      - "ready for whatever"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya's word of the year?"
+    expected_contains: ["roots"]
+  - question: "What is Julian's word of the year?"
+    expected_contains: ["light"]
+  - question: "What did Nadia say Maya is to the friend group?"
+    expected_contains: ["glue"]
+  - question: "What were everyone's words of the year?"
+    expected_contains: ["courage", "patience", "community", "growth"]
+  - question: "What metaphor do Maya and Julian form together?"
+    expected_contains: ["tree", "roots and light"]
+  - question: "Where did Maya put her word of the year?"
+    expected_contains: ["sticky note", "bathroom mirror"]
+  - question: "What book inspired the word 'roots'?"
+    expected_contains: ["Midnight Library"]
+  - question: "What is Jenny's word and why?"
+    expected_contains: ["reunion", "Portland"]
+  - question: "What did Tessa say about the friend group?"
+    expected_contains: ["saved", "year"]
+  - question: "What is Clara's word of the year?"
+    expected_contains: ["presence"]

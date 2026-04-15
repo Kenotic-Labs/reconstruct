@@ -1,0 +1,197 @@
+story_id: 494
+story_name: "Christmas at Reeves House Eugene"
+category: "Holiday Season"
+description: |
+  Tests memory of Christmas at Julian's parents' house in Eugene.
+  Establishes cultural differences in holiday traditions.
+  Verifies system captures family dynamics and tradition conflicts.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "December 24 4:00 PM"
+    user_input: |
+      so we drove down to Eugene for Christmas at Julian's parents and Diane has the house decorated like a Hallmark movie like there's a tree in every room and garland everywhere and Bob is wearing a Santa hat and Julian immediately reverted to like 12 year old Julian running around showing me his childhood bedroom which still has Goonies posters on the wall
+    expected_memory_stores:
+      - "drove to Eugene"
+      - "Reeves Christmas"
+      - "Diane decorated Hallmark"
+      - "tree in every room"
+      - "Bob Santa hat"
+      - "Julian childhood bedroom"
+      - "Goonies posters"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "December 24 6:00 PM"
+    user_input: |
+      so in my family we do Christmas Eve gifts that's the Chen tradition like we open presents on Christmas Eve and have a big dinner and then Christmas Day is chill but the Reeves family does Christmas morning presents and Diane has this whole production with stockings and matching pajamas and opening gifts around the tree at like 7 AM and I was like 7 AM is aggressive
+    expected_memory_stores:
+      - "Chen Christmas Eve gifts"
+      - "Reeves Christmas morning"
+      - "different traditions"
+      - "Diane stockings pajamas"
+      - "7 AM gifts"
+      - "Maya thinks aggressive"
+    expected_adaptation:
+      emotion_detected: "aware"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "December 24 7:00 PM"
+    user_input: |
+      so we had dinner and Diane made ham and Bob's famous mac and cheese and Julian's aunt Karen showed up which I forgot about and she's um a lot like she talks really loud and has opinions about everything and she asked me when we're having kids and I was like we're not even married yet and she said well hurry up and Julian mouthed sorry from across the table
+    expected_memory_stores:
+      - "Diane made ham"
+      - "Bob mac and cheese"
+      - "aunt Karen"
+      - "talks loud opinions"
+      - "asked about kids"
+      - "not married yet"
+      - "hurry up comment"
+      - "Julian mouthed sorry"
+    expected_adaptation:
+      emotion_detected: "uncomfortable"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "December 24 8:30 PM"
+    user_input: |
+      I texted my mom Merry Christmas Eve and she said she's sad we're not there tonight because this is when they do presents and I was like I know mom I'm sorry and she sent a photo of dad and Clara and Tyler and Sophie around their tree opening gifts and I got this wave of homesickness that hit me so hard and I went to the bathroom to cry a little because I miss my family's version of Christmas
+    expected_memory_stores:
+      - "texted Vivian"
+      - "Vivian sad"
+      - "Christmas Eve tradition"
+      - "family photo"
+      - "George Clara Tyler Sophie"
+      - "wave of homesickness"
+      - "cried in bathroom"
+      - "miss family Christmas"
+    expected_adaptation:
+      emotion_detected: "homesick"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "December 24 9:00 PM"
+    user_input: |
+      Julian found me in the bathroom and I told him I was homesick and he hugged me and said I know this is hard and he said next year we can alternate or do something different and I said I just feel like I'm losing my family's traditions by being here and he said you're not losing them you're building new ones alongside them and that actually helped
+    expected_memory_stores:
+      - "Julian found Maya"
+      - "told him homesick"
+      - "Julian hugged"
+      - "alternate next year"
+      - "losing traditions fear"
+      - "building new ones"
+      - "helped"
+    expected_adaptation:
+      emotion_detected: "vulnerable"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "December 24 10:00 PM"
+    user_input: |
+      Diane noticed I was quiet and she came up to me privately and said Maya I know this isn't how your family does it and I want you to know you can bring your traditions here too and she's really grown since the whole boundary thing last year and I appreciated it and she said next year you should bring your mom's dumplings for Christmas Eve and that was really sweet
+    expected_memory_stores:
+      - "Diane noticed quiet"
+      - "came privately"
+      - "bring your traditions"
+      - "Diane grown boundary thing"
+      - "bring dumplings next year"
+      - "really sweet"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "December 24 11:00 PM"
+    user_input: |
+      Diane gave everyone matching pajamas to wear for Christmas morning and they're plaid and have little reindeer on them and Julian looks ridiculous and Bob is already asleep in the recliner snoring and Kobe has a matching bandana that Diane made for him and I FaceTimed Clara quickly and showed her the pajamas and she was dying laughing and said I look like a lumberjack
+    expected_memory_stores:
+      - "matching pajamas"
+      - "plaid reindeer"
+      - "Julian ridiculous"
+      - "Bob asleep snoring"
+      - "Kobe matching bandana"
+      - "FaceTimed Clara"
+      - "lumberjack comment"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "December 25 7:30 AM"
+    user_input: |
+      what tradition does the Chen family have for Christmas that's different from the Reeves family
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "December 25 8:00 AM"
+    user_input: |
+      Christmas morning and Diane had us all up at 7 AM sharp and we did stockings first and Julian got candy and a new lens cap for his camera and I got a really nice scarf and earrings and then we did the tree presents and that's when Julian gave me the photo book the road trip photo book called Our Oregon and Beyond and I completely fell apart
+    expected_memory_stores:
+      - "Christmas morning 7 AM"
+      - "stockings"
+      - "Julian lens cap candy"
+      - "Maya scarf earrings"
+      - "tree presents"
+      - "Julian gave photo book"
+      - "Our Oregon and Beyond"
+      - "Maya fell apart"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "December 25 10:00 AM"
+    user_input: |
+      after the photo book moment I called my parents and told them about it and mom cried and dad said Julian is a keeper and Clara said she saw it on FaceTime and cried too and I thought you know what both traditions are beautiful the Chen Christmas Eve love and the Reeves Christmas morning chaos and I can hold both and maybe next year we'll create something that's ours like the Thanksgiving fusion
+    expected_memory_stores:
+      - "called parents about book"
+      - "Vivian cried"
+      - "George said keeper"
+      - "Clara cried"
+      - "both traditions beautiful"
+      - "hold both"
+      - "create combined tradition"
+      - "Thanksgiving fusion parallel"
+    expected_adaptation:
+      emotion_detected: "resolved"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where did Maya and Julian spend Christmas?"
+    expected_contains: ["Eugene", "Reeves"]
+  - question: "What is the Chen family Christmas tradition?"
+    expected_contains: ["Christmas Eve", "gifts"]
+  - question: "What is the Reeves family Christmas tradition?"
+    expected_contains: ["Christmas morning", "7 AM"]
+  - question: "Why was Maya homesick?"
+    expected_contains: ["miss", "family", "Christmas Eve"]
+  - question: "What did Diane say to Maya privately?"
+    expected_contains: ["bring traditions", "dumplings"]
+  - question: "What matching item did Diane give everyone?"
+    expected_contains: ["pajamas", "plaid"]
+  - question: "What was Julian's special Christmas gift to Maya?"
+    expected_contains: ["photo book", "Our Oregon and Beyond"]
+  - question: "Who is Julian's aunt?"
+    expected_contains: ["Karen"]
+  - question: "What did Julian get in his stocking?"
+    expected_contains: ["candy", "lens cap"]
+  - question: "What combined tradition idea does Maya have for next year?"
+    expected_contains: ["fusion", "both", "Chen", "Reeves"]

@@ -1,0 +1,171 @@
+story_id: 120
+story_name: "New Professional Identity"
+category: "Career"
+description: |
+  Tests whether the system captures Maya's settled new professional identity, the
+  integration of all career pivot learnings, and the closure of the exploration arc.
+  Cross-thread references to mentoring, UX shadowing, and therapy.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 4:00pm"
+    user_input: |
+      Dr. Tate session today and she asked me the same question from weeks ago. if you couldn't be an engineer what would you be? and this time I said I'd be a teacher or a designer of systems that help people. and she smiled and said notice how different that answer is from silence
+    expected_memory_stores:
+      - "Dr. Tate session"
+      - "same question"
+      - "new answer"
+      - "teacher"
+      - "systems designer"
+      - "growth from silence"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 4:30pm"
+    user_input: |
+      she said the exploration wasn't about finding a different career it was about understanding why I do what I do. and now I know. I build because I want to make someone's day better. whether that's an intern or a UX researcher or a customer
+    expected_memory_stores:
+      - "exploration purpose"
+      - "understanding why"
+      - "make someone's day better"
+      - "intern UX customer"
+    expected_adaptation:
+      emotion_detected: "settled"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 7:00pm"
+    user_input: |
+      Julian asked me tonight are you done exploring or is there more coming and I was like no I think I'm home actually. like I went out into the career wilderness and came back to engineering but with new eyes. he goes good because I like you as an engineer nerd, and then he kissed my forehead
+    expected_memory_stores:
+      - "Julian check-in"
+      - "done exploring"
+      - "engineering with new eyes"
+      - "tender moment"
+    expected_adaptation:
+      emotion_detected: "loved"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 9:00am"
+    user_input: |
+      updated my LinkedIn bio from Senior Software Engineer to something like Engineering Lead focused on internal tools and developer experience or whatever. it's silly but it felt significant. Priya was the first to like it
+    expected_memory_stores:
+      - "LinkedIn updated"
+      - "Engineering Lead"
+      - "internal tools"
+      - "developer experience"
+      - "Priya first like"
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 10:00am"
+    user_input: |
+      Rachel Ford sent me a really nice DM about the LinkedIn update. she said the best leaders are the ones who chose their path deliberately not just fell into it. that's a bar I wanna remember
+    expected_memory_stores:
+      - "Rachel Ford message"
+      - "deliberate path"
+      - "leadership insight"
+    expected_adaptation:
+      emotion_detected: "inspired"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 12:00pm"
+    user_input: |
+      Aisha goes hey does this mean I can tell people my mentor is a team lead now? I said absolutely. she's gonna be fine honestly, she doesn't even really need me anymore. that's the goal of mentoring right, make yourself unnecessary
+    expected_memory_stores:
+      - "Aisha proud"
+      - "mentor as team lead"
+      - "Aisha independent"
+      - "make yourself unnecessary"
+    expected_adaptation:
+      emotion_detected: "bittersweet"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 2:00pm"
+    user_input: |
+      what's Maya's new LinkedIn title
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 3:00pm"
+    user_input: |
+      Sam pulled me aside and said the VP wants to hear about Lens at the next quarterly business review. a QBR. that's like... leadership level. he said I should present. me. presenting to the C-suite basically
+    expected_memory_stores:
+      - "QBR presentation"
+      - "VP request"
+      - "quarterly business review"
+      - "C-suite"
+      - "Sam asked Maya"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 6:00pm"
+    user_input: |
+      called my mom to tell her about the QBR thing and she goes Maya you started this company as an intern and now you're presenting to the executives, I'm so proud. and I was like Mom I wasn't an intern at Conduit but she's always mixing that up
+    expected_memory_stores:
+      - "Mom proud"
+      - "Mom confusion about intern"
+      - "QBR news"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 10:00pm"
+    user_input: |
+      lying in bed and Julian's already asleep and Kobe's at my feet and I'm just thinking about how three months ago I was scared to mentor one intern and now I'm leading a team and presenting to executives. life comes at you fast. in a good way this time
+    expected_memory_stores:
+      - "reflection"
+      - "three months growth"
+      - "intern to team lead"
+      - "gratitude"
+      - "peaceful"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How did Maya answer Dr. Tate's question this time?"
+    expected_contains: ["teacher", "systems", "help people"]
+  - question: "What is Maya's new professional identity?"
+    expected_contains: ["Engineering Lead", "internal tools"]
+  - question: "What is Maya presenting at the QBR?"
+    expected_contains: ["Lens"]
+  - question: "Is Maya done exploring other careers?"
+    expected_contains: ["yes", "done", "home"]
+  - question: "What did Rachel Ford say about deliberate leadership?"
+    expected_contains: ["chose", "deliberately"]
+  - question: "What is Maya's mentoring philosophy?"
+    expected_contains: ["make yourself unnecessary"]
+  - question: "How has Maya grown over the past three months?"
+    expected_contains: ["intern", "team lead", "executives"]
+  - question: "Who will Maya present to at the QBR?"
+    expected_contains: ["VP", "C-suite", "executives"]
+  - question: "Is Aisha still dependent on Maya?"
+    expected_contains: ["no", "independent", "doesn't need"]
+  - question: "What did Dr. Tate say about the exploration?"
+    expected_contains: ["understanding why", "not about finding different career"]

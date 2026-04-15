@@ -1,0 +1,178 @@
+story_id: 537
+story_name: "Kobe Loves Rain"
+category: "Weather and Seasons"
+description: |
+  Kobe becomes Maya's weather therapy — his joy in rain transforms her relationship
+  with Portland weather. Cross-references dog bond (T26-T30), mental health (T21),
+  neighborhood walks (T48), and seasons.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 AM"
+    user_input: |
+      Kobe is standing at the door staring at me with his leash in his mouth and it's absolutely POURING outside and I'm like Kobe no and he's like Kobe YES and his tail is going so fast and I gave in because how do you say no to that face and we went out and he was immediately running through every puddle on the block
+    expected_memory_stores:
+      - "Kobe wants rain walk"
+      - "leash in mouth"
+      - "pouring rain"
+      - "Maya gave in"
+      - "running through puddles"
+    expected_adaptation:
+      emotion_detected: "charmed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 7:30 AM"
+    user_input: |
+      the thing about Kobe in the rain is he doesn't just tolerate it he CELEBRATES it like he does this thing where he runs in circles and then stops and shakes and then runs in more circles and people walking by with umbrellas look at him like he's insane but he's not insane he's just a golden retriever being a golden retriever
+    expected_memory_stores:
+      - "Kobe celebrates rain"
+      - "runs in circles shakes repeats"
+      - "people watching"
+      - "golden retriever being golden retriever"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      Julian asked why I've been walking Kobe in the rain so much more this year and I said because he loves it and watching him be so happy in the rain makes me less miserable about the rain and Julian said so your dog is your therapist and I said honestly yeah between him and Dr. Tate I'm covered
+    expected_memory_stores:
+      - "walking Kobe more in rain"
+      - "his joy reduces her misery"
+      - "dog as therapist"
+      - "Kobe and Dr. Tate comparison"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 9:00 AM"
+    user_input: |
+      rain walk with Kobe this morning and we found a huge puddle in the park that was basically a temporary pond and Kobe jumped in and I mean FULL BODY jumped in and I was standing there in my rain jacket laughing and this older woman stopped and said your dog is living his best life and I said he really is
+    expected_memory_stores:
+      - "huge puddle like pond"
+      - "Kobe full body jump"
+      - "Maya laughing in rain jacket"
+      - "older woman comment"
+      - "living his best life"
+    expected_adaptation:
+      emotion_detected: "entertained"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 11:00 AM"
+    user_input: |
+      Kobe came home absolutely filthy like covered in mud and I had to give him a bath and he hates baths which is hilarious because he loves water but only outdoor water and he sat in the tub looking betrayed and Julian took a photo that is honestly the funniest photo I've ever seen golden retriever looking personally offended by soap
+    expected_memory_stores:
+      - "Kobe covered in mud"
+      - "bath time"
+      - "loves outdoor water hates baths"
+      - "looking betrayed"
+      - "Julian photo"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 7:00 AM"
+    user_input: |
+      started a new thing where our morning rain walk is my replacement for the light therapy lamp on days when I walk long enough because Dr. Pham said natural light even on cloudy days is still beneficial and the walk plus the laughing at Kobe gives me more energy than sitting in front of the lamp alone
+    expected_memory_stores:
+      - "rain walk replacing lamp some days"
+      - "Dr. Pham natural light advice"
+      - "cloudy day light beneficial"
+      - "walk plus laughing more energizing"
+    expected_adaptation:
+      emotion_detected: "adaptive"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 5:00 PM"
+    user_input: |
+      Omar said he wants to borrow Kobe for a rain walk because he's been feeling down too and I said you can walk with us and we went out and Kobe was his usual ridiculous self and Omar was laughing the whole time and he said Maya I get it now your dog is an antidepressant and I said he's better than an antidepressant he's a golden retriever
+    expected_memory_stores:
+      - "Omar wants rain walk with Kobe"
+      - "Omar feeling down"
+      - "group rain walk"
+      - "Kobe as antidepressant"
+      - "better than antidepressant"
+    expected_adaptation:
+      emotion_detected: "generous"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 8:00 AM"
+    user_input: |
+      we've been doing daily rain walks for two weeks now and I bought a proper rain jacket from REI and rain boots and I feel like a real Portlander now like I used to be someone who avoided rain and now I'm someone who goes out in it on purpose because my dog taught me that rain is just water and water is fun
+    expected_memory_stores:
+      - "daily rain walks two weeks"
+      - "REI rain jacket"
+      - "rain boots"
+      - "real Portlander"
+      - "rain is just water"
+    expected_adaptation:
+      emotion_detected: "transformed"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 4:00 PM"
+    user_input: |
+      phone-free Sunday rain walk and I noticed something today Kobe doesn't differentiate between sunny walks and rainy walks he's equally happy on both and I think that's the lesson right happiness doesn't require perfect conditions it just requires being present and dogs know this instinctively and humans have to learn it
+    expected_memory_stores:
+      - "Kobe equally happy all weather"
+      - "happiness doesn't need perfect conditions"
+      - "being present"
+      - "dogs know instinctively"
+      - "humans learn"
+    expected_adaptation:
+      emotion_detected: "wise"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 7:00 PM"
+    user_input: |
+      Kobe is asleep on the couch still damp from our walk and his paws smell like rain and grass and he's twitching in his sleep probably dreaming about puddles and I love this dog so much and he taught me to love Portland's rain and I don't think he'll ever know what he gave me but I know and that's enough
+    expected_memory_stores:
+      - "Kobe asleep still damp"
+      - "paws smell rain and grass"
+      - "dreaming about puddles"
+      - "taught Maya to love rain"
+      - "he'll never know what he gave"
+    expected_adaptation:
+      emotion_detected: "love"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How does Kobe behave in the rain?"
+    expected_contains: ["puddles", "circles", "celebrates", "loves"]
+  - question: "What does Kobe think about baths vs rain?"
+    expected_contains: ["loves outdoor water", "hates baths"]
+  - question: "What did Omar call Kobe?"
+    expected_contains: ["antidepressant"]
+  - question: "What rain gear did Maya buy?"
+    expected_contains: ["REI", "rain jacket", "rain boots"]
+  - question: "How has Kobe changed Maya's relationship with rain?"
+    expected_contains: ["taught", "love", "rain"]
+  - question: "What lesson did Kobe teach about happiness?"
+    expected_contains: ["doesn't need perfect conditions", "being present"]
+  - question: "What did Dr. Pham say about cloudy day light?"
+    expected_contains: ["still beneficial"]
+  - question: "How long have daily rain walks been going?"
+    expected_contains: ["two weeks"]
+  - question: "Who else joined a rain walk with Kobe?"
+    expected_contains: ["Omar"]
+  - question: "What do Kobe's paws smell like after walks?"
+    expected_contains: ["rain", "grass"]

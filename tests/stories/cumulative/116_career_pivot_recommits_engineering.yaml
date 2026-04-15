@@ -1,0 +1,210 @@
+story_id: 116
+story_name: "Recommits to Engineering with Human Focus"
+category: "Career"
+description: |
+  Tests whether the system captures Maya's recommitment to engineering with a new lens,
+  her refined understanding of what kind of engineering she wants, and connections to
+  the mentoring and UX exploration threads.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00am"
+    user_input: |
+      walked into work today and felt different. like I still wanna be an engineer but now I know WHY I wanna be an engineer and it's not because I love algorithms or whatever it's because I love building things that make people's lives easier
+    expected_memory_stores:
+      - "recommitment"
+      - "engineering with purpose"
+      - "building for people"
+      - "clarity"
+    expected_triples:
+      - ["user", "recommitted_to", "engineering"]
+      - ["user", "motivated_by", "building things that make people's lives easier"]
+      - ["user", "has_emotion", "resolved"]
+    expected_adaptation:
+      emotion_detected: "resolved"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 11:00am"
+    user_input: |
+      told Aisha about my whole career exploration journey over coffee and she was like wow I didn't know you were going through all that. and I said yeah well you were going through your own stuff too, we were both figuring things out at the same time
+    expected_memory_stores:
+      - "shared with Aisha"
+      - "parallel growth"
+      - "mutual discovery"
+    expected_triples:
+      - ["user", "shared", "career exploration journey with Aisha"]
+      - ["user", "realized", "both she and Aisha were figuring things out simultaneously"]
+      - ["user", "has_emotion", "connected"]
+    expected_adaptation:
+      emotion_detected: "connected"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 2:00pm"
+    user_input: |
+      started making notes for my internal tool team proposal. if I'm gonna pitch this to Sam I need to have like a real business case. cost savings from reducing tool fragmentation, productivity gains, happier employees, less turnover maybe
+    expected_memory_stores:
+      - "proposal notes"
+      - "business case"
+      - "cost savings"
+      - "productivity gains"
+      - "Sam pitch"
+    expected_triples:
+      - ["user", "writing", "business case for internal tool team proposal"]
+      - ["user", "plans_to_pitch", "internal tool team to Sam"]
+      - ["user", "arguing", "cost savings and productivity gains from reducing tool fragmentation"]
+      - ["user", "has_emotion", "focused"]
+    expected_adaptation:
+      emotion_detected: "focused"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 5:00pm"
+    user_input: |
+      Rachel Ford from UX actually pinged me on Slack and said hey after your shadow day I had an idea, what if engineering and UX co-owned an internal tools project? like a collab. I was like... that's exactly what I've been thinking about
+    expected_memory_stores:
+      - "Rachel Ford message"
+      - "co-owned project"
+      - "engineering UX collaboration"
+      - "aligned thinking"
+    expected_triples:
+      - ["Rachel Ford", "proposed", "engineering and UX co-own internal tools project"]
+      - ["Rachel Ford", "aligned_with", "user's internal tools vision"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 10:00am"
+    user_input: |
+      met with Rachel Ford for coffee to talk about the internal tools idea and she's totally on board. she said the UX team has been asking for better tools for literally two years and nobody listens. she'd vouch for the proposal if I make one
+    expected_memory_stores:
+      - "Rachel Ford meeting"
+      - "UX team needs"
+      - "two years asking"
+      - "will vouch"
+    expected_triples:
+      - ["Rachel Ford", "supports", "user's internal tools proposal"]
+      - ["UX team", "has_needed", "better tools for two years"]
+      - ["Rachel Ford", "will_vouch", "for the proposal"]
+      - ["user", "has_emotion", "validated"]
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 12:00pm"
+    user_input: |
+      Julian did a freelance project for some startup last year where he basically redesigned their internal dashboard and he said it was the most impactful thing he's ever designed because the people using it every day were SO grateful. he gets it
+    expected_memory_stores:
+      - "Julian freelance dashboard"
+      - "startup project"
+      - "internal tools impact"
+      - "gratitude from users"
+    expected_triples:
+      - ["Julian", "redesigned", "internal dashboard for a startup last year"]
+      - ["Julian", "experienced", "gratitude from daily users of internal tools"]
+      - ["user", "has_emotion", "connected"]
+    expected_adaptation:
+      emotion_detected: "connected"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 2:00pm"
+    user_input: |
+      what was the name of the startup Julian redesigned the dashboard for
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 4:00pm"
+    user_input: |
+      Rachel Kim said she'd support the proposal too and even offered to co-present with me to Sam. she said having a manager sponsor would carry more weight. she's honestly been such a good manager through this whole thing
+    expected_memory_stores:
+      - "Rachel Kim support"
+      - "co-present to Sam"
+      - "manager sponsor"
+      - "good manager"
+    expected_triples:
+      - ["Rachel Kim", "offered", "to co-present proposal to Sam"]
+      - ["Rachel Kim", "provides", "manager sponsorship for proposal"]
+      - ["user", "appreciates", "Rachel Kim as a good manager"]
+      - ["user", "has_emotion", "grateful"]
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 7:00pm"
+    user_input: |
+      writing the proposal tonight. Julian's helping with the visual design again because apparently my slides look like they were made by a robot which rude but fair. Kobe's asleep on the couch as usual
+    expected_memory_stores:
+      - "proposal writing"
+      - "Julian design help"
+      - "slide design"
+      - "Kobe sleeping"
+    expected_triples:
+      - ["user", "writing", "proposal tonight"]
+      - ["Julian", "helping_with", "visual design of proposal slides"]
+      - ["user", "has_emotion", "determined"]
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 11:00pm"
+    user_input: |
+      proposal is done. twelve slides. title is Building the Builder's Tools: A Case for an Internal Platform Team at Conduit. Julian says the title is too long but I like it. sending it to Rachel Kim for review tomorrow
+    expected_memory_stores:
+      - "proposal completed"
+      - "twelve slides"
+      - "Internal Platform Team"
+      - "Conduit"
+      - "Rachel Kim review"
+    expected_triples:
+      - ["user", "completed", "proposal with twelve slides"]
+      - ["proposal", "titled", "Building the Builder's Tools: A Case for an Internal Platform Team at Conduit"]
+      - ["user", "sending_to", "Rachel Kim for review"]
+      - ["user", "has_emotion", "accomplished"]
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya proposing at Conduit?"
+    expected_contains: ["internal", "tool", "team", "platform"]
+  - question: "Who is supporting Maya's proposal?"
+    expected_contains: ["Rachel Kim", "Rachel Ford"]
+  - question: "What is the title of Maya's proposal?"
+    expected_contains: ["Building the Builder's Tools"]
+  - question: "How many slides is the proposal?"
+    expected_contains: ["twelve"]
+  - question: "Why does Maya want to stay in engineering?"
+    expected_contains: ["building", "people", "easier"]
+  - question: "What did Rachel Ford offer to do?"
+    expected_contains: ["vouch"]
+  - question: "What role did Julian play in the proposal?"
+    expected_contains: ["visual design", "slides"]
+  - question: "How long has the UX team wanted better tools?"
+    expected_contains: ["two years"]
+  - question: "What kind of collaboration does Rachel Ford want?"
+    expected_contains: ["engineering", "UX", "co-owned"]
+  - question: "What did Rachel Kim offer to do for the pitch?"
+    expected_contains: ["co-present", "Sam"]

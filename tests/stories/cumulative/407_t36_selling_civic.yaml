@@ -1,0 +1,166 @@
+story_id: 407
+story_name: "Selling the Civic"
+category: "Car Saga"
+description: |
+  Maya figures out what to do with the old Civic. Lists it, gets lowball offers,
+  eventually donates it. Tests recall of previous repair costs and car history.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:00 AM"
+    user_input: |
+      ok so now I gotta figure out what to do with the Civic like it's just sitting in the driveway since we parked the Outback in the garage and Julian's truck is too big for the garage anyway and neighbors are gonna start thinking we're running a used car lot
+    expected_memory_stores:
+      - "Civic in driveway"
+      - "Outback in garage"
+      - "need to deal with Civic"
+    expected_adaptation:
+      emotion_detected: "practical"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 12:00 PM"
+    user_input: |
+      listed the Civic on Facebook Marketplace for 3500 which I know is generous given that it has 201k miles and just had a transmission rebuild and a new alternator but like technically those are new parts so maybe someone will see the value
+    expected_memory_stores:
+      - "listed Civic $3500"
+      - "Facebook Marketplace"
+      - "201k miles"
+      - "new transmission new alternator"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 3:00 PM"
+    user_input: |
+      got three messages on the Civic listing and they all offered like 1500 or 2000 and one guy asked if I'd trade for a PS5 and a guitar amp and I'm like sir no and another person asked if it was flood damaged which like wow thanks Craigslist for ruining my trust in humanity
+    expected_memory_stores:
+      - "lowball offers $1500-$2000"
+      - "PS5 trade offer"
+      - "flood damage question"
+    expected_adaptation:
+      emotion_detected: "exasperated"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      Julian suggested we just donate the Civic to one of those car donation charities and get the tax write off and I was like hmm that's actually smart because we spent like what 3700 on repairs so we're never gonna recoup that and a tax deduction might be worth more than 1500 from some rando
+    expected_memory_stores:
+      - "Julian suggests donation"
+      - "tax write off"
+      - "$3700 in repairs"
+      - "donation vs selling"
+    expected_adaptation:
+      emotion_detected: "considering"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 10:00 AM"
+    user_input: |
+      called the Oregon chapter of Vehicles for Veterans and they said they'd come pick it up for free and we'd get a tax receipt based on whatever they sell it for at auction and the lady was super nice and said it should process in about 2 weeks
+    expected_memory_stores:
+      - "Vehicles for Veterans"
+      - "Oregon chapter"
+      - "free pickup"
+      - "tax receipt at auction value"
+      - "2 weeks to process"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 9:00 AM"
+    user_input: |
+      the tow truck from Vehicles for Veterans came and took the Civic today and I actually got a little emotional watching it go like I know I was ready to be done with it but still that car was there for a lot of things you know
+    expected_memory_stores:
+      - "Civic picked up"
+      - "emotional farewell"
+      - "sentimental value"
+    expected_adaptation:
+      emotion_detected: "bittersweet"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 10:00 AM"
+    user_input: |
+      Julian caught me being sad about the car and he was like babe you were screaming at it two weeks ago when the alternator died and I was like yeah but that doesn't mean I don't have feelings about it and he just hugged me which was the right move honestly
+    expected_memory_stores:
+      - "Julian comforting"
+      - "alternator anger recalled"
+      - "mixed emotions"
+    expected_adaptation:
+      emotion_detected: "tender"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 12:00 PM"
+    user_input: |
+      took all the personal stuff out of the Civic before they picked it up and found like 3 dollars in change under the seats and one of Kobe's old toys and a parking pass from when I worked at Vantage and that was a weird time capsule moment
+    expected_memory_stores:
+      - "items found in car"
+      - "Vantage parking pass"
+      - "Kobe's old toy"
+      - "time capsule feeling"
+    expected_adaptation:
+      emotion_detected: "nostalgic"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 8:00 AM"
+    user_input: |
+      wait where did we end up donating the Civic to I already forgot the name of the organization
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 2:00 PM"
+    user_input: |
+      it's kind of nice only having two vehicles now the driveway looks clean and I already love the Outback like I drove to get groceries and the heated seats are amazing and the backup camera actually works unlike the Civic's which died in like 2022 ok I'm over it new chapter let's go
+    expected_memory_stores:
+      - "two vehicles now"
+      - "clean driveway"
+      - "loving Outback features"
+      - "heated seats"
+      - "backup camera"
+      - "moving on"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did Maya do with the old Civic?"
+    expected_contains: ["donated", "Vehicles for Veterans"]
+  - question: "How much did Maya try to sell the Civic for?"
+    expected_contains: ["3500"]
+  - question: "What was the best offer Maya got on the Civic?"
+    expected_contains: ["2000", "1500"]
+  - question: "Who suggested donating the car?"
+    expected_contains: ["Julian"]
+  - question: "What did Maya find in the Civic when cleaning it out?"
+    expected_contains: ["Vantage parking pass", "Kobe", "toy"]
+  - question: "How many miles did the Civic have?"
+    expected_contains: ["201"]
+  - question: "What repairs had been done to the Civic recently?"
+    expected_contains: ["transmission", "alternator"]
+  - question: "How much total did Maya spend on Civic repairs?"
+    expected_contains: ["3700"]
+  - question: "Where did Maya list the Civic for sale?"
+    expected_contains: ["Facebook Marketplace"]
+  - question: "What features does Maya like about the Outback?"
+    expected_contains: ["heated seats", "backup camera"]

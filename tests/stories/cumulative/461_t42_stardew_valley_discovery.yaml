@@ -1,0 +1,176 @@
+story_id: 461
+story_name: "Stardew Valley Discovery"
+category: "Gaming"
+description: |
+  Tests memory of Maya discovering Stardew Valley as stress relief.
+  Establishes initial gaming habit, motivation for playing.
+  Verifies emotional context and cross-thread references to work stress.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      so Lily Tran at work was telling me about this game called Stardew Valley and she said it's like the most relaxing thing ever and I was like what is it and she said you farm and you fish and you talk to villagers and I was like that sounds boring but she insisted so I downloaded it on my laptop tonight for like fifteen bucks
+    expected_memory_stores:
+      - "Stardew Valley"
+      - "Lily Tran recommended"
+      - "farming fishing game"
+      - "downloaded on laptop"
+      - "fifteen dollars"
+    expected_adaptation:
+      emotion_detected: "curious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 9:30 PM"
+    user_input: |
+      okay so I've been playing for like an hour and a half and um I get it now like you just plant things and water them and the music is so calming and there's this whole little town with characters and I named my farm Kobe Farm obviously and Julian walked by and was like what are you playing and I said don't judge me
+    expected_memory_stores:
+      - "played hour and a half"
+      - "planting watering"
+      - "calming music"
+      - "named farm Kobe Farm"
+      - "Julian noticed"
+    expected_adaptation:
+      emotion_detected: "relaxed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 11:15 PM"
+    user_input: |
+      its 11 PM and I'm still playing and Julian went to bed like an hour ago and I keep saying one more day in the game just one more day but then it becomes three more days and I just I really needed this honestly work has been so stressful with the Conduit AI deadlines and the climbing gym has been closed for renovation so I haven't had my usual stress outlet
+    expected_memory_stores:
+      - "playing until 11 PM"
+      - "one more day loop"
+      - "work stress"
+      - "Conduit AI deadlines"
+      - "climbing gym closed"
+      - "stress outlet"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 7:00 AM"
+    user_input: |
+      okay so I stayed up until like 1 AM playing Stardew and I'm exhausted but I don't care because my virtual parsnips grew overnight and I'm unreasonably excited about it and Julian said at breakfast that I have a problem already and I was like no this is self care and he just shook his head
+    expected_memory_stores:
+      - "stayed up until 1 AM"
+      - "parsnips grew"
+      - "Julian says problem"
+      - "Maya calls it self care"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 12:30 PM"
+    user_input: |
+      I'm literally thinking about my Stardew farm during my lunch break at work and I told Lily it's her fault and she laughed and said everyone gets addicted the first week and Sam Okafor overheard and said he played it for 200 hours which is insane but also I can see how honestly and Danny Ruiz was like isn't that the farming game and I said it's a LIFESTYLE Danny
+    expected_memory_stores:
+      - "thinking about farm at work"
+      - "told Lily"
+      - "Sam Okafor 200 hours"
+      - "Danny Ruiz"
+      - "lifestyle comment"
+    expected_adaptation:
+      emotion_detected: "enthusiastic"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 6:00 PM"
+    user_input: |
+      rushed home to play more which is embarrassing but whatever and I figured out fishing which is like this mini game and it's actually hard and I'm terrible at it and also I found a mine where you fight monsters and it's not just farming there's so much to do and I should probably practice guitar tonight but I just wanna play one more hour
+    expected_memory_stores:
+      - "rushed home to play"
+      - "fishing mini game"
+      - "mine monsters"
+      - "guitar practice skipped"
+    expected_adaptation:
+      emotion_detected: "obsessed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 8:30 PM"
+    user_input: |
+      Julian just sat down next to me and watched me play for like 20 minutes and he goes this actually looks pretty fun and I was like DO YOU WANT TO PLAY and he said maybe and I looked it up and there's a co-op mode where we can play together and I'm like this is happening this is definitely happening
+    expected_memory_stores:
+      - "Julian watched"
+      - "Julian interested"
+      - "co-op mode"
+      - "plan to play together"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 9:00 PM"
+    user_input: |
+      what game did Lily recommend that I've been playing
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 10:00 PM"
+    user_input: |
+      so I'm at like 15 hours already in two days which is probably too much but Dr Tate always says I need to find things that calm my nervous system and this literally does that like my heart rate goes down when I play and the music is so soothing and I don't think about work or wedding planning or any of it
+    expected_memory_stores:
+      - "15 hours in two days"
+      - "Dr Tate advice"
+      - "calming nervous system"
+      - "heart rate down"
+      - "escape from stress"
+      - "wedding planning stress"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 11:30 PM"
+    user_input: |
+      Julian fell asleep on the couch while I was playing and Kobe is on his lap and I just took the cutest photo and texted it to Jenny and she was like you guys are disgusting and also what game is that and I told her and she downloaded it too and now I've created a monster honestly this game is taking over everyone's lives
+    expected_memory_stores:
+      - "Julian asleep on couch"
+      - "Kobe on Julian's lap"
+      - "photo to Jenny"
+      - "Jenny downloaded game"
+      - "spreading to friends"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who recommended Stardew Valley to Maya?"
+    expected_contains: ["Lily Tran"]
+  - question: "What did Maya name her farm in Stardew Valley?"
+    expected_contains: ["Kobe Farm"]
+  - question: "How many hours did Sam Okafor play Stardew Valley?"
+    expected_contains: ["200"]
+  - question: "Why does Maya find Stardew Valley therapeutic?"
+    expected_contains: ["calm", "stress", "relax"]
+  - question: "Does Stardew Valley have co-op mode?"
+    expected_contains: ["co-op", "together"]
+  - question: "How much did Stardew Valley cost?"
+    expected_contains: ["fifteen"]
+  - question: "Who else downloaded Stardew Valley after Maya?"
+    expected_contains: ["Jenny"]
+  - question: "What activities can you do in Stardew Valley?"
+    expected_contains: ["farm", "fish", "mine"]
+  - question: "What was closed that left Maya without a stress outlet?"
+    expected_contains: ["climbing gym"]
+  - question: "What did Dr. Tate say about Maya's nervous system?"
+    expected_contains: ["calm", "nervous system"]

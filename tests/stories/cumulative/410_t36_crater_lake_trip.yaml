@@ -1,0 +1,177 @@
+story_id: 410
+story_name: "Crater Lake Road Trip"
+category: "Car Saga"
+description: |
+  The actual Crater Lake trip. Maya, Julian, and Kobe's first road trip in the Outback.
+  Culmination of the car saga arc. Tests temporal sequencing and emotional arc completion.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 9:45 PM"
+    user_input: |
+      WE MADE IT oh my god the drive was so smooth Stella handled everything beautifully and the cabin is tiny but cute and Kobe immediately found the one rug and claimed it as his bed and Julian is making coffee on the camp stove at 10pm because he's Julian
+    expected_memory_stores:
+      - "arrived Crater Lake"
+      - "cabin cute but tiny"
+      - "Kobe on rug"
+      - "Julian making coffee"
+      - "Stella drove well"
+    expected_adaptation:
+      emotion_detected: "elated"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 7:00 AM"
+    user_input: |
+      ok so I woke up and stepped outside the cabin and I can see the lake from here and I literally gasped like the photos do not do it justice it's the bluest water I've ever seen in my life and it's so quiet up here just birds and wind and I almost cried which is embarrassing but like wow
+    expected_memory_stores:
+      - "first view of Crater Lake"
+      - "bluest water"
+      - "emotional reaction"
+      - "quiet peaceful"
+    expected_adaptation:
+      emotion_detected: "awestruck"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 10:00 AM"
+    user_input: |
+      did the Garfield Peak trail this morning it's like 3.5 miles round trip and the views from the top are insane you can see the whole lake and Wizard Island and Kobe was in heaven just sniffing everything and Julian carried him over a snow patch which was hilarious because Kobe weighs like 70 pounds
+    expected_memory_stores:
+      - "Garfield Peak trail"
+      - "3.5 miles round trip"
+      - "Wizard Island view"
+      - "snow patches"
+      - "Julian carried Kobe"
+      - "Kobe 70 pounds"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 1:00 PM"
+    user_input: |
+      had lunch at the Rim Village cafe which was overpriced but whatever and then we tried to do the Rim Drive but only the east side is open the west side is still closed for snow which sucks but the east side alone was stunning like every pullout has a different view of the lake
+    expected_memory_stores:
+      - "Rim Village cafe"
+      - "Rim Drive east side only"
+      - "west side closed snow"
+      - "stunning views"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 4:00 PM"
+    user_input: |
+      Julian brought his camera and he's been taking like 400 photos and he got this one of me and Kobe sitting on a rock with the lake behind us and it's actually gorgeous like he sent it to me and I immediately made it my phone wallpaper my mom is going to love this one
+    expected_memory_stores:
+      - "Julian photography"
+      - "photo Maya and Kobe with lake"
+      - "new phone wallpaper"
+      - "sending to Vivian"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 7:00 PM"
+    user_input: |
+      made dinner at the cabin tonight Julian grilled burgers on the camp stove and I made a salad from stuff we brought and we sat outside and watched the sunset over the rim and the sky turned like this crazy orange and purple and Julian said this is why we got the car and I was like ok yeah it is
+    expected_memory_stores:
+      - "cabin dinner"
+      - "Julian grilled burgers"
+      - "sunset over rim"
+      - "orange and purple sky"
+      - "Outback justified"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 9:00 PM"
+    user_input: |
+      the stars out here are UNREAL like I grew up near Seattle and live in Portland so I never see stars like this and Julian pointed out the Milky Way and I was like that's the actual Milky Way and he was like yeah babe and Kobe was just lying between us looking up too even though he probably doesn't care about stars
+    expected_memory_stores:
+      - "stargazing"
+      - "Milky Way visible"
+      - "no light pollution"
+      - "Kobe between them"
+    expected_adaptation:
+      emotion_detected: "wonder"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 8:00 AM"
+    user_input: |
+      last morning at the lake and we did the Sun Notch trail which is shorter just like a mile but it has this view down to the Phantom Ship which is this little island that looks like a ship and Kobe tried to go off trail to chase a chipmunk and I had to hold on for dear life
+    expected_memory_stores:
+      - "Sun Notch trail"
+      - "one mile"
+      - "Phantom Ship view"
+      - "Kobe chased chipmunk"
+    expected_adaptation:
+      emotion_detected: "lighthearted"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 11:00 AM"
+    user_input: |
+      packing up the cabin and heading home now and I feel like recharged you know like I didn't realize how much I needed this just getting out of Portland and breathing real air and being with Julian without screens or work or stress just us and the dog and a lake
+    expected_memory_stores:
+      - "packing up leaving"
+      - "feeling recharged"
+      - "needed the trip"
+      - "quality time"
+      - "no screens or work"
+    expected_adaptation:
+      emotion_detected: "refreshed"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 4:30 PM"
+    user_input: |
+      home now Kobe passed out immediately on his bed and Julian is already looking at where we should go next he's talking about like Mount Hood and the coast and Bend and I'm like slow down we just got back but honestly the Outback makes me want to go everywhere like I went from dreading car stuff to being excited about driving which is kind of the whole point right full circle
+    expected_memory_stores:
+      - "home safely"
+      - "Kobe exhausted"
+      - "Julian planning next trips"
+      - "Mount Hood coast Bend"
+      - "full circle car saga"
+      - "excitement about driving"
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What trails did Maya and Julian do at Crater Lake?"
+    expected_contains: ["Garfield Peak", "Sun Notch"]
+  - question: "What landmark did they see from Sun Notch?"
+    expected_contains: ["Phantom Ship"]
+  - question: "Was the Rim Drive fully open?"
+    expected_contains: ["east side", "west", "closed", "snow"]
+  - question: "What special moment did they have Saturday evening?"
+    expected_contains: ["sunset", "stars", "Milky Way"]
+  - question: "What photo did Julian take that Maya loved?"
+    expected_contains: ["Maya", "Kobe", "lake", "rock"]
+  - question: "How did Kobe behave on the trails?"
+    expected_contains: ["chipmunk", "chased"]
+  - question: "Where does Maya want to go next in the Outback?"
+    expected_contains: ["Mount Hood", "coast", "Bend"]
+  - question: "How does Maya feel about the car purchase now?"
+    expected_contains: ["full circle", "excited", "worth it"]
+  - question: "What did they name the Outback?"
+    expected_contains: ["Stella"]
+  - question: "Where did they stay at Crater Lake?"
+    expected_contains: ["Mazama Village", "cabin"]

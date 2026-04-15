@@ -1,0 +1,180 @@
+story_id: 245
+story_name: "Learning CBT Tools"
+category: "Mental Health"
+description: |
+  Tests system tracking therapy techniques and their application. Maya learns specific
+  CBT tools and starts using them in daily life. Verifies skill acquisition tracking.
+duration_simulated: "4 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 3:30 PM"
+    user_input: |
+      Dr. Tate taught me this thing today called cognitive restructuring where you take an automatic negative thought like I'm going to get fired and you evaluate the evidence for it and against it and then create a more realistic thought and it sounds so simple but it's actually powerful
+    expected_memory_stores:
+      - "cognitive restructuring"
+      - "automatic negative thought"
+      - "evaluate evidence"
+      - "realistic thought"
+      - "powerful"
+    expected_adaptation:
+      emotion_detected: "engaged"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 8:00 AM"
+    user_input: |
+      used cognitive restructuring this morning when I woke up anxious about work the automatic thought was everyone thinks I'm incompetent and the evidence against was Priya said my last two weeks have been solid and Leon asked for my help yesterday and the realistic thought was I'm competent and improving
+    expected_memory_stores:
+      - "applied cognitive restructuring"
+      - "automatic thought incompetent"
+      - "evidence Priya positive"
+      - "Leon asked for help"
+      - "realistic competent improving"
+    expected_adaptation:
+      emotion_detected: "empowered"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 5:00 PM"
+    user_input: |
+      Dr. Tate also taught me grounding and it's this 5-4-3-2-1 thing where you name five things you can see four you can hear three you can touch two you can smell and one you can taste and it pulls you out of anxious spiraling into the present moment
+    expected_memory_stores:
+      - "grounding technique"
+      - "5-4-3-2-1"
+      - "five see four hear"
+      - "three touch two smell"
+      - "one taste"
+      - "present moment"
+    expected_adaptation:
+      emotion_detected: "learning"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 10:00 AM"
+    user_input: |
+      had a minor anxiety moment this morning when I saw an email from Priya on my phone and before I even opened it my heart started racing and I did the grounding thing five things I see coffee mug Kobe window tree grandpa's watch and by the time I got to three things I touch I was calm enough to open the email which was just a standup reminder
+    expected_memory_stores:
+      - "anxiety moment"
+      - "email from Priya"
+      - "heart racing"
+      - "used grounding"
+      - "coffee Kobe window tree watch"
+      - "calm enough"
+      - "just standup reminder"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 12:00 PM"
+    user_input: |
+      told Clara about the CBT tools and she said oh yeah cognitive behavioral therapy is evidence based and she sees it work with patients at the hospital and she said the grounding one is especially good for acute anxiety and I was like look at us using our clinical vocabularies
+    expected_memory_stores:
+      - "Clara approves CBT"
+      - "evidence based"
+      - "hospital patients"
+      - "grounding for acute anxiety"
+      - "clinical vocabulary joke"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 3:00 PM"
+    user_input: |
+      what CBT techniques has Dr. Tate taught me so far
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 2:00 PM"
+    user_input: |
+      another technique she taught me is called behavioral activation where when you're feeling low instead of withdrawing you do something small and achievable like take a walk or text a friend or cook a meal and it breaks the withdrawal cycle
+    expected_memory_stores:
+      - "behavioral activation"
+      - "feeling low"
+      - "instead of withdrawing"
+      - "small achievable action"
+      - "walk text cook"
+      - "breaks withdrawal cycle"
+    expected_adaptation:
+      emotion_detected: "understanding"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      used behavioral activation today when I felt the afternoon slump hitting hard and instead of spiraling on the couch I put on shoes and walked Kobe around the block and by the time I got back I felt like a different person and I texted Dr. Tate to say it worked and she sent a smiley face
+    expected_memory_stores:
+      - "used behavioral activation"
+      - "afternoon slump"
+      - "walked Kobe"
+      - "felt different"
+      - "texted Dr. Tate"
+      - "it worked"
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 3:00 PM"
+    user_input: |
+      Dr. Tate said I'm a really fast learner with the CBT tools and she said most people take weeks to internalize them but I'm already using them automatically and she thinks it's because I'm an engineer and my brain likes systems and frameworks and I was like ok that makes total sense actually
+    expected_memory_stores:
+      - "fast learner"
+      - "using automatically"
+      - "engineer brain"
+      - "likes systems frameworks"
+      - "Dr. Tate impressed"
+    expected_adaptation:
+      emotion_detected: "pleased"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 8:00 PM"
+    user_input: |
+      Julian noticed I'm doing the grounding thing sometimes like he caught me quietly counting things I can see during a stressful commercial and he said is that the therapy thing and I said yeah and he said can you teach me and I said YES and I taught him the 5-4-3-2-1 and he actually found it helpful
+    expected_memory_stores:
+      - "Julian noticed"
+      - "taught Julian grounding"
+      - "Julian found it helpful"
+      - "sharing tools"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What CBT techniques has Maya learned?"
+    expected_contains: ["cognitive restructuring", "grounding", "behavioral activation"]
+  - question: "What is the 5-4-3-2-1 technique?"
+    expected_contains: ["five see", "four hear", "three touch", "two smell", "one taste"]
+  - question: "How does cognitive restructuring work?"
+    expected_contains: ["automatic thought", "evidence", "realistic"]
+  - question: "What is behavioral activation?"
+    expected_contains: ["small achievable action", "instead of withdrawing"]
+  - question: "Why did Dr. Tate say Maya learns CBT fast?"
+    expected_contains: ["engineer", "systems", "frameworks"]
+  - question: "Did Maya teach Julian any techniques?"
+    expected_contains: ["yes", "grounding", "5-4-3-2-1"]
+  - question: "When did Maya use grounding successfully?"
+    expected_contains: ["email from Priya", "heart racing"]
+  - question: "When did Maya use behavioral activation?"
+    expected_contains: ["afternoon slump", "walked Kobe"]
+  - question: "What did Clara say about CBT?"
+    expected_contains: ["evidence based"]
+  - question: "Is Maya using CBT tools automatically now?"
+    expected_contains: ["yes", "automatically"]

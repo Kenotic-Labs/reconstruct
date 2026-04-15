@@ -1,0 +1,176 @@
+story_id: 400
+story_name: "Health Advocacy as Identity"
+category: "Health"
+description: |
+  Tests memory of health advocacy becoming part of Maya's core identity.
+  Caps off the health advocacy thread and connects all medical threads.
+  Story 400 milestone - Maya's advocacy arc fully realized.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00 AM"
+    user_input: |
+      so I was thinking this morning about how much has changed health-wise in like six months and it's wild like I went from someone who couldn't remember her own medications to literally managing health records for eight people and a dog
+    expected_memory_stores:
+      - "six month reflection"
+      - "couldn't remember medications"
+      - "managing eight people"
+      - "and a dog"
+      - "transformation"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:00 AM"
+    user_input: |
+      the spreadsheet has been updated 47 times since I made it which I know because Google Sheets tracks that and every update means something was caught or recorded or followed up on and that feels meaningful
+    expected_memory_stores:
+      - "47 updates"
+      - "Google Sheets tracking"
+      - "each update meaningful"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:00 AM"
+    user_input: |
+      I think the thing I'm most proud of is dad's polyp because that was literally a precancerous growth that would've kept growing if I hadn't noticed the missing colonoscopy and made him go and now he has a clean bill of health and a follow up plan
+    expected_memory_stores:
+      - "most proud of"
+      - "dad's polyp"
+      - "precancerous"
+      - "caught it"
+      - "clean bill of health"
+      - "follow up plan"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 12:00 PM"
+    user_input: |
+      mom got her mammogram follow up last week and it came back normal which is amazing and she thanked me for pushing her and said she's going to keep up with her annual screenings from now on and I put it in the calendar already
+    expected_memory_stores:
+      - "Vivian mammogram normal"
+      - "thanked Maya"
+      - "annual screenings"
+      - "calendar entry"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 1:00 PM"
+    user_input: |
+      the shellfish allergy Dr Nassif diagnosed is now fully managed with EpiPen in my bag and all my recipes adapted and the dust mites thing she found means we're getting a HEPA air filter and Julian's going to be doing more vacuuming which he's thrilled about obviously
+    expected_memory_stores:
+      - "shellfish managed"
+      - "EpiPen always carried"
+      - "recipes adapted"
+      - "dust mites HEPA filter"
+      - "Julian vacuuming"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 2:00 PM"
+    user_input: |
+      Kobe's doing great Dr Sara Mills said he's the healthiest golden retriever she's seen who had pancreatitis and his probiotic is working and his weight is stable and I now keep his next vet appointment in the same system as everyone else's
+    expected_memory_stores:
+      - "Kobe healthy"
+      - "Dr. Sara Mills review"
+      - "probiotic working"
+      - "weight stable"
+      - "integrated system"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Sam at work asked me about the health spreadsheet thing because I mentioned it casually and he said his wife's parents are aging and he could use something like that and I shared the template and he said Maya you should actually make this into a product and I was like ha ha but also hmm
+    expected_memory_stores:
+      - "Sam asked about spreadsheet"
+      - "wife's aging parents"
+      - "shared template"
+      - "make it a product"
+      - "Maya considering"
+    expected_adaptation:
+      emotion_detected: "intrigued"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 4:00 PM"
+    user_input: |
+      what are all the doctors and medical providers Maya now tracks for her family
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 5:00 PM"
+    user_input: |
+      Clara said something today that stuck with me she said Maya you've become the person our family needed without anyone asking you to be and I realize that's a pattern like with first aid and cooking and even the ML thing I just see a gap and fill it
+    expected_memory_stores:
+      - "Clara observation"
+      - "person family needed"
+      - "without being asked"
+      - "pattern across life"
+      - "see gap fill it"
+    expected_adaptation:
+      emotion_detected: "insightful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 8:00 PM"
+    user_input: |
+      Julian and I are on the couch and Kobe is sleeping and I'm looking at the spreadsheet on my phone and everything is green like all checkups current all medications documented all allergies listed and I feel this deep satisfaction that my family is taken care of and Julian said you know what you are and I said what and he said you're a builder Maya you build systems that take care of people and honestly that might be the nicest thing anyone's ever said about me
+    expected_memory_stores:
+      - "everything current green"
+      - "deep satisfaction"
+      - "family taken care of"
+      - "Julian you're a builder"
+      - "systems that take care"
+      - "nicest thing said"
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How many times has Maya's health spreadsheet been updated?"
+    expected_contains: ["47"]
+  - question: "What was the most impactful health discovery?"
+    expected_contains: ["George", "polyp", "precancerous", "colonoscopy"]
+  - question: "Did Vivian's mammogram follow-up come back normal?"
+    expected_contains: ["yes", "normal"]
+  - question: "How is Maya managing her shellfish allergy?"
+    expected_contains: ["EpiPen", "recipes adapted"]
+  - question: "Who are all Maya's doctors?"
+    expected_contains: ["Dr. Tate", "Dr. Pham", "Dr. Nassif", "Dr. Kemp"]
+  - question: "What is Kobe's current health status?"
+    expected_contains: ["healthy", "stable"]
+  - question: "Who is Kobe's vet?"
+    expected_contains: ["Dr. Sara Mills"]
+  - question: "What product idea did Sam suggest?"
+    expected_contains: ["spreadsheet", "product"]
+  - question: "What pattern did Clara identify in Maya?"
+    expected_contains: ["see gap", "fill it", "without being asked"]
+  - question: "What did Julian call Maya?"
+    expected_contains: ["builder", "systems", "take care"]

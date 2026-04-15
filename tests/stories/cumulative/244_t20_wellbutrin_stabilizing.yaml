@@ -1,0 +1,186 @@
+story_id: 244
+story_name: "Wellbutrin Stabilizing"
+category: "Mental Health"
+description: |
+  Tests medication correction tracking. Maya starts Wellbutrin and gradually stabilizes.
+  Verifies system tracks medication changes and positive response over time.
+duration_simulated: "3 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 8:00 AM"
+    user_input: |
+      first day of Wellbutrin and I'm cautiously optimistic because Dr. Tate said this one works on dopamine and norepinephrine instead of serotonin so the mechanism is totally different and she said give it two weeks minimum before judging
+    expected_memory_stores:
+      - "first day Wellbutrin"
+      - "dopamine norepinephrine"
+      - "different mechanism"
+      - "two weeks minimum"
+    expected_triples:
+      - ["user", "started_medication", "Wellbutrin"]
+      - ["Wellbutrin", "works_on", "dopamine and norepinephrine"]
+      - ["Dr. Tate", "advised", "two weeks minimum before judging"]
+      - ["user", "has_emotion", "cautiously optimistic"]
+    expected_adaptation:
+      emotion_detected: "cautious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 9:00 AM"
+    user_input: |
+      day three of Wellbutrin and no nausea which is already better than Lexapro and I actually feel like myself like I woke up and was annoyed at the alarm which sounds bad but compared to feeling nothing about everything it's great
+    expected_memory_stores:
+      - "day three"
+      - "no nausea"
+      - "better than Lexapro"
+      - "feeling like myself"
+      - "annoyed at alarm"
+      - "feeling anything is good"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Week 1 Thursday 3:00 PM"
+    user_input: |
+      session with Dr. Tate and she asked about the Wellbutrin and I said so far so good no major side effects and she said good and she also said she wants to refine the diagnosis because she's not sure it's GAD she thinks it might be adjustment disorder since it's tied to specific life events rather than generalized
+    expected_memory_stores:
+      - "therapy session"
+      - "Wellbutrin update positive"
+      - "diagnosis refinement"
+      - "not GAD"
+      - "adjustment disorder"
+      - "tied to specific events"
+      - "correction"
+    expected_adaptation:
+      emotion_detected: "interested"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Week 2 Monday 7:00 AM"
+    user_input: |
+      two weeks in and I think the Wellbutrin is working like I have more energy in the morning and the racing thoughts before bed are way less and I actually slept through the night twice this week which hasn't happened in like a month
+    expected_memory_stores:
+      - "two weeks in"
+      - "Wellbutrin working"
+      - "more energy"
+      - "racing thoughts reduced"
+      - "slept through night"
+      - "twice this week"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Week 2 Thursday 3:00 PM"
+    user_input: |
+      Dr. Tate is really happy with the progress and she said the adjustment disorder diagnosis fits better because my anxiety is a response to accumulated stressors not a chronic baseline condition and that actually makes me feel better because it means this is situational not permanent
+    expected_memory_stores:
+      - "Dr. Tate happy"
+      - "adjustment disorder confirmed"
+      - "not GAD correction"
+      - "situational not permanent"
+      - "accumulated stressors"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Week 3 Monday 9:00 AM"
+    user_input: |
+      what medication am I on now and what's my current diagnosis
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Week 3 Tuesday 6:00 PM"
+    user_input: |
+      the Wellbutrin has been really good like I'm three weeks in now and the anxiety is so much more manageable and I had a stressful meeting at work about the PIP progress and instead of spiraling I just felt the stress and then it passed and that's HUGE for me
+    expected_memory_stores:
+      - "three weeks"
+      - "anxiety manageable"
+      - "PIP meeting"
+      - "stress passed"
+      - "didn't spiral"
+      - "huge progress"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Week 3 Wednesday 8:00 PM"
+    user_input: |
+      Julian said he can see the difference in me like I'm laughing more and sleeping better and I'm not checking my email at 2 am anymore and he said whatever combination of therapy and Wellbutrin is working don't stop and I said I won't
+    expected_memory_stores:
+      - "Julian sees difference"
+      - "laughing more"
+      - "sleeping better"
+      - "no 2am email checking"
+      - "therapy plus Wellbutrin"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Week 3 Thursday 3:00 PM"
+    user_input: |
+      Dr. Tate said the six week mark is when Wellbutrin reaches its full therapeutic effect and we're at three weeks and already seeing improvement so she's optimistic and she said we'll reassess at six weeks about the long term plan
+    expected_memory_stores:
+      - "six week full effect"
+      - "three weeks now"
+      - "already improving"
+      - "Dr. Tate optimistic"
+      - "reassess at six weeks"
+    expected_adaptation:
+      emotion_detected: "encouraged"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Week 3 Sunday 9:00 PM"
+    user_input: |
+      for the first time in weeks I feel like the ground is solid under me again like things aren't spinning and I'm not drowning and I can think clearly and I know there's still work to do but I feel like I'm going to be ok and that's not nothing
+    expected_memory_stores:
+      - "ground solid again"
+      - "not spinning"
+      - "not drowning"
+      - "thinking clearly"
+      - "going to be ok"
+      - "still work to do"
+    expected_adaptation:
+      emotion_detected: "stabilizing"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What medication is Maya currently on?"
+    expected_contains: ["Wellbutrin", "150mg"]
+  - question: "What is Maya's current diagnosis?"
+    expected_contains: ["adjustment disorder"]
+  - question: "Was the original GAD diagnosis changed?"
+    expected_contains: ["yes", "adjustment disorder"]
+  - question: "How has Wellbutrin compared to Lexapro?"
+    expected_contains: ["better", "no nausea", "no flat affect"]
+  - question: "How long until Wellbutrin reaches full effect?"
+    expected_contains: ["six weeks"]
+  - question: "What improvements has Maya noticed?"
+    expected_contains: ["energy", "sleep", "less racing thoughts"]
+  - question: "How does Julian describe the change?"
+    expected_contains: ["laughing more", "sleeping better"]
+  - question: "Why is adjustment disorder a better diagnosis than GAD?"
+    expected_contains: ["situational", "specific events", "not chronic"]
+  - question: "Is Maya spiraling from work stress anymore?"
+    expected_contains: ["no", "stress passed"]
+  - question: "When will Dr. Tate reassess the treatment plan?"
+    expected_contains: ["six weeks"]

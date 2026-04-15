@@ -1,0 +1,168 @@
+story_id: 437
+story_name: "Closing Costs Relief"
+category: "Lease Dispute"
+description: |
+  The settlement money applied to closing costs brings financial relief.
+  Cross-thread connection to house purchase and financial planning.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00 AM"
+    user_input: |
+      woke up feeling so much better about our finances like the closing costs were this cloud hanging over us ever since we bought the house and now it's basically handled we just have 600 left which Julian said we can cover from his next paycheck
+    expected_memory_stores:
+      - "financial relief"
+      - "closing cost cloud lifted"
+      - "$600 remaining"
+      - "Julian covers next paycheck"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:30 AM"
+    user_input: |
+      did a full financial review with Julian this morning and between the mortgage at 2100 the car payment at 385 and all our regular expenses we're actually in ok shape like not rich but comfortable and the closing cost thing was the last big outstanding bill
+    expected_memory_stores:
+      - "financial review"
+      - "mortgage $2100"
+      - "car payment $385"
+      - "comfortable not rich"
+      - "last big bill cleared"
+    expected_adaptation:
+      emotion_detected: "stable"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 12:00 PM"
+    user_input: |
+      funny how the deposit fight connected everything like we moved out of Westridge to buy the house and the deposit that was supposed to help with closing costs got withheld and I had to fight to get it back and then it went straight to closing costs anyway so it all came full circle
+    expected_memory_stores:
+      - "full circle realization"
+      - "Westridge to house connection"
+      - "deposit to closing costs"
+      - "everything connected"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 1:30 PM"
+    user_input: |
+      Clara asked how the money situation is and I said we're good and she was like I'm so glad because I know that was stressing you and Julian out and she said she remembers when I was panicking about the car repairs on top of the house stuff and now look at you all stable
+    expected_memory_stores:
+      - "Clara checking in"
+      - "was stressing both of them"
+      - "car repairs plus house"
+      - "now stable"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Julian made a joke about how we should send Greg Patterson a thank you card for eventually paying up and I was like Julian no and he was like just saying and I threw a pillow at him and Kobe thought it was a game and grabbed the pillow and ran
+    expected_memory_stores:
+      - "Julian joke thank you card"
+      - "Maya says no"
+      - "Kobe grabbed pillow"
+      - "playful moment"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 5:00 PM"
+    user_input: |
+      thinking about next year's budget and with the wedding coming up we need to start saving more aggressively and Julian's mom Diane Reeves offered to help with some wedding costs which was really generous and between that and the deposit being resolved I feel like we can actually afford the wedding we want
+    expected_memory_stores:
+      - "wedding budget planning"
+      - "saving more aggressively"
+      - "Diane Reeves helping costs"
+      - "can afford wedding now"
+    expected_adaptation:
+      emotion_detected: "optimistic"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 6:30 PM"
+    user_input: |
+      mom asked if we needed money for the wedding and I said we're ok now and she said Maya if you need it just ask and I said thank you mom but we're good and it's nice to be able to say that honestly instead of worrying about money constantly
+    expected_memory_stores:
+      - "Vivian offers wedding money"
+      - "Maya says they're ok"
+      - "nice to say honestly"
+      - "no longer worrying constantly"
+    expected_adaptation:
+      emotion_detected: "secure"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 7:30 PM"
+    user_input: |
+      what's our monthly mortgage and car payment again I need it for the budget spreadsheet
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 8:30 PM"
+    user_input: |
+      set up an automatic savings transfer of 500 a month into a wedding fund account and Julian matched it so we'll be putting away 1000 a month for the wedding and at that rate we'll have like 6000 saved by the time we need to pay the big vendor deposits
+    expected_memory_stores:
+      - "auto savings $500/month each"
+      - "$1000/month total"
+      - "wedding fund account"
+      - "$6000 by vendor deposits"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:00 PM"
+    user_input: |
+      you know what the whole deposit fight taught me about money is that sometimes you have to be willing to fight for what's yours like I could have just let the 1800 go and been like whatever but I didn't and that 1600 made a real tangible difference in our financial picture and that matters
+    expected_memory_stores:
+      - "lesson about fighting for money"
+      - "could have let it go"
+      - "$1600 made real difference"
+      - "tangible impact"
+    expected_adaptation:
+      emotion_detected: "wise"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How much do Maya and Julian still owe on closing costs?"
+    expected_contains: ["600"]
+  - question: "What is Maya's monthly mortgage?"
+    expected_contains: ["2100"]
+  - question: "What is Maya's car payment?"
+    expected_contains: ["385"]
+  - question: "How much are Maya and Julian saving monthly for the wedding?"
+    expected_contains: ["1000", "500 each"]
+  - question: "Who offered to help with wedding costs?"
+    expected_contains: ["Diane Reeves", "Julian's mom"]
+  - question: "How does Maya feel about their finances now?"
+    expected_contains: ["comfortable", "stable", "ok"]
+  - question: "What connection did Maya see between the deposit and closing costs?"
+    expected_contains: ["full circle", "deposit went to closing costs"]
+  - question: "How much will be saved for the wedding by vendor deposit time?"
+    expected_contains: ["6000"]
+  - question: "Did Vivian offer money for the wedding?"
+    expected_contains: ["yes"]
+  - question: "What financial lesson did the deposit fight teach Maya?"
+    expected_contains: ["fight for what's yours", "made real difference"]

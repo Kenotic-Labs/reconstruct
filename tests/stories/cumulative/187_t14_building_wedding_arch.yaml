@@ -1,0 +1,184 @@
+story_id: 187
+story_name: "Building Maya's Wedding Arch"
+category: "Life Events"
+description: |
+  George builds the wedding arch for Maya and Julian. His most ambitious
+  woodworking project. Tests emotional significance tracking, craft
+  detail recording, and cross-thread connections.
+duration_simulated: "3 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 7:00 PM"
+    user_input: |
+      I asked Dad if he'd build the wedding arch and there was this long silence on the phone and I thought maybe he didn't hear me and then he said Maya I would be honored and his voice cracked and I said Dad are you crying and he said no I have sawdust in my throat and I said sure you do
+    expected_memory_stores:
+      - "George agreed to build wedding arch"
+      - "emotional reaction"
+      - "voice cracked"
+      - "denied crying"
+    expected_adaptation:
+      emotion_detected: "deeply emotional"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Sunday 10:00 AM"
+    user_input: |
+      Dad called me back this morning already with questions he said what dimensions how tall how wide what kind of wood do you want and I said Dad I trust your judgment and he said Maya this is your wedding arch I need to know your vision and I said okay it should be about 8 feet tall and wide enough for two people and simple and elegant
+    expected_memory_stores:
+      - "arch dimensions discussed"
+      - "8 feet tall"
+      - "wide enough for two"
+      - "simple and elegant"
+      - "George wants Maya's input"
+    expected_adaptation:
+      emotion_detected: "collaborative"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 7:00 PM"
+    user_input: |
+      Dad sent me his first sketch and it's this beautiful curved arch with tapered legs and a subtle carved detail at the top like a vine pattern and he said he wants to use cedar because it's light strong and has a beautiful natural grain and it'll look amazing with Diane's roses wrapped around it
+    expected_memory_stores:
+      - "arch sketch curved design"
+      - "tapered legs"
+      - "vine pattern carving"
+      - "cedar wood"
+      - "light strong beautiful grain"
+      - "compatible with Diane's roses"
+    expected_adaptation:
+      emotion_detected: "amazed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      Bill from the woodworking class is helping Dad with the arch design he said the curved top is tricky and requires steam bending which is a technique Bill specializes in so they're doing it together and Dad said Bill is as excited about this as I am and I love that Dad has a woodworking partner in crime
+    expected_memory_stores:
+      - "Bill helping with arch"
+      - "steam bending technique"
+      - "curved top tricky"
+      - "Bill specializes in steam bending"
+      - "both excited"
+    expected_adaptation:
+      emotion_detected: "pleased"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Week 2 Saturday 6:00 PM"
+    user_input: |
+      Dad's been working on the arch every day for a week and he sent progress photos the legs are done the frame is assembled and he's starting on the curved top piece and Mom said she brings him lunch in the garage and he barely stops to eat because he's so focused and she said he talks to the wood which I find hilarious and adorable
+    expected_memory_stores:
+      - "arch progress one week"
+      - "legs done frame assembled"
+      - "starting curved top"
+      - "George talks to wood"
+      - "Vivian brings lunch to garage"
+    expected_adaptation:
+      emotion_detected: "charmed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Week 2 Wednesday 7:00 PM"
+    user_input: |
+      Dad called and said Maya I want to add something and I said what and he said I want to carve your and Julian's initials into the arch with the date M and J June 22nd and I said Dad that's perfect and then he paused and said and I want to put a small symbol for my father your grandfather the man who taught me to love wood
+    expected_memory_stores:
+      - "initials M and J carved"
+      - "June 22 on arch"
+      - "grandfather's symbol"
+      - "honoring George's father"
+      - "multi-generational connection"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Week 3 Monday 8:00 PM"
+    user_input: |
+      the steam bending worked the curved top piece is done and Bill said it's one of the cleanest bends he's seen and Dad sanded it smooth and started applying the finish which is a clear coat to protect the wood while showing the natural cedar grain and he's doing three coats because he wants it perfect
+    expected_memory_stores:
+      - "steam bending successful"
+      - "Bill praised the work"
+      - "sanding and finishing"
+      - "clear coat finish"
+      - "three coats"
+      - "natural cedar grain"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Week 3 Wednesday 6:00 PM"
+    user_input: |
+      Dad carved the initials today M heart J with June 22 underneath and then on the back at the base he carved a small tree which was his father's mark his grandfather was known for the little tree he put on all his furniture in Taiwan and Dad said now my father is at your wedding too and I completely lost it
+    expected_memory_stores:
+      - "initials carved M heart J"
+      - "June 22 carved"
+      - "grandfather's tree symbol on back"
+      - "grandfather's mark from Taiwan"
+      - "grandfather present at wedding"
+      - "Maya crying"
+    expected_adaptation:
+      emotion_detected: "profoundly moved"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Week 3 Friday 5:00 PM"
+    user_input: |
+      the arch is DONE Dad sent me a video of the finished piece standing in the garage and it is stunning like genuinely museum quality the proportions are perfect the wood is warm and gorgeous the curve is graceful and you can see the vine carving at the top catching the light and Julian watched the video and said Maya your Dad built a masterpiece
+    expected_memory_stores:
+      - "arch completed"
+      - "stunning quality"
+      - "perfect proportions"
+      - "vine carving"
+      - "Julian called it masterpiece"
+    expected_adaptation:
+      emotion_detected: "awestruck"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Week 3 Saturday 9:00 AM"
+    user_input: |
+      told Diane about the arch because the roses need to wrap around it and she FaceTimed Dad to see it and she gasped and said George that is the most beautiful arch I have ever seen and Dad said thanks Diane my roses are gonna look good on your arch I mean your roses are gonna look good and Diane laughed and said George you've outdone all of us
+    expected_memory_stores:
+      - "Diane saw the arch"
+      - "Diane gasped"
+      - "Diane praised George"
+      - "roses will wrap around it"
+      - "George's joke"
+      - "both families connected through arch"
+    expected_adaptation:
+      emotion_detected: "warm joy"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who built Maya's wedding arch?"
+    expected_contains: ["George", "Dad"]
+  - question: "What wood is the arch made of?"
+    expected_contains: ["cedar"]
+  - question: "What is carved on the arch?"
+    expected_contains: ["M", "J", "initials", "June 22"]
+  - question: "What symbol did George put on the back?"
+    expected_contains: ["tree", "grandfather"]
+  - question: "Who helped George with the steam bending?"
+    expected_contains: ["Bill"]
+  - question: "How will Diane's roses work with the arch?"
+    expected_contains: ["wrap around"]
+  - question: "What finish did George use?"
+    expected_contains: ["clear coat", "three coats"]
+  - question: "What carving is at the top of the arch?"
+    expected_contains: ["vine"]
+  - question: "What is the connection to George's father?"
+    expected_contains: ["tree mark", "Taiwan", "woodworking"]
+  - question: "How did Julian react to the arch?"
+    expected_contains: ["masterpiece"]

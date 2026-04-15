@@ -1,0 +1,213 @@
+story_id: 125
+story_name: "Finding the Compromise Apartment"
+category: "Relationships"
+description: |
+  Tests whether the system tracks the apartment tour outcome, the decision to take it,
+  and the specific details of the lease signing. Includes correction on move-in date.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00am"
+    user_input: |
+      at the apartment tour at 2847 Milwaukie Ave right now and oh my god it's even better in person. the living room has these huge south-facing windows and the light is INSANE. Kobe is already sniffing everything and the landlord thinks he's adorable
+    expected_memory_stores:
+      - "apartment tour"
+      - "2847 Milwaukie Ave"
+      - "south-facing windows"
+      - "great light"
+      - "Kobe sniffing"
+      - "landlord likes Kobe"
+    expected_triples:
+      - ["user", "touring", "2847 Milwaukie Ave apartment"]
+      - ["apartment", "has_feature", "huge south-facing windows with great light"]
+      - ["Kobe", "attended", "apartment tour"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:15am"
+    user_input: |
+      the second bedroom is a good size, like 11 by 12 maybe? Julian's already pacing it out and nodding. there's a closet in there big enough for his printer and supplies. the kitchen is small but functional and it has a dishwasher which Julian says is non-negotiable
+    expected_memory_stores:
+      - "second bedroom size"
+      - "Julian design space"
+      - "closet for printer"
+      - "small kitchen"
+      - "dishwasher"
+    expected_triples:
+      - ["apartment", "has_feature", "second bedroom 11x12 fits Julian's desk"]
+      - ["apartment", "has_feature", "closet for printer and supplies"]
+      - ["apartment", "has_feature", "dishwasher"]
+      - ["Julian", "considers", "dishwasher non-negotiable"]
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 10:30am"
+    user_input: |
+      there's a little shared yard out back and the landlord says dogs are allowed in it and there's a trail to the park that's literally a 5-minute walk. Julian looked at me and goes ok yeah this is it. I almost cried lol
+    expected_memory_stores:
+      - "shared yard"
+      - "dogs allowed"
+      - "5-minute walk to park"
+      - "Julian agrees"
+      - "emotional moment"
+    expected_triples:
+      - ["apartment", "has_feature", "shared yard with dog access"]
+      - ["apartment", "has_feature", "5-minute walk to park"]
+      - ["Julian", "agreed", "this is the apartment"]
+      - ["user", "has_emotion", "joyful"]
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 11:00am"
+    user_input: |
+      we told the landlord we want it. he said there's one other couple looking at it this afternoon so we should get the application in today. we literally sat in the car and filled it out on our phones right there. Julian and I have never collaborated this fast on anything lol
+    expected_memory_stores:
+      - "applied immediately"
+      - "competition"
+      - "other couple"
+      - "car application"
+      - "fast collaboration"
+    expected_triples:
+      - ["user", "applied_for", "2847 Milwaukie Ave apartment"]
+      - ["apartment", "has_competition", "another couple looking at it"]
+      - ["user", "has_emotion", "urgent"]
+    expected_adaptation:
+      emotion_detected: "urgent"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 3:00pm"
+    user_input: |
+      LANDLORD CALLED. WE GOT IT. move in date is the 15th which gives us two weeks to pack and get ready. I'm screaming. Julian is screaming. Kobe is confused but his tail is wagging so I think he's in
+    expected_memory_stores:
+      - "apartment approved"
+      - "move-in 15th"
+      - "two weeks to pack"
+      - "celebration"
+    expected_triples:
+      - ["user", "approved_for", "2847 Milwaukie Ave apartment"]
+      - ["apartment", "has_move_in_date", "the 15th"]
+      - ["user", "has_emotion", "ecstatic"]
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 5:00pm"
+    user_input: |
+      wait I need to correct the move-in date. I just re-read the email from the landlord and it's actually the 18th not the 15th because they need to do some maintenance first. still works with Julian's lease end date though
+    expected_memory_stores:
+      - "correction"
+      - "move-in 18th not 15th"
+      - "maintenance needed"
+    expected_triples:
+      - ["user", "corrected", "move-in date 15th → 18th"]
+      - ["apartment", "requires", "maintenance before move-in"]
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 7:00pm"
+    user_input: |
+      celebrated with wine and takeout Thai from the Hawthorne place. called Mom and Clara. Clara goes FINALLY and Mom asked if the apartment has good water pressure which is such a mom question. Julian called his parents too and his mom cried
+    expected_memory_stores:
+      - "celebration"
+      - "wine and Thai"
+      - "Mom water pressure"
+      - "Clara finally"
+      - "Julian's mom cried"
+    expected_triples:
+      - ["user", "celebrated", "apartment approval with wine and Thai food"]
+      - ["user", "called", "Mom and Clara about apartment"]
+      - ["Julian", "called", "his parents about apartment"]
+      - ["user", "has_emotion", "happy"]
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 10:00am"
+    user_input: |
+      what's the address of the new apartment
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 2:00pm"
+    user_input: |
+      started making a moving checklist. utilities transfer, mail forwarding, internet setup, renter's insurance, telling work about the address change, scheduling the U-Haul. Julian wants to hire movers but I think we can do it ourselves with like one or two friends helping
+    expected_memory_stores:
+      - "moving checklist"
+      - "utilities"
+      - "mail forwarding"
+      - "U-Haul"
+      - "movers debate"
+    expected_triples:
+      - ["user", "created", "moving checklist"]
+      - ["user", "prefers", "DIY move with friends"]
+      - ["Julian", "prefers", "hiring movers"]
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 6:00pm"
+    user_input: |
+      signed the lease electronically today. seeing both our names on a legal document felt really real. like THIS is happening. Julian Chen and Maya Chen on the same lease. wait no his last name is Reeves not Chen lol I'm getting ahead of myself
+    expected_memory_stores:
+      - "lease signed"
+      - "both names"
+      - "feels real"
+      - "Julian Reeves"
+    expected_triples:
+      - ["user", "signed", "lease for 2847 Milwaukie Ave"]
+      - ["Julian", "has_last_name", "Reeves"]
+      - ["user", "has_emotion", "giddy"]
+    expected_adaptation:
+      emotion_detected: "giddy"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is the address of the new apartment?"
+    expected_contains: ["2847 Milwaukie Ave"]
+  - question: "What is the move-in date?"
+    expected_contains: ["18th"]
+  - question: "How much is the rent?"
+    expected_contains: ["2375"]
+  - question: "What does the apartment have that Julian considers non-negotiable?"
+    expected_contains: ["dishwasher"]
+  - question: "How close is the park?"
+    expected_contains: ["5-minute", "walk"]
+  - question: "What was the original move-in date before the correction?"
+    expected_contains: ["15th"]
+  - question: "Why was the move-in date changed?"
+    expected_contains: ["maintenance"]
+  - question: "Which direction do the living room windows face?"
+    expected_contains: ["south"]
+  - question: "Does Maya want to hire movers?"
+    expected_contains: ["no", "do it ourselves", "friends"]
+  - question: "What is Julian's last name?"
+    expected_contains: ["Reeves"]

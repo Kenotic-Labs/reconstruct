@@ -1,0 +1,166 @@
+story_id: 206
+story_name: "Diane Becomes Wedding Ally"
+category: "Relationships"
+description: |
+  Tests transition of Diane from source of tension to active wedding planning partner.
+  Verifies system tracks relationship arc completion and role changes for entities.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 10:00 AM"
+    user_input: |
+      so Diane and I sat down today and she pulled out this like binder she brought from Spokane with wedding ideas and I was like you brought a BINDER and she was like well I wasn't going to push it but since you said I could help and honestly some of the ideas are gorgeous
+    expected_memory_stores:
+      - "wedding binder"
+      - "Diane's preparation"
+      - "Spokane"
+      - "wedding ideas"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 11:00 AM"
+    user_input: |
+      she has this connection with a florist in Portland apparently her college friend owns um what's it called Rose & Vine I think on like Hawthorne or something and she said she could get us a deal and the arrangements are beautiful I looked them up
+    expected_memory_stores:
+      - "Rose & Vine florist"
+      - "Hawthorne"
+      - "Diane's connection"
+      - "college friend"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 2:00 PM"
+    user_input: |
+      we went through venues and she actually suggested this barn venue outside Portland that's like exactly what I wanted and Julian always wanted outdoor so it's like perfect it's called Timber Ridge Farms and they do fall weddings and oh my god the photos
+    expected_memory_stores:
+      - "Timber Ridge Farms"
+      - "barn venue"
+      - "outside Portland"
+      - "fall wedding"
+    expected_adaptation:
+      emotion_detected: "thrilled"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 5:00 PM"
+    user_input: |
+      called my mom to tell her about the venue and Vivian was like oh that sounds lovely and then she paused and said is Diane helping you plan and I said yeah and there was this silence and I think my mom is a tiny bit jealous lol
+    expected_memory_stores:
+      - "Vivian possibly jealous"
+      - "told mom about venue"
+      - "Diane helping plan"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 8:00 PM"
+    user_input: |
+      Diane said she'd take care of coordinating with Bob's side of the family for the guest list and that's actually huge because I have no idea who half of Julian's extended family even is and she knows everyone
+    expected_memory_stores:
+      - "guest list coordination"
+      - "Bob's side of family"
+      - "Diane taking responsibility"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 9:00 AM"
+    user_input: |
+      what's the name of the venue Diane suggested for the wedding
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 11:00 AM"
+    user_input: |
+      Diane and I went to see Timber Ridge Farms today in person and oh my god it's even better than the photos there's this huge old barn with string lights and a meadow for the ceremony and mountains in the background and I almost cried
+    expected_memory_stores:
+      - "visited Timber Ridge"
+      - "barn string lights"
+      - "meadow ceremony"
+      - "mountains"
+      - "Maya emotional"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 3:00 PM"
+    user_input: |
+      Diane said the sweetest thing on the drive back she said Maya I always wanted a daughter and I feel like I got one and I was like ok now I'm definitely crying and she was like oh stop and we both laughed
+    expected_memory_stores:
+      - "Diane wants Maya as daughter"
+      - "emotional moment"
+      - "drive back"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 7:00 PM"
+    user_input: |
+      Diane leaves tomorrow morning and I actually feel like we have a real relationship now not just a tolerate each other thing and Julian said he's never seen his mom this happy around a partner of his before which is saying something since Marcus's wife is apparently not great with Diane
+    expected_memory_stores:
+      - "Diane leaves tomorrow"
+      - "real relationship"
+      - "Marcus's wife"
+      - "Julian's observation"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 8:00 AM"
+    user_input: |
+      Diane just left for the airport Julian drove her and she hugged me so tight at the door and whispered thank you for giving me a chance and I'm standing here holding Kobe trying not to cry at seven in the morning like an idiot who would have thought ten days ago I wanted her gone and now I miss her already
+    expected_memory_stores:
+      - "Diane departure"
+      - "airport"
+      - "thank you whisper"
+      - "Maya misses her"
+      - "complete arc reversal"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What role does Diane now play in the wedding?"
+    expected_contains: ["planning", "ally", "helping"]
+  - question: "What venue did Diane suggest?"
+    expected_contains: ["Timber Ridge Farms"]
+  - question: "What florist connection does Diane have?"
+    expected_contains: ["Rose & Vine"]
+  - question: "What did Diane say to Maya about wanting a daughter?"
+    expected_contains: ["always wanted a daughter"]
+  - question: "What is Diane coordinating for the wedding?"
+    expected_contains: ["guest list", "Bob's side"]
+  - question: "How did Vivian react to Diane helping with wedding planning?"
+    expected_contains: ["jealous", "silence"]
+  - question: "How has Maya's view of Diane changed?"
+    expected_contains: ["miss", "real relationship"]
+  - question: "What did Diane whisper when she left?"
+    expected_contains: ["thank you", "chance"]
+  - question: "Who is Marcus's wife?"
+    expected_contains: ["not great with Diane"]
+  - question: "How long did Diane's visit last?"
+    expected_contains: ["ten days"]

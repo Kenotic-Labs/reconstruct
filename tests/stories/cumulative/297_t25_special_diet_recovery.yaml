@@ -1,0 +1,188 @@
+story_id: 297
+story_name: "Special Diet and Recovery"
+category: "Pet"
+description: |
+  Tests memory of Kobe's recovery from pancreatitis including the special diet requirements.
+  Tests correction handling as the food brand changes twice.
+duration_simulated: "3 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00 AM"
+    user_input: |
+      day two home from Dove Lewis and Kobe is eating the prescription food Dr. Mills gave us it's called Hill's Science Diet i/d which is a low-fat gastrointestinal formula and he needs to eat this exclusively for at least six weeks no table scraps no treats except the prescription ones
+    expected_memory_stores:
+      - "day two home"
+      - "Hill's Science Diet i/d"
+      - "low-fat gastrointestinal"
+      - "six weeks minimum"
+      - "no table scraps"
+      - "no regular treats"
+      - "prescription treats only"
+    expected_adaptation:
+      emotion_detected: "careful"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 7:00 PM"
+    user_input: |
+      Kobe's energy is slowly coming back like he actually got up and walked to the door today when Julian came home which was the first time he's done that since before the pancreatitis and Julian got so emotional he sat on the floor with him for like 20 minutes
+    expected_memory_stores:
+      - "energy returning"
+      - "walked to door"
+      - "Julian came home"
+      - "first time since illness"
+      - "Julian emotional"
+      - "sat on floor 20 minutes"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      so there's a problem the Hill's Science Diet i/d is like $75 for a 17-pound bag and Kobe goes through a bag in about three weeks and also he's not that into it like he eats it but without enthusiasm and Dr. Mills said there are other low-fat options if this one isn't working
+    expected_memory_stores:
+      - "Hill's expensive"
+      - "$75 per bag"
+      - "17 pounds"
+      - "three weeks per bag"
+      - "Kobe unenthusiastic"
+      - "other options available"
+    expected_adaptation:
+      emotion_detected: "concerned"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 10:00 AM"
+    user_input: |
+      Dr. Mills at the follow-up appointment said we can try Royal Canin Gastrointestinal Low Fat instead which some dogs tolerate better and it's slightly cheaper at about $65 a bag and Kobe might like the taste more so we're switching. wait actually I think she said it was Royal Canin Hepatic no hold on I'll check the bag when I get home
+    expected_memory_stores:
+      - "switching from Hill's"
+      - "Royal Canin"
+      - "Gastrointestinal Low Fat"
+      - "or Hepatic confusion"
+      - "$65 a bag"
+      - "might taste better"
+      - "Dr. Mills follow-up"
+    expected_adaptation:
+      emotion_detected: "confused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 6:00 PM"
+    user_input: |
+      checked the bag and it's Royal Canin Gastrointestinal Low Fat NOT Hepatic sorry I got confused they're similar packaging. also good news at the follow-up Kobe's lipase levels are back to normal and Dr. Mills said the pancreas is healing well no lasting damage
+    expected_memory_stores:
+      - "correction"
+      - "Royal Canin Gastrointestinal Low Fat"
+      - "not Hepatic"
+      - "lipase normal"
+      - "pancreas healing"
+      - "no lasting damage"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 7:00 AM"
+    user_input: |
+      Kobe LOVES the Royal Canin he literally did a little dance around his bowl this morning and ate the whole thing in like 3 minutes and then looked at me like can I have more and I was like no buddy you can't your pancreas said no
+    expected_memory_stores:
+      - "Kobe loves Royal Canin"
+      - "danced around bowl"
+      - "ate in 3 minutes"
+      - "wanted more"
+      - "can't overfeed"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      week two of recovery and Kobe is almost back to himself like he's doing zoomies in the yard again and playing fetch with Julian and his coat is looking shiny and healthy and the only reminder of the whole ordeal is the prescription food and the follow-up appointments
+    expected_memory_stores:
+      - "week two recovery"
+      - "almost back to normal"
+      - "zoomies in yard"
+      - "playing fetch"
+      - "shiny coat"
+      - "prescription food ongoing"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 10:00 AM"
+    user_input: |
+      resumed training with Keiko this week and she was so sweet about it she said she was worried about Kobe and she adjusted the session to be gentler since he's recovering and he did great his reactivity training held even though we missed two weeks
+    expected_memory_stores:
+      - "resumed training"
+      - "Keiko worried"
+      - "gentler session"
+      - "recovering"
+      - "reactivity held"
+      - "missed two weeks"
+    expected_adaptation:
+      emotion_detected: "encouraged"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 6:00 PM"
+    user_input: |
+      Dr. Mills said at the next checkup if everything looks good we can start transitioning Kobe back to regular food but it needs to be a low-fat maintenance formula not the Blue Buffalo we were using before and she recommended Purina Pro Plan Sensitive Skin and Stomach which is actually what the shelter originally had him on but the sensitive stomach version
+    expected_memory_stores:
+      - "transition to regular food soon"
+      - "low-fat maintenance"
+      - "not Blue Buffalo"
+      - "Purina Pro Plan Sensitive Skin and Stomach"
+      - "similar to shelter food"
+      - "food brand change again"
+    expected_adaptation:
+      emotion_detected: "ironic"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      so to summarize Kobe's food journey: shelter had him on Purina Pro Plan, Dr. Mills switched to Blue Buffalo which he hated, then he got pancreatitis, went on Hill's Science Diet i/d, switched to Royal Canin Gastrointestinal Low Fat which he loves, and eventually going back to Purina Pro Plan Sensitive version. this dog has had more diet changes than anyone I know. what food is Kobe currently on
+    expected_memory_stores:
+      - "food journey summary"
+      - "Purina to Blue Buffalo to Hill's to Royal Canin to Purina"
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What food is Kobe currently eating?"
+    expected_contains: ["Royal Canin", "Gastrointestinal Low Fat"]
+  - question: "What was the first prescription food Kobe tried?"
+    expected_contains: ["Hill's", "Science Diet", "i/d"]
+  - question: "Why did they switch from Hill's to Royal Canin?"
+    expected_contains: ["didn't like", "unenthusiastic", "taste"]
+  - question: "Are Kobe's lipase levels normal now?"
+    expected_contains: ["yes", "normal"]
+  - question: "What food will Kobe eventually transition to?"
+    expected_contains: ["Purina Pro Plan", "Sensitive"]
+  - question: "How much does the Royal Canin cost?"
+    expected_contains: ["65"]
+  - question: "Is there lasting damage from the pancreatitis?"
+    expected_contains: ["no"]
+  - question: "Has Kobe's leash reactivity training regressed?"
+    expected_contains: ["no", "held"]
+  - question: "How is Kobe's recovery going?"
+    expected_contains: ["good", "almost back", "normal"]
+  - question: "What foods can Kobe NOT have?"
+    expected_contains: ["table scraps", "high-fat", "bacon"]

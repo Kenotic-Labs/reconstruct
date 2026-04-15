@@ -1,0 +1,172 @@
+story_id: 312
+story_name: "Nadia's Divorce"
+category: "Friendships"
+description: |
+  Tests memory of Nadia revealing she's going through a divorce from her
+  husband Kwame. Maya becomes her emotional support. Verifies system captures
+  sensitive disclosures and relationship entity tracking.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      climbed with Nadia again today our third time now and after we went to Upper Left again and she was kinda quiet and I asked if she was ok and she said yeah just got a lot going on and I didn't push it
+    expected_memory_stores:
+      - "third climbing session"
+      - "Upper Left Roasters"
+      - "Nadia quiet"
+      - "lot going on"
+      - "Maya didn't push"
+    expected_adaptation:
+      emotion_detected: "concerned"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 8:30 PM"
+    user_input: |
+      Nadia texted me tonight and said hey can I be honest with you about something and I said of course and she said the reason she moved to Portland from Chicago is because she's going through a divorce
+    expected_memory_stores:
+      - "Nadia divorcing"
+      - "reason for Portland move"
+      - "from Chicago"
+      - "opened up to Maya"
+    expected_adaptation:
+      emotion_detected: "sympathetic"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 9:00 PM"
+    user_input: |
+      her husband's name is Kwame and they were married for four years and she said it was his idea to separate and she still doesn't fully understand why and she moved to Portland because her college roommate lived here but then that roommate moved to Denver so Nadia ended up alone
+    expected_memory_stores:
+      - "Kwame husband"
+      - "married four years"
+      - "his idea to separate"
+      - "doesn't understand why"
+      - "college roommate moved"
+      - "Nadia alone"
+    expected_adaptation:
+      emotion_detected: "empathetic"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 12:00 PM"
+    user_input: |
+      I keep thinking about Nadia's situation like imagine moving to a new city for a fresh start and then the one person you know there leaves too and you're just in this apartment in Sellwood by yourself going through a divorce that makes my heart hurt
+    expected_memory_stores:
+      - "Maya processing"
+      - "Nadia's isolation"
+      - "Sellwood alone"
+      - "empathy"
+    expected_adaptation:
+      emotion_detected: "sad"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 11:00 AM"
+    user_input: |
+      took Nadia to the Saturday market at PSU and she'd never been and her face when she saw all the food stalls was so cute and we got elephant ears and walked along the waterfront and she said this is the first time she's felt normal in months
+    expected_memory_stores:
+      - "Saturday market PSU"
+      - "Nadia first time"
+      - "elephant ears"
+      - "waterfront walk"
+      - "first time feeling normal"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 3:00 PM"
+    user_input: |
+      she told me more about Kwame and apparently he's a lawyer in Chicago and he said he fell out of love which like what does that even mean and she said she keeps going over it in her head trying to figure out what she did wrong and I told her she probably didn't do anything wrong
+    expected_memory_stores:
+      - "Kwame lawyer Chicago"
+      - "fell out of love"
+      - "Nadia blaming herself"
+      - "Maya reassured"
+    expected_adaptation:
+      emotion_detected: "protective"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 10:00 AM"
+    user_input: |
+      Nadia's not seeing a therapist yet and I kind of gently suggested it and she said she knows she should and she just hasn't gotten around to it and I was like I can send you the name of someone Jenny's therapist might have Portland referrals or wait no Dr Okafor is in Austin never mind
+    expected_memory_stores:
+      - "no therapist yet"
+      - "Maya suggested therapy"
+      - "Dr Okafor Austin"
+      - "needs Portland referral"
+    expected_adaptation:
+      emotion_detected: "helpful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 2:00 PM"
+    user_input: |
+      what's Nadia's ex-husband's name and what does he do
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 5:00 PM"
+    user_input: |
+      Julian met Nadia for the first time today we all went for a walk with Kobe at Sellwood Park which is close to her apartment and Julian said she seems really cool and Kobe absolutely loved her and she was like I've always wanted a dog but Kwame was allergic
+    expected_memory_stores:
+      - "Julian met Nadia"
+      - "Sellwood Park walk"
+      - "Kobe loved Nadia"
+      - "Kwame allergic to dogs"
+      - "Nadia wants a dog"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 PM"
+    user_input: |
+      Nadia sent me a text tonight saying thank you for being so welcoming and that I'm the first real friend she's made in Portland and honestly that makes me really glad I went to the climbing gym that day
+    expected_memory_stores:
+      - "thank you text"
+      - "first real friend in Portland"
+      - "glad about climbing gym"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who is Kwame?"
+    expected_contains: ["Nadia's husband", "ex-husband"]
+  - question: "Why did Nadia move to Portland?"
+    expected_contains: ["divorce", "fresh start", "college roommate"]
+  - question: "What does Kwame do for work?"
+    expected_contains: ["lawyer", "Chicago"]
+  - question: "Why did Kwame want to separate?"
+    expected_contains: ["fell out of love"]
+  - question: "How long were Nadia and Kwame married?"
+    expected_contains: ["four years"]
+  - question: "Is Nadia seeing a therapist?"
+    expected_contains: ["no", "not yet"]
+  - question: "Where did Maya take Nadia on Saturday?"
+    expected_contains: ["Saturday market", "PSU"]
+  - question: "Why couldn't Nadia have a dog before?"
+    expected_contains: ["Kwame allergic"]
+  - question: "What did Julian think of Nadia?"
+    expected_contains: ["cool"]
+  - question: "What did Nadia say about Maya's friendship?"
+    expected_contains: ["first real friend", "Portland"]

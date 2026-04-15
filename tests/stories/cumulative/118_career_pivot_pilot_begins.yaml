@@ -1,0 +1,215 @@
+story_id: 118
+story_name: "Pilot Team Begins"
+category: "Career"
+description: |
+  Tests whether the system tracks the pilot team formation, team member selection, first
+  project choices, and Maya's transition into a leadership role. Cross-thread connections
+  to mentoring experience.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00am"
+    user_input: |
+      first day of the internal platform team pilot! got my two team members assigned. there's Derek Wu who's a backend engineer with like 5 years experience and um Priya Sharma who's more frontend and design systems. both volunteered for this which is a good sign
+    expected_memory_stores:
+      - "pilot team started"
+      - "Derek Wu"
+      - "backend engineer"
+      - "Priya Sharma"
+      - "frontend design systems"
+      - "volunteered"
+    expected_triples:
+      - ["user", "started", "internal platform team pilot"]
+      - ["Derek Wu", "is", "backend engineer with 5 years experience on pilot team"]
+      - ["Priya Sharma", "is", "frontend and design systems engineer on pilot team"]
+      - ["Derek Wu", "volunteered_for", "pilot team"]
+      - ["Priya Sharma", "volunteered_for", "pilot team"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 11:00am"
+    user_input: |
+      did a kickoff meeting where we brainstormed what to build first. the UX team's research tool situation is the worst so Rachel Ford suggested we start there. she's basically our first internal customer which is perfect because she already understands the vision
+    expected_memory_stores:
+      - "kickoff meeting"
+      - "UX research tools"
+      - "Rachel Ford first customer"
+      - "brainstorm"
+    expected_triples:
+      - ["pilot team", "held", "kickoff brainstorm meeting"]
+      - ["Rachel Ford", "is", "first internal customer for pilot team"]
+      - ["pilot team", "starting_with", "UX research tool situation"]
+      - ["user", "has_emotion", "focused"]
+    expected_adaptation:
+      emotion_detected: "focused"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 2:00pm"
+    user_input: |
+      spent the morning interviewing the UX team about their workflow and oh my god they're using like Google Sheets and Notion and Dovetail and Miro and none of them talk to each other. every user interview takes 2 hours of just organizing data afterwards. that's insane
+    expected_memory_stores:
+      - "UX workflow problems"
+      - "Google Sheets Notion Dovetail Miro"
+      - "fragmented tools"
+      - "2 hours organizing"
+    expected_triples:
+      - ["UX team", "uses", "Google Sheets, Notion, Dovetail, and Miro with no integration"]
+      - ["UX team", "wastes", "2 hours organizing data after each user interview"]
+      - ["user", "has_emotion", "shocked"]
+    expected_adaptation:
+      emotion_detected: "shocked"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 10:00am"
+    user_input: |
+      Derek and Priya are great to work with. Derek's all about the data pipeline and Priya immediately started sketching UI mockups. I feel like I'm doing what I did with Aisha but as an actual leader not just a mentor. it's different but the same energy
+    expected_memory_stores:
+      - "team dynamic"
+      - "Derek data pipeline"
+      - "Priya UI mockups"
+      - "leader vs mentor"
+      - "Aisha parallel"
+    expected_triples:
+      - ["Derek Wu", "focused_on", "data pipeline"]
+      - ["Priya Sharma", "started", "sketching UI mockups"]
+      - ["user", "feels", "leading team is like mentoring Aisha but as actual leader"]
+      - ["user", "has_emotion", "fulfilled"]
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 4:00pm"
+    user_input: |
+      Aisha stopped by and was like wait you have your OWN team now?? and she was SO excited for me. she goes you're gonna be the best team lead because you actually care about the people. coming from her that means everything honestly
+    expected_memory_stores:
+      - "Aisha excited"
+      - "best team lead"
+      - "cares about people"
+      - "meaningful compliment"
+    expected_triples:
+      - ["Aisha", "said", "user will be the best team lead because she cares about people"]
+      - ["Aisha", "excited_about", "user having her own team"]
+      - ["user", "has_emotion", "moved"]
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 9:00am"
+    user_input: |
+      how many tools does the UX team currently use for research
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 2:00pm"
+    user_input: |
+      we scoped our first project, it's a unified research repository where all user interview notes, survey results, and usability findings go into one searchable system. we're calling it Lens for now. Derek came up with the name
+    expected_memory_stores:
+      - "first project scoped"
+      - "unified research repository"
+      - "Lens"
+      - "Derek named it"
+      - "searchable system"
+    expected_triples:
+      - ["pilot team", "scoped", "first project: unified research repository"]
+      - ["Lens", "is", "searchable system for interview notes, surveys, and usability findings"]
+      - ["Derek Wu", "named", "the project Lens"]
+      - ["user", "has_emotion", "creative"]
+    expected_adaptation:
+      emotion_detected: "creative"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 10:00am"
+    user_input: |
+      first weekly standup with Sam as our stakeholder. he asked good questions and seemed genuinely interested not just checking a box. he said if the pilot works he wants to make this a permanent team in Q1 next year
+    expected_memory_stores:
+      - "weekly standup with Sam"
+      - "stakeholder"
+      - "permanent team"
+      - "Q1 next year"
+    expected_triples:
+      - ["Sam", "is", "stakeholder for pilot team with weekly standups"]
+      - ["Sam", "wants", "permanent team in Q1 next year if pilot works"]
+      - ["user", "has_emotion", "encouraged"]
+    expected_adaptation:
+      emotion_detected: "encouraged"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 5:00pm"
+    user_input: |
+      first week done and I'm tired but like the GOOD kind of tired. same feeling as after Aisha's first day but sustained. Julian made pasta and we watched something on Netflix. Kobe tried to steal garlic bread off the counter again
+    expected_memory_stores:
+      - "good tired"
+      - "sustained feeling"
+      - "Julian pasta"
+      - "Netflix"
+      - "Kobe garlic bread"
+    expected_triples:
+      - ["user", "feels", "good tired after first week of pilot"]
+      - ["Julian", "made", "pasta for dinner"]
+      - ["Kobe", "tried_to_steal", "garlic bread off counter"]
+      - ["user", "has_emotion", "content"]
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 9:00pm"
+    user_input: |
+      texted Dr. Tate to say I think the career exploration thing worked out and she texted back a smiley face. not very therapist-y but honestly I appreciated it lol
+    expected_memory_stores:
+      - "Dr. Tate update"
+      - "career exploration success"
+      - "smiley face"
+    expected_triples:
+      - ["user", "texted", "Dr. Tate that career exploration worked out"]
+      - ["Dr. Tate", "responded_with", "smiley face"]
+      - ["user", "has_emotion", "amused"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who is on Maya's pilot team?"
+    expected_contains: ["Derek Wu", "Priya Sharma"]
+  - question: "What is the first project called?"
+    expected_contains: ["Lens"]
+  - question: "What does Lens do?"
+    expected_contains: ["research repository", "searchable"]
+  - question: "Who is the first internal customer?"
+    expected_contains: ["Rachel Ford", "UX team"]
+  - question: "What tools is the UX team currently using?"
+    expected_contains: ["Google Sheets", "Notion", "Dovetail", "Miro"]
+  - question: "What is Sam's plan if the pilot succeeds?"
+    expected_contains: ["permanent team", "Q1"]
+  - question: "What does Derek specialize in?"
+    expected_contains: ["backend", "data pipeline"]
+  - question: "What does Priya specialize in?"
+    expected_contains: ["frontend", "design systems"]
+  - question: "What did Aisha say about Maya's leadership?"
+    expected_contains: ["best team lead", "cares"]
+  - question: "Who named the Lens project?"
+    expected_contains: ["Derek"]

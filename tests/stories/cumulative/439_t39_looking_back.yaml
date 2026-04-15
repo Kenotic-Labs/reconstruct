@@ -1,0 +1,173 @@
+story_id: 439
+story_name: "Looking Back at Westridge"
+category: "Lease Dispute"
+description: |
+  Maya reflects on the Westridge chapter of her life. Connects old apartment
+  memories to current life. Cross-thread references to T8 and T22.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 11:00 AM"
+    user_input: |
+      drove past Westridge Apartments today on the way to the food bank and it was weird seeing the building like I lived there for almost 3 years and now it's just a building and the parking spot where I used to park the Civic is there but someone else's car is in it obviously
+    expected_memory_stores:
+      - "drove past Westridge"
+      - "lived there 3 years"
+      - "someone else's car"
+      - "Civic parking spot"
+    expected_adaptation:
+      emotion_detected: "nostalgic"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 11:15 AM"
+    user_input: |
+      I remember moving into that apartment with Julian right after we got Kobe as a puppy and the landlord said no dogs originally and then he said ok but there's a 300 dollar pet deposit and we paid it and I bet Greg Patterson kept that too actually I never got the pet deposit back either wait did I
+    expected_memory_stores:
+      - "moved in with Julian"
+      - "Kobe was a puppy"
+      - "no dogs initially"
+      - "$300 pet deposit"
+      - "may not have gotten pet deposit"
+    expected_adaptation:
+      emotion_detected: "suddenly suspicious"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:30 AM"
+    user_input: |
+      checked my records and the pet deposit was actually returned separately when we moved out which ok fine at least Greg Patterson didn't steal that one too but still he tried to keep 1800 from us and got away with keeping 200 technically since we settled at 1600 instead of 1800 ugh
+    expected_memory_stores:
+      - "pet deposit was returned"
+      - "Patterson kept $200"
+      - "settled $1600 not $1800"
+      - "still annoying"
+    expected_adaptation:
+      emotion_detected: "grudging"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 2:00 PM"
+    user_input: |
+      at the food bank today and I was telling Diane about the apartment drama and she said isn't it funny how the places we leave behind still have a hold on us and she's right like Westridge was just an apartment but it was also where Julian and I built our life together before the house
+    expected_memory_stores:
+      - "Diane's observation"
+      - "places have a hold"
+      - "built life at Westridge"
+      - "before the house"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 4:00 PM"
+    user_input: |
+      Kobe's first steps were in that apartment and Julian proposed to me in the living room of that apartment and we had our first Thanksgiving dinner party there with Clara and Jenny and Marcus and honestly for all the landlord drama it was a good home for that chapter
+    expected_memory_stores:
+      - "Kobe's first steps"
+      - "Julian proposed there"
+      - "first Thanksgiving party"
+      - "Clara Jenny Marcus"
+      - "good home for that chapter"
+    expected_adaptation:
+      emotion_detected: "sentimental"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 5:30 PM"
+    user_input: |
+      Julian asked what I was thinking about tonight and I told him about driving past Westridge and he said remember when the upstairs neighbors flooded their bathroom and water came through our ceiling and we had to sleep in the living room for a week and I was like oh god I blocked that out
+    expected_memory_stores:
+      - "upstairs neighbors flood"
+      - "water through ceiling"
+      - "slept in living room"
+      - "one week"
+      - "blocked memory"
+    expected_adaptation:
+      emotion_detected: "amused horror"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 7:00 PM"
+    user_input: |
+      you know what I'm glad we left Westridge and I'm glad we fought for the deposit and I'm glad we own a house now because every step of that journey led to where we are and the crappy landlord the leaky ceiling the cramped kitchen it all made us appreciate what we have now more
+    expected_memory_stores:
+      - "glad they left"
+      - "glad they fought"
+      - "glad they own house"
+      - "journey appreciation"
+      - "appreciate current life"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 8:00 PM"
+    user_input: |
+      where did Julian propose to Maya
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 9:00 PM"
+    user_input: |
+      Julian pulled up the photo of me holding the settlement check and set it as my contact photo on his phone and I was like Julian change that and he said no this is peak Maya energy and I said fine but if your mom sees that she's going to ask questions and he said she'll be proud of you just like I am
+    expected_memory_stores:
+      - "settlement check contact photo"
+      - "peak Maya energy"
+      - "Diane Reeves might see"
+      - "Julian proud"
+    expected_adaptation:
+      emotion_detected: "amused touched"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:00 PM"
+    user_input: |
+      going to bed in our house that we OWN with our dog and our smart home that mostly works and our Subaru in the garage and I know it sounds simple but this is all stuff that didn't exist 3 years ago when we moved into Westridge and building a life is just one decision at a time isn't it
+    expected_memory_stores:
+      - "house they own"
+      - "dog Kobe"
+      - "smart home"
+      - "Subaru in garage"
+      - "didn't exist 3 years ago"
+      - "building life one decision"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where did Julian propose to Maya?"
+    expected_contains: ["Westridge", "apartment", "living room"]
+  - question: "Was the pet deposit returned from Westridge?"
+    expected_contains: ["yes", "returned"]
+  - question: "What happened with the upstairs neighbors at Westridge?"
+    expected_contains: ["flood", "water", "ceiling"]
+  - question: "How long did Maya live at Westridge?"
+    expected_contains: ["3 years", "almost 3"]
+  - question: "What significant events happened at the Westridge apartment?"
+    expected_contains: ["proposal", "Kobe's first steps", "Thanksgiving"]
+  - question: "Who came to the first Thanksgiving at Westridge?"
+    expected_contains: ["Clara", "Jenny", "Marcus"]
+  - question: "How much did Greg Patterson ultimately keep of Maya's deposit?"
+    expected_contains: ["200"]
+  - question: "What did Julian set as Maya's contact photo?"
+    expected_contains: ["settlement check"]
+  - question: "What does Maya appreciate about her current life?"
+    expected_contains: ["house", "dog", "Subaru"]
+  - question: "How does Maya describe building a life?"
+    expected_contains: ["one decision at a time"]

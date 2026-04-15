@@ -1,0 +1,173 @@
+story_id: 426
+story_name: "Food Drive Results"
+category: "Volunteering"
+description: |
+  The food drive wraps up with impressive results. Total of $4,200 raised.
+  Final collection day, trucking everything to the food bank.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 8:00 AM"
+    user_input: |
+      it's December 15th final collection day and the online donations closed last night and the final number is 4200 dollars including the company match and I'm like that is so much more than I expected I honestly would have been happy with 2000 and we more than doubled it
+    expected_memory_stores:
+      - "December 15th final day"
+      - "total $4200 raised"
+      - "including company match"
+      - "exceeded expectations"
+      - "expected $2000"
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 9:30 AM"
+    user_input: |
+      the physical donations are insane like we filled 14 large boxes of food and hygiene products and the third floor sales team won with the most donations and they get a pizza party that Sam is paying for and honestly the competitive thing really worked
+    expected_memory_stores:
+      - "14 large boxes"
+      - "food and hygiene products"
+      - "sales team won"
+      - "pizza party prize"
+      - "Sam paying"
+      - "competition worked"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 11:00 AM"
+    user_input: |
+      the food bank sent a truck to Conduit today and Diane came with two volunteers and we loaded everything up and it took like 45 minutes because there was SO much stuff and building Marcus helped with the heavy boxes and Diane was almost in tears she kept saying Maya this is incredible
+    expected_memory_stores:
+      - "food bank truck"
+      - "Diane and two volunteers"
+      - "45 minutes loading"
+      - "building Marcus helped"
+      - "Diane emotional"
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 12:00 PM"
+    user_input: |
+      Sam made a company wide announcement thanking everyone and he specifically called out me and Lily and said this is what Conduit should be about not just building products but building community and people were clapping and I was bright red because I hate being the center of attention but also it felt amazing
+    expected_memory_stores:
+      - "Sam announcement"
+      - "Maya and Lily recognized"
+      - "building community"
+      - "Maya embarrassed but happy"
+    expected_adaptation:
+      emotion_detected: "embarrassed proud"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 1:00 PM"
+    user_input: |
+      did the math and between the 4200 in monetary donations and the estimated value of the 14 boxes of food which Diane said is probably around 2000 in equivalent value we basically contributed over 6000 dollars worth of stuff to the food bank which is like 13 percent of their annual budget from one drive
+    expected_memory_stores:
+      - "$4200 monetary"
+      - "$2000 food value"
+      - "over $6000 total"
+      - "13% of annual budget"
+      - "one drive impact"
+    expected_adaptation:
+      emotion_detected: "amazed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 3:00 PM"
+    user_input: |
+      Lily said we should make this an annual thing and Sam agreed and he said Maya you should lead it every year and I was like yeah I'd love to and Lily and I already have ideas for making it bigger next year like maybe partnering with other tech companies in Portland
+    expected_memory_stores:
+      - "annual tradition"
+      - "Sam wants Maya to lead"
+      - "Lily co-organizer"
+      - "bigger next year"
+      - "partner with other companies"
+    expected_adaptation:
+      emotion_detected: "forward-looking"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 5:00 PM"
+    user_input: |
+      Jenny called from Austin and she said her company raised 1100 at their drive and I was like that's awesome so between the two of us that's over 5000 in direct donations and she was like we literally started a movement and I'm like ok calm down but also yeah kind of
+    expected_memory_stores:
+      - "Jenny's Austin drive raised $1100"
+      - "combined over $5000"
+      - "started a movement"
+    expected_adaptation:
+      emotion_detected: "connected"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 6:00 PM"
+    user_input: |
+      how much total did the Conduit food drive raise including monetary donations and food value
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 7:00 PM"
+    user_input: |
+      came home and Julian had a bottle of champagne waiting and he popped it when I walked in and said congrats babe you fed Portland and Kobe was barking at the champagne cork and Julian had made this card that said proud of you from Julian and Kobe with a paw print and I definitely cried a little ok a lot
+    expected_memory_stores:
+      - "Julian champagne celebration"
+      - "homemade card"
+      - "from Julian and Kobe"
+      - "paw print"
+      - "Maya cried"
+    expected_adaptation:
+      emotion_detected: "overwhelmed with joy"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 9:00 PM"
+    user_input: |
+      sitting on the couch tonight feeling like I actually did something that mattered and I think about the 2000 families that the food bank serves and knowing some of them will have a better holiday because of something I helped organize and that's just like yeah that's why you do this stuff
+    expected_memory_stores:
+      - "feeling it mattered"
+      - "2000 families"
+      - "better holiday"
+      - "why you do this"
+    expected_adaptation:
+      emotion_detected: "purposeful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How much money did the Conduit food drive raise?"
+    expected_contains: ["4200", "4,200"]
+  - question: "How many boxes of food were collected?"
+    expected_contains: ["14"]
+  - question: "What was the total value including food donations?"
+    expected_contains: ["6000", "6,000"]
+  - question: "What percentage of the food bank's budget did this represent?"
+    expected_contains: ["13"]
+  - question: "Which team collected the most donations?"
+    expected_contains: ["sales"]
+  - question: "Will the food drive become an annual event?"
+    expected_contains: ["yes", "annual"]
+  - question: "How much did Jenny's Austin drive raise?"
+    expected_contains: ["1100"]
+  - question: "Who was recognized in Sam's announcement?"
+    expected_contains: ["Maya", "Lily"]
+  - question: "How did Julian celebrate Maya's success?"
+    expected_contains: ["champagne", "card", "paw print"]
+  - question: "What are plans for next year's drive?"
+    expected_contains: ["bigger", "other companies", "partner"]

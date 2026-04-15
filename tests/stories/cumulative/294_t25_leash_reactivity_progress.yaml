@@ -1,0 +1,188 @@
+story_id: 294
+story_name: "Leash Reactivity Slow Progress"
+category: "Pet"
+description: |
+  Tests memory of the slow, sometimes frustrating progress on Kobe's leash reactivity.
+  Captures setbacks, small wins, and the emotional toll on Maya.
+duration_simulated: "3 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00 AM"
+    user_input: |
+      session four with Keiko and we had a setback today a pit bull walked past the window during training and Kobe LOST IT like all the progress from last week just gone he was barking and lunging and I couldn't get him to look at me no matter how much chicken I had
+    expected_memory_stores:
+      - "session four"
+      - "setback"
+      - "pit bull trigger"
+      - "barking lunging"
+      - "couldn't redirect"
+      - "progress lost"
+    expected_adaptation:
+      emotion_detected: "discouraged"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:30 AM"
+    user_input: |
+      Keiko said setbacks are totally normal and don't mean the training isn't working she said it's like two steps forward one step back and the fact that he was doing look at me voluntarily last week means the neural pathways are forming it just takes time
+    expected_memory_stores:
+      - "Keiko reassurance"
+      - "setbacks normal"
+      - "two steps forward one back"
+      - "neural pathways forming"
+      - "takes time"
+    expected_adaptation:
+      emotion_detected: "reassured"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 6:30 PM"
+    user_input: |
+      walk tonight and a golden retriever came around the corner and Kobe saw it and tensed and I braced for the lunge and... he looked at me. he actually looked at me. I gave him all the chicken and praised him and the other dog walked by and Kobe didn't react. I almost cried on the sidewalk
+    expected_memory_stores:
+      - "walk success"
+      - "golden retriever"
+      - "tensed but looked at Maya"
+      - "no reaction"
+      - "other dog passed"
+      - "almost cried"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      bad walk tonight a husky across the street barked at Kobe first and Kobe exploded and I almost lost grip on the leash and a lady walking by gave me this judgmental look and said you should get that dog under control and I wanted to scream like LADY WE'RE TRYING
+    expected_memory_stores:
+      - "bad walk"
+      - "husky barked first"
+      - "Kobe exploded"
+      - "almost lost leash"
+      - "judgmental lady"
+      - "comment about control"
+      - "Maya upset"
+    expected_adaptation:
+      emotion_detected: "angry"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 8:00 PM"
+    user_input: |
+      came home from the bad walk and just cried on the couch and Julian held me and was like he's getting better it's just slow and I was like what if he never gets better and Julian was like he will Keiko said 6 to 8 weeks and we're only at week four
+    expected_memory_stores:
+      - "crying on couch"
+      - "Julian comforting"
+      - "fear he'll never improve"
+      - "week four of eight"
+      - "patience needed"
+    expected_adaptation:
+      emotion_detected: "despairing"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:00 AM"
+    user_input: |
+      session five with Keiko and she introduced a new tool called a front-clip harness which redirects Kobe's body toward me when he pulls instead of letting him lunge forward and it makes a HUGE difference in control and she also taught us the emergency U-turn where you just turn and walk the other way
+    expected_memory_stores:
+      - "session five"
+      - "front-clip harness"
+      - "redirects body"
+      - "better control"
+      - "emergency U-turn"
+      - "walk other way"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      used the front-clip harness and the U-turn on tonight's walk and it worked perfectly a lab came toward us and I did the U-turn and Kobe followed without pulling and then I had him sit and look at me and he DID IT and the lab owner was like wow your dog is so well behaved and I was like haha you have no idea
+    expected_memory_stores:
+      - "front-clip harness works"
+      - "U-turn success"
+      - "lab encounter"
+      - "Kobe sat and looked"
+      - "well behaved comment"
+      - "ironic"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 10:00 AM"
+    user_input: |
+      session six and Keiko had three dogs in the room at different distances and Kobe only reacted to one of them the closest one which was a big German Shepherd about 10 feet away and even then he recovered faster and did look at me after about 5 seconds which Keiko said is massive progress
+    expected_memory_stores:
+      - "session six"
+      - "three dogs present"
+      - "only reacted to one"
+      - "German Shepherd 10 feet"
+      - "recovered in 5 seconds"
+      - "massive progress"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      walked past the same lady who told me to get my dog under control last time and Kobe was walking calmly on the front-clip harness and a dog across the street barked and Kobe looked at me and I gave him chicken and the lady didn't say anything and I felt SO vindicated
+    expected_memory_stores:
+      - "same judgmental lady"
+      - "Kobe calm"
+      - "dog barked"
+      - "Kobe looked at Maya"
+      - "vindicated"
+    expected_adaptation:
+      emotion_detected: "vindicated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 8:00 PM"
+    user_input: |
+      week six of eight and Keiko said Kobe has made excellent progress and she wants to do two more sessions focused on increasing the challenge level like having dogs closer and on the same sidewalk and she said at the end of the program we should be able to walk past most dogs without a reaction
+    expected_memory_stores:
+      - "week six of eight"
+      - "excellent progress"
+      - "increasing challenge"
+      - "dogs closer"
+      - "same sidewalk"
+      - "goal walk past most dogs"
+    expected_adaptation:
+      emotion_detected: "encouraged"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What tool helped with Kobe's leash reactivity?"
+    expected_contains: ["front-clip harness"]
+  - question: "What is the emergency U-turn technique?"
+    expected_contains: ["turn", "walk", "other way"]
+  - question: "How many weeks into training is Kobe?"
+    expected_contains: ["six"]
+  - question: "What setback happened in session four?"
+    expected_contains: ["pit bull", "lost progress"]
+  - question: "What happened when Maya walked past the judgmental lady again?"
+    expected_contains: ["calm", "vindicated"]
+  - question: "How did Kobe perform with three dogs in session six?"
+    expected_contains: ["one", "reacted", "recovered"]
+  - question: "What is the recovery time for Kobe now?"
+    expected_contains: ["5 seconds"]
+  - question: "What does Keiko say about setbacks?"
+    expected_contains: ["normal", "two steps forward"]
+  - question: "How many sessions are in the training program?"
+    expected_contains: ["eight"]
+  - question: "What is the end goal for Kobe's training?"
+    expected_contains: ["walk past", "dogs", "without reaction"]

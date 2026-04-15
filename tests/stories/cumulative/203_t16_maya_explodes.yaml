@@ -1,0 +1,198 @@
+story_id: 203
+story_name: "Maya Explodes at Julian"
+category: "Relationships"
+description: |
+  Tests the system handling an emotional outburst and private conflict between Maya and Julian.
+  Maya finally expresses her frustration about Diane. Verifies emotional escalation tracking
+  and relationship tension capture.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 9:00 PM"
+    user_input: |
+      ok so it happened I lost it on Julian tonight and I feel kind of bad but also not really because he DESERVED it honestly I waited until Diane went to bed and then I just let him have it
+    expected_memory_stores:
+      - "fight with Julian"
+      - "after Diane went to bed"
+      - "Thursday night"
+    expected_triples:
+      - ["user", "fought_with", "Julian"]
+      - ["user", "has_emotion", "angry"]
+      - ["user", "waited_for", "Diane to go to bed"]
+    expected_adaptation:
+      emotion_detected: "angry"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 9:05 PM"
+    user_input: |
+      I was like Julian your mom has been here for three days and she's rearranged my kitchen twice reorganized my bathroom told me my soap is wrong my mugs are wrong my bakeware is wrong and you just SIT THERE and he was like I don't think it's that bad and I literally saw red
+    expected_memory_stores:
+      - "three days of violations"
+      - "Julian minimizing"
+      - "seeing red"
+    expected_triples:
+      - ["Diane", "visited_for", "three days"]
+      - ["Diane", "rearranged", "kitchen and bathroom"]
+      - ["Julian", "minimized", "Maya's concerns"]
+      - ["user", "has_emotion", "furious"]
+    expected_adaptation:
+      emotion_detected: "furious"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 9:10 PM"
+    user_input: |
+      and then I said you PROMISED you would say something and you haven't said a single word and he got defensive and was like she's just trying to help and I was like helping would be ASKING before moving my stuff and he went quiet
+    expected_memory_stores:
+      - "broken promise confrontation"
+      - "Julian defensive"
+      - "then went quiet"
+    expected_triples:
+      - ["Julian", "broke_promise", "to speak up to Diane"]
+      - ["Julian", "became", "defensive"]
+      - ["user", "has_emotion", "upset"]
+    expected_adaptation:
+      emotion_detected: "upset"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 9:20 PM"
+    user_input: |
+      then I started crying which I hate because I wasn't sad I was angry but the tears just came and Julian immediately softened up and came over and hugged me and said I'm sorry you're right I should have said something
+    expected_memory_stores:
+      - "Maya crying"
+      - "angry tears"
+      - "Julian apologized"
+      - "hugged"
+    expected_triples:
+      - ["user", "cried_from", "anger not sadness"]
+      - ["Julian", "apologized_to", "user"]
+      - ["Julian", "hugged", "user"]
+      - ["user", "has_emotion", "vulnerable"]
+    expected_adaptation:
+      emotion_detected: "vulnerable"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 9:30 PM"
+    user_input: |
+      we talked for like half an hour and he admitted that he sees what she does but he freezes because she's his mom and he doesn't want to hurt her feelings and I get that I really do but I told him it's hurting MY feelings and that has to matter too
+    expected_memory_stores:
+      - "Julian admits seeing it"
+      - "freezes around mom"
+      - "doesn't want to hurt Diane"
+      - "Maya's feelings matter too"
+    expected_triples:
+      - ["Julian", "admits", "seeing Diane's behavior"]
+      - ["Julian", "freezes_around", "Diane"]
+      - ["user", "asserted", "her feelings matter too"]
+      - ["user", "has_emotion", "hurt"]
+    expected_adaptation:
+      emotion_detected: "hurt"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 10:00 PM"
+    user_input: |
+      he said he'll talk to her tomorrow morning and I said ok but please don't make it about me like don't say Maya is upset just say like hey mom please ask before you move things and he agreed and honestly I feel a little better now
+    expected_memory_stores:
+      - "Julian will talk to Diane"
+      - "tomorrow morning"
+      - "don't blame Maya"
+      - "ask before moving things"
+    expected_triples:
+      - ["Julian", "will_talk_to", "Diane tomorrow morning"]
+      - ["user", "requested", "don't blame Maya"]
+      - ["user", "has_emotion", "relieved"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 10:15 PM"
+    user_input: |
+      Kobe was so stressed during our fight he was like pacing and whining and then when we hugged he came over and put his head between us like he was trying to fix it too what a good boy
+    expected_memory_stores:
+      - "Kobe stressed during fight"
+      - "dog pacing"
+      - "came between them"
+    expected_triples:
+      - ["Kobe", "reacted_to", "fight with stress"]
+      - ["Kobe", "put_head_between", "Maya and Julian"]
+      - ["user", "has_emotion", "tender"]
+    expected_adaptation:
+      emotion_detected: "tender"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 7:00 AM"
+    user_input: |
+      barely slept last night just kept replaying everything in my head and I can hear Diane in the kitchen already probably rearranging the plates or something I dunno Julian said he'd talk to her this morning so I'm just waiting
+    expected_memory_stores:
+      - "didn't sleep well"
+      - "waiting for Julian's conversation"
+      - "Diane in kitchen"
+    expected_triples:
+      - ["user", "slept_poorly", "replaying fight"]
+      - ["user", "waiting_for", "Julian to talk to Diane"]
+      - ["user", "has_emotion", "anxious"]
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 9:00 AM"
+    user_input: |
+      what exactly did Julian promise to tell his mom again
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 10:30 AM"
+    user_input: |
+      ok he did it he talked to her while I took Kobe for a walk and when I got back she was in the guest room and Julian said it went ok but she was quiet after and I feel weirdly guilty even though I know I shouldn't
+    expected_memory_stores:
+      - "Julian talked to Diane"
+      - "Diane quiet after"
+      - "Maya feels guilty"
+      - "Kobe walk"
+    expected_adaptation:
+      emotion_detected: "guilty"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What happened between Maya and Julian?"
+    expected_contains: ["fight", "exploded", "argument"]
+  - question: "Why was Maya upset with Julian?"
+    expected_contains: ["didn't intervene", "silent", "promised"]
+  - question: "How did Julian initially respond to Maya's frustration?"
+    expected_contains: ["minimized", "not that bad", "defensive"]
+  - question: "What did Julian promise to tell Diane?"
+    expected_contains: ["ask before moving things"]
+  - question: "Did Julian talk to Diane?"
+    expected_contains: ["yes", "talked to her"]
+  - question: "How did Diane react after Julian talked to her?"
+    expected_contains: ["quiet"]
+  - question: "Why does Julian freeze around his mom?"
+    expected_contains: ["hurt her feelings", "his mom"]
+  - question: "How did Kobe react to the fight?"
+    expected_contains: ["stressed", "pacing", "whining"]
+  - question: "How is Maya feeling after the confrontation?"
+    expected_contains: ["guilty", "relieved"]
+  - question: "How long has Diane been visiting at this point?"
+    expected_contains: ["three days"]

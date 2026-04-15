@@ -1,0 +1,183 @@
+story_id: 177
+story_name: "Mom Stable"
+category: "Health"
+description: |
+  Vivian stabilizes on diltiazem. Follow-up appointment goes well.
+  Tests tracking medical improvement, ongoing monitoring, and emotional
+  transition from crisis to management mode.
+duration_simulated: "3 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Week 2 Monday 7:00 PM"
+    user_input: |
+      two weeks on diltiazem and Mom's doing really well Clara says her energy is almost back to normal she's cooking every day walking the neighborhood and she even started going back to her Chinese painting class at the community center which she had stopped after the chest pains
+    expected_memory_stores:
+      - "two weeks on diltiazem"
+      - "energy almost normal"
+      - "cooking every day"
+      - "walking regularly"
+      - "Chinese painting class resumed"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Week 2 Wednesday 7:00 PM"
+    user_input: |
+      did my nightly call and Mom told me she and Dad went out to lunch today at their favorite place this Chinese restaurant called Golden Dragon and she had soup and steamed fish instead of her usual fried dumplings because she's actually taking the diet stuff seriously which I'm shocked by honestly
+    expected_memory_stores:
+      - "parents went to Golden Dragon"
+      - "Vivian choosing healthier options"
+      - "steamed fish instead of fried dumplings"
+      - "diet changes sticking"
+    expected_adaptation:
+      emotion_detected: "pleasantly surprised"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Week 3 Friday 10:00 AM"
+    user_input: |
+      Clara took Mom to the follow up with Dr. Nair and she said the blood work looks great and the arrhythmia is well controlled on diltiazem and Dr. Nair said keep doing what you're doing Vivian and come back in three months and Clara texted me all this in real time like a live medical correspondent lol
+    expected_memory_stores:
+      - "follow up with Dr. Nair"
+      - "blood work great"
+      - "arrhythmia well controlled"
+      - "diltiazem working"
+      - "next appointment three months"
+      - "Clara providing updates"
+    expected_adaptation:
+      emotion_detected: "thrilled"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Week 3 Friday 12:00 PM"
+    user_input: |
+      called Mom after the appointment and she was smug she said see Maya I told you I was fine and I said Mom you had chest pains and went to the ER you were not quote fine unquote and she said well I'm fine NOW and I said okay fair enough and she asked how Kobe was and I said he's great Mom he ate another slipper though
+    expected_memory_stores:
+      - "Vivian smug about health"
+      - "Maya reminds of ER visit"
+      - "Vivian fine now"
+      - "asked about Kobe"
+      - "Kobe ate another slipper"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Week 3 Saturday 9:00 AM"
+    user_input: |
+      so the Ring camera has been amazing actually I check it like twice a day and I can see Mom in the kitchen or Dad in the living room and it makes me feel so much better like yesterday I saw Mom and some neighbor lady sitting on the porch drinking tea and I was like okay good she's socializing she's normal
+    expected_memory_stores:
+      - "Ring camera useful"
+      - "checking twice daily"
+      - "Vivian socializing with neighbor"
+      - "porch tea"
+      - "Maya reassured"
+    expected_adaptation:
+      emotion_detected: "comforted"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Week 3 Sunday 7:00 PM"
+    user_input: |
+      Mom's been asking about the wedding more and more she wants to know about the venue and the flowers and the dress and I finally told her about the dress from The White Veil and she cried AGAIN and said she wants to see it and I said Mom you'll see it on the wedding day and she said no I want to see it NOW mothers get to see the dress before the wedding Maya
+    expected_memory_stores:
+      - "Vivian wants wedding updates"
+      - "told about The White Veil dress"
+      - "Vivian cried again"
+      - "Vivian wants to see dress early"
+      - "mother-daughter dress tradition"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Week 4 Monday 7:00 PM"
+    user_input: |
+      Julian asked how Mom's doing tonight at dinner and I realized I haven't been as panicked about it lately like I still call every day and check the Ring but it's not consuming me anymore and Julian said that's healthy Maya and I think he's right I can worry about my mom AND live my life at the same time
+    expected_memory_stores:
+      - "Maya less panicked"
+      - "still calling daily"
+      - "checking Ring"
+      - "not consuming anymore"
+      - "Julian approves of balance"
+    expected_adaptation:
+      emotion_detected: "balanced"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Week 4 Wednesday 12:00 PM"
+    user_input: |
+      Clara said Mom's been walking with this group of ladies from the community center like three or four of them walk together every morning at 7am and it's become her routine and Clara said exercise buddy systems are the best accountability and Mom seems happier than before the health scare honestly
+    expected_memory_stores:
+      - "Vivian has walking group"
+      - "community center ladies"
+      - "7am walks"
+      - "accountability system"
+      - "Vivian happier than before"
+    expected_adaptation:
+      emotion_detected: "pleased"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Week 4 Friday 5:00 PM"
+    user_input: |
+      funny thing the health scare actually brought some good changes Mom's eating better exercising more taking her health seriously and Dad's been more attentive and they're spending more quality time together like the other day the Ring camera showed them dancing in the kitchen and I screenshotted it and sent it to Clara and she said I'm framing this
+    expected_memory_stores:
+      - "positive changes from health scare"
+      - "better diet exercise"
+      - "George more attentive"
+      - "parents dancing in kitchen"
+      - "Ring camera screenshot"
+      - "Clara framing it"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Week 4 Sunday 8:00 PM"
+    user_input: |
+      so status update on Mom's health she's stable on diltiazem no side effects arrhythmia controlled eating healthier exercising with her walking group next appointment in about two months and honestly I'm at peace with it now like she's okay she's got Clara nearby she's got Dad and she's got the Ring camera spying on her which she still doesn't love but accepts
+    expected_memory_stores:
+      - "health status summary"
+      - "diltiazem stable"
+      - "no side effects"
+      - "arrhythmia controlled"
+      - "next appointment two months"
+      - "Maya at peace"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Vivian's current health status?"
+    expected_contains: ["stable", "controlled", "diltiazem"]
+  - question: "How did the follow-up appointment go?"
+    expected_contains: ["great", "well controlled"]
+  - question: "When is Vivian's next appointment?"
+    expected_contains: ["three months", "two months"]
+  - question: "What lifestyle changes has Vivian made?"
+    expected_contains: ["eating healthier", "exercising", "walking"]
+  - question: "Does Vivian have a walking group?"
+    expected_contains: ["yes", "community center"]
+  - question: "Is the Ring camera still being used?"
+    expected_contains: ["yes"]
+  - question: "What did Maya see on the Ring camera?"
+    expected_contains: ["parents dancing", "kitchen"]
+  - question: "Has the health scare changed Vivian's lifestyle?"
+    expected_contains: ["yes", "better", "healthier"]
+  - question: "Is Vivian interested in wedding planning?"
+    expected_contains: ["yes", "asking"]
+  - question: "What class has Vivian returned to?"
+    expected_contains: ["Chinese painting"]

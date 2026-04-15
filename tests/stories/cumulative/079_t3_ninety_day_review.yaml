@@ -1,0 +1,227 @@
+story_id: 79
+story_name: "90-Day Review"
+category: "Career"
+description: |
+  Tests memory of Maya's formal 90-day review at Conduit AI.
+  Glowing feedback from Sam and Ross. Full circle from Vantage PIP.
+  Verifies system can reconstruct the complete career arc across threads.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 10:00 AM"
+    user_input: |
+      90-day review today with Sam and I'm weirdly nervous even though I know it's going to be fine like the last time I had a formal review was at Vantage and that was always positive but then Derek came along and suddenly reviews didn't matter so I have some trauma around this
+    expected_memory_stores:
+      - "90-day review"
+      - "nervous"
+      - "Vantage review trauma"
+      - "Derek association"
+    expected_triples:
+      - ["user", "has", "90-day review with Sam today"]
+      - ["user", "has_emotion", "anxious"]
+      - ["user", "has_trauma_from", "Vantage reviews and Derek"]
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 11:00 AM"
+    user_input: |
+      okay so the review was incredible like Sam literally said and I quote Maya has been the most impactful hire we've made this year and he went through everything the query expansion module the incident response the isolation layer the latency improvements and he said every single thing exceeded expectations
+    expected_memory_stores:
+      - "review incredible"
+      - "most impactful hire"
+      - "Sam quote"
+      - "query expansion mentioned"
+      - "incident response"
+      - "isolation layer"
+      - "latency improvements"
+      - "exceeded expectations"
+    expected_triples:
+      - ["Sam", "said", "user is most impactful hire this year"]
+      - ["Sam", "reviewed", "query expansion, incident response, isolation layer, latency improvements"]
+      - ["user", "rating", "exceeded expectations on every project"]
+      - ["user", "has_emotion", "overwhelmed"]
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 11:30 AM"
+    user_input: |
+      Sam also said he's recommending me for a title upgrade to senior search infrastructure engineer at the next promotion cycle in Q3 and that would come with a salary bump too and I was like Sam I've been here three months and he said talent doesn't have a time requirement
+    expected_memory_stores:
+      - "senior title recommendation"
+      - "senior search infrastructure engineer"
+      - "promotion cycle Q3"
+      - "salary bump"
+      - "talent no time requirement"
+    expected_triples:
+      - ["Sam", "recommending", "user for senior search infrastructure engineer"]
+      - ["promotion", "cycle", "Q3"]
+      - ["promotion", "includes", "salary bump"]
+      - ["Sam", "said", "talent doesn't have a time requirement"]
+      - ["user", "has_emotion", "stunned"]
+    expected_adaptation:
+      emotion_detected: "stunned"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 12:00 PM"
+    user_input: |
+      Ross also joined for the last ten minutes of the review and he said the search latency improvements directly contributed to a 15 percent increase in customer satisfaction scores and he thanked me personally and said he's glad Nina found me which was a nice full circle moment with the recruiter thing
+    expected_memory_stores:
+      - "Ross joined review"
+      - "15 percent customer satisfaction"
+      - "personal thanks"
+      - "Nina full circle"
+    expected_triples:
+      - ["Ross", "joined", "last 10 minutes of review"]
+      - ["search latency improvements", "caused", "15 percent increase in customer satisfaction"]
+      - ["Ross", "thanked_user_and", "said glad Nina found her"]
+      - ["user", "has_emotion", "emotional"]
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 1:00 PM"
+    user_input: |
+      called Julian right after and I could barely talk because I was getting emotional and he was like what happened is everything okay and I said they want to promote me and he literally screamed and then I heard him tell his coworker sorry my girlfriend just got amazing news and it was so cute
+    expected_memory_stores:
+      - "Julian called"
+      - "getting emotional"
+      - "promotion news"
+      - "Julian screamed"
+      - "told coworker"
+    expected_triples:
+      - ["user", "called", "Julian with promotion news"]
+      - ["Julian", "screamed", "with excitement"]
+      - ["Julian", "told_coworker", "girlfriend got amazing news"]
+      - ["user", "has_emotion", "joyful"]
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 5:00 PM"
+    user_input: |
+      Lily sent me flowers to my house like actual flowers delivered to my door and the card said from imposter to owner in 90 days proud of you and I'm like how is this woman so thoughtful and Julian put them on the kitchen table and Kobe tried to eat one of the roses
+    expected_memory_stores:
+      - "Lily sent flowers"
+      - "imposter to owner card"
+      - "90 days"
+      - "Julian placed flowers"
+      - "Kobe ate rose"
+    expected_triples:
+      - ["Lily", "sent", "flowers to user's house"]
+      - ["Lily", "card_said", "from imposter to owner in 90 days"]
+      - ["Kobe", "tried_to_eat", "a rose"]
+      - ["user", "has_emotion", "touched"]
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Monday 7:00 PM"
+    user_input: |
+      what did Sam say about Maya in her 90-day review
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Monday 9:00 PM"
+    user_input: |
+      lying in bed thinking about how three months ago I was on a PIP at Vantage thinking my career was over and now I'm being recommended for a senior title at a company I love and the contrast is so wild like what a difference the right environment makes versus the wrong one
+    expected_memory_stores:
+      - "PIP contrast"
+      - "three months ago"
+      - "career turnaround"
+      - "right environment"
+      - "reflection"
+    expected_triples:
+      - ["user", "reflected", "three months ago on PIP at Vantage, now recommended for senior title"]
+      - ["user", "realizes", "right environment vs wrong one makes all the difference"]
+      - ["user", "has_emotion", "reflective"]
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 9:00 AM"
+    user_input: |
+      told Leon about the review and the promotion recommendation and he was like Maya you went from PIP to promotion in three months that's a movie script and honestly he's right it kind of is and he said we should write a Medium post about toxic workplaces and I was like maybe someday
+    expected_memory_stores:
+      - "Leon reaction"
+      - "PIP to promotion"
+      - "three months"
+      - "movie script"
+      - "Medium post idea"
+      - "toxic workplaces"
+    expected_triples:
+      - ["Leon", "said", "PIP to promotion in three months is a movie script"]
+      - ["Leon", "suggested", "Medium post about toxic workplaces"]
+      - ["user", "responded", "maybe someday"]
+      - ["user", "has_emotion", "amused"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      called my mom and when I told her about the promotion recommendation she cried and said your father would be so proud and that hit me hard because I don't talk about my dad much but yeah I think he would be proud and Julian held my hand while I was on the phone and Kobe was being quiet like he knew it was a big moment
+    expected_memory_stores:
+      - "mom cried"
+      - "father mention"
+      - "father would be proud"
+      - "dad not around"
+      - "Julian held hand"
+      - "Kobe quiet"
+      - "emotional moment"
+    expected_triples:
+      - ["user's mom", "cried", "at promotion news"]
+      - ["user's mom", "said", "your father would be so proud"]
+      - ["user", "doesn't_talk_about", "dad much"]
+      - ["Julian", "held", "user's hand during phone call"]
+      - ["user", "has_emotion", "deeply moved"]
+    expected_adaptation:
+      emotion_detected: "deeply moved"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did Sam say about Maya in the 90-day review?"
+    expected_contains: ["most impactful hire", "exceeded expectations"]
+  - question: "What title is Maya being recommended for?"
+    expected_contains: ["senior search infrastructure engineer"]
+  - question: "When is the next promotion cycle?"
+    expected_contains: ["Q3"]
+  - question: "What did Ross say about the business impact?"
+    expected_contains: ["15 percent", "customer satisfaction"]
+  - question: "What did Lily send Maya?"
+    expected_contains: ["flowers"]
+  - question: "What did Lily's card say?"
+    expected_contains: ["imposter to owner"]
+  - question: "How does this compare to Maya's Vantage experience?"
+    expected_contains: ["PIP", "three months", "contrast"]
+  - question: "What did Maya's mom say about her dad?"
+    expected_contains: ["proud"]
+  - question: "What did Leon say about Maya's story?"
+    expected_contains: ["movie script"]
+  - question: "What projects were mentioned in Maya's review?"
+    expected_contains: ["query expansion", "incident", "isolation layer", "latency"]

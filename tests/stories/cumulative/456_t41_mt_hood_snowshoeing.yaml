@@ -1,0 +1,179 @@
+story_id: 456
+story_name: "Mt Hood Snowshoeing"
+category: "Road Trips"
+description: |
+  Tests memory of Maya and Julian snowshoeing at Mt Hood.
+  Establishes winter road trip, physical challenge, scenic beauty.
+  Verifies cross-thread references to climbing fitness and guitar.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 6:00 AM"
+    user_input: |
+      okay so we're doing a winter one today Mt Hood snowshoeing and Julian is not thrilled because he hates being cold but I'm like dude you survived the Columbia River at Hood River you'll be fine and we rented snowshoes from REI yesterday and I have like seven layers on and Kobe is staying with my parents this time because snow plus dog equals chaos
+    expected_memory_stores:
+      - "Mt Hood"
+      - "snowshoeing"
+      - "Julian hates cold"
+      - "Hood River reference"
+      - "rented snowshoes REI"
+      - "Kobe with parents"
+    expected_adaptation:
+      emotion_detected: "energized"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 8:00 AM"
+    user_input: |
+      the drive up to Timberline is only like an hour and a half from Portland and the mountain just keeps getting bigger as you drive toward it and there's snow everywhere and Julian admitted it's beautiful and I was like see this is why we do these trips and he took like 50 photos before we even parked
+    expected_memory_stores:
+      - "Timberline"
+      - "hour and a half drive"
+      - "mountain view"
+      - "snow everywhere"
+      - "Julian admitted beautiful"
+    expected_adaptation:
+      emotion_detected: "vindicated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 9:30 AM"
+    user_input: |
+      so we started on the Timberline Trail snowshoe route and its like a three mile loop and I'm doing great honestly all the climbing with Nadia and Omar has given me decent cardio but Julian is huffing and puffing after like ten minutes and I'm like this is the Cleetwood Cove situation all over again
+    expected_memory_stores:
+      - "Timberline Trail"
+      - "three mile loop"
+      - "Maya good cardio"
+      - "climbing fitness"
+      - "Julian struggling"
+      - "Cleetwood Cove comparison"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 11:00 AM"
+    user_input: |
+      the views from up here are incredible like you can see all the way to Mt Jefferson and the Three Sisters in the distance and the snow is that perfect fluffy powder and Julian found his second wind and he's actually enjoying it now and the silence up here is so peaceful like no traffic no noise just snow crunching
+    expected_memory_stores:
+      - "Mt Jefferson visible"
+      - "Three Sisters visible"
+      - "fluffy powder snow"
+      - "Julian second wind"
+      - "peaceful silence"
+    expected_adaptation:
+      emotion_detected: "serene"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 12:30 PM"
+    user_input: |
+      we stopped at the Timberline Lodge for lunch and oh my god this place is gorgeous like it was built in the 1930s by the WPA and its the hotel from The Shining and Julian is geeking out and we got hot chocolate and elk chili and I can feel my toes again finally
+    expected_memory_stores:
+      - "Timberline Lodge"
+      - "built 1930s WPA"
+      - "The Shining hotel"
+      - "hot chocolate"
+      - "elk chili"
+    expected_adaptation:
+      emotion_detected: "cozy"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 2:00 PM"
+    user_input: |
+      Julian bought a Timberline Lodge hoodie and he's wearing it already and he keeps taking selfies and I'm like you're such a dork and also I tried to FaceTime Clara to show her the mountain but the service up here is terrible so I'll just send her photos later Sophie would love the snow when she's older
+    expected_memory_stores:
+      - "Julian bought hoodie"
+      - "selfies"
+      - "tried FaceTime Clara"
+      - "bad service"
+      - "Sophie snow idea"
+    expected_adaptation:
+      emotion_detected: "playful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 3:30 PM"
+    user_input: |
+      we did one more short trail after lunch and Julian actually said he wants to learn to ski which is a huge development because this man does not do winter sports and I was like first windsurfing now skiing what's next and he said maybe I'll try climbing too and I almost passed out from shock
+    expected_memory_stores:
+      - "second trail"
+      - "Julian wants to ski"
+      - "windsurfing reference"
+      - "Julian might try climbing"
+      - "Maya shocked"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 5:00 PM"
+    user_input: |
+      what was the name of the lodge where we had lunch at Mt Hood
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 6:30 PM"
+    user_input: |
+      driving back and Julian is playing this chill acoustic playlist and I'm humming along and honestly I've been thinking about learning to play some of these songs on guitar like beyond just Knockin on Heavens Door and Julian goes you know what would be cool is if you played guitar at our wedding and I almost crashed the car because WHAT that's actually an amazing idea but also terrifying
+    expected_memory_stores:
+      - "acoustic playlist"
+      - "learn more guitar songs"
+      - "Julian suggested wedding guitar"
+      - "Maya terrified excited"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 8:00 PM"
+    user_input: |
+      home and picked up Kobe from mom and dads and mom made us dinner because she's the best and dad asked about the trip and I showed him photos and he said Mt Hood reminds him of mountains in Taiwan when he was young and that made me a little emotional and then Julian updated our Google Map with the Mt Hood pin and we're up to like six trips now this is so cool
+    expected_memory_stores:
+      - "Kobe from parents"
+      - "Vivian made dinner"
+      - "George Taiwan mountains"
+      - "emotional moment"
+      - "Google Map updated"
+      - "six trips total"
+    expected_adaptation:
+      emotion_detected: "sentimental"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where did Maya and Julian go snowshoeing?"
+    expected_contains: ["Mt Hood", "Timberline"]
+  - question: "How long was the snowshoe trail?"
+    expected_contains: ["three mile"]
+  - question: "What famous movie featured the lodge at Mt Hood?"
+    expected_contains: ["Shining"]
+  - question: "What winter sport does Julian want to learn?"
+    expected_contains: ["ski"]
+  - question: "Who watched Kobe during the Mt Hood trip?"
+    expected_contains: ["parents", "mom", "dad"]
+  - question: "What did Julian suggest Maya do at the wedding?"
+    expected_contains: ["play guitar"]
+  - question: "What did George say Mt Hood reminded him of?"
+    expected_contains: ["Taiwan", "mountains"]
+  - question: "Where did they rent snowshoes?"
+    expected_contains: ["REI"]
+  - question: "What did they eat at Timberline Lodge?"
+    expected_contains: ["hot chocolate", "elk chili"]
+  - question: "How many road trips have they done total?"
+    expected_contains: ["six"]

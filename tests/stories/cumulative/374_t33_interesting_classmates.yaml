@@ -1,0 +1,174 @@
+story_id: 374
+story_name: "Interesting People in Class"
+category: "Personal Development"
+description: |
+  Tests memory of Maya connecting with classmates in first aid training.
+  Verifies system tracks new social connections and shared motivations.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 8:30 AM"
+    user_input: |
+      got to class early and Patricia the woman who helped me when I was lightheaded brought donuts for everyone and we started talking and she's actually a grandmother of four and she's getting certified because she watches her grandkids and wants to be prepared
+    expected_memory_stores:
+      - "Patricia"
+      - "grandmother of four"
+      - "watches grandkids"
+      - "brought donuts"
+      - "getting certified for safety"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:00 AM"
+    user_input: |
+      Derek the teacher told me more about the seizure incident and he said the kid was fine but he felt so helpless and that's what drove him here and I was like that's exactly how I felt during Kobe's emergency and my own ER visit
+    expected_memory_stores:
+      - "Derek seizure story"
+      - "kid was fine"
+      - "felt helpless"
+      - "parallel to Maya's experiences"
+    expected_adaptation:
+      emotion_detected: "connected"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 12:00 PM"
+    user_input: |
+      there's also this guy named Raj who's a hiking guide and he said he's had to deal with actual emergencies on trails like hypothermia and broken ankles and he's getting formally certified because his company requires it now and his stories are wild
+    expected_memory_stores:
+      - "Raj hiking guide"
+      - "trail emergencies"
+      - "hypothermia broken ankles"
+      - "company requirement"
+      - "wild stories"
+    expected_adaptation:
+      emotion_detected: "fascinated"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 1:00 PM"
+    user_input: |
+      Raj and I actually exchanged numbers because he goes climbing sometimes too and when I mentioned I climb with Omar he was like oh at Portland Rock Gym and I was like yeah and he said maybe we should all go together sometime
+    expected_memory_stores:
+      - "Raj exchanged numbers"
+      - "Raj climbs"
+      - "Portland Rock Gym connection"
+      - "Omar mentioned"
+      - "potential group climb"
+    expected_adaptation:
+      emotion_detected: "social"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 3:30 PM"
+    user_input: |
+      Frank told us about this one time he responded to a car accident as a paramedic and he had to do CPR on a teenager and he saved the kid's life and he got all choked up telling the story and the whole room was silent and I was like this is why this matters
+    expected_memory_stores:
+      - "Frank car accident story"
+      - "CPR on teenager"
+      - "saved life"
+      - "emotional moment"
+      - "why it matters"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 5:00 PM"
+    user_input: |
+      did partner exercises with Patricia and she's surprisingly strong for someone who looks like a sweet grandma and she was doing chest compressions on the dummy with perfect form and I was like go Patricia and the whole class cheered
+    expected_memory_stores:
+      - "partner exercises"
+      - "Patricia strong"
+      - "perfect compressions"
+      - "class cheered"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 9:00 AM"
+    user_input: |
+      Derek brought coffee for everyone today and I'm realizing this class has become this weird little community like we're all here for different reasons but we all have this same motivation of wanting to help and not feel helpless
+    expected_memory_stores:
+      - "Derek brought coffee"
+      - "class community"
+      - "different reasons"
+      - "shared motivation"
+      - "not helpless"
+    expected_adaptation:
+      emotion_detected: "belonging"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 11:00 AM"
+    user_input: |
+      who are the interesting people Maya met in her first aid class
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 2:00 PM"
+    user_input: |
+      Raj said something that really stuck with me he said first aid isn't about being a hero it's about being the person who doesn't freeze and I thought that was really profound and I wrote it down in my notebook
+    expected_memory_stores:
+      - "Raj quote"
+      - "not about being hero"
+      - "about not freezing"
+      - "Maya wrote it down"
+      - "found it profound"
+    expected_adaptation:
+      emotion_detected: "thoughtful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 5:00 PM"
+    user_input: |
+      we exchanged a group text chain after class Frank Patricia Derek Raj and me and a few others and everyone's planning to keep in touch and I told Julian I made friends at first aid class like a kindergartener and he laughed
+    expected_memory_stores:
+      - "group text chain"
+      - "staying in touch"
+      - "Frank Patricia Derek Raj"
+      - "Julian laughed"
+      - "kindergarten joke"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who is Patricia in Maya's first aid class?"
+    expected_contains: ["grandmother", "four", "grandkids"]
+  - question: "What is Derek's profession?"
+    expected_contains: ["teacher"]
+  - question: "What is Raj's job?"
+    expected_contains: ["hiking guide"]
+  - question: "Why is Raj getting certified?"
+    expected_contains: ["company requires"]
+  - question: "What connection do Maya and Raj share?"
+    expected_contains: ["climbing"]
+  - question: "What story did Frank tell that moved the class?"
+    expected_contains: ["teenager", "car accident", "CPR"]
+  - question: "What quote did Raj say about first aid?"
+    expected_contains: ["not about", "hero", "not freeze"]
+  - question: "Did Maya stay in touch with classmates?"
+    expected_contains: ["group text", "yes"]
+  - question: "What did Patricia bring to class?"
+    expected_contains: ["donuts"]
+  - question: "What shared motivation unites the class?"
+    expected_contains: ["help", "not helpless"]

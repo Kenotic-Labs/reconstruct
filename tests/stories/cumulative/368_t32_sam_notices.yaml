@@ -1,0 +1,165 @@
+story_id: 368
+story_name: "Sam Notices"
+category: "Career Development"
+description: |
+  Tests memory of Sam formally recognizing Maya's growth and impact at Conduit.
+  Verifies system tracks professional recognition and career trajectory.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 2:00 PM"
+    user_input: |
+      Sam scheduled a one on one with me which doesn't usually happen outside of our regular weekly sync so I'm like either something is wrong or something is right and I spent the whole morning overthinking it
+    expected_memory_stores:
+      - "Sam scheduled 1:1"
+      - "unusual meeting"
+      - "Maya overthinking"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 3:00 PM"
+    user_input: |
+      okay so the meeting was amazing Sam said the search ranking improvement is being flagged to the VP level because it directly impacts revenue and he said he put my name on it as the lead contributor and I'm like what this is crazy
+    expected_memory_stores:
+      - "VP level recognition"
+      - "revenue impact"
+      - "lead contributor credit"
+      - "Sam advocacy"
+    expected_adaptation:
+      emotion_detected: "shocked"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 5:00 PM"
+    user_input: |
+      Sam also said he wants me to present the ranking model improvement at the next all-hands which is in two weeks and that's like 200 people and I'm terrified but also honored because only senior engineers usually present at all-hands
+    expected_memory_stores:
+      - "all-hands presentation"
+      - "two weeks"
+      - "200 people"
+      - "usually senior engineers"
+      - "terrified and honored"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      told Dr Tate about the work stuff and she was like Maya do you notice the pattern you take on something scary get overwhelmed almost quit push through and then succeed and I was like huh I guess that IS my pattern
+    expected_memory_stores:
+      - "Dr. Tate pattern observation"
+      - "scary overwhelm quit push succeed"
+      - "Maya's pattern"
+    expected_adaptation:
+      emotion_detected: "insightful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      Danny and Lily took me to lunch to celebrate and Danny was like dude you're gonna be a senior engineer before me and I was like shut up but Lily said she wouldn't be surprised and Sam apparently told her I'm being considered for the next promotion cycle
+    expected_memory_stores:
+      - "celebration lunch"
+      - "Danny senior engineer comment"
+      - "Lily confirms promotion cycle"
+      - "Sam told Lily"
+    expected_adaptation:
+      emotion_detected: "flattered"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 8:00 PM"
+    user_input: |
+      I'm working on my all-hands presentation slides and Julian is helping because obviously he's a graphic designer and he's making them look so professional and he said the data visualizations need to tell a story not just show numbers
+    expected_memory_stores:
+      - "presentation slides"
+      - "Julian helping design"
+      - "data visualizations"
+      - "storytelling approach"
+    expected_adaptation:
+      emotion_detected: "collaborative"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 5:00 PM"
+    user_input: |
+      practiced the presentation in front of Lily and Danny and they gave me really good feedback like Danny said I need to slow down because I talk too fast when I'm nervous and Lily said to start with the business impact not the technical details
+    expected_memory_stores:
+      - "practice presentation"
+      - "Danny slow down feedback"
+      - "Lily business impact first"
+      - "talk fast when nervous"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 10:00 AM"
+    user_input: |
+      what is Sam having Maya present at the all-hands about
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 2:00 PM"
+    user_input: |
+      Omar came over for ramen and I told him about the work stuff and he was like Maya you're literally living the dream getting paid to learn cool stuff and applying it and making your company better and I guess when he puts it that way yeah it is pretty cool
+    expected_memory_stores:
+      - "Omar perspective"
+      - "living the dream"
+      - "learn apply improve"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 6:00 PM"
+    user_input: |
+      called Jenny and updated her on everything and she was like girl this is what happens when you push through the hard part and she said she always knew I'd end up doing something impressive with the ML stuff because I get obsessive about things I care about
+    expected_memory_stores:
+      - "Jenny update"
+      - "push through hard part"
+      - "obsessive about passions"
+      - "Jenny's faith"
+    expected_adaptation:
+      emotion_detected: "loved"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What level is Maya's search ranking work being recognized at?"
+    expected_contains: ["VP"]
+  - question: "What is Maya presenting at the all-hands?"
+    expected_contains: ["search ranking", "improvement", "model"]
+  - question: "How many people attend the Conduit all-hands?"
+    expected_contains: ["200"]
+  - question: "Is Maya being considered for promotion?"
+    expected_contains: ["yes", "promotion cycle"]
+  - question: "What pattern did Dr. Tate identify in Maya?"
+    expected_contains: ["overwhelm", "push through", "succeed"]
+  - question: "Who is helping Maya with presentation slides?"
+    expected_contains: ["Julian"]
+  - question: "What presentation feedback did Danny give?"
+    expected_contains: ["slow down", "talks fast"]
+  - question: "What feedback did Lily give about the presentation?"
+    expected_contains: ["business impact", "first"]
+  - question: "Who credited Maya as lead contributor?"
+    expected_contains: ["Sam"]
+  - question: "Why is the search ranking important to the VP?"
+    expected_contains: ["revenue"]

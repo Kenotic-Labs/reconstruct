@@ -1,0 +1,190 @@
+story_id: 282
+story_name: "Demo Day Chaos"
+category: "Home"
+description: |
+  Tests memory of Maya and Julian ripping out the kitchen cabinets and discovering
+  asbestos tile underneath the vinyl flooring. Captures the moment confidence turns to panic.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 8:00 AM"
+    user_input: |
+      started demo and the first cabinet came off the wall super easy like three screws and it popped right off and I was like SEE this is why you watch YouTube and Julian high-fived me and Nadia was filming the whole thing from a safe distance
+    expected_memory_stores:
+      - "first cabinet easy"
+      - "three screws"
+      - "confidence building"
+      - "Nadia filming"
+      - "Julian high five"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 9:30 AM"
+    user_input: |
+      got all the upper cabinets off in about an hour and the walls underneath are a disaster like there's water stains and patches of missing drywall and whoever installed these cabinets in 1987 used approximately one million nails but still going strong
+    expected_memory_stores:
+      - "uppers removed"
+      - "one hour"
+      - "water stains"
+      - "missing drywall"
+      - "too many nails"
+    expected_adaptation:
+      emotion_detected: "undeterred"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:00 AM"
+    user_input: |
+      lower cabinets are harder because they're attached to each other and the countertop and the plumbing and Julian accidentally hit a water supply line with the pry bar and water started spraying everywhere and I was scrambling for the shutoff valve and Nadia was screaming and Kobe was barking it was chaos
+    expected_memory_stores:
+      - "lower cabinets harder"
+      - "hit water supply line"
+      - "water spraying"
+      - "shutoff valve"
+      - "Nadia screaming"
+      - "Kobe barking"
+      - "chaos"
+    expected_adaptation:
+      emotion_detected: "panicked"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 11:30 AM"
+    user_input: |
+      got the water shut off and the damage was minimal like a little puddle that we mopped up but Julian felt terrible and I was like it's fine this is why The Honest Carpenter said to shut off the water BEFORE demo and we didn't listen so lesson learned
+    expected_memory_stores:
+      - "water shut off"
+      - "minimal damage"
+      - "Julian felt bad"
+      - "should have shut off first"
+      - "Honest Carpenter was right"
+    expected_adaptation:
+      emotion_detected: "forgiving"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 1:00 PM"
+    user_input: |
+      got the old laminate counters off and the lower cabinets out and underneath the vinyl flooring there's... oh no. there are these 9x9 inch tiles that look like they're from the 60s and they're that suspicious gray-green color and Nadia was like uh isn't that asbestos tile
+    expected_memory_stores:
+      - "counters removed"
+      - "lowers out"
+      - "9x9 tiles underneath"
+      - "gray-green color"
+      - "1960s"
+      - "possible asbestos"
+      - "Nadia identified"
+    expected_adaptation:
+      emotion_detected: "dread"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 1:15 PM"
+    user_input: |
+      googled it and yeah 9x9 inch tiles from the 60s are almost always asbestos containing and you're NOT supposed to disturb them and we literally just ripped cabinets off on top of them and Julian went white and I was like okay everyone put your masks on NOW and let's step outside
+    expected_memory_stores:
+      - "confirmed asbestos likely"
+      - "9x9 tiles 60s"
+      - "not supposed to disturb"
+      - "may have disturbed"
+      - "masks on"
+      - "went outside"
+      - "Julian went white"
+    expected_adaptation:
+      emotion_detected: "scared"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 2:00 PM"
+    user_input: |
+      called Eddie because he dealt with asbestos in our basement wiring and he said don't panic the tiles are only dangerous if you break them and create dust and if they're intact under the vinyl it's actually fine and we should get them tested before assuming the worst
+    expected_memory_stores:
+      - "called Eddie"
+      - "only dangerous if broken"
+      - "dust is the danger"
+      - "get tested first"
+      - "might be fine"
+    expected_adaptation:
+      emotion_detected: "slightly calmer"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 4:00 PM"
+    user_input: |
+      so the kitchen is now a gutted disaster zone with no cabinets no counters exposed walls and possibly asbestos floor tiles and Julian looked at me and was like so maybe we should have hired a contractor and I was like yeah maybe and Nadia was like you think
+    expected_memory_stores:
+      - "kitchen gutted"
+      - "disaster zone"
+      - "no cabinets no counters"
+      - "asbestos floor"
+      - "should have hired contractor"
+      - "Nadia sarcasm"
+    expected_adaptation:
+      emotion_detected: "humbled"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 7:00 PM"
+    user_input: |
+      we set up a temporary kitchen in the living room with a microwave and a hot plate and the coffee maker and Kobe keeps sniffing the construction dust and I keep shooing him away and our kitchen is going to be out of commission for way longer than we planned
+    expected_memory_stores:
+      - "temporary kitchen"
+      - "living room"
+      - "microwave hot plate coffee"
+      - "Kobe sniffing dust"
+      - "longer than planned"
+    expected_adaptation:
+      emotion_detected: "resigned"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:00 PM"
+    user_input: |
+      Julian and I agreed we need a real contractor for the rest of this because the asbestos changes everything and also the walls need repair and probably the subfloor under the tiles and this is clearly beyond YouTube tutorial territory Eddie said he knows someone good named Miguel Santos who does kitchen renovations
+    expected_memory_stores:
+      - "need contractor"
+      - "asbestos changes everything"
+      - "walls need repair"
+      - "subfloor concerns"
+      - "beyond DIY"
+      - "Miguel Santos"
+      - "Eddie recommendation"
+      - "kitchen renovations"
+    expected_adaptation:
+      emotion_detected: "pragmatic"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What was found under the kitchen flooring?"
+    expected_contains: ["asbestos", "tiles", "9x9"]
+  - question: "What happened with the water supply during demo?"
+    expected_contains: ["hit", "pry bar", "spraying"]
+  - question: "Who identified the tiles as possible asbestos?"
+    expected_contains: ["Nadia"]
+  - question: "What contractor was recommended?"
+    expected_contains: ["Miguel Santos"]
+  - question: "Who recommended Miguel Santos?"
+    expected_contains: ["Eddie"]
+  - question: "Where is the temporary kitchen set up?"
+    expected_contains: ["living room"]
+  - question: "What does the kitchen look like after demo?"
+    expected_contains: ["gutted", "no cabinets", "no counters"]
+  - question: "Are the asbestos tiles dangerous in their current state?"
+    expected_contains: ["only if broken", "dust"]
+  - question: "Did Maya and Julian successfully do the demo themselves?"
+    expected_contains: ["partially", "cabinets yes"]
+  - question: "Why did they decide to hire a contractor?"
+    expected_contains: ["asbestos", "beyond", "walls", "subfloor"]

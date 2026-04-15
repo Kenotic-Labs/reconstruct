@@ -1,0 +1,175 @@
+story_id: 335
+story_name: "Maya Refuses to Pick Sides"
+category: "Friendships"
+description: |
+  Tests memory of Maya stepping into mediator role. She refuses the binary
+  of Team Marcus vs Team Nadia and tries to bring everyone together.
+  Verifies system tracks role evolution and diplomatic actions.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00 AM"
+    user_input: |
+      ok so I sent a text to the Round Table chat this morning and I said hey everyone I know things have been weird but we're all adults and the Round Table is important to all of us so let's talk about it at next dinner and nobody responded for like two hours
+    expected_memory_stores:
+      - "Maya texted group"
+      - "all adults"
+      - "Round Table important"
+      - "talk at dinner"
+      - "no response two hours"
+    expected_adaptation:
+      emotion_detected: "brave"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 11:30 AM"
+    user_input: |
+      Omar replied first and said I'm in and then Julian said same and then Nadia said I already told Maya I'm ok with this and then like an hour later Marcus said ok and it was the most tense group chat I've ever been in but everyone agreed
+    expected_memory_stores:
+      - "everyone agreed"
+      - "Omar first"
+      - "Nadia already ok"
+      - "Marcus last to respond"
+      - "tense group chat"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 6:00 PM"
+    user_input: |
+      called Marcus directly and said look I owe you an apology for how cold I've been and I still think what you did wasn't great but you're my friend too and I shouldn't have iced you out and he said thank you Maya that means a lot and his voice cracked
+    expected_memory_stores:
+      - "called Marcus"
+      - "apologized for coldness"
+      - "still thinks wrong"
+      - "but still friends"
+      - "Marcus voice cracked"
+    expected_adaptation:
+      emotion_detected: "mature"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      told Nadia I'm not going to be Team Nadia or Team Marcus anymore and I'm going to be Team Everyone and she said honestly that's what I want too because the whole sides thing made everything worse and she said she just wants to move forward
+    expected_memory_stores:
+      - "Team Everyone"
+      - "no more sides"
+      - "Nadia agrees"
+      - "wants to move forward"
+    expected_adaptation:
+      emotion_detected: "resolute"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 8:30 PM"
+    user_input: |
+      Jenny pushed back a little on Marco Polo she said Maya you're being too nice to Marcus and he needs to be held accountable and I said I'm not excusing what he did I'm just choosing the group over the grudge and Jenny said hmm ok fine
+    expected_memory_stores:
+      - "Jenny pushed back"
+      - "too nice to Marcus"
+      - "accountable"
+      - "group over grudge"
+      - "Jenny relented"
+    expected_adaptation:
+      emotion_detected: "firm"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      Marcus texted me separately and said he wants to apologize to Nadia before the dinner so it's not a public thing and I said that's actually a really good idea and he said he's going to call her tonight and I said be honest and be real
+    expected_memory_stores:
+      - "Marcus wants to apologize to Nadia"
+      - "before dinner"
+      - "call tonight"
+      - "be honest and real"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 9:00 PM"
+    user_input: |
+      Marcus called Nadia and it went for 45 minutes and Nadia texted me after and said he was actually really honest and he said he has attachment issues from his parents' divorce and he's working on it and she said she appreciated the honesty even if it doesn't fix what happened
+    expected_memory_stores:
+      - "Marcus called Nadia 45 minutes"
+      - "attachment issues"
+      - "parents' divorce"
+      - "working on it"
+      - "Nadia appreciated honesty"
+      - "doesn't fix it"
+    expected_adaptation:
+      emotion_detected: "encouraged"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 10:00 AM"
+    user_input: |
+      what did Marcus say about why he has commitment issues
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 6:00 PM"
+    user_input: |
+      Julian said he's proud of how I handled this and that going from taking sides to being a bridge was exactly what the group needed and I said I learned it from the Greg situation because that taught me that understanding someone doesn't mean excusing them
+    expected_memory_stores:
+      - "Julian proud"
+      - "taking sides to bridge"
+      - "learned from Greg"
+      - "understanding not excusing"
+    expected_adaptation:
+      emotion_detected: "wise"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 9:00 PM"
+    user_input: |
+      dinner is Saturday and I'm nervous but I think it's going to be ok because Marcus and Nadia already talked and everyone wants to be there and I think the Round Table is going to survive this and maybe be stronger for it like all things that get tested
+    expected_memory_stores:
+      - "dinner Saturday"
+      - "nervous but hopeful"
+      - "Marcus and Nadia talked"
+      - "Round Table will survive"
+      - "stronger from testing"
+    expected_adaptation:
+      emotion_detected: "optimistic"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What approach did Maya take with the group?"
+    expected_contains: ["Team Everyone", "no sides", "bridge"]
+  - question: "Did Marcus apologize to Nadia?"
+    expected_contains: ["yes", "called", "45 minutes"]
+  - question: "What did Marcus reveal about his commitment issues?"
+    expected_contains: ["attachment issues", "parents' divorce"]
+  - question: "How did Nadia respond to Marcus's apology?"
+    expected_contains: ["appreciated honesty", "doesn't fix"]
+  - question: "What did Jenny think about Maya's approach?"
+    expected_contains: ["pushed back", "too nice"]
+  - question: "What did Maya learn from the Greg situation?"
+    expected_contains: ["understanding not excusing"]
+  - question: "Who was the first to respond to Maya's group text?"
+    expected_contains: ["Omar"]
+  - question: "Did Maya apologize to Marcus?"
+    expected_contains: ["yes", "cold", "iced out"]
+  - question: "What did Julian say about Maya's mediation?"
+    expected_contains: ["proud", "bridge"]
+  - question: "Is the dinner happening?"
+    expected_contains: ["yes", "Saturday"]

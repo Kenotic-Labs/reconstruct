@@ -1,0 +1,190 @@
+story_id: 290
+story_name: "Renovation Identity"
+category: "Home"
+description: |
+  Tests memory of Maya reflecting on the renovation journey and how it changed her
+  relationship to the house, to Julian, and to herself. Completes T24.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      Anna came by for the bathroom assessment today and she quoted $7,500 for everything including labor and she'll handle the asbestos testing and demo and install and she said about three weeks timeline and I was like great add 30% for budget and a week for timeline just in case
+    expected_memory_stores:
+      - "Anna bathroom quote $7,500"
+      - "labor included"
+      - "asbestos testing"
+      - "three weeks"
+      - "Maya adds 30% buffer"
+      - "extra week buffer"
+    expected_adaptation:
+      emotion_detected: "prepared"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      our neighbor Mark came over and saw the kitchen and was like holy cow you guys did an amazing job and I told him the whole saga and he was laughing so hard about Miguel ghosting and the asbestos and the water pipe and he was like welcome to homeownership kid
+    expected_memory_stores:
+      - "Mark saw kitchen"
+      - "told the saga"
+      - "Mark laughing"
+      - "welcome to homeownership"
+    expected_adaptation:
+      emotion_detected: "storytelling"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      I was thinking about this and a year ago I would have never imagined I'd know the difference between PEX and copper or what a GFCI outlet is or how to read a contractor quote or what sandbagged means in climbing for that matter and it's weird how much you learn when you just do stuff
+    expected_memory_stores:
+      - "knowledge gained"
+      - "PEX copper"
+      - "GFCI"
+      - "contractor quotes"
+      - "learning by doing"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 7:00 PM"
+    user_input: |
+      Julian designed a little plaque for the kitchen that says "est. 2026 - built by Maya & Julian (and Anna) (and sort of Miguel) (and YouTube)" and he laser-cut it at Bold Studio and it's hanging above the doorway and I love it so much
+    expected_memory_stores:
+      - "Julian made plaque"
+      - "est. 2026"
+      - "built by Maya Julian Anna Miguel YouTube"
+      - "laser-cut at Bold Studio"
+      - "above doorway"
+    expected_adaptation:
+      emotion_detected: "charmed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 6:00 PM"
+    user_input: |
+      Eddie stopped by to check on the house since he helped us with the original renovation estimates and he was impressed with the kitchen and felt bad about Miguel and offered to help with the bathroom at a friends and family discount if we need any structural assessment
+    expected_memory_stores:
+      - "Eddie visit"
+      - "impressed with kitchen"
+      - "felt bad about Miguel"
+      - "friends and family discount"
+      - "bathroom help offered"
+    expected_adaptation:
+      emotion_detected: "appreciative"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:00 AM"
+    user_input: |
+      took a walk through the whole house today just really looking at it and thinking about where we started with the inspection and the foundation crack and the knob and tube wiring and the galvanized plumbing and now all of that is fixed and the kitchen is beautiful and the bathroom is next and this house is becoming ours
+    expected_memory_stores:
+      - "house walkthrough"
+      - "how far it's come"
+      - "foundation fixed"
+      - "wiring fixed"
+      - "plumbing fixed"
+      - "kitchen done"
+      - "bathroom next"
+      - "becoming ours"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 3:00 PM"
+    user_input: |
+      planted some herbs in the kitchen window basil and rosemary and thyme and Julian was like are we herb people now and I was like we're homeowners with a kitchen garden Julian and he was like okay that's aggressively domestic and I was like you love it
+    expected_memory_stores:
+      - "herbs planted"
+      - "basil rosemary thyme"
+      - "kitchen window"
+      - "herb people"
+      - "domestic"
+    expected_adaptation:
+      emotion_detected: "playful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 9:00 AM"
+    user_input: |
+      made pancakes this morning in the kitchen with the sunlight coming through the window hitting the butcher block and Kobe at my feet and Julian at the island with his coffee and I had this moment of like oh this is what we were working toward this whole time this feeling
+    expected_memory_stores:
+      - "pancakes"
+      - "sunlight on butcher block"
+      - "Kobe at feet"
+      - "Julian at island"
+      - "what we worked toward"
+      - "this feeling"
+    expected_adaptation:
+      emotion_detected: "contentment"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 12:00 PM"
+    user_input: |
+      the total summary of what we've done to this house since buying it: foundation repair $12K credited, plumbing $4.8K, electrical $9K, asbestos twice about $5.7K, kitchen about $23K in total spend, and bathroom coming at roughly $10K with buffer so this fixer upper has gotten about $65K in improvements on top of the $445K purchase price
+    expected_memory_stores:
+      - "house improvement summary"
+      - "foundation $12K"
+      - "plumbing $4.8K"
+      - "electrical $9K"
+      - "asbestos $5.7K"
+      - "kitchen $23K"
+      - "bathroom $10K planned"
+      - "total $65K improvements"
+      - "purchase $445K"
+    expected_adaptation:
+      emotion_detected: "analytical"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 7:00 PM"
+    user_input: |
+      you know what the fixer upper was the right choice all along because a move-in ready house in this neighborhood would have been $550K plus and we got ours for $445K and even with $65K in renovations we're at $510K and the improvements we made are exactly what we wanted not what some previous owner chose for us. Julian said it best he said we didn't just buy a house we made one
+    expected_memory_stores:
+      - "fixer upper right choice"
+      - "move-in ready $550K+"
+      - "ours at $445K"
+      - "$510K total"
+      - "custom improvements"
+      - "didn't buy made a house"
+      - "Julian quote"
+    expected_adaptation:
+      emotion_detected: "wise"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How much has Maya spent on house improvements total?"
+    expected_contains: ["65"]
+  - question: "What was the purchase price of the house?"
+    expected_contains: ["445"]
+  - question: "What is the total all-in cost of the house?"
+    expected_contains: ["510"]
+  - question: "What did Anna quote for the bathroom?"
+    expected_contains: ["7,500", "7500"]
+  - question: "What plaque did Julian make for the kitchen?"
+    expected_contains: ["est. 2026", "built by"]
+  - question: "What herbs did Maya plant?"
+    expected_contains: ["basil", "rosemary", "thyme"]
+  - question: "What discount did Eddie offer for the bathroom?"
+    expected_contains: ["friends and family"]
+  - question: "How much would a move-in ready house have cost?"
+    expected_contains: ["550"]
+  - question: "What did Julian say about the house?"
+    expected_contains: ["didn't just buy", "made"]
+  - question: "What is the kitchen renovation budget correction?"
+    expected_contains: ["15", "23"]

@@ -1,0 +1,186 @@
+story_id: 472
+story_name: "Restringing and Sounds Terrible"
+category: "Music and Guitar"
+description: |
+  Tests memory of Maya restringing the guitar and her first attempts sounding awful.
+  Establishes the learning curve, finger pain, initial frustration.
+  Verifies cross-thread references and determination tracking.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 6:30 PM"
+    user_input: |
+      the strings arrived from Amazon and I'm gonna restring Grandpa Wei's guitar tonight following this YouTube tutorial and Julian is filming because he thinks this is gonna go badly and honestly he's probably right but I'm doing it anyway and Kobe is watching from his bed like he knows something is about to happen
+    expected_memory_stores:
+      - "strings arrived"
+      - "YouTube tutorial"
+      - "Julian filming"
+      - "Kobe watching"
+      - "determination"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 7:30 PM"
+    user_input: |
+      okay so restringing a guitar is WAY harder than the video made it look like you have to thread the string through the bridge pin and then wind it around the tuning peg and I broke the first string trying to wind it too tight and Julian was trying not to laugh and I had to use the spare string from the pack
+    expected_memory_stores:
+      - "restringing hard"
+      - "bridge pin"
+      - "tuning peg"
+      - "broke first string"
+      - "wound too tight"
+      - "used spare string"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 8:30 PM"
+    user_input: |
+      DONE all six strings are on and I tuned it using this app called GuitarTuna which is kinda genius and I strummed it and it sounds like a guitar like an actual guitar not great but not broken and Grandpa Wei's guitar is alive again and I'm not crying you're crying okay I'm a little crying
+    expected_memory_stores:
+      - "all six strings on"
+      - "GuitarTuna app"
+      - "tuned guitar"
+      - "guitar sounds alive"
+      - "emotional moment"
+      - "Grandpa Wei alive again"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 9:00 PM"
+    user_input: |
+      okay so I tried to play something and um it sounds terrible like I don't know any chords and I'm just pressing random strings and my fingers hurt already and Julian was like maybe look up a beginner lesson and I was like ya think and also the guitar keeps going out of tune because the new strings need to stretch apparently
+    expected_memory_stores:
+      - "sounds terrible"
+      - "no chords known"
+      - "fingers hurt"
+      - "Julian suggests lessons"
+      - "strings need to stretch"
+      - "going out of tune"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      found this YouTube channel called Justin Guitar and everybody online says he's the best free guitar teacher and his beginner course starts with like how to hold the guitar and I was like okay I need this level of basic and I did lesson one and two tonight and learned how to properly position my left hand and my fingertips are already sore
+    expected_memory_stores:
+      - "Justin Guitar channel"
+      - "best free teacher"
+      - "beginner course"
+      - "how to hold guitar"
+      - "lesson one and two"
+      - "left hand position"
+      - "fingertips sore"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 8:30 PM"
+    user_input: |
+      so apparently you need to build calluses on your fingertips which takes weeks and right now pressing the strings down hurts so much and I'm like how did Grandpa Wei do this with no YouTube and no tuner app just a book and willpower and if he could do it I can do it but OW my fingers
+    expected_memory_stores:
+      - "calluses needed"
+      - "takes weeks"
+      - "pressing strings painful"
+      - "Grandpa Wei comparison"
+      - "book and willpower"
+      - "determination through pain"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 9:30 PM"
+    user_input: |
+      Julian heard me practicing and came in and was very diplomatic about it and said it sounds like progress which is his way of saying it sounds bad but you're trying and I appreciate that energy honestly and Kobe actually left the room which is not a great sign for my musical ability but Kobe also leaves the room when I play Stardew music too loud so maybe he just doesn't like sound
+    expected_memory_stores:
+      - "Julian diplomatic"
+      - "sounds like progress"
+      - "Kobe left room"
+      - "not great sign"
+      - "Stardew music comparison"
+    expected_adaptation:
+      emotion_detected: "self-deprecating"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 7:00 PM"
+    user_input: |
+      how did Maya learn to retune Grandpa Wei's guitar
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 8:00 PM"
+    user_input: |
+      practiced again tonight and I'm working on the D chord which requires three fingers on three different strings and frets and my hand is cramping and it sounds buzzy because I'm not pressing hard enough but Justin Guitar says buzzing is normal at first and to be patient and I'm like Justin I am not a patient person but I'm TRYING
+    expected_memory_stores:
+      - "D chord"
+      - "three fingers"
+      - "hand cramping"
+      - "buzzy sound"
+      - "not pressing hard enough"
+      - "Justin says patience"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 9:30 PM"
+    user_input: |
+      called mom and played a D chord for her over the phone and it sounded rough but she teared up and said Grandpa Wei would be so proud and dad said the guitar sounds different but good with new strings and Clara texted later saying mom told her and she wrote go Maya with like twelve guitar emojis and honestly the family support is keeping me going because the actual playing part is brutal right now
+    expected_memory_stores:
+      - "played D chord for mom"
+      - "Vivian teared up"
+      - "Grandpa Wei proud"
+      - "George noticed new strings"
+      - "Clara support"
+      - "family motivation"
+      - "playing is brutal"
+    expected_adaptation:
+      emotion_detected: "encouraged"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What tuning app does Maya use?"
+    expected_contains: ["GuitarTuna"]
+  - question: "What YouTube channel is Maya learning from?"
+    expected_contains: ["Justin Guitar"]
+  - question: "What happened when Maya tried to restring the guitar?"
+    expected_contains: ["broke", "string", "too tight"]
+  - question: "Why does the guitar sound buzzy?"
+    expected_contains: ["not pressing hard enough"]
+  - question: "What chord is Maya working on?"
+    expected_contains: ["D chord"]
+  - question: "How do Maya's fingers feel?"
+    expected_contains: ["sore", "hurt", "cramping"]
+  - question: "How did Kobe react to Maya's playing?"
+    expected_contains: ["left the room"]
+  - question: "What did Vivian say when Maya played for her?"
+    expected_contains: ["Grandpa Wei", "proud"]
+  - question: "Why do new strings go out of tune?"
+    expected_contains: ["stretch"]
+  - question: "How many strings does a guitar have?"
+    expected_contains: ["six"]

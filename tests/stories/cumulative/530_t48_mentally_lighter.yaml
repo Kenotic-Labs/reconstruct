@@ -1,0 +1,179 @@
+story_id: 530
+story_name: "Mentally Lighter"
+category: "Phone and Digital Life"
+description: |
+  Maya reflects on how her digital transformation affected her mental health, relationships,
+  and daily life. Screen time stable at 2.5 hours. Cross-references therapy (T21),
+  relationship, cooking (T31), climbing, and identity (T50).
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00 AM"
+    user_input: |
+      it's been two months since my phone cracked and I just checked and my average daily screen time is 2 hours and 27 minutes compared to 4.5 before and I saved two hours a day for two months that's like 120 hours of my life I got back which is five full days and I spent those days living not scrolling
+    expected_memory_stores:
+      - "two months since crack"
+      - "screen time 2hr 27min"
+      - "from 4.5 hours"
+      - "120 hours saved"
+      - "five full days"
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:30 AM"
+    user_input: |
+      made a list of what I did with those extra hours read 6 books started the photo journal learned three new recipes cooked dinner for friends twelve times did an extra climbing session per week spent more time with Julian and Kobe went on walks without my phone and noticed things in my neighborhood I'd never seen
+    expected_memory_stores:
+      - "extra hours activities"
+      - "6 books read"
+      - "photo journal"
+      - "three new recipes"
+      - "twelve dinners for friends"
+      - "extra climbing"
+      - "walks noticed things"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 12:00 PM"
+    user_input: |
+      told Dr. Tate about the screen time math and she said that's exactly the kind of concrete data that helps people understand the impact and she asked if my anxiety is better and I said yeah actually significantly and she said do you think it's the Wellbutrin or the phone habits and I said honestly probably both but the phone habits made me aware of what was feeding the anxiety
+    expected_memory_stores:
+      - "Dr. Tate screen time discussion"
+      - "anxiety significantly better"
+      - "Wellbutrin and phone habits both"
+      - "phone feeding anxiety"
+    expected_adaptation:
+      emotion_detected: "aware"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 2:00 PM"
+    user_input: |
+      Julian said something really nice today he said you're different since the phone thing and not different bad different better like you're here more and I said I was always here and he said yeah but you weren't always present and that distinction hit me like a truck because he's completely right
+    expected_memory_stores:
+      - "Julian says she's different"
+      - "here vs present distinction"
+      - "always here not always present"
+      - "hit her hard"
+    expected_adaptation:
+      emotion_detected: "humbled"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 4:00 PM"
+    user_input: |
+      went to the climbing gym and didn't bring my phone at all just left it in the car and it was the best session I've had in weeks like I was fully focused and Omar said your climbing has gotten better recently and I said I stopped scrolling between routes and he said wait that's the secret and I said yes Omar that's the secret
+    expected_memory_stores:
+      - "phone in car at gym"
+      - "best session in weeks"
+      - "fully focused"
+      - "Omar noticed improvement"
+      - "no scrolling between routes"
+    expected_adaptation:
+      emotion_detected: "proven"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 6:00 PM"
+    user_input: |
+      Clara said she's been doing phone-free Sundays on her own now even when she's not with us and her screen time dropped from 5 hours to 3 and she said Maya you literally changed my life and I was like I didn't do anything my phone just cracked and she said yeah but you turned a broken phone into a philosophy
+    expected_memory_stores:
+      - "Clara doing phone-free Sundays alone"
+      - "Clara's screen time dropped"
+      - "from 5 to 3 hours"
+      - "turned broken phone into philosophy"
+    expected_adaptation:
+      emotion_detected: "influential"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 7:00 PM"
+    user_input: |
+      cooking dinner without my phone in the kitchen is standard now and tonight I made miso ramen from memory for the hundredth time and grandpa's dumplings and I didn't look at a screen once and the food was perfect and Kobe was behind the gate and Julian was making drinks and this is just our Saturday night now
+    expected_memory_stores:
+      - "cooking without phone standard"
+      - "ramen and dumplings"
+      - "no screen in kitchen"
+      - "standard Saturday routine"
+    expected_adaptation:
+      emotion_detected: "settled"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 8:30 PM"
+    user_input: |
+      after dinner Julian and I watched an actual movie together a whole movie without either of us looking at our phones and when's the last time that happened honestly I can't remember and the movie was good but the real point is we experienced the same thing at the same time without being pulled in different directions
+    expected_memory_stores:
+      - "watched whole movie together"
+      - "no phones during movie"
+      - "can't remember last time"
+      - "same experience simultaneously"
+    expected_adaptation:
+      emotion_detected: "connected"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 10:00 PM"
+    user_input: |
+      reading in bed instead of scrolling and I'm three chapters into this book about an architect in Barcelona and I thought about how before the phone cracked I would have scrolled for 30 minutes and then felt bad and not slept well and now I read and I feel good and I sleep better and it's so simple but nobody does it
+    expected_memory_stores:
+      - "reading in bed"
+      - "architect in Barcelona book"
+      - "would have scrolled 30 minutes"
+      - "sleep better now"
+      - "simple but nobody does it"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 11:00 PM"
+    user_input: |
+      closing my book and turning off the light and I feel mentally lighter that's the phrase I keep coming back to like there's less noise in my head and more space for the things I care about and I wrote in my journal tonight I chose this city and I choose how I live in it and part of that choice is choosing what I pay attention to and my phone almost stole that choice from me
+    expected_memory_stores:
+      - "mentally lighter"
+      - "less noise more space"
+      - "journal entry"
+      - "choosing what to pay attention to"
+      - "phone almost stole choice"
+      - "chose this city"
+    expected_adaptation:
+      emotion_detected: "free"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya's stable screen time now?"
+    expected_contains: ["2 hours 27", "2.5"]
+  - question: "How many books has Maya read since the phone change?"
+    expected_contains: ["6"]
+  - question: "What distinction did Julian make about Maya's presence?"
+    expected_contains: ["here", "present", "different"]
+  - question: "How has climbing improved without the phone?"
+    expected_contains: ["best session", "fully focused"]
+  - question: "What influence has Maya had on Clara?"
+    expected_contains: ["phone-free Sundays", "screen time dropped"]
+  - question: "What does Maya mean by mentally lighter?"
+    expected_contains: ["less noise", "more space"]
+  - question: "What is Maya's bedtime routine now?"
+    expected_contains: ["reading", "no scrolling"]
+  - question: "How many extra hours did Maya gain in two months?"
+    expected_contains: ["120", "five days"]
+  - question: "What did Clara call Maya's phone philosophy?"
+    expected_contains: ["broken phone into philosophy"]
+  - question: "What journal entry captures Maya's digital philosophy?"
+    expected_contains: ["choosing", "attention", "city"]

@@ -1,0 +1,179 @@
+story_id: 171
+story_name: "Mom Has Chest Pains"
+category: "Health"
+description: |
+  Vivian Chen has chest pains and goes to the ER. Initial panic and
+  fear of heart attack. Tests emergency event tracking, hospital details,
+  and emotional crisis response.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 2:00 PM"
+    user_input: |
+      oh god okay so Clara just called me and she's at work and she said Mom called her from the house and said she's having chest pains and Clara told her to call 911 and I'm freaking out right now I can barely type I'm at work and I need to um I need to think
+    expected_memory_stores:
+      - "Vivian chest pains"
+      - "Clara called Maya"
+      - "911 called"
+      - "Maya at work"
+      - "panic"
+    expected_adaptation:
+      emotion_detected: "panicked"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 2:30 PM"
+    user_input: |
+      Clara called back and said the ambulance took Mom to Kaiser Sacramento and Dad is with her he rode in the ambulance and Clara is heading there from work she's at the hospital near downtown but Kaiser is on the other side of Sacramento and I'm like should I fly down there right now I'm five hours away by car
+    expected_memory_stores:
+      - "Kaiser Sacramento"
+      - "George with Vivian in ambulance"
+      - "Clara heading to hospital"
+      - "Maya in Portland five hours away"
+    expected_adaptation:
+      emotion_detected: "frantic"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 3:00 PM"
+    user_input: |
+      told Priya what's happening and she said go Maya just go and I told Julian and he said I'll drive you if you want but I said no babe you have work just let me figure out flights and he's already looking at flights for me while I'm trying not to cry at my desk Leon came by and said take whatever time you need
+    expected_memory_stores:
+      - "Priya supportive"
+      - "Julian offered to drive"
+      - "looking at flights"
+      - "Leon supportive"
+      - "Maya crying at work"
+    expected_adaptation:
+      emotion_detected: "distressed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 3:30 PM"
+    user_input: |
+      Clara just texted she's at Kaiser and Mom is in the ER they're doing an ECG and blood work and the doctor said it could be a heart attack but they need to run more tests and I just like I can't breathe my mom is 57 she walks every day she eats healthy this doesn't make sense
+    expected_memory_stores:
+      - "Clara at Kaiser"
+      - "ECG and blood work"
+      - "possible heart attack"
+      - "more tests needed"
+      - "Vivian 57 years old"
+      - "Vivian active and healthy"
+    expected_adaptation:
+      emotion_detected: "terrified"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 4:00 PM"
+    user_input: |
+      booked a flight for tonight 7pm out of PDX getting into Sacramento at like 8:30 Julian's gonna drop me off and take care of Kobe and I just need to get there I need to be with my mom right now I can't be here five hundred miles away while she's in the ER
+    expected_memory_stores:
+      - "flight booked 7pm PDX"
+      - "arriving Sacramento 8:30"
+      - "Julian dropping off"
+      - "Julian caring for Kobe"
+      - "Maya needs to be there"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 5:00 PM"
+    user_input: |
+      Dad called me his voice was shaky and he said Vivian your mother is resting they gave her something for the pain and the ECG showed some irregularity but the doctor said they won't know more until the blood work comes back and the stress test tomorrow and I said Dad are YOU okay and he said I'm fine just worried about your mother
+    expected_memory_stores:
+      - "George called"
+      - "Vivian resting"
+      - "pain medication given"
+      - "ECG irregularity"
+      - "blood work pending"
+      - "stress test tomorrow"
+      - "George worried"
+    expected_adaptation:
+      emotion_detected: "worried"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      Julian's driving me to the airport and I'm trying not to cry and he's holding my hand with one hand and driving with the other and he said Maya your mom is tough she's gonna be fine and I want to believe him but like what if she's not what if this is a heart attack and she's not okay I can't lose my mom
+    expected_memory_stores:
+      - "Julian driving to airport"
+      - "Maya afraid of losing mom"
+      - "Julian reassuring"
+    expected_adaptation:
+      emotion_detected: "fearful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 7:15 PM"
+    user_input: |
+      on the plane now and I can't check my phone for an hour this is torture I keep replaying Clara's call in my head and the way Dad's voice sounded and I'm thinking about all the things I haven't told my mom like how much she means to me and how she's the strongest person I know and why don't we say these things more often
+    expected_memory_stores:
+      - "Maya on plane"
+      - "no phone access"
+      - "regret about unsaid things"
+      - "Vivian means everything to Maya"
+    expected_adaptation:
+      emotion_detected: "desperate"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 8:45 PM"
+    user_input: |
+      landed in Sacramento and turned on my phone and Clara texted the blood work is back and the troponin levels are normal which apparently means it's probably NOT a heart attack and I literally started sobbing in the middle of the airport terminal a guy asked if I was okay and I said yes these are happy tears
+    expected_memory_stores:
+      - "arrived Sacramento"
+      - "troponin levels normal"
+      - "probably not heart attack"
+      - "Maya crying happy tears"
+    expected_adaptation:
+      emotion_detected: "overwhelmed relief"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 9:30 PM"
+    user_input: |
+      at the hospital now holding Mom's hand and she looks tired but okay and she said Maya you didn't have to fly down here and I said Mom are you serious of course I did and Dad's in the chair in the corner looking exhausted and Clara is being very nurse-like checking Mom's monitors and asking the doctors proper medical questions and I'm just holding my mom's hand
+    expected_memory_stores:
+      - "Maya at hospital"
+      - "Vivian tired but okay"
+      - "George exhausted"
+      - "Clara in nurse mode"
+      - "family gathered"
+    expected_adaptation:
+      emotion_detected: "relieved tender"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What happened to Vivian Chen?"
+    expected_contains: ["chest pains", "ER"]
+  - question: "What hospital is Vivian at?"
+    expected_contains: ["Kaiser Sacramento"]
+  - question: "Was it a heart attack?"
+    expected_contains: ["no", "not", "troponin normal"]
+  - question: "What tests were done?"
+    expected_contains: ["ECG", "blood work"]
+  - question: "Who called Maya about the emergency?"
+    expected_contains: ["Clara"]
+  - question: "How did Maya get to Sacramento?"
+    expected_contains: ["flew", "flight"]
+  - question: "Who is taking care of Kobe?"
+    expected_contains: ["Julian"]
+  - question: "How old is Vivian?"
+    expected_contains: ["57"]
+  - question: "What did the blood work show?"
+    expected_contains: ["troponin normal", "not heart attack"]
+  - question: "Is there still a test pending?"
+    expected_contains: ["stress test"]

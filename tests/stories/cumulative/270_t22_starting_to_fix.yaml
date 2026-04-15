@@ -1,0 +1,189 @@
+story_id: 270
+story_name: "Starting to Fix the House"
+category: "Housing"
+description: |
+  Tests memory of Maya and Julian beginning the actual repair work on the house.
+  Foundation repair starts, electrical gets underway, and they begin to see the house
+  taking shape. Completes the T22 house buying arc with forward momentum.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:00 AM"
+    user_input: |
+      Ruth Gaines is starting the foundation repair today and she brought a crew of three and they're in the basement with these massive carbon fiber strips and some kind of epoxy system and Julian took the day off to supervise which really means he's watching and asking questions
+    expected_memory_stores:
+      - "Ruth Gaines"
+      - "foundation repair starting"
+      - "crew of three"
+      - "carbon fiber strips"
+      - "epoxy system"
+      - "Julian took day off"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 5:00 PM"
+    user_input: |
+      Ruth said the foundation work will take three days total and she's really happy with how it's going the crack was exactly what she expected and the carbon fiber strapping is bonding well to the concrete and Julian filmed the whole thing for some reason
+    expected_memory_stores:
+      - "three day foundation job"
+      - "going well"
+      - "crack as expected"
+      - "carbon fiber bonding"
+      - "Julian filming"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 4:00 PM"
+    user_input: |
+      foundation repair is done! Ruth said it's solid and she'll come back in six months to check on it but she doesn't expect any issues and she also recommended improving the drainage around the east side of the house which she said we can DIY with some gravel and a French drain
+    expected_memory_stores:
+      - "foundation repair complete"
+      - "six month checkup"
+      - "drainage improvement recommended"
+      - "east side"
+      - "DIY French drain"
+      - "gravel"
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 9:00 AM"
+    user_input: |
+      electrician starts today Eddie recommended someone named Travis Boyd who does residential rewiring and he's gonna tackle the knob and tube in the whole house second floor hallway kitchen basement everything it's a big job like a week and a half
+    expected_memory_stores:
+      - "Travis Boyd electrician"
+      - "Eddie recommended"
+      - "whole house rewiring"
+      - "week and a half timeline"
+      - "knob and tube removal"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 10:00 AM"
+    user_input: |
+      living in a house during electrical work is awful like there's drywall dust everywhere and random outlets don't work and we've been running extension cords to the one circuit that's still live and Kobe keeps tripping over the cords and I'm like buddy please
+    expected_memory_stores:
+      - "drywall dust"
+      - "outlets not working"
+      - "extension cords"
+      - "one circuit live"
+      - "Kobe tripping on cords"
+    expected_adaptation:
+      emotion_detected: "annoyed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 3:00 PM"
+    user_input: |
+      Travis found asbestos insulation around some of the old wiring in the basement which means we need an abatement crew before he can finish that section and that's gonna be another $2,200 and I'm like of COURSE there's asbestos because why wouldn't there be
+    expected_memory_stores:
+      - "asbestos found"
+      - "basement wiring"
+      - "abatement crew needed"
+      - "$2,200 additional"
+      - "more unexpected costs"
+    expected_adaptation:
+      emotion_detected: "exasperated"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 5:00 PM"
+    user_input: |
+      electrical is mostly done except the basement section waiting on asbestos abatement but Travis said the rest of the house is now fully up to code with modern Romex wiring and new panel and new outlets and it feels so much safer knowing we don't have 60 year old wires behind the walls
+    expected_memory_stores:
+      - "electrical mostly complete"
+      - "basement waiting"
+      - "up to code"
+      - "Romex wiring"
+      - "new panel"
+      - "new outlets"
+      - "feels safer"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 9:00 AM"
+    user_input: |
+      Dave Chen finished the plumbing re-pipe yesterday too so we now have modern PEX plumbing throughout the house and the upstairs toilet flushes without any gurgling and Julian ceremonially flushed it three times and I was like you're so weird and he was like this is a celebration
+    expected_memory_stores:
+      - "plumbing complete"
+      - "PEX throughout"
+      - "no more gurgling"
+      - "Julian celebration flush"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 2:00 PM"
+    user_input: |
+      so let me add up the total renovation spending so far: foundation 12K from seller credit, plumbing 4.8K, electrical about 9K with the extra work, asbestos 2.2K and we still haven't touched the kitchen or bathrooms so we're at about 28K spent with the big stuff still ahead and our total budget is now what like 43K? or did we say 45? honestly I've lost track
+    expected_memory_stores:
+      - "foundation 12K credit"
+      - "plumbing 4.8K"
+      - "electrical 9K"
+      - "asbestos 2.2K"
+      - "28K spent"
+      - "kitchen and bathrooms ahead"
+      - "budget confusion"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 7:00 PM"
+    user_input: |
+      despite all the chaos and money and dust I walked through the house tonight and it actually feels good now like the bones are right the foundation is solid the wiring is safe the plumbing works and yeah the kitchen is still from 1987 and the bathroom is still cracked but the hard invisible stuff is done and that matters more and Julian agreed he said now the fun part starts
+    expected_memory_stores:
+      - "house feeling good"
+      - "foundation solid"
+      - "wiring safe"
+      - "plumbing works"
+      - "kitchen still old"
+      - "bathroom still cracked"
+      - "invisible stuff done"
+      - "fun part starts"
+    expected_adaptation:
+      emotion_detected: "optimistic"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Is the foundation repair complete?"
+    expected_contains: ["yes", "done"]
+  - question: "Who did the electrical rewiring?"
+    expected_contains: ["Travis Boyd"]
+  - question: "What unexpected issue was found during electrical work?"
+    expected_contains: ["asbestos"]
+  - question: "How much has been spent on renovations so far?"
+    expected_contains: ["28"]
+  - question: "Is the plumbing fixed?"
+    expected_contains: ["yes", "PEX"]
+  - question: "Who did the plumbing work?"
+    expected_contains: ["Dave Chen"]
+  - question: "What type of wiring was installed?"
+    expected_contains: ["Romex"]
+  - question: "What renovations still need to be done?"
+    expected_contains: ["kitchen", "bathroom"]
+  - question: "When will Ruth come back to check the foundation?"
+    expected_contains: ["six months"]
+  - question: "What drainage improvement was recommended?"
+    expected_contains: ["French drain", "east side"]

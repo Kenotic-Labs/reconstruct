@@ -1,0 +1,185 @@
+story_id: 548
+story_name: "Last Weekly Session"
+category: "Identity and Future"
+description: |
+  Maya's final weekly therapy session with Dr. Tate. She has the tools now.
+  Stepping down to monthly. Cross-references all therapy threads (T21),
+  Wellbutrin journey, every growth arc, and the full identity synthesis.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 10:00 AM"
+    user_input: |
+      ok so this is a big one today is my last weekly session with Dr. Tate I'm moving to monthly and I'm nervous about it even though it was my idea because she's been my rock for like what two years now and I'm sitting in her waiting room and my hands are actually sweating
+    expected_memory_stores:
+      - "last weekly session"
+      - "moving to monthly"
+      - "Maya's idea"
+      - "Dr. Tate for two years"
+      - "nervous hands sweating"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 10:15 AM"
+    user_input: |
+      I walked in and said I think I'm ready to not need you every week and she smiled and said tell me why and I said because I have tools now and I listed them the light therapy lamp the phone-free Sundays the cooking the climbing the mission statement the journal the accomplishment list the people in my life and she was nodding the whole time
+    expected_memory_stores:
+      - "I'm ready"
+      - "listed tools"
+      - "lamp phone-free Sundays cooking"
+      - "climbing mission journal"
+      - "accomplishment list people"
+      - "Dr. Tate nodding"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 10:30 AM"
+    user_input: |
+      she said let's review where you were when we started and I was like oh god ok and she said you were dealing with the PIP at Vantage you were isolated you were barely cooking eating takeout you hadn't climbed anything you were struggling with your mom and you couldn't name a single thing you were proud of and I was like yikes that's a person
+    expected_memory_stores:
+      - "review of starting point"
+      - "PIP at Vantage"
+      - "isolated"
+      - "takeout not cooking"
+      - "no climbing"
+      - "struggling with mom"
+      - "nothing proud of"
+    expected_adaptation:
+      emotion_detected: "humbled"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 10:45 AM"
+    user_input: |
+      she said and now you have a new career a house a partner you're close to your mom you cook for people every month you climb V5 you've processed your grandfather's death in a way that enriched your identity and you have a mission statement for your life and she said Maya that's not just improvement that's transformation
+    expected_memory_stores:
+      - "transformation review"
+      - "career house partner mom"
+      - "cooking climbing V5"
+      - "grandfather processed"
+      - "mission statement"
+      - "not improvement transformation"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 11:00 AM"
+    user_input: |
+      I told her the thing I'm most proud of is that I learned to ask for help because I used to think asking for help was failure and now I know it's the smartest thing I do and she said that's actually the thing I'm most proud of too because the rest follows from that
+    expected_memory_stores:
+      - "most proud of asking for help"
+      - "used to think failure"
+      - "now smartest thing"
+      - "Dr. Tate agrees"
+      - "rest follows from that"
+    expected_adaptation:
+      emotion_detected: "wise"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 11:15 AM"
+    user_input: |
+      she asked what I'm worried about without weekly sessions and I said honestly the winter like what if I slip back and she said you won't because you know the signs now and you have the tools and you have Julian and Kobe and Clara and a lamp and soup and she laughed and said you have a very specific toolkit and I said it's a Portland toolkit
+    expected_memory_stores:
+      - "worried about winter regression"
+      - "know the signs now"
+      - "have tools"
+      - "Julian Kobe Clara lamp soup"
+      - "Portland toolkit"
+    expected_adaptation:
+      emotion_detected: "reassured"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 11:30 AM"
+    user_input: |
+      she said I want you to know that the growth you've done isn't because of me it's because of you and I just gave you a space to see it and I said well the space mattered a lot and she said it does but Maya you did the work you showed up every week you did the homework you made the changes and I'm just the mirror
+    expected_memory_stores:
+      - "growth is Maya's"
+      - "Dr. Tate is the mirror"
+      - "Maya did the work"
+      - "showed up every week"
+      - "space mattered"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 11:45 AM"
+    user_input: |
+      I said what if I need to come back to weekly and she said the door is always open that's why it's monthly not never and she said most of my clients who step down to monthly realize they were ready three months before they actually made the switch and I said that sounds like something you'd say to make me feel better and she said it's data not comfort
+    expected_memory_stores:
+      - "can come back to weekly"
+      - "monthly not never"
+      - "ready before they switch"
+      - "data not comfort"
+    expected_adaptation:
+      emotion_detected: "trusting"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      last thing she said was Maya I'm going to miss our weekly conversations and I said Dr. Tate you're not supposed to say stuff like that and she said I'm human too and I said thank you for everything really thank you and she said thank yourself and I walked out and cried in my car for five minutes which is very on brand
+    expected_memory_stores:
+      - "Dr. Tate will miss sessions"
+      - "she's human too"
+      - "thank you"
+      - "thank yourself"
+      - "cried in car"
+      - "on brand"
+    expected_adaptation:
+      emotion_detected: "cathartic"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      told Julian about the session and he held me and said you know that therapist changed your life and I said she didn't change my life she helped me change my life and he said same thing and I said no it's not and he said ok fine it's different and I said thank you and he said for what and I said for being part of the toolkit and he said I'm not a toolkit I'm a boyfriend and I laughed
+    expected_memory_stores:
+      - "told Julian about session"
+      - "therapist changed life vs helped"
+      - "part of toolkit joke"
+      - "I'm a boyfriend not toolkit"
+      - "laughed together"
+    expected_adaptation:
+      emotion_detected: "lighter"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Is Maya ending therapy?"
+    expected_contains: ["no", "monthly", "stepping down"]
+  - question: "How long has Maya been seeing Dr. Tate?"
+    expected_contains: ["two years"]
+  - question: "What tools did Maya list for managing without weekly sessions?"
+    expected_contains: ["lamp", "phone-free", "cooking", "climbing", "journal"]
+  - question: "What is Maya most proud of?"
+    expected_contains: ["asking for help"]
+  - question: "What was Maya like when she started therapy?"
+    expected_contains: ["PIP", "isolated", "takeout", "struggling"]
+  - question: "What did Dr. Tate call Maya's journey?"
+    expected_contains: ["transformation", "not just improvement"]
+  - question: "What did Dr. Tate say about her role?"
+    expected_contains: ["mirror"]
+  - question: "What did Maya do after the session?"
+    expected_contains: ["cried in car"]
+  - question: "Can Maya return to weekly sessions?"
+    expected_contains: ["yes", "door always open"]
+  - question: "What did Julian say about being part of the toolkit?"
+    expected_contains: ["boyfriend not toolkit"]

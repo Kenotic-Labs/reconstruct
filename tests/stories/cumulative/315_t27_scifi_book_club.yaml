@@ -1,0 +1,174 @@
+story_id: 315
+story_name: "Starting the Book Club"
+category: "Friendships"
+description: |
+  Tests memory of Maya and Nadia starting a two-person sci-fi book club.
+  First pick, reading schedule, and the joy of shared intellectual interest.
+  Verifies system captures hobby formation and ongoing activity tracking.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 11:00 AM"
+    user_input: |
+      ok so I finished The Fifth Season and oh my GOD that book wrecked me and I texted Nadia like fifty messages about it and she was like SEE I TOLD YOU and we ended up at Upper Left talking about it for two hours
+    expected_memory_stores:
+      - "finished Fifth Season"
+      - "loved it"
+      - "Upper Left discussion"
+      - "two hours"
+    expected_adaptation:
+      emotion_detected: "passionate"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 1:00 PM"
+    user_input: |
+      Nadia said we should start a book club just the two of us like a sci fi book club where we read a book a month and then discuss it and I was like YES absolutely and she suggested we call it the Angry Planet Club after the Becky Chambers book
+    expected_memory_stores:
+      - "book club started"
+      - "two person"
+      - "sci fi"
+      - "book a month"
+      - "Angry Planet Club"
+      - "Becky Chambers reference"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 2:30 PM"
+    user_input: |
+      we went to Powell's Books to pick our first official book club book and we spent like an hour in the sci fi section and we almost fought over whether to read Octavia Butler or Ursula Le Guin first and we compromised on Left Hand of Darkness by Le Guin
+    expected_memory_stores:
+      - "Powell's Books"
+      - "sci fi section"
+      - "Octavia Butler vs Le Guin"
+      - "Left Hand of Darkness"
+      - "first book club pick"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 4:00 PM"
+    user_input: |
+      we're gonna meet every last Sunday of the month at Upper Left to discuss the book and Nadia made a shared Google Sheet with the reading schedule and future picks and she's SO organized about this it's adorable
+    expected_memory_stores:
+      - "last Sunday monthly"
+      - "Upper Left Roasters"
+      - "Google Sheet"
+      - "reading schedule"
+      - "Nadia organized"
+    expected_adaptation:
+      emotion_detected: "charmed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 8:00 PM"
+    user_input: |
+      told Jenny about the book club on Marco Polo and she was like oh can I join remotely and I said sure actually why not and Nadia said the more the merrier so now it's three people which is even better
+    expected_memory_stores:
+      - "Jenny wants to join"
+      - "joining remotely"
+      - "Nadia welcomed Jenny"
+      - "three person book club"
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      I'm like 40 pages into Left Hand of Darkness and it's so weird and beautiful and Nadia texted me a passage she loved and I texted back one I loved and Julian was like are you guys seriously live-texting a book and I was like mind your business
+    expected_memory_stores:
+      - "40 pages in"
+      - "weird and beautiful"
+      - "sharing passages"
+      - "Julian teasing"
+    expected_adaptation:
+      emotion_detected: "engaged"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 6:00 PM"
+    user_input: |
+      Nadia designed a little logo for the Angry Planet Club and it's this cute illustration of a planet with a frowny face reading a book and she printed stickers and gave me one for my water bottle and honestly it's one of my favorite things
+    expected_memory_stores:
+      - "Angry Planet Club logo"
+      - "planet with frowny face"
+      - "reading a book"
+      - "stickers"
+      - "water bottle"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 12:00 PM"
+    user_input: |
+      what's the first book Maya and Nadia are reading for their book club
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Nadia added a section to the Google Sheet for book ratings and notes and she said after a year we should rank all twelve books and make a definitive best sci fi list and I was like we are the nerdiest people alive and she said proudly
+    expected_memory_stores:
+      - "ratings and notes section"
+      - "year end ranking"
+      - "best sci fi list"
+      - "nerd pride"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 7:00 PM"
+    user_input: |
+      Julian said he thinks it's really cool that I have a new friend who shares my interests and that having different friends for different things is healthy and I think he's right because Jenny is my heart friend and Nadia is becoming my brain friend and I need both
+    expected_memory_stores:
+      - "Julian observation"
+      - "different friends different needs"
+      - "Jenny heart friend"
+      - "Nadia brain friend"
+      - "need both"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya and Nadia's book club called?"
+    expected_contains: ["Angry Planet Club"]
+  - question: "What was the first book club pick?"
+    expected_contains: ["Left Hand of Darkness", "Le Guin"]
+  - question: "Where do they meet for book club?"
+    expected_contains: ["Upper Left Roasters"]
+  - question: "When do they meet?"
+    expected_contains: ["last Sunday", "monthly"]
+  - question: "Who else joined the book club?"
+    expected_contains: ["Jenny", "remotely"]
+  - question: "What did Nadia design for the club?"
+    expected_contains: ["logo", "stickers", "planet"]
+  - question: "Where did they buy the first book?"
+    expected_contains: ["Powell's Books"]
+  - question: "What authors did they consider?"
+    expected_contains: ["Octavia Butler", "Le Guin"]
+  - question: "How does Maya categorize her friendships?"
+    expected_contains: ["Jenny heart", "Nadia brain"]
+  - question: "What tools does Nadia use for the book club?"
+    expected_contains: ["Google Sheet"]

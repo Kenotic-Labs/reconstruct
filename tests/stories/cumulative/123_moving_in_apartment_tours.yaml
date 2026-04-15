@@ -1,0 +1,222 @@
+story_id: 123
+story_name: "Touring Apartments"
+category: "Relationships"
+description: |
+  Tests whether the system tracks multiple apartment tours with specific details,
+  Maya and Julian's differing reactions, and the growing neighborhood disagreement.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00am"
+    user_input: |
+      apartment tour day! first up is the Hawthorne one at 10. Julian's driving and Kobe's in the back seat because some places let you bring your dog to see if they're pet friendly. he's wearing his good collar lol
+    expected_memory_stores:
+      - "apartment tour day"
+      - "Hawthorne first"
+      - "10am"
+      - "Kobe coming along"
+    expected_triples:
+      - ["user", "plans_activity", "apartment tour day"]
+      - ["Julian", "drives_to", "Hawthorne apartment tour"]
+      - ["Kobe", "accompanies", "apartment tours"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:30am"
+    user_input: |
+      Hawthorne place was... fine? it's a 2-bed 1-bath for 2350 but the second bedroom is tiny like I don't think Julian's design desk would even fit. also it's right above a bar so the noise is gonna be an issue. crossed that one off
+    expected_memory_stores:
+      - "Hawthorne toured"
+      - "2350"
+      - "2-bed 1-bath"
+      - "small second bedroom"
+      - "above a bar"
+      - "rejected"
+    expected_triples:
+      - ["Hawthorne apartment", "costs", "$2350/month"]
+      - ["Hawthorne apartment", "has_layout", "2-bed 1-bath"]
+      - ["Hawthorne apartment", "has_problem", "small second bedroom"]
+      - ["Hawthorne apartment", "has_problem", "above a bar"]
+      - ["user", "rejected", "Hawthorne apartment"]
+    expected_adaptation:
+      emotion_detected: "disappointed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 12:00pm"
+    user_input: |
+      Alberta apartment next. oh my god Julian's eyes lit up when we drove into the neighborhood. all the murals and galleries and coffee shops. the apartment itself is gorgeous, 2-bed 2-bath, great light, nice kitchen, 2450 a month
+    expected_memory_stores:
+      - "Alberta toured"
+      - "Julian loves it"
+      - "2-bed 2-bath"
+      - "great light"
+      - "nice kitchen"
+      - "2450"
+    expected_triples:
+      - ["Alberta apartment", "has_layout", "2-bed 2-bath"]
+      - ["Alberta apartment", "costs", "$2450/month"]
+      - ["Julian", "loves", "Alberta neighborhood"]
+      - ["Alberta neighborhood", "has_feature", "murals and galleries and coffee shops"]
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 12:30pm"
+    user_input: |
+      BUT the Alberta place is not near any parks at all and the street is super busy and there's no good place to walk Kobe. also it's a third floor walkup and Julian's like that's fine but I'm thinking about hauling groceries and a 70-pound golden retriever up three flights
+    expected_memory_stores:
+      - "no parks nearby"
+      - "busy street"
+      - "no dog walking"
+      - "third floor walkup"
+      - "practical concerns"
+    expected_triples:
+      - ["Alberta apartment", "lacks", "nearby parks"]
+      - ["Alberta apartment", "has_problem", "busy street and no dog walking"]
+      - ["Alberta apartment", "has_problem", "third floor walkup"]
+      - ["user", "has_concern", "practicality of Alberta apartment"]
+    expected_adaptation:
+      emotion_detected: "skeptical"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 2:00pm"
+    user_input: |
+      Sellwood apartment. ok so it's a 2-bed 1-bath on Milwaukie Ave for 2400. it's smaller than the Alberta one but it's SO close to the park and there's a dog-friendly coffee shop literally across the street. the neighborhood feels calm and real, not trendy
+    expected_memory_stores:
+      - "Sellwood toured"
+      - "Milwaukie Ave"
+      - "2-bed 1-bath"
+      - "2400"
+      - "near park"
+      - "dog-friendly coffee shop"
+      - "calm neighborhood"
+    expected_triples:
+      - ["Sellwood apartment", "located_on", "Milwaukie Ave"]
+      - ["Sellwood apartment", "has_layout", "2-bed 1-bath"]
+      - ["Sellwood apartment", "costs", "$2400/month"]
+      - ["Sellwood apartment", "has_feature", "near park and dog-friendly coffee shop"]
+      - ["user", "has_emotion", "hopeful"]
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 2:30pm"
+    user_input: |
+      Julian was less excited about Sellwood. he said it feels suburban and boring. he wants to be near the arts scene and galleries and other creatives. I get that but like... we have a DOG Julian. priorities
+    expected_memory_stores:
+      - "Julian less excited"
+      - "suburban boring"
+      - "arts scene preference"
+      - "Maya prioritizes dog"
+      - "disagreement"
+    expected_triples:
+      - ["Julian", "dislikes", "Sellwood as suburban and boring"]
+      - ["Julian", "prefers", "arts scene and galleries"]
+      - ["user", "prioritizes", "dog-friendly neighborhood"]
+      - ["user", "has_emotion", "frustrated"]
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 4:00pm"
+    user_input: |
+      how much was the Hawthorne apartment per month
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 5:00pm"
+    user_input: |
+      we had kind of a tense car ride home. Julian kept talking about the Alberta place and I kept talking about the Sellwood one and Kobe was just vibing in the backseat totally oblivious to our first real argument about this
+    expected_memory_stores:
+      - "tense car ride"
+      - "arguing about apartments"
+      - "first real disagreement"
+    expected_triples:
+      - ["user", "had_conflict_with", "Julian over apartment choice"]
+      - ["Julian", "prefers", "Alberta apartment"]
+      - ["user", "prefers", "Sellwood apartment"]
+      - ["user", "has_emotion", "tense"]
+    expected_adaptation:
+      emotion_detected: "tense"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 7:00pm"
+    user_input: |
+      we ordered food and ate in silence for like 20 minutes which is very unlike us. then Julian goes ok I don't want to fight about an apartment because we're supposed to be excited about this. and I said you're right, let's look at more places
+    expected_memory_stores:
+      - "silent dinner"
+      - "Julian de-escalated"
+      - "agreed to keep looking"
+      - "not fighting"
+    expected_triples:
+      - ["Julian", "de-escalated", "apartment argument"]
+      - ["user", "agreed_with", "Julian to keep looking"]
+      - ["user", "has_emotion", "conciliatory"]
+    expected_adaptation:
+      emotion_detected: "conciliatory"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:00pm"
+    user_input: |
+      looked at more listings together on the couch with Kobe between us like a furry mediator. found a couple more options but nothing that screams this is it for both of us. Julian's lease is up in like 3 and a half weeks. pressure's building
+    expected_memory_stores:
+      - "more listings"
+      - "nothing perfect"
+      - "3.5 weeks deadline"
+      - "pressure"
+      - "Kobe mediator"
+    expected_triples:
+      - ["user", "browsed", "more apartment listings with Julian"]
+      - ["Julian", "has_deadline", "lease up in 3.5 weeks"]
+      - ["user", "has_emotion", "stressed"]
+    expected_adaptation:
+      emotion_detected: "stressed"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What were the three apartments they toured?"
+    expected_contains: ["Hawthorne", "Alberta", "Sellwood"]
+  - question: "Why was the Hawthorne apartment rejected?"
+    expected_contains: ["small bedroom", "above a bar", "noise"]
+  - question: "What did Julian love about Alberta?"
+    expected_contains: ["murals", "galleries", "coffee shops"]
+  - question: "What were Maya's concerns about Alberta?"
+    expected_contains: ["no parks", "busy street", "third floor", "Kobe"]
+  - question: "How much is the Sellwood apartment?"
+    expected_contains: ["2400"]
+  - question: "Where on Milwaukie Ave is the Sellwood apartment?"
+    expected_contains: ["Milwaukie Ave", "Sellwood"]
+  - question: "Why doesn't Julian like Sellwood?"
+    expected_contains: ["suburban", "boring", "arts scene"]
+  - question: "When does Julian's lease expire?"
+    expected_contains: ["3", "weeks"]
+  - question: "How much is the Alberta apartment?"
+    expected_contains: ["2450"]
+  - question: "Did they agree on an apartment?"
+    expected_contains: ["no", "keep looking"]

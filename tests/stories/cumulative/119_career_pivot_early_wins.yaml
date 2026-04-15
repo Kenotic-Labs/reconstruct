@@ -1,0 +1,203 @@
+story_id: 119
+story_name: "Early Wins with Lens"
+category: "Career"
+description: |
+  Tests whether the system tracks the Lens project's early progress, user feedback,
+  and Maya's growing confidence as a team lead. Includes corrections when project
+  scope changes.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00am"
+    user_input: |
+      two weeks into the pilot and we shipped the first version of Lens last Friday. it's basic, just a search interface over the research notes, but Rachel Ford's team already loves it. one researcher said she saved 45 minutes on her last project just from search alone
+    expected_memory_stores:
+      - "Lens v1 shipped"
+      - "two weeks"
+      - "search interface"
+      - "45 minutes saved"
+      - "Rachel Ford team loves it"
+    expected_triples:
+      - ["pilot team", "shipped", "Lens v1 after two weeks"]
+      - ["Lens v1", "is", "search interface over research notes"]
+      - ["Lens", "saved", "45 minutes on one researcher's project"]
+      - ["Rachel Ford team", "loves", "Lens"]
+      - ["user", "has_emotion", "proud"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 11:00am"
+    user_input: |
+      Priya designed this really slick tagging system where researchers can tag findings by theme and persona and product area. it's so much better than the color-coded Google Sheets they were using before
+    expected_memory_stores:
+      - "tagging system"
+      - "theme persona product"
+      - "Priya designed"
+      - "replaced Google Sheets"
+    expected_triples:
+      - ["Priya Sharma", "designed", "tagging system for Lens by theme, persona, and product area"]
+      - ["Lens tagging", "replaced", "color-coded Google Sheets"]
+      - ["user", "has_emotion", "impressed"]
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 3:00pm"
+    user_input: |
+      the customer support team heard about Lens and they're asking if we can build something similar for their knowledge base. like they have the same fragmentation problem but with support tickets and FAQs. Sam said we should focus on UX first but it's cool that word is spreading
+    expected_memory_stores:
+      - "support team interested"
+      - "knowledge base"
+      - "fragmentation"
+      - "word spreading"
+      - "focus on UX first"
+    expected_triples:
+      - ["customer support team", "wants", "similar tool to Lens for knowledge base"]
+      - ["Sam", "directed", "focus on UX team first before expanding"]
+      - ["Lens", "gaining", "word-of-mouth interest across Conduit"]
+      - ["user", "has_emotion", "encouraged"]
+    expected_adaptation:
+      emotion_detected: "encouraged"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 10:00am"
+    user_input: |
+      Derek built this automated ingestion pipeline that pulls notes from Dovetail and Notion automatically so researchers don't have to manually upload stuff. the whole team cheered when he demo'd it. I love this team
+    expected_memory_stores:
+      - "automated ingestion"
+      - "Dovetail and Notion"
+      - "Derek built"
+      - "team celebration"
+    expected_triples:
+      - ["Derek Wu", "built", "automated ingestion pipeline from Dovetail and Notion"]
+      - ["pilot team", "celebrated", "Derek's ingestion pipeline demo"]
+      - ["user", "has_emotion", "happy"]
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 2:00pm"
+    user_input: |
+      ok so I initially said we saved 45 minutes per project with Lens but Rachel Ford actually measured it more carefully and it's more like 30 minutes on average. the 45 was an outlier. still good though
+    expected_memory_stores:
+      - "correction"
+      - "30 minutes average"
+      - "45 was outlier"
+      - "Rachel Ford measured"
+    expected_triples:
+      - ["user", "corrected", "Lens time savings 45 minutes → 30 minutes average"]
+      - ["Rachel Ford", "measured", "actual average time savings at 30 minutes"]
+    expected_adaptation:
+      emotion_detected: "honest"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 9:00am"
+    user_input: |
+      weekly standup with Sam and he asked for metrics. we have: 12 active users, 340 searches in the first week, and 30 minutes average time saved per research project. he seemed impressed, said this is exactly the kind of data the VP needs
+    expected_memory_stores:
+      - "metrics review"
+      - "12 active users"
+      - "340 searches"
+      - "30 minutes saved"
+      - "VP needs data"
+    expected_triples:
+      - ["Lens", "has_metrics", "12 active users, 340 searches in first week"]
+      - ["Lens", "saves", "30 minutes average per research project"]
+      - ["Sam", "wants", "metrics data for VP"]
+      - ["user", "has_emotion", "confident"]
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 12:00pm"
+    user_input: |
+      how many searches did Lens get in the first week
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Monday 10:00am"
+    user_input: |
+      Aisha asked if she could contribute to Lens in her spare time and I was like absolutely. she started writing documentation for the API which is exactly the kind of thing she's great at because of the onboarding doc experience. everything connects
+    expected_memory_stores:
+      - "Aisha contributing"
+      - "API documentation"
+      - "onboarding doc connection"
+      - "full circle"
+    expected_triples:
+      - ["Aisha", "volunteered_to", "write API documentation for Lens"]
+      - ["Aisha", "connected", "onboarding doc experience to API documentation skill"]
+      - ["user", "has_emotion", "touched"]
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 4:00pm"
+    user_input: |
+      Rachel Ford presented Lens at the UX team's monthly meeting and the feedback was overwhelming. people were like why didn't we have this two years ago. one researcher literally hugged me in the hallway which was unexpected but nice
+    expected_memory_stores:
+      - "UX monthly meeting"
+      - "overwhelming feedback"
+      - "two years too late"
+      - "researcher hug"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 8:00pm"
+    user_input: |
+      told Julian about the hug thing and he goes see? building things for people is your love language babe. walked Kobe and just felt really good about where things are going. like I found my lane finally
+    expected_memory_stores:
+      - "Julian observation"
+      - "building as love language"
+      - "Kobe walk"
+      - "found her lane"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How much time does Lens save per research project?"
+    expected_contains: ["30 minutes"]
+  - question: "How many active users does Lens have?"
+    expected_contains: ["12"]
+  - question: "What feature did Derek build for Lens?"
+    expected_contains: ["ingestion pipeline", "Dovetail", "Notion"]
+  - question: "What did Priya design for Lens?"
+    expected_contains: ["tagging system"]
+  - question: "What team is interested in a similar tool?"
+    expected_contains: ["customer support"]
+  - question: "How is Aisha contributing to Lens?"
+    expected_contains: ["API documentation"]
+  - question: "What was the corrected time savings figure?"
+    expected_contains: ["30 minutes", "45 was outlier"]
+  - question: "How many searches did Lens get in week one?"
+    expected_contains: ["340"]
+  - question: "What did Rachel Ford present at the UX meeting?"
+    expected_contains: ["Lens"]
+  - question: "What did Julian say about Maya's work?"
+    expected_contains: ["love language", "building"]

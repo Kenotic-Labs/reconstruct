@@ -1,0 +1,174 @@
+story_id: 420
+story_name: "Smart Home Lessons"
+category: "Smart Home"
+description: |
+  Maya reflects on the smart home journey and shares lessons with friends.
+  Clara considers getting a Nest. Thread 37 conclusion with relationship insights.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00 AM"
+    user_input: |
+      Clara came over for brunch and she's asking about our smart home setup because she's thinking about getting a Nest for her apartment and I was like ok let me tell you the FULL story from the beginning because it's been a journey and Julian from the kitchen yells it's been an adventure and I'm like that's one word for it
+    expected_memory_stores:
+      - "Clara interested in Nest"
+      - "Maya telling full story"
+      - "Julian's perspective"
+      - "brunch together"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:30 AM"
+    user_input: |
+      I told Clara start with one thing just the Nest don't go crazy like Julian did where he bought everything at once and she was like how bad was it and I was like girl we got locked out of our house at 11pm in the rain because of a firmware update and she was like WHAT
+    expected_memory_stores:
+      - "advice start with one thing"
+      - "don't go crazy like Julian"
+      - "lockout story retold"
+      - "Clara shocked"
+    expected_adaptation:
+      emotion_detected: "storytelling"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:00 AM"
+    user_input: |
+      the Nest is honestly the best smart device we have though like it just works no drama no weirdness it saves money and it makes the house comfortable so if Clara only gets one thing I said get the Nest and she was like ok sold and I was like see one device one decision done
+    expected_memory_stores:
+      - "Nest best device recommendation"
+      - "saves money works reliably"
+      - "Clara convinced"
+      - "one device philosophy"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 11:30 AM"
+    user_input: |
+      Nadia texted asking about smart locks because she saw Julian's Instagram stories about the Home Assistant setup and I was like Nadia DO NOT get smart locks unless you also keep physical keys accessible at all times and she was like why and I said trust me just trust me
+    expected_memory_stores:
+      - "Nadia asking about smart locks"
+      - "Julian's Instagram stories"
+      - "Maya warns about locks"
+      - "keep physical keys accessible"
+    expected_adaptation:
+      emotion_detected: "protective"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 1:00 PM"
+    user_input: |
+      Julian made a joke over brunch that Maya went from being the biggest smart home skeptic to building her own automations and buying smart plugs and he's not wrong like I definitely came around but I came around on MY terms after we established rules and that's the difference
+    expected_memory_stores:
+      - "Maya came around on her terms"
+      - "skeptic to participant"
+      - "rules made the difference"
+      - "Julian's observation"
+    expected_adaptation:
+      emotion_detected: "self-aware"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 2:30 PM"
+    user_input: |
+      honestly the smart home thing taught us a lot about how we make decisions together like Julian is the dive in and figure it out later type and I'm the research plan and proceed type and neither is wrong but we need to communicate better and that's been a bigger lesson than any thermostat
+    expected_memory_stores:
+      - "relationship lesson"
+      - "different decision styles"
+      - "Julian impulsive Maya planned"
+      - "communication lesson"
+      - "bigger than technology"
+    expected_adaptation:
+      emotion_detected: "insightful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 4:00 PM"
+    user_input: |
+      George called while Clara was still here and he asked how the smart stuff was going and I said great and he said he still doesn't trust it and Clara whispered is that Julian's dad and I said yes and she said he sounds exactly like my dad about technology and we all laughed
+    expected_memory_stores:
+      - "George still skeptical"
+      - "Clara relates"
+      - "generational tech divide"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 5:00 PM"
+    user_input: |
+      what was the biggest smart home disaster we had and how much did it cost us
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 6:00 PM"
+    user_input: |
+      tallied up the total smart home spending and it's like Nest was 250 two Ring cameras were 300 total two August locks were 400 total Hue bulbs were 120 the Raspberry Pi was 60 the smart plug was 15 plus the locksmith was 180 and Ring subscription is 10 a month so we're in for like 1325 plus subscription which when you think about it is actually not bad for a fully automated house
+    expected_memory_stores:
+      - "Nest $250"
+      - "Ring cameras $300"
+      - "August locks $400"
+      - "Hue bulbs $120"
+      - "Raspberry Pi $60"
+      - "smart plug $15"
+      - "locksmith $180"
+      - "total $1325"
+      - "Ring $10/month"
+    expected_adaptation:
+      emotion_detected: "pragmatic"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 8:00 PM"
+    user_input: |
+      Clara left and Julian and I are on the couch and the Hue lights are doing their warm evening thing and Kobe is asleep between us and the house is locked and warm and monitored and Julian said see babe was it worth it and I said yes but only because I almost murdered you twice in the process and he laughed and honestly yeah it was worth it
+    expected_memory_stores:
+      - "cozy evening"
+      - "Hue warm light"
+      - "Kobe between them"
+      - "house secure and warm"
+      - "worth it in the end"
+      - "Julian vindicated"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How much has Maya spent total on smart home equipment?"
+    expected_contains: ["1325"]
+  - question: "What device does Maya recommend most?"
+    expected_contains: ["Nest", "thermostat"]
+  - question: "What advice did Maya give Clara about smart home?"
+    expected_contains: ["start with one", "Nest"]
+  - question: "What advice did Maya give Nadia about smart locks?"
+    expected_contains: ["physical keys", "accessible"]
+  - question: "What relationship lesson did the smart home teach Maya?"
+    expected_contains: ["communication", "decision styles"]
+  - question: "How much does the monthly Ring subscription cost?"
+    expected_contains: ["10"]
+  - question: "What cost the most among smart home devices?"
+    expected_contains: ["August", "locks", "400"]
+  - question: "Does George approve of the smart home now?"
+    expected_contains: ["no", "still", "doesn't trust"]
+  - question: "Did Maya become a smart home convert?"
+    expected_contains: ["yes", "on her terms", "rules"]
+  - question: "What was the total cost including the locksmith?"
+    expected_contains: ["1325"]

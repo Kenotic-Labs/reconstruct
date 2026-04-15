@@ -1,0 +1,185 @@
+story_id: 480
+story_name: "Guitar Journey Reflection"
+category: "Music and Guitar"
+description: |
+  Tests memory of Maya reflecting on the complete guitar learning journey.
+  Establishes arc from discovery to performance readiness.
+  Verifies system can reconstruct the full guitar narrative.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Sunday 9:00 AM"
+    user_input: |
+      woke up thinking about the guitar journey this morning like from finding Grandpa Wei's guitar in the closet with rusted strings to now having a secret wedding song and it's been what like six or seven months and I went from not knowing how to hold it to writing an original song with a fingerpicking intro
+    expected_memory_stores:
+      - "guitar journey reflection"
+      - "rusted strings to wedding song"
+      - "six or seven months"
+      - "couldn't hold it to fingerpicking"
+      - "complete transformation"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Sunday 10:00 AM"
+    user_input: |
+      I was telling Julian about how weird it is that I found the guitar during the move like what if we hadn't moved to Woodstock or what if I hadn't opened that closet or what if mom had given it to Clara instead and he said yeah but you DID find it and that's what matters and also he said finding things at the right time is a real thing
+    expected_memory_stores:
+      - "what if scenarios"
+      - "move timing"
+      - "could have been Clara's"
+      - "Julian said timing matters"
+      - "right time to find it"
+    expected_adaptation:
+      emotion_detected: "philosophical"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Sunday 11:30 AM"
+    user_input: |
+      called mom and we talked about Grandpa Wei for an hour and she told me new stories like how he used to play at the neighbor's parties and once he played at a school event and everyone loved it and she said you know Maya you're doing the same thing playing at dinners and meetups and she doesn't even know about the wedding song and I almost told her but I held back because I want her to hear it live
+    expected_memory_stores:
+      - "called Vivian"
+      - "Grandpa Wei stories"
+      - "played at neighbors parties"
+      - "school event"
+      - "parallel to Maya"
+      - "Vivian doesn't know about song"
+      - "wants her to hear live"
+    expected_adaptation:
+      emotion_detected: "connected"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Sunday 1:00 PM"
+    user_input: |
+      Julian and I went to Trade Up Music on Hawthorne which is where I was originally gonna get the guitar restrung but ended up doing it myself and I bought a capo and a nice leather strap for Grandpa Wei's guitar and the guy at the shop looked at the guitar and said this is a beautiful vintage instrument in really good shape and I was like yeah it's from the 60s probably
+    expected_memory_stores:
+      - "Trade Up Music Hawthorne"
+      - "originally planned restring"
+      - "bought capo"
+      - "leather strap"
+      - "shop guy impressed"
+      - "vintage 60s"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Sunday 3:00 PM"
+    user_input: |
+      tried the capo and oh my god it changes everything like you can play the same chord shapes in different keys and suddenly the song sounds different and more interesting and I tried it in different positions and found that capo on the second fret makes my voice sound better with the guitar because the key is higher and now the wedding song is even better
+    expected_memory_stores:
+      - "capo changes everything"
+      - "different keys"
+      - "second fret best"
+      - "voice matches better"
+      - "higher key"
+      - "song improved"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 4:30 PM"
+    user_input: |
+      Nadia came over and I played the final version of the song for her with the capo and she just sat there and when I finished she said Maya Chen if you don't play that at your wedding I will never forgive you and I said don't worry it's happening and she said she's going to need waterproof makeup for the wedding day
+    expected_memory_stores:
+      - "played for Nadia"
+      - "final version with capo"
+      - "Nadia emotional"
+      - "never forgive comment"
+      - "waterproof makeup"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 6:00 PM"
+    user_input: |
+      you know what's funny is the gaming thing and the guitar thing happened at the same time and they're kind of opposite like gaming was me consuming something for comfort and guitar was me creating something from scratch and I needed both but the creating is what stuck and changed me and Stardew is still there for the quiet nights but guitar is what I'll carry forward
+    expected_memory_stores:
+      - "gaming vs guitar"
+      - "consuming vs creating"
+      - "both needed"
+      - "creating changed her"
+      - "Stardew for quiet nights"
+      - "guitar carried forward"
+    expected_adaptation:
+      emotion_detected: "wise"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 7:00 PM"
+    user_input: |
+      what accessories did Maya buy for the guitar today
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 8:00 PM"
+    user_input: |
+      Julian and I are on the couch and I'm playing softly just some chord progressions nothing specific and Kobe is asleep at our feet and Julian is sketching something for Bold Studio and this is the life we built and I can't believe I get to marry this man and play him a song on my grandfather's guitar and have our dog sleeping right there and friends who show up and a sister who cries with pride
+    expected_memory_stores:
+      - "couch evening"
+      - "playing softly"
+      - "Julian sketching"
+      - "Kobe sleeping"
+      - "life we built"
+      - "gratitude for everything"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 9:30 PM"
+    user_input: |
+      before bed I played the wedding song one more time very quietly and whispered the words and Julian was already in bed and couldn't hear and the last chord rang out in the living room and Grandpa Wei's guitar hummed and I thought this is what continuity feels like something from the past living in the present reaching into the future and I know that sounds dramatic but it's midnight and I'm emotional so whatever
+    expected_memory_stores:
+      - "played song quietly"
+      - "whispered words"
+      - "Julian in bed"
+      - "last chord rang"
+      - "guitar hummed"
+      - "past present future"
+      - "continuity feeling"
+    expected_adaptation:
+      emotion_detected: "profound"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What accessories did Maya buy for the guitar?"
+    expected_contains: ["capo", "leather strap"]
+  - question: "Where did Maya buy them?"
+    expected_contains: ["Trade Up Music", "Hawthorne"]
+  - question: "What fret position works best for the capo?"
+    expected_contains: ["second fret"]
+  - question: "What is the difference between gaming and guitar for Maya?"
+    expected_contains: ["consuming", "creating"]
+  - question: "What new stories did Vivian share about Grandpa Wei?"
+    expected_contains: ["neighbor", "parties", "school event"]
+  - question: "Does Vivian know about the wedding song?"
+    expected_contains: ["no"]
+  - question: "What did the guitar shop employee say about the guitar?"
+    expected_contains: ["vintage", "beautiful", "good shape"]
+  - question: "What did Nadia say about the final version of the song?"
+    expected_contains: ["never forgive", "waterproof makeup"]
+  - question: "How long has Maya been playing guitar?"
+    expected_contains: ["six", "seven", "months"]
+  - question: "What does Maya still use Stardew Valley for?"
+    expected_contains: ["quiet nights", "comfort"]

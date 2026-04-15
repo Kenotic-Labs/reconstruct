@@ -1,0 +1,177 @@
+story_id: 345
+story_name: "Tokyo Days — Shibuya, Tsukiji, teamLab"
+category: "Travel"
+description: |
+  Tests memory of Maya and Julian's Tokyo exploration. Tsukiji fish market,
+  teamLab Borderless, Shibuya nightlife, luggage arriving day 3. Verifies
+  system captures travel experiences and luggage resolution.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Day 2 Wednesday 6:00 AM JST"
+    user_input: |
+      woke up at 5am because jet lag and dragged Julian to Tsukiji outer market and oh my god the seafood is insane like they have these little stalls with fresh tuna and tamagoyaki and Julian ate like 6 things before 7am and I had the best mochi I've ever tasted
+    expected_memory_stores:
+      - "Tsukiji outer market"
+      - "5am jet lag"
+      - "fresh tuna tamagoyaki"
+      - "Julian ate 6 things"
+      - "best mochi"
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Day 2 Wednesday 12:00 PM JST"
+    user_input: |
+      walked through Harajuku and Takeshita Street and it's exactly as wild as the internet says like these crazy fashion stores and crepe shops everywhere and Julian got a crepe with strawberries and whipped cream and matcha ice cream and I got one with banana and Nutella
+    expected_memory_stores:
+      - "Harajuku"
+      - "Takeshita Street"
+      - "crazy fashion"
+      - "Julian strawberry matcha crepe"
+      - "Maya banana Nutella crepe"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Day 2 Wednesday 4:00 PM JST"
+    user_input: |
+      went to teamLab Borderless and I literally cannot describe it it's like walking through a dream with lights and water and flowers projected everywhere and Julian and I just stood in one room for 15 minutes holding hands not talking and it was the most beautiful thing I've ever seen
+    expected_memory_stores:
+      - "teamLab Borderless"
+      - "lights water flowers"
+      - "15 minutes one room"
+      - "holding hands"
+      - "most beautiful ever"
+    expected_adaptation:
+      emotion_detected: "transcendent"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Day 2 Wednesday 9:00 PM JST"
+    user_input: |
+      found this tiny yakitori bar in Golden Gai which is this area in Shinjuku with like 200 tiny bars that seat 6 people each and we squeezed in and the owner didn't speak English but we pointed at things and everything was incredible and we drank shochu
+    expected_memory_stores:
+      - "yakitori bar"
+      - "Golden Gai Shinjuku"
+      - "200 tiny bars"
+      - "seats 6 people"
+      - "pointed at menu"
+      - "drank shochu"
+    expected_adaptation:
+      emotion_detected: "adventurous"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Day 3 Thursday 10:00 AM JST"
+    user_input: |
+      LUGGAGE ARRIVED hotel called our room and said two bags are at front desk and I ran down in my Uniqlo pajamas and there they were and Julian's camera is fine thankfully and I finally have my own clothes and toiletries and it feels like Christmas
+    expected_memory_stores:
+      - "luggage arrived day 3"
+      - "hotel front desk"
+      - "camera fine"
+      - "own clothes"
+      - "feels like Christmas"
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Day 3 Thursday 2:00 PM JST"
+    user_input: |
+      visited Meiji Shrine today and it was so peaceful like you're in the middle of this massive city and you walk through this forest and it's silent and there were people doing the purification thing at the fountain and I did it too and Julian wrote a wish on an ema the wooden plaque
+    expected_memory_stores:
+      - "Meiji Shrine"
+      - "peaceful in city"
+      - "forest walkway"
+      - "purification fountain"
+      - "Julian wrote on ema"
+    expected_adaptation:
+      emotion_detected: "serene"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Day 3 Thursday 7:00 PM JST"
+    user_input: |
+      sent Marco Polos to Jenny and Nadia and they were both freaking out over the teamLab videos and Jenny said she went there too and she cried in the same room and Nadia said add Japan to my bucket list and I said you should definitely come someday
+    expected_memory_stores:
+      - "Marco Polos to Jenny and Nadia"
+      - "teamLab videos"
+      - "Jenny cried same room"
+      - "Nadia bucket list"
+    expected_adaptation:
+      emotion_detected: "sharing"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Day 4 Friday 10:00 AM JST"
+    user_input: |
+      what day did Maya and Julian's luggage arrive in Tokyo
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Day 4 Friday 3:00 PM JST"
+    user_input: |
+      last full day in Tokyo and we went to Akihabara which is the electronics district and Julian lost his mind over the vintage video game stores and I found this beautiful studio Ghibli shop with Totoro stuff and I bought a little Totoro keychain for Nadia because she loves My Neighbor Totoro
+    expected_memory_stores:
+      - "Akihabara"
+      - "electronics district"
+      - "vintage video game stores"
+      - "studio Ghibli shop"
+      - "Totoro keychain for Nadia"
+    expected_adaptation:
+      emotion_detected: "playful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Day 4 Friday 10:00 PM JST"
+    user_input: |
+      last night in Tokyo and we went to the Shibuya Sky observation deck and saw the whole city lit up at night and Julian put his arm around me and said thank you for making this happen and I said WE made this happen and also your passport almost ruined it and he laughed
+    expected_memory_stores:
+      - "Shibuya Sky"
+      - "observation deck"
+      - "city at night"
+      - "Julian thanked Maya"
+      - "passport joke"
+    expected_adaptation:
+      emotion_detected: "romantic"
+      warmth_direction: increase
+
+final_verification:
+  - question: "When did the luggage arrive?"
+    expected_contains: ["day 3", "Thursday"]
+  - question: "What did Maya and Julian do at teamLab?"
+    expected_contains: ["stood", "holding hands", "beautiful"]
+  - question: "Where did they go in Shinjuku?"
+    expected_contains: ["Golden Gai", "yakitori"]
+  - question: "What did they eat at Tsukiji?"
+    expected_contains: ["tuna", "tamagoyaki", "mochi"]
+  - question: "What did Julian write on at Meiji Shrine?"
+    expected_contains: ["ema", "wish"]
+  - question: "What did Maya buy for Nadia?"
+    expected_contains: ["Totoro keychain"]
+  - question: "Where was the observation deck they visited?"
+    expected_contains: ["Shibuya Sky"]
+  - question: "Was Julian's camera ok in the luggage?"
+    expected_contains: ["yes", "fine"]
+  - question: "What did they drink in Golden Gai?"
+    expected_contains: ["shochu"]
+  - question: "What neighborhood is known for electronics?"
+    expected_contains: ["Akihabara"]

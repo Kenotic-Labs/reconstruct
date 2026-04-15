@@ -1,0 +1,180 @@
+story_id: 276
+story_name: "Loans Under 20K"
+category: "Finance"
+description: |
+  Tests memory of Maya's loans crossing below the $20K threshold. Captures the
+  psychological milestone, the down payment fund at Fidelity, and growing financial confidence.
+duration_simulated: "2 months"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00 AM"
+    user_input: |
+      MONTH TEN and the balance is... drumroll... $19,400!! UNDER TWENTY THOUSAND DOLLARS I literally screamed and Julian came running from his studio thinking something was wrong and I was like NO BABE WE'RE UNDER 20K
+    expected_memory_stores:
+      - "month ten"
+      - "balance $19,400"
+      - "under $20K milestone"
+      - "screamed"
+      - "Julian came running"
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:00 AM"
+    user_input: |
+      so that's $14,800 paid off in ten months which is honestly incredible when I think about where we started and the car repair setback and everything and the app is making about $750 a month consistently now which has been a huge help
+    expected_memory_stores:
+      - "$14,800 paid in ten months"
+      - "started at $34,200"
+      - "car repair setback"
+      - "app income $750"
+      - "consistent revenue"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 12:00 PM"
+    user_input: |
+      so I've been thinking about this and once the loans are paid off we'll have like $2,200 a month that was going to Navient that can go somewhere else and I want to open a proper investment account not just savings and I've been looking at Fidelity
+    expected_memory_stores:
+      - "$2,200 freed up"
+      - "investment account idea"
+      - "not just savings"
+      - "Fidelity"
+      - "post-debt planning"
+    expected_adaptation:
+      emotion_detected: "forward-thinking"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      opened a Fidelity account today just a brokerage account for now and I put in the initial $500 from the emergency fund since it's at $3,400 now and I can spare it. eventually this will be our renovation fund slash long term savings slash whatever we need
+    expected_memory_stores:
+      - "Fidelity account opened"
+      - "brokerage account"
+      - "initial $500"
+      - "emergency fund $3,400"
+      - "renovation and savings"
+    expected_adaptation:
+      emotion_detected: "responsible"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 9:00 AM"
+    user_input: |
+      month eleven balance is $17,600 and I can taste the freedom lol Julian was like let's calculate exactly when we'll be done and I ran the numbers with our current payment rate of like $1,800 total per month including app income and it's looking like about 10 more months so month 21 total
+    expected_memory_stores:
+      - "month eleven"
+      - "balance $17,600"
+      - "$1,800 total monthly"
+      - "10 more months"
+      - "month 21 total"
+    expected_adaptation:
+      emotion_detected: "eager"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      Omar asked me about the loan payoff because I mentioned it at the climbing gym and when I told him the numbers he was like you know what you should do is throw the tax refund at it when you get it and I was like oh my god I forgot about the tax refund that could be like 3K
+    expected_memory_stores:
+      - "Omar suggestion"
+      - "tax refund"
+      - "estimated $3K"
+      - "forgot about it"
+      - "accelerate payoff"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 8:00 PM"
+    user_input: |
+      month twelve and we're at $15,800 and the fridge chart is actually looking dramatic now like the line is diving down and Julian's doodle mountain is getting closer and I added a note that says "one year in, one year to go" even though it might be less
+    expected_memory_stores:
+      - "month twelve"
+      - "balance $15,800"
+      - "one year milestone"
+      - "fridge chart dramatic"
+      - "one year to go"
+    expected_adaptation:
+      emotion_detected: "milestone"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 10:00 AM"
+    user_input: |
+      tax refund came in at $3,200 which is even more than I expected and I'm putting ALL OF IT toward the loans and that brings the balance from $15,800 down to $12,600 TWELVE THOUSAND SIX HUNDRED Julian was like we might be done by summer
+    expected_memory_stores:
+      - "tax refund $3,200"
+      - "all toward loans"
+      - "balance $12,600"
+      - "done by summer possible"
+    expected_adaptation:
+      emotion_detected: "thrilled"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 6:00 PM"
+    user_input: |
+      put another $200 into the Fidelity account and I bought some index funds which Nadia's partner recommended like a total market fund FSKAX and a bond fund for diversity or wait diversification I always say that wrong
+    expected_memory_stores:
+      - "Fidelity $200 deposit"
+      - "index funds"
+      - "FSKAX"
+      - "total market fund"
+      - "bond fund"
+      - "Nadia's partner recommended"
+    expected_adaptation:
+      emotion_detected: "learning"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      ran into my neighbor Diana and she asked how the house was going and I mentioned the loan payoff journey and she was like wow you two are so disciplined and she's right we are and I never thought I'd say that about myself and Julian but here we are
+    expected_memory_stores:
+      - "neighbor Diana"
+      - "loan payoff conversation"
+      - "disciplined"
+      - "personal growth"
+      - "Julian included"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya's current loan balance?"
+    expected_contains: ["12,600", "12600"]
+  - question: "What investment account did Maya open?"
+    expected_contains: ["Fidelity"]
+  - question: "What index fund did Maya buy?"
+    expected_contains: ["FSKAX"]
+  - question: "How much was the tax refund?"
+    expected_contains: ["3,200", "3200"]
+  - question: "How long has Maya been on the payoff plan?"
+    expected_contains: ["twelve months", "one year"]
+  - question: "How much does the recipe app make monthly now?"
+    expected_contains: ["750"]
+  - question: "Who suggested using the tax refund toward loans?"
+    expected_contains: ["Omar"]
+  - question: "What is the total monthly payment including app income?"
+    expected_contains: ["1,800", "1800"]
+  - question: "When might Maya be debt-free?"
+    expected_contains: ["summer"]
+  - question: "How much has been paid off total?"
+    expected_contains: ["21,600"]

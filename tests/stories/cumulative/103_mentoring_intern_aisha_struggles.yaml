@@ -1,0 +1,213 @@
+story_id: 103
+story_name: "Aisha Struggles with Codebase"
+category: "Career"
+description: |
+  Tests whether the system tracks Aisha's difficulties with the legacy codebase, Maya's
+  frustration with the code itself vs Aisha, and the emotional nuance of wanting to help
+  but feeling time-crunched. Cross-thread reference to Maya's own workload.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 10:00am"
+    user_input: |
+      so Aisha's been here a week now and she's really struggling with the legacy auth service. like the code is honestly terrible, it was written by someone who left before I even started and there's zero documentation
+    expected_memory_stores:
+      - "Aisha struggling"
+      - "legacy auth service"
+      - "no documentation"
+      - "one week"
+    expected_triples:
+      - ["Aisha", "struggles_with", "legacy auth service"]
+      - ["legacy auth service", "has_problem", "no documentation"]
+      - ["Aisha", "has_tenure", "one week"]
+      - ["user", "has_emotion", "frustrated"]
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 2:00pm"
+    user_input: |
+      she asked me like eight questions today already and I wanna be patient but I also have my own sprint deliverables you know? like I have that API migration due Friday and I've barely started
+    expected_memory_stores:
+      - "many questions"
+      - "sprint deliverables"
+      - "API migration"
+      - "Friday deadline"
+    expected_triples:
+      - ["Aisha", "asks", "many questions"]
+      - ["user", "has_deliverable", "API migration"]
+      - ["API migration", "has_deadline", "Friday"]
+      - ["user", "has_emotion", "stressed"]
+    expected_adaptation:
+      emotion_detected: "stressed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 9:30am"
+    user_input: |
+      found Aisha at her desk at like 8am this morning, she got here early to try to figure out the auth flow on her own. she had like three tabs of Stack Overflow open and a notebook full of diagrams. honestly that's dedication
+    expected_memory_stores:
+      - "Aisha early"
+      - "self-study"
+      - "auth flow"
+      - "dedication"
+    expected_triples:
+      - ["Aisha", "arrived_early", "8am"]
+      - ["Aisha", "studied", "auth flow"]
+      - ["Aisha", "demonstrates", "dedication"]
+      - ["user", "has_emotion", "impressed"]
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 3:00pm"
+    user_input: |
+      ok so Aisha made a PR today and it was... not great. like the logic was right but she didn't follow our code style at all and she put business logic in the controller layer. I spent an hour reviewing it and writing comments
+    expected_memory_stores:
+      - "first PR"
+      - "code style issues"
+      - "business logic placement"
+      - "code review"
+    expected_triples:
+      - ["Aisha", "submitted", "first PR"]
+      - ["Aisha PR", "has_issue", "code style violations"]
+      - ["Aisha PR", "has_issue", "business logic in controller layer"]
+      - ["user", "performed", "code review"]
+      - ["user", "has_emotion", "disappointed"]
+    expected_adaptation:
+      emotion_detected: "disappointed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 11:00am"
+    user_input: |
+      she seemed kinda dejected after my PR review yesterday but today she came back with everything fixed and also added unit tests that I didn't even ask for?? like this girl is a fighter
+    expected_memory_stores:
+      - "PR fixed"
+      - "unit tests added"
+      - "resilient"
+      - "initiative"
+    expected_triples:
+      - ["Aisha", "fixed", "PR feedback"]
+      - ["Aisha", "added", "unit tests"]
+      - ["Aisha", "demonstrates", "resilience"]
+      - ["user", "has_emotion", "proud"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 4:30pm"
+    user_input: |
+      my manager Rachel not Rachel Ford the UX person but my actual engineering manager Rachel Kim asked how the mentoring is going and I said good but honestly I'm falling behind on my own work. she said she'd talk to Sam about adjusting my sprint load
+    expected_memory_stores:
+      - "Rachel Kim"
+      - "engineering manager"
+      - "sprint load adjustment"
+      - "falling behind"
+    expected_triples:
+      - ["Rachel Kim", "is_role", "engineering manager"]
+      - ["user", "is_falling_behind", "own work"]
+      - ["Rachel Kim", "will_discuss", "sprint load adjustment"]
+      - ["user", "has_emotion", "relieved"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 9:00am"
+    user_input: |
+      what year was the auth service originally written
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 1:00pm"
+    user_input: |
+      Aisha broke the staging environment lol. like completely. she ran a migration script without the --dry-run flag and it wiped the test database. she was SO freaked out but I was like girl I did the exact same thing my third week here
+    expected_memory_stores:
+      - "staging environment broken"
+      - "migration script"
+      - "test database wiped"
+      - "Maya reassured"
+    expected_triples:
+      - ["Aisha", "broke", "staging environment"]
+      - ["Aisha", "ran_without", "dry-run flag"]
+      - ["Aisha", "wiped", "test database"]
+      - ["user", "reassured", "Aisha"]
+      - ["user", "has_emotion", "amused"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 3:00pm"
+    user_input: |
+      got the staging db restored from backup, took like 20 minutes. showed Aisha how to do backups and restores so she knows for next time. she wrote it all down in her notebook
+    expected_memory_stores:
+      - "database restored"
+      - "backup training"
+      - "Aisha notebook"
+    expected_triples:
+      - ["user", "restored", "staging database from backup"]
+      - ["user", "taught", "Aisha backup and restore procedures"]
+      - ["Aisha", "documented_in", "notebook"]
+    expected_adaptation:
+      emotion_detected: "patient"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 7:00pm"
+    user_input: |
+      made my API migration deadline by the skin of my teeth. literally submitted the PR at like 4:58pm. Julian and I are gonna order pizza and watch something dumb tonight. I need to not think about code for like twelve hours
+    expected_memory_stores:
+      - "API migration completed"
+      - "barely made deadline"
+      - "pizza with Julian"
+      - "burnout"
+    expected_triples:
+      - ["user", "completed", "API migration"]
+      - ["user", "plans_evening", "pizza with Julian"]
+      - ["user", "has_emotion", "exhausted"]
+    expected_adaptation:
+      emotion_detected: "exhausted"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Aisha struggling with at work?"
+    expected_contains: ["legacy", "auth service"]
+  - question: "What happened to the staging environment?"
+    expected_contains: ["migration", "database", "wiped"]
+  - question: "Who is Maya's engineering manager?"
+    expected_contains: ["Rachel Kim"]
+  - question: "Did Maya complete the API migration on time?"
+    expected_contains: ["yes", "Friday"]
+  - question: "What did Aisha add to her PR that wasn't requested?"
+    expected_contains: ["unit tests"]
+  - question: "How is mentoring affecting Maya's own work?"
+    expected_contains: ["falling behind", "sprint"]
+  - question: "What did Aisha do when she got to the office early?"
+    expected_contains: ["auth flow", "Stack Overflow", "diagrams"]
+  - question: "What issue did Maya's code review find?"
+    expected_contains: ["code style", "business logic", "controller"]
+  - question: "How did they fix the staging database?"
+    expected_contains: ["backup", "restored"]
+  - question: "What is Maya doing Friday night?"
+    expected_contains: ["pizza", "Julian"]

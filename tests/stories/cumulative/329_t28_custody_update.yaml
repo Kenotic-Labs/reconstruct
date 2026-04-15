@@ -1,0 +1,178 @@
+story_id: 329
+story_name: "Greg's Custody Win"
+category: "Home Life"
+description: |
+  Tests memory of Greg winning more custody time with Noah. Maya celebrates
+  with him. The neighbor relationship solidifies into genuine friendship.
+  Verifies system tracks legal outcome and emotional resolution.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 5:45 PM"
+    user_input: |
+      Greg was in his yard when I got home and he was GRINNING and he said Maya I got the call from my lawyer today and the judge approved every weekend plus one weekday evening and I was like oh my god Greg that's amazing
+    expected_memory_stores:
+      - "custody win"
+      - "every weekend"
+      - "one weekday evening"
+      - "lawyer called"
+      - "judge approved"
+      - "Greg grinning"
+    expected_adaptation:
+      emotion_detected: "thrilled"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 6:00 PM"
+    user_input: |
+      he was emotional like genuinely tearing up and he said the headphone amp thing actually helped his case because his lawyer used it to show the judge he was willing to compromise and be a good neighbor and I was like wait WHAT my suggestion helped your custody case
+    expected_memory_stores:
+      - "Greg tearing up"
+      - "headphone amp helped custody"
+      - "showed willingness to compromise"
+      - "Maya's suggestion helped"
+    expected_adaptation:
+      emotion_detected: "stunned"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 6:30 PM"
+    user_input: |
+      ran inside and told Julian and he was like are you serious the headphone amp was evidence and I was like apparently yes and Julian laughed and said that's the most Portland thing I've ever heard
+    expected_memory_stores:
+      - "told Julian"
+      - "headphone amp as evidence"
+      - "Julian laughed"
+      - "most Portland thing"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 7:00 PM"
+    user_input: |
+      Greg asked if he could take us to dinner to celebrate and we went to this BBQ place on Foster called Matt's BBQ and he insisted on paying and he kept saying I owe you guys and Julian was like you owe us nothing man
+    expected_memory_stores:
+      - "dinner celebration"
+      - "Matt's BBQ Foster"
+      - "Greg paid"
+      - "I owe you"
+      - "Julian said nothing owed"
+    expected_adaptation:
+      emotion_detected: "generous"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 8:30 PM"
+    user_input: |
+      at dinner Greg told us more about the custody timeline and Noah will start coming every Friday through Sunday and Wednesday evenings and he said he's going to set up a real bedroom for him not just the pullout couch and he was making plans and he looked alive
+    expected_memory_stores:
+      - "Friday through Sunday"
+      - "Wednesday evenings"
+      - "real bedroom for Noah"
+      - "not pullout couch"
+      - "Greg making plans"
+      - "looked alive"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 7:00 AM"
+    user_input: |
+      Greg texted at like 6am saying he couldn't sleep he's too excited and he asked if I knew anything about kid room furniture and I said ask Nadia she's the designer and he was like oh good idea and I connected them
+    expected_memory_stores:
+      - "Greg couldn't sleep"
+      - "too excited"
+      - "kid room furniture"
+      - "connected with Nadia"
+      - "Nadia designer"
+    expected_adaptation:
+      emotion_detected: "helpful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 6:00 PM"
+    user_input: |
+      Nadia called me and said Greg is the sweetest man she's ever met and she helped him pick out furniture online and she's going to help him paint the room and she already picked colors a blue and green ocean theme because Noah likes the ocean
+    expected_memory_stores:
+      - "Nadia helping Greg"
+      - "furniture online"
+      - "painting room"
+      - "blue green ocean theme"
+      - "Noah likes ocean"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 10:00 AM"
+    user_input: |
+      what custody schedule did Greg win
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Julian and I helped Greg move furniture into Noah's new room and it's cute with this little bed that looks like a boat and ocean colored walls that Nadia painted and there's a spot for Noah's drawings and a bookshelf and Greg stood in the doorway and just stared at it
+    expected_memory_stores:
+      - "helped move furniture"
+      - "boat bed"
+      - "ocean walls Nadia painted"
+      - "drawing spot"
+      - "bookshelf"
+      - "Greg stared"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 8:00 PM"
+    user_input: |
+      sitting on our porch tonight and I can see Greg through his window playing bass with headphones on and smiling and I remember three months ago wanting to kill this man and now I'm happy he's happy and I genuinely mean that
+    expected_memory_stores:
+      - "Greg playing bass headphones"
+      - "smiling"
+      - "three months ago"
+      - "wanted to kill him"
+      - "happy he's happy"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What custody schedule did Greg win?"
+    expected_contains: ["every weekend", "Wednesday evenings", "Friday through Sunday"]
+  - question: "How did the headphone amp help Greg's custody case?"
+    expected_contains: ["evidence", "willingness to compromise"]
+  - question: "Where did Greg take Maya and Julian to celebrate?"
+    expected_contains: ["Matt's BBQ", "Foster"]
+  - question: "What theme is Noah's new bedroom?"
+    expected_contains: ["ocean", "blue", "green"]
+  - question: "Who helped design Noah's room?"
+    expected_contains: ["Nadia"]
+  - question: "What kind of bed does Noah have?"
+    expected_contains: ["boat"]
+  - question: "Who painted Noah's room?"
+    expected_contains: ["Nadia"]
+  - question: "What does Noah like that inspired the room theme?"
+    expected_contains: ["ocean"]
+  - question: "How does Greg feel about the custody ruling?"
+    expected_contains: ["excited", "happy", "emotional"]
+  - question: "How does Maya feel about Greg now?"
+    expected_contains: ["happy for him", "genuine"]

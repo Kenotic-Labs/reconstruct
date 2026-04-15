@@ -1,0 +1,222 @@
+story_id: 164
+story_name: "The Offer"
+category: "Career"
+description: |
+  Julian gets the Bold Studio offer at $78K. Internal debate about
+  giving up freelance freedom. Tests tracking decision-making process,
+  salary details, and emotional conflict.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 11:00 AM"
+    user_input: |
+      JULIAN GOT THE OFFER from Bold Studio Kevin called him personally and said they want him and the salary is $78K plus benefits plus three weeks PTO and Julian called me at work and I literally screamed at my desk and Priya looked at me like I was insane and I had to mouth sorry personal call
+    expected_memory_stores:
+      - "Bold Studio offer received"
+      - "salary $78K"
+      - "benefits included"
+      - "three weeks PTO"
+      - "Kevin called personally"
+      - "Maya screamed at work"
+    expected_triples:
+      - ["Julian", "received_offer_from", "Bold Studio"]
+      - ["Bold Studio", "offered_salary", "$78K"]
+      - ["Kevin Park", "called", "Julian personally with offer"]
+      - ["user", "has_emotion", "ecstatic"]
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 12:00 PM"
+    user_input: |
+      okay so the details are $78000 base salary health dental vision 401k with 3% match three weeks PTO and a $2000 signing bonus for equipment because they want him to have his own drawing tablet and stuff and the start date would be in three weeks
+    expected_memory_stores:
+      - "$78000 base"
+      - "health dental vision"
+      - "401k 3% match"
+      - "three weeks PTO"
+      - "$2000 signing bonus"
+      - "drawing tablet"
+      - "start in three weeks"
+    expected_triples:
+      - ["Bold Studio", "offers_benefits", "health dental vision 401k"]
+      - ["Bold Studio", "offers_401k_match", "3%"]
+      - ["Bold Studio", "offers_signing_bonus", "$2000"]
+      - ["Julian", "start_date", "three weeks from now"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 5:00 PM"
+    user_input: |
+      so here's the thing Julian's not sure he wants to take it and I'm like WHAT and he said it's just that he's been his own boss for five years and going back to a 9 to 5 feels like giving up his dream and I get it I really do but also $78K with benefits is not nothing especially right now
+    expected_memory_stores:
+      - "Julian hesitant"
+      - "freedom vs stability"
+      - "five years self-employed"
+      - "feels like giving up dream"
+      - "Maya wants him to take it"
+    expected_triples:
+      - ["Julian", "has_emotion", "conflicted"]
+      - ["Julian", "freelanced_for", "five years"]
+      - ["Julian", "fears", "giving up freelance freedom"]
+      - ["user", "wants", "Julian to accept offer"]
+    expected_adaptation:
+      emotion_detected: "conflicted"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 9:00 PM"
+    user_input: |
+      we had a really long talk tonight like two hours on the couch with Kobe sleeping between us and Julian said what if I'm just not cut out for having a boss and I said Kevin literally let you bring ideas to the interview it's not like you'd be a drone and he said yeah but what about my own clients and I said you can freelance on the side
+    expected_memory_stores:
+      - "long conversation about decision"
+      - "Julian worried about having a boss"
+      - "Maya suggests freelancing on side"
+      - "Kevin is collaborative"
+    expected_triples:
+      - ["Julian", "worried_about", "having a boss"]
+      - ["user", "suggested", "freelancing on the side"]
+      - ["user", "has_emotion", "patient"]
+    expected_adaptation:
+      emotion_detected: "patient"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 10:00 AM"
+    user_input: |
+      Julian called his mom Diane about it and she said take the job Julian stability is important especially with the wedding and for once I completely agree with Diane honestly and Marcus texted saying dude take it and negotiate up if you can which is actually smart advice
+    expected_memory_stores:
+      - "Diane says take the job"
+      - "Marcus says take it and negotiate"
+      - "family unanimous"
+    expected_triples:
+      - ["Diane", "advises", "Julian take the job"]
+      - ["Marcus", "advises", "Julian take it and negotiate"]
+      - ["user", "has_emotion", "validated"]
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 2:00 PM"
+    user_input: |
+      Julian tried to negotiate and asked for $82K and Kevin came back with $78K but said there's a performance review at six months and if it goes well a raise is very likely and Julian was a little disappointed but honestly $78K is still great for Portland and it's way more than freelancing was giving him lately
+    expected_memory_stores:
+      - "negotiation attempted $82K"
+      - "held at $78K"
+      - "six month performance review"
+      - "raise possible at six months"
+      - "Julian disappointed"
+    expected_triples:
+      - ["Julian", "negotiated_for", "$82K"]
+      - ["Bold Studio", "held_salary_at", "$78K"]
+      - ["Bold Studio", "has_review_at", "six months"]
+      - ["Julian", "has_emotion", "disappointed"]
+    expected_adaptation:
+      emotion_detected: "slightly disappointed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 6:00 PM"
+    user_input: |
+      Julian's listing out pros and cons literally on paper like a pros and cons list which is very him um pros are stability income benefits team collaboration growth opportunity and Kobe at work cons are loss of freedom schedule restrictions commute and potential creative limitations and looking at it the pros clearly win
+    expected_memory_stores:
+      - "pros and cons list"
+      - "pros: stability income benefits team"
+      - "cons: freedom schedule commute"
+      - "pros outweigh cons"
+    expected_triples:
+      - ["Julian", "created", "pros and cons list"]
+      - ["Bold Studio pros", "include", "stability income benefits team Kobe at work"]
+      - ["Bold Studio cons", "include", "loss of freedom schedule commute"]
+    expected_adaptation:
+      emotion_detected: "analytical"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 9:00 AM"
+    user_input: |
+      Julian woke up today and said I'm taking it and he looked peaceful like really at peace with it and I hugged him so hard and Kobe jumped on both of us and knocked us over and it was perfect honestly I'm so relieved and proud of him for making a hard decision
+    expected_memory_stores:
+      - "Julian decided to accept"
+      - "at peace with decision"
+      - "Maya relieved and proud"
+      - "Kobe jumped on them"
+    expected_triples:
+      - ["Julian", "decided_to", "accept Bold Studio offer"]
+      - ["Julian", "has_emotion", "at peace"]
+      - ["user", "has_emotion", "relieved"]
+    expected_adaptation:
+      emotion_detected: "relieved joy"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 11:00 AM"
+    user_input: |
+      Julian emailed Kevin to formally accept and Kevin wrote back within like ten minutes saying welcome to the team can't wait to work with you and he signed it cheers Kevin which Julian said is very Kevin apparently and the start date is confirmed for three weeks from Monday
+    expected_memory_stores:
+      - "Julian formally accepted"
+      - "Kevin welcomed him"
+      - "start date confirmed"
+    expected_triples:
+      - ["Julian", "formally_accepted", "Bold Studio offer"]
+      - ["Kevin Park", "welcomed", "Julian to team"]
+      - ["Julian", "starts_at_Bold_Studio", "three weeks from Monday"]
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 PM"
+    user_input: |
+      told my parents about Julian's new job and Dad said about time that boy got a real job which LOL thanks Dad and Mom said she's happy because it means less financial stress for us heading into the wedding and she's right between my $140K and Julian's $78K we're at $218K household income which is honestly really comfortable for Portland
+    expected_memory_stores:
+      - "parents told about Julian's job"
+      - "George's reaction"
+      - "Vivian happy about finances"
+      - "household income $218K"
+      - "comfortable for Portland"
+    expected_triples:
+      - ["user", "has_household_income", "$218K"]
+      - ["user", "earns", "$140K"]
+      - ["Julian", "earns", "$78K"]
+      - ["user", "has_emotion", "content"]
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Julian's salary at Bold Studio?"
+    expected_contains: ["78"]
+  - question: "Did Julian try to negotiate?"
+    expected_contains: ["yes", "82"]
+  - question: "What benefits does Bold Studio offer?"
+    expected_contains: ["health", "dental", "401k", "PTO"]
+  - question: "Why was Julian hesitant to accept?"
+    expected_contains: ["freedom", "own boss", "freelance"]
+  - question: "Who encouraged Julian to take the job?"
+    expected_contains: ["Maya", "Diane", "Marcus"]
+  - question: "When does Julian start at Bold Studio?"
+    expected_contains: ["three weeks"]
+  - question: "What is the household income now?"
+    expected_contains: ["218"]
+  - question: "Is there a performance review planned?"
+    expected_contains: ["six months"]
+  - question: "How much was the signing bonus?"
+    expected_contains: ["2000"]
+  - question: "Did Julian accept the Bold Studio offer?"
+    expected_contains: ["yes", "accepted"]

@@ -1,0 +1,170 @@
+story_id: 351
+story_name: "Japan Trip Ramen Inspiration"
+category: "Food and Cooking"
+description: |
+  Tests memory of Maya's Japan trip inspiring a ramen obsession.
+  Establishes the catalyst event and initial enthusiasm.
+  Verifies system captures food-related memories and emotional excitement.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Sunday 9:00 AM"
+    user_input: |
+      okay so we just got back from Japan last night and I'm still like completely jet lagged but oh my god the ramen there was just on another level like we went to this tiny shop in Tokyo called Fuunji and I literally waited in line for like 45 minutes and it was the best thing I've ever eaten
+    expected_memory_stores:
+      - "Japan trip"
+      - "ramen"
+      - "Fuunji Tokyo"
+      - "45 minute wait"
+      - "best food experience"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Sunday 10:15 AM"
+    user_input: |
+      Julian took like a million photos of every bowl we ate which is so him but honestly I'm glad because now I can reference them and like the broth was this milky pork bone thing that had been simmered for like 18 hours and the noodles were handmade and chewy and I just I can't stop thinking about it
+    expected_memory_stores:
+      - "Julian photos"
+      - "tonkotsu broth"
+      - "18 hour simmer"
+      - "handmade noodles"
+    expected_adaptation:
+      emotion_detected: "enthusiastic"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Sunday 12:30 PM"
+    user_input: |
+      we went to like seven different ramen places in ten days which is a lot but also not enough honestly and each one was completely different like there was this miso one in Sapporo that was totally different from the shoyu one in Kyoto and I didn't even know there were that many kinds
+    expected_memory_stores:
+      - "seven ramen shops"
+      - "ten day trip"
+      - "miso ramen Sapporo"
+      - "shoyu ramen Kyoto"
+      - "ramen varieties"
+    expected_adaptation:
+      emotion_detected: "passionate"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Sunday 2:00 PM"
+    user_input: |
+      so I told Julian I wanna learn to make ramen like real ramen not the instant packet stuff and he was like oh boy here we go because he knows when I get into something I go all in and he's probably right but like I don't care I need to learn this
+    expected_memory_stores:
+      - "wants to make ramen"
+      - "Julian reaction"
+      - "Maya goes all in"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Sunday 4:30 PM"
+    user_input: |
+      been watching YouTube videos for like two hours about making tonkotsu broth and apparently you have to boil pork bones for minimum 12 hours some people do 24 and the kitchen basically smells like a farm the whole time and I'm like do I have a pot big enough for that
+    expected_memory_stores:
+      - "tonkotsu research"
+      - "12-24 hour cook time"
+      - "pork bones"
+      - "pot needed"
+    expected_adaptation:
+      emotion_detected: "curious"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 6:00 PM"
+    user_input: |
+      oh also Julian's mom called again asking about the trip but anyway about the ramen thing I found this place called Uwajimaya in Portland that apparently has all the Japanese ingredients I'd need like the tare and the kombu and the katsuobushi and stuff so I'm gonna go there this week
+    expected_memory_stores:
+      - "Uwajimaya"
+      - "Japanese ingredients"
+      - "tare"
+      - "kombu"
+      - "katsuobushi"
+      - "shopping plan"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 7:30 PM"
+    user_input: |
+      Jenny thinks I'm insane for wanting to make ramen from scratch she was like just go to Marukin in Portland it's great and I'm like Jenny that's not the POINT the point is I want to MAKE it myself you know like the process is part of it
+    expected_memory_stores:
+      - "Jenny reaction"
+      - "Marukin Portland"
+      - "Maya wants process"
+      - "DIY motivation"
+    expected_adaptation:
+      emotion_detected: "passionate"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 8:45 PM"
+    user_input: |
+      what was the name of that ramen shop in Tokyo we went to the first day the one with the long line
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 9:15 PM"
+    user_input: |
+      showed Clara the photos Julian took and she was like oh my god those look incredible and Tyler was drooling and I promised I'd make them ramen once I figure it out which might take a while honestly but Clara said she believes in me which was sweet
+    expected_memory_stores:
+      - "Clara reaction"
+      - "Tyler interested"
+      - "promised to cook for them"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 10:30 PM"
+    user_input: |
+      I made a whole list of equipment I need like a big stock pot and a fine mesh strainer and these special ramen bowls and chopstick rests and Julian was like we don't need chopstick rests and I was like yes we do it's about the experience and he just laughed
+    expected_memory_stores:
+      - "equipment list"
+      - "stock pot"
+      - "ramen bowls"
+      - "Julian amused"
+    expected_adaptation:
+      emotion_detected: "enthusiastic"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What inspired Maya's ramen obsession?"
+    expected_contains: ["Japan", "trip"]
+  - question: "What was the name of the ramen shop in Tokyo?"
+    expected_contains: ["Fuunji"]
+  - question: "How many ramen places did Maya visit in Japan?"
+    expected_contains: ["seven"]
+  - question: "Where is Maya planning to buy Japanese ingredients?"
+    expected_contains: ["Uwajimaya"]
+  - question: "What kind of broth does tonkotsu ramen use?"
+    expected_contains: ["pork bone"]
+  - question: "How long does tonkotsu broth take to cook?"
+    expected_contains: ["12", "hour"]
+  - question: "Who took photos of the ramen in Japan?"
+    expected_contains: ["Julian"]
+  - question: "What did Jenny suggest instead of making ramen?"
+    expected_contains: ["Marukin"]
+  - question: "Who did Maya promise to make ramen for?"
+    expected_contains: ["Clara", "Tyler"]
+  - question: "What types of ramen did Maya try in Japan?"
+    expected_contains: ["miso", "shoyu", "tonkotsu"]

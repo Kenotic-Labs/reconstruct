@@ -1,0 +1,188 @@
+story_id: 482
+story_name: "Midnight Library Amazing Discussion"
+category: "Book Club"
+description: |
+  Tests memory of the first book club meeting at Maya's house.
+  Establishes discussion quality, group dynamics, hosting success.
+  Verifies system captures multi-person interaction patterns.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 5:00 PM"
+    user_input: |
+      okay so book club is tonight and I'm stress cleaning the house because everyone's coming at 7 and Julian made these amazing bruschetta appetizers and I set up the living room with like extra cushions and blankets and Kobe is wearing his bandana because he needs to look presentable apparently
+    expected_memory_stores:
+      - "book club tonight"
+      - "stress cleaning"
+      - "everyone coming at 7"
+      - "Julian bruschetta"
+      - "cushions blankets"
+      - "Kobe bandana"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 7:15 PM"
+    user_input: |
+      everyone's here and Nadia brought wine and Tessa brought cheese and Lily brought these amazing chocolate truffles from this place on Division and Marcus came with nothing which is peak Marcus and Omar is already eating all the bruschetta and Julian waved from the stairs and disappeared like he promised
+    expected_memory_stores:
+      - "everyone arrived"
+      - "Nadia wine"
+      - "Tessa cheese"
+      - "Lily chocolate truffles Division"
+      - "Marcus brought nothing"
+      - "Omar eating bruschetta"
+      - "Julian disappeared upstairs"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 7:30 PM"
+    user_input: |
+      okay so the discussion started and Tessa opened with what life would you have chosen from the library and everyone went around and Nadia said she would've been a marine biologist and Omar said professional soccer player and Lily said she would've been a teacher and Marcus said astronaut and I said I honestly would've picked my current life which felt cheesy but is true
+    expected_memory_stores:
+      - "Tessa opened discussion"
+      - "what life would you choose"
+      - "Nadia marine biologist"
+      - "Omar soccer player"
+      - "Lily teacher"
+      - "Marcus astronaut"
+      - "Maya picked current life"
+    expected_adaptation:
+      emotion_detected: "authentic"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 8:00 PM"
+    user_input: |
+      the conversation got really deep like Omar talked about how he moved from Lebanon when he was twelve and how he sometimes wonders what life would have been like if he'd stayed and everyone got quiet and Nadia held his hand and I was like this is exactly what book club should be you know real conversations not just plot summaries
+    expected_memory_stores:
+      - "deep conversation"
+      - "Omar from Lebanon"
+      - "moved age twelve"
+      - "what if he stayed"
+      - "Nadia held his hand"
+      - "real conversations"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 8:30 PM"
+    user_input: |
+      Tessa said something really smart about how the book argues that the mundane life is the meaningful one and she connected it to her nonprofit work and how people in food deserts don't need extraordinary lives they just need access to basic things and that was such a good point and Marcus was like wow Tessa that's heavy and she said thanks Marcus you brought nothing to this gathering
+    expected_memory_stores:
+      - "Tessa mundane is meaningful"
+      - "nonprofit food desert connection"
+      - "basic things matter"
+      - "Marcus impressed"
+      - "Tessa teased Marcus"
+      - "brought nothing joke"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 9:00 PM"
+    user_input: |
+      Lily brought up the ending and how Nora chooses her root life and the word root really stuck with me because we just moved into this Woodstock house and I'm literally putting down roots and playing Grandpa Wei's guitar and planning a wedding and it all just felt so connected and I got a little emotional
+    expected_memory_stores:
+      - "Lily brought up ending"
+      - "Nora root life"
+      - "word root stuck"
+      - "Woodstock house roots"
+      - "guitar wedding connected"
+      - "Maya emotional"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 9:30 PM"
+    user_input: |
+      Marcus admitted he only read half the book and everyone booed him and he was like I got the gist and Omar said that's not how book club works and Marcus said he'll finish it this week and Nadia was like you better because next month we're reading Project Hail Mary and you need to pull your weight
+    expected_memory_stores:
+      - "Marcus read half"
+      - "everyone booed"
+      - "got the gist"
+      - "finish this week"
+      - "next book Project Hail Mary"
+      - "pull your weight"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 10:00 PM"
+    user_input: |
+      what did everyone bring to the first book club meeting
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 10:15 PM"
+    user_input: |
+      everyone's leaving and they all said this was amazing and we need to do this every month and Tessa hugged me and said your house is the perfect book club house and Omar said the bruschetta was better than the book which I don't think he meant as an insult to the book but Nadia smacked his arm anyway
+    expected_memory_stores:
+      - "everyone said amazing"
+      - "monthly commitment"
+      - "Tessa perfect house"
+      - "Omar bruschetta comment"
+      - "Nadia smacked Omar"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:45 PM"
+    user_input: |
+      Julian came downstairs after everyone left and said it sounded like you guys had an incredible time and I said we did and I told him about the discussion and he said it's cool that you have this thing that's yours and I was like yeah between book club and guitar and the tabletop meetup and climbing I actually have a full life outside of work and him and that feels really healthy
+    expected_memory_stores:
+      - "Julian came down after"
+      - "incredible time"
+      - "told Julian about discussion"
+      - "thing that's yours"
+      - "full life outside work"
+      - "book club guitar tabletop climbing"
+      - "healthy independence"
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did Tessa bring to book club?"
+    expected_contains: ["cheese"]
+  - question: "Where is Omar originally from?"
+    expected_contains: ["Lebanon"]
+  - question: "What did everyone say about the first book club meeting?"
+    expected_contains: ["amazing"]
+  - question: "What did Tessa say about the book's meaning?"
+    expected_contains: ["mundane", "meaningful"]
+  - question: "Did Marcus finish the book?"
+    expected_contains: ["no", "half"]
+  - question: "What's the next book club book?"
+    expected_contains: ["Project Hail Mary"]
+  - question: "What word from the book stuck with Maya?"
+    expected_contains: ["root"]
+  - question: "What life would Nadia have chosen?"
+    expected_contains: ["marine biologist"]
+  - question: "What did Julian make for book club?"
+    expected_contains: ["bruschetta"]
+  - question: "What life would Maya have chosen from the library?"
+    expected_contains: ["current life"]

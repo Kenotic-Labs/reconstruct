@@ -1,0 +1,182 @@
+story_id: 467
+story_name: "Portland Tabletop Meetup"
+category: "Gaming"
+description: |
+  Tests memory of Maya's first Portland Tabletop Meetup experience.
+  Establishes IRL gaming social circle, Settlers of Catan introduction.
+  Verifies system captures new social connections and venue details.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 5:00 PM"
+    user_input: |
+      okay so tonight is the Portland Tabletop Meetup at the Lucky Lab and I'm nervous which is dumb because it's just board games but I haven't done like a new social thing with strangers in a while and Nadia's meeting me there and she's bringing Tessa and Omar said he can't make it tonight but next time
+    expected_memory_stores:
+      - "Portland Tabletop Meetup"
+      - "Lucky Lab"
+      - "nervous about strangers"
+      - "Nadia meeting there"
+      - "Tessa coming"
+      - "Omar next time"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 6:30 PM"
+    user_input: |
+      okay we're here and the Lucky Lab is this brewpub with big wooden tables and there's like 15 people here for the meetup and the organizer is this guy named Dave who has like the most impressive board game collection I've ever seen he brought a literal rolling suitcase full of games and everyone seems really nice
+    expected_memory_stores:
+      - "Lucky Lab brewpub"
+      - "big wooden tables"
+      - "15 people"
+      - "organizer Dave"
+      - "rolling suitcase of games"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 7:00 PM"
+    user_input: |
+      so Dave put us in a group of five for Settlers of Catan which I've never played and it's me and Nadia and Tessa and these two other people named Jim and Robin and they're a couple who've been coming to the meetup for like two years and they're super welcoming and explained all the rules really patiently
+    expected_memory_stores:
+      - "Settlers of Catan"
+      - "group of five"
+      - "Jim and Robin"
+      - "couple two years attending"
+      - "rules explanation"
+    expected_adaptation:
+      emotion_detected: "comfortable"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 7:45 PM"
+    user_input: |
+      so Catan is like this strategy game where you build settlements and trade resources and I'm actually really into it like the strategy part of my brain that likes Stardew planning is firing on all cylinders and Nadia is terrible at it which is hilarious because she's so competitive about everything else and Tessa is actually really good she's super strategic
+    expected_memory_stores:
+      - "Catan strategy game"
+      - "settlements and trading"
+      - "Maya into it"
+      - "strategy brain"
+      - "Nadia terrible"
+      - "Tessa strategic"
+    expected_adaptation:
+      emotion_detected: "engaged"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 8:30 PM"
+    user_input: |
+      I WON my first game of Settlers of Catan and I was honestly shocked and Jim was like wow first timer that's impressive and Robin said I'm a natural and Nadia was fake mad because she came in last and Tessa came in second and was like okay you're my rival now and I'm like I love this energy
+    expected_memory_stores:
+      - "Maya won first game"
+      - "Jim impressed"
+      - "Robin said natural"
+      - "Nadia came last"
+      - "Tessa second rival"
+    expected_adaptation:
+      emotion_detected: "thrilled"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 9:00 PM"
+    user_input: |
+      we played a second game and Dave joined our table and he's hilarious and he asked what we all do and Tessa said she works at a nonprofit for food access and Nadia said she's a project manager and I said software engineer and Dave was like oh cool my day job is IT at Providence hospital so we're all nerds here
+    expected_memory_stores:
+      - "second game"
+      - "Dave joined"
+      - "Tessa nonprofit food access"
+      - "Nadia project manager"
+      - "Dave IT Providence hospital"
+      - "all nerds"
+    expected_adaptation:
+      emotion_detected: "belonging"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 9:30 PM"
+    user_input: |
+      Tessa and I really hit it off and she's telling me about this food bank she volunteers at and Nadia met her there and she's just like a genuinely kind person and she also does book club with some other friends and I was like WE have a book club too and she was like no way and I said you should come to ours sometime
+    expected_memory_stores:
+      - "Maya and Tessa connection"
+      - "food bank volunteer"
+      - "Tessa has book club"
+      - "Maya invited Tessa"
+      - "Nadia connection"
+    expected_adaptation:
+      emotion_detected: "friendly"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 10:00 PM"
+    user_input: |
+      what's the name of the organizer at the tabletop meetup and where does he work
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 10:15 PM"
+    user_input: |
+      we're wrapping up and everyone's exchanging numbers and Dave said the meetup is every other Thursday and next time they're doing Ticket to Ride and Nadia is already trash talking and I texted Julian that I had the best time and he said good see I told you IRL gaming is better and I mean he was right
+    expected_memory_stores:
+      - "exchanged numbers"
+      - "every other Thursday"
+      - "next time Ticket to Ride"
+      - "Nadia trash talking"
+      - "texted Julian"
+      - "Julian was right"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 10:45 PM"
+    user_input: |
+      driving home and Nadia called me from her car and was like that was amazing right and I said YES and she said Tessa loved it too and we're all going back in two weeks and honestly this is exactly what I needed like real human connection over something fun not staring at a screen alone and I'm so glad Julian suggested it and that the PixelDruid thing pushed me toward something better
+    expected_memory_stores:
+      - "Nadia loved it"
+      - "Tessa loved it"
+      - "going back two weeks"
+      - "real human connection"
+      - "Julian suggestion credit"
+      - "PixelDruid catalyst"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where does the Portland Tabletop Meetup take place?"
+    expected_contains: ["Lucky Lab"]
+  - question: "Who organizes the tabletop meetup?"
+    expected_contains: ["Dave"]
+  - question: "What game did Maya play at her first meetup?"
+    expected_contains: ["Settlers of Catan"]
+  - question: "Did Maya win her first game?"
+    expected_contains: ["yes", "won"]
+  - question: "Who is Tessa Brooks?"
+    expected_contains: ["nonprofit", "food", "Nadia"]
+  - question: "How often does the tabletop meetup happen?"
+    expected_contains: ["every other Thursday"]
+  - question: "Who are Jim and Robin?"
+    expected_contains: ["couple", "two years"]
+  - question: "What game is planned for the next meetup?"
+    expected_contains: ["Ticket to Ride"]
+  - question: "Who came in last place at Catan?"
+    expected_contains: ["Nadia"]
+  - question: "Who suggested Maya try IRL gaming?"
+    expected_contains: ["Julian"]

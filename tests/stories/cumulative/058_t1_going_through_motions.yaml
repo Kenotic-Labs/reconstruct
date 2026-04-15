@@ -1,0 +1,216 @@
+story_id: 58
+story_name: "Going Through the Motions"
+category: "Career"
+description: |
+  Tests memory of Maya mentally checked out at Vantage while still employed.
+  She does minimum work, avoids Derek, leans on Priya and Leon.
+  Verifies emotional state drift and situational awareness.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:15 AM"
+    user_input: |
+      another Monday at Vantage doing work I don't care about anymore and like I know I should still try but it's hard when you know you're leaving eventually it's like senioritis but for a job you know what I mean
+    expected_memory_stores:
+      - "checked out"
+      - "senioritis"
+      - "leaving eventually"
+    expected_triples:
+      - ["user", "has_emotion", "apathetic"]
+      - ["user", "mentally", "checked out at Vantage"]
+      - ["user", "plans", "leaving eventually"]
+    expected_adaptation:
+      emotion_detected: "apathetic"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 3:00 PM"
+    user_input: |
+      had the call with Nina Park and oh man she's really good like she totally understood my situation without me having to spell everything out and she said she has a few roles that might be perfect for me including one at Google and one at a startup called Conduit AI and she's sending me the job descriptions tonight
+    expected_memory_stores:
+      - "Nina Park call"
+      - "Google role"
+      - "Conduit AI role"
+      - "job descriptions coming"
+    expected_triples:
+      - ["user", "had", "call with Nina Park"]
+      - ["Nina Park", "suggested", "Google role"]
+      - ["Nina Park", "suggested", "Conduit AI role"]
+      - ["Nina Park", "sending", "job descriptions tonight"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 10:00 AM"
+    user_input: |
+      looked at the job descriptions Nina sent and the Google one is a senior engineer role working on search infrastructure which sounds amazing but also terrifying because its Google and the Conduit AI one is a mid-senior role building their core ML pipeline which also sounds cool but in a different way like more scrappy startup energy
+    expected_memory_stores:
+      - "Google senior engineer"
+      - "search infrastructure"
+      - "Conduit AI"
+      - "ML pipeline"
+      - "startup vs big tech"
+    expected_triples:
+      - ["Google role", "title", "senior engineer"]
+      - ["Google role", "team", "search infrastructure"]
+      - ["Conduit AI role", "title", "mid-senior"]
+      - ["Conduit AI role", "work", "core ML pipeline"]
+      - ["user", "has_emotion", "interested"]
+    expected_adaptation:
+      emotion_detected: "interested"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 11:00 AM"
+    user_input: |
+      Derek had another all hands today and he was talking about Q3 goals and velocity improvements and I swear I zoned out for like 20 minutes straight Leon sent me a slack message during it that just said kill me and I almost laughed out loud
+    expected_memory_stores:
+      - "Derek all hands"
+      - "Q3 goals"
+      - "zoned out"
+      - "Leon humor"
+    expected_triples:
+      - ["Derek", "held", "all hands about Q3 goals"]
+      - ["user", "behavior", "zoned out for 20 minutes"]
+      - ["Leon", "messaged", "kill me during all hands"]
+      - ["user", "has_emotion", "bored"]
+    expected_adaptation:
+      emotion_detected: "bored"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 9:00 AM"
+    user_input: |
+      Priya noticed I've been disengaged and she pulled me aside and was like look I get it but please don't burn bridges while you're still here and she's right I need to be professional even if I'm mentally gone because I don't want Derek to have any ammo against me
+    expected_memory_stores:
+      - "Priya noticed"
+      - "don't burn bridges"
+      - "professional behavior"
+      - "Derek ammo concern"
+    expected_triples:
+      - ["Priya", "noticed", "user disengaged"]
+      - ["Priya", "advised", "don't burn bridges"]
+      - ["user", "resolved", "stay professional to deny Derek ammo"]
+    expected_adaptation:
+      emotion_detected: "chastened"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 6:00 PM"
+    user_input: |
+      Julian is working on a big freelance project for some restaurant chain doing their whole visual identity and he's been super busy with it so we haven't had much quality time this week and I kinda miss that but also I'm glad his work is going well because it takes financial pressure off my job search
+    expected_memory_stores:
+      - "Julian freelance project"
+      - "restaurant chain"
+      - "visual identity"
+      - "less quality time"
+      - "financial pressure reduced"
+    expected_triples:
+      - ["Julian", "working_on", "freelance visual identity for restaurant chain"]
+      - ["Julian", "status", "very busy"]
+      - ["user", "missing", "quality time with Julian"]
+      - ["Julian's freelance", "reduces", "financial pressure on job search"]
+    expected_adaptation:
+      emotion_detected: "mixed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 2:00 PM"
+    user_input: |
+      Nina called and said Google wants to do a phone screen next week and I should prepare for system design and coding questions and I was like okay I haven't done leetcode in years but I guess it's time to start grinding again ugh
+    expected_memory_stores:
+      - "Google phone screen"
+      - "next week"
+      - "system design"
+      - "coding questions"
+      - "leetcode prep"
+    expected_triples:
+      - ["Nina", "informed", "Google phone screen next week"]
+      - ["Google phone screen", "requires", "system design and coding"]
+      - ["user", "needs_to", "prep leetcode"]
+      - ["user", "has_emotion", "anxious"]
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 4:00 PM"
+    user_input: |
+      what companies is Nina setting Maya up with
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 9:00 AM"
+    user_input: |
+      started studying for the Google interview this morning and wow I'm rusty like I couldn't even do a medium difficulty tree problem without looking up the solution and Julian brought me coffee and said I'll get it back it's like riding a bike and I hope he's right
+    expected_memory_stores:
+      - "interview prep"
+      - "rusty at algorithms"
+      - "tree problem"
+      - "Julian encouragement"
+    expected_triples:
+      - ["user", "started", "interview prep"]
+      - ["user", "struggling_with", "algorithms - rusty"]
+      - ["Julian", "encouraged", "user about interview prep"]
+      - ["user", "has_emotion", "insecure"]
+    expected_adaptation:
+      emotion_detected: "insecure"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 5:00 PM"
+    user_input: |
+      studied all weekend and I feel slightly better about the coding stuff but system design is where I actually shine because I've been doing that at Vantage for three years so hopefully the phone screen goes well and oh also Kobe ate my eraser off the desk while I was studying which was hilarious
+    expected_memory_stores:
+      - "weekend studying"
+      - "system design confidence"
+      - "Kobe ate eraser"
+      - "phone screen prep"
+    expected_triples:
+      - ["user", "studied", "all weekend for interview"]
+      - ["user", "confident_in", "system design"]
+      - ["Kobe", "ate", "eraser off desk"]
+      - ["user", "has_emotion", "cautiously optimistic"]
+    expected_adaptation:
+      emotion_detected: "cautiously optimistic"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What roles is Nina Park presenting to Maya?"
+    expected_contains: ["Google", "Conduit AI"]
+  - question: "What is the Google role about?"
+    expected_contains: ["search infrastructure", "senior"]
+  - question: "What is the Conduit AI role about?"
+    expected_contains: ["ML pipeline"]
+  - question: "When is Maya's Google phone screen?"
+    expected_contains: ["next week"]
+  - question: "What is Julian working on?"
+    expected_contains: ["freelance", "restaurant", "visual identity"]
+  - question: "What did Priya tell Maya about being disengaged?"
+    expected_contains: ["burn bridges", "professional"]
+  - question: "How is Maya preparing for the Google interview?"
+    expected_contains: ["leetcode", "studying", "system design"]
+  - question: "What did Kobe do while Maya was studying?"
+    expected_contains: ["ate", "eraser"]
+  - question: "How is Maya feeling about algorithms?"
+    expected_contains: ["rusty"]
+  - question: "Is Maya still engaged at Vantage?"
+    expected_contains: ["no", "checked out", "disengaged"]

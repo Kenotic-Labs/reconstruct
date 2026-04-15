@@ -1,0 +1,181 @@
+story_id: 179
+story_name: "Mom Visits Portland"
+category: "Health"
+description: |
+  Vivian and Clara visit Portland. Venue tour, Blue Fork tasting,
+  and mother-daughter bonding. Tests cross-thread integration of
+  health monitoring with wedding planning.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 12:00 PM"
+    user_input: |
+      Mom and Clara just landed at PDX and I'm SO happy to see them Mom looks great like actually glowing and she's walking fine no dizziness and Clara's carrying both their bags because she's Clara and she said the flight was smooth and Mom napped the whole way which is probably good for her heart honestly
+    expected_memory_stores:
+      - "Vivian and Clara arrived PDX"
+      - "Vivian looks great"
+      - "no dizziness"
+      - "Clara carrying bags"
+      - "Vivian napped on flight"
+    expected_adaptation:
+      emotion_detected: "overjoyed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 3:00 PM"
+    user_input: |
+      brought them home and Kobe LOST HIS MIND he's met Mom before a few times and he just loves her and she was sitting on the couch and he put his whole head in her lap and she was petting him and saying what a good boy in Mandarin which is hilarious and Julian made them tea and it was just so warm and nice
+    expected_memory_stores:
+      - "Kobe loves Vivian"
+      - "Vivian speaking Mandarin to Kobe"
+      - "Julian made tea"
+      - "warm family moment"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 10:00 AM"
+    user_input: |
+      took Mom and Clara to Pine Ridge Lodge this morning and Sarah gave us the full tour and Mom walked the meadow and looked at the mountains and turned to me with tears in her eyes and said Maya this is where my daughter is getting married and I lost it completely Clara was recording and she was crying too we were a mess
+    expected_memory_stores:
+      - "Pine Ridge Lodge tour"
+      - "Sarah gave tour"
+      - "Vivian emotional at venue"
+      - "meadow and mountains"
+      - "Clara recording"
+      - "everyone crying"
+    expected_adaptation:
+      emotion_detected: "deeply emotional"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 12:00 PM"
+    user_input: |
+      Mom had to sit down after the tour which worried me a little but Clara checked her pulse and said she's fine just emotional and tired from the walk and Mom said stop checking my pulse Clara I'm not one of your patients and Clara said Mom you literally are and we all laughed
+    expected_memory_stores:
+      - "Vivian needed to sit"
+      - "Clara checked pulse"
+      - "Vivian fine just tired"
+      - "Clara checking medical"
+      - "family humor"
+    expected_adaptation:
+      emotion_detected: "concerned then amused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 2:00 PM"
+    user_input: |
+      went to Blue Fork Catering for the second tasting and oh my god Michelle outdid herself she made the smoked salmon station and these little caprese bites and a mushroom risotto station and Mom tasted everything and declared the salmon the best she's ever had which from a Chinese mom is the highest compliment you can get about non-Chinese food
+    expected_memory_stores:
+      - "Blue Fork second tasting"
+      - "Michelle prepared tasting"
+      - "smoked salmon station"
+      - "caprese bites"
+      - "mushroom risotto"
+      - "Vivian loved the salmon"
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 5:00 PM"
+    user_input: |
+      Mom met Diane for the first time today we had everyone over for drinks Julian's mom and my mom in the same room and they actually got along great Diane was telling Mom about the rose arch and Mom said oh that sounds lovely Diane and they bonded over wanting their children to have a beautiful wedding and it was very cute if slightly terrifying
+    expected_memory_stores:
+      - "Vivian met Diane"
+      - "first meeting"
+      - "got along great"
+      - "bonded over wedding"
+      - "rose arch discussion"
+    expected_adaptation:
+      emotion_detected: "relieved amused"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 9:00 PM"
+    user_input: |
+      after everyone left Clara and I sat on the back porch with wine well Clara had wine Mom had tea and we just talked about everything the wedding Mom's health Clara's life and Clara got this look on her face and I said what and she said I have something to tell you guys but not tonight it can wait and WHAT CLARA YOU CAN'T DO THAT
+    expected_memory_stores:
+      - "porch conversation"
+      - "Clara has news"
+      - "Clara teasing news again"
+      - "sisterly evening"
+    expected_adaptation:
+      emotion_detected: "curious"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 9:00 AM"
+    user_input: |
+      made sure Mom took her diltiazem at 8am she remembered on her own actually which is great and then I made everyone breakfast eggs and avocado toast and Mom was like what is avocado toast and I said Mom it's the reason millennials can't buy houses and she did not get the joke but Clara was dying laughing
+    expected_memory_stores:
+      - "Vivian took diltiazem on own"
+      - "Maya made breakfast"
+      - "avocado toast joke"
+      - "generational humor"
+    expected_adaptation:
+      emotion_detected: "light happy"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 2:00 PM"
+    user_input: |
+      took Mom to The White Veil to see the dress because she basically demanded it and Mia was so gracious she brought the dress out and Mom touched the lace and said Maya it's perfect and then she started telling Mia about her own wedding dress from 1993 and how she sewed beads on it by hand and Mia was fascinated
+    expected_memory_stores:
+      - "Vivian saw wedding dress"
+      - "The White Veil visit"
+      - "Mia showed dress"
+      - "Vivian said it's perfect"
+      - "Vivian's wedding dress 1993"
+      - "hand sewn beads"
+    expected_adaptation:
+      emotion_detected: "tender"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 6:00 PM"
+    user_input: |
+      dropped Mom and Clara off at the airport and I hugged Mom so hard and she whispered in my ear take care of that boy he's a good one and I said I know Mom and she said and take care of yourself too and then Clara hugged me and whispered she's doing great stop worrying and I said never and they got on the plane and I cried in the car on the way home because I love them so much
+    expected_memory_stores:
+      - "airport goodbye"
+      - "Vivian approves of Julian"
+      - "Clara reassured Maya"
+      - "Maya cried driving home"
+      - "emotional departure"
+    expected_adaptation:
+      emotion_detected: "bittersweet love"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Did Vivian see the wedding venue?"
+    expected_contains: ["yes", "Pine Ridge Lodge"]
+  - question: "How did Vivian react to the venue?"
+    expected_contains: ["cried", "emotional", "tears"]
+  - question: "Did Vivian attend the Blue Fork tasting?"
+    expected_contains: ["yes", "loved salmon"]
+  - question: "Have Vivian and Diane met?"
+    expected_contains: ["yes", "got along"]
+  - question: "Did Vivian see the wedding dress?"
+    expected_contains: ["yes", "perfect"]
+  - question: "What did Vivian sew on her own wedding dress?"
+    expected_contains: ["beads", "hand"]
+  - question: "Is Vivian remembering to take diltiazem on her own?"
+    expected_contains: ["yes"]
+  - question: "How did Vivian handle the trip physically?"
+    expected_contains: ["well", "fine"]
+  - question: "Does Clara have news she hasn't shared yet?"
+    expected_contains: ["yes"]
+  - question: "What did Vivian whisper to Maya at the airport?"
+    expected_contains: ["take care", "good one"]

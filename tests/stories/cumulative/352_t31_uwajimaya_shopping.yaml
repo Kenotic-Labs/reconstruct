@@ -1,0 +1,166 @@
+story_id: 352
+story_name: "Uwajimaya Shopping Spree"
+category: "Food and Cooking"
+description: |
+  Tests memory of Maya's first trip to Uwajimaya to buy ramen supplies.
+  Verifies system tracks specific ingredients and store details.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 4:30 PM"
+    user_input: |
+      okay so I went to Uwajimaya after work today and oh my god that place is like a wonderland for Asian food I was there for like two hours just wandering around
+    expected_memory_stores:
+      - "Uwajimaya visit"
+      - "after work"
+      - "two hours"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      I got pork femur bones which the butcher said are the best for tonkotsu and then kombu and dried shiitake and this special soy sauce called usukuchi which is lighter than regular soy sauce and like five different types of miso because I couldn't decide
+    expected_memory_stores:
+      - "pork femur bones"
+      - "kombu"
+      - "dried shiitake"
+      - "usukuchi soy sauce"
+      - "five types of miso"
+    expected_adaptation:
+      emotion_detected: "enthusiastic"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 5:30 PM"
+    user_input: |
+      also got noodles because I'm not insane enough to make my own noodles yet like that's a whole other level and these Sun Noodle ones are supposed to be really good they're fresh not dried and they come in like a refrigerated section
+    expected_memory_stores:
+      - "Sun Noodle brand"
+      - "fresh noodles"
+      - "not making own noodles yet"
+    expected_adaptation:
+      emotion_detected: "practical"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 6:15 PM"
+    user_input: |
+      I spent like 85 dollars which is honestly a lot for groceries but Julian was like think of it as an investment in your new hobby and he's right I mean some of this stuff will last for months like the kombu and the katsuobushi
+    expected_memory_stores:
+      - "spent 85 dollars"
+      - "Julian supportive"
+      - "long-lasting ingredients"
+    expected_adaptation:
+      emotion_detected: "slightly guilty"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      the guy at the store was super helpful his name was um I think Ken or maybe it was Kevin no it was Ken and he said the trick is to soak the bones in cold water for like two hours before you start boiling to get the blood out which sounds gross but apparently it's essential
+    expected_memory_stores:
+      - "Ken at Uwajimaya"
+      - "soak bones in cold water"
+      - "two hours soaking"
+      - "remove blood"
+    expected_adaptation:
+      emotion_detected: "engaged"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 7:30 PM"
+    user_input: |
+      I also bought these beautiful ramen bowls they're like black with a red interior and they were 12 bucks each which is not bad and I got four of them and Julian was like see this is why I love you because you committed to the bit
+    expected_memory_stores:
+      - "ramen bowls"
+      - "black with red interior"
+      - "12 dollars each"
+      - "four bowls"
+      - "Julian comment"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      oh wait I forgot to get the chashu pork for the topping I was so focused on the broth ingredients that I completely blanked on the actual toppings like soft boiled eggs and green onions and nori and the pork belly for chashu
+    expected_memory_stores:
+      - "forgot chashu pork"
+      - "toppings needed"
+      - "soft boiled eggs"
+      - "green onions"
+      - "nori"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 8:30 PM"
+    user_input: |
+      how much did I spend at Uwajimaya today
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 9:00 PM"
+    user_input: |
+      I'm planning to do my first ramen attempt this Saturday and I already told Julian to clear his schedule because apparently the broth alone takes like 12 hours so I'm gonna start at like 6 AM which is insane for a Saturday but whatever I'm committed
+    expected_memory_stores:
+      - "first attempt Saturday"
+      - "12 hour broth"
+      - "starting 6 AM"
+      - "Julian cleared schedule"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 9:30 PM"
+    user_input: |
+      Kobe keeps sniffing the pork bones through the bag and I had to put everything on top of the fridge because he was going nuts and Julian said we should've gotten him his own bone and honestly that's not a bad idea
+    expected_memory_stores:
+      - "Kobe sniffing bones"
+      - "stored on top of fridge"
+      - "Julian suggestion"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where did Maya buy ramen ingredients?"
+    expected_contains: ["Uwajimaya"]
+  - question: "How much did Maya spend on ramen supplies?"
+    expected_contains: ["85"]
+  - question: "What brand of noodles did Maya buy?"
+    expected_contains: ["Sun Noodle"]
+  - question: "What did Ken at Uwajimaya recommend?"
+    expected_contains: ["soak", "bones", "cold water"]
+  - question: "What do Maya's ramen bowls look like?"
+    expected_contains: ["black", "red"]
+  - question: "What toppings did Maya forget to buy?"
+    expected_contains: ["chashu", "pork belly"]
+  - question: "When is Maya planning her first ramen attempt?"
+    expected_contains: ["Saturday"]
+  - question: "What time is Maya starting the broth?"
+    expected_contains: ["6 AM"]
+  - question: "What did Kobe do with the pork bones?"
+    expected_contains: ["sniffing", "nuts"]
+  - question: "What special soy sauce did Maya buy?"
+    expected_contains: ["usukuchi"]

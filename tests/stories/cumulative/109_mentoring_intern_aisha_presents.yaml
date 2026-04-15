@@ -1,0 +1,211 @@
+story_id: 109
+story_name: "Aisha Presents at All-Hands"
+category: "Career"
+description: |
+  Tests whether the system tracks Aisha's all-hands presentation, Maya's supportive role,
+  the team's reaction, and connects back to Aisha's earlier struggles and growth arc.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00am"
+    user_input: |
+      so Sam wants Aisha to present at the engineering all-hands next Thursday about the auth service improvements. like a 15 minute presentation in front of the whole engineering org. she's terrified
+    expected_memory_stores:
+      - "Aisha presenting"
+      - "all-hands"
+      - "Thursday"
+      - "15 minutes"
+      - "auth service improvements"
+      - "terrified"
+    expected_triples:
+      - ["Sam Okafor", "asked", "Aisha to present at all-hands"]
+      - ["Aisha presentation", "topic", "auth service improvements"]
+      - ["Aisha presentation", "scheduled_for", "Thursday, 15 minutes"]
+      - ["Aisha", "has_emotion", "terrified"]
+      - ["user", "has_emotion", "concerned"]
+    expected_adaptation:
+      emotion_detected: "concerned"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 2:00pm"
+    user_input: |
+      spent the afternoon helping Aisha outline her talk. she wanted to make it super technical but I was like no you gotta tell the story, what was the problem, how did you find it, what was the impact. people remember stories not code
+    expected_memory_stores:
+      - "talk outline"
+      - "storytelling approach"
+      - "Maya coaching"
+    expected_triples:
+      - ["user", "coached", "Aisha on presentation outline"]
+      - ["user", "advised", "storytelling over technical detail"]
+      - ["user", "has_emotion", "mentoring"]
+    expected_adaptation:
+      emotion_detected: "mentoring"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 10:00am"
+    user_input: |
+      Aisha did a practice run for just me and Rachel Kim today. she was SO nervous her hands were literally shaking but the content was solid. Rachel gave her some feedback about pacing and I helped with the slide design, Julian would be proud lol
+    expected_memory_stores:
+      - "practice run"
+      - "Rachel Kim attended"
+      - "nervous"
+      - "pacing feedback"
+      - "slide design"
+    expected_triples:
+      - ["Aisha", "did", "first practice run"]
+      - ["Rachel Kim", "gave_feedback", "pacing"]
+      - ["user", "helped_with", "slide design"]
+      - ["Aisha", "has_emotion", "nervous"]
+    expected_adaptation:
+      emotion_detected: "supportive"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 4:00pm"
+    user_input: |
+      second practice run today and she nailed it. like completely different person. confident, funny even, she made a joke about the migration script incident and everyone laughed. I was like ok she's ready
+    expected_memory_stores:
+      - "second practice"
+      - "confident"
+      - "funny"
+      - "migration script joke"
+      - "ready"
+    expected_triples:
+      - ["Aisha", "nailed", "second practice run"]
+      - ["Aisha", "joked_about", "migration script incident"]
+      - ["Aisha", "demonstrates", "confidence and humor"]
+      - ["user", "has_emotion", "proud"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 9:00am"
+    user_input: |
+      all-hands is at 2pm today. Aisha showed up in a blazer which is adorable because nobody here wears blazers. she asked me to sit in the front row and I was like obviously
+    expected_memory_stores:
+      - "all-hands at 2pm"
+      - "blazer"
+      - "front row"
+    expected_triples:
+      - ["all-hands", "scheduled_at", "2pm Thursday"]
+      - ["Aisha", "wore", "blazer to presentation"]
+      - ["Aisha", "asked_user", "sit in front row"]
+      - ["user", "has_emotion", "endeared"]
+    expected_adaptation:
+      emotion_detected: "endeared"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 2:30pm"
+    user_input: |
+      SHE KILLED IT. like absolutely crushed it. she presented for um I think it was actually 20 minutes not 15 because people kept asking questions which is like the best sign. the VP of engineering asked a question!! the VP!!!
+    expected_memory_stores:
+      - "presentation success"
+      - "20 minutes"
+      - "audience questions"
+      - "VP asked question"
+    expected_triples:
+      - ["Aisha", "crushed", "all-hands presentation"]
+      - ["Aisha presentation", "ran", "20 minutes due to audience questions"]
+      - ["VP of engineering", "asked_question", "during Aisha's talk"]
+      - ["user", "has_emotion", "ecstatic"]
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 3:00pm"
+    user_input: |
+      after the talk like five different engineers came up to Aisha to say great job and two of them asked if she could look at bugs in their services too lol she's getting recruited internally already
+    expected_memory_stores:
+      - "engineer praise"
+      - "internal recruitment"
+      - "bug investigation requests"
+    expected_triples:
+      - ["Aisha", "received_praise_from", "five engineers"]
+      - ["Aisha", "recruited_to", "investigate bugs in other services"]
+      - ["user", "has_emotion", "proud"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 3:30pm"
+    user_input: |
+      how many minutes was the original time slot for Aisha's talk
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 5:00pm"
+    user_input: |
+      Aisha wrote me a card. like a physical handwritten card that says thank you for believing in me when I didn't believe in myself. I'm keeping this forever. I put it on my desk next to the photo of Julian and Kobe
+    expected_memory_stores:
+      - "handwritten card"
+      - "thank you"
+      - "desk keepsake"
+      - "Julian and Kobe photo"
+    expected_triples:
+      - ["Aisha", "wrote", "handwritten thank-you card to user"]
+      - ["user", "placed_card", "on desk next to Julian and Kobe photo"]
+      - ["user", "has_emotion", "touched"]
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 8:00pm"
+    user_input: |
+      told Julian about the whole day and he goes babe you're literally a teacher at this point. and like... he's not wrong? something about watching someone grow because you helped them is just different. it hits different than shipping code
+    expected_memory_stores:
+      - "Julian observation"
+      - "teacher identity"
+      - "fulfillment from helping"
+      - "different from shipping code"
+    expected_triples:
+      - ["Julian", "called_user", "a teacher"]
+      - ["user", "finds", "helping others grow more fulfilling than shipping code"]
+      - ["user", "has_emotion", "fulfilled"]
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How did Aisha's all-hands presentation go?"
+    expected_contains: ["crushed", "killed", "great", "success"]
+  - question: "How long did the presentation actually run?"
+    expected_contains: ["20 minutes"]
+  - question: "Who asked Aisha a question during the talk?"
+    expected_contains: ["VP of engineering"]
+  - question: "What coaching did Maya give Aisha for the talk?"
+    expected_contains: ["story", "storytelling"]
+  - question: "What did Aisha give Maya after the presentation?"
+    expected_contains: ["card", "handwritten"]
+  - question: "How many practice runs did Aisha do?"
+    expected_contains: ["two"]
+  - question: "What joke did Aisha make during practice?"
+    expected_contains: ["migration script"]
+  - question: "What did Julian call Maya?"
+    expected_contains: ["teacher"]
+  - question: "What happened after the presentation with other engineers?"
+    expected_contains: ["five", "bugs", "recruited"]
+  - question: "Where did Maya put Aisha's card?"
+    expected_contains: ["desk", "Julian", "Kobe", "photo"]

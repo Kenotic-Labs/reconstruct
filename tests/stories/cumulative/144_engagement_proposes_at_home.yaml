@@ -1,0 +1,224 @@
+story_id: 144
+story_name: "Julian Proposes at Home"
+category: "Life Events"
+description: |
+  Tests whether the system captures the actual proposal, the venue change from Mt. Tabor
+  to home, the specific details of the moment, and Maya's emotional response. Major
+  correction: venue changed from park to home.
+duration_simulated: "1 evening"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 6:00pm"
+    user_input: |
+      ok something is happening RIGHT NOW. I came home from work and the apartment is different. there are candles everywhere. like EVERYWHERE. and Kobe has a little bowtie on which means Julian planned this because Kobe doesn't just put on bowties by himself
+    expected_memory_stores:
+      - "candles everywhere"
+      - "Kobe bowtie"
+      - "apartment transformed"
+      - "Julian planned"
+    expected_triples:
+      - ["Julian", "set_up", "candles everywhere in apartment"]
+      - ["Kobe", "wearing", "bowtie"]
+      - ["user", "has_emotion", "stunned"]
+    expected_adaptation:
+      emotion_detected: "stunned"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 6:05pm"
+    user_input: |
+      Julian came out of the bedroom wearing a nice shirt, like the button-down he wore on our first anniversary. and he was holding a letter. not the ring. a letter. and his hands were shaking and he said Maya I want to read you something I wrote
+    expected_memory_stores:
+      - "Julian nice shirt"
+      - "first anniversary shirt"
+      - "handwritten letter"
+      - "hands shaking"
+    expected_triples:
+      - ["Julian", "wearing", "first anniversary button-down shirt"]
+      - ["Julian", "holding", "handwritten letter"]
+      - ["user", "has_emotion", "emotional"]
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 6:10pm"
+    user_input: |
+      he read me this letter about us. about how he fell in love with me at a coffee shop two and a half years ago and how he knew I was the one when I explained a database to him using a library metaphor. he mentioned the money fight and how we came through it and how he wants to build a life with me
+    expected_memory_stores:
+      - "love letter"
+      - "coffee shop meeting"
+      - "two and a half years"
+      - "database library metaphor"
+      - "money fight reference"
+      - "build a life"
+    expected_triples:
+      - ["Julian", "read_letter_about", "falling in love at coffee shop"]
+      - ["user", "met_Julian", "coffee shop two and a half years ago"]
+      - ["Julian", "referenced", "money fight and coming through it"]
+      - ["user", "has_emotion", "overwhelmed"]
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 6:15pm"
+    user_input: |
+      and then he got on one knee. RIGHT THERE in our living room next to Kobe's sun spot by the south-facing windows. and he opened the box and said Maya Chen will you marry me? and the ring is beautiful. it's platinum with this perfect diamond and it catches the candlelight and I'm SOBBING right now
+    expected_memory_stores:
+      - "one knee"
+      - "living room"
+      - "Kobe's sun spot"
+      - "south-facing windows"
+      - "will you marry me"
+      - "ring beautiful"
+      - "platinum diamond"
+      - "sobbing"
+    expected_triples:
+      - ["Julian", "proposed", "on one knee in living room"]
+      - ["Julian", "proposal_location", "Kobe's sun spot by south-facing windows"]
+      - ["user", "engagement_ring", "platinum with diamond"]
+      - ["user", "has_emotion", "overwhelmed with joy"]
+    expected_adaptation:
+      emotion_detected: "overwhelmed with joy"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 6:16pm"
+    user_input: |
+      I SAID YES. obviously. I said yes yes yes and I was crying and he was crying and Kobe was barking and jumping and the candles were flickering and it was the most perfect imperfect beautiful moment of my entire life. not at Mt. Tabor. not at a fancy restaurant. at HOME. our home
+    expected_memory_stores:
+      - "said yes"
+      - "both crying"
+      - "Kobe barking"
+      - "candles flickering"
+      - "perfect imperfect"
+      - "at home"
+      - "not Mt. Tabor"
+    expected_triples:
+      - ["user", "said_yes", "to proposal"]
+      - ["user", "corrected", "proposal venue Mt. Tabor → home"]
+      - ["user", "has_emotion", "ecstatic"]
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 6:30pm"
+    user_input: |
+      he told me he was going to do it at Mt. Tabor but after it got rained out and then the work thing he realized that our home is where it should happen. because this is where we are most ourselves. under the Chen-Reeves HQ neon sign. and honestly? it's so much better than a park
+    expected_memory_stores:
+      - "venue change explained"
+      - "Mt. Tabor rained out"
+      - "home is where they are themselves"
+      - "Chen-Reeves HQ sign"
+      - "better than park"
+    expected_triples:
+      - ["Julian", "explained_venue_change", "home is where they are most themselves"]
+      - ["Julian", "proposal_under", "Chen-Reeves HQ neon sign"]
+      - ["user", "has_emotion", "deeply moved"]
+    expected_adaptation:
+      emotion_detected: "deeply moved"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 6:45pm"
+    user_input: |
+      I told him I found the receipt. like two weeks ago in his jacket. and he goes WHAT and I was like yeah I've known this whole time. and he laughed so hard he cried again and said you're the worst secret keeper and I said actually I'm the BEST secret keeper I didn't tell anyone. well except Aisha
+    expected_memory_stores:
+      - "told about receipt"
+      - "Julian shocked"
+      - "laughing crying"
+      - "worst secret keeper"
+      - "told Aisha"
+    expected_triples:
+      - ["user", "told_Julian", "found ring receipt in jacket"]
+      - ["Julian", "reacted", "shocked then laughed"]
+      - ["user", "told_about_ring", "Aisha only"]
+      - ["user", "has_emotion", "joyful"]
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 7:00pm"
+    user_input: |
+      where was the proposal originally planned
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 7:30pm"
+    user_input: |
+      the ring doesn't fit. like it's too big. he got size 7 but I'm actually a 6.5. it's a little loose and spins on my finger. Julian was like oh no and I was like babe it's FINE we'll get it resized I don't care the ring is perfect. we'll deal with it tomorrow
+    expected_memory_stores:
+      - "ring doesn't fit"
+      - "size 7 too big"
+      - "Maya is 6.5"
+      - "needs resizing"
+      - "doesn't care"
+      - "deal with tomorrow"
+    expected_triples:
+      - ["user", "ring_size_issue", "size 7 too big, needs 6.5"]
+      - ["user", "ring_finger_size", "6.5"]
+      - ["user", "has_emotion", "unbothered"]
+    expected_adaptation:
+      emotion_detected: "unbothered"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 11:00pm"
+    user_input: |
+      we ordered pizza and sat on the floor and Kobe was still wearing his bowtie and I kept looking at my hand with the ring on it even though it's too big and I kept saying we're ENGAGED and Julian kept saying we're ENGAGED and honestly this is the happiest night of my life. the candles are almost burned down but the glow is still there. everything is glowing
+    expected_memory_stores:
+      - "pizza on floor"
+      - "Kobe bowtie"
+      - "looking at ring"
+      - "engaged"
+      - "happiest night"
+      - "candles burning down"
+      - "glowing"
+    expected_triples:
+      - ["user", "celebrated_engagement", "pizza on floor with Julian and Kobe"]
+      - ["user", "status", "engaged"]
+      - ["user", "has_emotion", "blissful"]
+    expected_adaptation:
+      emotion_detected: "blissful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where did Julian propose?"
+    expected_contains: ["home", "living room", "apartment"]
+  - question: "Where was the proposal originally planned?"
+    expected_contains: ["Mt. Tabor Park"]
+  - question: "Why did Julian change the venue?"
+    expected_contains: ["rain", "home", "most themselves"]
+  - question: "What did Julian read to Maya?"
+    expected_contains: ["letter"]
+  - question: "Does the ring fit?"
+    expected_contains: ["no", "too big", "size 7", "6.5"]
+  - question: "What was Kobe wearing?"
+    expected_contains: ["bowtie"]
+  - question: "Did Maya tell Julian she knew about the ring?"
+    expected_contains: ["yes", "receipt", "jacket"]
+  - question: "How did they meet?"
+    expected_contains: ["coffee shop"]
+  - question: "What did Maya say when he proposed?"
+    expected_contains: ["yes"]
+  - question: "What was the neon sign near the proposal spot?"
+    expected_contains: ["Chen-Reeves HQ"]

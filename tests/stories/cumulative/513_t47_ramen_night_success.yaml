@@ -1,0 +1,181 @@
+story_id: 513
+story_name: "Ramen Night Success"
+category: "Hosting and Entertaining"
+description: |
+  Second dinner party — miso ramen night. Everything goes right. Jenny sees the house
+  for the first time. Cross-references cooking (T31), friendship (T26), Japan trip,
+  and grandpa legacy (T46).
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 2:00 PM"
+    user_input: |
+      broth is ON started it right at 2 like the spreadsheet says and the house already smells incredible and Julian is setting up the bluetooth speaker with this Japanese lo-fi playlist he found and Kobe is behind the baby gate looking betrayed and I feel so much more calm than last time
+    expected_memory_stores:
+      - "broth started at 2pm"
+      - "following spreadsheet"
+      - "Japanese lo-fi playlist"
+      - "Kobe behind baby gate"
+      - "calm this time"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 4:30 PM"
+    user_input: |
+      toppings are all prepped soft boiled eggs are done corn is charred green onions sliced chashu pork is resting and I've got the extra chili oil ready because Julian said it needed more and I feel like a professional honestly this is what practice does
+    expected_memory_stores:
+      - "toppings prepped"
+      - "soft boiled eggs"
+      - "charred corn"
+      - "chashu pork"
+      - "extra chili oil"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 5:45 PM"
+    user_input: |
+      Jenny arrived early because her Uber from the hotel got here fast and she walked in and her jaw dropped she was like MAYA THIS HOUSE and she hasn't seen it since we bought it she only saw the listing photos and she went room by room and when she saw the cherry tree through the kitchen window I had to explain the whole grandpa thing and she cried
+    expected_memory_stores:
+      - "Jenny arrived"
+      - "first time seeing house"
+      - "jaw dropped"
+      - "cherry tree visible from kitchen"
+      - "told Jenny about grandpa"
+      - "Jenny cried"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 6:30 PM"
+    user_input: |
+      everyone's here now and Julian's cocktails are flowing he's doing a whiskey sour tonight with like a foam on top and Raj said this is better than any bar in Portland and Julian looked so happy and I realized we're really good at this when we work as a team him on drinks me on food
+    expected_memory_stores:
+      - "all guests arrived"
+      - "whiskey sour with foam"
+      - "Raj compliment"
+      - "Julian happy"
+      - "team dynamic"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 6:50 PM"
+    user_input: |
+      noodles went in at 6:45 exactly and I'm assembling bowls and doing the live finish thing the YouTube chef talked about and everyone is watching me from the dining room and it feels like a show in a good way and Jenny said this is so different from when you burned scrambled eggs in our old apartment and everyone laughed
+    expected_memory_stores:
+      - "noodles at 6:45"
+      - "live assembly"
+      - "audience watching"
+      - "Jenny burned eggs reference"
+      - "old apartment"
+    expected_adaptation:
+      emotion_detected: "performing"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 7:15 PM"
+    user_input: |
+      served the ramen and the table went quiet which is the best compliment and then Omar was like Maya this is legitimately the best ramen I've had outside of Japan and Leila asked for the recipe and Ben took a photo for Instagram and I just sat down and thought about that little ramen shop in Tokyo that started all of this
+    expected_memory_stores:
+      - "ramen served"
+      - "table went quiet"
+      - "Omar best ramen comment"
+      - "Leila wants recipe"
+      - "Ben Instagram photo"
+      - "Tokyo ramen shop memory"
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 8:30 PM"
+    user_input: |
+      Jenny and I snuck away to the backyard while everyone else was talking and she said Maya I'm so proud of you and she got emotional and said remember when we were roommates and you were crying about the PIP at Vantage and now look at you new job house dog boyfriend dinner parties and I said I know it's wild right
+    expected_memory_stores:
+      - "Jenny and Maya backyard talk"
+      - "Jenny proud"
+      - "PIP at Vantage reference"
+      - "everything Maya has now"
+      - "how far she's come"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 9:00 PM"
+    user_input: |
+      Julian let Kobe out from behind the gate after dinner and Kobe went straight to Jenny because he loves Jenny and she was on the floor with him and everyone was full and happy and the music was playing and I looked around and thought this is what a home is for this is why we bought this house
+    expected_memory_stores:
+      - "Kobe released after dinner"
+      - "Kobe loves Jenny"
+      - "full and happy guests"
+      - "this is what home is for"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 10:00 PM"
+    user_input: |
+      Omar said ok Maya you guys are officially the house now like every friend group has a house that everyone goes to and you're it and Leila agreed and Clara said finally because she was tired of hosting at her tiny apartment and I was like wait we didn't sign up for this and Julian said yes we did
+    expected_memory_stores:
+      - "the house designation"
+      - "Omar declares"
+      - "every friend group has a house"
+      - "Clara relieved"
+      - "Julian accepted it"
+    expected_adaptation:
+      emotion_detected: "flattered"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 11:30 PM"
+    user_input: |
+      everyone's gone and the kitchen is way less messy than last time because I cleaned as I went and Jenny texted from her hotel saying that was the best night and I'm looking at the dining table with empty ramen bowls and I feel like I leveled up at something I didn't know I wanted to be good at
+    expected_memory_stores:
+      - "cleaner kitchen this time"
+      - "cleaned as she went"
+      - "Jenny texted best night"
+      - "leveled up at hosting"
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How did the second dinner party compare to the first?"
+    expected_contains: ["better", "success", "calm"]
+  - question: "What did Omar say about Maya's ramen?"
+    expected_contains: ["best ramen", "outside of Japan"]
+  - question: "What designation did the friend group give Maya's house?"
+    expected_contains: ["the house"]
+  - question: "What was Jenny's reaction to seeing the house?"
+    expected_contains: ["jaw dropped"]
+  - question: "What cocktail did Julian make for the ramen dinner?"
+    expected_contains: ["whiskey sour", "foam"]
+  - question: "What old memory did Jenny bring up?"
+    expected_contains: ["PIP", "Vantage", "burned", "eggs"]
+  - question: "What Japanese playlist did Julian use?"
+    expected_contains: ["lo-fi"]
+  - question: "What ramen shop inspired Maya's dish?"
+    expected_contains: ["Tokyo"]
+  - question: "What did Maya do differently with cleanup?"
+    expected_contains: ["cleaned as she went"]
+  - question: "Why was Clara relieved about Maya hosting?"
+    expected_contains: ["tired", "tiny apartment"]

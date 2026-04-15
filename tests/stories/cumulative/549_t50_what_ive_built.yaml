@@ -1,0 +1,188 @@
+story_id: 549
+story_name: "What I've Built"
+category: "Identity and Future"
+description: |
+  Maya takes stock of everything she's built this year. A reckoning with her own life
+  that finds more than she expected. Cross-references EVERY thread — career, house,
+  relationship, cooking, climbing, grief, hosting, digital life, weather, identity.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 8:00 AM"
+    user_input: |
+      woke up early and made tea from grandpa's tin and sat at the kitchen table with my journal and I decided to write down everything I've built this year not accomplishments just things that exist now that didn't exist a year ago and I'm wearing his watch and the lamp is on and it's raining and I'm ready
+    expected_memory_stores:
+      - "morning journal session"
+      - "grandpa's tea and watch"
+      - "lamp on raining"
+      - "listing what's been built"
+    expected_adaptation:
+      emotion_detected: "intentional"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 8:30 AM"
+    user_input: |
+      career I left Vantage Systems survived a PIP under Derek got a new job at Conduit AI with Priya as my manager got promoted to lead engineer mentored Aisha mentored Kyle and Tanya and I'm about to guest lecture at Epicodus and that career barely existed a year ago
+    expected_memory_stores:
+      - "career inventory"
+      - "Vantage PIP Derek"
+      - "Conduit AI Priya"
+      - "lead engineer promotion"
+      - "Aisha Kyle Tanya"
+      - "Epicodus lecture"
+    expected_adaptation:
+      emotion_detected: "counting"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 9:00 AM"
+    user_input: |
+      home I bought a house in Woodstock with Julian we survived the renovation we have a yard with a cherry tree we have a kitchen that's hosted twenty dinner parties we have rooms we painted ourselves and a porch that needs constant fixing and it's ours and the rain sounds different when it hits your own roof
+    expected_memory_stores:
+      - "home inventory"
+      - "Woodstock house"
+      - "renovation survived"
+      - "cherry tree yard"
+      - "twenty dinner parties"
+      - "rain on own roof"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 9:30 AM"
+    user_input: |
+      relationships Julian and I are stronger than ever and we host together and plan together and talk about kids together and my mom and I rebuilt something real after years of fighting and Diane went from adversary to someone who folds dumplings with my mom and Jenny is far away but closer than ever and Clara is my rock
+    expected_memory_stores:
+      - "relationship inventory"
+      - "Julian stronger than ever"
+      - "Vivian rebuilt"
+      - "Diane transformation"
+      - "Jenny far but close"
+      - "Clara is rock"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 10:00 AM"
+    user_input: |
+      skills I learned to cook fifteen dishes including miso ramen from Japan and grandpa's dumplings and I climb V5 now which is insane because I started at V1 and I can make cocktails sort of Julian does that but I learned to host which is its own skill and I learned to be present which is maybe the hardest skill
+    expected_memory_stores:
+      - "skills inventory"
+      - "fifteen dishes"
+      - "miso ramen dumplings"
+      - "V1 to V5"
+      - "hosting as skill"
+      - "being present hardest skill"
+    expected_adaptation:
+      emotion_detected: "amazed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:30 AM"
+    user_input: |
+      mental health I went from not being able to get off the couch in winter to having a toolkit that includes a lamp and Wellbutrin and therapy and rain walks with Kobe and phone-free Sundays and a journal and candles and soup and I went from weekly therapy to monthly which means I trust myself now
+    expected_memory_stores:
+      - "mental health inventory"
+      - "couch to toolkit"
+      - "lamp Wellbutrin therapy"
+      - "rain walks phone-free Sundays"
+      - "journal candles soup"
+      - "weekly to monthly trust"
+    expected_adaptation:
+      emotion_detected: "resilient"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 11:00 AM"
+    user_input: |
+      legacy I found out my grandfather was an engineer and that changed how I see myself I wear his watch every day I planted his tree I reconstructed his recipe I framed his degree I got his letters translated and I decided if I have a daughter her middle name will be Wei and that's a legacy built from grief
+    expected_memory_stores:
+      - "legacy inventory"
+      - "grandfather engineer"
+      - "watch tree recipe degree"
+      - "letters translated"
+      - "daughter named Wei"
+      - "legacy from grief"
+    expected_adaptation:
+      emotion_detected: "reverent"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 11:30 AM"
+    user_input: |
+      digital life I went from 4.5 hours screen time to 2.5 I deleted LinkedIn from my phone I unfollowed 200 accounts I started a photo journal I take three photos at events and I learned that my phone is a tool not a companion and the best thing that happened to my digital life was my phone breaking
+    expected_memory_stores:
+      - "digital life inventory"
+      - "4.5 to 2.5 hours"
+      - "deleted LinkedIn"
+      - "unfollowed 200"
+      - "photo journal"
+      - "three photos rule"
+      - "tool not companion"
+    expected_adaptation:
+      emotion_detected: "transformed"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 12:00 PM"
+    user_input: |
+      I read the whole list back and I started crying not sad crying just overwhelmed crying because when you live day to day you don't see the shape of your life but when you write it down you can see the whole thing and it's so much more than I thought it was and Dr. Tate was right and Julian was right and everyone was right
+    expected_memory_stores:
+      - "read list back"
+      - "overwhelmed crying"
+      - "shape of life"
+      - "more than she thought"
+      - "everyone was right"
+    expected_adaptation:
+      emotion_detected: "breakthrough"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Julian came home and found me sitting at the table with the journal open and tears on my face and he said are you ok and I said I'm better than ok I just realized I built a life and he sat down and read the list and when he got to the end he put his hand over mine and said yeah Maya you did and the watch ticked between our hands
+    expected_memory_stores:
+      - "Julian found her with journal"
+      - "I built a life"
+      - "Julian read list"
+      - "hand over hers"
+      - "watch ticked between hands"
+    expected_adaptation:
+      emotion_detected: "complete"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What categories did Maya inventory?"
+    expected_contains: ["career", "home", "relationships", "skills", "mental health", "legacy", "digital"]
+  - question: "How many dinner parties has Maya hosted?"
+    expected_contains: ["twenty"]
+  - question: "What climbing progression has Maya made?"
+    expected_contains: ["V1 to V5"]
+  - question: "How many dishes can Maya cook?"
+    expected_contains: ["fifteen"]
+  - question: "What happened to Maya's screen time?"
+    expected_contains: ["4.5 to 2.5"]
+  - question: "What legacy items does Maya have?"
+    expected_contains: ["watch", "tree", "recipe", "degree", "letters"]
+  - question: "How did Maya describe seeing her life written down?"
+    expected_contains: ["shape", "more than she thought"]
+  - question: "What therapy milestone did Maya reach?"
+    expected_contains: ["weekly to monthly"]
+  - question: "What was the symbolic detail at the end?"
+    expected_contains: ["watch ticked", "between hands"]
+  - question: "What hardest skill did Maya learn?"
+    expected_contains: ["being present"]

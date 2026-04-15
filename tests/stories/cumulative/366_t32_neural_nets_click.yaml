@@ -1,0 +1,173 @@
+story_id: 366
+story_name: "Neural Networks Click"
+category: "Career Development"
+description: |
+  Tests memory of Maya thriving in the neural networks module of her ML course.
+  Verifies system tracks learning breakthroughs and growing confidence.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00 PM"
+    user_input: |
+      okay so module two started and we're doing neural networks and honestly I thought it would be harder but the way they explain it like each neuron is just a tiny function that takes inputs and produces an output and when you stack them it's like Legos it actually makes intuitive sense to me
+    expected_memory_stores:
+      - "module 2 started"
+      - "neural networks"
+      - "neurons as functions"
+      - "Lego analogy"
+      - "intuitive"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      backpropagation is wild like the idea that you can propagate the error backwards through the network and adjust every weight is so elegant and I was explaining it to Julian at dinner and he was like I have no idea what you're saying but you look really happy
+    expected_memory_stores:
+      - "backpropagation"
+      - "error propagation"
+      - "weight adjustment"
+      - "explained to Julian"
+      - "Julian noticed happiness"
+    expected_adaptation:
+      emotion_detected: "passionate"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 7:00 PM"
+    user_input: |
+      built my first neural network today using PyTorch and it was a simple image classifier for handwritten digits and it got like 95 percent accuracy and I know that's a standard tutorial but seeing it work with my own code was magical
+    expected_memory_stores:
+      - "first neural network"
+      - "PyTorch"
+      - "image classifier"
+      - "handwritten digits"
+      - "95% accuracy"
+    expected_adaptation:
+      emotion_detected: "amazed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 2:00 PM"
+    user_input: |
+      study session with Lily and Danny and I actually understood things before Lily explained them this time and Danny was asking me questions and I could answer them and Lily was like look at you being the teacher now
+    expected_memory_stores:
+      - "understood before explanation"
+      - "Danny asking Maya questions"
+      - "Maya as teacher"
+      - "Lily comment"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 6:00 PM"
+    user_input: |
+      I think the reason neural nets click for me is because it's more like programming than math like the math is there but you're mostly thinking about architecture and data flow which is what I do every day at Conduit as a software engineer
+    expected_memory_stores:
+      - "neural nets like programming"
+      - "architecture and data flow"
+      - "engineering parallel"
+      - "Conduit connection"
+    expected_adaptation:
+      emotion_detected: "insightful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 9:00 PM"
+    user_input: |
+      got a 91 on this week's problem set which is insane compared to module one and Lily was like see I told you module two would be your thing and even the instructor left a comment on my submission saying excellent implementation
+    expected_memory_stores:
+      - "91 on problem set"
+      - "huge improvement"
+      - "Lily predicted"
+      - "instructor comment"
+      - "excellent implementation"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      I started reading papers on my own which is not required but I found this one about attention mechanisms and transformers and it's the same tech behind like GPT and stuff and I'm like this is what I want to understand deeply
+    expected_memory_stores:
+      - "reading papers voluntarily"
+      - "attention mechanisms"
+      - "transformers"
+      - "GPT connection"
+      - "deep understanding goal"
+    expected_adaptation:
+      emotion_detected: "curious"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 6:00 PM"
+    user_input: |
+      what score did Maya get on her module two problem set
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 8:00 PM"
+    user_input: |
+      I told Sam about the attention mechanisms paper and he got really interested and we spent like 30 minutes at his desk whiteboarding how we could use something similar for Conduit's search ranking and he was like this is exactly why I wanted you to learn this stuff
+    expected_memory_stores:
+      - "Sam interested"
+      - "whiteboarding session"
+      - "attention for search ranking"
+      - "Conduit application"
+      - "Sam validated decision"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 5:00 PM"
+    user_input: |
+      I'm actually ahead on the coursework for the first time like I finished next week's lectures already and did the practice problems and I'm sitting at like a 93 average for module two and it feels like a completely different experience from module one
+    expected_memory_stores:
+      - "ahead on coursework"
+      - "93 average module 2"
+      - "finished ahead"
+      - "transformation from module 1"
+    expected_adaptation:
+      emotion_detected: "thriving"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How is Maya doing in the neural networks module?"
+    expected_contains: ["well", "thriving", "93", "ahead"]
+  - question: "What framework is Maya using for neural networks?"
+    expected_contains: ["PyTorch"]
+  - question: "Why do neural networks click for Maya?"
+    expected_contains: ["programming", "architecture", "data flow"]
+  - question: "What did the ML instructor say about Maya's work?"
+    expected_contains: ["excellent implementation"]
+  - question: "What paper topic interested Maya?"
+    expected_contains: ["attention mechanisms", "transformers"]
+  - question: "How did Sam react to Maya's attention mechanisms knowledge?"
+    expected_contains: ["interested", "whiteboard", "search ranking"]
+  - question: "What is Maya's module 2 average?"
+    expected_contains: ["93"]
+  - question: "What was Maya's first neural network project?"
+    expected_contains: ["handwritten digits", "image classifier"]
+  - question: "How does Maya's module 2 performance compare to module 1?"
+    expected_contains: ["much better", "different", "improvement"]
+  - question: "Is Maya ahead or behind on coursework now?"
+    expected_contains: ["ahead"]

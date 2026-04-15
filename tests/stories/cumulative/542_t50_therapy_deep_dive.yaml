@@ -1,0 +1,178 @@
+story_id: 542
+story_name: "Therapy Deep Dive"
+category: "Identity and Future"
+description: |
+  Maya does a deep dive with Dr. Tate about the birthday spiral, identity, and what
+  she's accomplished. The accomplishment list. Cross-references all life threads,
+  mental health (T21), career (T1-T6), and grandpa (T46).
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 10:00 AM"
+    user_input: |
+      ok so I'm at Dr. Tate's and I told her about the birthday spiral and she said tell me about the spiral and I said I just felt like I haven't accomplished enough and she said compared to whom and I said I don't know everyone and she said that's the problem right there comparing yourself to a nonspecific everyone
+    expected_memory_stores:
+      - "Dr. Tate session"
+      - "birthday spiral discussion"
+      - "haven't accomplished enough"
+      - "compared to whom"
+      - "nonspecific everyone problem"
+    expected_adaptation:
+      emotion_detected: "exposed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 10:15 AM"
+    user_input: |
+      she asked me to list everything I've accomplished in the last year and I started with the obvious stuff like I got a new job at Conduit AI and bought a house with Julian and she stopped me and said wait you changed careers and bought a house in the same year and I said yeah and she said Maya do you understand how massive that is
+    expected_memory_stores:
+      - "accomplishment list exercise"
+      - "new job Conduit AI"
+      - "bought house with Julian"
+      - "same year"
+      - "Dr. Tate says massive"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 10:30 AM"
+    user_input: |
+      kept going with the list I improved my climbing from V1 to V5 I learned to cook like fifteen dishes from scratch I started hosting dinner parties and became quote unquote the house in my friend group I dealt with my grandfather's death in a healthy way I maintained my mental health through a full Portland winter
+    expected_memory_stores:
+      - "climbing V1 to V5"
+      - "fifteen dishes"
+      - "dinner party hosting"
+      - "the house designation"
+      - "grandfather's death processed"
+      - "winter mental health maintained"
+    expected_adaptation:
+      emotion_detected: "recognizing"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 10:45 AM"
+    user_input: |
+      Dr. Tate said and what else and I said um I reduced my screen time from 4.5 hours to 2.5 and I set up phone-free Sundays and I mentored Aisha and I rebuilt my relationship with my mom and she stopped me and said Maya that's not the list of someone who hasn't accomplished enough that's the list of someone who's built a life
+    expected_memory_stores:
+      - "screen time reduction"
+      - "phone-free Sundays"
+      - "mentored Aisha"
+      - "rebuilt Vivian relationship"
+      - "built a life"
+    expected_adaptation:
+      emotion_detected: "seen"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 11:00 AM"
+    user_input: |
+      she asked me why I discount my own accomplishments and I said I don't know I think it's because none of them are like big flashy public things like I didn't raise funding or get promoted to VP or publish something and she said so your definition of accomplishment is only things that LinkedIn would celebrate and I was like yeah I guess that's true
+    expected_memory_stores:
+      - "discounting accomplishments"
+      - "big flashy public things"
+      - "funding VP publishing"
+      - "LinkedIn definition of success"
+    expected_adaptation:
+      emotion_detected: "confronted"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 11:15 AM"
+    user_input: |
+      Dr. Tate said something that I keep replaying she said the most important things you build can't be put on a resume a home a relationship a friendship a sense of self mental health those are the real accomplishments and the world tells you they don't count because they can't be measured but they're the foundation everything else stands on
+    expected_memory_stores:
+      - "Dr. Tate quote"
+      - "important things not on resume"
+      - "home relationship friendship self"
+      - "unmeasurable but foundational"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 11:30 AM"
+    user_input: |
+      she asked about grandpa and I told her about the engineering discovery and the watch and the tree and the recipe and she said this is interesting because you went looking for accomplishments outside yourself and found them inside your family history and that reframed your own career in a deeper way
+    expected_memory_stores:
+      - "grandpa discussion"
+      - "engineering discovery"
+      - "accomplishments inside family"
+      - "reframed career"
+    expected_adaptation:
+      emotion_detected: "insightful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      before I left she gave me homework which is to write down three things I'm proud of every night for a week not accomplishments not milestones just things I'm proud of and I said ok and she said and Maya try to include things that aren't productivity related like being a good partner or making someone laugh
+    expected_memory_stores:
+      - "Dr. Tate homework"
+      - "three things proud of nightly"
+      - "not productivity related"
+      - "good partner making someone laugh"
+    expected_adaptation:
+      emotion_detected: "willing"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      first night of the homework and I wrote one I'm proud that I made Julian laugh at dinner by doing a terrible impression of Priya two I'm proud that Kobe trusts me completely three I'm proud that I called my mom without her calling me first and none of these would go on a resume and they all matter more than anything on my resume
+    expected_memory_stores:
+      - "first homework entry"
+      - "Julian laugh impression"
+      - "Kobe trusts her"
+      - "called mom first"
+      - "matter more than resume"
+    expected_adaptation:
+      emotion_detected: "learning"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 10:00 PM"
+    user_input: |
+      told Julian about the therapy session and the accomplishment list and he said I've been telling you this for months and I said I know but hearing it from a therapist made it clinical and he said what does clinical mean and I said it means it's not just you being nice it's actually true and he said so you only believe compliments if they come with a copay and I laughed so hard
+    expected_memory_stores:
+      - "told Julian about therapy"
+      - "Julian been saying it"
+      - "clinical validation"
+      - "copay joke"
+      - "laughed hard"
+    expected_adaptation:
+      emotion_detected: "breakthrough"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What homework did Dr. Tate assign?"
+    expected_contains: ["three things proud of", "every night"]
+  - question: "What did Dr. Tate say about unmeasurable accomplishments?"
+    expected_contains: ["foundation", "can't be on resume"]
+  - question: "What accomplishments did Maya list?"
+    expected_contains: ["job", "house", "climbing", "cooking", "hosting", "mental health"]
+  - question: "What did Dr. Tate say about LinkedIn's definition of success?"
+    expected_contains: ["only things LinkedIn celebrates"]
+  - question: "What was Maya's first pride homework entry?"
+    expected_contains: ["Julian laugh", "Kobe trusts", "called mom"]
+  - question: "What realization did Maya have about grandpa?"
+    expected_contains: ["accomplishments inside family"]
+  - question: "Why did Maya spiral on her birthday?"
+    expected_contains: ["compared", "nonspecific everyone"]
+  - question: "What did Julian say about therapy validation?"
+    expected_contains: ["copay", "only believe", "compliments"]
+  - question: "How did Dr. Tate respond to Maya's two biggest accomplishments?"
+    expected_contains: ["massive", "same year"]
+  - question: "What does Dr. Tate say the real accomplishments are?"
+    expected_contains: ["home", "relationship", "friendship", "mental health"]

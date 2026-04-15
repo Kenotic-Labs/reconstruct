@@ -1,0 +1,218 @@
+story_id: 98
+story_name: "Rebuilding Working Relationship"
+category: "Career"
+description: |
+  Tests memory of Danny and Maya finding a new professional normal.
+  They won't be best friends but they can collaborate effectively.
+  Verifies system tracks relationship evolution over multiple stages.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 10:00 AM"
+    user_input: |
+      been two weeks since Sam's intervention and things are noticeably better Danny properly credited me in yesterday's sprint review saying Maya's search ranking optimization improved recall by another 8 percent and he even walked through my architecture decisions like he was genuinely presenting my work as mine
+    expected_memory_stores:
+      - "two weeks later"
+      - "proper credit given"
+      - "8 percent recall improvement"
+      - "presented Maya's work"
+      - "architecture decisions"
+    expected_triples:
+      - ["Danny", "credited_user_for", "search ranking optimization"]
+      - ["user", "achieved", "8% recall improvement"]
+      - ["Danny", "presented", "user's architecture decisions properly"]
+      - ["user", "has_emotion", "satisfied"]
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 11:00 AM"
+    user_input: |
+      Danny and I had a technical disagreement today about how to handle query caching invalidation and instead of it being weird it was actually productive like we both argued our positions with data and Sam moderated and we ended up with a hybrid approach that was better than either of our individual ideas
+    expected_memory_stores:
+      - "technical disagreement"
+      - "query caching invalidation"
+      - "productive debate"
+      - "data-driven arguments"
+      - "Sam moderated"
+      - "hybrid approach"
+    expected_triples:
+      - ["user", "debated_with", "Danny on query caching invalidation"]
+      - ["Sam", "moderated", "technical disagreement"]
+      - ["team", "adopted", "hybrid approach"]
+    expected_adaptation:
+      emotion_detected: "professional"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 3:00 PM"
+    user_input: |
+      Lily said she's noticed the shift between Danny and me and she said it's not the same as before but it's functional and professional and maybe that's enough and I think she's right like we don't need to be besties we just need to respect each other's work
+    expected_memory_stores:
+      - "Lily observes shift"
+      - "functional professional"
+      - "not same as before"
+      - "enough"
+      - "respect work"
+    expected_triples:
+      - ["Lily", "observed", "Danny-Maya shift"]
+      - ["Danny_Maya_relationship", "is", "functional and professional"]
+      - ["user", "accepts", "mutual respect is enough"]
+    expected_adaptation:
+      emotion_detected: "accepting"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 7:00 PM"
+    user_input: |
+      Julian noticed I'm not talking about Danny anymore and he said is that a good sign or a you're-avoiding-it sign and I said honestly it's a good sign I'm just not thinking about it as much because the situation is resolved and Danny is behaving better and there's no drama
+    expected_memory_stores:
+      - "Julian notices"
+      - "not talking about Danny"
+      - "good sign"
+      - "situation resolved"
+      - "no drama"
+    expected_triples:
+      - ["Julian", "noticed", "user no longer talking about Danny"]
+      - ["Danny_situation", "is", "resolved"]
+      - ["user", "has_emotion", "settled"]
+    expected_adaptation:
+      emotion_detected: "settled"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Next Monday 9:00 AM"
+    user_input: |
+      Danny brought virtual donuts to the team meeting which is a Conduit tradition for when you ship something big and he shipped a major update to the ingestion pipeline and during his presentation he went out of his way to thank Maya and Amir for the infrastructure work that made his improvements possible and I thought okay he really is trying
+    expected_memory_stores:
+      - "virtual donuts"
+      - "Danny shipped ingestion update"
+      - "thanked Maya and Amir"
+      - "infrastructure acknowledged"
+      - "really trying"
+    expected_triples:
+      - ["Danny", "shipped", "ingestion pipeline update"]
+      - ["Danny", "thanked", "user and Amir for infrastructure"]
+      - ["Danny", "brought", "virtual donuts for team"]
+      - ["user", "has_emotion", "appreciative"]
+    expected_adaptation:
+      emotion_detected: "appreciative"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Next Wednesday 2:00 PM"
+    user_input: |
+      Sam's monthly team retrospective and he introduced the new attribution norm formally like from now on all presentations must name the primary author of any work being showcased and Danny nodded along and I could tell he knew it was inspired by our situation but nobody else needed to know the backstory
+    expected_memory_stores:
+      - "attribution norm formal"
+      - "presentations name author"
+      - "Danny nodded"
+      - "inspired by situation"
+      - "backstory private"
+    expected_triples:
+      - ["Sam", "formalized", "attribution norm for presentations"]
+      - ["Conduit", "has_policy", "presentations must name primary author"]
+      - ["Danny", "acknowledged", "new norm"]
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Next Thursday 10:00 AM"
+    user_input: |
+      is the Danny credit issue fully resolved now
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Next Thursday 6:00 PM"
+    user_input: |
+      Danny asked me if I wanted to do a paired debugging session on a tricky search issue and I said sure and we spent two hours on it and it was actually fun like genuinely fun working through a hard problem together and at the end he said thanks for your patience Maya and I don't just mean today
+    expected_memory_stores:
+      - "paired debugging"
+      - "tricky search issue"
+      - "two hours"
+      - "genuinely fun"
+      - "thanks for patience"
+      - "not just today"
+    expected_triples:
+      - ["Danny", "paired_debugged_with", "user for two hours"]
+      - ["Danny", "said", "thanks for patience, not just today"]
+      - ["user", "has_emotion", "moved"]
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Next Friday 4:00 PM"
+    user_input: |
+      Lily said something interesting today she said watching how you handled Danny taught me something about how to advocate for yourself without destroying the relationship and I was like honestly I learned that from surviving the PIP at Vantage and she said well then some good came from that too
+    expected_memory_stores:
+      - "Lily learned from Maya"
+      - "advocate without destroying"
+      - "PIP lesson"
+      - "good from bad"
+    expected_triples:
+      - ["Lily", "learned_from_user", "advocating without destroying relationship"]
+      - ["user", "learned_advocacy_from", "surviving PIP at Vantage"]
+      - ["user", "has_emotion", "reflective"]
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Next Saturday 11:00 AM"
+    user_input: |
+      took Kobe for a long walk this morning and thought about everything that's happened in the last few months the PIP the job search the new job the side project Danny and I realize I've grown so much as a professional and as a person and Julian said the same thing last night he said you're not the same Maya who was scared at Vantage
+    expected_memory_stores:
+      - "Kobe walk"
+      - "reflection"
+      - "growth"
+      - "PIP to now"
+      - "not same person"
+      - "Julian observation"
+    expected_triples:
+      - ["user", "reflects_on", "growth from PIP to now"]
+      - ["Julian", "observed", "user is not the same scared person from Vantage"]
+      - ["user", "has_emotion", "proud"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Is Danny properly crediting Maya now?"
+    expected_contains: ["yes"]
+  - question: "What attribution norm did Sam implement?"
+    expected_contains: ["presentations", "name", "author"]
+  - question: "How is the Danny-Maya relationship described now?"
+    expected_contains: ["functional", "professional"]
+  - question: "What did Danny say after the debugging session?"
+    expected_contains: ["patience", "not just today"]
+  - question: "What did Lily learn from watching Maya?"
+    expected_contains: ["advocate", "without destroying"]
+  - question: "What did Danny thank Maya and Amir for?"
+    expected_contains: ["infrastructure"]
+  - question: "Is there still drama between Danny and Maya?"
+    expected_contains: ["no"]
+  - question: "What growth has Maya experienced?"
+    expected_contains: ["professional", "person", "grown"]
+  - question: "What did Julian say about Maya's change?"
+    expected_contains: ["not same", "Vantage", "scared"]
+  - question: "Did the technical disagreement hurt their relationship?"
+    expected_contains: ["no", "productive"]

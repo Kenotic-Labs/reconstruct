@@ -1,0 +1,179 @@
+story_id: 228
+story_name: "First Run Back"
+category: "Health"
+description: |
+  Tests the emotional significance of returning to activity after injury. Maya does her
+  first walk-run intervals. Verifies system captures milestone events and emotional context.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 7:00 AM"
+    user_input: |
+      today is the day Jake cleared me for walk-run intervals and I'm so nervous and excited and Julian is here and Kobe is here and we're at the waterfront where I used to train and I'm wearing grandpa's watch and the Brooks and my knee brace just in case
+    expected_memory_stores:
+      - "first run day"
+      - "Jake cleared"
+      - "waterfront"
+      - "Julian and Kobe"
+      - "grandpa's watch"
+      - "Brooks shoes"
+      - "knee brace"
+    expected_adaptation:
+      emotion_detected: "nervous excitement"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 7:15 AM"
+    user_input: |
+      the plan is two minutes running one minute walking repeat for twenty minutes and I started the first running interval and oh my god the feeling of my feet hitting the ground again I almost cried like the wind in my face and the river and just moving it was everything
+    expected_memory_stores:
+      - "two minutes run one minute walk"
+      - "twenty minutes total"
+      - "almost cried"
+      - "river"
+      - "wind in face"
+      - "everything"
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 7:30 AM"
+    user_input: |
+      the knee felt a little stiff on the first interval but no pain and by the third interval it loosened up and Julian was jogging next to me even though he hates running and Kobe was going insane with happiness and I was grinning like an idiot
+    expected_memory_stores:
+      - "knee stiff then loosened"
+      - "no pain"
+      - "third interval"
+      - "Julian jogging with her"
+      - "Kobe happy"
+      - "grinning"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 7:45 AM"
+    user_input: |
+      finished the twenty minutes and I only did like eight running intervals but I don't care because I RAN and the knee is fine and I'm standing here sweating and breathing hard and I feel alive like actually alive for the first time in ten weeks
+    expected_memory_stores:
+      - "finished twenty minutes"
+      - "eight intervals"
+      - "knee fine"
+      - "sweating breathing hard"
+      - "feel alive"
+      - "ten weeks"
+    expected_adaptation:
+      emotion_detected: "triumphant"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 9:00 AM"
+    user_input: |
+      called Jake to tell him and he was like that's awesome Maya just make sure you ice after and don't run tomorrow even if you feel good and I said I know I know and he said I'll see you Monday and we'll assess and I said THANK YOU Jake like genuinely
+    expected_memory_stores:
+      - "called Jake"
+      - "ice after"
+      - "don't run tomorrow"
+      - "Monday assessment"
+      - "genuine thanks"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:00 AM"
+    user_input: |
+      what was my walk-run interval plan and how did the knee feel
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 12:00 PM"
+    user_input: |
+      texted Naomi and said I RAN TODAY and she sent back like fifty celebration emojis and said we're doing the welcome back run next Saturday and she's getting the whole group together and I can't wait
+    expected_memory_stores:
+      - "told Naomi"
+      - "celebration"
+      - "welcome back run next Saturday"
+      - "whole group"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 3:00 PM"
+    user_input: |
+      told Clara and she said see I told you and she asked about pain and I said zero and she said good but watch for swelling overnight and check in tomorrow morning and there's my nurse sister always nurse-ing
+    expected_memory_stores:
+      - "Clara told"
+      - "zero pain"
+      - "watch for swelling"
+      - "Clara nurse-ing"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 6:00 PM"
+    user_input: |
+      icing my knee on the couch and there's no swelling and Julian made celebratory tacos and he keeps saying he's proud of me and Kobe is exhausted from the run he's passed out on his bed and this is such a good day
+    expected_memory_stores:
+      - "icing no swelling"
+      - "celebratory tacos"
+      - "Julian proud"
+      - "Kobe exhausted"
+      - "good day"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:00 PM"
+    user_input: |
+      lying in bed and my legs are sore in the best way and I touched the watch and said grandpa I ran today and I'm going to keep going and I thought about how ten weeks ago I was on this same bed crying thinking I'd never run again and look at me now
+    expected_memory_stores:
+      - "legs sore"
+      - "told grandpa"
+      - "ten weeks ago comparison"
+      - "never run again fear"
+      - "look at me now"
+    expected_adaptation:
+      emotion_detected: "triumphant"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What was Maya's walk-run plan?"
+    expected_contains: ["two minutes running", "one minute walking", "twenty minutes"]
+  - question: "How did Maya's knee feel during the run?"
+    expected_contains: ["stiff then loosened", "no pain"]
+  - question: "Was there swelling after?"
+    expected_contains: ["no"]
+  - question: "Who ran with Maya?"
+    expected_contains: ["Julian", "Kobe"]
+  - question: "What did Jake say after the run?"
+    expected_contains: ["ice", "don't run tomorrow"]
+  - question: "When is the welcome back run with the group?"
+    expected_contains: ["next Saturday"]
+  - question: "What did Julian make to celebrate?"
+    expected_contains: ["tacos"]
+  - question: "How long was Maya unable to run?"
+    expected_contains: ["ten weeks"]
+  - question: "What did Maya say to Grandpa's watch?"
+    expected_contains: ["ran today", "keep going"]
+  - question: "Is Maya experiencing any swelling?"
+    expected_contains: ["no"]

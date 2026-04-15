@@ -1,0 +1,186 @@
+story_id: 195
+story_name: "Six Weeks of Bed Rest"
+category: "Health"
+description: |
+  Clara on bed rest for six weeks. Managing preeclampsia at home.
+  Family supporting. Tests long-duration medical tracking, weekly
+  updates, and emotional endurance.
+duration_simulated: "6 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Week 1 Monday 7:00 PM"
+    user_input: |
+      Clara's home from the hospital on strict bed rest she can get up to go to the bathroom and that's basically it and David is taking family leave from the fire department to be with her and Mom goes over every day to help cook and keep Clara company because Clara is going to go CRAZY just lying there for weeks
+    expected_memory_stores:
+      - "Clara home on bed rest"
+      - "strict bed rest"
+      - "bathroom only"
+      - "David on family leave"
+      - "Vivian going over daily"
+      - "Clara will go stir crazy"
+    expected_adaptation:
+      emotion_detected: "worried but organized"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Week 1 Thursday 8:00 PM"
+    user_input: |
+      Clara's blood pressure is being checked twice a day with a home monitor and she texts me the numbers every morning and evening today it was 132 over 84 in the morning and 135 over 86 in the evening which is high but controlled and Dr. Patel does a phone check-in every other day and in-person visits weekly
+    expected_memory_stores:
+      - "blood pressure monitoring twice daily"
+      - "home monitor"
+      - "132/84 morning"
+      - "135/86 evening"
+      - "high but controlled"
+      - "Dr. Patel phone check-ins"
+      - "weekly in-person visits"
+    expected_adaptation:
+      emotion_detected: "vigilant"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Week 2 Monday 7:00 PM"
+    user_input: |
+      Clara's losing her mind on bed rest she said Maya I'm a nurse I'm supposed to be MOVING and helping people and instead I'm lying here watching Netflix and eating crackers and I said Clara you're literally growing a human right now and she said yeah but Sophie better appreciate this when she's older
+    expected_memory_stores:
+      - "Clara frustrated with bed rest"
+      - "used to being active"
+      - "watching Netflix"
+      - "eating crackers"
+      - "Sophie should appreciate this"
+    expected_adaptation:
+      emotion_detected: "empathetic humor"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Week 3 Wednesday 6:00 PM"
+    user_input: |
+      week 31 now and Dr. Patel said Clara and Sophie are doing well the blood pressure is stable and Sophie is growing on track the latest ultrasound estimated her weight at about 3.5 pounds and Dr. Patel said that's good for 31 weeks and every day she stays in there is a win
+    expected_memory_stores:
+      - "week 31"
+      - "blood pressure stable"
+      - "Sophie 3.5 pounds"
+      - "good for 31 weeks"
+      - "every day is a win"
+      - "Dr. Patel pleased"
+    expected_adaptation:
+      emotion_detected: "cautiously positive"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Week 3 Saturday 10:00 AM"
+    user_input: |
+      Dad brought Clara a little wooden rattle he made for Sophie and Clara held it and the tears just started flowing pregnancy hormones plus bed rest plus the sweetest father in the world equals total meltdown and Dad just sat next to her and held her hand and said the baby's going to love it
+    expected_memory_stores:
+      - "George made wooden rattle"
+      - "for Sophie"
+      - "Clara crying"
+      - "pregnancy hormones"
+      - "George holding her hand"
+    expected_adaptation:
+      emotion_detected: "tender"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Week 4 Monday 7:00 PM"
+    user_input: |
+      week 32 and the ultrasound today estimated Sophie at wait let me check Clara's text she said 4 pounds 2 ounces which is great and actually the ultrasound tech said she might be a little bigger than they thought earlier like maybe closer to 5 or 6 pounds by birth but ultrasound weight estimates can be off by like a pound
+    expected_memory_stores:
+      - "week 32"
+      - "ultrasound estimate 4 pounds 2 ounces"
+      - "might be bigger than thought"
+      - "5-6 pounds estimated at birth"
+      - "ultrasound can be off by a pound"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Week 4 Thursday 8:00 PM"
+    user_input: |
+      Clara had a scare today her blood pressure spiked to 148 over 92 and she called Dr. Patel who said come in immediately and they ran tests and adjusted her medication and it came back down and Dr. Patel said we need to talk about delivery timing if this happens again we may need to deliver by 34 weeks
+    expected_memory_stores:
+      - "blood pressure spike 148/92"
+      - "Clara went in immediately"
+      - "medication adjusted"
+      - "blood pressure came down"
+      - "possible delivery at 34 weeks"
+      - "Dr. Patel concerned"
+    expected_adaptation:
+      emotion_detected: "scared"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Week 5 Monday 7:00 PM"
+    user_input: |
+      week 33 and things stabilized again after the scare blood pressure is back in the controlled range and Clara said she's been doing guided meditations that David found on YouTube to help manage stress which is kind of cute the paramedic and the nurse doing breathing exercises together in bed
+    expected_memory_stores:
+      - "week 33"
+      - "blood pressure stabilized"
+      - "guided meditations"
+      - "David found on YouTube"
+      - "breathing exercises together"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Week 5 Friday 6:00 PM"
+    user_input: |
+      Dr. Patel said they're going to schedule the C-section for week 36 which is March 25th and Clara's accepted it she said I wanted natural but Sophie's health comes first and at 36 weeks she should be fully developed enough to not need the NICU or at least not for long
+    expected_memory_stores:
+      - "C-section scheduled week 36"
+      - "March 25"
+      - "Clara accepted C-section"
+      - "Sophie should be developed enough"
+      - "minimal NICU expected"
+    expected_adaptation:
+      emotion_detected: "pragmatic"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Week 6 Wednesday 7:00 PM"
+    user_input: |
+      one more week until Sophie is born one more week of bed rest and Clara said she can see the finish line and she's ready she said Maya six weeks of lying in bed I wouldn't wish this on anyone but I'd do it a hundred times over for her and I said I know you would and I'm flying down next week for the birth I already have my ticket
+    expected_memory_stores:
+      - "one week until delivery"
+      - "Clara six weeks of bed rest"
+      - "Clara would do it again"
+      - "Maya flying down for birth"
+      - "ticket booked"
+    expected_adaptation:
+      emotion_detected: "anticipation"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How long was Clara on bed rest?"
+    expected_contains: ["six weeks"]
+  - question: "When is the C-section scheduled?"
+    expected_contains: ["March 25", "week 36"]
+  - question: "How much does Sophie weigh based on the latest ultrasound?"
+    expected_contains: ["4 pounds"]
+  - question: "Did Clara have any blood pressure scares during bed rest?"
+    expected_contains: ["yes", "spike", "148"]
+  - question: "Who is with Clara during bed rest?"
+    expected_contains: ["David", "Vivian"]
+  - question: "Is David on leave from work?"
+    expected_contains: ["yes", "family leave"]
+  - question: "What did George make for Sophie?"
+    expected_contains: ["wooden rattle"]
+  - question: "What is Clara doing to manage stress?"
+    expected_contains: ["meditation", "breathing"]
+  - question: "Is Maya planning to be at the birth?"
+    expected_contains: ["yes", "flying down"]
+  - question: "What was the original due date vs the new one?"
+    expected_contains: ["April 15", "March 25"]

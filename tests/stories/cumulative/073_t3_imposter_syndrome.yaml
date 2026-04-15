@@ -1,0 +1,227 @@
+story_id: 73
+story_name: "Imposter Syndrome Hits"
+category: "Career"
+description: |
+  Tests memory of Maya's confidence wavering in week two.
+  She feels behind compared to colleagues who know the codebase.
+  Verifies emotional state reversal tracking and self-doubt patterns.
+duration_simulated: "4 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 10:00 AM"
+    user_input: |
+      week two and the honeymoon period is wearing off because I'm starting to realize how much I don't know about Conduit's codebase like Danny submitted a PR today that touched six different services and I had to review it and I barely understood half of it and I felt so stupid
+    expected_memory_stores:
+      - "week two"
+      - "honeymoon over"
+      - "Danny PR"
+      - "six services"
+      - "didn't understand"
+      - "feeling stupid"
+    expected_triples:
+      - ["user", "in_week", "two at Conduit"]
+      - ["user", "has_emotion", "insecure"]
+      - ["Danny", "submitted", "PR touching six services"]
+      - ["user", "reviewed", "Danny's PR"]
+      - ["user", "feels", "stupid for not understanding codebase"]
+    expected_adaptation:
+      emotion_detected: "insecure"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 2:00 PM"
+    user_input: |
+      Lily noticed I was quiet in the team meeting and after she DM'd me and said hey are you okay and I told her I feel like everyone knows so much more than me and she was like Maya I felt the exact same way my first month and it took me three months to really feel comfortable and that helped a lot actually
+    expected_memory_stores:
+      - "Lily noticed"
+      - "DM support"
+      - "imposter syndrome shared"
+      - "three months to comfort"
+      - "reassurance"
+    expected_triples:
+      - ["Lily", "noticed", "user was quiet in meeting"]
+      - ["Lily", "DMed", "user to check in"]
+      - ["user", "has_emotion", "vulnerable"]
+      - ["Lily", "shared", "felt same way first month"]
+      - ["Lily", "took", "three months to feel comfortable"]
+    expected_adaptation:
+      emotion_detected: "vulnerable"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 7:00 PM"
+    user_input: |
+      told Julian about feeling like an imposter and he was like babe you are literally the person who fought a PIP with 47 pages of evidence and won you are not an imposter and I know he's right logically but emotionally it's different when you're in it you know and Kobe put his head on my lap like he always does when I'm down
+    expected_memory_stores:
+      - "Julian PIP reference"
+      - "47 pages"
+      - "logic vs emotion"
+      - "Kobe comfort"
+    expected_triples:
+      - ["user", "told", "Julian about imposter feelings"]
+      - ["Julian", "referenced", "user's PIP fight with 47 pages"]
+      - ["user", "has_emotion", "down"]
+      - ["Kobe", "comforted", "user by putting head on lap"]
+    expected_adaptation:
+      emotion_detected: "down"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 9:00 AM"
+    user_input: |
+      Sam had our weekly one on one and I was honest with him I said I'm struggling a bit with the ramp up and he was incredible about it he said everyone goes through this and he pulled up the onboarding doc and showed me that the expected ramp up time is three months and I'm only in week two so I should give myself grace
+    expected_memory_stores:
+      - "Sam one on one"
+      - "honest about struggling"
+      - "three month ramp up"
+      - "week two"
+      - "give yourself grace"
+    expected_triples:
+      - ["user", "had_one_on_one_with", "Sam"]
+      - ["user", "admitted", "struggling with ramp up"]
+      - ["Sam", "showed", "expected ramp up is three months"]
+      - ["user", "has_emotion", "reassured"]
+      - ["Sam", "advised", "give yourself grace"]
+    expected_adaptation:
+      emotion_detected: "reassured"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 3:00 PM"
+    user_input: |
+      okay so this is embarrassing but I accidentally pushed a broken build to the staging environment because I didn't run the tests locally first and Danny caught it and fixed it before anyone else noticed and he was nice about it but I could tell he was a little annoyed and I wanted to disappear
+    expected_memory_stores:
+      - "broken build pushed"
+      - "staging environment"
+      - "didn't run tests"
+      - "Danny caught it"
+      - "Danny annoyed"
+      - "embarrassment"
+    expected_triples:
+      - ["user", "pushed", "broken build to staging"]
+      - ["user", "forgot_to", "run tests locally"]
+      - ["Danny", "caught_and_fixed", "user's broken build"]
+      - ["Danny", "has_emotion", "slightly annoyed"]
+      - ["user", "has_emotion", "embarrassed"]
+    expected_adaptation:
+      emotion_detected: "embarrassed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 10:00 AM"
+    user_input: |
+      Lily told me that Danny broke production three times in his first month so like everyone messes up and she said he's just protective of the codebase which I understand but it still feels bad when you're the new person making mistakes
+    expected_memory_stores:
+      - "Danny broke production"
+      - "three times first month"
+      - "Lily context"
+      - "Danny protective"
+      - "new person mistakes"
+    expected_triples:
+      - ["Lily", "told_user", "Danny broke production three times in first month"]
+      - ["Danny", "is_protective_of", "codebase"]
+      - ["user", "has_emotion", "comforted"]
+    expected_adaptation:
+      emotion_detected: "comforted"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 2:00 PM"
+    user_input: |
+      did Maya's manager at Conduit change or is it still the same person
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 4:00 PM"
+    user_input: |
+      oh actually important thing Sam told me today that my official manager in the system is being changed from Ross to him because Ross decided the engineering leads should directly manage their reports instead of having it all go through him so Sam is my manager now not just my tech lead
+    expected_memory_stores:
+      - "manager change"
+      - "Ross to Sam"
+      - "official manager Sam"
+      - "leads manage directly"
+      - "correction"
+    expected_triples:
+      - ["user", "manager", "Sam"]
+      - ["user", "corrected", "manager Ross → Sam"]
+      - ["Ross", "decided", "leads should manage reports directly"]
+      - ["Sam", "role_change", "tech lead → official manager"]
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 11:00 AM"
+    user_input: |
+      had a small win today I fixed a search ranking bug that had been open for two weeks and Lily left a really nice comment on my PR saying great catch and Sam thumbs-upped it and even Danny said nice fix in standup and I felt like maybe I do belong here
+    expected_memory_stores:
+      - "search ranking bug fix"
+      - "two weeks open"
+      - "Lily nice comment"
+      - "Sam thumbs up"
+      - "Danny acknowledged"
+      - "belonging feeling"
+    expected_triples:
+      - ["user", "fixed", "search ranking bug open for two weeks"]
+      - ["Lily", "commented", "great catch on user's PR"]
+      - ["Sam", "thumbs_upped", "user's PR"]
+      - ["Danny", "said", "nice fix in standup"]
+      - ["user", "has_emotion", "validated"]
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 7:00 PM"
+    user_input: |
+      told Julian about fixing the bug and he was like see you went from feeling like an imposter to fixing bugs nobody else could fix in two days and I was like well it wasn't that nobody could fix it but he's right the trajectory is good and Kobe celebrated by stealing my sock off my foot which is his thing
+    expected_memory_stores:
+      - "Julian encouragement"
+      - "trajectory positive"
+      - "Kobe sock stealing"
+    expected_triples:
+      - ["user", "told", "Julian about fixing the bug"]
+      - ["Julian", "encouraged", "user about positive trajectory"]
+      - ["user", "has_emotion", "hopeful"]
+      - ["Kobe", "celebrated_by", "stealing user's sock"]
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who is Maya's official manager at Conduit now?"
+    expected_contains: ["Sam", "Sam Okafor"]
+  - question: "Who was Maya's manager before the change?"
+    expected_contains: ["Ross"]
+  - question: "What mistake did Maya make in week two?"
+    expected_contains: ["broken build", "staging"]
+  - question: "Who caught Maya's broken build?"
+    expected_contains: ["Danny"]
+  - question: "How long is the expected ramp-up time at Conduit?"
+    expected_contains: ["three months"]
+  - question: "What bug did Maya fix for her first win?"
+    expected_contains: ["search ranking"]
+  - question: "How did the team react to Maya's bug fix?"
+    expected_contains: ["nice", "great catch", "thumbs up"]
+  - question: "Is Maya experiencing imposter syndrome?"
+    expected_contains: ["yes", "was", "struggling"]
+  - question: "What did Lily say about her own ramp-up?"
+    expected_contains: ["three months", "same way"]
+  - question: "How many times did Danny break production in his first month?"
+    expected_contains: ["three"]

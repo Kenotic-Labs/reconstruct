@@ -1,0 +1,171 @@
+story_id: 409
+story_name: "Crater Lake Plan"
+category: "Car Saga"
+description: |
+  Maya and Julian plan their first road trip in the Outback to Crater Lake.
+  Packing, route planning, Kobe logistics. Tests temporal planning and entity tracking.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      ok so Julian has been bugging me about a road trip to Crater Lake ever since we got the Outback and I finally said ok let's do it this coming weekend leave Friday after work and come back Sunday and he literally jumped up and scared Kobe
+    expected_memory_stores:
+      - "Crater Lake trip planned"
+      - "this weekend"
+      - "leave Friday return Sunday"
+      - "Julian excited"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 8:30 PM"
+    user_input: |
+      it's about a 4 and a half hour drive from Portland to Crater Lake which is doable if we leave by like 5pm Friday and we'd get there around 9:30 and I booked a cabin at the Mazama Village Campground for Friday and Saturday nights it was 180 a night which is kind of steep but whatever it's our first trip in Stella
+    expected_memory_stores:
+      - "4.5 hour drive"
+      - "leave 5pm Friday"
+      - "arrive 9:30pm"
+      - "Mazama Village Campground"
+      - "$180/night cabin"
+      - "Friday and Saturday nights"
+    expected_adaptation:
+      emotion_detected: "planning"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 12:00 PM"
+    user_input: |
+      asked Sam if I could leave at 4:30 on Friday instead of 5 to beat traffic and he was like yeah go for it and he said Crater Lake is one of his favorite places in Oregon and he was like make sure you do the Rim Drive if the road is open yet and I was like noted
+    expected_memory_stores:
+      - "leaving 4:30 Friday"
+      - "Sam approved early leave"
+      - "Rim Drive recommendation"
+      - "road might not be open"
+    expected_adaptation:
+      emotion_detected: "anticipating"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 6:00 PM"
+    user_input: |
+      making a packing list and Julian keeps adding random stuff like he wants to bring the camp stove and a french press and hiking boots and I'm like we're going for two nights not two weeks and he said you can never be too prepared and I said this is why we need the Outback's cargo space apparently
+    expected_memory_stores:
+      - "packing list"
+      - "Julian overpacking"
+      - "camp stove french press"
+      - "two nights"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 7:30 PM"
+    user_input: |
+      so Kobe is definitely coming because we're not gonna leave him and the cabin allows dogs but we need to keep him on leash on all the trails and I got him a new water bottle thing that has a built in bowl because Julian said the trails can be dry up there
+    expected_memory_stores:
+      - "Kobe coming"
+      - "cabin allows dogs"
+      - "leash required trails"
+      - "new water bottle bowl"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 10:00 AM"
+    user_input: |
+      checked the weather for Crater Lake this weekend and it's gonna be cold like highs in the low 50s and lows in the 30s which is wild because Portland is supposed to be 65 but Julian said that's normal for 7000 feet elevation so I packed extra layers and the big blanket
+    expected_memory_stores:
+      - "cold weather forecast"
+      - "50s high 30s low"
+      - "7000 feet elevation"
+      - "Portland 65 degrees"
+      - "packed extra layers"
+    expected_adaptation:
+      emotion_detected: "prepared"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 11:00 AM"
+    user_input: |
+      Clara was like why didn't you invite me and I felt bad but I said it's kind of a couples trip you know first road trip in the new car and she was like fine but next time I'm coming and Nadia said she wants to do a group trip to Bend sometime too so maybe this summer
+    expected_memory_stores:
+      - "Clara wanted to come"
+      - "couples trip"
+      - "Nadia suggests Bend"
+      - "group trip summer"
+    expected_adaptation:
+      emotion_detected: "slight guilt"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 2:00 PM"
+    user_input: |
+      how far is the drive to Crater Lake again and what campground did I book the cabin at
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 4:00 PM"
+    user_input: |
+      loading up the car now and Julian was right we need the cargo space because between his camping gear and Kobe's stuff and our bags it's completely full and Kobe is in the backseat with his blanket just staring out the window like he knows something exciting is happening
+    expected_memory_stores:
+      - "loading car"
+      - "cargo area full"
+      - "Kobe in backseat"
+      - "about to leave"
+    expected_adaptation:
+      emotion_detected: "eager"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 4:35 PM"
+    user_input: |
+      WE ARE OFF left a little late because Julian forgot his hiking poles and we had to go back but now we're on I-5 south and the Outback is eating up the highway and the adaptive cruise control is set and honestly this is the best feeling just driving south with my people Julian singing badly and Kobe sleeping already
+    expected_memory_stores:
+      - "departed late"
+      - "Julian forgot hiking poles"
+      - "I-5 south"
+      - "adaptive cruise control"
+      - "good feeling"
+    expected_adaptation:
+      emotion_detected: "blissful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where are Maya and Julian road tripping to?"
+    expected_contains: ["Crater Lake"]
+  - question: "Where are they staying at Crater Lake?"
+    expected_contains: ["Mazama Village"]
+  - question: "How much is the cabin per night?"
+    expected_contains: ["180"]
+  - question: "How long is the drive from Portland to Crater Lake?"
+    expected_contains: ["4", "half", "hour"]
+  - question: "Is Kobe coming on the trip?"
+    expected_contains: ["yes", "coming"]
+  - question: "What road did Sam recommend they drive?"
+    expected_contains: ["Rim Drive"]
+  - question: "What's the weather forecast at Crater Lake?"
+    expected_contains: ["50", "30", "cold"]
+  - question: "Who wanted to come on the trip but wasn't invited?"
+    expected_contains: ["Clara"]
+  - question: "Why did they leave late?"
+    expected_contains: ["Julian forgot", "hiking poles"]
+  - question: "What route are they taking?"
+    expected_contains: ["I-5 south"]

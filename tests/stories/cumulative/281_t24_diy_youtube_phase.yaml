@@ -1,0 +1,191 @@
+story_id: 281
+story_name: "DIY YouTube Phase"
+category: "Home"
+description: |
+  Tests memory of Maya and Julian's overconfident DIY phase before the kitchen renovation.
+  They watch 40 hours of YouTube videos and convince themselves they can do it all.
+  Establishes the initial $15K budget that will later balloon.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00 AM"
+    user_input: |
+      okay so the kitchen renovation fund is finally at $15K and we're ready to start and Julian and I have decided we're doing this ourselves because we watched like 40 hours of YouTube renovation videos and honestly how hard can it be right
+    expected_memory_stores:
+      - "kitchen fund $15K"
+      - "DIY decision"
+      - "40 hours YouTube"
+      - "overconfident"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 11:00 AM"
+    user_input: |
+      our plan is demo first which every YouTuber says is the fun part then new cabinets from IKEA which Julian researched and said are actually good quality for the price then butcher block counters which we agreed on then paint and new backsplash tile budget is $15K and Julian made a beautiful project plan in his design style
+    expected_memory_stores:
+      - "demo first"
+      - "IKEA cabinets"
+      - "butcher block counters"
+      - "paint"
+      - "backsplash tile"
+      - "budget $15K"
+      - "Julian project plan"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Sunday 10:00 AM"
+    user_input: |
+      went to Home Depot and bought a sledgehammer a pry bar safety goggles a respirator mask and those heavy contractor trash bags and Julian also got a new drill which we probably didn't need but he was like it's an investment
+    expected_memory_stores:
+      - "Home Depot"
+      - "sledgehammer"
+      - "pry bar"
+      - "safety gear"
+      - "contractor bags"
+      - "Julian new drill"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Sunday 3:00 PM"
+    user_input: |
+      watched three more videos specifically about cabinet removal and this one guy on YouTube called The Honest Carpenter was really good he showed how to disconnect the plumbing first and label everything and take photos before you demo so you remember what goes where
+    expected_memory_stores:
+      - "The Honest Carpenter"
+      - "cabinet removal video"
+      - "disconnect plumbing first"
+      - "label everything"
+      - "take photos before"
+    expected_adaptation:
+      emotion_detected: "studious"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 7:00 PM"
+    user_input: |
+      Nadia was like are you seriously doing a kitchen demo by yourselves and I was like yeah and she was like you're crazy but also can I come watch and I was like absolutely we're starting Saturday bring snacks
+    expected_memory_stores:
+      - "Nadia skeptical"
+      - "Nadia coming to watch"
+      - "starting Saturday"
+      - "bring snacks"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      Eddie Torres heard about our DIY plan and called Julian and was like I love the enthusiasm but please please call me before you touch anything structural and Julian was like we're not touching anything structural and Eddie was like you'd be surprised what's structural in a kitchen
+    expected_memory_stores:
+      - "Eddie Torres warning"
+      - "don't touch structural"
+      - "surprises in kitchen"
+      - "Eddie concerned"
+    expected_adaptation:
+      emotion_detected: "brushing off"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 8:00 PM"
+    user_input: |
+      ordered the IKEA cabinets online and they'll be delivered in three weeks which gives us time to demo and prep and the cabinet order was $4,200 for like 12 cabinets including uppers and lowers and Julian designed the layout himself using IKEA's kitchen planner tool
+    expected_memory_stores:
+      - "IKEA cabinets ordered"
+      - "$4,200"
+      - "12 cabinets"
+      - "uppers and lowers"
+      - "three weeks delivery"
+      - "Julian designed layout"
+      - "IKEA kitchen planner"
+    expected_adaptation:
+      emotion_detected: "committed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 6:00 PM"
+    user_input: |
+      the butcher block counters are from a place called Lumber Liquidators and they're $1,800 for the whole kitchen which is like a quarter of what quartz would cost and Julian found this video about sealing them with mineral oil and they look gorgeous when done right
+    expected_memory_stores:
+      - "butcher block counters"
+      - "Lumber Liquidators"
+      - "$1,800"
+      - "quarter of quartz cost"
+      - "mineral oil sealing"
+    expected_adaptation:
+      emotion_detected: "resourceful"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 9:00 PM"
+    user_input: |
+      so our budget breakdown is: IKEA cabinets $4,200, counters $1,800, backsplash tile about $600, paint $200, plumbing hookup we're gonna try ourselves but budgeting $500 for a plumber if needed, new faucet and sink $400, lighting $300, and misc $500 so that's about $8,500 and we have $15K so we have buffer
+    expected_memory_stores:
+      - "budget breakdown"
+      - "cabinets $4,200"
+      - "counters $1,800"
+      - "tile $600"
+      - "paint $200"
+      - "plumbing $500"
+      - "faucet sink $400"
+      - "lighting $300"
+      - "misc $500"
+      - "total $8,500"
+      - "$15K budget"
+      - "$6,500 buffer"
+    expected_adaptation:
+      emotion_detected: "prepared"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 7:00 AM"
+    user_input: |
+      IT'S DEMO DAY Julian put on a bandana and picked up the sledgehammer and struck a pose and I took a photo and he looks ridiculous and I love him and Nadia's bringing coffee and donuts and we're about to destroy this 1987 kitchen LET'S GO
+    expected_memory_stores:
+      - "demo day"
+      - "Julian bandana"
+      - "sledgehammer pose"
+      - "Nadia bringing coffee and donuts"
+      - "1987 kitchen"
+      - "excited"
+    expected_adaptation:
+      emotion_detected: "pumped"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is the kitchen renovation budget?"
+    expected_contains: ["15"]
+  - question: "Where are the cabinets from?"
+    expected_contains: ["IKEA"]
+  - question: "How much are the cabinets?"
+    expected_contains: ["4,200", "4200"]
+  - question: "What type of countertops are they using?"
+    expected_contains: ["butcher block"]
+  - question: "Where are the countertops from?"
+    expected_contains: ["Lumber Liquidators"]
+  - question: "Who warned them about structural concerns?"
+    expected_contains: ["Eddie Torres"]
+  - question: "What YouTube channel did Maya find helpful?"
+    expected_contains: ["Honest Carpenter"]
+  - question: "How many hours of YouTube did they watch?"
+    expected_contains: ["40"]
+  - question: "Who designed the kitchen layout?"
+    expected_contains: ["Julian"]
+  - question: "What is demo day?"
+    expected_contains: ["demolish", "kitchen", "remove", "cabinets"]

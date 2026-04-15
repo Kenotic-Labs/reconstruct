@@ -1,0 +1,180 @@
+story_id: 242
+story_name: "First Therapy Session"
+category: "Mental Health"
+description: |
+  Tests system capturing therapy intake and initial diagnosis. Maya sees Dr. Helen Tate
+  for the first time. GAD diagnosed initially. Verifies medical professional tracking
+  and diagnostic detail capture.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 2:00 PM"
+    user_input: |
+      sitting in the waiting room at Dr. Tate's office on like Belmont and it's this calm little space with plants and soft music and I'm filling out the intake form and there are so many questions about anxiety and depression and sleep and I'm checking yes to way too many of them
+    expected_memory_stores:
+      - "Dr. Tate's office"
+      - "Belmont"
+      - "waiting room"
+      - "intake form"
+      - "saying yes to too many"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 2:30 PM"
+    user_input: |
+      Dr. Tate is really nice she's like mid forties with glasses and this calm voice and she asked me to just tell her what's been going on and I started talking and I couldn't stop like the PIP and grandpa and the knee and the allergy and the ER and moving and the wedding and I was like wow when I say it all out loud it's a LOT
+    expected_memory_stores:
+      - "Dr. Tate nice"
+      - "mid forties glasses"
+      - "calm voice"
+      - "listed everything"
+      - "PIP grandpa knee allergy ER moving wedding"
+      - "a lot when said out loud"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 3:00 PM"
+    user_input: |
+      she said it sounds like I've had a cascade of major life stressors in a very short period and that my anxiety response is actually pretty normal given what I've been through and she said she thinks it might be generalized anxiety disorder which she called GAD
+    expected_memory_stores:
+      - "cascade of stressors"
+      - "anxiety response normal"
+      - "generalized anxiety disorder"
+      - "GAD"
+      - "initial diagnosis"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 3:15 PM"
+    user_input: |
+      she asked about the panic attacks and the insomnia and the racing thoughts and she said those are all classic anxiety symptoms and she asked if I've ever experienced this before and I said not like this and she said that's actually important information
+    expected_memory_stores:
+      - "panic attacks discussed"
+      - "insomnia"
+      - "racing thoughts"
+      - "classic anxiety"
+      - "never this bad before"
+      - "important information"
+    expected_adaptation:
+      emotion_detected: "seen"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 3:30 PM"
+    user_input: |
+      she recommended weekly sessions to start and she said she wants to try something called CBT which is cognitive behavioral therapy and it's about identifying thought patterns and challenging them and she also said we should talk about whether medication might help
+    expected_memory_stores:
+      - "weekly sessions"
+      - "CBT"
+      - "cognitive behavioral therapy"
+      - "thought patterns"
+      - "challenging them"
+      - "medication discussion"
+    expected_adaptation:
+      emotion_detected: "cautious"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 4:00 PM"
+    user_input: |
+      what did Dr. Tate diagnose me with and what therapy approach did she suggest
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 5:00 PM"
+    user_input: |
+      told Julian about the session and he was so relieved I went and I told him about GAD and CBT and he said babe I'm proud of you for doing this and I said don't make me cry I just stopped crying at the therapist
+    expected_memory_stores:
+      - "told Julian"
+      - "Julian relieved"
+      - "told about GAD CBT"
+      - "proud of you"
+      - "don't make me cry"
+    expected_adaptation:
+      emotion_detected: "vulnerable"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 7:00 PM"
+    user_input: |
+      she gave me this homework thing where I have to write down every time I have an anxious thought and then write what triggered it and then write a more balanced version of the thought and it sounds simple but it's actually really hard because my anxious thoughts feel so TRUE
+    expected_memory_stores:
+      - "homework assignment"
+      - "thought log"
+      - "trigger identification"
+      - "balanced alternative"
+      - "anxious thoughts feel true"
+    expected_adaptation:
+      emotion_detected: "resistant"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 9:00 PM"
+    user_input: |
+      tried the thought log tonight I wrote down I'm going to lose my job and the trigger was the PIP and the balanced version was I've been a good employee for years and a PIP is a chance to improve not a guarantee of failure and writing it helped a little bit actually
+    expected_memory_stores:
+      - "first thought log entry"
+      - "lose my job thought"
+      - "PIP trigger"
+      - "balanced version"
+      - "chance to improve"
+      - "helped a little"
+    expected_adaptation:
+      emotion_detected: "trying"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 11:00 PM"
+    user_input: |
+      slept better tonight not great but better than the last week and I think just having someone say what you're feeling is normal and we can work on it made a difference like I'm not broken I'm just overwhelmed and that distinction matters
+    expected_memory_stores:
+      - "slept better"
+      - "not great but better"
+      - "not broken just overwhelmed"
+      - "distinction matters"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who is Maya's therapist?"
+    expected_contains: ["Dr. Helen Tate"]
+  - question: "What was Maya initially diagnosed with?"
+    expected_contains: ["GAD", "generalized anxiety disorder"]
+  - question: "What therapy approach is being used?"
+    expected_contains: ["CBT", "cognitive behavioral therapy"]
+  - question: "What homework did Dr. Tate give Maya?"
+    expected_contains: ["thought log", "anxious thought", "balanced version"]
+  - question: "How often are Maya's therapy sessions?"
+    expected_contains: ["weekly"]
+  - question: "Where is Dr. Tate's office?"
+    expected_contains: ["Belmont"]
+  - question: "What stressors did Maya list?"
+    expected_contains: ["PIP", "grandpa", "knee", "allergy", "moving", "wedding"]
+  - question: "Has Maya experienced anxiety like this before?"
+    expected_contains: ["no", "not like this"]
+  - question: "Did the thought log help?"
+    expected_contains: ["yes", "a little"]
+  - question: "How is Maya sleeping after the first session?"
+    expected_contains: ["better", "not great but better"]

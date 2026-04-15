@@ -1,0 +1,187 @@
+story_id: 484
+story_name: "Only Three People Show"
+category: "Book Club"
+description: |
+  Tests memory of book club hitting its low point with only three attendees.
+  Establishes crisis moment, Maya's commitment tested.
+  Verifies system captures group dissolution patterns.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 6:30 PM"
+    user_input: |
+      okay so third book club meeting and we picked The House in the Cerulean Sea by TJ Klune which is shorter like 280 pages and I sent discussion questions last week and I made themed snacks like little sea themed cookies and blue lemonade and Julian helped me decorate and I was really trying to make this special
+    expected_memory_stores:
+      - "third meeting"
+      - "House in the Cerulean Sea"
+      - "TJ Klune"
+      - "280 pages"
+      - "discussion questions sent"
+      - "sea themed cookies"
+      - "blue lemonade"
+      - "Julian helped decorate"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 7:00 PM"
+    user_input: |
+      so it's 7 and only Nadia is here and she texted Omar and he said he's stuck at work and can't make it and then Marcus texted that he forgot and has a dinner thing and Lily said she's sick which I think is real because she sounded rough on Slack yesterday and I'm just standing here with my sea cookies looking at an empty room
+    expected_memory_stores:
+      - "7 PM only Nadia"
+      - "Omar stuck at work"
+      - "Marcus forgot"
+      - "Lily sick"
+      - "sea cookies empty room"
+      - "three no-shows"
+    expected_adaptation:
+      emotion_detected: "deflated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 7:15 PM"
+    user_input: |
+      Tessa showed up at like 7:15 apologizing for being late and she saw my face and was like oh no how many people are coming and I said it's just us three and she said okay that's fine we'll have a great discussion and Nadia said yeah three is intimate right and I was like you guys don't have to pretend this isn't disappointing
+    expected_memory_stores:
+      - "Tessa arrived late"
+      - "only three people"
+      - "Tessa reassured"
+      - "Nadia positive spin"
+      - "Maya disappointed"
+    expected_adaptation:
+      emotion_detected: "defeated"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 7:30 PM"
+    user_input: |
+      okay but then we actually started talking about the book and you know what it was really good like three people meant everyone could talk more and Tessa had these amazing insights about the found family theme and Nadia connected it to her own experience moving from Ghana as a kid and finding community here and it got really personal and real
+    expected_memory_stores:
+      - "good discussion anyway"
+      - "everyone talked more"
+      - "Tessa found family theme"
+      - "Nadia from Ghana"
+      - "moved as kid"
+      - "finding community"
+      - "personal and real"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 8:00 PM"
+    user_input: |
+      the sea cookies were a hit by the way like Tessa said these are adorable and Nadia ate like eight of them and we were drinking the blue lemonade and laughing and I said I also put guitar practice on hold this week to finish the book and Nadia goes you're still doing guitar and I said yes I am very much doing guitar and she gave me this knowing look
+    expected_memory_stores:
+      - "sea cookies hit"
+      - "Tessa said adorable"
+      - "Nadia ate eight"
+      - "blue lemonade"
+      - "guitar on hold for book"
+      - "Nadia knowing look"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 8:30 PM"
+    user_input: |
+      I brought up the attendance problem and said look I made changes after last time shorter book themed snacks discussion questions ahead of time and still only three people showed and maybe this just isn't going to work and Tessa said no don't give up she said her other book club had the same problem and they fixed it by being really consistent and personal about it
+    expected_memory_stores:
+      - "attendance problem discussed"
+      - "changes didn't help"
+      - "Maya considered quitting"
+      - "Tessa said don't give up"
+      - "Tessa's other book club"
+      - "consistency and personal touch"
+    expected_adaptation:
+      emotion_detected: "discouraged"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 9:00 PM"
+    user_input: |
+      Nadia suggested we text people individually instead of just posting in the group chat because people ignore group chats and also maybe we should pick books that have movies or shows so people who don't finish can still participate and Tessa said also the themed snacks are actually a draw because who doesn't want themed snacks and I was like okay so the plan is personal invites shorter books themed snacks and grace for people who don't finish
+    expected_memory_stores:
+      - "individual texts"
+      - "not just group chat"
+      - "books with adaptations"
+      - "themed snacks as draw"
+      - "grace for not finishing"
+      - "restructured plan"
+    expected_adaptation:
+      emotion_detected: "strategic"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 9:30 PM"
+    user_input: |
+      how many people came to the third book club meeting and what book was it
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 10:00 PM"
+    user_input: |
+      Tessa and Nadia left and both hugged me and Tessa said this book club matters Maya don't let it die and Nadia said she'll personally drag Omar to the next one and I believe her and honestly even though only three people came tonight the conversation was maybe the best we've had so maybe it's not about numbers it's about depth
+    expected_memory_stores:
+      - "Tessa said matters"
+      - "Nadia will drag Omar"
+      - "best conversation yet"
+      - "not about numbers"
+      - "about depth"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:30 PM"
+    user_input: |
+      Julian found me eating sea cookies alone in the kitchen and he said how was it and I said only three people came and he hugged me and said that sucks and then he said but you're not gonna quit are you and I said no I'm going to make this work because giving up isn't an option this matters to me and Kobe ate one of the sea cookies off the table and honestly he deserved it
+    expected_memory_stores:
+      - "Julian found Maya in kitchen"
+      - "three people came"
+      - "Julian hugged"
+      - "not going to quit"
+      - "matters to Maya"
+      - "Kobe ate cookie"
+    expected_adaptation:
+      emotion_detected: "resolved"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How many people came to the third book club?"
+    expected_contains: ["three"]
+  - question: "What book did they discuss?"
+    expected_contains: ["House in the Cerulean Sea"]
+  - question: "Who didn't show up?"
+    expected_contains: ["Omar", "Marcus", "Lily"]
+  - question: "What themed snacks did Maya make?"
+    expected_contains: ["sea cookies", "blue lemonade"]
+  - question: "What was special about the small group discussion?"
+    expected_contains: ["deeper", "personal", "best"]
+  - question: "Where is Nadia originally from?"
+    expected_contains: ["Ghana"]
+  - question: "What changes were proposed for future meetings?"
+    expected_contains: ["personal", "text", "shorter books", "themed snacks"]
+  - question: "What did Tessa say about book club attendance?"
+    expected_contains: ["consistency", "don't give up"]
+  - question: "Is Maya going to quit book club?"
+    expected_contains: ["no"]
+  - question: "What was the theme from the book that resonated?"
+    expected_contains: ["found family"]

@@ -1,0 +1,177 @@
+story_id: 390
+story_name: "Meditation as Anchor"
+category: "Mental Health"
+description: |
+  Tests memory of meditation becoming Maya's foundational daily anchor.
+  Caps off the meditation practice thread with integration into all life areas.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 AM"
+    user_input: |
+      75 day streak and I'm thinking about how meditation connects to everything else I do like cooking is meditation because I'm focused and present and climbing is meditation because you can't think about anything else and even coding sometimes
+    expected_memory_stores:
+      - "75 day streak"
+      - "meditation connects everything"
+      - "cooking as meditation"
+      - "climbing as meditation"
+      - "coding sometimes"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 8:00 AM"
+    user_input: |
+      I realize the reason I went from hating meditation to loving it is because Dr Tate didn't give up on recommending it even after I deflected five times and that's a lesson about persistence and also about trusting people who know you
+    expected_memory_stores:
+      - "hating to loving"
+      - "Dr. Tate persistent"
+      - "deflected five times"
+      - "trust lesson"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 12:00 PM"
+    user_input: |
+      stressful meeting today and I used a technique from the retreat where you ground yourself by feeling your feet on the floor and noticing five things you can see and it worked in like 30 seconds and no one even knew I was doing it
+    expected_memory_stores:
+      - "grounding technique"
+      - "feet on floor"
+      - "five things see"
+      - "retreat technique"
+      - "30 seconds worked"
+      - "invisible practice"
+    expected_adaptation:
+      emotion_detected: "competent"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 5:00 PM"
+    user_input: |
+      walked past someone meditating at Sellwood on my lunch walk and we made eye contact and nodded at each other like members of a secret club and Julian would've laughed at that but it felt like a real moment of connection
+    expected_memory_stores:
+      - "saw meditator at Sellwood"
+      - "eye contact nod"
+      - "secret club feeling"
+      - "connection moment"
+    expected_adaptation:
+      emotion_detected: "belonging"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 7:00 PM"
+    user_input: |
+      I'm now doing 15 minutes sitting morning with Julian, walking meditation at Sellwood most evenings solo, and sometimes a 5 minute body scan before bed and Julian said our house feels different now like the energy is calmer and I think he's right
+    expected_memory_stores:
+      - "full practice schedule"
+      - "15 min morning with Julian"
+      - "evening walks solo"
+      - "5 min body scan bedtime"
+      - "house energy calmer"
+    expected_adaptation:
+      emotion_detected: "established"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 8:00 PM"
+    user_input: |
+      Dr Pham reduced my anxiety medication by half at my last visit and she said whatever I'm doing outside of medication is clearly working and I told her about the meditation and she was like honestly more of my patients should try this
+    expected_memory_stores:
+      - "Dr. Pham reduced medication"
+      - "reduced by half"
+      - "working outside medication"
+      - "told about meditation"
+      - "Dr. Pham endorsed"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Monday 9:00 PM"
+    user_input: |
+      I told mom about the meditation and the medication reduction and she cried and said she's been worried about me being on medication and she's happy I found something natural that helps and I wanted to say it's not instead of medication it's alongside but I just let her be happy
+    expected_memory_stores:
+      - "told Vivian"
+      - "medication worry"
+      - "Vivian cried happy"
+      - "natural alternative"
+      - "alongside not instead"
+      - "let mom be happy"
+    expected_adaptation:
+      emotion_detected: "wise"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Monday 9:30 PM"
+    user_input: |
+      what is Maya's complete daily meditation practice now
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 10:00 PM"
+    user_input: |
+      looking back at this whole journey from Dr Tate suggesting it to me being like no to the two minutes of suffering to walking meditation to Breitenbush to Grandpa Wei to Julian joining to medication reduction it's honestly the most transformative thing I've done in years
+    expected_memory_stores:
+      - "full journey reflection"
+      - "Dr. Tate to Breitenbush"
+      - "Grandpa Wei"
+      - "Julian joining"
+      - "medication reduction"
+      - "most transformative"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Monday 10:30 PM"
+    user_input: |
+      Julian and I did our bedtime body scan together tonight and Kobe was sleeping between us and the house was quiet and I thought if someone told me three months ago I'd be a meditation person I would've laughed but here I am and I wouldn't change it
+    expected_memory_stores:
+      - "bedtime body scan"
+      - "Julian and Kobe"
+      - "house quiet"
+      - "three months transformation"
+      - "wouldn't change it"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya's complete meditation routine?"
+    expected_contains: ["15 minutes morning", "walking evening", "body scan bed"]
+  - question: "How long has Maya been meditating?"
+    expected_contains: ["75 days"]
+  - question: "Has Maya's anxiety medication changed?"
+    expected_contains: ["reduced", "half"]
+  - question: "Who reduced Maya's medication?"
+    expected_contains: ["Dr. Pham"]
+  - question: "What grounding technique does Maya use at work?"
+    expected_contains: ["feet", "floor", "five things"]
+  - question: "How did the meditation journey start?"
+    expected_contains: ["Dr. Tate", "suggested", "five times"]
+  - question: "What was the biggest emotional breakthrough?"
+    expected_contains: ["Grandpa Wei", "Breitenbush"]
+  - question: "Is Julian meditating regularly now?"
+    expected_contains: ["yes", "morning"]
+  - question: "What does Maya call meditation in relation to her life?"
+    expected_contains: ["anchor", "transformative"]
+  - question: "Does Maya view meditation as replacing medication?"
+    expected_contains: ["no", "alongside"]

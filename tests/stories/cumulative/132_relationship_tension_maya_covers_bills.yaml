@@ -1,0 +1,176 @@
+story_id: 132
+story_name: "Maya Covers More Bills"
+category: "Relationships"
+description: |
+  Tests whether the system tracks the specific financial details as Maya takes on more
+  bills, the growing imbalance, and the correction when income amounts change. Tracks
+  emotional erosion over time.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 6:00pm"
+    user_input: |
+      so it's been like two weeks and Julian's income hasn't recovered. he got one more small gig, a website banner for like 200 bucks, but he's still way under. I paid the electric bill and the internet this month too on top of rent. that's an extra 180
+    expected_memory_stores:
+      - "two weeks"
+      - "website banner 200"
+      - "Maya paid electric and internet"
+      - "extra 180"
+      - "income not recovered"
+    expected_adaptation:
+      emotion_detected: "strained"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 12:00pm"
+    user_input: |
+      Julian bought groceries today with his own money which was nice but he also bought like premium stuff? organic everything and fancy cheese and I'm sitting here covering rent and he's buying $8 brie. I didn't say anything but I noticed
+    expected_memory_stores:
+      - "Julian bought groceries"
+      - "premium organic"
+      - "fancy cheese"
+      - "$8 brie"
+      - "Maya noticed spending"
+    expected_adaptation:
+      emotion_detected: "irritated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 9:00am"
+    user_input: |
+      I keep a mental tab of what I'm spending and it's not healthy but I can't stop. rent 2375, electric 95, internet 85, last two dinners out 120 total. that's like 2675 that should be split but isn't. and Julian owes me from last month too
+    expected_memory_stores:
+      - "mental tab"
+      - "rent 2375"
+      - "electric 95"
+      - "internet 85"
+      - "dinners 120"
+      - "total 2675"
+      - "owed from last month"
+    expected_adaptation:
+      emotion_detected: "resentful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 4:00pm"
+    user_input: |
+      actually I miscalculated, the electric was 105 not 95. I looked at the bill again. so total is more like 2685. anyway the exact number doesn't matter it's the principle of the thing
+    expected_memory_stores:
+      - "correction"
+      - "electric 105 not 95"
+      - "total 2685"
+      - "principle matters"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 5:00pm"
+    user_input: |
+      Dr. Tate asked me in therapy today if I've talked to Julian about how I'm feeling about the money and I was like no because I don't want him to feel bad. and she goes Maya whose comfort are you prioritizing right now, yours or his? ouch but fair
+    expected_memory_stores:
+      - "Dr. Tate therapy"
+      - "haven't talked to Julian"
+      - "protecting Julian"
+      - "prioritizing his comfort"
+    expected_adaptation:
+      emotion_detected: "called out"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:00am"
+    user_input: |
+      Julian got a bigger gig this week though, a branding package for a new restaurant for 1500. so his income is picking back up. but the damage is kind of done in terms of how I'm feeling? like the resentment doesn't just disappear because money comes in
+    expected_memory_stores:
+      - "branding package"
+      - "restaurant client"
+      - "1500"
+      - "income recovering"
+      - "resentment remains"
+    expected_adaptation:
+      emotion_detected: "conflicted"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 3:00pm"
+    user_input: |
+      when did Julian start making less money from freelance
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 11:00am"
+    user_input: |
+      Julian offered to pay for brunch today and I let him but I felt weird about it? like I was keeping score and one brunch doesn't equal 2685 dollars of bills. I hate that I'm thinking this way but I can't stop
+    expected_memory_stores:
+      - "Julian paid brunch"
+      - "scorekeeping"
+      - "doesn't equal bills"
+      - "can't stop tracking"
+    expected_adaptation:
+      emotion_detected: "guilty"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 5:00pm"
+    user_input: |
+      walked Kobe by myself and just stewed. like the issue isn't the money exactly, it's that I don't feel like we're equal partners right now. I'm carrying more and he doesn't even seem to fully realize it. he said thank you but thank you doesn't split a bill
+    expected_memory_stores:
+      - "Kobe walk alone"
+      - "not equal partners"
+      - "carrying more"
+      - "Julian doesn't realize"
+      - "thank you isn't enough"
+    expected_adaptation:
+      emotion_detected: "lonely"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 9:00pm"
+    user_input: |
+      lying in bed next to Julian and he's asleep and I'm just staring at the ceiling. I know I need to talk to him about this. Dr. Tate said so. Clara said so. I said so. but every time I try to bring it up I chicken out because I don't want to make him feel small. but I'm making myself smaller by staying quiet
+    expected_memory_stores:
+      - "insomnia"
+      - "need to talk"
+      - "avoiding conversation"
+      - "making herself smaller"
+      - "Dr. Tate and Clara both said"
+    expected_adaptation:
+      emotion_detected: "suffocated"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How much has Maya spent covering shared bills?"
+    expected_contains: ["2685"]
+  - question: "What was the corrected electric bill amount?"
+    expected_contains: ["105"]
+  - question: "What new client did Julian get?"
+    expected_contains: ["restaurant", "branding", "1500"]
+  - question: "Is Maya's resentment resolved by Julian's income recovering?"
+    expected_contains: ["no", "resentment remains"]
+  - question: "What did Dr. Tate ask Maya about the money situation?"
+    expected_contains: ["talked to Julian", "whose comfort"]
+  - question: "What does Maya feel is the real issue?"
+    expected_contains: ["equal partners", "not equal"]
+  - question: "What is Maya doing instead of talking to Julian?"
+    expected_contains: ["avoiding", "chicken out"]
+  - question: "Why doesn't Maya bring it up?"
+    expected_contains: ["feel small", "feel bad"]
+  - question: "What spending bothered Maya about Julian?"
+    expected_contains: ["organic", "brie", "premium"]
+  - question: "Who has told Maya to talk to Julian?"
+    expected_contains: ["Dr. Tate", "Clara"]

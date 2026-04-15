@@ -1,0 +1,168 @@
+story_id: 355
+story_name: "Improving Over Weeks"
+category: "Food and Cooking"
+description: |
+  Tests memory of Maya's gradual improvement at ramen making over multiple attempts.
+  Verifies temporal tracking of progressive skill development.
+duration_simulated: "3 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 7:00 PM"
+    user_input: |
+      okay second attempt done and it's SO much better like the broth is actually cloudy this time not full white yet but cloudy which is progress and I kept the heat on high the whole time like Kenji said and it made a huge difference
+    expected_memory_stores:
+      - "second attempt"
+      - "broth cloudy"
+      - "improvement"
+      - "high heat worked"
+    expected_adaptation:
+      emotion_detected: "encouraged"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 8:30 PM"
+    user_input: |
+      the eggs were perfect this time six and a half minutes exactly and the yolk was that gorgeous jammy orange and Julian was like whoa these are actually legit and even Kobe was staring at us eat with his most pathetic face
+    expected_memory_stores:
+      - "eggs perfect"
+      - "jammy yolk"
+      - "Julian impressed"
+      - "Kobe begging"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Next Saturday 6:00 PM"
+    user_input: |
+      third attempt and I think I cracked the tare finally like the ratio is two parts soy to one part mirin to one part sake with some kombu steeped in it and it's just the right amount of savory without being salty
+    expected_memory_stores:
+      - "third attempt"
+      - "tare ratio cracked"
+      - "soy mirin sake kombu"
+      - "balanced flavor"
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Next Saturday 8:00 PM"
+    user_input: |
+      I think the broth still needs work though like it's getting milkier each time but it's not that rich thick spoon-coating texture I had at Fuunji and I wonder if I need to add pork fatback or something to boost it
+    expected_memory_stores:
+      - "broth improving not there yet"
+      - "needs more richness"
+      - "Fuunji comparison"
+      - "pork fatback idea"
+    expected_adaptation:
+      emotion_detected: "analytical"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Following Wednesday 7:00 PM"
+    user_input: |
+      tried the pork fatback in attempt four tonight just a weeknight quickie version using leftover broth from Saturday and oh my god that was the missing piece the fat emulsifies into the broth and makes it creamy and thick and I literally texted Lily a photo and she was like that looks professional
+    expected_memory_stores:
+      - "attempt four"
+      - "pork fatback worked"
+      - "fat emulsification"
+      - "weeknight version"
+      - "Lily impressed"
+    expected_adaptation:
+      emotion_detected: "thrilled"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Following Saturday 7:30 PM"
+    user_input: |
+      fifth attempt and I nailed the chashu this time slow braised the pork belly for three hours in soy sake mirin and sugar and it just falls apart with a fork and Julian ate like three extra slices just on their own
+    expected_memory_stores:
+      - "fifth attempt"
+      - "chashu perfected"
+      - "three hour braise"
+      - "pork belly"
+      - "Julian ate extra"
+    expected_adaptation:
+      emotion_detected: "triumphant"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Following Saturday 9:00 PM"
+    user_input: |
+      I think I'm actually getting pretty good at this like not restaurant quality yet but like really solid home ramen and Julian said it honestly rivals some of the ramen places in Portland which might be an exaggeration but it made me so happy
+    expected_memory_stores:
+      - "solid home ramen"
+      - "Julian comparison to restaurants"
+      - "Maya happy with progress"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Following Sunday 10:00 AM"
+    user_input: |
+      how many times has Maya attempted ramen now and how has each attempt gone
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Following Sunday 2:00 PM"
+    user_input: |
+      Clara tried my latest batch and she literally said this is better than the ramen place near her hospital and Tyler had two bowls and even baby Sophie was staring at it from her high chair and Clara was like do NOT give that baby ramen
+    expected_memory_stores:
+      - "Clara loved it"
+      - "Tyler two bowls"
+      - "Sophie staring"
+      - "better than hospital ramen place"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Following Sunday 5:00 PM"
+    user_input: |
+      I'm thinking of starting to have people over for ramen like making it a regular thing you know like Saturday ramen nights or something because it's actually kinda fun to cook for people and see their faces when they try it
+    expected_memory_stores:
+      - "dinner party idea"
+      - "Saturday ramen nights"
+      - "cooking for others"
+      - "enjoys reactions"
+    expected_adaptation:
+      emotion_detected: "inspired"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How many ramen attempts has Maya made?"
+    expected_contains: ["five"]
+  - question: "What was the breakthrough for the broth?"
+    expected_contains: ["pork fatback", "emulsif"]
+  - question: "What is Maya's tare ratio?"
+    expected_contains: ["soy", "mirin", "sake"]
+  - question: "How did Maya perfect the chashu?"
+    expected_contains: ["slow braise", "three hours", "pork belly"]
+  - question: "How long to cook soft boiled eggs?"
+    expected_contains: ["six", "half", "minutes"]
+  - question: "What did Clara say about the ramen?"
+    expected_contains: ["better", "ramen place"]
+  - question: "What is Maya planning next for ramen?"
+    expected_contains: ["dinner", "people over", "Saturday"]
+  - question: "How has the broth quality progressed?"
+    expected_contains: ["cloudy", "milkier", "creamy", "thick"]
+  - question: "Who has tried Maya's ramen?"
+    expected_contains: ["Julian", "Clara", "Tyler", "Lily"]
+  - question: "What did Julian say about Maya's ramen?"
+    expected_contains: ["rivals", "Portland", "restaurants"]

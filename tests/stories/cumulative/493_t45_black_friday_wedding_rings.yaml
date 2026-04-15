@@ -1,0 +1,187 @@
+story_id: 493
+story_name: "Black Friday Wedding Rings"
+category: "Holiday Season"
+description: |
+  Tests memory of Maya and Julian buying wedding rings on Black Friday.
+  Establishes wedding ring details, the shopping experience.
+  Verifies system captures milestone purchases and preferences.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 9:00 AM"
+    user_input: |
+      okay so everyone does Black Friday shopping for TVs and whatever but Julian and I are buying our WEDDING RINGS today because there's a sale at this jeweler on Hawthorne called Gilt and they have 20 percent off and Julian was like this is the most us thing ever buying wedding rings on Black Friday between a breakfast burrito place and a vintage record store
+    expected_memory_stores:
+      - "Black Friday"
+      - "buying wedding rings"
+      - "Gilt jeweler"
+      - "Hawthorne"
+      - "20 percent off"
+      - "most us thing ever"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 10:00 AM"
+    user_input: |
+      we're at Gilt now and the woman helping us is named Rosa and she's so kind and patient and she's showing us different bands and I want something simple like a thin gold band because I work with my hands at a keyboard all day and I don't want anything bulky and Julian wants a brushed titanium band because he thinks it looks like a lightsaber handle
+    expected_memory_stores:
+      - "at Gilt"
+      - "Rosa helping"
+      - "Maya thin gold band"
+      - "simple for keyboard work"
+      - "Julian brushed titanium"
+      - "lightsaber handle"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 10:30 AM"
+    user_input: |
+      Rosa asked if we want engravings and Julian immediately said yes and he wants the coordinates of the spot where we first kissed which was at Burnside Bridge in Portland and I was like how do you even know those coordinates and he pulled out his phone and showed me he's had them saved and I was like you're insane and also that's the most romantic thing ever
+    expected_memory_stores:
+      - "engravings"
+      - "Julian wants coordinates"
+      - "Burnside Bridge first kiss"
+      - "coordinates saved in phone"
+      - "romantic gesture"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 11:00 AM"
+    user_input: |
+      I decided my engraving will be the date we met plus a tiny music note because of the guitar thing and Grandpa Wei and Julian doesn't know about the wedding song obviously so the music note just seems like a sweet personal touch and Rosa said she can do that and the total with the discount came to about 1800 for both rings which is actually really reasonable
+    expected_memory_stores:
+      - "Maya engraving"
+      - "date they met plus music note"
+      - "Grandpa Wei connection"
+      - "wedding song secret"
+      - "Rosa can do engraving"
+      - "1800 total both rings"
+      - "with discount"
+    expected_adaptation:
+      emotion_detected: "sentimental"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 11:30 AM"
+    user_input: |
+      we tried on the rings and Julian's titanium band fits perfectly on the first try and mine needed to be sized down a half size so they'll have it ready in two weeks and when I saw Julian with the ring on his finger I got this flash forward of our wedding day and I almost started crying in the store and Rosa handed me a tissue and said that happens all the time
+    expected_memory_stores:
+      - "tried on rings"
+      - "Julian fits first try"
+      - "Maya sized down half"
+      - "ready two weeks"
+      - "Julian with ring vision"
+      - "almost cried"
+      - "Rosa tissue"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 12:00 PM"
+    user_input: |
+      we celebrated with breakfast burritos at this place next door called Harlow and Julian kept looking at his hand imagining the ring and I was like you're gonna be that husband who touches his ring all day and he said absolutely and then we walked around Hawthorne and went into the record store and he bought a vinyl of the Goonies soundtrack because of course he did
+    expected_memory_stores:
+      - "Harlow breakfast burritos"
+      - "Julian imagining ring"
+      - "touches ring all day"
+      - "walked Hawthorne"
+      - "record store"
+      - "Goonies soundtrack vinyl"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 2:00 PM"
+    user_input: |
+      called Clara and told her we got the rings and she screamed and then asked what they look like and I described them and she said the music note engraving is perfect and she doesn't know about the wedding song either but she knows about the guitar so she gets the connection and Tyler said congratulations and Sophie babbled which we're counting as congratulations too
+    expected_memory_stores:
+      - "called Clara"
+      - "Clara screamed"
+      - "described rings"
+      - "music note perfect"
+      - "Clara doesn't know song"
+      - "Tyler congratulations"
+      - "Sophie babbled"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 3:00 PM"
+    user_input: |
+      what kind of wedding rings did Maya and Julian choose
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 5:00 PM"
+    user_input: |
+      texted Jenny and Nadia photos of the ring display and Jenny said she's crying at work which is probably bad because she's an accountant and Nadia said the thin gold band is so you and the engraving about the coordinates is going to make her cry at the wedding and I was like Nadia wait until you see what ELSE happens at the wedding and she knows about the song so she sent like ten fire emojis
+    expected_memory_stores:
+      - "Jenny crying at work"
+      - "Nadia thin gold so Maya"
+      - "coordinates engraving"
+      - "Nadia knows song"
+      - "fire emojis"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 8:00 PM"
+    user_input: |
+      Julian and I are on the couch and he said buying rings felt different from the engagement somehow like the engagement was a question and the rings are an answer and I said that's actually really poetic for a graphic designer and he said I contain multitudes and Kobe put his paw on my lap and I was like did you just claim me Kobe and Julian goes he's team Maya always has been
+    expected_memory_stores:
+      - "rings felt different"
+      - "engagement question rings answer"
+      - "Julian poetic"
+      - "contain multitudes"
+      - "Kobe paw on lap"
+      - "team Maya"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What kind of wedding band did Maya choose?"
+    expected_contains: ["thin gold"]
+  - question: "What kind of wedding band did Julian choose?"
+    expected_contains: ["brushed titanium"]
+  - question: "Where did they buy the rings?"
+    expected_contains: ["Gilt", "Hawthorne"]
+  - question: "What is Julian's ring engraving?"
+    expected_contains: ["coordinates", "Burnside Bridge", "first kiss"]
+  - question: "What is Maya's ring engraving?"
+    expected_contains: ["date", "music note"]
+  - question: "How much did both rings cost?"
+    expected_contains: ["1800"]
+  - question: "Who helped them at the jewelry store?"
+    expected_contains: ["Rosa"]
+  - question: "What did Julian buy at the record store?"
+    expected_contains: ["Goonies soundtrack"]
+  - question: "What did Julian say about rings versus engagement?"
+    expected_contains: ["question", "answer"]
+  - question: "When will Maya's ring be ready?"
+    expected_contains: ["two weeks"]

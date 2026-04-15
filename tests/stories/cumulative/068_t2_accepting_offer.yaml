@@ -1,0 +1,217 @@
+story_id: 68
+story_name: "Accepting the Offer"
+category: "Career"
+description: |
+  Tests memory of Maya officially accepting and telling people.
+  Resignation from Vantage begins. Multiple emotional reactions tracked.
+  Verifies entity relationship updates across work and personal life.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:00 AM"
+    user_input: |
+      called Nina this morning and officially accepted the Conduit AI offer 185k base 0.2 percent equity start date in three weeks and she was like congratulations Maya you earned this and I teared up a little on the phone because this has been such a long journey
+    expected_memory_stores:
+      - "offer accepted"
+      - "185k confirmed"
+      - "start date three weeks"
+      - "Nina congratulations"
+      - "emotional moment"
+    expected_triples:
+      - ["user", "accepted", "Conduit AI offer"]
+      - ["Conduit_offer", "salary", "185k"]
+      - ["Conduit_offer", "equity", "0.2 percent"]
+      - ["user", "start_date", "three weeks from now"]
+      - ["user", "has_emotion", "emotional"]
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 9:30 AM"
+    user_input: |
+      now I have to give my two weeks notice at Vantage and I'm going to tell Priya first because she deserves to hear it from me before anyone else and honestly I'm dreading it not because she'll be mad but because she'll be sad and I hate making Priya sad
+    expected_memory_stores:
+      - "two weeks notice"
+      - "telling Priya first"
+      - "dreading conversation"
+      - "Priya will be sad"
+    expected_triples:
+      - ["user", "plans", "two weeks notice at Vantage"]
+      - ["user", "telling_first", "Priya"]
+      - ["user", "has_emotion", "apprehensive"]
+    expected_adaptation:
+      emotion_detected: "apprehensive"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 10:00 AM"
+    user_input: |
+      told Priya and she cried a little and then she hugged me and said I'm so happy for you even though I'm losing my best engineer and she asked where I'm going and I told her Conduit AI and she said oh that's a great company you'll do amazing things there and then she cried a little more
+    expected_memory_stores:
+      - "Priya told"
+      - "Priya cried"
+      - "best engineer comment"
+      - "Priya approves Conduit"
+      - "emotional farewell"
+    expected_triples:
+      - ["user", "told", "Priya about leaving"]
+      - ["Priya", "cried", "and hugged user"]
+      - ["Priya", "called_user", "best engineer"]
+      - ["Priya", "approves", "Conduit AI"]
+      - ["user", "has_emotion", "bittersweet"]
+    expected_adaptation:
+      emotion_detected: "bittersweet"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 11:00 AM"
+    user_input: |
+      submitted my official resignation to HR and CC'd Derek and Priya and Derek responded within five minutes with just acknowledged which is so on brand for him and Priya responded privately saying she'll make sure the transition is smooth
+    expected_memory_stores:
+      - "resignation submitted"
+      - "Derek acknowledged"
+      - "Priya smooth transition"
+      - "HR notified"
+    expected_triples:
+      - ["user", "submitted", "official resignation to HR"]
+      - ["Derek", "responded", "acknowledged"]
+      - ["Priya", "promised", "smooth transition"]
+      - ["user", "has_emotion", "relieved"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 1:00 PM"
+    user_input: |
+      told Tanya and Raj on my pod and Tanya hugged me and said she's going to miss me even though we only worked together for like two months and Raj shook my hand and said congratulations and I realized these are actually good people I just never got to know them well because I was so focused on leaving
+    expected_memory_stores:
+      - "Tanya and Raj told"
+      - "Tanya will miss Maya"
+      - "Raj congratulations"
+      - "regret not connecting"
+    expected_triples:
+      - ["user", "told", "Tanya and Raj about leaving"]
+      - ["Tanya", "will_miss", "user"]
+      - ["Raj", "congratulated", "user"]
+      - ["user", "regrets", "not connecting more with pod"]
+      - ["user", "has_emotion", "reflective"]
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 6:00 PM"
+    user_input: |
+      called my mom and she was overjoyed like literally screaming on the phone and she said 185 thousand dollars Maya when I was your age I was making 40 and she wants to come visit Portland to celebrate and I said yeah come whenever and she said maybe next month
+    expected_memory_stores:
+      - "mom overjoyed"
+      - "salary comparison"
+      - "mom visiting Portland"
+      - "next month visit"
+    expected_triples:
+      - ["user", "told", "mom about offer"]
+      - ["mom", "has_emotion", "overjoyed"]
+      - ["mom", "planning_visit", "Portland next month"]
+      - ["user", "has_emotion", "happy"]
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Monday 8:00 PM"
+    user_input: |
+      Julian surprised me with a cake from that bakery on Hawthorne that we love and it said congratulations senior engineer even though my title is actually just software engineer but it's the thought that counts and Kobe tried to eat the frosting off the counter so Julian had to hold him back
+    expected_memory_stores:
+      - "Julian cake"
+      - "Hawthorne bakery"
+      - "title joke"
+      - "Kobe frosting"
+    expected_triples:
+      - ["Julian", "bought", "cake from Hawthorne bakery"]
+      - ["cake", "said", "congratulations senior engineer"]
+      - ["Kobe", "tried_to_eat", "frosting off counter"]
+      - ["user", "has_emotion", "loved"]
+    expected_adaptation:
+      emotion_detected: "loved"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 9:00 AM"
+    user_input: |
+      when does Maya start at Conduit AI
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 11:00 AM"
+    user_input: |
+      working on knowledge transfer docs for whoever takes over my portal work and it feels weird documenting everything I've been doing for someone else to pick up but also kind of satisfying like closing out a chapter properly even if the chapter was mostly boring
+    expected_memory_stores:
+      - "knowledge transfer"
+      - "documentation"
+      - "closure"
+      - "portal handoff"
+    expected_triples:
+      - ["user", "writing", "knowledge transfer docs"]
+      - ["user", "handing_off", "portal work"]
+      - ["user", "has_emotion", "satisfied"]
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      Leon called from Stripe and we had the best conversation just laughing about the whole Vantage saga from Derek arriving to the PIP to fighting back to this and he said we should get lunch next week to celebrate both of us being free and I'm like yes absolutely
+    expected_memory_stores:
+      - "Leon call"
+      - "Vantage saga recap"
+      - "lunch plan"
+      - "both free"
+    expected_triples:
+      - ["Leon", "called_from", "Stripe"]
+      - ["user", "reminisced", "Vantage saga with Leon"]
+      - ["Leon", "suggested", "lunch next week to celebrate"]
+      - ["user", "has_emotion", "elated"]
+    expected_adaptation:
+      emotion_detected: "elated"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Has Maya accepted the Conduit AI offer?"
+    expected_contains: ["yes", "accepted"]
+  - question: "When does Maya start at Conduit?"
+    expected_contains: ["three weeks"]
+  - question: "How did Derek respond to Maya's resignation?"
+    expected_contains: ["acknowledged"]
+  - question: "How did Priya react?"
+    expected_contains: ["cried", "happy for", "best engineer"]
+  - question: "What did Julian get Maya to celebrate?"
+    expected_contains: ["cake", "bakery"]
+  - question: "Is Maya's mom planning to visit?"
+    expected_contains: ["yes", "next month"]
+  - question: "What is Maya doing during her last two weeks?"
+    expected_contains: ["knowledge transfer", "documentation"]
+  - question: "How did Tanya react to Maya leaving?"
+    expected_contains: ["miss", "hug"]
+  - question: "What did Kobe try to eat?"
+    expected_contains: ["frosting", "cake"]
+  - question: "What did Leon suggest for next week?"
+    expected_contains: ["lunch", "celebrate"]

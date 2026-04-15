@@ -1,0 +1,179 @@
+story_id: 226
+story_name: "Recovery Timeline Extended Again"
+category: "Health"
+description: |
+  Tests second timeline correction. Recovery extends from 8 weeks to 10 weeks.
+  Maya must accept slower healing. Verifies system handles multiple corrections
+  to same medical timeline.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 3:00 PM"
+    user_input: |
+      had my PT session with Jake today and he tested my knee range of motion and it's better but not where he wants it and he said Maya I need to be honest the eight week timeline I gave you might need to be ten weeks because the tear is healing slower than he expected
+    expected_memory_stores:
+      - "PT session"
+      - "Jake honest"
+      - "range of motion improving"
+      - "but not enough"
+      - "ten weeks now"
+      - "correction from eight"
+      - "healing slower"
+    expected_adaptation:
+      emotion_detected: "disappointed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 3:30 PM"
+    user_input: |
+      I sat in my car in the parking lot at Rose City PT for like ten minutes just processing because first it was six weeks then eight now ten and I'm like is this ever going to end and I called Julian and he said babe just take it one week at a time
+    expected_memory_stores:
+      - "sat in car processing"
+      - "Rose City PT"
+      - "six then eight then ten"
+      - "three corrections"
+      - "Julian one week at a time"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 7:00 PM"
+    user_input: |
+      Jake said the good news is the swimming is helping a lot and my quad strength is up and the swelling is way down and he doesn't think I'll need surgery so that's something and he said he's seen tears like this take twelve weeks sometimes so ten is still reasonable
+    expected_memory_stores:
+      - "swimming helping"
+      - "quad strength up"
+      - "swelling down"
+      - "no surgery needed"
+      - "twelve weeks possible"
+      - "ten reasonable"
+    expected_adaptation:
+      emotion_detected: "mixed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 8:00 AM"
+    user_input: |
+      I'm six weeks in now and I just did the math and ten weeks means four more weeks which puts me at the end of November and I won't be running outside in Portland in December that's rain and dark so realistically I won't run outside til spring unless I do a treadmill
+    expected_memory_stores:
+      - "six weeks in"
+      - "four more weeks"
+      - "end of November"
+      - "Portland rain and dark"
+      - "treadmill option"
+      - "spring realistic"
+    expected_adaptation:
+      emotion_detected: "resigned"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      told my running group I won't be back for a while and Naomi said they'll save my spot and she said she's running the same route every Saturday if I want to walk with them when I'm ready and that was really nice actually
+    expected_memory_stores:
+      - "told running group"
+      - "Naomi supportive"
+      - "walk with them option"
+      - "Saturday runs"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 3:00 PM"
+    user_input: |
+      how long is my recovery timeline now and how long was it originally
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 5:00 PM"
+    user_input: |
+      Doris at the pool could tell I was off today and she asked what's wrong and I told her about the extended timeline and she said honey I had a hip replacement five years ago and I thought I'd never swim again and now I'm faster than I was before and patience is a muscle too
+    expected_memory_stores:
+      - "Doris noticed"
+      - "hip replacement five years ago"
+      - "faster than before"
+      - "patience is a muscle"
+    expected_adaptation:
+      emotion_detected: "inspired"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 8:00 AM"
+    user_input: |
+      Jake added some new exercises today like single leg squats and balance board work and he said these are progression exercises which means I'm improving even if the timeline is longer and he said the knee is structurally sound it just needs more time to fully heal
+    expected_memory_stores:
+      - "new exercises"
+      - "single leg squats"
+      - "balance board"
+      - "progression exercises"
+      - "improving"
+      - "structurally sound"
+    expected_adaptation:
+      emotion_detected: "cautiously optimistic"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      Clara said the extension from eight to ten weeks is actually common with meniscus tears and she said initial timelines are always optimistic and she was like did they say six at first and I said yes and she said yeah that was never realistic for a tear
+    expected_memory_stores:
+      - "Clara medical context"
+      - "extension common"
+      - "initial timelines optimistic"
+      - "six was never realistic"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 9:00 PM"
+    user_input: |
+      you know what I think the pool has become more than just injury rehab like even when my knee heals I think I want to keep swimming because it's changed something in me and Doris said she'll teach me butterfly next month which sounds insane but also fun
+    expected_memory_stores:
+      - "swimming beyond rehab"
+      - "keep swimming after recovery"
+      - "changed something"
+      - "butterfly next month"
+      - "Doris teaching"
+    expected_adaptation:
+      emotion_detected: "positive"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya's current recovery timeline?"
+    expected_contains: ["ten weeks"]
+  - question: "How has the timeline changed?"
+    expected_contains: ["six", "eight", "ten"]
+  - question: "Does Maya need surgery?"
+    expected_contains: ["no"]
+  - question: "What progress has Maya made in PT?"
+    expected_contains: ["quad strength", "swelling down", "range of motion"]
+  - question: "What new exercises did Jake add?"
+    expected_contains: ["single leg squats", "balance board"]
+  - question: "What did Doris share about her own recovery?"
+    expected_contains: ["hip replacement", "faster than before"]
+  - question: "Will Maya continue swimming after recovery?"
+    expected_contains: ["yes", "keep swimming"]
+  - question: "What stroke is Doris going to teach Maya?"
+    expected_contains: ["butterfly"]
+  - question: "When will Maya realistically run outside again?"
+    expected_contains: ["spring"]
+  - question: "What did Clara say about initial timelines?"
+    expected_contains: ["optimistic", "never realistic"]

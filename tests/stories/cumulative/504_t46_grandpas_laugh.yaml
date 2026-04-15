@@ -1,0 +1,172 @@
+story_id: 504
+story_name: "Grandpa's Laugh"
+category: "Grief and Legacy"
+description: |
+  Maya finds old family videos with Grandpa Wei's distinctive laugh. Shares with
+  family, processes the audio-visual grief dimension. Cross-references digital life (T48),
+  family relationships (T16), and therapy (T21).
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00 AM"
+    user_input: |
+      so I was going through old photos on my laptop trying to find something for work and I accidentally found this video from like 2019 of grandpa at Chinese New Year dinner and you can hear his laugh in it and I was NOT prepared for that like hearing a dead person's laugh is a different kind of pain
+    expected_memory_stores:
+      - "old video found"
+      - "2019 Chinese New Year"
+      - "Grandpa Wei laugh"
+      - "hearing dead person's voice"
+    expected_adaptation:
+      emotion_detected: "shocked"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 9:30 AM"
+    user_input: |
+      I've watched it like seven times now and in the video he's laughing because Kobe was still a puppy and he stole a dumpling off grandpa's plate and grandpa thought it was the funniest thing and his laugh was this like big booming sound that didn't match his tiny body at all
+    expected_memory_stores:
+      - "Kobe as puppy"
+      - "stole dumpling"
+      - "grandpa's big laugh"
+      - "small body big laugh contrast"
+    expected_adaptation:
+      emotion_detected: "nostalgic"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:00 AM"
+    user_input: |
+      sent the video to my mom and she called me immediately crying and laughing at the same time and she said she forgot what his laugh sounded like which made me so sad because how do you forget your own father's laugh and she said thank god you found this Maya
+    expected_memory_stores:
+      - "sent video to Vivian"
+      - "Vivian forgot laugh sound"
+      - "crying and laughing"
+      - "gratitude for finding video"
+    expected_adaptation:
+      emotion_detected: "bittersweet"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 12:30 PM"
+    user_input: |
+      now I'm panicking a little because what if I lose this video like what if my laptop dies I already lost those photos when my phone screen cracked remember and I can't lose this so I'm backing it up everywhere like iCloud Google Drive Julian's external hard drive everything
+    expected_memory_stores:
+      - "fear of losing video"
+      - "reference to cracked phone"
+      - "backing up everywhere"
+      - "iCloud Google Drive external"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 3:00 PM"
+    user_input: |
+      found three more videos with grandpa in them one is from when Julian and I first started dating and grandpa met Julian and he shook Julian's hand for like a full minute and said you take care of my granddaughter and Julian still talks about that moment
+    expected_memory_stores:
+      - "three more videos"
+      - "grandpa meeting Julian"
+      - "long handshake"
+      - "take care of granddaughter"
+    expected_adaptation:
+      emotion_detected: "tender"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 5:00 PM"
+    user_input: |
+      Julian came home from the hardware store and I showed him the video of the handshake and he got really quiet and just watched it three times and then hugged me and said your grandpa was the real deal and I know he means it because Julian's family is so different like George and Diane are great but they're so American you know and grandpa was just this other world
+    expected_memory_stores:
+      - "Julian watched handshake video"
+      - "Julian emotional"
+      - "cultural contrast"
+      - "George and Diane comparison"
+    expected_adaptation:
+      emotion_detected: "connected"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 7:30 PM"
+    user_input: |
+      made dumplings tonight using the recipe my mom texted me she said it was close to grandpa's recipe but not exact because he never wrote it down and I'm standing there folding dumplings wearing his watch and I feel like him in a way I never felt before like I'm continuing something
+    expected_memory_stores:
+      - "making dumplings"
+      - "Vivian's recipe"
+      - "grandpa never wrote recipe"
+      - "wearing watch while cooking"
+      - "feeling of continuation"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 10:00 AM"
+    user_input: |
+      woke up and watched the laughing video again and this time I just smiled instead of cried and I think that's progress right like Dr. Tate said grief doesn't go away it just changes shape and today the shape is more warm than sharp
+    expected_memory_stores:
+      - "watched video smiled"
+      - "grief changing shape"
+      - "Dr. Tate concept"
+      - "warm vs sharp grief"
+    expected_adaptation:
+      emotion_detected: "healing"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 1:00 PM"
+    user_input: |
+      Clara and Ben came over for lunch and I showed them the video of grandpa laughing and Clara said she could see where I got my stubbornness from because apparently grandpa looked stubborn and I was like that's not how genetics works Clara and we all laughed
+    expected_memory_stores:
+      - "Clara and Ben visit"
+      - "showed video to friends"
+      - "Clara's stubbornness comment"
+      - "laughing about it"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 6:00 PM"
+    user_input: |
+      made a folder on my laptop called "Wei" and put all the videos and the translations and photos of the letters and his degree and everything in there and it feels like I'm building an archive of a person who deserved to be remembered for what he actually was not just as a quiet old man in Fresno
+    expected_memory_stores:
+      - "Wei folder created"
+      - "archive of grandpa"
+      - "videos translations letters degree"
+      - "deserved full remembrance"
+    expected_adaptation:
+      emotion_detected: "purposeful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What video did Maya accidentally find?"
+    expected_contains: ["2019", "Chinese New Year", "laugh"]
+  - question: "Why was Grandpa Wei laughing in the video?"
+    expected_contains: ["Kobe", "puppy", "dumpling"]
+  - question: "What happened when Maya sent the video to Vivian?"
+    expected_contains: ["crying", "laughing", "forgot", "laugh"]
+  - question: "Why did Maya panic about the video?"
+    expected_contains: ["lose", "backup", "phone cracked"]
+  - question: "What did Grandpa Wei say when he met Julian?"
+    expected_contains: ["take care", "granddaughter"]
+  - question: "What recipe did Maya make that night?"
+    expected_contains: ["dumplings", "grandpa"]
+  - question: "How did Maya's grief change over the weekend?"
+    expected_contains: ["smiled", "warm", "instead of cried"]
+  - question: "What folder did Maya create?"
+    expected_contains: ["Wei", "archive"]
+  - question: "Who came over for lunch on Sunday?"
+    expected_contains: ["Clara", "Ben"]
+  - question: "What did Clara say about the video?"
+    expected_contains: ["stubbornness"]

@@ -1,0 +1,190 @@
+story_id: 486
+story_name: "Revived to Consistent Five"
+category: "Book Club"
+description: |
+  Tests memory of book club revival with consistent five members.
+  Establishes the restructuring success, Anxious People discussion.
+  Verifies system tracks group health improvement.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 6:00 PM"
+    user_input: |
+      okay so tonight is the big test the restructured book club meeting for Anxious People and I made the Swedish meatballs and they smell AMAZING and the house looks great and Julian set up extra chairs and I'm nervously checking my phone to see if people are confirming and so far Nadia Tessa Lily and Omar have all confirmed and Marcus said he's coming but he's always late
+    expected_memory_stores:
+      - "restructured meeting test"
+      - "Anxious People"
+      - "Swedish meatballs"
+      - "Nadia Tessa Lily Omar confirmed"
+      - "Marcus coming but late"
+      - "five people expected"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 7:10 PM"
+    user_input: |
+      FIVE PEOPLE ARE HERE five actual human beings in my living room Nadia brought the Swedish Fish and arranged them in a bowl with little flags and Tessa's apple cake looks incredible and Lily brought cinnamon buns and even Marcus came and he's only fifteen minutes late which for Marcus is basically early and he FINISHED THE BOOK and I screamed
+    expected_memory_stores:
+      - "five people attended"
+      - "Swedish Fish with flags"
+      - "Tessa apple cake"
+      - "Lily cinnamon buns"
+      - "Marcus fifteen minutes late"
+      - "Marcus finished book"
+      - "Maya screamed happy"
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 7:30 PM"
+    user_input: |
+      the discussion questions actually worked like everyone had something to say because they'd thought about it in advance and Omar started with the question about which character you relate to most and he said the pregnant woman Julia because she's scared of a huge life change and everyone was like Omar that's really honest and he said what climbing taught me to be vulnerable
+    expected_memory_stores:
+      - "discussion questions worked"
+      - "thought in advance"
+      - "Omar relates to Julia"
+      - "scared of life change"
+      - "climbing vulnerability"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 8:00 PM"
+    user_input: |
+      Marcus said his favorite part was how the book shows that everyone is anxious about something and we're all just pretending we have it together and Lily said yes exactly and she shared that she struggles with imposter syndrome at Conduit and I was like Lily YOU and she said yeah even me and that opened up this whole conversation about work anxiety
+    expected_memory_stores:
+      - "Marcus favorite part"
+      - "everyone anxious"
+      - "pretending together"
+      - "Lily imposter syndrome"
+      - "Conduit reference"
+      - "work anxiety conversation"
+    expected_adaptation:
+      emotion_detected: "connected"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 8:30 PM"
+    user_input: |
+      Tessa connected the book to her nonprofit work and how the people she serves are anxious about basic survival and sometimes we forget that anxiety isn't just a middle class thing and everyone got really quiet and Nadia said Tessa always has the best takes and Marcus was like okay I formally apologize for missing the last two meetings this is incredible
+    expected_memory_stores:
+      - "Tessa nonprofit connection"
+      - "anxiety and survival"
+      - "not just middle class"
+      - "everyone quiet"
+      - "Nadia Tessa best takes"
+      - "Marcus apologized for missing"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 9:00 PM"
+    user_input: |
+      the Swedish meatballs were demolished like there's not a single one left and Omar had four servings and Tessa's apple cake is the best thing I've ever tasted and she won't give me the recipe because she says a girl needs secrets and I was like Tessa I have a secret guitar song and she doesn't know about the wedding song so she just looked confused
+    expected_memory_stores:
+      - "meatballs demolished"
+      - "Omar four servings"
+      - "Tessa cake best ever"
+      - "won't share recipe"
+      - "Maya mentioned secret"
+      - "wedding song slip"
+      - "Tessa confused"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 9:30 PM"
+    user_input: |
+      we voted on the next book and I suggested Klara and the Sun by Kazuo Ishiguro and everyone was into it because it's about an AI robot and everyone knows I'm into AI stuff at Conduit and it's only like 300 pages and Nadia said the themed snacks should be robot themed and I was like how do you make robot food and she said I'll figure it out
+    expected_memory_stores:
+      - "voted next book"
+      - "Klara and the Sun"
+      - "Kazuo Ishiguro"
+      - "AI robot theme"
+      - "Maya into AI"
+      - "300 pages"
+      - "robot themed snacks"
+      - "Nadia will figure it out"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 10:00 PM"
+    user_input: |
+      what book did the group choose for next meeting
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 10:15 PM"
+    user_input: |
+      everyone's leaving and Marcus gave me a bro hug and said thanks for not giving up on the club and Omar said this is his favorite social thing after climbing and Lily said she's already ordered Klara and the Sun and Tessa said see I told you it would work if you restructured and Nadia said you're such a project manager Maya and I said I'm an engineer not a PM and she said same energy
+    expected_memory_stores:
+      - "Marcus thanked Maya"
+      - "Omar favorite social thing"
+      - "Lily ordered next book"
+      - "Tessa said it worked"
+      - "Nadia project manager comment"
+      - "engineer not PM"
+    expected_adaptation:
+      emotion_detected: "triumphant"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:45 PM"
+    user_input: |
+      Julian is eating leftover meatballs and he asked how it went and I said five people came everyone finished the book the discussion was incredible and the themed snacks were a hit and he said well look at that you fixed it and I said yeah I did and honestly this book club is becoming one of the best things in my life alongside road trips and guitar and climbing and tabletop and I feel SO rich in community right now
+    expected_memory_stores:
+      - "Julian leftover meatballs"
+      - "five people"
+      - "everyone finished"
+      - "incredible discussion"
+      - "themed snacks hit"
+      - "Maya fixed it"
+      - "rich in community"
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How many people came to the restructured book club?"
+    expected_contains: ["five"]
+  - question: "Did Marcus finish the book this time?"
+    expected_contains: ["yes", "finished"]
+  - question: "What Swedish themed food was served?"
+    expected_contains: ["meatballs", "Swedish Fish", "apple cake", "cinnamon buns"]
+  - question: "What did the discussion focus on?"
+    expected_contains: ["anxiety", "characters", "vulnerability"]
+  - question: "What's the next book club book?"
+    expected_contains: ["Klara and the Sun"]
+  - question: "Who wrote Klara and the Sun?"
+    expected_contains: ["Kazuo Ishiguro"]
+  - question: "What did Marcus say to Maya about the book club?"
+    expected_contains: ["thanks", "not giving up"]
+  - question: "What does Omar say is his favorite social thing?"
+    expected_contains: ["climbing", "book club"]
+  - question: "What did Tessa refuse to share?"
+    expected_contains: ["recipe", "apple cake"]
+  - question: "What is the theme for next month's snacks?"
+    expected_contains: ["robot"]

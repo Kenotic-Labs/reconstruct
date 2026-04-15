@@ -1,0 +1,221 @@
+story_id: 85
+story_name: "Growing Pains"
+category: "Learning"
+description: |
+  Tests memory of fridgesearch post-HN growth challenges.
+  Bug reports from new users, server scaling, support requests.
+  Verifies system tracks operational challenges alongside emotional state.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      so now that we have 2000 users the bug reports are coming in fast like there's this one where the search returns empty results if you use special characters in ingredient names and another where the fridge inventory doesn't sync properly on iOS Safari and I'm like I'm one person how am I supposed to fix all this
+    expected_memory_stores:
+      - "2000 users"
+      - "special characters bug"
+      - "iOS Safari sync bug"
+      - "overwhelmed"
+      - "one person"
+    expected_triples:
+      - ["fridgesearch", "has_bug", "special characters cause empty results"]
+      - ["fridgesearch", "has_bug", "iOS Safari sync issue"]
+      - ["user", "has_emotion", "overwhelmed"]
+      - ["user", "is_role", "solo developer"]
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 9:00 PM"
+    user_input: |
+      broke my weeknight rule again to fix the Safari bug because people were complaining and Julian found me at midnight still debugging and he sat next to me and didn't say anything just brought me tea and waited until I fixed it and then said okay bed now and I said okay
+    expected_memory_stores:
+      - "weeknight rule broken"
+      - "midnight debugging"
+      - "Julian tea"
+      - "Julian patience"
+      - "Safari fix"
+    expected_triples:
+      - ["user", "broke", "weeknight rule to fix Safari bug"]
+      - ["user", "debugged_until", "midnight"]
+      - ["Julian", "brought", "tea and waited patiently"]
+      - ["user", "has_emotion", "stressed"]
+    expected_adaptation:
+      emotion_detected: "stressed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 10:00 AM"
+    user_input: |
+      Sam noticed I was off at work again and he pulled me aside and said Maya your day job performance is what matters and if the side project is affecting that you need to recalibrate and he was gentle about it but firm and he's right Conduit pays my salary fridgesearch doesn't
+    expected_memory_stores:
+      - "Sam warning"
+      - "day job priority"
+      - "recalibrate"
+      - "gentle but firm"
+      - "salary reality"
+    expected_triples:
+      - ["Sam", "warned", "day job performance must come first"]
+      - ["Sam", "advised", "recalibrate if side project affects work"]
+      - ["user", "has_emotion", "chastened"]
+    expected_adaptation:
+      emotion_detected: "chastened"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 9:00 AM"
+    user_input: |
+      took Sam's advice and made a proper plan like I'm going to spend max 8 hours per weekend on fridgesearch document all known bugs prioritize them and only fix the critical ones and accept that some things will be broken for a while because I'm a solo dev and that's okay
+    expected_memory_stores:
+      - "8 hour weekend limit"
+      - "bug prioritization"
+      - "critical only"
+      - "acceptance"
+      - "solo dev reality"
+    expected_triples:
+      - ["user", "set_limit", "max 8 hours per weekend on fridgesearch"]
+      - ["user", "decided", "only fix critical bugs"]
+      - ["user", "accepted", "some things will be broken"]
+      - ["user", "has_emotion", "organized"]
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 2:00 PM"
+    user_input: |
+      Marcus volunteered to help triage bug reports since he's the most active user anyway and he set up a simple issue tracker on the GitHub repo and tagged everything by severity and I was like Marcus you're a lifesaver and he said well you built me my favorite app the least I can do is help maintain it
+    expected_memory_stores:
+      - "Marcus volunteering"
+      - "issue tracker"
+      - "GitHub repo"
+      - "severity tagging"
+      - "favorite app comment"
+    expected_triples:
+      - ["Marcus", "volunteered", "triage bug reports"]
+      - ["Marcus", "set_up", "GitHub issue tracker with severity tags"]
+      - ["Marcus", "said", "fridgesearch is his favorite app"]
+      - ["user", "has_emotion", "grateful"]
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 11:00 AM"
+    user_input: |
+      Kobe was being extra needy today and Julian said he thinks Kobe is jealous of the laptop and honestly he might be right because every time I open my laptop Kobe comes over and tries to sit on it or puts his head between me and the screen and it's adorable but also makes debugging very difficult
+    expected_memory_stores:
+      - "Kobe jealous of laptop"
+      - "Julian observation"
+      - "Kobe blocks screen"
+      - "adorable but difficult"
+    expected_triples:
+      - ["Kobe", "is_jealous_of", "laptop"]
+      - ["Kobe", "blocks", "screen during coding"]
+      - ["Julian", "observed", "Kobe jealous of laptop"]
+      - ["user", "has_emotion", "amused"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 3:00 PM"
+    user_input: |
+      how many hours per weekend is Maya spending on fridgesearch now
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Next Tuesday 7:00 PM"
+    user_input: |
+      user count is up to like 2300 now with organic growth even without any marketing and people are sharing it on Twitter and Reddit and someone wrote a blog post about it calling it quote the recipe app for lazy people who hate grocery stores which I think is a compliment
+    expected_memory_stores:
+      - "2300 users"
+      - "organic growth"
+      - "Twitter Reddit sharing"
+      - "blog post written"
+      - "lazy people compliment"
+    expected_triples:
+      - ["fridgesearch", "has_metric", "2300 users"]
+      - ["fridgesearch", "growing_via", "organic sharing on Twitter and Reddit"]
+      - ["fridgesearch", "featured_in", "blog post calling it app for lazy people"]
+      - ["user", "has_emotion", "amused"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Next Thursday 8:00 PM"
+    user_input: |
+      three people have now emailed me asking if fridgesearch has an API they can use and one person wants to build an iOS app around it and I'm like this is getting way bigger than I planned and Julian said you built something people love that's not a problem that's a gift
+    expected_memory_stores:
+      - "API requests"
+      - "three emails"
+      - "iOS app request"
+      - "bigger than planned"
+      - "Julian gift comment"
+    expected_triples:
+      - ["fridgesearch", "received", "three API requests via email"]
+      - ["someone", "wants_to_build", "iOS app around fridgesearch"]
+      - ["Julian", "said", "you built something people love, that's a gift"]
+      - ["user", "has_emotion", "overwhelmed"]
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Next Saturday 5:00 PM"
+    user_input: |
+      fixed the top five critical bugs this weekend and the app is running stable and Marcus's issue tracker shows we went from 23 open bugs to 12 and the remaining ones are all nice-to-haves and I feel good about where things are like it's under control now not perfect but under control
+    expected_memory_stores:
+      - "top five bugs fixed"
+      - "app stable"
+      - "23 to 12 bugs"
+      - "nice-to-haves remaining"
+      - "under control"
+    expected_triples:
+      - ["user", "fixed", "top five critical bugs"]
+      - ["fridgesearch", "has_metric", "23 to 12 open bugs"]
+      - ["fridgesearch", "status", "stable and under control"]
+      - ["user", "has_emotion", "relieved"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How many users does fridgesearch have now?"
+    expected_contains: ["2300"]
+  - question: "What limit did Maya set for weekend work?"
+    expected_contains: ["8 hours"]
+  - question: "Who is helping triage bugs?"
+    expected_contains: ["Marcus"]
+  - question: "What did Sam tell Maya about the side project?"
+    expected_contains: ["day job", "recalibrate"]
+  - question: "How many open bugs remain?"
+    expected_contains: ["12"]
+  - question: "Are people requesting an API?"
+    expected_contains: ["yes", "three"]
+  - question: "How is fridgesearch growing?"
+    expected_contains: ["organic", "Twitter", "Reddit"]
+  - question: "What did someone call fridgesearch in a blog post?"
+    expected_contains: ["lazy people", "grocery"]
+  - question: "Is Maya managing the side project better now?"
+    expected_contains: ["yes", "under control"]
+  - question: "What is Kobe doing during Maya's coding sessions?"
+    expected_contains: ["jealous", "laptop", "head", "screen"]

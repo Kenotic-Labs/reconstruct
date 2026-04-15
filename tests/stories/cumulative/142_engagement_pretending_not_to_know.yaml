@@ -1,0 +1,174 @@
+story_id: 142
+story_name: "Pretending She Doesn't Know"
+category: "Life Events"
+description: |
+  Tests whether the system tracks Maya's ongoing concealment, her observations of
+  Julian's suspicious behavior, and the comedy of maintaining a secret in close quarters.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 6:00pm"
+    user_input: |
+      ok so it's been two days since the receipt and I'm getting better at acting normal but Julian is acting WEIRD. like he keeps getting texts and then hiding his phone. and he left the apartment for two hours Saturday saying he was going to the art supply store but came back with nothing
+    expected_memory_stores:
+      - "Julian acting weird"
+      - "hiding phone"
+      - "left for two hours"
+      - "art supply excuse"
+      - "came back empty-handed"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 10:00am"
+    user_input: |
+      told Aisha at work that I think Julian might propose soon and she SCREAMED. like literally screamed at her desk. Rachel Kim walked over and was like what happened and Aisha goes uh nothing just a bug in the code lol. I probably shouldn't have told her at work but I needed SOMEONE
+    expected_memory_stores:
+      - "told Aisha"
+      - "Aisha screamed"
+      - "Rachel Kim heard"
+      - "bug in code excuse"
+      - "needed someone"
+    expected_adaptation:
+      emotion_detected: "giddy"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 7:00pm"
+    user_input: |
+      Julian asked me out of nowhere what my favorite spot in Portland is. like not our favorite spot, MY favorite. and I said um I guess Mt. Tabor Park because of the views and he goes hmm interesting. HMM INTERESTING. this man is not subtle
+    expected_memory_stores:
+      - "Julian asked favorite spot"
+      - "Mt. Tabor Park"
+      - "views"
+      - "Julian not subtle"
+      - "proposal planning"
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 12:00pm"
+    user_input: |
+      caught Julian googling weather forecasts for next weekend. like who checks weather THAT far in advance unless they're planning something outdoor. I pretended I didn't see his screen but I saw it. Mt. Tabor Park. weather. next Saturday. the pieces are falling into place
+    expected_memory_stores:
+      - "Julian weather check"
+      - "next weekend"
+      - "Mt. Tabor Park"
+      - "next Saturday"
+      - "outdoor plan"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 3:00pm"
+    user_input: |
+      Aisha keeps giving me knowing looks across the office and I'm like STOP being obvious about it but she can't help it. she asked if I've told Clara yet and I said no I'm keeping it tight because the fewer people who know the better
+    expected_memory_stores:
+      - "Aisha knowing looks"
+      - "still haven't told Clara"
+      - "keeping it tight"
+    expected_adaptation:
+      emotion_detected: "conspiratorial"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 6:00pm"
+    user_input: |
+      Julian's friend Marcus called and Julian took the call in the studio with the door closed and I heard him say something about Saturday and beautiful and perfect. MARCUS IS IN ON IT. of course he is they've been best friends since college
+    expected_memory_stores:
+      - "Marcus involved"
+      - "studio closed door"
+      - "Saturday beautiful perfect"
+      - "best friends since college"
+    expected_adaptation:
+      emotion_detected: "thrilled"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 8:00am"
+    user_input: |
+      when did Julian ask Maya about her favorite spot in Portland
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 10:00am"
+    user_input: |
+      today is supposedly the day but I just looked outside and it's POURING. like absolute downpour. Portland weather doing its thing. Julian keeps checking his phone and looking out the window and his face is getting more stressed by the minute. poor guy
+    expected_memory_stores:
+      - "rain"
+      - "downpour"
+      - "Julian stressed"
+      - "checking phone"
+      - "looking at window"
+      - "plan disrupted"
+    expected_adaptation:
+      emotion_detected: "sympathetic"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 12:00pm"
+    user_input: |
+      he suggested we go to Mt. Tabor anyway and I could see him trying to salvage his plan but the rain is literally sideways and I was like babe we're not hiking in a monsoon. he looked so defeated. I feel bad knowing what I know and watching him struggle
+    expected_memory_stores:
+      - "Mt. Tabor suggested"
+      - "rain too bad"
+      - "Julian defeated"
+      - "Maya feels bad"
+      - "plan cancelled"
+    expected_adaptation:
+      emotion_detected: "empathetic"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 5:00pm"
+    user_input: |
+      he was mopey all day. went into his studio for a while and I could tell he was regrouping. he'll figure out a new plan. I just need to keep pretending I don't know and let him do his thing. patience Maya. patience
+    expected_memory_stores:
+      - "Julian mopey"
+      - "regrouping"
+      - "new plan needed"
+      - "Maya patient"
+      - "keep pretending"
+    expected_adaptation:
+      emotion_detected: "patient"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What was Julian's original proposal plan?"
+    expected_contains: ["Mt. Tabor Park", "Saturday"]
+  - question: "Why was the proposal cancelled?"
+    expected_contains: ["rain", "downpour"]
+  - question: "Who knows about the upcoming proposal?"
+    expected_contains: ["Aisha", "Marcus"]
+  - question: "What did Maya say her favorite Portland spot is?"
+    expected_contains: ["Mt. Tabor Park"]
+  - question: "What suspicious behavior has Julian shown?"
+    expected_contains: ["hiding phone", "weather", "favorite spot"]
+  - question: "Who is Marcus?"
+    expected_contains: ["Julian's friend", "best friend", "college"]
+  - question: "Has Maya told Clara about the ring?"
+    expected_contains: ["no"]
+  - question: "What excuse did Julian give for leaving the apartment?"
+    expected_contains: ["art supply"]
+  - question: "How did Aisha react to the proposal news?"
+    expected_contains: ["screamed"]
+  - question: "What did Julian google?"
+    expected_contains: ["weather", "Mt. Tabor"]

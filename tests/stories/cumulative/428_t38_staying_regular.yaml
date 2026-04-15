@@ -1,0 +1,170 @@
+story_id: 428
+story_name: "Staying Regular"
+category: "Volunteering"
+description: |
+  Maya settles back into her regular monthly volunteer role. Finds peace in
+  the simplicity of just showing up and helping without extra responsibility.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 8:00 AM"
+    user_input: |
+      first shift back after turning down the board thing and honestly it feels good to just be a regular volunteer again like no pressure no board meetings no strategy just showing up sorting food and helping people that's enough and it's what I came here for
+    expected_memory_stores:
+      - "first shift after declining board"
+      - "just regular volunteer"
+      - "no pressure"
+      - "enough"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 9:30 AM"
+    user_input: |
+      Harold was like heard you turned down the board smart move and I was like how do you know everything and he said Maya I've been here 12 years I know everything that happens in this warehouse and Tomas said Harold is basically the food bank FBI
+    expected_memory_stores:
+      - "Harold knows about board decision"
+      - "Harold knows everything"
+      - "Tomas joke food bank FBI"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:00 AM"
+    user_input: |
+      Diane treated me totally normal which I was worried about like I thought maybe she'd be disappointed but she just gave me my assignment and asked about the wedding and we chatted about flower arrangements which is so random but she used to be a florist before she got into nonprofit work
+    expected_memory_stores:
+      - "Diane acting normal"
+      - "not disappointed"
+      - "chatted about wedding flowers"
+      - "Diane former florist"
+      - "nonprofit career change"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 12:00 PM"
+    user_input: |
+      there's a new volunteer today named Patricia she's a retired nurse and she's so sweet but she keeps trying to sort the canned goods alphabetically instead of by category and I gently redirected her like I remember being new here and not knowing the system so I was patient
+    expected_memory_stores:
+      - "Patricia new volunteer"
+      - "retired nurse"
+      - "sorting alphabetically wrong"
+      - "Maya patient mentoring"
+    expected_adaptation:
+      emotion_detected: "empathetic"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 1:00 PM"
+    user_input: |
+      the quarterly event at Pioneer Square is coming up in two weeks and Diane asked if I'd still help with logistics since I already built the plan and I said of course that's different from being on the board that's just project help and she said perfect
+    expected_memory_stores:
+      - "quarterly event 2 weeks"
+      - "Pioneer Square"
+      - "still helping logistics"
+      - "project help not board"
+    expected_adaptation:
+      emotion_detected: "willing"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 2:30 PM"
+    user_input: |
+      during distribution today I saw the same mom with three kids from my first shift and the youngest one recognized me and said hi food lady and I waved and the mom mouthed thank you and honestly moments like that are worth more than any board seat in the world
+    expected_memory_stores:
+      - "same family from first shift"
+      - "child recognized Maya"
+      - "called her food lady"
+      - "mom mouthed thank you"
+      - "worth more than board seat"
+    expected_adaptation:
+      emotion_detected: "deeply moved"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 3:30 PM"
+    user_input: |
+      Clara came for the last hour of my shift and we cleaned up together and she said you seem really at peace with the board decision and I said yeah I am because the purpose isn't about the title it's about the work and she was like ok when did you get this wise and I said I have a good therapist
+    expected_memory_stores:
+      - "Clara came for last hour"
+      - "at peace with decision"
+      - "purpose is the work"
+      - "good therapist reference"
+    expected_adaptation:
+      emotion_detected: "wise"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 4:30 PM"
+    user_input: |
+      wait what was Diane's career before she worked at the food bank I feel like she told me something interesting today
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 6:00 PM"
+    user_input: |
+      Julian picked me up after my shift and Kobe was in the back of the Outback and I got in smelling like canned soup and cardboard and Julian said that's the smell of a good person and I was like or just someone who needs a shower and we drove home and I felt that grounded thing again that calm
+    expected_memory_stores:
+      - "Julian picked up"
+      - "Kobe in Outback"
+      - "smelling like food bank"
+      - "Julian sweet comment"
+      - "grounded feeling again"
+    expected_adaptation:
+      emotion_detected: "grounded"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 8:00 PM"
+    user_input: |
+      this whole volunteering thing started because I felt like I needed something that wasn't about me and 6 months later it's become like this essential part of who I am like I'm Maya the engineer Maya the fiancee Maya the dog mom and now Maya the food bank person and I like all of those versions of me
+    expected_memory_stores:
+      - "6 months volunteering"
+      - "essential part of identity"
+      - "multiple identities"
+      - "engineer fiancee dog mom volunteer"
+      - "likes all versions"
+    expected_adaptation:
+      emotion_detected: "integrated"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Is Maya still volunteering at the food bank after declining the board?"
+    expected_contains: ["yes", "monthly"]
+  - question: "What did the child call Maya at the food bank?"
+    expected_contains: ["food lady"]
+  - question: "What was Diane's career before the food bank?"
+    expected_contains: ["florist"]
+  - question: "Who is the newest volunteer Maya helped train?"
+    expected_contains: ["Patricia"]
+  - question: "What is Patricia's background?"
+    expected_contains: ["retired nurse"]
+  - question: "Is Maya still helping with the quarterly event?"
+    expected_contains: ["yes", "logistics"]
+  - question: "How long has Maya been volunteering?"
+    expected_contains: ["6 months"]
+  - question: "What does Maya say about purpose vs title?"
+    expected_contains: ["work", "not about title"]
+  - question: "How does Maya describe her different identities?"
+    expected_contains: ["engineer", "fiancee", "dog mom", "food bank"]
+  - question: "What nickname does Harold's role earn him?"
+    expected_contains: ["food bank FBI"]

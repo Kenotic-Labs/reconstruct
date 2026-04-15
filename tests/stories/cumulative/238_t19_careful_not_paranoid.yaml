@@ -1,0 +1,176 @@
+story_id: 238
+story_name: "Careful Not Paranoid"
+category: "Health"
+description: |
+  Tests system tracking the balance between vigilance and normal life. Maya finds
+  equilibrium with her allergy management. Verifies emotional resolution tracking.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 6:00 PM"
+    user_input: |
+      went to a new restaurant tonight this Italian place called Basta on like Alberta and I didn't even stress about it I just asked the server calmly and they confirmed no shellfish in anything I ordered and Julian said you've come so far from the soy sauce paranoia days
+    expected_memory_stores:
+      - "Basta restaurant"
+      - "Alberta"
+      - "Italian"
+      - "no stress"
+      - "asked calmly"
+      - "Julian noted progress"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 8:00 PM"
+    user_input: |
+      I had the most incredible mushroom risotto and Julian had the bolognese and we shared a bottle of wine and it was just a normal date night and that's the thing I want my allergy to be a footnote not a headline and tonight it was
+    expected_memory_stores:
+      - "mushroom risotto"
+      - "bolognese"
+      - "wine"
+      - "normal date night"
+      - "footnote not headline"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 10:00 AM"
+    user_input: |
+      Dr. Nassif follow up appointment today and she said I'm managing it really well and she said the fact that I used the EpiPen correctly and went to the ER shows I take it seriously and she said keep doing what you're doing and come back in six months unless something happens
+    expected_memory_stores:
+      - "Dr. Nassif follow up"
+      - "managing well"
+      - "EpiPen used correctly"
+      - "six month follow up"
+      - "keep doing what you're doing"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 12:00 PM"
+    user_input: |
+      she said my skin prick test results from the initial visit confirm the allergy is specifically to crustaceans and not mollusks so technically I could eat clams and mussels and oysters but she said honestly I'd avoid those too just to be safe since shellfish allergies can expand
+    expected_memory_stores:
+      - "crustacean specific"
+      - "not mollusks technically"
+      - "clams mussels oysters"
+      - "avoid anyway"
+      - "allergies can expand"
+    expected_adaptation:
+      emotion_detected: "cautious"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 3:00 PM"
+    user_input: |
+      told Julian about the mollusk thing and he was like so you COULD have oysters and I said yeah technically and he said but you won't and I said no and he said ok I respect that and honestly him not pushing is everything
+    expected_memory_stores:
+      - "told Julian mollusk result"
+      - "could have oysters"
+      - "chooses not to"
+      - "Julian respects choice"
+    expected_adaptation:
+      emotion_detected: "appreciative"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 5:00 PM"
+    user_input: |
+      what exactly am I allergic to and can I eat mollusks
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 9:00 AM"
+    user_input: |
+      going to a farmers market today and I'm not worried about anything because it's just produce and cheese and bread and flowers and there's no shrimp at a farmers market and that simplicity feels nice like not everything has to be a minefield
+    expected_memory_stores:
+      - "farmers market"
+      - "no worry"
+      - "produce cheese bread"
+      - "simplicity"
+      - "not a minefield"
+    expected_adaptation:
+      emotion_detected: "relaxed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 2:00 PM"
+    user_input: |
+      had coffee with Naomi and she asked about the allergy and I said honestly it's become background noise now like I'm careful but not paranoid and she said that's exactly where you want to be and I think she's right
+    expected_memory_stores:
+      - "coffee with Naomi"
+      - "background noise"
+      - "careful not paranoid"
+      - "exactly where you want to be"
+    expected_adaptation:
+      emotion_detected: "balanced"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 6:00 PM"
+    user_input: |
+      made Aunt Lily's shellfish free paella tonight and oh my GOD it's amazing with chicken and chorizo and saffron and Julian had three helpings and said this might be our new dinner party dish and I texted Lily a photo and she said PERFECT
+    expected_memory_stores:
+      - "made Lily's paella"
+      - "chicken chorizo saffron"
+      - "Julian three helpings"
+      - "new dinner party dish"
+      - "Lily approved"
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 9:00 PM"
+    user_input: |
+      thinking about how six weeks ago I was in the ER thinking my life was ruined and now I'm hosting dinner parties and trying new restaurants and the allergy is just a thing I manage not a thing that manages me and Dr. Nassif was right it gets easier
+    expected_memory_stores:
+      - "six weeks since ER"
+      - "life not ruined"
+      - "hosting dinner parties"
+      - "trying new restaurants"
+      - "manages allergy not managed by it"
+      - "it gets easier"
+    expected_adaptation:
+      emotion_detected: "empowered"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How does Maya describe her allergy management style now?"
+    expected_contains: ["careful", "not paranoid"]
+  - question: "Is Maya allergic to mollusks?"
+    expected_contains: ["technically no", "avoids anyway"]
+  - question: "What is Maya specifically allergic to?"
+    expected_contains: ["crustaceans"]
+  - question: "When is Maya's next allergist appointment?"
+    expected_contains: ["six months"]
+  - question: "What dish did Maya make from Aunt Lily's recipe?"
+    expected_contains: ["paella"]
+  - question: "How does Julian handle Maya's allergy decisions?"
+    expected_contains: ["respects", "not pushing"]
+  - question: "How does Maya describe the allergy's role in her life?"
+    expected_contains: ["background noise", "footnote"]
+  - question: "What did Dr. Nassif say about Maya's management?"
+    expected_contains: ["managing well"]
+  - question: "How long since the ER visit?"
+    expected_contains: ["six weeks"]
+  - question: "What restaurant did Maya confidently dine at?"
+    expected_contains: ["Basta"]

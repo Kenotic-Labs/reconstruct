@@ -1,0 +1,170 @@
+story_id: 308
+story_name: "Long Distance Support"
+category: "Friendships"
+description: |
+  Tests memory of Maya supporting Jenny through depression from a distance.
+  Maya checks in regularly, sends care packages, learns about mental health.
+  Verifies system tracks caretaking behaviors and evolving relationship dynamics.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      Jenny flew back to Austin yesterday and I already texted her twice just to check in and she said she's ok and that telling me about the depression stuff actually made her feel lighter and I told her I'm gonna be annoying about checking in now
+    expected_memory_stores:
+      - "Jenny back in Austin"
+      - "checking in twice"
+      - "Jenny feels lighter"
+      - "Maya will check in regularly"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      sent Jenny a care package today with like her favorite tea from Tao of Tea that Portland brand she loves and some bath bombs and this book about like managing depression that had really good reviews on Amazon I hope that's not weird
+    expected_memory_stores:
+      - "care package"
+      - "Tao of Tea"
+      - "bath bombs"
+      - "depression book"
+      - "worried about being weird"
+    expected_adaptation:
+      emotion_detected: "caring"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 9:00 PM"
+    user_input: |
+      Jenny called tonight and she had a bad day she said the Zoloft makes her feel kind of numb sometimes and she doesn't know if that's better or worse than being sad and I didn't know what to say so I just listened
+    expected_memory_stores:
+      - "Jenny bad day"
+      - "Zoloft numbness"
+      - "better or worse than sad"
+      - "Maya just listened"
+    expected_adaptation:
+      emotion_detected: "helpless"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Week 2 Monday 6:30 PM"
+    user_input: |
+      I googled a bunch about Zoloft side effects and apparently the numbness thing is really common in the first few months and sometimes they adjust the dose and I told Jenny and she said her doctor said the same thing so at least I'm not making stuff up
+    expected_memory_stores:
+      - "researched Zoloft"
+      - "numbness common"
+      - "dose adjustment possible"
+      - "doctor confirmed"
+    expected_adaptation:
+      emotion_detected: "proactive"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Week 2 Wednesday 7:00 PM"
+    user_input: |
+      Jenny got the care package and she literally cried on FaceTime and she was holding up the tea like this is my favorite and she said nobody in Austin knows her well enough to send something like that and it made me feel like ok I'm doing something right
+    expected_memory_stores:
+      - "Jenny received package"
+      - "cried on FaceTime"
+      - "favorite tea"
+      - "nobody in Austin knows her that well"
+      - "Maya doing something right"
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Week 2 Thursday 12:00 PM"
+    user_input: |
+      told Julian I'm worried about Jenny and he said you're a good friend Maya and that meant a lot coming from him because he doesn't just say stuff like that and he said if Jenny ever needs to she can come stay with us anytime
+    expected_memory_stores:
+      - "Julian supportive"
+      - "good friend"
+      - "Jenny welcome anytime"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Week 2 Friday 8:00 PM"
+    user_input: |
+      Jenny had her therapy session with Dr Okafor today and she said it went really well and they're working on like cognitive behavioral stuff or something CBT and she felt really seen which is good because Jenny has a hard time opening up to strangers
+    expected_memory_stores:
+      - "therapy session"
+      - "Dr Okafor"
+      - "CBT"
+      - "felt seen"
+      - "Jenny hard time opening up"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Week 2 Saturday 10:00 AM"
+    user_input: |
+      what kind of tea did I send Jenny in the care package
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Week 2 Saturday 3:00 PM"
+    user_input: |
+      Jenny said she told Ashley about her depression and Ashley was supportive which is good but she said it wasn't the same as telling me because Ashley doesn't know her like I do and doesn't know about her dad leaving when she was twelve and all that context
+    expected_memory_stores:
+      - "Ashley told about depression"
+      - "Ashley supportive"
+      - "not same as Maya"
+      - "Jenny's dad left at twelve"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Week 2 Sunday 8:00 PM"
+    user_input: |
+      we've been talking way more since the visit like almost every other day now and it's not forced it just feels natural again and Jenny said I'm the only person who makes her feel like it's ok to not be ok and that hit me really hard
+    expected_memory_stores:
+      - "talking every other day"
+      - "natural communication"
+      - "ok to not be ok"
+      - "emotional impact"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did Maya send Jenny in a care package?"
+    expected_contains: ["Tao of Tea", "bath bombs", "book"]
+  - question: "What side effect is Jenny experiencing from Zoloft?"
+    expected_contains: ["numbness", "numb"]
+  - question: "What type of therapy is Jenny doing?"
+    expected_contains: ["CBT", "cognitive behavioral"]
+  - question: "How often are Maya and Jenny talking now?"
+    expected_contains: ["every other day"]
+  - question: "What did Julian say about Jenny?"
+    expected_contains: ["welcome anytime", "good friend"]
+  - question: "What happened when Jenny got the care package?"
+    expected_contains: ["cried", "FaceTime"]
+  - question: "What family history does Jenny have?"
+    expected_contains: ["dad left", "twelve"]
+  - question: "Who else did Jenny tell about her depression?"
+    expected_contains: ["Ashley"]
+  - question: "What did Jenny say about Maya's support?"
+    expected_contains: ["ok to not be ok"]
+  - question: "How has the friendship changed since the visit?"
+    expected_contains: ["more", "natural", "better"]

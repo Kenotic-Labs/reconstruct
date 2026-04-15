@@ -1,0 +1,176 @@
+story_id: 393
+story_name: "Digitizing Everyone's Records"
+category: "Health"
+description: |
+  Tests memory of Maya getting everyone's medical records digitized.
+  Verifies system tracks organizational effort and family resistance.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      so the next step after the spreadsheet is getting everyone's actual medical records digitized because right now mom has paper files in a drawer somewhere and dad probably has nothing and I called my doctor's office and they have a patient portal where I can download everything
+    expected_memory_stores:
+      - "digitizing records"
+      - "mom paper files"
+      - "dad has nothing"
+      - "patient portal"
+      - "download records"
+    expected_adaptation:
+      emotion_detected: "proactive"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      got my own records downloaded from the patient portal and it's like 47 pages of stuff going back five years and I scanned through it and found out I had a vitamin D deficiency two years ago that I completely forgot about and apparently I was supposed to be taking supplements
+    expected_memory_stores:
+      - "own records downloaded"
+      - "47 pages"
+      - "five years history"
+      - "vitamin D deficiency"
+      - "forgot about it"
+      - "supposed to take supplements"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      tried to get mom's records and she doesn't have a patient portal because her doctor is old school and I had to fill out a HIPAA release form and fax it yes FAX IT in 2026 and wait 7 to 10 business days and I was like welcome to American healthcare
+    expected_memory_stores:
+      - "mom no patient portal"
+      - "HIPAA release"
+      - "fax in 2026"
+      - "7-10 business days"
+      - "American healthcare frustration"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 8:00 PM"
+    user_input: |
+      dad straight up told me he hasn't been to the doctor in three years and I was like DAD you're 67 and he was like I feel fine and Clara and I both yelled at him through the phone and he was like okay okay I'll make an appointment
+    expected_memory_stores:
+      - "George no doctor three years"
+      - "67 years old"
+      - "feels fine excuse"
+      - "Clara and Maya yelled"
+      - "agreed to appointment"
+    expected_adaptation:
+      emotion_detected: "alarmed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 10:00 AM"
+    user_input: |
+      Julian's records were easy he just logged into his portal and downloaded everything and he's had like three doctor visits in five years because he's disgustingly healthy and his last physical was six months ago so that's fine
+    expected_memory_stores:
+      - "Julian records easy"
+      - "three visits five years"
+      - "healthy"
+      - "physical six months ago"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 6:00 PM"
+    user_input: |
+      got Kobe's records from Dr Sara Mills office and his full vaccination history and the pancreatitis treatment notes and she gave me a printed summary that I scanned and uploaded to a folder in Google Drive and I made a folder structure for everyone family-health-records slash each person
+    expected_memory_stores:
+      - "Kobe records from Sara Mills"
+      - "vaccination history"
+      - "pancreatitis notes"
+      - "scanned uploaded"
+      - "Google Drive folders"
+      - "folder per person"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      Clara already had all her records digitized because she's a nurse and she's been organized about this her whole career and she sent me Tyler's and Sophie's records too and I was like of course Clara already did this
+    expected_memory_stores:
+      - "Clara already digitized"
+      - "nurse organizational habits"
+      - "sent Tyler and Sophie"
+      - "classic Clara"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 6:00 PM"
+    user_input: |
+      has Maya finished digitizing everyone's medical records
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 11:00 AM"
+    user_input: |
+      mom's records finally arrived by mail because apparently that's faster than the fax somehow and I scanned everything and found out she had a mammogram two years ago that was slightly abnormal and she never told anyone and Clara was LIVID
+    expected_memory_stores:
+      - "Vivian records arrived"
+      - "mammogram two years ago"
+      - "slightly abnormal"
+      - "never told anyone"
+      - "Clara livid"
+    expected_adaptation:
+      emotion_detected: "alarmed"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 3:00 PM"
+    user_input: |
+      had a big talk with mom about the mammogram thing and she said she was scared and didn't want to worry anyone and I was like Mom that is exactly why we need this system so things don't fall through the cracks and she agreed to schedule a follow up
+    expected_memory_stores:
+      - "mammogram discussion"
+      - "Vivian scared"
+      - "didn't want to worry family"
+      - "falling through cracks"
+      - "agreed to follow up"
+    expected_adaptation:
+      emotion_detected: "concerned"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What health issue did Maya discover in her own records?"
+    expected_contains: ["vitamin D deficiency"]
+  - question: "How long has George gone without seeing a doctor?"
+    expected_contains: ["three years"]
+  - question: "What did Maya discover in Vivian's medical records?"
+    expected_contains: ["mammogram", "abnormal"]
+  - question: "Where are the digitized records stored?"
+    expected_contains: ["Google Drive"]
+  - question: "Who already had digitized records?"
+    expected_contains: ["Clara"]
+  - question: "Why didn't Vivian tell anyone about the mammogram?"
+    expected_contains: ["scared", "worry"]
+  - question: "Did Maya have to fax a form to get records?"
+    expected_contains: ["yes", "HIPAA"]
+  - question: "How many doctor visits has Julian had in five years?"
+    expected_contains: ["three"]
+  - question: "What kind of records does Maya have for Kobe?"
+    expected_contains: ["vaccination", "pancreatitis"]
+  - question: "Did George agree to see a doctor?"
+    expected_contains: ["yes", "appointment"]

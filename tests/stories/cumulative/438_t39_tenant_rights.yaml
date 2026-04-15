@@ -1,0 +1,171 @@
+story_id: 438
+story_name: "Tenant Rights Advocate"
+category: "Lease Dispute"
+description: |
+  Maya becomes an informal tenant rights resource among friends. Helps Nadia
+  with her own deposit issue. Knowledge from the fight pays forward.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      so Nadia just texted me and said her landlord is doing the same thing mine did like withholding part of her deposit claiming carpet damage and she asked if I could help and I was like Nadia I am literally the world's foremost expert on this subject now let me help you
+    expected_memory_stores:
+      - "Nadia deposit issue"
+      - "landlord withholding"
+      - "carpet damage claim"
+      - "Maya helping"
+    expected_adaptation:
+      emotion_detected: "energized"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      asked Nadia if she has move-in photos and she said no and I was like ok that makes it harder but I asked if she has the move-in checklist and she said she thinks so and I said find it immediately because that's your evidence and she went digging through her files
+    expected_memory_stores:
+      - "no move-in photos"
+      - "might have checklist"
+      - "Maya advising"
+      - "evidence critical"
+    expected_adaptation:
+      emotion_detected: "mentoring"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      Nadia found the checklist and it says carpet shows normal wear and I was like that's gold because Oregon law says landlords can't charge for normal wear and tear and I sent her the ORS 90.300 link and told her to draft a demand letter like I did and give a 14 day deadline
+    expected_memory_stores:
+      - "checklist found"
+      - "normal wear noted"
+      - "can't charge for wear and tear"
+      - "ORS 90.300 shared"
+      - "demand letter advice"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 6:00 PM"
+    user_input: |
+      helped Nadia write the demand letter tonight and we basically used mine as a template but changed the facts and she's claiming 950 dollars which is her full deposit and I told her make sure to send it certified mail and keep copies of everything
+    expected_memory_stores:
+      - "demand letter written"
+      - "used Maya's as template"
+      - "Nadia's deposit $950"
+      - "certified mail"
+      - "keep copies"
+    expected_adaptation:
+      emotion_detected: "helpful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 3:00 PM"
+    user_input: |
+      Omar heard about the Nadia thing at the group hangout and asked me to review his lease because he's worried about the same thing when he moves out next year and I was like sure and he bought me coffee as payment and I said this is the weirdest side hustle I've ever had
+    expected_memory_stores:
+      - "Omar wants lease review"
+      - "worried about deposit"
+      - "moving out next year"
+      - "bought Maya coffee"
+      - "weirdest side hustle"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:00 AM"
+    user_input: |
+      Julian thinks I should actually write a blog post or something about tenant deposit rights in Oregon because he said a lot of people don't know this stuff and I was like hmm maybe and he said you could put it on Medium or something and help people beyond just our friend group
+    expected_memory_stores:
+      - "Julian suggests blog post"
+      - "tenant deposit rights"
+      - "Medium platform"
+      - "help beyond friends"
+    expected_adaptation:
+      emotion_detected: "considering"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 2:00 PM"
+    user_input: |
+      Nadia called and her landlord responded to the demand letter within 3 days and agreed to return the full 950 no negotiation needed and she was like MAYA YOU ARE A GENIUS and I was like no you just had the evidence on the checklist and she said I wouldn't have known what to do without you
+    expected_memory_stores:
+      - "Nadia's landlord agreed"
+      - "full $950 returned"
+      - "3 day response"
+      - "no negotiation"
+      - "Nadia grateful"
+    expected_adaptation:
+      emotion_detected: "thrilled"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 4:00 PM"
+    user_input: |
+      how much was Nadia's security deposit and did she get it back
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 6:00 PM"
+    user_input: |
+      Nadia insists on taking me and Julian out to dinner to celebrate and she picked this Thai place on Hawthorne and she made a toast to Maya Chen tenant rights warrior and everyone laughed and Marcus was like wait what happened and we had to tell the whole story from the beginning
+    expected_memory_stores:
+      - "Nadia taking out to dinner"
+      - "Thai place Hawthorne"
+      - "tenant rights warrior toast"
+      - "Marcus didn't know story"
+    expected_adaptation:
+      emotion_detected: "celebrated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 9:00 PM"
+    user_input: |
+      driving home from dinner and I thought about how something that was really stressful and negative turned into this positive thing where I'm actually helping people and the knowledge I gained from fighting Greg Patterson is now benefiting my friends and that's kind of beautiful honestly
+    expected_memory_stores:
+      - "negative turned positive"
+      - "helping friends"
+      - "Patterson fight knowledge"
+      - "beautiful transformation"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who did Maya help with a deposit issue?"
+    expected_contains: ["Nadia"]
+  - question: "How much was Nadia's deposit?"
+    expected_contains: ["950"]
+  - question: "Did Nadia get her full deposit back?"
+    expected_contains: ["yes", "full", "950"]
+  - question: "Did Nadia have move-in photos?"
+    expected_contains: ["no"]
+  - question: "What evidence did Nadia have?"
+    expected_contains: ["checklist", "normal wear"]
+  - question: "Who else asked Maya for lease help?"
+    expected_contains: ["Omar"]
+  - question: "What did Julian suggest Maya write?"
+    expected_contains: ["blog post", "Medium", "tenant rights"]
+  - question: "How quickly did Nadia's landlord respond?"
+    expected_contains: ["3 days"]
+  - question: "What toast did Nadia make?"
+    expected_contains: ["tenant rights warrior"]
+  - question: "What law did Maya share with Nadia?"
+    expected_contains: ["ORS 90.300"]

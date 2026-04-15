@@ -1,0 +1,198 @@
+story_id: 214
+story_name: "Grandpa Wei Passes"
+category: "Family"
+description: |
+  Tests the system handling death of a family member. Grandpa Wei passes peacefully.
+  Maya receives the call. Verifies system captures the event, emotional state, and
+  immediate family response.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 6:15 AM"
+    user_input: |
+      my dad called at like 5 am and I knew before I even picked up and he said Maya grandpa passed in his sleep last night and Linda the nurse was there and she said it was peaceful and he didn't suffer and I just sat there holding the phone not saying anything
+    expected_memory_stores:
+      - "grandpa passed"
+      - "in his sleep"
+      - "peaceful"
+      - "George called"
+      - "5 am call"
+      - "Linda was there"
+    expected_triples:
+      - ["Grandpa Wei", "passed_away", "peacefully in his sleep"]
+      - ["George", "called_user", "at 5 am with news"]
+      - ["Linda", "was_present", "when Grandpa Wei passed"]
+      - ["user", "has_emotion", "shock"]
+    expected_adaptation:
+      emotion_detected: "shock"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 6:30 AM"
+    user_input: |
+      Julian woke up and saw me sitting on the edge of the bed just staring and he immediately knew and he held me and I cried so hard I couldn't breathe and Kobe jumped up on the bed which he's not supposed to do but neither of us stopped him
+    expected_memory_stores:
+      - "Julian held Maya"
+      - "crying hard"
+      - "Kobe on bed"
+      - "morning grief"
+    expected_triples:
+      - ["Julian", "comforted", "user after grandpa's death"]
+      - ["Kobe", "jumped_on", "bed to comfort user"]
+      - ["user", "has_emotion", "devastated"]
+    expected_adaptation:
+      emotion_detected: "devastated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 8:00 AM"
+    user_input: |
+      Clara called me and we just cried together on the phone for like fifteen minutes and she said she's glad we went to see him last week and I'm glad too because I got to hold his hand one more time and hear his voice
+    expected_memory_stores:
+      - "Clara called"
+      - "cried together"
+      - "glad they visited"
+      - "last week visit"
+    expected_triples:
+      - ["Clara", "called_user", "to grieve together"]
+      - ["user", "is_glad", "visited Grandpa Wei last week"]
+      - ["user", "has_emotion", "grief"]
+    expected_adaptation:
+      emotion_detected: "grief"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 10:00 AM"
+    user_input: |
+      my mom is a wreck she's in Fresno with dad and she's barely talking and Clara said she's going to fly down today to be with them and I said I'll come too but my mom said Maya wait come for the funeral on Saturday don't use all your days off now
+    expected_memory_stores:
+      - "Vivian devastated"
+      - "in Fresno with George"
+      - "Clara flying down"
+      - "funeral Saturday"
+      - "Maya told to wait"
+    expected_triples:
+      - ["Vivian", "is", "devastated and barely talking"]
+      - ["Clara", "flying_to", "Fresno to be with parents"]
+      - ["funeral", "scheduled_for", "Saturday"]
+      - ["Vivian", "told_user", "wait and come for the funeral"]
+    expected_adaptation:
+      emotion_detected: "anguished"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      I emailed my manager and told her about my grandfather and she said take whatever time you need and the team sent me this really nice message and Leon texted me separately and said I'm sorry Maya and I appreciated that
+    expected_memory_stores:
+      - "told manager"
+      - "take time off"
+      - "team message"
+      - "Leon texted"
+    expected_triples:
+      - ["user", "informed", "manager about grandfather's passing"]
+      - ["manager", "offered", "time off"]
+      - ["Leon", "texted", "condolences to user"]
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 2:00 PM"
+    user_input: |
+      when did grandpa pass and where is the funeral going to be
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 3:00 PM"
+    user_input: |
+      Diane called me and said oh sweetheart I'm so sorry and she asked if there was anything she could do and I said just make sure Julian is ok because he's trying to be strong for me but I can tell he doesn't know what to do with grief like he's never lost anyone close
+    expected_memory_stores:
+      - "Diane called condolences"
+      - "sweetheart"
+      - "Julian doesn't know grief"
+      - "never lost anyone close"
+    expected_adaptation:
+      emotion_detected: "appreciative"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 5:00 PM"
+    user_input: |
+      I keep looking at this photo on my phone of grandpa and me from my college graduation and he's beaming in it and he's wearing this suit that was too big for him and his watch the one he's leaving me and I can't stop staring at his smile
+    expected_memory_stores:
+      - "graduation photo"
+      - "grandpa beaming"
+      - "suit too big"
+      - "the watch"
+      - "can't stop staring"
+    expected_adaptation:
+      emotion_detected: "nostalgic"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      the funeral is at Pine Hill Memorial in Fresno on Saturday at 2 pm and my dad is handling all the arrangements because my mom can't and Clara is helping and they're doing a bilingual service English and Mandarin because that's what grandpa would have wanted
+    expected_memory_stores:
+      - "Pine Hill Memorial"
+      - "Fresno"
+      - "Saturday 2 pm"
+      - "George handling arrangements"
+      - "Vivian can't"
+      - "bilingual service"
+      - "English and Mandarin"
+    expected_adaptation:
+      emotion_detected: "somber"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 11:00 PM"
+    user_input: |
+      I'm lying in bed and I can't sleep and I keep thinking about what grandpa said last time build beautiful things and I will grandpa I promise and I whispered it out loud like he could hear me and maybe he can I don't know I want to believe that
+    expected_memory_stores:
+      - "can't sleep"
+      - "build beautiful things"
+      - "whispered promise"
+      - "wants to believe"
+    expected_adaptation:
+      emotion_detected: "bereft"
+      warmth_direction: increase
+
+final_verification:
+  - question: "When did Grandpa Wei pass away?"
+    expected_contains: ["Tuesday", "sleep", "night"]
+  - question: "How did Grandpa Wei die?"
+    expected_contains: ["peaceful", "in his sleep"]
+  - question: "Where is the funeral?"
+    expected_contains: ["Pine Hill Memorial", "Fresno"]
+  - question: "When is the funeral?"
+    expected_contains: ["Saturday", "2 pm"]
+  - question: "What kind of service is planned?"
+    expected_contains: ["bilingual", "English", "Mandarin"]
+  - question: "Who is handling funeral arrangements?"
+    expected_contains: ["George", "dad"]
+  - question: "How is Vivian handling the loss?"
+    expected_contains: ["wreck", "devastated", "barely talking"]
+  - question: "Who called Maya to offer condolences?"
+    expected_contains: ["Diane", "Leon"]
+  - question: "What photo does Maya keep looking at?"
+    expected_contains: ["graduation"]
+  - question: "What were Grandpa Wei's last meaningful words to Maya?"
+    expected_contains: ["build beautiful things"]

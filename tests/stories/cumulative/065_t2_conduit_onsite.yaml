@@ -1,0 +1,225 @@
+story_id: 65
+story_name: "Conduit AI Onsite Day"
+category: "Career"
+description: |
+  Tests memory of all four rounds of Maya's Conduit AI interview.
+  Each round has distinct content and interviewers.
+  Verifies detailed event tracking within a single high-stakes day.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 8:30 AM"
+    user_input: |
+      interview day and I'm sitting at my desk wearing Julian's ironed blouse with my nice earrings and I took PTO from Vantage told them I had a doctors appointment and I feel a little guilty about lying but also not really because they don't deserve my honesty after the PIP thing
+    expected_memory_stores:
+      - "interview day"
+      - "PTO lie"
+      - "doctors appointment excuse"
+      - "Julian's blouse"
+      - "mild guilt"
+    expected_triples:
+      - ["user", "took_PTO", "doctor's appointment excuse"]
+      - ["user", "wearing", "Julian's ironed blouse"]
+      - ["user", "has_emotion", "nervous"]
+      - ["user", "feels", "mild guilt about lying"]
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 9:15 AM"
+    user_input: |
+      round one was system design with a senior engineer named Wei and I had to design a real time search suggestion system and I crushed it like I went deep into the architecture talked about elasticsearch alternatives distributed caching query optimization and Wei kept saying good good that's interesting and I felt so alive doing it
+    expected_memory_stores:
+      - "round one system design"
+      - "Wei interviewer"
+      - "real time search suggestion"
+      - "elasticsearch"
+      - "distributed caching"
+      - "crushed it"
+    expected_triples:
+      - ["Wei", "interviewed_user", "round one system design"]
+      - ["user", "designed", "real time search suggestion system"]
+      - ["user", "discussed", "elasticsearch distributed caching query optimization"]
+      - ["user", "has_emotion", "exhilarated"]
+    expected_adaptation:
+      emotion_detected: "exhilarated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 10:45 AM"
+    user_input: |
+      round two was coding with Sam Okafor himself and the problem was building a simplified version of their document ranking pipeline and it was hard but fair like it tested real engineering skills not trick questions and I got a working solution and even had time to discuss trade offs which Sam seemed to really value
+    expected_memory_stores:
+      - "round two coding"
+      - "Sam Okafor"
+      - "document ranking pipeline"
+      - "working solution"
+      - "trade offs discussion"
+    expected_triples:
+      - ["Sam_Okafor", "interviewed_user", "round two coding"]
+      - ["user", "built", "simplified document ranking pipeline"]
+      - ["user", "discussed", "trade offs with Sam"]
+      - ["user", "has_emotion", "proud"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 12:30 PM"
+    user_input: |
+      took a break for lunch and Julian texted asking how it's going and I said two rounds down both went great and he sent back a picture of Kobe wearing sunglasses which I think he put on him specifically to cheer me up and it worked I laughed so hard
+    expected_memory_stores:
+      - "lunch break"
+      - "Julian check-in"
+      - "two rounds done"
+      - "Kobe sunglasses photo"
+      - "laughter"
+    expected_triples:
+      - ["Julian", "texted", "check-in during lunch break"]
+      - ["Julian", "sent", "photo of Kobe wearing sunglasses"]
+      - ["user", "has_emotion", "happy"]
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 1:30 PM"
+    user_input: |
+      round three was culture fit with the head of people ops a woman named Jenny and she asked me about dealing with conflict and I told her about the PIP situation without naming Derek or Vantage obviously and she was genuinely impressed at how I handled it with data and professionalism and she said that's exactly the kind of person we want
+    expected_memory_stores:
+      - "round three culture fit"
+      - "Jenny people ops"
+      - "PIP story told"
+      - "no names mentioned"
+      - "impressed response"
+      - "fit confirmation"
+    expected_triples:
+      - ["Jenny", "interviewed_user", "round three culture fit"]
+      - ["Jenny", "role", "head of people ops"]
+      - ["user", "told", "PIP conflict story without naming Derek or Vantage"]
+      - ["Jenny", "said", "that's exactly the kind of person we want"]
+      - ["user", "has_emotion", "validated"]
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 3:00 PM"
+    user_input: |
+      round four was with Ross Zhang and it was more of a conversation than an interview like he talked about Conduit's vision for the next two years and asked what I'd want to own if I joined and I said search infrastructure without hesitating and he smiled and said that's exactly what we need someone to own
+    expected_memory_stores:
+      - "round four Ross Zhang"
+      - "conversational"
+      - "Conduit vision"
+      - "search infrastructure ownership"
+      - "Ross smiled"
+      - "need confirmed"
+    expected_triples:
+      - ["Ross_Zhang", "interviewed_user", "round four conversational"]
+      - ["Ross_Zhang", "discussed", "Conduit vision next two years"]
+      - ["user", "wants_to_own", "search infrastructure"]
+      - ["Ross_Zhang", "confirmed", "need for search infrastructure owner"]
+      - ["user", "has_emotion", "elated"]
+    expected_adaptation:
+      emotion_detected: "elated"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 4:00 PM"
+    user_input: |
+      interviews are done and I feel incredible like genuinely the best I've felt about anything work related in months every round felt right and the people were amazing and the problems were interesting and I actually want to work there not just escape Vantage but genuinely want to be at Conduit
+    expected_memory_stores:
+      - "interviews complete"
+      - "feeling incredible"
+      - "genuine desire"
+      - "not just escape"
+      - "want to be at Conduit"
+    expected_triples:
+      - ["user", "completed", "all four Conduit interview rounds"]
+      - ["user", "genuinely_wants", "to work at Conduit AI"]
+      - ["user", "has_emotion", "euphoric"]
+    expected_adaptation:
+      emotion_detected: "euphoric"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 5:00 PM"
+    user_input: |
+      who interviewed Maya in the culture fit round at Conduit AI
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 7:00 PM"
+    user_input: |
+      Julian made steak which is his celebration dinner and he kept asking me about each round and he was so engaged and asking follow up questions and I realized he's been on this journey with me the whole time like the resume help the mock interviews the emotional support he's basically been my unpaid career coach
+    expected_memory_stores:
+      - "Julian celebration steak"
+      - "detailed debrief"
+      - "Julian as career coach"
+      - "appreciation"
+    expected_triples:
+      - ["Julian", "made", "celebration steak dinner"]
+      - ["Julian", "role", "unpaid career coach throughout process"]
+      - ["user", "has_emotion", "grateful"]
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 10:00 PM"
+    user_input: |
+      Nina texted and said she already heard initial feedback from Conduit and it's quote very positive unquote and they want to move to the offer stage pending one more reference check and I literally screamed and Julian came running in and Kobe started barking and it was chaos but the good kind
+    expected_memory_stores:
+      - "Nina positive feedback"
+      - "very positive"
+      - "offer stage"
+      - "reference check"
+      - "screaming celebration"
+      - "Julian and Kobe"
+    expected_triples:
+      - ["Nina", "reported", "very positive initial feedback"]
+      - ["Conduit", "wants_to_move_to", "offer stage"]
+      - ["Conduit", "pending", "one more reference check"]
+      - ["user", "has_emotion", "ecstatic"]
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How many rounds was the Conduit AI onsite?"
+    expected_contains: ["four"]
+  - question: "Who interviewed Maya in round one?"
+    expected_contains: ["Wei"]
+  - question: "What was the system design problem?"
+    expected_contains: ["real time search suggestion"]
+  - question: "What was the coding problem about?"
+    expected_contains: ["document ranking pipeline"]
+  - question: "Who conducted the culture fit interview?"
+    expected_contains: ["Jenny"]
+  - question: "What did Maya tell Jenny about conflict?"
+    expected_contains: ["PIP"]
+  - question: "What did Ross Zhang ask Maya about?"
+    expected_contains: ["own", "ownership"]
+  - question: "What area did Maya say she wanted to own?"
+    expected_contains: ["search infrastructure"]
+  - question: "What was the initial feedback from Conduit?"
+    expected_contains: ["very positive", "offer stage"]
+  - question: "What excuse did Maya give Vantage for the day off?"
+    expected_contains: ["doctor", "appointment"]

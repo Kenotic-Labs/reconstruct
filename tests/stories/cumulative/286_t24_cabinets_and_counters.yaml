@@ -1,0 +1,184 @@
+story_id: 286
+story_name: "Cabinets and Counters Going In"
+category: "Home"
+description: |
+  Tests memory of the IKEA cabinets and butcher block counters being installed.
+  Captures the excitement of seeing the kitchen take shape and an additional cost surprise.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 5:00 PM"
+    user_input: |
+      Anna's crew started the cabinet install today and Rosa is apparently the cabinet specialist and she's insanely good like she assembled the first IKEA cabinet in about 20 minutes and leveled it perfectly and I was like okay I see why you charge more
+    expected_memory_stores:
+      - "cabinet install started"
+      - "Rosa cabinet specialist"
+      - "20 minutes first cabinet"
+      - "leveled perfectly"
+      - "worth the cost"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      lower cabinets are all in and the uppers are going in tomorrow and oh my god it's starting to look like a real kitchen Julian came in after work and literally gasped like he stood in the doorway and was like oh my god Maya look at it
+    expected_memory_stores:
+      - "lower cabinets done"
+      - "uppers tomorrow"
+      - "looking like real kitchen"
+      - "Julian gasped"
+      - "emotional reaction"
+    expected_adaptation:
+      emotion_detected: "thrilled"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 7:00 PM"
+    user_input: |
+      all cabinets are installed and they look amazing the IKEA ones are actually really nice like white shaker style and Julian's layout design with the L-shape and the island prep area was genius and Anna was like whoever designed this layout did a great job and I was like that's my boyfriend
+    expected_memory_stores:
+      - "all cabinets installed"
+      - "white shaker style"
+      - "L-shape layout"
+      - "island prep area"
+      - "Julian's design praised"
+      - "Anna complimented layout"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 10:00 AM"
+    user_input: |
+      butcher block counter day! Tyler is cutting and fitting them and the wood is beautiful it's this warm honey-colored oak and when he set the first piece on the lower cabinets Julian made this sound that I can only describe as a happy whimper
+    expected_memory_stores:
+      - "butcher block installation"
+      - "Tyler cutting and fitting"
+      - "honey-colored oak"
+      - "beautiful wood"
+      - "Julian happy whimper"
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 6:00 PM"
+    user_input: |
+      small setback Anna said the butcher block around the sink cutout needs a special waterproof sealant not just the mineral oil we planned and that sealant plus the extra labor to apply it properly is another $400 and I'm like at this point what's $400 in a sea of overruns
+    expected_memory_stores:
+      - "waterproof sealant needed"
+      - "sink cutout"
+      - "not just mineral oil"
+      - "additional $400"
+      - "another overrun"
+    expected_adaptation:
+      emotion_detected: "resigned amusement"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      counters are done and sealed and the new sink is in it's a white farmhouse style that Julian picked and the faucet is this matte black thing that looks so modern against the butcher block and Anna connected the dishwasher with proper code-compliant fittings unlike Miguel
+    expected_memory_stores:
+      - "counters done and sealed"
+      - "white farmhouse sink"
+      - "Julian picked sink"
+      - "matte black faucet"
+      - "dishwasher connected properly"
+      - "unlike Miguel"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 8:00 PM"
+    user_input: |
+      I cooked on the new counter tonight just a simple pasta and it was the first real meal in our kitchen in almost six weeks and I was chopping vegetables on the butcher block and it felt so good and Julian opened a bottle of wine and we ate at the actual dining table for the first time in forever
+    expected_memory_stores:
+      - "first meal in kitchen"
+      - "six weeks without"
+      - "pasta"
+      - "chopping on butcher block"
+      - "wine with Julian"
+      - "dining table"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 6:00 PM"
+    user_input: |
+      Anna said next week is backsplash tile and painting and then the kitchen is done and I'm so close to the finish line and also she recommended these subway tiles in a slightly off-white color that would complement the butcher block and Julian loved the idea
+    expected_memory_stores:
+      - "next week tile and paint"
+      - "almost done"
+      - "subway tiles"
+      - "off-white"
+      - "complement butcher block"
+      - "Julian approved"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 10:00 AM"
+    user_input: |
+      took photos of the kitchen progress and sent them to my mom and Nadia and Omar and everyone and the response was unanimous like everyone is shocked by the transformation and Nadia was like this does NOT look like the same kitchen and honestly it doesn't
+    expected_memory_stores:
+      - "progress photos"
+      - "sent to everyone"
+      - "unanimous positive response"
+      - "Nadia shocked"
+      - "transformation"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 9:00 AM"
+    user_input: |
+      Julian spent the whole morning in the kitchen just sitting at the island with his coffee sketching in his notebook and he said this is the first space in the house that actually feels finished and designed and not just livable and I was like wait till we do the bathroom
+    expected_memory_stores:
+      - "Julian at island"
+      - "coffee and sketching"
+      - "feels finished"
+      - "designed not just livable"
+      - "bathroom next"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What style are the IKEA cabinets?"
+    expected_contains: ["white shaker"]
+  - question: "What is the counter material?"
+    expected_contains: ["butcher block", "oak"]
+  - question: "What style sink did they install?"
+    expected_contains: ["farmhouse", "white"]
+  - question: "What color is the kitchen faucet?"
+    expected_contains: ["matte black"]
+  - question: "Who picked the sink style?"
+    expected_contains: ["Julian"]
+  - question: "What is the kitchen layout?"
+    expected_contains: ["L-shape", "island"]
+  - question: "Who is the cabinet specialist on Anna's crew?"
+    expected_contains: ["Rosa"]
+  - question: "What backsplash tile style was recommended?"
+    expected_contains: ["subway", "off-white"]
+  - question: "How long were they without a kitchen?"
+    expected_contains: ["six weeks"]
+  - question: "What extra cost came up with the counters?"
+    expected_contains: ["sealant", "400"]

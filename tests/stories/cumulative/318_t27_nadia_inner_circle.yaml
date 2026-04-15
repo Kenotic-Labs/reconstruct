@@ -1,0 +1,170 @@
+story_id: 318
+story_name: "Nadia Joins the Inner Circle"
+category: "Friendships"
+description: |
+  Tests memory of Nadia gradually becoming part of Maya's friend group.
+  First group hangout, meeting the crew, finding her place.
+  Verifies system tracks social integration and group dynamics.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      so we have this monthly dinner thing that's been going on for a few months now with me Julian Marcus and Omar and I asked everyone if I could bring Nadia and they all said yeah of course and Marcus was like the more the merrier
+    expected_memory_stores:
+      - "monthly dinner group"
+      - "Maya Julian Marcus Omar"
+      - "inviting Nadia"
+      - "Marcus welcoming"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 7:30 PM"
+    user_input: |
+      prepped Nadia about the group and I was like ok Marcus Hill is a teacher super funny kind of a player Omar Hassan is an architect and he's quiet but like the most observant person ever and Julian you already met and she was like ok I can handle this
+    expected_memory_stores:
+      - "Marcus Hill teacher"
+      - "funny and player"
+      - "Omar Hassan architect"
+      - "quiet observant"
+      - "Nadia confident"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 7:00 PM"
+    user_input: |
+      dinner tonight at Eem which is this amazing Thai BBQ place on Killingsworth and Nadia showed up looking great in that green dress and Marcus immediately introduced himself and was being extra charming and I was like oh boy here we go
+    expected_memory_stores:
+      - "dinner at Eem"
+      - "Thai BBQ Killingsworth"
+      - "Nadia green dress"
+      - "Marcus charming"
+      - "Maya noticed"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 8:30 PM"
+    user_input: |
+      Nadia and Omar hit it off really well actually they started talking about design because Omar does architecture and Nadia does graphic design and they were geeking out about Brutalist buildings and I was like I don't know what that is but I'm glad you're happy
+    expected_memory_stores:
+      - "Nadia and Omar bonding"
+      - "design conversation"
+      - "Brutalist buildings"
+      - "architecture and graphic design"
+    expected_adaptation:
+      emotion_detected: "pleased"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 9:30 PM"
+    user_input: |
+      Marcus made some joke about being recently single too and Nadia laughed and said oh are you also on the freshly divorced train and everyone got quiet for a second and then Marcus said wait you too high five and they high fived and it was weirdly cute
+    expected_memory_stores:
+      - "Marcus recently single"
+      - "Nadia divorced joke"
+      - "high five"
+      - "weirdly cute"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:30 PM"
+    user_input: |
+      Julian leaned over and whispered she fits right in and I was like I know right and it's true like Nadia has this energy that just works with our group and Omar said on the way out that she should come every time
+    expected_memory_stores:
+      - "Julian said she fits"
+      - "Nadia's energy"
+      - "Omar wants her back"
+      - "group acceptance"
+    expected_adaptation:
+      emotion_detected: "gratified"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 10:00 AM"
+    user_input: |
+      Nadia texted this morning saying she had so much fun and that she hasn't had a friend group since Chicago and it made her feel normal again and she really liked Omar because he didn't try too hard like Marcus did which lol accurate
+    expected_memory_stores:
+      - "Nadia had fun"
+      - "no friend group since Chicago"
+      - "felt normal"
+      - "liked Omar"
+      - "Marcus tried too hard"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 12:00 PM"
+    user_input: |
+      where did the group go for dinner when Nadia first joined
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 3:00 PM"
+    user_input: |
+      Marcus texted me privately and said yo Nadia is really cool is she seeing anyone and I was like Marcus she JUST got divorced leave her alone and he was like ok ok fair enough I'm just asking and I was like I'm watching you
+    expected_memory_stores:
+      - "Marcus interested in Nadia"
+      - "Maya warned him"
+      - "just divorced"
+      - "watching you"
+    expected_adaptation:
+      emotion_detected: "protective"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 7:00 PM"
+    user_input: |
+      told Jenny about Nadia meeting the group and she was like I'm glad you have people there because I worry about you and I said I worry about YOU and she said well then we're even and then she said she can't wait to meet everyone at the wedding
+    expected_memory_stores:
+      - "Jenny glad about group"
+      - "mutual worry"
+      - "meet everyone at wedding"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who is in Maya's dinner group?"
+    expected_contains: ["Maya", "Julian", "Marcus", "Omar", "Nadia"]
+  - question: "Where was Nadia's first group dinner?"
+    expected_contains: ["Eem", "Killingsworth"]
+  - question: "What do Nadia and Omar have in common?"
+    expected_contains: ["design", "architecture", "graphic design"]
+  - question: "What did Marcus do when he met Nadia?"
+    expected_contains: ["charming", "tried too hard"]
+  - question: "Is Marcus interested in Nadia?"
+    expected_contains: ["yes", "asked if seeing anyone"]
+  - question: "What did Maya say to Marcus about Nadia?"
+    expected_contains: ["leave her alone", "just divorced"]
+  - question: "How did Nadia feel about the group?"
+    expected_contains: ["fun", "normal", "friend group"]
+  - question: "Who does Nadia like most in the group?"
+    expected_contains: ["Omar"]
+  - question: "What did Julian say about Nadia fitting in?"
+    expected_contains: ["fits right in"]
+  - question: "What does Omar do for work?"
+    expected_contains: ["architect"]

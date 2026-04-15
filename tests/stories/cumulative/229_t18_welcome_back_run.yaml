@@ -1,0 +1,173 @@
+story_id: 229
+story_name: "Welcome Back Run"
+category: "Health"
+description: |
+  Tests social recovery milestone. Running group welcomes Maya back.
+  Verifies system tracks social context of physical recovery and group dynamics.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 7:00 AM"
+    user_input: |
+      meeting the running group at Forest Park for the welcome back run and Naomi is here and there's like six others and someone made a little sign that says MAYA IS BACK and I'm laughing and also trying not to cry because these people are so sweet
+    expected_memory_stores:
+      - "welcome back run"
+      - "Forest Park"
+      - "Naomi"
+      - "six others"
+      - "Maya is back sign"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 7:15 AM"
+    user_input: |
+      everyone agreed to go at my pace which is slow like really slow compared to before and Naomi stayed with me the whole time and we did like two and a half miles with walk breaks and she was telling me about her marathon and it was fine like I wasn't jealous anymore
+    expected_memory_stores:
+      - "group went at her pace"
+      - "slow pace"
+      - "Naomi stayed"
+      - "two and a half miles"
+      - "walk breaks"
+      - "no longer jealous"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 8:00 AM"
+    user_input: |
+      after the run everyone went to this coffee shop nearby um Extracto on Killingsworth or something and we all got lattes and they asked about my knee and the swimming and Doris and I told them the whole story and they were like wow you're a swimmer now too
+    expected_memory_stores:
+      - "coffee after run"
+      - "Extracto"
+      - "Killingsworth"
+      - "told whole story"
+      - "swimmer now too"
+    expected_adaptation:
+      emotion_detected: "belonging"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 10:00 AM"
+    user_input: |
+      Jake said I can increase to three minutes running one minute walking this week and he said the group run was perfect because it forced me to go slow and he said the social aspect of running is actually important for recovery motivation
+    expected_memory_stores:
+      - "three minutes running now"
+      - "one minute walking"
+      - "progression"
+      - "social aspect important"
+      - "recovery motivation"
+    expected_adaptation:
+      emotion_detected: "encouraged"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 2:00 PM"
+    user_input: |
+      Naomi texted me and said it was so good to have you back and she said she missed our morning runs and she asked if I want to be running partners again when I'm back to full speed and I said yes absolutely
+    expected_memory_stores:
+      - "Naomi running partner"
+      - "missed Maya"
+      - "back to full speed plan"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 4:00 PM"
+    user_input: |
+      how far did I run today and what was the interval plan
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 5:00 PM"
+    user_input: |
+      thinking about the next Portland Marathon which is next October and Naomi said we should sign up together and I said maybe but also I don't want to put that pressure on myself yet and she said totally fair no rush
+    expected_memory_stores:
+      - "next Portland Marathon"
+      - "next October"
+      - "Naomi sign up together"
+      - "Maya cautious"
+      - "no rush"
+    expected_adaptation:
+      emotion_detected: "cautious"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 7:00 PM"
+    user_input: |
+      Julian asked how the group run went and I told him about the sign and the coffee and Naomi and he said I'm really glad you have those people and he's right like running introduced me to this whole community I didn't even appreciate before the injury
+    expected_memory_stores:
+      - "told Julian"
+      - "community appreciation"
+      - "didn't appreciate before"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 9:00 PM"
+    user_input: |
+      gonna keep swimming too even now that I can run again because it's become something I genuinely love and Doris texted me good luck on your run today with a little fish emoji and she said the pool misses you and I said I'll be there Monday don't worry
+    expected_memory_stores:
+      - "keeping swimming"
+      - "Doris texted"
+      - "pool Monday"
+      - "genuinely loves swimming"
+    expected_adaptation:
+      emotion_detected: "balanced"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 AM"
+    user_input: |
+      woke up and my knee feels great no soreness no swelling and I feel like this chapter is closing and a new one is opening and I'm a runner who swims now or a swimmer who runs or whatever but I'm more than I was before and it took a torn meniscus to get there which is annoyingly poetic
+    expected_memory_stores:
+      - "knee great"
+      - "no soreness no swelling"
+      - "chapter closing"
+      - "runner who swims"
+      - "more than before"
+      - "annoyingly poetic"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How did the welcome back run go?"
+    expected_contains: ["two and a half miles", "walk breaks", "slow"]
+  - question: "What did the running group do for Maya?"
+    expected_contains: ["sign", "Maya is back"]
+  - question: "Where did the group get coffee?"
+    expected_contains: ["Extracto"]
+  - question: "Is Maya considering another marathon?"
+    expected_contains: ["maybe", "cautious", "next October"]
+  - question: "Will Maya continue swimming?"
+    expected_contains: ["yes", "loves swimming"]
+  - question: "What is Maya's updated running interval?"
+    expected_contains: ["three minutes running", "one minute walking"]
+  - question: "Who wants to be Maya's running partner?"
+    expected_contains: ["Naomi"]
+  - question: "How is Maya's knee after the group run?"
+    expected_contains: ["great", "no soreness", "no swelling"]
+  - question: "What did Maya learn from the injury?"
+    expected_contains: ["community", "more than before"]
+  - question: "How does Maya describe herself now?"
+    expected_contains: ["runner who swims", "swimmer who runs"]

@@ -1,0 +1,187 @@
+story_id: 190
+story_name: "Dad's Retirement Arc Complete"
+category: "Life Events"
+description: |
+  Full reflection on George's retirement journey. From announcement
+  through sale, depression, woodworking, wedding arch, and new purpose.
+  Tests complete state reconstruction of retirement thread.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Sunday 9:00 AM"
+    user_input: |
+      woke up at my parents house the morning after the party and Dad is already in the garage working on the dining table commission and humming again and I'm sitting in the kitchen drinking coffee and Mom is making congee and it's just peaceful and I'm thinking about this whole journey
+    expected_memory_stores:
+      - "morning after party"
+      - "George in garage"
+      - "dining table commission"
+      - "humming"
+      - "Vivian making congee"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Sunday 9:30 AM"
+    user_input: |
+      like Dad announced retirement and I was scared because that shop was his identity and then the Roger Willis sale fell through and Dad was crushed and then Frank DeLuca came along and they negotiated from $380K down to $340K and the closing kept getting pushed but it finally happened March 22nd
+    expected_memory_stores:
+      - "retirement journey recap"
+      - "Roger fell through"
+      - "Frank DeLuca bought it"
+      - "$380K to $340K"
+      - "closing March 22"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Sunday 10:00 AM"
+    user_input: |
+      and then the depression or whatever it was where Dad just sat in his recliner and watched TV and snapped at Mom and didn't eat and Clara thought he needed therapy and Julian said no he needs a project and I suggested woodworking and his grandfather's legacy kicked in
+    expected_memory_stores:
+      - "depression period recap"
+      - "sat in recliner"
+      - "snapped at Vivian"
+      - "Clara suggested therapy"
+      - "Julian said project"
+      - "Maya suggested woodworking"
+      - "grandfather's legacy"
+    expected_adaptation:
+      emotion_detected: "narrative"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Sunday 10:30 AM"
+    user_input: |
+      and then everything changed Bill's class the jewelry box the bookshelf the side table entering the show winning third place the first commission Howard becoming his friend and partner and then the wedding arch which is honestly the crown jewel of all of it
+    expected_memory_stores:
+      - "woodworking milestones"
+      - "Bill's class"
+      - "jewelry box bookshelf side table"
+      - "show third place"
+      - "first commission"
+      - "Howard partner"
+      - "wedding arch crown jewel"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Sunday 11:00 AM"
+    user_input: |
+      the arch though like Dad building the arch for my wedding with the carved initials and the little tree symbol for his father that's the most meaningful thing he's ever made and when I stand under it with Julian on June 22nd I'll know that three generations of Chens built the moment I'm standing in
+    expected_memory_stores:
+      - "arch significance"
+      - "carved initials"
+      - "grandfather's tree symbol"
+      - "three generations"
+      - "June 22 ceremony"
+    expected_adaptation:
+      emotion_detected: "profound gratitude"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 12:00 PM"
+    user_input: |
+      Dad came in from the garage for lunch and he had sawdust in his hair and Mom brushed it off and said George you need a haircut before the wedding and he said I'll get a haircut when the dining table is done and she said the dining table can wait your daughter's wedding cannot and they bickered and it was perfect
+    expected_memory_stores:
+      - "George needs haircut for wedding"
+      - "Vivian insisting"
+      - "dining table priority for George"
+      - "wedding priority for Vivian"
+      - "loving bickering"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 2:00 PM"
+    user_input: |
+      I went into the garage to watch Dad work and he showed me the dining table in progress and it's beautiful hickory wood with breadboard ends which I learned is a technique to prevent warping and he explained every joint every measurement every decision and I realized this is exactly how he used to talk about engines
+    expected_memory_stores:
+      - "dining table in progress"
+      - "hickory wood"
+      - "breadboard ends"
+      - "George explains craft"
+      - "same passion as engines"
+    expected_adaptation:
+      emotion_detected: "tender"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 4:00 PM"
+    user_input: |
+      Clara came over and we sat in the garage watching Dad work and she said you know what I think Dad needed to retire not just from the shop but from the version of himself that only knew how to be one thing and now he's becoming something new and I was like Clara when did you get so wise and she said I'm a nurse Maya I watch people transform every day
+    expected_memory_stores:
+      - "Clara's insight"
+      - "George becoming something new"
+      - "retiring from old identity"
+      - "Clara's wisdom from nursing"
+    expected_adaptation:
+      emotion_detected: "thoughtful"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 6:00 PM"
+    user_input: |
+      heading to the airport soon and Dad drove me because Mom's car was blocked in by Dad's wood delivery pile lol and in the car Dad said Maya thanks for suggesting the woodworking and I said Dad you did all the work and he said no you saw what I needed before I could see it myself and that means more than you know
+    expected_memory_stores:
+      - "George drove Maya to airport"
+      - "George thanked Maya for woodworking suggestion"
+      - "Maya saw what he needed"
+      - "meaningful conversation"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 PM"
+    user_input: |
+      on the plane home and thinking about everything Dad's retirement is complete his new chapter is thriving he's got purpose again and the wedding arch is sitting in his garage ready to be transported to Pine Ridge Lodge in a few months and I just feel like everything is coming together Mom's health is stable Dad is happy Julian is killing it at Bold Studio the wedding is planned and I'm about to be Auntie Maya wait what did I just say that's a different story
+    expected_memory_stores:
+      - "flying home"
+      - "retirement arc complete"
+      - "George thriving"
+      - "arch ready for transport"
+      - "everything coming together"
+      - "Vivian stable"
+      - "Julian at Bold Studio"
+      - "wedding planned"
+      - "Auntie Maya hint"
+    expected_adaptation:
+      emotion_detected: "grateful hopeful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Summarize George's retirement journey."
+    expected_contains: ["shop", "sold", "340K", "depressed", "woodworking", "thriving"]
+  - question: "Who bought Chen's Auto Repair?"
+    expected_contains: ["Frank DeLuca"]
+  - question: "What saved George from retirement depression?"
+    expected_contains: ["woodworking"]
+  - question: "What is George building for the wedding?"
+    expected_contains: ["arch"]
+  - question: "What symbol is on the wedding arch?"
+    expected_contains: ["tree", "grandfather"]
+  - question: "Who suggested woodworking to George?"
+    expected_contains: ["Maya"]
+  - question: "Who is George's woodworking instructor?"
+    expected_contains: ["Bill"]
+  - question: "What is George's current routine?"
+    expected_contains: ["garage", "woodworking"]
+  - question: "Has George gotten paid commissions?"
+    expected_contains: ["yes", "dining table"]
+  - question: "Is George happier now than when he first retired?"
+    expected_contains: ["yes"]

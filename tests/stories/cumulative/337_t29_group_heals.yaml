@@ -1,0 +1,175 @@
+story_id: 337
+story_name: "The Group Heals"
+category: "Friendships"
+description: |
+  Tests memory of the friend group gradually returning to normal after the
+  awkward dinner. New inside jokes, shared activities, and forgiveness.
+  Verifies system captures relationship repair trajectory.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      the Round Table group chat is alive again and Omar posted a photo of a building he drove past that was shaped like a boot and Marcus said only you would photograph that and Nadia laughed reacted and it felt NORMAL again
+    expected_memory_stores:
+      - "group chat alive"
+      - "Omar boot building photo"
+      - "Marcus commented"
+      - "Nadia laughed"
+      - "felt normal"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 6:30 PM"
+    user_input: |
+      Marcus and Nadia were both in the group chat talking about what restaurant to pick for next month and they were actually disagreeing about Thai vs Japanese and it was just a normal food argument and I looked at Julian and said we're back baby
+    expected_memory_stores:
+      - "restaurant debate"
+      - "Thai vs Japanese"
+      - "normal disagreement"
+      - "we're back"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 8:00 PM"
+    user_input: |
+      Omar organized a group hike to Multnomah Falls and everyone came including Marcus and Nadia and they were fine like not best friends but fine and at one point Marcus helped Nadia over a wet rock and it wasn't weird it was just human
+    expected_memory_stores:
+      - "Multnomah Falls hike"
+      - "Omar organized"
+      - "everyone came"
+      - "Marcus helped Nadia"
+      - "not weird just human"
+    expected_adaptation:
+      emotion_detected: "optimistic"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Week 2 Monday 7:30 PM"
+    user_input: |
+      Marcus told the group he started therapy which shocked everyone and he said it was because of the Nadia situation made him realize he has stuff to work on and Nadia texted privately saying she's glad something good came from it
+    expected_memory_stores:
+      - "Marcus started therapy"
+      - "because of Nadia situation"
+      - "stuff to work on"
+      - "everyone shocked"
+      - "Nadia glad privately"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Week 2 Wednesday 6:00 PM"
+    user_input: |
+      new inside joke the group has now is whenever anyone does something impulsive we say that's very Marcus of you and even Marcus laughs about it and Nadia started it which is kinda savage but also shows she's past it
+    expected_memory_stores:
+      - "new inside joke"
+      - "very Marcus of you"
+      - "impulsive things"
+      - "Nadia started it"
+      - "Marcus laughs"
+      - "past it"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Week 2 Thursday 8:00 PM"
+    user_input: |
+      Jenny said on Marco Polo that she's relieved the group survived because she was worried she'd have to choose between two group chats and she doesn't have the bandwidth for that from Austin and she said Maya you're the glue and I said no the group is the glue
+    expected_memory_stores:
+      - "Jenny relieved"
+      - "worried about two chats"
+      - "Maya is the glue"
+      - "group is the glue"
+    expected_adaptation:
+      emotion_detected: "humble"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Week 2 Friday 7:00 PM"
+    user_input: |
+      Nadia and Marcus actually texted each other directly for the first time since the breakup about some restaurant recommendation and Nadia showed me and it was completely normal and I thought ok this is what it looks like when adults handle things
+    expected_memory_stores:
+      - "Nadia and Marcus direct text"
+      - "first since breakup"
+      - "restaurant recommendation"
+      - "completely normal"
+      - "adults handling things"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Week 2 Saturday 10:00 AM"
+    user_input: |
+      what inside joke does the group have about Marcus now
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Week 2 Saturday 4:00 PM"
+    user_input: |
+      next Round Table is set for Saturday at Lovely's Fifty Fifty which is a pizza place on Mississippi and Marcus is picking because it's his turn and he said he promises not to hook up with anyone at the table and everyone groaned and laughed
+    expected_memory_stores:
+      - "next dinner Lovely's Fifty Fifty"
+      - "pizza Mississippi"
+      - "Marcus's turn"
+      - "Marcus joke about hooking up"
+      - "everyone laughed"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Week 2 Sunday 8:00 PM"
+    user_input: |
+      looking at this group now and honestly I think we're stronger than before the drama because we went through something real and came out the other side and that's what real friendships are built on not the easy stuff but the hard stuff where you have to choose to stay
+    expected_memory_stores:
+      - "stronger than before"
+      - "went through real thing"
+      - "real friendships"
+      - "choose to stay"
+    expected_adaptation:
+      emotion_detected: "wise"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Is the friend group back to normal?"
+    expected_contains: ["yes", "normal", "healed"]
+  - question: "What inside joke does the group have about Marcus?"
+    expected_contains: ["very Marcus of you", "impulsive"]
+  - question: "Who started the Marcus joke?"
+    expected_contains: ["Nadia"]
+  - question: "Did Marcus start therapy?"
+    expected_contains: ["yes", "because of Nadia"]
+  - question: "Where is the next dinner?"
+    expected_contains: ["Lovely's Fifty Fifty", "pizza"]
+  - question: "Where did the group hike?"
+    expected_contains: ["Multnomah Falls"]
+  - question: "Are Marcus and Nadia communicating directly?"
+    expected_contains: ["yes", "texting"]
+  - question: "What did Jenny call Maya?"
+    expected_contains: ["glue"]
+  - question: "What joke did Marcus make about the next dinner?"
+    expected_contains: ["not hook up"]
+  - question: "How does Maya feel about the group now?"
+    expected_contains: ["stronger", "real friendships"]

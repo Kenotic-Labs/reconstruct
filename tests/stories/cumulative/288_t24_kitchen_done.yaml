@@ -1,0 +1,190 @@
+story_id: 288
+story_name: "Kitchen Done, Beautiful"
+category: "Home"
+description: |
+  Tests memory of the kitchen renovation being completed. Captures the reveal moment,
+  the emotional payoff after seven weeks of chaos, and the celebration.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 3:00 PM"
+    user_input: |
+      Anna just texted me at work and said the kitchen is DONE she sent photos and I literally started crying at my desk AGAIN Sam was like not this again and I was like look at my kitchen and showed him and he was like okay that's a nice kitchen
+    expected_memory_stores:
+      - "kitchen done"
+      - "Anna texted photos"
+      - "crying at desk"
+      - "Sam reaction"
+      - "nice kitchen"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 5:30 PM"
+    user_input: |
+      drove home so fast and walked in and oh my god. the kitchen is BEAUTIFUL. the white shaker cabinets the butcher block counters the off-white subway tile backsplash the matte black fixtures the pendant lights over the island and the walls are this soft sage green that Julian picked and it all works together perfectly
+    expected_memory_stores:
+      - "kitchen beautiful"
+      - "white shaker cabinets"
+      - "butcher block counters"
+      - "subway tile"
+      - "matte black fixtures"
+      - "pendant lights"
+      - "sage green walls"
+      - "Julian picked color"
+    expected_adaptation:
+      emotion_detected: "awestruck"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 5:45 PM"
+    user_input: |
+      Julian was already home and he was standing in the kitchen with the biggest smile and he was like I've been standing here for 20 minutes just looking at it and I walked up and hugged him and we just stood there in our kitchen OUR kitchen and it was perfect
+    expected_memory_stores:
+      - "Julian in kitchen"
+      - "standing 20 minutes"
+      - "hugged"
+      - "their kitchen"
+      - "perfect moment"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 7:00 PM"
+    user_input: |
+      cooked a full dinner in the new kitchen roasted chicken with vegetables and garlic bread and the butcher block is amazing to work on and the lighting is perfect and the new stove heats evenly and Julian set the table with candles and we had a proper dinner in our renovated kitchen
+    expected_memory_stores:
+      - "first full dinner"
+      - "roasted chicken"
+      - "vegetables and garlic bread"
+      - "butcher block amazing"
+      - "good lighting"
+      - "new stove"
+      - "candle dinner"
+    expected_adaptation:
+      emotion_detected: "blissful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 9:00 PM"
+    user_input: |
+      Anna came by to do the final walkthrough and give us the warranty on her work which is two years on labor and she went through everything showing us how the soft-close hinges work and where the shutoff valves are and she was so professional the whole time we gave her a tip and a card
+    expected_memory_stores:
+      - "Anna final walkthrough"
+      - "two year warranty"
+      - "soft-close hinges"
+      - "shutoff valves"
+      - "professional"
+      - "tip and card"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:00 AM"
+    user_input: |
+      invited Nadia and Omar and Leila and Leon over to see the kitchen and everyone was blown away and Omar was like this doesn't even look like the same house and Nadia was like I told you this would be worth it and Leon brought a bottle of whiskey as a housewarming gift
+    expected_memory_stores:
+      - "friends over"
+      - "Nadia Omar Leila Leon"
+      - "everyone impressed"
+      - "Omar comment"
+      - "Leon whiskey gift"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 12:00 PM"
+    user_input: |
+      made brunch for everyone in the new kitchen scrambled eggs and bacon and waffles and fresh coffee and it was the first time I've cooked for a group since we moved in and having a kitchen that actually works and looks good makes such a huge difference
+    expected_memory_stores:
+      - "brunch for friends"
+      - "scrambled eggs bacon waffles"
+      - "first group cooking"
+      - "kitchen makes difference"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Julian posted before and after photos on Instagram and the response was insane like 200 likes in an hour and his Bold Studio colleagues were commenting fire emojis and his mom called and was like Julian this is gorgeous and he was beaming
+    expected_memory_stores:
+      - "Instagram before after"
+      - "200 likes"
+      - "Bold Studio reactions"
+      - "Julian's mom called"
+      - "beaming"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 7:00 PM"
+    user_input: |
+      Kobe has found his new favorite spot which is lying right in front of the island where there's a warm spot from the dishwasher vent and he just sprawls out there while I cook and it's the most domestically perfect scene imaginable
+    expected_memory_stores:
+      - "Kobe favorite spot"
+      - "in front of island"
+      - "warm spot dishwasher"
+      - "sprawls while Maya cooks"
+      - "domestically perfect"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 9:00 AM"
+    user_input: |
+      seven weeks of chaos two contractors one asbestos scare a water pipe incident a ghosting $8K over budget and exactly zero regrets this kitchen was worth every single penny and every single headache and Julian and I are already talking about the bathroom which is next and I'm like please can we just enjoy this for a month first
+    expected_memory_stores:
+      - "seven weeks"
+      - "two contractors"
+      - "asbestos"
+      - "water pipe"
+      - "ghosting"
+      - "$8K over"
+      - "zero regrets"
+      - "worth it"
+      - "bathroom next"
+      - "enjoy first"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Is the kitchen renovation complete?"
+    expected_contains: ["yes", "done"]
+  - question: "What color are the kitchen walls?"
+    expected_contains: ["sage green"]
+  - question: "What is the warranty on Anna's work?"
+    expected_contains: ["two years"]
+  - question: "What is Kobe's favorite spot in the new kitchen?"
+    expected_contains: ["front of island", "dishwasher"]
+  - question: "What did they cook for the first full dinner?"
+    expected_contains: ["roasted chicken"]
+  - question: "Who came to see the finished kitchen?"
+    expected_contains: ["Nadia", "Omar", "Leon"]
+  - question: "What room is next for renovation?"
+    expected_contains: ["bathroom"]
+  - question: "How long did the kitchen renovation take total?"
+    expected_contains: ["seven weeks"]
+  - question: "What wall color did Julian pick?"
+    expected_contains: ["sage green"]
+  - question: "How many contractors worked on the kitchen?"
+    expected_contains: ["two"]

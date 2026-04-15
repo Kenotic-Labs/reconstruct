@@ -1,0 +1,205 @@
+story_id: 130
+story_name: "This Is Home Now"
+category: "Relationships"
+description: |
+  Tests whether the system captures the emotional closure of the moving-in arc, the
+  integration of Maya's initial fears being resolved, and the establishment of their
+  home as a stable entity. Cross-thread to therapy and career progress.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 5:00pm"
+    user_input: |
+      been living at 2847 Milwaukie Ave for about a month now and honestly? it's the best decision we've made. Dr. Tate asked me today how the independence thing is going and I said it's fine because Julian and I actually respect each other's space naturally
+    expected_memory_stores:
+      - "one month"
+      - "best decision"
+      - "Dr. Tate check-in"
+      - "independence resolved"
+      - "natural space respect"
+    expected_triples:
+      - ["user", "living_at", "2847 Milwaukie Ave for one month"]
+      - ["user", "told", "Dr. Tate independence concern is resolved"]
+      - ["user", "feels", "moving in was best decision"]
+      - ["user", "has_emotion", "content"]
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 7:00pm"
+    user_input: |
+      Julian surprised me with a housewarming gift even though we've been here a month already. it's a custom neon sign that says Chen-Reeves HQ in this warm white glow and he made it himself at the arts collective in Alberta. I might've cried a little
+    expected_memory_stores:
+      - "housewarming gift"
+      - "neon sign"
+      - "Chen-Reeves HQ"
+      - "Julian made it"
+      - "arts collective"
+    expected_triples:
+      - ["Julian", "made", "custom neon sign saying Chen-Reeves HQ"]
+      - ["Julian", "made_it_at", "arts collective in Alberta"]
+      - ["user", "received", "housewarming gift from Julian"]
+      - ["user", "has_emotion", "touched"]
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 9:00am"
+    user_input: |
+      our Sunday at Bark and Brew but on Saturday today because Julian has a client call tomorrow. the barista goes morning regulars and it hit me that we're regulars somewhere together. we have a PLACE. people know us as a unit
+    expected_memory_stores:
+      - "Bark and Brew"
+      - "regulars"
+      - "known as a unit"
+      - "schedule change"
+    expected_triples:
+      - ["user", "recognized_as", "regulars at Bark and Brew"]
+      - ["user", "feels", "known as a couple unit"]
+      - ["user", "has_emotion", "warm"]
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 12:00pm"
+    user_input: |
+      Clara is visiting next weekend and she'll be the first family member to see the apartment. Mom wants to come too but she's in LA and the flights are too expensive right now. Clara's driving down from Seattle where she lives with her boyfriend
+    expected_memory_stores:
+      - "Clara visiting"
+      - "next weekend"
+      - "first family visit"
+      - "Mom in LA"
+      - "Clara in Seattle"
+      - "Clara's boyfriend"
+    expected_triples:
+      - ["Clara", "visiting", "next weekend from Seattle"]
+      - ["Clara", "lives_in", "Seattle with her boyfriend"]
+      - ["Mom", "lives_in", "LA"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 3:00pm"
+    user_input: |
+      took Kobe to the park and this older couple stopped me and said oh you must be the ones who moved into the apartment with the golden retriever, welcome to the neighborhood! apparently everybody on the street knows Kobe. he's the real community builder
+    expected_memory_stores:
+      - "neighbors know Kobe"
+      - "welcome to neighborhood"
+      - "community"
+      - "older couple"
+    expected_triples:
+      - ["Kobe", "known_by", "neighbors in Sellwood"]
+      - ["user", "welcomed_by", "older couple in neighborhood"]
+      - ["user", "has_emotion", "delighted"]
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 6:00pm"
+    user_input: |
+      where does Maya's sister Clara live
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 10:00am"
+    user_input: |
+      Julian came out of his studio this morning after working for like 3 hours and goes I just finished the best logo design of my career and I think it's because this space is better than my old one. having a dedicated studio is huge for him. the second bedroom was the right call
+    expected_memory_stores:
+      - "Julian best work"
+      - "studio space working"
+      - "dedicated studio"
+      - "second bedroom right call"
+    expected_triples:
+      - ["Julian", "produced", "best logo design of his career"]
+      - ["Julian", "credits", "dedicated studio space for better work"]
+      - ["user", "feels", "second bedroom as studio was right call"]
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 4:00pm"
+    user_input: |
+      made dinner for the first time using this pasta recipe my mom sent me and Julian goes this is better than the restaurant on Hawthorne and I was like ok slow down but also thank you. cooking for someone is so different from cooking for yourself, there's like an audience and it's nice
+    expected_memory_stores:
+      - "cooking for Julian"
+      - "mom's pasta recipe"
+      - "Julian compliment"
+      - "cooking as sharing"
+    expected_triples:
+      - ["user", "cooked", "mom's pasta recipe for Julian"]
+      - ["Julian", "complimented", "user's cooking"]
+      - ["user", "enjoys", "cooking for someone else"]
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 8:00pm"
+    user_input: |
+      Aisha texted me a meme about roommate drama and I was like girl I live with my BOYFRIEND not a roommate and she goes same thing lol. she's funny. she also asked if she can dog-sit Kobe sometime which... yes absolutely
+    expected_memory_stores:
+      - "Aisha meme"
+      - "boyfriend not roommate"
+      - "dog-sitting offer"
+      - "Kobe"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 10:00pm"
+    user_input: |
+      end of another weekend. Julian's reading in bed and Kobe's between us and the neon sign is glowing softly from the hallway and I just keep thinking about how scared I was to do this and now I can't imagine going back to living alone. growth is weird like that
+    expected_memory_stores:
+      - "reflection"
+      - "neon sign glow"
+      - "fear resolved"
+      - "can't imagine alone"
+      - "growth"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How long have Maya and Julian been at the new apartment?"
+    expected_contains: ["month"]
+  - question: "What housewarming gift did Julian make?"
+    expected_contains: ["neon sign", "Chen-Reeves HQ"]
+  - question: "Where did Julian make the gift?"
+    expected_contains: ["arts collective", "Alberta"]
+  - question: "Is the coffee shop routine still happening?"
+    expected_contains: ["yes", "regulars", "Bark and Brew"]
+  - question: "Has Maya's fear about losing independence come true?"
+    expected_contains: ["no", "resolved", "respect space"]
+  - question: "Where does Clara live?"
+    expected_contains: ["Seattle"]
+  - question: "Is Julian's studio working well?"
+    expected_contains: ["yes", "best work", "better"]
+  - question: "Who offered to dog-sit Kobe?"
+    expected_contains: ["Aisha"]
+  - question: "What recipe did Maya cook?"
+    expected_contains: ["pasta", "mom"]
+  - question: "How does Maya feel about living together now vs her initial fears?"
+    expected_contains: ["can't imagine alone", "best decision", "scared before"]

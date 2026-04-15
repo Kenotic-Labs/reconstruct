@@ -1,0 +1,185 @@
+story_id: 469
+story_name: "Healthier Social Gaming"
+category: "Gaming"
+description: |
+  Tests memory of Maya finding healthy balance between gaming types.
+  Establishes new equilibrium: IRL gaming, solo Stardew, no Discord.
+  Verifies system can track behavioral evolution across the arc.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00 AM"
+    user_input: |
+      so I had my therapy session with Dr Tate this morning and she asked about the gaming thing and I told her how it evolved from Stardew obsession to Discord to tabletop meetup and she was like that's actually a really healthy progression Maya you identified what wasn't working and found something better and I was like yeah I guess I did
+    expected_memory_stores:
+      - "Dr Tate session"
+      - "gaming progression"
+      - "healthy evolution"
+      - "identified problems"
+      - "found better alternative"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 11:30 AM"
+    user_input: |
+      I still play Stardew maybe like twice a week for an hour before bed and it's perfect now like Julian doesn't play anymore he got bored of it but I use it as my wind down thing and the music is still so calming and my farm is beautiful and I don't feel the need to be obsessive about it anymore which feels mature
+    expected_memory_stores:
+      - "Stardew twice a week"
+      - "one hour before bed"
+      - "Julian stopped playing"
+      - "wind down tool"
+      - "not obsessive"
+      - "mature approach"
+    expected_adaptation:
+      emotion_detected: "balanced"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 1:00 PM"
+    user_input: |
+      the tabletop meetup has basically become my main social gaming thing and I've been to like six of them now and the core group is me Nadia Omar Tessa Jim Robin and sometimes Julian and sometimes Dave plays with us and it's honestly the highlight of my every other week schedule
+    expected_memory_stores:
+      - "six meetups attended"
+      - "core group"
+      - "every other week highlight"
+      - "sometimes Julian"
+      - "sometimes Dave"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 2:30 PM"
+    user_input: |
+      Nadia and I were talking and she said the meetup has been so good for her too because before it was just climbing and book club and now there's this fun competitive thing and Tessa has become like a real friend not just a meetup person and we've been hanging out outside of Thursdays too like getting coffee and stuff
+    expected_memory_stores:
+      - "Nadia appreciates meetup"
+      - "climbing and book club"
+      - "Tessa real friend"
+      - "hanging out outside meetup"
+      - "getting coffee"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 4:00 PM"
+    user_input: |
+      I checked in on Alex PixelDruid the other day and they're doing great they got into a coding bootcamp for high schoolers over the summer and their Python is getting really solid and they said I inspired them to pursue game development which honestly made my whole week and the mentoring relationship is in a really good place
+    expected_memory_stores:
+      - "Alex doing well"
+      - "coding bootcamp summer"
+      - "Python improving"
+      - "inspired game development"
+      - "mentoring in good place"
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 5:30 PM"
+    user_input: |
+      Julian and I went on a road trip to Silver Falls today which is like an hour south of Portland and we hiked behind a waterfall and I was like remember when gaming almost replaced these trips and he said yeah I'm glad we found the balance and also he took incredible photos as usual and Kobe jumped in a creek and was soaked
+    expected_memory_stores:
+      - "Silver Falls road trip"
+      - "hour south of Portland"
+      - "hiked behind waterfall"
+      - "gaming almost replaced trips"
+      - "balance found"
+      - "Kobe soaked in creek"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 7:00 PM"
+    user_input: |
+      I've been thinking about how different my week looks now versus three months ago when it was just Stardew every night and now it's like Monday guitar practice Tuesday book reading Wednesday climbing Thursday tabletop or rest Friday date night Saturday road trip Sunday rest and Stardew fits in the cracks and that feels right
+    expected_memory_stores:
+      - "weekly schedule"
+      - "guitar Monday"
+      - "book reading Tuesday"
+      - "climbing Wednesday"
+      - "tabletop Thursday"
+      - "date night Friday"
+      - "road trip Saturday"
+      - "Stardew in the cracks"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 8:00 PM"
+    user_input: |
+      what is Maya's current weekly schedule for activities
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 9:00 PM"
+    user_input: |
+      played Stardew for an hour tonight and it was so peaceful like I checked on my farm and harvested some ancient fruit and made some wine in the cellar and the whole time I was just calm and not anxious about anything and then I closed the laptop and picked up my guitar and played Knockin on Heavens Door and it actually sounded decent and Julian applauded from the kitchen
+    expected_memory_stores:
+      - "Stardew one hour"
+      - "ancient fruit wine"
+      - "calm not anxious"
+      - "guitar after Stardew"
+      - "sounded decent"
+      - "Julian applauded"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:00 PM"
+    user_input: |
+      I think the whole gaming arc taught me something about myself which is that I go all in on things way too fast and then burn out and Dr Tate calls it an intensity pattern and it happened with Stardew and it happened with climbing early on and it'll probably happen again but now I know the signs and I know how to pull back before it becomes unhealthy and that's growth right
+    expected_memory_stores:
+      - "intensity pattern"
+      - "Dr Tate term"
+      - "Stardew burnout"
+      - "climbing early on"
+      - "know the signs"
+      - "pull back"
+      - "personal growth"
+    expected_adaptation:
+      emotion_detected: "wise"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How often does Maya play Stardew Valley now?"
+    expected_contains: ["twice a week", "hour"]
+  - question: "Does Julian still play Stardew Valley?"
+    expected_contains: ["no", "bored", "stopped"]
+  - question: "What is Maya's intensity pattern according to Dr. Tate?"
+    expected_contains: ["all in", "burn out", "intensity"]
+  - question: "What is Alex PixelDruid doing now?"
+    expected_contains: ["coding bootcamp", "game development"]
+  - question: "Who has become a real friend outside the meetup?"
+    expected_contains: ["Tessa"]
+  - question: "What road trip did Maya and Julian do recently?"
+    expected_contains: ["Silver Falls"]
+  - question: "What is Maya's Monday activity?"
+    expected_contains: ["guitar"]
+  - question: "How many tabletop meetups has Maya attended?"
+    expected_contains: ["six"]
+  - question: "What did Maya play on guitar after Stardew?"
+    expected_contains: ["Knockin on Heaven", "Door"]
+  - question: "What did the gaming arc teach Maya about herself?"
+    expected_contains: ["intensity", "all in", "burn out", "signs"]

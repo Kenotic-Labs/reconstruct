@@ -1,0 +1,216 @@
+story_id: 55
+story_name: "Fighting Back with Data"
+category: "Career"
+description: |
+  Tests memory of Maya building her case against the PIP.
+  She gathers evidence, metrics, and peer testimonials.
+  Verifies system can track a multi-step plan unfolding over time.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:00 AM"
+    user_input: |
+      okay so I decided I'm not just gonna sit here and accept this PIP I'm gonna fight it with data like actual metrics so this morning I pulled my commit history for the last three years and guess what I've shipped more features than anyone on the team except Leon and I have the git stats to prove it
+    expected_memory_stores:
+      - "fighting PIP"
+      - "commit history"
+      - "three years"
+      - "most features shipped"
+      - "git stats"
+    expected_triples:
+      - ["user", "decided", "fight PIP with data"]
+      - ["user", "gathered", "commit history for three years"]
+      - ["user", "metric", "second most features shipped after Leon"]
+      - ["user", "has_emotion", "determined"]
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 11:30 AM"
+    user_input: |
+      also pulled my code review stats and I've reviewed more PRs than anyone on the team period and my review quality is consistently flagged as helpful by the team so like where exactly is the performance issue Derek tell me where
+    expected_memory_stores:
+      - "code review stats"
+      - "most PRs reviewed"
+      - "review quality"
+      - "challenge to Derek"
+    expected_triples:
+      - ["user", "gathered", "code review stats"]
+      - ["user", "metric", "most PRs reviewed on team"]
+      - ["user", "metric", "review quality flagged as helpful"]
+      - ["user", "has_emotion", "defiant"]
+    expected_adaptation:
+      emotion_detected: "defiant"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 9:00 AM"
+    user_input: |
+      Leon offered to write a peer testimonial for me and so did Tanya from my new pod which is really sweet because I've only been working with her for like two weeks and she said she can already tell I'm one of the strongest engineers she's worked with
+    expected_memory_stores:
+      - "Leon testimonial"
+      - "Tanya testimonial"
+      - "peer support"
+    expected_triples:
+      - ["Leon", "offered", "peer testimonial for user"]
+      - ["Tanya", "offered", "peer testimonial for user"]
+      - ["Tanya", "said", "user is one of strongest engineers she's worked with"]
+      - ["user", "has_emotion", "grateful"]
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 3:00 PM"
+    user_input: |
+      Priya helped me compile a document with all my performance reviews from the last three years and every single one says exceeds expectations or meets expectations with notes about going above and beyond and she signed off on it as my direct manager
+    expected_memory_stores:
+      - "performance review compilation"
+      - "exceeds or meets expectations"
+      - "above and beyond"
+      - "Priya signed"
+    expected_triples:
+      - ["Priya", "helped", "compile performance review document"]
+      - ["user", "review_history", "exceeds or meets expectations for three years"]
+      - ["Priya", "signed_off_on", "performance review compilation"]
+      - ["user", "has_emotion", "empowered"]
+    expected_adaptation:
+      emotion_detected: "empowered"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 10:00 AM"
+    user_input: |
+      submitted my response to the PIP with all the data attached like 47 pages of evidence commit stats review stats peer testimonials performance reviews project completions everything and HR said they'll review it within five business days
+    expected_memory_stores:
+      - "PIP response submitted"
+      - "47 pages"
+      - "HR review"
+      - "five business days"
+    expected_triples:
+      - ["user", "submitted", "PIP response with 47 pages of evidence"]
+      - ["HR", "will_review", "PIP response within five business days"]
+      - ["user", "has_emotion", "anxious"]
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      Julian made me promise to not check my email tonight and he hid my laptop which is honestly kind of funny and we just played with Kobe in the backyard and I grilled some burgers and tried to be present but my brain keeps going back to the PIP response like did I include enough evidence
+    expected_memory_stores:
+      - "Julian hiding laptop"
+      - "backyard"
+      - "burgers"
+      - "Kobe"
+      - "ruminating"
+    expected_triples:
+      - ["Julian", "hid", "user's laptop"]
+      - ["user", "activity", "played with Kobe in backyard"]
+      - ["user", "activity", "grilled burgers"]
+      - ["user", "has_emotion", "restless"]
+    expected_adaptation:
+      emotion_detected: "restless"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 2:00 PM"
+    user_input: |
+      heard from a friend at another company that Derek Hollis did the same thing at his last company at Microsoft he came in restructured put people on PIPs and then hired his own people from outside and the friend said like four engineers got PIPed out and replaced with Derek's former colleagues
+    expected_memory_stores:
+      - "Derek pattern"
+      - "Microsoft same behavior"
+      - "PIPs to replace"
+      - "hired own people"
+    expected_triples:
+      - ["Derek", "pattern", "PIPs then replaces with own people"]
+      - ["Derek", "did_same_at", "Microsoft"]
+      - ["Derek", "at_Microsoft", "four engineers PIPed out and replaced"]
+      - ["user", "has_emotion", "vindicated"]
+    expected_adaptation:
+      emotion_detected: "vindicated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 4:00 PM"
+    user_input: |
+      how many pages was Maya's PIP response
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 11:00 AM"
+    user_input: |
+      HR called me this morning and said they're reviewing my case and it looks strong and they asked if I'd be willing to meet with Derek and an HR mediator next Tuesday to discuss and I said yes absolutely bring it on I have nothing to hide
+    expected_memory_stores:
+      - "HR positive signal"
+      - "mediation meeting"
+      - "next Tuesday"
+      - "Derek meeting"
+      - "HR mediator"
+    expected_triples:
+      - ["HR", "said", "user's case looks strong"]
+      - ["user", "scheduled", "mediation meeting next Tuesday"]
+      - ["mediation meeting", "attendees", "user, Derek, HR mediator"]
+      - ["user", "has_emotion", "confident"]
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 6:00 PM"
+    user_input: |
+      weekend is here and I actually feel okay like still stressed but also kind of proud of myself for fighting back Julian said he's proud of me too and even my mom called and said she's glad I'm standing up for myself so yeah we'll see what happens Tuesday
+    expected_memory_stores:
+      - "weekend"
+      - "pride"
+      - "Julian proud"
+      - "mom supportive"
+      - "Tuesday meeting"
+    expected_triples:
+      - ["user", "has_emotion", "proud"]
+      - ["Julian", "has_emotion", "proud of user"]
+      - ["user's mom", "said", "glad user is standing up for herself"]
+      - ["user", "awaiting", "Tuesday mediation meeting"]
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What evidence did Maya gather against the PIP?"
+    expected_contains: ["commit", "review", "testimonial", "performance reviews"]
+  - question: "How many pages was Maya's PIP response?"
+    expected_contains: ["47"]
+  - question: "Who wrote peer testimonials for Maya?"
+    expected_contains: ["Leon", "Tanya"]
+  - question: "When is the mediation meeting with Derek?"
+    expected_contains: ["Tuesday"]
+  - question: "What did Maya learn about Derek's history at Microsoft?"
+    expected_contains: ["same", "PIP", "replaced", "hired"]
+  - question: "How many business days for HR to review?"
+    expected_contains: ["five"]
+  - question: "What did Julian do to help Maya relax?"
+    expected_contains: ["hid", "laptop"]
+  - question: "Who signed off on Maya's performance review compilation?"
+    expected_contains: ["Priya"]
+  - question: "How is Maya feeling about the PIP fight?"
+    expected_contains: ["determined", "proud", "confident"]
+  - question: "What did Tanya say about Maya?"
+    expected_contains: ["strongest engineers"]

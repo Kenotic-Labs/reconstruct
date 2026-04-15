@@ -1,0 +1,218 @@
+story_id: 156
+story_name: "Guest List Drama"
+category: "Life Events"
+description: |
+  Guest list goes from 120 to 85 due to budget constraints and family politics.
+  Tests numeric correction handling, emotional processing of difficult
+  decisions, and tracking reasons for changes.
+duration_simulated: "5 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      okay so Julian and I sat down with the spreadsheet tonight and started really looking at the guest list numbers and um it's bad like we had 120 people on there but when you add up venue food drinks rentals photography with that many people we're looking at like $28000 total which is way more than we budgeted
+    expected_memory_stores:
+      - "guest list 120 people"
+      - "total estimated $28000"
+      - "over budget"
+    expected_triples:
+      - ["user", "guest_list_count", "120 people"]
+      - ["user", "wedding_estimated_cost", "$28000"]
+      - ["user", "is_over_budget", "true"]
+      - ["user", "has_emotion", "stressed"]
+    expected_adaptation:
+      emotion_detected: "stressed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 9:00 PM"
+    user_input: |
+      our actual budget is $20000 like that's what we can afford between savings and what my parents offered to chip in which was $5000 bless them and Diane said she'd cover flowers remember so that helps but we're still like $8000 short and I don't want to go into debt for a wedding that's stupid
+    expected_memory_stores:
+      - "budget $20000"
+      - "parents contributing $5000"
+      - "Diane covering flowers"
+      - "$8000 short"
+      - "no debt for wedding"
+    expected_triples:
+      - ["user", "wedding_budget", "$20000"]
+      - ["user", "parents_contributing", "$5000"]
+      - ["Diane Reeves", "covering", "flowers"]
+      - ["user", "budget_shortfall", "$8000"]
+      - ["user", "principle", "no debt for wedding"]
+    expected_adaptation:
+      emotion_detected: "practical concern"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 8:00 AM"
+    user_input: |
+      Julian suggested we cut the guest list and I know he's right but it's so hard because like who do you cut you know his parents want all their friends there and my mom gave me this list of cousins I barely know and then there's work people and it's just like ugh
+    expected_memory_stores:
+      - "Julian suggests cutting guest list"
+      - "Diane's friends"
+      - "Vivian's cousin list"
+      - "work people"
+      - "difficulty deciding who to cut"
+    expected_triples:
+      - ["Julian", "suggested", "cutting guest list"]
+      - ["user", "struggling_with", "who to cut from guest list"]
+      - ["user", "has_emotion", "conflicted"]
+    expected_adaptation:
+      emotion_detected: "conflicted"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      talked to Clara about it and she was brutal in the best way she said okay here's what you do make three tiers tier one is people you'd be sad if they weren't there tier two is people you'd feel guilty if they weren't there and tier three is people you're inviting out of obligation and then cut tier three entirely
+    expected_memory_stores:
+      - "Clara's three tier system"
+      - "tier one sad without"
+      - "tier two guilt"
+      - "tier three obligation"
+      - "cut tier three"
+    expected_triples:
+      - ["Clara", "suggested", "three-tier guest list system"]
+      - ["user", "strategy", "cut tier three obligation guests"]
+      - ["user", "has_emotion", "clarity"]
+    expected_adaptation:
+      emotion_detected: "clarity"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      so we did Clara's tier thing and um tier one was 62 people tier two was 23 and tier three was 35 and cutting tier three brings us to 85 which is a LOT less than 120 but it actually fits our budget way better like $19500 estimated and that's under $20000
+    expected_memory_stores:
+      - "tier one 62 people"
+      - "tier two 23 people"
+      - "tier three 35 people"
+      - "new guest list 85"
+      - "estimated cost $19500"
+      - "under budget"
+    expected_triples:
+      - ["user", "corrected", "guest list 120 → 85"]
+      - ["user", "wedding_estimated_cost", "$19500"]
+      - ["user", "under_budget", "true"]
+      - ["user", "has_emotion", "relieved"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 9:00 AM"
+    user_input: |
+      Diane is NOT happy about the cut she called Julian and was like you can't not invite the Hendersons and the Parkinsons we've known them for thirty years and Julian held firm he said Mom it's our wedding and our budget and she got quiet which is worse than yelling honestly
+    expected_memory_stores:
+      - "Diane upset about cuts"
+      - "Hendersons and Parkinsons cut"
+      - "Julian stood firm"
+      - "Diane went quiet"
+    expected_triples:
+      - ["Diane Reeves", "upset_about", "guest list cuts"]
+      - ["Julian", "stood_firm_with", "Diane about guest list"]
+      - ["user", "cut", "Hendersons and Parkinsons"]
+      - ["user", "has_emotion", "tense"]
+    expected_adaptation:
+      emotion_detected: "tense"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 6:00 PM"
+    user_input: |
+      my mom was actually totally fine with the cuts she said honestly Maya I only put those cousins on the list because I felt like I had to and she said your Aunt Susan will understand and if she doesn't that's her problem which lol go Vivian honestly my mom is the best
+    expected_memory_stores:
+      - "Vivian fine with cuts"
+      - "Aunt Susan's family cut"
+      - "Vivian supportive"
+    expected_triples:
+      - ["Vivian", "supportive_of", "guest list cuts"]
+      - ["user", "cut", "Aunt Susan's family"]
+      - ["user", "has_emotion", "amused and relieved"]
+    expected_adaptation:
+      emotion_detected: "amused and relieved"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 10:00 AM"
+    user_input: |
+      I also had to cut some work people and that was awkward because like Leon from work I'm inviting him obviously he's Julian's friend too but some of the other team people I had to leave off and I hope it doesn't make things weird at the office
+    expected_memory_stores:
+      - "Leon invited"
+      - "some work people cut"
+      - "worried about office dynamics"
+    expected_triples:
+      - ["Leon", "invited_to", "wedding"]
+      - ["user", "cut", "some work colleagues"]
+      - ["user", "worried_about", "office dynamics after cuts"]
+    expected_adaptation:
+      emotion_detected: "uncomfortable"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 11:00 AM"
+    user_input: |
+      called Blue Fork Catering to update the headcount from 120 to 85 and Michelle was like oh that actually makes it easier for us and she revised the quote down to $3700 from $5200 which saves us $1500 so see cutting the list was the right call financially for sure
+    expected_memory_stores:
+      - "Blue Fork updated to 85 guests"
+      - "new quote $3700"
+      - "saved $1500"
+      - "Michelle fine with change"
+    expected_triples:
+      - ["Blue Fork Catering", "corrected", "headcount 120 → 85"]
+      - ["Blue Fork Catering", "revised_quote", "$3700"]
+      - ["user", "saved", "$1500 on catering"]
+      - ["user", "has_emotion", "vindicated"]
+    expected_adaptation:
+      emotion_detected: "vindicated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Julian and I finalized the list at 85 people and honestly looking at it now these are all people we actually WANT there like every single name on this list is someone who matters to us and that feels way better than having 120 people half of whom we'd barely talk to honestly this was the right decision
+    expected_memory_stores:
+      - "guest list finalized 85"
+      - "all meaningful guests"
+      - "couple at peace with decision"
+    expected_triples:
+      - ["user", "finalized_guest_list", "85 people"]
+      - ["user", "feels_about_guest_list", "all meaningful people"]
+      - ["user", "has_emotion", "content"]
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How many guests are invited to Maya's wedding?"
+    expected_contains: ["85"]
+  - question: "What was the original guest count?"
+    expected_contains: ["120"]
+  - question: "Why did the guest list shrink?"
+    expected_contains: ["budget"]
+  - question: "What is Maya's wedding budget?"
+    expected_contains: ["20000"]
+  - question: "How much are Maya's parents contributing?"
+    expected_contains: ["5000"]
+  - question: "What system did they use to cut the guest list?"
+    expected_contains: ["tier", "three"]
+  - question: "How did Diane react to the guest list cuts?"
+    expected_contains: ["not happy", "upset"]
+  - question: "What is the updated catering cost?"
+    expected_contains: ["3700"]
+  - question: "How much did they save by cutting the guest list?"
+    expected_contains: ["1500"]
+  - question: "Who suggested the tier system for the guest list?"
+    expected_contains: ["Clara"]

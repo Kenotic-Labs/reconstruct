@@ -1,0 +1,223 @@
+story_id: 183
+story_name: "Frank DeLuca"
+category: "Life Events"
+description: |
+  Second buyer Frank DeLuca appears. Negotiation from $380K down to $340K.
+  Closing date moves twice. Tests price correction, date tracking, and
+  new entity introduction.
+duration_simulated: "3 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 6:00 PM"
+    user_input: |
+      okay so the business listing I put up online actually got a bite there's this guy named Frank DeLuca who's been a mechanic for 20 years and always wanted to own his own shop and he saw our listing and called Dad directly and they talked for like an hour and Dad said he seems solid Frank knows cars
+    expected_memory_stores:
+      - "Frank DeLuca interested"
+      - "mechanic 20 years"
+      - "wants to own shop"
+      - "found through listing"
+      - "talked to George for an hour"
+      - "George thinks he's solid"
+    expected_triples:
+      - ["Frank DeLuca", "interested_in_buying", "Chen's Auto Repair"]
+      - ["Frank DeLuca", "has_experience", "mechanic 20 years"]
+      - ["Frank DeLuca", "found_via", "online business listing"]
+      - ["George", "has_opinion", "Frank seems solid"]
+    expected_adaptation:
+      emotion_detected: "cautiously hopeful"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 3:00 PM"
+    user_input: |
+      Frank came to tour the shop and Dad showed him everything the lifts the tools the customer database and Frank was impressed he said this is a well maintained operation George and Dad puffed up a little because complimenting his shop is like complimenting his child
+    expected_memory_stores:
+      - "Frank toured shop"
+      - "saw lifts tools customer database"
+      - "Frank impressed"
+      - "George proud"
+    expected_triples:
+      - ["Frank DeLuca", "toured", "Chen's Auto Repair"]
+      - ["Frank DeLuca", "has_opinion", "well maintained operation"]
+      - ["George", "has_emotion", "proud"]
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 7:00 PM"
+    user_input: |
+      so Frank made an offer but it's not $380K he offered $330K because he said the equipment is older than listed and needs some updating and Dad was offended because those lifts still work perfectly and I was like Dad let's negotiate don't take it personally this is business
+    expected_memory_stores:
+      - "Frank offered $330K"
+      - "below asking"
+      - "equipment age concern"
+      - "George offended"
+      - "Maya says negotiate"
+    expected_triples:
+      - ["Frank DeLuca", "offered", "$330K for shop"]
+      - ["George", "has_emotion", "offended by low offer"]
+      - ["user", "advised", "George to negotiate"]
+    expected_adaptation:
+      emotion_detected: "pragmatic"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 10:00 AM"
+    user_input: |
+      helped Dad draft a counter offer we came back at $360K and included the fact that the customer base is loyal and the location is prime and the revenue is consistent and Frank came back at $340K and honestly that feels fair it's lower than $380K but it's a real offer from a real buyer with actual financing
+    expected_memory_stores:
+      - "counter offer $360K"
+      - "Frank countered $340K"
+      - "feels fair"
+      - "real buyer with financing"
+      - "correction: sale price now $340K not $380K"
+    expected_triples:
+      - ["user", "corrected", "sale price $380K → $340K"]
+      - ["Frank DeLuca", "countered_at", "$340K"]
+      - ["Frank DeLuca", "has_attribute", "real buyer with financing"]
+    expected_adaptation:
+      emotion_detected: "reasonable"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 5:00 PM"
+    user_input: |
+      Dad said he'll take $340K he said Maya it's not about squeezing every dollar it's about finding someone who'll take care of the shop and the guys and Frank met Tony and Rick today and they got along great Frank even said he'd keep the Chen's Auto Repair name as a nod to the legacy which made Dad tear up
+    expected_memory_stores:
+      - "George accepts $340K"
+      - "not about money about legacy"
+      - "Frank met Tony and Rick"
+      - "keeping Chen's Auto Repair name"
+      - "George emotional about name"
+    expected_triples:
+      - ["George", "accepted_offer", "$340K"]
+      - ["Frank DeLuca", "will_keep", "Chen's Auto Repair name"]
+      - ["Frank DeLuca", "met", "Tony and Rick"]
+      - ["George", "has_emotion", "emotional about legacy"]
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 9:00 AM"
+    user_input: |
+      Frank's financing is through a credit union not a regular bank and his loan officer said everything looks good Frank has excellent credit and enough for a 20% down payment which is $68K so this is way more solid than Roger's situation and the closing date is set for March 1st
+    expected_memory_stores:
+      - "Frank's financing through credit union"
+      - "excellent credit"
+      - "20% down payment $68K"
+      - "closing date March 1st"
+      - "more solid than Roger"
+    expected_triples:
+      - ["Frank DeLuca", "financing_through", "credit union"]
+      - ["Frank DeLuca", "has_attribute", "excellent credit"]
+      - ["Frank DeLuca", "down_payment", "$68K 20%"]
+      - ["Chen's Auto Repair", "closing_date", "March 1st"]
+    expected_adaptation:
+      emotion_detected: "optimistic"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      ugh so the credit union needs additional documentation and the closing got pushed from March 1st to March 15th which is annoying but not a dealbreaker Frank called Dad and apologized and said bureaucracy you know and Dad said I've been dealing with bureaucracy for 40 years it's fine
+    expected_memory_stores:
+      - "closing pushed to March 15"
+      - "additional documentation needed"
+      - "Frank apologized"
+      - "George understanding"
+      - "correction: closing date March 1 to March 15"
+    expected_triples:
+      - ["user", "corrected", "closing date March 1 → March 15"]
+      - ["Frank DeLuca", "apologized_for", "closing delay"]
+      - ["George", "has_emotion", "understanding about delay"]
+    expected_adaptation:
+      emotion_detected: "mildly frustrated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Week 2 Monday 5:00 PM"
+    user_input: |
+      another delay the inspection report flagged one of the lifts as needing recertification and the credit union wants it done before closing so now the closing is pushed to March 22nd and I'm like come ON but Dad is being so calm about it he said Maya when you've been in business for 40 years you learn that nothing goes on schedule
+    expected_memory_stores:
+      - "lift recertification needed"
+      - "closing pushed to March 22"
+      - "second delay"
+      - "George calm"
+      - "correction: closing date March 15 to March 22"
+    expected_triples:
+      - ["user", "corrected", "closing date March 15 → March 22"]
+      - ["Chen's Auto Repair", "inspection_issue", "lift needs recertification"]
+      - ["George", "has_emotion", "calm about second delay"]
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Week 2 Wednesday 3:00 PM"
+    user_input: |
+      the lift got recertified cost Dad $800 out of pocket which is annoying but necessary and the credit union said they're ready to proceed and Frank confirmed March 22nd closing and honestly at this point I'm just holding my breath until the check clears
+    expected_memory_stores:
+      - "lift recertified $800"
+      - "credit union ready"
+      - "March 22 confirmed"
+      - "Maya holding breath"
+    expected_triples:
+      - ["George", "paid_for", "lift recertification $800"]
+      - ["Frank DeLuca", "confirmed_closing", "March 22"]
+      - ["user", "has_emotion", "tense hope"]
+    expected_adaptation:
+      emotion_detected: "tense hope"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Week 3 Friday 7:00 PM"
+    user_input: |
+      everything is on track for March 22nd closing Frank signed the final documents the credit union approved the loan and the lawyers are drawing up the transfer and Dad is so ready like he's been cleaning the shop every day making sure it's perfect for Frank which is the most George Chen thing ever hand it over in better condition than you got it
+    expected_memory_stores:
+      - "March 22 closing on track"
+      - "Frank signed documents"
+      - "loan approved"
+      - "lawyers drawing up transfer"
+      - "George cleaning shop for handover"
+    expected_triples:
+      - ["Frank DeLuca", "signed", "final documents"]
+      - ["Chen's Auto Repair", "closing_status", "on track March 22"]
+      - ["George", "preparing_shop", "cleaning for handover"]
+    expected_adaptation:
+      emotion_detected: "cautious relief"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who is buying Chen's Auto Repair?"
+    expected_contains: ["Frank DeLuca"]
+  - question: "What is the final sale price?"
+    expected_contains: ["340"]
+  - question: "What was the original asking price?"
+    expected_contains: ["380"]
+  - question: "When is the closing date?"
+    expected_contains: ["March 22"]
+  - question: "How many times did the closing date move?"
+    expected_contains: ["twice", "two"]
+  - question: "Will the shop keep its name?"
+    expected_contains: ["yes", "Chen's Auto Repair"]
+  - question: "How is Frank financing the purchase?"
+    expected_contains: ["credit union"]
+  - question: "What issue came up during inspection?"
+    expected_contains: ["lift", "recertification"]
+  - question: "What happened with the first buyer Roger?"
+    expected_contains: ["loan denied", "fell through"]
+  - question: "Will Frank keep Tony and Rick?"
+    expected_contains: ["yes"]

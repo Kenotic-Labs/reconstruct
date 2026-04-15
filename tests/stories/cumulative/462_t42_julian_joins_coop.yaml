@@ -1,0 +1,181 @@
+story_id: 462
+story_name: "Julian Joins Co-op Farm"
+category: "Gaming"
+description: |
+  Tests memory of Julian joining Maya's Stardew Valley co-op farm.
+  Establishes their nightly gaming routine, Julian's play style.
+  Verifies relationship dynamics in gaming context.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 7:00 PM"
+    user_input: |
+      okay so Julian bought Stardew Valley on his laptop and we set up the co-op and he joined my Kobe Farm and I'm so excited like we're sitting on the couch each with our laptops and Kobe is between us and Julian picked the artsy looking character which is very on brand for a graphic designer
+    expected_memory_stores:
+      - "Julian bought game"
+      - "co-op setup"
+      - "Kobe Farm"
+      - "couch gaming"
+      - "Julian artsy character"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 8:30 PM"
+    user_input: |
+      so Julian's approach to Stardew is completely different from mine like I'm all about efficiency and planning crops and he's just running around decorating the farmhouse and placing flowers everywhere and I'm like Julian we need to make money and he's like the farm needs AESTHETIC Maya and I can't even argue because it does look nicer
+    expected_memory_stores:
+      - "Julian decorating"
+      - "Maya efficiency focused"
+      - "different play styles"
+      - "farm aesthetics"
+      - "crop planning vs decoration"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 10:00 PM"
+    user_input: |
+      we just played for three hours straight and didn't even realize and Julian figured out you can give gifts to the villagers and now he's romancing someone named Emily and I was like excuse me sir we are ENGAGED and he was like it's a game Maya and I was like I'm watching you Julian Reeves
+    expected_memory_stores:
+      - "three hours straight"
+      - "gifting villagers"
+      - "Julian romancing Emily"
+      - "Maya fake jealous"
+      - "engaged joke"
+    expected_adaptation:
+      emotion_detected: "playful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 10:00 AM"
+    user_input: |
+      we literally woke up this morning and Julian said can we play Stardew before the road trip stuff and I was like yes absolutely so we played for like two hours before breakfast and we unlocked the greenhouse and Julian was SO excited and Kobe kept pawing at our laptops wanting attention and we were like buddy five more minutes
+    expected_memory_stores:
+      - "morning gaming"
+      - "two hours before breakfast"
+      - "unlocked greenhouse"
+      - "Kobe wanting attention"
+      - "road trip reference"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 6:00 PM"
+    user_input: |
+      so we've established a routine now where after dinner we play Stardew for like two hours every night and it's become our thing and honestly it's so nice because we're doing something together but it's relaxed and we talk while we play about our day and Julian's Bold Studio stuff and my Conduit AI stuff and it's like quality time but gaming
+    expected_memory_stores:
+      - "nightly routine"
+      - "two hours after dinner"
+      - "couple activity"
+      - "talk while playing"
+      - "Bold Studio"
+      - "Conduit AI"
+      - "quality time gaming"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 8:00 PM"
+    user_input: |
+      we're trying to finish the community center in the game which requires collecting all these items and Julian is obsessed with the fish tank bundle because he likes fishing in the game and I'm doing the crops bundle and we have like a whole strategy going and Lily would be proud of me honestly this is teamwork
+    expected_memory_stores:
+      - "community center"
+      - "collecting items"
+      - "fish tank bundle Julian"
+      - "crops bundle Maya"
+      - "strategy teamwork"
+      - "Lily reference"
+    expected_adaptation:
+      emotion_detected: "focused"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 9:30 PM"
+    user_input: |
+      I told Nadia about our Stardew addiction and she was like you guys are such nerds and I said says the woman who reads a book a week for book club and she laughed and then Omar said he plays too and I was like WHAT and he said yeah he has like 300 hours and Maya Nadia and I were both shook
+    expected_memory_stores:
+      - "told Nadia"
+      - "Nadia called them nerds"
+      - "book club reference"
+      - "Omar plays too"
+      - "Omar 300 hours"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 10:00 AM"
+    user_input: |
+      what does Julian focus on in our Stardew Valley co-op farm
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 3:00 PM"
+    user_input: |
+      we've been playing every evening for a week now and our farm is getting really good and Julian designed the layout and I handle the money and we have chickens and cows and a dog in the game that we also named Kobe which is very meta and Julian said this is the first video game he's actually loved since like Mario Kart in college
+    expected_memory_stores:
+      - "week of nightly play"
+      - "Julian designed layout"
+      - "Maya handles money"
+      - "chickens cows"
+      - "in-game dog named Kobe"
+      - "Julian first game since college"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 9:00 PM"
+    user_input: |
+      I realized I haven't practiced guitar in like five days because of Stardew and I feel a little guilty but also my stress levels are so much lower and Julian and I are having such good quality time and the farm is thriving so like is it really a problem if I skip guitar for a bit I don't know Dr Tate would probably say balance or whatever
+    expected_memory_stores:
+      - "no guitar five days"
+      - "guilt about guitar"
+      - "lower stress levels"
+      - "quality time priority"
+      - "Dr Tate balance"
+    expected_adaptation:
+      emotion_detected: "conflicted"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Julian's play style in Stardew Valley?"
+    expected_contains: ["decor", "aesthetic", "design"]
+  - question: "What character is Julian romancing in the game?"
+    expected_contains: ["Emily"]
+  - question: "What is their nightly Stardew Valley routine?"
+    expected_contains: ["two hours", "after dinner"]
+  - question: "What are they trying to complete in the game?"
+    expected_contains: ["community center"]
+  - question: "What did they name the in-game dog?"
+    expected_contains: ["Kobe"]
+  - question: "Who else plays Stardew Valley besides Maya and Julian?"
+    expected_contains: ["Omar"]
+  - question: "How many hours has Omar played Stardew?"
+    expected_contains: ["300"]
+  - question: "What has Maya been skipping because of Stardew?"
+    expected_contains: ["guitar"]
+  - question: "What is Maya's role on the co-op farm?"
+    expected_contains: ["crops", "money"]
+  - question: "When was the last time Julian loved a video game?"
+    expected_contains: ["Mario Kart", "college"]

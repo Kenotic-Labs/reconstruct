@@ -1,0 +1,183 @@
+story_id: 473
+story_name: "Three Chords Learned G C D"
+category: "Music and Guitar"
+description: |
+  Tests memory of Maya learning G, C, and D chords.
+  Establishes milestone achievement, growing confidence.
+  Verifies temporal progression and cross-thread references.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:30 PM"
+    user_input: |
+      okay so I've been doing Justin Guitar lessons every night for about two weeks now and tonight I finally got the G chord clean like no buzzing no muted strings and I strummed it and it sounded like actual MUSIC and I yelled Julian come here and he ran in thinking something was wrong and I played the G chord and he was like oh okay that's one chord cool and I was like DO YOU NOT UNDERSTAND THE SIGNIFICANCE
+    expected_memory_stores:
+      - "two weeks of lessons"
+      - "G chord clean"
+      - "no buzzing"
+      - "sounds like music"
+      - "Julian unimpressed"
+      - "Maya excited"
+    expected_adaptation:
+      emotion_detected: "triumphant"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      working on the C chord now and it's harder than G because you have to stretch your fingers more and my pinky is basically useless it just does whatever it wants and Justin Guitar says the C chord is where a lot of beginners get stuck and I'm like great cool love that for me but I'm not quitting Grandpa Wei didn't quit
+    expected_memory_stores:
+      - "C chord"
+      - "harder than G"
+      - "finger stretch"
+      - "pinky useless"
+      - "beginners get stuck"
+      - "Grandpa Wei motivation"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 8:00 PM"
+    user_input: |
+      GOT THE C CHORD and it only took like four days which Justin Guitar says is fast so apparently I'm a natural or maybe I'm just stubborn and my calluses are forming which means the pain is going away and I can press the strings harder without wincing and also I skipped Stardew tonight to practice which is growth honestly
+    expected_memory_stores:
+      - "C chord learned"
+      - "four days"
+      - "Justin says fast"
+      - "natural or stubborn"
+      - "calluses forming"
+      - "skipped Stardew for guitar"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 10:00 AM"
+    user_input: |
+      the D chord I already kinda knew from before so now I have three chords G C and D and Justin Guitar says those three chords can play like thousands of songs and I'm like wait really and he listed some and one of them is Knockin on Heavens Door by Bob Dylan and I looked up the chords and its literally just G D C over and over
+    expected_memory_stores:
+      - "three chords G C D"
+      - "thousands of songs"
+      - "Knockin on Heavens Door"
+      - "Bob Dylan"
+      - "G D C pattern"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 11:00 AM"
+    user_input: |
+      I tried playing Knockin on Heavens Door and um its recognizable which is the most positive thing I can say about it like the chord changes are slow and clunky and I lose the rhythm every time I switch from C to G but you can tell what song it is if you squint your ears and Julian heard it from the other room and yelled is that Bob Dylan and I said YES JULIAN IT IS
+    expected_memory_stores:
+      - "tried Knockin on Heavens Door"
+      - "recognizable barely"
+      - "slow clunky changes"
+      - "C to G transition hard"
+      - "rhythm lost"
+      - "Julian recognized it"
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 3:00 PM"
+    user_input: |
+      practiced for like two hours which is the longest session I've done and my fingertips are raw but in a good way and I can switch between G and D pretty smoothly now but C to anything is still rough and I'm just playing Knockin on Heavens Door on repeat and Kobe actually stayed in the room this time which I'm counting as a win
+    expected_memory_stores:
+      - "two hour practice"
+      - "longest session"
+      - "fingertips raw"
+      - "G to D smooth"
+      - "C transitions rough"
+      - "Kobe stayed in room"
+    expected_adaptation:
+      emotion_detected: "dedicated"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 11:00 AM"
+    user_input: |
+      called Jenny and played Knockin on Heavens Door over FaceTime and she was like oh my god Maya you're playing guitar when did this happen and I told her about Grandpa Wei's guitar and she got emotional and said she remembers me talking about him and she said it sounds really good which is a lie but I love her for it
+    expected_memory_stores:
+      - "played for Jenny FaceTime"
+      - "Jenny surprised"
+      - "told about Grandpa Wei"
+      - "Jenny remembered"
+      - "Jenny said sounds good"
+      - "lie but sweet"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 2:00 PM"
+    user_input: |
+      what three chords has Maya learned on guitar
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 4:00 PM"
+    user_input: |
+      we went on a road trip to the coast today just a quick one to Pacific City and on the drive I was doing air guitar chord shapes with my left hand on the steering wheel and Julian was like please drive normally and I was like I'm building muscle memory and he was like you're building a car accident but I could see him smiling
+    expected_memory_stores:
+      - "Pacific City road trip"
+      - "air guitar while driving"
+      - "muscle memory"
+      - "Julian concerned amused"
+    expected_adaptation:
+      emotion_detected: "playful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 PM"
+    user_input: |
+      played for like 30 minutes tonight and something clicked with the C to G transition like my fingers just knew where to go and the song flowed for maybe four bars straight without stopping and I recorded it on my phone and listened back and it's rough but its real and I'm playing Grandpa Wei's guitar and making music and that just hit me really hard
+    expected_memory_stores:
+      - "C to G clicked"
+      - "four bars flowing"
+      - "recorded on phone"
+      - "rough but real"
+      - "emotional realization"
+      - "Grandpa Wei connection"
+    expected_adaptation:
+      emotion_detected: "deeply moved"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What three chords has Maya learned?"
+    expected_contains: ["G", "C", "D"]
+  - question: "What song can Maya play with those chords?"
+    expected_contains: ["Knockin on Heaven", "Door"]
+  - question: "Who wrote Knockin' on Heaven's Door?"
+    expected_contains: ["Bob Dylan"]
+  - question: "Which chord transition is hardest for Maya?"
+    expected_contains: ["C to G"]
+  - question: "How did Kobe react to the improved playing?"
+    expected_contains: ["stayed in room"]
+  - question: "Who did Maya play for over FaceTime?"
+    expected_contains: ["Jenny"]
+  - question: "What did Maya do with chord shapes while driving?"
+    expected_contains: ["air guitar", "steering wheel"]
+  - question: "How long was Maya's longest practice session?"
+    expected_contains: ["two hour"]
+  - question: "What YouTube teacher does Maya follow?"
+    expected_contains: ["Justin Guitar"]
+  - question: "Are Maya's calluses forming?"
+    expected_contains: ["yes", "forming"]

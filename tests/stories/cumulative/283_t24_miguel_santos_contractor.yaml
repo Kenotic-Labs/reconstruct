@@ -1,0 +1,199 @@
+story_id: 283
+story_name: "Hiring Miguel Santos"
+category: "Home"
+description: |
+  Tests memory of Maya hiring contractor Miguel Santos. Captures his initial assessment,
+  the expanded scope of work, and the budget jumping from $15K to a new number.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00 AM"
+    user_input: |
+      Miguel Santos came by this morning to look at the kitchen and he's like this stocky guy in his 50s with a thick mustache and he walked in and looked at the gutted kitchen and the exposed tiles and just went hmm and I was like is hmm good or bad
+    expected_memory_stores:
+      - "Miguel Santos visit"
+      - "stocky 50s mustache"
+      - "looked at kitchen"
+      - "said hmm"
+    expected_triples:
+      - ["Miguel Santos", "visited", "kitchen for assessment"]
+      - ["Miguel Santos", "has_appearance", "stocky 50s thick mustache"]
+      - ["user", "has_emotion", "nervous"]
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 9:30 AM"
+    user_input: |
+      so Miguel said the asbestos tiles need professional abatement which is gonna run about $3,500 and the subfloor underneath is probably damaged from decades of moisture and will need to be replaced and the drywall behind where the cabinets were needs to be fully replaced not just patched
+    expected_memory_stores:
+      - "asbestos abatement $3,500"
+      - "subfloor damaged"
+      - "moisture damage"
+      - "drywall replacement"
+      - "not just patches"
+    expected_triples:
+      - ["Miguel Santos", "assessed", "asbestos tiles need professional abatement"]
+      - ["asbestos abatement", "costs", "$3,500"]
+      - ["kitchen", "has_issue", "subfloor damaged from moisture"]
+      - ["kitchen", "needs", "full drywall replacement"]
+    expected_adaptation:
+      emotion_detected: "dismayed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 10:00 AM"
+    user_input: |
+      Miguel's total estimate for finishing the kitchen including abatement new subfloor drywall installing the IKEA cabinets we already bought the counters plumbing reconnection electrical for new lighting and backsplash tile is... $18,500 and I was like Miguel our budget was $15K and he was like well the budget was before you found asbestos
+    expected_memory_stores:
+      - "Miguel estimate $18,500"
+      - "includes everything"
+      - "budget was $15K"
+      - "asbestos changed budget"
+    expected_triples:
+      - ["Miguel Santos", "estimated", "$18,500 for kitchen"]
+      - ["kitchen renovation", "had_budget", "$15K"]
+      - ["user", "has_emotion", "stressed"]
+    expected_adaptation:
+      emotion_detected: "stressed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 12:00 PM"
+    user_input: |
+      wait actually I need to correct that. the $18,500 is just Miguel's labor and the abatement. we already spent $4,200 on IKEA cabinets and $1,800 on counters and about $1,500 on other materials so the TOTAL project cost is more like $26,000 which is ELEVEN THOUSAND over our original $15K budget
+    expected_memory_stores:
+      - "correction"
+      - "Miguel labor $18,500"
+      - "materials already bought $7,500"
+      - "total $26,000"
+      - "$11K over budget"
+      - "original budget $15K"
+    expected_triples:
+      - ["user", "corrected", "$18,500 total → $18,500 labor only"]
+      - ["kitchen materials", "cost", "$7,500 already spent"]
+      - ["kitchen renovation", "total_cost", "$26,000"]
+      - ["kitchen renovation", "over_budget_by", "$11K"]
+    expected_adaptation:
+      emotion_detected: "panicked"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 6:00 PM"
+    user_input: |
+      Julian and I had a long talk about whether to proceed and we're looking at pulling from the emergency fund and the Fidelity account to cover the gap and Julian was like but we just built those up and I was like I know but we can't live without a kitchen forever
+    expected_memory_stores:
+      - "proceed discussion"
+      - "pull from emergency fund"
+      - "pull from Fidelity"
+      - "cover gap"
+      - "can't live without kitchen"
+    expected_adaptation:
+      emotion_detected: "torn"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 10:00 AM"
+    user_input: |
+      Miguel said he can start next Monday and the timeline is three weeks for everything and his crew is three guys plus him and he does really good work according to Eddie and also he showed me photos of other kitchens he's done and they look amazing
+    expected_memory_stores:
+      - "start next Monday"
+      - "three week timeline"
+      - "crew of three plus Miguel"
+      - "Eddie vouches"
+      - "portfolio photos"
+      - "amazing work"
+    expected_adaptation:
+      emotion_detected: "reassured"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      signed the contract with Miguel and gave him a $5,000 deposit and the payment schedule is deposit then $5,000 at week one then $5,000 at week two then the remaining $3,500 at completion and he said that's standard for a kitchen reno
+    expected_memory_stores:
+      - "signed contract"
+      - "$5,000 deposit"
+      - "payment schedule"
+      - "$5K week one"
+      - "$5K week two"
+      - "$3,500 at completion"
+    expected_adaptation:
+      emotion_detected: "committed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 7:00 PM"
+    user_input: |
+      had to sell some of the FSKAX in the Fidelity account to help fund this and it hurt because we literally just started investing but we still have $2,300 in there and the emergency fund took a hit too we're at $4,000 now but we'll rebuild once the kitchen is done
+    expected_memory_stores:
+      - "sold FSKAX"
+      - "Fidelity down to $2,300"
+      - "emergency fund $4,000"
+      - "will rebuild"
+      - "hurts to sell investments"
+    expected_adaptation:
+      emotion_detected: "reluctant"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 8:00 PM"
+    user_input: |
+      Omar was like dude I know a guy who does tile work for way cheaper than a contractor would charge and he might be able to save us some money on the backsplash if we handle that ourselves and I was like at this point any savings helps so yes please connect us
+    expected_memory_stores:
+      - "Omar knows tile guy"
+      - "cheaper backsplash"
+      - "potential savings"
+      - "connect us"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:00 AM"
+    user_input: |
+      the IKEA cabinets arrived all 47 boxes of flatpack furniture stacked in our living room and Julian counted them twice and was like wait I thought we ordered 12 cabinets why are there 47 boxes and I was like IKEA babe everything comes in pieces and Kobe was sniffing the boxes like each one was a present for him
+    expected_memory_stores:
+      - "IKEA cabinets delivered"
+      - "47 boxes"
+      - "flatpack"
+      - "living room storage"
+      - "Julian confused by boxes"
+      - "Kobe sniffing"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How much is Miguel Santos charging for the kitchen?"
+    expected_contains: ["18,500", "18500"]
+  - question: "What is the total project cost including materials?"
+    expected_contains: ["26,000", "26000"]
+  - question: "How much over budget is the kitchen renovation?"
+    expected_contains: ["11"]
+  - question: "How much was the deposit to Miguel?"
+    expected_contains: ["5,000", "5000"]
+  - question: "How long is the renovation timeline?"
+    expected_contains: ["three weeks"]
+  - question: "What does the asbestos abatement cost?"
+    expected_contains: ["3,500", "3500"]
+  - question: "How much is left in the Fidelity account?"
+    expected_contains: ["2,300", "2300"]
+  - question: "How many IKEA boxes were delivered?"
+    expected_contains: ["47"]
+  - question: "Who recommended Miguel Santos?"
+    expected_contains: ["Eddie"]
+  - question: "When does Miguel start work?"
+    expected_contains: ["Monday"]

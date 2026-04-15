@@ -1,0 +1,183 @@
+story_id: 277
+story_name: "The Final Stretch"
+category: "Finance"
+description: |
+  Tests memory of Maya approaching the end of her student loan payoff.
+  Balance drops rapidly, anticipation builds, and they start planning the celebration.
+duration_simulated: "3 months"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00 AM"
+    user_input: |
+      month fourteen and the balance is $10,400 single digits by next month probably and the Fidelity account has like $1,200 in it now growing slowly in the background and honestly the whole financial picture just looks so different from a year ago
+    expected_memory_stores:
+      - "month fourteen"
+      - "balance $10,400"
+      - "single digits soon"
+      - "Fidelity $1,200"
+      - "financial transformation"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      the app hit 25,000 monthly active users and I got another sponsorship offer this time from a meal kit company called Green Chef offering $2,000 for a three month integration and I said yes because duh and all of it goes to the loans
+    expected_memory_stores:
+      - "25,000 MAU"
+      - "Green Chef sponsorship"
+      - "$2,000"
+      - "three month integration"
+      - "all to loans"
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 9:00 AM"
+    user_input: |
+      month fifteen and YES SINGLE DIGITS we're at $8,600 and I did a little happy dance and Kobe thought I was playing and started jumping on me and Julian filmed the whole thing which is going to be embarrassing forever
+    expected_memory_stores:
+      - "month fifteen"
+      - "balance $8,600"
+      - "single digits"
+      - "happy dance"
+      - "Kobe jumping"
+      - "Julian filmed"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      Julian and I are already talking about what to do when we're debt free and he wants to go on a real vacation like we haven't taken a trip in over a year because of the budget and I was like where do you wanna go and he said the Oregon coast and I was like that's so you keeping it local
+    expected_memory_stores:
+      - "vacation planning"
+      - "no trip in over a year"
+      - "Oregon coast"
+      - "Julian's idea"
+      - "keeping it local"
+    expected_adaptation:
+      emotion_detected: "dreaming"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 9:00 AM"
+    user_input: |
+      month sixteen balance is $6,700 we are SO CLOSE and I called my mom and told her and she cried which made me cry and she was like your dad would be so proud and now I'm a mess
+    expected_memory_stores:
+      - "month sixteen"
+      - "balance $6,700"
+      - "called mom"
+      - "mom cried"
+      - "dad mentioned"
+      - "emotional"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      realized we need to decide how to celebrate and I said let's go to Canard because it's our special occasion restaurant and Julian was like perfect and I was like but we're not going until the balance is literally zero like I want to make the last payment and then walk in there
+    expected_memory_stores:
+      - "Canard celebration"
+      - "special occasion restaurant"
+      - "wait until zero balance"
+      - "last payment first"
+    expected_adaptation:
+      emotion_detected: "intentional"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 9:00 AM"
+    user_input: |
+      month seventeen and we're at $4,800 which means we could potentially knock this out in two or three more months depending on the app income and Julian's extra work and I'm getting legitimately antsy like I want it to be zero NOW
+    expected_memory_stores:
+      - "month seventeen"
+      - "balance $4,800"
+      - "two or three months left"
+      - "antsy"
+      - "want it done"
+    expected_adaptation:
+      emotion_detected: "impatient"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 7:00 PM"
+    user_input: |
+      had this idea what if instead of waiting three more months we do one massive final payment? we have the Fidelity account at $1,800 and the emergency fund at $4,100 and if we pull from both we could pay it ALL off right now. Julian was like wait what about emergencies and I was like we'll rebuild it fast with the $1,800 that was going to loans
+    expected_memory_stores:
+      - "lump sum payoff idea"
+      - "Fidelity $1,800"
+      - "emergency fund $4,100"
+      - "pay it all off now"
+      - "Julian concerned"
+      - "rebuild fast"
+    expected_adaptation:
+      emotion_detected: "impulsive"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 6:00 PM"
+    user_input: |
+      okay Julian talked me out of the lump sum thing and he's right we shouldn't drain both accounts that's irresponsible but we compromised and we're going to do $2,400 next month which is double the normal payment and then the remaining $2,400 the month after so done in two months
+    expected_memory_stores:
+      - "lump sum rejected"
+      - "Julian compromise"
+      - "$2,400 next two months"
+      - "done in two months"
+      - "responsible approach"
+    expected_adaptation:
+      emotion_detected: "reasonable"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:00 AM"
+    user_input: |
+      month eighteen and the balance is $2,400 TWO THOUSAND FOUR HUNDRED DOLLARS one more payment and it's done I made a reservation at Canard for next month the 15th and told Julian don't schedule anything that evening and he was like wouldn't miss it
+    expected_memory_stores:
+      - "month eighteen"
+      - "balance $2,400"
+      - "one more payment"
+      - "Canard reservation"
+      - "the 15th"
+      - "Julian cleared schedule"
+    expected_adaptation:
+      emotion_detected: "anticipation"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How much does Maya still owe on her loans?"
+    expected_contains: ["2,400", "2400"]
+  - question: "Where are Maya and Julian celebrating when the loans are paid off?"
+    expected_contains: ["Canard"]
+  - question: "What sponsorship did the recipe app get?"
+    expected_contains: ["Green Chef"]
+  - question: "How many months has Maya been paying off loans?"
+    expected_contains: ["eighteen"]
+  - question: "Where does Julian want to go on vacation?"
+    expected_contains: ["Oregon coast"]
+  - question: "What did Maya's mom say about the loan payoff?"
+    expected_contains: ["dad", "proud"]
+  - question: "How much is in the Fidelity account?"
+    expected_contains: ["1,800", "1800"]
+  - question: "Why did Maya not do the lump sum payoff?"
+    expected_contains: ["Julian", "drain", "irresponsible"]
+  - question: "When is the Canard reservation?"
+    expected_contains: ["15th"]
+  - question: "How many monthly active users does the recipe app have?"
+    expected_contains: ["25,000", "25000"]

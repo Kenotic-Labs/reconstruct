@@ -1,0 +1,176 @@
+story_id: 227
+story_name: "Slow and Steady Progress"
+category: "Health"
+description: |
+  Tests system tracking incremental physical recovery milestones. Small wins accumulate.
+  Maya's patience grows. Verifies progress tracking over time and emotional maturation.
+duration_simulated: "4 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 3:00 PM"
+    user_input: |
+      eight weeks in now and Jake tested my knee today and he said the range of motion is at 90% and the strength is really good and for the first time he said we can start thinking about a return to running plan and I literally hugged him
+    expected_memory_stores:
+      - "eight weeks"
+      - "90% range of motion"
+      - "strength good"
+      - "return to running plan"
+      - "hugged Jake"
+    expected_adaptation:
+      emotion_detected: "elated"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 3:30 PM"
+    user_input: |
+      he said the plan would be like start with walk-run intervals at week ten so two more weeks and then gradually increase running time and decrease walking time and he said absolutely no long runs for another month after that
+    expected_memory_stores:
+      - "walk-run intervals"
+      - "week ten start"
+      - "two more weeks"
+      - "gradual increase"
+      - "no long runs for a month"
+    expected_adaptation:
+      emotion_detected: "eager"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 7:00 AM"
+    user_input: |
+      swam twenty laps today which is my best ever and Doris was there and she said girl you're a swimmer now and I said I think you might be right and she tried to teach me butterfly and it's HARD like my shoulders were screaming but I got the kick down
+    expected_memory_stores:
+      - "twenty laps"
+      - "personal best"
+      - "Doris compliment"
+      - "butterfly attempt"
+      - "kick down"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      walked up and down the stairs today without any pain at all and I know that sounds like nothing but two months ago stairs were agony and I literally called Julian and said STAIRS and he said what and I said NO PAIN ON STAIRS and he laughed
+    expected_memory_stores:
+      - "stairs no pain"
+      - "milestone"
+      - "two months ago agony"
+      - "called Julian"
+      - "STAIRS celebration"
+    expected_adaptation:
+      emotion_detected: "triumphant"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 9:00 AM"
+    user_input: |
+      went for a walk with Julian and Kobe and I did three miles and the knee felt totally fine and I could feel my body wanting to run like every cell was saying go go go but I held back because Jake said not until week ten
+    expected_memory_stores:
+      - "three mile walk"
+      - "knee fine"
+      - "body wanting to run"
+      - "held back"
+      - "week ten rule"
+    expected_adaptation:
+      emotion_detected: "restrained"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 12:00 PM"
+    user_input: |
+      how many weeks am I in on my knee recovery and when can I start running again
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 4:00 PM"
+    user_input: |
+      Jake said my last two sessions have been the best yet and he said he's really impressed with how the swimming strengthened the supporting muscles and he said when I do start running again I should cross train with swimming to prevent reinjury
+    expected_memory_stores:
+      - "best sessions"
+      - "swimming strengthened muscles"
+      - "cross train recommendation"
+      - "prevent reinjury"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 8:00 AM"
+    user_input: |
+      Naomi from running group texted and asked how the knee is and I said almost there and she said a few of them want to do a small run with me when I'm ready like a welcome back thing and that made me emotional because I thought they'd have moved on
+    expected_memory_stores:
+      - "Naomi texted"
+      - "welcome back run"
+      - "running group support"
+      - "emotional"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 5:00 PM"
+    user_input: |
+      looking at my swimming log and I went from two laps in the first week to twenty laps now and I can do bilateral breathing and almost do a flip turn and I'm attempting butterfly and I never would have tried any of this if my knee hadn't blown up
+    expected_memory_stores:
+      - "swimming progress"
+      - "two to twenty laps"
+      - "bilateral breathing"
+      - "flip turns"
+      - "butterfly"
+      - "injury led to growth"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 10:00 AM"
+    user_input: |
+      two more weeks until walk-run intervals and I'm counting down like it's Christmas and Julian said he wants to be there for my first run back and Kobe definitely wants to be there too and I promised myself I'll listen to my body this time and not push through pain
+    expected_memory_stores:
+      - "two weeks countdown"
+      - "Julian wants to be there"
+      - "Kobe too"
+      - "listen to body"
+      - "not push through pain"
+      - "lesson learned"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya's knee range of motion at now?"
+    expected_contains: ["90%"]
+  - question: "When can Maya start walk-run intervals?"
+    expected_contains: ["week ten"]
+  - question: "How many laps can Maya swim now?"
+    expected_contains: ["twenty"]
+  - question: "What milestone did Maya celebrate with stairs?"
+    expected_contains: ["no pain"]
+  - question: "What did Jake recommend for after recovery?"
+    expected_contains: ["cross train", "swimming"]
+  - question: "What is the running group planning?"
+    expected_contains: ["welcome back run"]
+  - question: "What has Maya learned from the injury?"
+    expected_contains: ["listen to body", "not push through"]
+  - question: "How has Maya's swimming progressed?"
+    expected_contains: ["two laps", "twenty laps", "bilateral", "flip turns"]
+  - question: "What was Jake impressed by?"
+    expected_contains: ["swimming", "strengthened muscles"]
+  - question: "Who wants to be there for Maya's first run back?"
+    expected_contains: ["Julian", "Kobe"]

@@ -1,0 +1,177 @@
+story_id: 211
+story_name: "Grandpa Wei Declining"
+category: "Family"
+description: |
+  Tests system capturing declining health of a loved one. Grandpa Wei Chen is 89 and getting
+  weaker. Maya processes the news with mixed emotions. Verifies health tracking and
+  family relationship mapping.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      my mom called tonight and she was um she was trying to be calm about it but I could tell she'd been crying and she said grandpa is getting worse like he's not eating much and he's sleeping a lot and the doctors in Fresno said it might be time to think about hospice
+    expected_memory_stores:
+      - "Vivian called"
+      - "grandpa declining"
+      - "not eating"
+      - "sleeping a lot"
+      - "Fresno"
+      - "hospice discussion"
+    expected_adaptation:
+      emotion_detected: "sad"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 7:30 PM"
+    user_input: |
+      grandpa Wei is 89 and he's been like the rock of our family he came to the US from China when he was 25 and he was an engineer and he built this whole life and now he's just fading and it's not fair I know 89 is old but still
+    expected_memory_stores:
+      - "Wei Chen"
+      - "89 years old"
+      - "came from China at 25"
+      - "engineer"
+      - "fading"
+    expected_adaptation:
+      emotion_detected: "grief"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 8:00 PM"
+    user_input: |
+      Julian held me while I cried and he said babe do you want to go see him and I was like I should but Fresno is so far and work is crazy right now and he was like Maya work can wait this can't and he's right but it's hard to just drop everything
+    expected_memory_stores:
+      - "Julian supportive"
+      - "considering visit"
+      - "Fresno far from Portland"
+      - "work conflict"
+    expected_adaptation:
+      emotion_detected: "torn"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 8:00 AM"
+    user_input: |
+      Clara called me and she was already making plans to go to Fresno this weekend because she's a nurse so she can at least help assess the situation and she said Tyler will stay with the um wait does Clara have kids no she doesn't it's just her and Tyler so I guess Tyler's just holding down the fort
+    expected_memory_stores:
+      - "Clara going to Fresno"
+      - "this weekend"
+      - "nurse can assess"
+      - "Tyler staying home"
+      - "no kids"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      my dad George flew down to Fresno already he went yesterday apparently and he's been staying with grandpa and he said grandpa still recognizes everyone which is good but he's weak and his voice is quiet and that makes me so sad because grandpa always had this booming voice
+    expected_memory_stores:
+      - "George in Fresno"
+      - "grandpa recognizes everyone"
+      - "weak but lucid"
+      - "quiet voice"
+      - "used to have booming voice"
+    expected_adaptation:
+      emotion_detected: "melancholic"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 3:00 PM"
+    user_input: |
+      how old is grandpa Wei and where is he right now
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 5:00 PM"
+    user_input: |
+      I video called grandpa today and oh man he looked so small in that hospital bed and he smiled when he saw me and he said Maya Maya in this soft voice and he asked if I was eating enough which is so him like he's literally dying and worried about ME
+    expected_memory_stores:
+      - "video call"
+      - "grandpa in hospital bed"
+      - "smiled"
+      - "asked about Maya"
+      - "typical grandpa concern"
+    expected_adaptation:
+      emotion_detected: "heartbroken"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      he told me a little story about when he first came to America and didn't speak English and got lost in San Francisco and some stranger helped him find the bus and he said Maya always remember kindness travels and I just lost it I started sobbing on the call
+    expected_memory_stores:
+      - "immigration story"
+      - "San Francisco"
+      - "lost didn't speak English"
+      - "stranger helped"
+      - "kindness travels"
+      - "Maya crying"
+    expected_adaptation:
+      emotion_detected: "devastated"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      I decided I'm going to Fresno this weekend with Clara I told my manager and she said take whatever time you need and Julian said he'll watch Kobe and I just need to see him one more time at least in person not through a screen
+    expected_memory_stores:
+      - "going to Fresno"
+      - "this weekend"
+      - "with Clara"
+      - "manager approved"
+      - "Julian watching Kobe"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 10:00 PM"
+    user_input: |
+      can't sleep thinking about grandpa and all the times he took me to the park when I was little and taught me to ride a bike and he used to say Maya you are the smartest one in this family remember that and I believed him and I still do and I'm not ready to lose him
+    expected_memory_stores:
+      - "park memories"
+      - "taught bike riding"
+      - "smartest one in family"
+      - "not ready to lose him"
+    expected_adaptation:
+      emotion_detected: "grieving"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who is Grandpa Wei?"
+    expected_contains: ["maternal grandfather", "Wei Chen"]
+  - question: "How old is Grandpa Wei?"
+    expected_contains: ["89"]
+  - question: "Where is Grandpa Wei?"
+    expected_contains: ["Fresno"]
+  - question: "What was Grandpa Wei's career?"
+    expected_contains: ["engineer"]
+  - question: "Where did Grandpa Wei come from?"
+    expected_contains: ["China"]
+  - question: "What did Grandpa Wei say about kindness?"
+    expected_contains: ["kindness travels"]
+  - question: "Who is already in Fresno with Grandpa?"
+    expected_contains: ["George"]
+  - question: "Is Maya going to visit?"
+    expected_contains: ["yes", "this weekend"]
+  - question: "Who is watching Kobe while Maya visits?"
+    expected_contains: ["Julian"]
+  - question: "What did Grandpa teach Maya as a child?"
+    expected_contains: ["bike", "ride"]

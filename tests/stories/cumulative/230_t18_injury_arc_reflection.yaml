@@ -1,0 +1,180 @@
+story_id: 230
+story_name: "Injury Arc Reflection"
+category: "Health"
+description: |
+  Tests full injury arc reconstruction. Maya reflects on the complete journey from training
+  to injury to recovery to becoming a swimmer-runner. Verifies system handles timeline
+  corrections and identity evolution.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 3:00 PM"
+    user_input: |
+      had my final PT session with Jake today he discharged me and said my knee is at 100% and he was like you're one of the best patients I've had because you actually did the exercises and I said Jake you literally saved my knee
+    expected_memory_stores:
+      - "final PT session"
+      - "discharged"
+      - "100%"
+      - "best patient"
+      - "Jake saved knee"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 3:30 PM"
+    user_input: |
+      he said I should keep doing the strengthening exercises twice a week forever basically and keep cross training with swimming and he said if I ever feel a twinge to come in immediately don't wait like I did last time and I said I promise
+    expected_memory_stores:
+      - "strengthening forever"
+      - "twice a week"
+      - "cross train swimming"
+      - "don't wait on pain"
+      - "Maya promised"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 5:00 PM"
+    user_input: |
+      told Julian I'm officially discharged from PT and he picked me up and spun me around and Kobe was barking and it felt like a celebration and I said thank you for dealing with moody injured Maya for three months and he said babe you weren't that bad and I said Julian yes I was
+    expected_memory_stores:
+      - "told Julian"
+      - "picked her up"
+      - "three months total"
+      - "thanked Julian"
+      - "was moody"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 7:00 PM"
+    user_input: |
+      looking back on it the whole timeline went six weeks then eight then ten and the total recovery was actually about twelve weeks including the return to running phase and I went from not being able to run half a mile to doing four mile runs now with no pain
+    expected_memory_stores:
+      - "full timeline recap"
+      - "six eight ten twelve"
+      - "half mile to four miles"
+      - "no pain now"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 8:00 PM"
+    user_input: |
+      I run three days a week now and swim three days and take one rest day and Jake said that's the perfect balance and Doris said I should think about joining a masters swim team and I said Doris slow down I just learned flip turns
+    expected_memory_stores:
+      - "three days running"
+      - "three days swimming"
+      - "one rest day"
+      - "perfect balance"
+      - "masters swim team"
+      - "Doris ambitious"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 9:00 PM"
+    user_input: |
+      how long did my total knee recovery take and what was the original diagnosis
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 7:00 AM"
+    user_input: |
+      went for a run this morning along the waterfront same route where I first felt the knee pain and I ran the whole thing five miles no walk breaks no pain and the air was crisp and the river was gorgeous and I thought about how different I am now
+    expected_memory_stores:
+      - "waterfront run"
+      - "five miles"
+      - "no walk breaks"
+      - "no pain"
+      - "same route as first pain"
+      - "different now"
+    expected_adaptation:
+      emotion_detected: "triumphant"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      Naomi and I ran together for the first time since before my injury and we did an easy four miles and she kept checking on me and I said Naomi I'm FINE and she said ok ok just making sure and we're planning to sign up for a 10K in the spring as a stepping stone before marathon
+    expected_memory_stores:
+      - "ran with Naomi"
+      - "four miles"
+      - "Naomi checking"
+      - "10K in spring"
+      - "stepping stone"
+      - "before marathon"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      Clara asked if I'd do the marathon next year and I said I think so but differently this time like I'll train smarter and listen to my body and cross train and not just grind miles and she said that sounds like growth and I said it is it really is
+    expected_memory_stores:
+      - "marathon next year"
+      - "train smarter"
+      - "listen to body"
+      - "cross train"
+      - "growth"
+    expected_adaptation:
+      emotion_detected: "mature"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 9:00 PM"
+    user_input: |
+      the torn meniscus was one of the hardest things I've been through physically and emotionally and I wouldn't wish it on anyone but I also wouldn't trade what I learned from it like I found swimming I found patience I found a community I didn't know I had and I found out I'm tougher than I thought
+    expected_memory_stores:
+      - "hardest thing"
+      - "wouldn't trade it"
+      - "found swimming"
+      - "found patience"
+      - "found community"
+      - "tougher than thought"
+    expected_adaptation:
+      emotion_detected: "wise"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Summarize Maya's knee injury journey."
+    expected_contains: ["torn meniscus", "PT", "swimming", "recovery"]
+  - question: "How long was the total recovery?"
+    expected_contains: ["twelve weeks"]
+  - question: "What is Maya's current exercise routine?"
+    expected_contains: ["three days running", "three days swimming"]
+  - question: "Is Maya going to run the marathon next year?"
+    expected_contains: ["yes", "differently", "smarter"]
+  - question: "What is Maya's next race?"
+    expected_contains: ["10K", "spring"]
+  - question: "How far can Maya run now?"
+    expected_contains: ["five miles"]
+  - question: "Who is Maya's physical therapist?"
+    expected_contains: ["Jake Russo"]
+  - question: "Where does Maya do PT?"
+    expected_contains: ["Rose City Physical Therapy"]
+  - question: "What did Maya learn from the injury?"
+    expected_contains: ["patience", "swimming", "community", "listen to body"]
+  - question: "Has Maya been discharged from PT?"
+    expected_contains: ["yes", "100%"]

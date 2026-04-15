@@ -1,0 +1,178 @@
+story_id: 239
+story_name: "Cooking Confidence"
+category: "Health"
+description: |
+  Tests system tracking identity evolution through food. Maya develops cooking skills
+  as a positive outcome of the allergy. Verifies system captures silver lining narratives.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      so I've been cooking like every night now and I'm getting really good at it like tonight I made this Thai basil chicken stir fry using the shellfish free sauces I found and Julian said babe you should start a food blog or something
+    expected_memory_stores:
+      - "cooking every night"
+      - "Thai basil chicken"
+      - "shellfish free sauces"
+      - "Julian food blog idea"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 12:00 PM"
+    user_input: |
+      brought leftovers to work and Leon tried some and he was like wait you made this and I said yeah and he said this is restaurant quality and I was like Leon stop but also don't stop
+    expected_memory_stores:
+      - "brought leftovers"
+      - "Leon tried"
+      - "restaurant quality"
+      - "compliment"
+    expected_adaptation:
+      emotion_detected: "flattered"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 7:00 PM"
+    user_input: |
+      found this YouTube channel about allergy friendly cooking and the chef has a shellfish allergy too and she does all these amazing substitutions and I learned that coconut aminos can replace oyster sauce and mushroom broth can replace fish sauce in most recipes
+    expected_memory_stores:
+      - "YouTube cooking channel"
+      - "chef with shellfish allergy"
+      - "coconut aminos"
+      - "replaces oyster sauce"
+      - "mushroom broth"
+      - "replaces fish sauce"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 6:00 PM"
+    user_input: |
+      Diane asked me to contribute a recipe to the Reeves family cookbook thing she's putting together and I submitted my garlic butter chicken and the shellfish free paella and she said both are going in and I'm like wow I'm in the family cookbook that's official
+    expected_memory_stores:
+      - "Reeves family cookbook"
+      - "Diane putting together"
+      - "garlic chicken submitted"
+      - "paella submitted"
+      - "both accepted"
+      - "in the family cookbook"
+    expected_adaptation:
+      emotion_detected: "honored"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 10:00 AM"
+    user_input: |
+      went to this kitchen supply store on Hawthorne and bought a proper wok and a mortar and pestle and Julian was like you're turning into your dad and I said well George Chen IS the best cook I know so that's a compliment
+    expected_memory_stores:
+      - "kitchen supply store"
+      - "Hawthorne"
+      - "wok and mortar and pestle"
+      - "turning into George"
+      - "compliment"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 2:00 PM"
+    user_input: |
+      what recipes have I contributed to the Reeves family cookbook
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 6:00 PM"
+    user_input: |
+      made my first real Chinese dish tonight my dad's mapo tofu recipe and I called him while cooking and he walked me through each step and he said Maya your grandmother Mei would be so proud of you in the kitchen and I almost burned the tofu because I was getting emotional
+    expected_memory_stores:
+      - "mapo tofu"
+      - "George's recipe"
+      - "called dad while cooking"
+      - "grandma Mei would be proud"
+      - "almost burned tofu"
+      - "emotional"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 11:00 AM"
+    user_input: |
+      the mapo tofu turned out amazing and Julian said it's better than what we get at restaurants and I said that's because it's grandpa George's recipe which is actually grandma Mei's recipe which is actually some family recipe from Wuhan so it's like generations of flavor
+    expected_memory_stores:
+      - "mapo tofu success"
+      - "George's recipe"
+      - "originally grandma Mei's"
+      - "from Wuhan"
+      - "generations of flavor"
+    expected_adaptation:
+      emotion_detected: "connected"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 4:00 PM"
+    user_input: |
+      Clara and Tyler came for dinner and I made a full spread like the paella and a salad and these little mochi desserts I learned from the YouTube channel and Clara said Maya since when do you cook like this and I said since shrimp tried to kill me
+    expected_memory_stores:
+      - "Clara and Tyler dinner"
+      - "full spread"
+      - "paella salad mochi"
+      - "since when do you cook"
+      - "since shrimp tried to kill me"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 9:00 PM"
+    user_input: |
+      thinking about how this allergy literally changed my relationship with food in a positive way like I went from someone who ordered takeout five nights a week to someone who cooks every night and knows ingredients and actually enjoys the process and all because of shrimp who knew
+    expected_memory_stores:
+      - "relationship with food changed"
+      - "takeout to cooking"
+      - "five nights takeout before"
+      - "cooks every night now"
+      - "enjoys process"
+      - "because of shrimp"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How has Maya's cooking changed since the allergy?"
+    expected_contains: ["improved", "every night", "takeout to cooking"]
+  - question: "What recipes did Maya contribute to the Reeves cookbook?"
+    expected_contains: ["garlic chicken", "paella"]
+  - question: "What substitutions has Maya learned?"
+    expected_contains: ["coconut aminos", "mushroom broth"]
+  - question: "Whose recipe is the mapo tofu?"
+    expected_contains: ["George", "grandma Mei", "Wuhan"]
+  - question: "What kitchen equipment did Maya buy?"
+    expected_contains: ["wok", "mortar and pestle"]
+  - question: "What did George say about Maya's cooking?"
+    expected_contains: ["grandma Mei", "proud"]
+  - question: "How did Maya joke about her allergy?"
+    expected_contains: ["shrimp tried to kill me"]
+  - question: "What is Diane putting together for the family?"
+    expected_contains: ["cookbook"]
+  - question: "What YouTube channel does Maya follow?"
+    expected_contains: ["allergy friendly cooking"]
+  - question: "How many nights a week did Maya used to order takeout?"
+    expected_contains: ["five"]

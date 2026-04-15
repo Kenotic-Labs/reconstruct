@@ -1,0 +1,174 @@
+story_id: 371
+story_name: "Kobe's Emergency Motivates First Aid"
+category: "Personal Development"
+description: |
+  Tests memory of Kobe's pancreatitis emergency motivating Maya to learn first aid.
+  Verifies system tracks cause-effect chains across life events.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      so I've been thinking a lot since Kobe's pancreatitis thing and the shellfish allergy ER visit and I realized I don't know anything about first aid like if Julian had been choking or if someone collapsed I would just stand there and panic
+    expected_memory_stores:
+      - "Kobe pancreatitis"
+      - "shellfish allergy ER"
+      - "no first aid knowledge"
+      - "choking scenario"
+      - "would panic"
+    expected_adaptation:
+      emotion_detected: "concerned"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 7:30 PM"
+    user_input: |
+      I looked up the Red Cross in Portland and they offer a combined first aid and CPR AED certification course and it's like two weekends and costs 90 bucks and I signed up for the one starting next Saturday
+    expected_memory_stores:
+      - "Red Cross Portland"
+      - "first aid CPR AED"
+      - "two weekends"
+      - "90 dollars"
+      - "starts next Saturday"
+    expected_adaptation:
+      emotion_detected: "proactive"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 8:00 PM"
+    user_input: |
+      Julian was like wait you're signing up for another course you just finished the ML thing and I was like this is different this is about keeping people alive not career stuff and he was like fair point
+    expected_memory_stores:
+      - "Julian surprised"
+      - "another course"
+      - "ML comparison"
+      - "different motivation"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      told Clara about signing up and she was SO excited because she's a nurse and she was like oh my god finally someone in this family besides me who knows what to do in an emergency and she immediately started quizzing me on stuff I don't know yet
+    expected_memory_stores:
+      - "Clara excited"
+      - "nurse perspective"
+      - "only medical person in family"
+      - "started quizzing"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      but honestly I'm a little nervous about the blood and needles stuff like I'm fine with my own blood but seeing other people bleed makes me kinda lightheaded and I told Dr Tate and she said that's common and it gets easier with exposure
+    expected_memory_stores:
+      - "nervous about blood"
+      - "lightheaded with others' blood"
+      - "Dr. Tate reassurance"
+      - "exposure helps"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 6:00 PM"
+    user_input: |
+      Clara sent me her old first aid study materials and highlighted the parts she thinks are most important and she wrote little notes in the margins like always check scene safety first and make sure YOU don't become the next patient
+    expected_memory_stores:
+      - "Clara study materials"
+      - "highlighted sections"
+      - "margin notes"
+      - "scene safety first"
+      - "don't become next patient"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 8:00 PM"
+    user_input: |
+      spent tonight going through Clara's materials and actually the anatomy stuff is really interesting like I never knew how the recovery position works or why you tilt the head back for airway or that you're supposed to push HARD for CPR like two inches deep
+    expected_memory_stores:
+      - "studying materials"
+      - "recovery position"
+      - "head tilt airway"
+      - "CPR depth two inches"
+      - "finding it interesting"
+    expected_adaptation:
+      emotion_detected: "engaged"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 9:00 PM"
+    user_input: |
+      what motivated Maya to sign up for first aid certification
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 7:00 AM"
+    user_input: |
+      first class is today and I'm nervous but I packed Clara's notes and a notebook and Julian was like you're treating this like college and I was like listen if someone is dying in front of me I want to know what to do okay
+    expected_memory_stores:
+      - "first class day"
+      - "nervous"
+      - "packed notes"
+      - "Julian comment"
+      - "life or death motivation"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 5:00 PM"
+    user_input: |
+      first day of class done and it was actually really good the instructor is this retired paramedic named Frank and he's funny and the group is like 15 people and we practiced CPR on dummies and I didn't pass out so that's a win
+    expected_memory_stores:
+      - "first day done"
+      - "instructor Frank"
+      - "retired paramedic"
+      - "15 people"
+      - "CPR on dummies"
+      - "didn't pass out"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Why did Maya sign up for first aid?"
+    expected_contains: ["Kobe", "pancreatitis", "allergy", "ER"]
+  - question: "Where is Maya taking the first aid course?"
+    expected_contains: ["Red Cross", "Portland"]
+  - question: "How much does the course cost?"
+    expected_contains: ["90"]
+  - question: "Who is the first aid instructor?"
+    expected_contains: ["Frank", "paramedic"]
+  - question: "What is Maya nervous about in the course?"
+    expected_contains: ["blood", "needles"]
+  - question: "Who sent Maya study materials?"
+    expected_contains: ["Clara"]
+  - question: "What did Clara highlight as the most important rule?"
+    expected_contains: ["scene safety"]
+  - question: "How deep should CPR compressions be?"
+    expected_contains: ["two inches"]
+  - question: "How many people are in Maya's first aid class?"
+    expected_contains: ["15"]
+  - question: "How long is the first aid course?"
+    expected_contains: ["two weekends"]

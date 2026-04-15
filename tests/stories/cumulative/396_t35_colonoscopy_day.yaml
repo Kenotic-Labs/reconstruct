@@ -1,0 +1,182 @@
+story_id: 396
+story_name: "Colonoscopy Day"
+category: "Health"
+description: |
+  Tests memory of the actual colonoscopy day and its immediate results.
+  Verifies system tracks medical procedures and family coordination.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Procedure Day 6:00 AM"
+    user_input: |
+      picking up dad now it's 6 AM and his appointment is at 7:30 and mom wanted to come but I said stay home we'll be fine and dad is being really quiet in the car and he's holding his stomach because the prep last night was rough
+    expected_memory_stores:
+      - "6 AM pickup"
+      - "7:30 appointment"
+      - "Vivian stayed home"
+      - "George quiet"
+      - "holding stomach"
+      - "rough prep"
+    expected_adaptation:
+      emotion_detected: "caring"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Procedure Day 7:30 AM"
+    user_input: |
+      we're at Good Samaritan and dad filled out all the paperwork and I helped him with the medication list because he couldn't remember everything and thank god for the spreadsheet because it had everything Dr Okonkwo's info his meds his allergies all of it
+    expected_memory_stores:
+      - "Good Samaritan"
+      - "paperwork"
+      - "Maya helped"
+      - "spreadsheet saved the day"
+      - "Dr. Okonkwo info"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Procedure Day 8:00 AM"
+    user_input: |
+      met Dr Ramirez and she's really calm and reassuring and she explained the whole procedure to dad step by step and said it would take about 30 minutes and he'd be sedated the whole time and dad finally relaxed a little
+    expected_memory_stores:
+      - "met Dr. Ramirez"
+      - "calm reassuring"
+      - "explained procedure"
+      - "30 minutes"
+      - "sedated"
+      - "George relaxed"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Procedure Day 8:15 AM"
+    user_input: |
+      they took dad back and I'm sitting in the waiting room and I texted Clara and she said she's refreshing her phone every 30 seconds and mom texted asking if he went in yet and I'm like yes mom I'll update you please don't text every minute
+    expected_memory_stores:
+      - "George taken back"
+      - "waiting room"
+      - "Clara refreshing phone"
+      - "Vivian texting"
+      - "Maya updating"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Procedure Day 9:00 AM"
+    user_input: |
+      Dr Ramirez came out and said the procedure went well but they found a polyp and she removed it during the procedure and she said they're sending it to pathology and we should have results in about a week and I was like wait a polyp is that bad
+    expected_memory_stores:
+      - "Dr. Ramirez update"
+      - "polyp found"
+      - "removed during procedure"
+      - "sent to pathology"
+      - "results in a week"
+      - "Maya worried"
+    expected_adaptation:
+      emotion_detected: "worried"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Procedure Day 9:30 AM"
+    user_input: |
+      she said most polyps are benign but they remove them as a precaution and test them and she said this is exactly why screening matters because if this polyp had stayed for another 5 or 10 years it could have become cancerous and I immediately texted Clara
+    expected_memory_stores:
+      - "most polyps benign"
+      - "removed as precaution"
+      - "could become cancerous"
+      - "5-10 years risk"
+      - "why screening matters"
+      - "texted Clara"
+    expected_adaptation:
+      emotion_detected: "shaken"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Procedure Day 10:00 AM"
+    user_input: |
+      dad woke up from sedation and he was all groggy and funny and he kept saying that wasn't bad at all and I was like I TOLD YOU and he said okay you were right and Frank was wrong and I said I'm getting that tattooed
+    expected_memory_stores:
+      - "George woke up"
+      - "groggy funny"
+      - "wasn't bad"
+      - "Maya was right"
+      - "Frank was wrong"
+      - "tattoo joke"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Procedure Day 11:00 AM"
+    user_input: |
+      what did the doctor find during George's colonoscopy
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Procedure Day 12:00 PM"
+    user_input: |
+      brought dad home and mom had made congee which is like rice porridge and dad ate three bowls and he was talking so much about how easy it was and I was like you were literally terrified this morning and he was like I don't recall that
+    expected_memory_stores:
+      - "brought George home"
+      - "Vivian made congee"
+      - "three bowls"
+      - "George says easy"
+      - "was terrified morning"
+      - "I don't recall"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Procedure Day 3:00 PM"
+    user_input: |
+      told Julian about the polyp and he went pale and said thank god you pushed him on this and I said I know and we just sat there for a minute because the what-if is really scary like what if I hadn't made the spreadsheet what if I hadn't noticed the missing colonoscopy
+    expected_memory_stores:
+      - "told Julian about polyp"
+      - "Julian went pale"
+      - "thank god pushed"
+      - "what-if scary"
+      - "spreadsheet saved it"
+    expected_adaptation:
+      emotion_detected: "sobered"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did the doctor find during George's colonoscopy?"
+    expected_contains: ["polyp"]
+  - question: "Was the polyp removed?"
+    expected_contains: ["yes", "during procedure"]
+  - question: "Where is the polyp being sent?"
+    expected_contains: ["pathology"]
+  - question: "How did George feel about the procedure afterward?"
+    expected_contains: ["wasn't bad", "easy"]
+  - question: "Who performed the colonoscopy?"
+    expected_contains: ["Dr. Ramirez"]
+  - question: "Where was the procedure done?"
+    expected_contains: ["Good Samaritan"]
+  - question: "What did Vivian make when George got home?"
+    expected_contains: ["congee"]
+  - question: "Why is finding the polyp significant?"
+    expected_contains: ["could", "cancerous", "5", "10 years"]
+  - question: "How did the family health spreadsheet help on procedure day?"
+    expected_contains: ["medication", "list", "paperwork"]
+  - question: "What did George say about Frank's advice?"
+    expected_contains: ["Frank was wrong"]

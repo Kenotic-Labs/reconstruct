@@ -1,0 +1,177 @@
+story_id: 303
+story_name: "Calls Start Decreasing"
+category: "Friendships"
+description: |
+  Tests memory of the gradual decrease in communication between Maya and Jenny
+  after the move. Weekly calls become biweekly. Maya notices but doesn't confront.
+  Verifies temporal tracking of communication frequency changes.
+duration_simulated: "3 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Week 1 Wednesday 7:00 PM"
+    user_input: |
+      had our weekly FaceTime with Jenny tonight and she was telling me about her new office well not office but like the coworking space she goes to sometimes and she met some people there and it sounds cool I guess she seems happy
+    expected_memory_stores:
+      - "weekly FaceTime"
+      - "coworking space"
+      - "Jenny meeting people"
+      - "Jenny happy"
+    expected_triples:
+      - ["Maya", "had_facetime_with", "Jenny"]
+      - ["Jenny", "uses", "coworking space"]
+      - ["Jenny", "met", "new people at coworking"]
+      - ["Jenny", "has_emotion", "happy"]
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Week 2 Wednesday 8:30 PM"
+    user_input: |
+      Jenny cancelled our call tonight said she had dinner plans with some coworkers and I was like oh ok no worries and she was like we'll do it Thursday and I mean that's fine but we always do Wednesdays
+    expected_memory_stores:
+      - "Jenny cancelled call"
+      - "dinner with coworkers"
+      - "rescheduled to Thursday"
+      - "Wednesday tradition broken"
+    expected_triples:
+      - ["Jenny", "cancelled", "Wednesday FaceTime"]
+      - ["Jenny", "had_dinner_with", "coworkers"]
+      - ["Jenny", "rescheduled_call_to", "Thursday"]
+      - ["user", "has_emotion", "disappointed"]
+    expected_adaptation:
+      emotion_detected: "disappointed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Week 2 Friday 9:00 PM"
+    user_input: |
+      we never did the Thursday call either Jenny texted and said sorry work got crazy and she'd call this weekend and I haven't heard from her since Thursday so
+    expected_memory_stores:
+      - "Thursday call missed too"
+      - "work crazy excuse"
+      - "weekend call promise"
+      - "no contact since Thursday"
+    expected_adaptation:
+      emotion_detected: "hurt"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Week 3 Monday 12:00 PM"
+    user_input: |
+      Jenny finally called yesterday and she was all sorry sorry I've just been so busy settling in and making friends and starting the new job and I was like yeah no totally I get it but like do I though
+    expected_memory_stores:
+      - "Jenny called Sunday"
+      - "busy excuse"
+      - "settling in"
+      - "Maya doubtful"
+    expected_adaptation:
+      emotion_detected: "resentful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Week 3 Wednesday 6:00 PM"
+    user_input: |
+      told Clara about Jenny being flaky and Clara was like give her time she just moved and I was like I know but we used to talk every single day and now it's like once a week if I'm lucky and Clara said that's normal for long distance friendships
+    expected_memory_stores:
+      - "Clara advice give time"
+      - "used to talk daily"
+      - "now once a week"
+      - "long distance normal"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Week 3 Saturday 3:00 PM"
+    user_input: |
+      I saw on Instagram that Jenny went to some rooftop bar with like five people I don't know and she looks so happy in the photos and I should be glad she's making friends right so why does it feel like she's replacing me
+    expected_memory_stores:
+      - "Instagram photos"
+      - "rooftop bar"
+      - "new friends"
+      - "feeling replaced"
+    expected_adaptation:
+      emotion_detected: "jealous"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Week 3 Saturday 9:00 PM"
+    user_input: |
+      Julian said I'm being a little possessive about the Jenny thing and I got mad at him and he was like I'm not trying to be mean but people grow and I was like I KNOW that but she's my best friend not just some person
+    expected_memory_stores:
+      - "Julian called her possessive"
+      - "fought about it"
+      - "Julian said people grow"
+      - "Maya defensive"
+    expected_adaptation:
+      emotion_detected: "angry"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Week 3 Sunday 11:00 AM"
+    user_input: |
+      how often have Jenny and I talked since she moved to Austin
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Week 3 Sunday 2:00 PM"
+    user_input: |
+      Jenny sent me a voice note today just a random one about how she found a great pho place in Austin and it reminded her of our spot on Division Street and idk that made me feel better like she's still thinking about me even when she's busy
+    expected_memory_stores:
+      - "voice note from Jenny"
+      - "pho place Austin"
+      - "Division Street pho spot"
+      - "Jenny thinking of Maya"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Week 3 Sunday 7:30 PM"
+    user_input: |
+      I think I need to just like adjust my expectations you know like we're not gonna talk every day anymore and that's ok it doesn't mean she doesn't love me it just means life is different now and I gotta be ok with that
+    expected_memory_stores:
+      - "adjusting expectations"
+      - "acceptance"
+      - "life is different"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How has communication between Maya and Jenny changed?"
+    expected_contains: ["decreased", "less", "weekly", "cancelled"]
+  - question: "What day did Maya and Jenny usually FaceTime?"
+    expected_contains: ["Wednesday"]
+  - question: "Why did Jenny cancel their call?"
+    expected_contains: ["dinner", "coworkers"]
+  - question: "What did Julian say about Maya's reaction to Jenny?"
+    expected_contains: ["possessive"]
+  - question: "What did Clara advise Maya about the situation?"
+    expected_contains: ["give her time", "normal", "long distance"]
+  - question: "What did Maya see on Instagram?"
+    expected_contains: ["rooftop bar", "new friends"]
+  - question: "What voice note did Jenny send?"
+    expected_contains: ["pho place", "Austin"]
+  - question: "What pho restaurant do Maya and Jenny share?"
+    expected_contains: ["Division Street"]
+  - question: "How does Maya feel about the changing friendship?"
+    expected_contains: ["adjusting", "accept"]
+  - question: "How often do Maya and Jenny talk now?"
+    expected_contains: ["once a week", "less"]

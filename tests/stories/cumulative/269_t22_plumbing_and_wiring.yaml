@@ -1,0 +1,182 @@
+story_id: 269
+story_name: "Discovering Plumbing and Wiring Issues"
+category: "Housing"
+description: |
+  Tests memory of Maya discovering additional problems in the house beyond what the
+  inspection found. Plumbing issues and old wiring create new headaches and expanding costs.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      so we've been in the house for about a week now and everything was fine until tonight when I flushed the upstairs toilet and heard this really ominous gurgling noise from the kitchen sink downstairs and Julian was like that's not normal right and I was like definitely not normal
+    expected_memory_stores:
+      - "one week in house"
+      - "toilet flush"
+      - "gurgling kitchen sink"
+      - "plumbing issue"
+      - "upstairs to downstairs"
+    expected_adaptation:
+      emotion_detected: "concerned"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 9:00 AM"
+    user_input: |
+      called a plumber this morning his name is Dave Chen no relation to me obviously and he said the gurgling is probably a venting issue in the drain lines which is common in older houses and he can come look Thursday and it might be a simple fix or it might mean tearing into a wall
+    expected_memory_stores:
+      - "Dave Chen plumber"
+      - "venting issue"
+      - "drain lines"
+      - "older houses common"
+      - "Thursday visit"
+      - "might tear into wall"
+    expected_adaptation:
+      emotion_detected: "worried"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 2:00 PM"
+    user_input: |
+      Dave came and oh boy it's not just a venting issue apparently the main drain line from the upstairs bathroom has a partial collapse where it goes through the floor between the first and second stories and he said the pipe is like original galvanized steel from when the house was built in the 60s
+    expected_memory_stores:
+      - "main drain partial collapse"
+      - "between floors"
+      - "galvanized steel"
+      - "original from 1960s"
+      - "worse than expected"
+    expected_adaptation:
+      emotion_detected: "dismayed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 3:00 PM"
+    user_input: |
+      wait so the inspection said the plumbing was copper which is good but Dave is saying the visible pipes are copper but the ones inside the walls and between floors are the original galvanized and Greg the inspector couldn't have seen those without opening walls so it's not his fault but still
+    expected_memory_stores:
+      - "copper visible only"
+      - "galvanized inside walls"
+      - "inspector couldn't see"
+      - "not Greg's fault"
+      - "correction from inspection"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 4:00 PM"
+    user_input: |
+      Dave's estimate to replace the collapsed drain and re-pipe the galvanized sections is $4,800 and Julian was like can't we just fix the one collapsed part and Dave was like you can but the rest will fail within a year or two and then you're paying me twice so we're doing the full job
+    expected_memory_stores:
+      - "plumbing repair $4,800"
+      - "replace galvanized"
+      - "full job vs patch"
+      - "will fail if patched"
+    expected_adaptation:
+      emotion_detected: "resigned"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:00 AM"
+    user_input: |
+      while Dave's crew was doing the plumbing they opened up a wall in the hallway and found MORE knob and tube wiring that wasn't in the areas Greg inspected or Eddie looked at and I'm starting to think this house is like an onion every layer is a new surprise
+    expected_memory_stores:
+      - "more knob and tube"
+      - "hallway wall opened"
+      - "not previously found"
+      - "house like onion"
+      - "new surprise"
+    expected_adaptation:
+      emotion_detected: "exasperated"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 3:00 PM"
+    user_input: |
+      called Eddie to come look at the wiring situation and he said the hallway run connects to the upstairs bedrooms so basically the whole second floor needs to be rewired not just the kitchen and basement area like we originally thought and that adds another 3K to the electrical estimate
+    expected_memory_stores:
+      - "Eddie assessed wiring"
+      - "second floor needs rewiring"
+      - "not just kitchen and basement"
+      - "additional $3K"
+      - "scope expanded"
+    expected_adaptation:
+      emotion_detected: "stressed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 9:00 AM"
+    user_input: |
+      okay so I'm doing the math and our renovation budget was 35K and now with the plumbing at 4.8K and the extra electrical at 3K we're looking at about 43K total in renovation costs which is 8K over the original estimate and we haven't even started the kitchen yet
+    expected_memory_stores:
+      - "renovation budget 35K"
+      - "plumbing 4.8K"
+      - "extra electrical 3K"
+      - "total now 43K"
+      - "8K over budget"
+      - "kitchen not started"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 12:00 PM"
+    user_input: |
+      Julian was trying to be positive and was like at least we're finding all this stuff now before we renovate the kitchen and not after and that's actually a good point because if we'd done the kitchen first and then had to tear into walls for plumbing and wiring it would have been way worse
+    expected_memory_stores:
+      - "Julian positive"
+      - "finding issues early"
+      - "before kitchen reno"
+      - "would be worse later"
+      - "silver lining"
+    expected_adaptation:
+      emotion_detected: "begrudgingly optimistic"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 6:00 PM"
+    user_input: |
+      took Kobe for a long walk around the Woodstock neighborhood to clear my head and found this cute coffee shop called Red E Cafe and sat outside with him and some lady came up and was like what a beautiful dog and I was like thanks we just moved here and she was like welcome to Woodstock you'll love it and honestly I think I will once we stop hemorrhaging money on house repairs
+    expected_memory_stores:
+      - "walk in Woodstock"
+      - "Red E Cafe"
+      - "Kobe compliment"
+      - "new to neighborhood"
+      - "welcoming community"
+      - "house repair costs"
+    expected_adaptation:
+      emotion_detected: "mixed"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What plumbing problem was discovered in the house?"
+    expected_contains: ["drain", "collapse", "galvanized"]
+  - question: "Who is the plumber?"
+    expected_contains: ["Dave Chen"]
+  - question: "How much is the plumbing repair?"
+    expected_contains: ["4,800", "4800"]
+  - question: "What additional wiring problem was found?"
+    expected_contains: ["knob and tube", "second floor", "hallway"]
+  - question: "How much over the original renovation budget are they?"
+    expected_contains: ["8"]
+  - question: "What is the total renovation cost estimate now?"
+    expected_contains: ["43"]
+  - question: "Why weren't the galvanized pipes found during inspection?"
+    expected_contains: ["inside walls", "couldn't see"]
+  - question: "What coffee shop did Maya find in Woodstock?"
+    expected_contains: ["Red E"]
+  - question: "Who was the original renovation estimator?"
+    expected_contains: ["Eddie"]
+  - question: "What hasn't been started yet despite the cost overruns?"
+    expected_contains: ["kitchen"]

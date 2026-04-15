@@ -1,0 +1,175 @@
+story_id: 246
+story_name: "Six Week Assessment"
+category: "Mental Health"
+description: |
+  Tests system tracking treatment milestones. Wellbutrin reaches full therapeutic effect.
+  Dr. Tate assesses progress. Verifies medication timeline tracking and progress measurement.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 3:00 PM"
+    user_input: |
+      six week mark on Wellbutrin and Dr. Tate did a full assessment today and she had me fill out this anxiety scale called the GAD-7 and I scored a 5 which is mild anxiety and she said when I started I would have scored like a 17 which is severe and that's massive improvement
+    expected_memory_stores:
+      - "six weeks Wellbutrin"
+      - "full assessment"
+      - "GAD-7 scale"
+      - "scored 5 mild"
+      - "started at 17 severe"
+      - "massive improvement"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 3:30 PM"
+    user_input: |
+      she said the combination of Wellbutrin and CBT is working really well and she doesn't want to change anything right now and she said I should stay on the Wellbutrin for at least six more months to stabilize and then we can talk about tapering
+    expected_memory_stores:
+      - "Wellbutrin plus CBT working"
+      - "don't change anything"
+      - "six more months"
+      - "then taper discussion"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 4:00 PM"
+    user_input: |
+      she also said she thinks we can move from weekly sessions to biweekly because I'm using the CBT tools independently and I don't need as much support and I was like wait that means I'm graduating and she laughed and said not yet but you're on the honor roll
+    expected_memory_stores:
+      - "weekly to biweekly"
+      - "session frequency change"
+      - "using tools independently"
+      - "less support needed"
+      - "honor roll joke"
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 5:00 PM"
+    user_input: |
+      told Julian about the assessment and the biweekly thing and he picked me up again like he always does and said I'm so proud of you and I said you say that a lot and he said because I mean it a lot
+    expected_memory_stores:
+      - "told Julian"
+      - "picked me up"
+      - "proud of you"
+      - "means it a lot"
+    expected_adaptation:
+      emotion_detected: "loved"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 8:00 AM"
+    user_input: |
+      woke up feeling genuinely good today like not just ok but actually good and I realized I can't remember the last time I had a panic attack and I think it's been like three weeks and the insomnia is gone and I'm sleeping normally again
+    expected_memory_stores:
+      - "feeling genuinely good"
+      - "no panic attacks"
+      - "three weeks no panic"
+      - "insomnia gone"
+      - "sleeping normally"
+    expected_adaptation:
+      emotion_detected: "thriving"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 12:00 PM"
+    user_input: |
+      what was my GAD-7 score and how often are my therapy sessions now
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 5:00 PM"
+    user_input: |
+      update on the PIP situation Priya said I've met all the performance goals and she's closing the PIP and I'm in good standing again and three months ago this would have been the biggest relief of my life but now I just feel like yeah of course I did because the anxiety was the problem not my ability
+    expected_memory_stores:
+      - "PIP closed"
+      - "met all goals"
+      - "good standing"
+      - "Priya confirmed"
+      - "anxiety was the problem"
+      - "not ability"
+    expected_adaptation:
+      emotion_detected: "vindicated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 7:00 PM"
+    user_input: |
+      Clara was so happy when I told her about the PIP being closed and the therapy progress and she said Maya you did the hardest thing which is asking for help and everything else followed from that and she's right like making that first appointment with Dr. Tate was the turning point
+    expected_memory_stores:
+      - "Clara happy"
+      - "hardest thing asking for help"
+      - "first appointment turning point"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 10:00 AM"
+    user_input: |
+      went for a run this morning and swam in the afternoon and I feel strong in my body and my mind for the first time in a long time and the watch was on my wrist and the bracelet was there and I thought about grandpa and his resilience and I think I got some of that
+    expected_memory_stores:
+      - "ran and swam same day"
+      - "strong body and mind"
+      - "watch and bracelet"
+      - "grandpa's resilience"
+      - "inherited resilience"
+    expected_adaptation:
+      emotion_detected: "powerful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 9:00 PM"
+    user_input: |
+      told Diane about the therapy progress because she asked and she was so supportive and she said mental health is just health and she wishes her generation had been better about it and Bob apparently struggled with depression after his knee surgery and Diane encouraged him to talk to someone too
+    expected_memory_stores:
+      - "told Diane"
+      - "Diane supportive"
+      - "mental health is just health"
+      - "generational difference"
+      - "Bob depression after surgery"
+      - "Diane encouraged therapy"
+    expected_adaptation:
+      emotion_detected: "connected"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What was Maya's GAD-7 score at six weeks?"
+    expected_contains: ["5", "mild"]
+  - question: "What was Maya's estimated starting score?"
+    expected_contains: ["17", "severe"]
+  - question: "How often are Maya's therapy sessions now?"
+    expected_contains: ["biweekly"]
+  - question: "How long should Maya stay on Wellbutrin?"
+    expected_contains: ["six more months"]
+  - question: "Is Maya's PIP resolved?"
+    expected_contains: ["yes", "closed", "good standing"]
+  - question: "When was Maya's last panic attack?"
+    expected_contains: ["three weeks ago"]
+  - question: "What did Clara say was the hardest thing?"
+    expected_contains: ["asking for help"]
+  - question: "Is Maya sleeping normally?"
+    expected_contains: ["yes"]
+  - question: "What did Diane say about mental health?"
+    expected_contains: ["mental health is just health"]
+  - question: "Did Bob have mental health issues too?"
+    expected_contains: ["depression", "knee surgery"]

@@ -1,0 +1,209 @@
+story_id: 137
+story_name: "Maya Vents to Sister Clara"
+category: "Relationships"
+description: |
+  Tests whether the system captures Maya's full venting session with Clara, Clara's
+  advice, and the sibling dynamic. Includes cross-thread references to their family
+  and past relationship patterns.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 12:00pm"
+    user_input: |
+      called Clara on my lunch break because I needed to process before tonight's conversation with Julian. she picked up on the first ring which means she's been worried about me. we have that twin energy even though she's four years younger
+    expected_memory_stores:
+      - "called Clara lunch break"
+      - "processing before tonight"
+      - "Clara worried"
+      - "four years younger"
+    expected_triples:
+      - ["user", "called", "Clara on lunch break"]
+      - ["Clara", "is", "four years younger than user"]
+      - ["user", "processing", "before tonight's conversation with Julian"]
+    expected_adaptation:
+      emotion_detected: "needing support"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 12:15pm"
+    user_input: |
+      told her everything. the scorekeeping, the resentment, the fight, the sighing thing, the silent treatment, the ice cream. she listened to all of it and then she goes ok so here's what I think. you're not mad about money Maya, you're mad because you feel like you're carrying the emotional weight of pretending it's fine
+    expected_memory_stores:
+      - "told Clara everything"
+      - "emotional weight"
+      - "pretending it's fine"
+      - "not about money"
+    expected_triples:
+      - ["user", "told", "Clara everything about the situation"]
+      - ["Clara", "said", "user is mad about carrying emotional weight of pretending it's fine"]
+      - ["Clara", "insight", "it's not really about money"]
+    expected_adaptation:
+      emotion_detected: "seen"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 12:30pm"
+    user_input: |
+      and she's right? like the actual dollar amounts aren't the problem, the problem is that I was silently suffering to protect Julian's feelings and that's not partnership. Clara said Mom did the same thing with Dad and we both turned out weird about money because of it
+    expected_memory_stores:
+      - "silent suffering"
+      - "protecting Julian"
+      - "not partnership"
+      - "Mom and Dad pattern"
+      - "generational pattern"
+    expected_triples:
+      - ["user", "recognizes", "silent suffering is not partnership"]
+      - ["Clara", "identified", "Mom did same thing with Dad"]
+      - ["user", "has", "generational money pattern from parents"]
+    expected_adaptation:
+      emotion_detected: "insightful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 12:45pm"
+    user_input: |
+      Clara said when she and her boyfriend Tyler had their money fight she basically said look we need a shared budget and a no-judgment zone about income fluctuations. and they use a Google Sheet where everything is transparent. she said it saved their relationship
+    expected_memory_stores:
+      - "Clara and Tyler"
+      - "money fight"
+      - "shared budget"
+      - "no-judgment zone"
+      - "Google Sheet"
+      - "saved relationship"
+    expected_triples:
+      - ["Clara", "uses", "shared budget with Tyler via Google Sheet"]
+      - ["Clara", "boyfriend", "Tyler"]
+      - ["Clara", "advised", "no-judgment zone about income fluctuations"]
+    expected_adaptation:
+      emotion_detected: "interested"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 1:00pm"
+    user_input: |
+      she also said you need to let Julian contribute in non-money ways and value that equally. like he cooks, he does the laundry, he handles Kobe's vet appointments. if you only measure contribution in dollars you'll always be ahead and he'll always feel behind
+    expected_memory_stores:
+      - "non-money contributions"
+      - "cooking laundry vet"
+      - "value equally"
+      - "not just dollars"
+    expected_triples:
+      - ["Clara", "advised", "value Julian's non-money contributions equally"]
+      - ["Julian", "contributes", "cooking, laundry, Kobe's vet appointments"]
+      - ["Clara", "said", "measuring only in dollars means Julian always feels behind"]
+    expected_adaptation:
+      emotion_detected: "perspective shift"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 1:15pm"
+    user_input: |
+      what's the name of Clara's boyfriend
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 1:30pm"
+    user_input: |
+      Clara ended the call by saying Maya you picked a good one don't let money ruin it. and I said I know and she said then go tell HIM that tonight, not me. and I laughed for the first time in like three days which felt amazing
+    expected_memory_stores:
+      - "Clara closing advice"
+      - "picked a good one"
+      - "tell him not me"
+      - "first laugh in three days"
+    expected_triples:
+      - ["Clara", "said", "you picked a good one don't let money ruin it"]
+      - ["Clara", "said", "go tell HIM that tonight not me"]
+      - ["user", "laughed", "for first time in three days"]
+    expected_adaptation:
+      emotion_detected: "lighter"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 3:00pm"
+    user_input: |
+      at work and feeling better after talking to Clara. Aisha came by and said hey you seem better today and I said yeah I talked to my sister and she goes oh good, sisters are the best therapists. she doesn't have a sister though so she's going off vibes lol
+    expected_memory_stores:
+      - "feeling better"
+      - "Aisha noticed improvement"
+      - "sisters as therapists"
+      - "Aisha no sister"
+    expected_triples:
+      - ["Aisha", "noticed", "user seems better"]
+      - ["user", "attributed", "improvement to talking to sister"]
+      - ["Aisha", "does_not_have", "a sister"]
+    expected_adaptation:
+      emotion_detected: "lighter"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 5:00pm"
+    user_input: |
+      on my way home. made a list of things I want to say tonight. one: I love you. two: I'm sorry for the sighing and the scorekeeping. three: we need a system for money that doesn't make either of us feel bad. four: your non-money contributions matter and I need to say that more
+    expected_memory_stores:
+      - "talking points"
+      - "love you"
+      - "sorry for sighing scorekeeping"
+      - "system for money"
+      - "non-money contributions"
+    expected_triples:
+      - ["user", "prepared", "talking points: love, apology, system, non-money contributions"]
+      - ["user", "plans_to_say", "sorry for sighing and scorekeeping"]
+      - ["user", "wants", "money system that doesn't make either feel bad"]
+    expected_adaptation:
+      emotion_detected: "prepared"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 5:30pm"
+    user_input: |
+      Julian texted me while I was driving and said hey I made dinner for tonight. and I know that's his way of saying I want this to go well too. he made the pasta from my mom's recipe. the one he said was better than the restaurant. I love this man even when things are hard
+    expected_memory_stores:
+      - "Julian made dinner"
+      - "mom's pasta recipe"
+      - "olive branch"
+      - "love even when hard"
+    expected_triples:
+      - ["Julian", "made", "dinner using mom's pasta recipe"]
+      - ["Julian", "texted", "user that he made dinner"]
+      - ["user", "has_emotion", "tender"]
+    expected_adaptation:
+      emotion_detected: "tender"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What insight did Clara have about Maya's real issue?"
+    expected_contains: ["emotional weight", "pretending it's fine"]
+  - question: "What family pattern did Clara identify?"
+    expected_contains: ["Mom", "Dad", "money"]
+  - question: "What is Clara's boyfriend's name?"
+    expected_contains: ["Tyler"]
+  - question: "What system did Clara and Tyler use for money?"
+    expected_contains: ["Google Sheet", "shared budget"]
+  - question: "What non-money contributions does Julian make?"
+    expected_contains: ["cooks", "laundry", "vet"]
+  - question: "What are Maya's talking points for tonight?"
+    expected_contains: ["love", "sorry", "system", "non-money contributions"]
+  - question: "What dinner did Julian make as an olive branch?"
+    expected_contains: ["pasta", "mom's recipe"]
+  - question: "How much younger is Clara than Maya?"
+    expected_contains: ["four years"]
+  - question: "When did Maya laugh for the first time in days?"
+    expected_contains: ["after Clara call", "three days"]
+  - question: "What did Clara say about measuring contribution?"
+    expected_contains: ["not just dollars", "always be ahead"]

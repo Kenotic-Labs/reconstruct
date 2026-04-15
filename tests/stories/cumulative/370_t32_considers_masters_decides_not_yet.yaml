@@ -1,0 +1,170 @@
+story_id: 370
+story_name: "Considers Master's Decides Not Yet"
+category: "Career Development"
+description: |
+  Tests memory of Maya seriously considering a master's degree but deciding to wait.
+  Verifies system tracks complex decision-making with multiple inputs.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:00 PM"
+    user_input: |
+      so Jenny's comment about a master's degree has been stuck in my head and I went on the Georgia Tech OMSCS website which is their online computer science master's program and it's only like 7000 dollars total for the whole degree which is insanely cheap for a master's
+    expected_memory_stores:
+      - "Georgia Tech OMSCS"
+      - "online CS master's"
+      - "7000 dollars total"
+      - "affordable"
+      - "Jenny's suggestion"
+    expected_adaptation:
+      emotion_detected: "curious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      but the thing is it's like two to three years part time on top of work and I just did three months of the certificate and that nearly killed me and Julian was like maybe you should enjoy not studying for a while
+    expected_memory_stores:
+      - "2-3 years part time"
+      - "certificate nearly killed her"
+      - "Julian suggests rest"
+    expected_adaptation:
+      emotion_detected: "hesitant"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      asked Sam if a master's would help my career at Conduit and he was really honest he said for what you're doing right now the certificate is enough and experience matters more than degrees in tech but if you want to go into ML research then yeah you'd need one
+    expected_memory_stores:
+      - "Sam honest advice"
+      - "certificate enough for now"
+      - "experience over degrees"
+      - "ML research would need it"
+    expected_adaptation:
+      emotion_detected: "thoughtful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 8:00 PM"
+    user_input: |
+      Lily said she thought about getting a master's too but she decided the ROI wasn't there for her and she's doing fine without one and she makes a good point because she's literally a senior engineer at Conduit without one
+    expected_memory_stores:
+      - "Lily considered master's"
+      - "decided against"
+      - "ROI not there"
+      - "senior without degree"
+    expected_adaptation:
+      emotion_detected: "analytical"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 7:00 PM"
+    user_input: |
+      talked to Dr Tate about it and she said Maya the question isn't whether you CAN do it the question is whether you NEED to right now and what would you be giving up and I was like my sanity probably and she laughed
+    expected_memory_stores:
+      - "Dr. Tate perspective"
+      - "need vs can"
+      - "what would you give up"
+      - "sanity joke"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 11:00 AM"
+    user_input: |
+      I made a pros and cons list like a nerd and the pros are more knowledge deeper ML skills possible career pivot into research and the cons are time stress money even though it's cheap and I'd have to cut back on ramen nights and climbing with Omar and just having a life
+    expected_memory_stores:
+      - "pros cons list"
+      - "pros knowledge skills research"
+      - "cons time stress money"
+      - "sacrifice hobbies"
+      - "sacrifice social life"
+    expected_adaptation:
+      emotion_detected: "torn"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Julian and I had a long talk and he said he supports whatever I decide but he also said he noticed how stressed I was during the certificate and he doesn't want that to be our whole life for three years and I hear that like that's a valid point
+    expected_memory_stores:
+      - "Julian long talk"
+      - "supports either way"
+      - "noticed stress"
+      - "doesn't want 3 years of stress"
+      - "valid concern"
+    expected_adaptation:
+      emotion_detected: "thoughtful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 5:00 PM"
+    user_input: |
+      what are the main reasons Maya is considering not doing the master's degree
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 10:00 AM"
+    user_input: |
+      I decided I'm not doing the master's right now and I feel really good about it like maybe in a year or two when things settle and the promotion goes through and the ramen empire is established I'll revisit it but for now I'm going to just apply what I learned and enjoy my life
+    expected_memory_stores:
+      - "decided not now"
+      - "maybe in 1-2 years"
+      - "wait for promotion"
+      - "enjoy life"
+      - "apply what learned"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 2:00 PM"
+    user_input: |
+      Jenny was like okay fair enough but promise me you'll revisit it and I said I promise and Clara said honestly I'm glad because I want my sister to have fun not be stressed all the time and even mom was relieved because she thought I was going to ask for money
+    expected_memory_stores:
+      - "Jenny promise to revisit"
+      - "Clara glad"
+      - "Vivian relieved"
+      - "not asking for money"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Did Maya decide to pursue a master's degree?"
+    expected_contains: ["not now", "not yet", "decided against"]
+  - question: "What master's program was Maya considering?"
+    expected_contains: ["Georgia Tech", "OMSCS"]
+  - question: "How much would the program cost?"
+    expected_contains: ["7000"]
+  - question: "What did Sam say about needing a master's?"
+    expected_contains: ["certificate enough", "experience", "research"]
+  - question: "What did Julian say about the master's decision?"
+    expected_contains: ["stress", "three years", "supports"]
+  - question: "When might Maya revisit the master's idea?"
+    expected_contains: ["year", "two"]
+  - question: "What did Dr. Tate ask about the decision?"
+    expected_contains: ["need", "right now", "giving up"]
+  - question: "What was on Maya's cons list?"
+    expected_contains: ["time", "stress", "hobbies"]
+  - question: "How did Jenny respond to Maya's decision?"
+    expected_contains: ["promise", "revisit"]
+  - question: "Why was Vivian relieved?"
+    expected_contains: ["money"]

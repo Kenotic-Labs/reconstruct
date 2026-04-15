@@ -1,0 +1,175 @@
+story_id: 321
+story_name: "Bass Guitar at 11 PM"
+category: "Home Life"
+description: |
+  Tests memory of new neighbor Greg Hoffman playing bass guitar late at night.
+  First encounter with the noise problem. Establishes the Woodstock house setting
+  and Maya's initial frustration. Verifies entity and location tracking.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 11:15 PM"
+    user_input: |
+      ok so we just moved into the Woodstock house like two weeks ago and everything's been great until TONIGHT because our neighbor is playing bass guitar and it's 11pm and the walls are apparently paper thin and Julian is trying to sleep and Kobe is barking
+    expected_memory_stores:
+      - "Woodstock house"
+      - "two weeks"
+      - "neighbor bass guitar"
+      - "11pm"
+      - "thin walls"
+      - "Kobe barking"
+    expected_adaptation:
+      emotion_detected: "annoyed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 11:30 PM"
+    user_input: |
+      it's been going for like an hour now and it's not even good bass playing like it's the same riff over and over and I can feel it in the walls like a thudding and Julian just put in earplugs and I'm lying here staring at the ceiling
+    expected_memory_stores:
+      - "one hour of bass"
+      - "same riff repeated"
+      - "vibrating walls"
+      - "Julian earplugs"
+      - "can't sleep"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 7:00 AM"
+    user_input: |
+      barely slept and I have work today and Julian's cranky too and I looked up who lives next door and the mailbox says Hoffman so I'm assuming that's the bass player and I've never even met them because we just moved in
+    expected_memory_stores:
+      - "barely slept"
+      - "Hoffman on mailbox"
+      - "never met neighbor"
+      - "just moved in"
+    expected_adaptation:
+      emotion_detected: "tired"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      asked the neighbor on the other side Mrs Patterson she's this sweet old lady and she said oh that's Greg Hoffman he moved in about six months ago and he's been playing that bass since day one and she said she's mostly deaf so it doesn't bother her which lucky her
+    expected_memory_stores:
+      - "Greg Hoffman"
+      - "moved in six months ago"
+      - "Mrs Patterson"
+      - "other neighbor"
+      - "mostly deaf"
+    expected_adaptation:
+      emotion_detected: "informed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 6:30 PM"
+    user_input: |
+      Julian said I should go knock on Greg's door and just ask nicely like hey man we're your new neighbors and the bass is kind of loud after 10 could you keep it down and I'm like yeah you're right that's the adult thing to do
+    expected_memory_stores:
+      - "Julian suggestion"
+      - "knock on door"
+      - "ask nicely"
+      - "after 10pm"
+    expected_adaptation:
+      emotion_detected: "resolute"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      went over and knocked and this guy opens the door he's like mid 40s beard flannel shirt and he's like oh hey you must be the new neighbors and I said yeah I'm Maya and he said Greg nice to meet you and I was like so about the bass
+    expected_memory_stores:
+      - "met Greg"
+      - "mid 40s"
+      - "beard flannel"
+      - "introduced herself"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 7:15 PM"
+    user_input: |
+      he was actually really nice about it he said oh man I'm sorry I didn't realize it carried that much and he said he'd keep it to before 10pm and he seemed genuinely embarrassed and I was like cool thanks and we shook hands and that went better than I expected
+    expected_memory_stores:
+      - "Greg apologized"
+      - "didn't realize noise"
+      - "keep before 10pm"
+      - "seemed embarrassed"
+      - "handshake"
+      - "better than expected"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 9:00 AM"
+    user_input: |
+      what's the neighbor's name who plays bass guitar
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 10:30 PM"
+    user_input: |
+      no bass tonight thank god Julian and I watched a movie in peace and Kobe slept on his bed without barking once so maybe Greg listened and this is resolved fingers crossed
+    expected_memory_stores:
+      - "no bass tonight"
+      - "peaceful evening"
+      - "Kobe calm"
+      - "maybe resolved"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 11:00 PM"
+    user_input: |
+      second night quiet too so I think the conversation worked and Julian said see you just needed to talk to the guy and I said yeah yeah you were right and honestly Greg seemed like a decent dude just didn't know how thin the walls are
+    expected_memory_stores:
+      - "second quiet night"
+      - "conversation worked"
+      - "Julian right"
+      - "Greg decent"
+      - "thin walls"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who is the neighbor playing bass guitar?"
+    expected_contains: ["Greg Hoffman"]
+  - question: "What time does the bass playing happen?"
+    expected_contains: ["11pm", "late"]
+  - question: "Where do Maya and Julian live?"
+    expected_contains: ["Woodstock"]
+  - question: "Who is Mrs Patterson?"
+    expected_contains: ["neighbor", "other side", "deaf"]
+  - question: "What did Maya ask Greg to do?"
+    expected_contains: ["keep it down", "before 10"]
+  - question: "How did Greg respond to Maya's request?"
+    expected_contains: ["nice", "apologized", "embarrassed"]
+  - question: "How long has Greg lived next door?"
+    expected_contains: ["six months"]
+  - question: "What instrument does Greg play?"
+    expected_contains: ["bass guitar"]
+  - question: "Has the bass stopped after the conversation?"
+    expected_contains: ["yes", "quiet"]
+  - question: "How does Kobe react to the bass?"
+    expected_contains: ["barking"]

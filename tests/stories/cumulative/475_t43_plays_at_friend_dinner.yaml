@@ -1,0 +1,188 @@
+story_id: 475
+story_name: "Plays at Friend Dinner"
+category: "Music and Guitar"
+description: |
+  Tests memory of Maya playing guitar in front of friends for the first time.
+  Establishes performance anxiety, shaking hands, crowd reaction.
+  Verifies emotional progression and social dynamics.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 4:00 PM"
+    user_input: |
+      so we're hosting a dinner tonight at the Woodstock house and Nadia and Omar are coming and Tessa and Marcus and Lily and Julian obviously and I've been going back and forth ALL day about whether to play guitar and Julian keeps saying do it and I keep saying no and then yes and then no and I'm a mess honestly
+    expected_memory_stores:
+      - "dinner at Woodstock"
+      - "guest list"
+      - "Nadia Omar Tessa Marcus Lily"
+      - "guitar debate"
+      - "Julian encouraging"
+      - "Maya indecisive"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 5:30 PM"
+    user_input: |
+      I practiced Knockin on Heavens Door three times through and it sounded good twice and terrible once which is not great odds and my hands are already a little shaky and the dinner hasn't even started yet and Julian made pasta and Tessa brought wine and Nadia brought that amazing focaccia she makes and I'm just sitting here with butterflies
+    expected_memory_stores:
+      - "practiced three times"
+      - "good twice bad once"
+      - "hands shaky"
+      - "Julian made pasta"
+      - "Tessa brought wine"
+      - "Nadia focaccia"
+      - "butterflies"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 7:30 PM"
+    user_input: |
+      dinner was so good and everyone's hanging out and laughing and Marcus and Omar are debating about something ridiculous and Lily and Tessa are bonding over food documentaries and Nadia keeps looking at me and mouthing DO IT because she knows I'm thinking about the guitar and Julian quietly moved the guitar from the living room to the dining room which is both helpful and terrifying
+    expected_memory_stores:
+      - "dinner good"
+      - "Marcus Omar debating"
+      - "Lily Tessa bonding"
+      - "Nadia mouthing do it"
+      - "Julian moved guitar"
+      - "helpful and terrifying"
+    expected_adaptation:
+      emotion_detected: "torn"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 8:00 PM"
+    user_input: |
+      okay so there was a lull in conversation and I just I don't know what happened but I grabbed the guitar and said um so I've been learning guitar on my grandfather's guitar and I know like three chords and one song so don't expect much and everyone got really quiet and I could feel my heart in my throat
+    expected_memory_stores:
+      - "grabbed guitar"
+      - "announced learning"
+      - "grandfather's guitar"
+      - "three chords one song"
+      - "don't expect much"
+      - "everyone quiet"
+      - "heart in throat"
+    expected_adaptation:
+      emotion_detected: "terrified"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 8:05 PM"
+    user_input: |
+      my hands were literally shaking like visibly shaking and I started strumming the intro to Knockin on Heavens Door and I messed up the first chord transition from G to D but then I found the rhythm and it was like the room disappeared and I was just playing and I got through the whole first verse and chorus without stopping
+    expected_memory_stores:
+      - "hands shaking visibly"
+      - "messed up first transition"
+      - "found rhythm"
+      - "room disappeared"
+      - "whole first verse and chorus"
+      - "didn't stop"
+    expected_adaptation:
+      emotion_detected: "courageous"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 8:10 PM"
+    user_input: |
+      I finished and looked up and everyone was quiet for like two seconds which felt like an eternity and then they all started clapping and Nadia was literally wiping her eyes and Omar was like DUDE that was awesome and Tessa was clapping and saying more more and Marcus was grinning and Lily said she had no idea I could play and Julian just sat there smiling
+    expected_memory_stores:
+      - "finished playing"
+      - "two seconds silence"
+      - "everyone clapped"
+      - "Nadia crying"
+      - "Omar said awesome"
+      - "Tessa said more"
+      - "Marcus grinning"
+      - "Lily surprised"
+      - "Julian smiling"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 8:30 PM"
+    user_input: |
+      Nadia asked about the guitar and I told the whole Grandpa Wei story and how mom gave it to me and I found it in the closet during the move and restrung it and learned from YouTube and everyone was like that's the most beautiful thing and Tessa said she plays ukulele and we should jam sometime and I was like maybe someday I'm still very new at this
+    expected_memory_stores:
+      - "told Grandpa Wei story"
+      - "everyone loved story"
+      - "Tessa ukulele jam"
+      - "Maya still new"
+    expected_adaptation:
+      emotion_detected: "humble"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 9:00 PM"
+    user_input: |
+      when did Maya start learning guitar and whose guitar is it
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 10:00 PM"
+    user_input: |
+      everyone's leaving and they're all telling me to keep playing and Marcus said next dinner I want two songs and I was like don't push your luck and Omar wants me to play at the tabletop meetup next time and I was like absolutely not that's a bar and Nadia hugged me and whispered I'm so proud of you and I almost lost it
+    expected_memory_stores:
+      - "guests encouraging"
+      - "Marcus wants two songs"
+      - "Omar wants meetup performance"
+      - "Maya refused bar"
+      - "Nadia whispered proud"
+      - "almost cried"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 11:00 PM"
+    user_input: |
+      Julian and I are cleaning up and he said I was incredible and I said I wasn't but he held up his phone and I was like you did NOT record me again and he said relax I didn't but I wish I had and then he said have you ever thought about writing a song and I was like Julian I know three chords and he said some of the best songs only have three chords and that planted something in my head honestly
+    expected_memory_stores:
+      - "Julian said incredible"
+      - "didn't record this time"
+      - "Julian suggested writing a song"
+      - "three chords enough"
+      - "idea planted"
+    expected_adaptation:
+      emotion_detected: "inspired"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who was at the dinner where Maya played guitar?"
+    expected_contains: ["Nadia", "Omar", "Tessa", "Marcus", "Lily", "Julian"]
+  - question: "What song did Maya play at the dinner?"
+    expected_contains: ["Knockin on Heaven", "Door"]
+  - question: "How did Maya's hands feel while playing?"
+    expected_contains: ["shaking"]
+  - question: "How did everyone react to Maya's performance?"
+    expected_contains: ["clap", "awesome", "crying"]
+  - question: "Who cried during Maya's performance?"
+    expected_contains: ["Nadia"]
+  - question: "What did Julian suggest after the dinner?"
+    expected_contains: ["writing a song"]
+  - question: "How many songs does Marcus want next time?"
+    expected_contains: ["two"]
+  - question: "Did Maya mess up during the performance?"
+    expected_contains: ["first", "transition", "G to D"]
+  - question: "Where does Omar want Maya to play next?"
+    expected_contains: ["tabletop meetup"]
+  - question: "What did Nadia whisper to Maya?"
+    expected_contains: ["proud"]

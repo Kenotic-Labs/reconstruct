@@ -1,0 +1,217 @@
+story_id: 149
+story_name: "Engagement Party Prep"
+category: "Life Events"
+description: |
+  Tests whether the system captures the party preparation details, the collaborative
+  effort, and the pre-party emotions. Includes corrections when party details change.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Sunday 8:00am"
+    user_input: |
+      party prep day! engagement party is next Saturday. Julian's in full creative director mode. he's got a supply list from the arts collective, string lights, paper lanterns in dusty rose, eucalyptus garlands for the tables. Karen is helping him coordinate
+    expected_memory_stores:
+      - "party next Saturday"
+      - "Julian creative director"
+      - "string lights"
+      - "paper lanterns dusty rose"
+      - "eucalyptus garlands"
+      - "Karen helping"
+    expected_triples:
+      - ["user", "party_date", "next Saturday"]
+      - ["Julian", "party_supplies", "string lights, paper lanterns dusty rose, eucalyptus garlands"]
+      - ["Karen", "helping_with", "party coordination"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Sunday 10:00am"
+    user_input: |
+      my mom took over food planning which is her strength. she's doing a taco bar because it feeds a lot of people affordably and everyone likes tacos. Julian's mom Karen was like shouldn't we do something more formal? and my mom goes honey nothing brings people together like tacos. debate settled
+    expected_memory_stores:
+      - "Mom food planning"
+      - "taco bar"
+      - "Karen wanted formal"
+      - "tacos win"
+      - "debate settled"
+    expected_triples:
+      - ["user", "mom_handling", "food planning with taco bar"]
+      - ["Karen", "wanted", "something more formal"]
+      - ["user", "mom_won", "taco bar debate"]
+      - ["user", "has_emotion", "amused"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Sunday 12:00pm"
+    user_input: |
+      Clara and Tyler are handling the drinks. they're setting up a little bar with wine, beer, and a signature cocktail that Julian designed called the Rosewood which is basically rosemary simple syrup and bourbon. it sounds amazing actually
+    expected_memory_stores:
+      - "Clara Tyler drinks"
+      - "wine beer"
+      - "signature cocktail"
+      - "Rosewood"
+      - "rosemary bourbon"
+      - "Julian designed"
+    expected_triples:
+      - ["Clara", "handling", "drinks with Tyler"]
+      - ["Julian", "designed_cocktail", "The Rosewood - rosemary bourbon"]
+      - ["user", "has_emotion", "impressed"]
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Sunday 2:00pm"
+    user_input: |
+      Aisha texted and asked if she can help with anything. I asked if she could handle the playlist and she was like YES MUSIC IS MY THING. she's making a collaborative Spotify playlist and she already added like 40 songs. she has good taste honestly
+    expected_memory_stores:
+      - "Aisha playlist"
+      - "collaborative Spotify"
+      - "40 songs"
+      - "good taste"
+    expected_triples:
+      - ["Aisha", "handling", "party playlist on Spotify"]
+      - ["Aisha", "added", "40 songs already"]
+      - ["user", "has_emotion", "grateful"]
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Sunday 3:00pm"
+    user_input: |
+      oh wait we changed the party from Saturday to Sunday because Robert and my dad want to go fishing Saturday morning and we want them there obviously. so engagement party is SUNDAY not Saturday. Julian's updating the invitations
+    expected_memory_stores:
+      - "correction"
+      - "party Sunday not Saturday"
+      - "fishing Saturday"
+      - "Robert and Dad"
+      - "invitations updated"
+    expected_triples:
+      - ["user", "corrected", "party day Saturday → Sunday"]
+      - ["Robert", "fishing_with", "Maya's dad on Saturday"]
+      - ["Julian", "updating", "invitations for Sunday"]
+    expected_adaptation:
+      emotion_detected: "flexible"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 5:00pm"
+    user_input: |
+      Julian's working on a photo display for the party. he's printing out photos of us from the last two and a half years and arranging them on a board in chronological order. there's the coffee shop where we met, the hike where we first said I love you, Kobe as a puppy, the new apartment
+    expected_memory_stores:
+      - "photo display"
+      - "chronological"
+      - "coffee shop"
+      - "first I love you hike"
+      - "Kobe puppy"
+      - "new apartment"
+    expected_triples:
+      - ["Julian", "created", "chronological photo display for party"]
+      - ["user", "relationship_milestones", "coffee shop, first I love you hike, Kobe puppy, new apartment"]
+      - ["user", "has_emotion", "sentimental"]
+    expected_adaptation:
+      emotion_detected: "sentimental"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 6:00pm"
+    user_input: |
+      what day is the engagement party now
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 7:00pm"
+    user_input: |
+      Marcus stopped by to drop off speakers for the party and he and Julian tested the sound system in the backyard. the landlord came out and said as long as music is off by 10pm he's fine with it. he also said congratulations which was sweet. we gave him an invitation
+    expected_memory_stores:
+      - "Marcus speakers"
+      - "sound test"
+      - "landlord 10pm cutoff"
+      - "landlord invited"
+    expected_triples:
+      - ["Marcus", "dropped_off", "speakers for party"]
+      - ["user", "landlord_rule", "music off by 10pm"]
+      - ["user", "invited", "landlord to party"]
+    expected_adaptation:
+      emotion_detected: "community"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 8:00pm"
+    user_input: |
+      final RSVPs are in. 42 confirmed out of 45 invited. the three who can't come are Julian's cousin from Denver who has a work thing, my college friend who's traveling in Japan, and Sam Okafor who has a family event but sent a really nice congratulations note
+    expected_memory_stores:
+      - "42 confirmed"
+      - "45 invited"
+      - "3 can't come"
+      - "Julian's cousin"
+      - "friend in Japan"
+      - "Sam Okafor family event"
+    expected_triples:
+      - ["user", "party_rsvps", "42 confirmed out of 45 invited"]
+      - ["Sam Okafor", "cannot_attend", "family event"]
+      - ["user", "has_emotion", "pleased"]
+    expected_adaptation:
+      emotion_detected: "pleased"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 10:00pm"
+    user_input: |
+      everything is planned. taco bar, Rosewood cocktails, Aisha's playlist, Julian's decorations, photo display. all that's left is the actual day. Julian and I are lying in bed and he goes are you ready for this and I said I've been ready since I found that receipt in your jacket. he groaned and I laughed. we're ready
+    expected_memory_stores:
+      - "everything planned"
+      - "ready"
+      - "receipt callback"
+      - "Julian groaned"
+      - "laughed together"
+    expected_triples:
+      - ["user", "party_status", "everything planned and ready"]
+      - ["user", "callback", "receipt in jacket joke"]
+      - ["user", "has_emotion", "content"]
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+final_verification:
+  - question: "When is the engagement party?"
+    expected_contains: ["Sunday"]
+  - question: "What food is being served?"
+    expected_contains: ["taco bar"]
+  - question: "What is the signature cocktail called?"
+    expected_contains: ["Rosewood"]
+  - question: "Who is handling the playlist?"
+    expected_contains: ["Aisha"]
+  - question: "How many people confirmed?"
+    expected_contains: ["42"]
+  - question: "Why was the party moved from Saturday to Sunday?"
+    expected_contains: ["fishing", "Robert", "Dad"]
+  - question: "Who can't attend the party?"
+    expected_contains: ["Julian's cousin", "Sam Okafor"]
+  - question: "What decorations is Julian using?"
+    expected_contains: ["string lights", "paper lanterns", "eucalyptus"]
+  - question: "What time does music need to stop?"
+    expected_contains: ["10pm"]
+  - question: "Who settled the taco vs formal food debate?"
+    expected_contains: ["Maya's mom"]

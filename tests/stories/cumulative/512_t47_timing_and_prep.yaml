@@ -1,0 +1,176 @@
+story_id: 512
+story_name: "Timing and Prep"
+category: "Hosting and Entertaining"
+description: |
+  Maya learns from the first disaster and researches meal timing, prep work,
+  and hosting logistics. Cross-references cooking (T31), digital habits (T48),
+  and the miso ramen signature dish.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      ok so after the chicken disaster I've been watching a ton of YouTube videos about meal prep for dinner parties and this one chef said the key is everything should be done before guests arrive except one thing that you finish live and that way you look calm even though you prepped for six hours
+    expected_memory_stores:
+      - "YouTube meal prep research"
+      - "prep before guests arrive"
+      - "one live finish dish"
+      - "appear calm strategy"
+    expected_adaptation:
+      emotion_detected: "motivated"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 8:30 PM"
+    user_input: |
+      made a literal spreadsheet of timing like if dinner is at 7 then the ramen broth needs to start at 2 and the toppings need to be prepped by 5 and the noodles go in at 6:45 and Julian looked at it and said you're project managing dinner and I said yes I am because I am a software engineer and we plan things
+    expected_memory_stores:
+      - "dinner timing spreadsheet"
+      - "ramen broth at 2pm"
+      - "toppings by 5pm"
+      - "noodles at 6:45"
+      - "project managing dinner"
+    expected_adaptation:
+      emotion_detected: "focused"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 10:00 AM"
+    user_input: |
+      asked Clara what makes a dinner party good from a guest perspective and she said honestly three things good food that's ready on time music that isn't too loud and a host who isn't freaking out and I was like ok so I failed all three last time and she laughed and said you got the energy right though
+    expected_memory_stores:
+      - "Clara's three things"
+      - "food on time"
+      - "music not too loud"
+      - "host not freaking out"
+      - "failed all three last time"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 12:30 PM"
+    user_input: |
+      Julian said he'll handle music and drinks if I handle food and that's actually a great division of labor because his cocktails were the best part of the last dinner and my food was the worst part so we're playing to strengths here and he already bought a new bluetooth speaker for the living room
+    expected_memory_stores:
+      - "division of labor"
+      - "Julian handles music and drinks"
+      - "Maya handles food"
+      - "new bluetooth speaker"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 5:00 PM"
+    user_input: |
+      I'm committing to miso ramen as my signature dinner party dish because it's the best thing I make and Omar specifically asked for it and I've made it maybe 15 times since the Japan trip and I can do it with my eyes closed and Julian's right serve what you know
+    expected_memory_stores:
+      - "miso ramen as signature dish"
+      - "made it 15 times"
+      - "Japan trip origin"
+      - "Omar's request"
+      - "Julian's advice internalized"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      did a practice run tonight just for Julian and me and Kobe and I followed the spreadsheet exactly and the ramen was ready at 7 on the dot and it was delicious and Julian gave it a 9 out of 10 and I said what's the missing point and he said a tiny bit more chili oil and he's right
+    expected_memory_stores:
+      - "practice run"
+      - "followed spreadsheet"
+      - "ready on time"
+      - "Julian rates 9/10"
+      - "needs more chili oil"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      also realized I need to Kobe-proof the kitchen like last time he stole a bread roll because the counter was accessible so Julian's gonna put up the baby gate in the kitchen doorway which is hilarious because it's a dog gate for a dinner party but you know what works works
+    expected_memory_stores:
+      - "Kobe-proofing kitchen"
+      - "baby gate in doorway"
+      - "bread roll incident prevention"
+    expected_adaptation:
+      emotion_detected: "practical"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 9:00 PM"
+    user_input: |
+      scrolling through my phone looking at hosting stuff and I realized my screen time is back up to like 3.5 hours today mostly because of all the YouTube cooking videos and recipe browsing and I was doing so good keeping it at 2.5 but I guess this is at least productive screen time right
+    expected_memory_stores:
+      - "screen time up to 3.5 hours"
+      - "YouTube cooking videos"
+      - "was keeping at 2.5"
+      - "productive screen time rationalization"
+    expected_adaptation:
+      emotion_detected: "sheepish"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 10:00 AM"
+    user_input: |
+      invited people for this Saturday and the guest list is the same crew plus Jenny is actually gonna be in town visiting from Denver so she's coming too and I'm so excited because Jenny hasn't seen the house yet and she doesn't know about all the grandpa stuff and I have so much to catch her up on
+    expected_memory_stores:
+      - "Saturday dinner planned"
+      - "same guest list"
+      - "Jenny visiting from Denver"
+      - "Jenny hasn't seen house"
+      - "catch up on grandpa news"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      made a grocery list that's way more organized than last time and I'm going to New Seasons on Friday after work to get fresh stuff and the total should be around 120 this time because ramen is cheaper than chicken and sides and Julian said he'll stock up on bourbon and ginger beer for cocktails and I think this time is gonna be actually great
+    expected_memory_stores:
+      - "organized grocery list"
+      - "New Seasons Friday"
+      - "budget $120"
+      - "ramen cheaper"
+      - "Julian bourbon and ginger beer"
+    expected_adaptation:
+      emotion_detected: "prepared"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya's signature dinner party dish?"
+    expected_contains: ["miso ramen"]
+  - question: "What did Maya create to manage dinner timing?"
+    expected_contains: ["spreadsheet"]
+  - question: "What are Clara's three things for a good dinner party?"
+    expected_contains: ["food on time", "music", "host not freaking out"]
+  - question: "What is Julian responsible for at dinner parties?"
+    expected_contains: ["music", "drinks", "cocktails"]
+  - question: "How did Maya Kobe-proof the kitchen?"
+    expected_contains: ["baby gate", "gate"]
+  - question: "What score did Julian give the practice ramen?"
+    expected_contains: ["9 out of 10"]
+  - question: "What's the improvement for next time?"
+    expected_contains: ["chili oil"]
+  - question: "Who is visiting from Denver for the dinner?"
+    expected_contains: ["Jenny"]
+  - question: "What is the grocery budget for the second dinner?"
+    expected_contains: ["120"]
+  - question: "How many times has Maya made miso ramen?"
+    expected_contains: ["15"]

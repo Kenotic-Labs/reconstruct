@@ -1,0 +1,190 @@
+story_id: 289
+story_name: "Bathroom is Next"
+category: "Home"
+description: |
+  Tests memory of Maya and Julian beginning to plan the bathroom renovation after the
+  kitchen success. Captures lessons learned and a much more cautious approach this time.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00 AM"
+    user_input: |
+      okay so I gave us a month to enjoy the kitchen and now it's time to think about the bathroom which is honestly the worst room in the house like the tiles are cracked the tub has this yellow stain that won't come out and the vanity is from like the 70s with this weird gold hardware
+    expected_memory_stores:
+      - "bathroom planning"
+      - "cracked tiles"
+      - "yellow stained tub"
+      - "70s vanity"
+      - "gold hardware"
+      - "worst room"
+    expected_adaptation:
+      emotion_detected: "motivated"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:00 AM"
+    user_input: |
+      lesson number one from the kitchen: we are NOT doing DIY demo this time. lesson number two: we're hiring Anna Petrova from the start. lesson number three: we're adding 30% to whatever the estimate is because renovations always cost more. Julian was like look at you being a seasoned homeowner
+    expected_memory_stores:
+      - "no DIY demo"
+      - "hire Anna from start"
+      - "30% buffer"
+      - "lessons from kitchen"
+      - "seasoned homeowner"
+    expected_adaptation:
+      emotion_detected: "wise"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Sunday 11:00 AM"
+    user_input: |
+      called Anna and she was super happy to hear from us and she said she can come do an assessment in two weeks and she loves bathroom work because it's smaller scope than a kitchen and she said to start thinking about what style we want
+    expected_memory_stores:
+      - "called Anna"
+      - "assessment in two weeks"
+      - "Anna loves bathrooms"
+      - "smaller scope"
+      - "think about style"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 7:00 PM"
+    user_input: |
+      Julian is already going full designer mode on the bathroom he made a mood board on Pinterest with like hexagonal floor tiles and a floating vanity and this rain showerhead and I was like babe how much does a rain showerhead cost and he was like don't worry about it
+    expected_memory_stores:
+      - "Julian mood board"
+      - "Pinterest"
+      - "hexagonal floor tiles"
+      - "floating vanity"
+      - "rain showerhead"
+      - "cost concerns"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      bathroom renovation fund is at $3,800 which isn't enough yet but if we keep saving the way we have been we'll be at about $8K in three months and Anna will probably quote us in that range for a small bathroom so the timing could work out
+    expected_memory_stores:
+      - "bathroom fund $3,800"
+      - "need more"
+      - "target $8K"
+      - "three months saving"
+      - "timing alignment"
+    expected_adaptation:
+      emotion_detected: "planning"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 8:00 PM"
+    user_input: |
+      asked Anna if there could be asbestos in the bathroom too since the house is from the 60s and she said possibly in the floor tiles and window glazing but she'll test everything before they start so there are no surprises this time
+    expected_memory_stores:
+      - "asbestos question bathroom"
+      - "house from 60s"
+      - "possibly in floor tiles"
+      - "window glazing"
+      - "Anna will test first"
+      - "no surprises"
+    expected_adaptation:
+      emotion_detected: "cautious"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 7:00 PM"
+    user_input: |
+      Julian found a tub at a salvage shop called Rebuilding Center that's this beautiful clawfoot cast iron tub and it's $300 which is insane for a clawfoot and he's BEGGING me to get it and I'm like will it even fit and he measured and said barely but yes
+    expected_memory_stores:
+      - "clawfoot tub found"
+      - "Rebuilding Center"
+      - "salvage shop"
+      - "cast iron"
+      - "$300"
+      - "Julian begging"
+      - "barely fits"
+    expected_adaptation:
+      emotion_detected: "tempted"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 10:00 AM"
+    user_input: |
+      we bought the clawfoot tub because Julian's eyes were doing that thing and honestly it IS beautiful and $300 for a clawfoot is a steal and it's sitting in our garage now waiting for the bathroom reno and Kobe is scared of it
+    expected_memory_stores:
+      - "bought clawfoot tub"
+      - "$300"
+      - "in garage"
+      - "waiting for reno"
+      - "Kobe scared of it"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 7:00 PM"
+    user_input: |
+      made a list of what we want in the bathroom: clawfoot tub obviously, hexagonal floor tile in white, subway tile on the walls to match the kitchen, floating vanity, rain showerhead, new toilet, updated lighting and Julian added heated floors and I was like we'll see about that one
+    expected_memory_stores:
+      - "bathroom wish list"
+      - "clawfoot tub"
+      - "hexagonal floor tile white"
+      - "subway tile walls"
+      - "floating vanity"
+      - "rain showerhead"
+      - "new toilet"
+      - "updated lighting"
+      - "heated floors maybe"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 9:00 PM"
+    user_input: |
+      this time we're doing it right from the start no YouTube overconfidence no random contractors and we're saving up before we begin not scrambling during and I feel good about it like the kitchen taught us everything we need to know about home renovation
+    expected_memory_stores:
+      - "doing it right this time"
+      - "no YouTube overconfidence"
+      - "no random contractors"
+      - "save before start"
+      - "kitchen lessons applied"
+      - "feeling good"
+    expected_adaptation:
+      emotion_detected: "mature"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Is the bathroom renovation starting soon?"
+    expected_contains: ["planning", "two weeks", "assessment"]
+  - question: "Who is doing the bathroom renovation?"
+    expected_contains: ["Anna Petrova"]
+  - question: "What did Julian find at the Rebuilding Center?"
+    expected_contains: ["clawfoot tub"]
+  - question: "How much was the clawfoot tub?"
+    expected_contains: ["300"]
+  - question: "What floor tile does Julian want?"
+    expected_contains: ["hexagonal"]
+  - question: "How much is in the bathroom renovation fund?"
+    expected_contains: ["3,800", "3800"]
+  - question: "What lessons did Maya learn from the kitchen renovation?"
+    expected_contains: ["no DIY", "hire Anna", "30% buffer"]
+  - question: "Does Julian want heated floors?"
+    expected_contains: ["yes"]
+  - question: "What is the bathroom budget target?"
+    expected_contains: ["8"]
+  - question: "Where is the clawfoot tub being stored?"
+    expected_contains: ["garage"]

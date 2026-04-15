@@ -1,0 +1,231 @@
+story_id: 194
+story_name: "Preeclampsia Diagnosis"
+category: "Health"
+description: |
+  Clara diagnosed with preeclampsia at week 28. Hospitalized at UC Davis.
+  Tests tracking medical emergency for family member, hospital details,
+  and emotional crisis echoing Mom's health scare.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 3:00 PM"
+    user_input: |
+      Clara just called and she's at the doctor and her blood pressure is really high like dangerously high 160 over 100 and Dr. Patel is sending her to the hospital and Clara's being very calm because she's a nurse but I can hear the shake in her voice and she said Maya they think it might be preeclampsia
+    expected_memory_stores:
+      - "Clara high blood pressure"
+      - "160/100"
+      - "Dr. Patel sending to hospital"
+      - "possible preeclampsia"
+      - "Clara 28 weeks"
+      - "Clara calm but shaking"
+    expected_triples:
+      - ["Clara", "blood_pressure", "160/100"]
+      - ["Clara", "possible_diagnosis", "preeclampsia"]
+      - ["Dr. Patel", "sent_to_hospital", "Clara"]
+      - ["user", "has_emotion", "terrified"]
+    expected_adaptation:
+      emotion_detected: "terrified"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 3:30 PM"
+    user_input: |
+      not again I can't do this again first Mom and now Clara and I know this is different but it feels the same that cold fear in my chest and Julian's here and he's holding me and I told him about Clara and he said Maya let's not panic until we know more and I said I know but she's only 28 weeks Julian that's early that's too early
+    expected_memory_stores:
+      - "echoes of Mom's health scare"
+      - "Julian holding Maya"
+      - "28 weeks is early"
+      - "fear"
+    expected_triples:
+      - ["user", "emotional_echo", "Mom's health scare"]
+      - ["Julian", "comforting", "Maya"]
+      - ["Clara", "weeks_pregnant", "28"]
+      - ["user", "has_emotion", "panic"]
+    expected_adaptation:
+      emotion_detected: "panic"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 4:00 PM"
+    user_input: |
+      David called me and he sounds terrified he said they're at UC Davis Medical Center and they're admitting Clara and she's hooked up to monitors and they're checking protein in her urine which is how they confirm preeclampsia and the baby's heart rate is being monitored too and he said the doctors are moving fast
+    expected_memory_stores:
+      - "UC Davis Medical Center"
+      - "Clara admitted"
+      - "monitors hooked up"
+      - "protein in urine test"
+      - "baby heart rate monitored"
+      - "David terrified"
+    expected_triples:
+      - ["Clara", "admitted_to", "UC Davis Medical Center"]
+      - ["Clara", "being_tested_for", "protein in urine"]
+      - ["baby", "status", "heart rate monitored"]
+      - ["David", "has_emotion", "terrified"]
+    expected_adaptation:
+      emotion_detected: "alarmed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 5:00 PM"
+    user_input: |
+      Dr. Patel confirmed it's preeclampsia the protein levels in Clara's urine are elevated and her blood pressure is still high and she said at 28 weeks this is serious but manageable the goal is to keep the baby in as long as possible while keeping Clara safe and she's going to start Clara on medication to lower her blood pressure
+    expected_memory_stores:
+      - "preeclampsia confirmed"
+      - "elevated protein"
+      - "blood pressure still high"
+      - "serious but manageable"
+      - "keep baby in as long as possible"
+      - "blood pressure medication"
+      - "Dr. Patel"
+    expected_triples:
+      - ["Clara", "diagnosed_with", "preeclampsia"]
+      - ["Clara", "treatment", "blood pressure medication"]
+      - ["Dr. Patel", "assessment", "serious but manageable"]
+      - ["Clara", "goal", "keep baby in as long as possible"]
+    expected_adaptation:
+      emotion_detected: "focused fear"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 6:00 PM"
+    user_input: |
+      Mom called and she's already at the hospital she got there before I could even think about flights and she said Clara is resting David is with her and the monitors show the baby's heartbeat is strong and Mom said Maya don't fly down tonight just wait until we know more and I said Mom I need to be there and she said I know you do but Clara said she wants you to stay calm for now
+    expected_memory_stores:
+      - "Vivian already at hospital"
+      - "Clara resting"
+      - "David with her"
+      - "baby heartbeat strong"
+      - "Clara wants Maya to stay calm"
+      - "Maya wants to fly down"
+    expected_triples:
+      - ["Vivian", "arrived_at", "hospital"]
+      - ["baby", "status", "heartbeat strong"]
+      - ["Clara", "requested", "Maya stay calm"]
+      - ["user", "has_emotion", "torn"]
+    expected_adaptation:
+      emotion_detected: "torn"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 8:00 PM"
+    user_input: |
+      Dr. Patel said if the blood pressure can be controlled with medication they might be able to keep Clara on bed rest and delay delivery until at least 34 weeks which would be much safer for the baby and she said the due date is no longer April 15th it's now more like March 25th at the earliest if things go well
+    expected_memory_stores:
+      - "bed rest plan"
+      - "delay delivery to 34 weeks"
+      - "due date changed from April 15 to March 25"
+      - "correction: due date moved up"
+      - "blood pressure medication needed"
+    expected_triples:
+      - ["Clara", "corrected", "due date April 15 → March 25"]
+      - ["Dr. Patel", "plan", "delay delivery to 34 weeks"]
+      - ["Clara", "treatment", "bed rest with medication"]
+    expected_adaptation:
+      emotion_detected: "cautiously hopeful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 10:00 PM"
+    user_input: |
+      Clara texted me she said hey sis I'm okay don't freak out I've seen preeclampsia a hundred times in other patients and I know the drill and the team here is amazing and Sophie is being a trooper her heart rate is perfect and I wrote back I love you and please rest and she said I love you too now go hug Kobe
+    expected_memory_stores:
+      - "Clara texted Maya"
+      - "Clara knows preeclampsia from nursing"
+      - "Sophie heart rate perfect"
+      - "Clara reassuring Maya"
+    expected_triples:
+      - ["Clara", "texted", "Maya reassurance"]
+      - ["Sophie", "status", "heart rate perfect"]
+      - ["Clara", "knows_preeclampsia", "from nursing experience"]
+    expected_adaptation:
+      emotion_detected: "relieved slightly"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 7:00 AM"
+    user_input: |
+      barely slept again this is becoming a pattern when my family is in hospitals and Julian made me coffee and said Maya Clara's a nurse she's at one of the best hospitals in Sacramento and Sophie is strong and he's right but it's hard to be rational when it's your sister
+    expected_memory_stores:
+      - "Maya barely slept"
+      - "Julian making coffee"
+      - "Julian reassuring"
+      - "hard to be rational"
+    expected_triples:
+      - ["user", "sleep_status", "barely slept"]
+      - ["Julian", "supports", "made coffee, reassuring"]
+      - ["user", "has_emotion", "exhausted worry"]
+    expected_adaptation:
+      emotion_detected: "exhausted worry"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 10:00 AM"
+    user_input: |
+      David called with an update Clara's blood pressure came down overnight with the medication to 138 over 88 which is still high but way better than yesterday and Dr. Patel said that's encouraging and they're going to keep her for a few more days to monitor and then possibly send her home on bed rest with close monitoring
+    expected_memory_stores:
+      - "blood pressure improved 138/88"
+      - "medication working"
+      - "Dr. Patel encouraged"
+      - "few more days in hospital"
+      - "possible home bed rest"
+    expected_triples:
+      - ["Clara", "blood_pressure", "improved to 138/88"]
+      - ["Clara", "medication", "working"]
+      - ["Dr. Patel", "plan", "few more days then home bed rest"]
+      - ["user", "has_emotion", "relieved"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 3:00 PM"
+    user_input: |
+      so the plan now is bed rest for Clara until the baby can be safely delivered which could be anywhere from 34 to 36 weeks and the birth plan has changed Clara said she talked to Dr. Patel and if the preeclampsia worsens they'll need to do a C-section instead of natural delivery and Clara was disappointed but she said the priority is Sophie's safety not my birth plan
+    expected_memory_stores:
+      - "bed rest until delivery"
+      - "delivery 34-36 weeks"
+      - "birth plan changed to possible C-section"
+      - "correction: natural to C-section"
+      - "Clara disappointed but pragmatic"
+      - "Sophie's safety is priority"
+    expected_triples:
+      - ["Clara", "corrected", "birth plan natural → possible C-section"]
+      - ["Clara", "delivery_window", "34-36 weeks"]
+      - ["Clara", "priority", "Sophie's safety over birth plan"]
+      - ["user", "has_emotion", "accepting"]
+    expected_adaptation:
+      emotion_detected: "accepting"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What was Clara diagnosed with?"
+    expected_contains: ["preeclampsia"]
+  - question: "What was Clara's blood pressure at diagnosis?"
+    expected_contains: ["160", "100"]
+  - question: "Has the due date changed?"
+    expected_contains: ["yes", "March 25", "April 15"]
+  - question: "What hospital is Clara at?"
+    expected_contains: ["UC Davis Medical Center"]
+  - question: "Has the birth plan changed?"
+    expected_contains: ["yes", "C-section"]
+  - question: "What was the original birth plan?"
+    expected_contains: ["natural"]
+  - question: "Did the blood pressure medication help?"
+    expected_contains: ["yes", "138", "88"]
+  - question: "How many weeks pregnant is Clara?"
+    expected_contains: ["28"]
+  - question: "What is the goal for delivery timing?"
+    expected_contains: ["34", "36 weeks"]
+  - question: "Who is Clara's OB?"
+    expected_contains: ["Dr. Patel"]

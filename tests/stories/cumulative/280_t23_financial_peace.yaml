@@ -1,0 +1,184 @@
+story_id: 280
+story_name: "Financial Peace"
+category: "Finance"
+description: |
+  Tests memory of Maya reaching a state of financial stability and peace. The long arc
+  of debt, setbacks, and discipline culminates in a feeling of security. Completes T23.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00 AM"
+    user_input: |
+      three months since the last loan payment and you know what's weird is I keep checking Navient out of habit and it just says $0.00 and every time I see it I smile like it's still not fully real to me that we actually did it
+    expected_memory_stores:
+      - "three months debt-free"
+      - "checking Navient habit"
+      - "$0.00 balance"
+      - "still surreal"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 12:00 PM"
+    user_input: |
+      had a random thought today that a year ago a $65 sushi order made me feel guilty and now I can get sushi without thinking twice not because I'm rich but because there's no debt cloud hanging over everything and that mental freedom is honestly the best part
+    expected_memory_stores:
+      - "sushi guilt gone"
+      - "mental freedom"
+      - "no debt cloud"
+      - "best part is mental"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      emergency fund hit $7,200 and the Fidelity account is at $5,100 and the kitchen fund is at $2,300 and I made a pie chart of our savings breakdown and Julian was like you and your charts and I was like the charts kept us on track for 19 months they've earned my loyalty
+    expected_memory_stores:
+      - "emergency fund $7,200"
+      - "Fidelity $5,100"
+      - "kitchen fund $2,300"
+      - "pie chart"
+      - "charts earned loyalty"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 6:00 PM"
+    user_input: |
+      Julian surprised me with a weekend trip to Cannon Beach for our anniversary which would have been impossible during the loan payoff and we're staying at this cute cottage and Kobe's coming and I didn't even ask how much it cost which feels like growth
+    expected_memory_stores:
+      - "Cannon Beach trip"
+      - "anniversary"
+      - "Julian surprise"
+      - "cute cottage"
+      - "Kobe coming"
+      - "didn't ask cost"
+      - "financial growth"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 10:00 AM"
+    user_input: |
+      at Cannon Beach walking on the sand with Kobe and Julian and watching the waves and I just feel this deep sense of like we're okay you know? like we own a house we're debt free we have savings we both have good income and I'm 29 and we're in such a good position
+    expected_memory_stores:
+      - "Cannon Beach"
+      - "walking on sand"
+      - "deep peace"
+      - "own house"
+      - "debt free"
+      - "savings"
+      - "good income"
+      - "29 years old"
+      - "good position"
+    expected_adaptation:
+      emotion_detected: "serene"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Julian said something that stuck with me he was like you know the loan payoff wasn't just about money it taught us how to work together toward a goal and he's right like before that we never really had a shared mission and now we have the house and the renovation coming up and it's like we know how to team up
+    expected_memory_stores:
+      - "Julian reflection"
+      - "teamwork lesson"
+      - "shared mission"
+      - "before no shared goal"
+      - "now know how to team up"
+      - "house and renovation"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 8:00 AM"
+    user_input: |
+      also I should mention the recipe app now has 30,000 monthly users and it's consistently making over $1,000 a month with subscriptions and ads combined and Priya keeps saying I should turn it into a real startup but I'm happy with it as a side income honestly I don't want the pressure
+    expected_memory_stores:
+      - "30,000 MAU"
+      - "over $1,000 monthly"
+      - "subscriptions and ads"
+      - "Priya startup suggestion"
+      - "happy as side income"
+      - "don't want pressure"
+    expected_adaptation:
+      emotion_detected: "grounded"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 12:00 PM"
+    user_input: |
+      mapped out the next financial goals on the drive home: hit $10K emergency fund by end of summer, get Fidelity to $10K by end of year, and save enough for the kitchen renovation by spring so we can finally get rid of those 1987 laminate counters
+    expected_memory_stores:
+      - "financial goals"
+      - "$10K emergency fund by summer"
+      - "$10K Fidelity by year end"
+      - "kitchen by spring"
+      - "1987 laminate counters"
+    expected_adaptation:
+      emotion_detected: "goal-oriented"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 5:00 PM"
+    user_input: |
+      home from Cannon Beach and the house smells like the lavender Julian planted by the front door and Kobe immediately went to his spot in the yard and Julian went to his studio and I'm standing in our ugly beautiful kitchen thinking about how far we've come
+    expected_memory_stores:
+      - "home from trip"
+      - "lavender by front door"
+      - "Kobe yard spot"
+      - "Julian studio"
+      - "ugly beautiful kitchen"
+      - "how far we've come"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 PM"
+    user_input: |
+      what was the total journey from our first loan payment amount to being debt free can you summarize the whole financial situation as it stands now because I want to see how far we've come from $34,200 in debt to where we are today
+    expected_memory_stores:
+      - "GK trap"
+      - "summary request"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Is Maya still in debt?"
+    expected_contains: ["no", "debt-free"]
+  - question: "How much is the emergency fund?"
+    expected_contains: ["7,200", "7200"]
+  - question: "How much is in Maya's investment account at Fidelity?"
+    expected_contains: ["5,100", "5100"]
+  - question: "How much is in the kitchen renovation fund?"
+    expected_contains: ["2,300", "2300"]
+  - question: "How much does the recipe app make per month?"
+    expected_contains: ["1,000", "1000"]
+  - question: "Where did Maya and Julian go for their anniversary?"
+    expected_contains: ["Cannon Beach"]
+  - question: "What was Maya's total student loan debt?"
+    expected_contains: ["34,200", "34200"]
+  - question: "What are Maya's next financial goals?"
+    expected_contains: ["10K emergency", "10K Fidelity", "kitchen renovation"]
+  - question: "How many users does the recipe app have?"
+    expected_contains: ["30,000", "30000"]
+  - question: "How long did it take to pay off the loans?"
+    expected_contains: ["nineteen months", "19"]

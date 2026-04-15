@@ -1,0 +1,181 @@
+story_id: 278
+story_name: "Debt Free"
+category: "Finance"
+description: |
+  Tests memory of Maya making her final student loan payment and becoming debt-free.
+  Captures the moment, the celebration at Canard, and the emotional significance.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 8:00 AM"
+    user_input: |
+      okay today is the day THE DAY I'm making the final payment to Navient $2,400 and then my student loans are DONE FOREVER and my hands are literally shaking as I type this at my desk at work
+    expected_memory_stores:
+      - "final payment day"
+      - "$2,400 last payment"
+      - "Navient"
+      - "hands shaking"
+      - "at work"
+    expected_adaptation:
+      emotion_detected: "nervous excitement"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 8:15 AM"
+    user_input: |
+      logged into Navient and the balance shows $2,387.64 which is a little less than I expected because of the last interest accrual or whatever and I hit pay full balance and confirmed and it processed and the screen says BALANCE: $0.00 and I'm done. I'm done.
+    expected_memory_stores:
+      - "paid $2,387.64"
+      - "balance $0.00"
+      - "payment processed"
+      - "debt free"
+      - "done"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 8:20 AM"
+    user_input: |
+      I'm crying at my desk and Sam noticed and was like are you okay and I was like I just paid off my student loans and he was like oh wow congratulations and gave me a high five and Priya overheard and was like YES MAYA and I'm just sitting here sniffling
+    expected_memory_stores:
+      - "crying at desk"
+      - "Sam congratulated"
+      - "Priya cheering"
+      - "high five"
+      - "emotional"
+    expected_adaptation:
+      emotion_detected: "tearful joy"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 8:30 AM"
+    user_input: |
+      texted Julian a screenshot of the $0.00 balance and he sent back about fifty exclamation marks and then a voice message that was just him going WOOOOOOO and I could hear Kobe barking in the background and I'm still crying
+    expected_memory_stores:
+      - "texted Julian screenshot"
+      - "$0.00 balance"
+      - "Julian voice message"
+      - "Kobe barking"
+      - "celebration"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 12:00 PM"
+    user_input: |
+      Nadia bought me flowers at lunch and a card that said "from one debt-free queen to another" and I almost cried AGAIN and she was like you better not I already cried when you texted me this morning
+    expected_memory_stores:
+      - "Nadia flowers"
+      - "debt-free queen card"
+      - "Nadia texted earlier"
+      - "emotional"
+    expected_adaptation:
+      emotion_detected: "loved"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 5:00 PM"
+    user_input: |
+      left work early because tonight is Canard night and I need to go home and get ready and Julian already texted that he's wearing his nice blazer and he asked me what I wanted to drink and I was like the most expensive champagne they have
+    expected_memory_stores:
+      - "left work early"
+      - "Canard tonight"
+      - "getting ready"
+      - "Julian blazer"
+      - "expensive champagne"
+    expected_adaptation:
+      emotion_detected: "celebratory"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 7:30 PM"
+    user_input: |
+      at Canard now and we ordered champagne and it's $28 a glass and I do not care because for the first time in NINETEEN MONTHS I can spend money without thinking about Navient and Julian raised his glass and said to nineteen months of discipline and one night of indulgence
+    expected_memory_stores:
+      - "at Canard"
+      - "champagne $28"
+      - "nineteen months"
+      - "Julian toast"
+      - "discipline and indulgence"
+      - "no more Navient"
+    expected_adaptation:
+      emotion_detected: "free"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 8:30 PM"
+    user_input: |
+      I got the duck confit and Julian got the steak frites and we split a cheese plate and everything was incredible and the total bill was like $180 which a year ago would have given me a panic attack but tonight it's a celebration and we earned it
+    expected_memory_stores:
+      - "duck confit"
+      - "steak frites"
+      - "cheese plate"
+      - "bill $180"
+      - "no guilt"
+      - "earned it"
+    expected_adaptation:
+      emotion_detected: "indulgent"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 10:00 PM"
+    user_input: |
+      walking home from Canard and the air is warm and Julian is holding my hand and I feel lighter like physically lighter I know that sounds dramatic but carrying $34,000 in debt is a weight and now it's gone and I just feel... free
+    expected_memory_stores:
+      - "walking home"
+      - "warm air"
+      - "holding hands"
+      - "feeling lighter"
+      - "$34,000 gone"
+      - "free"
+    expected_adaptation:
+      emotion_detected: "liberated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 11:00 PM"
+    user_input: |
+      home now and Kobe's on the couch and I took down the payoff chart from the fridge but Julian was like wait don't throw it away I want to frame it and honestly yeah that chart represents nineteen months of our lives and it deserves a frame. how much did we pay off total again? like the total amount from start to finish
+    expected_memory_stores:
+      - "chart taken down"
+      - "Julian wants to frame it"
+      - "nineteen months"
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "nostalgic"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Is Maya debt-free?"
+    expected_contains: ["yes"]
+  - question: "How long did it take to pay off the loans?"
+    expected_contains: ["nineteen months"]
+  - question: "How much total debt was paid off?"
+    expected_contains: ["34", "34,200"]
+  - question: "Where did Maya and Julian celebrate?"
+    expected_contains: ["Canard"]
+  - question: "What did Maya order at Canard?"
+    expected_contains: ["duck confit"]
+  - question: "What did Nadia give Maya?"
+    expected_contains: ["flowers", "card"]
+  - question: "What is Julian doing with the payoff chart?"
+    expected_contains: ["frame"]
+  - question: "How much was the Canard bill?"
+    expected_contains: ["180"]
+  - question: "What was the final payment amount?"
+    expected_contains: ["2,387", "2387"]
+  - question: "Who was Maya's loan servicer?"
+    expected_contains: ["Navient"]

@@ -1,0 +1,173 @@
+story_id: 254
+story_name: "Meets Climbing Partner Omar"
+category: "Fitness"
+description: |
+  Tests memory of Maya meeting Omar Hassan at the gym. Establishes a new climbing partnership,
+  Omar's background, and the shift from casual climbing to more serious training.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 7:30 PM"
+    user_input: |
+      so something cool happened at the gym tonight there was this guy on the route next to me and he was watching me work on a 5.9 and he was like hey your footwork is actually really solid for someone who just started and I was like oh thanks and we started talking
+    expected_memory_stores:
+      - "met someone at gym"
+      - "compliment on footwork"
+      - "5.9 route"
+    expected_adaptation:
+      emotion_detected: "flattered"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 7:45 PM"
+    user_input: |
+      his name is Omar Hassan and he's been climbing for like five years he said? he moved to Portland from San Diego about a year ago and he works in like physical therapy or something related to that and he's super chill and knows a ton about technique
+    expected_memory_stores:
+      - "Omar Hassan"
+      - "climbing five years"
+      - "from San Diego"
+      - "one year in Portland"
+      - "physical therapy"
+      - "technique knowledge"
+    expected_adaptation:
+      emotion_detected: "interested"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 8:15 PM"
+    user_input: |
+      Omar showed me this technique called flagging where you like stick your leg out to the side for balance instead of using it on a hold and it immediately made the crux on that 5.9 so much easier like I was trying to muscle through it and he was like no no use your body position and it clicked
+    expected_memory_stores:
+      - "flagging technique"
+      - "Omar taught technique"
+      - "body position"
+      - "crux easier"
+    expected_adaptation:
+      emotion_detected: "enlightened"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 9:30 PM"
+    user_input: |
+      he asked if I wanted a regular climbing partner because apparently his old partner moved to Bend and he's been climbing alone a lot and I was like yeah totally I'm here Tuesday Thursday and Saturday and he said he does the same days basically so it works out
+    expected_memory_stores:
+      - "climbing partner offer"
+      - "Omar's old partner moved to Bend"
+      - "same schedule"
+      - "Tuesday Thursday Saturday"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 8:00 AM"
+    user_input: |
+      told Julian about Omar and he was like oh cool is he good and I was like yeah he climbs like 5.12s and Julian was like whoa and then he was like wait is he cute and I was like Julian stop he's just a climbing partner lol he's like married with two kids or something
+    expected_memory_stores:
+      - "Julian knows about Omar"
+      - "Omar climbs 5.12"
+      - "Julian's reaction"
+      - "Omar married with kids"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:30 AM"
+    user_input: |
+      first real session with Omar as my climbing partner and oh my god the difference when someone actually knows what they're doing gives you beta. he mapped out the whole sequence for this 5.10a I've been staring at for a week and I got to the second to last hold before falling
+    expected_memory_stores:
+      - "first session with Omar"
+      - "beta guidance"
+      - "5.10a attempt"
+      - "fell near top"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 12:00 PM"
+    user_input: |
+      Omar told me about outdoor climbing and how it's like a completely different experience from gym climbing and there's this place called Smith Rock about two and a half hours from Portland that's apparently like the best sport climbing in Oregon and I'm like okay I need to go there
+    expected_memory_stores:
+      - "outdoor climbing"
+      - "Smith Rock"
+      - "two and a half hours"
+      - "sport climbing"
+      - "Oregon"
+    expected_adaptation:
+      emotion_detected: "curious"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Nadia came by and met Omar and they already knew each other apparently from some climbing meetup thing? small world. so now it's like the three of us and honestly I love having a climbing crew it makes it so much more fun
+    expected_memory_stores:
+      - "Nadia met Omar"
+      - "already knew each other"
+      - "climbing meetup"
+      - "climbing crew"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      Omar brought me a hangboard tonight like as a gift and he was like train your grip at home and you'll progress way faster and I was like dude you didn't have to do that and he was like nah I have like three of them it's fine
+    expected_memory_stores:
+      - "hangboard gift"
+      - "grip training"
+      - "Omar generous"
+      - "home training"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 10:00 PM"
+    user_input: |
+      hung the hangboard above the bathroom door and Julian was like really and I was like yes really and Kobe was barking at it like it was an intruder lol but seriously Omar is such a great climbing partner I'm learning so much faster now
+    expected_memory_stores:
+      - "hangboard installed"
+      - "bathroom door"
+      - "Julian's reaction"
+      - "Kobe barking"
+      - "faster learning"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who is Maya's climbing partner?"
+    expected_contains: ["Omar Hassan"]
+  - question: "How long has Omar been climbing?"
+    expected_contains: ["five years"]
+  - question: "Where is Omar originally from?"
+    expected_contains: ["San Diego"]
+  - question: "What does Omar do for work?"
+    expected_contains: ["physical therapy"]
+  - question: "What technique did Omar teach Maya?"
+    expected_contains: ["flagging"]
+  - question: "What grade does Omar climb?"
+    expected_contains: ["5.12"]
+  - question: "What outdoor climbing area did Omar mention?"
+    expected_contains: ["Smith Rock"]
+  - question: "What did Omar give Maya for home training?"
+    expected_contains: ["hangboard"]
+  - question: "Is Omar single or married?"
+    expected_contains: ["married"]
+  - question: "Do Nadia and Omar know each other?"
+    expected_contains: ["yes", "meetup"]

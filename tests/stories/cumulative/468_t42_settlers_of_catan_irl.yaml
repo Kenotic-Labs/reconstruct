@@ -1,0 +1,182 @@
+story_id: 468
+story_name: "Settlers of Catan IRL Regular"
+category: "Gaming"
+description: |
+  Tests memory of Maya becoming a regular at the tabletop meetup.
+  Establishes deepening friendships, competitive streak, social integration.
+  Verifies system tracks evolving social patterns and cross-thread references.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 6:00 PM"
+    user_input: |
+      second tabletop meetup tonight and Omar actually came this time and he walked in and was like whoa this is way more people than I expected and Dave was like welcome my dude and gave him a beer and Omar fit right in immediately because he's just like that you know he's so social and we played Ticket to Ride which is about building train routes
+    expected_memory_stores:
+      - "second meetup"
+      - "Omar came"
+      - "Dave welcomed Omar"
+      - "Ticket to Ride"
+      - "train routes game"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 8:00 PM"
+    user_input: |
+      okay so Ticket to Ride is fun but I like Catan better because there's more strategy and trading and Nadia is already obsessed with Ticket to Ride though because she won and she was like THIS is my game and Tessa and I just looked at each other like here we go competitive Nadia is activated
+    expected_memory_stores:
+      - "Maya prefers Catan"
+      - "Nadia won Ticket to Ride"
+      - "Nadia competitive"
+      - "Tessa and Maya bonding"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Two weeks later Thursday 7:00 PM"
+    user_input: |
+      third meetup and it's Catan night again and I brought homemade brownies because Tessa brought cookies last time and now we have a thing going where everyone brings snacks and Dave said we're the best group the meetup has ever had and Jim and Robin brought their friend Kyle who works at Nike and he's really fun
+    expected_memory_stores:
+      - "third meetup Catan"
+      - "homemade brownies"
+      - "Tessa brought cookies last time"
+      - "snack tradition"
+      - "Dave compliment"
+      - "Kyle from Nike"
+    expected_adaptation:
+      emotion_detected: "belonging"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 8:30 PM"
+    user_input: |
+      so Omar is actually a really aggressive Catan player like he builds roads everywhere and blocks everyone and Nadia was FURIOUS and she goes Omar I thought we were friends and he goes in Catan there are no friends and Julian would love this energy honestly I should bring him sometime
+    expected_memory_stores:
+      - "Omar aggressive player"
+      - "builds roads blocks everyone"
+      - "Nadia furious"
+      - "no friends in Catan"
+      - "bring Julian idea"
+    expected_adaptation:
+      emotion_detected: "entertained"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 9:00 PM"
+    user_input: |
+      Tessa won this time and she did this little victory dance and I'm like okay she's my favorite person now and we stayed after the game talking and she told me about her job at the food access nonprofit and how they're trying to get fresh produce into food deserts in east Portland and it's really meaningful work
+    expected_memory_stores:
+      - "Tessa won"
+      - "victory dance"
+      - "food access nonprofit"
+      - "fresh produce food deserts"
+      - "east Portland"
+      - "meaningful work"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Next Thursday 7:30 PM"
+    user_input: |
+      fourth meetup and Julian actually came tonight and he was SO into it and he and Dave were geeking out about game design because Julian has a designer's eye for the board layout and also Julian and Omar were immediately competitive and trash talking and I was like great I created a monster by bringing my fiance to game night
+    expected_memory_stores:
+      - "fourth meetup"
+      - "Julian came"
+      - "Julian and Dave game design"
+      - "Julian and Omar competitive"
+      - "trash talking"
+      - "Maya brought fiance"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 9:00 PM"
+    user_input: |
+      Julian won his FIRST game and he was insufferable about it like he literally stood up and bowed and Omar was like sit down rookie and Nadia threw a game piece at him and I was like this is the best friend group situation and honestly it reminds me of playing Stardew co-op with Julian but better because there's more people and real laughter
+    expected_memory_stores:
+      - "Julian won first game"
+      - "stood up and bowed"
+      - "Omar said sit down"
+      - "Nadia threw piece"
+      - "best friend group"
+      - "better than Stardew co-op"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 10:00 AM"
+    user_input: |
+      how many tabletop meetups has Maya been to and who usually comes
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 6:00 PM"
+    user_input: |
+      I told Lily Tran about the tabletop meetup and she was like ooh can I come and I said of course and then Marcus heard and he was like I used to play Catan in college and I was like Marcus you should totally come this is becoming a whole thing and Danny Ruiz was like I'll stick to my PlayStation and I was like your loss Danny
+    expected_memory_stores:
+      - "Lily wants to come"
+      - "Marcus Catan in college"
+      - "Marcus might come"
+      - "Danny prefers PlayStation"
+    expected_adaptation:
+      emotion_detected: "enthusiastic"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 8:00 PM"
+    user_input: |
+      you know what's funny is this whole thing started with Stardew Valley which started with Lily's recommendation which led to Discord which led to the PixelDruid thing which led to Julian saying go do IRL gaming which led to the tabletop meetup and now I have this amazing group of friends and a Thursday night tradition and I still play Stardew sometimes solo for the calm but the real community is here in person
+    expected_memory_stores:
+      - "full arc reflection"
+      - "Stardew to Discord to tabletop"
+      - "Lily started it"
+      - "PixelDruid catalyst"
+      - "Julian suggestion"
+      - "Thursday tradition"
+      - "solo Stardew for calm"
+      - "real community IRL"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How often does Maya go to the tabletop meetup?"
+    expected_contains: ["every other Thursday"]
+  - question: "What is Omar's play style in Catan?"
+    expected_contains: ["aggressive", "roads", "block"]
+  - question: "Who is Kyle and how did he join the meetup?"
+    expected_contains: ["Nike", "Jim", "Robin"]
+  - question: "Did Julian come to the tabletop meetup?"
+    expected_contains: ["yes"]
+  - question: "What does Tessa do for work?"
+    expected_contains: ["food", "nonprofit", "produce"]
+  - question: "Does Maya still play Stardew Valley?"
+    expected_contains: ["solo", "sometimes", "calm"]
+  - question: "Who won the first Catan game Julian played?"
+    expected_contains: ["Julian"]
+  - question: "What snack did Maya bring to the meetup?"
+    expected_contains: ["brownies"]
+  - question: "Which coworkers want to join the meetup?"
+    expected_contains: ["Lily", "Marcus"]
+  - question: "What chain of events led Maya to the tabletop meetup?"
+    expected_contains: ["Stardew", "Discord", "PixelDruid", "Julian"]

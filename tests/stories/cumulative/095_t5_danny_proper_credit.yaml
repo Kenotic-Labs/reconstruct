@@ -1,0 +1,218 @@
+story_id: 95
+story_name: "Danny Gives Proper Credit"
+category: "Career"
+description: |
+  Tests memory of Danny's behavior change in the short term.
+  He properly credits Maya in one meeting. Is the change real?
+  Verifies system tracks behavioral change and skepticism.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 10:00 AM"
+    user_input: |
+      team presentation today and Danny was presenting the search infrastructure updates and this time he specifically said Maya designed and implemented the isolation layer and Maya led the latency optimization and I contributed testing and one optimization function and I was like okay he's trying
+    expected_memory_stores:
+      - "Danny credited Maya"
+      - "specifically named"
+      - "proper attribution"
+      - "isolation layer credited"
+      - "latency credited"
+      - "he's trying"
+    expected_triples:
+      - ["Danny", "credited", "user for isolation layer"]
+      - ["Danny", "credited", "user for latency optimization"]
+      - ["Danny", "gave", "proper attribution in presentation"]
+      - ["user", "has_emotion", "relieved"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 10:30 AM"
+    user_input: |
+      Lily texted me after the meeting saying well that's progress and she used the raised eyebrow emoji which I think means she's cautiously optimistic like me and Sam caught my eye during the meeting when Danny credited me and gave a small nod
+    expected_memory_stores:
+      - "Lily progress note"
+      - "cautious optimism"
+      - "Sam noticed"
+      - "Sam nod"
+    expected_triples:
+      - ["Lily", "noted", "progress in Danny's behavior"]
+      - ["Sam", "noticed", "Danny crediting user"]
+      - ["user", "has_emotion", "cautiously hopeful"]
+    expected_adaptation:
+      emotion_detected: "cautiously hopeful"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 1:00 PM"
+    user_input: |
+      Danny slacked me after the meeting and said hey I want you to know I heard you and I'm going to do better about attribution and it wasn't a formal apology but it was something and I replied thanks Danny I appreciate that and we left it there
+    expected_memory_stores:
+      - "Danny slack message"
+      - "heard you"
+      - "do better"
+      - "not formal apology"
+      - "something"
+      - "Maya appreciated"
+    expected_triples:
+      - ["Danny", "messaged", "I heard you, will do better"]
+      - ["Danny", "did_not_give", "formal apology"]
+      - ["user", "appreciated", "Danny's acknowledgment"]
+    expected_adaptation:
+      emotion_detected: "cautious"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 7:00 PM"
+    user_input: |
+      told Julian about Danny crediting me properly and he said good but one meeting doesn't make a trend and I agree but also like progress is progress and Julian said fair but keep the documentation just in case and I will
+    expected_memory_stores:
+      - "Julian cautious"
+      - "one meeting not trend"
+      - "progress acknowledged"
+      - "keep documentation"
+    expected_triples:
+      - ["Julian", "advised", "one meeting doesn't make a trend"]
+      - ["Julian", "advised", "keep documentation"]
+      - ["user", "has_emotion", "cautious"]
+    expected_adaptation:
+      emotion_detected: "cautious"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 10:00 AM"
+    user_input: |
+      Danny and I had a normal code review today and it was like before like we were discussing technical tradeoffs and he asked my opinion on an indexing approach and it felt like the old Danny not the credit-stealing Danny and I want to believe this is real
+    expected_memory_stores:
+      - "normal code review"
+      - "technical discussion"
+      - "old Danny back"
+      - "want to believe"
+    expected_triples:
+      - ["Danny", "had_normal", "code review with user"]
+      - ["Danny", "asked_opinion_on", "indexing approach"]
+      - ["user", "has_emotion", "hopeful"]
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      Kobe and I went for a walk and I was thinking about the whole Danny situation and I realized maybe I should bring it to Sam anyway not as a complaint but just as a heads up so it's on the record and Sam can keep an eye on it and that way I've done everything I can
+    expected_memory_stores:
+      - "bring to Sam anyway"
+      - "not complaint"
+      - "heads up"
+      - "on record"
+      - "Sam monitor"
+      - "done everything"
+    expected_triples:
+      - ["user", "decided_to", "bring situation to Sam"]
+      - ["user", "framing_as", "heads up not complaint"]
+      - ["user", "wants", "on the record with Sam"]
+    expected_adaptation:
+      emotion_detected: "resolved"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 9:00 AM"
+    user_input: |
+      did Danny properly credit Maya in the latest presentation
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 11:00 AM"
+    user_input: |
+      scheduled a one on one with Sam for Friday to discuss the situation and Lily said she'll be available if Sam wants to talk to her as a witness and I told Julian and he said good you're handling this the right way and honestly after the PIP I know how to navigate these things now which is a weird thing to be grateful for
+    expected_memory_stores:
+      - "Sam meeting Friday"
+      - "Lily available"
+      - "Julian approves"
+      - "PIP experience useful"
+      - "navigation skills"
+    expected_triples:
+      - ["user", "scheduled_meeting_with", "Sam for Friday"]
+      - ["Lily", "available_as", "witness"]
+      - ["user", "applying_lesson_from", "PIP experience"]
+      - ["user", "has_emotion", "prepared"]
+    expected_adaptation:
+      emotion_detected: "prepared"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      Danny asked me on slack if he could add a new feature to fridgesearch and part of me was like this feels weird given everything but also the fridgesearch collaboration is separate from the work credit issue and I don't want to punish him in one space for behavior in another
+    expected_memory_stores:
+      - "Danny fridgesearch question"
+      - "weird feeling"
+      - "separate spaces"
+      - "don't punish cross-context"
+    expected_triples:
+      - ["Danny", "asked_to", "add feature to fridgesearch"]
+      - ["user", "believes", "fridgesearch separate from credit issue"]
+      - ["user", "has_emotion", "mature"]
+    expected_adaptation:
+      emotion_detected: "mature"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 9:00 PM"
+    user_input: |
+      Julian and I prepped for the Sam meeting tomorrow and I organized all the documentation into a clean narrative chronological with evidence and I also noted that Danny has been improving since the confrontation because I want to be fair and Julian said that's what makes you different than people like Derek you fight fair
+    expected_memory_stores:
+      - "Sam meeting prep"
+      - "clean narrative"
+      - "chronological evidence"
+      - "Danny improvement noted"
+      - "fairness"
+      - "Julian Derek comparison"
+      - "fight fair"
+    expected_triples:
+      - ["user", "prepared", "chronological documentation for Sam"]
+      - ["user", "included", "Danny's improvement in report"]
+      - ["Julian", "compared_user_to", "opposite of Derek"]
+      - ["user", "has_quality", "fights fair"]
+    expected_adaptation:
+      emotion_detected: "principled"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Did Danny give Maya proper credit in the latest meeting?"
+    expected_contains: ["yes", "specifically", "named"]
+  - question: "Did Danny apologize formally?"
+    expected_contains: ["no", "not formal", "something"]
+  - question: "What did Danny say on Slack after the meeting?"
+    expected_contains: ["heard", "do better"]
+  - question: "Is Maya still keeping documentation?"
+    expected_contains: ["yes"]
+  - question: "When is Maya meeting with Sam?"
+    expected_contains: ["Friday"]
+  - question: "Is Maya presenting this as a complaint?"
+    expected_contains: ["no", "heads up", "record"]
+  - question: "Is Danny still working on fridgesearch?"
+    expected_contains: ["yes"]
+  - question: "What did Julian say about Maya fighting fair?"
+    expected_contains: ["different", "Derek"]
+  - question: "Does Maya note Danny's improvement in her documentation?"
+    expected_contains: ["yes", "improving"]
+  - question: "What PIP experience is Maya applying?"
+    expected_contains: ["data", "documentation", "navigation"]

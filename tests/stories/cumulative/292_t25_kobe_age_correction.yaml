@@ -1,0 +1,183 @@
+story_id: 292
+story_name: "Kobe's Age Correction"
+category: "Pet"
+description: |
+  Tests correction handling when the vet determines Kobe is closer to 4 years old,
+  not the 2 years the shelter estimated. Also captures Kobe's chaotic puppy-energy
+  behavior and chewing Julian's shoes.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 10:00 AM"
+    user_input: |
+      at the vet with Kobe for his first checkup and Dr. Mills is really nice she's looking at his teeth and feeling his joints and she said hmm and I was like what and she was like I don't think this dog is 2 years old
+    expected_memory_stores:
+      - "vet visit"
+      - "Dr. Mills"
+      - "teeth and joints exam"
+      - "not 2 years old"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 10:30 AM"
+    user_input: |
+      Dr. Mills said based on his dental wear and the condition of his joints especially some early arthritis signs in his hips she'd estimate Kobe is closer to 4 years old maybe even 4 and a half and the shelter's estimate of 2 was probably based on his energy level which is misleading because goldens are just energetic dogs period
+    expected_memory_stores:
+      - "Kobe closer to 4 years old"
+      - "correction from 2 to 4"
+      - "dental wear"
+      - "early arthritis hips"
+      - "shelter estimate wrong"
+      - "goldens energetic"
+    expected_adaptation:
+      emotion_detected: "concerned"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 11:00 AM"
+    user_input: |
+      I was a little upset because if he's 4 then we have less time with him than I thought and Dr. Mills was like golden retrievers typically live 10 to 12 years so even at 4 you have a good 6 to 8 years and that's a long time and she said he's otherwise very healthy
+    expected_memory_stores:
+      - "Maya upset less time"
+      - "golden lifespan 10-12 years"
+      - "6-8 years left"
+      - "otherwise healthy"
+      - "Dr. Mills reassuring"
+    expected_adaptation:
+      emotion_detected: "sad"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 11:30 AM"
+    user_input: |
+      Dr. Mills gave Kobe his booster shots and dewormer and said we should switch him from Purina Pro Plan to something with glucosamine for his joints and she recommended a brand called Blue Buffalo Life Protection for large breeds
+    expected_memory_stores:
+      - "booster shots"
+      - "dewormer"
+      - "switch from Purina Pro Plan"
+      - "Blue Buffalo Life Protection"
+      - "glucosamine for joints"
+      - "large breed formula"
+    expected_adaptation:
+      emotion_detected: "responsible"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 7:00 AM"
+    user_input: |
+      so despite being allegedly 4 years old Kobe has the energy of a puppy he woke up at 5:30 today and was zooming around the apartment and then he found Julian's favorite shoes these brown leather Clarks and he CHEWED THE HEEL RIGHT OFF and Julian was so mad
+    expected_memory_stores:
+      - "puppy energy"
+      - "5:30 AM zoomies"
+      - "chewed Julian's shoes"
+      - "brown leather Clarks"
+      - "heel chewed off"
+      - "Julian mad"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      Julian got over the shoe thing pretty fast because Kobe did this thing where he brought the destroyed shoe to Julian and dropped it at his feet and then sat down and tilted his head like he was apologizing and Julian was like I can't stay mad at that face and picked him up
+    expected_memory_stores:
+      - "Kobe brought shoe"
+      - "head tilt apology"
+      - "Julian can't stay mad"
+      - "picked Kobe up"
+    expected_adaptation:
+      emotion_detected: "charmed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 8:00 PM"
+    user_input: |
+      bought some chew toys at a pet store called Mud Bay so Kobe has things to destroy that aren't Julian's belongings and also bought the Blue Buffalo food that Dr. Mills recommended but Kobe sniffed it and walked away from his bowl and I was like are you serious
+    expected_memory_stores:
+      - "chew toys"
+      - "Mud Bay pet store"
+      - "Blue Buffalo purchased"
+      - "Kobe won't eat it"
+      - "walked away from bowl"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 7:00 AM"
+    user_input: |
+      tried mixing the Blue Buffalo with the old Purina Pro Plan and Kobe picked out just the Purina pieces and left the Blue Buffalo ones and Julian was like this dog is a genius evil genius and I was like we need to do a slow transition Dr. Mills said mix it gradually over a week
+    expected_memory_stores:
+      - "mixing food"
+      - "Kobe picked out Purina"
+      - "left Blue Buffalo"
+      - "slow transition needed"
+      - "one week gradual"
+      - "Dr. Mills advice"
+    expected_adaptation:
+      emotion_detected: "exasperated"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 10:00 AM"
+    user_input: |
+      day four of the food transition and Kobe is finally eating the mix without picking through it though he gives me this betrayed look every time I put the bowl down like I'm poisoning him and Julian's like dude it's premium dog food it costs more than our food
+    expected_memory_stores:
+      - "day four transition"
+      - "eating mix"
+      - "betrayed look"
+      - "premium food"
+      - "more expensive than human food"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 5:00 PM"
+    user_input: |
+      also Kobe chewed Julian's LEFT shoe now not the right one from before but the LEFT one of a different pair these were Nike running shoes and Julian was like THAT'S IT we're getting a trainer and I was like yes we should probably do that how old is Kobe again according to the vet
+    expected_memory_stores:
+      - "chewed another shoe"
+      - "left Nike running shoe"
+      - "different pair"
+      - "Julian wants trainer"
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "annoyed"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How old is Kobe according to the vet?"
+    expected_contains: ["4", "four"]
+  - question: "How old did the shelter say Kobe was?"
+    expected_contains: ["2"]
+  - question: "What food did Dr. Mills recommend for Kobe?"
+    expected_contains: ["Blue Buffalo"]
+  - question: "Why does Kobe need glucosamine?"
+    expected_contains: ["joints", "arthritis", "hips"]
+  - question: "What shoes did Kobe chew?"
+    expected_contains: ["Clarks", "Nike"]
+  - question: "Who is Kobe's veterinarian?"
+    expected_contains: ["Dr. Sara Mills"]
+  - question: "Where did Maya buy Kobe's chew toys?"
+    expected_contains: ["Mud Bay"]
+  - question: "Did Kobe take to the new food immediately?"
+    expected_contains: ["no", "refused", "picked out"]
+  - question: "What is the typical lifespan of a golden retriever?"
+    expected_contains: ["10", "12"]
+  - question: "What does Julian want to do about Kobe's behavior?"
+    expected_contains: ["trainer"]

@@ -1,0 +1,198 @@
+story_id: 174
+story_name: "Staying with Mom"
+category: "Health"
+description: |
+  Maya stays a week in Sacramento helping Vivian adjust. Daily life
+  at parents house. Tests tracking ongoing care situation, multi-day
+  stay details, and parent-child dynamic reversal.
+duration_simulated: "5 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 8:00 AM"
+    user_input: |
+      first full day of being here with Mom and she's already trying to do everything herself like she was up at 6am trying to clean the kitchen and I was like Mom please sit down the doctor said rest and she said Maya I've been resting I've been lying in hospital beds I want to be useful and I get it but still
+    expected_memory_stores:
+      - "Vivian trying to do too much"
+      - "Maya monitoring"
+      - "Vivian wants to be useful"
+      - "first full day at parents"
+    expected_triples:
+      - ["Vivian", "trying_to", "do too much too soon"]
+      - ["user", "monitoring", "Vivian's recovery"]
+      - ["Vivian", "wants_to_be", "useful"]
+    expected_adaptation:
+      emotion_detected: "concerned"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 11:00 AM"
+    user_input: |
+      made Mom take her metoprolol at 8am with breakfast and she said it made her a little dizzy which Clara said is normal for the first few days as her body adjusts and to mention it at the follow up if it doesn't go away but otherwise she seems okay just tired
+    expected_memory_stores:
+      - "metoprolol taken"
+      - "dizziness side effect"
+      - "Clara says normal initially"
+      - "mention at follow up"
+      - "Vivian tired"
+    expected_triples:
+      - ["Vivian", "took", "metoprolol at 8am with breakfast"]
+      - ["Vivian", "experiencing", "dizziness from metoprolol"]
+      - ["Clara", "says", "dizziness normal initially"]
+    expected_adaptation:
+      emotion_detected: "watchful"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Sunday 9:00 AM"
+    user_input: |
+      Dad is being so cute he keeps bringing Mom tea and blankets and asking if she's comfortable and Mom keeps saying George I'm fine stop fussing and he says I'll stop fussing when you stop scaring me and honestly it's the most adorable thing watching my 62 year old father hover over my mother like a worried teenager
+    expected_memory_stores:
+      - "George hovering over Vivian"
+      - "bringing tea and blankets"
+      - "George 62 years old"
+      - "adorable dynamic"
+    expected_triples:
+      - ["George", "hovering_over", "Vivian with tea and blankets"]
+      - ["George", "age", "62 years old"]
+      - ["user", "has_emotion", "tender"]
+    expected_adaptation:
+      emotion_detected: "tender"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Sunday 3:00 PM"
+    user_input: |
+      went grocery shopping for my parents today and stocked up on heart healthy foods like salmon and leafy greens and nuts and whole grains and Mom was like what is all this and I said it's your new diet and she said I'm Chinese Maya I'm not eating kale and I said fine but you're eating the salmon
+    expected_memory_stores:
+      - "Maya grocery shopping"
+      - "heart healthy foods"
+      - "salmon leafy greens nuts whole grains"
+      - "Vivian resistant to diet change"
+      - "compromise on salmon"
+    expected_triples:
+      - ["user", "bought", "heart healthy foods for parents"]
+      - ["Vivian", "resistant_to", "kale and diet change"]
+      - ["Vivian", "agreed_to", "eating salmon"]
+    expected_adaptation:
+      emotion_detected: "determined humor"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 10:00 AM"
+    user_input: |
+      FaceTimed Julian this morning and Kobe was going crazy when he heard my voice through the phone like jumping and barking and Julian held the phone up to him and Kobe licked the screen which was gross but also I miss my dog so much oh also Julian said work is going great Kevin asked about Mom and sent flowers which is so Kevin
+    expected_memory_stores:
+      - "FaceTime with Julian and Kobe"
+      - "Kobe misses Maya"
+      - "Kevin sent flowers for Vivian"
+      - "Julian's work going well"
+    expected_triples:
+      - ["user", "FaceTimed", "Julian and Kobe"]
+      - ["Kobe", "misses", "user"]
+      - ["Kevin", "sent_flowers_for", "Vivian"]
+    expected_adaptation:
+      emotion_detected: "homesick warm"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      Mom took a short walk around the block today with Dad and me and she did fine no chest pains no dizziness from the metoprolol which is progress the dizziness seems to have faded and she said she felt good getting fresh air Clara called and was happy to hear Mom is moving around
+    expected_memory_stores:
+      - "Vivian walked around block"
+      - "no chest pains"
+      - "dizziness from metoprolol faded"
+      - "feeling good"
+      - "Clara updated"
+    expected_adaptation:
+      emotion_detected: "encouraged"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      had a weird moment today where I was working on my laptop from my parents' kitchen because Priya said I could work remote and Mom came in and sat with me and said Maya I'm sorry for scaring you and I said Mom it's not your fault and she said I know but I saw your face in the hospital and I never want you to look like that again and we both cried
+    expected_memory_stores:
+      - "Maya working remote"
+      - "Vivian apologized"
+      - "emotional moment"
+      - "both cried"
+      - "Vivian saw Maya's fear"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      Dad pulled me aside and said Maya I want to thank you for being here it means more than you know and he said your mother acts tough but she was scared too she just won't show it and I said I know Dad that's where I get it from and he laughed and said you get everything from your mother
+    expected_memory_stores:
+      - "George thanked Maya"
+      - "Vivian was scared"
+      - "Vivian acts tough"
+      - "Maya like her mother"
+    expected_adaptation:
+      emotion_detected: "poignant"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 8:00 AM"
+    user_input: |
+      okay so the dizziness actually came back pretty bad yesterday evening and Mom almost fell getting up from the couch and Clara said that's a known side effect of metoprolol especially in some patients and she thinks we should tell Dr. Nair about it at the follow up or maybe call her office sooner because Mom shouldn't be at risk of falling
+    expected_memory_stores:
+      - "dizziness returned worse"
+      - "Vivian almost fell"
+      - "metoprolol side effect"
+      - "Clara concerned about falls"
+      - "need to contact Dr. Nair"
+    expected_adaptation:
+      emotion_detected: "worried again"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 2:00 PM"
+    user_input: |
+      called Dr. Nair's office and they said bring her in tomorrow for a quick check and they might adjust the medication and honestly I was planning to fly home Monday but maybe I should stay a few more days no actually Clara said she'll handle it from here she lives 20 minutes away and she's a nurse and she practically ordered me to go home and kiss my dog and plan my wedding
+    expected_memory_stores:
+      - "Dr. Nair appointment tomorrow"
+      - "medication adjustment possible"
+      - "Maya considering staying longer"
+      - "Clara taking over care"
+      - "Clara ordered Maya home"
+      - "Clara lives 20 minutes away"
+    expected_adaptation:
+      emotion_detected: "conflicted"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How long is Maya staying in Sacramento?"
+    expected_contains: ["week"]
+  - question: "Is Vivian having side effects from metoprolol?"
+    expected_contains: ["dizziness", "almost fell"]
+  - question: "Who will monitor Vivian after Maya leaves?"
+    expected_contains: ["Clara"]
+  - question: "How far does Clara live from their parents?"
+    expected_contains: ["20 minutes"]
+  - question: "Has Vivian been walking?"
+    expected_contains: ["yes", "around the block"]
+  - question: "Is Maya working remotely?"
+    expected_contains: ["yes", "laptop", "remote"]
+  - question: "What diet changes is Maya pushing for Vivian?"
+    expected_contains: ["heart healthy", "salmon"]
+  - question: "What did Kevin Park do for Vivian?"
+    expected_contains: ["sent flowers"]
+  - question: "Is there a medication appointment scheduled?"
+    expected_contains: ["tomorrow", "Dr. Nair"]
+  - question: "How is George handling the situation?"
+    expected_contains: ["hovering", "worried", "caring"]

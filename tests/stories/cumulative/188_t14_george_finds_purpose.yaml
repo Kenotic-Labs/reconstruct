@@ -1,0 +1,184 @@
+story_id: 188
+story_name: "George Finds Purpose"
+category: "Life Events"
+description: |
+  George fully transitions from retired auto mechanic to active
+  woodworker. Purpose restored. Tests tracking emotional recovery
+  arc and new identity formation.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      so the woodworking show was this weekend and Dad entered the bookshelf and the side table and guess what he won third place for the side table in the novice category and he was like it's only third place but Bill was like George you've been doing this for two months and you placed against people who've been doing it for years
+    expected_memory_stores:
+      - "woodworking show"
+      - "third place side table"
+      - "novice category"
+      - "two months experience"
+      - "Bill proud"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      a woman at the woodworking show asked Dad if he does custom work because she wants a dining table made and Dad was like um I'm not sure I'm good enough for that and she said I just saw your side table sir you're good enough and she left her number and Dad came home and told Mom someone wants to pay me to make furniture and Mom said well I'm not surprised
+    expected_memory_stores:
+      - "custom dining table request"
+      - "woman from show"
+      - "George unsure"
+      - "potential paying work"
+      - "Vivian not surprised"
+    expected_adaptation:
+      emotion_detected: "pleased"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      I told Dad to do the custom table he should absolutely take the commission and he said but Maya I don't even know how to price furniture and I said Dad you ran a business for 40 years you know how to price things materials plus labor plus margin just like auto repair and he said huh yeah I guess it is the same
+    expected_memory_stores:
+      - "Maya encourages commission"
+      - "George doesn't know pricing"
+      - "Maya compares to auto repair pricing"
+      - "materials labor margin"
+      - "same business logic"
+    expected_adaptation:
+      emotion_detected: "encouraging"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 8:00 PM"
+    user_input: |
+      Dad quoted the dining table at $1200 for materials and labor and the woman said yes immediately and Dad called me and said Maya I just got my first woodworking client and he sounded like a kid on Christmas and I said Dad this is amazing and he said don't tell your mother how much they're paying me she'll want me to work more
+    expected_memory_stores:
+      - "dining table commission $1200"
+      - "first woodworking client"
+      - "George excited"
+      - "doesn't want Vivian to know price"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 7:00 PM"
+    user_input: |
+      Howard and Dad are talking about maybe starting a little side business together Howard does the electrical work for shop lights and power tools and Dad does the woodworking and they could share a booth at markets and do custom work together and it's like Dad found a whole new career at 62 which is incredible honestly
+    expected_memory_stores:
+      - "George and Howard business idea"
+      - "Howard does electrical"
+      - "George does woodworking"
+      - "market booths"
+      - "custom work together"
+      - "new career at 62"
+    expected_adaptation:
+      emotion_detected: "amazed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:00 AM"
+    user_input: |
+      Frank DeLuca called Dad to ask about some stuff at the shop and Dad helped him over the phone and then Frank said George the shop is doing great Tony's running things smoothly and your customers keep asking about you and Dad said tell them I'm building furniture now and they can find me in my garage which is so George
+    expected_memory_stores:
+      - "Frank called George"
+      - "shop doing well under Frank"
+      - "Tony managing smoothly"
+      - "customers miss George"
+      - "George redirecting to woodworking"
+    expected_adaptation:
+      emotion_detected: "closure"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Monday 7:00 PM"
+    user_input: |
+      Clara told me she went over and Dad was showing her his workshop setup he's got it all organized now tools on pegboard a proper workbench the lathe in the corner and he said Clara this is my new shop and Clara said it actually made her tear up because he looked like himself again like the Dad we grew up with the one who's always building something
+    expected_memory_stores:
+      - "workshop organized"
+      - "pegboard workbench lathe"
+      - "George calls it his new shop"
+      - "Clara teared up"
+      - "George looks like himself again"
+    expected_adaptation:
+      emotion_detected: "poignant"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      Dad's routine now is up at 6 coffee with Mom walk around the block woodworking from 8 to noon lunch break then either more woodworking or class with Bill or hanging out with Howard and then dinner with Mom and TV and honestly it's a better routine than the shop was because he's not exhausted and his body doesn't hurt as much
+    expected_memory_stores:
+      - "George's new routine"
+      - "up at 6 coffee walk woodwork"
+      - "less exhausting than auto repair"
+      - "body doesn't hurt as much"
+      - "balanced schedule"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 8:00 PM"
+    user_input: |
+      Mom said something beautiful on the phone tonight she said Maya your father retired from fixing cars but he didn't retire from being George Chen he just found a new way to be himself and I said Mom that's really profound and she said I know I've been married to the man for 32 years I know him better than he knows himself
+    expected_memory_stores:
+      - "Vivian's insight about George"
+      - "retired from cars not from being himself"
+      - "new way to be himself"
+      - "32 years of marriage"
+      - "Vivian knows George deeply"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 9:00 AM"
+    user_input: |
+      so looking at it all Dad sold the shop for $340K started woodworking went from depressed to thriving in like a month won a prize at a show got his first commission is maybe starting a business with Howard and is building my wedding arch and honestly the retirement chapter might end up being the best chapter of his life
+    expected_memory_stores:
+      - "George's arc summary"
+      - "sold shop $340K"
+      - "depression to thriving"
+      - "show prize"
+      - "first commission"
+      - "business with Howard"
+      - "wedding arch"
+      - "best chapter"
+    expected_adaptation:
+      emotion_detected: "hopeful grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Did George win anything at the woodworking show?"
+    expected_contains: ["third place", "side table"]
+  - question: "Has George gotten any paid woodworking commissions?"
+    expected_contains: ["yes", "dining table", "1200"]
+  - question: "Who might George start a business with?"
+    expected_contains: ["Howard"]
+  - question: "What is George's daily routine now?"
+    expected_contains: ["6am", "walk", "woodwork"]
+  - question: "How is the auto shop doing under Frank?"
+    expected_contains: ["great", "well", "Tony"]
+  - question: "What did Vivian say about George's retirement?"
+    expected_contains: ["didn't retire from being himself"]
+  - question: "How did George's emotional state change after starting woodworking?"
+    expected_contains: ["depressed to thriving"]
+  - question: "What is George's workshop setup like?"
+    expected_contains: ["garage", "pegboard", "workbench", "lathe"]
+  - question: "How much did George charge for his first commission?"
+    expected_contains: ["1200"]
+  - question: "Is George still connected to the auto shop?"
+    expected_contains: ["Frank calls", "helps"]

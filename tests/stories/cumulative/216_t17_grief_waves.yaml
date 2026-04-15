@@ -1,0 +1,170 @@
+story_id: 216
+story_name: "Grief Waves Hit Randomly"
+category: "Family"
+description: |
+  Tests system tracking grief that manifests unpredictably in daily life. Maya experiences
+  random triggers. Verifies emotional state persistence and grief pattern detection.
+duration_simulated: "5 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00 AM"
+    user_input: |
+      back at work today first day back since grandpa's funeral and I was fine fine fine and then someone in the break room was eating congee they brought from home and the smell hit me and I had to go to the bathroom and cry for ten minutes
+    expected_memory_stores:
+      - "back at work"
+      - "congee trigger"
+      - "grief wave"
+      - "cried in bathroom"
+    expected_adaptation:
+      emotion_detected: "grief"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 5:00 PM"
+    user_input: |
+      was fine the rest of the day mostly just numb I guess and then driving home I saw an old man crossing the street slowly and he was wearing a hat like grandpa's and I just sat at the green light until someone honked
+    expected_memory_stores:
+      - "old man trigger"
+      - "hat like grandpa's"
+      - "sat at green light"
+      - "numb"
+    expected_adaptation:
+      emotion_detected: "grief"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      Julian keeps asking if I'm ok and I keep saying I'm fine but I'm not fine I just don't know how to explain what grief feels like it's not constant it's like waves it hits you when you're not expecting it and then recedes and you think you're ok and then BAM
+    expected_memory_stores:
+      - "Julian checking in"
+      - "saying fine but not"
+      - "grief waves metaphor"
+      - "unpredictable"
+    expected_adaptation:
+      emotion_detected: "struggling"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 12:00 PM"
+    user_input: |
+      I was writing code today and I looked down at the watch on my wrist the Seiko from grandpa and I just stared at it for like five minutes watching the second hand move and thinking about how time keeps going and he's not in it anymore and that messed me up
+    expected_memory_stores:
+      - "watch trigger"
+      - "Seiko"
+      - "staring at time"
+      - "grandpa not in time anymore"
+    expected_adaptation:
+      emotion_detected: "melancholic"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 8:00 PM"
+    user_input: |
+      Clara called to check on me and she said she's having the same thing like random triggers and she was at the hospital and an elderly patient reminded her of grandpa and she had to step out of the room and she said grief doesn't have a schedule
+    expected_memory_stores:
+      - "Clara same experience"
+      - "elderly patient trigger"
+      - "grief doesn't have a schedule"
+      - "sisters bonding over grief"
+    expected_adaptation:
+      emotion_detected: "understood"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:00 AM"
+    user_input: |
+      what did grandpa's watch engraving say I want to remember it exactly
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 2:00 PM"
+    user_input: |
+      went to the bookstore and saw a book about Chinese engineering history and I bought it and started reading it and there's a chapter about the bridges in Hubei that grandpa talked about and seeing it in print made it real like his stories were REAL HISTORY
+    expected_memory_stores:
+      - "bought engineering book"
+      - "Chinese engineering history"
+      - "Hubei bridges"
+      - "grandpa's stories validated"
+    expected_adaptation:
+      emotion_detected: "awed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 6:00 PM"
+    user_input: |
+      made congee tonight on purpose like I decided to face it and I used the recipe grandpa taught my dad and my dad texted me the steps and I cried while making it but I ate it and it was good and it felt like grandpa was there
+    expected_memory_stores:
+      - "made congee"
+      - "grandpa's recipe"
+      - "George texted steps"
+      - "cried while cooking"
+      - "felt grandpa's presence"
+    expected_adaptation:
+      emotion_detected: "bittersweet"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 9:00 AM"
+    user_input: |
+      Julian said maybe we should do something to honor grandpa at the wedding like a moment of silence or his photo at the ceremony and I immediately started crying but like good tears not sad tears and I said yes that's perfect
+    expected_memory_stores:
+      - "wedding tribute idea"
+      - "moment of silence"
+      - "photo at ceremony"
+      - "good tears"
+      - "Julian suggested"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 7:00 PM"
+    user_input: |
+      today was the first day I didn't have a grief wave and I don't know if that means I'm healing or just getting numb but Julian said healing isn't linear and I think he's right and I touched the watch and said goodnight grandpa like I do every night now before bed
+    expected_memory_stores:
+      - "no grief wave today"
+      - "healing vs numb"
+      - "Julian healing isn't linear"
+      - "goodnight grandpa ritual"
+      - "nightly watch routine"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What triggers Maya's grief waves?"
+    expected_contains: ["congee", "old man", "watch"]
+  - question: "How does Maya describe grief?"
+    expected_contains: ["waves", "unpredictable"]
+  - question: "Does Clara experience similar grief triggers?"
+    expected_contains: ["yes", "elderly patient"]
+  - question: "What new ritual does Maya have?"
+    expected_contains: ["goodnight grandpa", "watch"]
+  - question: "What book did Maya buy?"
+    expected_contains: ["Chinese engineering", "history"]
+  - question: "What did Maya cook to face her grief?"
+    expected_contains: ["congee"]
+  - question: "What wedding tribute did Julian suggest?"
+    expected_contains: ["moment of silence", "photo"]
+  - question: "What did Clara say about grief?"
+    expected_contains: ["doesn't have a schedule"]
+  - question: "What did Julian say about healing?"
+    expected_contains: ["not linear"]
+  - question: "What watch does Maya wear?"
+    expected_contains: ["Seiko", "grandpa's"]

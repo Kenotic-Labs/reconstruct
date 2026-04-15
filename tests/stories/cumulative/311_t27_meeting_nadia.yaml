@@ -1,0 +1,173 @@
+story_id: 311
+story_name: "Meeting Nadia at the Climbing Gym"
+category: "Friendships"
+description: |
+  Tests memory of Maya meeting Nadia Osei at Portland Rock Gym. Both are
+  beginners. Initial connection through shared incompetence and laughter.
+  Verifies system captures new character introduction and context.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00 AM"
+    user_input: |
+      ok so Julian got us both memberships at Portland Rock Gym for Christmas remember and I finally went today by myself because he had to work and I have literally no idea what I'm doing like I could not figure out the harness
+    expected_memory_stores:
+      - "Portland Rock Gym"
+      - "membership from Julian"
+      - "Christmas gift"
+      - "went alone"
+      - "can't figure out harness"
+    expected_adaptation:
+      emotion_detected: "embarrassed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:30 AM"
+    user_input: |
+      so I was struggling with the harness and this woman next to me was like I think it goes the other way and I looked at her and she was also struggling with hers and we both just started laughing and she said hi I'm Nadia and I said I'm Maya and neither of us know what we're doing
+    expected_memory_stores:
+      - "Nadia Osei"
+      - "met at climbing gym"
+      - "both struggling with harness"
+      - "laughing together"
+      - "both beginners"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:30 AM"
+    user_input: |
+      Nadia and I did the beginner wall together and we were both terrible like she made it about halfway up and I made it maybe a third and the instructor this guy Kyle was being super patient with us and Nadia kept making me laugh because she was narrating her climb like a nature documentary
+    expected_memory_stores:
+      - "beginner wall"
+      - "both terrible"
+      - "instructor Kyle"
+      - "Nadia funny"
+      - "nature documentary narration"
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 12:30 PM"
+    user_input: |
+      after climbing Nadia was like do you wanna grab coffee and I was like absolutely because my arms are dead and we went to this place called Upper Left Roasters that's near the gym and she got an oat milk latte and I got a cortado
+    expected_memory_stores:
+      - "coffee after climbing"
+      - "Upper Left Roasters"
+      - "Nadia oat milk latte"
+      - "Maya cortado"
+    expected_adaptation:
+      emotion_detected: "open"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 1:00 PM"
+    user_input: |
+      so Nadia is 31 she's a graphic designer at some agency downtown I forget the name and she just moved to the Sellwood neighborhood like three months ago from Chicago and she doesn't really know anyone here yet
+    expected_memory_stores:
+      - "Nadia 31"
+      - "graphic designer"
+      - "agency downtown"
+      - "Sellwood neighborhood"
+      - "moved from Chicago"
+      - "three months ago"
+      - "doesn't know anyone"
+    expected_adaptation:
+      emotion_detected: "interested"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 1:30 PM"
+    user_input: |
+      we were talking about books because she saw the Becky Chambers novel in my bag The Long Way to a Small Angry Planet and she was like oh my god I love that book and we ended up geeking out about sci fi for like 20 minutes
+    expected_memory_stores:
+      - "Becky Chambers"
+      - "Long Way to a Small Angry Planet"
+      - "both love sci fi"
+      - "talked for 20 minutes"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 2:00 PM"
+    user_input: |
+      she also recommended this book by NK Jemisin called um The Fifth Season I think and she said it changed her life and I was like ok sold I'm buying it today and she was like no wait I'll lend you my copy because it has all my annotations
+    expected_memory_stores:
+      - "NK Jemisin"
+      - "The Fifth Season"
+      - "Nadia lending copy"
+      - "annotations"
+    expected_adaptation:
+      emotion_detected: "bonding"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 3:00 PM"
+    user_input: |
+      where did Nadia move to Portland from
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 5:00 PM"
+    user_input: |
+      we exchanged numbers and she texted me already like an hour ago saying today was the most fun she's had since moving to Portland and honestly same because with Jenny gone I've been missing having a close girlfriend to just do stuff with
+    expected_memory_stores:
+      - "exchanged numbers"
+      - "Nadia texted"
+      - "most fun since moving"
+      - "filling Jenny void"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 8:00 PM"
+    user_input: |
+      told Julian about Nadia and he was like see I told you going to the climbing gym would be good for you and I was like ok fine you were right again and he wants to meet her sometime and I said yeah maybe we'll all climb together next weekend
+    expected_memory_stores:
+      - "told Julian"
+      - "Julian pleased"
+      - "climb together next weekend"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where did Maya meet Nadia?"
+    expected_contains: ["Portland Rock Gym", "climbing gym"]
+  - question: "What does Nadia do for work?"
+    expected_contains: ["graphic designer"]
+  - question: "Where did Nadia move from?"
+    expected_contains: ["Chicago"]
+  - question: "What neighborhood does Nadia live in?"
+    expected_contains: ["Sellwood"]
+  - question: "What book do Maya and Nadia both love?"
+    expected_contains: ["Long Way to a Small Angry Planet", "Becky Chambers"]
+  - question: "What book did Nadia recommend to Maya?"
+    expected_contains: ["Fifth Season", "NK Jemisin"]
+  - question: "Where did they get coffee after climbing?"
+    expected_contains: ["Upper Left Roasters"]
+  - question: "How old is Nadia?"
+    expected_contains: ["31"]
+  - question: "Why is Maya open to a new friendship?"
+    expected_contains: ["Jenny", "moved", "gone"]
+  - question: "What does Nadia drink at coffee shops?"
+    expected_contains: ["oat milk latte"]

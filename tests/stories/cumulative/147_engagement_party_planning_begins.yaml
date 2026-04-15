@@ -1,0 +1,218 @@
+story_id: 147
+story_name: "Engagement Party Planning Begins"
+category: "Life Events"
+description: |
+  Tests whether the system captures the early engagement party planning, the guest
+  list negotiations, venue considerations, and the clash of planning styles between
+  Maya and Julian.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00pm"
+    user_input: |
+      so Julian's mom called tonight and she wants to throw us an engagement party. like a real one with invitations and catering and everything. Julian's dad offered to help pay for it which is really generous. they're thinking about coming out from Denver for a long weekend to help plan
+    expected_memory_stores:
+      - "engagement party"
+      - "Julian's mom organizing"
+      - "Julian's dad paying"
+      - "Denver"
+      - "invitations catering"
+      - "long weekend visit"
+    expected_triples:
+      - ["Julian", "mom_organizing", "engagement party"]
+      - ["Julian", "dad_offered", "help pay for party"]
+      - ["Julian", "parents_visiting_from", "Denver"]
+      - ["user", "has_emotion", "grateful"]
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 10:00am"
+    user_input: |
+      my mom wants to help plan too obviously and I can already see the two moms butting heads. Julian's mom is very organized and formal and my mom is more like let's just have a big potluck in the backyard. the culture clash is going to be something
+    expected_memory_stores:
+      - "both moms involved"
+      - "Julian's mom formal"
+      - "Maya's mom casual"
+      - "potluck vs formal"
+      - "culture clash"
+    expected_triples:
+      - ["Julian", "mom_style", "organized and formal"]
+      - ["user", "mom_style", "casual potluck backyard"]
+      - ["user", "anticipates", "culture clash between moms"]
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 6:00pm"
+    user_input: |
+      started the guest list and it's already getting out of hand. Julian wants to invite like 60 people and I was thinking more like 30. he has a huge extended family and a big friend group from art school. I have work people, Clara, and like 5 friends from college
+    expected_memory_stores:
+      - "guest list"
+      - "Julian wants 60"
+      - "Maya wants 30"
+      - "Julian big family"
+      - "art school friends"
+      - "Maya smaller circle"
+    expected_triples:
+      - ["Julian", "wants_guest_count", "60 people"]
+      - ["user", "wants_guest_count", "30 people"]
+      - ["Julian", "has_large", "extended family and art school friends"]
+      - ["user", "has_emotion", "overwhelmed"]
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 3:00pm"
+    user_input: |
+      Aisha goes can I come to the engagement party and I said of course you're invited. Derek and Priya too. and Rachel Kim and Rachel Ford. and Sam. ok my work list is growing. Julian said we should invite Marcus obviously and his girlfriend and some people from the arts collective
+    expected_memory_stores:
+      - "work guests"
+      - "Aisha Derek Priya"
+      - "Rachel Kim Rachel Ford"
+      - "Sam"
+      - "Marcus and girlfriend"
+      - "arts collective people"
+    expected_triples:
+      - ["user", "inviting_from_work", "Aisha Derek Priya Rachel Kim Rachel Ford Sam"]
+      - ["Julian", "inviting", "Marcus and girlfriend and arts collective"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 10:00am"
+    user_input: |
+      looking at venues. Julian wants to rent out a gallery space in Alberta because of course he does. I suggested the backyard of our building since the landlord said it's available for events. gallery is 800 dollars, backyard is free. budget brain is kicking in
+    expected_memory_stores:
+      - "venue options"
+      - "gallery Alberta 800"
+      - "backyard free"
+      - "budget consideration"
+    expected_triples:
+      - ["Julian", "wants_venue", "gallery in Alberta $800"]
+      - ["user", "wants_venue", "backyard of building free"]
+      - ["user", "has_emotion", "practical"]
+    expected_adaptation:
+      emotion_detected: "practical"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 3:00pm"
+    user_input: |
+      how many people does Julian want to invite to the engagement party
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 11:00am"
+    user_input: |
+      Julian made a mood board for the engagement party. like an actual design mood board with color palettes and font options and decoration ideas. he wants it to be a dusty rose and sage green theme. I was like babe it's a party not a brand launch but honestly his vision is beautiful
+    expected_memory_stores:
+      - "mood board"
+      - "color palette"
+      - "dusty rose sage green"
+      - "decoration ideas"
+      - "Julian's vision"
+    expected_triples:
+      - ["Julian", "created", "mood board for engagement party"]
+      - ["Julian", "party_theme", "dusty rose and sage green"]
+      - ["user", "has_emotion", "charmed"]
+    expected_adaptation:
+      emotion_detected: "charmed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 3:00pm"
+    user_input: |
+      compromise on venue: we'll do it in the backyard but Julian gets to decorate it however he wants. free venue plus designer touches. best of both worlds. we settled on a guest list of about 45 people which is between our two numbers
+    expected_memory_stores:
+      - "venue compromise"
+      - "backyard with Julian decor"
+      - "45 guests"
+      - "between both numbers"
+    expected_triples:
+      - ["user", "venue_decided", "backyard with Julian decorating"]
+      - ["user", "guest_count_settled", "45 people"]
+      - ["user", "has_emotion", "satisfied"]
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 10:00am"
+    user_input: |
+      Clara said she'll drive down from Seattle for the party and she's bringing Tyler. Mom and Dad are flying in from LA. Julian's parents from Denver. this is going to be the first time both families meet in person and I'm slightly terrified
+    expected_memory_stores:
+      - "Clara and Tyler from Seattle"
+      - "Mom Dad from LA"
+      - "Julian's parents from Denver"
+      - "first time families meet"
+      - "terrified"
+    expected_triples:
+      - ["Clara", "traveling_from", "Seattle with Tyler"]
+      - ["user", "parents_from", "LA"]
+      - ["user", "anticipates", "first time both families meet"]
+      - ["user", "has_emotion", "nervous"]
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 5:00pm"
+    user_input: |
+      Julian designed the digital invitation tonight. it's gorgeous, this elegant calligraphy with a watercolor border in dusty rose and sage. it says Julian Reeves and Maya Chen invite you to celebrate their engagement. seeing my name next to his on an invitation made it feel so official
+    expected_memory_stores:
+      - "digital invitation"
+      - "calligraphy watercolor"
+      - "dusty rose sage"
+      - "Julian Reeves Maya Chen"
+      - "feels official"
+    expected_triples:
+      - ["Julian", "designed", "digital invitation with calligraphy and watercolor"]
+      - ["Julian", "invitation_names", "Julian Reeves and Maya Chen"]
+      - ["user", "has_emotion", "touched"]
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who is hosting the engagement party?"
+    expected_contains: ["Julian's mom", "parents"]
+  - question: "Where will the engagement party be?"
+    expected_contains: ["backyard"]
+  - question: "How many guests are invited?"
+    expected_contains: ["45"]
+  - question: "What is the party's color theme?"
+    expected_contains: ["dusty rose", "sage green"]
+  - question: "Who designed the invitation?"
+    expected_contains: ["Julian"]
+  - question: "Where are Julian's parents coming from?"
+    expected_contains: ["Denver"]
+  - question: "Where is Maya's family coming from?"
+    expected_contains: ["LA", "Seattle"]
+  - question: "Have the two families met before?"
+    expected_contains: ["no", "first time"]
+  - question: "What was the venue compromise?"
+    expected_contains: ["backyard", "Julian decorate"]
+  - question: "Who from work is invited?"
+    expected_contains: ["Aisha", "Derek", "Priya", "Rachel Kim", "Rachel Ford", "Sam"]

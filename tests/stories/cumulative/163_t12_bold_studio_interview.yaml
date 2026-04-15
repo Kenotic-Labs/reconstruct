@@ -1,0 +1,216 @@
+story_id: 163
+story_name: "Bold Studio Interview"
+category: "Career"
+description: |
+  Julian's in-person interview at Bold Studio. Meets Kevin Park.
+  Tests tracking interview progression, impressions of new people,
+  and emotional state through someone else's experience.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 AM"
+    user_input: |
+      Julian's interview at Bold Studio is today at 10am and he's already changed his outfit three times I'm like babe you're a designer they're gonna judge your work not your shirt but he said first impressions matter Maya and okay fine he's right he settled on this navy blazer with jeans and white sneakers which is very Portland creative professional
+    expected_memory_stores:
+      - "Bold Studio interview today 10am"
+      - "Julian nervous about outfit"
+      - "navy blazer jeans white sneakers"
+    expected_triples:
+      - ["Julian", "has_interview_at", "Bold Studio"]
+      - ["Julian", "has_emotion", "nervous"]
+      - ["Julian", "wearing", "navy blazer jeans white sneakers"]
+    expected_adaptation:
+      emotion_detected: "amused nervousness"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 10:30 AM"
+    user_input: |
+      I can't focus at work I keep checking my phone waiting for Julian to text me after the interview Leon noticed and was like what's going on and I told him about Julian's situation and Leon was really supportive he said Julian's super talented he'll crush it
+    expected_memory_stores:
+      - "Maya distracted at work"
+      - "Leon supportive of Julian"
+    expected_triples:
+      - ["user", "has_emotion", "anxious"]
+      - ["Leon", "supports", "Julian"]
+      - ["user", "waiting_for", "Julian interview result"]
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 12:15 PM"
+    user_input: |
+      JULIAN TEXTED he said it went amazing and Kevin Park is like the coolest boss ever apparently he's this laid back guy who used to run his own studio in Seattle before moving to Portland and he showed Julian around the office and it's this open loft space with like plants everywhere and a dog friendly policy WHICH MEANS KOBE COULD COME TO WORK
+    expected_memory_stores:
+      - "interview went well"
+      - "Kevin Park cool boss"
+      - "Kevin from Seattle"
+      - "ran own studio before"
+      - "open loft office"
+      - "dog friendly"
+      - "Kobe could come to work"
+    expected_triples:
+      - ["Julian", "interviewed_at", "Bold Studio"]
+      - ["Kevin Park", "is_boss_at", "Bold Studio"]
+      - ["Kevin Park", "previously_located_in", "Seattle"]
+      - ["Bold Studio", "has_policy", "dog friendly"]
+      - ["user", "has_emotion", "thrilled"]
+    expected_adaptation:
+      emotion_detected: "thrilled"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 1:00 PM"
+    user_input: |
+      Julian called me on his drive home and said Kevin told him the role is senior graphic designer leading brand projects and he'd have two junior designers reporting to him which is huge because Julian's never managed people before but Kevin said his freelance experience basically IS management because he managed clients and projects alone
+    expected_memory_stores:
+      - "senior graphic designer role"
+      - "leading brand projects"
+      - "two junior designers reporting to Julian"
+      - "first management role"
+      - "Kevin values freelance experience"
+    expected_triples:
+      - ["Julian", "offered_role", "senior graphic designer"]
+      - ["Julian", "would_manage", "two junior designers"]
+      - ["Julian", "has_experience", "never managed people before"]
+      - ["Kevin Park", "values", "Julian freelance experience"]
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 6:00 PM"
+    user_input: |
+      Julian also said there was a design exercise as part of the interview where they gave him a fictional brewery brand and he had 45 minutes to sketch a concept and Kevin said it was one of the best exercises he'd seen and I'm like of COURSE it was Julian is ridiculously talented he just doesn't always believe it
+    expected_memory_stores:
+      - "design exercise in interview"
+      - "fictional brewery brand"
+      - "45 minute sketch"
+      - "Kevin praised it"
+      - "Julian doesn't believe in himself enough"
+    expected_triples:
+      - ["Julian", "completed", "brewery brand design exercise"]
+      - ["Kevin Park", "praised", "Julian design exercise"]
+      - ["Julian", "has_trait", "lacks self-confidence"]
+      - ["user", "has_emotion", "proud"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 8:00 PM"
+    user_input: |
+      we celebrated tonight with tacos from that food cart pod on Hawthorne and Julian was so animated talking about Bold Studio like his eyes were lit up in a way I haven't seen since before the Thornton thing he said the other designers seem cool and they use Figma which he loves and they have a real collaborative culture
+    expected_memory_stores:
+      - "celebration tacos Hawthorne"
+      - "Julian animated"
+      - "Bold Studio uses Figma"
+      - "collaborative culture"
+      - "Julian excited about team"
+    expected_triples:
+      - ["Bold Studio", "uses_tool", "Figma"]
+      - ["Bold Studio", "has_culture", "collaborative"]
+      - ["Julian", "has_emotion", "excited"]
+      - ["user", "celebrated_at", "Hawthorne food cart pod"]
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 9:00 AM"
+    user_input: |
+      Julian's still on a high from yesterday but also anxious because Kevin said they'd let him know by end of week and Julian's like what if they pick someone else and I'm like babe you literally made the creative director say wow during a sketch exercise calm down
+    expected_memory_stores:
+      - "decision by end of week"
+      - "Julian anxious about outcome"
+      - "Maya reassuring"
+    expected_triples:
+      - ["Bold Studio", "decision_timeline", "end of week"]
+      - ["Julian", "has_emotion", "anxious"]
+      - ["user", "reassuring", "Julian"]
+    expected_adaptation:
+      emotion_detected: "cautiously optimistic"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 2:00 PM"
+    user_input: |
+      Jenny texted asking how it went and when I told her she said Julian would be insane not to take it if they offer and she's right honestly like freelance freedom is great but stability is underrated especially when you're getting married in a few months and need to like know your income
+    expected_memory_stores:
+      - "Jenny supports Julian taking job"
+      - "stability over freedom"
+      - "wedding finances"
+    expected_triples:
+      - ["Jenny", "supports", "Julian taking Bold Studio job"]
+      - ["user", "values", "stability for wedding finances"]
+      - ["user", "has_emotion", "pragmatic"]
+    expected_adaptation:
+      emotion_detected: "pragmatic"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 11:00 AM"
+    user_input: |
+      Julian picked up a small freelance gig while waiting to hear back from Bold Studio someone needs a menu designed for their restaurant and it's $500 quick turnaround which is fine keeps him busy and out of his own head oh also Kobe needs his shots reminded me because Julian mentioned the dog friendly office
+    expected_memory_stores:
+      - "small freelance gig menu design $500"
+      - "Julian keeping busy"
+      - "Kobe needs vaccinations"
+    expected_triples:
+      - ["Julian", "took_gig", "menu design $500"]
+      - ["Kobe", "needs", "vaccinations"]
+      - ["Julian", "waiting_for", "Bold Studio response"]
+    expected_adaptation:
+      emotion_detected: "practical"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 5:00 PM"
+    user_input: |
+      still no word from Bold Studio and Julian is checking his email every five minutes I told him watched pots never boil and he said that's not how email works Maya and I said you know what I mean but honestly I'm checking my phone too we're both a mess Kobe is the only calm one in this house
+    expected_memory_stores:
+      - "no word yet from Bold Studio"
+      - "both anxious"
+      - "Julian checking email constantly"
+      - "Kobe calm"
+    expected_triples:
+      - ["Bold Studio", "has_status", "no response yet"]
+      - ["Julian", "has_emotion", "impatient"]
+      - ["user", "has_emotion", "anxious"]
+    expected_adaptation:
+      emotion_detected: "impatient anxiety"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How did Julian's interview at Bold Studio go?"
+    expected_contains: ["well", "amazing", "great"]
+  - question: "Who is Kevin Park?"
+    expected_contains: ["creative director", "Bold Studio"]
+  - question: "What was the interview design exercise about?"
+    expected_contains: ["brewery", "brand", "sketch"]
+  - question: "Would Julian manage anyone at Bold Studio?"
+    expected_contains: ["two junior designers"]
+  - question: "Is Bold Studio dog friendly?"
+    expected_contains: ["yes", "dog friendly"]
+  - question: "When will Julian hear back from Bold Studio?"
+    expected_contains: ["end of week"]
+  - question: "Where was Kevin Park before Bold Studio?"
+    expected_contains: ["Seattle"]
+  - question: "What design tools does Bold Studio use?"
+    expected_contains: ["Figma"]
+  - question: "What was Julian wearing to the interview?"
+    expected_contains: ["navy blazer", "jeans"]
+  - question: "Has Julian ever managed people before?"
+    expected_contains: ["no", "never", "first"]

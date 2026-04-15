@@ -1,0 +1,182 @@
+story_id: 264
+story_name: "The Woodstock Fixer Upper"
+category: "Housing"
+description: |
+  Tests memory of Maya and Julian falling in love with the Woodstock fixer upper despite
+  its problems. Captures the second tour with a contractor, the emotional shift toward
+  embracing the project, and deciding to make an offer.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00 AM"
+    user_input: |
+      at the Woodstock house again with Sarah and Julian brought his contractor buddy Eddie Torres who's been doing renovations in Portland for like 20 years and he's walking around with a flashlight and a clipboard and I'm nervous
+    expected_memory_stores:
+      - "Woodstock house"
+      - "Sarah present"
+      - "Eddie Torres"
+      - "contractor"
+      - "20 years experience"
+      - "clipboard inspection"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:30 AM"
+    user_input: |
+      so Eddie's first take is the structure is actually solid like the framing is good the roof was done maybe 10 years ago and the plumbing is copper which is great but he said the electrical is sketchy like it's old knob and tube in some areas which needs to be replaced
+    expected_memory_stores:
+      - "structure solid"
+      - "good framing"
+      - "roof 10 years old"
+      - "copper plumbing"
+      - "knob and tube electrical"
+      - "electrical needs replacement"
+    expected_adaptation:
+      emotion_detected: "mixed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:00 AM"
+    user_input: |
+      the kitchen is definitely the worst part like I said before it's from 1987 with these awful laminate counters and the cabinets are falling apart but Eddie was like the layout is actually good and with new cabinets and counters this could be a great kitchen for like 15K
+    expected_memory_stores:
+      - "1987 kitchen"
+      - "laminate counters"
+      - "cabinets falling apart"
+      - "good layout"
+      - "kitchen reno $15K"
+      - "Eddie estimate"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 11:30 AM"
+    user_input: |
+      Julian is walking through the house and I can see him mentally decorating it like he's doing that thing where he squints and tilts his head and he was like the living room has incredible bones and that built-in bookshelf is original craftsman and I was like oh no he's falling in love with it
+    expected_memory_stores:
+      - "Julian falling for house"
+      - "living room bones"
+      - "built-in bookshelf"
+      - "original craftsman"
+      - "Julian decorating mentally"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 12:00 PM"
+    user_input: |
+      the yard though oh my god Kobe would LOSE his mind it's huge like easily 5000 square feet with a big old oak tree and a falling down shed that Eddie said could be torn down or rebuilt and there's even a side gate which is perfect for a dog
+    expected_memory_stores:
+      - "huge yard"
+      - "5000 square feet"
+      - "oak tree"
+      - "falling down shed"
+      - "side gate"
+      - "perfect for Kobe"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 1:00 PM"
+    user_input: |
+      Eddie's total estimate for everything the house needs is about 35K which includes the kitchen, rewiring, bathroom updates, and refinishing the floors and he said if we do some of the demo ourselves we could save maybe 5K and Julian was like we can totally do demo
+    expected_memory_stores:
+      - "total renovation $35K"
+      - "kitchen rewiring bathroom floors"
+      - "save $5K with DIY demo"
+      - "Julian wants to do demo"
+    expected_adaptation:
+      emotion_detected: "calculating"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Sarah pulled us aside and was like look this house is listed at 435 and it's been on the market for five weeks now with no offers the sellers are probably getting anxious and she thinks we could offer 415 and see what happens or go 425 if we want to be safe
+    expected_memory_stores:
+      - "listed $435K"
+      - "five weeks no offers"
+      - "sellers anxious"
+      - "Sarah suggests $415-425K"
+    expected_adaptation:
+      emotion_detected: "strategic"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 6:00 PM"
+    user_input: |
+      Julian and I talked it over at dinner and I think we want to offer 425 with a full inspection contingency and Sarah said she'd write it up tonight and we could submit tomorrow morning and I'm like is this real are we actually buying a house
+    expected_memory_stores:
+      - "offer $425K"
+      - "inspection contingency"
+      - "Sarah writing offer"
+      - "submit tomorrow"
+      - "disbelief"
+    expected_adaptation:
+      emotion_detected: "surreal"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 9:00 PM"
+    user_input: |
+      wait hold on I need to reconsider our offer amount because if Eddie said renovations are 35K and the house is listed at 435 then we're really paying 470K total and our budget was 500 so actually maybe we should offer a little less like 415 to leave more room for renovations going over budget
+    expected_memory_stores:
+      - "recalculating offer"
+      - "total cost 470K"
+      - "change to $415K"
+      - "renovation budget buffer"
+    expected_adaptation:
+      emotion_detected: "analytical"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 AM"
+    user_input: |
+      called Sarah and changed our offer to 415K she said that's aggressive but not unreasonable given how long it's been listed and she's submitting it this morning so now we wait. again. Julian is stress baking cookies and Kobe is very happy about the cookie situation
+    expected_memory_stores:
+      - "offer changed to $415K"
+      - "Sarah submitting"
+      - "waiting"
+      - "Julian stress baking"
+      - "Kobe happy"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How much did Maya and Julian offer on the Woodstock house?"
+    expected_contains: ["415"]
+  - question: "Who inspected the house for renovation scope?"
+    expected_contains: ["Eddie Torres"]
+  - question: "What is the estimated renovation cost?"
+    expected_contains: ["35"]
+  - question: "What is wrong with the electrical in the Woodstock house?"
+    expected_contains: ["knob and tube"]
+  - question: "How big is the yard?"
+    expected_contains: ["5000"]
+  - question: "How long has the Woodstock house been on the market?"
+    expected_contains: ["five weeks"]
+  - question: "What is the house listed at?"
+    expected_contains: ["435"]
+  - question: "What original feature does the living room have?"
+    expected_contains: ["built-in bookshelf", "craftsman"]
+  - question: "What decade is the kitchen from?"
+    expected_contains: ["1987", "80s"]
+  - question: "What is the condition of the roof?"
+    expected_contains: ["10 years"]

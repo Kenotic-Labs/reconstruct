@@ -1,0 +1,171 @@
+story_id: 110
+story_name: "Maya Realizes She Loves Teaching"
+category: "Career"
+description: |
+  Tests whether the system captures Maya's identity-level realization about loving teaching,
+  connects it back to the full mentoring arc, and tracks the seeds of career direction
+  change. Cross-thread setup for career pivot thread.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00am"
+    user_input: |
+      been thinking a lot about the whole Aisha experience this weekend. like Julian and I went to the farmers market this morning and I couldn't stop talking about it. about how watching her grow felt more meaningful than any feature I've shipped
+    expected_memory_stores:
+      - "reflection"
+      - "farmers market"
+      - "more meaningful than features"
+      - "Aisha growth"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 1:00pm"
+    user_input: |
+      Julian goes ok so basically you wanna be a teacher and I was like what?? no I'm an engineer. but then he listed all the things I liked about mentoring and like... making the curriculum, explaining concepts, watching the lightbulb moments. that IS teaching
+    expected_memory_stores:
+      - "Julian observation"
+      - "teacher comparison"
+      - "curriculum"
+      - "explaining concepts"
+      - "lightbulb moments"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 4:00pm"
+    user_input: |
+      took Kobe to Sellwood Park and just walked and thought about it. like I love code obviously but the part of code I love most is making it understandable to other people? my best PRs are the ones with really good documentation and comments
+    expected_memory_stores:
+      - "Sellwood Park"
+      - "Kobe walk"
+      - "making code understandable"
+      - "documentation"
+      - "self-discovery"
+    expected_adaptation:
+      emotion_detected: "contemplative"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Sunday 11:00am"
+    user_input: |
+      talked to my sister Clara on the phone and she was like Maya you literally used to teach me math homework every night when we were kids and you LOVED it. I forgot about that. she's right though I did love it
+    expected_memory_stores:
+      - "sister Clara"
+      - "childhood teaching"
+      - "math homework"
+      - "pattern recognition"
+    expected_adaptation:
+      emotion_detected: "nostalgic"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Sunday 2:00pm"
+    user_input: |
+      ok so I looked up like tech education roles and there's actually a lot of paths. developer advocacy, technical training, even like internal enablement teams at big companies. I'm not saying I wanna switch careers I'm just... looking
+    expected_memory_stores:
+      - "developer advocacy"
+      - "technical training"
+      - "enablement teams"
+      - "exploring options"
+    expected_adaptation:
+      emotion_detected: "curious"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 5:00pm"
+    user_input: |
+      what's the name of Maya's sister
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 7:00pm"
+    user_input: |
+      therapy with Dr. Tate is on Tuesday and I think I wanna bring this up. like is it possible that I've been in the wrong career track this whole time and I just never had the experience to see it? or is it just a mentoring high
+    expected_memory_stores:
+      - "therapy Tuesday"
+      - "Dr. Tate"
+      - "wrong career track"
+      - "mentoring high"
+      - "uncertainty"
+    expected_adaptation:
+      emotion_detected: "uncertain"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Monday 9:00am"
+    user_input: |
+      got to work and Aisha was already at her desk writing documentation for the notification service. she goes I'm writing it up the way you taught me, clear enough for a new intern to follow. I almost cried at my desk again
+    expected_memory_stores:
+      - "Aisha documenting"
+      - "notification service"
+      - "paying it forward"
+      - "emotional impact"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 12:00pm"
+    user_input: |
+      Sam mentioned in standup that they're thinking about starting a formal mentoring program at Conduit and he asked if I'd be interested in helping design it. I said yes before he even finished the sentence lol
+    expected_memory_stores:
+      - "formal mentoring program"
+      - "Conduit"
+      - "Sam asked Maya"
+      - "immediate yes"
+    expected_adaptation:
+      emotion_detected: "enthusiastic"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Monday 6:00pm"
+    user_input: |
+      told Dr. Tate's receptionist I wanna move my appointment from Tuesday to like as soon as possible because I have a lot to talk about. they moved me to tomorrow at 4pm. I think I'm at a turning point honestly
+    expected_memory_stores:
+      - "therapy moved"
+      - "tomorrow 4pm"
+      - "turning point"
+      - "urgency"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What realization has Maya come to about herself?"
+    expected_contains: ["teaching", "loves", "mentoring"]
+  - question: "What did Julian compare Maya to?"
+    expected_contains: ["teacher"]
+  - question: "What did Clara remind Maya about?"
+    expected_contains: ["math homework", "kids", "teaching"]
+  - question: "What career paths has Maya been researching?"
+    expected_contains: ["developer advocacy", "technical training", "enablement"]
+  - question: "What is Aisha doing that shows Maya's influence?"
+    expected_contains: ["documentation", "notification service"]
+  - question: "What is Sam starting at Conduit?"
+    expected_contains: ["mentoring program"]
+  - question: "When is Maya's therapy appointment now?"
+    expected_contains: ["tomorrow", "4pm"]
+  - question: "Who is Maya's therapist?"
+    expected_contains: ["Dr. Tate", "Helen Tate"]
+  - question: "What part of engineering does Maya enjoy most?"
+    expected_contains: ["understandable", "documentation", "explaining"]
+  - question: "Where did Maya walk Kobe while reflecting?"
+    expected_contains: ["Sellwood Park"]

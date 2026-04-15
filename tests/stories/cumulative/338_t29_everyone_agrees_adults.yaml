@@ -1,0 +1,174 @@
+story_id: 338
+story_name: "Everyone Agrees to Be Adults"
+category: "Friendships"
+description: |
+  Tests memory of the group explicitly establishing ground rules for the
+  future. No more intra-group dating without group discussion. Mature
+  conversations. Verifies system captures group norms and agreements.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 6:00 PM"
+    user_input: |
+      at Lovely's Fifty Fifty for the Round Table and Marcus ordered three pizzas for the table and one of them has anchovies because he's a monster and Jenny is on FaceTime eating what she says is Austin's best pizza which she admits is mid
+    expected_memory_stores:
+      - "Lovely's Fifty Fifty"
+      - "Marcus ordered pizzas"
+      - "anchovies"
+      - "Jenny FaceTime"
+      - "Austin pizza mid"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 7:00 PM"
+    user_input: |
+      I brought it up because someone had to and I said ok can we just acknowledge what happened and agree on some like ground rules going forward and everyone went quiet and Omar said yeah that's fair
+    expected_memory_stores:
+      - "Maya brought it up"
+      - "ground rules"
+      - "everyone quiet"
+      - "Omar agreed"
+    expected_adaptation:
+      emotion_detected: "brave"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 7:15 PM"
+    user_input: |
+      I said rule one if anyone in the group is interested in anyone else in the group maybe like tell the group first so we're not blindsided and Marcus said that's fair and Nadia said yeah and Omar said can I get an exemption and everyone laughed because Omar is the last person who would hook up at dinner
+    expected_memory_stores:
+      - "rule one tell group first"
+      - "Marcus agreed"
+      - "Nadia agreed"
+      - "Omar exemption joke"
+      - "everyone laughed"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 7:30 PM"
+    user_input: |
+      Julian added rule two if a breakup happens no one has to pick sides the group stays neutral and offers both people support and Marcus said yeah I would have appreciated that and he looked at me and I said I know and I'm sorry
+    expected_memory_stores:
+      - "rule two no sides"
+      - "group stays neutral"
+      - "Julian proposed"
+      - "Marcus would have appreciated"
+      - "Maya apologized again"
+    expected_adaptation:
+      emotion_detected: "humble"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 7:45 PM"
+    user_input: |
+      Nadia said rule three no pity and no walking on eggshells she said she doesn't want anyone treating her differently because she's the one who got dumped and Marcus winced at the word dumped and she said what that's what happened and he said yeah fair
+    expected_memory_stores:
+      - "rule three no pity"
+      - "no eggshells"
+      - "Nadia proposed"
+      - "Marcus winced at dumped"
+      - "fair"
+    expected_adaptation:
+      emotion_detected: "direct"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 8:00 PM"
+    user_input: |
+      Jenny from the phone said rule four I should be physically present for at least two dinners a year because she feels like she's watching a reality show through a screen and everyone agreed and she said she'll fly up in the spring and for Maya's wedding obviously
+    expected_memory_stores:
+      - "rule four Jenny present twice a year"
+      - "feels like reality show"
+      - "fly up in spring"
+      - "wedding attendance"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 8:30 PM"
+    user_input: |
+      Omar's rule five was no more mezcal at Round Table because that's what started this mess and Marcus was like hey the mezcal didn't make me do anything and Omar said it definitely didn't help and that was the biggest laugh of the night
+    expected_memory_stores:
+      - "rule five no mezcal"
+      - "Omar proposed"
+      - "mezcal started mess"
+      - "biggest laugh"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 9:00 PM"
+    user_input: |
+      what are the Round Table rules the group agreed on
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 9:30 PM"
+    user_input: |
+      we all clinked glasses at the end and Marcus said to the Round Table and everyone said to the Round Table and Jenny yelled it through the phone speaker and the couple at the next table looked at us like we were crazy and honestly we probably are but in the best way
+    expected_memory_stores:
+      - "clinked glasses"
+      - "to the Round Table"
+      - "Jenny yelled"
+      - "couple looked"
+      - "crazy in best way"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 11:00 PM"
+    user_input: |
+      Julian and I walked home and he put his arm around me and said I'm proud of you for steering the ship and I said I didn't steer it alone and he said yeah but you started the conversation and that's the hardest part and I leaned into him and thought about how lucky I am to have these people
+    expected_memory_stores:
+      - "walked home"
+      - "Julian arm around"
+      - "proud of steering"
+      - "started conversation"
+      - "lucky to have these people"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What rules did the Round Table group establish?"
+    expected_contains: ["tell group", "no sides", "no pity", "Jenny present", "no mezcal"]
+  - question: "Who proposed rule one about telling the group?"
+    expected_contains: ["Maya"]
+  - question: "Who proposed no picking sides?"
+    expected_contains: ["Julian"]
+  - question: "What was Nadia's rule?"
+    expected_contains: ["no pity", "no eggshells"]
+  - question: "What was Omar's rule?"
+    expected_contains: ["no mezcal"]
+  - question: "How often will Jenny attend in person?"
+    expected_contains: ["twice a year"]
+  - question: "What toast did the group make?"
+    expected_contains: ["to the Round Table"]
+  - question: "Where was this dinner?"
+    expected_contains: ["Lovely's Fifty Fifty"]
+  - question: "What did Marcus order with anchovies?"
+    expected_contains: ["pizza"]
+  - question: "How does Maya feel about the group?"
+    expected_contains: ["lucky", "grateful"]

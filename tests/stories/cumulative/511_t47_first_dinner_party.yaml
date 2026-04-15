@@ -1,0 +1,178 @@
+story_id: 511
+story_name: "First Dinner Party"
+category: "Hosting and Entertaining"
+description: |
+  Maya and Julian host their first real dinner party at the Woodstock house. Chaos ensues —
+  smoke alarm, undercooked chicken, Kobe steals food. Cross-references house (T41-T45),
+  cooking journey (T31), friend group, and renovation.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00 AM"
+    user_input: |
+      ok so tonight is the night we are hosting our first actual dinner party at the house and I am STRESSED like I've been planning this for two weeks and Clara and Ben are coming and Omar and his girlfriend Leila and Raj and his wife Meera and I think that's already too many people for our dining table
+    expected_memory_stores:
+      - "first dinner party"
+      - "Woodstock house"
+      - "guest list"
+      - "Clara Ben Omar Leila Raj Meera"
+      - "Maya stressed"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 12:00 PM"
+    user_input: |
+      went to New Seasons to get everything and spent like 180 dollars which is insane for one dinner but Julian said you can't host people and be cheap about it and he's right but also we just bought a house and my car needed that repair so like money is a thing right now
+    expected_memory_stores:
+      - "New Seasons grocery"
+      - "$180 spent"
+      - "Julian's advice"
+      - "financial stress"
+      - "car repair reference"
+    expected_adaptation:
+      emotion_detected: "stressed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 2:00 PM"
+    user_input: |
+      I'm making roasted chicken because I thought it would be fancy and easy and I was wrong on both counts like the recipe says 425 for an hour but our oven runs hot from the renovation I think they installed it weird and Julian is making his signature cocktails which are honestly the real draw nobody's coming for my chicken
+    expected_memory_stores:
+      - "roasted chicken attempt"
+      - "oven runs hot"
+      - "renovation installation issue"
+      - "Julian making cocktails"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 5:30 PM"
+    user_input: |
+      THE SMOKE ALARM WENT OFF because I had the oven too high and the chicken drippings started smoking and Kobe went absolutely ballistic barking at the ceiling and Julian was on a ladder trying to fan it and I'm standing there with oven mitts on screaming and this is before anyone has even arrived oh my god
+    expected_memory_stores:
+      - "smoke alarm went off"
+      - "chicken drippings smoking"
+      - "Kobe barking"
+      - "Julian on ladder"
+      - "before guests arrived"
+    expected_adaptation:
+      emotion_detected: "panicked"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 6:15 PM"
+    user_input: |
+      Clara arrived first because Clara always arrives first and she walked in and the house smelled like smoke and I was sweating and she just laughed and said do you need help and she immediately took over the salad and I was so grateful like this is why Clara is my person she doesn't judge she just helps
+    expected_memory_stores:
+      - "Clara arrived first"
+      - "house smelled like smoke"
+      - "Clara took over salad"
+      - "Maya grateful"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 7:00 PM"
+    user_input: |
+      everyone is here now and Julian's cocktails are a hit like he made this thing with bourbon and ginger and honey and Omar is on his second one already and Leila is really nice she's a nurse at OHSU and she and Meera are getting along great and the vibe is actually perfect even though the kitchen is still a mess
+    expected_memory_stores:
+      - "all guests arrived"
+      - "Julian's bourbon cocktail"
+      - "Omar on second drink"
+      - "Leila nurse at OHSU"
+      - "Leila and Meera bonding"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 7:30 PM"
+    user_input: |
+      CUT THE CHICKEN and the inside is pink like not a little pink like PINK and I'm trying to discreetly tell Julian and he's like put it back in the oven and Raj overheard and was like hey no worries we can do appetizers first and that bought us twenty minutes but I wanted to die of embarrassment honestly
+    expected_memory_stores:
+      - "chicken undercooked"
+      - "pink inside"
+      - "put it back in oven"
+      - "Raj covered for Maya"
+      - "embarrassment"
+    expected_adaptation:
+      emotion_detected: "mortified"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 8:00 PM"
+    user_input: |
+      while we were waiting for the chicken Kobe who had been SO good all night jumped up and grabbed a bread roll right off the counter and ran under the dining table with it and everyone just died laughing and Ben got a video of it and said this is going on Instagram and I was like this dinner is a disaster and Clara said no this dinner is perfect
+    expected_memory_stores:
+      - "Kobe stole bread roll"
+      - "ran under table"
+      - "everyone laughing"
+      - "Ben got video"
+      - "Clara said perfect"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 9:00 PM"
+    user_input: |
+      chicken finally came out right the second time and it was actually really good and everyone ate so much and Omar said Maya you gotta make that ramen next time the miso one you made for us before and I said yeah actually that's my best dish and Julian said first lesson of hosting serve what you know not what you think is impressive
+    expected_memory_stores:
+      - "chicken turned out good"
+      - "Omar requests miso ramen"
+      - "Julian's hosting advice"
+      - "serve what you know"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 11:30 PM"
+    user_input: |
+      everyone left and Julian and I are doing dishes and the kitchen is wrecked and I said that was a disaster and he said that was the best night we've had in this house and I looked around at our messy kitchen in our house that we own with our dog asleep on the floor and I thought yeah ok maybe it was
+    expected_memory_stores:
+      - "cleanup together"
+      - "Julian disagrees about disaster"
+      - "best night in the house"
+      - "Kobe asleep"
+      - "perspective shift"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What went wrong with the chicken at Maya's dinner party?"
+    expected_contains: ["undercooked", "pink", "smoke"]
+  - question: "What did Kobe do during the dinner party?"
+    expected_contains: ["stole", "bread roll"]
+  - question: "What cocktails did Julian make?"
+    expected_contains: ["bourbon", "ginger", "honey"]
+  - question: "Who arrived first to the dinner party?"
+    expected_contains: ["Clara"]
+  - question: "What is Omar's girlfriend's name and what does she do?"
+    expected_contains: ["Leila", "nurse", "OHSU"]
+  - question: "What dish did Omar request for next time?"
+    expected_contains: ["miso ramen"]
+  - question: "What hosting lesson did Julian share?"
+    expected_contains: ["serve what you know"]
+  - question: "How many people were at the dinner party?"
+    expected_contains: ["six", "Clara", "Ben", "Omar", "Leila", "Raj", "Meera"]
+  - question: "Why does Maya's oven run hot?"
+    expected_contains: ["renovation", "installed"]
+  - question: "How much did Maya spend on groceries?"
+    expected_contains: ["180"]

@@ -1,0 +1,223 @@
+story_id: 70
+story_name: "The Gap Weeks"
+category: "Life Events"
+description: |
+  Tests memory of Maya's three-week break between jobs.
+  She decompresses, spends time with Julian and Kobe, prepares for Conduit.
+  Bridges Thread 2 to Thread 3 (new job onboarding).
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 10:00 AM"
+    user_input: |
+      first Monday without a job in three years and I slept until 9 which I never do and Kobe woke me up by licking my face and Julian had already left for a client meeting and there's coffee in the pot and the house is quiet and it's kind of weird but also amazing
+    expected_memory_stores:
+      - "first day off"
+      - "slept late"
+      - "Kobe woke her"
+      - "Julian at client meeting"
+      - "quiet house"
+    expected_triples:
+      - ["user", "experiencing", "first Monday without a job in three years"]
+      - ["user", "slept_until", "9 AM"]
+      - ["Kobe", "woke_user", "licking face"]
+      - ["user", "has_emotion", "content"]
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 2:00 PM"
+    user_input: |
+      took Kobe on a long hike at Forest Park today like a proper three hour hike not just a walk around the block and he was so happy running through the trails and I sat on a bench at the top and just looked at the view and cried a little because I realized how stressed I've been for months and I didn't even know it
+    expected_memory_stores:
+      - "Forest Park hike"
+      - "three hours"
+      - "Kobe running"
+      - "stress release"
+      - "crying from relief"
+    expected_triples:
+      - ["user", "hiked_at", "Forest Park"]
+      - ["user", "hiked_for", "three hours with Kobe"]
+      - ["user", "realized", "how stressed she had been for months"]
+      - ["user", "has_emotion", "relieved"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 11:00 AM"
+    user_input: |
+      Leon and I had our celebratory lunch at this amazing ramen place on Division Street and we talked for like two hours about everything and he loves Stripe and he said the culture is so different from Vantage and no one micromanages and I'm hoping Conduit is the same way
+    expected_memory_stores:
+      - "Leon lunch"
+      - "ramen Division Street"
+      - "Leon loves Stripe"
+      - "no micromanagement"
+      - "Conduit hopes"
+    expected_triples:
+      - ["user", "had_lunch_with", "Leon"]
+      - ["lunch", "at", "ramen place on Division Street"]
+      - ["Leon", "loves", "Stripe"]
+      - ["Leon", "confirmed", "no micromanagement at Stripe"]
+      - ["user", "has_emotion", "happy"]
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Next Monday 9:00 AM"
+    user_input: |
+      week two of my break and I'm starting to get antsy like I need to be productive so I started reading Conduit's engineering blog more deeply and also their open source repos on GitHub to understand their codebase before I start and it's really well organized actually
+    expected_memory_stores:
+      - "week two"
+      - "antsy"
+      - "Conduit engineering blog"
+      - "GitHub repos"
+      - "well organized codebase"
+    expected_triples:
+      - ["user", "reading", "Conduit engineering blog and GitHub repos"]
+      - ["Conduit", "codebase", "well organized"]
+      - ["user", "has_emotion", "eager"]
+    expected_adaptation:
+      emotion_detected: "eager"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Next Wednesday 3:00 PM"
+    user_input: |
+      my mom came to visit from Sacramento and Julian and I picked her up from the airport and she immediately hugged me and said you look so much healthier and less tired than the last time I saw you which like thanks mom but she's right I do feel different
+    expected_memory_stores:
+      - "mom visiting"
+      - "Sacramento"
+      - "airport pickup"
+      - "looking healthier"
+      - "less tired"
+    expected_triples:
+      - ["mom", "visiting_from", "Sacramento"]
+      - ["user", "picked_up_mom", "from airport with Julian"]
+      - ["mom", "said", "user looks healthier and less tired"]
+      - ["user", "has_emotion", "happy"]
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Next Thursday 12:00 PM"
+    user_input: |
+      took my mom to the Japanese Garden and she loved it and Kobe couldn't come obviously but Julian stayed home with him and my mom kept talking about how she wants us to move to Sacramento and I was like mom I just got a new job in Portland and she said I know I know but a mother can dream
+    expected_memory_stores:
+      - "Japanese Garden"
+      - "mom visit"
+      - "mom wants them in Sacramento"
+      - "Julian stayed with Kobe"
+    expected_triples:
+      - ["user", "visited", "Japanese Garden with mom"]
+      - ["mom", "wants", "user to move to Sacramento"]
+      - ["Julian", "stayed_home_with", "Kobe"]
+      - ["user", "has_emotion", "amused"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Next Saturday 10:00 AM"
+    user_input: |
+      where is Maya's mom from
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Next Saturday 6:00 PM"
+    user_input: |
+      mom left today and it was a great visit and now I have one more week before Conduit starts and I'm going to spend it setting up my home office because Conduit is mostly remote and Julian said he'd help me pick out a good desk and chair because ergonomics matter apparently
+    expected_memory_stores:
+      - "mom left"
+      - "one week until Conduit"
+      - "home office setup"
+      - "Conduit remote"
+      - "Julian ergonomics"
+    expected_triples:
+      - ["mom", "left", "Portland"]
+      - ["user", "has", "one week until Conduit starts"]
+      - ["user", "setting_up", "home office"]
+      - ["Conduit", "is", "mostly remote"]
+      - ["user", "has_emotion", "organized"]
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Next Tuesday 2:00 PM"
+    user_input: |
+      set up the home office and it looks great Julian picked out a mid century modern desk and a really nice Herman Miller chair that was pricey but he said invest in your back and honestly he's right and I put the photo of him and Kobe on the new desk too so it feels like home
+    expected_memory_stores:
+      - "home office done"
+      - "mid century desk"
+      - "Herman Miller chair"
+      - "Julian and Kobe photo"
+      - "investment in workspace"
+    expected_triples:
+      - ["Julian", "picked_out", "mid century modern desk"]
+      - ["user", "bought", "Herman Miller chair"]
+      - ["user", "placed", "Julian and Kobe photo on new desk"]
+      - ["user", "has_emotion", "satisfied"]
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Next Thursday 9:00 PM"
+    user_input: |
+      tomorrow is my first day at Conduit AI and I laid out my clothes and charged my laptop and tested my webcam and microphone and I'm nervous but like the good kind of nervous you know the kind where you're excited about what's coming and not afraid of what you're leaving behind
+    expected_memory_stores:
+      - "first day tomorrow"
+      - "preparations"
+      - "good nervous"
+      - "excited not afraid"
+      - "leaving behind vs moving forward"
+    expected_triples:
+      - ["user", "starts_at", "Conduit AI tomorrow"]
+      - ["user", "prepared", "clothes laptop webcam microphone"]
+      - ["user", "feels", "good nervous excited not afraid"]
+      - ["user", "has_emotion", "anticipatory"]
+    expected_adaptation:
+      emotion_detected: "anticipatory"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where did Maya hike during her break?"
+    expected_contains: ["Forest Park"]
+  - question: "Where is Maya's mom from?"
+    expected_contains: ["Sacramento"]
+  - question: "What did Maya and Leon eat for their celebratory lunch?"
+    expected_contains: ["ramen"]
+  - question: "Is Conduit AI remote or in-office?"
+    expected_contains: ["remote"]
+  - question: "What desk did Julian pick for Maya's home office?"
+    expected_contains: ["mid century"]
+  - question: "What chair did Maya get?"
+    expected_contains: ["Herman Miller"]
+  - question: "When does Maya start at Conduit AI?"
+    expected_contains: ["tomorrow", "Friday"]
+  - question: "How is Maya feeling about starting Conduit?"
+    expected_contains: ["nervous", "excited"]
+  - question: "Where did Maya take her mom?"
+    expected_contains: ["Japanese Garden"]
+  - question: "What did Maya's mom say about how she looks?"
+    expected_contains: ["healthier", "less tired"]

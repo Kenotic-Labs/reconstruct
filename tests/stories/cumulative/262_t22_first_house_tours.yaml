@@ -1,0 +1,192 @@
+story_id: 262
+story_name: "First House Tours"
+category: "Housing"
+description: |
+  Tests memory of Maya and Julian's first house tours with Sarah Kimball.
+  Captures their reactions to different properties, the reality shock of the market,
+  and the beginning of understanding what they can and can't afford.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00 AM"
+    user_input: |
+      meeting Sarah at the first house in like 20 minutes it's on SE 42nd and Hawthorne and it's listed at 465K three bed two bath and the photos look amazing Julian's driving and he's weirdly quiet I think he's nervous
+    expected_memory_stores:
+      - "first house"
+      - "SE 42nd and Hawthorne"
+      - "$465K"
+      - "three bed two bath"
+      - "Julian nervous"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 9:45 AM"
+    user_input: |
+      okay so house number one was... not great like the photos were super misleading the kitchen was tiny and dark and there was this weird smell in the basement and the yard was more like a patch of dirt and Julian was like nope before we even got to the second floor
+    expected_memory_stores:
+      - "Hawthorne house disappointing"
+      - "misleading photos"
+      - "tiny kitchen"
+      - "weird basement smell"
+      - "bad yard"
+      - "Julian rejected"
+    expected_adaptation:
+      emotion_detected: "disappointed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:00 AM"
+    user_input: |
+      second house is on Division near 50th and it's 489K and Sarah said it just got listed yesterday so we're early and oh my god this one is SO much better like the living room has these huge windows and the kitchen is open concept and there's a nice fenced yard
+    expected_memory_stores:
+      - "Division house"
+      - "near 50th"
+      - "$489K"
+      - "listed yesterday"
+      - "huge windows"
+      - "open concept kitchen"
+      - "fenced yard"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 11:30 AM"
+    user_input: |
+      but then Sarah told us that this house already has three offers and the listing agent said they expect it to go for at least 530K and I was like that's fifty thousand over asking and she was like yeah welcome to Portland real estate in 2026 and my heart just sank
+    expected_memory_stores:
+      - "three offers already"
+      - "expected $530K"
+      - "$50K over asking"
+      - "market reality"
+      - "Sarah warning"
+    expected_adaptation:
+      emotion_detected: "deflated"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 1:00 PM"
+    user_input: |
+      third house is in Woodstock on SE 47th it's listed at 435K but it's a total fixer upper like the floors are warped and the bathroom tile is cracked and the kitchen is from like 1987 but it has four bedrooms and a huge yard and Julian was like hmm
+    expected_memory_stores:
+      - "Woodstock house"
+      - "SE 47th"
+      - "$435K"
+      - "fixer upper"
+      - "warped floors"
+      - "cracked tile"
+      - "1987 kitchen"
+      - "four bedrooms"
+      - "huge yard"
+    expected_adaptation:
+      emotion_detected: "mixed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 1:30 PM"
+    user_input: |
+      Sarah was like you know this Woodstock house has been on the market for three weeks which in this market means something's wrong or it's priced right and most people are scared of the renovation work but the bones are good and the neighborhood is great
+    expected_memory_stores:
+      - "three weeks on market"
+      - "something wrong"
+      - "renovation needed"
+      - "good bones"
+      - "good neighborhood"
+    expected_adaptation:
+      emotion_detected: "cautious"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 3:00 PM"
+    user_input: |
+      fourth house back in Hawthorne closer to 30th and it was 510K which is over our budget but Sarah said it was worth seeing and it was gorgeous like completely renovated everything modern and Julian was like THIS is the one and I was like babe it's 510 and he was like yeah but look at this kitchen
+    expected_memory_stores:
+      - "Hawthorne house #2"
+      - "near 30th"
+      - "$510K"
+      - "over budget"
+      - "completely renovated"
+      - "Julian loves it"
+      - "too expensive"
+    expected_adaptation:
+      emotion_detected: "torn"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 5:00 PM"
+    user_input: |
+      back home and Julian and I are going through the spreadsheet I made and honestly the Division house is the best value but if it's going 50K over asking we can't compete and the Woodstock fixer upper is in budget but needs so much work and the nice Hawthorne one is too expensive so basically we're stuck
+    expected_memory_stores:
+      - "comparing houses"
+      - "spreadsheet review"
+      - "Division best value"
+      - "can't compete"
+      - "Woodstock needs work"
+      - "Hawthorne too expensive"
+      - "feeling stuck"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 7:00 PM"
+    user_input: |
+      Sarah texted and said she thinks we should put an offer on the Division house anyway even if it goes over asking because sometimes offers fall through and we could get lucky and she suggested we offer 495K with an escalation clause up to 520K
+    expected_memory_stores:
+      - "Sarah advice"
+      - "offer on Division"
+      - "offer $495K"
+      - "escalation clause"
+      - "up to $520K"
+    expected_adaptation:
+      emotion_detected: "uncertain"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 9:30 PM"
+    user_input: |
+      Julian and I talked about it and we're gonna put in the offer on the Division house tomorrow and just see what happens and also we want to go back and look at the Woodstock fixer upper again because Julian's actually warming up to the idea of doing renovations together he was like it could be our project
+    expected_memory_stores:
+      - "offering on Division"
+      - "tomorrow"
+      - "revisit Woodstock"
+      - "Julian open to renovation"
+      - "project together"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How many houses did Maya and Julian tour?"
+    expected_contains: ["four"]
+  - question: "Which house are they putting an offer on?"
+    expected_contains: ["Division"]
+  - question: "What did they offer on the Division house?"
+    expected_contains: ["495"]
+  - question: "What is the escalation clause up to?"
+    expected_contains: ["520"]
+  - question: "Which house was a fixer upper?"
+    expected_contains: ["Woodstock"]
+  - question: "How much is the Woodstock house listed for?"
+    expected_contains: ["435"]
+  - question: "Why was the first Hawthorne house rejected?"
+    expected_contains: ["tiny kitchen", "smell", "misleading"]
+  - question: "How many offers were already on the Division house?"
+    expected_contains: ["three"]
+  - question: "Which house did Julian love that was over budget?"
+    expected_contains: ["Hawthorne", "510"]
+  - question: "Who is their realtor?"
+    expected_contains: ["Sarah Kimball"]

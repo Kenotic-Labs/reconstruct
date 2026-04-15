@@ -1,0 +1,188 @@
+story_id: 489
+story_name: "Tessa Joins Core Friend Group"
+category: "Book Club"
+description: |
+  Tests memory of Tessa Brooks becoming fully integrated into the friend group.
+  Establishes Tessa's origin (food bank through Nadia) to core member.
+  Verifies system tracks evolving social relationships across threads.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 11:00 AM"
+    user_input: |
+      so I was thinking about it and Tessa Brooks has gone from being Nadia's friend from the food bank to like one of MY closest friends and it happened through the tabletop meetup and book club and now we hang out separately too and she texted me this morning just to say hey hope you're having a good weekend and that's like a real friendship thing
+    expected_memory_stores:
+      - "Tessa close friend now"
+      - "food bank origin"
+      - "tabletop and book club"
+      - "hang out separately"
+      - "texted good morning"
+      - "real friendship"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 12:00 PM"
+    user_input: |
+      Tessa came over for coffee and she met Kobe properly for the first time like not just at book club but actually playing with him in the yard and she said she's been thinking about getting a dog and I was like yes do it and she said she's looking at rescue organizations and Julian showed her some photos of golden retrievers and she was like maybe something smaller though
+    expected_memory_stores:
+      - "Tessa coffee visit"
+      - "met Kobe properly"
+      - "playing in yard"
+      - "thinking about dog"
+      - "rescue organizations"
+      - "maybe smaller dog"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 1:30 PM"
+    user_input: |
+      Tessa and I went for a walk around the Woodstock neighborhood and she told me more about her work at the food access nonprofit and how they're expanding to three new neighborhoods and she needs volunteers and I was like I could help sometimes and she was like really and I said yeah of course you're my friend and she got a little emotional
+    expected_memory_stores:
+      - "walked Woodstock"
+      - "food access expanding"
+      - "three new neighborhoods"
+      - "needs volunteers"
+      - "Maya offered to help"
+      - "Tessa emotional"
+    expected_adaptation:
+      emotion_detected: "generous"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 3:00 PM"
+    user_input: |
+      I told Tessa about the guitar and played her Knockin on Heavens Door and she played her ukulele which she brought over and we actually sounded okay together like not good but recognizable and we were laughing and Julian was filming from the doorway again which I've given up fighting honestly at this point he films everything
+    expected_memory_stores:
+      - "played guitar for Tessa"
+      - "Tessa played ukulele"
+      - "sounded okay together"
+      - "laughing"
+      - "Julian filming again"
+      - "given up fighting it"
+    expected_adaptation:
+      emotion_detected: "playful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 4:30 PM"
+    user_input: |
+      Tessa asked about the wedding and I told her about the venue and the timeline and she said she'd love to come if I'm inviting tabletop people and I was like Tessa you're not tabletop people you're FRIEND people and of course you're invited and she got this look on her face like she really needed to hear that and I think she's been lonely honestly
+    expected_memory_stores:
+      - "Tessa asked about wedding"
+      - "venue timeline discussion"
+      - "Tessa invited to wedding"
+      - "not tabletop people friend people"
+      - "Tessa needed to hear that"
+      - "Tessa lonely"
+    expected_adaptation:
+      emotion_detected: "caring"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 5:30 PM"
+    user_input: |
+      we talked about the book club trajectory and Tessa said she thinks The Midnight Library was the best book but the Klara and the Sun discussion was the best meeting and I agreed and she said the themed snacks honestly saved the club because they give people a reason to contribute even if they're not confident in their literary opinions
+    expected_memory_stores:
+      - "book club trajectory"
+      - "Midnight Library best book"
+      - "Klara best meeting"
+      - "themed snacks saved club"
+      - "reason to contribute"
+      - "not confident opinions"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 6:30 PM"
+    user_input: |
+      I almost told Tessa about the wedding song but I stopped myself because the more people who know the higher the chance Julian finds out and Jenny and Nadia are enough for the support team but I did tell Tessa that I'm planning a surprise for Julian at the wedding and she said oh my god what is it and I said you'll find out and she said that's CRUEL Maya
+    expected_memory_stores:
+      - "almost told Tessa"
+      - "stopped herself"
+      - "Jenny Nadia enough"
+      - "mentioned surprise"
+      - "Tessa dying to know"
+      - "that's cruel"
+    expected_adaptation:
+      emotion_detected: "secretive"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 7:00 PM"
+    user_input: |
+      how did Maya and Tessa become friends
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 8:00 PM"
+    user_input: |
+      Tessa left and Julian said he really likes her and he said it's cool to watch your friend group expand like when he met me I basically had Jenny and Clara and now there's Nadia and Omar and Tessa and the tabletop people and the climbing group and he said Portland has been really good for you and he's right it has
+    expected_memory_stores:
+      - "Julian likes Tessa"
+      - "friend group expanded"
+      - "before just Jenny Clara"
+      - "now Nadia Omar Tessa"
+      - "tabletop climbing groups"
+      - "Portland good for Maya"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 9:30 PM"
+    user_input: |
+      I was lying in bed thinking about community and how it's built slowly like you don't wake up one day with a village you build it one climbing session one book club one tabletop meetup one road trip at a time and Tessa went from stranger to essential in like four months and that's magic honestly and Kobe is snoring at the foot of the bed and Julian is reading and this is my root life
+    expected_memory_stores:
+      - "community built slowly"
+      - "not overnight"
+      - "one activity at a time"
+      - "Tessa stranger to essential"
+      - "four months"
+      - "root life"
+      - "Kobe snoring"
+      - "Julian reading"
+    expected_adaptation:
+      emotion_detected: "profound"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How did Maya meet Tessa?"
+    expected_contains: ["Nadia", "food bank", "tabletop"]
+  - question: "What instrument does Tessa play?"
+    expected_contains: ["ukulele"]
+  - question: "Is Tessa invited to the wedding?"
+    expected_contains: ["yes"]
+  - question: "What does Tessa do for work?"
+    expected_contains: ["food access", "nonprofit"]
+  - question: "Does Tessa know about the wedding song?"
+    expected_contains: ["no"]
+  - question: "What kind of dog is Tessa considering?"
+    expected_contains: ["rescue", "smaller"]
+  - question: "What did Tessa say saved the book club?"
+    expected_contains: ["themed snacks"]
+  - question: "How long has Tessa been Maya's friend?"
+    expected_contains: ["four months"]
+  - question: "What did Julian observe about Maya's friend group?"
+    expected_contains: ["expanded", "Portland"]
+  - question: "What does Maya mean by root life?"
+    expected_contains: ["choosing", "here", "Midnight Library"]

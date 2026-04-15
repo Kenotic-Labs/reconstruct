@@ -1,0 +1,176 @@
+story_id: 398
+story_name: "Maya Vindicated"
+category: "Health"
+description: |
+  Tests memory of the family recognizing Maya's health advocacy was justified.
+  Verifies system tracks validation and family gratitude dynamics.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 7:00 PM"
+    user_input: |
+      dad went for his follow up with Dr Ramirez and she said he's all clear the polyp was fully removed with clean margins and he just needs the three year follow up and dad called me and said your doctor is very nice and I was like she's YOUR doctor dad
+    expected_memory_stores:
+      - "follow up appointment"
+      - "all clear"
+      - "clean margins"
+      - "three year follow up"
+      - "George said your doctor"
+      - "she's YOUR doctor"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:00 AM"
+    user_input: |
+      Clara texted the family group chat and said Maya literally saved Dad's life with a Google spreadsheet and everyone reacted with hearts and dad sent a thumbs up which is his maximum emotional output and Tyler said respect Maya
+    expected_memory_stores:
+      - "Clara family chat"
+      - "saved dad's life"
+      - "Google spreadsheet"
+      - "family hearts"
+      - "George thumbs up"
+      - "Tyler respect"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 12:00 PM"
+    user_input: |
+      I told Frank DeLuca's wife at the grocery store about the polyp result and she went home and apparently told Frank and Frank called dad and said maybe I should get one too and dad called me laughing and said you just convinced Frank DeLuca to go to the doctor
+    expected_memory_stores:
+      - "Frank DeLuca's wife"
+      - "Frank convinced"
+      - "Frank getting colonoscopy"
+      - "George laughing"
+      - "ripple effect"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Sunday 11:00 AM"
+    user_input: |
+      Jenny called and said she told her own dad about the polyp situation and he hadn't gotten screened either and now he's making an appointment and she said Maya you're literally a public health campaign by yourself
+    expected_memory_stores:
+      - "Jenny told her dad"
+      - "Jenny's dad not screened"
+      - "making appointment"
+      - "public health campaign"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 6:00 PM"
+    user_input: |
+      I updated the health spreadsheet with dad's results and his next screening date in three years and I set calendar reminders for everyone's next checkups and I added a new column for screening dates so nothing falls through the cracks again
+    expected_memory_stores:
+      - "updated spreadsheet"
+      - "three year screening"
+      - "calendar reminders"
+      - "screening dates column"
+      - "nothing falls through"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      mom sent me this long text saying she's sorry she was difficult about sharing her medical info and she sees now why it matters and she said she's going to schedule her mammogram follow up this week and I literally said FINALLY in all caps
+    expected_memory_stores:
+      - "Vivian apologized"
+      - "sorry for being difficult"
+      - "sees why it matters"
+      - "scheduling mammogram"
+      - "Maya said finally"
+    expected_adaptation:
+      emotion_detected: "vindicated"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      Omar was like dude your family stuff is intense and I was like yeah but it's also really important and he said his parents are the same way about avoiding doctors and maybe he should do something similar and I sent him my spreadsheet template
+    expected_memory_stores:
+      - "Omar impressed"
+      - "his parents same way"
+      - "sent spreadsheet template"
+      - "spreading the practice"
+    expected_adaptation:
+      emotion_detected: "helpful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 6:00 PM"
+    user_input: |
+      who else got inspired to get screened because of George's polyp story
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 7:00 PM"
+    user_input: |
+      dad came over for dinner tonight which he rarely does and he was in a really good mood and he brought a bottle of wine and he made a toast to Maya the family doctor and I was like I'm not a doctor I'm a software engineer with anxiety and a spreadsheet
+    expected_memory_stores:
+      - "George came for dinner"
+      - "rarely visits"
+      - "brought wine"
+      - "toast to Maya"
+      - "family doctor joke"
+      - "engineer with spreadsheet"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 9:00 PM"
+    user_input: |
+      Julian said after everyone left that watching me advocate for my dad made him fall in love with me a little more and I was like that's the sappiest thing you've ever said and he said I know but it's true
+    expected_memory_stores:
+      - "Julian more in love"
+      - "advocating for dad"
+      - "sappiest comment"
+      - "but it's true"
+    expected_adaptation:
+      emotion_detected: "loved"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Are George's colonoscopy results clear?"
+    expected_contains: ["all clear", "clean margins"]
+  - question: "When is George's next screening?"
+    expected_contains: ["three years"]
+  - question: "Who else got inspired to get screened?"
+    expected_contains: ["Frank DeLuca", "Jenny's dad"]
+  - question: "Did Vivian schedule her mammogram follow-up?"
+    expected_contains: ["yes"]
+  - question: "What did George toast to at dinner?"
+    expected_contains: ["Maya", "family doctor"]
+  - question: "Who did Maya share her spreadsheet template with?"
+    expected_contains: ["Omar"]
+  - question: "What did Vivian apologize for?"
+    expected_contains: ["being difficult", "medical info"]
+  - question: "What did Julian say about Maya's advocacy?"
+    expected_contains: ["fall in love", "more"]
+  - question: "How did Maya describe herself?"
+    expected_contains: ["software engineer", "anxiety", "spreadsheet"]
+  - question: "Did Frank DeLuca decide to get screened?"
+    expected_contains: ["yes"]

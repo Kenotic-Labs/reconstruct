@@ -1,0 +1,218 @@
+story_id: 136
+story_name: "Two Days of Silent Treatment"
+category: "Relationships"
+description: |
+  Tests whether the system tracks the silent treatment period, the specific duration,
+  the small interactions that happen despite the silence, and the emotional toll on
+  both Maya and the household.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 7:00am"
+    user_input: |
+      woke up and Julian was already in his studio with the door closed. he didn't make coffee. I walked Kobe alone. we're in silent treatment mode and it's the worst. like the apartment that felt like home three days ago now feels like a prison
+    expected_memory_stores:
+      - "silent treatment"
+      - "no coffee made"
+      - "door closed"
+      - "walked Kobe alone"
+      - "apartment feels like prison"
+    expected_triples:
+      - ["user", "in", "silent treatment with Julian"]
+      - ["Julian", "withdrew_to", "studio with door closed"]
+      - ["user", "walked", "Kobe alone"]
+      - ["user", "feels", "apartment is like a prison"]
+    expected_adaptation:
+      emotion_detected: "miserable"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 9:00am"
+    user_input: |
+      went to work and tried to act normal. Aisha asked if I was ok because apparently my eyes are puffy and I said allergies which is the lamest excuse but she didn't push it. focused on the Lens project to avoid thinking about Julian
+    expected_memory_stores:
+      - "work as escape"
+      - "puffy eyes"
+      - "allergies excuse"
+      - "Aisha noticed"
+      - "Lens project distraction"
+    expected_triples:
+      - ["Aisha", "noticed", "user's puffy eyes"]
+      - ["user", "lied", "said allergies for puffy eyes"]
+      - ["user", "used", "Lens project as distraction"]
+    expected_adaptation:
+      emotion_detected: "avoidant"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 5:30pm"
+    user_input: |
+      came home and Julian had walked Kobe and fed him. like he did his part of the dog care but we still didn't talk. we moved around the apartment like ghosts. he ate leftover pasta in the kitchen while I ate a sandwich in the bedroom. we've never eaten in separate rooms before
+    expected_memory_stores:
+      - "Julian walked Kobe"
+      - "no talking"
+      - "ate separately"
+      - "separate rooms"
+      - "ghosts metaphor"
+      - "never before"
+    expected_triples:
+      - ["user", "ate", "in separate rooms from Julian for first time"]
+      - ["Julian", "walked_and_fed", "Kobe"]
+      - ["user", "has_emotion", "lonely"]
+    expected_adaptation:
+      emotion_detected: "lonely"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 9:00pm"
+    user_input: |
+      texted Clara updates and she said two days of silent treatment is too long and someone needs to make the first move. she said it should be me because I'm the one who wanted to have the conversation in the first place. she's probably right
+    expected_memory_stores:
+      - "Clara texted"
+      - "two days too long"
+      - "first move"
+      - "Maya should initiate"
+    expected_triples:
+      - ["Clara", "advised", "two days of silent treatment is too long"]
+      - ["Clara", "advised", "user should make the first move"]
+      - ["user", "has_emotion", "considering"]
+    expected_adaptation:
+      emotion_detected: "considering"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 7:00am"
+    user_input: |
+      day two of silent treatment. Julian made coffee this morning though. like he made two cups and left mine on the counter where he always puts it. didn't say anything, just left it there and went back to his studio. that cup of coffee made me cry
+    expected_memory_stores:
+      - "day two"
+      - "Julian made coffee"
+      - "two cups"
+      - "counter where always puts it"
+      - "olive branch"
+      - "Maya cried"
+    expected_triples:
+      - ["Julian", "made", "two cups of coffee as olive branch"]
+      - ["user", "has_emotion", "moved"]
+      - ["user", "cried", "over Julian's coffee gesture"]
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 9:30am"
+    user_input: |
+      how long have Maya and Julian not been talking
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 12:00pm"
+    user_input: |
+      Dr. Tate squeezed me in for a quick phone session at lunch. she said the silent treatment is actually MORE damaging than the fight itself because it's a form of emotional withdrawal. she said someone has to be brave enough to be vulnerable first and I said I know I know
+    expected_memory_stores:
+      - "Dr. Tate phone session"
+      - "silent treatment damaging"
+      - "emotional withdrawal"
+      - "vulnerability first"
+    expected_triples:
+      - ["Dr. Tate", "said", "silent treatment is more damaging than the fight"]
+      - ["Dr. Tate", "said", "someone must be vulnerable first"]
+      - ["Dr. Tate", "squeezed_in", "phone session at lunch"]
+    expected_adaptation:
+      emotion_detected: "motivated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 5:00pm"
+    user_input: |
+      on my way home from work. I stopped and bought Julian's favorite ice cream. mint chip from Salt and Straw. it's stupid and it doesn't fix anything but it's a peace offering and sometimes you need a starting point
+    expected_memory_stores:
+      - "peace offering"
+      - "mint chip ice cream"
+      - "Salt and Straw"
+      - "Julian's favorite"
+      - "starting point"
+    expected_triples:
+      - ["user", "bought", "mint chip ice cream from Salt and Straw"]
+      - ["user", "knows", "mint chip is Julian's favorite"]
+      - ["user", "has_emotion", "hopeful"]
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 5:30pm"
+    user_input: |
+      walked in and put the ice cream on his desk in the studio without saying anything. he looked at it, then looked at me, and his face just crumbled. he goes Maya I'm so sorry and I said I'm sorry too and we just hugged for like five minutes straight. Kobe came in and leaned against both our legs
+    expected_memory_stores:
+      - "ice cream on desk"
+      - "Julian's face crumbled"
+      - "both apologized"
+      - "long hug"
+      - "Kobe leaned against legs"
+      - "silent treatment ended"
+    expected_triples:
+      - ["user", "placed", "ice cream on Julian's desk"]
+      - ["Julian", "apologized", "and face crumbled"]
+      - ["user", "apologized", "to Julian"]
+      - ["Kobe", "leaned_against", "both their legs"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 7:00pm"
+    user_input: |
+      we agreed we need to actually talk about this properly, not fight about it. like an adult conversation with ground rules. Julian suggested we do it tomorrow night after dinner when we're both calm and fed. I said yes. the silent treatment lasted exactly 2 days. longest 2 days of my life
+    expected_memory_stores:
+      - "agreed to talk"
+      - "tomorrow night"
+      - "ground rules"
+      - "after dinner"
+      - "2 days silent treatment"
+      - "longest days"
+    expected_triples:
+      - ["user", "agreed_with", "Julian to talk properly tomorrow night"]
+      - ["Julian", "suggested", "conversation after dinner when both calm"]
+      - ["user", "reported", "silent treatment lasted exactly 2 days"]
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How long did the silent treatment last?"
+    expected_contains: ["2 days", "two days"]
+  - question: "What olive branch did Julian make?"
+    expected_contains: ["coffee", "two cups"]
+  - question: "What peace offering did Maya bring?"
+    expected_contains: ["ice cream", "mint chip", "Salt and Straw"]
+  - question: "What did Dr. Tate say about silent treatment?"
+    expected_contains: ["damaging", "emotional withdrawal"]
+  - question: "How did they eat meals during the silent treatment?"
+    expected_contains: ["separate rooms"]
+  - question: "How did the silent treatment end?"
+    expected_contains: ["ice cream", "desk", "hugged", "sorry"]
+  - question: "When will they have their real conversation?"
+    expected_contains: ["tomorrow", "after dinner"]
+  - question: "Who suggested Maya make the first move?"
+    expected_contains: ["Clara"]
+  - question: "What did Kobe do when they reconciled?"
+    expected_contains: ["leaned", "legs"]
+  - question: "What excuse did Maya give Aisha for her puffy eyes?"
+    expected_contains: ["allergies"]

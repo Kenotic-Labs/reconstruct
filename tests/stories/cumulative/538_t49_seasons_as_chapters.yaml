@@ -1,0 +1,177 @@
+story_id: 538
+story_name: "Seasons as Chapters"
+category: "Weather and Seasons"
+description: |
+  Maya sees the four seasons as chapters of her year. Each season has its own identity
+  and gifts. Cross-references all seasonal experiences, therapy (T21), grandpa (T46),
+  hosting (T47), and identity (T50).
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00 AM"
+    user_input: |
+      I was writing in my journal this morning and I realized I've been in Portland through every season now for the second time and each one taught me something different and I want to write it down because I think it's important like the seasons are chapters and each chapter has a lesson
+    expected_memory_stores:
+      - "journal reflection"
+      - "second year of all seasons"
+      - "seasons as chapters"
+      - "each has a lesson"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 9:30 AM"
+    user_input: |
+      winter taught me that I need help and that help looks like a lamp and a medication adjustment and a dog who loves rain and a partner who makes soup and a therapist who tells me the truth and I used to think needing help was weakness and now I think it's the smartest thing I do
+    expected_memory_stores:
+      - "winter lessons"
+      - "lamp medication dog soup therapist"
+      - "needing help is smart not weak"
+    expected_adaptation:
+      emotion_detected: "mature"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 10:00 AM"
+    user_input: |
+      spring taught me about renewal and specifically that grief doesn't end it transforms and when the cherry tree bloomed it wasn't like the grief went away it was like the grief became something beautiful like compost turning into flowers which is gross but accurate
+    expected_memory_stores:
+      - "spring lessons"
+      - "renewal and grief transformation"
+      - "cherry tree bloom"
+      - "grief as compost to flowers"
+    expected_adaptation:
+      emotion_detected: "insightful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 10:30 AM"
+    user_input: |
+      summer taught me about my body and what it can do like I didn't know I could hike twelve miles or climb V5 or feel this strong and it taught me that being outside in nature resets something in my brain that nothing else can and Portland summer is the reward for surviving Portland winter
+    expected_memory_stores:
+      - "summer lessons"
+      - "body capability"
+      - "twelve miles V5"
+      - "nature resets brain"
+      - "summer rewards winter"
+    expected_adaptation:
+      emotion_detected: "empowered"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 11:00 AM"
+    user_input: |
+      fall taught me about home and gathering and what it means to bring people into your space and feed them and light candles and make them feel welcome and the dinner parties and the book club and the soup nights all happened in fall and I think fall is my season honestly
+    expected_memory_stores:
+      - "fall lessons"
+      - "home and gathering"
+      - "bringing people in"
+      - "dinner parties book club soup"
+      - "fall is her season"
+    expected_adaptation:
+      emotion_detected: "certain"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 12:00 PM"
+    user_input: |
+      showed Julian what I wrote and he read it quietly and then he said Maya you should share this with Dr. Tate and I said why and he said because this is growth like actual measurable growth from the person who couldn't get out of bed to the person who writes about seasons like chapters
+    expected_memory_stores:
+      - "Julian read journal"
+      - "share with Dr. Tate"
+      - "actual measurable growth"
+      - "couldn't get out of bed to this"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 2:00 PM"
+    user_input: |
+      thinking about how the seasons connect to everything in my life like winter connects to mental health and Kobe spring connects to grandpa and the cherry tree summer connects to climbing and fitness and fall connects to hosting and community and it's all one thing it's just living in a place and paying attention
+    expected_memory_stores:
+      - "seasons connect to everything"
+      - "winter mental health Kobe"
+      - "spring grandpa tree"
+      - "summer climbing fitness"
+      - "fall hosting community"
+      - "living and paying attention"
+    expected_adaptation:
+      emotion_detected: "synthesizing"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 4:00 PM"
+    user_input: |
+      Clara came over and I read her my seasons journal entry and she said Maya when did you become a writer and I said I'm not a writer I'm an engineer and she said engineers don't write things like grief becoming compost turning into flowers and I said well this one does
+    expected_memory_stores:
+      - "read to Clara"
+      - "Clara says writer"
+      - "I'm an engineer not writer"
+      - "this one does"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 6:00 PM"
+    user_input: |
+      made tea from grandpa's tin and sat under the cherry tree which still has a few leaves hanging on and I thought about how grandpa experienced seasons in Wuhan and then seasons in Fresno and now I'm experiencing them in Portland and we're connected across time and geography by weather and by being engineers who notice things
+    expected_memory_stores:
+      - "tea under cherry tree"
+      - "few leaves remaining"
+      - "grandpa's seasons"
+      - "Wuhan Fresno Portland"
+      - "connected across time geography"
+      - "engineers who notice things"
+    expected_adaptation:
+      emotion_detected: "connected"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 9:00 PM"
+    user_input: |
+      the last thing I wrote in the journal tonight is this Portland gave me seasons and seasons gave me a language for change and change is not the enemy it's the plot and I put the pen down and looked at the rain and thought ok I get it now I really get it I live here and I love it here and that's the whole thing
+    expected_memory_stores:
+      - "journal final entry"
+      - "Portland gave seasons"
+      - "seasons give language for change"
+      - "change is the plot"
+      - "I live here I love it here"
+    expected_adaptation:
+      emotion_detected: "complete"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did winter teach Maya?"
+    expected_contains: ["needing help", "lamp", "medication"]
+  - question: "What did spring teach Maya?"
+    expected_contains: ["renewal", "grief transforms"]
+  - question: "What did summer teach Maya?"
+    expected_contains: ["body", "strength", "nature"]
+  - question: "What did fall teach Maya?"
+    expected_contains: ["home", "gathering", "community"]
+  - question: "Which season does Maya call hers?"
+    expected_contains: ["fall"]
+  - question: "What metaphor did Maya use for grief and spring?"
+    expected_contains: ["compost", "flowers"]
+  - question: "What did Clara say about Maya's writing?"
+    expected_contains: ["when did you become a writer"]
+  - question: "How does Maya connect to grandpa through seasons?"
+    expected_contains: ["Wuhan", "Fresno", "Portland", "engineers"]
+  - question: "What does Maya say change is?"
+    expected_contains: ["the plot"]
+  - question: "What is Maya's final journal line about Portland?"
+    expected_contains: ["live here", "love it here"]

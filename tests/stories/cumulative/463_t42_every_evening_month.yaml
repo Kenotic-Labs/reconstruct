@@ -1,0 +1,182 @@
+story_id: 463
+story_name: "Every Evening for a Month"
+category: "Gaming"
+description: |
+  Tests memory of the Stardew Valley routine becoming consuming over a month.
+  Establishes the pattern of nightly play taking over other activities.
+  Verifies temporal tracking of habits and cross-thread impact.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      so it's been about a month of playing Stardew every single night and I just checked my Steam and I have 87 hours which is honestly kind of a lot and Julian has like 72 and our farm is incredible we have a wine cellar and a slime hutch and like every upgrade possible and I'm proud but also like should we be doing other things
+    expected_memory_stores:
+      - "one month of playing"
+      - "87 hours Maya"
+      - "72 hours Julian"
+      - "wine cellar"
+      - "slime hutch"
+      - "all upgrades"
+    expected_adaptation:
+      emotion_detected: "conflicted"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      Nadia texted asking if I want to go climbing this weekend since the gym reopened finally and I was like um maybe and then realized I haven't gone climbing in like three weeks because every evening is Stardew and also I haven't gone on a road trip in a while either and Julian and I cancelled the last one because we wanted to play which is kind of embarrassing
+    expected_memory_stores:
+      - "Nadia climbing invite"
+      - "gym reopened"
+      - "no climbing three weeks"
+      - "cancelled road trip"
+      - "Stardew priority over trips"
+    expected_adaptation:
+      emotion_detected: "guilty"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 9:00 PM"
+    user_input: |
+      Jenny called tonight and I didn't pick up because we were in the middle of a skull cavern run and then I felt bad and called her back and she was like girl you never answer anymore and I said sorry I've been busy and didn't say busy with a farming simulator because she would judge me so hard
+    expected_memory_stores:
+      - "missed Jenny's call"
+      - "skull cavern run"
+      - "felt bad"
+      - "called back"
+      - "didn't mention game"
+      - "fear of judgment"
+    expected_adaptation:
+      emotion_detected: "guilty"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 10:00 PM"
+    user_input: |
+      Julian noticed I was quiet and asked if everything's okay and I said yeah I just feel like maybe we're playing too much and he paused the game and was like you know what yeah maybe we are like we haven't cooked a real dinner in two weeks we've just been ordering DoorDash and playing and that's not great
+    expected_memory_stores:
+      - "Maya quiet"
+      - "Julian checked in"
+      - "playing too much discussion"
+      - "no real dinner two weeks"
+      - "DoorDash every night"
+    expected_adaptation:
+      emotion_detected: "self-aware"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      talked to Lily at lunch about the Stardew thing and she was like oh yeah the honeymoon phase is intense but it levels off and I was like I hope so because I haven't practiced guitar in almost a month and book club is next week and I haven't started the book and Sam was like what book and I said Project Hail Mary and he goes oh that's so good which doesn't help me read it faster
+    expected_memory_stores:
+      - "talked to Lily"
+      - "honeymoon phase"
+      - "no guitar one month"
+      - "book club next week"
+      - "Project Hail Mary"
+      - "haven't started reading"
+      - "Sam recommends book"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 6:30 PM"
+    user_input: |
+      so tonight I told Julian let's only play for one hour and then do other stuff and he agreed and we set a timer and played for one hour and then the timer went off and we looked at each other and played for two more hours because we have no self control apparently and Kobe was just lying there judging us the whole time I swear
+    expected_memory_stores:
+      - "one hour limit"
+      - "set timer"
+      - "played two more hours"
+      - "no self control"
+      - "Kobe judging"
+    expected_adaptation:
+      emotion_detected: "sheepish"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 9:30 PM"
+    user_input: |
+      Dr Tate asked me today how the stress management is going and I mentioned the game and she was like that's fine as a tool but when it replaces all your other activities that's avoidance not coping and I was like okay yeah that's fair and she suggested I designate game-free days which makes sense
+    expected_memory_stores:
+      - "Dr Tate session"
+      - "avoidance vs coping"
+      - "game replaces activities"
+      - "game-free days suggestion"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 7:00 PM"
+    user_input: |
+      how many hours have I played Stardew Valley total
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 8:00 PM"
+    user_input: |
+      tried doing a game-free night tonight and it was actually really nice like I practiced guitar for 30 minutes and I'm still terrible but I played through the G C D progression and it's getting a little smoother and then I started Project Hail Mary and it's actually really good and Julian read next to me and Kobe was on the rug and it felt normal again
+    expected_memory_stores:
+      - "game-free night"
+      - "guitar 30 minutes"
+      - "G C D progression"
+      - "started Project Hail Mary"
+      - "Julian reading"
+      - "felt normal"
+    expected_adaptation:
+      emotion_detected: "balanced"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 10:00 PM"
+    user_input: |
+      I think the plan is game-free weeknights and Stardew on weekends which is healthier and Julian agrees and also I should get back to climbing and road trips because those are like real life Stardew you know actually going outside and doing things and not just virtual farming but I still love the game I just need to be smarter about it
+    expected_memory_stores:
+      - "game-free weeknights"
+      - "Stardew weekends only"
+      - "Julian agrees"
+      - "climbing and road trips"
+      - "real life vs virtual"
+      - "smarter balance"
+    expected_adaptation:
+      emotion_detected: "mature"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How many hours has Maya played Stardew Valley?"
+    expected_contains: ["87"]
+  - question: "What did Dr. Tate say about Maya's gaming?"
+    expected_contains: ["avoidance", "coping"]
+  - question: "What activities has Maya been skipping for Stardew?"
+    expected_contains: ["guitar", "climbing", "road trip", "cooking"]
+  - question: "What book hasn't Maya started for book club?"
+    expected_contains: ["Project Hail Mary"]
+  - question: "What is Maya's new gaming schedule?"
+    expected_contains: ["weeknights", "weekends"]
+  - question: "How long has the nightly Stardew routine lasted?"
+    expected_contains: ["month"]
+  - question: "What have Maya and Julian been eating instead of cooking?"
+    expected_contains: ["DoorDash"]
+  - question: "What did Maya do on her first game-free night?"
+    expected_contains: ["guitar", "read"]
+  - question: "How many hours has Julian played Stardew?"
+    expected_contains: ["72"]
+  - question: "What upgrades does their Stardew farm have?"
+    expected_contains: ["wine cellar", "slime hutch"]

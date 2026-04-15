@@ -1,0 +1,174 @@
+story_id: 225
+story_name: "Swimming Discovery"
+category: "Health"
+description: |
+  Tests system tracking new activity adoption. Maya starts swimming and discovers she
+  actually likes it. Mood begins to lift. Verifies activity tracking and mood correlation.
+duration_simulated: "5 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 7:30 AM"
+    user_input: |
+      went to Matt Dishman this morning for lap swim and I was terrible like I could barely do two laps without gasping and the water was cold and I forgot goggles so my eyes were burning but weirdly my knee felt AMAZING in the water like zero pain
+    expected_memory_stores:
+      - "first swim"
+      - "Matt Dishman"
+      - "terrible at swimming"
+      - "two laps"
+      - "forgot goggles"
+      - "knee zero pain in water"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 8:00 AM"
+    user_input: |
+      there was this older lady in the lane next to me she was like seventy and she was doing these smooth graceful laps like a dolphin and I was over here splashing like a drowning cat and she smiled at me after and said it gets easier and I hope so
+    expected_memory_stores:
+      - "older lady swimmer"
+      - "graceful"
+      - "Maya splashing"
+      - "it gets easier"
+    expected_adaptation:
+      emotion_detected: "humbled"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 7:00 AM"
+    user_input: |
+      went back to the pool today and bought goggles at Fred Meyer on the way and this time I did six laps which is better and I found this rhythm where I breathe every three strokes and it started to feel almost meditative like running used to
+    expected_memory_stores:
+      - "second swim"
+      - "bought goggles"
+      - "six laps"
+      - "breathing rhythm"
+      - "every three strokes"
+      - "meditative like running"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 6:00 PM"
+    user_input: |
+      told Jake at PT that I started swimming and he was like that's great Maya and he said swimming actually works the quads and hamstrings in ways that support meniscus recovery and he was genuinely excited which made me feel good
+    expected_memory_stores:
+      - "told Jake about swimming"
+      - "quads and hamstrings"
+      - "supports recovery"
+      - "Jake excited"
+    expected_adaptation:
+      emotion_detected: "encouraged"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 8:00 AM"
+    user_input: |
+      swam again today and did ten laps and the older lady was there again and she introduced herself her name is Doris and she's been swimming here for twenty years and she said I should try bilateral breathing and she gave me some tips and honestly she's like my swim coach now
+    expected_memory_stores:
+      - "ten laps"
+      - "Doris"
+      - "twenty years swimming"
+      - "bilateral breathing"
+      - "swim tips"
+      - "unofficial coach"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 12:00 PM"
+    user_input: |
+      how many laps could I do when I first started swimming versus now
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 9:00 AM"
+    user_input: |
+      Julian noticed I'm in a better mood and he said whatever the swimming is doing keep doing it and I realized he's right like I haven't had that heavy feeling in days and I actually got out of bed before my alarm today which hasn't happened in weeks
+    expected_memory_stores:
+      - "Julian noticed improvement"
+      - "better mood"
+      - "no heavy feeling"
+      - "woke before alarm"
+    expected_adaptation:
+      emotion_detected: "improving"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Monday 7:00 AM"
+    user_input: |
+      swimming is becoming my thing now like I go Monday Wednesday Friday Saturday and I'm up to fifteen laps and Doris taught me flip turns and I'm not great at them yet but it feels cool and I actually look forward to it which is wild because two weeks ago I thought I'd hate the pool
+    expected_memory_stores:
+      - "four days a week"
+      - "fifteen laps"
+      - "flip turns"
+      - "Doris teaching"
+      - "looking forward to it"
+      - "complete reversal"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 5:00 PM"
+    user_input: |
+      Clara said she's proud of me for finding something new and she said sometimes injuries redirect you somewhere better and I was like ok that's very zen Clara but also maybe true
+    expected_memory_stores:
+      - "Clara proud"
+      - "injuries redirect"
+      - "somewhere better"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      realized today that running was always about pushing through and grinding and swimming is different it's more about flow and breathing and being in your body and I think I needed that like my whole approach to exercise was just go harder and maybe my knee was telling me to slow down
+    expected_memory_stores:
+      - "running vs swimming philosophy"
+      - "pushing vs flowing"
+      - "needed to slow down"
+      - "body telling her"
+    expected_adaptation:
+      emotion_detected: "enlightened"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where does Maya swim?"
+    expected_contains: ["Matt Dishman Community Center"]
+  - question: "How has Maya's swimming improved?"
+    expected_contains: ["two laps", "fifteen laps"]
+  - question: "Who is Doris?"
+    expected_contains: ["older", "swim", "tips", "coach"]
+  - question: "How often does Maya swim?"
+    expected_contains: ["four days", "Monday Wednesday Friday Saturday"]
+  - question: "How has swimming affected Maya's mood?"
+    expected_contains: ["better", "improved", "no heavy feeling"]
+  - question: "What did Jake say about swimming for recovery?"
+    expected_contains: ["quads", "hamstrings", "supports recovery"]
+  - question: "What did Maya learn about herself through swimming?"
+    expected_contains: ["flow", "slow down", "breathing"]
+  - question: "What did Clara say about injuries?"
+    expected_contains: ["redirect", "somewhere better"]
+  - question: "What technique did Doris teach Maya?"
+    expected_contains: ["bilateral breathing", "flip turns"]
+  - question: "How does Maya compare swimming to running?"
+    expected_contains: ["flow", "breathing", "pushing vs flowing"]

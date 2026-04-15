@@ -1,0 +1,181 @@
+story_id: 532
+story_name: "Light Therapy"
+category: "Weather and Seasons"
+description: |
+  Maya starts using the light therapy lamp and notices subtle improvement. Still raining
+  but coping better. Cross-references mental health (T21), Wellbutrin, morning routines,
+  and work at Conduit.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 AM"
+    user_input: |
+      ok Julian set up the light therapy lamp on the kitchen table and I'm sitting in front of it eating breakfast and it's this weird bright white light that's supposed to be like sunlight and Kobe is staring at it like it's an alien and honestly it does feel a little weird sitting in front of a fake sun while it's pouring rain outside
+    expected_memory_stores:
+      - "light therapy lamp set up"
+      - "kitchen table"
+      - "eating breakfast with lamp"
+      - "Kobe staring at it"
+      - "fake sun while raining"
+    expected_adaptation:
+      emotion_detected: "skeptical"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 7:30 AM"
+    user_input: |
+      third day with the lamp and I can't tell if it's working or if it's placebo but I did get out of bed faster this morning and I felt slightly less foggy at work and Priya said I seemed more like myself today and I said I'm sitting in front of a lightbox every morning and she said whatever works Maya
+    expected_memory_stores:
+      - "third day lamp"
+      - "got up faster"
+      - "less foggy"
+      - "Priya noticed improvement"
+      - "whatever works"
+    expected_adaptation:
+      emotion_detected: "cautiously hopeful"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 6:00 PM"
+    user_input: |
+      end of first week with the lamp and the increased Wellbutrin and I think the combination is helping like I went to climbing tonight which I hadn't done all last week and Omar said welcome back and I did a V4 clean which is not my best but it's better than lying on the couch which is what I was doing five days ago
+    expected_memory_stores:
+      - "first week lamp plus Wellbutrin"
+      - "combination helping"
+      - "went to climbing"
+      - "Omar welcome back"
+      - "V4 clean"
+      - "better than couch"
+    expected_adaptation:
+      emotion_detected: "improving"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 10:00 AM"
+    user_input: |
+      it's still raining obviously because it's Portland in December but I made breakfast this morning and used the lamp and then actually felt like going to the farmers market which I haven't wanted to do in three weeks and the cheese guy said haven't seen you in a while and I said yeah the rain got me down and he said it gets everyone
+    expected_memory_stores:
+      - "still raining"
+      - "December Portland"
+      - "farmers market return"
+      - "three week absence"
+      - "cheese guy noticed"
+    expected_adaptation:
+      emotion_detected: "returning"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 9:00 AM next week"
+    user_input: |
+      second week with the lamp and I've settled into a routine lamp at 7am for 30 minutes while eating breakfast and drinking tea from grandpa's tin and taking Wellbutrin and it's become this like peaceful morning ritual and the rain is still there but it doesn't feel as heavy somehow
+    expected_memory_stores:
+      - "second week routine"
+      - "7am 30 minutes"
+      - "breakfast tea Wellbutrin"
+      - "grandpa's tin"
+      - "peaceful ritual"
+      - "rain less heavy"
+    expected_adaptation:
+      emotion_detected: "stabilizing"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      Dr. Pham check-in and she asked how the 200mg Wellbutrin is going and I said I think it's helping along with the lamp and she said good let's keep it at 200 through March and then reassess in spring and I was like March that's four months and she said winter is four months Maya welcome to the Pacific Northwest
+    expected_memory_stores:
+      - "Dr. Pham check-in"
+      - "200mg through March"
+      - "reassess in spring"
+      - "winter is four months"
+    expected_adaptation:
+      emotion_detected: "accepting"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 8:00 PM"
+    user_input: |
+      Julian bought himself a light therapy lamp too because he said if it works for you maybe I need one and honestly I think he's been affected by the rain too he's just quieter about it and now we sit at the kitchen table together in the morning with our lamps like two plants trying to photosynthesize and Kobe just looks confused
+    expected_memory_stores:
+      - "Julian bought his own lamp"
+      - "Julian affected by rain too"
+      - "sitting together with lamps"
+      - "two plants photosynthesizing"
+      - "Kobe confused"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 3:00 PM"
+    user_input: |
+      despite the rain Julian and I forced ourselves to go for a hike at Forest Park and it was actually beautiful in the rain like everything is so green and the moss on the trees looks magical and Kobe didn't care about the rain at all he was running through puddles and shaking mud everywhere and I thought maybe the rain isn't the enemy maybe I just needed to learn to be in it
+    expected_memory_stores:
+      - "Forest Park hike in rain"
+      - "beautiful in rain"
+      - "green and moss"
+      - "Kobe loves puddles"
+      - "rain isn't the enemy"
+    expected_adaptation:
+      emotion_detected: "shifting"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 9:00 AM"
+    user_input: |
+      sleeping better now like back to about 8 hours instead of the 10 I was doing and I'm waking up before my alarm which hasn't happened in weeks and the lamp is definitely part of it and the Wellbutrin adjustment and also I think just accepting that winter is a season not a punishment changed my mindset
+    expected_memory_stores:
+      - "sleeping 8 hours"
+      - "waking before alarm"
+      - "lamp and Wellbutrin helping"
+      - "winter is season not punishment"
+    expected_adaptation:
+      emotion_detected: "recovering"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 5:00 PM"
+    user_input: |
+      told Dr. Tate about the lamp and the forest hike and the mindset shift and she said this is really important because you're building a toolkit for winter that you can use every year and I said yeah it's like seasonal maintenance and she said exactly like your car needs oil changes your brain needs light therapy in Portland
+    expected_memory_stores:
+      - "Dr. Tate session"
+      - "winter toolkit"
+      - "use every year"
+      - "seasonal maintenance"
+      - "brain needs light therapy"
+    expected_adaptation:
+      emotion_detected: "equipped"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya's morning light therapy routine?"
+    expected_contains: ["7am", "30 minutes", "breakfast"]
+  - question: "What Wellbutrin dose is Maya on for winter?"
+    expected_contains: ["200mg"]
+  - question: "When will Dr. Pham reassess the dosage?"
+    expected_contains: ["March", "spring"]
+  - question: "Did Julian also get a light therapy lamp?"
+    expected_contains: ["yes"]
+  - question: "How has Maya's sleep improved?"
+    expected_contains: ["8 hours", "from 10"]
+  - question: "What happened at the Forest Park hike?"
+    expected_contains: ["rain", "beautiful", "green", "moss"]
+  - question: "What did Kobe do in the rain on the hike?"
+    expected_contains: ["puddles", "mud"]
+  - question: "What did Dr. Tate call the coping strategies?"
+    expected_contains: ["toolkit", "winter"]
+  - question: "What mindset shift did Maya have about winter?"
+    expected_contains: ["season not punishment"]
+  - question: "What metaphor did Dr. Tate use?"
+    expected_contains: ["oil changes", "brain", "light therapy"]

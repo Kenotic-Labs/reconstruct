@@ -1,0 +1,179 @@
+story_id: 181
+story_name: "Dad Announces Retirement"
+category: "Life Events"
+description: |
+  George Chen announces retirement from Chen's Auto Repair after 40 years.
+  Bittersweet emotions. Tests tracking life milestone for family member,
+  business details, and emotional complexity.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Sunday 7:00 PM"
+    user_input: |
+      so Dad called tonight and dropped a bombshell he said Maya I've decided to retire and close the shop and I was like wait what Chen's Auto Repair like THE shop and he said yes I've been doing this for 40 years and my body's telling me it's time my knees my back my hands are not what they used to be
+    expected_memory_stores:
+      - "George retiring"
+      - "Chen's Auto Repair"
+      - "40 years"
+      - "body telling him to stop"
+      - "knees back hands"
+    expected_adaptation:
+      emotion_detected: "shocked"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Sunday 7:30 PM"
+    user_input: |
+      I don't know how to feel about this like that shop is my CHILDHOOD I used to sit on the counter after school and do homework while Dad fixed cars and he taught me how to change oil when I was like 12 and the smell of motor oil still makes me think of him and now it's just gonna be gone
+    expected_memory_stores:
+      - "childhood memories at shop"
+      - "homework on counter"
+      - "learned oil change at 12"
+      - "motor oil smell"
+      - "shop is going away"
+    expected_adaptation:
+      emotion_detected: "nostalgic sad"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Sunday 8:00 PM"
+    user_input: |
+      Mom got on the phone and said she supports the decision completely she said Maya your father has worked six days a week for 40 years he deserves to rest and she said they've saved well and with Social Security they'll be fine and honestly she's right Dad's earned this a thousand times over
+    expected_memory_stores:
+      - "Vivian supports retirement"
+      - "George worked six days a week"
+      - "savings and Social Security"
+      - "financially okay"
+      - "40 years of work"
+    expected_adaptation:
+      emotion_detected: "accepting"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 9:00 AM"
+    user_input: |
+      told Julian about Dad retiring and he got kind of emotional too because Julian loves my dad they have this whole thing where they watch car shows together and Julian said George is one of the hardest working people I've ever met and I said yeah he really is and Julian said we should do something special for him
+    expected_memory_stores:
+      - "Julian emotional about George retiring"
+      - "Julian and George watch car shows"
+      - "Julian respects George"
+      - "something special for George"
+    expected_adaptation:
+      emotion_detected: "sentimental"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 12:00 PM"
+    user_input: |
+      Clara called and she's taking it harder than me honestly she was full on crying she said that shop is Dad and Dad is that shop and I said I know but he can't do this forever and she said I know I just didn't think it would happen yet and honestly neither did I I thought he'd work until he physically couldn't which I guess he kind of is
+    expected_memory_stores:
+      - "Clara emotional about retirement"
+      - "crying"
+      - "shop is Dad's identity"
+      - "unexpected timing"
+    expected_adaptation:
+      emotion_detected: "empathetic"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 5:00 PM"
+    user_input: |
+      Dad said he wants to sell the business not just close it because the shop has a good reputation and loyal customers and the equipment is worth something and the location on 4th Street in Sacramento is prime and he thinks he can get maybe $380K for it which would be a nice retirement cushion on top of savings
+    expected_memory_stores:
+      - "George wants to sell shop"
+      - "good reputation"
+      - "loyal customers"
+      - "4th Street Sacramento"
+      - "estimated $380K"
+      - "retirement cushion"
+    expected_adaptation:
+      emotion_detected: "practical"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 10:00 AM"
+    user_input: |
+      Dad asked if I could help with some of the paperwork stuff like tax documents and business valuation because he's not great with that kind of thing and I said of course Dad I'm a software engineer I can figure out spreadsheets and he said I know that's why I'm asking you not Clara no offense to Clara
+    expected_memory_stores:
+      - "Maya helping with paperwork"
+      - "tax documents"
+      - "business valuation"
+      - "George not great with paperwork"
+      - "Maya's spreadsheet skills"
+    expected_adaptation:
+      emotion_detected: "willing"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 3:00 PM"
+    user_input: |
+      started looking at the financials Dad emailed me and the shop actually does really well like $320K in annual revenue with about $90K profit after expenses and two employees and I'm like Dad you've been running a solid business this whole time and he said yeah I just never cared about the numbers I cared about the cars
+    expected_memory_stores:
+      - "shop financials"
+      - "$320K annual revenue"
+      - "$90K profit"
+      - "two employees"
+      - "George cares about cars not numbers"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      Dad's two employees are named Tony and Rick and they've been with him for 15 and 8 years respectively and Dad said his biggest worry is what happens to them and I said Dad that's so you worrying about your guys and he said they're not my guys they're my family which okay I'm crying now
+    expected_memory_stores:
+      - "Tony 15 years employee"
+      - "Rick 8 years employee"
+      - "George worried about employees"
+      - "employees like family"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 9:00 PM"
+    user_input: |
+      Julian said we should throw Dad a retirement party and I said that's actually a great idea maybe after the wedding though because we have too much going on and Julian said yeah or we could do something small in Sacramento just family and I said let's see how the sale goes first one thing at a time oh also Kobe really needs a bath he rolled in something at the park today
+    expected_memory_stores:
+      - "retirement party idea"
+      - "Julian suggested"
+      - "after wedding or small in Sacramento"
+      - "one thing at a time"
+      - "Kobe needs bath"
+    expected_adaptation:
+      emotion_detected: "planning"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Is George Chen retiring?"
+    expected_contains: ["yes"]
+  - question: "What is the name of George's business?"
+    expected_contains: ["Chen's Auto Repair"]
+  - question: "How long has George owned the shop?"
+    expected_contains: ["40 years"]
+  - question: "How much does he think the shop is worth?"
+    expected_contains: ["380"]
+  - question: "Where is the shop located?"
+    expected_contains: ["4th Street", "Sacramento"]
+  - question: "Who are George's employees?"
+    expected_contains: ["Tony", "Rick"]
+  - question: "What are the shop's annual financials?"
+    expected_contains: ["320K revenue", "90K profit"]
+  - question: "Why is George retiring?"
+    expected_contains: ["body", "knees", "back"]
+  - question: "Is Maya helping with the business sale?"
+    expected_contains: ["yes", "paperwork", "tax"]
+  - question: "How does Clara feel about the retirement?"
+    expected_contains: ["emotional", "crying"]

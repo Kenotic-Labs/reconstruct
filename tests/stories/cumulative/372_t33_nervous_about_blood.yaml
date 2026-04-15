@@ -1,0 +1,175 @@
+story_id: 372
+story_name: "Nervous About Blood and Needles"
+category: "Personal Development"
+description: |
+  Tests memory of Maya confronting her blood/needle aversion during first aid class.
+  Verifies system tracks phobia management and Clara's coaching.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Sunday 9:00 AM"
+    user_input: |
+      second day of class and today we're doing wound management and I can already feel my stomach getting weird just thinking about it and I texted Clara for a pep talk and she said just breathe and focus on the steps not the blood
+    expected_memory_stores:
+      - "day two"
+      - "wound management"
+      - "stomach upset"
+      - "Clara pep talk"
+      - "focus on steps"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Sunday 12:00 PM"
+    user_input: |
+      so Frank showed us pictures of different wound types and I got really lightheaded during the open fracture one and had to sit down and drink water and this woman next to me named Patricia was like are you okay sweetie and I was mortified
+    expected_memory_stores:
+      - "wound type pictures"
+      - "lightheaded"
+      - "open fracture"
+      - "had to sit down"
+      - "Patricia helped"
+      - "embarrassed"
+    expected_adaptation:
+      emotion_detected: "embarrassed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Sunday 3:00 PM"
+    user_input: |
+      Frank was actually really cool about it he said it happens to like a third of students and he told me a trick where you tense your leg muscles when you feel lightheaded because it keeps blood flowing to your brain and it actually worked
+    expected_memory_stores:
+      - "Frank reassured"
+      - "third of students"
+      - "muscle tension trick"
+      - "tense leg muscles"
+      - "keeps blood to brain"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Sunday 6:00 PM"
+    user_input: |
+      got through the whole bandaging practice section without getting lightheaded and I even applied a pressure bandage to a fake wound on a mannequin and Frank said good job and I felt like such a badass which is ridiculous but still
+    expected_memory_stores:
+      - "bandaging practice"
+      - "pressure bandage"
+      - "mannequin practice"
+      - "Frank approval"
+      - "felt accomplished"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      Clara and I FaceTimed and she walked me through some extra practice scenarios like what to do if someone's bleeding from the head versus bleeding from the arm and she said the key is always pressure and elevation and keeping the person calm
+    expected_memory_stores:
+      - "Clara FaceTime coaching"
+      - "head vs arm bleeding"
+      - "pressure and elevation"
+      - "keep person calm"
+    expected_adaptation:
+      emotion_detected: "focused"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 7:00 PM"
+    user_input: |
+      I practiced the recovery position on Julian tonight and he was a terrible patient he kept laughing and moving and Kobe thought we were playing and jumped on top of him and it was chaos but I got the positioning right eventually
+    expected_memory_stores:
+      - "practiced on Julian"
+      - "Julian laughing"
+      - "Kobe jumped on them"
+      - "recovery position correct"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 9:00 PM"
+    user_input: |
+      studying for the written part of the exam and honestly the hardest part is remembering the order of operations like for choking it's five back blows then five abdominal thrusts and for CPR it's 30 compressions two breaths and Clara made me a mnemonic which helps
+    expected_memory_stores:
+      - "studying written exam"
+      - "choking protocol"
+      - "five back blows five thrusts"
+      - "CPR 30:2 ratio"
+      - "Clara mnemonic"
+    expected_adaptation:
+      emotion_detected: "studious"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 10:00 PM"
+    user_input: |
+      what is the CPR ratio Maya is learning about compressions to breaths
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 8:00 AM"
+    user_input: |
+      weekend two day one and I met this interesting guy in class named Derek he's a teacher and he said he's getting certified because one of his students had a seizure in class and he didn't know what to do and that story really hit me
+    expected_memory_stores:
+      - "weekend two"
+      - "Derek teacher"
+      - "student seizure"
+      - "didn't know what to do"
+      - "story resonated"
+    expected_adaptation:
+      emotion_detected: "empathetic"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 5:00 PM"
+    user_input: |
+      did the AED section today and it's actually way simpler than I thought the machine literally tells you what to do with voice prompts and Frank said the biggest barrier to using an AED is people being too scared to try and he's right
+    expected_memory_stores:
+      - "AED section"
+      - "simpler than expected"
+      - "voice prompts"
+      - "biggest barrier fear"
+      - "Frank insight"
+    expected_adaptation:
+      emotion_detected: "empowered"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How does Maya cope with feeling lightheaded around blood?"
+    expected_contains: ["tense", "leg muscles"]
+  - question: "Who helped Maya when she felt lightheaded in class?"
+    expected_contains: ["Patricia"]
+  - question: "What is the choking first aid protocol?"
+    expected_contains: ["five back blows", "five", "thrusts"]
+  - question: "Who coached Maya through extra practice scenarios?"
+    expected_contains: ["Clara"]
+  - question: "What did Maya practice on Julian at home?"
+    expected_contains: ["recovery position"]
+  - question: "Who is Derek in Maya's first aid class?"
+    expected_contains: ["teacher", "student seizure"]
+  - question: "What did Frank say about AED usage?"
+    expected_contains: ["barrier", "scared"]
+  - question: "What is the CPR compression to breath ratio?"
+    expected_contains: ["30", "2"]
+  - question: "How does an AED guide users?"
+    expected_contains: ["voice prompts"]
+  - question: "Who was Maya's first aid instructor?"
+    expected_contains: ["Frank"]

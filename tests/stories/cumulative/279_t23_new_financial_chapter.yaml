@@ -1,0 +1,181 @@
+story_id: 279
+story_name: "New Financial Chapter"
+category: "Finance"
+description: |
+  Tests memory of Maya redirecting her former loan payments into savings and investments.
+  Captures the shift from debt payoff to wealth building and the Fidelity account growth.
+duration_simulated: "1 month"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:00 AM"
+    user_input: |
+      first month with no student loan payment and I set up the autopay that used to go to Navient to instead go to Fidelity $1,200 a month into the brokerage account and $300 into a high yield savings for the emergency fund which is now at $4,500
+    expected_memory_stores:
+      - "no loan payment"
+      - "Fidelity autopay $1,200"
+      - "high yield savings $300"
+      - "emergency fund $4,500"
+      - "redirected payments"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      it feels so weird having money left over at the end of the month like we're not scraping by anymore and Julian was like should we upgrade our lifestyle and I was like absolutely not we're keeping the same budget and saving the difference the lifestyle creep is real and we're not falling for it
+    expected_memory_stores:
+      - "money left over"
+      - "Julian lifestyle upgrade idea"
+      - "Maya says no"
+      - "lifestyle creep"
+      - "keep same budget"
+    expected_adaptation:
+      emotion_detected: "disciplined"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 7:00 PM"
+    user_input: |
+      the recipe app had its biggest month ever $920 in revenue and I'm thinking about whether to keep investing the app income or save it for the kitchen renovation since we still haven't done that and the 1987 kitchen is driving me crazy every day
+    expected_memory_stores:
+      - "app revenue $920"
+      - "biggest month"
+      - "invest vs renovation"
+      - "1987 kitchen"
+      - "still not renovated"
+    expected_adaptation:
+      emotion_detected: "deliberating"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 10:00 AM"
+    user_input: |
+      decided to split the app income 50/50 half to Fidelity and half to a dedicated kitchen renovation fund which I'm keeping in the high yield savings account separately tracked and at current rates we'll have enough for the kitchen in about 8 months
+    expected_memory_stores:
+      - "split app income 50/50"
+      - "half Fidelity half kitchen"
+      - "kitchen renovation fund"
+      - "high yield savings"
+      - "8 months for kitchen"
+    expected_adaptation:
+      emotion_detected: "strategic"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 12:00 PM"
+    user_input: |
+      Priya at work asked me about my financial strategy because she's trying to pay off her car loan faster and I spent like 30 minutes explaining the whole system with the spreadsheet and the fridge chart and the discipline and she was like you should be a financial coach
+    expected_memory_stores:
+      - "Priya asking advice"
+      - "car loan"
+      - "explained system"
+      - "financial coach comment"
+    expected_adaptation:
+      emotion_detected: "helpful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 8:00 PM"
+    user_input: |
+      Julian got a raise at Bold Studio his retainer went from $4,500 to $5,200 a month and he came home grinning and I was like how much of that goes to savings and he was like all of the increase so $700 extra a month to the emergency fund and I was like that's my boy
+    expected_memory_stores:
+      - "Julian raise"
+      - "$4,500 to $5,200"
+      - "$700 increase"
+      - "all to emergency fund"
+      - "Maya approves"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 9:00 AM"
+    user_input: |
+      Fidelity account hit $3,500 which isn't huge but it's growing steadily and the FSKAX index fund is up like 8% since I started investing which means my money is actually making money and that concept still blows my mind honestly
+    expected_memory_stores:
+      - "Fidelity $3,500"
+      - "FSKAX up 8%"
+      - "money making money"
+      - "growing steadily"
+    expected_adaptation:
+      emotion_detected: "amazed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      emergency fund is at $5,800 now and our target was originally $2,000 so we've way overshot that and I'm thinking maybe $10,000 is a better target for homeowners since house stuff is expensive and unpredictable as we've learned the hard way
+    expected_memory_stores:
+      - "emergency fund $5,800"
+      - "original target $2,000"
+      - "new target $10,000"
+      - "homeowner expenses"
+      - "unpredictable costs"
+    expected_adaptation:
+      emotion_detected: "prudent"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 7:00 PM"
+    user_input: |
+      kitchen renovation fund is at $1,400 after two months of app income contributions and Julian looked up countertop options and was like quartz is really nice and I was like yeah and really expensive and he was like we could do butcher block and I was like now you're talking
+    expected_memory_stores:
+      - "kitchen fund $1,400"
+      - "two months"
+      - "quartz expensive"
+      - "butcher block option"
+      - "Julian researching"
+    expected_adaptation:
+      emotion_detected: "practical"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 PM"
+    user_input: |
+      looking back it's kind of incredible like a year and a half ago I was staring at $34,200 in debt with no plan and now I'm debt-free with savings growing and investments started and a kitchen fund building and I just feel like a completely different person financially like I finally have my stuff together
+    expected_memory_stores:
+      - "reflection"
+      - "year and a half ago"
+      - "$34,200 starting debt"
+      - "now debt-free"
+      - "savings growing"
+      - "investments started"
+      - "kitchen fund"
+      - "personal transformation"
+    expected_adaptation:
+      emotion_detected: "transformed"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How much is Maya saving monthly to Fidelity?"
+    expected_contains: ["1,200", "1200"]
+  - question: "How much is in the emergency fund?"
+    expected_contains: ["5,800", "5800"]
+  - question: "What is the new emergency fund target?"
+    expected_contains: ["10,000", "10000"]
+  - question: "How much is Julian making at Bold Studio now?"
+    expected_contains: ["5,200", "5200"]
+  - question: "How much is in the kitchen renovation fund?"
+    expected_contains: ["1,400", "1400"]
+  - question: "How much does the recipe app make per month?"
+    expected_contains: ["920"]
+  - question: "What countertop material are they considering?"
+    expected_contains: ["butcher block"]
+  - question: "How much is in the Fidelity account?"
+    expected_contains: ["3,500", "3500"]
+  - question: "What index fund is Maya invested in?"
+    expected_contains: ["FSKAX"]
+  - question: "What return has the FSKAX fund gotten?"
+    expected_contains: ["8%"]

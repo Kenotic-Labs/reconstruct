@@ -1,0 +1,175 @@
+story_id: 431
+story_name: "Deposit Withheld"
+category: "Lease Dispute"
+description: |
+  Maya's old landlord at Westridge Apartments withholds $1800 security deposit
+  claiming bathroom tile damage. Maya has move-in photos proving it was pre-existing.
+  Cross-thread connection to T22 (house) and T8 (old apartment).
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 5:30 PM"
+    user_input: |
+      ok so I got a letter today from my old landlord at Westridge Apartments you know the place Julian and I lived before we bought the house and it says they're keeping our entire security deposit all 1800 dollars because of quote damage to bathroom tile unquote and I'm like WHAT
+    expected_memory_stores:
+      - "Westridge Apartments"
+      - "old landlord"
+      - "security deposit $1800"
+      - "withheld"
+      - "bathroom tile damage claim"
+    expected_adaptation:
+      emotion_detected: "outraged"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 5:45 PM"
+    user_input: |
+      that bathroom tile was cracked when we moved IN I have photos from move-in day that clearly show the crack in the bottom left corner tile near the tub and I even noted it on the move-in checklist that the landlord gave us and they signed it so this is complete bull
+    expected_memory_stores:
+      - "tile cracked at move-in"
+      - "move-in photos exist"
+      - "bottom left corner near tub"
+      - "noted on move-in checklist"
+      - "landlord signed checklist"
+    expected_adaptation:
+      emotion_detected: "furious"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 6:30 PM"
+    user_input: |
+      found the move-in photos on my phone from 3 years ago and yep there it is clear as day the cracked tile and the timestamp on the photo is from our first day there and I also found the move-in inspection form where it says in my handwriting bathroom tile cracked near tub with the landlord's initials next to it
+    expected_memory_stores:
+      - "found move-in photos"
+      - "3 years ago timestamp"
+      - "cracked tile in photo"
+      - "inspection form found"
+      - "landlord initials on form"
+    expected_adaptation:
+      emotion_detected: "vindicated"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      told Julian and he's pissed like actually angry which he almost never gets and he said this guy is trying to scam us and I was like I know and Julian said we should get a lawyer and I said let me try a demand letter first because lawyers are expensive and I want to handle this myself
+    expected_memory_stores:
+      - "Julian angry"
+      - "landlord scamming"
+      - "Julian wants lawyer"
+      - "Maya wants demand letter first"
+      - "lawyers expensive"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      looked up Oregon tenant law and apparently under ORS 90.300 a landlord has 31 days to return the deposit with an itemized statement and if they withhold it in bad faith the tenant can recover up to twice the amount so if I prove bad faith I could get 3600 back not just 1800
+    expected_memory_stores:
+      - "ORS 90.300"
+      - "31 days to return deposit"
+      - "itemized statement required"
+      - "bad faith double damages"
+      - "could get $3600"
+    expected_adaptation:
+      emotion_detected: "empowered"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 9:00 PM"
+    user_input: |
+      the landlord's name is Greg Patterson and he owns like 4 or 5 buildings in southeast Portland and there are reviews online from other tenants saying he pulled the same thing with their deposits so I'm not the first person he's done this to which makes me even more motivated to fight it
+    expected_memory_stores:
+      - "landlord Greg Patterson"
+      - "owns 4-5 buildings southeast Portland"
+      - "other tenants same issue"
+      - "pattern of behavior"
+    expected_adaptation:
+      emotion_detected: "righteous"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 9:00 AM"
+    user_input: |
+      drafted the demand letter this morning before work basically saying I have photographic evidence and the signed move-in checklist proving the tile damage was pre-existing and I cited ORS 90.300 and gave him 14 days to return the full 1800 or I'm filing in small claims court
+    expected_memory_stores:
+      - "demand letter drafted"
+      - "cited evidence"
+      - "cited ORS 90.300"
+      - "14 day deadline"
+      - "small claims court threat"
+    expected_adaptation:
+      emotion_detected: "assertive"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      how much is my security deposit and what law did I cite in the demand letter
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 3:00 PM"
+    user_input: |
+      sent the demand letter via certified mail so I have proof he received it and I also emailed a copy to the email on the Westridge Apartments lease agreement and CC'd myself so there's a paper trail and Julian said you're scary when you're organized and I said thank you
+    expected_memory_stores:
+      - "certified mail sent"
+      - "emailed copy too"
+      - "paper trail"
+      - "Julian impressed"
+    expected_adaptation:
+      emotion_detected: "methodical"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      Clara said her cousin went through something similar and the landlord caved immediately when they got the demand letter and I hope that's what happens here because honestly I don't want to go to court but I will if I have to that 1800 dollars could go toward our house closing costs which we still owe
+    expected_memory_stores:
+      - "Clara's cousin similar situation"
+      - "hope landlord caves"
+      - "will go to court if needed"
+      - "$1800 toward closing costs"
+      - "house connection"
+    expected_adaptation:
+      emotion_detected: "resolute"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How much is Maya's withheld security deposit?"
+    expected_contains: ["1800"]
+  - question: "What does the landlord claim is damaged?"
+    expected_contains: ["bathroom tile"]
+  - question: "Does Maya have evidence the damage was pre-existing?"
+    expected_contains: ["yes", "photos", "move-in checklist"]
+  - question: "What Oregon law protects tenants' deposits?"
+    expected_contains: ["ORS 90.300"]
+  - question: "What is the landlord's name?"
+    expected_contains: ["Greg Patterson"]
+  - question: "What did Maya send the landlord?"
+    expected_contains: ["demand letter"]
+  - question: "What apartment complex did Maya live in?"
+    expected_contains: ["Westridge"]
+  - question: "How much could Maya recover if she proves bad faith?"
+    expected_contains: ["3600"]
+  - question: "What does Maya want to use the deposit money for?"
+    expected_contains: ["closing costs", "house"]
+  - question: "Have other tenants had deposit issues with this landlord?"
+    expected_contains: ["yes", "same thing", "reviews"]

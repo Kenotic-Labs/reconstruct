@@ -1,0 +1,222 @@
+story_id: 243
+story_name: "Trying Lexapro"
+category: "Mental Health"
+description: |
+  Tests medication tracking and side effect monitoring. Maya starts Lexapro but has bad
+  side effects. Verifies system captures medication details, dosage, and side effects.
+duration_simulated: "5 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 3:00 PM"
+    user_input: |
+      Dr. Tate and I talked about medication today and she said given the severity of the panic attacks and the insomnia she thinks an SSRI could help alongside the CBT and she prescribed Lexapro 10mg and I'm nervous about taking meds for my brain but she said it's temporary and we can adjust
+    expected_memory_stores:
+      - "medication discussion"
+      - "SSRI"
+      - "Lexapro"
+      - "10mg"
+      - "panic attacks insomnia severity"
+      - "temporary"
+      - "can adjust"
+    expected_triples:
+      - ["Dr. Tate", "prescribed", "Lexapro 10mg"]
+      - ["user", "has_condition", "panic attacks and insomnia"]
+      - ["user", "has_emotion", "apprehensive"]
+      - ["Lexapro", "is_type", "SSRI"]
+    expected_adaptation:
+      emotion_detected: "apprehensive"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 8:00 PM"
+    user_input: |
+      told Julian about the Lexapro and he was supportive but I could tell he was worried and he said his cousin took an SSRI and it helped and I said ok that makes me feel a little better and I picked up the prescription from the pharmacy on my way home
+    expected_memory_stores:
+      - "told Julian"
+      - "Julian's cousin on SSRI"
+      - "picked up prescription"
+      - "pharmacy"
+    expected_triples:
+      - ["user", "told", "Julian about Lexapro"]
+      - ["Julian", "has_emotion", "supportive but worried"]
+      - ["Julian's cousin", "took", "SSRI"]
+      - ["user", "picked_up", "Lexapro prescription"]
+    expected_adaptation:
+      emotion_detected: "mixed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 8:00 AM"
+    user_input: |
+      took my first Lexapro this morning with breakfast and Dr. Tate said it takes two to four weeks to really kick in and the first week might have side effects and to just ride it out and I'm like ok here goes nothing
+    expected_memory_stores:
+      - "first Lexapro dose"
+      - "with breakfast"
+      - "two to four weeks"
+      - "side effects first week"
+      - "ride it out"
+    expected_triples:
+      - ["user", "took_first_dose", "Lexapro"]
+      - ["Lexapro", "onset_time", "two to four weeks"]
+      - ["user", "has_emotion", "nervous"]
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 10:00 AM"
+    user_input: |
+      day two of Lexapro and oh god the nausea is real like I woke up and felt like I was going to throw up and I could barely eat breakfast and Clara said yeah SSRIs can cause nausea in the first week it should pass and I said it better because this is miserable
+    expected_memory_stores:
+      - "day two"
+      - "nausea side effect"
+      - "could barely eat"
+      - "Clara said should pass"
+      - "miserable"
+    expected_triples:
+      - ["user", "experiencing_side_effect", "nausea from Lexapro"]
+      - ["user", "has_emotion", "miserable"]
+      - ["Clara", "said", "SSRI nausea should pass in first week"]
+    expected_adaptation:
+      emotion_detected: "suffering"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 7:00 PM"
+    user_input: |
+      day four and the nausea is slightly better but now I feel this weird flat affect like I'm not anxious exactly but I'm also not anything I'm just like blank and Julian asked if I was ok at dinner and I said I think the meds are making me feel nothing and he looked concerned
+    expected_memory_stores:
+      - "day four"
+      - "nausea slightly better"
+      - "flat affect"
+      - "feeling nothing"
+      - "blank"
+      - "Julian concerned"
+    expected_triples:
+      - ["user", "experiencing_side_effect", "flat affect from Lexapro"]
+      - ["user", "reports", "nausea slightly better on day four"]
+      - ["Julian", "has_emotion", "concerned"]
+      - ["user", "has_emotion", "flat"]
+    expected_adaptation:
+      emotion_detected: "flat"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 8:00 AM"
+    user_input: |
+      what medication am I on and what are the side effects I'm experiencing
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 5:00 PM"
+    user_input: |
+      day five and the flat thing is getting worse like I should be excited about a code review that went well but I felt literally nothing and Kobe was being adorable and I just looked at him and felt nothing and THAT scared me because I always feel things about Kobe
+    expected_memory_stores:
+      - "day five"
+      - "flat affect worsening"
+      - "no excitement"
+      - "no feeling about Kobe"
+      - "scared by numbness"
+    expected_triples:
+      - ["user", "experiencing_side_effect", "flat affect worsening on day five"]
+      - ["user", "has_emotion", "alarmed"]
+      - ["user", "felt_nothing_about", "Kobe"]
+    expected_adaptation:
+      emotion_detected: "alarmed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 9:00 AM"
+    user_input: |
+      called Dr. Tate's office and told her about the nausea and the flat affect and she said the flat affect this early is concerning because it usually means this particular SSRI isn't right for me and she wants me to stop the Lexapro and she said we'll try something different
+    expected_memory_stores:
+      - "called Dr. Tate"
+      - "nausea and flat affect"
+      - "flat affect concerning"
+      - "stop Lexapro"
+      - "try something different"
+    expected_triples:
+      - ["Dr. Tate", "instructed", "stop Lexapro"]
+      - ["user", "reported", "nausea and flat affect to Dr. Tate"]
+      - ["Dr. Tate", "assessed", "flat affect early means SSRI not right"]
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 2:00 PM"
+    user_input: |
+      she's switching me to Wellbutrin 150mg which is a different kind of antidepressant it's an NDRI not an SSRI and she said it's less likely to cause the flat affect and might actually help with energy and focus and I start it tomorrow after the Lexapro clears
+    expected_memory_stores:
+      - "Wellbutrin"
+      - "150mg"
+      - "NDRI"
+      - "not SSRI"
+      - "less flat affect"
+      - "energy and focus"
+      - "starts tomorrow"
+      - "medication change"
+    expected_triples:
+      - ["Dr. Tate", "prescribed", "Wellbutrin 150mg"]
+      - ["Wellbutrin", "is_type", "NDRI"]
+      - ["user", "switching_from", "Lexapro to Wellbutrin"]
+      - ["user", "has_emotion", "cautiously hopeful"]
+    expected_adaptation:
+      emotion_detected: "cautiously hopeful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 9:00 PM"
+    user_input: |
+      the Lexapro is wearing off and I can feel emotions coming back like I watched a dog video and actually laughed and Julian said welcome back and I said I was only gone for five days but it felt like a month and I'm nervous about the Wellbutrin but at least it's not Lexapro
+    expected_memory_stores:
+      - "Lexapro wearing off"
+      - "emotions returning"
+      - "laughed at video"
+      - "Julian welcome back"
+      - "nervous about Wellbutrin"
+    expected_triples:
+      - ["user", "reports", "Lexapro wearing off and emotions returning"]
+      - ["user", "has_emotion", "relieved"]
+      - ["Julian", "said", "welcome back"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What medication did Maya try first?"
+    expected_contains: ["Lexapro", "10mg"]
+  - question: "What side effects did Lexapro cause?"
+    expected_contains: ["nausea", "flat affect"]
+  - question: "Why was Lexapro stopped?"
+    expected_contains: ["flat affect", "concerning", "not right"]
+  - question: "What medication is Maya switching to?"
+    expected_contains: ["Wellbutrin", "150mg"]
+  - question: "What type of medication is Wellbutrin?"
+    expected_contains: ["NDRI"]
+  - question: "How long was Maya on Lexapro?"
+    expected_contains: ["five days"]
+  - question: "Who prescribed the medication?"
+    expected_contains: ["Dr. Tate", "Dr. Helen Tate"]
+  - question: "What was the most alarming side effect?"
+    expected_contains: ["flat affect", "feeling nothing"]
+  - question: "What tipped Maya off that something was wrong?"
+    expected_contains: ["Kobe", "felt nothing"]
+  - question: "Is Maya still on Lexapro?"
+    expected_contains: ["no", "stopped", "switched"]

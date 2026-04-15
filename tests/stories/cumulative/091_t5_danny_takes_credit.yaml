@@ -1,0 +1,179 @@
+story_id: 91
+story_name: "Danny Takes Credit"
+category: "Career"
+description: |
+  Tests memory of the first instance of Danny taking credit for Maya's work.
+  Maya stays quiet. The incident plants seeds of conflict.
+  Verifies system can track subtle interpersonal dynamics.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 10:00 AM"
+    user_input: |
+      okay so something happened in the all hands today that's bugging me Danny was presenting the quarterly engineering wins and when he got to the search latency improvements he said we optimized the search pipeline and reduced latency by 35 percent and he said we like it was a team effort but I did most of that work he helped with testing
+    expected_memory_stores:
+      - "Danny presenting"
+      - "quarterly wins"
+      - "latency improvements"
+      - "said we"
+      - "Maya did most work"
+      - "Danny helped testing"
+      - "credit issue"
+    expected_adaptation:
+      emotion_detected: "annoyed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 10:30 AM"
+    user_input: |
+      and then when someone asked about the isolation layer he said yeah that was a team effort too and I was sitting right there and I could feel my face getting hot because that was my RFC my design my implementation he reviewed it sure but it was my work and he's taking credit in front of the whole company
+    expected_memory_stores:
+      - "isolation layer credit"
+      - "Maya's RFC"
+      - "Maya's design"
+      - "Maya's implementation"
+      - "Danny taking credit"
+      - "whole company watching"
+      - "face getting hot"
+    expected_adaptation:
+      emotion_detected: "angry"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 12:00 PM"
+    user_input: |
+      Lily noticed something was off and she DM'd me saying hey I noticed Danny kind of glossed over your contributions in the all hands was that intentional and I said I don't know maybe he didn't mean it that way and she said hmm and I could tell she wasn't convinced
+    expected_memory_stores:
+      - "Lily noticed"
+      - "DM about credit"
+      - "glossed over"
+      - "Maya downplayed"
+      - "Lily unconvinced"
+    expected_adaptation:
+      emotion_detected: "conflicted"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 3:00 PM"
+    user_input: |
+      I keep going back and forth in my head like maybe Danny didn't mean to take credit maybe he was just presenting it as team work and didn't think about attribution and I don't want to be that person who makes a big deal about credit but also like it was my work you know
+    expected_memory_stores:
+      - "internal debate"
+      - "benefit of doubt"
+      - "attribution concern"
+      - "don't want drama"
+      - "but it was my work"
+    expected_adaptation:
+      emotion_detected: "torn"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 7:00 PM"
+    user_input: |
+      told Julian about it and he immediately said that's not okay and you need to say something and I was like but Danny and I have a good working relationship and I don't want to ruin it and Julian said Maya you just survived a PIP because you didn't stay quiet you spoke up with data
+    expected_memory_stores:
+      - "Julian says speak up"
+      - "good relationship concern"
+      - "PIP parallel"
+      - "speak up with data"
+    expected_adaptation:
+      emotion_detected: "uncertain"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 9:00 PM"
+    user_input: |
+      but the thing is Danny is also a contributor to fridgesearch and we've been bonding over our dogs and like our golden retrievers Kobe and Penny and I don't want this to mess up what's actually been a really nice coworker friendship so I'm going to let it go this time
+    expected_memory_stores:
+      - "Danny fridgesearch contributor"
+      - "Kobe and Penny"
+      - "coworker friendship"
+      - "letting it go"
+      - "this time"
+    expected_adaptation:
+      emotion_detected: "resigned"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 9:00 AM"
+    user_input: |
+      who took credit for the search latency improvements in the all hands
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 11:00 AM"
+    user_input: |
+      Sam pulled me aside today and said hey I want you to know that I know the latency work was primarily yours and I appreciated that but also he didn't say anything in the meeting itself which is like okay good that he acknowledges it privately but publicly Danny got the credit
+    expected_memory_stores:
+      - "Sam acknowledges privately"
+      - "didn't speak up publicly"
+      - "Danny got public credit"
+      - "private vs public"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 4:00 PM"
+    user_input: |
+      Danny acted completely normal today like nothing happened he even asked me about a search indexing question and was super friendly and I helped him and it was fine and maybe I'm overthinking this maybe it really was just bad attribution not malicious credit theft
+    expected_memory_stores:
+      - "Danny normal behavior"
+      - "asked for help"
+      - "Maya helped"
+      - "overthinking maybe"
+      - "bad attribution vs theft"
+    expected_adaptation:
+      emotion_detected: "confused"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      Julian asked if I talked to Danny about it and I said no I let it go and he gave me a look but said okay your call and Kobe came and sat between us like he was mediating and honestly I just want to move on and focus on work and hope it doesn't happen again
+    expected_memory_stores:
+      - "didn't confront"
+      - "Julian accepts"
+      - "Kobe mediating"
+      - "hope it doesn't repeat"
+      - "moving on"
+    expected_adaptation:
+      emotion_detected: "avoidant"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What happened at the all hands meeting?"
+    expected_contains: ["Danny", "credit", "latency", "we"]
+  - question: "Whose work was the search latency improvement?"
+    expected_contains: ["Maya"]
+  - question: "Did Maya confront Danny?"
+    expected_contains: ["no"]
+  - question: "Who noticed Danny taking credit?"
+    expected_contains: ["Lily"]
+  - question: "What did Sam say privately?"
+    expected_contains: ["knows", "Maya's work", "acknowledges"]
+  - question: "Why is Maya hesitant to confront Danny?"
+    expected_contains: ["friendship", "relationship", "fridgesearch"]
+  - question: "What did Julian advise?"
+    expected_contains: ["speak up", "say something"]
+  - question: "What parallel did Julian draw?"
+    expected_contains: ["PIP"]
+  - question: "What are Danny and Maya's dogs' names?"
+    expected_contains: ["Kobe", "Penny"]
+  - question: "Is Maya planning to let this go?"
+    expected_contains: ["yes", "this time"]

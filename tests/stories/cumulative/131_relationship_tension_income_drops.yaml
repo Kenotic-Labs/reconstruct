@@ -1,0 +1,171 @@
+story_id: 131
+story_name: "Julian's Freelance Income Drops"
+category: "Relationships"
+description: |
+  Tests whether the system captures the financial stress of Julian's income dropping,
+  the specific numbers involved, and Maya's initial supportive response that begins
+  to mask growing resentment.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00pm"
+    user_input: |
+      so Julian told me tonight that two of his freelance clients dropped off. like they just stopped sending work. one of them was a startup that ran out of funding and the other one just... ghosted him I guess? so his income this month is gonna be like way less than usual
+    expected_memory_stores:
+      - "Julian clients lost"
+      - "two clients"
+      - "startup ran out of funding"
+      - "client ghosted"
+      - "income drop"
+    expected_adaptation:
+      emotion_detected: "concerned"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 7:30pm"
+    user_input: |
+      he usually makes around 3500 a month on average from freelance but this month it's looking like maybe 1800? which means he can't cover his half of rent and utilities. he looked so stressed telling me this, like physically stressed
+    expected_memory_stores:
+      - "usually 3500"
+      - "this month 1800"
+      - "can't cover half"
+      - "Julian stressed"
+    expected_adaptation:
+      emotion_detected: "worried"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 8:00pm"
+    user_input: |
+      I told him don't worry about it I'll cover the difference this month. like it's fine, I make 135K salary it's not gonna break me. but there's this little voice in my head that's like... is this gonna become a pattern? which is an awful thought and I feel guilty for even thinking it
+    expected_memory_stores:
+      - "Maya covers difference"
+      - "135K salary"
+      - "pattern worry"
+      - "guilt"
+    expected_adaptation:
+      emotion_detected: "conflicted"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 10:00am"
+    user_input: |
+      at work trying to focus on the Lens project but I keep thinking about the money thing. like Aisha noticed I was distracted and asked if everything was ok and I said yeah just personal stuff. I hate when personal stuff leaks into work
+    expected_memory_stores:
+      - "distracted at work"
+      - "Aisha noticed"
+      - "personal stuff"
+      - "compartmentalization"
+    expected_adaptation:
+      emotion_detected: "stressed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 3:00pm"
+    user_input: |
+      Julian's been applying to new freelance gigs all day but the design market is apparently really slow right now. he said everyone's cutting creative budgets. he's on Upwork and Dribbble and even posted on LinkedIn. I appreciate that he's hustling
+    expected_memory_stores:
+      - "Julian job searching"
+      - "Upwork Dribbble LinkedIn"
+      - "design market slow"
+      - "creative budgets cut"
+      - "hustling"
+    expected_adaptation:
+      emotion_detected: "supportive"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 6:00pm"
+    user_input: |
+      Julian got a small gig today, a logo design for like 400 bucks. not a lot but he seemed relieved to have something. I'm trying to be encouraging but honestly 400 doesn't even cover groceries for two weeks and a dog
+    expected_memory_stores:
+      - "small gig"
+      - "logo design"
+      - "400 dollars"
+      - "not enough"
+      - "Maya privately frustrated"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 9:00am"
+    user_input: |
+      how much does Julian usually make per month
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 12:00pm"
+    user_input: |
+      paid rent today myself. the full 2375. Julian saw me do it and he got really quiet and said I'll pay you back when things pick up and I said it's fine babe don't worry about it. but inside I was like... yeah you better
+    expected_memory_stores:
+      - "Maya paid full rent"
+      - "2375"
+      - "Julian will pay back"
+      - "Maya internal resentment"
+    expected_adaptation:
+      emotion_detected: "resentful"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 10:00am"
+    user_input: |
+      went to Bark and Brew this morning and I paid for both coffees which I always do but today it felt different? like usually it's a nice thing and today it felt like an obligation. I didn't say anything but I noticed the feeling and I don't love it
+    expected_memory_stores:
+      - "Bark and Brew"
+      - "paid for both"
+      - "obligation feeling"
+      - "noticed resentment"
+    expected_adaptation:
+      emotion_detected: "uncomfortable"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 6:00pm"
+    user_input: |
+      Clara called and I vented a LITTLE about the money thing and she goes well that's what happens when you date an artist. which is kind of harsh but also... the financial instability of freelancing is real and it's affecting us now in a way it didn't when we had separate apartments
+    expected_memory_stores:
+      - "Clara vented to"
+      - "artist comment"
+      - "freelance instability"
+      - "different from separate apartments"
+    expected_adaptation:
+      emotion_detected: "torn"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How much does Julian usually make per month?"
+    expected_contains: ["3500"]
+  - question: "How much is Julian making this month?"
+    expected_contains: ["1800"]
+  - question: "Why did Julian's income drop?"
+    expected_contains: ["clients", "startup", "ghosted"]
+  - question: "How much is Maya covering for rent?"
+    expected_contains: ["full", "2375"]
+  - question: "How is Maya feeling about covering Julian's expenses?"
+    expected_contains: ["resentful", "frustrated"]
+  - question: "Where is Julian looking for new work?"
+    expected_contains: ["Upwork", "Dribbble", "LinkedIn"]
+  - question: "What small gig did Julian land?"
+    expected_contains: ["logo", "400"]
+  - question: "Who did Maya vent to about the money situation?"
+    expected_contains: ["Clara"]
+  - question: "What did Clara say about dating an artist?"
+    expected_contains: ["that's what happens"]
+  - question: "How has living together changed the financial dynamic?"
+    expected_contains: ["separate apartments", "different"]

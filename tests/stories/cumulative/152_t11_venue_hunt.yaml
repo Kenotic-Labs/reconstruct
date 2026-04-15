@@ -1,0 +1,209 @@
+story_id: 152
+story_name: "Venue Hunt"
+category: "Life Events"
+description: |
+  Maya and Julian tour Pine Ridge Lodge and book it. Tests venue confirmation,
+  deposit details, capacity info, and corrections about availability dates.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 8:00 AM"
+    user_input: |
+      big day today we're touring Pine Ridge Lodge finally I'm so nervous like what if it's not as nice in person as the photos you know Julian's still in bed I swear that man could sleep through anything Kobe come here stop licking my face
+    expected_memory_stores:
+      - "Pine Ridge Lodge tour today"
+      - "nervous about venue"
+    expected_triples:
+      - ["user", "touring_today", "Pine Ridge Lodge"]
+      - ["user", "has_emotion", "nervous excitement"]
+    expected_adaptation:
+      emotion_detected: "nervous excitement"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 12:30 PM"
+    user_input: |
+      OH MY GOD it's even better than the photos like the meadow overlooks this valley and there's these massive pine trees all around and the pavilion has string lights already built in and the coordinator Sarah showed us the bridal suite and I almost cried Julian was squeezing my hand the whole time
+    expected_memory_stores:
+      - "Pine Ridge Lodge toured"
+      - "meadow overlooks valley"
+      - "pine trees"
+      - "string lights in pavilion"
+      - "coordinator Sarah"
+      - "bridal suite"
+    expected_triples:
+      - ["Pine Ridge Lodge", "has", "meadow overlooking valley with pine trees"]
+      - ["Pine Ridge Lodge", "has", "pavilion with built-in string lights"]
+      - ["Pine Ridge Lodge", "coordinator", "Sarah"]
+      - ["user", "has_emotion", "overwhelmed with joy"]
+    expected_adaptation:
+      emotion_detected: "overwhelmed with joy"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 1:00 PM"
+    user_input: |
+      okay so here's the thing um June 15th is available but barely Sarah said another couple is looking at it too and if we want to lock it in we need to put down a deposit of $3500 by Wednesday which is like a lot but Julian said let's just do it and I agree honestly this is THE place
+    expected_memory_stores:
+      - "June 15 available"
+      - "another couple interested"
+      - "deposit $3500"
+      - "deadline Wednesday"
+      - "Julian agrees to book"
+    expected_triples:
+      - ["Pine Ridge Lodge", "deposit_required", "$3500 by Wednesday"]
+      - ["Pine Ridge Lodge", "june_15_status", "available but another couple looking"]
+      - ["user", "has_emotion", "urgent excitement"]
+    expected_adaptation:
+      emotion_detected: "urgent excitement"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 4:00 PM"
+    user_input: |
+      told Jenny about Pine Ridge and she was like omg yes that's the one and then she started talking about like color schemes and I was like slow down girl we haven't even booked it yet but she's already planning which is so Jenny honestly love her energy
+    expected_memory_stores:
+      - "Jenny Wu excited about venue"
+      - "color scheme discussions starting"
+    expected_triples:
+      - ["Jenny Wu", "excited_about", "Pine Ridge Lodge"]
+      - ["Jenny Wu", "started_planning", "color schemes"]
+      - ["user", "has_emotion", "amused"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 10:00 AM"
+    user_input: |
+      wait so I just got an email from Sarah at Pine Ridge and she said actually the other couple booked June 15th I'm literally about to cry like we waited too long but THEN she said June 22nd is open and honestly a week later might actually be better because it gives us more time to prep
+    expected_memory_stores:
+      - "June 15 taken"
+      - "June 22 available"
+      - "date shift"
+      - "correction: wedding date now June 22"
+    expected_triples:
+      - ["user", "corrected", "wedding date June 15 → June 22"]
+      - ["Sarah", "informed", "June 15 taken by another couple"]
+      - ["user", "has_emotion", "disappointed then relieved"]
+    expected_adaptation:
+      emotion_detected: "disappointed then relieved"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 11:30 AM"
+    user_input: |
+      Julian said June 22nd works for him too and actually his cousin's graduation is June 14th so this works out better anyway see everything happens for a reason or whatever people say um so yeah we're going with June 22nd calling Sarah back right now
+    expected_memory_stores:
+      - "June 22 confirmed"
+      - "Julian's cousin graduation June 14"
+      - "date change works better"
+    expected_triples:
+      - ["user", "wedding_date_confirmed", "June 22"]
+      - ["Julian", "cousin_graduation", "June 14 so June 22 works better"]
+      - ["user", "has_emotion", "optimistic"]
+    expected_adaptation:
+      emotion_detected: "optimistic"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Monday 2:00 PM"
+    user_input: |
+      BOOKED IT deposit is in we got Pine Ridge Lodge for June 22nd I'm shaking honestly like this is really happening Sarah sent over the contract and it's $8500 total for the venue which includes tables chairs the pavilion and the bridal suite for getting ready
+    expected_memory_stores:
+      - "Pine Ridge Lodge booked"
+      - "June 22 confirmed"
+      - "deposit paid"
+      - "total cost $8500"
+      - "includes tables chairs pavilion bridal suite"
+    expected_triples:
+      - ["user", "booked_venue", "Pine Ridge Lodge for June 22"]
+      - ["Pine Ridge Lodge", "total_cost", "$8500 includes tables chairs pavilion bridal suite"]
+      - ["user", "paid", "deposit for venue"]
+      - ["user", "has_emotion", "elated"]
+    expected_adaptation:
+      emotion_detected: "elated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      my mom called and I told her about the date change from June 15th to June 22nd and she was like oh that's actually better because your father has a doctor appointment on the 16th and she wouldn't have wanted to travel right before that so see it all works out
+    expected_memory_stores:
+      - "Vivian informed of date change"
+      - "George has doctor appointment June 16"
+      - "family okay with new date"
+    expected_triples:
+      - ["Vivian", "informed_of", "date change to June 22"]
+      - ["George", "has_appointment", "doctor June 16"]
+      - ["user", "has_emotion", "relieved"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 8:00 AM"
+    user_input: |
+      Clara texted me a list of like 15 things we need to start doing now that we have the venue and date locked down it's um flowers DJ or band photographer caterer officiant save the dates invitations dress tux bridesmaids dresses groomsmen registry cake decorations hotel blocks transportation and I'm already overwhelmed
+    expected_memory_stores:
+      - "Clara's planning checklist"
+      - "15 items to do"
+      - "feeling overwhelmed"
+    expected_triples:
+      - ["Clara", "sent", "checklist of 15 wedding items to do"]
+      - ["user", "has_emotion", "overwhelmed"]
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 9:00 PM"
+    user_input: |
+      Julian and I made a timeline tonight like a proper one on a Google sheet with deadlines for everything and honestly once you break it down it's not that bad we have like 11 months to get it all done and Jenny already volunteered to handle the save the dates because she's a designer too like Julian so they'll probably make something amazing together
+    expected_memory_stores:
+      - "wedding timeline created"
+      - "Google sheet"
+      - "11 months to wedding"
+      - "Jenny handling save the dates"
+      - "Jenny is a designer"
+    expected_triples:
+      - ["user", "created", "wedding timeline on Google sheet"]
+      - ["user", "time_until_wedding", "11 months"]
+      - ["Jenny Wu", "volunteered_for", "save the dates"]
+      - ["Jenny Wu", "is_also", "a designer like Julian"]
+    expected_adaptation:
+      emotion_detected: "calm and organized"
+      warmth_direction: increase
+
+final_verification:
+  - question: "When is Maya's wedding?"
+    expected_contains: ["June 22"]
+  - question: "Was the wedding always June 22?"
+    expected_contains: ["June 15", "changed"]
+  - question: "What venue did Maya book?"
+    expected_contains: ["Pine Ridge Lodge"]
+  - question: "How much is the venue?"
+    expected_contains: ["8500"]
+  - question: "How much was the deposit?"
+    expected_contains: ["3500"]
+  - question: "Who is the venue coordinator?"
+    expected_contains: ["Sarah"]
+  - question: "Why did the date change from June 15 to June 22?"
+    expected_contains: ["another couple", "booked"]
+  - question: "Who is designing the save the dates?"
+    expected_contains: ["Jenny"]
+  - question: "How many months until the wedding?"
+    expected_contains: ["11"]
+  - question: "What does the venue cost include?"
+    expected_contains: ["tables", "chairs", "pavilion", "bridal suite"]

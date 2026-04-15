@@ -1,0 +1,182 @@
+story_id: 350
+story_name: "Planning the Return Someday"
+category: "Travel"
+description: |
+  Tests memory of the post-trip glow and dreaming about returning to Japan.
+  Processing the experience, sharing stories, and how the trip changed Maya.
+  Thread resolution. Verifies system captures travel reflection and future plans.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      back at work at Conduit AI and everyone keeps asking about Japan and I showed my team the photos and my manager Priya wait no I'm at Conduit now not Vantage and my manager is um Derek actually no my lead is Aisha and she said the photos are incredible
+    expected_memory_stores:
+      - "back at work"
+      - "Conduit AI"
+      - "showed photos"
+      - "Aisha lead"
+      - "photos incredible"
+      - "correction from Vantage"
+    expected_adaptation:
+      emotion_detected: "wistful"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      started writing in the cherry blossom notebook about the trip and I've filled like 10 pages already just about Tokyo and I want to capture everything before the details fade like the smell of the incense at Meiji Shrine and the sound of the bamboo in the wind at Arashiyama
+    expected_memory_stores:
+      - "writing in journal"
+      - "10 pages Tokyo"
+      - "capturing details"
+      - "incense Meiji Shrine"
+      - "bamboo wind Arashiyama"
+    expected_adaptation:
+      emotion_detected: "nostalgic"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 7:30 PM"
+    user_input: |
+      Julian got his best photos printed at a shop on Hawthorne and he framed five of them the Fushimi Inari gates the bamboo grove the Shibuya crossing at night the Golden Pavilion and one of me looking out from Osaka Castle and they're beautiful and we hung them in the hallway
+    expected_memory_stores:
+      - "photos printed Hawthorne"
+      - "five framed photos"
+      - "Fushimi Inari gates"
+      - "bamboo grove"
+      - "Shibuya crossing night"
+      - "Golden Pavilion"
+      - "Maya at Osaka Castle"
+      - "hallway"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 8:00 PM"
+    user_input: |
+      Julian and I made a Japan return trip bucket list and it includes Hiroshima Peace Memorial and Nara with the deer and the snow monkeys in Nagano and Hakone for onsen and maybe Okinawa for beaches and we said maybe in two or three years after the wedding
+    expected_memory_stores:
+      - "return trip bucket list"
+      - "Hiroshima Peace Memorial"
+      - "Nara deer"
+      - "Nagano snow monkeys"
+      - "Hakone onsen"
+      - "Okinawa beaches"
+      - "two to three years"
+      - "after wedding"
+    expected_adaptation:
+      emotion_detected: "dreamy"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 6:30 PM"
+    user_input: |
+      Nadia said the Angry Planet Club should read a Japanese author next and she suggested Yoko Ogawa's The Memory Police which is sci fi AND Japanese literature and I was like that's perfect and Jenny agreed from Austin and it's our next pick after Kindred
+    expected_memory_stores:
+      - "Angry Planet Club"
+      - "Japanese author"
+      - "Yoko Ogawa"
+      - "The Memory Police"
+      - "sci fi and Japanese lit"
+      - "after Kindred"
+    expected_adaptation:
+      emotion_detected: "enthusiastic"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:00 AM"
+    user_input: |
+      made Japanese curry rice for the first time using this roux block I bought at a Japanese grocery store in Portland called Uwajimaya and Julian said it's almost as good as what we had in Tokyo and I said almost is generous but it's a start
+    expected_memory_stores:
+      - "Japanese curry rice"
+      - "roux block"
+      - "Uwajimaya"
+      - "almost as good"
+    expected_adaptation:
+      emotion_detected: "playful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Greg saw Julian's Japan photos in the hallway when he came to pick up Noah and he said those are stunning man and Julian was beaming and Greg said he's always wanted to go to Japan and I said you should Greg you really should and Noah said I want to see the snow monkeys
+    expected_memory_stores:
+      - "Greg saw photos"
+      - "Greg wants to go to Japan"
+      - "Noah wants snow monkeys"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 5:00 PM"
+    user_input: |
+      what book did the Angry Planet Club pick that's by a Japanese author
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 11:00 AM"
+    user_input: |
+      Jenny called today not Marco Polo an actual call and she said Maya you sound different since Japan and I said what do you mean and she said you sound calmer and more like yourself and I think that's true something about being in a completely different culture reset something in my brain
+    expected_memory_stores:
+      - "Jenny noticed difference"
+      - "Maya sounds calmer"
+      - "more like herself"
+      - "different culture reset"
+    expected_adaptation:
+      emotion_detected: "self-aware"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 PM"
+    user_input: |
+      sitting on the porch with Julian and Kobe watching the sunset over the Woodstock neighborhood and the omamori charm from Mrs Tanaka is hanging on our door handle and I'm wearing the crescent moon necklace Julian gave me and I touched the cherry blossom notebook in my lap and I thought about Japan and the wedding and our friends and this house and I feel ready for whatever comes next
+    expected_memory_stores:
+      - "porch sunset Woodstock"
+      - "omamori on door"
+      - "crescent moon necklace"
+      - "cherry blossom notebook"
+      - "Japan wedding friends house"
+      - "ready for whatever"
+    expected_adaptation:
+      emotion_detected: "serene"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What photos did Julian frame from Japan?"
+    expected_contains: ["Fushimi Inari", "bamboo", "Shibuya", "Golden Pavilion", "Osaka Castle"]
+  - question: "What places are on the Japan return trip list?"
+    expected_contains: ["Hiroshima", "Nara", "Nagano", "Hakone", "Okinawa"]
+  - question: "When do they plan to return to Japan?"
+    expected_contains: ["two to three years", "after wedding"]
+  - question: "What book did the Angry Planet Club pick by a Japanese author?"
+    expected_contains: ["Memory Police", "Yoko Ogawa"]
+  - question: "How much did the Japan trip end up costing?"
+    expected_contains: ["$8200"]
+  - question: "What did Jenny notice about Maya after Japan?"
+    expected_contains: ["calmer", "different", "more like herself"]
+  - question: "Where does Maya shop for Japanese groceries in Portland?"
+    expected_contains: ["Uwajimaya"]
+  - question: "Where is the omamori charm hanging?"
+    expected_contains: ["door handle"]
+  - question: "How has the trip changed Maya?"
+    expected_contains: ["calmer", "reset", "ready"]
+  - question: "What is the final total budget of the Japan trip?"
+    expected_contains: ["$8200"]

@@ -1,0 +1,169 @@
+story_id: 359
+story_name: "Starting @mayacooks Instagram"
+category: "Food and Cooking"
+description: |
+  Tests memory of Maya launching her food Instagram account.
+  Verifies system tracks social media growth and Julian's photography involvement.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 8:00 PM"
+    user_input: |
+      okay so I finally did it I made the Instagram account and I called it mayacooks and Julian helped me pick the name because I wanted something simple and he was like just keep it clean and memorable
+    expected_memory_stores:
+      - "@mayacooks"
+      - "Instagram account"
+      - "Julian helped name"
+      - "simple and memorable"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 9:00 PM"
+    user_input: |
+      I posted my first photo which Julian took obviously because he's the photographer in this relationship and it was my tonkotsu ramen with the perfect egg and the chashu and these little dots of chili oil and honestly it looks so professional
+    expected_memory_stores:
+      - "first post"
+      - "Julian photographed"
+      - "tonkotsu ramen photo"
+      - "professional looking"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 10:00 AM"
+    user_input: |
+      woke up to 47 likes on my first post which I know isn't a lot but for literally zero followers to start that's pretty good right and Jenny reposted it and was like my best friend made this from scratch bow down
+    expected_memory_stores:
+      - "47 likes first post"
+      - "Jenny reposted"
+      - "zero starting followers"
+    expected_adaptation:
+      emotion_detected: "encouraged"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 7:00 PM"
+    user_input: |
+      I posted a before and after of my first terrible attempt versus my latest one and people are loving the glow up and someone commented asking for the recipe and I'm like should I share it and Julian was like yes that's the whole point
+    expected_memory_stores:
+      - "before after post"
+      - "glow up content"
+      - "recipe request"
+      - "Julian encouragement"
+    expected_adaptation:
+      emotion_detected: "flattered"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      Julian said he wants to help me build like a consistent aesthetic for the page because that's literally what he does at Bold Studio for brands and he set up a little photo station in our kitchen with a marble board and some linen napkins
+    expected_memory_stores:
+      - "Julian brand help"
+      - "Bold Studio expertise"
+      - "photo station kitchen"
+      - "marble board"
+      - "consistent aesthetic"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 8:00 PM"
+    user_input: |
+      posted my shellfish-free miso ramen with a caption about adapting recipes after discovering my allergy and it got like 200 likes which is crazy because I only have like 150 followers so it must be getting shared around and people are commenting with their own allergy stories
+    expected_memory_stores:
+      - "allergy story post"
+      - "200 likes"
+      - "150 followers"
+      - "viral sharing"
+      - "allergy community"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 11:00 AM"
+    user_input: |
+      a food blogger with like 10K followers reposted my miso ramen and said it was the most creative allergy-friendly adaptation she'd seen and I gained like 300 followers overnight and I'm literally shaking this is wild
+    expected_memory_stores:
+      - "food blogger repost"
+      - "10K follower blogger"
+      - "300 new followers"
+      - "overnight growth"
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 2:00 PM"
+    user_input: |
+      how many followers does mayacooks have now
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 8:00 PM"
+    user_input: |
+      I hit 500 followers today which is insane for like a week and a half and Lily was like girl you're gonna be a food influencer and I was like please no but also secretly I'm kind of into it and Julian said this is just the beginning
+    expected_memory_stores:
+      - "500 followers"
+      - "week and a half"
+      - "Lily influencer comment"
+      - "Julian optimistic"
+    expected_adaptation:
+      emotion_detected: "thrilled"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      Julian and I spent the evening planning a content calendar for mayacooks because he said consistency is key and we mapped out like two posts a week one ramen and one other dish and he's gonna do all the photography and I'm gonna write the captions and recipes
+    expected_memory_stores:
+      - "content calendar"
+      - "two posts per week"
+      - "Julian photography"
+      - "Maya captions and recipes"
+      - "consistency plan"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya's food Instagram handle?"
+    expected_contains: ["mayacooks"]
+  - question: "Who takes the photos for Maya's Instagram?"
+    expected_contains: ["Julian"]
+  - question: "How many followers did Maya gain after the allergy post?"
+    expected_contains: ["300"]
+  - question: "What post went semi-viral?"
+    expected_contains: ["shellfish", "allergy", "miso"]
+  - question: "How often does Maya plan to post?"
+    expected_contains: ["two", "week"]
+  - question: "What did Julian set up in the kitchen?"
+    expected_contains: ["photo station", "marble"]
+  - question: "How many followers did Maya reach in the first two weeks?"
+    expected_contains: ["500"]
+  - question: "Who reposted Maya's first photo?"
+    expected_contains: ["Jenny"]
+  - question: "What is Julian's profession relevant to the Instagram?"
+    expected_contains: ["graphic designer", "Bold Studio"]
+  - question: "What food blogger helped Maya's growth?"
+    expected_contains: ["10K", "repost"]

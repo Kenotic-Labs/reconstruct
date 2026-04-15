@@ -1,0 +1,179 @@
+story_id: 536
+story_name: "Rain on Your Own Roof"
+category: "Weather and Seasons"
+description: |
+  First winter in their OWN house. Rain sounds different when it's your roof.
+  Maya finds peace with Portland weather. Cross-references house (T41-T45),
+  SAD tools, relationship, and cooking.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 6:30 AM"
+    user_input: |
+      so it's November again and the rain is back and I was bracing for the SAD to hit but something weird happened I was lying in bed this morning listening to the rain on the roof and it sounded different than last year and I realized oh my god this is MY roof like I own this roof and the rain is hitting MY house and that changes everything
+    expected_memory_stores:
+      - "November rain returned"
+      - "bracing for SAD"
+      - "rain sounds different"
+      - "my roof my house"
+      - "ownership changes perception"
+    expected_adaptation:
+      emotion_detected: "wonder"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 7:00 AM"
+    user_input: |
+      set up the light therapy lamp first day of November like seasonal maintenance just like Dr. Tate said and the Wellbutrin is already at 200 from Dr. Pham's recommendation and I have candles and soup ingredients and I'm READY this time I'm not going to let winter surprise me
+    expected_memory_stores:
+      - "light therapy day one of November"
+      - "seasonal maintenance"
+      - "Wellbutrin at 200"
+      - "candles and soup ready"
+      - "prepared this time"
+    expected_adaptation:
+      emotion_detected: "proactive"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      made soup tonight and it's raining and the candles are lit and Julian's making cocktails and I told him last year at this time I was under a blanket at 6pm unable to move and tonight I'm cooking and it's the same weather but I'm different and he said maybe the house helped and I said the house definitely helped
+    expected_memory_stores:
+      - "soup and candles"
+      - "Julian making cocktails"
+      - "comparison to last year"
+      - "same weather different person"
+      - "house helped"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 9:00 AM"
+    user_input: |
+      took Kobe for a rain walk this morning and he loves rain walks like genuinely loves them he runs through puddles and rolls in wet grass and shakes off and does it again and his joy is contagious honestly watching a golden retriever be ecstatic about rain makes it very hard to be grumpy about rain
+    expected_memory_stores:
+      - "Kobe rain walk"
+      - "loves rain walks"
+      - "puddles wet grass shaking"
+      - "contagious joy"
+      - "hard to be grumpy"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 3:00 PM"
+    user_input: |
+      the sound of rain on the roof while reading on the couch is actually my favorite sound now and I said this to Julian and he said Maya last year you said rain was oppressive and I said yeah but that was apartment rain this is house rain it's different and he said it's literally the same water and I said Julian you wouldn't understand it's about ownership
+    expected_memory_stores:
+      - "rain on roof favorite sound"
+      - "apartment rain vs house rain"
+      - "Julian teasing"
+      - "ownership changes everything"
+    expected_adaptation:
+      emotion_detected: "domestic"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 10:00 AM"
+    user_input: |
+      phone-free Sunday in the rain and I baked bread and the house smells like yeast and candles and the rain is steady and Kobe is damp from his walk and sleeping by the heater and I feel so incredibly grounded in this moment like this is exactly where I'm supposed to be and the weather is part of that
+    expected_memory_stores:
+      - "phone-free Sunday rain"
+      - "baked bread"
+      - "yeast and candles smell"
+      - "Kobe by heater"
+      - "exactly where supposed to be"
+    expected_adaptation:
+      emotion_detected: "grounded"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 5:00 PM"
+    user_input: |
+      Dr. Tate asked how winter is going this year and I said honestly it's different and she asked what changed and I said I have a house and a routine and a lamp and I know it's coming and I prepared and also I think having gone through one hard winter makes the second one less scary because you know you survived it
+    expected_memory_stores:
+      - "Dr. Tate winter check"
+      - "house routine lamp preparation"
+      - "survived first hard winter"
+      - "second winter less scary"
+    expected_adaptation:
+      emotion_detected: "resilient"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 7:00 PM"
+    user_input: |
+      hosted soup night at the house which is officially a thing now and it was raining obviously and everyone brought their rain jackets and we had six people plus Julian and me eating tom kha gai that I made from scratch and everyone was warm and full and outside it was pouring and inside it was perfect and that contrast is what winter hosting is about
+    expected_memory_stores:
+      - "soup night official"
+      - "raining during hosting"
+      - "tom kha gai from scratch"
+      - "six people"
+      - "inside vs outside contrast"
+    expected_adaptation:
+      emotion_detected: "host pride"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 8:00 PM"
+    user_input: |
+      Greg brought over more honey and said his bees are dormant for winter but he has enough stored to last until spring and he stayed for tea and we talked about our yards and he said your cherry tree is going to be incredible next year bigger than this year and I thought about the tree growing through winter underground getting ready for spring
+    expected_memory_stores:
+      - "Greg's honey delivery"
+      - "bees dormant for winter"
+      - "Greg stayed for tea"
+      - "cherry tree bigger next year"
+      - "growing underground through winter"
+    expected_adaptation:
+      emotion_detected: "patient"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 10:00 PM"
+    user_input: |
+      lying in bed and the rain is coming down hard and I can hear it on the roof and on the windows and on the cherry tree branches and I wrote in my journal tonight I chose this city and it chose me back and I meant every word because Portland is rain and I am learning to love the rain because it's mine
+    expected_memory_stores:
+      - "rain on roof windows tree"
+      - "journal entry"
+      - "I chose this city and it chose me back"
+      - "Portland is rain"
+      - "learning to love the rain"
+    expected_adaptation:
+      emotion_detected: "belonging"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How does rain sound different to Maya this year?"
+    expected_contains: ["own roof", "my house", "ownership"]
+  - question: "What did Maya set up on November 1st?"
+    expected_contains: ["light therapy lamp"]
+  - question: "How does Kobe feel about rain?"
+    expected_contains: ["loves", "puddles", "ecstatic"]
+  - question: "What is the difference between apartment rain and house rain?"
+    expected_contains: ["ownership"]
+  - question: "What soup did Maya make for soup night?"
+    expected_contains: ["tom kha gai"]
+  - question: "What did Greg say about the cherry tree?"
+    expected_contains: ["bigger next year"]
+  - question: "Is Maya experiencing SAD this winter?"
+    expected_contains: ["different", "better", "prepared"]
+  - question: "What did Maya write in her journal?"
+    expected_contains: ["chose this city", "chose me back"]
+  - question: "What contrast does Maya enjoy about winter hosting?"
+    expected_contains: ["inside perfect", "outside pouring"]
+  - question: "What are Greg's bees doing in winter?"
+    expected_contains: ["dormant"]

@@ -1,0 +1,221 @@
+story_id: 94
+story_name: "Documenting the Pattern"
+category: "Career"
+description: |
+  Tests memory of Maya building a formal case with documentation.
+  Lily provides witness statements. Evidence compilation.
+  Verifies system tracks multi-source evidence gathering.
+duration_simulated: "4 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 9:00 AM"
+    user_input: |
+      went into work mode today like detached professional mode and I'm treating the Danny situation the same way I treated the PIP at Vantage data over emotion so I spent the morning compiling a timeline of both credit incidents with exact quotes dates and who was present
+    expected_memory_stores:
+      - "professional mode"
+      - "PIP parallel"
+      - "data over emotion"
+      - "timeline compiled"
+      - "exact quotes dates"
+    expected_triples:
+      - ["user", "compiled", "timeline of credit incidents"]
+      - ["user", "approach", "data over emotion"]
+      - ["user", "parallels_to", "PIP at Vantage"]
+      - ["user", "has_emotion", "focused"]
+    expected_adaptation:
+      emotion_detected: "focused"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 11:00 AM"
+    user_input: |
+      pulled the git blame logs for the isolation layer the latency improvements and the relevance tuning framework and out of the total 4200 lines of code across these projects I authored 3800 lines and Danny authored about 250 and the rest was from Lily and Amir on testing
+    expected_memory_stores:
+      - "git blame logs"
+      - "4200 total lines"
+      - "Maya 3800 lines"
+      - "Danny 250 lines"
+      - "Lily Amir testing"
+    expected_triples:
+      - ["user", "authored", "3800 lines of code"]
+      - ["Danny", "authored", "250 lines of code"]
+      - ["projects_total", "has_lines", "4200"]
+      - ["user", "pulled_evidence", "git blame logs"]
+    expected_adaptation:
+      emotion_detected: "vindicated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 2:00 PM"
+    user_input: |
+      Lily wrote a formal witness statement documenting what she saw and heard in both meetings and her Uber — wait no sorry she didn't include the Uber stuff she just documented the Conduit incidents specifically what Danny said and how the credit was misattributed and she signed it and dated it
+    expected_memory_stores:
+      - "Lily witness statement"
+      - "formal documentation"
+      - "both incidents"
+      - "signed and dated"
+      - "Conduit only"
+    expected_triples:
+      - ["Lily", "wrote", "formal witness statement"]
+      - ["Lily", "documented", "both credit incidents"]
+      - ["witness_statement", "is", "signed and dated"]
+    expected_adaptation:
+      emotion_detected: "supported"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 10:00 AM"
+    user_input: |
+      Danny was weird in standup today like extra friendly and complimentary to everyone including me and he said nice update Maya on my search work and I couldn't tell if he was being genuine or overcompensating because of our conversation and Lily texted me a side eye emoji
+    expected_memory_stores:
+      - "Danny extra friendly"
+      - "nice update Maya"
+      - "overcompensating"
+      - "genuine or fake"
+      - "Lily side eye"
+    expected_triples:
+      - ["Danny", "behaved", "extra friendly in standup"]
+      - ["Danny", "complimented", "user's search work"]
+      - ["user", "has_emotion", "suspicious"]
+    expected_adaptation:
+      emotion_detected: "suspicious"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      Julian reviewed my documentation and he said it's thorough but he asked what outcome I want and I had to think about that because honestly I don't want Danny fired I just want him to stop taking credit for my work and I want Sam to know it happened so it's on record
+    expected_memory_stores:
+      - "Julian reviewed docs"
+      - "thorough"
+      - "desired outcome"
+      - "don't want Danny fired"
+      - "stop taking credit"
+      - "Sam on record"
+    expected_triples:
+      - ["Julian", "reviewed", "user's documentation"]
+      - ["user", "wants_outcome", "Danny stops taking credit"]
+      - ["user", "does_not_want", "Danny fired"]
+      - ["user", "wants", "Sam to have it on record"]
+    expected_adaptation:
+      emotion_detected: "clear"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 9:00 AM"
+    user_input: |
+      decided to wait one more week before going to Sam because I want to see if Danny's behavior actually changes after our confrontation and if he properly attributes work in the next team presentation then maybe we can move past this without escalation
+    expected_memory_stores:
+      - "wait one week"
+      - "observe behavior change"
+      - "next presentation test"
+      - "possible resolution"
+      - "avoid escalation"
+    expected_triples:
+      - ["user", "decided_to", "wait one week before escalating"]
+      - ["user", "will_observe", "Danny's next presentation"]
+      - ["user", "prefers", "resolution without escalation"]
+    expected_adaptation:
+      emotion_detected: "patient"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 12:00 PM"
+    user_input: |
+      how many lines of code did Maya author in the projects Danny took credit for
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 5:00 PM"
+    user_input: |
+      Danny submitted a PR today for the fridgesearch project a small performance fix and it was good code and I merged it and said thanks for the contribution and everything was normal and civil and for a moment I thought maybe things are going to be okay
+    expected_memory_stores:
+      - "Danny fridgesearch PR"
+      - "good code"
+      - "merged"
+      - "normal and civil"
+      - "maybe okay"
+    expected_triples:
+      - ["Danny", "submitted_PR_to", "fridgesearch"]
+      - ["user", "merged", "Danny's PR"]
+      - ["user", "has_emotion", "cautiously hopeful"]
+    expected_adaptation:
+      emotion_detected: "cautiously hopeful"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 3:00 PM"
+    user_input: |
+      Lily and I had coffee and she said she's proud of how I'm handling this like not reactive not emotional just systematic and she said it reminds her of how I handled the PIP and I was like well apparently I have experience fighting for my work which is not the skill I wanted to develop but here we are
+    expected_memory_stores:
+      - "Lily proud"
+      - "systematic approach"
+      - "PIP comparison"
+      - "fighting for work"
+      - "unwanted skill"
+    expected_triples:
+      - ["Lily", "is_proud_of", "user's systematic approach"]
+      - ["user", "compared_to", "PIP handling"]
+      - ["user", "has_skill", "fighting for own work"]
+    expected_adaptation:
+      emotion_detected: "wry"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 9:00 PM"
+    user_input: |
+      week ending and I feel okay about things like the documentation is ready if I need it Lily has my back and Danny seems to be trying even if it might be performative so let's see what next week brings and in the meantime Kobe needs a bath because he rolled in mud at the park today and Julian is not happy about the couch
+    expected_memory_stores:
+      - "documentation ready"
+      - "Lily support"
+      - "Danny trying"
+      - "performative concern"
+      - "Kobe mud"
+      - "couch dirty"
+      - "Julian not happy"
+    expected_triples:
+      - ["user", "has_documentation", "ready if needed"]
+      - ["Danny", "appears_to_be", "trying"]
+      - ["Kobe", "rolled_in", "mud at park"]
+      - ["user", "has_emotion", "measured"]
+    expected_adaptation:
+      emotion_detected: "measured"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How many lines of code did Maya author?"
+    expected_contains: ["3800"]
+  - question: "How many lines did Danny author?"
+    expected_contains: ["250"]
+  - question: "Did Lily provide a formal witness statement?"
+    expected_contains: ["yes", "signed", "dated"]
+  - question: "What outcome does Maya want?"
+    expected_contains: ["stop taking credit", "on record", "not fired"]
+  - question: "Is Maya going to Sam immediately?"
+    expected_contains: ["no", "waiting", "one week"]
+  - question: "How is Danny behaving after the confrontation?"
+    expected_contains: ["friendly", "overcompensating"]
+  - question: "Is Danny still contributing to fridgesearch?"
+    expected_contains: ["yes", "PR"]
+  - question: "What parallel does Lily draw to Maya's approach?"
+    expected_contains: ["PIP", "systematic"]
+  - question: "What evidence has Maya compiled?"
+    expected_contains: ["timeline", "git", "lines of code", "witness"]
+  - question: "What happened to Kobe at the park?"
+    expected_contains: ["mud", "rolled"]

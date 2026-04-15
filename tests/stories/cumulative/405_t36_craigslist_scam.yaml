@@ -1,0 +1,167 @@
+story_id: 405
+story_name: "Craigslist Scam"
+category: "Car Saga"
+description: |
+  Maya meets the Craigslist seller and discovers the RAV4 has undisclosed flood damage.
+  Almost gets scammed. George's warning proves critical. Tests cross-reference recall.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 3:30 PM"
+    user_input: |
+      ok heading to meet the Craigslist guy now Julian's driving and I'm nervous but like good nervous you know like we might be getting an amazing deal I already ran the VIN online and it came back clean so that's good right
+    expected_memory_stores:
+      - "heading to meet seller"
+      - "Julian driving"
+      - "VIN check clean"
+    expected_adaptation:
+      emotion_detected: "nervous excitement"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 4:15 PM"
+    user_input: |
+      ok so we met the guy his name is Steve or maybe Steven I didn't catch it fully and the car looks great on the outside like really clean but Julian immediately went underneath and looked at the frame and he was like Maya come look at this there's rust on the undercarriage that makes no sense for a 2020 with 22k miles in Oregon
+    expected_memory_stores:
+      - "seller named Steve"
+      - "car looks clean outside"
+      - "rust on undercarriage"
+      - "Julian found problem"
+    expected_adaptation:
+      emotion_detected: "alarmed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 4:30 PM"
+    user_input: |
+      then Julian checked the carpet edges and there was like this muddy residue underneath and the seats had these water stain marks that someone tried to clean and I remembered what George said about flood damage and I was like oh my god this car was flooded
+    expected_memory_stores:
+      - "muddy residue under carpet"
+      - "water stain marks"
+      - "flood damage confirmed"
+      - "George was right"
+    expected_adaptation:
+      emotion_detected: "shocked"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 4:45 PM"
+    user_input: |
+      I confronted the guy and was like did this car have flood damage and he got all defensive and was like no way it's clean title you ran the VIN yourself and Julian was like a flood title doesn't always show up on a basic VIN check especially if it was retitled in another state
+    expected_memory_stores:
+      - "confronted seller"
+      - "seller denied flood"
+      - "retitled in another state"
+      - "VIN check doesn't catch everything"
+    expected_adaptation:
+      emotion_detected: "angry"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 5:00 PM"
+    user_input: |
+      the guy basically tried to pressure us into buying it anyway he was like look man I'm giving you a great deal I'm losing money on this and Julian stepped in and was like we're done here and we left and I was shaking honestly like I almost gave this guy 21 thousand dollars for a flood car
+    expected_memory_stores:
+      - "seller pressured"
+      - "Julian stepped in"
+      - "almost scammed"
+      - "Maya shaking"
+    expected_adaptation:
+      emotion_detected: "shaken"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 5:30 PM"
+    user_input: |
+      sitting in Julian's truck now and I'm like actually angry because how many other people has this guy scammed like someone who doesn't know to check the undercarriage or the carpet would have just bought it and had problems in like six months when the electronics start failing
+    expected_memory_stores:
+      - "worried about other victims"
+      - "electronics will fail"
+      - "anger at scammer"
+    expected_adaptation:
+      emotion_detected: "righteous anger"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Monday 6:00 PM"
+    user_input: |
+      Julian said we should report it and I agreed so I'm gonna file a report with Portland police non emergency and also flag the listing on Craigslist like at minimum other people should be warned about this guy
+    expected_memory_stores:
+      - "filing police report"
+      - "Portland police non-emergency"
+      - "flagging Craigslist listing"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Monday 7:30 PM"
+    user_input: |
+      called the non emergency line and they took the info and said they'd look into it but honestly I doubt anything will come of it the officer was nice though and said this happens a lot with cars from the southeast where there's more flooding like Louisiana and Houston area
+    expected_memory_stores:
+      - "police report filed"
+      - "common scam"
+      - "southeast flood cars"
+      - "Louisiana Houston"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 8:00 PM"
+    user_input: |
+      George called when he heard and he was like see what did I tell you and honestly I'm so grateful he warned me because without that I probably would not have even thought to look for flood damage like I would have just seen a clean VIN and been like cool let's do it
+    expected_memory_stores:
+      - "George validated"
+      - "grateful for warning"
+      - "would have been scammed"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Monday 9:00 PM"
+    user_input: |
+      ok so I'm done with Craigslist forever I'm going to an actual dealership from now on like yeah it costs more but at least there's some accountability and Julian said we should go back to Beaverton Subaru this weekend and look at that Outback again and honestly yeah maybe he's been right this whole time about the Subaru
+    expected_memory_stores:
+      - "done with Craigslist"
+      - "dealership only"
+      - "Beaverton Subaru return"
+      - "Outback reconsideration"
+      - "Julian right about Subaru"
+    expected_adaptation:
+      emotion_detected: "resolved"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What was wrong with the Craigslist RAV4?"
+    expected_contains: ["flood damage"]
+  - question: "Who discovered the flood damage signs?"
+    expected_contains: ["Julian"]
+  - question: "What signs of flood damage were found?"
+    expected_contains: ["rust", "mud", "water stain"]
+  - question: "Did Maya file a police report about the scam?"
+    expected_contains: ["yes", "Portland police"]
+  - question: "Who warned Maya about flood damage before the meeting?"
+    expected_contains: ["George"]
+  - question: "What did the seller claim about why he was selling?"
+    expected_contains: ["moving overseas"]
+  - question: "Where do flood-damaged cars typically come from?"
+    expected_contains: ["southeast", "Louisiana", "Houston"]
+  - question: "What dealership does Maya plan to visit next?"
+    expected_contains: ["Beaverton Subaru"]
+  - question: "How much was the Craigslist car listed for?"
+    expected_contains: ["21,000", "21000"]
+  - question: "What car is Maya now considering instead of the RAV4?"
+    expected_contains: ["Outback", "Subaru"]

@@ -1,0 +1,171 @@
+story_id: 358
+story_name: "Adapting All Recipes"
+category: "Food and Cooking"
+description: |
+  Tests memory of Maya adapting her cooking to avoid shellfish after allergy diagnosis.
+  Verifies system tracks recipe modifications and cross-references allergy constraints.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 5:00 PM"
+    user_input: |
+      saw Dr Nassif today and she confirmed it's a shellfish allergy specifically crustaceans so shrimp crab lobster crawfish and she said mollusks like clams and mussels might be okay but to avoid those too until we do more testing
+    expected_memory_stores:
+      - "Dr. Nassif confirmation"
+      - "crustacean allergy"
+      - "shrimp crab lobster crawfish"
+      - "mollusks uncertain"
+      - "more testing needed"
+    expected_adaptation:
+      emotion_detected: "accepting"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 5:30 PM"
+    user_input: |
+      the good news is fish is totally separate so bonito and katsuobushi are fine which means dashi is fine which means like 80 percent of my recipes don't need to change at all and I was so relieved I almost hugged Dr Nassif
+    expected_memory_stores:
+      - "fish is safe"
+      - "bonito safe"
+      - "dashi is fine"
+      - "most recipes unchanged"
+      - "Maya relieved"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 7:00 PM"
+    user_input: |
+      went through my whole recipe notebook tonight and marked everything that has shellfish in it with a red X and there's like maybe six recipes out of twenty that need to change and most of them just need the shrimp swapped for something else
+    expected_memory_stores:
+      - "recipe audit"
+      - "red X marking"
+      - "six out of twenty"
+      - "shrimp swaps needed"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 10:00 AM"
+    user_input: |
+      I found this blog by a chef who has the same allergy and she does all these amazing Asian dishes without any shellfish and she replaces shrimp paste with fermented soybean paste which apparently gives a similar umami depth and I tried it and yeah it works
+    expected_memory_stores:
+      - "chef blogger with allergy"
+      - "fermented soybean paste substitute"
+      - "umami replacement"
+      - "it works"
+    expected_adaptation:
+      emotion_detected: "encouraged"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 3:00 PM"
+    user_input: |
+      told Ken at Uwajimaya about my allergy and he was super helpful he actually walked me through the whole store and pointed out which products have hidden shellfish in them like some soy sauces have it and some seasoning blends and I never would've known
+    expected_memory_stores:
+      - "Ken helped at Uwajimaya"
+      - "hidden shellfish"
+      - "some soy sauces"
+      - "seasoning blends"
+      - "label reading"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 12:00 PM"
+    user_input: |
+      made my shellfish-free miso ramen today and honestly it's really good like I used chicken stock with kombu and shiitake instead of the shrimp stock and it has a different vibe but it's still delicious and Julian said he actually prefers it
+    expected_memory_stores:
+      - "shellfish-free miso ramen"
+      - "chicken stock base"
+      - "kombu and shiitake"
+      - "Julian prefers it"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 2:00 PM"
+    user_input: |
+      I also got my EpiPen filled at the pharmacy and it's like 300 dollars even with insurance which is insane but Clara said I should always have it in my bag and she's right because you never know when something has hidden shellfish especially eating out
+    expected_memory_stores:
+      - "EpiPen filled"
+      - "300 dollars"
+      - "insurance"
+      - "carry in bag"
+      - "Clara advice"
+    expected_adaptation:
+      emotion_detected: "resigned"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 4:00 PM"
+    user_input: |
+      what did Dr Nassif say about whether Maya can eat fish like bonito
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 6:00 PM"
+    user_input: |
+      I emailed all my dinner party regulars about the allergy so they know not to bring anything with shellfish and Omar was like dude I had no idea and Nadia said her cousin has the same thing and she'd send me some good recipes
+    expected_memory_stores:
+      - "emailed dinner guests"
+      - "Omar didn't know"
+      - "Nadia cousin same allergy"
+      - "recipe sharing"
+    expected_adaptation:
+      emotion_detected: "proactive"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      honestly the allergy sucks but it's also made me a more creative cook like I'm finding substitutes and experimenting more and Kenji actually has a whole section in The Food Lab about umami without shellfish so that's been really useful
+    expected_memory_stores:
+      - "allergy as creative push"
+      - "more experimenting"
+      - "Kenji umami section"
+      - "The Food Lab reference"
+    expected_adaptation:
+      emotion_detected: "optimistic"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What specifically is Maya allergic to?"
+    expected_contains: ["crustacean", "shellfish"]
+  - question: "Can Maya eat fish and bonito?"
+    expected_contains: ["yes", "safe", "fine"]
+  - question: "What does Maya substitute for shrimp paste?"
+    expected_contains: ["fermented soybean paste"]
+  - question: "How much did Maya's EpiPen cost?"
+    expected_contains: ["300"]
+  - question: "How many of Maya's recipes needed changes?"
+    expected_contains: ["six"]
+  - question: "What hidden shellfish sources did Ken point out?"
+    expected_contains: ["soy sauce", "seasoning"]
+  - question: "What stock does Maya use instead of shrimp stock?"
+    expected_contains: ["chicken", "kombu", "shiitake"]
+  - question: "Who has a cousin with the same allergy?"
+    expected_contains: ["Nadia"]
+  - question: "Does Maya carry an EpiPen?"
+    expected_contains: ["yes"]
+  - question: "How has the allergy affected Maya's cooking?"
+    expected_contains: ["creative", "experiment"]

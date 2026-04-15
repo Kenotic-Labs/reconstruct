@@ -1,0 +1,175 @@
+story_id: 523
+story_name: "Digital Declutter"
+category: "Phone and Digital Life"
+description: |
+  Maya unsubscribes from newsletters, deletes unused apps, and cleans up her digital
+  life. Cross-references work at Conduit (T6), mental health (T21), climbing (T21),
+  and screen time goals.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      ok so I've decided to do a full digital declutter like a proper one because having the new phone with a clean slate made me realize how much garbage was on my old phone and in my email and everywhere and I read this article about digital minimalism and it said start with your inbox
+    expected_memory_stores:
+      - "digital declutter decision"
+      - "clean slate realization"
+      - "digital minimalism article"
+      - "starting with inbox"
+    expected_adaptation:
+      emotion_detected: "motivated"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 8:00 PM"
+    user_input: |
+      opened my email and I have 4,287 unread emails which is disgusting honestly and I started unsubscribing from newsletters and oh my god there are SO many like I apparently signed up for emails from every store I've ever bought anything from and cooking sites and tech blogs and climbing gear companies and I've unsubscribed from like 15 so far
+    expected_memory_stores:
+      - "4287 unread emails"
+      - "unsubscribing from newsletters"
+      - "store emails cooking tech climbing"
+      - "15 unsubscribed so far"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      unsubscribed from 40 newsletters total over two days and I can already feel the difference like my email used to be this avalanche every morning and now it's actually manageable and Julian watched me do it and said you look like you're breaking up with 40 people and honestly that's exactly what it felt like
+    expected_memory_stores:
+      - "40 newsletters unsubscribed"
+      - "email manageable now"
+      - "Julian's breakup analogy"
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 8:30 PM"
+    user_input: |
+      deleted 12 apps from my phone that I haven't used in months like there was a meditation app I downloaded after a therapy session and never opened and a recipe app I used once before I found better websites and three games I don't play and a period tracker that I stopped using and two shopping apps and a couple random ones
+    expected_memory_stores:
+      - "deleted 12 apps"
+      - "meditation app never opened"
+      - "recipe app used once"
+      - "three games"
+      - "period tracker stopped"
+      - "shopping apps"
+    expected_adaptation:
+      emotion_detected: "decisive"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 9:00 AM"
+    user_input: |
+      checked my screen time report this morning and yesterday I was at 2 hours and 10 minutes which is way down from the 4.5 hours I used to average before the phone cracked and it's because I'm not mindlessly scrolling newsletters or opening apps I don't need and I feel like I got two extra hours in my day
+    expected_memory_stores:
+      - "screen time 2hr 10min"
+      - "down from 4.5 hours"
+      - "less mindless scrolling"
+      - "two extra hours feeling"
+    expected_adaptation:
+      emotion_detected: "liberated"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      told Raj at work about the digital declutter and he was like oh I need to do that too and I said yeah I had over 4000 unread emails and he said amateur I have 12000 and we both laughed and then Priya overheard and said she has zero unread emails and we were like Priya you're not human
+    expected_memory_stores:
+      - "told Raj about declutter"
+      - "Raj has 12000 unread"
+      - "Priya has zero unread"
+      - "Priya not human joke"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      organized my home screen so the first page is only essential apps and everything else is on the second page which I have to swipe to and it sounds small but it means I pick up my phone and see Camera Messages Maps and Calendar instead of Instagram TikTok and Twitter and that tiny change matters a lot psychologically
+    expected_memory_stores:
+      - "home screen organized"
+      - "essential apps first page"
+      - "social media second page"
+      - "psychological impact"
+    expected_adaptation:
+      emotion_detected: "intentional"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      finally installed Instagram back on but I set a 15 minute daily limit on it and I unfollowed like 200 accounts that were just noise like brands and influencers and people I don't know and I kept friends and art accounts and climbing stuff and my feed is actually enjoyable now instead of this anxious scroll of comparison
+    expected_memory_stores:
+      - "Instagram reinstalled"
+      - "15 minute daily limit"
+      - "unfollowed 200 accounts"
+      - "kept friends art climbing"
+      - "no more comparison scroll"
+    expected_adaptation:
+      emotion_detected: "controlled"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 8:00 PM"
+    user_input: |
+      told Dr. Tate about the digital declutter and she was really positive about it she said a lot of her clients struggle with phone addiction and the fact that I'm being intentional about it shows growth and she asked if I think the phone-free time contributed to my lower anxiety and I said honestly yeah I think it did
+    expected_memory_stores:
+      - "Dr. Tate session"
+      - "phone addiction comment"
+      - "intentional shows growth"
+      - "phone-free reduces anxiety"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 6:00 PM"
+    user_input: |
+      end of the week and my average screen time is 2 hours and 30 minutes down from 4.5 and I feel mentally lighter and I read a whole book this week and went on three walks without my phone and I actually noticed things like there's a house on our street with a lemon tree that I've walked past a hundred times and never saw and that's what being present looks like
+    expected_memory_stores:
+      - "average screen time 2.5 hours"
+      - "down from 4.5"
+      - "read a whole book"
+      - "three phone-free walks"
+      - "lemon tree discovery"
+      - "being present"
+    expected_adaptation:
+      emotion_detected: "transformed"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How many newsletters did Maya unsubscribe from?"
+    expected_contains: ["40"]
+  - question: "How many apps did Maya delete?"
+    expected_contains: ["12"]
+  - question: "What is Maya's new average screen time?"
+    expected_contains: ["2.5", "2 hours 30"]
+  - question: "What limit did Maya set on Instagram?"
+    expected_contains: ["15 minute"]
+  - question: "How many accounts did Maya unfollow?"
+    expected_contains: ["200"]
+  - question: "How many unread emails did Maya have?"
+    expected_contains: ["4287", "4000"]
+  - question: "How many unread emails does Raj have?"
+    expected_contains: ["12000"]
+  - question: "How many unread emails does Priya have?"
+    expected_contains: ["zero"]
+  - question: "What did Maya discover on a phone-free walk?"
+    expected_contains: ["lemon tree"]
+  - question: "What did Dr. Tate say about the digital declutter?"
+    expected_contains: ["intentional", "growth"]

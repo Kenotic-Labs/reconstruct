@@ -1,0 +1,186 @@
+story_id: 487
+story_name: "Book Club Becomes Monthly Highlight"
+category: "Book Club"
+description: |
+  Tests memory of book club solidifying as a key social tradition.
+  Establishes consistent attendance, anticipation, group bonding.
+  Verifies system captures routine establishment and emotional value.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      so I was just thinking about how book club has become like this thing I look forward to every single month and Nadia and I were talking about it and she said it's her favorite night of the month too and we've done what four meetings now and the last two have been amazing and people are actually reading and showing up and the themed snacks have become like a competition
+    expected_memory_stores:
+      - "monthly highlight"
+      - "Nadia's favorite night"
+      - "four meetings"
+      - "last two amazing"
+      - "people reading showing up"
+      - "snack competition"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      the group dynamic is really good now like everyone has their role Marcus is the funny one who makes jokes about every book Omar brings the deep emotional insights Lily has the analytical literary perspective Tessa connects everything to real world social issues Nadia keeps everyone organized and I guess I'm the host and the person who won't let it die
+    expected_memory_stores:
+      - "group roles"
+      - "Marcus funny"
+      - "Omar emotional"
+      - "Lily analytical"
+      - "Tessa social issues"
+      - "Nadia organized"
+      - "Maya host and guardian"
+    expected_adaptation:
+      emotion_detected: "aware"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 12:00 PM"
+    user_input: |
+      so people at work are asking about the book club now like Danny Ruiz was like can I come and I said maybe eventually and Aisha Johnson said she's been wanting to join a book club and Sam said he would come but he reads too slow and I was like Sam you played 200 hours of Stardew Valley you have time to read
+    expected_memory_stores:
+      - "Danny wants to join"
+      - "Aisha interested"
+      - "Sam reads too slow"
+      - "Stardew 200 hours reference"
+      - "expanding interest"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 6:30 PM"
+    user_input: |
+      I'm reading Klara and the Sun and it's hitting different because it's about an artificial intelligence observing human relationships and I keep thinking about my work at Conduit and how we're building AI systems and this book is about what AI might feel and I highlighted like every other page and Julian saw my copy and was like you murdered that book with a highlighter
+    expected_memory_stores:
+      - "reading Klara and Sun"
+      - "AI observing humans"
+      - "Conduit AI parallel"
+      - "what AI might feel"
+      - "highlighted extensively"
+      - "Julian book comment"
+    expected_adaptation:
+      emotion_detected: "engrossed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 7:00 PM"
+    user_input: |
+      Tessa texted the group and said she's making robot shaped cookies for the meeting which is hilarious and Nadia said she found blue and silver decorations and Marcus said he's bringing a bottle of something called Artifical Intelligence wine which apparently exists and I was like this group is unhinged and I love it
+    expected_memory_stores:
+      - "Tessa robot cookies"
+      - "Nadia blue silver decorations"
+      - "Marcus AI wine"
+      - "group enthusiastic"
+      - "unhinged and loveable"
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:00 AM"
+    user_input: |
+      I told Dr Tate about book club and how it went from almost dying to being my favorite monthly thing and she said that's a great example of persistence and she said it's interesting that I put the same energy into saving book club as I did into learning guitar and climbing and she said I have a pattern of committing to things that create connection
+    expected_memory_stores:
+      - "Dr Tate book club"
+      - "almost dying to favorite"
+      - "persistence example"
+      - "same energy as guitar climbing"
+      - "pattern of commitment"
+      - "creating connection"
+    expected_adaptation:
+      emotion_detected: "insightful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 2:00 PM"
+    user_input: |
+      I'm making a book club playlist for background music at the meetings and I put in some classical stuff and lo-fi beats and Julian contributed some indie tracks and I also put Knockin on Heavens Door on there as a joke because it's the only song I know on guitar and also I played a little guitar while making the playlist because multitasking
+    expected_memory_stores:
+      - "book club playlist"
+      - "classical lo-fi indie"
+      - "Julian contributed"
+      - "Knockin on Heavens Door joke"
+      - "guitar while making playlist"
+    expected_adaptation:
+      emotion_detected: "creative"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 4:00 PM"
+    user_input: |
+      what is the current book the book club is reading
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 6:00 PM"
+    user_input: |
+      I was looking back at photos from the last few meetings and we've taken group photos at each one and you can see the group getting more comfortable like the first photo everyone's posed and stiff and the last one Nadia has her arm around Omar and Marcus is doing rabbit ears behind Lily and Tessa is laughing so hard her eyes are closed and that's real friendship right there
+    expected_memory_stores:
+      - "group photos each meeting"
+      - "getting more comfortable"
+      - "first photo stiff"
+      - "latest photo relaxed"
+      - "Nadia arm around Omar"
+      - "Marcus rabbit ears"
+      - "Tessa laughing"
+      - "real friendship"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 8:00 PM"
+    user_input: |
+      texted Jenny and told her about book club and she said she wishes she lived in Portland so she could join and I said you can do a virtual join sometime and she said maybe and then she asked about the wedding song practice and I said it's going great and she said good because she's been planning the logistics for the surprise and she has the DJ booth thing all figured out
+    expected_memory_stores:
+      - "told Jenny about book club"
+      - "Jenny wishes Portland"
+      - "virtual join idea"
+      - "wedding song update"
+      - "Jenny planning logistics"
+      - "DJ booth figured out"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What has book club become for Maya?"
+    expected_contains: ["monthly highlight", "favorite"]
+  - question: "What role does each person play in book club?"
+    expected_contains: ["Marcus funny", "Omar emotional", "Lily analytical"]
+  - question: "What themed snacks are being made for Klara and the Sun?"
+    expected_contains: ["robot cookies", "AI wine"]
+  - question: "What pattern did Dr. Tate identify in Maya?"
+    expected_contains: ["commitment", "connection"]
+  - question: "What does Maya see in the group photos over time?"
+    expected_contains: ["comfortable", "relaxed", "friendship"]
+  - question: "What AI connection does Maya see in Klara and the Sun?"
+    expected_contains: ["Conduit", "building AI"]
+  - question: "Who wants to join book club from work?"
+    expected_contains: ["Danny", "Aisha"]
+  - question: "What is the current book club book?"
+    expected_contains: ["Klara and the Sun"]
+  - question: "What is Jenny's role in the wedding song plan?"
+    expected_contains: ["logistics", "DJ booth"]
+  - question: "Who made the book club playlist?"
+    expected_contains: ["Maya"]

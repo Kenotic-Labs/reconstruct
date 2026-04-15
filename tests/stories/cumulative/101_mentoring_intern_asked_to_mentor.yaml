@@ -1,0 +1,204 @@
+story_id: 101
+story_name: "Asked to Mentor Intern"
+category: "Career"
+description: |
+  Tests whether the system captures a new mentoring assignment, registers the intern's name
+  and role, detects Maya's mixed emotions (excitement + anxiety), and links to existing
+  workplace context at Conduit Systems.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:15am"
+    user_input: |
+      ok so like Sam Okafor just pulled me into his office this morning and um he wants me to mentor the new intern? her name is Aisha Johnson she's starting next week and I guess she's a CS junior from Portland State
+    expected_memory_stores:
+      - "mentor"
+      - "Aisha Johnson"
+      - "intern"
+      - "Sam Okafor"
+      - "Portland State"
+    expected_triples:
+      - ["Sam Okafor", "asked_user_to", "mentor new intern"]
+      - ["Aisha Johnson", "is", "intern"]
+      - ["Aisha Johnson", "attends", "Portland State"]
+      - ["Aisha Johnson", "is_a", "CS junior"]
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 9:18am"
+    user_input: |
+      like honestly I'm kind of flattered that Sam picked me but also like... I've never mentored anyone before you know? what if I'm terrible at it and she doesn't learn anything and it's just a waste of her time
+    expected_memory_stores:
+      - "first time mentoring"
+      - "self-doubt"
+      - "flattered"
+    expected_triples:
+      - ["user", "has_never", "mentored anyone before"]
+      - ["user", "has_emotion", "flattered"]
+      - ["user", "has_emotion", "anxious"]
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 12:30pm"
+    user_input: |
+      told Julian about the intern thing at lunch and he was like babe you're gonna be great you literally explain code to me all the time which is... not the same thing lol but it was sweet
+    expected_memory_stores:
+      - "Julian"
+      - "supportive"
+      - "lunch conversation"
+    expected_triples:
+      - ["Julian", "encouraged", "user about mentoring"]
+      - ["Julian", "said", "you explain code to me all the time"]
+      - ["user", "has_emotion", "amused"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 3:00pm"
+    user_input: |
+      so I looked up some mentoring best practices and apparently you're supposed to have like a structured onboarding plan? I literally have no plan. Aisha starts Monday. that's five days.
+    expected_memory_stores:
+      - "onboarding plan"
+      - "five days"
+      - "preparation"
+    expected_triples:
+      - ["user", "needs_to_create", "structured onboarding plan"]
+      - ["Aisha", "starts_in", "five days"]
+      - ["user", "has_emotion", "stressed"]
+    expected_adaptation:
+      emotion_detected: "stressed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 6:00pm"
+    user_input: |
+      wait actually I think I should make her a doc with like the codebase overview and the main repos she'll need access to. the API service is in like four different repos and it took ME two months to figure that out when I started
+    expected_memory_stores:
+      - "codebase overview"
+      - "documentation"
+      - "API service"
+      - "four repos"
+    expected_triples:
+      - ["user", "planning_to_create", "codebase overview doc for Aisha"]
+      - ["API_service", "spans", "four different repos"]
+      - ["user", "has_emotion", "motivated"]
+    expected_adaptation:
+      emotion_detected: "motivated"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 8:45am"
+    user_input: |
+      spent like two hours last night writing up the onboarding doc and honestly? it's pretty good. I included the repo map, the dev environment setup, and the main architectural decisions. Julian said I was being extra but whatever
+    expected_memory_stores:
+      - "onboarding document completed"
+      - "repo map"
+      - "dev environment"
+      - "architectural decisions"
+    expected_triples:
+      - ["user", "completed", "onboarding document"]
+      - ["onboarding_doc", "contains", "repo map, dev environment setup, architecture decisions"]
+      - ["user", "has_emotion", "proud"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 2:00pm"
+    user_input: |
+      um random question do you know what my dog's name is
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 10:00am"
+    user_input: |
+      Sam sent me Aisha's resume and she's actually really impressive? like she's done two internships already, one at Nike and one at some startup, and she knows Python and JavaScript and even some Rust
+    expected_memory_stores:
+      - "Aisha resume"
+      - "Nike internship"
+      - "Python"
+      - "JavaScript"
+      - "Rust"
+    expected_triples:
+      - ["Aisha", "interned_at", "Nike"]
+      - ["Aisha", "knows", "Python, JavaScript, Rust"]
+      - ["user", "has_emotion", "impressed"]
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 4:00pm"
+    user_input: |
+      ok wait I just realized I said Aisha had two previous internships but actually looking at her resume again it was three, she also did one at Intel the summer before. my bad
+    expected_memory_stores:
+      - "correction"
+      - "three internships"
+      - "Intel"
+    expected_triples:
+      - ["user", "corrected", "two internships → three internships"]
+      - ["Aisha", "interned_at", "Intel"]
+      - ["Aisha", "has_total_internships", "three"]
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 9:00pm"
+    user_input: |
+      feeling weirdly nervous about Monday like it's MY first day or something. took Kobe for a long walk to clear my head. Julian's working late on a freelance logo so it's just me and the dog tonight
+    expected_memory_stores:
+      - "nervous"
+      - "Kobe walk"
+      - "Julian freelance"
+      - "logo project"
+    expected_triples:
+      - ["user", "has_emotion", "anxious"]
+      - ["user", "walked", "Kobe to clear head"]
+      - ["Julian", "working_on", "freelance logo project"]
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who is Maya mentoring?"
+    expected_contains: ["Aisha Johnson", "intern"]
+  - question: "Who asked Maya to be a mentor?"
+    expected_contains: ["Sam Okafor"]
+  - question: "Where does Aisha go to school?"
+    expected_contains: ["Portland State"]
+  - question: "How many previous internships has Aisha had?"
+    expected_contains: ["three"]
+  - question: "What companies did Aisha intern at before?"
+    expected_contains: ["Nike", "Intel"]
+  - question: "What did Maya prepare for Aisha?"
+    expected_contains: ["onboarding", "doc"]
+  - question: "How does Maya feel about mentoring?"
+    expected_contains: ["nervous", "flattered"]
+  - question: "What programming languages does Aisha know?"
+    expected_contains: ["Python", "JavaScript", "Rust"]
+  - question: "What is Julian working on?"
+    expected_contains: ["freelance", "logo"]
+  - question: "What is Maya's dog's name?"
+    expected_contains: ["Kobe"]

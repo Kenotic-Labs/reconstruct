@@ -1,0 +1,176 @@
+story_id: 388
+story_name: "Practice Becomes Daily Non-Negotiable"
+category: "Mental Health"
+description: |
+  Tests memory of meditation becoming Maya's daily anchor.
+  Verifies system tracks habit permanence and identity integration.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 AM"
+    user_input: |
+      60 day streak on Insight Timer today and I almost can't believe it because two months ago I couldn't sit still for two minutes and now 15 minutes of meditation is as automatic as making coffee
+    expected_memory_stores:
+      - "60 day streak"
+      - "two months"
+      - "couldn't sit still"
+      - "15 minutes automatic"
+      - "like making coffee"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 6:00 AM"
+    user_input: |
+      woke up late and had 20 minutes before I had to leave for work and I chose to meditate for 10 minutes instead of checking my phone which is the first time I've prioritized meditation over doom scrolling and it felt like a real choice
+    expected_memory_stores:
+      - "woke up late"
+      - "chose meditation over phone"
+      - "prioritized"
+      - "real choice"
+      - "10 minutes"
+    expected_adaptation:
+      emotion_detected: "intentional"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      Sam noticed I don't react to production alerts the same way anymore like I used to get this surge of adrenaline and now I just breathe check the dashboard and respond methodically and he was like whatever you're doing keep doing it
+    expected_memory_stores:
+      - "Sam noticed change"
+      - "production alerts"
+      - "no adrenaline surge"
+      - "breathe check respond"
+      - "methodical"
+    expected_adaptation:
+      emotion_detected: "centered"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 7:00 AM"
+    user_input: |
+      I've started doing a thing where I set an intention at the beginning of meditation like today my intention was patience and then throughout the day when I feel impatient I remember the morning intention and it pulls me back
+    expected_memory_stores:
+      - "morning intention"
+      - "patience intention"
+      - "throughout day"
+      - "pulls back"
+      - "new technique"
+    expected_adaptation:
+      emotion_detected: "growing"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 6:00 PM"
+    user_input: |
+      missed my morning meditation because of an early work call and I felt off the ENTIRE day like genuinely unsettled and Julian was like you're proving Dr Tate's point it's become non-negotiable for you and I'm like yeah I guess it has
+    expected_memory_stores:
+      - "missed morning meditation"
+      - "felt off all day"
+      - "unsettled"
+      - "Julian observation"
+      - "non-negotiable"
+    expected_adaptation:
+      emotion_detected: "uncomfortable"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 7:00 AM"
+    user_input: |
+      back to my 15 minutes this morning and the relief of returning to it was so noticeable like my whole body relaxed when I sat down on my cushion and I realized I bought a meditation cushion when did that happen I'm officially a meditation person
+    expected_memory_stores:
+      - "back to 15 minutes"
+      - "relief returning"
+      - "body relaxed"
+      - "meditation cushion"
+      - "officially meditation person"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 10:00 AM"
+    user_input: |
+      Dr Tate said she's genuinely impressed because most people she recommends meditation to try it for a week and stop and I've been going for two months and she said it's clearly become a pillar not just a practice
+    expected_memory_stores:
+      - "Dr. Tate impressed"
+      - "most people stop after week"
+      - "two months consistent"
+      - "pillar not practice"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 2:00 PM"
+    user_input: |
+      has Maya's meditation practice become a daily habit
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 7:00 AM"
+    user_input: |
+      I wrote down my meditation non-negotiables like a contract with myself one no phone before meditation two minimum 10 minutes three do it before 8 AM and four if I miss morning I do evening in Sellwood no excuses
+    expected_memory_stores:
+      - "meditation rules"
+      - "no phone before"
+      - "minimum 10 minutes"
+      - "before 8 AM"
+      - "evening backup"
+      - "no excuses"
+    expected_adaptation:
+      emotion_detected: "committed"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      Jenny noticed on our FaceTime that I seem like calmer and more centered and she said whatever you're doing in Portland keep doing it and I told her about the meditation and she was like okay I take back what I said about meditation people you're still cool
+    expected_memory_stores:
+      - "Jenny noticed calm"
+      - "more centered"
+      - "told about meditation"
+      - "Jenny approved"
+      - "still cool"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How long is Maya's meditation streak?"
+    expected_contains: ["60"]
+  - question: "Is meditation negotiable for Maya?"
+    expected_contains: ["non-negotiable"]
+  - question: "What happens when Maya misses morning meditation?"
+    expected_contains: ["off", "unsettled", "entire day"]
+  - question: "What are Maya's meditation rules?"
+    expected_contains: ["no phone", "minimum 10", "before 8 AM"]
+  - question: "What did Dr. Tate call Maya's meditation?"
+    expected_contains: ["pillar"]
+  - question: "Does Maya own a meditation cushion?"
+    expected_contains: ["yes"]
+  - question: "How has meditation changed Maya at work?"
+    expected_contains: ["calm", "methodical", "breathe"]
+  - question: "What new technique is Maya using in meditation?"
+    expected_contains: ["intention", "morning"]
+  - question: "What did Sam say about Maya's change?"
+    expected_contains: ["whatever you're doing", "keep"]
+  - question: "What does Maya do if she misses morning meditation?"
+    expected_contains: ["evening", "Sellwood"]

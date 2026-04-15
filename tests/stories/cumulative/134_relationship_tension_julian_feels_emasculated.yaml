@@ -1,0 +1,211 @@
+story_id: 134
+story_name: "Julian Feels Emasculated"
+category: "Relationships"
+description: |
+  Tests whether the system captures Julian's emotional state about the financial
+  imbalance, the signs Maya notices, and the growing distance between them before
+  the big confrontation.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00am"
+    user_input: |
+      Julian's been weird the last few days. like quiet. he's not his usual jokey self. this morning at Bark and Brew he insisted on paying and when the barista said oh she already tapped her card Julian looked... deflated? like it physically bothered him that I paid first
+    expected_memory_stores:
+      - "Julian quiet"
+      - "Bark and Brew"
+      - "insisted on paying"
+      - "Maya paid first"
+      - "Julian deflated"
+    expected_triples:
+      - ["Julian", "insisted_on", "paying at Bark and Brew"]
+      - ["user", "paid_first", "at Bark and Brew"]
+      - ["Julian", "has_emotion", "deflated"]
+      - ["user", "has_emotion", "worried"]
+    expected_adaptation:
+      emotion_detected: "worried"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 12:00pm"
+    user_input: |
+      he's spending more time in his studio with the door closed. like usually it's open and he'll call out random thoughts or show me what he's working on but this week the door is shut and he's got headphones on. I think he knows something is off between us
+    expected_memory_stores:
+      - "studio door closed"
+      - "headphones on"
+      - "withdrawing"
+      - "something off"
+    expected_triples:
+      - ["Julian", "withdrawing_to", "studio with door closed"]
+      - ["Julian", "wearing", "headphones"]
+      - ["user", "notices", "Julian is pulling away"]
+    expected_adaptation:
+      emotion_detected: "sad"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 3:00pm"
+    user_input: |
+      I heard him on the phone with his friend Marcus talking about money stuff. he was like man I feel like I'm not pulling my weight and Maya's too nice to say anything but I can tell. so he KNOWS. he sees it. he just doesn't know what to do about it either
+    expected_memory_stores:
+      - "Julian phone with Marcus"
+      - "not pulling weight"
+      - "Maya too nice"
+      - "Julian aware"
+      - "doesn't know what to do"
+    expected_triples:
+      - ["Julian", "told", "Marcus he's not pulling his weight"]
+      - ["Julian", "aware", "Maya notices the financial imbalance"]
+      - ["user", "overheard", "Julian's phone call with Marcus"]
+      - ["user", "has_emotion", "heartbroken"]
+    expected_adaptation:
+      emotion_detected: "heartbroken"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Sunday 10:00am"
+    user_input: |
+      we went grocery shopping together and Julian kept putting stuff back. like he'd pick something up, look at the price, and put it back. I've never seen him do that before. he always bought whatever he wanted. the financial stress is changing him and it's hard to watch
+    expected_memory_stores:
+      - "grocery shopping"
+      - "Julian putting things back"
+      - "price checking"
+      - "behavior change"
+      - "hard to watch"
+    expected_triples:
+      - ["Julian", "started", "putting groceries back due to price"]
+      - ["Julian", "changed_behavior", "price checking at grocery store"]
+      - ["user", "has_emotion", "pained"]
+    expected_adaptation:
+      emotion_detected: "pained"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Sunday 2:00pm"
+    user_input: |
+      tried to suggest we do something fun this afternoon and Julian said we should probably save money and just stay in. and I was like Julian it's fine we can afford to go out and he snapped and said YOU can afford it Maya. and then he apologized immediately but like... there it is
+    expected_memory_stores:
+      - "Julian snapped"
+      - "YOU can afford it"
+      - "immediate apology"
+      - "truth surfaced"
+    expected_triples:
+      - ["Julian", "snapped", "YOU can afford it Maya"]
+      - ["Julian", "apologized", "immediately after snapping"]
+      - ["user", "has_emotion", "stung"]
+    expected_adaptation:
+      emotion_detected: "stung"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 5:00pm"
+    user_input: |
+      what did Julian say to Marcus on the phone about money
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 7:00pm"
+    user_input: |
+      dinner was quiet. Kobe sat under the table between our feet like he always does but even he seemed subdued. Julian broke the silence and said hey I know things are weird right now and I'm sorry. I said I know and you don't have to apologize for having a slow month. but it's been more than a month now honestly
+    expected_memory_stores:
+      - "quiet dinner"
+      - "Kobe subdued"
+      - "Julian acknowledged weirdness"
+      - "more than a month"
+    expected_triples:
+      - ["Julian", "acknowledged", "things are weird between them"]
+      - ["user", "admitted", "financial tension has been more than a month"]
+      - ["Kobe", "sensed", "tension at dinner"]
+    expected_adaptation:
+      emotion_detected: "heavy"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Monday 9:00am"
+    user_input: |
+      at work and I told Aisha I think Julian and I need to have a serious talk about money and she goes money conversations are the worst but they're necessary and that's surprisingly wise for a 21-year-old intern. she's growing up
+    expected_memory_stores:
+      - "told Aisha"
+      - "serious money talk needed"
+      - "Aisha wise advice"
+      - "21 years old"
+    expected_triples:
+      - ["user", "told", "Aisha about needing serious money talk with Julian"]
+      - ["Aisha", "advised", "money conversations are necessary"]
+      - ["Aisha", "is_age", "21"]
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 6:00pm"
+    user_input: |
+      Julian told me tonight that his income last month ended up being 2100 total not 1800 like he originally thought because one late payment came through. so it's a little better but still way below his usual 3500. the gap is still there
+    expected_memory_stores:
+      - "correction"
+      - "Julian income 2100 not 1800"
+      - "late payment"
+      - "still below 3500"
+    expected_triples:
+      - ["Julian", "corrected", "income $1800 → $2100 last month"]
+      - ["Julian", "received", "late payment"]
+      - ["Julian", "usual_income", "$3500"]
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Monday 10:00pm"
+    user_input: |
+      I'm going to do it tomorrow. I'm going to talk to him. Dr. Tate said this week and it's already Monday night. I wrote down some notes in my phone about what I want to say because I know I'll get emotional and lose my words. this is the conversation that either makes us stronger or shows us where we're broken
+    expected_memory_stores:
+      - "tomorrow conversation"
+      - "notes in phone"
+      - "Dr. Tate deadline"
+      - "makes or breaks"
+    expected_triples:
+      - ["user", "plans_to", "talk to Julian tomorrow about money"]
+      - ["user", "prepared", "notes in phone for conversation"]
+      - ["Dr. Tate", "set_deadline", "this week for the conversation"]
+      - ["user", "has_emotion", "resolved"]
+    expected_adaptation:
+      emotion_detected: "resolved"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How has Julian been acting about money?"
+    expected_contains: ["quiet", "putting things back", "price checking"]
+  - question: "What did Julian say when he snapped?"
+    expected_contains: ["YOU can afford it"]
+  - question: "What did Julian tell Marcus on the phone?"
+    expected_contains: ["not pulling weight", "Maya too nice"]
+  - question: "What was Julian's actual income last month?"
+    expected_contains: ["2100"]
+  - question: "What was the original estimate of Julian's income?"
+    expected_contains: ["1800"]
+  - question: "How is Julian's behavior different in his studio?"
+    expected_contains: ["door closed", "headphones"]
+  - question: "When is Maya planning to have the money conversation?"
+    expected_contains: ["tomorrow"]
+  - question: "What did Maya do to prepare for the conversation?"
+    expected_contains: ["notes", "phone"]
+  - question: "How old is Aisha?"
+    expected_contains: ["21"]
+  - question: "What did Aisha say about money conversations?"
+    expected_contains: ["worst", "necessary"]

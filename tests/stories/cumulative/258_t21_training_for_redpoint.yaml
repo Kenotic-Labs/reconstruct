@@ -1,0 +1,181 @@
+story_id: 258
+story_name: "Training for the Redpoint"
+category: "Fitness"
+description: |
+  Tests memory of Maya's focused training week to prepare for her second attempt
+  at Wherever I May Roam. Tracks specific crux practice, mental game work, and
+  growing determination.
+duration_simulated: "4 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 AM"
+    user_input: |
+      okay so I've been replaying that crux move in my head all weekend and I think the issue was I was trying to reach the jug with my right hand but Omar was saying I should have used my left and crossed over which means I was sequencing wrong the whole time
+    expected_memory_stores:
+      - "crux analysis"
+      - "wrong hand sequence"
+      - "should use left hand"
+      - "cross over move"
+      - "Omar advice"
+    expected_adaptation:
+      emotion_detected: "analytical"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 8:30 PM"
+    user_input: |
+      went to Portland Rock Gym tonight and Omar set a problem on the bouldering wall that mimics the crux move from Wherever I May Roam like the same reach and the same kind of holds and I practiced it probably 30 times my skin is wrecked but I can do it now
+    expected_memory_stores:
+      - "Omar set practice problem"
+      - "mimics crux"
+      - "bouldering wall"
+      - "practiced 30 times"
+      - "skin damaged"
+      - "can do the move"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      Nadia was like have you tried visualization because her friend who competes does it before every climb and basically you close your eyes and imagine yourself doing each move successfully and I tried it during lunch break and it felt kind of dumb but also weirdly calming
+    expected_memory_stores:
+      - "Nadia visualization tip"
+      - "competitive friend"
+      - "mental training"
+      - "tried during lunch"
+      - "calming effect"
+    expected_adaptation:
+      emotion_detected: "open-minded"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      Julian was like you know what your problem is you overthink and he's not wrong like I analyze everything to death and Omar said the same thing he was like at some point you just have to commit to the move and trust your body and stop thinking about falling
+    expected_memory_stores:
+      - "Julian observation"
+      - "overthinking problem"
+      - "Omar same advice"
+      - "commit to move"
+      - "stop thinking about falling"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 8:00 PM"
+    user_input: |
+      had an amazing session tonight climbed a 5.10b for the first time it's called Midnight Express and it had this roof section that was HARD but I just committed to it like Omar said and I made it through and I was like YES this is the mindset I need for Saturday
+    expected_memory_stores:
+      - "sent 5.10b"
+      - "Midnight Express"
+      - "roof section"
+      - "committed mindset"
+      - "new grade PR"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 8:00 AM"
+    user_input: |
+      rest day today no climbing Omar's orders he said I need fresh skin and fresh muscles for tomorrow and he's right my fingers are kind of raw from all the crimp training this week so I'll just do some light stretching and visualization
+    expected_memory_stores:
+      - "rest day Friday"
+      - "Omar's orders"
+      - "fresh for tomorrow"
+      - "raw fingers"
+      - "stretching and visualization"
+    expected_adaptation:
+      emotion_detected: "disciplined"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 12:00 PM"
+    user_input: |
+      checked the weather for Smith Rock tomorrow and it's supposed to be like 65 and sunny which Omar says is perfect climbing conditions not too hot so the rock won't be sweaty and not too cold so your fingers stay warm
+    expected_memory_stores:
+      - "weather check"
+      - "65 sunny"
+      - "perfect conditions"
+      - "rock temperature"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 6:00 PM"
+    user_input: |
+      taped my fingers with climbing tape the way Omar showed me to protect the raw spots and packed everything for tomorrow including extra chalk because last time my hands were super sweaty from nerves and that probably didn't help with the crux
+    expected_memory_stores:
+      - "finger taping"
+      - "extra chalk"
+      - "sweaty hands last time"
+      - "packed gear"
+    expected_adaptation:
+      emotion_detected: "prepared"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 9:00 PM"
+    user_input: |
+      did the visualization thing one more time and I can see the whole route in my head now like every hold every foot placement and the crux move I reach with my left hand cross over and grab the jug and then it's easy slab climbing to the top. I can do this.
+    expected_memory_stores:
+      - "visualization"
+      - "route memorized"
+      - "left hand cross over"
+      - "jug hold"
+      - "slab to top"
+      - "confidence"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 10:30 PM"
+    user_input: |
+      Julian made me chamomile tea and Kobe's on my feet and tomorrow I'm going to send Wherever I May Roam I know it. alarm set for 4:45 AM this time because Omar wants to be at the crag by sunrise to get the route before anyone else
+    expected_memory_stores:
+      - "chamomile tea"
+      - "Julian caring"
+      - "alarm 4:45 AM"
+      - "sunrise arrival"
+      - "get route first"
+    expected_adaptation:
+      emotion_detected: "calm"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What was wrong with Maya's sequence on the crux?"
+    expected_contains: ["wrong hand", "left", "cross over"]
+  - question: "What new grade did Maya send in the gym this week?"
+    expected_contains: ["5.10b"]
+  - question: "What is the name of the 5.10b Maya sent?"
+    expected_contains: ["Midnight Express"]
+  - question: "What mental training technique did Maya try?"
+    expected_contains: ["visualization"]
+  - question: "Who suggested visualization to Maya?"
+    expected_contains: ["Nadia"]
+  - question: "What is the weather forecast for Smith Rock?"
+    expected_contains: ["65", "sunny"]
+  - question: "What did Omar tell Maya about the crux move?"
+    expected_contains: ["commit", "trust"]
+  - question: "What time is Maya's alarm set for?"
+    expected_contains: ["4:45"]
+  - question: "Why did Maya bring extra chalk?"
+    expected_contains: ["sweaty hands", "nerves"]
+  - question: "How did Maya protect her raw fingers?"
+    expected_contains: ["tape"]

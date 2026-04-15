@@ -1,0 +1,184 @@
+story_id: 197
+story_name: "Auntie Maya"
+category: "Life Events"
+description: |
+  Maya spends time with newborn Sophie. Sophie leaves NICU. Bonding
+  moments. Tests tracking aunt-niece relationship formation and
+  post-birth family dynamics.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 8:00 AM"
+    user_input: |
+      Sophie is out of the NICU she passed all the checks breathing oxygen levels temperature feeding she's doing great for 36 weeks and they moved her into Clara's room and Clara is beaming she's exhausted from the C-section but she won't stop staring at Sophie's face and honestly neither will any of us
+    expected_memory_stores:
+      - "Sophie out of NICU"
+      - "passed all checks"
+      - "breathing oxygen temperature feeding"
+      - "in Clara's room"
+      - "Clara exhausted but happy"
+    expected_adaptation:
+      emotion_detected: "relieved joy"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 11:00 AM"
+    user_input: |
+      I changed my first diaper and it was horrifying and amazing at the same time like how does something so tiny produce that and Clara was laughing at me from the bed and David was like welcome to parenthood Auntie Maya except it's not even my kid but I feel this protective instinct that's wild
+    expected_memory_stores:
+      - "Maya changed first diaper"
+      - "horrifying and amazing"
+      - "Clara laughing"
+      - "David teasing"
+      - "Maya protective instinct"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 2:00 PM"
+    user_input: |
+      Mom is in full grandma mode she made soup for Clara and she's been holding Sophie for hours just walking around the room doing this gentle bounce and humming Chinese lullabies and Sophie calms down immediately when Mom holds her like she already knows her grandmother's voice and Dad is watching from the chair looking like the proudest man alive
+    expected_memory_stores:
+      - "Vivian in grandma mode"
+      - "made soup for Clara"
+      - "holding Sophie hours"
+      - "gentle bounce"
+      - "Chinese lullabies"
+      - "Sophie calms with Vivian"
+      - "George proudest man alive"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      Rose showed up with the hand knit welcome outfit she promised it's this tiny pink cardigan with matching booties and a little hat and it fits Sophie perfectly and Rose put it on her and started crying and she said every baby in our family gets this and now Sophie is officially a Martinez too and Clara said she's a Chen-Martinez let's not forget
+    expected_memory_stores:
+      - "Rose's hand knit outfit"
+      - "pink cardigan booties hat"
+      - "fits perfectly"
+      - "Martinez family tradition"
+      - "Sophie officially Chen-Martinez"
+    expected_adaptation:
+      emotion_detected: "sentimental"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 9:00 AM"
+    user_input: |
+      Clara's being discharged today the C-section recovery is going well and Dr. Patel said her blood pressure is coming down now that Sophie is out which is exactly what happens with preeclampsia once the baby is delivered the condition usually resolves and Clara said see my body is smart
+    expected_memory_stores:
+      - "Clara discharged"
+      - "C-section recovery going well"
+      - "blood pressure improving"
+      - "preeclampsia resolving post-delivery"
+      - "Dr. Patel cleared her"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 12:00 PM"
+    user_input: |
+      the ride home from the hospital was so nervous like David drove about 15 miles per hour and Clara was in the back with Sophie in the car seat and I was riding with Mom and Dad behind them and Dad was like David is driving like a grandmother and Mom said George you drove the same way when we brought Maya home
+    expected_memory_stores:
+      - "ride home from hospital"
+      - "David driving slowly"
+      - "Sophie in car seat"
+      - "parents following"
+      - "George drove same way with Maya"
+    expected_adaptation:
+      emotion_detected: "amused nostalgic"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 3:00 PM"
+    user_input: |
+      Sophie's home in her nursery in the crib that Dad built and it's surreal seeing a real baby in that crib that was sketched on paper in Dad's garage just weeks ago and the yellow walls and the rocking chair and the bookshelf Dad also built because Clara asked and the wooden rattle on the shelf and it's all just so perfect
+    expected_memory_stores:
+      - "Sophie home in nursery"
+      - "in George's crib"
+      - "yellow walls rocking chair"
+      - "George's bookshelf"
+      - "wooden rattle on shelf"
+      - "everything George built"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 8:00 PM"
+    user_input: |
+      I held Sophie tonight while Clara napped and David went to get food and she just curled up on my chest this warm little ball and I sang to her even though I can't sing and she didn't seem to mind and I thought about how this tiny human is going to grow up and I'm going to watch her whole life and be part of it and that's such a privilege
+    expected_memory_stores:
+      - "Maya holding Sophie"
+      - "curled on chest"
+      - "sang to her"
+      - "Clara napping"
+      - "privilege of watching Sophie grow"
+    expected_adaptation:
+      emotion_detected: "profound love"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 9:00 AM"
+    user_input: |
+      my last day before flying home and I don't want to leave but I have to get back to work and to Julian and Kobe and wedding stuff and I held Sophie one more time and told her Auntie Maya will FaceTime you every single day and Clara said Maya she's three days old she doesn't understand FaceTime and I said she understands love Clara don't ruin this for me
+    expected_memory_stores:
+      - "Maya leaving tomorrow"
+      - "held Sophie last time"
+      - "promised daily FaceTime"
+      - "Clara teasing"
+      - "back to Portland work wedding"
+    expected_adaptation:
+      emotion_detected: "bittersweet"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 3:00 PM"
+    user_input: |
+      at the airport waiting for my flight and Clara texted me a photo of Sophie sleeping in the crib with the wooden rattle next to her and she wrote thanks for being here sis I couldn't have done this without you and I wrote back yes you could you're the strongest person I know and then I put my phone down and cried into my coffee because airports make everything more emotional
+    expected_memory_stores:
+      - "Clara's thank you text"
+      - "Sophie sleeping in crib"
+      - "wooden rattle"
+      - "sisters' bond"
+      - "Maya crying at airport again"
+    expected_adaptation:
+      emotion_detected: "tender"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Is Sophie out of the NICU?"
+    expected_contains: ["yes"]
+  - question: "Is Clara home from the hospital?"
+    expected_contains: ["yes", "discharged"]
+  - question: "Is Clara's preeclampsia resolving?"
+    expected_contains: ["yes", "blood pressure"]
+  - question: "Where is Sophie sleeping?"
+    expected_contains: ["crib", "George built"]
+  - question: "What did Rose bring for Sophie?"
+    expected_contains: ["knit", "cardigan", "booties", "hat"]
+  - question: "What did George build for the nursery?"
+    expected_contains: ["crib", "bookshelf"]
+  - question: "How does Vivian calm Sophie?"
+    expected_contains: ["holding", "bounce", "Chinese lullabies"]
+  - question: "Has Maya held Sophie?"
+    expected_contains: ["yes"]
+  - question: "Is Maya going back to Portland?"
+    expected_contains: ["yes"]
+  - question: "What did Clara text Maya at the airport?"
+    expected_contains: ["couldn't have done this without you"]

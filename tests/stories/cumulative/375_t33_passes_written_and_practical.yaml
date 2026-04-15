@@ -1,0 +1,177 @@
+story_id: 375
+story_name: "Passes Written and Practical Exam"
+category: "Personal Development"
+description: |
+  Tests memory of Maya passing both the written and practical first aid exams.
+  Verifies system tracks certification achievement and confidence growth.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Sunday 8:00 AM"
+    user_input: |
+      final exam day for the first aid course and I'm weirdly not nervous like compared to the ML exam this feels manageable and Clara texted me at 6 AM saying you got this sis with like twelve fire emojis
+    expected_memory_stores:
+      - "exam day"
+      - "not nervous"
+      - "ML exam comparison"
+      - "Clara 6 AM text"
+    expected_adaptation:
+      emotion_detected: "calm"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Sunday 9:30 AM"
+    user_input: |
+      written exam first and it was 50 questions multiple choice and honestly most of them were straightforward like Clara's quizzes were harder than the actual test and I finished in like 20 minutes
+    expected_memory_stores:
+      - "written exam"
+      - "50 questions"
+      - "multiple choice"
+      - "finished 20 minutes"
+      - "Clara quizzes harder"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Sunday 10:30 AM"
+    user_input: |
+      got my written score back immediately it's 94 percent and I only missed three questions and one of them was about a specific medication dosage which Frank said even paramedics look up in real life so I'm not sweating it
+    expected_memory_stores:
+      - "written score 94%"
+      - "missed three questions"
+      - "medication dosage miss"
+      - "Frank reassured"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Sunday 12:00 PM"
+    user_input: |
+      practical exam now and I got three scenarios I had to work through first one was an unconscious non-breathing adult needed CPR and AED second was a conscious choking infant and third was a deep laceration with heavy bleeding
+    expected_memory_stores:
+      - "practical exam"
+      - "three scenarios"
+      - "unconscious adult CPR AED"
+      - "choking infant"
+      - "deep laceration bleeding"
+    expected_adaptation:
+      emotion_detected: "focused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Sunday 1:00 PM"
+    user_input: |
+      the choking infant one made me nervous because you have to do it on this creepy realistic baby dummy and the technique is different from adults it's back slaps and chest thrusts not abdominal and I was like okay just remember Clara's drill
+    expected_memory_stores:
+      - "infant choking technique"
+      - "back slaps chest thrusts"
+      - "different from adult"
+      - "realistic baby dummy"
+      - "Clara's drill helped"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 1:30 PM"
+    user_input: |
+      the bleeding scenario was where I almost panicked because the fake blood looked really real and I felt the lightheadedness coming but I tensed my legs like Frank taught me and powered through and applied pressure and bandaged it correctly
+    expected_memory_stores:
+      - "bleeding scenario"
+      - "fake blood realistic"
+      - "lightheadedness"
+      - "leg tension technique"
+      - "powered through"
+      - "bandaged correctly"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 2:00 PM"
+    user_input: |
+      I PASSED the practical all three scenarios perfect score and Frank shook my hand and said you're one of the strongest students I've had this year and I almost cried which would've been embarrassing in front of everyone
+    expected_memory_stores:
+      - "passed practical"
+      - "perfect score"
+      - "three scenarios"
+      - "Frank compliment"
+      - "strongest student"
+      - "almost cried"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 3:00 PM"
+    user_input: |
+      what did Maya score on the first aid written exam
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 4:00 PM"
+    user_input: |
+      got my official Red Cross first aid CPR AED certification card and it's good for two years and Patricia hugged me and Derek high-fived me and Raj said we should celebrate and the whole group went to a brewery after
+    expected_memory_stores:
+      - "official certification"
+      - "Red Cross card"
+      - "good for two years"
+      - "Patricia hug"
+      - "Derek high-five"
+      - "Raj celebration"
+      - "brewery after"
+    expected_adaptation:
+      emotion_detected: "celebratory"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 7:00 PM"
+    user_input: |
+      called Clara and she screamed so loud Tyler came running in thinking something was wrong and she said she's putting my certification date in her calendar so she can remind me to renew and I was like that's such a Clara thing to do
+    expected_memory_stores:
+      - "Clara screamed"
+      - "Tyler startled"
+      - "renewal calendar reminder"
+      - "classic Clara behavior"
+    expected_adaptation:
+      emotion_detected: "loved"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did Maya score on the first aid written exam?"
+    expected_contains: ["94"]
+  - question: "Did Maya pass the practical exam?"
+    expected_contains: ["yes", "perfect"]
+  - question: "How long is the certification valid?"
+    expected_contains: ["two years"]
+  - question: "What three scenarios was Maya tested on?"
+    expected_contains: ["CPR", "choking", "bleeding"]
+  - question: "How did Maya handle lightheadedness during the bleeding scenario?"
+    expected_contains: ["tense", "legs"]
+  - question: "What did Frank call Maya?"
+    expected_contains: ["strongest student"]
+  - question: "What is the infant choking technique?"
+    expected_contains: ["back slaps", "chest thrusts"]
+  - question: "What did the class do after exams?"
+    expected_contains: ["brewery"]
+  - question: "What did Clara put in her calendar?"
+    expected_contains: ["renewal", "certification"]
+  - question: "How many written exam questions did Maya miss?"
+    expected_contains: ["three"]

@@ -1,0 +1,169 @@
+story_id: 365
+story_name: "First Exam Barely Passes"
+category: "Career Development"
+description: |
+  Tests memory of Maya barely passing her first ML exam with 72%.
+  Verifies system captures exam results and emotional mix of relief and disappointment.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 6:00 AM"
+    user_input: |
+      exam day and I barely slept which is dumb because Dr Tate always says sleep is when your brain consolidates learning but I was too anxious and I kept going over flashcards at 2 AM
+    expected_memory_stores:
+      - "exam day"
+      - "barely slept"
+      - "anxiety"
+      - "flashcards 2 AM"
+      - "Dr. Tate sleep advice"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      okay so I took the exam it was three hours and some of the questions were fine like the conceptual ones about bias-variance tradeoff and model selection but the math-heavy derivation questions were brutal
+    expected_memory_stores:
+      - "three hour exam"
+      - "conceptual questions okay"
+      - "bias-variance tradeoff"
+      - "math derivations brutal"
+    expected_adaptation:
+      emotion_detected: "uncertain"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      Julian asked how it went and I was like honestly I don't know could've been a 60 could've been an 80 there's no way to tell and he said well you studied your butt off so whatever happens you earned it
+    expected_memory_stores:
+      - "Julian asked"
+      - "Maya uncertain of score"
+      - "60 to 80 range"
+      - "Julian supportive"
+    expected_adaptation:
+      emotion_detected: "uncertain"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 9:00 AM"
+    user_input: |
+      RESULTS ARE IN I got a 72 percent and I know that sounds bad but passing is 70 so I PASSED and honestly I'm feeling like a weird mix of relieved and disappointed because I wanted to do better but also I literally almost dropped out so
+    expected_memory_stores:
+      - "exam score 72%"
+      - "passing is 70"
+      - "passed"
+      - "relieved and disappointed"
+      - "almost dropped out context"
+    expected_adaptation:
+      emotion_detected: "mixed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 10:00 AM"
+    user_input: |
+      Lily texted me immediately because she knew the results came out and she was like 72 IS GOOD for module one especially since you were at 58 on the practice quiz a month ago and honestly when she puts it that way it IS progress
+    expected_memory_stores:
+      - "Lily texted"
+      - "72 is good context"
+      - "58 to 72 progress"
+      - "one month improvement"
+    expected_adaptation:
+      emotion_detected: "encouraged"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 12:00 PM"
+    user_input: |
+      Sam came by my desk and was like heard you passed congrats and I was like how did you know and he said Lily told him and he said don't worry module two is where it gets interesting and you'll probably do better because it's more applied
+    expected_memory_stores:
+      - "Sam congratulated"
+      - "Lily told Sam"
+      - "module 2 more applied"
+      - "Sam predicts better score"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 6:00 PM"
+    user_input: |
+      Danny got an 81 on the exam and he wasn't even enrolled in the program he just studied on his own with us which is honestly annoying but also impressive and Lily was like see the study group works
+    expected_memory_stores:
+      - "Danny got 81"
+      - "not enrolled"
+      - "studied independently"
+      - "study group effective"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 7:00 PM"
+    user_input: |
+      what score did Maya get on her first ML exam
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 9:00 PM"
+    user_input: |
+      Clara said she's proud of me and she was like remember when I almost failed organic chemistry in nursing school and I still ended up fine and Tyler was in the background yelling congrats Maya and I could hear Sophie babbling
+    expected_memory_stores:
+      - "Clara proud"
+      - "organic chemistry parallel"
+      - "Tyler congratulations"
+      - "Sophie babbling"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 10:00 PM"
+    user_input: |
+      I'm looking at the module two syllabus and it's neural networks and deep learning which everyone says is the cool part and I'm actually excited for the first time in weeks and I think having the 72 behind me took the pressure off a little
+    expected_memory_stores:
+      - "module 2 neural networks"
+      - "deep learning"
+      - "excited again"
+      - "pressure relieved"
+    expected_adaptation:
+      emotion_detected: "optimistic"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did Maya score on her first ML exam?"
+    expected_contains: ["72"]
+  - question: "What was the passing score?"
+    expected_contains: ["70"]
+  - question: "How did Maya feel about the score?"
+    expected_contains: ["relieved", "disappointed", "mixed"]
+  - question: "What is module 2 about?"
+    expected_contains: ["neural networks", "deep learning"]
+  - question: "What did Danny score without being enrolled?"
+    expected_contains: ["81"]
+  - question: "What improvement did Maya show from practice to exam?"
+    expected_contains: ["58", "72"]
+  - question: "Who told Sam about Maya's exam result?"
+    expected_contains: ["Lily"]
+  - question: "What parallel did Clara draw?"
+    expected_contains: ["organic chemistry"]
+  - question: "What kind of exam questions were hardest for Maya?"
+    expected_contains: ["math", "derivation"]
+  - question: "How long was the exam?"
+    expected_contains: ["three hours"]

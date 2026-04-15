@@ -1,0 +1,218 @@
+story_id: 138
+story_name: "The Honest Conversation"
+category: "Relationships"
+description: |
+  Tests whether the system captures the pivotal honest conversation about money,
+  both sides' perspectives, the vulnerability shown, and the specific agreements
+  they reach together.
+duration_simulated: "1 evening"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 7:00pm"
+    user_input: |
+      we ate dinner first like we agreed. the pasta was perfect. Julian even lit a candle which is his way of saying this is a safe space. after we ate I said ok should we talk? and he said yeah let's do this
+    expected_memory_stores:
+      - "dinner first"
+      - "pasta"
+      - "candle lit"
+      - "safe space"
+      - "started conversation"
+    expected_triples:
+      - ["user", "ate", "dinner with Julian before conversation"]
+      - ["Julian", "lit", "candle as safe space signal"]
+      - ["user", "initiated", "the honest conversation"]
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 7:15pm"
+    user_input: |
+      I started with I love you, which Clara told me to do first, and then I said I'm sorry for keeping score and for sighing when I paid for things and for not talking to you sooner. Julian's eyes got wet immediately and he said thank you for saying that
+    expected_memory_stores:
+      - "started with love"
+      - "Clara's advice followed"
+      - "apologized for scorekeeping"
+      - "apologized for sighing"
+      - "Julian emotional"
+    expected_triples:
+      - ["user", "started_with", "I love you per Clara's advice"]
+      - ["user", "apologized_for", "scorekeeping and sighing"]
+      - ["Julian", "has_emotion", "emotional and grateful"]
+    expected_adaptation:
+      emotion_detected: "vulnerable"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 7:30pm"
+    user_input: |
+      then Julian talked and he was really honest. he said the hardest part isn't the money it's feeling like he's failing me as a partner. he said his dad always provided for the family and he grew up thinking that's what men do and when he can't do that he feels worthless
+    expected_memory_stores:
+      - "Julian's honesty"
+      - "failing as partner"
+      - "Julian's dad provided"
+      - "grew up believing men provide"
+      - "feels worthless"
+    expected_triples:
+      - ["Julian", "feels", "failing user as a partner"]
+      - ["Julian", "dad", "always provided for family"]
+      - ["Julian", "grew_up_believing", "men should provide"]
+      - ["Julian", "has_emotion", "worthless when he can't provide"]
+    expected_adaptation:
+      emotion_detected: "empathetic"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 7:45pm"
+    user_input: |
+      I told him that his dad's model isn't the only model and that partnership means we carry things together and sometimes one person carries more and then the other person carries more and that's ok. and I said your cooking and your laundry and the way you take care of Kobe IS providing for this family
+    expected_memory_stores:
+      - "partnership model"
+      - "carrying together"
+      - "alternating weight"
+      - "non-financial providing"
+      - "cooking laundry Kobe"
+    expected_triples:
+      - ["user", "told", "Julian that partnership means carrying things together"]
+      - ["user", "affirmed", "Julian's cooking, laundry, and Kobe care as providing"]
+      - ["user", "reframed", "partnership as alternating who carries more"]
+    expected_adaptation:
+      emotion_detected: "compassionate"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 8:00pm"
+    user_input: |
+      he said something that really moved me. he said Maya I chose to be a freelance artist knowing it would be unstable and I never want that choice to become your burden. and I said it's not a burden Julian it's just something we need to plan for instead of pretending it doesn't exist
+    expected_memory_stores:
+      - "Julian's choice"
+      - "freelance instability acknowledged"
+      - "not a burden"
+      - "plan instead of pretend"
+    expected_triples:
+      - ["Julian", "said", "chose freelance art knowing it would be unstable"]
+      - ["Julian", "said", "never wants his choice to be user's burden"]
+      - ["user", "said", "need to plan for instability not pretend it doesn't exist"]
+    expected_adaptation:
+      emotion_detected: "mature"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 8:15pm"
+    user_input: |
+      ok so we came up with a plan. we're going to create a shared budget on Google Sheets, like Clara and Tyler do. everything transparent. both incomes, all expenses, no hiding, no scorekeeping
+    expected_memory_stores:
+      - "shared budget plan"
+      - "Google Sheets"
+      - "transparent"
+      - "both incomes"
+      - "all expenses"
+      - "no hiding"
+    expected_triples:
+      - ["user", "created", "shared budget on Google Sheets with Julian"]
+      - ["user", "agreed_to", "full transparency on incomes and expenses"]
+      - ["user", "modeled_after", "Clara and Tyler's budget system"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 8:30pm"
+    user_input: |
+      the deal is: we contribute proportionally based on income not 50-50 flat. so if Julian makes 40% of our combined income he pays 40% of shared expenses. that way nobody's drowning and nobody's freeloading. Julian actually suggested this which surprised me
+    expected_memory_stores:
+      - "proportional contribution"
+      - "based on income"
+      - "not 50-50"
+      - "40% example"
+      - "Julian suggested"
+      - "fair system"
+    expected_triples:
+      - ["user", "agreed_to", "proportional expense split based on income"]
+      - ["Julian", "suggested", "proportional split not 50-50"]
+      - ["Julian", "example", "pays 40% if earning 40% of combined income"]
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 8:45pm"
+    user_input: |
+      who suggested the proportional budget split
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 9:00pm"
+    user_input: |
+      also agreed on a monthly money check-in. like every first Sunday of the month we sit down and review the budget together. no judgment, no blame, just facts and adjustments. Julian called it our fiscal date night lol
+    expected_memory_stores:
+      - "monthly check-in"
+      - "first Sunday"
+      - "review budget"
+      - "no judgment"
+      - "fiscal date night"
+    expected_triples:
+      - ["user", "agreed_to", "monthly budget check-in on first Sunday"]
+      - ["Julian", "named_it", "fiscal date night"]
+      - ["user", "agreed_to", "no judgment, no blame review"]
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 10:00pm"
+    user_input: |
+      we ended the conversation with a long hug and then Julian goes so... ice cream? and we split the last of that Salt and Straw mint chip and watched TV with Kobe and it felt normal again. better than normal actually because now we have a plan and we both know where we stand. I'm so relieved I could cry. actually I am crying but happy tears this time
+    expected_memory_stores:
+      - "hug"
+      - "ice cream together"
+      - "Salt and Straw"
+      - "felt normal"
+      - "have a plan"
+      - "happy tears"
+    expected_triples:
+      - ["user", "shared", "ice cream with Julian after conversation"]
+      - ["user", "feels", "normal again with a plan"]
+      - ["user", "has_emotion", "relieved"]
+      - ["user", "crying", "happy tears"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How are Maya and Julian splitting expenses now?"
+    expected_contains: ["proportional", "income", "not 50-50"]
+  - question: "Who suggested the proportional split?"
+    expected_contains: ["Julian"]
+  - question: "What tool are they using for their budget?"
+    expected_contains: ["Google Sheets"]
+  - question: "When is their monthly budget check-in?"
+    expected_contains: ["first Sunday"]
+  - question: "What did Julian say about his dad?"
+    expected_contains: ["provided", "family", "men"]
+  - question: "What did Maya say about Julian's non-financial contributions?"
+    expected_contains: ["cooking", "laundry", "Kobe", "providing"]
+  - question: "What did Julian call the monthly check-in?"
+    expected_contains: ["fiscal date night"]
+  - question: "How did they start the conversation?"
+    expected_contains: ["I love you"]
+  - question: "What did Julian say about his freelance choice?"
+    expected_contains: ["chose", "unstable", "never want", "burden"]
+  - question: "How did the evening end?"
+    expected_contains: ["ice cream", "TV", "happy tears"]

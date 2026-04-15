@@ -1,0 +1,180 @@
+story_id: 274
+story_name: "Recalibrating the Budget"
+category: "Finance"
+description: |
+  Tests memory of Maya and Julian recalibrating their budget after the car repair setback.
+  Captures the recovery plan, increased recipe app income, and Julian's growing freelance work.
+duration_simulated: "2 months"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      okay so month four of the payoff plan and with the reduced $800 payment the loan balance is at $29,750 which is still progress just slower than before and the emergency fund is back up to $1,100 so we're rebuilding
+    expected_memory_stores:
+      - "month four"
+      - "balance $29,750"
+      - "$800 payment"
+      - "emergency fund $1,100"
+      - "rebuilding"
+    expected_adaptation:
+      emotion_detected: "steady"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      the recipe app had its best month ever I added a premium tier where people pay $2.99 a month for ad-free plus extra features and about 800 people signed up immediately and between ads and subscriptions I made $620 this month from the app alone
+    expected_memory_stores:
+      - "recipe app premium tier"
+      - "$2.99 monthly"
+      - "800 subscribers"
+      - "$620 monthly revenue"
+      - "best month"
+    expected_adaptation:
+      emotion_detected: "thrilled"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 10:00 AM"
+    user_input: |
+      Julian got a big freelance contract with Bold Studio they want him to do the full brand identity for a new Portland restaurant called Fern and Ember and the contract is $3,500 over two months and he said half is going to the loans and half to the emergency fund
+    expected_memory_stores:
+      - "Julian contract"
+      - "Bold Studio"
+      - "Fern and Ember restaurant"
+      - "$3,500"
+      - "two months"
+      - "half loans half emergency"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      with the app income and Julian's freelance money I think we can go back to $1,200 payments next month instead of waiting the full three months I was planning and the emergency fund is at $1,800 now which is close to the $2,000 target
+    expected_memory_stores:
+      - "back to $1,200 early"
+      - "ahead of schedule"
+      - "emergency fund $1,800"
+      - "close to $2,000 target"
+    expected_adaptation:
+      emotion_detected: "optimistic"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 12:00 PM"
+    user_input: |
+      had lunch with my coworker Priya and she was asking about the app and when I told her it makes over $600 a month she was like Maya that's a real business not a side project and she's right I should probably take it more seriously
+    expected_memory_stores:
+      - "Priya lunch"
+      - "app is real business"
+      - "over $600 monthly"
+      - "take it more seriously"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 9:00 AM"
+    user_input: |
+      month five and the balance is $28,200 we did $1,200 this month plus an extra $400 from the app and Julian's $1,750 first payment from Fern and Ember and emergency fund is at $2,100 so we hit the target and I'm back to feeling good about this
+    expected_memory_stores:
+      - "month five"
+      - "balance $28,200"
+      - "$1,200 plus extra"
+      - "Julian $1,750 Fern and Ember"
+      - "emergency fund $2,100"
+      - "hit target"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Monday 6:00 PM"
+    user_input: |
+      one thing I didn't expect is how much the budgeting has changed how we think about money like Julian used to just buy stuff impulsively and now he's like do we need this or want this and I've stopped buying coffee out every day and we actually cook together now which is nice
+    expected_memory_stores:
+      - "mindset shift"
+      - "Julian less impulsive"
+      - "need vs want"
+      - "no daily coffee out"
+      - "cooking together"
+    expected_adaptation:
+      emotion_detected: "growth"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      the app is up to 18,000 monthly active users now and I got an email from a food brand called DailyHarvest asking about a sponsored integration and they're offering $1,500 for a one-month promotion and I'm like wait companies are paying ME money now?
+    expected_memory_stores:
+      - "18,000 MAU"
+      - "DailyHarvest sponsorship"
+      - "$1,500 offer"
+      - "one month promotion"
+      - "brands paying her"
+    expected_adaptation:
+      emotion_detected: "disbelief"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 8:00 PM"
+    user_input: |
+      month six and we crushed it balance is $26,100 and that includes the DailyHarvest payment which I put entirely toward the loans and at this rate we might actually beat the 26 month revised timeline and be done in like 20 months
+    expected_memory_stores:
+      - "month six"
+      - "balance $26,100"
+      - "DailyHarvest payment to loans"
+      - "beating timeline"
+      - "20 months possible"
+    expected_adaptation:
+      emotion_detected: "triumphant"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:00 AM"
+    user_input: |
+      updated the fridge chart and Julian added another doodle this time it's a mountain with a flag on top that says DEBT FREE and I'm starting to actually believe we're gonna get there and faster than we thought especially with the app income growing
+    expected_memory_stores:
+      - "fridge chart updated"
+      - "Julian mountain doodle"
+      - "debt free flag"
+      - "believing in timeline"
+      - "app income growing"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya's current loan balance?"
+    expected_contains: ["26,100", "26100"]
+  - question: "How much does the recipe app make now?"
+    expected_contains: ["620"]
+  - question: "What brand offered Maya a sponsorship deal?"
+    expected_contains: ["DailyHarvest"]
+  - question: "How much was the DailyHarvest sponsorship?"
+    expected_contains: ["1,500", "1500"]
+  - question: "What freelance project is Julian working on?"
+    expected_contains: ["Fern and Ember"]
+  - question: "How much is the emergency fund at now?"
+    expected_contains: ["2,100", "2100"]
+  - question: "What is the revised payoff timeline?"
+    expected_contains: ["20 months"]
+  - question: "How many active users does the recipe app have?"
+    expected_contains: ["18,000", "18000"]
+  - question: "How much is the premium subscription for the recipe app?"
+    expected_contains: ["2.99"]
+  - question: "Who told Maya the app is a real business?"
+    expected_contains: ["Priya"]

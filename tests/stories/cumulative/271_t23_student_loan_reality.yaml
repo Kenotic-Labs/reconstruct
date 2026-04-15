@@ -1,0 +1,179 @@
+story_id: 271
+story_name: "Student Loan Reality"
+category: "Finance"
+description: |
+  Tests memory of Maya confronting her student loan debt and creating an aggressive payoff plan.
+  Establishes the loan details, her frustration with interest, and the initial budget strategy.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Sunday 10:00 AM"
+    user_input: |
+      okay so I've been avoiding looking at my student loan balance for like months and I finally logged into Navient this morning and it's $34,200 which is like ugh that's more than I thought it was going to be I could've sworn it was under 32K
+    expected_memory_stores:
+      - "student loans"
+      - "Navient"
+      - "$34,200"
+      - "more than expected"
+      - "thought under $32K"
+      - "been avoiding"
+    expected_adaptation:
+      emotion_detected: "dismayed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Sunday 10:30 AM"
+    user_input: |
+      so the interest rate is 5.8% which isn't the worst but it means I'm paying like $165 a month just in interest and right now my minimum payment is $380 which means only $215 actually goes to the principal and at this rate I'll be paying this off for like another 10 years
+    expected_memory_stores:
+      - "5.8% interest rate"
+      - "$165 monthly interest"
+      - "$380 minimum payment"
+      - "$215 to principal"
+      - "10 years at current rate"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Sunday 12:00 PM"
+    user_input: |
+      Julian sat down with me and we went through our budget together and after rent and car insurance and groceries and utilities and Kobe's food and my climbing gym membership we have about $1,800 left over each month and he was like what if we put $1,200 of that toward the loans
+    expected_memory_stores:
+      - "Julian budget session"
+      - "$1,800 leftover monthly"
+      - "Julian suggests $1,200 to loans"
+      - "aggressive payoff"
+    expected_adaptation:
+      emotion_detected: "motivated"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Sunday 1:00 PM"
+    user_input: |
+      if I pay $1,200 a month instead of $380 I could have the loans paid off in about two and a half years which is way better than ten and the total interest paid drops from like $14K to about $5K so it saves us almost $9K in interest which is real money
+    expected_memory_stores:
+      - "$1,200 monthly payment"
+      - "two and a half year payoff"
+      - "saves $9K interest"
+      - "$5K total interest"
+      - "vs $14K at minimum"
+    expected_adaptation:
+      emotion_detected: "empowered"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Sunday 3:00 PM"
+    user_input: |
+      the problem is $1,200 a month to loans means we only have $600 for literally everything else like eating out and fun stuff and unexpected expenses and Julian was like that's tight but doable if we're disciplined and I was like since when are you disciplined and he was like ouch
+    expected_memory_stores:
+      - "$600 left for everything else"
+      - "tight budget"
+      - "discipline needed"
+      - "Julian committed"
+      - "playful banter"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 6:00 PM"
+    user_input: |
+      made a spreadsheet obviously because that's what I do and tracked every single expense we had last month and honestly the biggest money leaks are eating out which was like $450 last month and Julian's art supply orders which were $280 and my climbing gear which was like $200
+    expected_memory_stores:
+      - "expense spreadsheet"
+      - "eating out $450"
+      - "Julian art supplies $280"
+      - "climbing gear $200"
+      - "money leaks identified"
+    expected_adaptation:
+      emotion_detected: "analytical"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Monday 8:00 AM"
+    user_input: |
+      set up autopay for the $1,200 to Navient starting next month and it felt scary hitting confirm but also kind of liberating like we have a plan now and we're executing it instead of just paying the minimum and pretending the debt doesn't exist
+    expected_memory_stores:
+      - "autopay set up"
+      - "$1,200 to Navient"
+      - "starting next month"
+      - "scary but liberating"
+      - "plan in action"
+    expected_adaptation:
+      emotion_detected: "empowered"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Monday 12:00 PM"
+    user_input: |
+      told Nadia about the aggressive payoff plan and she was like girl yes I did the same thing with my loans and she paid off 28K in two years and she said the first few months are the hardest because you feel broke but then you get used to it and it becomes satisfying watching the balance drop
+    expected_memory_stores:
+      - "Nadia did same thing"
+      - "Nadia paid off $28K"
+      - "two years"
+      - "first months hardest"
+      - "satisfying watching balance drop"
+    expected_adaptation:
+      emotion_detected: "encouraged"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 6:00 PM"
+    user_input: |
+      also I've been thinking about that recipe app side project I built last year the one with like 4000 downloads? it makes a tiny bit of ad revenue like $150 a month and I never really cared about it but now every dollar counts so I'm thinking about actually putting effort into it to increase the income
+    expected_memory_stores:
+      - "recipe app"
+      - "side project"
+      - "4000 downloads"
+      - "$150 monthly ad revenue"
+      - "increase income idea"
+    expected_adaptation:
+      emotion_detected: "entrepreneurial"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Monday 9:00 PM"
+    user_input: |
+      Julian just looked at me from across the couch and was like we're gonna crush this debt and I was like yeah we are and Kobe barked like he was agreeing and it was this nice moment like we're a team tackling this thing together. how much do I owe on my loans again I want to remember the starting number
+    expected_memory_stores:
+      - "Julian encouraging"
+      - "Kobe barking"
+      - "team feeling"
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "motivated"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How much does Maya owe in student loans?"
+    expected_contains: ["34,200", "34200"]
+  - question: "Who is Maya's loan servicer?"
+    expected_contains: ["Navient"]
+  - question: "What is the interest rate on Maya's loans?"
+    expected_contains: ["5.8"]
+  - question: "How much is Maya paying per month toward her loans?"
+    expected_contains: ["1,200", "1200"]
+  - question: "How long will it take to pay off at $1,200/month?"
+    expected_contains: ["two and a half", "2.5"]
+  - question: "What side project earns Maya extra income?"
+    expected_contains: ["recipe app"]
+  - question: "How much does the recipe app make monthly?"
+    expected_contains: ["150"]
+  - question: "What were Maya's biggest spending leaks?"
+    expected_contains: ["eating out", "art supplies", "climbing"]
+  - question: "Who inspired Maya with their own loan payoff story?"
+    expected_contains: ["Nadia"]
+  - question: "How much will Maya save in interest with the aggressive plan?"
+    expected_contains: ["9"]

@@ -1,0 +1,175 @@
+story_id: 326
+story_name: "Christmas Cookies from Greg"
+category: "Home Life"
+description: |
+  Tests memory of Greg bringing cookies at Christmas as a peace offering.
+  The relationship shifts from cordial to genuinely friendly. Verifies system
+  tracks relationship evolution across conflict resolution arc.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "December 23 Monday 4:00 PM"
+    user_input: |
+      Greg just knocked on the door and I opened it and he was holding a plate of cookies wrapped in plastic wrap with a little card and he said Merry Christmas Maya and I was honestly kind of stunned
+    expected_memory_stores:
+      - "Greg brought cookies"
+      - "plate plastic wrap"
+      - "card"
+      - "Merry Christmas"
+      - "Maya stunned"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "December 23 Monday 4:15 PM"
+    user_input: |
+      the card said sorry for being a terrible neighbor hope these make up for it a little and they're chocolate chip cookies and they're actually really good like actually good and Julian tried one and was like ok these are amazing
+    expected_memory_stores:
+      - "card apology"
+      - "terrible neighbor"
+      - "chocolate chip cookies"
+      - "really good"
+      - "Julian approved"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "December 23 Monday 5:00 PM"
+    user_input: |
+      told Julian we should bring him something back and Julian agreed and we had that extra bottle of that Willamette Valley pinot noir and I wrapped it with a bow and wrote a card that said Merry Christmas Greg no hard feelings
+    expected_memory_stores:
+      - "reciprocating gift"
+      - "Willamette Valley pinot noir"
+      - "bow and card"
+      - "no hard feelings"
+    expected_adaptation:
+      emotion_detected: "generous"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "December 23 Monday 5:30 PM"
+    user_input: |
+      brought the wine over and Greg opened the door and Noah was there too wearing a little Santa hat and Greg said oh you didn't have to and I said well you didn't have to bring cookies and we both laughed and Noah said can I pet your dog again
+    expected_memory_stores:
+      - "brought wine to Greg"
+      - "Noah Santa hat"
+      - "Greg grateful"
+      - "both laughed"
+      - "Noah wants to pet Kobe"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "December 23 Monday 6:00 PM"
+    user_input: |
+      Noah came over and played with Kobe in our yard for like 30 minutes and Greg stood at the fence watching and we actually talked like normal people and he told me he's been playing bass for 20 years and he used to be in a band called The Low End in his 20s
+    expected_memory_stores:
+      - "Noah played with Kobe"
+      - "30 minutes"
+      - "Greg and Maya talked"
+      - "bass for 20 years"
+      - "band called The Low End"
+      - "in his 20s"
+    expected_adaptation:
+      emotion_detected: "friendly"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "December 23 Monday 6:30 PM"
+    user_input: |
+      he also said the custody thing is getting a little better his lawyer is optimistic about getting more time with Noah and he might get every weekend instead of every other and I said I hope so Greg because Noah seems like a great kid and he got a little emotional
+    expected_memory_stores:
+      - "custody improving"
+      - "lawyer optimistic"
+      - "might get every weekend"
+      - "Noah great kid"
+      - "Greg emotional"
+    expected_adaptation:
+      emotion_detected: "compassionate"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "December 23 Monday 7:00 PM"
+    user_input: |
+      Julian said he's glad we didn't let the neighbor thing turn into a war because now we actually have a decent relationship with Greg and he pointed out that most neighbors just avoid each other forever after a conflict and we didn't do that
+    expected_memory_stores:
+      - "Julian glad"
+      - "didn't turn into war"
+      - "decent relationship"
+      - "most neighbors avoid"
+      - "they didn't"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "December 23 Monday 8:00 PM"
+    user_input: |
+      what was Greg's old band called
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "December 23 Monday 9:00 PM"
+    user_input: |
+      ate three more of Greg's cookies they're dangerously good and Julian said we should ask him for the recipe and honestly I might because these are the best chocolate chip cookies I've ever had and Kobe tried to steal one off the counter
+    expected_memory_stores:
+      - "cookies addictive"
+      - "best ever"
+      - "want recipe"
+      - "Kobe tried to steal"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "December 23 Monday 10:00 PM"
+    user_input: |
+      lying in bed in our quiet house with Julian asleep and Kobe on his bed and no bass thumping through the walls and I thought about how three months ago Greg was my least favorite person and now he brought us Christmas cookies and life is really weird and kind of beautiful sometimes
+    expected_memory_stores:
+      - "quiet house"
+      - "three months ago"
+      - "least favorite to cookies"
+      - "life weird and beautiful"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did Greg bring Maya and Julian for Christmas?"
+    expected_contains: ["cookies", "chocolate chip"]
+  - question: "What did the card say?"
+    expected_contains: ["sorry", "terrible neighbor"]
+  - question: "What did Maya and Julian give Greg?"
+    expected_contains: ["wine", "pinot noir"]
+  - question: "What was Greg's old band called?"
+    expected_contains: ["The Low End"]
+  - question: "How long has Greg been playing bass?"
+    expected_contains: ["20 years"]
+  - question: "How is Greg's custody situation?"
+    expected_contains: ["improving", "every weekend", "optimistic"]
+  - question: "What did Noah do during the Christmas visit?"
+    expected_contains: ["played with Kobe", "Santa hat"]
+  - question: "How is the relationship between Maya and Greg now?"
+    expected_contains: ["friendly", "cordial", "decent"]
+  - question: "What did Maya's card to Greg say?"
+    expected_contains: ["no hard feelings"]
+  - question: "How has the neighbor conflict evolved?"
+    expected_contains: ["resolved", "cookies", "friendly"]

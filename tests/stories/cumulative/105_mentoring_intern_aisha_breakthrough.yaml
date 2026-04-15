@@ -1,0 +1,206 @@
+story_id: 105
+story_name: "Aisha's Breakthrough"
+category: "Career"
+description: |
+  Tests whether the system tracks Aisha's breakthrough moment, connects it to prior
+  struggles, captures Maya's pride and validation, and links to the mentoring investment
+  arc. Cross-thread reference to Maya's engineering identity.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 9:15am"
+    user_input: |
+      ok so something amazing happened. Aisha found a bug in the auth service that's been there for like MONTHS. nobody caught it. it was causing silent failures on password resets for users with special characters in their email
+    expected_memory_stores:
+      - "Aisha found bug"
+      - "auth service"
+      - "password reset bug"
+      - "special characters"
+      - "months old"
+    expected_triples:
+      - ["Aisha", "found_bug_in", "auth service"]
+      - ["bug", "affects", "password resets for emails with special characters"]
+      - ["bug", "existed_for", "months"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 9:20am"
+    user_input: |
+      like this is the same auth service she was totally lost in two weeks ago and now she's finding bugs that the senior engineers missed?? I literally screamed at my desk when she showed me
+    expected_memory_stores:
+      - "growth"
+      - "senior engineers missed"
+      - "Maya reaction"
+    expected_triples:
+      - ["Aisha", "outperformed", "senior engineers at bug detection"]
+      - ["Aisha", "demonstrates", "rapid growth"]
+      - ["user", "has_emotion", "proud"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 10:00am"
+    user_input: |
+      she wrote the fix too and it's clean. like actually clean. proper error handling, edge cases covered, even added a test for the special character scenario. I barely had any comments on the PR
+    expected_memory_stores:
+      - "clean fix"
+      - "error handling"
+      - "edge cases"
+      - "test coverage"
+      - "clean PR"
+    expected_triples:
+      - ["Aisha", "wrote", "clean fix with error handling"]
+      - ["Aisha", "covered", "edge cases"]
+      - ["Aisha", "added", "test for special character scenario"]
+      - ["user", "has_emotion", "impressed"]
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 12:00pm"
+    user_input: |
+      Sam Okafor came by and was like I heard your intern found the password reset bug and he seemed genuinely impressed. told him yeah she's doing great and it felt good to say that and mean it
+    expected_memory_stores:
+      - "Sam Okafor impressed"
+      - "recognition"
+      - "genuine praise"
+    expected_triples:
+      - ["Sam Okafor", "impressed_by", "Aisha finding password reset bug"]
+      - ["user", "praised", "Aisha to Sam Okafor"]
+      - ["user", "has_emotion", "validated"]
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 3:00pm"
+    user_input: |
+      Aisha told me over coffee that she almost quit last week. like she was gonna call the program coordinator and say she wasn't cut out for this. I'm so glad she didn't. I told her about when I almost quit my first year at Conduit
+    expected_memory_stores:
+      - "Aisha almost quit"
+      - "vulnerability"
+      - "Maya's first year"
+      - "bonding moment"
+    expected_triples:
+      - ["Aisha", "almost_quit", "last week"]
+      - ["user", "shared", "own almost-quitting story from first year"]
+      - ["user", "has_emotion", "moved"]
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 5:00pm"
+    user_input: |
+      honestly I think the mentoring is what made the difference. like if I hadn't walked her through the auth flow those three times she wouldn't have understood the system well enough to spot the bug. the overinvestment paid off
+    expected_memory_stores:
+      - "mentoring impact"
+      - "three walkthroughs"
+      - "overinvestment justified"
+    expected_triples:
+      - ["user", "walked_through", "auth flow three times with Aisha"]
+      - ["mentoring overinvestment", "resulted_in", "Aisha finding the bug"]
+      - ["user", "has_emotion", "satisfied"]
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 7:00pm"
+    user_input: |
+      told Julian and he was like see babe I told you you'd be great at this. walked Kobe to the park and just felt really good for the first time in weeks honestly
+    expected_memory_stores:
+      - "Julian validation"
+      - "Kobe park walk"
+      - "good feeling"
+    expected_triples:
+      - ["Julian", "validated", "user's mentoring success"]
+      - ["user", "walked", "Kobe to the park"]
+      - ["user", "has_emotion", "happy"]
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 9:00am"
+    user_input: |
+      what was the name of the bug Aisha found yesterday
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 11:00am"
+    user_input: |
+      the fix went to production this morning and like 47 users who were affected by the password reset bug can now actually reset their passwords. Aisha's first production deploy!! she took a screenshot
+    expected_memory_stores:
+      - "production deploy"
+      - "47 users affected"
+      - "first deploy"
+      - "screenshot"
+    expected_triples:
+      - ["Aisha", "achieved", "first production deploy"]
+      - ["bug fix", "helped", "47 users with password reset"]
+      - ["Aisha", "took", "screenshot of deploy"]
+      - ["user", "has_emotion", "celebratory"]
+    expected_adaptation:
+      emotion_detected: "celebratory"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 2:00pm"
+    user_input: |
+      Rachel Kim gave Aisha a shoutout in the engineering all-hands Slack channel. Aisha DM'd me like omg is this real?? and I was like girl you earned it. this is what it's all about
+    expected_memory_stores:
+      - "Rachel Kim shoutout"
+      - "Slack recognition"
+      - "Aisha excited"
+      - "mentoring reward"
+    expected_triples:
+      - ["Rachel Kim", "gave_shoutout", "Aisha in engineering all-hands Slack"]
+      - ["Aisha", "has_emotion", "excited about recognition"]
+      - ["user", "has_emotion", "proud"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What bug did Aisha find?"
+    expected_contains: ["password reset", "special characters", "auth"]
+  - question: "How long had the bug been in the codebase?"
+    expected_contains: ["months"]
+  - question: "How many users were affected by the bug?"
+    expected_contains: ["47"]
+  - question: "Did Aisha consider quitting?"
+    expected_contains: ["almost quit", "last week"]
+  - question: "Who recognized Aisha's work?"
+    expected_contains: ["Sam Okafor", "Rachel Kim"]
+  - question: "Was this Aisha's first production deploy?"
+    expected_contains: ["yes", "first"]
+  - question: "How does Maya feel about the mentoring now?"
+    expected_contains: ["paid off", "worth it"]
+  - question: "What did Julian say about Maya's mentoring?"
+    expected_contains: ["great", "told you"]
+  - question: "How was the quality of Aisha's fix?"
+    expected_contains: ["clean", "error handling", "edge cases"]
+  - question: "Where was Aisha recognized?"
+    expected_contains: ["Slack", "all-hands"]

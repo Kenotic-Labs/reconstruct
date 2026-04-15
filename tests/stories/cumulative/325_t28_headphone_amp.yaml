@@ -1,0 +1,172 @@
+story_id: 325
+story_name: "Greg Gets the Headphone Amp"
+category: "Home Life"
+description: |
+  Tests memory of Greg following through on the mediation agreement. Buys
+  headphone amp, quiet returns to the house. Relationship shifts to neutral.
+  Verifies system tracks resolution follow-through.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 6:30 PM"
+    user_input: |
+      Greg knocked on our door today which made me tense up but he was holding a box and he said look I got the headphone amp it's a Fender Mustang something and he wanted to show us that he followed through and I said thank you Greg that means a lot
+    expected_memory_stores:
+      - "Greg knocked"
+      - "headphone amp purchased"
+      - "Fender Mustang"
+      - "showed them"
+      - "followed through"
+    expected_adaptation:
+      emotion_detected: "appreciative"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 9:00 PM"
+    user_input: |
+      it's 9pm and I can't hear ANYTHING from Greg's side and Julian said he can see the light on in Greg's music room or whatever through the window so he's probably playing but we can't hear a thing and it's like magic honestly
+    expected_memory_stores:
+      - "no sound"
+      - "Greg playing silently"
+      - "headphone amp works"
+      - "music room"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      three nights in a row of silence and I actually slept through the whole night which hasn't happened in weeks and Kobe is calm and Julian's mood is better and I didn't realize how much the noise was affecting everything
+    expected_memory_stores:
+      - "three nights quiet"
+      - "full night sleep"
+      - "Kobe calm"
+      - "Julian better mood"
+      - "noise impact realized"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 5:30 PM"
+    user_input: |
+      saw Greg getting his mail and I waved and he waved back and it wasn't awkward exactly but it wasn't warm either just like a neutral nod kind of thing and that's ok neutral is fine after everything
+    expected_memory_stores:
+      - "Greg waved"
+      - "neutral interaction"
+      - "not warm not awkward"
+      - "neutral is ok"
+    expected_adaptation:
+      emotion_detected: "accepting"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 6:00 PM"
+    user_input: |
+      told Nadia the mediation worked and she was like see the system works and I said yeah but the real thing that worked was finding out why he was doing it because once I knew about Noah everything changed in my head
+    expected_memory_stores:
+      - "told Nadia"
+      - "mediation worked"
+      - "knowing why changed perspective"
+      - "Noah information pivotal"
+    expected_adaptation:
+      emotion_detected: "wise"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:00 AM"
+    user_input: |
+      saw Noah at Greg's house this morning it must be his weekend the kid's like maybe 7 or 8 and he was playing in the yard with a soccer ball and Greg was watching from the porch looking happy for the first time since I've seen him
+    expected_memory_stores:
+      - "Noah at Greg's"
+      - "Greg's weekend"
+      - "Noah 7 or 8"
+      - "soccer ball"
+      - "Greg happy"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 12:00 PM"
+    user_input: |
+      Kobe was in our yard and Noah ran over and asked if he could pet the dog and I said of course and Greg came over and said Noah loves dogs and I said well Kobe loves kids so it works out and Greg actually smiled like a real smile
+    expected_memory_stores:
+      - "Noah petted Kobe"
+      - "Greg came over"
+      - "Noah loves dogs"
+      - "Greg smiled"
+      - "positive interaction"
+    expected_adaptation:
+      emotion_detected: "pleased"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 2:00 PM"
+    user_input: |
+      what kind of headphone amp did Greg buy
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 5:00 PM"
+    user_input: |
+      Julian said it's kind of nice that Greg has Noah because the neighborhood feels more alive when there's a kid running around and I agreed and I thought about how two weeks ago I wanted to move away from Greg and now I feel bad for him
+    expected_memory_stores:
+      - "Julian likes Noah around"
+      - "neighborhood more alive"
+      - "Maya empathy shift"
+      - "wanted to move two weeks ago"
+    expected_adaptation:
+      emotion_detected: "compassionate"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 PM"
+    user_input: |
+      a full week of quiet and I think this chapter of the Greg saga is closed and honestly it taught me something about not assuming the worst about people because everyone's fighting something and I want to remember that
+    expected_memory_stores:
+      - "full week quiet"
+      - "chapter closed"
+      - "lesson about assumptions"
+      - "everyone fighting something"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What headphone amp did Greg buy?"
+    expected_contains: ["Fender Mustang"]
+  - question: "Has the bass noise stopped?"
+    expected_contains: ["yes", "quiet", "can't hear"]
+  - question: "How old is Noah?"
+    expected_contains: ["7", "8"]
+  - question: "What does Noah like to do?"
+    expected_contains: ["soccer", "dogs"]
+  - question: "How is the relationship between Maya and Greg now?"
+    expected_contains: ["neutral", "better"]
+  - question: "What lesson did Maya take from the situation?"
+    expected_contains: ["assumptions", "everyone fighting something"]
+  - question: "How has the quiet affected the household?"
+    expected_contains: ["better sleep", "Kobe calm", "Julian mood"]
+  - question: "Did Greg follow through on the mediation agreement?"
+    expected_contains: ["yes", "bought amp"]
+  - question: "How did Greg look when Noah was visiting?"
+    expected_contains: ["happy"]
+  - question: "Did Noah interact with Kobe?"
+    expected_contains: ["yes", "petted", "loves dogs"]

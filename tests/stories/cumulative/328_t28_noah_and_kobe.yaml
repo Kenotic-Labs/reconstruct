@@ -1,0 +1,172 @@
+story_id: 328
+story_name: "Noah and Kobe Become Best Friends"
+category: "Home Life"
+description: |
+  Tests memory of the growing bond between Noah and Kobe. Greg's weekends
+  now include Kobe time. Maya sees a different side of her neighbor through
+  his relationship with his son. Verifies cross-character bonding tracking.
+duration_simulated: "2 weekends"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00 AM"
+    user_input: |
+      Noah's here this weekend and he literally rang our doorbell at 9am asking if Kobe can play and I was still in my robe and Greg was behind him like sorry he's been asking since 7 and I laughed and let Kobe out
+    expected_memory_stores:
+      - "Noah rang doorbell 9am"
+      - "asking since 7am"
+      - "Greg apologetic"
+      - "Maya in robe"
+      - "Kobe let out"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 11:00 AM"
+    user_input: |
+      Noah taught Kobe to fetch a stick which Kobe's been iffy about before but Noah has this patience with him that's really sweet and he just kept throwing it and encouraging him and eventually Kobe did it and Noah screamed HE DID IT and Greg was filming on his phone
+    expected_memory_stores:
+      - "Noah taught Kobe fetch"
+      - "Kobe learned"
+      - "Noah patient"
+      - "Greg filming"
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 1:00 PM"
+    user_input: |
+      made Noah a sandwich for lunch peanut butter and jelly and he sat on our porch eating it with Kobe next to him and Greg said thank you Maya and I said it's just a sandwich and he said no I mean for everything you know and I got it
+    expected_memory_stores:
+      - "PB&J for Noah"
+      - "porch with Kobe"
+      - "Greg grateful"
+      - "thank you for everything"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 4:00 PM"
+    user_input: |
+      Julian played soccer with Noah in the yard while Greg and I had coffee on the porch and Greg said it means a lot that Noah has people who are nice to him here because Lauren's parents don't really like Greg and it creates tension for Noah
+    expected_memory_stores:
+      - "Julian played soccer with Noah"
+      - "Greg and Maya coffee"
+      - "Lauren's parents don't like Greg"
+      - "tension for Noah"
+    expected_adaptation:
+      emotion_detected: "sympathetic"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Week 2 Saturday 10:00 AM"
+    user_input: |
+      Noah brought a drawing this weekend it's Kobe wearing a cape and it says Super Kobe and he's getting really good at drawing for a kid his age and Maya said wait no I said we should put it next to the other one on the fridge
+    expected_memory_stores:
+      - "new drawing Super Kobe"
+      - "cape on Kobe"
+      - "getting good at drawing"
+      - "on fridge with other one"
+    expected_adaptation:
+      emotion_detected: "charmed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Week 2 Saturday 2:00 PM"
+    user_input: |
+      Greg asked if Noah could come trick or treating from our house at Halloween because our street has better decorations and more kids than Lauren's neighborhood in Salem and I said of course and Julian got excited and was like I'll get the good candy
+    expected_memory_stores:
+      - "trick or treating request"
+      - "from Maya's house"
+      - "better decorations"
+      - "Julian excited"
+      - "good candy"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Week 2 Saturday 5:00 PM"
+    user_input: |
+      Nadia met Noah and Greg today when she came over for climbing gear and Noah showed her his drawings and Nadia was like this kid is genuinely talented and she would know being a graphic designer and Greg was beaming
+    expected_memory_stores:
+      - "Nadia met Noah and Greg"
+      - "Noah showed drawings"
+      - "Nadia said talented"
+      - "graphic designer perspective"
+      - "Greg beaming"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Week 2 Saturday 6:00 PM"
+    user_input: |
+      what does Noah call the drawing of Kobe wearing a cape
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Week 2 Sunday 10:00 AM"
+    user_input: |
+      Noah cried when Greg said it was time to go back to Salem and Kobe whined at the door after Noah left and I looked at Julian and said we are in too deep with this kid and he said yeah but in the best way
+    expected_memory_stores:
+      - "Noah cried leaving"
+      - "Kobe whined at door"
+      - "too deep"
+      - "best way"
+    expected_adaptation:
+      emotion_detected: "bittersweet"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Week 2 Sunday 8:00 PM"
+    user_input: |
+      Greg texted tonight saying Noah asked Lauren if they could get a dog and Lauren said no because of the apartment and Greg said that means Noah's gonna be even more obsessed with Kobe every weekend and I said bring it on we love that kid
+    expected_memory_stores:
+      - "Noah asked for dog"
+      - "Lauren said no"
+      - "apartment constraint"
+      - "more Kobe time"
+      - "we love that kid"
+    expected_adaptation:
+      emotion_detected: "affectionate"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How has Noah's relationship with Kobe developed?"
+    expected_contains: ["best friends", "fetch", "drawings"]
+  - question: "What drawing did Noah make of Kobe?"
+    expected_contains: ["Super Kobe", "cape"]
+  - question: "What did Greg ask about Halloween?"
+    expected_contains: ["trick or treating", "their house"]
+  - question: "What did Noah teach Kobe?"
+    expected_contains: ["fetch"]
+  - question: "Why can't Noah have a dog at Lauren's?"
+    expected_contains: ["apartment"]
+  - question: "What does Noah do when it's time to leave?"
+    expected_contains: ["cried", "doesn't want to go"]
+  - question: "What did Nadia say about Noah's drawings?"
+    expected_contains: ["talented"]
+  - question: "Do Lauren's parents like Greg?"
+    expected_contains: ["no", "don't like"]
+  - question: "What happened when Julian played with Noah?"
+    expected_contains: ["soccer", "yard"]
+  - question: "How many drawings of Kobe are on Maya's fridge?"
+    expected_contains: ["two"]

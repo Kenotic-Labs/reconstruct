@@ -1,0 +1,174 @@
+story_id: 515
+story_name: "Dumpling Night"
+category: "Hosting and Entertaining"
+description: |
+  The most meaningful themed night — dumpling night using Grandpa Wei's recipe.
+  Grief and joy converge. Cross-references grandpa legacy (T46), cooking (T31),
+  Vivian relationship (T16), and friend group.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 11:00 AM"
+    user_input: |
+      today is dumpling night and this one feels different from the other themed nights because I'm using grandpa's recipe and I called my mom this morning and she said make them proud and I said mom it's dumplings not a TED talk and she laughed but I could tell she was emotional
+    expected_memory_stores:
+      - "dumpling night"
+      - "grandpa's recipe"
+      - "called Vivian"
+      - "make them proud"
+      - "Vivian emotional"
+    expected_adaptation:
+      emotion_detected: "meaningful"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 1:00 PM"
+    user_input: |
+      I'm doing the prep and I realized I need way more dumplings than I thought because we've got like ten people coming and each person eats maybe fifteen dumplings so that's a hundred and fifty dumplings and Julian is helping fold and he's gotten really good at it actually better than me which I refuse to accept publicly
+    expected_memory_stores:
+      - "150 dumplings needed"
+      - "ten people coming"
+      - "Julian folding better"
+      - "competitive about folding"
+    expected_adaptation:
+      emotion_detected: "focused"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 3:00 PM"
+    user_input: |
+      I set up the dining room with the recipe card framed on the table like a centerpiece and put one of grandpa's tea tins next to it with flowers in it and Julian said this looks like a shrine and I said it IS a shrine kind of and he kissed my forehead and said your grandpa would love this
+    expected_memory_stores:
+      - "recipe card as centerpiece"
+      - "tea tin with flowers"
+      - "shrine setup"
+      - "Julian sweet about it"
+    expected_adaptation:
+      emotion_detected: "reverent"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 6:00 PM"
+    user_input: |
+      everyone arrived and I gave a little speech which I never do but I said tonight we're making grandpa Wei's dumplings and I told them about him being an engineer and the letters and the recipe and Clara had tears in her eyes and Omar raised his glass and said to grandpa Wei and everyone said to grandpa Wei and I almost lost it right there
+    expected_memory_stores:
+      - "Maya gave speech"
+      - "told grandpa's story"
+      - "Clara tearing up"
+      - "Omar toast to grandpa Wei"
+      - "group toast"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 6:30 PM"
+    user_input: |
+      we did a group dumpling making station where everyone folds their own and it was CHAOS like Ben's dumplings looked like deflated footballs and Leila's were actually perfect and she said she makes empanadas so same concept and Marcus made one that was just a ball of dough with no filling and everyone was dying laughing
+    expected_memory_stores:
+      - "group dumpling station"
+      - "Ben bad at folding"
+      - "Leila perfect empanada skill"
+      - "Marcus ball of dough"
+      - "everyone laughing"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 7:30 PM"
+    user_input: |
+      dumplings are cooked and everyone is eating and the verdict is overwhelmingly positive like Raj said these are the best dumplings he's ever had and his wife Meera who is very honest and would absolutely tell me if they were bad said yeah these are genuinely excellent and I felt so proud not of me of grandpa
+    expected_memory_stores:
+      - "dumplings cooked"
+      - "Raj best dumplings ever"
+      - "Meera honest approval"
+      - "proud of grandpa not self"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 8:00 PM"
+    user_input: |
+      Julian made jasmine tea cocktails tonight like actual cocktails with jasmine tea as the base and honey and vodka and it's incredible and it smells like grandpa's apartment in Fresno and I told him that and he said that's exactly why I chose it and I'm like how are you this thoughtful
+    expected_memory_stores:
+      - "jasmine tea cocktails"
+      - "honey and vodka"
+      - "smells like grandpa's apartment"
+      - "Julian intentional"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 9:30 PM"
+    user_input: |
+      my mom called during the party because she wanted to hear the noise and I put her on speaker and everyone yelled HI VIVIAN and she laughed and cried and she said you're all eating my father's food and it's alive again and that was the most beautiful thing anyone said all night
+    expected_memory_stores:
+      - "Vivian called during party"
+      - "speaker phone"
+      - "everyone yelled hi"
+      - "his food is alive again"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 10:30 PM"
+    user_input: |
+      before people left Clara said this was the best themed night by far not even close and everyone agreed and Omar said ok I change my vote from Japanese to dumpling night and Ben said we need to do this annually like a grandpa Wei memorial dumpling night and I loved that idea so much
+    expected_memory_stores:
+      - "best themed night"
+      - "Omar changed vote"
+      - "annual grandpa Wei dumpling night"
+      - "Ben's suggestion"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 11:30 PM"
+    user_input: |
+      kitchen is clean and there are leftover dumplings in the fridge and I'm sitting at the table where the recipe card centerpiece was and I think grandpa's legacy isn't just a watch and a tree and a degree it's a recipe that ten people loved tonight and that's the most alive a dead person can be through the people they fed
+    expected_memory_stores:
+      - "leftover dumplings"
+      - "recipe card centerpiece"
+      - "legacy through food"
+      - "most alive a dead person can be"
+    expected_adaptation:
+      emotion_detected: "profound"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What made dumpling night different from other themed nights?"
+    expected_contains: ["grandpa Wei", "recipe", "meaningful"]
+  - question: "How many dumplings did Maya need to make?"
+    expected_contains: ["150", "hundred"]
+  - question: "What was the group activity during dumpling night?"
+    expected_contains: ["folding", "making station"]
+  - question: "Who had the best dumplings besides Maya?"
+    expected_contains: ["Leila", "empanada"]
+  - question: "What cocktail did Julian make for dumpling night?"
+    expected_contains: ["jasmine tea", "honey", "vodka"]
+  - question: "What did Vivian say when she called during the party?"
+    expected_contains: ["food", "alive again"]
+  - question: "What annual tradition was suggested?"
+    expected_contains: ["grandpa Wei", "memorial", "dumpling night"]
+  - question: "Who suggested the annual tradition?"
+    expected_contains: ["Ben"]
+  - question: "Which themed night does Omar now rank highest?"
+    expected_contains: ["dumpling"]
+  - question: "What did Maya set up as a centerpiece?"
+    expected_contains: ["recipe card", "tea tin", "flowers"]

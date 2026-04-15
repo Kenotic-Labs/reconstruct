@@ -1,0 +1,177 @@
+story_id: 231
+story_name: "Mystery Stomach Issues"
+category: "Health"
+description: |
+  Tests system tracking unexplained symptoms over time. Maya has recurring stomach problems
+  with no clear cause. Verifies temporal pattern tracking and symptom logging.
+duration_simulated: "5 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00 PM"
+    user_input: |
+      ok so this is like the third time this month I've had really bad stomach cramps after dinner and I can't figure out what's causing it like tonight we had Thai food from that place on Belmont and an hour later I was in the bathroom dying
+    expected_memory_stores:
+      - "third time this month"
+      - "stomach cramps"
+      - "after dinner"
+      - "Thai food"
+      - "Belmont"
+      - "bathroom"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 7:00 AM"
+    user_input: |
+      still feel gross this morning and Julian asked if maybe it's the Thai place specifically and I said no because it also happened when we had that seafood boil last week and also that time at the tapas bar so it's not one restaurant
+    expected_memory_stores:
+      - "still feeling bad"
+      - "Julian asked"
+      - "seafood boil last week"
+      - "tapas bar"
+      - "not one restaurant"
+      - "multiple incidents"
+    expected_adaptation:
+      emotion_detected: "puzzled"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      told Clara about the stomach thing and she immediately went into nurse detective mode asking what I ate each time and she was like Maya have you considered it might be a specific ingredient not a restaurant and I said like what and she said it could be dairy or gluten or shellfish or something
+    expected_memory_stores:
+      - "Clara nurse detective"
+      - "specific ingredient"
+      - "dairy gluten shellfish"
+      - "possible allergy"
+    expected_adaptation:
+      emotion_detected: "concerned"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      I tried to think about what was common in all three meals and the Thai had shrimp pad Thai and the seafood boil obviously had shrimp and crab and the tapas bar I had those garlic shrimp things and Clara is like Maya what is the common ingredient and I was like oh no is it shrimp
+    expected_memory_stores:
+      - "common ingredient analysis"
+      - "shrimp pad Thai"
+      - "shrimp and crab"
+      - "garlic shrimp"
+      - "shrimp common denominator"
+    expected_adaptation:
+      emotion_detected: "dawning realization"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 7:00 PM"
+    user_input: |
+      but wait I've eaten shrimp my whole life and never had a problem so how can I suddenly be allergic and Clara said adult onset food allergies are a thing and they can develop at any age and she said I should do an elimination diet to confirm
+    expected_memory_stores:
+      - "shrimp lifetime"
+      - "never had problem before"
+      - "adult onset allergies"
+      - "elimination diet"
+      - "Clara recommendation"
+    expected_adaptation:
+      emotion_detected: "worried"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 10:00 AM"
+    user_input: |
+      what food does Clara think I might be allergic to
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 6:00 PM"
+    user_input: |
+      started the elimination diet today cutting out all shellfish which means no shrimp no crab no lobster no clams and Julian is bummed because he loves the seafood boil place and I said babe my intestines are more important than your crab legs
+    expected_memory_stores:
+      - "elimination diet started"
+      - "no shellfish"
+      - "shrimp crab lobster clams"
+      - "Julian bummed"
+      - "seafood boil place"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 8:00 PM"
+    user_input: |
+      day two of no shellfish and I made pasta with chicken for dinner and my stomach is completely fine like zero cramps zero issues and Clara said that's a good sign but I need to do it for at least two weeks to be sure
+    expected_memory_stores:
+      - "day two"
+      - "pasta chicken"
+      - "no cramps"
+      - "good sign"
+      - "two weeks minimum"
+    expected_adaptation:
+      emotion_detected: "cautiously optimistic"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 5:00 PM"
+    user_input: |
+      thinking about how this affects the wedding because we were going to have shrimp cocktail as an appetizer and if I'm actually allergic that's going to need to change and the caterer is Blue Fork and I need to talk to them about this
+    expected_memory_stores:
+      - "wedding impact"
+      - "shrimp cocktail appetizer"
+      - "need to change"
+      - "Blue Fork caterer"
+      - "need to inform caterer"
+    expected_adaptation:
+      emotion_detected: "concerned"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 9:00 PM"
+    user_input: |
+      it's been like five days of no shellfish and my stomach has been perfect like completely normal and before this I was having issues every few days and Clara said yeah Maya I think we found our culprit and she recommended I see an allergist to get properly tested
+    expected_memory_stores:
+      - "five days no shellfish"
+      - "stomach perfect"
+      - "before was every few days"
+      - "culprit found"
+      - "see allergist"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What food is Maya possibly allergic to?"
+    expected_contains: ["shellfish", "shrimp"]
+  - question: "How many incidents did Maya have before figuring it out?"
+    expected_contains: ["three"]
+  - question: "What was the common ingredient in all the meals?"
+    expected_contains: ["shrimp"]
+  - question: "Who helped Maya identify the potential allergy?"
+    expected_contains: ["Clara"]
+  - question: "What diet is Maya doing?"
+    expected_contains: ["elimination"]
+  - question: "How is Maya's stomach since cutting shellfish?"
+    expected_contains: ["perfect", "no cramps"]
+  - question: "What wedding item needs to change?"
+    expected_contains: ["shrimp cocktail"]
+  - question: "Who is the wedding caterer?"
+    expected_contains: ["Blue Fork"]
+  - question: "What did Clara recommend Maya do next?"
+    expected_contains: ["allergist", "tested"]
+  - question: "Can adult food allergies develop suddenly?"
+    expected_contains: ["yes", "any age"]

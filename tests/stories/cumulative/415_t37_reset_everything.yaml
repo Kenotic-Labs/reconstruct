@@ -1,0 +1,167 @@
+story_id: 415
+story_name: "Reset Everything"
+category: "Smart Home"
+description: |
+  After the lockout, Julian resets and reconfigures all smart devices from scratch.
+  Maya supervises. Tests recall of previous device issues and corrections.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00 AM"
+    user_input: |
+      Julian spent the whole morning factory resetting every smart device in the house like the Nest the two Ring cameras both August locks and he's setting them all back up from scratch because he said the firmware issue corrupted some settings and I'm watching him like a hawk
+    expected_memory_stores:
+      - "factory reset all devices"
+      - "Nest Ring August"
+      - "setting up from scratch"
+      - "Maya supervising"
+    expected_adaptation:
+      emotion_detected: "vigilant"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:30 AM"
+    user_input: |
+      he disabled automatic firmware updates on everything and set them to manual only so nothing updates without us choosing to do it and I made him write down all the settings and codes in a notebook like a physical paper notebook because if the tech fails at least we have analog backup
+    expected_memory_stores:
+      - "automatic updates disabled"
+      - "manual updates only"
+      - "physical notebook backup"
+      - "all settings written down"
+    expected_adaptation:
+      emotion_detected: "practical"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 12:00 PM"
+    user_input: |
+      the Nest came back up fine same schedule 62 at night 68 in the morning and the Ring cameras are both working again front doorbell and back battery cam and Julian redrew the motion zones on the back one to exclude Kobe's running area which took like 20 minutes of testing
+    expected_memory_stores:
+      - "Nest restored same schedule"
+      - "Ring cameras working"
+      - "motion zones redrawn"
+      - "Kobe zone exclusion"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 1:30 PM"
+    user_input: |
+      the August locks were the hardest to reset because they require you to remove the whole thing from the door and re pair them with Bluetooth and the front door one kept failing to pair and Julian was getting frustrated and I was like hmm technology is so great right and he gave me a look
+    expected_memory_stores:
+      - "August locks hard to reset"
+      - "remove and re-pair Bluetooth"
+      - "front lock pairing issues"
+      - "Julian frustrated"
+      - "Maya being sarcastic"
+    expected_adaptation:
+      emotion_detected: "smug"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 3:00 PM"
+    user_input: |
+      everything is finally back online and Julian created what he's calling the smart home bible which is the notebook with every device name model number serial number login credentials recovery codes and settings and I was like this should have existed from day one and he said yeah you're right
+    expected_memory_stores:
+      - "all devices back online"
+      - "smart home bible notebook"
+      - "all credentials recorded"
+      - "should have existed earlier"
+    expected_adaptation:
+      emotion_detected: "vindicated"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 4:00 PM"
+    user_input: |
+      I also made Julian set up the back door with a regular deadbolt that he ordered so now we have three entry options physical key from the lockbox outside the smart lock code or app and the regular deadbolt on the back door so we will never be locked out again
+    expected_memory_stores:
+      - "regular deadbolt on back door"
+      - "three entry options"
+      - "lockbox physical key"
+      - "smart lock code or app"
+      - "never locked out again"
+    expected_adaptation:
+      emotion_detected: "secure"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 5:30 PM"
+    user_input: |
+      Clara called to hear the lockout story and she was dying laughing and she said that's exactly why she'll never get smart locks and I said honestly I'm starting to agree but Julian overheard and was like it was one time it was a freak thing and Clara and I both laughed
+    expected_memory_stores:
+      - "Clara laughing at lockout"
+      - "Clara anti smart locks"
+      - "Julian defensive"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 7:00 PM"
+    user_input: |
+      one positive thing from all this is Julian now checks the smart home app every night before bed to make sure everything is connected and online which he should have been doing before and he tests the physical key once a week to make sure it still works with the deadbolt
+    expected_memory_stores:
+      - "nightly smart home check"
+      - "weekly key test"
+      - "Julian more responsible"
+    expected_adaptation:
+      emotion_detected: "approving"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 8:00 PM"
+    user_input: |
+      what's the backup plan for getting into the house if the smart locks fail again I know Julian set something up but remind me
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 9:00 AM"
+    user_input: |
+      everything worked perfectly overnight and the Nest heated the house by 6am and the door unlocked when I went for my run and locked when I left and I hate to say it but when the smart home stuff works it really does make life easier I just need it to ALWAYS work you know
+    expected_memory_stores:
+      - "working perfectly"
+      - "Nest heated on time"
+      - "auto lock/unlock working"
+      - "Maya accepts when reliable"
+    expected_adaptation:
+      emotion_detected: "cautiously positive"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did Julian create to document all smart home devices?"
+    expected_contains: ["smart home bible", "notebook"]
+  - question: "What three ways can Maya and Julian get into the house?"
+    expected_contains: ["lockbox", "smart lock", "deadbolt"]
+  - question: "Were automatic updates re-enabled after the reset?"
+    expected_contains: ["no", "manual", "disabled"]
+  - question: "Which device was hardest to reset?"
+    expected_contains: ["August", "lock"]
+  - question: "What does Julian check every night now?"
+    expected_contains: ["smart home app", "connected", "online"]
+  - question: "What does Julian test weekly?"
+    expected_contains: ["physical key", "deadbolt"]
+  - question: "What did Clara think of the lockout story?"
+    expected_contains: ["laughing", "never get smart locks"]
+  - question: "Where is the backup physical key stored?"
+    expected_contains: ["lockbox", "porch"]
+  - question: "What schedule is the Nest back on?"
+    expected_contains: ["62", "night", "68", "morning"]
+  - question: "What was the Kobe fix on the Ring camera?"
+    expected_contains: ["motion zones", "exclude", "running area"]

@@ -1,0 +1,178 @@
+story_id: 343
+story_name: "Flight Cancellation and Rebooking"
+category: "Travel"
+description: |
+  Tests memory of the original flight being cancelled and rebooked +2 days.
+  Budget adjustment from $6K to $8.2K. Correction: Kyoto Airbnb changed to
+  ryokan. Verifies system handles corrections and timeline shifts.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 6:00 AM"
+    user_input: |
+      NOOO got an email from ANA Airlines at 5am saying our March 15th flight is CANCELLED due to some scheduling change and I woke Julian up and he was like what and I showed him and he said are you kidding me
+    expected_memory_stores:
+      - "ANA flight cancelled"
+      - "March 15th cancelled"
+      - "scheduling change"
+      - "5am email"
+      - "woke Julian"
+    expected_adaptation:
+      emotion_detected: "distressed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 7:00 AM"
+    user_input: |
+      called ANA and waited on hold for 45 minutes and they rebooked us on March 17th instead which is two days later same route Portland to Narita through San Francisco and no extra charge which is good but that means we lose two days of the trip
+    expected_memory_stores:
+      - "rebooked March 17th"
+      - "two days later"
+      - "same route"
+      - "no extra charge"
+      - "lose two days"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 8:30 AM"
+    user_input: |
+      ok so now we fly out March 17th and come back March 25th which means it's 8 days not 10 and I'm bummed but Julian said we can cut Tokyo to 4 days and keep Kyoto 3 and Osaka 1 day instead of 2 and I said that works I guess
+    expected_memory_stores:
+      - "March 17th to March 25th"
+      - "8 days not 10"
+      - "Tokyo 4 days"
+      - "Kyoto 3 days"
+      - "Osaka 1 day"
+      - "revised itinerary"
+    expected_adaptation:
+      emotion_detected: "disappointed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      told Clara about the change and she said that actually works better for her because 8 days of dog sitting is easier than 10 and she was like Kobe will be fine I got this and she reminded me she has a key already from when she house-sat last month
+    expected_memory_stores:
+      - "Clara ok with 8 days"
+      - "easier than 10"
+      - "has key already"
+      - "house-sat last month"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 3:00 PM"
+    user_input: |
+      so while I was redoing the itinerary Julian found this ryokan in Kyoto which is like a traditional Japanese inn and it's more expensive than the Airbnb we had but it's a real cultural experience with tatami mats and a shared bath and he's like Maya we HAVE to do this
+    expected_memory_stores:
+      - "ryokan in Kyoto"
+      - "traditional Japanese inn"
+      - "more expensive than Airbnb"
+      - "tatami mats"
+      - "shared bath"
+      - "Julian insisting"
+    expected_adaptation:
+      emotion_detected: "interested"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 4:00 PM"
+    user_input: |
+      ok so the ryokan is $150 a night instead of $70 for the Airbnb which means 3 nights is $450 instead of $210 and with the passport rush fee and some other stuff our budget is now looking more like $8,200 not $6,000 and Julian said it's worth it and honestly yeah it probably is
+    expected_memory_stores:
+      - "ryokan $150/night"
+      - "Airbnb cancelled"
+      - "budget now $8200"
+      - "was $6000"
+      - "Julian said worth it"
+    expected_adaptation:
+      emotion_detected: "accepting"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      cancelled the Kyoto Airbnb and booked the ryokan it's called Guesthouse Hana no Michi and it's near Gion district and the reviews are incredible like people say it changed their understanding of Japanese culture and I'm actually really excited about it now
+    expected_memory_stores:
+      - "Airbnb cancelled"
+      - "ryokan Guesthouse Hana no Michi"
+      - "Gion district"
+      - "great reviews"
+      - "excited"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 10:00 AM"
+    user_input: |
+      when do Maya and Julian fly out to Japan now and what changed about the Kyoto accommodation
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 5:00 PM"
+    user_input: |
+      redid Julian's spreadsheet and the budget breakdown is now flights $1400 Tokyo hotel $360 which is 4 nights at 90 Kyoto ryokan $450 which is 3 nights at 150 food and transport and activities budget roughly $6000 for the 8 days so total is about $8200 give or take
+    expected_memory_stores:
+      - "budget breakdown"
+      - "flights $1400"
+      - "Tokyo $360"
+      - "Kyoto $450"
+      - "food transport activities $6000"
+      - "total $8200"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 9:00 PM"
+    user_input: |
+      Nadia said the ryokan is the best decision we made and she showed me photos of the one her parents stayed at when they visited Japan and it looked magical and Julian is already watching YouTube videos about ryokan etiquette like how to wear the yukata and use the onsen
+    expected_memory_stores:
+      - "Nadia approved ryokan"
+      - "Nadia's parents visited Japan"
+      - "Julian watching etiquette videos"
+      - "yukata onsen"
+    expected_adaptation:
+      emotion_detected: "eager"
+      warmth_direction: increase
+
+final_verification:
+  - question: "When do Maya and Julian now fly to Japan?"
+    expected_contains: ["March 17"]
+  - question: "Why was the original flight cancelled?"
+    expected_contains: ["scheduling change", "ANA"]
+  - question: "What is the new Kyoto accommodation?"
+    expected_contains: ["ryokan", "Guesthouse Hana no Michi"]
+  - question: "What happened to the Kyoto Airbnb?"
+    expected_contains: ["cancelled"]
+  - question: "What is the updated budget?"
+    expected_contains: ["$8200", "8200"]
+  - question: "How many days is the trip now?"
+    expected_contains: ["8"]
+  - question: "What is the revised itinerary?"
+    expected_contains: ["4 Tokyo", "3 Kyoto", "1 Osaka"]
+  - question: "How much is the ryokan per night?"
+    expected_contains: ["$150"]
+  - question: "Where is the ryokan located?"
+    expected_contains: ["Gion"]
+  - question: "What was the original departure date?"
+    expected_contains: ["March 15"]

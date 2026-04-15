@@ -1,0 +1,215 @@
+story_id: 143
+story_name: "Proposal Reschedules Twice"
+category: "Life Events"
+description: |
+  Tests whether the system tracks the proposal date changing multiple times, the
+  reasons for each reschedule, and Maya's internal knowledge tracking. Tests
+  temporal corrections as dates shift.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 6:00pm"
+    user_input: |
+      Julian seems to be planning attempt number two. I overheard him telling Marcus on the phone that next Saturday should be clear. so the new plan is next Saturday, still at Mt. Tabor I think. the man is persistent I'll give him that
+    expected_memory_stores:
+      - "second attempt"
+      - "next Saturday"
+      - "Mt. Tabor again"
+      - "Marcus coordination"
+      - "persistent"
+    expected_triples:
+      - ["Julian", "plans_proposal", "second attempt next Saturday"]
+      - ["Julian", "venue_planned", "Mt. Tabor"]
+      - ["Julian", "coordinating_with", "Marcus"]
+      - ["user", "has_emotion", "amused"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 3:00pm"
+    user_input: |
+      Julian's agency contract had a crisis today. some big deliverable got moved up and he has to work all weekend. he came home looking frustrated and said hey can we do our Mt. Tabor hike the following weekend instead and I was like sure babe no rush. NO RUSH. lol
+    expected_memory_stores:
+      - "agency crisis"
+      - "deliverable moved up"
+      - "work all weekend"
+      - "postponed again"
+      - "following weekend"
+      - "second reschedule"
+    expected_triples:
+      - ["Julian", "has_work_crisis", "agency deliverable moved up"]
+      - ["Julian", "postponed_proposal", "following weekend"]
+      - ["user", "corrected", "proposal date next Saturday → following weekend"]
+      - ["user", "has_emotion", "understanding"]
+    expected_adaptation:
+      emotion_detected: "understanding"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 7:00pm"
+    user_input: |
+      so that's three dates now. original Saturday rained out, next Saturday work conflict, now it's the Saturday after that. the proposal has been rescheduled more than a dentist appointment. I shouldn't be laughing but I'm definitely laughing internally
+    expected_memory_stores:
+      - "three dates"
+      - "rain then work then third try"
+      - "three reschedules"
+      - "internally laughing"
+    expected_triples:
+      - ["Julian", "proposal_rescheduled", "three times total"]
+      - ["Julian", "reschedule_reasons", "rain then work then third try"]
+      - ["user", "has_emotion", "amused"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 10:00am"
+    user_input: |
+      Aisha at work goes so... has it happened yet? and I was like girl it's been postponed TWICE and she made this face like she was watching a rom-com and said this is gonna be the best proposal story ever. she's not wrong
+    expected_memory_stores:
+      - "Aisha checking in"
+      - "postponed twice"
+      - "best proposal story"
+    expected_triples:
+      - ["Aisha", "asked_about", "proposal status"]
+      - ["user", "told_coworker", "proposal postponed twice"]
+      - ["user", "has_emotion", "entertained"]
+    expected_adaptation:
+      emotion_detected: "entertained"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 8:00pm"
+    user_input: |
+      Julian worked late all week on the agency thing and I could tell he was stressed about both the work AND the proposal planning. he doesn't know I know but I can see the dual stress. I made him dinner every night this week to take some pressure off
+    expected_memory_stores:
+      - "Julian overworked"
+      - "dual stress"
+      - "Maya made dinner all week"
+      - "taking pressure off"
+    expected_triples:
+      - ["Julian", "has_stress", "dual work and proposal stress"]
+      - ["user", "made_dinner", "every night this week"]
+      - ["user", "has_emotion", "caring"]
+    expected_adaptation:
+      emotion_detected: "caring"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 2:00pm"
+    user_input: |
+      Julian finished the agency deliverable and seemed SO relieved. he immediately started texting Marcus again. I noticed he also called a number I didn't recognize which is probably the park ranger or a florist or something. the planning is back on
+    expected_memory_stores:
+      - "deliverable done"
+      - "texting Marcus"
+      - "unknown number"
+      - "planning resumed"
+      - "florist maybe"
+    expected_triples:
+      - ["Julian", "finished", "agency deliverable"]
+      - ["Julian", "resumed_planning", "proposal"]
+      - ["Julian", "called", "unknown number possibly florist"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 10:00am"
+    user_input: |
+      how many times has the proposal been rescheduled
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Monday 5:00pm"
+    user_input: |
+      ok something shifted. Julian came home today and he seemed... calm? like a different kind of calm. peaceful almost. he made dinner without being asked and he was extra attentive all evening. I think he made a decision about something. the energy has changed
+    expected_memory_stores:
+      - "Julian calm"
+      - "different energy"
+      - "made dinner"
+      - "extra attentive"
+      - "decision made"
+    expected_triples:
+      - ["Julian", "has_demeanor", "calm and peaceful"]
+      - ["Julian", "made_dinner", "without being asked"]
+      - ["user", "suspects", "Julian made a decision"]
+      - ["user", "has_emotion", "anticipatory"]
+    expected_adaptation:
+      emotion_detected: "anticipatory"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 7:00pm"
+    user_input: |
+      he didn't mention Mt. Tabor this weekend. at all. usually he references the hike plan but this time nothing. either he gave up on that plan entirely or he's going a completely different direction. I'm trying not to overthink it but I'm DEFINITELY overthinking it
+    expected_memory_stores:
+      - "no Mt. Tabor mention"
+      - "plan changed maybe"
+      - "different direction"
+      - "overthinking"
+    expected_triples:
+      - ["Julian", "did_not_mention", "Mt. Tabor"]
+      - ["user", "suspects", "plan changed entirely"]
+      - ["user", "has_emotion", "curious"]
+    expected_adaptation:
+      emotion_detected: "curious"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 9:00pm"
+    user_input: |
+      Marcus stopped by to drop something off to Julian and they were in the studio for like 20 minutes talking quietly. when Marcus left he gave me this big grin and a thumbs up which was NOT subtle at all. something is happening. maybe not this weekend at the park. maybe something else entirely
+    expected_memory_stores:
+      - "Marcus visit"
+      - "studio 20 minutes"
+      - "grin and thumbs up"
+      - "not subtle"
+      - "plan change confirmed"
+    expected_triples:
+      - ["Marcus", "visited", "Julian in studio for 20 minutes"]
+      - ["Marcus", "gave_signal", "grin and thumbs up"]
+      - ["user", "suspects", "proposal plan changed from park"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How many times has the proposal been rescheduled?"
+    expected_contains: ["three", "twice", "3"]
+  - question: "Why was the first attempt cancelled?"
+    expected_contains: ["rain"]
+  - question: "Why was the second attempt cancelled?"
+    expected_contains: ["agency", "work", "deliverable"]
+  - question: "Is the proposal still planned for Mt. Tabor?"
+    expected_contains: ["unclear", "changed", "no mention"]
+  - question: "Who has been helping Julian plan?"
+    expected_contains: ["Marcus"]
+  - question: "What did Marcus do when he left the apartment?"
+    expected_contains: ["grin", "thumbs up"]
+  - question: "How has Maya been supporting Julian during the stress?"
+    expected_contains: ["dinner", "every night"]
+  - question: "What changed about Julian's energy?"
+    expected_contains: ["calm", "peaceful", "different"]
+  - question: "What did Maya tell Aisha about the proposal status?"
+    expected_contains: ["postponed twice"]
+  - question: "What suspicious call did Julian make?"
+    expected_contains: ["unknown number", "florist"]

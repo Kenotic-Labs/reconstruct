@@ -1,0 +1,236 @@
+story_id: 100
+story_name: "The New Normal"
+category: "Life Events"
+description: |
+  Tests comprehensive memory of Maya's full arc across all five threads.
+  All threads converge: Vantage resolved, Conduit thriving, fridgesearch stable,
+  Danny situation settled. Verifies full cross-thread reconstruction.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00 AM"
+    user_input: |
+      it's been about four months since I left Vantage and honestly it feels like a lifetime ago like Derek and the PIP and the portal pod all of that is just a story I tell now it's not my daily reality anymore and my daily reality is Conduit and search infrastructure and a team that respects me
+    expected_memory_stores:
+      - "four months since Vantage"
+      - "lifetime ago"
+      - "Derek PIP portal"
+      - "just a story"
+      - "Conduit daily reality"
+      - "team respects"
+    expected_triples:
+      - ["user", "left_Vantage", "four months ago"]
+      - ["user", "works_at", "Conduit"]
+      - ["Vantage", "feels_like", "lifetime ago"]
+      - ["user", "has_emotion", "reflective"]
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 2:00 PM"
+    user_input: |
+      Sam's quarterly review and I got the formal promotion to senior search infrastructure engineer which comes with a salary bump to 195k and Sam said I'm the fastest person to get promoted in Conduit's history and Ross sent me a personal congratulations email and I cried at my desk which is becoming a pattern
+    expected_memory_stores:
+      - "promotion official"
+      - "senior search infrastructure engineer"
+      - "195k salary"
+      - "fastest promotion"
+      - "Ross congratulations"
+      - "cried at desk"
+    expected_triples:
+      - ["user", "promoted_to", "senior search infrastructure engineer"]
+      - ["user", "has_salary", "195k"]
+      - ["user", "achieved", "fastest promotion in Conduit history"]
+      - ["Ross", "sent", "personal congratulations email"]
+      - ["user", "has_emotion", "overwhelmed"]
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 3:00 PM"
+    user_input: |
+      the whole team congratulated me and Danny was one of the first to say congrats Maya well deserved and Lily sent flowers again with a card saying from imposter to senior in 4 months new record and Amir sent a rare emoji in Slack which for Amir is basically a standing ovation
+    expected_memory_stores:
+      - "team congratulations"
+      - "Danny well deserved"
+      - "Lily flowers again"
+      - "imposter to senior card"
+      - "Amir emoji"
+    expected_triples:
+      - ["Danny", "congratulated", "user"]
+      - ["Lily", "sent_flowers_with_card", "imposter to senior in 4 months"]
+      - ["Amir", "sent", "rare emoji in Slack"]
+      - ["user", "has_emotion", "loved"]
+    expected_adaptation:
+      emotion_detected: "loved"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 7:00 PM"
+    user_input: |
+      Julian had the house decorated when I got off work like congratulations banner Kobe in another bow tie champagne on the table and he'd invited Leon and Lily and Marcus over for a celebration dinner and everyone was there and it was the most loved I've ever felt in my entire life
+    expected_memory_stores:
+      - "Julian decorated"
+      - "Kobe bow tie"
+      - "champagne"
+      - "Leon Lily Marcus"
+      - "celebration dinner"
+      - "most loved ever"
+    expected_triples:
+      - ["Julian", "decorated_house_for", "user's promotion"]
+      - ["Julian", "invited", "Leon, Lily, and Marcus"]
+      - ["Kobe", "wore", "bow tie"]
+      - ["user", "has_emotion", "ecstatic"]
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 10:00 PM"
+    user_input: |
+      Leon gave a toast and said to Maya who went from PIP to senior engineer in four months that's not a career that's a movie and everyone laughed and Julian squeezed my hand under the table and Marcus said hear hear and raised his glass and Lily wiped her eyes
+    expected_memory_stores:
+      - "Leon toast"
+      - "PIP to senior"
+      - "four months"
+      - "career movie comment"
+      - "Julian hand squeeze"
+      - "Marcus hear hear"
+      - "Lily emotional"
+    expected_triples:
+      - ["Leon", "toasted", "user going from PIP to senior in four months"]
+      - ["Leon", "said", "that's not a career, that's a movie"]
+      - ["Julian", "squeezed_hand", "under the table"]
+      - ["user", "has_emotion", "joyful"]
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 9:00 AM"
+    user_input: |
+      Priya texted congratulations she heard through the grapevine and she said she always knew I was going to do great things and she's at Vercel now and loving it and she said watching me and Leon leave Vantage was the push she needed and now all three of us are in better places because we didn't accept what Derek was doing
+    expected_memory_stores:
+      - "Priya congratulations"
+      - "Vercel"
+      - "always knew"
+      - "all three better"
+      - "didn't accept Derek"
+    expected_triples:
+      - ["Priya", "works_at", "Vercel"]
+      - ["Priya", "congratulated", "user"]
+      - ["Priya", "said", "watching user and Leon leave pushed her to leave too"]
+      - ["user", "has_emotion", "connected"]
+    expected_adaptation:
+      emotion_detected: "connected"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      what is Maya's current salary and title
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 10:00 AM"
+    user_input: |
+      fridgesearch update we crossed 4000 users this morning and the donations fully cover server costs and the community is thriving and Danny and Marcus and one new contributor are handling most of the maintenance and I just guide the roadmap and it's exactly what I wanted a living project not a second job
+    expected_memory_stores:
+      - "4000 users"
+      - "donations cover costs"
+      - "community thriving"
+      - "Danny Marcus contributor"
+      - "Maya guides roadmap"
+      - "living project"
+    expected_triples:
+      - ["fridgesearch", "has_users", "4000"]
+      - ["fridgesearch", "funded_by", "donations covering server costs"]
+      - ["user", "role_in_fridgesearch", "guides roadmap"]
+      - ["Danny", "role_in_fridgesearch", "maintenance contributor"]
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      Julian got a big freelance contract with a Portland restaurant group doing their entire brand identity and it's his biggest project yet and between his freelance success and my promotion we're officially looking at houses this weekend and Kobe is getting his yard finally
+    expected_memory_stores:
+      - "Julian big contract"
+      - "Portland restaurant group"
+      - "brand identity"
+      - "biggest project"
+      - "house shopping"
+      - "Kobe yard"
+    expected_triples:
+      - ["Julian", "got_contract_with", "Portland restaurant group"]
+      - ["Julian", "doing", "brand identity design"]
+      - ["user", "planning", "house shopping this weekend"]
+      - ["Kobe", "will_get", "a yard"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 10:00 PM"
+    user_input: |
+      lying in bed with Julian and Kobe and the house is quiet and I'm thinking about everything from the PIP to Google bombing to fridgesearch going viral to the Danny thing to this promotion and it's been the craziest four months of my life but also the most growth and I wouldn't change any of it because every hard thing led to something better and I think that's what they call a character arc
+    expected_memory_stores:
+      - "reflection all threads"
+      - "PIP"
+      - "Google"
+      - "fridgesearch"
+      - "Danny"
+      - "promotion"
+      - "four months"
+      - "growth"
+      - "character arc"
+    expected_triples:
+      - ["user", "reflects_on", "four months of growth"]
+      - ["user", "experienced", "PIP, Google, fridgesearch, Danny, promotion"]
+      - ["user", "describes_journey_as", "character arc"]
+      - ["user", "has_emotion", "peaceful"]
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya's current title?"
+    expected_contains: ["senior search infrastructure engineer"]
+  - question: "What is Maya's current salary?"
+    expected_contains: ["195k", "195"]
+  - question: "How many users does fridgesearch have?"
+    expected_contains: ["4000"]
+  - question: "Where does Maya work now?"
+    expected_contains: ["Conduit AI"]
+  - question: "Who is Maya's manager?"
+    expected_contains: ["Sam Okafor"]
+  - question: "What happened to the PIP reason?"
+    expected_contains: ["budget reallocation"]
+  - question: "What was the final Conduit offer before negotiation?"
+    expected_contains: ["185k", "185"]
+  - question: "Is the Danny credit issue resolved?"
+    expected_contains: ["yes"]
+  - question: "Who are Maya's closest people?"
+    expected_contains: ["Julian", "Lily", "Leon"]
+  - question: "What is Maya's overall emotional state now?"
+    expected_contains: ["good", "peaceful", "grateful", "content"]

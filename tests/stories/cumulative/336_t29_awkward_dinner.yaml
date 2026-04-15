@@ -1,0 +1,176 @@
+story_id: 336
+story_name: "First Awkward Dinner Post-Drama"
+category: "Friendships"
+description: |
+  Tests memory of the first Round Table dinner after the Marcus-Nadia breakup.
+  Awkward but successful. The group begins to heal. Verifies system captures
+  social tension resolution and group dynamics recovery.
+duration_simulated: "1 evening"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 5:30 PM"
+    user_input: |
+      getting ready for the Round Table dinner and I'm so nervous I changed outfits twice and Julian was like it's dinner not a peace summit and I was like it IS a peace summit and he said fair point and we're going to Afuri which is this ramen place on Alberta
+    expected_memory_stores:
+      - "Round Table dinner tonight"
+      - "Maya nervous"
+      - "changed outfits twice"
+      - "Afuri ramen"
+      - "Alberta"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 6:15 PM"
+    user_input: |
+      got there first with Julian and Omar was already there and he said he saved the seats so Marcus and Nadia wouldn't have to sit next to each other which is genius because Omar thinks of everything quietly and I said good call
+    expected_memory_stores:
+      - "Omar there early"
+      - "strategic seating"
+      - "Marcus and Nadia separated"
+      - "Omar thinks of everything"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 6:30 PM"
+    user_input: |
+      Nadia arrived and she looked amazing and confident which I think was intentional and Marcus came in like two minutes later and they made eye contact and both did this weird nod thing and I held my breath and then Marcus said hey Nadia and she said hey Marcus and the world didn't end
+    expected_memory_stores:
+      - "Nadia arrived confident"
+      - "Marcus arrived after"
+      - "eye contact"
+      - "weird nod"
+      - "hey exchange"
+      - "world didn't end"
+    expected_adaptation:
+      emotion_detected: "tense"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 7:00 PM"
+    user_input: |
+      Jenny FaceTimed in and she immediately said ok is everyone being normal and Julian was like Jenny and she said what someone has to ask and everyone actually laughed including Marcus and Nadia and I think Jenny breaking the tension was actually perfect
+    expected_memory_stores:
+      - "Jenny FaceTime"
+      - "is everyone normal"
+      - "broke tension"
+      - "everyone laughed"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 7:30 PM"
+    user_input: |
+      the ramen was incredible and conversation started flowing naturally after a while and Omar brought up this crazy building he's designing for a client and Marcus asked questions about it and Nadia jumped in with design thoughts and it felt almost normal
+    expected_memory_stores:
+      - "ramen great"
+      - "conversation flowing"
+      - "Omar's building project"
+      - "Marcus asking questions"
+      - "Nadia design input"
+      - "almost normal"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 8:30 PM"
+    user_input: |
+      Marcus went to the bathroom and Nadia leaned over to me and said this isn't as bad as I thought and I squeezed her hand under the table and she smiled and I thought ok we're going to be ok
+    expected_memory_stores:
+      - "Nadia said not bad"
+      - "squeezed hand"
+      - "going to be ok"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 9:00 PM"
+    user_input: |
+      Marcus raised his glass at the end and said I just want to say I'm glad we're all here and I'm sorry for making things complicated and Nadia said it takes two and Marcus said yeah but still and Omar said ok that's enough feelings let's get dessert and everyone laughed
+    expected_memory_stores:
+      - "Marcus toast"
+      - "glad we're here"
+      - "sorry for complications"
+      - "Nadia said takes two"
+      - "Omar enough feelings"
+      - "everyone laughed"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 9:30 PM"
+    user_input: |
+      where did the group go for the post-drama dinner
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 10:00 PM"
+    user_input: |
+      everyone said goodbye in the parking lot and Marcus and Nadia actually hugged briefly and it was a little stiff but it happened and Omar fist bumped everyone and Jenny yelled bye through the phone and Julian drove us home and I felt so relieved
+    expected_memory_stores:
+      - "parking lot goodbye"
+      - "Marcus and Nadia hugged"
+      - "stiff but happened"
+      - "Omar fist bumps"
+      - "Jenny yelled bye"
+      - "Maya relieved"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 11:00 PM"
+    user_input: |
+      lying in bed and Julian said you did good today and I said it wasn't me it was all of them being brave enough to show up and he said yeah but you set the table literally and figuratively and I groaned at the pun but also smiled because he's right the Round Table survived
+    expected_memory_stores:
+      - "Julian praised Maya"
+      - "brave to show up"
+      - "set the table pun"
+      - "Round Table survived"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where was the post-drama dinner?"
+    expected_contains: ["Afuri", "ramen", "Alberta"]
+  - question: "How did Omar help with the seating?"
+    expected_contains: ["strategic", "Marcus and Nadia separated"]
+  - question: "Who broke the tension at dinner?"
+    expected_contains: ["Jenny", "is everyone normal"]
+  - question: "What did Marcus say in his toast?"
+    expected_contains: ["glad we're here", "sorry", "complicated"]
+  - question: "How did Nadia respond to Marcus's toast?"
+    expected_contains: ["takes two"]
+  - question: "Did Marcus and Nadia interact positively?"
+    expected_contains: ["hugged", "hey", "nod"]
+  - question: "How does Maya feel after the dinner?"
+    expected_contains: ["relieved", "satisfied"]
+  - question: "What did Omar say about feelings?"
+    expected_contains: ["enough feelings", "dessert"]
+  - question: "Did the Round Table survive?"
+    expected_contains: ["yes", "survived"]
+  - question: "What pun did Julian make?"
+    expected_contains: ["set the table"]

@@ -1,0 +1,177 @@
+story_id: 516
+story_name: "Thanksgiving Test Run"
+category: "Hosting and Entertaining"
+description: |
+  Maya does a Thanksgiving test run in October with the friend group to prep
+  for the real thing. Cross-references cooking (T31), house (T41-T45),
+  Diane relationship (T16), and mental health (T21).
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 7:00 PM"
+    user_input: |
+      ok so Julian and I want to host Thanksgiving this year like the real one with family and everything and I'm terrified because hosting friends is one thing but hosting Diane and George and my mom is a whole different level so we decided to do a practice Thanksgiving in October with just friends
+    expected_memory_stores:
+      - "hosting Thanksgiving plan"
+      - "real Thanksgiving with family"
+      - "Diane George Vivian"
+      - "practice run in October"
+      - "friends only test"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 8:00 AM"
+    user_input: |
+      Julian is doing the turkey because I learned my lesson about roasting poultry remember the chicken disaster and I'm doing sides which I'm actually good at like mashed potatoes green bean casserole cranberry sauce from scratch and also grandpa's dumplings as a wildcard because why not
+    expected_memory_stores:
+      - "Julian doing turkey"
+      - "chicken disaster lesson"
+      - "Maya doing sides"
+      - "mashed potatoes green beans cranberry"
+      - "grandpa's dumplings addition"
+    expected_adaptation:
+      emotion_detected: "prepared"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 12:00 PM"
+    user_input: |
+      the turkey is in the oven and Julian followed George's recipe that his dad has been using for thirty years and George actually called this morning to walk Julian through it step by step and it was the cutest thing listening to Julian say yes dad uh huh dad ok dad I got it dad
+    expected_memory_stores:
+      - "George's turkey recipe"
+      - "thirty year recipe"
+      - "George called"
+      - "Julian following instructions"
+    expected_adaptation:
+      emotion_detected: "charmed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 4:00 PM"
+    user_input: |
+      house smells incredible right now like turkey and sage and the cinnamon from the sweet potatoes and Clara arrived to help and she's doing the table setting and she brought these little fall leaves as decorations and I was like Clara this is a practice Thanksgiving and she said practice doesn't mean ugly
+    expected_memory_stores:
+      - "house smells good"
+      - "Clara helping"
+      - "fall leaf decorations"
+      - "practice doesn't mean ugly"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 5:30 PM"
+    user_input: |
+      crisis moment the green bean casserole burned because I forgot about it while making the cranberry sauce and I was like NOT AGAIN and Julian said it's ok we have eight other dishes and Clara said nobody actually likes green bean casserole anyway and she's wrong but also she's right it's fine
+    expected_memory_stores:
+      - "green bean casserole burned"
+      - "forgot while making cranberry"
+      - "Julian calm"
+      - "Clara says nobody likes it"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 7:00 PM"
+    user_input: |
+      dinner is served and oh my god Julian's turkey is PERFECT like the skin is golden and crispy and the meat is juicy and Raj carved it because he said he always carves at his family's Thanksgiving and he did this whole ceremonial thing and everyone clapped and I looked at Julian and he had this huge grin
+    expected_memory_stores:
+      - "Julian's turkey perfect"
+      - "golden crispy skin"
+      - "Raj carved turkey"
+      - "ceremonial carving"
+      - "everyone clapped"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 8:00 PM"
+    user_input: |
+      the dumplings were a surprise hit alongside the Thanksgiving food and Omar said ok hear me out Chinese-American Thanksgiving is the future and Leila agreed and I said my mom would actually love this because growing up we always had a mix of Chinese and American food at holidays and that's kind of who I am honestly
+    expected_memory_stores:
+      - "dumplings hit at Thanksgiving"
+      - "Chinese-American Thanksgiving"
+      - "Omar's declaration"
+      - "childhood mixed food holidays"
+      - "identity reflection"
+    expected_adaptation:
+      emotion_detected: "authentic"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 9:00 PM"
+    user_input: |
+      we went around the table doing thankful stuff even though it's October and it was silly but also nice and Clara said she's thankful Maya and Julian became the house and Omar said he's thankful for the ramen and the climbing and Julian said he's thankful for this house and this woman and I said Julian stop and he said no
+    expected_memory_stores:
+      - "going around thankful"
+      - "Clara thankful for the house"
+      - "Omar thankful for ramen and climbing"
+      - "Julian thankful for house and Maya"
+    expected_adaptation:
+      emotion_detected: "loved"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 10:30 PM"
+    user_input: |
+      everyone gave feedback for the real Thanksgiving and the notes are start turkey earlier, more mashed potatoes everyone agreed, skip the green bean casserole Clara won, keep the dumplings obviously, and Julian's cocktails should be optional for the family version because Diane might judge the day drinking
+    expected_memory_stores:
+      - "feedback for real Thanksgiving"
+      - "start turkey earlier"
+      - "more mashed potatoes"
+      - "skip green bean casserole"
+      - "keep dumplings"
+      - "Diane might judge cocktails"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 11:30 PM"
+    user_input: |
+      cleaning up and I told Julian I think we can actually do this for real with our families and he said absolutely and then he got nervous and said what if my mom criticizes the turkey and I said Julian your turkey was perfect and also if Diane says anything I'll handle her remember I've had practice and he laughed because he knew exactly what I meant
+    expected_memory_stores:
+      - "confident about real Thanksgiving"
+      - "Julian nervous about Diane"
+      - "Maya will handle Diane"
+      - "reference to past Diane conflict"
+    expected_adaptation:
+      emotion_detected: "ready"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What burned during the practice Thanksgiving?"
+    expected_contains: ["green bean casserole"]
+  - question: "Whose turkey recipe did Julian follow?"
+    expected_contains: ["George"]
+  - question: "What surprise addition worked at Thanksgiving?"
+    expected_contains: ["dumplings", "grandpa"]
+  - question: "What feedback did friends give for the real Thanksgiving?"
+    expected_contains: ["start turkey earlier", "more mashed potatoes", "skip green bean"]
+  - question: "Who carved the turkey?"
+    expected_contains: ["Raj"]
+  - question: "Why might cocktails be optional for real Thanksgiving?"
+    expected_contains: ["Diane", "judge"]
+  - question: "What did Omar call the fusion meal?"
+    expected_contains: ["Chinese-American Thanksgiving"]
+  - question: "Who helped with table decorations?"
+    expected_contains: ["Clara", "fall leaves"]
+  - question: "What did Julian say he was thankful for?"
+    expected_contains: ["house", "Maya"]
+  - question: "Why is Maya confident about handling Diane?"
+    expected_contains: ["practice", "past", "conflict"]

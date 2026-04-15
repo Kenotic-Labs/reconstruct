@@ -1,0 +1,180 @@
+story_id: 240
+story_name: "Allergy Arc Reflection"
+category: "Health"
+description: |
+  Tests full allergy arc reconstruction. Maya reflects on the journey from mystery symptoms
+  to confident management. Verifies system can reconstruct the complete narrative including
+  corrections, escalations, and identity changes.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:00 PM"
+    user_input: |
+      had my three month check in with Dr. Nassif today and she said everything looks stable and my allergy management is textbook and she said I don't need to come back for a year unless there's an incident and that felt like graduation
+    expected_memory_stores:
+      - "three month check in"
+      - "Dr. Nassif"
+      - "everything stable"
+      - "textbook management"
+      - "yearly visits now"
+      - "felt like graduation"
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 8:30 PM"
+    user_input: |
+      she asked if I'd be willing to be a peer mentor for newly diagnosed patients and I said yes immediately because I remember how scared I was and if someone had told me hey I've been through this and you'll be ok that would have helped so much
+    expected_memory_stores:
+      - "peer mentor offer"
+      - "said yes"
+      - "help newly diagnosed"
+      - "remembers being scared"
+    expected_adaptation:
+      emotion_detected: "generous"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 9:00 PM"
+    user_input: |
+      thinking about the whole journey like it started with random stomach cramps and Clara saying it could be shellfish and then the elimination diet and then Dr. Nassif confirming it and the EpiPen and then Thai Orchid and the ER and the bracelet and now I'm fine like actually fine
+    expected_memory_stores:
+      - "full journey recap"
+      - "stomach cramps"
+      - "Clara detective"
+      - "elimination diet"
+      - "Dr. Nassif"
+      - "EpiPen"
+      - "Thai Orchid ER"
+      - "bracelet"
+      - "actually fine now"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 9:30 PM"
+    user_input: |
+      told Julian I'm going to be a peer mentor and he said of course you are you turn everything into helping people and I said well I learned that from grandpa and I touched the watch and he smiled
+    expected_memory_stores:
+      - "told Julian mentor"
+      - "turns everything into helping"
+      - "learned from grandpa"
+      - "touched watch"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 8:00 AM"
+    user_input: |
+      wore the medical bracelet and grandpa's watch and my engagement ring all on my hands and wrists today and Julian said you're accessorized and I said these aren't accessories they're my identity like the watch is legacy the bracelet is survival and the ring is love
+    expected_memory_stores:
+      - "bracelet watch ring"
+      - "identity statement"
+      - "legacy survival love"
+      - "Julian amused"
+    expected_adaptation:
+      emotion_detected: "poetic"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      summarize my shellfish allergy journey for me like the whole thing from start to now
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 3:00 PM"
+    user_input: |
+      Aunt Lily called and said she heard I'm going to mentor newly diagnosed patients and she said Maya that's exactly what this family does we take our hardships and turn them into something useful and she said grandpa would call that building a bridge
+    expected_memory_stores:
+      - "Aunt Lily heard about mentoring"
+      - "family tradition"
+      - "hardships into something useful"
+      - "grandpa building a bridge"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 5:00 PM"
+    user_input: |
+      I realize now that the allergy didn't take anything from me it just redirected me like I can't eat shrimp anymore but I cook better I read labels I advocate for myself I'm going to help other people and I have an excuse to make incredible paella every week
+    expected_memory_stores:
+      - "didn't take anything"
+      - "redirected"
+      - "cook better"
+      - "read labels"
+      - "advocate for self"
+      - "help others"
+      - "incredible paella"
+    expected_adaptation:
+      emotion_detected: "empowered"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      Clara said something that stuck with me she said you know how some people let their limitations define them and other people let their limitations refine them and she said Maya you're a refiner and I was like Clara that's too deep for a Tuesday
+    expected_memory_stores:
+      - "Clara insight"
+      - "define vs refine"
+      - "Maya is a refiner"
+      - "too deep for Tuesday"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 10:00 PM"
+    user_input: |
+      EpiPen on the nightstand bracelet on my wrist watch ticking softly and I'm not scared anymore I'm just prepared and there's a huge difference between those two things and I finally understand that and goodnight grandpa
+    expected_memory_stores:
+      - "EpiPen nightstand"
+      - "bracelet on wrist"
+      - "watch ticking"
+      - "not scared just prepared"
+      - "huge difference"
+      - "goodnight grandpa"
+    expected_adaptation:
+      emotion_detected: "at peace"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Summarize Maya's shellfish allergy journey."
+    expected_contains: ["stomach cramps", "shellfish", "EpiPen", "Thai Orchid", "ER", "management"]
+  - question: "What is Maya volunteering to do?"
+    expected_contains: ["peer mentor", "newly diagnosed"]
+  - question: "How often does Maya see Dr. Nassif now?"
+    expected_contains: ["yearly"]
+  - question: "What three items does Maya wear on her wrists/hands?"
+    expected_contains: ["watch", "bracelet", "ring"]
+  - question: "What did Maya say they represent?"
+    expected_contains: ["legacy", "survival", "love"]
+  - question: "What did Aunt Lily say about the family tradition?"
+    expected_contains: ["hardships", "useful", "building a bridge"]
+  - question: "What did Clara say about define vs refine?"
+    expected_contains: ["refiner"]
+  - question: "How does Maya describe her relationship with fear now?"
+    expected_contains: ["not scared", "prepared"]
+  - question: "Who is Maya's allergist?"
+    expected_contains: ["Dr. Amy Nassif"]
+  - question: "What wedding caterer is accommodating the allergy?"
+    expected_contains: ["Blue Fork"]

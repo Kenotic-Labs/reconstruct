@@ -1,0 +1,197 @@
+story_id: 491
+story_name: "Thanksgiving Hosting First Time"
+category: "Holiday Season"
+description: |
+  Tests memory of Maya and Julian hosting Thanksgiving for the first time.
+  Establishes the stress of hosting both families, menu conflicts.
+  Verifies system captures family dynamics and cross-thread references.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      okay so we decided to host Thanksgiving at the Woodstock house this year which is our first time hosting ANYTHING this big and both families are coming so that's my parents Vivian and George and Julian's parents Diane and Bob and Clara and Tyler and Sophie and I'm already stressed and it's a week away
+    expected_memory_stores:
+      - "Thanksgiving hosting"
+      - "Woodstock house"
+      - "first time hosting big"
+      - "both families"
+      - "Vivian George"
+      - "Diane Bob"
+      - "Clara Tyler Sophie"
+      - "week away stressed"
+    expected_adaptation:
+      emotion_detected: "stressed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      so the menu drama has begun because my mom wants to make some Chinese dishes like her scallion pancakes and these red braised pork belly things that Grandpa Wei used to make and Diane wants a traditional American Thanksgiving with turkey and stuffing and green bean casserole and both of them keep texting me their opinions and I'm like PLEASE
+    expected_memory_stores:
+      - "menu drama"
+      - "Vivian Chinese dishes"
+      - "scallion pancakes"
+      - "red braised pork belly"
+      - "Grandpa Wei recipe"
+      - "Diane traditional American"
+      - "turkey stuffing green bean casserole"
+      - "both texting opinions"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      Julian's trying to mediate and he's like just do both and I'm like Julian we have a normal sized kitchen not a restaurant and also Diane texted asking if she can bring her famous sweet potato casserole and my mom texted asking if she can bring dumplings and neither of them asked me they're both just assuming their dishes are happening and I need to set some boundaries here
+    expected_memory_stores:
+      - "Julian mediate"
+      - "do both suggestion"
+      - "normal kitchen"
+      - "Diane sweet potato casserole"
+      - "Vivian dumplings"
+      - "neither asked"
+      - "need boundaries"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 7:00 PM"
+    user_input: |
+      okay I did it I called both moms and said I love you both and I appreciate your traditions but I'M cooking and this is MY menu and my house and they can each bring one dish and that's it and Diane was a little huffy but she said okay fine she'll bring the sweet potato casserole and my mom said she'll bring dumplings and both of them said yes dear in that way moms do when they're annoyed but accepting it
+    expected_memory_stores:
+      - "called both moms"
+      - "I'm cooking my menu"
+      - "my house"
+      - "one dish each"
+      - "Diane huffy"
+      - "sweet potato casserole"
+      - "Vivian dumplings"
+      - "yes dear annoyed"
+    expected_adaptation:
+      emotion_detected: "empowered"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 8:00 PM"
+    user_input: |
+      so my plan is a fusion menu that honors both families so I'm making turkey obviously but I'm also making Grandpa Wei's dumpling recipe the one mom taught me as a side dish alongside the traditional stuffing and cranberry sauce and I found this recipe for miso gravy that bridges both cultures and Julian said that's actually genius
+    expected_memory_stores:
+      - "fusion menu"
+      - "honors both families"
+      - "turkey"
+      - "Grandpa Wei dumpling recipe"
+      - "side dish"
+      - "traditional stuffing cranberry"
+      - "miso gravy"
+      - "bridges cultures"
+      - "Julian said genius"
+    expected_adaptation:
+      emotion_detected: "creative"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:00 AM"
+    user_input: |
+      went grocery shopping and spent like 200 dollars on Thanksgiving stuff and Julian came with me and we were at Uwajimaya getting the Asian ingredients for the dumplings and miso gravy and then we went to New Seasons for the turkey and all the American stuff and Kobe stayed home and apparently ate a sock while we were gone but he seems fine
+    expected_memory_stores:
+      - "grocery shopping 200 dollars"
+      - "Julian came"
+      - "Uwajimaya Asian ingredients"
+      - "New Seasons turkey"
+      - "Kobe ate sock"
+      - "Kobe seems fine"
+    expected_adaptation:
+      emotion_detected: "busy"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 3:00 PM"
+    user_input: |
+      I practiced making the dumplings today as a test run and called mom for guidance and she walked me through Grandpa Wei's recipe and I made like 40 dumplings and some turned out perfect and some look like abstract art but Julian taste tested and said they're incredible and I got a little emotional because these are Grandpa's dumplings in my kitchen in my house
+    expected_memory_stores:
+      - "test run dumplings"
+      - "called Vivian for guidance"
+      - "Grandpa Wei recipe"
+      - "40 dumplings"
+      - "some perfect some abstract"
+      - "Julian said incredible"
+      - "emotional Grandpa's dumplings"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 2:00 PM"
+    user_input: |
+      what is Maya's Thanksgiving menu
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 5:00 PM"
+    user_input: |
+      Dr Tate and I talked about the boundary setting with both moms and she said she's proud of me for being clear about my house my rules and she said hosting for the first time is a big milestone in adulthood and I should enjoy it not just survive it and she's right I need to shift from stress mode to celebration mode
+    expected_memory_stores:
+      - "Dr Tate proud"
+      - "my house my rules"
+      - "hosting milestone"
+      - "adulthood"
+      - "enjoy not survive"
+      - "stress to celebration"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 PM"
+    user_input: |
+      I told Jenny and Nadia about the Thanksgiving menu drama and they both said I handled it perfectly and Jenny said the fusion menu idea is so you and Nadia said the miso gravy sounds amazing and can she come and I said Nadia it's family Thanksgiving and she said Maya I AM family and honestly she's not wrong I should have invited her
+    expected_memory_stores:
+      - "told Jenny Nadia"
+      - "handled perfectly"
+      - "fusion is so Maya"
+      - "Nadia wants miso gravy"
+      - "Nadia I am family"
+      - "should have invited"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where is Thanksgiving being hosted?"
+    expected_contains: ["Woodstock house"]
+  - question: "What two families are coming?"
+    expected_contains: ["Chen", "Reeves"]
+  - question: "What did Vivian want to contribute?"
+    expected_contains: ["Chinese", "dumplings", "scallion"]
+  - question: "What did Diane want to contribute?"
+    expected_contains: ["sweet potato casserole"]
+  - question: "What boundary did Maya set about the menu?"
+    expected_contains: ["my menu", "my house", "one dish each"]
+  - question: "What is the fusion element in Maya's menu?"
+    expected_contains: ["miso gravy", "dumplings", "turkey"]
+  - question: "Whose dumpling recipe is Maya using?"
+    expected_contains: ["Grandpa Wei"]
+  - question: "Where did they shop for ingredients?"
+    expected_contains: ["Uwajimaya", "New Seasons"]
+  - question: "What did Kobe eat while they were shopping?"
+    expected_contains: ["sock"]
+  - question: "What did Dr. Tate say about hosting?"
+    expected_contains: ["milestone", "enjoy", "adulthood"]

@@ -1,0 +1,172 @@
+story_id: 406
+story_name: "Buying the Outback"
+category: "Car Saga"
+description: |
+  Maya goes back to Beaverton Subaru and buys the 2021 Outback for $28,500.
+  Tests the car choice correction from RAV4 to Outback and purchase details.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:30 AM"
+    user_input: |
+      ok it's Subaru day Julian is way too excited about this like he's been watching YouTube reviews of the 2021 Outback all week and he made a whole spreadsheet of features vs the RAV4 and honestly the Outback wins in most categories I have to admit
+    expected_memory_stores:
+      - "going to Beaverton Subaru"
+      - "Julian excited"
+      - "Outback vs RAV4 spreadsheet"
+      - "Outback wins comparison"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 11:00 AM"
+    user_input: |
+      at the dealership now and the sales guy is named Ron and he's actually chill not pushy at all like the Toyota dude was and the Outback is still here same one 2021 28k miles in this gorgeous dark blue metallic color Julian is already calling it the adventure mobile
+    expected_memory_stores:
+      - "salesman Ron"
+      - "Outback available"
+      - "dark blue metallic"
+      - "28k miles confirmed"
+      - "adventure mobile nickname"
+    expected_adaptation:
+      emotion_detected: "enthusiastic"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:45 AM"
+    user_input: |
+      test drove it and oh my god it drives so smooth like compared to the Civic which was basically held together by prayers at this point the Outback is like driving on a cloud and the cargo area is massive like Kobe could have his own apartment back there
+    expected_memory_stores:
+      - "test drive positive"
+      - "smooth driving"
+      - "cargo area for Kobe"
+      - "Civic comparison"
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 1:00 PM"
+    user_input: |
+      ok so here's where it gets real the sticker is 28,500 and I asked Ron if there's any room and he talked to his manager and they came back at 27,800 and I was like can you do 27 flat and they said 27,500 is their absolute lowest and Julian whispered just take it so we shook on 27,500
+    expected_memory_stores:
+      - "sticker $28,500"
+      - "negotiated to $27,500"
+      - "Ron's manager involved"
+      - "Julian said take it"
+    expected_adaptation:
+      emotion_detected: "thrilled"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 2:30 PM"
+    user_input: |
+      wait actually no I just looked at the paperwork again and the final price is 28,500 because there's like 700 in dealer fees and doc fees and whatever else they tack on so it's basically back to where we started but at least the interest rate through our credit union is 4.2 percent which is way better than the Toyota guys 6.9
+    expected_memory_stores:
+      - "final price $28,500 with fees"
+      - "dealer fees $700"
+      - "correction on price"
+      - "credit union 4.2%"
+      - "better than Toyota 6.9%"
+    expected_adaptation:
+      emotion_detected: "slightly annoyed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 3:30 PM"
+    user_input: |
+      doing all the financing paperwork now and we put 5000 down like we planned and the monthly payment comes out to 385 a month for 60 months wait no that's 5 years not 4 like we originally said but the monthly is lower this way so Julian said go with 60
+    expected_memory_stores:
+      - "$5000 down"
+      - "$385/month"
+      - "60 months not 48"
+      - "correction on loan term"
+    expected_adaptation:
+      emotion_detected: "pragmatic"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 4:30 PM"
+    user_input: |
+      IT'S OURS we drove it off the lot and Julian immediately played Born to Run by Springsteen at full volume because he's a dork and I won't lie I got a little emotional like this is my first real grown up car purchase the Civic was a hand me down from my aunt
+    expected_memory_stores:
+      - "purchased Outback"
+      - "drove off lot"
+      - "Born to Run celebration"
+      - "emotional moment"
+      - "Civic was hand-me-down from aunt"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 5:30 PM"
+    user_input: |
+      drove straight to the pet store and got Kobe a car seat cover for the cargo area and a new harness that clips into the seatbelt anchor and he jumped in the back and just looked so happy like he knew it was his car too honestly Kobe approved
+    expected_memory_stores:
+      - "car seat cover for Kobe"
+      - "seatbelt harness"
+      - "Kobe approved"
+      - "pet store trip"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 7:00 PM"
+    user_input: |
+      mom FaceTimed and I showed her the Outback and she was like oh it's very practical which is the highest compliment Vivian Chen gives to a car and my dad said nice color and asked about the warranty which apparently has 2 years left on the factory warranty so that's great
+    expected_memory_stores:
+      - "Vivian approves"
+      - "dad asked about warranty"
+      - "2 years factory warranty left"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 9:00 PM"
+    user_input: |
+      parked the Outback in the garage tonight and just sat in it for a minute like I know it's just a car but it feels like a fresh start and Julian came out and was like are you having a moment with the car and I was like yes leave me alone and he laughed and honestly today was a really good day
+    expected_memory_stores:
+      - "parked in garage"
+      - "fresh start feeling"
+      - "Julian teasing"
+      - "great day"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What car did Maya buy?"
+    expected_contains: ["2021", "Subaru Outback"]
+  - question: "How much did Maya pay for the Outback?"
+    expected_contains: ["28,500", "28500"]
+  - question: "What color is the Outback?"
+    expected_contains: ["dark blue", "metallic"]
+  - question: "What dealership did Maya buy from?"
+    expected_contains: ["Beaverton Subaru"]
+  - question: "What is Maya's monthly car payment?"
+    expected_contains: ["385"]
+  - question: "What is the loan term?"
+    expected_contains: ["60 months", "5 years"]
+  - question: "What interest rate did Maya get?"
+    expected_contains: ["4.2"]
+  - question: "How much was the down payment?"
+    expected_contains: ["5000", "5,000"]
+  - question: "Where did Maya's Civic originally come from?"
+    expected_contains: ["aunt", "hand-me-down"]
+  - question: "How much factory warranty is left on the Outback?"
+    expected_contains: ["2 years"]

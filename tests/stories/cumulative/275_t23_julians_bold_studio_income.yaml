@@ -1,0 +1,179 @@
+story_id: 275
+story_name: "Julian's Bold Studio Income"
+category: "Finance"
+description: |
+  Tests memory of Julian's freelance work at Bold Studio growing significantly,
+  contributing more to the household income and loan payoff. Captures the shift in
+  their financial dynamic.
+duration_simulated: "1 month"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:00 AM"
+    user_input: |
+      so big news Julian got offered a bigger role at Bold Studio they want him to be their lead designer on retainer instead of just doing project-by-project freelance and the retainer is $4,500 a month which is like double what he was making before
+    expected_memory_stores:
+      - "Julian lead designer"
+      - "Bold Studio retainer"
+      - "$4,500 monthly"
+      - "double previous income"
+      - "not just freelance"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 12:00 PM"
+    user_input: |
+      Julian is so happy about it like he literally did a little dance in the kitchen when he got the email and Kobe started jumping around with him and it was the cutest thing and honestly he deserves this he's been grinding for years building his portfolio
+    expected_memory_stores:
+      - "Julian celebrating"
+      - "kitchen dance"
+      - "Kobe jumping"
+      - "deserves it"
+      - "years of portfolio building"
+    expected_adaptation:
+      emotion_detected: "proud of partner"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      with Julian's new income our combined monthly take-home is now like $11,200 after taxes which is insane compared to where we were and I ran the numbers and if we bump the loan payment to $1,500 we can knock out the remaining balance in about 14 months
+    expected_memory_stores:
+      - "combined take-home $11,200"
+      - "bump to $1,500 payments"
+      - "14 months remaining"
+      - "income increase"
+    expected_adaptation:
+      emotion_detected: "empowered"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      Julian was like wait if I'm making this much now can I please buy some new Wacom tablet because my current one is literally taped together and I was like yes babe you've earned it and he ordered a Wacom Cintiq which was like $800 but honestly he needs it for work
+    expected_memory_stores:
+      - "Wacom Cintiq purchase"
+      - "$800"
+      - "old tablet broken"
+      - "taped together"
+      - "Maya approved"
+      - "needed for work"
+    expected_adaptation:
+      emotion_detected: "generous"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 8:00 PM"
+    user_input: |
+      we had the talk about whether Julian's retainer is stable enough to rely on for budgeting and he said Bold Studio has been around for 8 years and they have a full client roster and his contract is for 12 months with auto-renewal so yeah it's pretty solid
+    expected_memory_stores:
+      - "retainer stability discussion"
+      - "Bold Studio 8 years"
+      - "12 month contract"
+      - "auto-renewal"
+      - "solid income"
+    expected_adaptation:
+      emotion_detected: "reassured"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 9:00 AM"
+    user_input: |
+      month seven and the loan balance is at $24,500 we went aggressive this month $1,500 payment plus the app income of about $650 and it's wild seeing the number drop this fast like it was 34K not that long ago
+    expected_memory_stores:
+      - "month seven"
+      - "balance $24,500"
+      - "$1,500 payment"
+      - "app income $650"
+      - "was 34K"
+      - "dropping fast"
+    expected_adaptation:
+      emotion_detected: "motivated"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Monday 6:00 PM"
+    user_input: |
+      Julian started his retainer officially today and his first project is redesigning the website for this organic skincare brand called Bloom & Root and he's already excited about the color palette he wants to use and honestly watching him be passionate about design is one of my favorite things
+    expected_memory_stores:
+      - "retainer started"
+      - "Bloom & Root"
+      - "organic skincare"
+      - "website redesign"
+      - "Julian passionate"
+    expected_adaptation:
+      emotion_detected: "loving"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      funny thing is Julian used to make maybe 2K a month freelancing and now with the retainer plus occasional side work he's bringing in like 5K and I make about 7K after taxes from Conduit so our total household income went from like 9K to 12K monthly in less than a year
+    expected_memory_stores:
+      - "Julian was 2K now 5K"
+      - "Maya 7K from Conduit"
+      - "household 9K to 12K"
+      - "less than a year"
+      - "income growth"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 10:00 AM"
+    user_input: |
+      month eight balance is $22,800 under 23K and I'm starting to think about what comes after the loans are paid off like we should probably start a proper house down payment fund wait we already bought the house lol I mean an emergency fund slash renovation fund
+    expected_memory_stores:
+      - "month eight"
+      - "balance $22,800"
+      - "under 23K"
+      - "post-loan planning"
+      - "renovation fund idea"
+      - "already bought house"
+    expected_adaptation:
+      emotion_detected: "forward-thinking"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 7:00 PM"
+    user_input: |
+      how much do I owe on my student loans right now and how much has Julian's income changed since he started the retainer I want to make sure I have the numbers right
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "practical"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How much is Julian making at Bold Studio now?"
+    expected_contains: ["4,500", "4500"]
+  - question: "What is Julian's role at Bold Studio?"
+    expected_contains: ["lead designer", "retainer"]
+  - question: "What is the current loan balance?"
+    expected_contains: ["22,800", "22800"]
+  - question: "What is the combined household monthly income?"
+    expected_contains: ["12", "11,200"]
+  - question: "How much is the monthly loan payment now?"
+    expected_contains: ["1,500", "1500"]
+  - question: "What new equipment did Julian buy?"
+    expected_contains: ["Wacom", "Cintiq"]
+  - question: "What project is Julian working on at Bold Studio?"
+    expected_contains: ["Bloom & Root"]
+  - question: "How long is Julian's Bold Studio contract?"
+    expected_contains: ["12 months"]
+  - question: "What is Maya planning for after the loans are paid off?"
+    expected_contains: ["emergency fund", "renovation fund"]
+  - question: "How much did Julian used to make freelancing?"
+    expected_contains: ["2"]

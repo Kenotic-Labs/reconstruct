@@ -1,0 +1,187 @@
+story_id: 291
+story_name: "Adopting Kobe"
+category: "Pet"
+description: |
+  Tests memory of Maya and Julian adopting Kobe from Oregon Humane Society.
+  Establishes shelter details, initial age estimate, and the chaotic first day home.
+  Tests correction when the vet later says Kobe is older than the shelter stated.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00 AM"
+    user_input: |
+      okay so we've been talking about getting a dog for like a year and today we're finally going to Oregon Humane Society to look and I'm SO excited Julian is pretending to be calm but he's definitely not calm he's been looking at dog beds on Amazon all morning
+    expected_memory_stores:
+      - "getting a dog"
+      - "talked about for a year"
+      - "Oregon Humane Society"
+      - "Julian looking at dog beds"
+      - "excited"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 11:30 AM"
+    user_input: |
+      we met like eight dogs and they were all great but then we walked past this golden retriever who was just sitting quietly in his kennel looking at us with these soulful brown eyes and the card said his name was Kobe male golden retriever approximately 2 years old surrendered by previous owner
+    expected_memory_stores:
+      - "met eight dogs"
+      - "golden retriever"
+      - "name Kobe"
+      - "soulful brown eyes"
+      - "approximately 2 years old"
+      - "surrendered by previous owner"
+    expected_adaptation:
+      emotion_detected: "smitten"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 12:00 PM"
+    user_input: |
+      did the meet and greet with Kobe and he immediately put his head on Julian's lap and Julian looked at me and was like we're taking him home and I was like we haven't even done the temperament assessment yet and Julian was like I don't care this is our dog
+    expected_memory_stores:
+      - "meet and greet"
+      - "head on Julian's lap"
+      - "Julian instant connection"
+      - "our dog"
+      - "skipping assessment"
+    expected_adaptation:
+      emotion_detected: "love at first sight"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 1:30 PM"
+    user_input: |
+      filled out the adoption paperwork and the adoption fee was $350 which includes neutering and first round of vaccinations and a microchip and the shelter counselor said Kobe was surrendered because his previous owner was moving overseas and couldn't take him which is so sad but also lucky for us
+    expected_memory_stores:
+      - "adoption paperwork"
+      - "$350 fee"
+      - "neutered"
+      - "vaccinations"
+      - "microchip"
+      - "previous owner moved overseas"
+      - "surrendered reason"
+    expected_adaptation:
+      emotion_detected: "empathetic"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Kobe is in the car. I repeat KOBE IS IN THE CAR he's in the back seat with a shelter blanket and he's looking out the window and Julian is driving and I'm turned around talking to him like a crazy person and he just seems so calm and trusting for a dog who just left a shelter
+    expected_memory_stores:
+      - "Kobe in car"
+      - "shelter blanket"
+      - "looking out window"
+      - "calm and trusting"
+      - "Maya talking to him"
+    expected_adaptation:
+      emotion_detected: "overjoyed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 4:00 PM"
+    user_input: |
+      first moments home and Kobe sniffed every single inch of the apartment like EVERY inch and then he found the dog bed we set up in the living room and just lay down with a huge sigh and I was like same buddy same and Julian was like I think he likes it here
+    expected_memory_stores:
+      - "first moments home"
+      - "sniffed everything"
+      - "dog bed in living room"
+      - "lay down with sigh"
+      - "likes it here"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 7:00 PM"
+    user_input: |
+      feeding time and the shelter gave us a bag of the food he was eating there which is some brand called Purina Pro Plan and he ate like he hadn't seen food in days which he probably had because shelters are stressful and then he drank water for like two minutes straight
+    expected_memory_stores:
+      - "first feeding"
+      - "Purina Pro Plan"
+      - "shelter food"
+      - "ate fast"
+      - "drank lots of water"
+    expected_adaptation:
+      emotion_detected: "nurturing"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 10:00 PM"
+    user_input: |
+      first night and Kobe is sleeping on the floor next to our bed and he's snoring softly and Julian is asleep and I'm lying here listening to our dog snore and feeling like our little family just got complete. also he smells kind of bad and needs a bath but that's tomorrow's problem
+    expected_memory_stores:
+      - "first night"
+      - "sleeping next to bed"
+      - "snoring"
+      - "family complete"
+      - "needs bath"
+      - "smells bad"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 9:00 AM"
+    user_input: |
+      Kobe woke us up at 6 AM by licking Julian's face and Julian was like DUDE and I was laughing so hard and then we took him for his first walk around Sellwood and he was SO HAPPY like tail going a million miles an hour and everyone we passed was like beautiful dog
+    expected_memory_stores:
+      - "6 AM wake up"
+      - "licking Julian's face"
+      - "first walk Sellwood"
+      - "tail wagging"
+      - "people complimenting"
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 2:00 PM"
+    user_input: |
+      scheduled Kobe's first vet appointment for Tuesday with Dr. Sara Mills at Woodstock Veterinary Clinic which Nadia recommended and also I need to know how old Kobe actually is because the shelter said about 2 years but they seemed unsure and his teeth look a little more worn than a 2 year old
+    expected_memory_stores:
+      - "vet appointment Tuesday"
+      - "Dr. Sara Mills"
+      - "Woodstock Veterinary Clinic"
+      - "Nadia recommended"
+      - "age uncertainty"
+      - "shelter said 2 years"
+      - "teeth worn"
+    expected_adaptation:
+      emotion_detected: "responsible"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where did Maya adopt Kobe?"
+    expected_contains: ["Oregon Humane Society"]
+  - question: "What breed is Kobe?"
+    expected_contains: ["golden retriever"]
+  - question: "How old did the shelter say Kobe is?"
+    expected_contains: ["2 years"]
+  - question: "Why was Kobe surrendered?"
+    expected_contains: ["owner", "moving", "overseas"]
+  - question: "How much was the adoption fee?"
+    expected_contains: ["350"]
+  - question: "What food was Kobe eating at the shelter?"
+    expected_contains: ["Purina Pro Plan"]
+  - question: "Who is Kobe's vet?"
+    expected_contains: ["Dr. Sara Mills"]
+  - question: "What vet clinic does Kobe go to?"
+    expected_contains: ["Woodstock Veterinary"]
+  - question: "Who recommended the vet?"
+    expected_contains: ["Nadia"]
+  - question: "How did Julian react to meeting Kobe?"
+    expected_contains: ["lap", "our dog", "instant"]

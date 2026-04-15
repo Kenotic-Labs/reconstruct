@@ -1,0 +1,172 @@
+story_id: 429
+story_name: "Grounded and Purposeful"
+category: "Volunteering"
+description: |
+  Maya reflects on how volunteering has changed her perspective. Connects it
+  to her therapy work and overall life direction. Deep emotional integration.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 7:00 PM"
+    user_input: |
+      had a really good session with Dr Tate today and we talked about how volunteering has like anchored me emotionally and she said it's interesting because I started volunteering to get outside myself and what happened is I actually found more of myself which is very therapist speak but she's right
+    expected_memory_stores:
+      - "Dr Tate session"
+      - "volunteering anchored emotionally"
+      - "get outside herself"
+      - "found more of herself"
+    expected_adaptation:
+      emotion_detected: "insightful"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 7:30 PM"
+    user_input: |
+      she also connected it to the whole PIP trauma at Vantage and how after that I felt like my only value was my work output and volunteering proved that I have value beyond code and productivity and that hit me really hard because yeah that's exactly what happened I defined myself by work for too long
+    expected_memory_stores:
+      - "PIP trauma connection"
+      - "Vantage Systems"
+      - "value beyond work"
+      - "defined by work"
+      - "volunteering proved otherwise"
+    expected_adaptation:
+      emotion_detected: "emotional breakthrough"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 8:00 PM"
+    user_input: |
+      told Julian about the therapy insight and he was like I've been saying that for years like you are so much more than your job and I was like I know you've been saying it but I had to feel it for myself and he said fair enough and held my hand and Kobe put his head on my foot because he's emotionally intelligent for a dog
+    expected_memory_stores:
+      - "Julian always said this"
+      - "had to feel it herself"
+      - "Julian holding hand"
+      - "Kobe emotionally intelligent"
+    expected_adaptation:
+      emotion_detected: "loved"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 8:30 PM"
+    user_input: |
+      thinking about all the people I've met through the food bank like Diane and Harold and Tomas and Patricia and even the families that come in and the kid who calls me food lady and these connections are different from work connections they're not transactional they're just human
+    expected_memory_stores:
+      - "food bank connections"
+      - "Diane Harold Tomas Patricia"
+      - "food lady kid"
+      - "not transactional"
+      - "just human connections"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 9:00 PM"
+    user_input: |
+      even the food drive changed how people at Conduit see me like I'm not just the engineer who delivers features I'm also the person who organized this amazing charity thing and Aisha told me the food drive inspired her to volunteer at a youth center in her neighborhood
+    expected_memory_stores:
+      - "changed perception at Conduit"
+      - "not just engineer"
+      - "Aisha inspired"
+      - "youth center volunteering"
+    expected_adaptation:
+      emotion_detected: "meaningful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 9:30 PM"
+    user_input: |
+      my mom said something last week that stuck with me she said Maya your grandmother used to feed everyone on the block during Chinese New Year no matter how little we had and I think you have that same spirit and I cried because I never met my grandmother and to be compared to her means everything
+    expected_memory_stores:
+      - "Vivian's comparison"
+      - "grandmother fed neighborhood"
+      - "Chinese New Year"
+      - "same spirit"
+      - "never met grandmother"
+      - "Maya cried"
+    expected_adaptation:
+      emotion_detected: "deeply moved"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 10:00 PM"
+    user_input: |
+      you know what the food bank also gave me it gave me perspective on money and stuff like Julian and I stressed so hard about the car repair and the house and the smart home expenses but then you go to the food bank and see families who can't afford groceries and it just recalibrates everything
+    expected_memory_stores:
+      - "perspective on money"
+      - "car repair house smart home"
+      - "families can't afford groceries"
+      - "recalibrates everything"
+    expected_adaptation:
+      emotion_detected: "humbled"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 10:15 PM"
+    user_input: |
+      what did Dr Tate connect my volunteering to from my past
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 10:30 PM"
+    user_input: |
+      I want to teach Kobe to be a therapy dog eventually like I've seen people bring therapy dogs to shelters and food banks and Kobe is so gentle and loving he would be perfect for it and Julian said that's the most on brand Maya thing he's ever heard which is fair
+    expected_memory_stores:
+      - "therapy dog idea for Kobe"
+      - "shelters and food banks"
+      - "Kobe gentle and loving"
+      - "Julian says on brand"
+    expected_adaptation:
+      emotion_detected: "dreaming"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 11:00 PM"
+    user_input: |
+      going to bed feeling like the last 6 months of volunteering changed me in ways I didn't expect and I'm not the same person who walked into the food bank nervous on that first Saturday and that growth feels real and lasting not like a mood but like a shift in who I fundamentally am
+    expected_memory_stores:
+      - "6 months of change"
+      - "not same person"
+      - "growth feels real"
+      - "fundamental shift"
+      - "not a mood"
+    expected_adaptation:
+      emotion_detected: "transformed"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did Dr. Tate connect Maya's volunteering to?"
+    expected_contains: ["PIP", "Vantage", "value beyond work"]
+  - question: "What did Vivian say about Maya's grandmother?"
+    expected_contains: ["fed", "neighborhood", "Chinese New Year", "same spirit"]
+  - question: "What does Maya want to train Kobe to be?"
+    expected_contains: ["therapy dog"]
+  - question: "How has volunteering changed Maya's perspective on money?"
+    expected_contains: ["recalibrates", "perspective", "families", "groceries"]
+  - question: "What inspired Aisha beyond the food drive?"
+    expected_contains: ["youth center", "volunteer"]
+  - question: "How long has Maya been volunteering?"
+    expected_contains: ["6 months"]
+  - question: "What did Julian always tell Maya about her value?"
+    expected_contains: ["more than job", "more than work"]
+  - question: "How does Maya describe the connections at the food bank?"
+    expected_contains: ["not transactional", "human"]
+  - question: "Did Maya meet her grandmother?"
+    expected_contains: ["no", "never"]
+  - question: "How has Maya changed since starting volunteering?"
+    expected_contains: ["fundamental", "shift", "not same person"]

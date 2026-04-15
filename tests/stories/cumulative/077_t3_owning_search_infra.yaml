@@ -1,0 +1,225 @@
+story_id: 77
+story_name: "Owning Search Infrastructure"
+category: "Career"
+description: |
+  Tests memory of Maya officially taking ownership of search infrastructure.
+  She creates a roadmap and starts leading technical direction.
+  Verifies system tracks role evolution and professional ownership.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00 AM"
+    user_input: |
+      Sam made it official today my title is now search infrastructure engineer and I own the entire search pipeline from ingestion to indexing to query processing to ranking and it's a lot of responsibility but it's exactly what I told Ross I wanted in my interview and here I am four weeks later actually doing it
+    expected_memory_stores:
+      - "title official"
+      - "search infrastructure engineer"
+      - "owns entire search pipeline"
+      - "ingestion to ranking"
+      - "four weeks"
+      - "interview promise delivered"
+    expected_triples:
+      - ["user", "title", "search infrastructure engineer (official)"]
+      - ["user", "owns", "entire search pipeline: ingestion to ranking"]
+      - ["user", "at_conduit_for", "four weeks"]
+      - ["user", "has_emotion", "proud"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 2:00 PM"
+    user_input: |
+      started drafting a 90-day roadmap for search infrastructure and my priorities are one fix the remaining tech debt from the race condition two improve search latency by 30 percent and three build a new relevance tuning framework and Sam said this is exactly the kind of ownership he wants to see
+    expected_memory_stores:
+      - "90-day roadmap"
+      - "tech debt"
+      - "latency improvement 30 percent"
+      - "relevance tuning framework"
+      - "Sam approval"
+    expected_triples:
+      - ["user", "drafted", "90-day roadmap for search infrastructure"]
+      - ["roadmap priority 1", "is", "fix remaining tech debt from race condition"]
+      - ["roadmap priority 2", "is", "improve search latency by 30 percent"]
+      - ["roadmap priority 3", "is", "build relevance tuning framework"]
+      - ["Sam", "approved", "roadmap as exactly the ownership he wants"]
+    expected_adaptation:
+      emotion_detected: "motivated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 10:00 AM"
+    user_input: |
+      presented the roadmap to the whole team and everyone was on board and Danny actually volunteered to help with the latency improvements because he said ingestion and indexing performance are related and he wants to optimize them together which is actually really smart and I was like yes let's collaborate
+    expected_memory_stores:
+      - "roadmap presented"
+      - "team on board"
+      - "Danny volunteered"
+      - "latency collaboration"
+      - "ingestion and indexing"
+    expected_triples:
+      - ["user", "presented", "roadmap to whole team"]
+      - ["Danny", "volunteered_for", "latency improvements"]
+      - ["Danny", "wants_to_optimize", "ingestion and indexing together"]
+      - ["user", "has_emotion", "energized"]
+    expected_adaptation:
+      emotion_detected: "energized"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 3:00 PM"
+    user_input: |
+      Lily and I had coffee well virtual coffee and she said she's noticed a change in me from when I started like she said I went from timid to owning the room in team meetings and I was like really and she said yeah when you presented the roadmap you looked like you've been doing this for years
+    expected_memory_stores:
+      - "Lily observation"
+      - "timid to confident"
+      - "owning the room"
+      - "growth acknowledged"
+    expected_triples:
+      - ["Lily", "observed", "user went from timid to owning the room"]
+      - ["Lily", "said", "user looked like she's been doing this for years"]
+      - ["user", "has_emotion", "surprised"]
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 11:00 AM"
+    user_input: |
+      Ross invited me to the quarterly planning meeting which is usually just leads and above and Sam said it's because Ross wants my input on the search strategy for next quarter and I'm sitting in this meeting with directors and VPs and I'm like how is this my life right now
+    expected_memory_stores:
+      - "quarterly planning meeting"
+      - "leads and above"
+      - "Ross invitation"
+      - "search strategy input"
+      - "directors and VPs"
+    expected_triples:
+      - ["Ross", "invited_user_to", "quarterly planning meeting"]
+      - ["quarterly planning", "normally_for", "leads and above"]
+      - ["Ross", "wants", "user's input on search strategy"]
+      - ["user", "has_emotion", "amazed"]
+    expected_adaptation:
+      emotion_detected: "amazed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 6:00 PM"
+    user_input: |
+      told Julian about the quarterly planning meeting and he was like see this is what happens when you go somewhere that values you and I thought about how at Vantage I was building form validations and here I'm shaping quarterly search strategy for a Series B startup and the contrast is wild
+    expected_memory_stores:
+      - "Julian perspective"
+      - "valued"
+      - "form validations vs search strategy"
+      - "Vantage contrast"
+      - "Series B"
+    expected_triples:
+      - ["Julian", "said", "this is what happens when you go somewhere that values you"]
+      - ["user", "contrasted", "form validations at Vantage vs search strategy at Series B startup"]
+      - ["user", "has_emotion", "grateful"]
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 9:00 AM"
+    user_input: |
+      what does Maya own at Conduit AI
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 2:00 PM"
+    user_input: |
+      started the latency improvement project with Danny and we profiled the search pipeline and found three major bottlenecks the embedding computation step the index lookup and the ranking model inference and I think we can parallelize the first two and optimize the third with model quantization
+    expected_memory_stores:
+      - "latency project started"
+      - "Danny collaboration"
+      - "three bottlenecks"
+      - "embedding computation"
+      - "index lookup"
+      - "ranking model inference"
+      - "parallelize"
+      - "model quantization"
+    expected_triples:
+      - ["user", "started", "latency improvement project with Danny"]
+      - ["search pipeline bottleneck 1", "is", "embedding computation"]
+      - ["search pipeline bottleneck 2", "is", "index lookup"]
+      - ["search pipeline bottleneck 3", "is", "ranking model inference"]
+      - ["user", "plans_to", "parallelize embedding and index lookup, quantize ranking model"]
+    expected_adaptation:
+      emotion_detected: "focused"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 10:00 AM"
+    user_input: |
+      took Kobe to the dog park and ran into another Conduit employee randomly turns out she lives in Portland too her name is Grace and she works on the product team and she said oh you're Maya the search infrastructure person Sam talks about you all the time and I was like what really and she said yeah he's always bragging about your work
+    expected_memory_stores:
+      - "dog park"
+      - "Grace product team"
+      - "lives in Portland"
+      - "Sam talks about Maya"
+      - "bragging about work"
+    expected_triples:
+      - ["user", "met", "Grace at dog park"]
+      - ["Grace", "works_on", "product team at Conduit"]
+      - ["Grace", "lives_in", "Portland"]
+      - ["Sam", "brags_about", "user's work to other Conduit employees"]
+      - ["user", "has_emotion", "flattered"]
+    expected_adaptation:
+      emotion_detected: "flattered"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 5:00 PM"
+    user_input: |
+      Julian and I went grocery shopping and I was telling him about Grace and how Sam talks about me and he said babe you deserve all of it and then he grabbed my hand in the produce section and said I'm really proud of the person you're becoming and I was like Julian we're in a grocery store don't make me cry by the avocados
+    expected_memory_stores:
+      - "grocery shopping"
+      - "Julian proud"
+      - "becoming"
+      - "avocado moment"
+    expected_triples:
+      - ["Julian", "said", "user deserves all of it"]
+      - ["Julian", "said", "proud of the person user is becoming"]
+      - ["user", "has_emotion", "loved"]
+    expected_adaptation:
+      emotion_detected: "loved"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya's official title at Conduit?"
+    expected_contains: ["search infrastructure engineer"]
+  - question: "What are the three priorities in Maya's roadmap?"
+    expected_contains: ["tech debt", "latency", "relevance"]
+  - question: "What are the three search latency bottlenecks?"
+    expected_contains: ["embedding", "index lookup", "ranking"]
+  - question: "Who is Maya collaborating with on latency?"
+    expected_contains: ["Danny"]
+  - question: "Was Maya invited to the quarterly planning meeting?"
+    expected_contains: ["yes", "Ross"]
+  - question: "What did Lily say about Maya's growth?"
+    expected_contains: ["timid", "confident", "owning the room"]
+  - question: "Who is Grace?"
+    expected_contains: ["product team", "Conduit", "Portland"]
+  - question: "What does Sam say about Maya?"
+    expected_contains: ["talks about", "bragging"]
+  - question: "What latency improvement target did Maya set?"
+    expected_contains: ["30 percent"]
+  - question: "How does Maya's role at Conduit compare to Vantage?"
+    expected_contains: ["valued", "strategy", "form validations"]

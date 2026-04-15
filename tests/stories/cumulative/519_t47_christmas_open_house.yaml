@@ -1,0 +1,181 @@
+story_id: 519
+story_name: "Christmas Open House"
+category: "Hosting and Entertaining"
+description: |
+  Maya and Julian host a Christmas open house including neighbors — even Greg.
+  The house becomes a community hub. Cross-references house (T41-T45), neighbor
+  Greg (T28), weather/seasons (T49), and grandpa legacy (T46).
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 5:00 PM"
+    user_input: |
+      ok so the Christmas open house is tomorrow and we invited like twenty people which is the most we've ever done and that includes neighbors like the Hendersons from down the street and Greg from next door yes THAT Greg and Julian said are you sure about Greg and I said it's Christmas Julian we're being neighborly
+    expected_memory_stores:
+      - "Christmas open house"
+      - "twenty people"
+      - "neighbors invited"
+      - "Hendersons"
+      - "Greg from next door"
+      - "being neighborly"
+    expected_adaptation:
+      emotion_detected: "generous"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 9:00 PM"
+    user_input: |
+      decorating the house tonight and it looks so beautiful like we got a tree from a lot on Woodstock Boulevard and strung lights on the front porch and Julian put candles in every window and the cherry tree in the backyard has these little solar lights on it that make it glow and it's raining which makes the lights reflect on everything and Portland Christmas is actually magical
+    expected_memory_stores:
+      - "Christmas decorations"
+      - "tree from Woodstock Boulevard"
+      - "lights on porch"
+      - "candles in windows"
+      - "cherry tree solar lights"
+      - "rain reflection"
+    expected_adaptation:
+      emotion_detected: "enchanted"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 10:00 AM"
+    user_input: |
+      made a huge batch of mulled wine and Julian's doing eggnog with bourbon obviously and I baked cookies for like three hours this morning sugar cookies and gingerbread and I also made a tray of grandpa's dumplings because at this point they're just part of every event we host and I wouldn't have it any other way
+    expected_memory_stores:
+      - "mulled wine"
+      - "eggnog with bourbon"
+      - "sugar cookies gingerbread"
+      - "three hours baking"
+      - "grandpa's dumplings at every event"
+    expected_adaptation:
+      emotion_detected: "festive"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 2:00 PM"
+    user_input: |
+      people started arriving and the first person was actually Greg and he brought a bottle of wine and was surprisingly not weird about it he said your house looks great and I said thanks and then he saw Kobe and said is that the dog that barks at my fence and I said yes that's him and Greg actually petted him and Kobe licked his hand so I guess they're friends now
+    expected_memory_stores:
+      - "Greg first to arrive"
+      - "Greg brought wine"
+      - "Greg complimented house"
+      - "Kobe barks at Greg's fence"
+      - "Kobe licked Greg"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 3:30 PM"
+    user_input: |
+      the house is full now like actually full and it's a mix of our friend group and coworkers and neighbors and there's this amazing energy and Mrs. Henderson brought her famous fudge and Priya came which is the first time my boss has been to my house and she said Maya your home is beautiful and I almost died
+    expected_memory_stores:
+      - "house full of people"
+      - "mix of friends coworkers neighbors"
+      - "Mrs Henderson fudge"
+      - "Priya first time at house"
+      - "Priya compliment"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 4:00 PM"
+    user_input: |
+      Marcus and Omar are by the bar cart and Julian is teaching them how to make his smoked old fashioned and the smoke is setting off the detector AGAIN and I had flashbacks to the chicken disaster and I was like JULIAN THE ALARM and he was like I got it I got it and everyone laughed because apparently our smoke alarm going off is like a tradition now
+    expected_memory_stores:
+      - "smoke alarm again"
+      - "smoked old fashioned"
+      - "Marcus and Omar at bar"
+      - "chicken disaster flashback"
+      - "smoke alarm tradition"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 5:00 PM"
+    user_input: |
+      Greg is talking to Clara and they're actually getting along and he's telling her about his garden and Clara is genuinely interested because she's been talking about wanting to garden at her new place and I'm watching this thinking did I accidentally create a community by just opening my door
+    expected_memory_stores:
+      - "Greg and Clara talking"
+      - "Greg's garden"
+      - "Clara wants to garden"
+      - "creating community"
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 6:30 PM"
+    user_input: |
+      the dumplings were the most asked about thing at the party and people kept saying what are these and I kept telling the story of grandpa and the recipe and by the end of the night like five different people came up to me and said something about how special that is and Mrs. Henderson said you're keeping him alive dear
+    expected_memory_stores:
+      - "dumplings most popular"
+      - "told grandpa story multiple times"
+      - "Mrs Henderson keeping him alive"
+      - "five people commented"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 8:00 PM"
+    user_input: |
+      it's getting dark and the rain is coming down and the lights are glowing and people are leaving slowly and everyone keeps saying this was so wonderful you have to do this every year and Greg on his way out said happy holidays Maya and it was just genuinely nice and Julian whispered see I told you about Greg and I said ok fine you were right one time
+    expected_memory_stores:
+      - "rain and lights"
+      - "people leaving"
+      - "do this every year"
+      - "Greg said happy holidays"
+      - "Julian right about Greg"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:00 PM"
+    user_input: |
+      house is quiet now and there are cookie crumbs everywhere and empty wine glasses and Kobe is asleep under the Christmas tree and Julian and I are on the couch and he said we did it and I said yeah we did and the rain is on the roof and it's our roof and this is our life and it's really really good
+    expected_memory_stores:
+      - "quiet house post-party"
+      - "Kobe under Christmas tree"
+      - "on the couch together"
+      - "rain on our roof"
+      - "life is really good"
+    expected_adaptation:
+      emotion_detected: "complete"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who was the first guest at the Christmas open house?"
+    expected_contains: ["Greg"]
+  - question: "How did Greg and Kobe interact?"
+    expected_contains: ["petted", "licked"]
+  - question: "What happened with the smoke alarm at the party?"
+    expected_contains: ["smoked old fashioned", "went off"]
+  - question: "Who did Greg bond with at the party?"
+    expected_contains: ["Clara", "garden"]
+  - question: "What food was most asked about?"
+    expected_contains: ["dumplings"]
+  - question: "How many people were invited?"
+    expected_contains: ["twenty"]
+  - question: "What did Mrs. Henderson bring?"
+    expected_contains: ["fudge"]
+  - question: "Was Priya at the Christmas open house?"
+    expected_contains: ["yes"]
+  - question: "What decorations were on the cherry tree?"
+    expected_contains: ["solar lights"]
+  - question: "Where did they buy the Christmas tree?"
+    expected_contains: ["Woodstock Boulevard"]

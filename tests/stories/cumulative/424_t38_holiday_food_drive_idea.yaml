@@ -1,0 +1,171 @@
+story_id: 424
+story_name: "Holiday Food Drive Idea"
+category: "Volunteering"
+description: |
+  Maya decides to organize a holiday food drive at Conduit AI. Gets Sam's
+  approval and starts planning. Bridge between work and volunteer worlds.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 10:00 AM"
+    user_input: |
+      had this idea in the shower this morning what if I organized a food drive at Conduit for the holidays like we have like 200 employees and if everyone donated even a little bit we could make a huge impact and I could route everything through the Portland Food Bank so Diane could distribute it
+    expected_memory_stores:
+      - "food drive idea"
+      - "Conduit AI workplace"
+      - "200 employees"
+      - "Portland Food Bank distribution"
+      - "Diane connection"
+    expected_adaptation:
+      emotion_detected: "inspired"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 11:00 AM"
+    user_input: |
+      talked to Sam about it and he was immediately on board he said Conduit has been wanting to do more community engagement and he asked if we could also do a monetary donation matching thing where the company matches employee donations up to 5000 dollars total and I was like YES that's amazing
+    expected_memory_stores:
+      - "Sam approved"
+      - "company donation matching"
+      - "up to $5000 match"
+      - "community engagement"
+    expected_adaptation:
+      emotion_detected: "thrilled"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 12:30 PM"
+    user_input: |
+      told Lily Tran from my team and she was like oh I love this can I help organize and I said yes please because doing this alone on top of regular work would be nuts and she said she'd handle the communications and email blasts to the company and I'm like perfect team work
+    expected_memory_stores:
+      - "Lily Tran volunteered to help"
+      - "handling communications"
+      - "email blasts"
+      - "teamwork"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 3:00 PM"
+    user_input: |
+      called Diane and told her about the food drive idea and she literally screamed on the phone she was so excited and she said anything collected we can store at the warehouse and distribute through their existing network and she offered to come to Conduit and do a presentation about food insecurity in Portland
+    expected_memory_stores:
+      - "Diane excited"
+      - "warehouse storage"
+      - "existing distribution network"
+      - "Diane presentation offer"
+      - "food insecurity topic"
+    expected_adaptation:
+      emotion_detected: "energized"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 5:00 PM"
+    user_input: |
+      planning the logistics and I'm thinking two weeks collection period starting December 1st with bins on every floor and a final collection day on December 15th where we truck everything to the food bank and then Diane can distribute it before the holidays to families in need
+    expected_memory_stores:
+      - "two week collection"
+      - "December 1st start"
+      - "December 15th final collection"
+      - "bins on every floor"
+      - "pre-holiday distribution"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 7:00 PM"
+    user_input: |
+      Julian was like this is such a good idea babe and he asked if his company could do something similar and I said you should totally ask and he works at that architecture firm what's it called Greenline Design and he said his boss would probably be into it which would be cool like a joint effort
+    expected_memory_stores:
+      - "Julian supportive"
+      - "Julian's firm Greenline Design"
+      - "possible joint effort"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 9:00 AM"
+    user_input: |
+      created a shared doc for the food drive planning and sent it to Lily and Sam for review it has the timeline the donation categories most needed items which Diane gave me like canned proteins rice pasta diapers and hygiene products and the pickup logistics
+    expected_memory_stores:
+      - "planning document"
+      - "sent to Lily and Sam"
+      - "most needed items"
+      - "canned proteins rice pasta"
+      - "diapers hygiene products"
+      - "pickup logistics"
+    expected_adaptation:
+      emotion_detected: "productive"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      when does the food drive start and end at Conduit
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 3:00 PM"
+    user_input: |
+      Sam suggested we also set up an online donation page for people who'd rather give money than food and the company match would apply to that too and he said he'd personally donate 500 which wow that's generous and I'm like this is really coming together
+    expected_memory_stores:
+      - "online donation page"
+      - "company match applies"
+      - "Sam donating $500 personally"
+      - "coming together"
+    expected_adaptation:
+      emotion_detected: "amazed"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      texted Jenny about the food drive and she was like I wish I was still in Portland to help and she said she'd donate from Austin online and she asked if her company in Austin could be connected to a food bank there and do something similar and I was like that would be incredible the ripple effect you know
+    expected_memory_stores:
+      - "Jenny wants to donate from Austin"
+      - "online donation"
+      - "Jenny's company Austin food bank"
+      - "ripple effect"
+    expected_adaptation:
+      emotion_detected: "inspired"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya organizing at Conduit?"
+    expected_contains: ["food drive", "holiday"]
+  - question: "When does the food drive run?"
+    expected_contains: ["December 1", "December 15"]
+  - question: "How much will Conduit match in donations?"
+    expected_contains: ["5000", "5,000"]
+  - question: "Who is helping Maya organize the food drive?"
+    expected_contains: ["Lily Tran"]
+  - question: "What items are most needed for the food drive?"
+    expected_contains: ["canned proteins", "rice", "pasta", "diapers"]
+  - question: "Will Diane be involved in the food drive?"
+    expected_contains: ["yes", "presentation", "distribute"]
+  - question: "How much did Sam personally offer to donate?"
+    expected_contains: ["500"]
+  - question: "Where does Julian work?"
+    expected_contains: ["Greenline Design"]
+  - question: "How will employees who prefer cash donations contribute?"
+    expected_contains: ["online donation page"]
+  - question: "What did Jenny offer to do from Austin?"
+    expected_contains: ["donate online", "similar food drive"]

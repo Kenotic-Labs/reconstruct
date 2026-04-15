@@ -1,0 +1,176 @@
+story_id: 399
+story_name: "Unofficial Family Health Coordinator"
+category: "Health"
+description: |
+  Tests memory of Maya becoming the unofficial family health coordinator.
+  Verifies system tracks role crystallization and identity shift.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      so now everyone in the family calls me about health stuff like Tyler texted me asking if his headache could be something serious and I was like Tyler I'm not a doctor and he said yeah but you're the closest thing we have besides Clara and Clara was offended
+    expected_memory_stores:
+      - "everyone calls Maya"
+      - "Tyler headache question"
+      - "not a doctor"
+      - "closest thing"
+      - "Clara offended"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      mom asked me to help her find a new primary care doctor because her old one retired and I found her one on ZocDoc with good reviews named Dr Park and I scheduled the appointment for her and mom was like how did you do that so fast and I'm like mom it's an app
+    expected_memory_stores:
+      - "Vivian needs new doctor"
+      - "old doctor retired"
+      - "Dr. Park found"
+      - "ZocDoc"
+      - "Maya scheduled"
+      - "app explanation"
+    expected_adaptation:
+      emotion_detected: "helpful"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      I set up quarterly health check-ins on the family calendar where I literally just message everyone and ask has anything changed with your medications doctors or health and Clara said this is the most type A thing I've ever seen and I said you're welcome
+    expected_memory_stores:
+      - "quarterly health check-ins"
+      - "family calendar"
+      - "medication doctor changes"
+      - "Clara type A comment"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 8:00 PM"
+    user_input: |
+      I realized I should add myself to my own health coordinator duties because I hadn't actually followed up on the vitamin D thing I found in my records so I scheduled a blood test with Dr Kemp and started taking vitamin D supplements 2000 IU daily
+    expected_memory_stores:
+      - "added self"
+      - "vitamin D follow up"
+      - "blood test Dr. Kemp"
+      - "vitamin D 2000 IU"
+      - "practice what preach"
+    expected_adaptation:
+      emotion_detected: "self-aware"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 6:00 PM"
+    user_input: |
+      Dr Nassif the allergist called with my updated allergy panel results and she confirmed shellfish allergy severe and also found a mild sensitivity to dust mites which explains why I've been sneezy in the mornings and I added all this to the spreadsheet immediately
+    expected_memory_stores:
+      - "Dr. Nassif allergy panel"
+      - "shellfish severe"
+      - "dust mites mild"
+      - "sneezy mornings explained"
+      - "updated spreadsheet"
+    expected_adaptation:
+      emotion_detected: "informed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:00 AM"
+    user_input: |
+      took Kobe to Dr Sara Mills for his six month checkup and she said he's doing great the pancreatitis hasn't recurred and his weight is stable at 72 pounds and I updated his tab in the spreadsheet while sitting in the waiting room because that's who I am now
+    expected_memory_stores:
+      - "Kobe checkup"
+      - "Dr. Sara Mills"
+      - "pancreatitis not recurred"
+      - "72 pounds stable"
+      - "updated spreadsheet"
+      - "who I am now"
+    expected_adaptation:
+      emotion_detected: "responsible"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 2:00 PM"
+    user_input: |
+      made a little emergency card for everyone's wallet with their allergies medications blood type emergency contacts and doctor phone numbers laminated them at FedEx and mailed them out and Julian was like you are unhinged and I said thank you
+    expected_memory_stores:
+      - "emergency wallet cards"
+      - "laminated at FedEx"
+      - "mailed out"
+      - "allergies meds blood type"
+      - "Julian unhinged comment"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 4:00 PM"
+    user_input: |
+      what did Maya create for everyone's wallet
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 10:00 AM"
+    user_input: |
+      Clara FaceTimed me and showed me that she put the laminated card in her wallet right behind her nurse ID and she said honestly every family should have a Maya and that made me feel so good because coming from a nurse that actually means something
+    expected_memory_stores:
+      - "Clara uses card"
+      - "behind nurse ID"
+      - "every family should have a Maya"
+      - "nurse validation"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 3:00 PM"
+    user_input: |
+      reflecting on all of this and honestly the health coordinator thing started from chaos like three emergencies in four months and now it's become this organized system and Dr Tate said I turned anxiety into agency which I thought was a really good way to put it
+    expected_memory_stores:
+      - "started from chaos"
+      - "three emergencies"
+      - "now organized system"
+      - "anxiety into agency"
+      - "Dr. Tate phrase"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What role has Maya taken on in the family?"
+    expected_contains: ["health coordinator"]
+  - question: "What did Maya create for everyone's wallets?"
+    expected_contains: ["emergency card", "laminated"]
+  - question: "What new allergy did Dr. Nassif find?"
+    expected_contains: ["dust mites"]
+  - question: "What vitamin is Maya supplementing?"
+    expected_contains: ["vitamin D", "2000 IU"]
+  - question: "How often does Maya check in on family health?"
+    expected_contains: ["quarterly"]
+  - question: "What did Dr. Tate say about Maya's health advocacy?"
+    expected_contains: ["anxiety into agency"]
+  - question: "Who did Maya find as Vivian's new doctor?"
+    expected_contains: ["Dr. Park"]
+  - question: "What app did Maya use to find a doctor?"
+    expected_contains: ["ZocDoc"]
+  - question: "What did Clara say about Maya's system?"
+    expected_contains: ["every family should have a Maya"]
+  - question: "Is Kobe's pancreatitis recurring?"
+    expected_contains: ["no", "not recurred"]

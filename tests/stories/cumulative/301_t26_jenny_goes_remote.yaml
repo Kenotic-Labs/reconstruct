@@ -1,0 +1,166 @@
+story_id: 301
+story_name: "Jenny Goes Remote"
+category: "Friendships"
+description: |
+  Tests memory of Maya's best friend Jenny Wu getting a remote job and announcing
+  her move to Austin TX. Establishes the deep friendship baseline and the first
+  hint of distance. Verifies system captures relationship history and emotional shift.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:15 AM"
+    user_input: |
+      ok so Jenny called me last night and she was like all excited and I was like what and she said she got this fully remote job at some fintech company in Austin and I'm like wait Austin like Texas Austin and she's like yeah and I was like oh
+    expected_memory_stores:
+      - "Jenny Wu"
+      - "remote job"
+      - "fintech company"
+      - "Austin Texas"
+      - "moving"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:30 AM"
+    user_input: |
+      like Jenny and I have been best friends since sophomore year at UW like we literally lived together junior and senior year and she was the first person I told about Julian and I mean she's my maid of honor so yeah it's kind of a big deal that she's leaving
+    expected_memory_stores:
+      - "best friends since UW"
+      - "lived together college"
+      - "maid of honor"
+      - "Jenny leaving Portland"
+    expected_adaptation:
+      emotion_detected: "sad"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 12:00 PM"
+    user_input: |
+      she said she's moving in like six weeks which is fast right like she already found an apartment down there near Zilker Park apparently and her rent is gonna be like half of what she pays here which I get it but still
+    expected_memory_stores:
+      - "moving in six weeks"
+      - "apartment near Zilker Park"
+      - "cheaper rent"
+    expected_adaptation:
+      emotion_detected: "resigned"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 3:00 PM"
+    user_input: |
+      told Julian about Jenny leaving and he was like that sucks babe but you guys will still talk all the time and I'm like yeah but it won't be the same like we go to Salt and Straw every other week and we do our Sunday morning runs at Forest Park and that just all goes away
+    expected_memory_stores:
+      - "Julian reaction"
+      - "Salt and Straw tradition"
+      - "Sunday runs Forest Park"
+      - "traditions ending"
+    expected_adaptation:
+      emotion_detected: "grieving"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 5:45 PM"
+    user_input: |
+      Jenny texted me the salary and I mean good for her it's like 135k which is way more than she was making at the nonprofit here and she deserves it she really does I'm just being selfish I know that
+    expected_memory_stores:
+      - "Jenny salary 135k"
+      - "previous nonprofit job"
+      - "Maya feeling selfish"
+    expected_adaptation:
+      emotion_detected: "conflicted"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 7:30 PM"
+    user_input: |
+      we used to talk like literally every day though you know like not even about anything important just stupid stuff and memes and voice notes and I'm worried that's gonna just fade away
+    expected_memory_stores:
+      - "daily communication"
+      - "voice notes"
+      - "fear of fading"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 8:00 AM"
+    user_input: |
+      did our last Sunday run at Forest Park this morning well not last last but like one of the last and Jenny was acting all normal like nothing's changing and I wanted to be like dude you're leaving in six weeks can we at least acknowledge this
+    expected_memory_stores:
+      - "Forest Park run"
+      - "Jenny acting normal"
+      - "Maya wants acknowledgment"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 12:00 PM"
+    user_input: |
+      wait what's the name of the company Jenny's going to work for I feel like she told me but I can't remember was it like a fintech thing
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 4:00 PM"
+    user_input: |
+      Clara said I should be happy for Jenny and I AM happy for her it's just like everyone keeps leaving Portland you know first Marcus almost moved to Denver and now Jenny is actually going and it just feels like things are changing really fast
+    expected_memory_stores:
+      - "Clara advice"
+      - "Marcus almost moved Denver"
+      - "Portland friends leaving"
+      - "change anxiety"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:30 PM"
+    user_input: |
+      Jenny came over for dinner and we made pad thai and she promised she'd still be maid of honor obviously and she'd fly up for all the wedding stuff and I felt better about it honestly like ok we can make this work right
+    expected_memory_stores:
+      - "dinner together"
+      - "pad thai"
+      - "maid of honor confirmed"
+      - "wedding commitment"
+      - "feeling better"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where is Jenny Wu moving to?"
+    expected_contains: ["Austin", "Texas"]
+  - question: "Why is Jenny moving?"
+    expected_contains: ["remote job", "fintech"]
+  - question: "What is Jenny's role in Maya's wedding?"
+    expected_contains: ["maid of honor"]
+  - question: "How do Maya and Jenny know each other?"
+    expected_contains: ["college", "UW", "sophomore"]
+  - question: "What weekly traditions do Maya and Jenny share?"
+    expected_contains: ["Salt and Straw", "Forest Park", "Sunday runs"]
+  - question: "How is Maya feeling about Jenny leaving?"
+    expected_contains: ["sad", "worried", "selfish"]
+  - question: "When is Jenny moving?"
+    expected_contains: ["six weeks"]
+  - question: "Where is Jenny's new apartment?"
+    expected_contains: ["Zilker Park"]
+  - question: "What did Jenny promise about the wedding?"
+    expected_contains: ["maid of honor", "fly up"]
+  - question: "How much is Jenny's new salary?"
+    expected_contains: ["135"]

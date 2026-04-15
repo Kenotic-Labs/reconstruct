@@ -1,0 +1,180 @@
+story_id: 215
+story_name: "Funeral at Pine Hill"
+category: "Family"
+description: |
+  Tests the system handling a funeral event with many attendees and emotional complexity.
+  Bilingual service at Pine Hill Memorial. Maya eulogy. Verifies multi-entity tracking
+  and emotional state management during significant life event.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 8:00 PM"
+    user_input: |
+      Julian and I flew into Fresno tonight and Clara and Tyler are already here and my parents are at the funeral home finalizing stuff and the service is tomorrow and I wrote something to say but I don't know if I can get through it without falling apart
+    expected_memory_stores:
+      - "flew to Fresno"
+      - "Julian with Maya"
+      - "Clara and Tyler there"
+      - "parents at funeral home"
+      - "service tomorrow"
+      - "wrote speech"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 10:00 PM"
+    user_input: |
+      Julian and I are staying at this little hotel near grandpa's apartment and he helped me practice reading my eulogy and I cried twice but he said babe it's beautiful and it's ok to cry and Clara called and said she'll be right next to me if I need her
+    expected_memory_stores:
+      - "hotel near apartment"
+      - "practiced eulogy"
+      - "Julian helped"
+      - "cried practicing"
+      - "Clara will be nearby"
+    expected_adaptation:
+      emotion_detected: "vulnerable"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 10:00 AM"
+    user_input: |
+      at grandpa's apartment packing up some things before the service and I found his old engineering notebooks from China and they're all in Chinese with these beautiful technical drawings and I can't read them but I can see the precision and the care and I just held them to my chest
+    expected_memory_stores:
+      - "engineering notebooks"
+      - "Chinese writing"
+      - "technical drawings"
+      - "grandpa's apartment"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 1:30 PM"
+    user_input: |
+      at Pine Hill Memorial now and there's more people than I expected like maybe sixty or seventy and a lot of grandpa's old engineering colleagues came and some people from the Chinese community center and my aunt wait I don't think I've mentioned her um my mom's sister Aunt Lily she came from Sacramento
+    expected_memory_stores:
+      - "Pine Hill Memorial"
+      - "sixty to seventy people"
+      - "engineering colleagues"
+      - "Chinese community center"
+      - "Aunt Lily"
+      - "Vivian's sister"
+      - "Sacramento"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 2:30 PM"
+    user_input: |
+      the service was beautiful they did it in English first and then repeated key parts in Mandarin and my dad spoke first and he told the story of grandpa coming to America with thirty dollars and a suitcase and building a life from nothing and everyone was crying
+    expected_memory_stores:
+      - "bilingual service"
+      - "George spoke"
+      - "thirty dollars and suitcase"
+      - "built life from nothing"
+      - "everyone crying"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 2:45 PM"
+    user_input: |
+      I went up to speak and Clara was right there in the front row and I talked about how grandpa taught me to love engineering and how he used to say kindness travels and build beautiful things and my voice cracked but I made it through and Clara was sobbing
+    expected_memory_stores:
+      - "Maya spoke"
+      - "eulogy delivered"
+      - "kindness travels"
+      - "build beautiful things"
+      - "voice cracked"
+      - "Clara sobbing"
+    expected_adaptation:
+      emotion_detected: "grief"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 4:00 PM"
+    user_input: |
+      how many people came to the funeral and where was it held
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 5:00 PM"
+    user_input: |
+      after the service one of grandpa's old colleagues Mr. Huang came up to me and said your grandfather talked about you all the time he was so proud of you and he said grandpa used to show everyone your photo and say that's my Maya she builds the future and I just lost it again
+    expected_memory_stores:
+      - "Mr. Huang"
+      - "grandpa's colleague"
+      - "grandpa proud of Maya"
+      - "showed everyone photo"
+      - "builds the future"
+    expected_adaptation:
+      emotion_detected: "devastated"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 7:00 PM"
+    user_input: |
+      my dad gave me grandpa's watch at dinner tonight and it's this old Seiko automatic from like the 1970s and the back is engraved in Chinese and my dad translated it and it says time is the bridge between dreams and reality and I'm wearing it right now and I'll never take it off
+    expected_memory_stores:
+      - "received watch"
+      - "old Seiko automatic"
+      - "1970s"
+      - "engraved in Chinese"
+      - "time is bridge between dreams and reality"
+      - "wearing it"
+    expected_adaptation:
+      emotion_detected: "honored"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:00 PM"
+    user_input: |
+      Julian and I are at the hotel and he asked to see the watch and he held it carefully and said this is incredible babe and he said your grandpa was an amazing man and I said he really was and we just lay there quiet and I feel both empty and full at the same time
+    expected_memory_stores:
+      - "Julian admired watch"
+      - "incredible"
+      - "empty and full"
+      - "quiet together"
+    expected_adaptation:
+      emotion_detected: "bittersweet"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where was Grandpa Wei's funeral?"
+    expected_contains: ["Pine Hill Memorial", "Fresno"]
+  - question: "How many people attended?"
+    expected_contains: ["sixty", "seventy"]
+  - question: "What did Maya say in her eulogy?"
+    expected_contains: ["kindness travels", "build beautiful things", "engineering"]
+  - question: "What did George say in his speech?"
+    expected_contains: ["thirty dollars", "suitcase", "built a life"]
+  - question: "Who is Mr. Huang?"
+    expected_contains: ["grandpa's colleague"]
+  - question: "What did Grandpa say about Maya to his colleagues?"
+    expected_contains: ["builds the future", "proud"]
+  - question: "Describe the watch Maya inherited."
+    expected_contains: ["Seiko", "automatic", "1970s", "engraved"]
+  - question: "What does the watch engraving say?"
+    expected_contains: ["time", "bridge", "dreams", "reality"]
+  - question: "Who is Aunt Lily?"
+    expected_contains: ["Vivian's sister", "Sacramento"]
+  - question: "What did Maya find at Grandpa's apartment?"
+    expected_contains: ["engineering notebooks", "Chinese", "drawings"]

@@ -1,0 +1,170 @@
+story_id: 421
+story_name: "Food Bank Start"
+category: "Volunteering"
+description: |
+  Maya starts volunteering at Portland Food Bank. First Saturday shift.
+  Meets coordinator Diane Choi. Establishes volunteering baseline.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 7:30 AM"
+    user_input: |
+      so I signed up to volunteer at the Portland Food Bank like I've been thinking about it forever and Clara does it and she said it's really rewarding and today is my first shift I'm nervous which is dumb because it's volunteering not a job interview but still new things make me nervous
+    expected_memory_stores:
+      - "Portland Food Bank"
+      - "first volunteer shift"
+      - "Clara also volunteers"
+      - "nervous"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 8:15 AM"
+    user_input: |
+      got to the food bank and met the volunteer coordinator her name is Diane Choi and she's like in her 50s super energetic and warm and she gave me a tour of the warehouse and it's huge like they serve over 2000 families a month which is mind blowing I didn't realize the need was this big in Portland
+    expected_memory_stores:
+      - "Diane Choi coordinator"
+      - "50s energetic warm"
+      - "warehouse tour"
+      - "2000 families per month"
+      - "Portland need"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 9:00 AM"
+    user_input: |
+      my job today is sorting donations in the back like people donate canned goods and produce and sometimes weird stuff and you have to check expiration dates and sort everything by category and it's like assembly line style and Diane paired me with this older guy named Harold who's been volunteering here for 12 years
+    expected_memory_stores:
+      - "sorting donations"
+      - "checking expiration dates"
+      - "sorting by category"
+      - "Harold 12 year volunteer"
+    expected_adaptation:
+      emotion_detected: "engaged"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 11:00 AM"
+    user_input: |
+      Harold is amazing like he knows exactly where everything goes and he told me stories about the food bank and how it started in someone's garage in 1986 and now they have this massive warehouse and he said the holidays are insane they do like triple the volume and I'm like wow
+    expected_memory_stores:
+      - "Harold stories"
+      - "food bank started 1986"
+      - "started in garage"
+      - "holidays triple volume"
+    expected_adaptation:
+      emotion_detected: "fascinated"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 12:30 PM"
+    user_input: |
+      took a lunch break and Diane came and sat with me and asked why I wanted to volunteer and I said honestly I've been so caught up in work and the house and wedding planning and I felt like I needed to do something that wasn't about me and she smiled and said that's the best reason
+    expected_memory_stores:
+      - "Diane conversation"
+      - "Maya's motivation"
+      - "caught up in own life"
+      - "needed something not about her"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 2:00 PM"
+    user_input: |
+      we switched to distribution in the afternoon where families come in and pick up their boxes and I was handing out produce bags and there was this mom with three kids and the youngest one looked at me and said thank you and I almost lost it right there like I'm tearing up just thinking about it
+    expected_memory_stores:
+      - "distribution shift"
+      - "handing out produce"
+      - "mom with three kids"
+      - "child said thank you"
+      - "Maya emotional"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 3:30 PM"
+    user_input: |
+      Diane said they do shifts every Saturday from 8am to 3pm and she asked if I'd want to make it a monthly thing and I said yeah absolutely like first Saturday of every month and she said perfect and put me on the schedule and I'm already looking forward to next month
+    expected_memory_stores:
+      - "Saturday 8am-3pm shifts"
+      - "monthly commitment"
+      - "first Saturday of month"
+      - "on the schedule"
+    expected_adaptation:
+      emotion_detected: "committed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 4:00 PM"
+    user_input: |
+      wait what's the volunteer coordinator's name again the woman who showed me around I want to send her a thank you text
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 5:00 PM"
+    user_input: |
+      told Julian about the food bank and he was like that's awesome babe and he asked about Diane and I said she's the coordinator Diane Choi and he paused and was like wait Diane like my mom's name Diane and I was like different Diane your mom is Diane Reeves this is Diane Choi completely different person
+    expected_memory_stores:
+      - "Julian supportive"
+      - "Diane Choi not Diane Reeves"
+      - "disambiguation Julian's mom"
+      - "different Dianes"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 8:00 PM"
+    user_input: |
+      I feel different tonight like physically tired from sorting and lifting boxes all day but mentally really calm and grounded like I haven't felt this way in a while just the sense of doing something that matters beyond my own little world and I want to keep this feeling
+    expected_memory_stores:
+      - "physically tired"
+      - "mentally calm"
+      - "grounded feeling"
+      - "doing something that matters"
+      - "wants to continue"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where does Maya volunteer?"
+    expected_contains: ["Portland Food Bank"]
+  - question: "Who is the volunteer coordinator?"
+    expected_contains: ["Diane Choi"]
+  - question: "How often does Maya volunteer?"
+    expected_contains: ["monthly", "first Saturday"]
+  - question: "How many families does the food bank serve monthly?"
+    expected_contains: ["2000"]
+  - question: "Who did Maya work with on her first shift?"
+    expected_contains: ["Harold"]
+  - question: "How long has Harold been volunteering?"
+    expected_contains: ["12 years"]
+  - question: "Is Diane Choi the same person as Julian's mom Diane?"
+    expected_contains: ["no", "Diane Reeves", "different"]
+  - question: "What motivated Maya to volunteer?"
+    expected_contains: ["something not about", "beyond", "needed"]
+  - question: "What hours are the volunteer shifts?"
+    expected_contains: ["8am", "3pm", "Saturday"]
+  - question: "How did Maya feel after her first shift?"
+    expected_contains: ["grounded", "calm", "matters"]

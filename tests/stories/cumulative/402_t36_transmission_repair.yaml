@@ -1,0 +1,162 @@
+story_id: 402
+story_name: "Transmission Repair Estimate"
+category: "Car Saga"
+description: |
+  Maya gets the diagnosis from Pacific Auto. Initial estimate of $1800 jumps to $2800
+  after they find additional damage. Tests correction handling on price changes.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 11:00 AM"
+    user_input: |
+      ok so Pacific Auto called and yep it's the transmission like we knew and the guy said it's gonna be about 1800 bucks which is like not great but honestly I was expecting worse based on what I saw online so maybe it's fine
+    expected_memory_stores:
+      - "Pacific Auto diagnosis"
+      - "transmission confirmed"
+      - "estimate $1800"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 11:45 AM"
+    user_input: |
+      told Julian the estimate and he was like that's actually not bad for a transmission rebuild and his dad George said the same thing like George called and was like for a 2014 Civic that's reasonable you should do it so I said ok go ahead fix it
+    expected_memory_stores:
+      - "Julian reaction"
+      - "George agrees reasonable"
+      - "approved repair"
+    expected_adaptation:
+      emotion_detected: "cautiously optimistic"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 4:30 PM"
+    user_input: |
+      Pacific Auto just called AGAIN and they said when they opened up the transmission they found the torque converter is also shot and now the total is gonna be like 2800 not 1800 and I'm literally so mad like why didn't they see that in the diagnostic that's a thousand dollar difference
+    expected_memory_stores:
+      - "torque converter damaged"
+      - "new estimate $2800"
+      - "correction $1800 to $2800"
+      - "Maya angry"
+    expected_adaptation:
+      emotion_detected: "furious"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 5:00 PM"
+    user_input: |
+      called another shop to get a second opinion just on the phone and the guy at Sellwood Transmission said yeah a torque converter plus transmission rebuild on a high mileage Civic would probably run you 2500 to 3000 so I guess Pacific Auto isn't ripping me off they just should have caught it earlier
+    expected_memory_stores:
+      - "Sellwood Transmission"
+      - "second opinion"
+      - "$2500-$3000 range"
+      - "Pacific Auto validated"
+    expected_adaptation:
+      emotion_detected: "grudgingly accepting"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      Julian and I had this whole argument about whether to spend 2800 on a car that's worth maybe 4000 and he keeps saying just buy a new one and I'm like it's not that simple we don't have car payment money right now with the mortgage starting next month
+    expected_memory_stores:
+      - "car worth $4000"
+      - "repair vs replace argument"
+      - "mortgage starting"
+      - "Julian disagrees"
+    expected_adaptation:
+      emotion_detected: "stressed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 9:00 AM"
+    user_input: |
+      ok I called Pacific Auto back and told them to go ahead with the full repair the 2800 because like what am I gonna do I need a car to get to work and buying a new one right now is just not realistic so this is the move
+    expected_memory_stores:
+      - "approved $2800 repair"
+      - "needs car for work"
+      - "practical decision"
+    expected_adaptation:
+      emotion_detected: "resolved"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      they said it'll take about 5 days to do the full rebuild so I'm borrowing Julian's truck which is fine except I hate driving trucks it's this big Ford F-150 and parking it at Conduit's garage is a nightmare it barely fits
+    expected_memory_stores:
+      - "5 day repair timeline"
+      - "borrowing Julian's F-150"
+      - "parking issues"
+    expected_adaptation:
+      emotion_detected: "annoyed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 3:00 PM"
+    user_input: |
+      Sam asked why I was driving a truck today at work and I told him the whole car saga and he was like oh man my wife just went through the same thing and he told me about some car buying service that finds you deals but I was like I'm repairing not replacing but thanks
+    expected_memory_stores:
+      - "Sam Okafor conversation"
+      - "car buying service mentioned"
+      - "staying with repair"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 6:30 PM"
+    user_input: |
+      actually wait how much is the repair gonna be total again I know it went up from what they originally said
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 10:00 AM"
+    user_input: |
+      talked to my dad about it and he was like Maya you're throwing good money after bad and I'm like dad not now and he was like well just saying at 200 thousand miles you're gonna have something else break in six months and honestly that thought is terrifying because he's probably right
+    expected_memory_stores:
+      - "dad's warning"
+      - "good money after bad"
+      - "fear of next breakdown"
+      - "200k mile concern"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How much was the original repair estimate for Maya's car?"
+    expected_contains: ["1800"]
+  - question: "How much did the repair end up costing?"
+    expected_contains: ["2800"]
+  - question: "Why did the price increase?"
+    expected_contains: ["torque converter"]
+  - question: "What car is Maya borrowing while hers is in the shop?"
+    expected_contains: ["F-150", "Julian", "truck"]
+  - question: "How long will the repair take?"
+    expected_contains: ["5 days"]
+  - question: "What did Maya's dad say about the repair?"
+    expected_contains: ["good money after bad", "something else break"]
+  - question: "What shop is doing the repair?"
+    expected_contains: ["Pacific Auto"]
+  - question: "How much is Maya's Civic worth?"
+    expected_contains: ["4000"]
+  - question: "What financial pressure is Maya dealing with?"
+    expected_contains: ["mortgage", "house"]
+  - question: "What did the second shop Sellwood Transmission say?"
+    expected_contains: ["2500", "3000"]

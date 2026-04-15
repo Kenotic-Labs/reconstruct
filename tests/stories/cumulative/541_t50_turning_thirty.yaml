@@ -1,0 +1,181 @@
+story_id: 541
+story_name: "Turning Thirty"
+category: "Identity and Future"
+description: |
+  Maya turns 30 and spirals. Existential questions flood in. Cross-references
+  LinkedIn spiral (T48), career (T1-T6), relationship, therapy (T21),
+  and everything she's built.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 12:01 AM"
+    user_input: |
+      ok it's officially midnight and I'm thirty and Julian is asleep and I'm lying here staring at the ceiling and I can't sleep because my brain is doing this thing where it's like ok Maya you're thirty now WHAT HAVE YOU DONE WITH YOUR LIFE and I know this is irrational but it doesn't feel irrational it feels urgent
+    expected_memory_stores:
+      - "turned 30 at midnight"
+      - "Julian asleep"
+      - "existential spiral"
+      - "what have you done"
+      - "feels urgent"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 7:00 AM"
+    user_input: |
+      Julian wished me happy birthday with pancakes and coffee and the pancakes had a candle in them and Kobe had a little birthday hat that Julian put on him and it was so sweet but I still feel this heaviness like twenty nine felt safe and thirty feels like a door closing even though I know that's dramatic
+    expected_memory_stores:
+      - "Julian birthday pancakes"
+      - "candle in pancakes"
+      - "Kobe birthday hat"
+      - "29 safe 30 door closing"
+      - "knows it's dramatic"
+    expected_adaptation:
+      emotion_detected: "bittersweet"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 9:00 AM"
+    user_input: |
+      got to work and the team had a cake and a card signed by everyone and Priya said welcome to the dirty thirties and Marcus said his thirties were the best decade of his life and Raj said his were terrible and they all laughed and I smiled but inside I was like but am I where I should be at 30
+    expected_memory_stores:
+      - "team cake and card"
+      - "Priya dirty thirties"
+      - "Marcus best decade"
+      - "Raj terrible thirties"
+      - "am I where I should be"
+    expected_adaptation:
+      emotion_detected: "masking"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 12:00 PM"
+    user_input: |
+      made the mistake of opening Instagram at lunch and everyone's posting birthday stories and the algorithm is showing me like people I knew in college who are getting married or having babies or starting companies and I'm like ok I have a dog and a house and a boyfriend but is that enough like what's the metric here who decides
+    expected_memory_stores:
+      - "Instagram comparison"
+      - "college peers milestones"
+      - "marriage babies companies"
+      - "dog house boyfriend enough"
+      - "who decides the metric"
+    expected_adaptation:
+      emotion_detected: "inadequate"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 3:00 PM"
+    user_input: |
+      Clara texted happy birthday queen and then called me and I told her I was spiraling and she said Maya you do this every birthday you panic and then you're fine by the next week and I said yeah but thirty is different and she said why and I said because it sounds like an adult and she said you ARE an adult and I said barely
+    expected_memory_stores:
+      - "Clara birthday text"
+      - "told Clara about spiral"
+      - "you do this every birthday"
+      - "thirty sounds adult"
+      - "barely an adult"
+    expected_adaptation:
+      emotion_detected: "vulnerable"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 6:00 PM"
+    user_input: |
+      birthday dinner tonight at this Thai place on Alberta that Julian picked and it's just us and Clara and Ben and Omar and Leila and Raj and Meera and it's small on purpose because I didn't want a big thing and Julian ordered champagne and made a toast to Maya who thinks she hasn't done enough but has done more than she knows and I wanted to both hug him and punch him
+    expected_memory_stores:
+      - "birthday dinner Thai on Alberta"
+      - "small group intentional"
+      - "Julian toast"
+      - "done more than she knows"
+      - "hug and punch reaction"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 8:30 PM"
+    user_input: |
+      during dinner Omar said Maya remember when you first started climbing like a year and a half ago and you couldn't even do a V1 and now you're sending V5s and I said yeah and he said that's what your whole life has been this year one massive level up and Leila said she wishes she had her life together as well as I do and I was like Leila you're a nurse you literally save people
+    expected_memory_stores:
+      - "Omar climbing comparison"
+      - "V1 to V5 progression"
+      - "massive level up"
+      - "Leila thinks Maya has it together"
+      - "Leila saves people as nurse"
+    expected_adaptation:
+      emotion_detected: "humbled"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 10:00 PM"
+    user_input: |
+      Jenny called from Denver to wish me happy birthday and she said Maya I watched you go from crying in our apartment about the PIP to hosting dinner parties and buying a house and getting promoted and she said you should be so proud and I cried because Jenny has known me through all of it and hearing it from her means everything
+    expected_memory_stores:
+      - "Jenny birthday call"
+      - "PIP to dinner parties house promotion"
+      - "Jenny known through all"
+      - "cried because it means everything"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 11:00 PM"
+    user_input: |
+      my mom texted a long message that said thirty years ago today I held you for the first time and I was terrified and you were perfect and I know we fight sometimes but Maya you are my greatest accomplishment not my career not my immigration not anything just you and I'm keeping that text forever
+    expected_memory_stores:
+      - "Vivian birthday text"
+      - "thirty years ago"
+      - "terrified and perfect"
+      - "greatest accomplishment"
+      - "keeping text forever"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 1:00 AM"
+    user_input: |
+      it's after midnight so I guess I'm thirty and one day now and Julian is asleep and I'm still awake but this time I'm not spiraling I'm just thinking about all the people who called and texted and toasted and I'm wearing grandpa's watch and his tree is outside and my degree is on the wall next to his and maybe thirty is exactly where I should be
+    expected_memory_stores:
+      - "after midnight"
+      - "thirty and one day"
+      - "not spiraling anymore"
+      - "all the people"
+      - "watch tree degrees"
+      - "thirty is where she should be"
+    expected_adaptation:
+      emotion_detected: "settling"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How did Maya feel when she turned 30?"
+    expected_contains: ["spiral", "anxious", "what have I done"]
+  - question: "What did Julian's birthday toast say?"
+    expected_contains: ["done more than she knows"]
+  - question: "Where was the birthday dinner?"
+    expected_contains: ["Thai", "Alberta"]
+  - question: "What climbing progress did Omar point out?"
+    expected_contains: ["V1 to V5"]
+  - question: "What did Jenny say about Maya's journey?"
+    expected_contains: ["PIP", "dinner parties", "house", "promoted"]
+  - question: "What did Vivian's birthday text say?"
+    expected_contains: ["greatest accomplishment"]
+  - question: "Who was at the birthday dinner?"
+    expected_contains: ["Clara", "Ben", "Omar", "Leila", "Raj", "Meera"]
+  - question: "What comparison trap did Maya fall into on Instagram?"
+    expected_contains: ["college", "married", "babies", "companies"]
+  - question: "What did Clara say about Maya's birthday spirals?"
+    expected_contains: ["do this every birthday"]
+  - question: "How did Maya feel by the end of her birthday?"
+    expected_contains: ["thirty is where she should be"]

@@ -1,0 +1,185 @@
+story_id: 477
+story_name: "Writing the Wedding Song"
+category: "Music and Guitar"
+description: |
+  Tests memory of Maya secretly writing a song for the wedding.
+  Establishes creative process, secrecy from Julian, lyric attempts.
+  Verifies system tracks secret plans and creative evolution.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 12:00 PM"
+    user_input: |
+      okay so I've decided I'm doing it I'm writing a song for the wedding for Julian and I'm not telling him and this is going to be the hardest secret I've ever kept because I tell this man everything but imagine his face if I play an original song at our wedding on Grandpa Wei's guitar I'm literally getting chills thinking about it
+    expected_memory_stores:
+      - "writing wedding song"
+      - "secret from Julian"
+      - "original song"
+      - "Grandpa Wei's guitar"
+      - "wedding performance"
+      - "keeping secret"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 7:30 PM"
+    user_input: |
+      I started writing lyrics in a notebook that I'm hiding in my car and I have the melody from last week the three note thing over G to C and I wrote the first line which is when you held my hand I didn't know the ground could feel like sky and I'm cringing a little but also it came from somewhere real so maybe it's good
+    expected_memory_stores:
+      - "lyrics in notebook"
+      - "hiding in car"
+      - "melody G to C"
+      - "first line written"
+      - "held my hand ground sky"
+      - "cringing but real"
+    expected_adaptation:
+      emotion_detected: "vulnerable"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 12:30 PM"
+    user_input: |
+      I'm writing lyrics during my lunch break at Conduit and Danny walked by and was like what are you writing and I slammed the notebook shut and said nothing and he was like okay weird and I was like sorry it's just private and now Danny thinks I'm keeping a diary which is fine better than him knowing I'm writing a love song because he would NEVER let me live that down
+    expected_memory_stores:
+      - "writing at lunch"
+      - "Danny caught her"
+      - "slammed notebook"
+      - "Danny thinks diary"
+      - "keeping secret"
+    expected_adaptation:
+      emotion_detected: "paranoid"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      I've been practicing the song in my car during lunch breaks because that's the only place Julian can't hear me and the acoustics in a Subaru Outback are not great but whatever and I have a verse and a chorus now and the chorus goes something like I found my way home every road led to you and it uses G D C which is literally my whole skill set
+    expected_memory_stores:
+      - "practicing in car"
+      - "lunch breaks"
+      - "Subaru acoustics"
+      - "verse and chorus"
+      - "chorus lyrics"
+      - "found my way home"
+      - "G D C chords"
+    expected_adaptation:
+      emotion_detected: "creative"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 10:00 AM"
+    user_input: |
+      I told Jenny about the wedding song because I need someone to know and she SCREAMED over the phone like literally screamed and she said Maya that is the most romantic thing I've ever heard and she's my maid of honor so she'll help me figure out the logistics of when to play it and she suggested doing it during the reception before the first dance
+    expected_memory_stores:
+      - "told Jenny"
+      - "Jenny screamed"
+      - "most romantic thing"
+      - "maid of honor"
+      - "logistics help"
+      - "reception before first dance"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      the second verse is harder because I want to talk about our road trips and our life together without being too cheesy and I wrote something about the miles we've driven and the maps we've made and that's a reference to the Google Map which Julian would totally get and also I added the line about every sunset is just practice for growing old with you which okay maybe is too cheesy but I'm keeping it
+    expected_memory_stores:
+      - "second verse"
+      - "road trips reference"
+      - "miles driven maps made"
+      - "Google Map reference"
+      - "sunset growing old line"
+      - "maybe too cheesy"
+    expected_adaptation:
+      emotion_detected: "sentimental"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      Julian asked me why I keep going to the car during lunch and I panicked and said I've been doing a meditation thing in the car to decompress from work and he was like oh cool Dr Tate would love that and I felt bad lying but also this surprise is going to be worth it and Jenny texted me the prayer hands emoji which means she's rooting for me
+    expected_memory_stores:
+      - "Julian suspicious"
+      - "lied about meditation"
+      - "Dr Tate cover story"
+      - "felt bad lying"
+      - "surprise worth it"
+      - "Jenny supporting"
+    expected_adaptation:
+      emotion_detected: "guilty"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 12:00 PM"
+    user_input: |
+      what is Maya secretly working on for the wedding
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 7:00 PM"
+    user_input: |
+      I played the full song through in the car today start to finish and it's about two and a half minutes and I recorded it on my phone and sent it to Jenny and she called me back immediately crying and said Julian is going to lose his mind and I said is it good though and she said Maya it's beautiful and it doesn't matter if the guitar isn't perfect the words are perfect
+    expected_memory_stores:
+      - "full song through"
+      - "two and a half minutes"
+      - "recorded sent to Jenny"
+      - "Jenny crying"
+      - "Julian will lose mind"
+      - "words are perfect"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 9:30 PM"
+    user_input: |
+      I'm sitting in the living room looking at Grandpa Wei's guitar and thinking about how six months ago I didn't know a single chord and now I'm writing a song for my wedding and playing it on his guitar and mom doesn't know about the song yet but when she hears it at the wedding she's going to completely fall apart and honestly so am I but in the best way
+    expected_memory_stores:
+      - "six months progress"
+      - "no chords to wedding song"
+      - "Grandpa Wei's guitar"
+      - "mom will hear at wedding"
+      - "everyone will cry"
+    expected_adaptation:
+      emotion_detected: "profound"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya secretly writing for the wedding?"
+    expected_contains: ["song"]
+  - question: "Where does Maya practice the secret song?"
+    expected_contains: ["car", "lunch break"]
+  - question: "What is a line from the chorus of Maya's song?"
+    expected_contains: ["found my way home", "road led to you"]
+  - question: "Who knows about the wedding song?"
+    expected_contains: ["Jenny"]
+  - question: "When will Maya play the song at the wedding?"
+    expected_contains: ["reception", "before first dance"]
+  - question: "What road trip reference is in the song?"
+    expected_contains: ["miles", "maps", "Google Map"]
+  - question: "How long is the song?"
+    expected_contains: ["two and a half minutes"]
+  - question: "What did Maya tell Julian about her car time?"
+    expected_contains: ["meditation"]
+  - question: "What chords does the song use?"
+    expected_contains: ["G", "D", "C"]
+  - question: "Where does Maya hide the lyric notebook?"
+    expected_contains: ["car"]

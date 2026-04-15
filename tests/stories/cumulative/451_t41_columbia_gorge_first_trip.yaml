@@ -1,0 +1,176 @@
+story_id: 451
+story_name: "Columbia Gorge First Trip"
+category: "Road Trips"
+description: |
+  Tests memory of Maya and Julian's first weekend road trip in their new Subaru.
+  Establishes the road trip tradition, Multnomah Falls destination.
+  Verifies system captures logistics, enthusiasm, and cross-thread references.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 7:30 AM"
+    user_input: |
+      okay so we finally got the Subaru like the Outback we've been looking at for months and Julian was like let's just GO somewhere this weekend and I was like yes absolutely so we're driving to the Columbia Gorge today to see Multnomah Falls and I'm so excited honestly we haven't done like a spontaneous trip in forever
+    expected_memory_stores:
+      - "Subaru Outback"
+      - "new car"
+      - "Columbia Gorge"
+      - "Multnomah Falls"
+      - "weekend trip"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 8:45 AM"
+    user_input: |
+      um so we packed up Kobe too because like why not he loves car rides and Julian put his camera bag in the back he's been wanting to shoot waterfalls for his portfolio at Bold Studio and I made sandwiches last night so we're all set basically oh and I downloaded this road trip playlist that has like all our songs from college
+    expected_memory_stores:
+      - "Kobe in car"
+      - "Julian camera"
+      - "Bold Studio portfolio"
+      - "sandwiches packed"
+      - "road trip playlist"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 10:15 AM"
+    user_input: |
+      we just got to the gorge and oh my god its gorgeous like the drive from Portland is only like 45 minutes which is nothing and Kobe had his head out the window the whole time and Julian was singing along to the playlist terribly and I was like this is what life should be you know after all the stress with the book club planning and guitar practice this is exactly what I needed
+    expected_memory_stores:
+      - "45 minute drive"
+      - "Columbia Gorge arrival"
+      - "Kobe head out window"
+      - "Julian singing"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 11:00 AM"
+    user_input: |
+      so Multnomah Falls is just incredible like its this massive two tier waterfall and there's a bridge between the two sections and Julian is going absolutely nuts with his camera like he's already taken like 200 photos no joke and Kobe is a little nervous about the mist but he's being a good boy
+    expected_memory_stores:
+      - "Multnomah Falls"
+      - "two tier waterfall"
+      - "bridge between sections"
+      - "Julian photographing"
+      - "Kobe nervous about mist"
+    expected_adaptation:
+      emotion_detected: "awestruck"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 12:30 PM"
+    user_input: |
+      had our sandwiches at this picnic area near the falls and this older couple came up and asked if they could pet Kobe and they were telling us about how they've been doing road trips together for like 40 years and the wife said the gorge was their first trip too when they were young and I literally almost cried like that's gonna be us
+    expected_memory_stores:
+      - "picnic at falls"
+      - "older couple"
+      - "40 years of trips"
+      - "first trip parallel"
+      - "emotional moment"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 2:00 PM"
+    user_input: |
+      we drove a little further east to this viewpoint called Crown Point and you can see the whole gorge from up there and Julian said he wants to come back in fall when the leaves change and I was like yeah let's make this a thing like weekend road trips can be our thing you know and he was so into it
+    expected_memory_stores:
+      - "Crown Point"
+      - "gorge viewpoint"
+      - "fall return plan"
+      - "weekend trips as tradition"
+      - "Julian enthusiastic"
+    expected_adaptation:
+      emotion_detected: "inspired"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 4:15 PM"
+    user_input: |
+      oh I should mention we stopped at this little fruit stand on the way back and got like fresh cherries and peaches and the lady was so nice she gave Kobe a treat and Julian bought a pie too which is very on brand for him and I was thinking we should do a different trip every weekend or like every other weekend
+    expected_memory_stores:
+      - "fruit stand"
+      - "cherries and peaches"
+      - "Julian bought pie"
+      - "every other weekend trips"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 6:00 PM"
+    user_input: |
+      where did we stop on the way back from the falls that had the fruit
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 7:30 PM"
+    user_input: |
+      back home now and Kobe is passed out on his bed like completely zonked and Julian's already uploading the photos to his laptop and he's like these are some of the best landscape shots I've ever taken and I believe him honestly the light at the gorge was insane oh and Sam from work texted asking how the new car handles and I said perfectly
+    expected_memory_stores:
+      - "Kobe tired"
+      - "Julian uploading photos"
+      - "best landscape shots"
+      - "Sam Okafor texted"
+      - "car handles well"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 9:00 PM"
+    user_input: |
+      Julian and I are already looking at where to go next weekend and he wants to do Bend because there's all these breweries and I'm like sure but I also wanna do Cannon Beach at some point because I wanna see Haystack Rock and also take Kobe to the actual beach for the first time so we have like a whole list going now this is gonna be our thing I can feel it
+    expected_memory_stores:
+      - "Bend next"
+      - "breweries"
+      - "Cannon Beach"
+      - "Haystack Rock"
+      - "Kobe first beach"
+      - "trip list"
+    expected_adaptation:
+      emotion_detected: "enthusiastic"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What kind of car did Maya and Julian get?"
+    expected_contains: ["Subaru", "Outback"]
+  - question: "Where was their first road trip?"
+    expected_contains: ["Columbia Gorge", "Multnomah Falls"]
+  - question: "How long is the drive from Portland to the Columbia Gorge?"
+    expected_contains: ["45 minutes"]
+  - question: "What viewpoint did they visit after Multnomah Falls?"
+    expected_contains: ["Crown Point"]
+  - question: "What did Julian want to do with his waterfall photos?"
+    expected_contains: ["portfolio", "Bold Studio"]
+  - question: "What did they buy at the fruit stand?"
+    expected_contains: ["cherries", "peaches", "pie"]
+  - question: "Where does Julian want to go next?"
+    expected_contains: ["Bend"]
+  - question: "Why does Maya want to go to Cannon Beach?"
+    expected_contains: ["Haystack Rock", "Kobe", "beach"]
+  - question: "What couple did they meet at the picnic area?"
+    expected_contains: ["older couple", "40 years"]
+  - question: "What tradition are Maya and Julian starting?"
+    expected_contains: ["weekend", "road trip"]

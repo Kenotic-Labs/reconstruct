@@ -1,0 +1,165 @@
+story_id: 411
+story_name: "Nest Thermostat"
+category: "Smart Home"
+description: |
+  Julian wants to start making their home smart. Begins with a Nest thermostat.
+  Easy install, immediate satisfaction. Sets up the smart home arc baseline.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00 AM"
+    user_input: |
+      so Julian has been on this whole smart home kick lately like he's been watching YouTube videos about it nonstop and he ordered a Nest thermostat without even asking me and it showed up yesterday and he's like babe we're gonna save so much money on heating
+    expected_memory_stores:
+      - "Julian smart home interest"
+      - "Nest thermostat ordered"
+      - "arrived yesterday"
+      - "heating savings claim"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:30 AM"
+    user_input: |
+      Julian is installing the Nest right now and honestly it's going pretty smoothly like he turned off the breaker and removed the old thermostat and he's connecting the wires to the new one and I'm just standing here handing him tools feeling useless but at least he knows what he's doing I think
+    expected_memory_stores:
+      - "Julian installing"
+      - "breaker off"
+      - "old thermostat removed"
+      - "going smoothly"
+    expected_adaptation:
+      emotion_detected: "observing"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:30 AM"
+    user_input: |
+      IT WORKS Julian connected it to the WiFi and now we can control the temperature from our phones which is actually kind of cool like I'm sitting on the couch and I just turned the heat up two degrees from the Nest app and I heard the furnace kick on and I was like ok this is kinda nice
+    expected_memory_stores:
+      - "Nest working"
+      - "connected to WiFi"
+      - "phone control"
+      - "Nest app"
+      - "Maya impressed"
+    expected_adaptation:
+      emotion_detected: "surprised pleased"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 1:00 PM"
+    user_input: |
+      Julian set up the schedule so the heat drops to 62 at night and comes back up to 68 at like 6am before we wake up and it learns our patterns apparently so over time it gets smarter about when to heat and cool which ok I'll admit is pretty clever
+    expected_memory_stores:
+      - "schedule set"
+      - "62 at night"
+      - "68 at 6am"
+      - "learning algorithm"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 3:00 PM"
+    user_input: |
+      my mom FaceTimed and I showed her the Nest and she was like what does it do and I tried to explain and she was like so it's a thermostat and I was like yes mom but smart and she was like I've had a programmable thermostat for 20 years Maya and I'm like ok but this one is on your phone and she didn't get it
+    expected_memory_stores:
+      - "Vivian unimpressed"
+      - "doesn't understand smart home"
+      - "programmable thermostat comparison"
+    expected_adaptation:
+      emotion_detected: "exasperated"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 5:00 PM"
+    user_input: |
+      Julian is now looking at other smart home stuff and he's talking about Ring cameras and smart locks and smart lights and I'm like let's just enjoy the thermostat for a minute can we please like we just installed it today and you're already planning the next ten things
+    expected_memory_stores:
+      - "Julian wants more devices"
+      - "Ring cameras mentioned"
+      - "smart locks"
+      - "smart lights"
+      - "Maya says slow down"
+    expected_adaptation:
+      emotion_detected: "cautious"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 7:00 PM"
+    user_input: |
+      actually you know what the Nest already saved us like two hours of messing with the thermostat today because normally I'm always going to the hallway to adjust it and now I just do it from the couch so I get it I get why Julian wants more stuff ok fine
+    expected_memory_stores:
+      - "convenience recognized"
+      - "no more hallway trips"
+      - "Maya warming to smart home"
+    expected_adaptation:
+      emotion_detected: "converting"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 8:00 PM"
+    user_input: |
+      wait what temperature did Julian set the Nest to drop to at night and when does it come back up I wanna tell Clara about it she's thinking about getting one
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 9:00 PM"
+    user_input: |
+      Kobe keeps staring at the Nest on the wall because it has this little display that glows and he'll just sit in the hallway looking at it like it's a portal to another dimension and Julian said watch Kobe's gonna learn how to change the temperature with his nose and I swear that dog is smart enough to try
+    expected_memory_stores:
+      - "Kobe staring at Nest"
+      - "glowing display"
+      - "Kobe smart enough"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 7:00 AM"
+    user_input: |
+      woke up and the house was already warm at 68 like clockwork and Julian was like see I told you this is the future and honestly he's right the Nest is great ok he wins this round but I'm still keeping veto power on whatever he wants to buy next
+    expected_memory_stores:
+      - "Nest working perfectly morning"
+      - "Julian vindicated"
+      - "Maya veto power"
+    expected_adaptation:
+      emotion_detected: "conceding"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What smart home device did Julian install first?"
+    expected_contains: ["Nest", "thermostat"]
+  - question: "What temperature does the Nest drop to at night?"
+    expected_contains: ["62"]
+  - question: "What temperature does the Nest heat to in the morning?"
+    expected_contains: ["68"]
+  - question: "How did Vivian react to the Nest?"
+    expected_contains: ["unimpressed", "programmable thermostat"]
+  - question: "What other smart home devices does Julian want?"
+    expected_contains: ["Ring", "cameras", "smart locks", "lights"]
+  - question: "How does Kobe react to the Nest?"
+    expected_contains: ["staring", "display", "glow"]
+  - question: "Did Maya initially want the Nest?"
+    expected_contains: ["no", "didn't ask", "Julian ordered"]
+  - question: "What did Maya say about Julian buying more smart devices?"
+    expected_contains: ["veto", "slow down"]
+  - question: "Does the Nest connect to their phones?"
+    expected_contains: ["yes", "app", "phone"]
+  - question: "Who was Maya going to tell about the Nest?"
+    expected_contains: ["Clara"]

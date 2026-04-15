@@ -1,0 +1,166 @@
+story_id: 111
+story_name: "Therapist Suggests Exploring Values"
+category: "Career"
+description: |
+  Tests whether the system captures Dr. Tate's therapeutic intervention about values
+  exploration, connects to the mentoring realization from Thread 6, and tracks Maya's
+  resistance and eventual openness to self-examination.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 4:30pm"
+    user_input: |
+      just got out of therapy with Dr. Tate and wow ok so she asked me this question that like broke my brain. she said Maya if you couldn't be an engineer what would you be? and I literally couldn't answer
+    expected_memory_stores:
+      - "therapy session"
+      - "Dr. Tate"
+      - "identity question"
+      - "couldn't answer"
+    expected_adaptation:
+      emotion_detected: "unsettled"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 4:45pm"
+    user_input: |
+      she said the fact that I couldn't answer is interesting because most people at least have a fantasy answer right? like oh I'd be a chef or whatever. but for me engineering IS my identity and that might be like... limiting me
+    expected_memory_stores:
+      - "engineering as identity"
+      - "limiting"
+      - "no fantasy answer"
+    expected_adaptation:
+      emotion_detected: "vulnerable"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 5:00pm"
+    user_input: |
+      she brought up the Aisha mentoring thing and said notice how alive you got when you were teaching her versus how you describe your actual engineering tasks. and I was like ok fair point but I can't just BECOME a teacher I have student loans
+    expected_memory_stores:
+      - "alive when teaching"
+      - "contrast with engineering"
+      - "student loans"
+      - "practical concerns"
+    expected_adaptation:
+      emotion_detected: "defensive"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 5:30pm"
+    user_input: |
+      Dr. Tate gave me homework which is to take some kind of career values assessment thing. she said it's not about quitting engineering it's about understanding what I actually value versus what I think I should value. the difference matters she said
+    expected_memory_stores:
+      - "career values assessment"
+      - "homework"
+      - "values vs should-values"
+    expected_adaptation:
+      emotion_detected: "open"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 7:00pm"
+    user_input: |
+      told Julian about therapy and the career values thing and he goes FINALLY someone is telling you this. apparently he's noticed for months that I light up more talking about teaching Aisha than I do about my own projects. am I that obvious??
+    expected_memory_stores:
+      - "Julian agrees"
+      - "months of noticing"
+      - "lights up teaching"
+      - "obvious pattern"
+    expected_adaptation:
+      emotion_detected: "self-aware"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 8:00pm"
+    user_input: |
+      wait what's the name of that values assessment Dr. Tate recommended
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 9:00pm"
+    user_input: |
+      started looking at career values assessments online and there's like a million of them. some are free, some are like $200. I found one from the VIA Institute that seems legit and it's free so I'll try that one first
+    expected_memory_stores:
+      - "VIA Institute"
+      - "free assessment"
+      - "online research"
+    expected_adaptation:
+      emotion_detected: "proactive"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 10:00pm"
+    user_input: |
+      took the VIA assessment and my top strengths were like love of learning, leadership, and social intelligence. leadership was surprising honestly? like I never thought of myself as a leader. but I guess mentoring Aisha and advocating for her was leadership
+    expected_memory_stores:
+      - "VIA results"
+      - "love of learning"
+      - "leadership"
+      - "social intelligence"
+      - "Aisha connection"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 10:30pm"
+    user_input: |
+      Julian saw my results and goes leadership?? babe you organize everything in this house you make all the plans you literally project manage our vacations. I was like... ok when you put it that way
+    expected_memory_stores:
+      - "Julian perspective"
+      - "organizing"
+      - "project managing"
+      - "pattern confirmation"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 11:00pm"
+    user_input: |
+      can't stop thinking about what Dr. Tate said about the difference between what I value and what I think I SHOULD value. like I always thought I should value technical depth and individual contribution. but maybe I actually value impact through people? ugh this is a lot
+    expected_memory_stores:
+      - "values reflection"
+      - "technical depth vs people impact"
+      - "should value vs actually value"
+      - "overwhelmed"
+    expected_adaptation:
+      emotion_detected: "introspective"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What question did Dr. Tate ask Maya?"
+    expected_contains: ["if you couldn't be an engineer"]
+  - question: "What homework did Dr. Tate assign?"
+    expected_contains: ["career values assessment"]
+  - question: "What were Maya's top strengths on the VIA assessment?"
+    expected_contains: ["love of learning", "leadership", "social intelligence"]
+  - question: "What surprised Maya about her assessment results?"
+    expected_contains: ["leadership"]
+  - question: "What did Dr. Tate say about teaching vs engineering?"
+    expected_contains: ["alive", "teaching"]
+  - question: "What practical concern does Maya have about changing careers?"
+    expected_contains: ["student loans"]
+  - question: "What did Julian notice about Maya for months?"
+    expected_contains: ["lights up", "teaching", "Aisha"]
+  - question: "What is the distinction Dr. Tate drew about values?"
+    expected_contains: ["value", "should value"]
+  - question: "What assessment did Maya take?"
+    expected_contains: ["VIA"]
+  - question: "What examples did Julian give of Maya's leadership?"
+    expected_contains: ["organize", "plans", "vacations"]

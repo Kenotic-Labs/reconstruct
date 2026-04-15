@@ -1,0 +1,174 @@
+story_id: 122
+story_name: "Maya's Hesitation About Moving In"
+category: "Relationships"
+description: |
+  Tests whether the system tracks Maya's deeper emotional processing about moving in,
+  therapy discussion about attachment, and the nuance between wanting partnership and
+  fearing loss of independence.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00am"
+    user_input: |
+      so we decided to move in together but I keep having these little panic moments? like this morning I was brushing my teeth and suddenly thought what if he's always there when I get home from work and I just wanna be alone and decompress
+    expected_memory_stores:
+      - "panic moments"
+      - "decompression need"
+      - "always there"
+      - "after work alone time"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 12:00pm"
+    user_input: |
+      brought it up with Dr. Tate at our session today. she said my need for alone time is totally valid and it's not something to feel guilty about. she said healthy couples actually NEED separate space and hobbies and it's a myth that you should want to be together 24/7
+    expected_memory_stores:
+      - "Dr. Tate session"
+      - "alone time valid"
+      - "separate space needed"
+      - "myth of togetherness"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 12:30pm"
+    user_input: |
+      Dr. Tate also asked about my parents' relationship and like... they were always together. always. my mom didn't have her own hobbies or friends really. and I think part of my fear is becoming that. losing myself in the relationship
+    expected_memory_stores:
+      - "parents relationship"
+      - "mom always with dad"
+      - "no separate hobbies"
+      - "fear of losing self"
+    expected_adaptation:
+      emotion_detected: "insightful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 6:00pm"
+    user_input: |
+      told Julian about the therapy stuff, not all of it but the part about needing space. and he goes Maya I'm a freelancer who works from home, I NEED alone time too. we should build space into the apartment for both of us. he's so reasonable sometimes it's annoying
+    expected_memory_stores:
+      - "Julian needs space too"
+      - "freelancer works from home"
+      - "build in space"
+      - "reasonable"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 10:00am"
+    user_input: |
+      Aisha at work asked me why I seem distracted and I told her Julian and I are moving in together and she goes oh my god that's amazing!! and like her excitement actually made me feel more excited about it? sometimes you need someone else's energy
+    expected_memory_stores:
+      - "Aisha excited"
+      - "contagious excitement"
+      - "shared news at work"
+    expected_adaptation:
+      emotion_detected: "uplifted"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 3:00pm"
+    user_input: |
+      Rachel Kim goes oh you're moving in with your boyfriend? and she told me about when she moved in with her wife and how the first month was hard but then it became the best thing she ever did. I didn't know Rachel Kim was married, she keeps her personal life pretty private
+    expected_memory_stores:
+      - "Rachel Kim married"
+      - "Rachel Kim wife"
+      - "first month hard"
+      - "best thing"
+      - "private person"
+    expected_adaptation:
+      emotion_detected: "curious"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 9:00am"
+    user_input: |
+      what did Dr. Tate say about Maya's parents
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 11:00am"
+    user_input: |
+      Julian and I made a list of non-negotiables for the apartment. mine: natural light, dog-friendly, quiet for focus work, close to a park for Kobe. his: space for a design desk, good wifi, not a ground floor, near restaurants. there's some overlap which is good
+    expected_memory_stores:
+      - "apartment non-negotiables"
+      - "natural light"
+      - "dog-friendly"
+      - "quiet"
+      - "park nearby"
+      - "design desk space"
+      - "not ground floor"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 5:00pm"
+    user_input: |
+      started seriously looking on Zillow and Apartments.com. there's like barely anything in our price range that checks all the boxes. Julian wants to spend max 2500 and I agree but that limits us a LOT in Portland right now
+    expected_memory_stores:
+      - "Zillow Apartments.com"
+      - "limited options"
+      - "max 2500 budget"
+      - "Portland market"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 9:00pm"
+    user_input: |
+      we've got three apartments bookmarked to tour this weekend. one in Hawthorne, one in Alberta, one in Sellwood. I'm already biased toward Sellwood because it's near the dog park and it's quieter. Julian likes Alberta because it's artsy. this is gonna be a thing
+    expected_memory_stores:
+      - "three apartments"
+      - "Hawthorne"
+      - "Alberta"
+      - "Sellwood"
+      - "Maya prefers Sellwood"
+      - "Julian prefers Alberta"
+      - "neighborhood disagreement"
+    expected_adaptation:
+      emotion_detected: "anticipatory"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya's biggest concern about cohabitation?"
+    expected_contains: ["alone time", "independence"]
+  - question: "What did Dr. Tate say about alone time in relationships?"
+    expected_contains: ["valid", "healthy", "need separate space"]
+  - question: "What fear does Maya have based on her parents?"
+    expected_contains: ["losing herself", "mom", "always together"]
+  - question: "What are Maya's apartment non-negotiables?"
+    expected_contains: ["natural light", "dog-friendly", "quiet", "park"]
+  - question: "What are Julian's apartment non-negotiables?"
+    expected_contains: ["design desk", "wifi", "not ground floor"]
+  - question: "What is their apartment budget?"
+    expected_contains: ["2500"]
+  - question: "Which neighborhoods are they touring?"
+    expected_contains: ["Hawthorne", "Alberta", "Sellwood"]
+  - question: "Which neighborhood does Maya prefer?"
+    expected_contains: ["Sellwood"]
+  - question: "Which neighborhood does Julian prefer?"
+    expected_contains: ["Alberta"]
+  - question: "Is Rachel Kim married?"
+    expected_contains: ["yes", "wife"]

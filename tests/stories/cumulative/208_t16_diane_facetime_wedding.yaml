@@ -1,0 +1,168 @@
+story_id: 208
+story_name: "Diane FaceTimes About Wedding"
+category: "Relationships"
+description: |
+  Tests post-visit relationship maintenance. Diane now regularly FaceTimes Maya about wedding
+  planning. Verifies system can track ongoing collaborative relationship and wedding details.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 6:00 PM"
+    user_input: |
+      Diane FaceTimed me tonight just me not Julian and we talked for like forty minutes about wedding colors and she suggested dusty blue and sage green and I was like Diane yes that's exactly what I was thinking and she was so excited
+    expected_memory_stores:
+      - "Diane FaceTime"
+      - "wedding colors"
+      - "dusty blue"
+      - "sage green"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 7:00 PM"
+    user_input: |
+      she also said her friend at Rose & Vine can do the flowers for like 30% less than the other quote we got and the samples she showed me on her phone were stunning like eucalyptus and roses and these little white wildflowers
+    expected_memory_stores:
+      - "Rose & Vine discount"
+      - "30% less"
+      - "eucalyptus"
+      - "roses"
+      - "white wildflowers"
+    expected_adaptation:
+      emotion_detected: "pleased"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 10:00 AM"
+    user_input: |
+      Julian is being zero help with wedding stuff like I asked him about the centerpieces and he was like whatever you want babe and I was like that's not helpful and then I texted Diane and she immediately sent me five Pinterest boards she'd been working on
+    expected_memory_stores:
+      - "Julian unhelpful"
+      - "centerpieces"
+      - "Diane Pinterest boards"
+      - "five boards"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 2:00 PM"
+    user_input: |
+      we need to book Timber Ridge by the end of the month or we lose the October date and Diane said she can put down the deposit as our wedding gift which is insanely generous and Julian was like mom you don't have to and she was like I WANT to
+    expected_memory_stores:
+      - "Timber Ridge deadline"
+      - "end of month"
+      - "October date"
+      - "Diane paying deposit"
+      - "wedding gift"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 5:00 PM"
+    user_input: |
+      told my mom about Diane paying for the venue deposit and Vivian was quiet and then said well your father and I will pay for the catering then and I was like ok mom this isn't a competition and she was like I know I know but I could tell it totally is
+    expected_memory_stores:
+      - "Vivian competitive"
+      - "George and Vivian paying catering"
+      - "family competition"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 9:00 AM"
+    user_input: |
+      what wedding colors did Diane and I pick again and what venue are we booking
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 11:00 AM"
+    user_input: |
+      Diane sent me this whole spreadsheet she made of the guest list from Bob's side and it's like 47 people and I was like ok that's more than I expected and she color coded it by like definite maybe and probably not which is honestly impressive
+    expected_memory_stores:
+      - "guest list spreadsheet"
+      - "47 people Bob's side"
+      - "color coded"
+      - "Diane organized"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 3:00 PM"
+    user_input: |
+      my mom is doing the Chen side guest list and so far she has like 62 people because every cousin and second cousin and my dad's old college friends and I'm like mom we can't invite 110 people total this isn't that kind of wedding
+    expected_memory_stores:
+      - "Vivian guest list"
+      - "62 people Chen side"
+      - "too many"
+      - "guest list tension"
+    expected_adaptation:
+      emotion_detected: "stressed"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 6:00 PM"
+    user_input: |
+      Clara called and volunteered to be the one to tell mom to cut the list because she says Vivian listens to her more which is true actually Clara has always been the diplomat in our family Tyler says she could negotiate world peace
+    expected_memory_stores:
+      - "Clara volunteered"
+      - "diplomat"
+      - "Tyler's comment"
+      - "cut guest list"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 9:00 PM"
+    user_input: |
+      thinking about how three weeks ago I was dreading Diane's visit and now she's like my wedding planning partner and we text every day and Julian says he created a monster because now his mom and his fiancee are ganging up on him about napkin colors lol
+    expected_memory_stores:
+      - "three week transformation"
+      - "daily texting"
+      - "wedding planning partner"
+      - "Julian joke"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What are Maya's wedding colors?"
+    expected_contains: ["dusty blue", "sage green"]
+  - question: "What venue are they booking?"
+    expected_contains: ["Timber Ridge Farms"]
+  - question: "When is the wedding?"
+    expected_contains: ["October"]
+  - question: "Who is paying for the venue deposit?"
+    expected_contains: ["Diane"]
+  - question: "Who is paying for catering?"
+    expected_contains: ["George", "Vivian", "Maya's parents"]
+  - question: "How many people are on Bob's side guest list?"
+    expected_contains: ["47"]
+  - question: "What florist are they using?"
+    expected_contains: ["Rose & Vine"]
+  - question: "Who volunteered to trim the Chen guest list?"
+    expected_contains: ["Clara"]
+  - question: "How has Maya's relationship with Diane changed?"
+    expected_contains: ["partner", "text every day"]
+  - question: "What flowers are planned for the wedding?"
+    expected_contains: ["eucalyptus", "roses", "wildflowers"]

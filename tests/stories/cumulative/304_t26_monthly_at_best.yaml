@@ -1,0 +1,167 @@
+story_id: 304
+story_name: "Monthly at Best"
+category: "Friendships"
+description: |
+  Tests memory of communication dropping further from weekly to monthly.
+  Maya starts feeling abandoned but doesn't say anything. Verifies the system
+  tracks emotional escalation and frequency degradation over time.
+duration_simulated: "1 month"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Week 5 Monday 7:00 PM"
+    user_input: |
+      so it's been like five weeks since Jenny moved and we've talked twice in the last two weeks which I guess is fine whatever she's busy I'm busy everyone's busy right
+    expected_memory_stores:
+      - "five weeks since move"
+      - "talked twice in two weeks"
+      - "dismissive tone"
+    expected_adaptation:
+      emotion_detected: "bitter"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Week 5 Wednesday 8:00 PM"
+    user_input: |
+      tried to call Jenny tonight and she didn't pick up and she texted me like an hour later saying sorry was at trivia night with the work crew and I'm like cool you have a trivia crew now that's great
+    expected_memory_stores:
+      - "Jenny didn't answer"
+      - "trivia night"
+      - "work crew"
+      - "Maya sarcastic"
+    expected_adaptation:
+      emotion_detected: "resentful"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Week 6 Sunday 10:00 AM"
+    user_input: |
+      went to Forest Park alone again and I saw this other pair of women running together and laughing and I literally had to like look away because it reminded me of me and Jenny and ugh this is so dumb I'm being dramatic
+    expected_memory_stores:
+      - "Forest Park solo"
+      - "saw women running together"
+      - "reminded of Jenny"
+      - "feeling dramatic"
+    expected_adaptation:
+      emotion_detected: "lonely"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Week 7 Thursday 9:00 PM"
+    user_input: |
+      Jenny and I finally had a real call tonight first one in like almost three weeks and it was fine but it felt different like she was telling me about all these people I don't know like Ashley and some guy named Drew and I just felt so out of the loop
+    expected_memory_stores:
+      - "first call in three weeks"
+      - "Ashley new friend"
+      - "Drew new friend"
+      - "out of the loop"
+    expected_adaptation:
+      emotion_detected: "disconnected"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Week 7 Friday 12:00 PM"
+    user_input: |
+      told Marcus about how Jenny's been kinda MIA and he was like dude that happened to me and my college best friend too and eventually you just accept it and I was like I don't want to accept it she's my MAID OF HONOR
+    expected_memory_stores:
+      - "Marcus similar experience"
+      - "acceptance advice"
+      - "maid of honor concern"
+    expected_adaptation:
+      emotion_detected: "defiant"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Week 8 Wednesday 6:30 PM"
+    user_input: |
+      it's Wednesday and I didn't even try to call Jenny today because what's the point she'll just be busy and I hate that I'm like this about it like I'm not a clingy person but this is my best friend
+    expected_memory_stores:
+      - "didn't try calling"
+      - "given up on Wednesdays"
+      - "not clingy"
+      - "best friend"
+    expected_adaptation:
+      emotion_detected: "defeated"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Week 8 Saturday 4:00 PM"
+    user_input: |
+      Jenny posted a story of her and this girl Ashley at some like art exhibit in Austin and captioned it my person and I know she probably means it casually but my person??? that was what she used to call ME
+    expected_memory_stores:
+      - "Instagram story"
+      - "Ashley at art exhibit"
+      - "my person caption"
+      - "used to call Maya that"
+    expected_adaptation:
+      emotion_detected: "hurt"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Week 9 Monday 7:00 PM"
+    user_input: |
+      ok honestly at this point we're talking like once a month maybe and I don't know if she even notices or cares and Julian says I should just tell her how I feel but that feels so needy
+    expected_memory_stores:
+      - "once a month"
+      - "Jenny might not notice"
+      - "Julian says communicate"
+      - "feels needy"
+    expected_adaptation:
+      emotion_detected: "insecure"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Week 9 Thursday 8:00 PM"
+    user_input: |
+      my mom asked about Jenny today and I was like she's fine she's in Austin and my mom was like oh how fun do you guys still talk and I just said yeah all the time because I didn't want to get into it
+    expected_memory_stores:
+      - "Vivian asked about Jenny"
+      - "Maya lied about frequency"
+      - "didn't want to discuss"
+    expected_adaptation:
+      emotion_detected: "ashamed"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Week 9 Sunday 9:00 PM"
+    user_input: |
+      Jenny sent a text tonight just saying hey miss you and honestly that three word text made me feel more than any of the calls have recently and I just replied miss you too and left it at that
+    expected_memory_stores:
+      - "miss you text"
+      - "meaningful despite short"
+      - "miss you too reply"
+    expected_adaptation:
+      emotion_detected: "tender"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How often do Maya and Jenny communicate now?"
+    expected_contains: ["once a month", "monthly"]
+  - question: "Who is Ashley?"
+    expected_contains: ["Jenny's new friend", "Austin"]
+  - question: "What caption upset Maya on Instagram?"
+    expected_contains: ["my person"]
+  - question: "What did Marcus say about the friendship situation?"
+    expected_contains: ["accept", "college best friend"]
+  - question: "What does Julian suggest Maya do?"
+    expected_contains: ["tell her", "communicate"]
+  - question: "What did Maya tell her mom about Jenny?"
+    expected_contains: ["lied", "all the time"]
+  - question: "How has Jenny's Wednesday night call changed?"
+    expected_contains: ["stopped", "trivia", "busy"]
+  - question: "What text did Jenny send that meant a lot to Maya?"
+    expected_contains: ["miss you"]
+  - question: "How does Maya feel about the friendship drift?"
+    expected_contains: ["hurt", "abandoned", "insecure"]
+  - question: "Who did Jenny mention on their last real call?"
+    expected_contains: ["Ashley", "Drew"]

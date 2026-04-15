@@ -1,0 +1,173 @@
+story_id: 394
+story_name: "Discovers Dad Never Got Colonoscopy"
+category: "Health"
+description: |
+  Tests memory of Maya discovering George has never had a colonoscopy at age 67.
+  Verifies system tracks health advocacy urgency and family dynamics.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00 AM"
+    user_input: |
+      okay so while going through dad's stuff for the spreadsheet I noticed something alarming there's no colonoscopy listed anywhere and I called him and said dad have you ever had a colonoscopy and he said no what's that and I was like ARE YOU KIDDING ME
+    expected_memory_stores:
+      - "no colonoscopy"
+      - "George asked what it is"
+      - "Maya alarmed"
+      - "spreadsheet discovery"
+    expected_adaptation:
+      emotion_detected: "alarmed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:30 AM"
+    user_input: |
+      he's 67 years old and you're supposed to start getting colonoscopies at 45 and he's TWENTY TWO YEARS overdue and I immediately called Clara and she was like oh my god dad no and we both went into full panic mode
+    expected_memory_stores:
+      - "67 years old"
+      - "supposed to start at 45"
+      - "22 years overdue"
+      - "called Clara"
+      - "panic mode"
+    expected_adaptation:
+      emotion_detected: "panicked"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:00 AM"
+    user_input: |
+      Clara said colon cancer is one of the most preventable cancers IF you get screened and the fact that dad hasn't been screened in 22 years is genuinely dangerous and she used her nurse voice which means she's actually scared not just lecturing
+    expected_memory_stores:
+      - "colon cancer preventable"
+      - "screening important"
+      - "22 years unscreened"
+      - "Clara nurse voice"
+      - "actually scared"
+    expected_adaptation:
+      emotion_detected: "scared"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 12:00 PM"
+    user_input: |
+      called dad back and tried to explain why this is important and he was like I feel fine I don't have any symptoms and I was like DAD that's the POINT you get screened BEFORE symptoms because by the time you have symptoms it could be too late
+    expected_memory_stores:
+      - "George feels fine"
+      - "no symptoms argument"
+      - "screening before symptoms"
+      - "could be too late"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 1:00 PM"
+    user_input: |
+      dad said he's scared of the procedure because Frank DeLuca who bought his auto shop told him it's painful and invasive and I was like dad they put you under anesthesia you literally don't feel anything and Clara confirmed this on speaker
+    expected_memory_stores:
+      - "George scared of procedure"
+      - "Frank DeLuca told him painful"
+      - "anesthesia explained"
+      - "Clara confirmed"
+      - "speaker phone"
+    expected_adaptation:
+      emotion_detected: "empathetic"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 2:00 PM"
+    user_input: |
+      mom got on the phone and was like George just do it and then she said to me I've been telling him for years and he won't listen and I was like YEARS and she just sighed and I was like okay so I'm not the first person to try this great
+    expected_memory_stores:
+      - "Vivian been telling him years"
+      - "George won't listen"
+      - "Maya not first to try"
+      - "Vivian sighed"
+    expected_adaptation:
+      emotion_detected: "exasperated"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 4:00 PM"
+    user_input: |
+      Julian said maybe I should try a different approach and instead of scaring dad I should make it easy for him like find the doctor schedule the appointment and drive him there and I was like that's actually genius because dad is the kind of person who won't do things for himself but will show up if you make it easy
+    expected_memory_stores:
+      - "Julian strategy"
+      - "make it easy"
+      - "find doctor schedule drive"
+      - "George personality"
+      - "won't do for himself"
+    expected_adaptation:
+      emotion_detected: "strategic"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 5:00 PM"
+    user_input: |
+      how old is George Chen and how overdue is he for a colonoscopy
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 6:00 PM"
+    user_input: |
+      looked up gastroenterologists near my parents and found a really well reviewed one Dr something I'll look up the name again but they have availability in three weeks and I'm going to call Monday and schedule it for him
+    expected_memory_stores:
+      - "gastroenterologist search"
+      - "near parents"
+      - "availability three weeks"
+      - "Maya scheduling for him"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 8:00 PM"
+    user_input: |
+      I texted dad and said I'm scheduling your colonoscopy and I'm driving you and I don't want to hear arguments and he texted back just the thumbs up emoji which for dad is basically a yes and Clara said I handled that perfectly
+    expected_memory_stores:
+      - "texted George"
+      - "scheduling and driving"
+      - "no arguments"
+      - "thumbs up reply"
+      - "basically a yes"
+      - "Clara approved"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Has George Chen ever had a colonoscopy?"
+    expected_contains: ["no", "never"]
+  - question: "How overdue is George for a colonoscopy?"
+    expected_contains: ["22 years"]
+  - question: "When should colonoscopy screening start?"
+    expected_contains: ["45"]
+  - question: "Why is George afraid of the procedure?"
+    expected_contains: ["Frank DeLuca", "painful"]
+  - question: "What strategy did Julian suggest for getting George screened?"
+    expected_contains: ["make it easy", "schedule", "drive"]
+  - question: "Has Vivian tried to get George screened before?"
+    expected_contains: ["yes", "years"]
+  - question: "Did George agree to the colonoscopy?"
+    expected_contains: ["yes", "thumbs up"]
+  - question: "Who is driving George to the appointment?"
+    expected_contains: ["Maya"]
+  - question: "Why does George say he doesn't need screening?"
+    expected_contains: ["feels fine", "no symptoms"]
+  - question: "What did Clara say about colon cancer screening?"
+    expected_contains: ["preventable"]

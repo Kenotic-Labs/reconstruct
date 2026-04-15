@@ -1,0 +1,231 @@
+story_id: 84
+story_name: "Hacker News Moment"
+category: "Learning"
+description: |
+  Tests memory of fridgesearch getting featured on Hacker News.
+  Sudden traffic spike, user growth, and unexpected attention.
+  Verifies system tracks rapid-change events and their cascading effects.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 7:00 AM"
+    user_input: |
+      oh my god so Marcus posted fridgesearch on Hacker News last night without telling me and I woke up to 47 notifications on my phone and the post is on the front page with 340 upvotes and there are like 80 comments and I'm literally shaking right now what is happening
+    expected_memory_stores:
+      - "Hacker News front page"
+      - "Marcus posted"
+      - "340 upvotes"
+      - "80 comments"
+      - "47 notifications"
+      - "without telling Maya"
+    expected_triples:
+      - ["Marcus", "posted", "fridgesearch on Hacker News"]
+      - ["fridgesearch", "reached", "Hacker News front page"]
+      - ["fridgesearch_hn", "has_metric", "340 upvotes"]
+      - ["fridgesearch_hn", "has_metric", "80 comments"]
+      - ["user", "has_emotion", "shocked"]
+    expected_adaptation:
+      emotion_detected: "shocked"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 8:00 AM"
+    user_input: |
+      reading the comments and most are positive like people are saying the ingredient matching is really clever and the UI is beautiful and someone said this is what happens when a search engineer builds a recipe app and I'm like how do they know I'm a search engineer oh wait Marcus probably mentioned it in the post
+    expected_memory_stores:
+      - "positive comments"
+      - "ingredient matching praised"
+      - "UI praised"
+      - "search engineer recognition"
+      - "Marcus mentioned background"
+    expected_triples:
+      - ["fridgesearch_hn", "received", "positive comments"]
+      - ["HN_commenters", "praised", "ingredient matching"]
+      - ["HN_commenters", "praised", "UI"]
+      - ["Marcus", "mentioned", "Maya is a search engineer"]
+      - ["user", "has_emotion", "overwhelmed"]
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 10:00 AM"
+    user_input: |
+      the server is struggling like response times went from 200ms to 3 seconds because I'm running this on a single $20 VPS and suddenly there are hundreds of concurrent users and I'm frantically trying to optimize things while Julian is bringing me coffee and Kobe is barking at the mailman like a normal Saturday for him but not for me
+    expected_memory_stores:
+      - "server struggling"
+      - "200ms to 3 seconds"
+      - "$20 VPS"
+      - "hundreds concurrent users"
+      - "optimizing frantically"
+      - "Julian coffee"
+      - "Kobe barking"
+    expected_triples:
+      - ["fridgesearch", "has_issue", "response time 200ms to 3 seconds"]
+      - ["fridgesearch", "runs_on", "$20 VPS"]
+      - ["user", "is_doing", "frantically optimizing server"]
+      - ["Julian", "brought", "coffee during crisis"]
+      - ["user", "has_emotion", "panicked"]
+    expected_adaptation:
+      emotion_detected: "panicked"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 2:00 PM"
+    user_input: |
+      upgraded to a bigger VPS like a $80 per month one with more RAM and CPU and the site is stable now and we've gone from 12 beta users to like 600 signups today which is insane and Julian keeps refreshing the signup counter and saying numbers every five minutes like 612 618 625 he's more excited than me
+    expected_memory_stores:
+      - "VPS upgraded"
+      - "$80 per month"
+      - "600 signups"
+      - "12 to 600"
+      - "Julian counting signups"
+    expected_triples:
+      - ["fridgesearch", "upgraded_to", "$80/month VPS"]
+      - ["fridgesearch", "has_metric", "600 signups in one day"]
+      - ["fridgesearch", "grew_from", "12 to 600 users"]
+      - ["Julian", "is_doing", "refreshing signup counter excitedly"]
+      - ["user", "has_emotion", "exhilarated"]
+    expected_adaptation:
+      emotion_detected: "exhilarated"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 6:00 PM"
+    user_input: |
+      end of the Hacker News day and we have 847 signups total and the post peaked at 520 upvotes and 143 comments and two people emailed me asking if fridgesearch is open source and one person offered to contribute and I'm like this is surreal this was just a side project for fun
+    expected_memory_stores:
+      - "847 signups"
+      - "520 upvotes"
+      - "143 comments"
+      - "open source question"
+      - "contributor offer"
+      - "surreal feeling"
+    expected_triples:
+      - ["fridgesearch", "has_metric", "847 signups total"]
+      - ["fridgesearch_hn", "has_metric", "520 upvotes"]
+      - ["fridgesearch_hn", "has_metric", "143 comments"]
+      - ["fridgesearch", "received", "open source inquiry and contributor offer"]
+      - ["user", "has_emotion", "amazed"]
+    expected_adaptation:
+      emotion_detected: "amazed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 9:00 AM"
+    user_input: |
+      the Hacker News traffic is slowing down which is normal but we still got another 300 signups overnight so we're at like 1150 users now and the server is handling it fine on the upgraded VPS and Marcus texted saying sorry I should've warned you but isn't this amazing and yeah it is but also Marcus come on give a girl some warning
+    expected_memory_stores:
+      - "traffic slowing"
+      - "300 overnight signups"
+      - "1150 users"
+      - "server stable"
+      - "Marcus apology"
+    expected_triples:
+      - ["fridgesearch", "has_metric", "1150 users"]
+      - ["fridgesearch", "has_metric", "300 overnight signups"]
+      - ["Marcus", "apologized", "for posting without warning"]
+      - ["user", "has_emotion", "amused"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 12:00 PM"
+    user_input: |
+      how many users does fridgesearch have now
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 4:00 PM"
+    user_input: |
+      Leon called and was like I just saw fridgesearch on Hacker News are you kidding me that's your app and I was like yeah and he was like Maya that's incredible and he told everyone at Stripe about it and some of his coworkers signed up too
+    expected_memory_stores:
+      - "Leon found on HN"
+      - "told Stripe coworkers"
+      - "more signups from Stripe"
+    expected_triples:
+      - ["Leon", "saw", "fridgesearch on Hacker News"]
+      - ["Leon", "told", "Stripe coworkers about fridgesearch"]
+      - ["Stripe_coworkers", "signed_up_for", "fridgesearch"]
+      - ["user", "has_emotion", "proud"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 9:00 AM"
+    user_input: |
+      Lily saw the Hacker News post and she slacked the whole Conduit engineering channel about it and Sam was like Maya is this you and I said yeah it's a weekend project and he said the search algorithm is really elegant and even Danny said nice work which coming from Danny means a lot
+    expected_memory_stores:
+      - "Lily shared at Conduit"
+      - "Sam saw it"
+      - "search algorithm elegant"
+      - "Danny nice work"
+      - "Conduit team knows"
+    expected_triples:
+      - ["Lily", "shared", "fridgesearch in Conduit engineering channel"]
+      - ["Sam", "praised", "search algorithm as elegant"]
+      - ["Danny", "said", "nice work on fridgesearch"]
+      - ["user", "has_emotion", "embarrassed"]
+    expected_adaptation:
+      emotion_detected: "embarrassed"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Monday 7:00 PM"
+    user_input: |
+      end of the Hacker News wave and the final count is about 2000 users and the server costs are now $80 a month which is fine but if it keeps growing I'll need to think about whether to keep paying out of pocket or find some way to cover costs and Julian said we'll figure it out together
+    expected_memory_stores:
+      - "2000 users final"
+      - "$80 monthly cost"
+      - "cost concern"
+      - "growth sustainability"
+      - "Julian support"
+    expected_triples:
+      - ["fridgesearch", "has_metric", "2000 users"]
+      - ["fridgesearch", "costs", "$80/month server"]
+      - ["user", "concerned_about", "paying out of pocket if growth continues"]
+      - ["Julian", "said", "we'll figure it out together"]
+      - ["user", "has_emotion", "thoughtful"]
+    expected_adaptation:
+      emotion_detected: "thoughtful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How many users does fridgesearch have?"
+    expected_contains: ["2000"]
+  - question: "Who posted fridgesearch on Hacker News?"
+    expected_contains: ["Marcus"]
+  - question: "How many upvotes did it get?"
+    expected_contains: ["520"]
+  - question: "What happened to the server when traffic spiked?"
+    expected_contains: ["struggling", "slow", "3 seconds"]
+  - question: "How much does the server cost now?"
+    expected_contains: ["80", "$80"]
+  - question: "Did Maya's Conduit teammates see fridgesearch?"
+    expected_contains: ["yes", "Lily", "Sam", "Danny"]
+  - question: "What did Sam say about fridgesearch?"
+    expected_contains: ["elegant"]
+  - question: "How many comments were on the Hacker News post?"
+    expected_contains: ["143"]
+  - question: "Did Marcus warn Maya before posting?"
+    expected_contains: ["no"]
+  - question: "What did Julian do during the traffic spike?"
+    expected_contains: ["coffee", "counting signups"]

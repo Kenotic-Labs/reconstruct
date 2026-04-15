@@ -1,0 +1,162 @@
+story_id: 205
+story_name: "Rebuilding with Diane"
+category: "Relationships"
+description: |
+  Tests incremental relationship improvement tracking. Diane and Maya slowly build trust
+  through small moments. Verifies system can track gradual emotional shifts over time.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Sunday 9:00 AM"
+    user_input: |
+      Diane and I went to the farmers market together this morning just the two of us and it was actually really nice she didn't try to tell me what produce to buy she just walked around and pointed at things she thought looked good and we got these amazing peaches
+    expected_memory_stores:
+      - "farmers market"
+      - "Diane and Maya alone"
+      - "peaches"
+      - "positive outing"
+    expected_adaptation:
+      emotion_detected: "pleasant"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Sunday 12:00 PM"
+    user_input: |
+      she told me stories about Julian as a kid and oh my god apparently he used to build these elaborate pillow forts and refuse to come out for dinner and one time he stayed in one for like six hours and I was dying laughing
+    expected_memory_stores:
+      - "Julian childhood stories"
+      - "pillow forts"
+      - "bonding moment"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 7:00 PM"
+    user_input: |
+      Diane asked me about the wedding and what I'm thinking for like the general vibe and I said um we haven't planned much yet and she was like well I'd love to help if you want and she said it in such a genuine way not pushy at all
+    expected_memory_stores:
+      - "wedding discussion"
+      - "Diane offered to help"
+      - "genuine not pushy"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 9:00 PM"
+    user_input: |
+      Julian told me privately that his mom called Bob and told him about the apology and apparently Bob said it's about time and Julian was like yeah dad's always been the honest one in the family which was funny
+    expected_memory_stores:
+      - "Bob's reaction"
+      - "about time"
+      - "Bob is honest one"
+      - "Julian shared privately"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 10:00 AM"
+    user_input: |
+      ok so small thing but Diane was going to reorganize the linen closet I could SEE her eyeing it and then she caught herself and looked at me and said should I leave it and I said yes and she laughed and said ok fair enough and like that's growth right
+    expected_memory_stores:
+      - "Diane self-corrected"
+      - "linen closet"
+      - "growth moment"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 2:00 PM"
+    user_input: |
+      she helped me pick out a rug for the new house online and she actually has really good taste I was like Diane this one is perfect and she was so happy to be included and I could tell it meant a lot to her
+    expected_memory_stores:
+      - "rug shopping online"
+      - "new house"
+      - "Diane included"
+      - "good taste"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      wait how many days has Diane been here now I'm losing track of this visit
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 8:00 AM"
+    user_input: |
+      Diane made pancakes this morning and she asked me first where the mixing bowls are even though I'm pretty sure she already knew from when she reorganized everything last week lol but the fact that she asked is what matters
+    expected_memory_stores:
+      - "pancakes"
+      - "asked where things are"
+      - "respecting boundaries"
+    expected_adaptation:
+      emotion_detected: "appreciative"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 4:00 PM"
+    user_input: |
+      my mom called and asked about Diane and I told Vivian that things got better after we talked and my mom was like see I told you to be gracious and I was like mom I was NOT gracious I had a meltdown and THEN it got better but sure take credit
+    expected_memory_stores:
+      - "Vivian call"
+      - "update on Diane"
+      - "mom taking credit"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 9:00 PM"
+    user_input: |
+      honestly I'm kind of sad Diane leaves Saturday like three days ago I wanted her gone and now I'm like stay longer which is wild and Julian is thrilled that we're getting along he keeps looking at us with this dumb happy grin
+    expected_memory_stores:
+      - "Diane leaves Saturday"
+      - "Maya sad about departure"
+      - "complete reversal"
+      - "Julian happy"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How is Maya's relationship with Diane now?"
+    expected_contains: ["improved", "better", "getting along"]
+  - question: "What activities did Maya and Diane do together?"
+    expected_contains: ["farmers market", "rug shopping", "cooking"]
+  - question: "How did Diane show she changed?"
+    expected_contains: ["asked", "self-corrected", "permission"]
+  - question: "When does Diane leave?"
+    expected_contains: ["Saturday"]
+  - question: "What did Diane offer to help with?"
+    expected_contains: ["wedding"]
+  - question: "What did Bob Reeves say about the apology?"
+    expected_contains: ["about time"]
+  - question: "How does Julian feel about Maya and Diane getting along?"
+    expected_contains: ["thrilled", "happy"]
+  - question: "What did Vivian say about the situation?"
+    expected_contains: ["told you", "gracious"]
+  - question: "What did Diane self-correct on?"
+    expected_contains: ["linen closet"]
+  - question: "How does Maya feel about Diane leaving?"
+    expected_contains: ["sad", "stay longer"]

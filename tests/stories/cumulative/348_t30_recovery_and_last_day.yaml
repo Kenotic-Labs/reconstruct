@@ -1,0 +1,173 @@
+story_id: 348
+story_name: "Recovery and Last Day in Japan"
+category: "Travel"
+description: |
+  Tests memory of Julian recovering and their last day in Japan. Quiet moments,
+  souvenir shopping, final meals. Verifies system captures winding-down travel
+  narrative and final impressions.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Day 9 Wednesday 8:00 AM JST"
+    user_input: |
+      last full day in Japan and Julian woke up feeling almost normal he ate breakfast at the hotel buffet actual breakfast not just crackers and he said his stomach is like 90% and I said good because we have a lot to do today
+    expected_memory_stores:
+      - "last full day"
+      - "Julian 90% recovered"
+      - "ate breakfast buffet"
+      - "lot to do"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Day 9 Wednesday 10:00 AM JST"
+    user_input: |
+      went souvenir shopping in Shinsaibashi which is this huge shopping street in Osaka and I got stuff for everyone a sake set for Clara and Tyler green tea Kit Kats for the Round Table crew a beautiful origami paper set for Nadia and a Japanese whiskey for Marcus
+    expected_memory_stores:
+      - "Shinsaibashi shopping"
+      - "sake set Clara Tyler"
+      - "Kit Kats Round Table"
+      - "origami paper Nadia"
+      - "Japanese whiskey Marcus"
+    expected_adaptation:
+      emotion_detected: "generous"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Day 9 Wednesday 12:00 PM JST"
+    user_input: |
+      had our last real Japanese meal at this sushi place and we did the omakase which is where the chef picks everything and it was 15 courses and each one was like a little jewel and Julian was being careful with his stomach but he ate most of it and the toro was unbelievable
+    expected_memory_stores:
+      - "last Japanese meal"
+      - "sushi omakase"
+      - "15 courses"
+      - "chef picks everything"
+      - "Julian careful stomach"
+      - "toro unbelievable"
+    expected_adaptation:
+      emotion_detected: "savoring"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Day 9 Wednesday 3:00 PM JST"
+    user_input: |
+      walked through Namba Parks which is this outdoor shopping mall with a garden going up the building like terraces and we sat on a bench and I said Julian I don't want to go home and he said me neither and we just sat there watching people
+    expected_memory_stores:
+      - "Namba Parks"
+      - "garden terraces"
+      - "don't want to go home"
+      - "watching people"
+    expected_adaptation:
+      emotion_detected: "melancholy"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Day 9 Wednesday 5:00 PM JST"
+    user_input: |
+      FaceTimed Kobe well FaceTimed Clara and she held the phone to Kobe and he wagged his tail and whined and Clara said he's been looking for you guys at the door every evening and I'm like oh no my baby and Julian said we're coming home buddy
+    expected_memory_stores:
+      - "FaceTimed Kobe"
+      - "wagged and whined"
+      - "looking for them at door"
+      - "Julian said coming home"
+    expected_adaptation:
+      emotion_detected: "homesick"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Day 9 Wednesday 7:00 PM JST"
+    user_input: |
+      bought one last thing at a little stationery shop a beautiful notebook with cherry blossoms on it and I'm going to use it as a travel journal to write down everything from this trip before I forget and Julian bought a vintage Japanese print for our living room
+    expected_memory_stores:
+      - "stationery shop"
+      - "cherry blossom notebook"
+      - "travel journal"
+      - "Julian vintage print"
+      - "for living room"
+    expected_adaptation:
+      emotion_detected: "sentimental"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Day 9 Wednesday 9:00 PM JST"
+    user_input: |
+      packing up and I realized we spent way more than $6000 like definitely in the $8200 range with the passport emergency and the ryokan upgrade and the Uniqlo wardrobe and the souvenirs and the omakase but I literally do not care it was worth every single penny
+    expected_memory_stores:
+      - "packing up"
+      - "spent $8200 range"
+      - "passport ryokan Uniqlo souvenirs omakase"
+      - "worth every penny"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Day 9 Wednesday 10:00 PM JST"
+    user_input: |
+      what souvenirs did Maya buy for the friend group
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Day 9 Wednesday 10:30 PM JST"
+    user_input: |
+      Julian said he wants to come back someday and do the parts we missed like Hiroshima and Nara and the snow monkeys in Nagano and I said yes to all of it but maybe next time we check passports first and he said too soon and I said never too soon
+    expected_memory_stores:
+      - "want to come back"
+      - "Hiroshima Nara Nagano"
+      - "snow monkeys"
+      - "passport joke"
+    expected_adaptation:
+      emotion_detected: "dreamy"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Day 9 Wednesday 11:30 PM JST"
+    user_input: |
+      last night in Japan lying in the hotel and Julian is looking through the photos on his camera and they're stunning and I said you should print the best ones for the house and he said already planning to and I closed my eyes and thought this trip changed something in me I can feel it
+    expected_memory_stores:
+      - "last night"
+      - "Julian's photos stunning"
+      - "print for house"
+      - "trip changed something"
+      - "can feel it"
+    expected_adaptation:
+      emotion_detected: "transformed"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What souvenirs did Maya buy?"
+    expected_contains: ["sake set", "Kit Kats", "origami", "whiskey"]
+  - question: "Who got what souvenir?"
+    expected_contains: ["Clara sake", "Nadia origami", "Marcus whiskey"]
+  - question: "What was the last meal in Japan?"
+    expected_contains: ["omakase", "sushi", "15 courses"]
+  - question: "What did Julian buy for the house?"
+    expected_contains: ["vintage Japanese print"]
+  - question: "How much did the trip end up costing?"
+    expected_contains: ["$8200"]
+  - question: "What places do they want to visit on a return trip?"
+    expected_contains: ["Hiroshima", "Nara", "Nagano"]
+  - question: "How is Kobe doing at home?"
+    expected_contains: ["looking for them", "door"]
+  - question: "What notebook did Maya buy?"
+    expected_contains: ["cherry blossom", "travel journal"]
+  - question: "How is Julian's stomach?"
+    expected_contains: ["90%", "recovered"]
+  - question: "How does Maya feel about the trip?"
+    expected_contains: ["changed", "worth it"]

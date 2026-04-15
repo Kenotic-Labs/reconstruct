@@ -1,0 +1,177 @@
+story_id: 222
+story_name: "MRI Reveals Torn Meniscus"
+category: "Health"
+description: |
+  Tests diagnosis correction. Maya expected a sprain but gets diagnosed with torn meniscus.
+  Recovery timeline is worse than hoped. Verifies system handles medical corrections and
+  emotional response to bad news.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 10:00 AM"
+    user_input: |
+      at Providence Portland right now sitting in the waiting room for my MRI and I'm trying to convince myself it's just a sprain or maybe runner's knee and it'll be like rest for a week and I'll be back out there but my stomach is in knots
+    expected_memory_stores:
+      - "Providence Portland"
+      - "MRI waiting"
+      - "hoping for sprain"
+      - "anxious"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 11:30 AM"
+    user_input: |
+      ok so the MRI is done and the doctor just came in and it's not a sprain it's a torn meniscus in my right knee and I'm just sitting here staring at the scan image and he said it's a medial meniscus tear and it'll need physical therapy and no running for at least six weeks
+    expected_memory_stores:
+      - "torn meniscus"
+      - "not a sprain"
+      - "correction"
+      - "right knee"
+      - "medial meniscus"
+      - "no running six weeks"
+      - "physical therapy needed"
+    expected_adaptation:
+      emotion_detected: "devastated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      called Julian from the parking lot and I was trying not to cry and I said it's torn and he said oh babe I'm sorry and I said six weeks no running and he said it's ok we'll figure it out and I know he's right but six weeks means I'm probably out for the marathon
+    expected_memory_stores:
+      - "called Julian"
+      - "trying not to cry"
+      - "six weeks no running"
+      - "marathon likely out"
+    expected_adaptation:
+      emotion_detected: "crushed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 3:00 PM"
+    user_input: |
+      the doctor referred me to a physical therapist named Jake Russo at Rose City Physical Therapy and I have my first appointment next Monday and the doctor said if PT goes well I might avoid surgery but if it doesn't heal then we'd have to talk about arthroscopic repair
+    expected_memory_stores:
+      - "Jake Russo"
+      - "physical therapist"
+      - "Rose City Physical Therapy"
+      - "first appointment Monday"
+      - "might avoid surgery"
+      - "arthroscopic repair possibility"
+    expected_adaptation:
+      emotion_detected: "worried"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      told Clara about the diagnosis and she was like Maya a torn meniscus is not the end of the world I see way worse and she said PT is really effective for this and she said the six week timeline is conservative you might need eight weeks to be safe and I was like EIGHT?
+    expected_memory_stores:
+      - "Clara reassurance"
+      - "not end of world"
+      - "PT effective"
+      - "might need eight weeks"
+      - "six to eight weeks"
+    expected_adaptation:
+      emotion_detected: "dismayed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 8:00 AM"
+    user_input: |
+      what's the diagnosis for my knee and how long can't I run
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 10:00 AM"
+    user_input: |
+      I went online and officially withdrew from the Portland Marathon and clicking that withdraw button felt like defeat like I'd been training for months and now it's just over and I sat on the couch and just stared at the wall for a while
+    expected_memory_stores:
+      - "withdrew from marathon"
+      - "felt like defeat"
+      - "months of training"
+      - "stared at wall"
+    expected_adaptation:
+      emotion_detected: "defeated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 2:00 PM"
+    user_input: |
+      Julian got me a knee brace and ice packs and some anti-inflammatory stuff and he set up the couch with pillows so I can elevate it and Kobe keeps sniffing my knee like he knows something is wrong
+    expected_memory_stores:
+      - "Julian got supplies"
+      - "knee brace"
+      - "ice packs"
+      - "anti-inflammatory"
+      - "Kobe sniffing knee"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 7:00 PM"
+    user_input: |
+      I keep thinking about what I did wrong like did I increase mileage too fast or was it the old shoes or did I just push through when I should have stopped and Clara said sometimes these things just happen especially with running and it's not my fault
+    expected_memory_stores:
+      - "self-blame"
+      - "mileage too fast"
+      - "old shoes"
+      - "pushed through"
+      - "Clara says not fault"
+    expected_adaptation:
+      emotion_detected: "self-critical"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 10:00 PM"
+    user_input: |
+      lying in bed and the knee is throbbing even with the brace and I can't find a comfortable position and I'm thinking about how running was my stress relief and my meditation and now it's gone for at least six weeks probably eight and I don't know what to do with myself
+    expected_memory_stores:
+      - "knee throbbing"
+      - "can't get comfortable"
+      - "running was stress relief"
+      - "running was meditation"
+      - "identity crisis"
+    expected_adaptation:
+      emotion_detected: "lost"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya's knee diagnosis?"
+    expected_contains: ["torn meniscus"]
+  - question: "Is it a sprain?"
+    expected_contains: ["no", "torn meniscus"]
+  - question: "Who is Maya's physical therapist?"
+    expected_contains: ["Jake Russo"]
+  - question: "Where is PT?"
+    expected_contains: ["Rose City Physical Therapy"]
+  - question: "How long can't Maya run?"
+    expected_contains: ["six", "eight", "weeks"]
+  - question: "Did Maya withdraw from the marathon?"
+    expected_contains: ["yes", "withdrew"]
+  - question: "Where was the MRI done?"
+    expected_contains: ["Providence Portland"]
+  - question: "What's the possible surgery if PT doesn't work?"
+    expected_contains: ["arthroscopic"]
+  - question: "Why was running important to Maya beyond fitness?"
+    expected_contains: ["stress relief", "meditation"]
+  - question: "What did Clara say about the recovery timeline?"
+    expected_contains: ["eight weeks", "conservative"]

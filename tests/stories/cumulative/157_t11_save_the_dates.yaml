@@ -1,0 +1,216 @@
+story_id: 157
+story_name: "Save the Dates"
+category: "Life Events"
+description: |
+  Jenny and Julian design the save-the-dates. Tests collaboration tracking,
+  design decisions, and mailing logistics. Includes minor corrections about
+  the RSVP deadline.
+duration_simulated: "4 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 6:00 PM"
+    user_input: |
+      so Jenny and Julian finally sat down together to work on the save the dates and it's actually hilarious watching two designers collaborate like they're both so opinionated Julian wants minimalist clean lines and Jenny wants something more whimsical with illustrations and they've been going back and forth for two hours
+    expected_memory_stores:
+      - "save the dates design"
+      - "Jenny and Julian collaborating"
+      - "Julian wants minimalist"
+      - "Jenny wants whimsical"
+    expected_triples:
+      - ["Jenny", "collaborating_with", "Julian on save the dates"]
+      - ["Julian", "prefers", "minimalist clean lines"]
+      - ["Jenny", "prefers", "whimsical with illustrations"]
+      - ["user", "has_emotion", "amused"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 9:00 PM"
+    user_input: |
+      they compromised on this gorgeous design it's clean layout like Julian wanted but with this hand drawn pine tree border that Jenny illustrated and it says Maya & Julian June 22nd Pine Ridge Lodge Portland Oregon and honestly it's perfect it's so us
+    expected_memory_stores:
+      - "save the date design finalized"
+      - "clean layout with pine tree border"
+      - "Jenny illustrated border"
+      - "June 22 Pine Ridge Lodge"
+    expected_triples:
+      - ["user", "save_the_date_design", "clean layout with hand-drawn pine tree border"]
+      - ["Jenny", "illustrated", "pine tree border"]
+      - ["user", "has_emotion", "delighted"]
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 10:00 AM"
+    user_input: |
+      we need to print 85 save the dates well actually more like 60 because some are couples so one per household and Jenny found this great printer online that does thick cardstock with like a linen texture for $1.20 each so that's only like $72 for printing which is nothing
+    expected_memory_stores:
+      - "60 save the dates needed"
+      - "one per household"
+      - "thick cardstock linen texture"
+      - "$1.20 each"
+      - "$72 total printing"
+    expected_triples:
+      - ["user", "needs", "60 save the dates"]
+      - ["user", "printing_cost", "$72 total at $1.20 each"]
+      - ["user", "card_material", "thick cardstock with linen texture"]
+    expected_adaptation:
+      emotion_detected: "practical"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 3:00 PM"
+    user_input: |
+      wait I need to add an RSVP deadline on these um I was thinking April 15th wait no that might be too late because Blue Fork needs final numbers by April 1st so actually RSVP by March 15th gives us a buffer that's better right yeah March 15th
+    expected_memory_stores:
+      - "RSVP deadline March 15"
+      - "Blue Fork needs numbers April 1"
+      - "correction: April 15 changed to March 15"
+    expected_triples:
+      - ["user", "corrected", "RSVP deadline April 15 → March 15"]
+      - ["Blue Fork Catering", "needs_final_numbers_by", "April 1"]
+      - ["user", "RSVP_deadline", "March 15"]
+    expected_adaptation:
+      emotion_detected: "thoughtful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 11:00 AM"
+    user_input: |
+      ordered the prints they'll be here by Friday and I also bought stamps those forever stamps with the flowers on them which is kind of perfect for a wedding invite and envelopes that match the cardstock Jenny said she'd help me address them this weekend bless her
+    expected_memory_stores:
+      - "prints ordered arriving Friday"
+      - "flower stamps bought"
+      - "matching envelopes"
+      - "Jenny helping address"
+    expected_triples:
+      - ["user", "ordered", "save the date prints arriving Friday"]
+      - ["user", "bought", "flower forever stamps"]
+      - ["Jenny", "helping_with", "addressing envelopes"]
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 5:00 PM"
+    user_input: |
+      the save the dates arrived and oh my god they turned out SO good the cardstock is thick and the print quality is crisp and the pine tree border looks amazing Julian held one up and was like we made that and he looked so proud it was really cute Kobe tried to eat one but we stopped him
+    expected_memory_stores:
+      - "save the dates arrived"
+      - "great quality"
+      - "Julian proud"
+      - "Kobe tried to eat one"
+    expected_triples:
+      - ["user", "received", "save the dates with great quality"]
+      - ["Julian", "has_emotion", "proud"]
+      - ["Kobe", "tried_to_eat", "a save the date"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 10:00 AM"
+    user_input: |
+      Jenny came over and we set up an assembly line in the living room she's writing the addresses in this gorgeous calligraphy because of course she can do calligraphy and I'm stuffing envelopes and sealing them and Julian is organizing them by who gets mailed versus hand delivered
+    expected_memory_stores:
+      - "assembly line at home"
+      - "Jenny doing calligraphy addresses"
+      - "Maya stuffing envelopes"
+      - "Julian organizing by delivery method"
+    expected_triples:
+      - ["Jenny", "did_calligraphy_on", "envelope addresses"]
+      - ["user", "stuffing", "envelopes"]
+      - ["Julian", "organizing", "mail vs hand delivery"]
+      - ["user", "has_emotion", "happy"]
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 2:00 PM"
+    user_input: |
+      done all 60 save the dates are addressed sealed and ready we're mailing 48 and hand delivering 12 to local friends and family Julian's gonna drop the hand delivery ones off this week and I'm taking the rest to the post office on Monday
+    expected_memory_stores:
+      - "60 save the dates done"
+      - "48 mailed"
+      - "12 hand delivered"
+      - "post office Monday"
+    expected_triples:
+      - ["user", "completed", "60 save the dates"]
+      - ["user", "mailing", "48 save the dates"]
+      - ["Julian", "hand_delivering", "12 save the dates"]
+      - ["user", "has_emotion", "accomplished"]
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 12:00 PM"
+    user_input: |
+      just dropped off all 48 at the post office and the woman there was like oh congratulations when she saw them and it hit me like wow these are going out into the world people are going to get these and know we're getting married it feels so real now I called Julian from the parking lot and I was like babe I'm emotional
+    expected_memory_stores:
+      - "save the dates mailed"
+      - "emotional reaction"
+      - "feeling real now"
+    expected_triples:
+      - ["user", "mailed", "48 save the dates at post office"]
+      - ["user", "has_emotion", "emotional"]
+      - ["user", "realization", "wedding feels real now"]
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      already getting texts from people who got their save the dates like my college friend Ava texted omg these are BEAUTIFUL and Julian's brother Marcus called and said he's already booked flights from Austin and Clara said she cried when she opened hers which tracks because Clara cries at everything but still so sweet
+    expected_memory_stores:
+      - "responses coming in"
+      - "friend Ava"
+      - "Marcus Reeves booking flights from Austin"
+      - "Julian's brother Marcus"
+      - "Clara cried"
+    expected_triples:
+      - ["Marcus Reeves", "booked_flights_from", "Austin"]
+      - ["Marcus Reeves", "is_brother_of", "Julian"]
+      - ["Clara", "cried_over", "save the date"]
+      - ["user", "has_emotion", "grateful"]
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who designed the save the dates?"
+    expected_contains: ["Jenny", "Julian"]
+  - question: "What do the save the dates look like?"
+    expected_contains: ["pine tree", "clean"]
+  - question: "What is the RSVP deadline?"
+    expected_contains: ["March 15"]
+  - question: "How many save the dates were sent?"
+    expected_contains: ["60"]
+  - question: "How many were mailed vs hand delivered?"
+    expected_contains: ["48", "12"]
+  - question: "Who did the calligraphy on the envelopes?"
+    expected_contains: ["Jenny"]
+  - question: "Who is Marcus?"
+    expected_contains: ["Julian's brother"]
+  - question: "Where does Marcus live?"
+    expected_contains: ["Austin"]
+  - question: "When does Blue Fork need final guest numbers?"
+    expected_contains: ["April 1"]
+  - question: "How much did printing cost?"
+    expected_contains: ["72"]

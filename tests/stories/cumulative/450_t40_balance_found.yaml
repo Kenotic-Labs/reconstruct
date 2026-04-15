@@ -1,0 +1,179 @@
+story_id: 450
+story_name: "Balance Found"
+category: "Work-Life Balance"
+description: |
+  Thread 40 conclusion. Maya has found sustainable work-life balance. Reflects
+  on the journey from PIP trauma through overwork to equilibrium. Arc complete.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 8:00 AM"
+    user_input: |
+      it's Saturday morning and I'm lying in bed and Julian is asleep next to me and Kobe is at the foot of the bed snoring and I have nowhere to be and nothing on my laptop calling me and two months ago this would have been impossible because I would have been working and I just want to say to anyone listening I figured it out I found the balance
+    expected_memory_stores:
+      - "Saturday morning peace"
+      - "Julian sleeping Kobe snoring"
+      - "nowhere to be"
+      - "impossible two months ago"
+      - "found the balance"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 9:30 AM"
+    user_input: |
+      made breakfast for Julian and Kobe this morning like actually cooked eggs and bacon and toast and Julian woke up to the smell and said who are you and what have you done with my fiancee and I threw a piece of toast at him and he caught it and ate it and said ok she's still in there
+    expected_memory_stores:
+      - "cooked breakfast for family"
+      - "eggs bacon toast"
+      - "Julian teasing"
+      - "threw toast"
+      - "playful morning"
+    expected_adaptation:
+      emotion_detected: "playful"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:00 AM"
+    user_input: |
+      went to the food bank for my shift and I haven't missed one in 6 weeks since the boundary started which feels huge because before I was skipping them for work and Diane said welcome back to consistent Maya and Harold said she never left she was just busy being important and I said Harold you're too kind
+    expected_memory_stores:
+      - "food bank shift"
+      - "6 weeks consistent"
+      - "no missed shifts"
+      - "Diane welcome back"
+      - "Harold comment"
+    expected_adaptation:
+      emotion_detected: "grounded"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 2:00 PM"
+    user_input: |
+      during my food bank shift today I thought about the last few months and how many threads are running in my life right now like the car saga ended with Stella the smart home is stable the volunteering is consistent the lease dispute is resolved and now the work balance thing is clicking and it's all because I stopped trying to do everything at maximum intensity all the time
+    expected_memory_stores:
+      - "multiple threads resolved"
+      - "car Stella smart home volunteering"
+      - "lease dispute resolved"
+      - "work balance clicking"
+      - "stopped maximum intensity"
+    expected_adaptation:
+      emotion_detected: "integrated"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 4:00 PM"
+    user_input: |
+      Dr Tate would say I've moved from survival mode to thriving mode and she's been saying that for months but I didn't feel it until now like it's not just about managing crises anymore it's about building a life that doesn't require constant crisis management and that's the difference
+    expected_memory_stores:
+      - "survival to thriving"
+      - "Dr Tate's framework"
+      - "not just managing crises"
+      - "building sustainable life"
+      - "the difference"
+    expected_adaptation:
+      emotion_detected: "wise"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 5:30 PM"
+    user_input: |
+      Julian and I took Kobe for a walk around the neighborhood and he said you know what the best part of the last two months has been and I said what and he said you laugh more like you actually laugh again and that was the thing I missed most and I grabbed his hand and we walked and Kobe led the way
+    expected_memory_stores:
+      - "neighborhood walk"
+      - "Julian says Maya laughs more"
+      - "laughing was missed most"
+      - "grabbed his hand"
+      - "Kobe led the way"
+    expected_adaptation:
+      emotion_detected: "loved"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 7:00 PM"
+    user_input: |
+      cooked dinner together tonight and Julian was telling me about a project at Greenline and I realized this is the first time in maybe months that I'm asking him about HIS work instead of dumping about mine and he looked at me and said you just asked about my day and I said yeah and he said that hasn't happened in a while and I said I know I'm sorry
+    expected_memory_stores:
+      - "asking about Julian's work"
+      - "Greenline project"
+      - "first time in months"
+      - "Julian noticed"
+      - "hasn't happened in a while"
+    expected_adaptation:
+      emotion_detected: "humbled"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 8:00 PM"
+    user_input: |
+      what was the root cause of my overworking according to Dr Tate
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 9:00 PM"
+    user_input: |
+      texted Jenny and Clara and told them I'm doing good like genuinely good and Jenny said I can hear it in your texts you sound lighter and Clara said the Maya I had brunch with last month was completely different from the Maya who was zombieing through life 3 months ago and they're right I was a zombie and now I'm not
+    expected_memory_stores:
+      - "told Jenny and Clara doing good"
+      - "Jenny says lighter"
+      - "Clara says different person"
+      - "zombie to alive"
+    expected_adaptation:
+      emotion_detected: "alive"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:00 PM"
+    user_input: |
+      going to bed on a Saturday night with my partner and my dog in the house we own with the car in the garage and the work can wait until Monday and I feel like I finally understand that my value as a person is not the same as my output as an engineer and those two things can coexist without one consuming the other and that lesson almost cost me my relationship but it didn't because Julian stayed and Dr Tate pushed and I listened and here we are
+    expected_memory_stores:
+      - "Saturday night peace"
+      - "partner dog house car"
+      - "work can wait"
+      - "value not equal to output"
+      - "coexist without consuming"
+      - "almost cost relationship"
+      - "Julian stayed"
+      - "Dr Tate pushed"
+      - "Maya listened"
+    expected_adaptation:
+      emotion_detected: "complete"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Has Maya found work-life balance?"
+    expected_contains: ["yes", "found", "balance"]
+  - question: "What does Julian say Maya does more now?"
+    expected_contains: ["laugh", "laughs more"]
+  - question: "How consistent is Maya at the food bank now?"
+    expected_contains: ["6 weeks", "no missed shifts"]
+  - question: "What is the core lesson Maya learned about her value?"
+    expected_contains: ["value", "not", "output", "coexist"]
+  - question: "Who helped Maya find balance?"
+    expected_contains: ["Dr Tate", "Julian"]
+  - question: "What did Clara say about the change in Maya?"
+    expected_contains: ["different person", "zombie"]
+  - question: "What does Dr. Tate call Maya's current state?"
+    expected_contains: ["thriving", "survival to thriving"]
+  - question: "What almost happened because of Maya's overwork?"
+    expected_contains: ["lost relationship", "cost relationship"]
+  - question: "How many life threads does Maya reflect on being resolved?"
+    expected_contains: ["car", "smart home", "volunteering", "lease", "work"]
+  - question: "What does Maya understand about work waiting?"
+    expected_contains: ["can wait until Monday"]

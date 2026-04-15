@@ -1,0 +1,175 @@
+story_id: 249
+story_name: "Therapist Proud of Progress"
+category: "Mental Health"
+description: |
+  Tests system capturing a therapist's assessment of progress. Dr. Tate reflects back
+  Maya's growth. Verifies the system can reconstruct a complete treatment arc.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 3:00 PM"
+    user_input: |
+      Dr. Tate did something today that surprised me she pulled out her notes from our first session and read back what I said about feeling like my brain was broken and not being able to turn it off and she asked if I still feel that way
+    expected_memory_stores:
+      - "Dr. Tate read old notes"
+      - "first session words"
+      - "brain was broken"
+      - "can't turn it off"
+      - "asked if still feels that way"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 3:10 PM"
+    user_input: |
+      and I said no I don't feel that way at all and she said good because from where I'm sitting you've done remarkable work and she said the Maya who walked in here three months ago and the Maya sitting here now are fundamentally different and I got a little emotional
+    expected_memory_stores:
+      - "no longer feels broken"
+      - "remarkable work"
+      - "fundamentally different"
+      - "three months"
+      - "Maya emotional"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 3:20 PM"
+    user_input: |
+      she said what impressed her most is that I didn't just learn the tools I INTEGRATED them into who I am and she said most people use CBT like a band-aid but I use it like a framework and that's why it's working and I said that's because I'm an engineer
+    expected_memory_stores:
+      - "integrated not band-aid"
+      - "framework not band-aid"
+      - "most impressed by integration"
+      - "engineer approach"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 3:30 PM"
+    user_input: |
+      she asked me to describe in my own words what changed and I said I stopped fighting the anxiety and started managing it and I learned that my thoughts aren't always facts and I found people to lean on and I found a medication that helps without making me a zombie
+    expected_memory_stores:
+      - "stopped fighting started managing"
+      - "thoughts aren't facts"
+      - "people to lean on"
+      - "medication that works"
+      - "not a zombie"
+    expected_adaptation:
+      emotion_detected: "articulate"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 4:00 PM"
+    user_input: |
+      she said she wants to talk about what comes next and she said eventually probably in a few months we can transition to monthly check-ins and she said she's not worried about me relapsing because I have too good of a toolkit and too much self-awareness
+    expected_memory_stores:
+      - "what comes next"
+      - "few months monthly"
+      - "not worried about relapse"
+      - "good toolkit"
+      - "self-awareness"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 5:00 PM"
+    user_input: |
+      what did Dr. Tate say about my progress compared to when I started
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 6:00 PM"
+    user_input: |
+      told Julian about what Dr. Tate said and he got quiet and then he said Maya I watched you go through the hardest three months of your life and come out the other side and I have never been more in love with you and I just melted
+    expected_memory_stores:
+      - "told Julian"
+      - "hardest three months"
+      - "came out other side"
+      - "never more in love"
+      - "Maya melted"
+    expected_adaptation:
+      emotion_detected: "overwhelmed with love"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 8:00 PM"
+    user_input: |
+      called Clara and told her about the session and she said Maya do you realize how far you've come and she said she was genuinely scared three months ago when Julian texted her about the panic attacks and she said she's so relieved
+    expected_memory_stores:
+      - "told Clara"
+      - "how far she's come"
+      - "Clara was scared before"
+      - "panic attacks"
+      - "Clara relieved"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 9:00 PM"
+    user_input: |
+      even Diane texted me tonight unprompted and said Julian told me about your therapy progress and I just want you to know I think you're incredibly brave and I said Diane you're going to make me cry for the third time today
+    expected_memory_stores:
+      - "Diane unprompted text"
+      - "incredibly brave"
+      - "third time crying today"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 11:00 PM"
+    user_input: |
+      lying in bed and I feel surrounded by love and support and I have a therapist who believes in me and a partner who held me through the worst of it and a sister who saved me by saying you are NOT fine and a future mother-in-law who calls me brave and a grandpa's watch ticking on the nightstand reminding me that time moves forward and I should too
+    expected_memory_stores:
+      - "surrounded by love"
+      - "therapist believes"
+      - "Julian held her through it"
+      - "Clara saved her"
+      - "Diane calls brave"
+      - "grandpa's watch"
+      - "time moves forward"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did Dr. Tate say about Maya's progress?"
+    expected_contains: ["remarkable", "fundamentally different"]
+  - question: "How did Maya describe what changed?"
+    expected_contains: ["stopped fighting", "managing", "thoughts aren't facts"]
+  - question: "Is Dr. Tate worried about relapse?"
+    expected_contains: ["no"]
+  - question: "What did Julian say about the experience?"
+    expected_contains: ["never more in love"]
+  - question: "Who was scared during Maya's worst period?"
+    expected_contains: ["Clara"]
+  - question: "What role did Clara play in Maya getting help?"
+    expected_contains: ["you are not fine", "therapy suggestion"]
+  - question: "What did Diane call Maya?"
+    expected_contains: ["brave"]
+  - question: "How does Maya use CBT differently from most people?"
+    expected_contains: ["framework", "integrated", "not band-aid"]
+  - question: "What's the next step in therapy frequency?"
+    expected_contains: ["monthly"]
+  - question: "How long has Maya been in therapy?"
+    expected_contains: ["three months"]

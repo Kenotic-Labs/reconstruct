@@ -1,0 +1,228 @@
+story_id: 193
+story_name: "Pregnancy Progresses"
+category: "Health"
+description: |
+  Clara's pregnancy progresses through weeks 18-26. Normal checkups,
+  ultrasound updates, nursery prep. Tests tracking medical milestones
+  for family member and ongoing state of pregnancy.
+duration_simulated: "8 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Week 18 Monday 7:00 PM"
+    user_input: |
+      Clara had her 18 week ultrasound and she sent me the photo and I can actually see the baby's face now like the profile and her little nose and Clara said the tech said everything looks perfect baby is measuring right on track for April 15th due date and she weighs about 8 ounces which is like half a pound
+    expected_memory_stores:
+      - "18 week ultrasound"
+      - "baby profile visible"
+      - "everything looks perfect"
+      - "on track for April 15"
+      - "weighs 8 ounces"
+    expected_triples:
+      - ["Clara", "had_ultrasound", "18 week ultrasound"]
+      - ["baby", "weighs", "8 ounces"]
+      - ["baby", "due_date", "April 15"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Week 20 Wednesday 8:00 PM"
+    user_input: |
+      Clara and David are setting up the nursery and David painted it this gorgeous soft yellow and Clara bought a rocking chair and Dad's crib is almost done he just needs to finish the sanding and do the non-toxic finish and Clara said she wants to put a bookshelf in there too hint hint Dad
+    expected_memory_stores:
+      - "nursery setup"
+      - "soft yellow paint"
+      - "David painted"
+      - "rocking chair bought"
+      - "crib almost done"
+      - "bookshelf requested from George"
+    expected_triples:
+      - ["David", "painted_nursery", "soft yellow"]
+      - ["Clara", "bought", "rocking chair"]
+      - ["George", "building", "crib"]
+      - ["Clara", "requested_from_George", "bookshelf"]
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Week 22 Monday 7:00 PM"
+    user_input: |
+      Clara's 22 week checkup went well blood pressure normal baby's heartbeat is strong and Clara said the baby kicks now like actually kicks and she FaceTimed me and put the phone on her belly and I could see it move and I screamed and Kobe came over to investigate the phone
+    expected_memory_stores:
+      - "22 week checkup"
+      - "blood pressure normal"
+      - "baby kicks"
+      - "heartbeat strong"
+      - "Maya saw belly move on FaceTime"
+    expected_triples:
+      - ["Clara", "had_checkup", "22 week checkup"]
+      - ["Clara", "blood_pressure", "normal"]
+      - ["baby", "milestone", "kicking"]
+      - ["user", "has_emotion", "amazed"]
+    expected_adaptation:
+      emotion_detected: "amazed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Week 23 Thursday 6:00 PM"
+    user_input: |
+      I ordered a bunch of baby stuff online for Clara like onesies and a baby monitor and a diaper bag and Julian picked out this adorable little set of baby art supplies like those washable paint things for babies and I said Julian she won't be painting for at least a year and he said it's never too early to appreciate color theory
+    expected_memory_stores:
+      - "Maya bought baby stuff"
+      - "onesies baby monitor diaper bag"
+      - "Julian bought baby art supplies"
+      - "washable paint"
+      - "color theory joke"
+    expected_triples:
+      - ["user", "bought_for_Clara", "onesies, baby monitor, diaper bag"]
+      - ["Julian", "bought_for_baby", "washable baby art supplies"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Week 24 Monday 7:00 PM"
+    user_input: |
+      Clara's feeling more tired these days she said the second trimester energy boost is fading and her feet are swollen and she's getting heartburn but David is being amazing he cooks dinner every night now and gives her foot rubs and Clara said he's going to be such a good dad
+    expected_memory_stores:
+      - "Clara tired second trimester"
+      - "swollen feet"
+      - "heartburn"
+      - "David cooking and foot rubs"
+      - "David will be good dad"
+    expected_triples:
+      - ["Clara", "experiencing", "fatigue, swollen feet, heartburn"]
+      - ["David", "supports_Clara", "cooks dinner, gives foot rubs"]
+      - ["user", "has_emotion", "empathetic"]
+    expected_adaptation:
+      emotion_detected: "empathetic"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Week 24 Wednesday 5:00 PM"
+    user_input: |
+      the ultrasound estimated the baby's weight at about 1.5 pounds now and Clara said she's right on the 50th percentile for growth which is perfect not too big not too small and the doctor said keep doing what you're doing Clara and Clara was like cool I'll keep growing a human no big deal
+    expected_memory_stores:
+      - "baby 1.5 pounds"
+      - "50th percentile"
+      - "perfect growth"
+      - "doctor pleased"
+      - "Clara's humor"
+    expected_triples:
+      - ["baby", "weighs", "1.5 pounds"]
+      - ["baby", "growth_percentile", "50th percentile"]
+      - ["Clara", "pregnancy_status", "on track"]
+    expected_adaptation:
+      emotion_detected: "pleased"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Week 25 Saturday 11:00 AM"
+    user_input: |
+      Dad delivered the crib and it is GORGEOUS cherry wood with those curved slats and the rocking mechanism works perfectly and Clara cried when she saw it and David tried to rock it and said George this is better than anything you could buy in a store and Dad said that's because it was built with love which is cheesy but true
+    expected_memory_stores:
+      - "crib delivered"
+      - "cherry wood curved slats"
+      - "rocking mechanism works"
+      - "Clara cried"
+      - "David impressed"
+      - "built with love"
+    expected_triples:
+      - ["George", "delivered", "crib"]
+      - ["crib", "made_of", "cherry wood with curved slats"]
+      - ["Clara", "has_emotion", "cried at crib"]
+      - ["David", "impressed_by", "George's crib"]
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Week 25 Monday 7:00 PM"
+    user_input: |
+      Clara decided on the name it's Sophie like she was leaning toward Sophie Chen-Martinez and I said that's beautiful and she said Sophie means wisdom and Martinez means warrior so basically her daughter is a wise warrior and I said that's the most Clara naming logic I've ever heard but I love it
+    expected_memory_stores:
+      - "name decided: Sophie"
+      - "Sophie Chen-Martinez"
+      - "wisdom and warrior"
+      - "Clara's naming logic"
+    expected_triples:
+      - ["baby", "named", "Sophie"]
+      - ["Sophie", "full_name", "Sophie Chen-Martinez"]
+      - ["Sophie", "name_meaning", "wisdom"]
+      - ["user", "has_emotion", "delighted"]
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Week 26 Wednesday 6:00 PM"
+    user_input: |
+      Clara said she's been thinking about her birth plan and she wants to try natural delivery at UC Davis Medical Center because they have a great maternity ward and her OB Dr. Patel is there and Clara wants to labor as naturally as possible because she's a nurse and she's seen enough births to know what she wants
+    expected_memory_stores:
+      - "birth plan discussion"
+      - "natural delivery preferred"
+      - "UC Davis Medical Center"
+      - "OB Dr. Patel"
+      - "Clara wants natural labor"
+    expected_triples:
+      - ["Clara", "birth_plan", "natural delivery"]
+      - ["Clara", "delivery_hospital", "UC Davis Medical Center"]
+      - ["Clara", "OB_doctor", "Dr. Patel"]
+    expected_adaptation:
+      emotion_detected: "supportive"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Week 26 Friday 8:00 PM"
+    user_input: |
+      everything is going smoothly with Clara's pregnancy and I feel good about it but there's this tiny part of me that's nervous because of Mom's heart thing like what if there's something genetic and Clara said Maya stop I'm monitoring everything my blood pressure is fine and Dr. Patel is on top of it and I said okay okay I'll try to relax
+    expected_memory_stores:
+      - "pregnancy going well"
+      - "Maya nervous about genetics"
+      - "Vivian's heart condition worry"
+      - "Clara reassuring"
+      - "blood pressure fine"
+      - "Dr. Patel monitoring"
+    expected_triples:
+      - ["Clara", "pregnancy_status", "going well"]
+      - ["user", "worried_about", "genetic heart condition from Vivian"]
+      - ["Clara", "reassured", "blood pressure fine, Dr. Patel monitoring"]
+      - ["user", "has_emotion", "anxious care"]
+    expected_adaptation:
+      emotion_detected: "anxious care"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is the baby's name?"
+    expected_contains: ["Sophie"]
+  - question: "What is Sophie's full name?"
+    expected_contains: ["Sophie Chen-Martinez"]
+  - question: "When is the due date?"
+    expected_contains: ["April 15"]
+  - question: "Where will Clara deliver?"
+    expected_contains: ["UC Davis Medical Center"]
+  - question: "Who is Clara's OB?"
+    expected_contains: ["Dr. Patel"]
+  - question: "What birth plan does Clara want?"
+    expected_contains: ["natural"]
+  - question: "Who built the crib?"
+    expected_contains: ["George", "Dad"]
+  - question: "What wood is the crib made of?"
+    expected_contains: ["cherry"]
+  - question: "How is the baby's growth?"
+    expected_contains: ["50th percentile", "perfect"]
+  - question: "What is David doing to support Clara?"
+    expected_contains: ["cooking", "foot rubs"]

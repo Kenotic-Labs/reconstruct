@@ -1,0 +1,178 @@
+story_id: 535
+story_name: "Fall Cozy Energy"
+category: "Weather and Seasons"
+description: |
+  Autumn arrives and Maya discovers she loves Portland fall. Candles, soup season, book club.
+  Cross-references cooking (T31), hosting (T47), mental health (T21), and house (T41-T45).
+duration_simulated: "3 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00 AM"
+    user_input: |
+      it's October and the leaves are turning and I know everyone says this but Portland in fall is incredible like the maples are bright orange and yellow and there's this crispness in the air that's different from summer and I wore a sweater today for the first time since March and it felt like coming home to a version of myself I forgot about
+    expected_memory_stores:
+      - "October Portland"
+      - "leaves turning"
+      - "maple colors"
+      - "crisp air"
+      - "first sweater since March"
+    expected_adaptation:
+      emotion_detected: "nostalgic"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 3:00 PM"
+    user_input: |
+      bought candles at this shop on Hawthorne and I got like five of them cedar and vanilla and pumpkin and something called fireside and one that smells like rain which is ironic but also perfect and the house smells amazing now and Julian said it smells like a Pottery Barn in here and I said thank you
+    expected_memory_stores:
+      - "candles from Hawthorne"
+      - "cedar vanilla pumpkin fireside rain"
+      - "five candles"
+      - "Julian Pottery Barn comment"
+    expected_adaptation:
+      emotion_detected: "cozy"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Sunday 5:00 PM"
+    user_input: |
+      made butternut squash soup tonight Julian's recipe from last winter the one he made during the rain and it's even better this time and I added some of Greg's honey to it and it was perfect and the house is warm and the candles are lit and it's starting to rain but this time it feels cozy not oppressive
+    expected_memory_stores:
+      - "butternut squash soup"
+      - "Julian's winter recipe"
+      - "Greg's honey added"
+      - "candles lit"
+      - "rain feels cozy not oppressive"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      book club met at our house tonight and it was perfect timing because fall is the best book club season and we read this novel about an immigrant family that hit me really hard because of grandpa's story and Clara said she could see me getting emotional during the discussion and I said yeah this one was personal
+    expected_memory_stores:
+      - "book club at house"
+      - "fall perfect for book club"
+      - "immigrant family novel"
+      - "connected to grandpa's story"
+      - "Maya got emotional"
+    expected_adaptation:
+      emotion_detected: "connected"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 6:00 PM"
+    user_input: |
+      it's getting dark by 5:30 now which is earlier every week and instead of dreading it like last year I lit all the candles and put on music and started making soup and I thought about how Dr. Tate said to build a winter toolkit and I think my toolkit is candles and soup and books and people and maybe that's enough
+    expected_memory_stores:
+      - "dark by 5:30"
+      - "not dreading like last year"
+      - "candles music soup"
+      - "winter toolkit"
+      - "candles soup books people"
+    expected_adaptation:
+      emotion_detected: "prepared"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 11:00 AM"
+    user_input: |
+      took Kobe to the park and the leaves are covering everything like a carpet of red and gold and he was running through leaf piles and I was laughing and this kid at the park said your dog looks like fall and I was like that's the best thing anyone has ever said about my dog golden retriever in golden leaves
+    expected_memory_stores:
+      - "Kobe in leaf piles"
+      - "red and gold carpet"
+      - "kid's comment"
+      - "golden retriever golden leaves"
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      started a soup of the week thing where every Wednesday I try a new soup recipe and tonight was French onion which took like two hours but was incredible and Julian said we should add soup night to the Woodstock Table rotation and I said Julian we can't have a themed dinner night for every type of food and he said why not
+    expected_memory_stores:
+      - "soup of the week Wednesdays"
+      - "French onion two hours"
+      - "Woodstock Table soup night idea"
+      - "Julian wants more themed nights"
+    expected_adaptation:
+      emotion_detected: "creative"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 4:00 PM"
+    user_input: |
+      went apple picking at an orchard outside Portland with Clara and Ben and it was so fall it hurt like hot cider and hay rides and perfect weather and Clara and I took photos for each other and I only took five photos total sticking to my intentional photography thing and every single one is gorgeous
+    expected_memory_stores:
+      - "apple picking"
+      - "orchard outside Portland"
+      - "Clara and Ben"
+      - "hot cider hay rides"
+      - "five intentional photos"
+    expected_adaptation:
+      emotion_detected: "autumnal"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 6:00 PM"
+    user_input: |
+      the cherry tree has lost most of its leaves now and it looks like a skeleton which should be sad but it's not because I know the blossoms will come back in March and there's something reassuring about seasons like everything leaves and comes back and grief is like that too it comes in waves but so does joy
+    expected_memory_stores:
+      - "cherry tree lost leaves"
+      - "skeleton tree"
+      - "blossoms return March"
+      - "seasons are reassuring"
+      - "grief and joy come in waves"
+    expected_adaptation:
+      emotion_detected: "philosophical"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 PM"
+    user_input: |
+      sitting by the window watching the last bit of orange light fade and the candle is flickering and Kobe is on the couch and Julian is reading the Death and Co cocktail book and the rain has started again softly and I'm not scared of winter this year I have my lamp and my soup and my people and my tree and I know what's coming and I know how to handle it
+    expected_memory_stores:
+      - "watching light fade"
+      - "candle flickering"
+      - "Julian reading cocktail book"
+      - "rain starting softly"
+      - "not scared of winter"
+      - "toolkit ready"
+    expected_adaptation:
+      emotion_detected: "ready"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya's fall candle collection?"
+    expected_contains: ["cedar", "vanilla", "pumpkin", "fireside", "rain"]
+  - question: "What is Maya's soup of the week day?"
+    expected_contains: ["Wednesday"]
+  - question: "What did Maya add to the butternut squash soup?"
+    expected_contains: ["Greg's honey"]
+  - question: "What book club book connected to grandpa?"
+    expected_contains: ["immigrant family"]
+  - question: "What did the kid at the park say about Kobe?"
+    expected_contains: ["looks like fall"]
+  - question: "How does the cherry tree look in fall?"
+    expected_contains: ["lost leaves", "skeleton"]
+  - question: "Is Maya dreading winter this year?"
+    expected_contains: ["no", "not scared"]
+  - question: "What is in Maya's winter toolkit?"
+    expected_contains: ["lamp", "soup", "candles", "people"]
+  - question: "Where did Maya go apple picking?"
+    expected_contains: ["orchard", "Portland"]
+  - question: "How many photos did Maya take apple picking?"
+    expected_contains: ["five"]

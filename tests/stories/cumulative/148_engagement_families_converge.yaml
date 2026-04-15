@@ -1,0 +1,221 @@
+story_id: 148
+story_name: "Families Converge"
+category: "Life Events"
+description: |
+  Tests whether the system captures the family meeting dynamics, the two mothers'
+  contrasting styles, and the emotional significance of families coming together.
+  Cross-thread references to family backgrounds.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 4:00pm"
+    user_input: |
+      Julian's parents arrived from Denver. picked them up from the airport. his mom Karen is already in planning mode, she brought like a binder of engagement party ideas. his dad Robert is the quiet supportive type, he just hugged me and said welcome to the family again
+    expected_memory_stores:
+      - "Julian's parents arrived"
+      - "Karen"
+      - "Robert"
+      - "Denver airport"
+      - "binder of ideas"
+      - "welcome to family"
+    expected_triples:
+      - ["Karen", "is", "Julian's mom"]
+      - ["Robert", "is", "Julian's dad"]
+      - ["Karen", "brought", "binder of engagement party ideas"]
+      - ["Robert", "said", "welcome to the family"]
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 7:00pm"
+    user_input: |
+      took Karen and Robert to our apartment and Karen immediately goes oh this is lovely, who decorated? and Julian said we both did and I could tell he was proud. Robert got on the floor to play with Kobe which was adorable. Kobe loved him instantly
+    expected_memory_stores:
+      - "apartment tour"
+      - "Karen impressed"
+      - "Julian proud"
+      - "Robert played with Kobe"
+      - "Kobe loved Robert"
+    expected_triples:
+      - ["Karen", "impressed_by", "apartment decor"]
+      - ["Robert", "bonded_with", "Kobe"]
+      - ["user", "has_emotion", "happy"]
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 9:00am"
+    user_input: |
+      Mom and Dad got in late last night from LA and they're staying at a hotel downtown. Clara and Tyler drove down from Seattle this morning. everyone's here. I'm nervous about the family dinner tonight at that Italian place on Division
+    expected_memory_stores:
+      - "Mom Dad arrived LA"
+      - "hotel downtown"
+      - "Clara Tyler from Seattle"
+      - "everyone here"
+      - "family dinner"
+      - "Italian place Division"
+    expected_triples:
+      - ["user", "parents_arrived_from", "LA"]
+      - ["Clara", "arrived_with", "Tyler from Seattle"]
+      - ["user", "family_dinner_at", "Italian place on Division"]
+      - ["user", "has_emotion", "nervous"]
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 6:00pm"
+    user_input: |
+      family dinner is happening. both sets of parents, me and Julian, Clara and Tyler. eight people at a big round table. Karen and my mom are sitting next to each other and I'm watching them like a hawk. so far they're bonding over embarrassing childhood stories about me and Julian which is... fine I guess
+    expected_memory_stores:
+      - "family dinner"
+      - "eight people"
+      - "round table"
+      - "Karen and Maya's mom"
+      - "childhood stories"
+      - "bonding"
+    expected_triples:
+      - ["user", "family_dinner", "eight people at round table"]
+      - ["Karen", "bonding_with", "Maya's mom over childhood stories"]
+      - ["user", "has_emotion", "cautiously optimistic"]
+    expected_adaptation:
+      emotion_detected: "cautiously optimistic"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 7:00pm"
+    user_input: |
+      ok so my mom and Karen actually get along??? like really well. my mom told a story about how I used to pretend my calculator was a phone and Karen goes Julian used to draw portraits of his stuffed animals and then they were both laughing and I was like ok this is actually going great
+    expected_memory_stores:
+      - "moms get along"
+      - "calculator phone story"
+      - "Julian stuffed animal portraits"
+      - "both laughing"
+      - "going great"
+    expected_triples:
+      - ["user", "mom_told_story", "calculator as phone"]
+      - ["Karen", "told_story", "Julian drew portraits of stuffed animals"]
+      - ["user", "has_emotion", "relieved"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 7:30pm"
+    user_input: |
+      Robert and my dad started talking and it turns out they both love fishing?? like what are the odds. Dad was like we should plan a fishing trip and Robert goes absolutely and Julian leaned over to me and whispered our dads are gonna be best friends and honestly? probably
+    expected_memory_stores:
+      - "Robert and Dad"
+      - "both love fishing"
+      - "fishing trip planned"
+      - "dads bonding"
+      - "Julian's whisper"
+    expected_triples:
+      - ["Robert", "shares_hobby_with", "Maya's dad, both love fishing"]
+      - ["user", "dad_planned", "fishing trip with Robert"]
+      - ["user", "has_emotion", "delighted"]
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 8:00pm"
+    user_input: |
+      what are the names of Julian's parents
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 9:00pm"
+    user_input: |
+      Clara pulled me aside at the restaurant and goes Maya he's the one, his family is wonderful, and I said I know and she goes no like I REALLY know now that I've met them. Tyler and Julian are talking about design which makes sense since Tyler does marketing. the families are merging
+    expected_memory_stores:
+      - "Clara approves"
+      - "family is wonderful"
+      - "Tyler does marketing"
+      - "Tyler and Julian bonding"
+      - "families merging"
+    expected_triples:
+      - ["Clara", "approves_of", "Julian and his family"]
+      - ["Tyler", "works_in", "marketing"]
+      - ["Tyler", "bonding_with", "Julian over design"]
+      - ["user", "has_emotion", "full"]
+    expected_adaptation:
+      emotion_detected: "full"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 10:00pm"
+    user_input: |
+      at the end of dinner my dad stood up and said he wanted to make a toast. he said to Maya and Julian, may your love be as strong as your mothers' opinions, and everyone laughed. then he got serious and said you two found something real and we're all grateful to witness it. I cried. again
+    expected_memory_stores:
+      - "Dad toast"
+      - "mothers' opinions joke"
+      - "something real"
+      - "grateful to witness"
+      - "Maya cried"
+    expected_triples:
+      - ["user", "dad_gave_toast", "mothers' opinions joke then something real"]
+      - ["user", "dad_said", "you two found something real"]
+      - ["user", "has_emotion", "moved"]
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 11:00pm"
+    user_input: |
+      drove home with Julian and we were both quiet but the good kind of quiet. he held my hand the whole drive. Kobe was waiting at the door when we got home and Julian goes even the dog's happy our families get along. tomorrow is party prep day. I'm tired and grateful and so so happy
+    expected_memory_stores:
+      - "good quiet"
+      - "held hands"
+      - "Kobe at door"
+      - "families get along"
+      - "party prep tomorrow"
+      - "tired grateful happy"
+    expected_triples:
+      - ["user", "families_outcome", "both families get along"]
+      - ["user", "next_event", "party prep tomorrow"]
+      - ["user", "has_emotion", "grateful"]
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What are Julian's parents' names?"
+    expected_contains: ["Karen", "Robert"]
+  - question: "Do the two mothers get along?"
+    expected_contains: ["yes", "really well"]
+  - question: "What do the fathers have in common?"
+    expected_contains: ["fishing"]
+  - question: "Where was the family dinner?"
+    expected_contains: ["Italian", "Division"]
+  - question: "What did Maya's dad say in his toast?"
+    expected_contains: ["mothers' opinions", "something real"]
+  - question: "What childhood story did Maya's mom tell?"
+    expected_contains: ["calculator", "phone"]
+  - question: "What does Tyler do for work?"
+    expected_contains: ["marketing"]
+  - question: "How many people were at the dinner?"
+    expected_contains: ["eight"]
+  - question: "What did Clara say about Julian's family?"
+    expected_contains: ["wonderful", "the one"]
+  - question: "Where are Julian's parents staying?"
+    expected_contains: ["Denver", "visiting"]

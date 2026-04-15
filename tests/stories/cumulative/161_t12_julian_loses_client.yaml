@@ -1,0 +1,173 @@
+story_id: 161
+story_name: "Julian Loses Biggest Client"
+category: "Career"
+description: |
+  Julian loses the Thornton Group, his biggest freelance client. Tests
+  tracking another person's career through Maya's perspective, financial
+  stress, and emotional support dynamics.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 5:00 PM"
+    user_input: |
+      so um Julian got some really bad news today the Thornton Group dropped him as their designer they've been his biggest client for like two years they were paying him $3500 a month for ongoing brand work and they just emailed him and said they're going in a different direction which is corporate speak for we found someone cheaper
+    expected_memory_stores:
+      - "Thornton Group dropped Julian"
+      - "biggest client two years"
+      - "$3500 per month"
+      - "brand work"
+      - "going different direction"
+    expected_adaptation:
+      emotion_detected: "worried"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      Julian's trying to act like it's fine but I can tell he's devastated because like that was almost half his income you know he makes probably like $7000 a month freelancing on a good month and just lost half of that right before our wedding which is just timing you know awful awful timing
+    expected_memory_stores:
+      - "Julian devastated"
+      - "Thornton was half his income"
+      - "$7000/month freelance income"
+      - "bad timing with wedding"
+    expected_adaptation:
+      emotion_detected: "empathetic worry"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 9:00 PM"
+    user_input: |
+      we talked about it over dinner and Julian said he'll ramp up his outreach to find new clients but honestly the freelance market is tough right now like everyone I know who freelances is saying the same thing budgets are getting cut AI tools are making companies think they don't need designers as much which is stupid but here we are
+    expected_memory_stores:
+      - "Julian plans to find new clients"
+      - "freelance market tough"
+      - "budget cuts"
+      - "AI tools threatening design"
+    expected_adaptation:
+      emotion_detected: "concerned"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 8:00 AM"
+    user_input: |
+      I told Julian that my salary can cover us for a while like I make $140k at Vantage and our rent is only $1800 and we have savings so don't panic but I could tell he felt weird about it because he's always been really proud of pulling his own weight financially
+    expected_memory_stores:
+      - "Maya's salary $140k"
+      - "rent $1800"
+      - "savings buffer"
+      - "Julian's pride about finances"
+    expected_adaptation:
+      emotion_detected: "supportive"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      Julian sent out like 20 inquiry emails this morning to potential clients and updated his portfolio site and he's being proactive which is good but I can see the stress in his face like he barely ate breakfast and Kobe's been following him around all day because Kobe always knows when something's wrong
+    expected_memory_stores:
+      - "Julian sent 20 inquiries"
+      - "updated portfolio"
+      - "stress visible"
+      - "not eating"
+      - "Kobe following Julian"
+    expected_adaptation:
+      emotion_detected: "worried"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 4:00 PM"
+    user_input: |
+      Clara called to check in and I told her about Julian and she was like oh no is he okay and I said he's putting on a brave face and she said remind him that setbacks are temporary and I was like thanks Clara that's very nurse-pep-talk of you but also she's right
+    expected_memory_stores:
+      - "Clara checked in"
+      - "Clara supportive of Julian"
+    expected_adaptation:
+      emotion_detected: "appreciative"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      Julian got one response already from the 20 emails but it's a small project like a logo redesign for $800 which is fine but it's not recurring income you know what he really needs is another retainer client like Thornton was someone who pays monthly for ongoing work
+    expected_memory_stores:
+      - "one response received"
+      - "logo redesign $800"
+      - "small one-off project"
+      - "needs retainer client"
+    expected_adaptation:
+      emotion_detected: "pragmatic concern"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 10:00 AM"
+    user_input: |
+      so something interesting Julian's friend from design school his name is Nathan told him that a studio in Portland called Bold Studio is hiring a senior designer full time and Julian was like hmm I haven't had a full time job in five years but maybe it's worth looking into and I tried not to react too much because I don't want to push him either way
+    expected_memory_stores:
+      - "Nathan design school friend"
+      - "Bold Studio hiring"
+      - "senior designer position"
+      - "Julian considering full time"
+      - "hasn't had full time job in 5 years"
+    expected_adaptation:
+      emotion_detected: "cautiously interested"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 3:00 PM"
+    user_input: |
+      Julian looked up Bold Studio and actually their work is really good like they do branding for craft breweries and outdoor companies and restaurants and it's totally his aesthetic and the job posting says $75-85K salary with benefits and PTO which honestly would be life changing for us because Julian has never had health insurance through work he's been on my plan
+    expected_memory_stores:
+      - "Bold Studio portfolio"
+      - "branding for breweries outdoor restaurants"
+      - "salary $75-85K"
+      - "benefits and PTO"
+      - "Julian on Maya's health insurance"
+    expected_adaptation:
+      emotion_detected: "intrigued"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 9:00 PM"
+    user_input: |
+      Julian said he's going to apply to Bold Studio but he also wants to keep freelancing on the side and honestly I think that's smart because if the full time thing doesn't work out he needs clients to fall back on but also I can see him at a studio he's always been a little lonely working from home alone with just Kobe all day
+    expected_memory_stores:
+      - "Julian applying to Bold Studio"
+      - "keep freelancing on side"
+      - "Julian lonely working from home"
+      - "Maya thinks studio would be good"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What happened with Julian's biggest client?"
+    expected_contains: ["Thornton Group", "dropped", "lost"]
+  - question: "How much was the Thornton Group paying Julian?"
+    expected_contains: ["3500"]
+  - question: "What studio is Julian considering applying to?"
+    expected_contains: ["Bold Studio"]
+  - question: "What is the salary range at Bold Studio?"
+    expected_contains: ["75", "85"]
+  - question: "How long has Julian been freelancing?"
+    expected_contains: ["five years"]
+  - question: "Who told Julian about Bold Studio?"
+    expected_contains: ["Nathan"]
+  - question: "What kind of work does Bold Studio do?"
+    expected_contains: ["branding", "breweries", "outdoor"]
+  - question: "How much does Maya make at Vantage?"
+    expected_contains: ["140"]
+  - question: "How much is their rent?"
+    expected_contains: ["1800"]
+  - question: "Does Julian have his own health insurance?"
+    expected_contains: ["no", "Maya's plan"]

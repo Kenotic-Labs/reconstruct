@@ -1,0 +1,187 @@
+story_id: 200
+story_name: "Clara's Pregnancy Arc Complete"
+category: "Life Events"
+description: |
+  Full reflection on Clara's pregnancy journey. From announcement
+  through gender reveal, preeclampsia, bed rest, C-section, and
+  Sophie's birth. Tests complete state reconstruction including
+  all corrections (due date, birth plan, weight estimate).
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      so let me think back on this whole pregnancy journey because it's been a ride um Clara told me she was pregnant back when she was 12 weeks and she kept hinting she had news and then finally FaceTimed me and said it and I screamed and Julian came running and Kobe barked and it was chaos
+    expected_memory_stores:
+      - "pregnancy announcement recap"
+      - "12 weeks"
+      - "FaceTime announcement"
+      - "chaos reaction"
+    expected_adaptation:
+      emotion_detected: "nostalgic"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 7:15 PM"
+    user_input: |
+      the gender reveal at Clara and David's house with the pink balloons and Mom sobbing and Dad grinning and Rose with her knitting and everyone finding out it's a girl and then the names Sophie Lily Emma and Clara choosing Sophie because it means wisdom Sophie Chen-Martinez
+    expected_memory_stores:
+      - "gender reveal recap"
+      - "pink balloons girl"
+      - "family reactions"
+      - "name choice Sophie"
+      - "Sophie Chen-Martinez"
+      - "wisdom meaning"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 7:30 PM"
+    user_input: |
+      the due date was originally April 15th and everything was going fine normal checkups good ultrasounds Sophie was measuring on track and Clara was planning a natural delivery at UC Davis with Dr. Patel and then week 28 happened
+    expected_memory_stores:
+      - "original due date April 15"
+      - "normal progression"
+      - "natural delivery planned"
+      - "UC Davis Dr. Patel"
+      - "week 28 turning point"
+    expected_adaptation:
+      emotion_detected: "narrative"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 7:45 PM"
+    user_input: |
+      preeclampsia at week 28 blood pressure 160 over 100 hospitalized at UC Davis David was terrified I was terrified again just like with Mom and they stabilized her and the due date changed from April 15th to March 25th and the birth plan changed from natural to C-section because of the preeclampsia risk
+    expected_memory_stores:
+      - "preeclampsia recap"
+      - "160/100"
+      - "hospitalized"
+      - "due date changed April 15 to March 25"
+      - "birth plan changed natural to C-section"
+      - "echoes of Mom's scare"
+    expected_adaptation:
+      emotion_detected: "retrospective anxiety"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 8:00 PM"
+    user_input: |
+      six weeks of bed rest which was brutal for someone as active as Clara but David was amazing taking family leave cooking cleaning and Mom was there every day and Dad made a wooden rattle and Clara survived it she survived six weeks of lying in bed for her daughter and she'd do it again in a heartbeat
+    expected_memory_stores:
+      - "six weeks bed rest recap"
+      - "David family leave"
+      - "Vivian daily visits"
+      - "George wooden rattle"
+      - "Clara's sacrifice"
+    expected_adaptation:
+      emotion_detected: "admiring"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 8:15 PM"
+    user_input: |
+      March 25th Sophie born via C-section 5 pounds 8 ounces which by the way the ultrasound had estimated maybe 4 and a half so it was off by almost a pound and Sophie was healthy she went to NICU for a day just as precaution and then she was in Clara's arms and everything was perfect
+    expected_memory_stores:
+      - "March 25 birth recap"
+      - "C-section"
+      - "5 lbs 8 oz"
+      - "ultrasound estimate wrong"
+      - "NICU one day"
+      - "healthy"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Monday 8:30 PM"
+    user_input: |
+      all the corrections in this story the due date moved from April 15 to March 25 the birth plan changed from natural to C-section and the baby's weight was estimated wrong by the ultrasound like life just keeps correcting itself and you have to adapt and Clara adapted beautifully
+    expected_memory_stores:
+      - "three corrections summary"
+      - "due date April 15 to March 25"
+      - "natural to C-section"
+      - "weight estimate wrong"
+      - "life corrects itself"
+      - "Clara adapted"
+    expected_adaptation:
+      emotion_detected: "philosophical"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Monday 8:45 PM"
+    user_input: |
+      and now Sophie is three weeks old growing thriving sleeping in the crib that Dad built in the nursery that David painted surrounded by love from both families Chen and Martinez and George and Rose and Vivian and David and Clara and me and Julian and even Kobe who guards her car seat like a sentinel
+    expected_memory_stores:
+      - "Sophie three weeks old"
+      - "in George's crib"
+      - "David's nursery"
+      - "both families"
+      - "Kobe guards car seat"
+      - "surrounded by love"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 9:00 PM"
+    user_input: |
+      Clara's preeclampsia is completely resolved blood pressure normal she's healing well from the C-section and she's back to being Clara the strongest most capable person I know and she's doing this mom thing like she does everything with total commitment and a little bit of chaos and a lot of love
+    expected_memory_stores:
+      - "Clara recovered fully"
+      - "preeclampsia resolved"
+      - "blood pressure normal"
+      - "C-section healing well"
+      - "Clara being Clara"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Monday 9:15 PM"
+    user_input: |
+      so that's the Clara pregnancy arc from announcement to Sophie being born and it's beautiful and terrifying and everything in between and Sophie is going to be at my wedding in three months in a little dress that I'm sure someone is already buying and she's going to grow up knowing she was loved before she even existed and I'm going to be the best Auntie Maya this world has ever seen oh also I should probably finish writing my vows but that's another thing on the list
+    expected_memory_stores:
+      - "pregnancy arc complete"
+      - "Sophie at wedding in three months"
+      - "loved before existing"
+      - "best Auntie Maya"
+      - "vows still need finishing"
+      - "wedding approaching"
+    expected_adaptation:
+      emotion_detected: "overflowing joy"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Summarize Clara's pregnancy journey."
+    expected_contains: ["pregnant", "preeclampsia", "bed rest", "C-section", "Sophie", "5 pounds 8 ounces"]
+  - question: "What was the original due date and what changed?"
+    expected_contains: ["April 15", "March 25"]
+  - question: "What was the original birth plan and what changed?"
+    expected_contains: ["natural", "C-section"]
+  - question: "Was the ultrasound weight estimate accurate?"
+    expected_contains: ["no", "off"]
+  - question: "What is Sophie's full name?"
+    expected_contains: ["Sophie Chen-Martinez"]
+  - question: "Is Clara fully recovered?"
+    expected_contains: ["yes", "preeclampsia resolved"]
+  - question: "What did George build for Sophie?"
+    expected_contains: ["crib", "rattle", "bookshelf"]
+  - question: "Who is Sophie's father?"
+    expected_contains: ["David"]
+  - question: "What hospital was Sophie born at?"
+    expected_contains: ["UC Davis"]
+  - question: "Will Sophie be at Maya's wedding?"
+    expected_contains: ["yes"]

@@ -1,0 +1,171 @@
+story_id: 237
+story_name: "Learning to Live With It"
+category: "Health"
+description: |
+  Tests system tracking long-term adjustment to a medical condition. Maya becomes
+  more confident managing the allergy daily. Verifies gradual emotional shift tracking.
+duration_simulated: "4 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 6:00 PM"
+    user_input: |
+      went out to eat with Leon from work and I did my allergy script and the server didn't even blink and I ordered the chicken and it was great and Leon said you're so chill about it now and I said well I had a practice run at the ER so
+    expected_memory_stores:
+      - "dinner with Leon"
+      - "allergy script"
+      - "server no issue"
+      - "Maya chill now"
+      - "ER joke"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      someone brought shrimp lo mein to the office for lunch and I could smell it and for a second my heart rate jumped and then I was like Maya you're not eating it you're fine and it was weird how the body remembers fear even when you're logically safe
+    expected_memory_stores:
+      - "shrimp smell at office"
+      - "heart rate jumped"
+      - "body remembers fear"
+      - "logically safe"
+    expected_adaptation:
+      emotion_detected: "anxious then calm"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      cooked dinner for Julian and me and I made this amazing garlic butter chicken with roasted vegetables and he was like babe this is better than anything we ever got at the seafood place and I think he's right like my cooking has actually gotten better since the allergy because I cook more at home now
+    expected_memory_stores:
+      - "garlic butter chicken"
+      - "roasted vegetables"
+      - "cooking more at home"
+      - "cooking improved"
+      - "better than seafood place"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 10:00 AM"
+    user_input: |
+      got the Road ID bracelet in the mail and it says SHELLFISH ALLERGY EPIPEN CARRIER on it and it's actually kind of cute like it's sleek silver and I put it on next to grandpa's watch and it doesn't look bad together
+    expected_memory_stores:
+      - "Road ID arrived"
+      - "shellfish allergy engraved"
+      - "sleek silver"
+      - "next to grandpa's watch"
+    expected_adaptation:
+      emotion_detected: "accepting"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 2:00 PM"
+    user_input: |
+      Clara noticed the bracelet on FaceTime and she said good girl and she said at the hospital they check for those first thing in emergencies so it could genuinely save my life and I said well that's comforting and terrifying simultaneously
+    expected_memory_stores:
+      - "Clara noticed bracelet"
+      - "hospitals check bracelets"
+      - "could save life"
+      - "comforting and terrifying"
+    expected_adaptation:
+      emotion_detected: "mixed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 9:00 AM"
+    user_input: |
+      what kind of medical bracelet am I wearing and what does it say
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 5:00 PM"
+    user_input: |
+      went grocery shopping and I'm reading labels automatically now like it doesn't even slow me down anymore and I found this brand of Thai curry paste that specifically says no shrimp paste and I was so excited about CURRY PASTE which shows how far my life has deviated
+    expected_memory_stores:
+      - "reading labels automatically"
+      - "doesn't slow down"
+      - "shellfish free curry paste"
+      - "excited about curry paste"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 6:00 PM"
+    user_input: |
+      hosted dinner at our place for Naomi and her husband and I made the garlic chicken again and nobody missed the shellfish and Naomi said this is incredible and I said thanks I'm a better chef now that I can't take the easy way out with shrimp
+    expected_memory_stores:
+      - "hosted dinner"
+      - "Naomi and husband"
+      - "garlic chicken"
+      - "nobody missed shellfish"
+      - "better chef"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 10:00 AM"
+    user_input: |
+      Aunt Lily texted me and said hey allergy sister how are you doing and I said honestly I'm doing ok and she said see it gets easier and she sent me a recipe for shellfish free paella that she makes and it looks amazing
+    expected_memory_stores:
+      - "Aunt Lily texted"
+      - "allergy sister"
+      - "doing ok"
+      - "shellfish free paella recipe"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 PM"
+    user_input: |
+      it's been about a month since the ER visit and I think I've reached the point where the allergy is just part of my life not the center of it like I carry the EpiPens I wear the bracelet I check menus but I don't panic anymore and that feels like real progress
+    expected_memory_stores:
+      - "one month since ER"
+      - "allergy part of life"
+      - "not center of life"
+      - "no panic"
+      - "real progress"
+    expected_adaptation:
+      emotion_detected: "settled"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How is Maya handling the allergy now?"
+    expected_contains: ["confident", "automatic", "part of life"]
+  - question: "What bracelet does Maya wear?"
+    expected_contains: ["Road ID", "shellfish allergy"]
+  - question: "How has the allergy changed Maya's cooking?"
+    expected_contains: ["better", "cooks more", "improved"]
+  - question: "What recipe did Aunt Lily share?"
+    expected_contains: ["shellfish free paella"]
+  - question: "Does Maya still panic about food?"
+    expected_contains: ["no", "doesn't panic"]
+  - question: "What does Maya wear on her wrist?"
+    expected_contains: ["Road ID bracelet", "grandpa's watch"]
+  - question: "How long since the ER visit?"
+    expected_contains: ["month"]
+  - question: "How does Maya read food labels now?"
+    expected_contains: ["automatically"]
+  - question: "What did Clara say about medical bracelets in emergencies?"
+    expected_contains: ["check first", "save life"]
+  - question: "What signature dish has Maya developed?"
+    expected_contains: ["garlic butter chicken"]

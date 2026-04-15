@@ -1,0 +1,172 @@
+story_id: 361
+story_name: "Enrolling in ML Course"
+category: "Career Development"
+description: |
+  Tests memory of Maya enrolling in Stanford Online ML certificate program.
+  Verifies system captures educational decisions, costs, and motivations.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:00 PM"
+    user_input: |
+      okay so I did something kinda big today I enrolled in the Stanford Online machine learning certificate program and it's 3200 dollars which is a lot but Conduit is covering half through their education stipend so I'm only paying 1600 out of pocket
+    expected_memory_stores:
+      - "Stanford Online ML certificate"
+      - "3200 dollars"
+      - "Conduit education stipend"
+      - "1600 out of pocket"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 8:30 PM"
+    user_input: |
+      I've been thinking about this for like months because at Conduit we're doing more and more ML stuff in the search product and I feel like I'm falling behind because Sam and Lily already know this stuff and I'm always asking them to explain things
+    expected_memory_stores:
+      - "ML at Conduit"
+      - "search product"
+      - "falling behind"
+      - "Sam and Lily ahead"
+      - "months of consideration"
+    expected_adaptation:
+      emotion_detected: "motivated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 9:00 PM"
+    user_input: |
+      the program is like four modules over three months and they say it's about 10 hours a week of work which on top of my full time job is gonna be a lot but like other people do it right and Julian said he'd pick up more of the house stuff while I'm studying
+    expected_memory_stores:
+      - "four modules"
+      - "three months"
+      - "10 hours per week"
+      - "on top of full time job"
+      - "Julian helping with house"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 9:30 PM"
+    user_input: |
+      the first module starts next Monday and it's basically intro to ML concepts like supervised versus unsupervised learning and regression and classification and I've seen some of this stuff but never formally learned it
+    expected_memory_stores:
+      - "starts next Monday"
+      - "module 1 intro"
+      - "supervised unsupervised"
+      - "regression classification"
+      - "informal prior knowledge"
+    expected_adaptation:
+      emotion_detected: "focused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      told Sam about the course and he was like finally because he's been wanting someone else on the team who understands ML properly and he said when I'm done we can actually collaborate on the search ranking model which would be amazing
+    expected_memory_stores:
+      - "Sam supportive"
+      - "Sam wanted ML teammate"
+      - "search ranking model"
+      - "future collaboration"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      Lily said she took the same program two years ago and she said module 2 about neural networks is the hardest but also the most interesting and she offered to help if I get stuck which is so nice of her
+    expected_memory_stores:
+      - "Lily took same program"
+      - "two years ago"
+      - "module 2 hardest"
+      - "neural networks"
+      - "Lily offered help"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      mom was like why are you paying for school again you already have a degree and I tried to explain that this is a certificate not a degree and it's for work and she was like I thought you were already good at computers and I just I can't with her sometimes
+    expected_memory_stores:
+      - "Vivian doesn't understand"
+      - "certificate vs degree"
+      - "Maya frustrated with mom"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      how much is Maya's ML course costing her out of pocket
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 9:00 PM"
+    user_input: |
+      I ordered the recommended textbook which is um I think it's called Introduction to Statistical Learning and it's actually free as a PDF but I wanted the physical book because I learn better that way and Julian was like you and your paper books
+    expected_memory_stores:
+      - "Introduction to Statistical Learning"
+      - "textbook"
+      - "free PDF"
+      - "bought physical"
+      - "learns better with paper"
+    expected_adaptation:
+      emotion_detected: "prepared"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 6:00 PM"
+    user_input: |
+      okay first module orientation meeting tonight on Zoom and there's like 40 people in the cohort from all over the world and the instructor seems really good her name is Dr something I'll remember later but yeah this feels real now I'm actually doing this
+    expected_memory_stores:
+      - "orientation meeting"
+      - "Zoom"
+      - "40 person cohort"
+      - "international students"
+      - "feels real"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What ML program did Maya enroll in?"
+    expected_contains: ["Stanford Online", "certificate"]
+  - question: "How much does the program cost?"
+    expected_contains: ["3200"]
+  - question: "How much is Maya paying out of pocket?"
+    expected_contains: ["1600"]
+  - question: "How many hours per week is the coursework?"
+    expected_contains: ["10"]
+  - question: "Who else at Conduit took the same program?"
+    expected_contains: ["Lily"]
+  - question: "What did Sam say about Maya learning ML?"
+    expected_contains: ["finally", "search ranking"]
+  - question: "How long is the program?"
+    expected_contains: ["three months", "four modules"]
+  - question: "What textbook is Maya using?"
+    expected_contains: ["Introduction to Statistical Learning"]
+  - question: "How many people are in Maya's cohort?"
+    expected_contains: ["40"]
+  - question: "Is Conduit helping pay for the course?"
+    expected_contains: ["yes", "education stipend", "half"]

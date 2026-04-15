@@ -1,0 +1,186 @@
+story_id: 460
+story_name: "Photo Book Christmas Gift"
+category: "Road Trips"
+description: |
+  Tests memory of Julian's surprise photo book Christmas gift for Maya.
+  Establishes the emotional culmination of the road trip thread.
+  Verifies system can connect Julian's photography across all trip stories.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Christmas Morning 8:00 AM"
+    user_input: |
+      okay so its Christmas morning and we're at Julian's parents place in Eugene and Diane made cinnamon rolls and Bob has a fire going and Kobe got a new toy from them and everything is cozy and Julian has this wrapped gift he keeps looking at and he seems nervous which is weird because he never gets nervous about gifts
+    expected_memory_stores:
+      - "Christmas morning"
+      - "Eugene at Reeves house"
+      - "Diane cinnamon rolls"
+      - "Bob fire"
+      - "Kobe new toy"
+      - "Julian nervous about gift"
+    expected_adaptation:
+      emotion_detected: "curious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Christmas Morning 9:00 AM"
+    user_input: |
+      so Julian handed me this heavy rectangular wrapped thing and said open this one first and I could tell it was a book and I was like did you get me a cookbook because he knows I've been into the ramen thing and he was like just open it and Diane had her phone out already filming which should've been my clue that this was a big deal
+    expected_memory_stores:
+      - "heavy rectangular gift"
+      - "book shaped"
+      - "Maya guessed cookbook"
+      - "ramen reference"
+      - "Diane filming"
+    expected_adaptation:
+      emotion_detected: "curious"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Christmas Morning 9:05 AM"
+    user_input: |
+      I opened it and it's a photo book a real professionally printed photo book of ALL our road trips and Julian made it with his photos from every single trip and the cover says Our Oregon and Beyond and it has a photo of the three of us me Julian and Kobe at Crater Lake and I just I immediately started crying like full on ugly crying
+    expected_memory_stores:
+      - "photo book"
+      - "professionally printed"
+      - "all road trips"
+      - "Our Oregon and Beyond"
+      - "cover photo Crater Lake"
+      - "Maya ugly crying"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Christmas Morning 9:15 AM"
+    user_input: |
+      so I'm flipping through and the first section is Columbia Gorge with Multnomah Falls and the waterfall shots are stunning and there's a candid of me at the picnic area with the older couple in the background and then Bend has all the brewery photos and the sunset from 10 Barrel's rooftop and Julian wrote little captions under each photo
+    expected_memory_stores:
+      - "Columbia Gorge section"
+      - "Multnomah Falls photos"
+      - "candid of Maya"
+      - "Bend section"
+      - "brewery photos"
+      - "10 Barrel sunset"
+      - "Julian wrote captions"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Christmas Morning 9:25 AM"
+    user_input: |
+      the Cannon Beach section has the most Kobe photos like him running in circles his first time on sand and the one where the wave scared him and he jumped behind Julian and that sunset photo of us and honestly that page alone is worth the whole book and then Crater Lake has that insane blue water and the stars we saw that night
+    expected_memory_stores:
+      - "Cannon Beach section"
+      - "Kobe beach photos"
+      - "wave scare photo"
+      - "sunset us photo"
+      - "Crater Lake section"
+      - "blue water stars"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Christmas Morning 9:35 AM"
+    user_input: |
+      Hood River section has the windsurfing disaster photos and Julian included the one of him floating in the water looking defeated and captioned it even the falls were worth it and I laughed through my tears and Mt Hood has Timberline Lodge and the snow and the one of us on the trail and Astoria has the Goonies house and Julian's face when he saw it
+    expected_memory_stores:
+      - "Hood River windsurfing photos"
+      - "Julian floating caption"
+      - "Mt Hood section"
+      - "Timberline Lodge"
+      - "Astoria Goonies"
+      - "Julian's excited face"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Christmas Morning 9:45 AM"
+    user_input: |
+      the last section is the Olympic Peninsula and the Hoh Rainforest photos are literally gallery quality like the moss and the light through the trees and Rialto Beach and that photo of Kobe in the moss where the little girl called him a forest guardian and the very last page just says more roads to come with a little map icon and I completely lost it again
+    expected_memory_stores:
+      - "Olympic Peninsula section"
+      - "Hoh Rainforest gallery quality"
+      - "Kobe forest guardian photo"
+      - "Rialto Beach"
+      - "last page more roads to come"
+      - "Maya lost it"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Christmas Morning 10:00 AM"
+    user_input: |
+      when did Julian mention making a photo book for the first time was that after Cannon Beach
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Christmas Morning 10:15 AM"
+    user_input: |
+      Diane is crying and Bob is pretending he's not and Julian said he's been working on this for months secretly printing and editing at Bold Studio after hours and that's why he was weird about his laptop a few times and I was like THATS why you wouldn't let me see your screen and he said yeah sorry about that and I hugged him so hard I think I hurt him
+    expected_memory_stores:
+      - "Diane crying"
+      - "Bob emotional"
+      - "Julian months of work"
+      - "Bold Studio after hours"
+      - "laptop secrecy explained"
+      - "Maya hugged Julian hard"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Christmas Morning 11:00 AM"
+    user_input: |
+      I called my mom and told her about the book and she teared up and I FaceTimed Clara and held up the pages and Sophie was grabbing at the screen and I texted Jenny and Nadia photos of the book and everyone is like Julian is the best and honestly yeah he is and this book is going on our coffee table forever and it's the best gift I've ever received in my life hands down nothing else even comes close
+    expected_memory_stores:
+      - "called Vivian"
+      - "FaceTimed Clara"
+      - "Sophie grabbing screen"
+      - "Jenny Nadia texted"
+      - "best gift ever"
+      - "coffee table forever"
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did Julian give Maya for Christmas?"
+    expected_contains: ["photo book", "road trip"]
+  - question: "What is the title of the photo book?"
+    expected_contains: ["Our Oregon and Beyond"]
+  - question: "What photo is on the cover of the book?"
+    expected_contains: ["Crater Lake", "three"]
+  - question: "Where did Julian print the photo book?"
+    expected_contains: ["Bold Studio"]
+  - question: "What does the last page of the book say?"
+    expected_contains: ["more roads to come"]
+  - question: "Where were they when Maya opened the gift?"
+    expected_contains: ["Eugene", "Reeves"]
+  - question: "How many trips are documented in the photo book?"
+    expected_contains: ["eight"]
+  - question: "What was Julian's caption on the Hood River windsurfing photo?"
+    expected_contains: ["falls were worth it"]
+  - question: "Who did Maya tell about the photo book?"
+    expected_contains: ["Vivian", "Clara", "Jenny", "Nadia"]
+  - question: "Where is Maya keeping the photo book?"
+    expected_contains: ["coffee table"]

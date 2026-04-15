@@ -1,0 +1,173 @@
+story_id: 305
+story_name: "Birthday Goes Unacknowledged"
+category: "Friendships"
+description: |
+  Tests memory of Maya's birthday being missed by Jenny. The emotional
+  peak of the abandonment arc. Verifies system captures the significance
+  of missed milestones in close relationships.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Birthday Eve Wednesday 8:00 PM"
+    user_input: |
+      so tomorrow's my birthday and Jenny hasn't mentioned it at all like she used to start a countdown a week before with like those little emoji things and this year nothing and I keep checking my phone like an idiot
+    expected_memory_stores:
+      - "Maya's birthday tomorrow"
+      - "Jenny hasn't mentioned"
+      - "used to do countdown"
+      - "checking phone"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Birthday Thursday 7:00 AM"
+    user_input: |
+      woke up and Julian made me pancakes and Kobe had a little bandana on that says birthday girl which was adorable and Clara texted at like midnight and my parents called already but nothing from Jenny
+    expected_memory_stores:
+      - "birthday morning"
+      - "Julian pancakes"
+      - "Kobe bandana"
+      - "Clara midnight text"
+      - "parents called"
+      - "nothing from Jenny"
+    expected_adaptation:
+      emotion_detected: "hurt"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Birthday Thursday 12:00 PM"
+    user_input: |
+      it's noon on my birthday and Jenny still hasn't texted or called or anything and Marcus and Omar both posted on my wall and even my aunt Linda who I see once a year remembered and Jenny my BEST FRIEND and MAID OF HONOR forgot
+    expected_memory_stores:
+      - "noon no Jenny"
+      - "Marcus posted"
+      - "Omar posted"
+      - "aunt Linda remembered"
+      - "Jenny forgot"
+    expected_adaptation:
+      emotion_detected: "devastated"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Birthday Thursday 3:00 PM"
+    user_input: |
+      Julian took me to lunch at Canard which was really sweet and he got me this beautiful necklace with a little crescent moon pendant and I love it but in the back of my head I just kept thinking about Jenny not calling
+    expected_memory_stores:
+      - "lunch at Canard"
+      - "crescent moon necklace"
+      - "Julian gift"
+      - "still thinking about Jenny"
+    expected_adaptation:
+      emotion_detected: "distracted"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Birthday Thursday 6:00 PM"
+    user_input: |
+      ok so Jenny FINALLY texted at like 5:45 and it was literally just happy birthday Maya with a balloon emoji and that's IT like not even a call not a voice note not a paragraph just six words and a balloon
+    expected_memory_stores:
+      - "Jenny texted 5:45 PM"
+      - "happy birthday balloon emoji"
+      - "no call"
+      - "minimal effort"
+    expected_adaptation:
+      emotion_detected: "furious"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Birthday Thursday 8:30 PM"
+    user_input: |
+      went to dinner with Julian Clara and Marcus at Departure and it was fun but I was in a mood and Clara could tell and she pulled me aside in the bathroom and was like what's wrong and I said Jenny barely acknowledged my birthday and Clara was like oh honey
+    expected_memory_stores:
+      - "birthday dinner Departure"
+      - "Julian Clara Marcus"
+      - "Maya in a mood"
+      - "Clara noticed"
+      - "bathroom conversation"
+    expected_adaptation:
+      emotion_detected: "upset"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Birthday Thursday 10:00 PM"
+    user_input: |
+      I replied to Jenny's text with just a thanks and she sent back a heart and that was it and last year she literally threw me a surprise party at Loyal Legion with like 20 people and made a slideshow of our friendship so
+    expected_memory_stores:
+      - "replied thanks"
+      - "Jenny sent heart"
+      - "last year surprise party"
+      - "Loyal Legion"
+      - "friendship slideshow"
+    expected_adaptation:
+      emotion_detected: "grieving"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 9:00 AM"
+    user_input: |
+      where did Julian take me for my birthday lunch yesterday and what was the gift
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 12:00 PM"
+    user_input: |
+      Julian said maybe Jenny just had a rough day or forgot what day it was with the time zone thing but Austin is only two hours ahead that's not an excuse and he said I should call her and tell her I'm hurt instead of stewing
+    expected_memory_stores:
+      - "Julian defending Jenny"
+      - "time zone excuse"
+      - "two hours ahead"
+      - "call and communicate"
+    expected_adaptation:
+      emotion_detected: "stubborn"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 7:00 PM"
+    user_input: |
+      I'm not gonna call her about it because if she can't remember my birthday without being reminded then what does that say and I know I sound petty but we've been best friends for seven years and she couldn't pick up the phone for five minutes on my birthday
+    expected_memory_stores:
+      - "won't call Jenny"
+      - "seven year friendship"
+      - "five minutes"
+      - "feeling petty but justified"
+    expected_adaptation:
+      emotion_detected: "resolute"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What happened on Maya's birthday regarding Jenny?"
+    expected_contains: ["forgot", "late text", "balloon emoji"]
+  - question: "What did Julian give Maya for her birthday?"
+    expected_contains: ["crescent moon necklace"]
+  - question: "Where did Julian take Maya for birthday lunch?"
+    expected_contains: ["Canard"]
+  - question: "Who came to Maya's birthday dinner?"
+    expected_contains: ["Julian", "Clara", "Marcus"]
+  - question: "Where was Maya's birthday dinner?"
+    expected_contains: ["Departure"]
+  - question: "What did Jenny do for Maya's birthday last year?"
+    expected_contains: ["surprise party", "Loyal Legion", "slideshow"]
+  - question: "When did Jenny finally text on Maya's birthday?"
+    expected_contains: ["5:45", "evening", "late"]
+  - question: "How long have Maya and Jenny been best friends?"
+    expected_contains: ["seven years"]
+  - question: "What did Clara do at the birthday dinner?"
+    expected_contains: ["pulled aside", "bathroom", "noticed"]
+  - question: "How does Maya feel about Jenny missing her birthday?"
+    expected_contains: ["hurt", "furious", "devastated"]

@@ -1,0 +1,164 @@
+story_id: 401
+story_name: "Civic Dying"
+category: "Car Saga"
+description: |
+  Maya's 2014 Honda Civic with 200K miles starts having serious transmission issues.
+  Establishes car baseline, mileage, and the beginning of a long repair saga.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:30 AM"
+    user_input: |
+      ok so my car is doing this thing again where like when I shift from park to drive it kind of lurches and makes this horrible grinding noise and I'm like oh god please not the transmission because that's like the one thing you don't wanna hear right
+    expected_memory_stores:
+      - "car problems"
+      - "transmission issue"
+      - "grinding noise"
+      - "lurching"
+    expected_adaptation:
+      emotion_detected: "worried"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 8:15 AM"
+    user_input: |
+      it's a 2014 Honda Civic by the way I've had it since like right after college so it's been a good car honestly but it's got like um I think around 198 thousand miles on it wait no actually I checked last week it was 201k so yeah over 200 thousand which is a lot
+    expected_memory_stores:
+      - "2014 Honda Civic"
+      - "200k miles"
+      - "since college"
+      - "correction 198k to 201k"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 12:30 PM"
+    user_input: |
+      Julian drove the car to get coffee this morning and he said it's definitely the transmission like he grew up around cars his dad George is like super into that stuff and Julian said the slipping is textbook transmission failure whatever that means
+    expected_memory_stores:
+      - "Julian confirms transmission"
+      - "George knows cars"
+      - "transmission slipping"
+    expected_adaptation:
+      emotion_detected: "stressed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 2:00 PM"
+    user_input: |
+      called this mechanic place on Hawthorne that Clara recommended called Pacific Auto and they said bring it in tomorrow and they'd do a diagnostic for 120 bucks and I'm like ok fine but I already know it's gonna be bad news
+    expected_memory_stores:
+      - "Pacific Auto"
+      - "Hawthorne"
+      - "Clara recommendation"
+      - "diagnostic $120"
+      - "appointment tomorrow"
+    expected_adaptation:
+      emotion_detected: "resigned"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 5:00 PM"
+    user_input: |
+      looked up transmission repair costs online and it's saying anywhere from like 1800 to 3500 dollars and I'm just like we literally just put the down payment on the house I don't have that kind of money right now this is so bad timing
+    expected_memory_stores:
+      - "repair estimate $1800-$3500"
+      - "down payment on house"
+      - "financial stress"
+    expected_adaptation:
+      emotion_detected: "panicked"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 7:00 PM"
+    user_input: |
+      Julian said maybe we should just buy a new car and I'm like with what money Julian we just bought a house and he's like well your car has 200k miles on it how much longer were you really gonna drive it and I hate that he's right honestly
+    expected_memory_stores:
+      - "Julian suggests new car"
+      - "financial argument"
+      - "house purchase recent"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Monday 8:30 PM"
+    user_input: |
+      my mom called and I told her about the car and she was like Maya you should have gotten rid of that thing years ago and I'm like thanks mom real helpful and she offered to lend us some money which was actually sweet but I said we'd figure it out
+    expected_memory_stores:
+      - "Vivian reaction"
+      - "offered money"
+      - "Maya declined"
+    expected_adaptation:
+      emotion_detected: "irritated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Monday 9:15 PM"
+    user_input: |
+      wait how many miles did I say my car has again I keep going back and forth I think it's like 200 something thousand right
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 10:00 PM"
+    user_input: |
+      can't sleep thinking about this car thing like I know it's just a car but it's been with me through so much you know like I drove it to my interview at Vantage and I drove it to Portland when I moved here from Seattle and it's got all those dumb stickers Julian put on the bumper
+    expected_memory_stores:
+      - "sentimental attachment"
+      - "drove to Vantage interview"
+      - "moved Portland from Seattle"
+      - "Julian bumper stickers"
+    expected_adaptation:
+      emotion_detected: "nostalgic"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 6:45 AM"
+    user_input: |
+      ok taking the Civic to Pacific Auto this morning Julian's following me in his truck in case it breaks down on the way and honestly the way it sounded starting up I would not be surprised like it made this noise that was like metal on metal just bad real bad
+    expected_memory_stores:
+      - "driving to Pacific Auto"
+      - "Julian following"
+      - "metal on metal noise"
+      - "worsening condition"
+    expected_adaptation:
+      emotion_detected: "dreading"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What kind of car does Maya drive?"
+    expected_contains: ["2014", "Honda Civic"]
+  - question: "How many miles does Maya's car have?"
+    expected_contains: ["200", "201"]
+  - question: "What's wrong with Maya's car?"
+    expected_contains: ["transmission"]
+  - question: "Where is Maya taking the car for repair?"
+    expected_contains: ["Pacific Auto"]
+  - question: "Who recommended the mechanic?"
+    expected_contains: ["Clara"]
+  - question: "How much is the diagnostic?"
+    expected_contains: ["120"]
+  - question: "What did Julian suggest about the car?"
+    expected_contains: ["new car", "buy"]
+  - question: "Why is the timing bad for car expenses?"
+    expected_contains: ["house", "down payment"]
+  - question: "What did Vivian offer regarding the car situation?"
+    expected_contains: ["money", "lend"]
+  - question: "What sentimental value does the car have for Maya?"
+    expected_contains: ["interview", "Portland", "moved"]

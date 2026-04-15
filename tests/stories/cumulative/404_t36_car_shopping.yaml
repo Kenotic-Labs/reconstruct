@@ -1,0 +1,169 @@
+story_id: 404
+story_name: "Car Shopping Begins"
+category: "Car Saga"
+description: |
+  Maya starts shopping for a used car. Looks at RAV4s, Outbacks, and finds a
+  suspiciously good deal on Craigslist. Tests entity tracking across car options.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00 AM"
+    user_input: |
+      ok so the Civic is fixed again but Julian and I agreed this is it we're getting a new car well not new new but like a used car that's not falling apart so today we're gonna go look at some stuff I've been on Autotrader all morning
+    expected_memory_stores:
+      - "Civic fixed"
+      - "shopping for used car"
+      - "Autotrader research"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 11:00 AM"
+    user_input: |
+      went to the Toyota dealership in Beaverton first and they have a 2021 RAV4 with 35k miles for like 29 thousand but the salesman was SO pushy like immediately trying to get me to finance through them at 6.9 percent and I'm like sir I haven't even driven it yet calm down
+    expected_memory_stores:
+      - "Toyota dealership Beaverton"
+      - "2021 RAV4 35k miles"
+      - "$29,000"
+      - "pushy salesman"
+      - "6.9% financing"
+    expected_adaptation:
+      emotion_detected: "annoyed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 1:30 PM"
+    user_input: |
+      Julian dragged me to the Subaru place next door literally called Beaverton Subaru and ok fine the Outback is really nice like the 2021 has this huge cargo area and Kobe would love it and the all wheel drive is standard and the one they showed us has 28k miles for 28,500
+    expected_memory_stores:
+      - "Beaverton Subaru"
+      - "2021 Outback"
+      - "28k miles"
+      - "$28,500"
+      - "Kobe cargo area"
+      - "all wheel drive"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 3:00 PM"
+    user_input: |
+      I keep going back and forth like the RAV4 is the safe choice and Toyota reliability is legendary but the Outback just feels better to drive and it's actually 500 bucks cheaper and has fewer miles which wait that doesn't make sense or does it I guess Subarus depreciate faster
+    expected_memory_stores:
+      - "RAV4 vs Outback comparison"
+      - "Outback $500 cheaper"
+      - "fewer miles on Outback"
+      - "depreciation difference"
+    expected_adaptation:
+      emotion_detected: "indecisive"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 6:00 PM"
+    user_input: |
+      got home and Jenny FaceTimed from Austin and I showed her the pictures of both cars and she was like girl get the Subaru you live in Oregon everyone has a Subaru it's literally the law there and I laughed but she's not wrong
+    expected_memory_stores:
+      - "Jenny FaceTime from Austin"
+      - "Jenny recommends Subaru"
+      - "Oregon Subaru culture"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 8:00 AM"
+    user_input: |
+      so I'm scrolling Craigslist this morning and there's this 2020 RAV4 with only 22k miles listed for 21 thousand dollars which is insanely cheap like that's like 7 or 8 thousand under market value and the photos look great and I'm like ok this might be the move
+    expected_memory_stores:
+      - "Craigslist listing"
+      - "2020 RAV4"
+      - "22k miles"
+      - "$21,000"
+      - "below market value"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 9:30 AM"
+    user_input: |
+      texted the Craigslist seller and he said he's selling because he's moving overseas and needs to get rid of it fast and I'm like ok that makes sense right Julian looked at the photos and said something about the interior looked off but I think he's being paranoid
+    expected_memory_stores:
+      - "seller claims moving overseas"
+      - "needs to sell fast"
+      - "Julian suspicious"
+      - "interior looked off"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 12:00 PM"
+    user_input: |
+      wait what was the price of that Craigslist RAV4 and how many miles does it have
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 2:00 PM"
+    user_input: |
+      George texted me and said if the deal seems too good to be true it probably is and he said always get a pre purchase inspection and check for flood damage especially on cheap cars coming from out of state and I was like ok good advice thanks George
+    expected_memory_stores:
+      - "George advice"
+      - "pre-purchase inspection"
+      - "flood damage warning"
+      - "out of state cars"
+    expected_adaptation:
+      emotion_detected: "thoughtful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 5:00 PM"
+    user_input: |
+      set up to meet the Craigslist guy tomorrow at a parking lot off Division Street at 4pm he said he'd have all the paperwork and a clean title and Julian insisted on coming with me which honestly fine good I want him there just in case
+    expected_memory_stores:
+      - "meeting tomorrow 4pm"
+      - "Division Street parking lot"
+      - "clean title claimed"
+      - "Julian coming along"
+    expected_adaptation:
+      emotion_detected: "cautiously excited"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What cars did Maya test drive at dealerships?"
+    expected_contains: ["RAV4", "Outback"]
+  - question: "How much is the Outback at Beaverton Subaru?"
+    expected_contains: ["28,500", "28500"]
+  - question: "What suspiciously cheap car did Maya find on Craigslist?"
+    expected_contains: ["RAV4", "21,000", "21000"]
+  - question: "Why is the Craigslist seller selling?"
+    expected_contains: ["moving overseas"]
+  - question: "What did George warn Maya about?"
+    expected_contains: ["flood damage", "pre-purchase inspection"]
+  - question: "Where is Maya meeting the Craigslist seller?"
+    expected_contains: ["Division Street"]
+  - question: "Who recommended the Subaru?"
+    expected_contains: ["Jenny", "Julian"]
+  - question: "How many miles does the Craigslist RAV4 have?"
+    expected_contains: ["22"]
+  - question: "What was suspicious about the Craigslist listing?"
+    expected_contains: ["below market", "cheap", "too good"]
+  - question: "What dealership has the Outback?"
+    expected_contains: ["Beaverton Subaru"]

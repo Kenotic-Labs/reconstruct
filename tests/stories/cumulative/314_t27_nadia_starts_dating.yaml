@@ -1,0 +1,174 @@
+story_id: 314
+story_name: "Nadia Starts Dating Again"
+category: "Friendships"
+description: |
+  Tests memory of Nadia tentatively entering the dating world. Maya supports
+  her through the awkwardness. First dates, profile reviews, and nervous energy.
+  Verifies system tracks new relationship developments for secondary characters.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00 PM"
+    user_input: |
+      Nadia told me she downloaded Bumble tonight and she was like is this crazy I'm not even divorced yet technically and I said girl the papers are filed Kwame is on Hinge you do you and she laughed nervously
+    expected_memory_stores:
+      - "Nadia on Bumble"
+      - "not technically divorced"
+      - "papers filed"
+      - "Kwame on Hinge"
+      - "nervous"
+    expected_adaptation:
+      emotion_detected: "supportive"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      helped Nadia pick her Bumble photos after climbing tonight and she's so photogenic but she kept picking the worst ones and I was like Nadia that one makes you look like a librarian no offense to librarians and we were dying laughing at the gym cafe
+    expected_memory_stores:
+      - "Bumble photos"
+      - "after climbing"
+      - "gym cafe"
+      - "Nadia photogenic"
+      - "laughing"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 7:30 PM"
+    user_input: |
+      Nadia has her first date tomorrow with this guy named Ethan who's a chef at some restaurant on Alberta Street and she's freaking out and keeps texting me outfit options and I'm like wear the green dress you look incredible in it
+    expected_memory_stores:
+      - "first date tomorrow"
+      - "Ethan"
+      - "chef"
+      - "Alberta Street restaurant"
+      - "outfit anxiety"
+      - "green dress"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 10:30 PM"
+    user_input: |
+      Nadia's date was fine she said like literally the word fine and I was like that bad huh and she said no he was nice enough but there was zero chemistry and he talked about sourdough for 30 minutes and I was like oh no the sourdough guys
+    expected_memory_stores:
+      - "date was fine"
+      - "zero chemistry"
+      - "sourdough for 30 minutes"
+      - "no second date"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Week 2 Monday 6:00 PM"
+    user_input: |
+      Nadia went on another date this weekend with someone named Priya not my Priya from work obviously different Priya and she said it was actually really nice and she hadn't considered dating women before but Dr Lin helped her explore that
+    expected_memory_stores:
+      - "date with Priya"
+      - "different from work Priya"
+      - "nice date"
+      - "exploring dating women"
+      - "Dr Lin helped"
+    expected_adaptation:
+      emotion_detected: "interested"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Week 2 Wednesday 8:30 PM"
+    user_input: |
+      the Priya thing didn't work out either apparently they had a great conversation but Priya just moved here too and is looking for something casual and Nadia wants someone who's like actually invested so back to swiping
+    expected_memory_stores:
+      - "Priya didn't work out"
+      - "Priya wants casual"
+      - "Nadia wants invested"
+      - "back to swiping"
+    expected_adaptation:
+      emotion_detected: "disappointed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Week 2 Thursday 7:00 PM"
+    user_input: |
+      Nadia said dating is making her miss Kwame which is confusing because she doesn't want him back exactly but she misses having a person you know like someone who already knows your coffee order and how you like the pillows and all that stuff
+    expected_memory_stores:
+      - "misses Kwame"
+      - "doesn't want him back"
+      - "misses comfort"
+      - "knowing someone deeply"
+    expected_adaptation:
+      emotion_detected: "empathetic"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Week 2 Friday 12:00 PM"
+    user_input: |
+      what dating app is Nadia using
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Week 2 Saturday 4:00 PM"
+    user_input: |
+      told Nadia to take a break from the apps for a bit and just focus on building her life here and she agreed and she said she has climbing and she has me and she has her job and Dr Lin and that's actually a pretty good foundation and I was like see? you don't need a man or woman or whoever right now
+    expected_memory_stores:
+      - "taking break from apps"
+      - "focus on building life"
+      - "good foundation"
+      - "doesn't need partner now"
+    expected_adaptation:
+      emotion_detected: "wise"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Week 2 Sunday 6:00 PM"
+    user_input: |
+      Nadia deleted Bumble tonight and she sent me a screenshot and she was like look I'm free and she seemed genuinely relieved like the pressure was off and she said she'll try again when she's ready but right now she just wants to enjoy Portland and her friends
+    expected_memory_stores:
+      - "deleted Bumble"
+      - "screenshot"
+      - "relieved"
+      - "try again when ready"
+      - "enjoy Portland and friends"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What dating app did Nadia use?"
+    expected_contains: ["Bumble"]
+  - question: "Who was Nadia's first date?"
+    expected_contains: ["Ethan", "chef"]
+  - question: "What went wrong with the Ethan date?"
+    expected_contains: ["sourdough", "no chemistry"]
+  - question: "Who else did Nadia go on a date with?"
+    expected_contains: ["Priya"]
+  - question: "What did Nadia discover about her dating preferences?"
+    expected_contains: ["women", "exploring"]
+  - question: "Why did Nadia stop using Bumble?"
+    expected_contains: ["deleted", "break", "not ready"]
+  - question: "What does Nadia miss about being in a relationship?"
+    expected_contains: ["comfort", "knowing someone", "person"]
+  - question: "What foundation does Nadia have in Portland?"
+    expected_contains: ["climbing", "Maya", "job", "Dr Lin"]
+  - question: "Did Nadia go on any good dates?"
+    expected_contains: ["Priya", "nice"]
+  - question: "What advice did Maya give about dating?"
+    expected_contains: ["break", "focus", "building life"]

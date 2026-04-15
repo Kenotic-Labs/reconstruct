@@ -1,0 +1,192 @@
+story_id: 296
+story_name: "Dove Lewis Emergency"
+category: "Pet"
+description: |
+  Tests memory of Kobe being taken to Dove Lewis emergency vet when he doesn't
+  improve. Captures the scary overnight stay and Maya's emotional crisis.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 6:00 AM"
+    user_input: |
+      Kobe barely slept last night and neither did I he started vomiting again around 3 AM even with the anti-nausea meds and he's shaking and won't stand up and I called Dr. Mills answering service and they said take him to Dove Lewis now
+    expected_memory_stores:
+      - "vomiting again 3 AM"
+      - "anti-nausea not working"
+      - "shaking"
+      - "won't stand"
+      - "called answering service"
+      - "Dove Lewis now"
+    expected_adaptation:
+      emotion_detected: "panicked"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 6:30 AM"
+    user_input: |
+      Julian drove us to Dove Lewis and I was in the back seat with Kobe's head in my lap and he was trembling and I was talking to him the whole time telling him he's a good boy and we're gonna fix this and Julian was driving fast but steady and I could see his jaw clenched
+    expected_memory_stores:
+      - "Julian driving"
+      - "Maya in back with Kobe"
+      - "Kobe trembling"
+      - "talking to Kobe"
+      - "Julian jaw clenched"
+      - "rushed to Dove Lewis"
+    expected_adaptation:
+      emotion_detected: "terrified"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 7:00 AM"
+    user_input: |
+      at Dove Lewis now and they took Kobe immediately into the back the emergency vet is Dr. Kim and she said they'll start aggressive IV fluids and pain management and they need to monitor him and she asked about his history and I told her everything the pancreatitis diagnosis from Dr. Mills
+    expected_memory_stores:
+      - "Dove Lewis"
+      - "Dr. Kim emergency vet"
+      - "taken to back immediately"
+      - "aggressive IV fluids"
+      - "pain management"
+      - "monitoring"
+      - "shared Dr. Mills diagnosis"
+    expected_adaptation:
+      emotion_detected: "scared"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 9:00 AM"
+    user_input: |
+      sitting in the Dove Lewis waiting room and Julian got us coffee and we're just sitting here waiting and I can't stop crying and Julian's holding my hand and he looks like he hasn't slept either and the waiting room has these sad pamphlets about pet loss and I can't even look at them
+    expected_memory_stores:
+      - "waiting room"
+      - "Julian got coffee"
+      - "crying"
+      - "Julian holding hand"
+      - "no sleep"
+      - "pet loss pamphlets"
+    expected_adaptation:
+      emotion_detected: "devastated"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 11:00 AM"
+    user_input: |
+      Dr. Kim came out and said Kobe is responding to the fluids and the vomiting has stopped and his vitals are stabilizing but they want to keep him overnight for observation and the estimated cost for the emergency visit and overnight stay is $1,800 to $2,200 and I was like I don't care how much it costs
+    expected_memory_stores:
+      - "Kobe responding"
+      - "vomiting stopped"
+      - "vitals stabilizing"
+      - "overnight stay"
+      - "$1,800-2,200 estimate"
+      - "don't care about cost"
+    expected_adaptation:
+      emotion_detected: "relieved but worried"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 12:00 PM"
+    user_input: |
+      they let us visit Kobe in the back and he was on an IV drip lying in a kennel with a blanket and when he saw us his tail did this little weak wag and I lost it completely Julian picked up his paw and held it and Dr. Kim said he's comfortable and not in pain
+    expected_memory_stores:
+      - "visited Kobe"
+      - "IV drip"
+      - "kennel with blanket"
+      - "weak tail wag"
+      - "Maya lost it"
+      - "Julian held paw"
+      - "comfortable not in pain"
+    expected_adaptation:
+      emotion_detected: "heartbroken"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 6:00 PM"
+    user_input: |
+      home without Kobe and the house feels so empty and wrong and his bed is there and his water bowl is there and his chew toys are there and he's not and Julian and I just sat on the couch not talking and I texted Nadia and she said she's coming over
+    expected_memory_stores:
+      - "home without Kobe"
+      - "house feels empty"
+      - "his things everywhere"
+      - "silent couch"
+      - "texted Nadia"
+      - "Nadia coming over"
+    expected_adaptation:
+      emotion_detected: "bereft"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 9:00 PM"
+    user_input: |
+      Nadia brought food and stayed with us and told us about how her cat had a health scare last year and recovered fully and she said Kobe is strong and he's at the best emergency vet in Portland and he's going to be fine and I needed to hear that even if I'm not fully convinced
+    expected_memory_stores:
+      - "Nadia brought food"
+      - "Nadia's cat scare"
+      - "Kobe is strong"
+      - "best emergency vet"
+      - "reassurance"
+    expected_adaptation:
+      emotion_detected: "slightly comforted"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 8:00 AM"
+    user_input: |
+      Dove Lewis called and Kobe had a good night his lipase levels are dropping which means the inflammation is going down and he ate a small amount of a special low-fat prescription food and kept it down and Dr. Kim said we can probably take him home this afternoon
+    expected_memory_stores:
+      - "good night at Dove Lewis"
+      - "lipase dropping"
+      - "inflammation going down"
+      - "ate prescription food"
+      - "kept food down"
+      - "home this afternoon"
+    expected_adaptation:
+      emotion_detected: "hugely relieved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 2:00 PM"
+    user_input: |
+      KOBE IS HOME he walked out of Dove Lewis on his own which Dr. Kim said is a really good sign and his tail was wagging properly not the weak wag from yesterday and the bill was $2,050 and Julian was like worth every penny and I was like absolutely and Kobe is currently lying on his bed with his head on Julian's lap
+    expected_memory_stores:
+      - "Kobe home"
+      - "walked out on own"
+      - "good sign"
+      - "tail wagging"
+      - "bill $2,050"
+      - "worth every penny"
+      - "head on Julian's lap"
+    expected_adaptation:
+      emotion_detected: "overjoyed"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where was Kobe hospitalized?"
+    expected_contains: ["Dove Lewis"]
+  - question: "Who was the emergency vet?"
+    expected_contains: ["Dr. Kim"]
+  - question: "How much did the Dove Lewis visit cost?"
+    expected_contains: ["2,050", "2050"]
+  - question: "What showed Kobe was improving?"
+    expected_contains: ["lipase dropping", "ate", "kept food down"]
+  - question: "How long was Kobe at Dove Lewis?"
+    expected_contains: ["overnight", "one night"]
+  - question: "What food did Kobe eat at Dove Lewis?"
+    expected_contains: ["low-fat", "prescription"]
+  - question: "Did Kobe walk out on his own?"
+    expected_contains: ["yes"]
+  - question: "Who came to keep Maya and Julian company while Kobe was hospitalized?"
+    expected_contains: ["Nadia"]
+  - question: "What were Kobe's symptoms that led to the emergency visit?"
+    expected_contains: ["vomiting", "shaking", "wouldn't stand"]
+  - question: "How much has Kobe's medical care cost total?"
+    expected_contains: ["2,530", "2530", "480", "2050"]

@@ -1,0 +1,174 @@
+story_id: 340
+story_name: "Wedding Guest Core"
+category: "Friendships"
+description: |
+  Tests memory of the friend group becoming the wedding guest core. Wedding
+  planning discussions, role assignments, and excitement. Thread resolution.
+  Verifies system captures event planning and role tracking.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 7:00 PM"
+    user_input: |
+      Round Table tonight but it's special because Julian and I are officially asking the group for wedding roles and I'm nervous which is dumb because they're our best friends but still it's a big ask
+    expected_memory_stores:
+      - "special Round Table"
+      - "wedding roles"
+      - "nervous"
+      - "big ask"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 7:30 PM"
+    user_input: |
+      Julian asked Marcus to be his best man and Marcus literally stood up and hugged him in the restaurant and said are you kidding me of course and I thought about how two months ago I wanted to kick Marcus out of the group and now he's our best man
+    expected_memory_stores:
+      - "Marcus best man"
+      - "Julian asked"
+      - "Marcus hugged Julian"
+      - "two months ago wanted to kick out"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 7:45 PM"
+    user_input: |
+      Jenny already knows she's maid of honor obviously but I asked Nadia to be a bridesmaid and she started crying at the table and she said Maya three months ago I didn't have a single friend in Portland and now I'm in a wedding and Omar handed her a napkin
+    expected_memory_stores:
+      - "Nadia bridesmaid"
+      - "Nadia cried"
+      - "three months ago no friends"
+      - "now in a wedding"
+      - "Omar napkin"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 8:00 PM"
+    user_input: |
+      Julian asked Omar to be a groomsman and Omar did that Omar thing where he nodded once and said it would be an honor and that was it but you could tell he was really moved because his eyes got shiny and Omar does NOT get shiny eyed
+    expected_memory_stores:
+      - "Omar groomsman"
+      - "it would be an honor"
+      - "eyes got shiny"
+      - "Omar rarely emotional"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 8:30 PM"
+    user_input: |
+      Jenny was crying through FaceTime obviously and she said she already has bachelorette party plans in the works Willamette Valley wine weekend like we talked about and Nadia said count me in and Marcus said what about the bachelor party and Julian said keep it simple no Vegas
+    expected_memory_stores:
+      - "Jenny crying"
+      - "bachelorette Willamette Valley"
+      - "Nadia joining"
+      - "bachelor party"
+      - "no Vegas"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 9:00 PM"
+    user_input: |
+      we told them the wedding details September at the venue in Hood River on the Columbia and it's going to be like 80 people and Marcus said I'm giving the best speech anyone's ever heard and Julian said please don't embarrass me and Marcus said no promises
+    expected_memory_stores:
+      - "September wedding"
+      - "Hood River venue"
+      - "Columbia River"
+      - "80 people"
+      - "Marcus speech"
+      - "no promises"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 9:30 PM"
+    user_input: |
+      Omar said he'll handle the music playlist because he has the best taste and nobody argued and Nadia offered to design the invitations and Jenny said she'll coordinate with Clara on the bridal shower and I was like you guys this is really happening
+    expected_memory_stores:
+      - "Omar music playlist"
+      - "Nadia invitations design"
+      - "Jenny and Clara bridal shower"
+      - "really happening"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 10:00 PM"
+    user_input: |
+      who is Julian's best man and who are the groomsmen
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 10:30 PM"
+    user_input: |
+      Marcus raised his glass and said to the Round Table the only friend group that survived a hookup a breakup a group split and still ended up in a wedding and everyone clinked and Jenny yelled HEAR HEAR through the phone and I thought this is my family
+    expected_memory_stores:
+      - "Marcus toast"
+      - "survived hookup breakup split"
+      - "in a wedding"
+      - "everyone clinked"
+      - "Jenny HEAR HEAR"
+      - "this is my family"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 AM"
+    user_input: |
+      woke up this morning with Julian and Kobe and I could hear Greg playing bass through headphones next door which means I can't actually hear it but I know he's there and I looked around at my life and thought about the wedding and the friends and the house and the dog and I just feel really full right now like my life is full
+    expected_memory_stores:
+      - "morning reflection"
+      - "Julian Kobe Greg"
+      - "wedding friends house dog"
+      - "life is full"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who is Julian's best man?"
+    expected_contains: ["Marcus"]
+  - question: "Who are Maya's bridesmaids?"
+    expected_contains: ["Jenny", "Nadia"]
+  - question: "Who is the groomsman?"
+    expected_contains: ["Omar"]
+  - question: "What is Omar doing for the wedding?"
+    expected_contains: ["music playlist", "groomsman"]
+  - question: "What is Nadia doing for the wedding?"
+    expected_contains: ["invitations", "design", "bridesmaid"]
+  - question: "Where is the wedding?"
+    expected_contains: ["Hood River"]
+  - question: "How many guests?"
+    expected_contains: ["80"]
+  - question: "What did Marcus say about his speech?"
+    expected_contains: ["best speech", "no promises"]
+  - question: "Where is the bachelorette party?"
+    expected_contains: ["Willamette Valley"]
+  - question: "What toast did Marcus give?"
+    expected_contains: ["survived hookup breakup split", "wedding"]

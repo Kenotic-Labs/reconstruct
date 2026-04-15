@@ -1,0 +1,172 @@
+story_id: 316
+story_name: "Nadia's Emotional Anchor"
+category: "Friendships"
+description: |
+  Tests memory of Maya becoming Nadia's primary emotional support during
+  a particularly hard week when divorce becomes final. Verifies system tracks
+  emotional milestones and supportive relationship patterns.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 6:00 PM"
+    user_input: |
+      Nadia called me at work today sounding really shaky and she said the divorce was finalized this morning like officially done signed by the judge and even though she wanted it to be over hearing that it's actually over felt like getting punched
+    expected_memory_stores:
+      - "divorce finalized"
+      - "signed by judge"
+      - "Nadia shaky"
+      - "felt like getting punched"
+      - "called at work"
+    expected_adaptation:
+      emotion_detected: "concerned"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 7:30 PM"
+    user_input: |
+      drove to Nadia's apartment after work and she was on the couch still in her work clothes just staring at the wall and I brought Thai food from that place on Hawthorne PaaDee and we just sat and ate and she didn't talk much and that was ok
+    expected_memory_stores:
+      - "drove to Nadia's"
+      - "Nadia staring at wall"
+      - "Thai food PaaDee"
+      - "Hawthorne"
+      - "quiet company"
+    expected_adaptation:
+      emotion_detected: "nurturing"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      Nadia texted tonight saying she went back and forth between crying and feeling relieved all day and she's confused about which feeling is the real one and I said probably both and she said yeah probably
+    expected_memory_stores:
+      - "crying and relief"
+      - "confused about feelings"
+      - "both are real"
+    expected_adaptation:
+      emotion_detected: "empathetic"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      climbed with Nadia today and she was climbing angry like just attacking the wall and she got up a V2 for the first time which is nuts and Kyle the instructor was like whoa and she got down and was like that felt AMAZING and I think the anger helped honestly
+    expected_memory_stores:
+      - "climbing angry"
+      - "Nadia topped V2"
+      - "Kyle impressed"
+      - "anger as fuel"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 9:00 PM"
+    user_input: |
+      Nadia showed me the text she sent Kwame after the finalization she just said I hope you find what you're looking for and he replied you too and she said it felt like the most adult thing she's ever done and Dr Lin was proud of her
+    expected_memory_stores:
+      - "text to Kwame"
+      - "hope you find what you're looking for"
+      - "Kwame replied you too"
+      - "adult moment"
+      - "Dr Lin proud"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 6:30 PM"
+    user_input: |
+      Nadia said she wants to mark the finalization with something meaningful so we're going to get tattoos tomorrow which is so unlike her but she said she wants a small mountain on her wrist to represent climbing out of the valley and I'm like ok that's actually beautiful
+    expected_memory_stores:
+      - "getting tattoos"
+      - "small mountain wrist"
+      - "climbing out of valley meaning"
+      - "unlike Nadia"
+    expected_adaptation:
+      emotion_detected: "supportive"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 2:00 PM"
+    user_input: |
+      we went to Atlas Tattoo on Division and Nadia got the mountain on her inner wrist and I got a tiny crescent moon on my ankle which matches the necklace Julian got me and the artist's name was Jess and Nadia barely flinched which impressed me
+    expected_memory_stores:
+      - "Atlas Tattoo Division"
+      - "Nadia mountain wrist"
+      - "Maya crescent moon ankle"
+      - "matches Julian's necklace"
+      - "artist Jess"
+    expected_adaptation:
+      emotion_detected: "bonded"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 4:00 PM"
+    user_input: |
+      what tattoo did Nadia get and where
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 7:00 PM"
+    user_input: |
+      after the tattoos we went to dinner at Pok Pok well actually wait Pok Pok closed didn't it yeah we went to Langbaan instead for Thai and Nadia raised her glass and said to new beginnings and I almost cried it was so perfect
+    expected_memory_stores:
+      - "dinner at Langbaan"
+      - "not Pok Pok closed"
+      - "Thai food"
+      - "toast to new beginnings"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 10:00 AM"
+    user_input: |
+      Nadia sent me the sweetest text this morning she said Maya you've been my anchor through the worst year of my life and I don't think I would have survived Portland without you and I'm sitting here with my coffee crying happy tears because that means everything to me
+    expected_memory_stores:
+      - "anchor text"
+      - "worst year of life"
+      - "survived Portland"
+      - "happy tears"
+      - "means everything"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+final_verification:
+  - question: "When was Nadia's divorce finalized?"
+    expected_contains: ["Monday", "signed by judge"]
+  - question: "What tattoo did Nadia get?"
+    expected_contains: ["mountain", "wrist"]
+  - question: "What tattoo did Maya get?"
+    expected_contains: ["crescent moon", "ankle"]
+  - question: "Where did they get tattoos?"
+    expected_contains: ["Atlas Tattoo", "Division"]
+  - question: "What climbing milestone did Nadia hit this week?"
+    expected_contains: ["V2"]
+  - question: "What did Nadia text Kwame after the divorce?"
+    expected_contains: ["hope you find what you're looking for"]
+  - question: "What did Nadia call Maya?"
+    expected_contains: ["anchor"]
+  - question: "Where did they celebrate with dinner?"
+    expected_contains: ["Langbaan"]
+  - question: "What was Nadia's emotional state throughout the week?"
+    expected_contains: ["crying", "relieved", "angry", "proud"]
+  - question: "What did Dr Lin think of Nadia's text to Kwame?"
+    expected_contains: ["proud"]

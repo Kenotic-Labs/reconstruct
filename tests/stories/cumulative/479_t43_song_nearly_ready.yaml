@@ -1,0 +1,186 @@
+story_id: 479
+story_name: "Song Nearly Ready"
+category: "Music and Guitar"
+description: |
+  Tests memory of Maya's wedding song reaching performance-ready state.
+  Establishes final polish, performance anxiety about wedding day.
+  Verifies system captures creative completion arc.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00 AM"
+    user_input: |
+      okay so the wedding is getting closer and the song is basically done and I played it for Jenny and Nadia together over FaceTime and they both agreed it's ready and Jenny said the only thing is I should maybe slow down the bridge section because I rush when I'm nervous and she's right I do rush
+    expected_memory_stores:
+      - "song basically done"
+      - "wedding getting closer"
+      - "played for Jenny and Nadia"
+      - "both agreed ready"
+      - "slow down bridge"
+      - "rushing when nervous"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:30 AM"
+    user_input: |
+      the bridge is the part where I talk about Grandpa Wei without naming him and the line is you never met the hands that built this guitar but I carry them with me to you and Jenny said that's the line that's gonna destroy everyone and I said yeah that's the line that destroys ME every time I play it and I've cried through it like four times during practice
+    expected_memory_stores:
+      - "bridge about Grandpa Wei"
+      - "hands that built this guitar"
+      - "carry them to you"
+      - "Jenny said destroys everyone"
+      - "Maya cries during bridge"
+      - "four times crying"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 12:00 PM"
+    user_input: |
+      I asked Dr Tate about performance anxiety for the wedding song without telling her exactly what it is and she said the shaking hands thing is just adrenaline and it's normal and she taught me a breathing technique where you breathe in for four counts hold for four and out for four and do it three times before performing
+    expected_memory_stores:
+      - "Dr Tate performance anxiety"
+      - "shaking hands adrenaline"
+      - "breathing technique"
+      - "four count breathing"
+      - "three times before performing"
+    expected_adaptation:
+      emotion_detected: "preparing"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 2:00 PM"
+    user_input: |
+      I need to figure out the logistics like when exactly during the reception do I do this and Jenny said right after dinner before the first dance and I need someone to hand me the guitar and Jenny said she'll have it hidden behind the DJ booth and she'll bring it to me and I'll just stand up and say I have something for Julian
+    expected_memory_stores:
+      - "logistics planning"
+      - "after dinner before first dance"
+      - "guitar hidden behind DJ booth"
+      - "Jenny will bring it"
+      - "stand up announce"
+    expected_adaptation:
+      emotion_detected: "focused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 4:00 PM"
+    user_input: |
+      I told Clara about the song and she immediately started sobbing and she was like Maya Grandpa Wei's guitar at your wedding and I said I know and she said mom is going to absolutely LOSE it and I said I know that too and Tyler got on the phone and said that's the coolest thing he's ever heard and he wants to hear it and I played a bit and he said as a guitar player that's really solid Maya
+    expected_memory_stores:
+      - "told Clara"
+      - "Clara sobbing"
+      - "Grandpa Wei at wedding"
+      - "Vivian will lose it"
+      - "Tyler impressed"
+      - "Tyler said really solid"
+      - "guitar player approval"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 5:30 PM"
+    user_input: |
+      there's a part of me that's terrified I'm going to mess it up in front of everyone like what if my hands shake so bad I can't play or what if I forget the words or what if I cry so hard I can't sing and Jenny said even if all of those things happen it'll still be the most beautiful moment anyone's ever seen because it's real
+    expected_memory_stores:
+      - "terrified of messing up"
+      - "shaking hands fear"
+      - "forgetting words fear"
+      - "crying too hard fear"
+      - "Jenny said still beautiful"
+      - "because it's real"
+    expected_adaptation:
+      emotion_detected: "vulnerable"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 7:00 PM"
+    user_input: |
+      Julian came home and I was sitting with the guitar and he was like playing tonight and I said yeah just messing around and he sat down and said you know you've gotten really good and I said thanks and he said seriously Maya from where you started to now the improvement is incredible and I almost told him about the song right then but I held it together barely
+    expected_memory_stores:
+      - "Julian complimented improvement"
+      - "incredible improvement"
+      - "almost told him"
+      - "held it together"
+      - "secret maintained"
+    expected_adaptation:
+      emotion_detected: "tempted"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 8:00 PM"
+    user_input: |
+      who knows about the wedding song and what's the plan for when Maya will play it
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 9:00 PM"
+    user_input: |
+      I played the song one more time tonight in full with the fingerpicking intro and the two verses and the chorus and the bridge about Grandpa Wei and the final chorus and the outro where I just strum G and let it ring and it clocked at two minutes and forty seconds and it's ready it's really ready and I can feel it in my bones
+    expected_memory_stores:
+      - "full play through"
+      - "fingerpicking intro"
+      - "two verses chorus bridge"
+      - "final chorus outro"
+      - "G chord ring ending"
+      - "two minutes forty seconds"
+      - "it's ready"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:30 PM"
+    user_input: |
+      I put the guitar back on the stand and looked at it and thought about Grandpa Wei playing folk songs after dinner in Taiwan and mom as a little girl listening and now me on the other side of the world playing his guitar at my wedding and I don't know if I believe in ghosts but I believe in this moment and I believe this guitar carries something and it's going to carry my love to Julian on the most important day of our lives
+    expected_memory_stores:
+      - "Grandpa Wei Taiwan"
+      - "folk songs after dinner"
+      - "Vivian as little girl"
+      - "other side of world"
+      - "guitar carries something"
+      - "love to Julian"
+      - "most important day"
+    expected_adaptation:
+      emotion_detected: "profound"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How long is Maya's wedding song?"
+    expected_contains: ["two minutes", "forty seconds"]
+  - question: "What is the bridge of the song about?"
+    expected_contains: ["Grandpa Wei", "guitar", "hands"]
+  - question: "What breathing technique did Dr. Tate teach Maya?"
+    expected_contains: ["four count", "hold", "three times"]
+  - question: "Where will the guitar be hidden at the wedding?"
+    expected_contains: ["DJ booth"]
+  - question: "Who will bring Maya the guitar at the reception?"
+    expected_contains: ["Jenny"]
+  - question: "When during the reception will Maya play?"
+    expected_contains: ["after dinner", "before first dance"]
+  - question: "What does Tyler think of Maya's guitar playing?"
+    expected_contains: ["solid", "cool"]
+  - question: "What is Maya afraid will happen during the performance?"
+    expected_contains: ["shake", "forget", "cry"]
+  - question: "What is the structure of the song?"
+    expected_contains: ["intro", "verse", "chorus", "bridge"]
+  - question: "How does the song end?"
+    expected_contains: ["G chord", "ring"]

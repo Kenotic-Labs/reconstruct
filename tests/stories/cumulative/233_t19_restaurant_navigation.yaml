@@ -1,0 +1,213 @@
+story_id: 233
+story_name: "Navigating Restaurants"
+category: "Health"
+description: |
+  Tests system tracking how a food allergy changes daily decisions. Maya learns to navigate
+  menus, communicate with restaurants, and manage social eating situations.
+duration_simulated: "4 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 6:00 PM"
+    user_input: |
+      went out to dinner with Julian's work friends tonight and they picked a sushi place and I had to be that person who asks the server about shellfish and cross contamination and everyone was staring at me and I felt so awkward
+    expected_memory_stores:
+      - "sushi restaurant"
+      - "Julian's work friends"
+      - "asked about shellfish"
+      - "cross contamination question"
+      - "felt awkward"
+    expected_triples:
+      - ["user", "went_to", "sushi restaurant with Julian's work friends"]
+      - ["user", "asked_about", "shellfish and cross contamination"]
+      - ["user", "has_emotion", "awkward"]
+    expected_adaptation:
+      emotion_detected: "embarrassed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 6:30 PM"
+    user_input: |
+      the server was actually really nice about it and said the salmon rolls and tuna rolls are prepped separately from the shrimp tempura and she checked with the kitchen and I ended up getting salmon rolls and edamame and it was fine but I miss being able to just order without thinking
+    expected_memory_stores:
+      - "server helpful"
+      - "salmon and tuna safe"
+      - "separate from shrimp tempura"
+      - "salmon rolls edamame"
+      - "miss ordering freely"
+    expected_triples:
+      - ["user", "ordered", "salmon rolls and edamame"]
+      - ["user", "learned", "salmon and tuna prepped separately from shrimp tempura"]
+      - ["user", "has_emotion", "wistful about ordering freely"]
+    expected_adaptation:
+      emotion_detected: "wistful"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 12:00 PM"
+    user_input: |
+      Julian and I went to our favorite brunch spot and I never realized they put crab in the eggs benedict and it's always been there on the menu and I just never noticed because I wasn't looking for it and now I see shellfish EVERYWHERE
+    expected_memory_stores:
+      - "brunch spot"
+      - "crab in eggs benedict"
+      - "never noticed before"
+      - "shellfish everywhere"
+    expected_triples:
+      - ["user", "discovered", "crab in eggs benedict at brunch spot"]
+      - ["user", "realized", "shellfish is in many menu items"]
+      - ["user", "has_emotion", "frustrated"]
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 12:00 PM"
+    user_input: |
+      work lunch today and the team ordered from this Chinese place and I had to ask them to not get the kung pao shrimp and to make sure nothing had oyster sauce and Leon was like I didn't know you were allergic and I said yeah it's new and he said that sucks and yeah it does
+    expected_memory_stores:
+      - "work lunch"
+      - "Chinese food"
+      - "no kung pao shrimp"
+      - "no oyster sauce"
+      - "Leon didn't know"
+      - "it's new"
+    expected_triples:
+      - ["user", "navigated", "work lunch Chinese food order for shellfish allergy"]
+      - ["user", "avoided", "kung pao shrimp and oyster sauce"]
+      - ["Leon", "learned_about", "user's shellfish allergy"]
+    expected_adaptation:
+      emotion_detected: "matter-of-fact"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 5:00 PM"
+    user_input: |
+      Dr. Nassif's office sent me this list of common hidden shellfish ingredients and it includes things like glucosamine which is in some supplements and carrageenan and chitosan and I was like I need a PhD just to eat safely now
+    expected_memory_stores:
+      - "hidden shellfish list"
+      - "glucosamine"
+      - "carrageenan"
+      - "chitosan"
+      - "supplements risk"
+    expected_triples:
+      - ["Dr. Nassif", "sent", "hidden shellfish ingredients list"]
+      - ["user", "learned", "glucosamine, carrageenan, chitosan contain shellfish"]
+      - ["user", "has_emotion", "overwhelmed"]
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 9:00 AM"
+    user_input: |
+      what are some hidden sources of shellfish I should watch for
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      Julian found this app called Fig that scans menus for allergens and you can set it to shellfish and it highlights dangerous items and I was like ok this is actually helpful and we tried it at dinner and it flagged the bisque and the crab cakes obviously but also the caesar dressing which apparently sometimes has anchovy paste
+    expected_memory_stores:
+      - "Fig app"
+      - "scans menus"
+      - "shellfish setting"
+      - "flagged bisque"
+      - "crab cakes"
+      - "caesar dressing anchovy"
+    expected_triples:
+      - ["Julian", "found", "Fig app for scanning menus for allergens"]
+      - ["Fig app", "flagged", "bisque, crab cakes, caesar dressing"]
+      - ["user", "has_emotion", "relieved"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      getting better at this honestly like I've developed a script for restaurants where I say hi I have a shellfish allergy can you tell me which items are safe and most servers are really good about it and Julian always backs me up and reminds me it's not a burden to ask
+    expected_memory_stores:
+      - "restaurant script"
+      - "shellfish allergy announce"
+      - "servers good about it"
+      - "Julian backs up"
+      - "not a burden"
+    expected_triples:
+      - ["user", "developed", "restaurant script for shellfish allergy"]
+      - ["Julian", "supports", "user by backing up allergy requests"]
+      - ["user", "has_emotion", "more confident"]
+    expected_adaptation:
+      emotion_detected: "more confident"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 9:00 PM"
+    user_input: |
+      Clara said she's proud of me for advocating for myself because she sees patients who are too embarrassed to mention allergies and end up in the ER and she said it's literally a safety issue not a preference and that reframed it for me
+    expected_memory_stores:
+      - "Clara proud"
+      - "advocating for self"
+      - "patients too embarrassed"
+      - "safety not preference"
+      - "reframed"
+    expected_triples:
+      - ["Clara", "said", "allergy disclosure is safety not preference"]
+      - ["user", "reframed", "allergy asking as safety issue"]
+      - ["user", "has_emotion", "empowered"]
+    expected_adaptation:
+      emotion_detected: "empowered"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 12:00 PM"
+    user_input: |
+      had lunch with Naomi from running group and she was amazing about it she looked up the menu beforehand and found three things I could safely eat and texted me before we even got there and I was like Naomi you didn't have to do that and she said of course I did you're my friend
+    expected_memory_stores:
+      - "Naomi looked up menu"
+      - "found safe items"
+      - "texted beforehand"
+      - "friendship"
+    expected_triples:
+      - ["Naomi", "looked_up", "restaurant menu for user's safe options"]
+      - ["Naomi", "texted", "user safe items before lunch"]
+      - ["user", "has_emotion", "touched"]
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How does Maya handle restaurants now?"
+    expected_contains: ["script", "asks server", "shellfish allergy"]
+  - question: "What app helps Maya with menus?"
+    expected_contains: ["Fig"]
+  - question: "What hidden ingredients contain shellfish?"
+    expected_contains: ["glucosamine", "carrageenan", "chitosan"]
+  - question: "How did Naomi help Maya with the allergy?"
+    expected_contains: ["looked up menu", "found safe items"]
+  - question: "What did Clara say about allergies and safety?"
+    expected_contains: ["safety", "not preference"]
+  - question: "How does Julian support Maya at restaurants?"
+    expected_contains: ["backs her up", "not a burden"]
+  - question: "What foods at restaurants can be risky for Maya?"
+    expected_contains: ["bisque", "oyster sauce", "fish sauce"]
+  - question: "Does Maya feel comfortable asking about allergies now?"
+    expected_contains: ["yes", "better", "script"]
+  - question: "What surprise ingredient was flagged in caesar dressing?"
+    expected_contains: ["anchovy"]
+  - question: "How did Maya's work team react to her allergy?"
+    expected_contains: ["accommodating", "Leon didn't know"]

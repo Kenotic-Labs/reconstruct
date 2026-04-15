@@ -1,0 +1,190 @@
+story_id: 496
+story_name: "Maya Creates Combined Tradition"
+category: "Holiday Season"
+description: |
+  Tests memory of Maya implementing the new combined Christmas tradition.
+  Establishes the first Christmas Eve letter exchange with Julian.
+  Verifies system captures tradition creation and emotional significance.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "December 27 10:00 AM"
+    user_input: |
+      okay so I know Christmas already happened but Julian and I decided to do our first tradition right now as a practice run before next year so tonight we're doing our first Christmas Eve style letter exchange even though it's December 27th and I'm sitting at the kitchen table writing a letter to Julian and I don't know what to write and my hand is shaking which is stupid because I write code all day but this is different
+    expected_memory_stores:
+      - "first tradition practice"
+      - "December 27 makeup"
+      - "letter to Julian"
+      - "don't know what to write"
+      - "hand shaking"
+      - "code vs emotional writing"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "December 27 11:00 AM"
+    user_input: |
+      I wrote about how this year has been the most full year of my life and I mentioned the road trips and finding Grandpa Wei's guitar and the book club and the tabletop meetup and Stardew Valley and how through all of it he was there being steady and kind and making bruschetta and disappearing upstairs when I needed space and I said that's love that's real actual love
+    expected_memory_stores:
+      - "most full year"
+      - "road trips guitar book club"
+      - "tabletop Stardew"
+      - "Julian steady kind"
+      - "bruschetta disappearing upstairs"
+      - "that's real love"
+    expected_adaptation:
+      emotion_detected: "loving"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "December 27 2:00 PM"
+    user_input: |
+      I went to get supplies for our practice tradition night and bought nice paper and envelopes and candles and Julian's favorite wine and I also secretly ordered road trip ornament supplies from Amazon because I want to make the first one as a surprise for Julian even though Christmas is over it's about starting the tradition
+    expected_memory_stores:
+      - "bought supplies"
+      - "nice paper envelopes"
+      - "candles wine"
+      - "road trip ornament supplies"
+      - "surprise for Julian"
+      - "starting the tradition"
+    expected_adaptation:
+      emotion_detected: "intentional"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "December 27 6:00 PM"
+    user_input: |
+      Julian came home from Bold Studio and I told him tonight's the night and he was like wait we're doing the letter thing now and I said yes right now practice run and he sat down at the table and started writing and he was so focused like his graphic designer concentration face and Kobe was lying at our feet and the candles were lit and it felt ceremonial
+    expected_memory_stores:
+      - "Julian came home"
+      - "letter thing now"
+      - "practice run"
+      - "Julian writing focused"
+      - "designer concentration face"
+      - "Kobe at feet"
+      - "candles ceremonial"
+    expected_adaptation:
+      emotion_detected: "reverent"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "December 27 7:00 PM"
+    user_input: |
+      we exchanged letters and I read his first and he wrote about the day we got the Subaru and drove to the gorge for the first time and how he knew in that moment that he wanted to spend his whole life exploring with me and I just I couldn't even read the rest out loud because I was crying and he said it's okay take your time
+    expected_memory_stores:
+      - "exchanged letters"
+      - "Julian's letter"
+      - "Subaru gorge first trip"
+      - "spend whole life exploring"
+      - "Maya crying"
+      - "take your time"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "December 27 7:15 PM"
+    user_input: |
+      Julian read my letter and he got quiet which is how Julian processes big emotions and he looked at me and said the part about me disappearing upstairs during book club being love that's the most seen I've ever felt and I said that's because I see you and okay now we're both crying and Kobe is licking both our faces
+    expected_memory_stores:
+      - "Julian read Maya's letter"
+      - "Julian quiet processing"
+      - "disappearing upstairs is love"
+      - "most seen he's felt"
+      - "I see you"
+      - "both crying"
+      - "Kobe licking faces"
+    expected_adaptation:
+      emotion_detected: "profound"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "December 27 8:00 PM"
+    user_input: |
+      we decided to keep the letters in a box and add to it every year and Julian said in 40 years we'll have 40 letters each and we can read them back and be those old road trip people like the couple we met at Multnomah Falls and I said Julian Reeves that's exactly the plan and he said I know that's why I said it
+    expected_memory_stores:
+      - "letter box"
+      - "add every year"
+      - "40 years 40 letters"
+      - "old road trip people"
+      - "Multnomah Falls couple"
+      - "exactly the plan"
+    expected_adaptation:
+      emotion_detected: "sentimental"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "December 27 9:00 PM"
+    user_input: |
+      what did Julian write about in his letter to Maya
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "December 27 9:30 PM"
+    user_input: |
+      I told mom we did the letter thing and she cried obviously and said she's so happy we're carrying it forward and dad said the first one is always the hardest because you don't know what to say yet and she said it gets easier and more meaningful every year and I believe her and Clara said she and Tyler are going to start doing it too
+    expected_memory_stores:
+      - "told Vivian"
+      - "Vivian cried"
+      - "carrying it forward"
+      - "George first hardest"
+      - "gets easier meaningful"
+      - "Clara Tyler starting too"
+    expected_adaptation:
+      emotion_detected: "connected"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "December 27 10:30 PM"
+    user_input: |
+      we put both letters in a nice wooden box that Julian found at a craft store and it sits on the bookshelf next to the photo book and the Google Map printout and Grandpa Wei's guitar is on the stand below it and this shelf is basically the museum of our life and I played a few chords softly and Julian said this is the best night of the whole holiday season and I said it really is
+    expected_memory_stores:
+      - "wooden letter box"
+      - "bookshelf"
+      - "next to photo book"
+      - "Google Map printout"
+      - "Grandpa Wei guitar below"
+      - "museum of our life"
+      - "played chords softly"
+      - "best night of holiday"
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What new tradition did Maya and Julian start?"
+    expected_contains: ["letter", "exchange"]
+  - question: "What did Julian write about in his letter?"
+    expected_contains: ["Subaru", "gorge", "exploring"]
+  - question: "What part of Maya's letter moved Julian most?"
+    expected_contains: ["disappearing upstairs", "love", "seen"]
+  - question: "Where do they keep the letters?"
+    expected_contains: ["wooden box", "bookshelf"]
+  - question: "How many letters will they have in 40 years?"
+    expected_contains: ["40"]
+  - question: "Who else started the letter tradition?"
+    expected_contains: ["Clara", "Tyler"]
+  - question: "What old couple do they want to be like?"
+    expected_contains: ["Multnomah Falls"]
+  - question: "What items are on the bookshelf together?"
+    expected_contains: ["letter box", "photo book", "Google Map"]
+  - question: "What did George say about the first letter?"
+    expected_contains: ["hardest"]
+  - question: "What did Maya play after the letter exchange?"
+    expected_contains: ["guitar", "chords"]

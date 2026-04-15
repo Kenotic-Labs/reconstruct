@@ -1,0 +1,178 @@
+story_id: 443
+story_name: "Dr Tate Intervenes"
+category: "Work-Life Balance"
+description: |
+  Dr. Tate helps Maya see that overwork is avoidance behavior rooted in PIP
+  trauma at Vantage. Major therapeutic breakthrough about proving worth.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 4:00 PM"
+    user_input: |
+      had my session with Dr Tate today and I told her about the fight with Julian and the working late and she was quiet for a moment and then she said Maya I'm going to push you a little today is that ok and I said yes because when she says that it means something important is coming
+    expected_memory_stores:
+      - "Dr Tate session"
+      - "told about Julian fight"
+      - "working late discussion"
+      - "Tate going to push"
+    expected_adaptation:
+      emotion_detected: "bracing"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 4:15 PM"
+    user_input: |
+      she asked me what I'm afraid will happen if I leave work at 5 or 6 like everyone else and I said I'll fall behind and she said fall behind what and I said the work and she said but your colleagues leave at 5 and they're not falling behind so what makes you different
+    expected_memory_stores:
+      - "afraid of falling behind"
+      - "colleagues leave at 5"
+      - "not falling behind"
+      - "what makes you different"
+    expected_adaptation:
+      emotion_detected: "confronted"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 4:30 PM"
+    user_input: |
+      and then she said it she said Maya you're not avoiding falling behind you're avoiding something and I said what and she said you're avoiding the feeling you had during the PIP at Vantage that feeling of being told you weren't good enough and you're overworking to make sure no one ever says that again
+    expected_memory_stores:
+      - "you're avoiding something"
+      - "PIP at Vantage"
+      - "not good enough feeling"
+      - "overworking to prevent"
+      - "never says that again"
+    expected_adaptation:
+      emotion_detected: "gutted"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 4:45 PM"
+    user_input: |
+      I broke down crying because she's right like she's absolutely right I can feel it in my body the PIP traumatized me and even though Conduit is nothing like Vantage and Sam is nothing like Derek I still carry this fear that if I'm not the absolute hardest working person in the room someone will notice I'm not enough
+    expected_memory_stores:
+      - "crying in session"
+      - "PIP traumatized"
+      - "Conduit not like Vantage"
+      - "Sam not like Derek"
+      - "fear of not being enough"
+      - "hardest working to compensate"
+    expected_adaptation:
+      emotion_detected: "breakthrough"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 5:00 PM"
+    user_input: |
+      Dr Tate said the PIP wasn't even a reflection of your ability it was a tool used by a bad manager in a toxic environment and she said you left that job you got a better one you've been promoted and praised and your boss literally calls you out in company meetings for good work and I know all that but the fear is still there
+    expected_memory_stores:
+      - "PIP wasn't about ability"
+      - "bad manager toxic environment"
+      - "left for better job"
+      - "promoted and praised"
+      - "Sam praises publicly"
+      - "fear persists"
+    expected_adaptation:
+      emotion_detected: "conflicted"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 5:15 PM"
+    user_input: |
+      she said here's what I want you to try I want you to set a hard boundary at work leave at 6pm every day and notice what feelings come up when you do and she said it will feel uncomfortable like you're leaving too early like you're slacking and I should sit with that feeling instead of running back to my desk
+    expected_memory_stores:
+      - "6pm boundary suggested"
+      - "notice feelings"
+      - "will feel uncomfortable"
+      - "feel like slacking"
+      - "sit with feeling"
+      - "don't run back to desk"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 5:30 PM"
+    user_input: |
+      she also said the overwork isn't just hurting Julian it's hurting you too because you're not sleeping well you're not exercising you've missed food bank shifts and you're not present even when you ARE home and I was like wait I missed food bank shifts and she said you told me you missed February and I forgot I told her that
+    expected_memory_stores:
+      - "hurting Maya too"
+      - "not sleeping"
+      - "not exercising"
+      - "missed food bank shifts"
+      - "missed February"
+      - "not present at home"
+    expected_adaptation:
+      emotion_detected: "alarmed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 6:00 PM"
+    user_input: |
+      what did Dr Tate say is the root cause of my overworking
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 7:00 PM"
+    user_input: |
+      told Julian everything from the session and he held me while I cried again and he said that makes so much sense because he never understood why I worked so hard at Conduit when Sam clearly values me and now he gets it and he said we'll work through this together and I believe him
+    expected_memory_stores:
+      - "told Julian everything"
+      - "Julian held her"
+      - "makes sense to Julian"
+      - "never understood before"
+      - "work through together"
+    expected_adaptation:
+      emotion_detected: "raw"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 9:00 PM"
+    user_input: |
+      going to bed tonight and I feel like something cracked open like a good crack not a bad one and I know tomorrow is the first day I try the 6pm boundary and I'm already anxious about it but Dr Tate said the anxiety is the proof that it's the right thing to work on and I trust her
+    expected_memory_stores:
+      - "something cracked open"
+      - "6pm boundary starts tomorrow"
+      - "already anxious"
+      - "anxiety is proof"
+      - "trusts Dr Tate"
+    expected_adaptation:
+      emotion_detected: "vulnerable hopeful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did Dr. Tate say Maya is really avoiding?"
+    expected_contains: ["PIP", "not good enough", "Vantage"]
+  - question: "What boundary did Dr. Tate suggest?"
+    expected_contains: ["6pm", "leave at 6"]
+  - question: "Why does Maya overwork?"
+    expected_contains: ["PIP trauma", "fear", "not enough"]
+  - question: "How is the PIP trauma different from Conduit reality?"
+    expected_contains: ["Sam values her", "promoted", "praised"]
+  - question: "What has Maya missed because of overworking?"
+    expected_contains: ["food bank", "sleep", "exercise"]
+  - question: "How did Julian react to the therapy insight?"
+    expected_contains: ["makes sense", "held her", "work through together"]
+  - question: "Who was Maya's bad manager at Vantage?"
+    expected_contains: ["Derek"]
+  - question: "What feeling will the 6pm boundary create?"
+    expected_contains: ["uncomfortable", "slacking"]
+  - question: "What did Dr. Tate say about the anxiety of leaving early?"
+    expected_contains: ["proof", "right thing"]
+  - question: "Did Maya have a breakthrough in this session?"
+    expected_contains: ["yes", "crying", "cracked open"]

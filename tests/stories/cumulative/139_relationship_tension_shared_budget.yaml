@@ -1,0 +1,216 @@
+story_id: 139
+story_name: "Creating the Shared Budget"
+category: "Relationships"
+description: |
+  Tests whether the system tracks the specific budget creation process, the numbers
+  involved, corrections when income fluctuates, and the emotional shift from tension
+  to teamwork.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00am"
+    user_input: |
+      budget creation day! Julian and I are at the kitchen table with laptops open and Bark and Brew coffees and we're building the Google Sheet together. he's handling the visual layout because designer and I'm doing the formulas because engineer. we're playing to our strengths lol
+    expected_memory_stores:
+      - "budget creation"
+      - "kitchen table"
+      - "Google Sheet"
+      - "Julian layout"
+      - "Maya formulas"
+      - "playing to strengths"
+    expected_triples:
+      - ["user", "building", "shared budget Google Sheet with Julian"]
+      - ["Julian", "handling", "visual layout of spreadsheet"]
+      - ["user", "handling", "formulas for spreadsheet"]
+    expected_adaptation:
+      emotion_detected: "collaborative"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:30am"
+    user_input: |
+      ok so here are the numbers. my take-home after taxes is about 7800 a month. Julian's average over the last 6 months is about 2900 actually, not 3500 like I said before. he went back and calculated properly. so combined we have about 10700 a month
+    expected_memory_stores:
+      - "Maya take-home 7800"
+      - "Julian average 2900"
+      - "correction from 3500"
+      - "combined 10700"
+    expected_triples:
+      - ["user", "earns", "$7800/month take-home"]
+      - ["Julian", "corrected", "average income $3500 → $2900"]
+      - ["user", "combined_income", "$10700/month"]
+    expected_adaptation:
+      emotion_detected: "focused"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:00am"
+    user_input: |
+      shared expenses: rent 2375, electric around 105, internet 85, groceries about 600, Kobe stuff like food and vet around 150, renter's insurance 45. total shared expenses about 3360 a month. Julian's proportional share based on 27% income ratio is about 907 and mine is about 2453
+    expected_memory_stores:
+      - "shared expenses 3360"
+      - "rent 2375"
+      - "groceries 600"
+      - "Kobe 150"
+      - "Julian share 907"
+      - "Maya share 2453"
+      - "27% ratio"
+    expected_triples:
+      - ["user", "shared_expenses", "$3360/month total"]
+      - ["user", "rent", "$2375/month"]
+      - ["Julian", "proportional_share", "$907/month at 27%"]
+      - ["user", "proportional_share", "$2453/month"]
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 12:00pm"
+    user_input: |
+      Julian looked at the numbers and goes ok so I pay about 907 a month in shared expenses and everything else I keep for my own stuff and savings. and I do the same. no more mental scorekeeping because the spreadsheet does it for us. he actually seemed relieved to see it all laid out
+    expected_memory_stores:
+      - "Julian relieved"
+      - "907 per month"
+      - "no more scorekeeping"
+      - "spreadsheet tracks"
+      - "own money separate"
+    expected_triples:
+      - ["Julian", "pays", "$907/month shared expenses"]
+      - ["Julian", "has_emotion", "relieved to see it all laid out"]
+      - ["user", "eliminated", "mental scorekeeping via spreadsheet"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 2:00pm"
+    user_input: |
+      we also added a rule: if Julian's income for a month drops below 2000, we switch to a flat 75-25 split instead of proportional, just for that month. that way there's a safety net and neither of us is scrambling. this was my idea and Julian said it was smart
+    expected_memory_stores:
+      - "safety net rule"
+      - "below 2000 threshold"
+      - "75-25 split"
+      - "Maya's idea"
+      - "Julian approved"
+    expected_triples:
+      - ["user", "created_rule", "75-25 split if Julian's income drops below $2000"]
+      - ["user", "designed", "safety net rule for budget"]
+      - ["Julian", "approved", "user's safety net idea"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 4:00pm"
+    user_input: |
+      Julian color-coded the whole spreadsheet. income is green, expenses are red, savings are blue, and there's a little dashboard at the top with pie charts showing the split. it's honestly beautiful. I married... I mean I'm dating a man who makes spreadsheets beautiful
+    expected_memory_stores:
+      - "color-coded spreadsheet"
+      - "green income"
+      - "red expenses"
+      - "blue savings"
+      - "dashboard pie charts"
+    expected_triples:
+      - ["Julian", "color-coded", "spreadsheet: green income, red expenses, blue savings"]
+      - ["Julian", "added", "dashboard with pie charts"]
+      - ["user", "has_emotion", "amused"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 10:00am"
+    user_input: |
+      what is Maya's monthly take-home pay
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 12:00pm"
+    user_input: |
+      did our first entry into the budget together. Julian logged his restaurant branding payment of 1500 and a small logo gig of 400 and another one that came in yesterday for 350. so his income this month is tracking to about 2250 which means we're in proportional territory not the safety net zone
+    expected_memory_stores:
+      - "first budget entry"
+      - "restaurant branding 1500"
+      - "logo 400"
+      - "new gig 350"
+      - "tracking 2250"
+      - "proportional zone"
+    expected_triples:
+      - ["Julian", "logged", "restaurant branding payment $1500"]
+      - ["Julian", "logged", "logo gig $400 and new gig $350"]
+      - ["Julian", "income_tracking", "$2250 this month, in proportional zone"]
+    expected_adaptation:
+      emotion_detected: "optimistic"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 3:00pm"
+    user_input: |
+      texted Clara a screenshot of the budget and she goes omg it's beautiful who designed it and I said Julian and she goes of course the artist made the prettiest spreadsheet I've ever seen. she also said she's proud of us for working through it
+    expected_memory_stores:
+      - "sent Clara screenshot"
+      - "Clara impressed"
+      - "Julian design praised"
+      - "proud of them"
+    expected_triples:
+      - ["user", "sent", "budget screenshot to Clara"]
+      - ["Clara", "praised", "Julian's spreadsheet design"]
+      - ["Clara", "has_emotion", "proud of user and Julian"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 7:00pm"
+    user_input: |
+      told Dr. Tate about the budget over a text and she said this is exactly what healthy conflict resolution looks like. you had the hard conversation and built a system to prevent it from festering again. I feel like we actually grew from this instead of being damaged by it
+    expected_memory_stores:
+      - "Dr. Tate approval"
+      - "healthy conflict resolution"
+      - "system to prevent festering"
+      - "growth from conflict"
+    expected_triples:
+      - ["Dr. Tate", "called_it", "healthy conflict resolution"]
+      - ["Dr. Tate", "approved", "the budget system"]
+      - ["user", "feels", "grew from the conflict instead of being damaged"]
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya's monthly take-home pay?"
+    expected_contains: ["7800"]
+  - question: "What is Julian's corrected average monthly income?"
+    expected_contains: ["2900"]
+  - question: "How are they splitting shared expenses?"
+    expected_contains: ["proportional", "27%"]
+  - question: "What is the safety net rule?"
+    expected_contains: ["below 2000", "75-25"]
+  - question: "What are their total shared monthly expenses?"
+    expected_contains: ["3360"]
+  - question: "How much is Julian's monthly share?"
+    expected_contains: ["907"]
+  - question: "What tool are they using for budgeting?"
+    expected_contains: ["Google Sheets"]
+  - question: "Who color-coded the spreadsheet?"
+    expected_contains: ["Julian"]
+  - question: "What did Dr. Tate call their process?"
+    expected_contains: ["healthy conflict resolution"]
+  - question: "What was the original estimate of Julian's average income?"
+    expected_contains: ["3500"]

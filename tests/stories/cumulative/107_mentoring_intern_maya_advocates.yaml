@@ -1,0 +1,204 @@
+story_id: 107
+story_name: "Maya Advocates to Sam Okafor"
+category: "Career"
+description: |
+  Tests whether the system tracks Maya's advocacy meeting with Sam, the outcome uncertainty,
+  the emotional rollercoaster, and the cross-thread connection to Maya's growing identity
+  as someone who fights for others.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 8:00am"
+    user_input: |
+      meeting with Sam is at 10am today. I barely slept. went over the presentation like four times this morning. Julian made me eat breakfast even though I wasn't hungry because he's annoyingly responsible sometimes
+    expected_memory_stores:
+      - "meeting at 10am"
+      - "barely slept"
+      - "practiced presentation"
+      - "Julian made breakfast"
+    expected_triples:
+      - ["user", "has_meeting", "Sam Okafor at 10am"]
+      - ["user", "practiced", "presentation four times"]
+      - ["Julian", "made", "breakfast for user"]
+      - ["user", "has_emotion", "anxious"]
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 10:45am"
+    user_input: |
+      ok just got out of the meeting with Sam. it went... I think it went well? he listened to everything and he kept nodding and he asked really specific questions about Aisha's contributions. he said he'd think about it and get back to me by Friday
+    expected_memory_stores:
+      - "meeting happened"
+      - "Sam listened"
+      - "asked questions"
+      - "decision by Friday"
+    expected_triples:
+      - ["user", "met_with", "Sam Okafor about Aisha"]
+      - ["Sam Okafor", "asked", "specific questions about Aisha's contributions"]
+      - ["Sam Okafor", "will_decide_by", "Friday"]
+      - ["user", "has_emotion", "hopeful"]
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 11:00am"
+    user_input: |
+      the thing that scared me was when Sam said the budget is genuinely tight and even if he wants to extend her he might not be able to find the money. like it's not just about her being good enough it's literally about dollars
+    expected_memory_stores:
+      - "budget genuinely tight"
+      - "not about merit"
+      - "financial constraint"
+    expected_triples:
+      - ["Sam Okafor", "said", "budget is genuinely tight"]
+      - ["Aisha extension", "constrained_by", "financial limits not merit"]
+      - ["user", "has_emotion", "worried"]
+    expected_adaptation:
+      emotion_detected: "worried"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 12:30pm"
+    user_input: |
+      Rachel Kim stopped by and asked how it went. told her Sam said he'd think about it and she goes that's actually a good sign, he usually says no on the spot if it's a no. so maybe??
+    expected_memory_stores:
+      - "Rachel Kim follow-up"
+      - "good sign"
+      - "Sam usually says no immediately"
+    expected_triples:
+      - ["Rachel Kim", "said", "Sam thinking about it is a good sign"]
+      - ["Sam Okafor", "pattern", "usually says no on the spot"]
+      - ["user", "has_emotion", "cautiously optimistic"]
+    expected_adaptation:
+      emotion_detected: "cautiously optimistic"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 2:00pm"
+    user_input: |
+      meanwhile Aisha is just out there being her normal self coding away not knowing her whole future at this company is being decided in some meeting. HR was supposed to tell her today but Sam asked them to hold off until he decides
+    expected_memory_stores:
+      - "Aisha unaware"
+      - "HR delayed"
+      - "Sam postponed notification"
+    expected_triples:
+      - ["Aisha", "is_unaware_of", "contract situation"]
+      - ["Sam Okafor", "asked_HR", "hold off telling Aisha"]
+      - ["user", "has_emotion", "tense"]
+    expected_adaptation:
+      emotion_detected: "tense"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 4:00pm"
+    user_input: |
+      what did I present to Sam this morning about Aisha
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 5:30pm"
+    user_input: |
+      Aisha asked if I wanted to grab coffee tomorrow morning before work and I was like yeah of course and then internally I was like oh god what if by tomorrow she knows and this is the last normal coffee we have
+    expected_memory_stores:
+      - "coffee plan"
+      - "internal dread"
+      - "last normal interaction"
+    expected_triples:
+      - ["Aisha", "invited", "user for coffee tomorrow morning"]
+      - ["user", "fears", "this may be last normal interaction with Aisha"]
+      - ["user", "has_emotion", "dread"]
+    expected_adaptation:
+      emotion_detected: "dread"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 7:00pm"
+    user_input: |
+      Julian cooked dinner tonight which was really sweet. he could tell I was in my head about the Aisha thing. we watched like three episodes of that baking show to distract me. Kobe was being extra cuddly like he always is when I'm stressed
+    expected_memory_stores:
+      - "Julian cooked"
+      - "baking show"
+      - "Kobe cuddly"
+      - "stress response"
+    expected_triples:
+      - ["Julian", "cooked_dinner", "for user"]
+      - ["user", "watched", "baking show with Julian"]
+      - ["Kobe", "behavior_when_stressed", "extra cuddly"]
+      - ["user", "has_emotion", "grateful"]
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 9:00pm"
+    user_input: |
+      you know what's wild is I didn't expect to care this much. like when Sam first asked me to mentor her I was nervous about it and now I'm literally losing sleep fighting for her career. people change you in ways you don't see coming
+    expected_memory_stores:
+      - "unexpected caring"
+      - "personal growth"
+      - "mentoring impact on Maya"
+    expected_triples:
+      - ["user", "realized", "cares deeply about Aisha's career"]
+      - ["mentoring", "changed", "user in unexpected ways"]
+      - ["user", "has_emotion", "reflective"]
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 11:00pm"
+    user_input: |
+      can't sleep. keep checking my email like Sam's gonna decide at 11pm on a Wednesday. Julian told me to put my phone in the other room. he's right but I'm not gonna do it
+    expected_memory_stores:
+      - "insomnia"
+      - "checking email"
+      - "Julian advice"
+      - "anxiety"
+    expected_triples:
+      - ["user", "experiencing", "insomnia over Aisha decision"]
+      - ["user", "keeps_checking", "email for Sam's response"]
+      - ["Julian", "advised", "put phone in other room"]
+      - ["user", "has_emotion", "anxious"]
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+final_verification:
+  - question: "When did Maya meet with Sam about Aisha?"
+    expected_contains: ["Wednesday", "10am"]
+  - question: "When will Sam give his decision?"
+    expected_contains: ["Friday"]
+  - question: "What did Rachel Kim say about Sam's response?"
+    expected_contains: ["good sign", "says no on the spot"]
+  - question: "Was HR supposed to tell Aisha today?"
+    expected_contains: ["yes", "Sam asked", "hold off"]
+  - question: "How is Maya sleeping?"
+    expected_contains: ["barely slept", "can't sleep"]
+  - question: "What are Maya and Aisha doing tomorrow morning?"
+    expected_contains: ["coffee"]
+  - question: "What did Maya and Julian do to unwind?"
+    expected_contains: ["baking show"]
+  - question: "How has Maya's attitude toward mentoring changed?"
+    expected_contains: ["care", "unexpected", "fighting"]
+  - question: "What was Sam's concern about extending Aisha?"
+    expected_contains: ["budget", "money", "tight"]
+  - question: "How does Kobe behave when Maya is stressed?"
+    expected_contains: ["cuddly", "extra"]

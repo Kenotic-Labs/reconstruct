@@ -1,0 +1,178 @@
+story_id: 180
+story_name: "Health Scare Reflection"
+category: "Health"
+description: |
+  Maya reflects on the full arc of Mom's health scare. Tests complete
+  medical state reconstruction including corrections (heart attack to
+  arrhythmia, metoprolol to diltiazem) and emotional journey.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      you know I was thinking about everything that happened with Mom and it's been like two months now since the chest pains and she's doing great on diltiazem and walking every day and Clara's got the monitoring handled and the Ring camera is installed and honestly looking back it could have been so much worse
+    expected_memory_stores:
+      - "two months since chest pains"
+      - "Vivian doing great"
+      - "diltiazem"
+      - "walking daily"
+      - "Clara monitoring"
+      - "Ring camera"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 7:15 PM"
+    user_input: |
+      like when Clara first called me and said Mom has chest pains my brain immediately went to heart attack and I was on a plane within hours and the whole time I was thinking what if this is it what if I lose my mom and the fear was just this cold heavy thing in my chest which is ironic given what was happening to her chest
+    expected_memory_stores:
+      - "initial fear of heart attack"
+      - "flew to Sacramento"
+      - "fear of losing mom"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 7:30 PM"
+    user_input: |
+      and then the tests ECG stress test Holter monitor echocardiogram and waiting for Dr. Nair to tell us what was going on and that night in the kitchen when Dad cried for the first time in my life and I realized how much he depends on Mom like she's his whole world
+    expected_memory_stores:
+      - "test sequence recap"
+      - "Dr. Nair"
+      - "George crying"
+      - "George depends on Vivian"
+    expected_adaptation:
+      emotion_detected: "poignant"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 7:45 PM"
+    user_input: |
+      then the diagnosis not a heart attack but an arrhythmia PVCs and the relief was just like physical like my body unclenched and they put her on metoprolol but that made her dizzy almost fell so they switched to diltiazem which worked way better and she's been on it since
+    expected_memory_stores:
+      - "diagnosis recap arrhythmia PVCs"
+      - "not heart attack"
+      - "metoprolol then diltiazem"
+      - "medication switch due to dizziness"
+      - "diltiazem worked better"
+    expected_adaptation:
+      emotion_detected: "narrative"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 8:00 PM"
+    user_input: |
+      the thing I learned from all of this is that you have to say the things while you can because when I was on that plane I was thinking about all the times I didn't tell Mom how much she means to me and how she's the reason I am who I am and I'm not going to let that go unsaid anymore
+    expected_memory_stores:
+      - "lesson about expressing love"
+      - "don't wait to say important things"
+      - "Vivian shaped who Maya is"
+    expected_adaptation:
+      emotion_detected: "philosophical"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 8:15 PM"
+    user_input: |
+      Clara was incredible through all of this like she went into full nurse mode from the first phone call and she was the one translating medical information and managing Dr. Nair and creating care plans and she never once let on how scared she was until we sat on the porch together and she told me she was falling apart inside
+    expected_memory_stores:
+      - "Clara was incredible"
+      - "nurse mode"
+      - "translated medical info"
+      - "managed Dr. Nair"
+      - "care plans"
+      - "scared inside"
+    expected_adaptation:
+      emotion_detected: "admiration"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Monday 8:30 PM"
+    user_input: |
+      and Julian god Julian he drove me to the airport and took care of Kobe for a week and called every night and never once made it about him and when I came home he just held me and said I'm glad she's okay and he didn't need anything back he just gave me what I needed
+    expected_memory_stores:
+      - "Julian supportive throughout"
+      - "drove to airport"
+      - "cared for Kobe"
+      - "called every night"
+      - "selfless support"
+    expected_adaptation:
+      emotion_detected: "love"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Monday 8:45 PM"
+    user_input: |
+      the good that came out of it is Mom is actually healthier now than before the scare she's eating better walking with her group doing stretches taking her medication and Dad's more attentive and they even danced in the kitchen which the Ring camera caught and it's now my favorite video ever
+    expected_memory_stores:
+      - "Vivian healthier than before"
+      - "positive lifestyle changes"
+      - "walking group stretches medication"
+      - "George more attentive"
+      - "kitchen dancing video"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 9:00 PM"
+    user_input: |
+      and she came to Portland and saw the venue and loved it and met Diane and saw the dress and she's going to walk me down the aisle with Dad on June 22nd and she's going to dance at my reception and she's going to be a grandmother someday even though I told her to calm down about that part
+    expected_memory_stores:
+      - "Vivian visited Portland"
+      - "saw venue dress met Diane"
+      - "walking Maya down aisle"
+      - "June 22 wedding"
+      - "future grandmother"
+    expected_adaptation:
+      emotion_detected: "hopeful joy"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Monday 9:15 PM"
+    user_input: |
+      so yeah that's the Mom health scare arc and it ends well thank god it ends well and I'm grateful for Clara and Dr. Nair and diltiazem and Ring cameras and for the fact that chest pains don't always mean the worst thing and that my mom is stubborn enough to make chicken congee the day after leaving the hospital because that's Vivian Chen and she's not going anywhere
+    expected_memory_stores:
+      - "full arc summary"
+      - "grateful for Clara Dr. Nair diltiazem"
+      - "ends well"
+      - "Vivian stubborn and strong"
+      - "chicken congee resilience"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Summarize Vivian's health journey."
+    expected_contains: ["chest pains", "arrhythmia", "metoprolol", "diltiazem", "stable"]
+  - question: "What was the initial concern and final diagnosis?"
+    expected_contains: ["heart attack", "arrhythmia", "PVC"]
+  - question: "What medications were tried?"
+    expected_contains: ["metoprolol", "diltiazem"]
+  - question: "Why was the first medication changed?"
+    expected_contains: ["dizziness", "almost fell"]
+  - question: "Who is Vivian's doctor?"
+    expected_contains: ["Dr. Nair"]
+  - question: "What tests did Vivian have?"
+    expected_contains: ["ECG", "stress test", "Holter", "echocardiogram"]
+  - question: "How did the family support each other?"
+    expected_contains: ["Clara", "Julian", "George"]
+  - question: "What monitoring is in place?"
+    expected_contains: ["Ring camera", "Clara", "daily calls"]
+  - question: "Is Vivian healthier now than before?"
+    expected_contains: ["yes"]
+  - question: "Will Vivian attend Maya's wedding?"
+    expected_contains: ["yes", "walk down aisle"]

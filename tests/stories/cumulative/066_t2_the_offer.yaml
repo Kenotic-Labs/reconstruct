@@ -1,0 +1,218 @@
+story_id: 66
+story_name: "The Conduit AI Offer"
+category: "Career"
+description: |
+  Tests memory of the initial offer and its details.
+  The offer number ($175k) will change during negotiation in later stories.
+  Verifies precise numerical memory and correction handling setup.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00 AM"
+    user_input: |
+      reference check is done Priya was my reference and she said they called her and she gave me a glowing review and honestly I owe that woman so much she's been in my corner through this whole nightmare and I hope she knows how much she means to me
+    expected_memory_stores:
+      - "reference check done"
+      - "Priya reference"
+      - "glowing review"
+      - "gratitude to Priya"
+    expected_triples:
+      - ["Priya", "was_reference_for", "user"]
+      - ["Priya", "gave", "glowing review to Conduit"]
+      - ["user", "has_emotion", "grateful"]
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 2:00 PM"
+    user_input: |
+      NINA JUST CALLED THE OFFER IS IN and its 175k base salary plus equity plus full benefits and the equity is like 0.15 percent which for a Series B company could be worth a lot if they grow and the base is 35k more than what I make at Vantage I'm shaking right now
+    expected_memory_stores:
+      - "Conduit offer"
+      - "175k base salary"
+      - "equity 0.15 percent"
+      - "Series B"
+      - "35k more than Vantage"
+      - "full benefits"
+    expected_triples:
+      - ["Conduit", "offered_salary", "175k base"]
+      - ["Conduit", "offered_equity", "0.15 percent"]
+      - ["Conduit_offer", "compared_to_Vantage", "35k more"]
+      - ["user", "has_emotion", "ecstatic"]
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 2:30 PM"
+    user_input: |
+      called Julian immediately and he was in the middle of a design review with his restaurant client but he stepped out and when I told him 175k he was like oh my god Maya that's incredible and I could hear him trying not to yell in whatever hallway he ducked into
+    expected_memory_stores:
+      - "Julian told immediately"
+      - "design review interrupted"
+      - "175k reaction"
+      - "trying not to yell"
+    expected_triples:
+      - ["user", "told", "Julian about 175k offer"]
+      - ["Julian", "interrupted", "design review with restaurant client"]
+      - ["Julian", "has_emotion", "ecstatic for user"]
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 5:00 PM"
+    user_input: |
+      Nina said I have a week to decide but she also said there might be room to negotiate because they really want me and she said I should think about what number would make me say yes immediately and I was like honestly 175 is already amazing but if I can get more why not right
+    expected_memory_stores:
+      - "one week deadline"
+      - "room to negotiate"
+      - "they really want Maya"
+      - "negotiation consideration"
+    expected_triples:
+      - ["user", "has_deadline", "one week to decide"]
+      - ["Nina", "advised", "room to negotiate"]
+      - ["Conduit", "really_wants", "user"]
+      - ["user", "has_emotion", "strategic"]
+    expected_adaptation:
+      emotion_detected: "strategic"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 8:00 PM"
+    user_input: |
+      Julian and I sat down with a spreadsheet and worked out the financials and between his freelance income picking up and 175k from me we'd be in really good shape and he said we could even start saving for a house which is something we've been talking about for a while and Kobe needs a yard of his own
+    expected_memory_stores:
+      - "financial planning"
+      - "spreadsheet"
+      - "Julian freelance income"
+      - "house savings"
+      - "Kobe yard"
+    expected_triples:
+      - ["user", "did_financial_planning", "spreadsheet with Julian"]
+      - ["Julian", "income", "freelance picking up"]
+      - ["user", "saving_for", "house"]
+      - ["Kobe", "needs", "a yard"]
+      - ["user", "has_emotion", "hopeful"]
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 10:00 AM"
+    user_input: |
+      at Vantage and it's so surreal sitting here knowing I have a 175k offer on the table and Derek walked by and said something about sprint velocity and I just smiled because none of this matters anymore none of it I'm free well almost free
+    expected_memory_stores:
+      - "surreal feeling"
+      - "Derek irrelevant"
+      - "sprint velocity"
+      - "almost free"
+    expected_triples:
+      - ["user", "feels", "surreal having offer while at Vantage"]
+      - ["Derek", "is_now", "irrelevant to user"]
+      - ["user", "has_emotion", "liberated"]
+    expected_adaptation:
+      emotion_detected: "liberated"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 3:00 PM"
+    user_input: |
+      told Leon about the offer over text and he was like YES get out of there and then he said wait 175 is great but you should definitely negotiate because Conduit just raised 40 million they can afford more and Leon knows about this stuff because he negotiated up at Stripe too
+    expected_memory_stores:
+      - "Leon informed"
+      - "Leon says negotiate"
+      - "40 million funding"
+      - "Leon negotiated at Stripe"
+    expected_triples:
+      - ["user", "told", "Leon about offer"]
+      - ["Leon", "advised", "negotiate because Conduit raised 40 million"]
+      - ["Leon", "negotiated_up_at", "Stripe"]
+      - ["user", "has_emotion", "emboldened"]
+    expected_adaptation:
+      emotion_detected: "emboldened"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 9:00 AM"
+    user_input: |
+      what is the base salary on Maya's Conduit AI offer
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 11:00 AM"
+    user_input: |
+      Nina coached me on negotiation and she said to ask for 190k because they'll probably meet in the middle around 182 or 185 and she said to emphasize the competing interest even though Google fell through because they don't need to know that and I was like isn't that dishonest and she said it's negotiation not confession
+    expected_memory_stores:
+      - "Nina negotiation coaching"
+      - "ask 190k"
+      - "expect 182 or 185"
+      - "competing interest tactic"
+      - "Google fallen through"
+      - "negotiation ethics"
+    expected_triples:
+      - ["Nina", "coached", "user on negotiation"]
+      - ["Nina", "advised", "ask for 190k expect 182-185"]
+      - ["Nina", "suggested", "imply competing interest"]
+      - ["user", "has_emotion", "uncertain"]
+    expected_adaptation:
+      emotion_detected: "uncertain"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      Julian thinks I should negotiate too and he said you literally just fought a PIP with data and won you can negotiate a salary and he's right I'm done undervaluing myself so tomorrow I'm going to call Nina and tell her to counter at 190k and see what happens
+    expected_memory_stores:
+      - "Julian supports negotiation"
+      - "PIP parallel"
+      - "done undervaluing"
+      - "counter at 190k"
+      - "calling Nina tomorrow"
+    expected_triples:
+      - ["Julian", "supports", "negotiation"]
+      - ["Julian", "said", "PIP fight proves user can negotiate"]
+      - ["user", "decided", "counter at 190k"]
+      - ["user", "has_emotion", "determined"]
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What was the initial Conduit AI offer?"
+    expected_contains: ["175k", "175"]
+  - question: "How much equity was offered?"
+    expected_contains: ["0.15 percent"]
+  - question: "Who was Maya's reference?"
+    expected_contains: ["Priya"]
+  - question: "How much more is the offer than Vantage?"
+    expected_contains: ["35k"]
+  - question: "How long does Maya have to decide?"
+    expected_contains: ["week", "one week"]
+  - question: "What counter-offer number is Maya planning?"
+    expected_contains: ["190k", "190"]
+  - question: "What did Nina say to expect in negotiation?"
+    expected_contains: ["182", "185"]
+  - question: "Who encouraged Maya to negotiate?"
+    expected_contains: ["Leon", "Julian", "Nina"]
+  - question: "What are Maya and Julian saving for?"
+    expected_contains: ["house"]
+  - question: "How is Derek's behavior affecting Maya now?"
+    expected_contains: ["irrelevant", "doesn't matter"]

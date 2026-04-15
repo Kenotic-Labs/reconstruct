@@ -1,0 +1,174 @@
+story_id: 384
+story_name: "Five Minutes Daily"
+category: "Mental Health"
+description: |
+  Tests memory of Maya establishing a consistent 5-minute daily meditation practice.
+  Verifies system tracks habit formation and gradual behavioral changes.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 AM"
+    user_input: |
+      okay so I've been alternating between walking meditation in the park and sitting meditation at home and I think five minutes is my sweet spot for sitting like anything less feels pointless and anything more and my brain starts screaming
+    expected_memory_stores:
+      - "alternating walking and sitting"
+      - "five minutes sweet spot"
+      - "sitting at home"
+      - "brain screams past five"
+    expected_adaptation:
+      emotion_detected: "settled"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 7:30 AM"
+    user_input: |
+      discovered something cool on Insight Timer there's a streak counter and I'm at 12 days straight and seeing that number makes me not want to break it which is like gamification of meditation which feels wrong but also it works
+    expected_memory_stores:
+      - "Insight Timer streak"
+      - "12 days straight"
+      - "gamification"
+      - "motivating"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 6:00 PM"
+    user_input: |
+      had a stressful day at work like a really bad deploy and Sam was frustrated and I noticed that instead of spiraling I just took three deep breaths at my desk and it helped and I was like huh is this the meditation thing working
+    expected_memory_stores:
+      - "stressful work day"
+      - "bad deploy"
+      - "Sam frustrated"
+      - "three deep breaths"
+      - "didn't spiral"
+      - "meditation working"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 8:00 AM"
+    user_input: |
+      tried a new meditation today called Loving Kindness where you basically send good vibes to yourself and then to people you love and then to people you're neutral about and then to people you're having conflict with and it was weirdly emotional
+    expected_memory_stores:
+      - "Loving Kindness meditation"
+      - "send good vibes"
+      - "self love others neutral conflict"
+      - "weirdly emotional"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 7:00 AM"
+    user_input: |
+      two weeks in and my Insight Timer streak is at 17 days and I'm doing five minutes sitting in the morning and sometimes 10-15 minutes walking in Sellwood in the evening and Julian said it's becoming my thing and he's right
+    expected_memory_stores:
+      - "17 day streak"
+      - "five minutes morning"
+      - "10-15 evening walk"
+      - "Sellwood"
+      - "becoming her thing"
+    expected_adaptation:
+      emotion_detected: "established"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 5:00 PM"
+    user_input: |
+      Dr Tate said she can see a difference in how I talk in sessions like I'm less rushed and I pause more before answering and she said that's the practice showing up in real life and honestly I hadn't even noticed it myself until she pointed it out
+    expected_memory_stores:
+      - "Dr. Tate noticed difference"
+      - "less rushed"
+      - "pauses more"
+      - "practice in real life"
+      - "Maya hadn't noticed"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 7:00 PM"
+    user_input: |
+      Omar asked why I've been so zen lately and I told him about the meditation and he was like no way you can't sit still for five seconds and I was like I KNOW that's what I said but walking meditation changed everything and now I can actually sit too for at least five minutes
+    expected_memory_stores:
+      - "Omar noticed zen"
+      - "told about meditation"
+      - "Omar surprised"
+      - "walking changed everything"
+      - "can sit five minutes"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 7:00 AM"
+    user_input: |
+      how many days is Maya's meditation streak now
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 10:00 AM"
+    user_input: |
+      Clara said she's proud of me for sticking with the meditation but she also said don't become one of those people who tells everyone to meditate and I was like I literally already told Omar and she was like exactly and we both laughed
+    expected_memory_stores:
+      - "Clara proud"
+      - "don't proselytize"
+      - "already told Omar"
+      - "both laughed"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 7:00 AM"
+    user_input: |
+      I think the biggest change is I'm sleeping better like I fall asleep faster and don't wake up at 3 AM with anxiety thoughts and Dr Pham even noticed at my last med check that my anxiety scores have improved and I don't know if it's the meditation or everything together but something is working
+    expected_memory_stores:
+      - "better sleep"
+      - "fall asleep faster"
+      - "no 3 AM anxiety"
+      - "Dr. Pham noticed"
+      - "anxiety scores improved"
+      - "something working"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How long is Maya's daily sitting meditation?"
+    expected_contains: ["five minutes"]
+  - question: "How long is Maya's meditation streak?"
+    expected_contains: ["17"]
+  - question: "What new meditation type did Maya try?"
+    expected_contains: ["Loving Kindness"]
+  - question: "How has meditation affected Maya's sleep?"
+    expected_contains: ["better", "fall asleep faster", "no 3 AM"]
+  - question: "What did Dr. Tate notice about Maya's speaking pattern?"
+    expected_contains: ["less rushed", "pauses"]
+  - question: "What did Dr. Pham notice about Maya's anxiety?"
+    expected_contains: ["improved", "scores"]
+  - question: "How does Maya handle stress differently now?"
+    expected_contains: ["deep breaths", "doesn't spiral"]
+  - question: "What app feature motivates Maya to keep meditating?"
+    expected_contains: ["streak", "counter"]
+  - question: "What advice did Clara give about meditation?"
+    expected_contains: ["don't tell everyone", "proselytize"]
+  - question: "What is Maya's evening meditation practice?"
+    expected_contains: ["walking", "Sellwood", "10", "15"]

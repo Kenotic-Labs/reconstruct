@@ -1,0 +1,222 @@
+story_id: 173
+story_name: "Diagnosis: Arrhythmia"
+category: "Health"
+description: |
+  Vivian diagnosed with minor arrhythmia, NOT a heart attack. Started
+  on metoprolol. Tests correction from suspected heart attack to actual
+  diagnosis, medication tracking, and emotional relief.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 9:30 AM"
+    user_input: |
+      we're at Kaiser Dr. Nair is going over the results and she said the Holter monitor confirmed it's a cardiac arrhythmia specifically a type called premature ventricular contractions or PVCs combined with some occasional irregular rhythm and she said it is NOT a heart attack and I literally exhaled for the first time in three days
+    expected_memory_stores:
+      - "diagnosis cardiac arrhythmia"
+      - "premature ventricular contractions PVCs"
+      - "NOT heart attack"
+      - "Dr. Nair confirmed"
+      - "Holter monitor results"
+      - "correction: suspected heart attack now arrhythmia"
+    expected_triples:
+      - ["Vivian", "diagnosed_with", "cardiac arrhythmia PVCs"]
+      - ["Vivian", "confirmed_not", "heart attack"]
+      - ["Dr. Nair", "confirmed_via", "Holter monitor results"]
+      - ["user", "corrected", "suspected heart attack → arrhythmia PVCs"]
+      - ["user", "has_emotion", "immense relief"]
+    expected_adaptation:
+      emotion_detected: "immense relief"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 10:00 AM"
+    user_input: |
+      Dr. Nair said it's relatively common especially in women Vivian's age and it's manageable with medication and lifestyle adjustments and she said the chest pains were from the irregular rhythm not from a blocked artery and Clara was nodding along because she probably already knew this but let the doctor tell us properly
+    expected_memory_stores:
+      - "common in women Vivian's age"
+      - "manageable with medication"
+      - "lifestyle adjustments needed"
+      - "chest pains from rhythm not artery"
+      - "Clara already suspected"
+    expected_triples:
+      - ["Vivian", "condition_is", "common in women her age"]
+      - ["Vivian", "needs", "medication and lifestyle adjustments"]
+      - ["Vivian", "chest_pains_from", "irregular rhythm not blocked artery"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 10:30 AM"
+    user_input: |
+      so the medication Dr. Nair prescribed is metoprolol it's a beta blocker that slows the heart rate and helps regulate the rhythm and Mom needs to take it once a day in the morning with food and Dr. Nair said we should see improvement within a week or two
+    expected_memory_stores:
+      - "metoprolol prescribed"
+      - "beta blocker"
+      - "slows heart rate"
+      - "once daily morning with food"
+      - "improvement in one to two weeks"
+    expected_triples:
+      - ["Vivian", "prescribed", "metoprolol"]
+      - ["metoprolol", "is_a", "beta blocker"]
+      - ["metoprolol", "dosage", "once daily morning with food"]
+      - ["Vivian", "expected_improvement", "one to two weeks"]
+    expected_adaptation:
+      emotion_detected: "focused"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 11:00 AM"
+    user_input: |
+      Dr. Nair also said Mom needs to reduce caffeine and stress and she should continue walking but nothing too strenuous and she needs to come back in four weeks for a follow up and if the PVCs don't improve they might need to adjust the medication or try something else
+    expected_memory_stores:
+      - "reduce caffeine and stress"
+      - "walking okay not strenuous"
+      - "follow up in four weeks"
+      - "medication may need adjustment"
+    expected_triples:
+      - ["Vivian", "needs_to_reduce", "caffeine and stress"]
+      - ["Vivian", "can_do", "walking but not strenuous exercise"]
+      - ["Vivian", "follow_up_in", "four weeks"]
+    expected_adaptation:
+      emotion_detected: "attentive"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 12:00 PM"
+    user_input: |
+      Mom looked at Dr. Nair and said so I'm not dying and Dr. Nair laughed and said no Vivian you are not dying but you need to take this seriously and take your medication every day and Mom said I will I will and Dad was sitting there just looking at Mom with so much love I swear that man would fall apart without her
+    expected_memory_stores:
+      - "Vivian asking if she's dying"
+      - "Dr. Nair reassurance"
+      - "need to take medication seriously"
+      - "George emotional"
+    expected_triples:
+      - ["Vivian", "reassured_by", "Dr. Nair she is not dying"]
+      - ["Vivian", "must", "take medication every day"]
+      - ["George", "has_emotion", "deep love for Vivian"]
+    expected_adaptation:
+      emotion_detected: "warm relief"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 1:00 PM"
+    user_input: |
+      called Julian from the parking lot at Kaiser and told him it's not a heart attack it's an arrhythmia and he said oh thank god and I could hear him exhale and he said give Vivian a hug from me and tell George to breathe and then he said Kobe just ate one of your slippers so you might want to buy new ones when you get home
+    expected_memory_stores:
+      - "Julian informed"
+      - "Julian relieved"
+      - "Kobe ate slipper"
+    expected_triples:
+      - ["user", "informed", "Julian about diagnosis"]
+      - ["Julian", "has_emotion", "relieved"]
+      - ["Kobe", "ate", "user's slipper"]
+    expected_adaptation:
+      emotion_detected: "relieved and amused"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 3:00 PM"
+    user_input: |
+      picked up the metoprolol prescription at the pharmacy near my parents house $15 copay which is good and I set up a daily alarm on Mom's phone so she doesn't forget to take it because knowing my mom she'll say she's fine and skip it and Dad promised to make sure she takes it every morning
+    expected_memory_stores:
+      - "metoprolol picked up"
+      - "$15 copay"
+      - "alarm set on Vivian's phone"
+      - "George will monitor"
+    expected_triples:
+      - ["user", "picked_up", "metoprolol prescription"]
+      - ["metoprolol", "copay", "$15"]
+      - ["user", "set_alarm_on", "Vivian's phone for medication"]
+      - ["George", "will_ensure", "Vivian takes medication daily"]
+    expected_adaptation:
+      emotion_detected: "proactive"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 5:00 PM"
+    user_input: |
+      Clara came over to my parents house after her shift and we all had dinner together and it was the most normal night we've had since this whole thing started Mom made her chicken congee which is her comfort food and she seemed like herself again and Dad was smiling and Clara and I just kept looking at each other like okay we're okay
+    expected_memory_stores:
+      - "family dinner"
+      - "chicken congee"
+      - "Vivian seems herself"
+      - "George smiling"
+      - "Clara and Maya relieved"
+    expected_triples:
+      - ["Vivian", "made", "chicken congee comfort food"]
+      - ["Vivian", "seems", "back to herself"]
+      - ["user", "has_emotion", "grateful"]
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 8:00 PM"
+    user_input: |
+      Clara and I sat on the porch after dinner and she said Maya I was really scared and I said me too and she said when Mom called me with chest pains I just went into nurse mode but inside I was falling apart and I hugged her and said we're lucky you were in nurse mode because you kept us all together
+    expected_memory_stores:
+      - "Clara and Maya bonding"
+      - "Clara scared too"
+      - "nurse mode on the outside"
+      - "Clara held family together"
+    expected_triples:
+      - ["Clara", "was_scared", "internally during health scare"]
+      - ["Clara", "held_together", "entire family in nurse mode"]
+      - ["user", "has_emotion", "sisterly love"]
+    expected_adaptation:
+      emotion_detected: "sisterly love"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 10:00 PM"
+    user_input: |
+      I'm staying through the weekend to make sure Mom is settled with the medication and everything and then I'll fly back to Portland on Monday Priya said take all the time I need and Julian's been amazing handling Kobe and everything at home honestly I'm just so grateful it wasn't worse you know like arrhythmia is manageable a heart attack would have been a whole different story
+    expected_memory_stores:
+      - "staying through weekend"
+      - "flying back Monday"
+      - "Priya gave time off"
+      - "Julian managing home"
+      - "arrhythmia manageable"
+      - "gratitude"
+    expected_triples:
+      - ["user", "staying", "through weekend at parents"]
+      - ["user", "flying_back", "Portland on Monday"]
+      - ["Priya", "gave", "user time off"]
+      - ["user", "has_emotion", "grateful relief"]
+    expected_adaptation:
+      emotion_detected: "grateful relief"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Vivian's diagnosis?"
+    expected_contains: ["arrhythmia", "PVC"]
+  - question: "Was it a heart attack?"
+    expected_contains: ["no", "not"]
+  - question: "What medication is Vivian taking?"
+    expected_contains: ["metoprolol"]
+  - question: "How often does Vivian take her medication?"
+    expected_contains: ["once a day", "morning"]
+  - question: "When is Vivian's follow-up appointment?"
+    expected_contains: ["four weeks"]
+  - question: "What lifestyle changes does Vivian need?"
+    expected_contains: ["reduce caffeine", "stress"]
+  - question: "Who is Vivian's cardiologist?"
+    expected_contains: ["Dr. Nair"]
+  - question: "What did the Holter monitor confirm?"
+    expected_contains: ["arrhythmia", "PVC"]
+  - question: "How long is Maya staying in Sacramento?"
+    expected_contains: ["weekend", "Monday"]
+  - question: "What kind of medication is metoprolol?"
+    expected_contains: ["beta blocker"]

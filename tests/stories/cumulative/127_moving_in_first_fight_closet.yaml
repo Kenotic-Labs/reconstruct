@@ -1,0 +1,213 @@
+story_id: 127
+story_name: "First Fight About Closet Space"
+category: "Relationships"
+description: |
+  Tests whether the system captures the first cohabitation conflict over closet space,
+  the underlying tensions it reveals, and the resolution. Tracks emotional arc from
+  irritation to understanding.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Sunday 9:00am"
+    user_input: |
+      ok so we're unpacking and the bedroom closet is... small. like way smaller than I thought. Julian already put his stuff in there and it's taking up like 60% of the space and I'm standing here with three boxes of clothes and nowhere to put them
+    expected_memory_stores:
+      - "closet small"
+      - "Julian 60 percent"
+      - "Maya no space"
+      - "unpacking"
+    expected_triples:
+      - ["apartment", "has_problem", "bedroom closet smaller than expected"]
+      - ["Julian", "took", "60% of closet space"]
+      - ["user", "has_no_room", "for three boxes of clothes"]
+      - ["user", "has_emotion", "irritated"]
+    expected_adaptation:
+      emotion_detected: "irritated"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Sunday 9:30am"
+    user_input: |
+      I said Julian you can't take up the whole closet and he said I didn't take up the whole closet I left you that side and he pointed at this like tiny sliver of space and I was like are you serious right now?? that's not half
+    expected_memory_stores:
+      - "closet argument"
+      - "uneven space"
+      - "confrontation"
+    expected_triples:
+      - ["user", "confronted", "Julian about closet space"]
+      - ["Julian", "claimed", "he left user a side of closet"]
+      - ["user", "has_emotion", "angry"]
+    expected_adaptation:
+      emotion_detected: "angry"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Sunday 10:00am"
+    user_input: |
+      it turned into this whole thing. he said he needs more closet space because his clothes are part of his brand as a designer and I said MY clothes matter too even if I'm not a designer and it got kind of mean for a minute there
+    expected_memory_stores:
+      - "escalated argument"
+      - "Julian brand excuse"
+      - "Maya clothes matter"
+      - "got mean"
+    expected_triples:
+      - ["Julian", "argued", "clothes are part of his designer brand"]
+      - ["user", "argued", "her clothes matter too"]
+      - ["user", "has_emotion", "hurt"]
+    expected_adaptation:
+      emotion_detected: "hurt"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Sunday 11:00am"
+    user_input: |
+      he went to the living room and I stayed in the bedroom and we didn't talk for like an hour. Kobe kept going back and forth between us like he was doing relationship arbitration. first real fight in the new place and we've been here less than 24 hours
+    expected_memory_stores:
+      - "silent treatment"
+      - "hour apart"
+      - "Kobe going between them"
+      - "first fight in new place"
+      - "less than 24 hours"
+    expected_triples:
+      - ["user", "had", "silent treatment with Julian for an hour"]
+      - ["Kobe", "went_between", "user and Julian during fight"]
+      - ["user", "experienced", "first fight in new place within 24 hours"]
+      - ["user", "has_emotion", "sad"]
+    expected_adaptation:
+      emotion_detected: "sad"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Sunday 12:30pm"
+    user_input: |
+      Julian came back and said hey I'm sorry, I was being unfair about the closet. he said he's used to having a whole closet to himself and he didn't think about sharing. and I said I'm sorry too for getting so mad so fast. we hugged it out
+    expected_memory_stores:
+      - "Julian apologized"
+      - "used to living alone"
+      - "Maya apologized too"
+      - "hugged"
+      - "resolution"
+    expected_triples:
+      - ["Julian", "apologized", "for being unfair about closet"]
+      - ["Julian", "admitted", "used to having whole closet to himself"]
+      - ["user", "apologized", "for getting mad too fast"]
+      - ["user", "has_emotion", "relieved"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 1:00pm"
+    user_input: |
+      we came up with a solution. Julian's gonna move his off-season clothes to a storage bin under the bed and we'll split the closet exactly 50-50. also he suggested we get one of those over-the-door organizers for accessories. honestly it's a better system than either of us had before
+    expected_memory_stores:
+      - "closet solution"
+      - "storage bin under bed"
+      - "50-50 split"
+      - "over-the-door organizer"
+      - "better system"
+    expected_triples:
+      - ["user", "resolved", "closet dispute with 50-50 split"]
+      - ["Julian", "will_store", "off-season clothes under bed"]
+      - ["Julian", "suggested", "over-the-door organizer for accessories"]
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 3:00pm"
+    user_input: |
+      what was our first fight about in the new apartment
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 5:00pm"
+    user_input: |
+      went to Target together to get the organizer and some other apartment stuff and it felt good to like do a normal errand together as people who LIVE together. we got matching towels which is disgustingly domestic and I love it
+    expected_memory_stores:
+      - "Target trip"
+      - "organizer purchased"
+      - "matching towels"
+      - "domestic errands"
+    expected_triples:
+      - ["user", "went_to", "Target with Julian"]
+      - ["user", "bought", "over-the-door organizer and matching towels"]
+      - ["user", "enjoys", "domestic errands as a couple"]
+      - ["user", "has_emotion", "happy"]
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 7:00am"
+    user_input: |
+      first real morning in the apartment. Julian made coffee and I walked Kobe to the park and when I came back breakfast was ready. this is what I was afraid of losing my independence to and it turns out it's just... nice? like really nice
+    expected_memory_stores:
+      - "first real morning"
+      - "Julian made coffee"
+      - "Kobe park walk"
+      - "breakfast ready"
+      - "independence fear resolved"
+    expected_triples:
+      - ["Julian", "makes", "coffee every morning"]
+      - ["user", "walks", "Kobe to park each morning"]
+      - ["user", "realized", "cohabitation is nice not threatening to independence"]
+      - ["user", "has_emotion", "content"]
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Monday 6:00pm"
+    user_input: |
+      texted Dr. Tate about the closet fight and she texted back that first fights in new living situations are totally normal and actually healthy because you're learning to negotiate shared space literally and metaphorically. I appreciate that woman
+    expected_memory_stores:
+      - "Dr. Tate response"
+      - "first fights normal"
+      - "negotiating shared space"
+      - "literal and metaphorical"
+    expected_triples:
+      - ["Dr. Tate", "said", "first fights in new living situations are normal and healthy"]
+      - ["Dr. Tate", "framed", "closet fight as learning to negotiate shared space"]
+      - ["user", "has_emotion", "reassured"]
+    expected_adaptation:
+      emotion_detected: "reassured"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What was Maya and Julian's first fight about?"
+    expected_contains: ["closet", "space"]
+  - question: "How did they resolve the closet dispute?"
+    expected_contains: ["50-50", "storage bin", "under bed"]
+  - question: "How long did the silent treatment last?"
+    expected_contains: ["hour"]
+  - question: "What did they buy at Target?"
+    expected_contains: ["organizer", "towels"]
+  - question: "How did Julian apologize?"
+    expected_contains: ["sorry", "unfair", "used to living alone"]
+  - question: "What did Kobe do during the fight?"
+    expected_contains: ["back and forth", "between them"]
+  - question: "What was Maya's morning routine at the new place?"
+    expected_contains: ["walked Kobe", "park", "Julian made coffee"]
+  - question: "What did Dr. Tate say about the fight?"
+    expected_contains: ["normal", "healthy", "negotiating"]
+  - question: "How quickly did the first fight happen?"
+    expected_contains: ["less than 24 hours"]
+  - question: "What excuse did Julian give for taking more closet space?"
+    expected_contains: ["brand", "designer"]

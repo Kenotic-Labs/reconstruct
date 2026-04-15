@@ -1,0 +1,206 @@
+story_id: 129
+story_name: "Decorating and Making It Theirs"
+category: "Relationships"
+description: |
+  Tests whether the system tracks the apartment personalization process, stylistic
+  compromises between Maya and Julian, and the emotional significance of making a
+  shared space. Includes correction on furniture purchase.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00am"
+    user_input: |
+      so we've been living with bare walls for like three weeks and Julian the designer cannot take it anymore lol. today is decorating day. he's been curating a Pinterest board for this apartment since before we even moved in which is so him
+    expected_memory_stores:
+      - "decorating day"
+      - "bare walls three weeks"
+      - "Julian Pinterest board"
+    expected_triples:
+      - ["user", "starting", "decorating day after three weeks of bare walls"]
+      - ["Julian", "curated", "Pinterest board for apartment"]
+      - ["user", "has_emotion", "amused"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 11:00am"
+    user_input: |
+      went to a vintage furniture store on Hawthorne and Julian found this mid-century bookshelf that he's OBSESSED with. it's 350 dollars which is kind of a lot but it's gorgeous and it would fit perfectly in the living room between the windows
+    expected_memory_stores:
+      - "vintage furniture store"
+      - "Hawthorne"
+      - "mid-century bookshelf"
+      - "350 dollars"
+      - "between windows"
+    expected_triples:
+      - ["user", "visited", "vintage furniture store on Hawthorne"]
+      - ["Julian", "found", "mid-century bookshelf for $350"]
+      - ["bookshelf", "fits", "between living room windows"]
+    expected_adaptation:
+      emotion_detected: "considering"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 12:00pm"
+    user_input: |
+      we got the bookshelf. Julian negotiated it down to 275 because the back panel has a small scratch. I married... I mean I'm dating a bargain hunter apparently. the scratch is on the back so you can't even see it once it's against the wall
+    expected_memory_stores:
+      - "bookshelf purchased"
+      - "275 negotiated"
+      - "Julian bargain hunter"
+      - "scratch on back"
+    expected_triples:
+      - ["user", "purchased", "mid-century bookshelf for $275"]
+      - ["Julian", "negotiated", "bookshelf price down from $350 to $275"]
+      - ["bookshelf", "has_flaw", "small scratch on back panel"]
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 3:00pm"
+    user_input: |
+      we had our first style disagreement lol. Julian wants to hang his large format prints in the living room, like his art photography stuff. I wanted to put up some plants and maybe a couple simple frames. he says my taste is too minimal and I say his taste is too busy. we're both right
+    expected_memory_stores:
+      - "style disagreement"
+      - "Julian art prints"
+      - "Maya minimal plants"
+      - "too minimal vs too busy"
+    expected_triples:
+      - ["Julian", "wants", "large format art prints in living room"]
+      - ["user", "wants", "plants and simple frames"]
+      - ["Julian", "calls", "user's taste too minimal"]
+      - ["user", "calls", "Julian's taste too busy"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 4:00pm"
+    user_input: |
+      compromise: Julian gets the hallway and studio as his gallery walls and the living room is a blend of both. we hung two of his prints and I put up three hanging planters and honestly? the combo looks better than either of us would've done alone
+    expected_memory_stores:
+      - "style compromise"
+      - "Julian hallway gallery"
+      - "living room blend"
+      - "two prints three planters"
+      - "better together"
+    expected_triples:
+      - ["Julian", "gets", "hallway and studio as gallery walls"]
+      - ["living room", "has", "blend of two prints and three hanging planters"]
+      - ["user", "feels", "combined style looks better than either alone"]
+    expected_adaptation:
+      emotion_detected: "pleased"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 10:00am"
+    user_input: |
+      wait actually we didn't pay 275 for the bookshelf I just looked at the receipt and it was 285 not 275. Julian says I'm being a nerd about 10 dollars but accuracy matters ok
+    expected_memory_stores:
+      - "correction"
+      - "bookshelf 285 not 275"
+      - "receipt check"
+    expected_triples:
+      - ["user", "corrected", "bookshelf price $275 → $285"]
+    expected_adaptation:
+      emotion_detected: "precise"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 1:00pm"
+    user_input: |
+      what color is the mid-century bookshelf
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 3:00pm"
+    user_input: |
+      Julian hung a framed photo of us from last summer at the coast in the bedroom and another one of Kobe as a puppy in the hallway. the apartment is starting to feel like us not just a place where two people sleep
+    expected_memory_stores:
+      - "photos hung"
+      - "coast photo"
+      - "Kobe puppy photo"
+      - "feels like them"
+    expected_triples:
+      - ["Julian", "hung", "framed coast photo in bedroom"]
+      - ["Julian", "hung", "Kobe puppy photo in hallway"]
+      - ["user", "feels", "apartment starting to feel like them"]
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 6:00pm"
+    user_input: |
+      Kobe has claimed the spot by the south-facing windows as his napping zone. the sun hits there perfectly around 2pm and he just lays in it and melts. we put his bed there permanently. he's the real interior designer
+    expected_memory_stores:
+      - "Kobe nap spot"
+      - "south-facing windows"
+      - "2pm sun"
+      - "dog bed placement"
+    expected_triples:
+      - ["Kobe", "claimed", "south-facing window spot as napping zone"]
+      - ["Kobe", "naps_at", "2pm when sun hits windows"]
+      - ["user", "placed", "Kobe's bed by south-facing windows"]
+    expected_adaptation:
+      emotion_detected: "endeared"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 9:00pm"
+    user_input: |
+      took photos of the finished apartment and sent them to Clara and Mom. Mom said it looks cozy and Clara said it looks like a Pinterest board which coming from a 25-year-old is a compliment I think. Julian posted a photo of his studio setup on Instagram and got like 200 likes already
+    expected_memory_stores:
+      - "apartment photos"
+      - "Mom cozy"
+      - "Clara Pinterest"
+      - "Julian Instagram"
+      - "200 likes"
+    expected_triples:
+      - ["user", "sent", "apartment photos to Clara and Mom"]
+      - ["Clara", "said", "apartment looks like Pinterest"]
+      - ["Julian", "posted", "studio setup on Instagram and got 200 likes"]
+      - ["user", "has_emotion", "proud"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How much did the bookshelf cost?"
+    expected_contains: ["285"]
+  - question: "Where did they find the bookshelf?"
+    expected_contains: ["vintage", "Hawthorne"]
+  - question: "How did they compromise on decorating style?"
+    expected_contains: ["Julian hallway", "living room blend", "prints", "planters"]
+  - question: "Where is Kobe's nap spot?"
+    expected_contains: ["south-facing windows", "sun"]
+  - question: "What photos did Julian hang?"
+    expected_contains: ["coast", "Kobe puppy"]
+  - question: "What was the original price mentioned for the bookshelf?"
+    expected_contains: ["275"]
+  - question: "What is Julian's style preference?"
+    expected_contains: ["art prints", "busy"]
+  - question: "What is Maya's style preference?"
+    expected_contains: ["minimal", "plants"]
+  - question: "What did Clara say about the apartment?"
+    expected_contains: ["Pinterest"]
+  - question: "What time does the sun hit Kobe's napping spot?"
+    expected_contains: ["2pm"]

@@ -1,0 +1,175 @@
+story_id: 235
+story_name: "Aftermath and EpiPen Life"
+category: "Health"
+description: |
+  Tests system tracking post-emergency adjustment. Maya follows up with allergist,
+  gets multiple EpiPens, becomes hyper-vigilant. Verifies medical follow-up tracking.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 10:00 AM"
+    user_input: |
+      follow up with Dr. Nassif today after the ER visit and she said the reaction was exactly what she warned me about and she's prescribing a second EpiPen because I used the one and she said I should carry two at all times now one in my purse and one in my car
+    expected_memory_stores:
+      - "Dr. Nassif follow up"
+      - "two EpiPens now"
+      - "one purse one car"
+      - "carry at all times"
+    expected_adaptation:
+      emotion_detected: "serious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 10:30 AM"
+    user_input: |
+      she also gave me a medical bracelet recommendation like one of those allergy alert bracelets and she said I should get one that says shellfish allergy and I was like do people actually wear those and she said Maya you stopped breathing in a restaurant yes people wear those
+    expected_memory_stores:
+      - "allergy bracelet"
+      - "shellfish allergy label"
+      - "you stopped breathing"
+      - "Dr. Nassif direct"
+    expected_adaptation:
+      emotion_detected: "sobered"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 2:00 PM"
+    user_input: |
+      ordered the bracelet online it's a simple silver one from Road ID and I'm getting it engraved with SHELLFISH ALLERGY and EPIPEN CARRIER and I never thought I'd be the person wearing a medical bracelet at 29 but here we are
+    expected_memory_stores:
+      - "Road ID bracelet"
+      - "silver"
+      - "engraved"
+      - "shellfish allergy"
+      - "EpiPen carrier"
+    expected_adaptation:
+      emotion_detected: "accepting"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 7:00 AM"
+    user_input: |
+      I'm being kind of paranoid about food now like I made breakfast this morning and I was reading the ingredient list on the soy sauce bottle checking for shellfish derivatives and Julian was like babe soy sauce doesn't have shrimp and I was like YOU DON'T KNOW THAT
+    expected_memory_stores:
+      - "paranoid about food"
+      - "reading ingredient lists"
+      - "soy sauce check"
+      - "Julian says overreacting"
+      - "hyper-vigilant"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      I went back to the Thai Orchid website and wrote a review about what happened and I was calm and factual about it and said when customers disclose a shellfish allergy you need to check for shrimp paste in your sauces and the manager actually responded and apologized and said they're retraining staff
+    expected_memory_stores:
+      - "wrote review"
+      - "Thai Orchid"
+      - "calm and factual"
+      - "shrimp paste issue"
+      - "manager responded"
+      - "retraining staff"
+    expected_adaptation:
+      emotion_detected: "empowered"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 3:00 PM"
+    user_input: |
+      how many EpiPens do I carry now and where do I keep them
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 9:00 AM"
+    user_input: |
+      Diane called and Julian must have told her about the ER and she was horrified and she said oh Maya we need to make sure the wedding venue knows about this and I said yeah we need to tell Blue Fork the caterer and Diane said she'll handle it and make sure there's zero shellfish
+    expected_memory_stores:
+      - "Diane called"
+      - "horrified"
+      - "wedding venue"
+      - "Blue Fork caterer"
+      - "zero shellfish at wedding"
+      - "Diane will handle it"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 2:00 PM"
+    user_input: |
+      my mom called too and Vivian was like Maya Chen why didn't you call me from the hospital and I was like mom it was 1 am and she was like I don't care I'm your MOTHER and then she started asking about Aunt Lily's allergy protocol and apparently Lily has a whole system for dining out
+    expected_memory_stores:
+      - "Vivian upset"
+      - "why didn't you call"
+      - "Aunt Lily's system"
+      - "dining out protocol"
+    expected_adaptation:
+      emotion_detected: "sheepish"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      talked to Aunt Lily on the phone and she's had the shellfish allergy for fifteen years and she said the first year is the hardest because you're scared of everything and then it becomes second nature and she gave me her list of safe restaurants in Portland because she visits Clara sometimes
+    expected_memory_stores:
+      - "Aunt Lily fifteen years"
+      - "first year hardest"
+      - "becomes second nature"
+      - "safe restaurants list"
+      - "Lily visits Clara"
+    expected_adaptation:
+      emotion_detected: "comforted"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 9:00 PM"
+    user_input: |
+      feeling a little better about everything like yes it was terrifying but I survived and I know what to do now and I have EpiPens and a bracelet coming and Julian and Clara and Diane are all watching out for me and Aunt Lily said it gets easier and I believe her
+    expected_memory_stores:
+      - "feeling better"
+      - "survived"
+      - "know what to do"
+      - "support system"
+      - "gets easier"
+    expected_adaptation:
+      emotion_detected: "resilient"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How many EpiPens does Maya carry?"
+    expected_contains: ["two"]
+  - question: "Where does Maya keep her EpiPens?"
+    expected_contains: ["purse", "car"]
+  - question: "What medical bracelet did Maya order?"
+    expected_contains: ["Road ID", "shellfish allergy"]
+  - question: "Did the Thai Orchid respond to Maya's review?"
+    expected_contains: ["yes", "apologized", "retraining"]
+  - question: "Who is handling the wedding caterer's allergy protocol?"
+    expected_contains: ["Diane"]
+  - question: "What did Aunt Lily share about living with the allergy?"
+    expected_contains: ["first year hardest", "second nature"]
+  - question: "How long has Aunt Lily had the allergy?"
+    expected_contains: ["fifteen years"]
+  - question: "What did Dr. Nassif recommend after the ER visit?"
+    expected_contains: ["two EpiPens", "bracelet"]
+  - question: "How is Maya coping with the aftermath?"
+    expected_contains: ["better", "resilient", "support"]
+  - question: "Who was upset Maya didn't call from the hospital?"
+    expected_contains: ["Vivian", "mom"]

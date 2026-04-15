@@ -1,0 +1,211 @@
+story_id: 90
+story_name: "Keeping It Free"
+category: "Learning"
+description: |
+  Tests memory of Maya's final decision to keep fridgesearch free.
+  The project reaches a stable state. Thread 4 resolves.
+  Verifies system tracks project lifecycle and value-driven decisions.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      got another acquisition email this time from a company called CookSmart and they offered $50k for the whole thing the code the users the brand everything and I forwarded it to Julian and he replied with just a laughing emoji and I replied to CookSmart saying no thank you fridgesearch is not for sale
+    expected_memory_stores:
+      - "CookSmart acquisition"
+      - "$50k offer"
+      - "Julian laughing"
+      - "declined again"
+      - "not for sale"
+    expected_triples:
+      - ["CookSmart", "offered", "$50k to acquire fridgesearch"]
+      - ["user", "declined", "CookSmart acquisition offer"]
+      - ["Julian", "reacted", "laughing emoji to $50k offer"]
+      - ["user", "has_emotion", "amused"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      Marcus said I'm crazy for turning down 50k and honestly he might be right from a financial perspective but I told him it's not about the money it's about what happens to the users if I sell like CookSmart would absolutely put ads everywhere and charge for premium features and that defeats the whole purpose
+    expected_memory_stores:
+      - "Marcus thinks crazy"
+      - "financial perspective"
+      - "users first"
+      - "ads and premium concern"
+      - "purpose over money"
+    expected_triples:
+      - ["Marcus", "thinks", "user is crazy for turning down $50k"]
+      - ["user", "prioritizes", "users over financial gain"]
+      - ["user", "concerned", "CookSmart would add ads and charge premium"]
+      - ["user", "has_emotion", "firm"]
+    expected_adaptation:
+      emotion_detected: "firm"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 9:00 AM"
+    user_input: |
+      wrote a blog post on the fridgesearch website titled why this app will always be free and I talked about how the food system is already full of companies trying to extract value from what should be a basic human activity which is cooking and fridgesearch exists to give that power back to people not to make money
+    expected_memory_stores:
+      - "blog post written"
+      - "always be free"
+      - "food system critique"
+      - "power to people"
+      - "not for money"
+    expected_triples:
+      - ["user", "wrote", "blog post: why this app will always be free"]
+      - ["user", "argues", "food system extracts value from cooking"]
+      - ["fridgesearch", "exists_to", "give power back to people"]
+      - ["user", "has_emotion", "passionate"]
+    expected_adaptation:
+      emotion_detected: "passionate"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 2:00 PM"
+    user_input: |
+      the blog post got 200 likes on Twitter and someone called me the open source chef which is hilarious and Julian said you're becoming a brand whether you want to or not and I was like I don't want a brand I just want to help people cook and he said same thing
+    expected_memory_stores:
+      - "blog post viral"
+      - "200 likes"
+      - "open source chef"
+      - "Julian brand comment"
+      - "same thing"
+    expected_triples:
+      - ["blog_post", "got", "200 likes on Twitter"]
+      - ["someone", "called_user", "the open source chef"]
+      - ["Julian", "said", "you're becoming a brand whether you want to or not"]
+      - ["user", "has_emotion", "amused"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Sunday 11:00 AM"
+    user_input: |
+      Ross from Conduit saw my blog post and he slacked me privately saying he respects the decision to keep it free and he said it reminds him of why he started Conduit to build something meaningful not just something profitable and I thought that was really cool of him to say
+    expected_memory_stores:
+      - "Ross saw blog post"
+      - "respects decision"
+      - "Conduit parallel"
+      - "meaningful over profitable"
+    expected_triples:
+      - ["Ross", "saw", "user's blog post about keeping fridgesearch free"]
+      - ["Ross", "respects", "decision to keep fridgesearch free"]
+      - ["Ross", "said", "reminds him of why he started Conduit"]
+      - ["user", "has_emotion", "validated"]
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Next Wednesday 7:00 PM"
+    user_input: |
+      fridgesearch is officially at a stable place now like 3500 users donations cover costs Danny contributes regularly Marcus manages the community the subreddit is self-moderating and I only need to spend maybe 4 hours a weekend on maintenance and new features
+    expected_memory_stores:
+      - "stable state"
+      - "3500 users"
+      - "costs covered"
+      - "Danny contributes"
+      - "Marcus manages community"
+      - "4 hours weekend"
+    expected_triples:
+      - ["fridgesearch", "has_metric", "3500 users"]
+      - ["fridgesearch", "status", "stable"]
+      - ["Danny", "contributes", "regularly"]
+      - ["Marcus", "manages", "community"]
+      - ["user", "spends", "4 hours per weekend on fridgesearch"]
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Next Thursday 8:00 PM"
+    user_input: |
+      how much was the latest acquisition offer for fridgesearch
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Next Saturday 10:00 AM"
+    user_input: |
+      added one more feature today a seasonal ingredient filter that highlights recipes using ingredients that are in season in your region and Marcus was the first to test it obviously and he said this is genius because in season produce is cheaper and tastes better and he's right
+    expected_memory_stores:
+      - "seasonal ingredient filter"
+      - "in season produce"
+      - "region based"
+      - "Marcus tested"
+      - "cheaper and better"
+    expected_adaptation:
+      emotion_detected: "creative"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Next Saturday 5:00 PM"
+    user_input: |
+      Julian and I used the seasonal filter ourselves and found a recipe for summer peach salad with burrata and basil and we made it for dinner and it was probably the best thing we've ever cooked together and Kobe didn't get any because peaches aren't great for dogs but he got his regular dinner plus a treat
+    expected_memory_stores:
+      - "summer peach salad"
+      - "burrata and basil"
+      - "best thing cooked"
+      - "Kobe no peaches"
+      - "Kobe got treat"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Next Sunday 8:00 PM"
+    user_input: |
+      looking at everything tonight and I feel complete about fridgesearch like it's not done obviously there's always more to build but it's good and it's helping people and it's sustainable and it brought Julian and me even closer together and it taught me that I can build things outside of work that matter and that's a feeling I'll carry forever
+    expected_memory_stores:
+      - "complete feeling"
+      - "not done but good"
+      - "helping people"
+      - "sustainable"
+      - "Julian closer"
+      - "building outside work"
+      - "lasting lesson"
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How much was the CookSmart offer?"
+    expected_contains: ["50k", "50"]
+  - question: "Did Maya sell fridgesearch?"
+    expected_contains: ["no"]
+  - question: "How many users does fridgesearch have?"
+    expected_contains: ["3500"]
+  - question: "How much time does Maya spend on fridgesearch weekly?"
+    expected_contains: ["4 hours"]
+  - question: "What was the latest feature added?"
+    expected_contains: ["seasonal", "ingredient"]
+  - question: "Who is managing the fridgesearch community?"
+    expected_contains: ["Marcus"]
+  - question: "What did Ross say about the blog post?"
+    expected_contains: ["respects", "meaningful"]
+  - question: "Is fridgesearch open source?"
+    expected_contains: ["open source", "GitHub"]
+  - question: "What recipe did Maya and Julian make with the seasonal filter?"
+    expected_contains: ["peach salad", "burrata"]
+  - question: "What has fridgesearch taught Maya?"
+    expected_contains: ["build things", "outside work", "matter"]

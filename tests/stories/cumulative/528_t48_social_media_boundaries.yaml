@@ -1,0 +1,174 @@
+story_id: 528
+story_name: "Social Media Boundaries"
+category: "Phone and Digital Life"
+description: |
+  Maya establishes permanent social media boundaries — what she posts, what she consumes,
+  what she avoids. Cross-references LinkedIn spiral (526), Instagram limits,
+  friend group, and identity (T50).
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      ok so I've been thinking about my relationship with social media as a whole not just screen time but like what I put out there and what I consume and I realized I've been performing for people I don't even know like posting photos of dinner parties for strangers when the people who matter were at the actual table
+    expected_memory_stores:
+      - "social media reflection"
+      - "performing for strangers"
+      - "real audience at the table"
+    expected_adaptation:
+      emotion_detected: "introspective"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 10:00 AM"
+    user_input: |
+      decided on my rules for social media going forward one I only post things I'd want to remember not things I want people to see two I don't check anyone else's career updates three I keep the 15 minute Instagram limit and actually respect it and four no scrolling in bed before sleep that one is the hardest
+    expected_memory_stores:
+      - "social media rules"
+      - "post to remember not to show"
+      - "no career stalking"
+      - "15 minute limit respected"
+      - "no bed scrolling"
+    expected_adaptation:
+      emotion_detected: "disciplined"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      Ben posted photos from our last dinner party on Instagram and tagged me and I got like fifty likes and I caught myself feeling good about the likes and then immediately feeling gross about feeling good about likes like I'm thirty years old why do dopamine hits from strangers double tapping still affect me
+    expected_memory_stores:
+      - "Ben posted dinner party photos"
+      - "fifty likes"
+      - "feeling good then gross"
+      - "dopamine hits from likes"
+      - "age awareness"
+    expected_adaptation:
+      emotion_detected: "self-critical"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 12:00 PM"
+    user_input: |
+      told Marcus about my social media rules and he said honestly Maya most people at our age are having this reckoning and he said he quit Twitter entirely last year and his anxiety dropped noticeably and I was like wait really and he said yeah turns out arguing with strangers about tech isn't good for your mental health who knew
+    expected_memory_stores:
+      - "Marcus quit Twitter"
+      - "anxiety dropped"
+      - "generational reckoning"
+      - "arguing with strangers bad"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 6:00 PM"
+    user_input: |
+      Omar sent me a climbing video on Instagram that was really cool and I watched it and then got sucked into climbing content for 25 minutes and blew past my 15 minute limit AGAIN and I was like this is the problem it's not that Instagram is bad it's that the algorithm is designed to keep you scrolling and I'm an engineer I should understand this better than anyone
+    expected_memory_stores:
+      - "Omar sent climbing video"
+      - "sucked into 25 minutes"
+      - "blew past limit again"
+      - "algorithm design awareness"
+      - "engineer should know better"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:00 AM"
+    user_input: |
+      phone-free Sunday tomorrow and I'm looking forward to it more than anything which is such a weird thing to say about NOT using technology but it's true and I think the contrast between connected days and disconnected days makes both better like you appreciate the phone more when you've had a break from it
+    expected_memory_stores:
+      - "looking forward to phone-free Sunday"
+      - "contrast makes both better"
+      - "appreciate phone after break"
+    expected_adaptation:
+      emotion_detected: "balanced"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Monday 9:00 AM"
+    user_input: |
+      week one of the social media rules and my average screen time is 2 hours and 15 minutes and Instagram average is 12 minutes per day which is under the limit and I didn't check LinkedIn once and I didn't scroll in bed and I feel like I'm actually winning at something for once
+    expected_memory_stores:
+      - "screen time 2hr 15min"
+      - "Instagram 12 minutes average"
+      - "under limit"
+      - "no LinkedIn"
+      - "no bed scrolling"
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      Julian noticed I'm not on my phone in bed anymore and he said it's nice and I said what's nice and he said you used to scroll for like 30 minutes before sleep and now you read and sometimes you fall asleep with the book on your chest and he said I missed seeing your face instead of the top of your head
+    expected_memory_stores:
+      - "no phone in bed"
+      - "reading instead"
+      - "falls asleep with book"
+      - "Julian sees her face now"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      Priya asked me at work if I saw some industry news on Twitter and I said no I don't really do Twitter and she looked at me like I was an alien and I said I get my news from like two newsletters now and actual conversations and she said that's either very healthy or very ignorant and I said probably both
+    expected_memory_stores:
+      - "Priya surprised no Twitter"
+      - "news from two newsletters"
+      - "actual conversations"
+      - "healthy or ignorant"
+    expected_adaptation:
+      emotion_detected: "unconcerned"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 9:00 PM"
+    user_input: |
+      I think the digital declutter and the phone-free Sundays and the social media rules are all connected to the same thing which is me choosing what gets my attention and what doesn't and that's actually a bigger deal than it sounds because for years my attention was being extracted by apps and now I'm taking it back and using it on the things that matter like people and food and trees and dogs
+    expected_memory_stores:
+      - "all rules connected"
+      - "choosing attention"
+      - "attention extracted by apps"
+      - "taking it back"
+      - "people food trees dogs"
+    expected_adaptation:
+      emotion_detected: "empowered"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What are Maya's social media rules?"
+    expected_contains: ["post to remember", "no career updates", "15 minute limit", "no bed scrolling"]
+  - question: "What is Maya's average Instagram time per day?"
+    expected_contains: ["12 minutes"]
+  - question: "What did Julian notice about bedtime?"
+    expected_contains: ["not on phone", "reading", "face instead of head"]
+  - question: "Who quit Twitter and saw anxiety drop?"
+    expected_contains: ["Marcus"]
+  - question: "What does Maya say about the algorithm?"
+    expected_contains: ["designed to keep scrolling"]
+  - question: "How does Maya get her news now?"
+    expected_contains: ["two newsletters", "conversations"]
+  - question: "What is Maya's current screen time average?"
+    expected_contains: ["2 hours 15"]
+  - question: "What does Maya say she's taking back?"
+    expected_contains: ["attention"]
+  - question: "What climbing content issue happened?"
+    expected_contains: ["Omar", "video", "25 minutes"]
+  - question: "What does Maya value over screen time?"
+    expected_contains: ["people", "food", "trees", "dogs"]

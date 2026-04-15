@@ -1,0 +1,178 @@
+story_id: 323
+story_name: "Greg Gets Hostile"
+category: "Home Life"
+description: |
+  Tests memory of Greg's hostile reaction to the noise complaint. Passive-aggressive
+  note, confrontation escalation. Verifies system tracks conflict intensification
+  and emotional responses to neighbor aggression.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 5:30 PM"
+    user_input: |
+      came home from work and there's a NOTE taped to our front door and it's from Greg and it says quote thanks for the complaint to the city real neighborly of you signed your neighbor end quote and Julian saw it too and he was like what the hell
+    expected_memory_stores:
+      - "note on front door"
+      - "from Greg"
+      - "passive aggressive"
+      - "real neighborly"
+      - "Julian angry"
+    expected_triples:
+      - ["Greg", "left_note_on", "Maya and Julian's front door"]
+      - ["Greg", "wrote", "thanks for the complaint real neighborly"]
+      - ["Julian", "has_emotion", "angry"]
+      - ["user", "has_emotion", "shocked"]
+    expected_adaptation:
+      emotion_detected: "shocked"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 6:00 PM"
+    user_input: |
+      so obviously Greg got the warning letter from the city and figured out it was us because who else would it be Mrs Patterson can't hear and now I feel like I have an enemy next door and Julian wants to go talk to him but he's heated and I don't want it to escalate more
+    expected_memory_stores:
+      - "Greg got warning letter"
+      - "figured out it was them"
+      - "Mrs Patterson ruled out"
+      - "enemy next door"
+      - "Julian heated"
+      - "don't want escalation"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 8:00 PM"
+    user_input: |
+      the bass is going tonight and I swear it's even louder like he's doing it on purpose as revenge and it started at exactly 9:59 PM like one minute before the cutoff which is so petty and passive aggressive and I want to scream
+    expected_memory_stores:
+      - "bass louder as revenge"
+      - "started 9:59 PM"
+      - "one minute before cutoff"
+      - "deliberate pettiness"
+    expected_adaptation:
+      emotion_detected: "furious"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 8:00 AM"
+    user_input: |
+      Julian went out to walk Kobe this morning and Greg was in his yard and they made eye contact and Greg just stared at him and didn't say anything and Julian said it was really uncomfortable and I'm like great now we can't even be in our own yard
+    expected_memory_stores:
+      - "Greg stared at Julian"
+      - "no greeting"
+      - "uncomfortable"
+      - "yard tension"
+    expected_adaptation:
+      emotion_detected: "stressed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 12:00 PM"
+    user_input: |
+      looked into it more and apparently the Woodstock Neighborhood Association has a mediation program for neighbor disputes and I think that might be the way to go because this is getting out of hand and I don't want to live next to someone who hates me
+    expected_memory_stores:
+      - "Woodstock Neighborhood Association"
+      - "mediation program"
+      - "neighbor disputes"
+      - "out of hand"
+    expected_adaptation:
+      emotion_detected: "practical"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 3:00 PM"
+    user_input: |
+      told Clara about the note and she was LIVID she was like that's harassment Maya and you should call the HOA or the neighborhood association and document everything and she's not wrong I should be keeping a record
+    expected_memory_stores:
+      - "Clara livid"
+      - "called it harassment"
+      - "document everything"
+      - "HOA suggestion"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 6:00 PM"
+    user_input: |
+      Greg left ANOTHER note today this one said I have a right to play music in my own home and I was like you know what technically he's right if it's before 10 but the thing is it's so loud it shakes our dishes and that can't be legal
+    expected_memory_stores:
+      - "second note"
+      - "right to play music"
+      - "technically before 10"
+      - "shakes dishes"
+      - "volume issue"
+    expected_adaptation:
+      emotion_detected: "exasperated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 10:00 AM"
+    user_input: |
+      what organization did Maya look into for neighbor mediation
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 2:00 PM"
+    user_input: |
+      emailed the Woodstock Neighborhood Association about the mediation program and explained the situation and they replied really quickly and said they do free mediation for neighbor conflicts and they can set something up within two weeks
+    expected_memory_stores:
+      - "emailed neighborhood association"
+      - "free mediation"
+      - "within two weeks"
+      - "quick reply"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 7:00 PM"
+    user_input: |
+      Julian and I talked about it and we agreed to try the mediation before doing anything else and he said he'll come and be calm about it and I'm going to keep a log of dates and times when the bass is playing just in case we need it and honestly I just want this resolved peacefully
+    expected_memory_stores:
+      - "agreed to try mediation"
+      - "Julian will be calm"
+      - "keeping log of bass"
+      - "dates and times"
+      - "want peaceful resolution"
+    expected_adaptation:
+      emotion_detected: "mature"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did Greg's first note say?"
+    expected_contains: ["thanks for the complaint", "neighborly"]
+  - question: "What did Greg's second note say?"
+    expected_contains: ["right to play music"]
+  - question: "What time did Greg start playing as revenge?"
+    expected_contains: ["9:59"]
+  - question: "What organization is Maya contacting for mediation?"
+    expected_contains: ["Woodstock Neighborhood Association"]
+  - question: "How soon can mediation be set up?"
+    expected_contains: ["two weeks"]
+  - question: "What did Clara advise Maya to do?"
+    expected_contains: ["document", "HOA", "harassment"]
+  - question: "What is Maya keeping a log of?"
+    expected_contains: ["dates", "times", "bass playing"]
+  - question: "How did Greg react when he saw Julian in the yard?"
+    expected_contains: ["stared", "didn't say anything"]
+  - question: "Is the mediation free?"
+    expected_contains: ["yes", "free"]
+  - question: "What physical effect does the bass have on the house?"
+    expected_contains: ["shakes dishes", "vibrating"]

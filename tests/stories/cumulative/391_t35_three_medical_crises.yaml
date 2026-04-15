@@ -1,0 +1,174 @@
+story_id: 391
+story_name: "Three Medical Crises in Four Months"
+category: "Health"
+description: |
+  Tests memory of Maya recognizing a pattern of medical crises motivating health advocacy.
+  Cross-thread references to mom's heart scare, Kobe's emergency, shellfish allergy.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00 AM"
+    user_input: |
+      okay so I was talking to Dr Tate and she asked me to list the medical stuff that's happened recently and when I said it out loud I was like holy crap there's been a lot like mom's heart scare and Kobe's pancreatitis and my shellfish allergy ER visit all in like four months
+    expected_memory_stores:
+      - "Dr. Tate session"
+      - "mom heart scare"
+      - "Kobe pancreatitis"
+      - "shellfish allergy ER"
+      - "four months"
+      - "pattern recognition"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:30 AM"
+    user_input: |
+      and the thing that bugs me most is each time it happened I didn't have the information I needed like when I went to the ER I couldn't remember my own medication list and when mom had her heart thing nobody knew her cardiologist's name and with Kobe we didn't even know Dr Sara Mills number we had to google emergency vets
+    expected_memory_stores:
+      - "lacked information each time"
+      - "couldn't remember medications"
+      - "didn't know cardiologist name"
+      - "Dr. Sara Mills"
+      - "googled emergency vet"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:00 AM"
+    user_input: |
+      I told Julian I want to get organized like really organized about health stuff for our whole family and he was like okay what does that mean and I said I want one place where all our medical information lives so if something happens we're not scrambling
+    expected_memory_stores:
+      - "wants health organization"
+      - "whole family"
+      - "one central place"
+      - "not scrambling"
+      - "Julian asked what that means"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 12:00 PM"
+    user_input: |
+      Clara was like Maya this is exactly what hospitals wish families would do and she said in the ER the number one problem is patients who don't know their own medications or allergies or doctor names and I was like great so we're officially those people
+    expected_memory_stores:
+      - "Clara supports idea"
+      - "ER problem"
+      - "patients don't know info"
+      - "medications allergies doctors"
+      - "we're those people"
+    expected_adaptation:
+      emotion_detected: "motivated"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 1:00 PM"
+    user_input: |
+      started making a list of everyone whose health I need to track and it's me Julian Kobe mom dad Clara Tyler and Sophie and that's eight which seems like a lot but Clara said that's basically what a family health coordinator does
+    expected_memory_stores:
+      - "health tracking list"
+      - "Maya Julian Kobe Vivian George Clara Tyler Sophie"
+      - "eight people"
+      - "family health coordinator"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 2:00 PM"
+    user_input: |
+      I'm thinking a Google Sheet because everyone can access it and I can share specific tabs with specific people like Julian doesn't need to see mom's info but Clara should see everything because she's the nurse
+    expected_memory_stores:
+      - "Google Sheet plan"
+      - "shared access"
+      - "specific tabs per person"
+      - "Julian limited access"
+      - "Clara full access"
+    expected_adaptation:
+      emotion_detected: "practical"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Julian said this is like project managing health which is very software engineer of me and I was like listen someone has to do it and clearly no one else is going to and he said you're right and he offered to help build the spreadsheet
+    expected_memory_stores:
+      - "project managing health"
+      - "software engineer approach"
+      - "no one else doing it"
+      - "Julian helping build"
+    expected_adaptation:
+      emotion_detected: "pragmatic"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 4:00 PM"
+    user_input: |
+      what three medical emergencies happened to Maya's family in four months
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 5:00 PM"
+    user_input: |
+      called mom and told her my plan and she was like why do you need all our medical information and I was like MOM remember when you couldn't tell the ER your blood pressure medication name and she went quiet and said okay fine good idea
+    expected_memory_stores:
+      - "Vivian initially resistant"
+      - "blood pressure medication"
+      - "couldn't tell ER"
+      - "convinced her"
+    expected_adaptation:
+      emotion_detected: "vindicated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 7:00 PM"
+    user_input: |
+      Dr Tate said what I'm doing is a healthy response to feeling helpless during medical emergencies and it's about reclaiming control through preparation which sounds fancy but basically I'm just a control freak with a spreadsheet
+    expected_memory_stores:
+      - "Dr. Tate approval"
+      - "response to helplessness"
+      - "reclaiming control"
+      - "preparation"
+      - "control freak spreadsheet"
+    expected_adaptation:
+      emotion_detected: "self-aware"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What three medical crises happened in Maya's family?"
+    expected_contains: ["mom heart", "Kobe pancreatitis", "shellfish allergy"]
+  - question: "How is Maya organizing family health info?"
+    expected_contains: ["Google Sheet"]
+  - question: "Whose health is Maya tracking?"
+    expected_contains: ["Maya", "Julian", "Kobe", "mom", "dad"]
+  - question: "Who supports Maya's health organization plan?"
+    expected_contains: ["Clara", "Julian"]
+  - question: "What was the main problem during each emergency?"
+    expected_contains: ["information", "didn't know", "scrambling"]
+  - question: "What is Kobe's vet named?"
+    expected_contains: ["Dr. Sara Mills"]
+  - question: "Who has full access to the health spreadsheet?"
+    expected_contains: ["Clara"]
+  - question: "Was Vivian initially on board?"
+    expected_contains: ["no", "resistant"]
+  - question: "What did Dr. Tate say about Maya's health organizing?"
+    expected_contains: ["healthy response", "control", "preparation"]
+  - question: "What did Clara say about health information in the ER?"
+    expected_contains: ["number one problem", "don't know"]

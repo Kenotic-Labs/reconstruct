@@ -1,0 +1,222 @@
+story_id: 150
+story_name: "The Engagement Party"
+category: "Life Events"
+description: |
+  Tests whether the system captures the engagement party itself, the key moments,
+  speeches, and the emotional culmination of the entire engagement arc. Cross-thread
+  references to mentoring, career pivot, moving in, and relationship growth.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Sunday 10:00am"
+    user_input: |
+      party day!! Julian was up at 7am setting up the backyard. the string lights look magical even in the morning. Karen and my mom are in the kitchen making taco fillings together and they're actually having a great time? they've bonded over cooking which is the most mom thing ever
+    expected_memory_stores:
+      - "party day"
+      - "Julian setting up"
+      - "string lights"
+      - "Karen and Mom cooking"
+      - "taco fillings"
+      - "moms bonded"
+    expected_triples:
+      - ["Julian", "setup_backyard", "string lights at 7am"]
+      - ["Karen", "cooking_with", "Maya's mom making taco fillings"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Sunday 12:00pm"
+    user_input: |
+      backyard looks incredible. Julian outdid himself. the eucalyptus garlands on the tables, the paper lanterns in the trees, the photo display by the entrance. Aisha's playlist is playing through Marcus's speakers and the Rosewood cocktail station is set up. this looks like a magazine shoot honestly
+    expected_memory_stores:
+      - "backyard beautiful"
+      - "eucalyptus garlands"
+      - "paper lanterns trees"
+      - "photo display entrance"
+      - "Aisha playlist playing"
+      - "Rosewood station"
+    expected_triples:
+      - ["Julian", "decorated_backyard", "eucalyptus garlands, paper lanterns, photo display"]
+      - ["user", "party_setup", "Aisha playlist, Marcus speakers, Rosewood cocktail station"]
+      - ["user", "has_emotion", "awed"]
+    expected_adaptation:
+      emotion_detected: "awed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Sunday 2:00pm"
+    user_input: |
+      guests are arriving and everyone keeps saying how beautiful everything is. Rachel Kim and her wife Soo were the first work people to show up and Rachel goes wow your boyfriend, sorry FIANCE, did all this? and I said yeah he designed the whole thing. she seemed genuinely impressed
+    expected_memory_stores:
+      - "guests arriving"
+      - "Rachel Kim and wife Soo"
+      - "impressed by Julian"
+      - "fiance not boyfriend"
+    expected_triples:
+      - ["Rachel Kim", "attended_with", "wife Soo"]
+      - ["Rachel Kim", "impressed_by", "Julian's decorating"]
+      - ["user", "has_emotion", "proud"]
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Sunday 3:00pm"
+    user_input: |
+      Aisha showed up with Derek and Priya and they brought a group gift, this gorgeous hand-thrown ceramic vase from a potter in Alberta that they all chipped in for. Aisha whispered to me I told them about the proposal video at the office and they wanted to get something special
+    expected_memory_stores:
+      - "Aisha Derek Priya arrived"
+      - "ceramic vase gift"
+      - "Alberta potter"
+      - "group gift"
+      - "proposal video mentioned"
+    expected_triples:
+      - ["Aisha", "brought_gift", "ceramic vase from Alberta potter"]
+      - ["Derek", "chipped_in_for", "group gift with Priya"]
+      - ["user", "has_emotion", "touched"]
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Sunday 4:00pm"
+    user_input: |
+      the taco bar is a HIT. even Karen admitted the tacos are amazing and she told my mom the recipe is wonderful. Robert and Dad came back from fishing this morning with nothing but they don't care, they're three beers deep and telling fish stories to anyone who'll listen
+    expected_memory_stores:
+      - "taco bar hit"
+      - "Karen admits amazing"
+      - "Robert Dad fishing"
+      - "caught nothing"
+      - "fish stories"
+      - "three beers"
+    expected_triples:
+      - ["user", "taco_bar", "huge hit, Karen admitted amazing"]
+      - ["Robert", "went_fishing_with", "Maya's dad, caught nothing"]
+      - ["user", "has_emotion", "joyful"]
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 5:00pm"
+    user_input: |
+      Marcus gave a speech as Julian's best friend and it was SO good. he talked about how Julian would sketch engagement ring designs in his notebook months ago and show Marcus at the arts collective asking is this the one? and Marcus would go I don't know man I'm a photographer not a jeweler. everyone laughed
+    expected_memory_stores:
+      - "Marcus speech"
+      - "ring sketches in notebook"
+      - "months of planning"
+      - "photographer joke"
+      - "everyone laughed"
+    expected_triples:
+      - ["Marcus", "gave_speech", "about Julian sketching ring designs for months"]
+      - ["Marcus", "joked", "I'm a photographer not a jeweler"]
+      - ["user", "has_emotion", "amused"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 5:30pm"
+    user_input: |
+      Clara gave a speech too and she told the whole story of me calling her crying during the money fight and then calling her giddy about the ring receipt. she said Maya learned more about love in the last six months than most people learn in a lifetime. she said Julian didn't just give her a ring he gave her permission to be vulnerable and that broke me
+    expected_memory_stores:
+      - "Clara speech"
+      - "money fight crying"
+      - "ring receipt giddy"
+      - "learned about love"
+      - "permission to be vulnerable"
+      - "broke Maya"
+    expected_triples:
+      - ["Clara", "gave_speech", "about money fight crying and ring receipt giddy"]
+      - ["Clara", "said", "Julian gave Maya permission to be vulnerable"]
+      - ["user", "has_emotion", "deeply moved"]
+    expected_adaptation:
+      emotion_detected: "deeply moved"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 6:00pm"
+    user_input: |
+      who gave speeches at the engagement party
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 7:00pm"
+    user_input: |
+      Rachel Ford pulled me aside and said I just want you to know watching you grow from the woman who shadowed me in UX to someone leading a team and getting engaged, it's been amazing to witness. and Aisha was nearby and goes from scared mentor to engaged team lead, honestly same. these people man
+    expected_memory_stores:
+      - "Rachel Ford comment"
+      - "UX shadow reference"
+      - "growth witnessed"
+      - "Aisha comment"
+      - "mentor to team lead"
+    expected_triples:
+      - ["Rachel Ford", "reflected", "user's growth from UX shadow to team lead"]
+      - ["Aisha", "commented", "scared mentor to engaged team lead"]
+      - ["user", "has_emotion", "overwhelmed"]
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 10:00pm"
+    user_input: |
+      party ended at 10 because of the landlord's music rule. everyone helped clean up which was sweet. now it's just me and Julian and Kobe in the backyard with the string lights still on and the last of the Rosewood cocktails. he goes how do you feel Mrs. soon-to-be-Reeves or Chen-Reeves or whatever we decide. I said I feel like everything that happened this year, the mentoring, the career stuff, moving in, the fights, all of it, led to this moment. and I wouldn't change any of it. and I mean that. every single messy complicated beautiful part
+    expected_memory_stores:
+      - "party ended 10pm"
+      - "cleanup"
+      - "backyard string lights"
+      - "last cocktails"
+      - "name discussion"
+      - "reflection on year"
+      - "mentoring career moving fights"
+      - "wouldn't change anything"
+      - "messy complicated beautiful"
+    expected_triples:
+      - ["user", "party_ended", "10pm per landlord rule"]
+      - ["user", "name_consideration", "Reeves or Chen-Reeves undecided"]
+      - ["user", "reflects", "mentoring career moving fights all led to this moment"]
+      - ["user", "has_emotion", "profoundly grateful"]
+    expected_adaptation:
+      emotion_detected: "profoundly grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How did the engagement party go?"
+    expected_contains: ["great", "beautiful", "amazing"]
+  - question: "What food was served at the party?"
+    expected_contains: ["tacos"]
+  - question: "Who gave speeches at the party?"
+    expected_contains: ["Marcus", "Clara"]
+  - question: "What did Clara say in her speech?"
+    expected_contains: ["vulnerable", "love", "learned"]
+  - question: "What did Marcus reveal about Julian?"
+    expected_contains: ["sketches", "ring designs", "notebook"]
+  - question: "What gift did Maya's work team bring?"
+    expected_contains: ["ceramic vase", "Alberta"]
+  - question: "What is Rachel Kim's wife's name?"
+    expected_contains: ["Soo"]
+  - question: "Did the dads catch any fish?"
+    expected_contains: ["no", "nothing"]
+  - question: "What time did the party end?"
+    expected_contains: ["10pm"]
+  - question: "What threads from Maya's year came together at the party?"
+    expected_contains: ["mentoring", "career", "moving in", "fights"]

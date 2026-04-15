@@ -1,0 +1,202 @@
+story_id: 102
+story_name: "Aisha's First Day"
+category: "Career"
+description: |
+  Tests whether the system tracks Aisha's first day interactions, captures Maya's evolving
+  emotions from nervous to relieved, and maintains continuity with the onboarding document
+  created earlier.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:30am"
+    user_input: |
+      ok it's the big day Aisha starts in like thirty minutes and I'm literally pacing around the office like a weirdo. I printed out the onboarding doc I made and put it on her desk with a little sticky note that says welcome
+    expected_memory_stores:
+      - "Aisha first day"
+      - "onboarding doc printed"
+      - "welcome note"
+    expected_triples:
+      - ["Aisha", "starts", "today"]
+      - ["user", "printed", "onboarding doc for Aisha's desk"]
+      - ["user", "left", "welcome sticky note"]
+      - ["user", "has_emotion", "anxious"]
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 9:15am"
+    user_input: |
+      she's here! ok so Aisha seems super nice, really polite, asked like a million questions already which is honestly a good sign right? she already had her dev environment half set up before she even got here
+    expected_memory_stores:
+      - "Aisha arrived"
+      - "asks questions"
+      - "dev environment"
+      - "proactive"
+    expected_triples:
+      - ["Aisha", "arrived", "first day"]
+      - ["Aisha", "is", "polite and asks many questions"]
+      - ["Aisha", "had", "dev environment half set up already"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 11:00am"
+    user_input: |
+      so we spent like two hours going through the codebase and um she's sharp but you can tell she's overwhelmed. the monorepo structure is a LOT for someone who's used to like single-repo school projects
+    expected_memory_stores:
+      - "codebase walkthrough"
+      - "monorepo"
+      - "overwhelmed"
+    expected_triples:
+      - ["user", "walked_Aisha_through", "codebase for two hours"]
+      - ["Aisha", "is", "sharp but overwhelmed by monorepo"]
+      - ["user", "has_emotion", "empathetic"]
+    expected_adaptation:
+      emotion_detected: "empathetic"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 12:15pm"
+    user_input: |
+      took Aisha to lunch at that Thai place on Hawthorne, you know the one Julian and I go to? she's from Sacramento originally, moved to Portland for school and stayed because she loves the rain which is... honestly psychotic but ok
+    expected_memory_stores:
+      - "lunch"
+      - "Thai restaurant"
+      - "Hawthorne"
+      - "Sacramento"
+      - "Portland"
+    expected_triples:
+      - ["user", "took_Aisha_to", "Thai place on Hawthorne"]
+      - ["Aisha", "originally_from", "Sacramento"]
+      - ["Aisha", "moved_to_Portland_for", "school"]
+    expected_adaptation:
+      emotion_detected: "friendly"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 2:30pm"
+    user_input: |
+      afternoon was rough, Aisha tried to run the test suite and like half of them failed because she didn't have the right env variables set up. I should've included that in the onboarding doc, that's on me
+    expected_memory_stores:
+      - "test suite failures"
+      - "environment variables"
+      - "onboarding doc gap"
+    expected_triples:
+      - ["Aisha", "encountered", "test suite failures from missing env variables"]
+      - ["onboarding_doc", "missing", "env variables section"]
+      - ["user", "has_emotion", "guilty"]
+    expected_adaptation:
+      emotion_detected: "guilty"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 4:00pm"
+    user_input: |
+      ok got the env vars sorted and she got all tests passing now. the look on her face when the green checkmarks came through was honestly so satisfying? like I remember that feeling
+    expected_memory_stores:
+      - "tests passing"
+      - "env vars fixed"
+      - "satisfaction"
+    expected_triples:
+      - ["Aisha", "got", "all tests passing"]
+      - ["user", "fixed", "env variables issue"]
+      - ["user", "has_emotion", "happy"]
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Monday 5:30pm"
+    user_input: |
+      Aisha asked me what the hardest part of this job is and I was like hmm probably context switching between the four different services... wait no it's actually five services now, they added the notification service last quarter
+    expected_memory_stores:
+      - "correction"
+      - "five services"
+      - "notification service"
+      - "context switching"
+    expected_triples:
+      - ["user", "corrected", "four services → five services"]
+      - ["team", "added", "notification service last quarter"]
+      - ["user", "finds_hardest", "context switching between services"]
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Monday 7:00pm"
+    user_input: |
+      home now. told Julian about it and he goes so you basically had a first day too huh? and yeah actually that's exactly what it felt like. I'm exhausted but like the good kind
+    expected_memory_stores:
+      - "exhausted"
+      - "good tired"
+      - "Julian comment"
+    expected_triples:
+      - ["user", "has_emotion", "content"]
+      - ["user", "feels", "exhausted but good kind"]
+      - ["Julian", "said", "you had a first day too"]
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 8:30pm"
+    user_input: |
+      what color is my dog
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Monday 10:00pm"
+    user_input: |
+      just updated the onboarding doc with the env variables section and also added a troubleshooting FAQ based on what Aisha ran into today. if we get more interns this could actually be useful
+    expected_memory_stores:
+      - "onboarding doc updated"
+      - "env variables section"
+      - "troubleshooting FAQ"
+      - "future interns"
+    expected_triples:
+      - ["user", "updated", "onboarding doc with env variables section"]
+      - ["user", "added", "troubleshooting FAQ to onboarding doc"]
+      - ["user", "has_emotion", "productive"]
+    expected_adaptation:
+      emotion_detected: "productive"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How did Aisha's first day go?"
+    expected_contains: ["questions", "overwhelmed", "tests passing"]
+  - question: "What problem did Aisha encounter with the test suite?"
+    expected_contains: ["environment variables", "env"]
+  - question: "Where is Aisha originally from?"
+    expected_contains: ["Sacramento"]
+  - question: "How many services does Maya's team maintain?"
+    expected_contains: ["five"]
+  - question: "What did Maya add to the onboarding doc?"
+    expected_contains: ["env variables", "troubleshooting", "FAQ"]
+  - question: "Where did Maya take Aisha for lunch?"
+    expected_contains: ["Thai", "Hawthorne"]
+  - question: "How did Maya feel at the end of Aisha's first day?"
+    expected_contains: ["exhausted", "good"]
+  - question: "What was the hardest part of the job Maya mentioned?"
+    expected_contains: ["context switching", "services"]
+  - question: "Did Aisha have her dev environment ready?"
+    expected_contains: ["half set up", "before"]
+  - question: "What breed is Maya's dog?"
+    expected_contains: ["golden retriever"]

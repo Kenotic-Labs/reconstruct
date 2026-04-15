@@ -1,0 +1,170 @@
+story_id: 367
+story_name: "Applies ML at Conduit"
+category: "Career Development"
+description: |
+  Tests memory of Maya applying ML concepts at work to improve Conduit's search ranking.
+  Verifies system tracks professional impact of learning.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 10:00 AM"
+    user_input: |
+      okay so Sam pulled me into a meeting this morning and said he wants me to work on improving the search ranking model for Conduit and he said since I've been learning ML this is perfect timing and I'm like wait really you want ME to lead this
+    expected_memory_stores:
+      - "Sam assigned project"
+      - "search ranking improvement"
+      - "Maya leading"
+      - "ML knowledge applied"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 2:00 PM"
+    user_input: |
+      looked at the current search ranking code and it's basically just keyword matching with some TF-IDF which is like ancient and I'm thinking we could replace it with a learned ranking model that uses embeddings and I pitched it to Sam and he was like yes go for it
+    expected_memory_stores:
+      - "current system TF-IDF"
+      - "keyword matching"
+      - "learned ranking model"
+      - "embeddings approach"
+      - "Sam approved"
+    expected_adaptation:
+      emotion_detected: "motivated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 4:00 PM"
+    user_input: |
+      spent the day pulling historical search data and user click patterns to build a training dataset and it's like exactly what we covered in the course like feature engineering and data preprocessing and I'm actually using what I learned in real time
+    expected_memory_stores:
+      - "historical search data"
+      - "click patterns"
+      - "training dataset"
+      - "feature engineering"
+      - "course applied in real time"
+    expected_adaptation:
+      emotion_detected: "engaged"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      built a prototype ranking model using a simple neural network and ran it against the test data and the relevance scores improved by 15 percent compared to the old TF-IDF system and Sam was like whoa that's significant
+    expected_memory_stores:
+      - "prototype ranking model"
+      - "neural network"
+      - "15% improvement"
+      - "Sam impressed"
+    expected_adaptation:
+      emotion_detected: "thrilled"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 11:00 AM"
+    user_input: |
+      presented the results to the whole engineering team and people were asking really good questions and Aisha the intern was like this is so cool can I help and I said yes because honestly having another person would speed things up
+    expected_memory_stores:
+      - "team presentation"
+      - "good questions"
+      - "Aisha wants to help"
+      - "Maya said yes"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 3:00 PM"
+    user_input: |
+      Sam pulled me aside after the presentation and said this is exactly the kind of initiative that gets people promoted and I was like oh and he winked and I'm trying not to get my hopes up but like that definitely meant something right
+    expected_memory_stores:
+      - "Sam promotion hint"
+      - "initiative recognized"
+      - "Sam winked"
+      - "Maya hopeful"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 6:00 PM"
+    user_input: |
+      Lily helped me optimize the model architecture today she suggested adding a dropout layer to prevent overfitting which is literally what we studied last week and together we got the improvement up to 18 percent which is even better
+    expected_memory_stores:
+      - "Lily helped optimize"
+      - "dropout layer"
+      - "overfitting prevention"
+      - "18% improvement"
+    expected_adaptation:
+      emotion_detected: "collaborative"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 7:00 PM"
+    user_input: |
+      how much did Maya improve Conduit's search ranking
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 10:00 AM"
+    user_input: |
+      told Julian about the promotion hint and he literally did a happy dance in the kitchen and Kobe started jumping around too and Julian was like I told you this course would pay off and he's right it literally already is
+    expected_memory_stores:
+      - "told Julian promotion hint"
+      - "Julian happy dance"
+      - "Kobe jumping"
+      - "course paying off"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 3:00 PM"
+    user_input: |
+      the best part is the ML course homework this week is about building ranking models and I literally already did it at work so the assignment took me like an hour and I got 98 percent and I'm like okay this is the flow state I've been missing
+    expected_memory_stores:
+      - "homework about ranking models"
+      - "already did at work"
+      - "one hour completion"
+      - "98 percent"
+      - "flow state"
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did Maya improve at Conduit using ML?"
+    expected_contains: ["search ranking"]
+  - question: "How much did the search ranking improve?"
+    expected_contains: ["18", "percent"]
+  - question: "What was the old system using?"
+    expected_contains: ["TF-IDF", "keyword"]
+  - question: "What did Sam hint about regarding Maya?"
+    expected_contains: ["promotion"]
+  - question: "Who helped Maya optimize the model?"
+    expected_contains: ["Lily"]
+  - question: "What technique did Lily suggest to prevent overfitting?"
+    expected_contains: ["dropout"]
+  - question: "Who asked to help with the ranking project?"
+    expected_contains: ["Aisha"]
+  - question: "What score did Maya get on her ranking models homework?"
+    expected_contains: ["98"]
+  - question: "How did Julian react to the promotion hint?"
+    expected_contains: ["happy dance"]
+  - question: "What approach did Maya's new ranking model use?"
+    expected_contains: ["neural network", "embeddings"]

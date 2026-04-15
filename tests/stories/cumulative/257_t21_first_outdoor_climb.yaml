@@ -1,0 +1,182 @@
+story_id: 257
+story_name: "First Outdoor Climb at Smith Rock"
+category: "Fitness"
+description: |
+  Tests memory of Maya's first outdoor climbing experience at Smith Rock.
+  She attempts Wherever I May Roam and falls on the crux. Captures the emotional
+  experience, the difference from gym climbing, and the fall itself.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 5:45 AM"
+    user_input: |
+      in Omar's car right now driving to Smith Rock it's still dark outside and I've had two coffees and I'm vibrating Leila's in the back seat sleeping lol she brought hiking boots and trail snacks and said she's gonna do the Misery Ridge trail while we climb
+    expected_memory_stores:
+      - "driving to Smith Rock"
+      - "early morning"
+      - "Leila in car"
+      - "Misery Ridge trail"
+      - "Leila hiking"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 8:15 AM"
+    user_input: |
+      oh my god we just got here and I can see the rock formations and they're MASSIVE like the photos do not do it justice the main wall is like 400 feet tall and Omar is pointing out different routes and I'm like that one and that one and he's like calm down let's warm up first
+    expected_memory_stores:
+      - "arrived Smith Rock"
+      - "massive rock formations"
+      - "400 feet"
+      - "Omar calming her down"
+      - "warm up first"
+    expected_adaptation:
+      emotion_detected: "awestruck"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 9:00 AM"
+    user_input: |
+      did a warm up route called Bunny Face which is a 5.7 and it felt so different from gym climbing like the rock is this volcanic tuff stuff and it's way more textured than plastic holds and my shoes grip differently and you can feel the wind and the sun and it's just like a whole different experience
+    expected_memory_stores:
+      - "Bunny Face 5.7"
+      - "warm up route"
+      - "volcanic tuff"
+      - "different from gym"
+      - "textured rock"
+    expected_adaptation:
+      emotion_detected: "amazed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 10:30 AM"
+    user_input: |
+      okay so we found Wherever I May Roam and Omar's setting up the rope and my hands are actually shaking which is stupid because it's the same grade I climb in the gym but standing at the base of actual rock looking up 80 feet is just... different
+    expected_memory_stores:
+      - "Wherever I May Roam"
+      - "Omar setting rope"
+      - "hands shaking"
+      - "80 feet"
+      - "intimidated"
+    expected_adaptation:
+      emotion_detected: "scared"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 10:45 AM"
+    user_input: |
+      started climbing and the first half went great like the moves felt natural and I was reading the rock pretty well Omar was yelling beta from below like move your right foot up there yeah that crimp and I was feeling really good about it
+    expected_memory_stores:
+      - "first half good"
+      - "reading rock well"
+      - "Omar calling beta"
+      - "feeling confident"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 11:00 AM"
+    user_input: |
+      and then I hit the crux which is this like overhang section at about 60 feet and you have to do a big reach to this jug hold and my feet were on these tiny nubs and I just... I couldn't commit to the move like I was scared to let go with my left hand and I pumped out and fell
+    expected_memory_stores:
+      - "fell on crux"
+      - "overhang at 60 feet"
+      - "big reach to jug"
+      - "couldn't commit"
+      - "pumped out"
+      - "fear of letting go"
+    expected_adaptation:
+      emotion_detected: "disappointed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 11:15 AM"
+    user_input: |
+      the fall was fine by the way Omar caught me perfectly on belay and I only dropped like four feet but hanging there on the rope 60 feet up with the river below me I just started crying? not because I was hurt but because I was so frustrated I was RIGHT THERE
+    expected_memory_stores:
+      - "fall was safe"
+      - "Omar belayed well"
+      - "four feet drop"
+      - "60 feet up"
+      - "cried from frustration"
+      - "river below"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 12:00 PM"
+    user_input: |
+      Omar lowered me down and was like hey that was incredible for your first outdoor climb most people don't even make it to the crux their first time and I was like yeah but I didn't send it and he was like so come back next weekend and I was like wait really and he was like yeah that's how outdoor climbing works
+    expected_memory_stores:
+      - "Omar encouragement"
+      - "most don't reach crux first time"
+      - "come back next weekend"
+      - "outdoor climbing process"
+    expected_adaptation:
+      emotion_detected: "encouraged"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 2:00 PM"
+    user_input: |
+      did two more easier routes after lunch a 5.8 called Cinnamon Slab and a 5.9 called Voyage of the Cowdog and sent both of them clean which felt good and Leila came back from her hike and took pictures of me on the wall and she was like you look like a badass
+    expected_memory_stores:
+      - "Cinnamon Slab 5.8"
+      - "Voyage of the Cowdog 5.9"
+      - "sent both clean"
+      - "Leila photos"
+      - "compliment"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 7:30 PM"
+    user_input: |
+      home now and my whole body hurts in the best way Julian ordered pizza and I'm showing him all the photos and videos and he was like babe you were so high up and I was like I KNOW and Kobe won't stop sniffing my climbing shoes lol I'm going back next Saturday for that route I'm not leaving it unfinished
+    expected_memory_stores:
+      - "back home"
+      - "body sore"
+      - "pizza with Julian"
+      - "showing photos"
+      - "going back Saturday"
+      - "unfinished business"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Did Maya send Wherever I May Roam on her first attempt?"
+    expected_contains: ["no", "fell"]
+  - question: "Where did Maya fall on the route?"
+    expected_contains: ["crux", "overhang", "60 feet"]
+  - question: "What was the warm up route Maya did at Smith Rock?"
+    expected_contains: ["Bunny Face"]
+  - question: "What kind of rock is Smith Rock made of?"
+    expected_contains: ["volcanic", "tuff"]
+  - question: "What other routes did Maya send at Smith Rock?"
+    expected_contains: ["Cinnamon Slab", "Voyage of the Cowdog"]
+  - question: "What did Omar say about Maya's performance?"
+    expected_contains: ["incredible", "most", "don't", "crux"]
+  - question: "What trail did Leila hike?"
+    expected_contains: ["Misery Ridge"]
+  - question: "Is Maya going back to Smith Rock?"
+    expected_contains: ["yes", "next Saturday"]
+  - question: "Why did Maya cry on the wall?"
+    expected_contains: ["frustrated", "close"]
+  - question: "How far did Maya fall when she came off the crux?"
+    expected_contains: ["four feet"]

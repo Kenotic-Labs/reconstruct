@@ -1,0 +1,173 @@
+story_id: 416
+story_name: "Home Assistant Over-Engineering"
+category: "Smart Home"
+description: |
+  Julian discovers Home Assistant and starts building a centralized smart home hub.
+  Goes way overboard with automations. Maya watches the spiral with growing concern.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:00 PM"
+    user_input: |
+      oh god Julian found Home Assistant which is apparently this open source smart home platform that lets you control everything from one place and he's been reading about it all day at work Marcus told him about it and now Julian is like this solves the firmware update problem because it's local not cloud
+    expected_memory_stores:
+      - "Home Assistant discovered"
+      - "open source smart home"
+      - "Marcus told Julian"
+      - "local not cloud"
+      - "centralized control"
+    expected_adaptation:
+      emotion_detected: "wary"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      Julian ordered a Raspberry Pi to run Home Assistant on and it arrived today and he's in the office setting it up and I can hear him muttering about YAML configuration files and Docker containers and I'm like this is getting way too technical he's not a programmer this is my domain
+    expected_memory_stores:
+      - "Raspberry Pi ordered"
+      - "YAML configuration"
+      - "Docker containers"
+      - "Julian not a programmer"
+      - "Maya's domain"
+    expected_adaptation:
+      emotion_detected: "concerned"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 9:00 PM"
+    user_input: |
+      Julian has been working on Home Assistant for three nights now and he's got the Nest connected and one Ring camera but the August locks won't integrate and he's on Reddit forums asking for help and I offered to help with the YAML but he was like no I can do it and I was like ok buddy
+    expected_memory_stores:
+      - "three nights of work"
+      - "Nest connected"
+      - "one Ring connected"
+      - "August locks not integrating"
+      - "Reddit forums"
+      - "refused Maya's help"
+    expected_adaptation:
+      emotion_detected: "watching"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 10:00 PM"
+    user_input: |
+      he created these automations that are like insane like when we get home the lights turn on the thermostat adjusts the front door unlocks and it plays a welcome home playlist on the speaker and I was like Julian this isn't a spaceship it's a 3 bedroom house in Portland
+    expected_memory_stores:
+      - "complex automations"
+      - "lights thermostat unlock music"
+      - "welcome home playlist"
+      - "Maya thinks it's too much"
+    expected_adaptation:
+      emotion_detected: "exasperated"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 6:00 PM"
+    user_input: |
+      the automations keep firing at weird times like the welcome home thing triggered when the pizza delivery guy walked up because it detected motion and started the playlist and the door unlocked and the poor guy was standing there confused while Bohemian Rhapsody was blasting from inside
+    expected_memory_stores:
+      - "automations misfiring"
+      - "pizza delivery triggered"
+      - "door unlocked for stranger"
+      - "Bohemian Rhapsody"
+      - "security issue"
+    expected_adaptation:
+      emotion_detected: "alarmed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 9:00 AM"
+    user_input: |
+      I told Julian the door unlocking for random people is a security issue and he said yeah you're right and he changed it so it only triggers when our specific phones connect to the home WiFi not just motion which ok that's better but I'm still nervous about all these automations
+    expected_memory_stores:
+      - "security fix"
+      - "phone WiFi trigger instead"
+      - "Maya still nervous"
+    expected_adaptation:
+      emotion_detected: "partially reassured"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 2:00 PM"
+    user_input: |
+      Julian added smart bulbs now like Hue bulbs in the living room and bedroom and they change color based on time of day like warm in the evening and bright in the morning and honestly that's actually nice but he also made one that turns red when the doorbell rings and that's just weird Julian
+    expected_memory_stores:
+      - "Hue smart bulbs"
+      - "living room and bedroom"
+      - "color changes by time"
+      - "red light doorbell alert"
+      - "warm evening bright morning"
+    expected_adaptation:
+      emotion_detected: "mixed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 5:00 PM"
+    user_input: |
+      what platform is Julian using to control all the smart home stuff and what's it running on
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 8:00 PM"
+    user_input: |
+      Julian showed me the Home Assistant dashboard on his phone and it has like 47 different controls and automations and I said Julian I'm a software engineer and even I think this is over-engineered and he looked at me like I'd insulted his child and I said I love you but we need to simplify
+    expected_memory_stores:
+      - "47 controls and automations"
+      - "over-engineered"
+      - "Maya says simplify"
+      - "Julian offended"
+    expected_adaptation:
+      emotion_detected: "firm but kind"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 10:00 AM"
+    user_input: |
+      Julian reluctantly agreed to pare down the automations to just the useful ones which are auto lock and unlock the temperature schedule and the motion alerts for the cameras and he's keeping the smart bulbs because I actually do like the warm evening lighting but everything else goes and I said thank you
+    expected_memory_stores:
+      - "automations reduced"
+      - "keeping: lock, thermostat, cameras, bulbs"
+      - "removing unnecessary ones"
+      - "Julian reluctant"
+      - "Maya grateful"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What smart home platform did Julian set up?"
+    expected_contains: ["Home Assistant"]
+  - question: "What hardware runs Home Assistant?"
+    expected_contains: ["Raspberry Pi"]
+  - question: "Who told Julian about Home Assistant?"
+    expected_contains: ["Marcus"]
+  - question: "What embarrassing automation misfired?"
+    expected_contains: ["pizza delivery", "door unlocked", "Bohemian Rhapsody"]
+  - question: "What smart bulbs did Julian add?"
+    expected_contains: ["Hue"]
+  - question: "How many automations did Julian create?"
+    expected_contains: ["47"]
+  - question: "What automations did they keep?"
+    expected_contains: ["lock", "thermostat", "cameras", "bulbs"]
+  - question: "How did Julian fix the security issue with the door?"
+    expected_contains: ["phone WiFi", "not motion"]
+  - question: "What does the warm evening lighting come from?"
+    expected_contains: ["Hue", "smart bulbs"]
+  - question: "Did Julian accept Maya's help with YAML configuration?"
+    expected_contains: ["no", "refused"]

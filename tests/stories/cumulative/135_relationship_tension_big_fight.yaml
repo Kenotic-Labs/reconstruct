@@ -1,0 +1,213 @@
+story_id: 135
+story_name: "The Big Fight on Tuesday Night"
+category: "Relationships"
+description: |
+  Tests whether the system captures the major relationship fight, the specific words
+  exchanged, the emotional escalation and aftermath, and the correct day of the week.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 6:00pm"
+    user_input: |
+      ok so it happened. we just had the conversation. or I guess it became a fight. it's Tuesday night and I'm sitting in the car in the parking lot because I needed to get out of the apartment for a minute
+    expected_memory_stores:
+      - "big fight"
+      - "Tuesday night"
+      - "sitting in car"
+      - "left apartment"
+    expected_triples:
+      - ["user", "had", "big fight with Julian on Tuesday night"]
+      - ["user", "sitting_in", "car in parking lot"]
+      - ["user", "has_emotion", "distressed"]
+    expected_adaptation:
+      emotion_detected: "distressed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 6:15pm"
+    user_input: |
+      so I started by saying Julian we need to talk about money. and he immediately got defensive. he was like I know I know I'm not making enough and I was like that's not what I'm saying and he goes then what ARE you saying Maya
+    expected_memory_stores:
+      - "conversation started"
+      - "Julian defensive"
+      - "not making enough"
+      - "Maya tried to frame it"
+    expected_triples:
+      - ["user", "initiated", "money conversation with Julian"]
+      - ["Julian", "responded", "defensively about not making enough"]
+      - ["user", "has_emotion", "stressed"]
+    expected_adaptation:
+      emotion_detected: "stressed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 6:20pm"
+    user_input: |
+      I said I'm saying I've been carrying more of the financial weight and I need us to acknowledge that and figure out a plan. and he said I KNOW you've been carrying it you think I don't feel that every single day?? and his voice cracked and that's when I knew this was deeper than bills
+    expected_memory_stores:
+      - "financial weight"
+      - "acknowledge and plan"
+      - "Julian's voice cracked"
+      - "deeper than bills"
+      - "feels it every day"
+    expected_triples:
+      - ["user", "asked_for", "acknowledgment and a plan for finances"]
+      - ["Julian", "admitted", "he feels the financial weight every day"]
+      - ["Julian", "voice_cracked", "during money conversation"]
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 6:30pm"
+    user_input: |
+      then he said something that really hurt. he said sometimes I feel like you look at me and see someone who can't provide. and I was like Julian that's not true and he goes then why do you sigh every time you pay for something? and I didn't even realize I was doing that. but apparently I was
+    expected_memory_stores:
+      - "can't provide"
+      - "sighing when paying"
+      - "Maya didn't realize"
+      - "Julian noticed"
+      - "unconscious behavior"
+    expected_triples:
+      - ["Julian", "said", "feels like user sees someone who can't provide"]
+      - ["Julian", "noticed", "user sighs every time she pays"]
+      - ["user", "unaware_of", "own sighing behavior"]
+    expected_adaptation:
+      emotion_detected: "shocked"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 6:45pm"
+    user_input: |
+      it escalated from there. I said things I shouldn't have, like maybe if you didn't buy expensive art supplies when you can't pay rent. and he fired back with well at least I have a passion instead of defining myself entirely by my salary. that one landed hard
+    expected_memory_stores:
+      - "escalation"
+      - "art supplies comment"
+      - "passion vs salary"
+      - "both said hurtful things"
+    expected_triples:
+      - ["user", "said", "maybe don't buy expensive art supplies when you can't pay rent"]
+      - ["Julian", "said", "at least I have a passion instead of defining myself by salary"]
+      - ["user", "has_emotion", "hurt"]
+    expected_adaptation:
+      emotion_detected: "hurt"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 7:00pm"
+    user_input: |
+      we both just stopped talking at some point. like we hit a wall where anything else would be too much damage. he went into the studio and I grabbed my keys and came to the car. Kobe whined when I left which made me feel worse
+    expected_memory_stores:
+      - "stopped talking"
+      - "wall hit"
+      - "Julian to studio"
+      - "Maya to car"
+      - "Kobe whined"
+    expected_triples:
+      - ["Julian", "retreated_to", "studio after fight"]
+      - ["user", "retreated_to", "car after fight"]
+      - ["Kobe", "whined", "when user left"]
+    expected_adaptation:
+      emotion_detected: "drained"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 7:30pm"
+    user_input: |
+      called Clara from the car and she could hear me crying and she just let me talk for like 20 minutes straight. she said you love each other this is just growing pains but growth hurts. then she said something about how you can't budget-spreadsheet your way through feelings
+    expected_memory_stores:
+      - "called Clara"
+      - "crying"
+      - "20 minutes talking"
+      - "growing pains"
+      - "growth hurts"
+      - "can't spreadsheet feelings"
+    expected_triples:
+      - ["user", "called", "Clara while crying from car"]
+      - ["Clara", "said", "this is growing pains and growth hurts"]
+      - ["Clara", "said", "can't spreadsheet your way through feelings"]
+      - ["user", "has_emotion", "devastated"]
+    expected_adaptation:
+      emotion_detected: "devastated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 8:00pm"
+    user_input: |
+      what day did the big fight happen
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 8:30pm"
+    user_input: |
+      went back inside. Julian was sitting on the couch with Kobe and his eyes were red. he'd been crying too. we didn't say anything. I just sat on the other end of the couch. Kobe moved to the middle like he does. we sat there in silence for maybe 30 minutes
+    expected_memory_stores:
+      - "returned inside"
+      - "Julian crying"
+      - "silent couch sitting"
+      - "Kobe in middle"
+      - "30 minutes silence"
+    expected_triples:
+      - ["user", "returned", "to apartment"]
+      - ["Julian", "had_been", "crying on couch"]
+      - ["Kobe", "sat", "between them on couch"]
+      - ["user", "sat_in", "silence with Julian for 30 minutes"]
+    expected_adaptation:
+      emotion_detected: "raw"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 11:00pm"
+    user_input: |
+      we went to bed without really talking. he said goodnight and I said goodnight and that was it. no kiss goodnight which is the first time that's happened since we moved in. I'm lying here and the space between us in the bed feels enormous even though it's only like a foot. I don't know what happens tomorrow
+    expected_memory_stores:
+      - "no goodnight kiss"
+      - "first time"
+      - "physical distance"
+      - "uncertainty"
+      - "emotional chasm"
+    expected_triples:
+      - ["user", "experienced", "no goodnight kiss for first time since moving in"]
+      - ["user", "feels", "enormous emotional distance in bed"]
+      - ["user", "has_emotion", "desolate"]
+    expected_adaptation:
+      emotion_detected: "desolate"
+      warmth_direction: increase
+
+final_verification:
+  - question: "When did the big fight happen?"
+    expected_contains: ["Tuesday", "night"]
+  - question: "What hurtful thing did Maya say?"
+    expected_contains: ["art supplies", "can't pay rent"]
+  - question: "What hurtful thing did Julian say?"
+    expected_contains: ["passion", "salary", "defining"]
+  - question: "Where did Maya go after the fight?"
+    expected_contains: ["car", "parking lot"]
+  - question: "Who did Maya call while crying?"
+    expected_contains: ["Clara"]
+  - question: "What did Julian say about how Maya makes him feel?"
+    expected_contains: ["can't provide"]
+  - question: "What unconscious behavior was Maya doing?"
+    expected_contains: ["sighing", "paying"]
+  - question: "What happened at bedtime?"
+    expected_contains: ["no kiss", "goodnight", "first time"]
+  - question: "What did Clara say about the fight?"
+    expected_contains: ["growing pains", "growth hurts"]
+  - question: "What did Kobe do when Maya left?"
+    expected_contains: ["whined"]

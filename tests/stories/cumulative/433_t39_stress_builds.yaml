@@ -1,0 +1,175 @@
+story_id: 433
+story_name: "Stress Builds"
+category: "Lease Dispute"
+description: |
+  The weeks before the hearing. Maya deals with increasing stress about the
+  dispute while managing work, wedding planning, and volunteering.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:00 PM"
+    user_input: |
+      four weeks until the hearing and I keep going over my evidence folder like obsessively and Julian caught me at midnight last night reviewing the photos again and he was like Maya you've looked at those 50 times they haven't changed and I know he's right but I'm anxious about it
+    expected_memory_stores:
+      - "4 weeks until hearing"
+      - "obsessively reviewing evidence"
+      - "midnight reviewing"
+      - "Julian concerned"
+      - "anxious"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      Dr Tate and I talked about the anxiety and she said the deposit dispute is activating my fear of being taken advantage of which connects back to the PIP at Vantage and even the Craigslist car scam like there's a pattern of me feeling like people are trying to cheat me and it triggers a fight response
+    expected_memory_stores:
+      - "Dr Tate session"
+      - "fear of being cheated"
+      - "connects to PIP and car scam"
+      - "pattern identified"
+      - "fight response"
+    expected_adaptation:
+      emotion_detected: "insight"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 12:00 PM"
+    user_input: |
+      having trouble concentrating at work today because I keep thinking about what to say at the hearing like do I just present the evidence or do I need like a speech and I googled Oregon small claims court tips and most sites say keep it simple state your facts show your evidence don't get emotional
+    expected_memory_stores:
+      - "trouble concentrating at work"
+      - "hearing preparation"
+      - "googled tips"
+      - "keep it simple"
+      - "state facts show evidence"
+      - "don't get emotional"
+    expected_adaptation:
+      emotion_detected: "preoccupied"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 10:00 AM"
+    user_input: |
+      went to the food bank today and honestly it helped with the stress like just being there and sorting food and talking to Harold and Diane I forgot about the landlord thing for like 4 hours which was a relief and Harold said whatever's eating you kid leave it at the door this is the food bank we do good here
+    expected_memory_stores:
+      - "food bank helped with stress"
+      - "forgot about landlord"
+      - "4 hours of relief"
+      - "Harold advice"
+      - "leave it at door"
+    expected_adaptation:
+      emotion_detected: "relieved temporarily"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Sunday 3:00 PM"
+    user_input: |
+      Clara offered to come to the hearing for moral support and I said you don't have to and she said Maya I'm coming and I almost cried because like this is why Clara is Clara she just shows up when it matters and Julian is coming too obviously so I'll have my people there
+    expected_memory_stores:
+      - "Clara coming for support"
+      - "Clara just shows up"
+      - "Julian coming too"
+      - "Maya grateful"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 7:00 PM"
+    user_input: |
+      two weeks until the hearing now and I wrote out a timeline of events to present to the judge like moved in March 2023 noted tile damage on checklist lived there until we bought the house moved out January 2026 landlord withheld deposit February 2026 sent demand letter no response filed claim
+    expected_memory_stores:
+      - "2 weeks until hearing"
+      - "timeline created"
+      - "moved in March 2023"
+      - "moved out January 2026"
+      - "withheld deposit February"
+      - "demand letter sent"
+    expected_adaptation:
+      emotion_detected: "methodical"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 9:00 PM"
+    user_input: |
+      read online that judges in small claims often try to get both sides to settle before the actual hearing and I'm not sure how I feel about that because on one hand I just want my money back but on the other hand I kind of want the judge to rule in my favor officially you know like validation
+    expected_memory_stores:
+      - "judges encourage settlement"
+      - "conflicted about settling"
+      - "wants money back"
+      - "wants official validation"
+    expected_adaptation:
+      emotion_detected: "conflicted"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      when did we move into Westridge Apartments and when did we move out
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 8:00 PM"
+    user_input: |
+      Julian asked if I've been sleeping ok and I was like not really I keep having these stress dreams about the hearing where I show up and I forgot all my evidence and the judge sides with the landlord and Julian was like babe that's not gonna happen you have everything organized and I know but brains are stupid
+    expected_memory_stores:
+      - "sleep issues"
+      - "stress dreams about hearing"
+      - "forgetting evidence dream"
+      - "judge siding with landlord dream"
+      - "Julian reassures"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 6:00 PM"
+    user_input: |
+      you know what I realized today the 1800 dollars isn't even that much in the grand scheme of things but it represents something bigger it's about not letting someone take advantage of me and standing up when someone does wrong and that's worth more than the money honestly
+    expected_memory_stores:
+      - "bigger than money"
+      - "not letting someone take advantage"
+      - "standing up for right"
+      - "principle matters"
+    expected_adaptation:
+      emotion_detected: "resolute"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How is the lease dispute affecting Maya's sleep?"
+    expected_contains: ["stress dreams", "not sleeping well"]
+  - question: "What pattern did Dr. Tate identify about Maya's anxiety?"
+    expected_contains: ["fear", "cheated", "taken advantage", "PIP", "car scam"]
+  - question: "Who is coming to the hearing for moral support?"
+    expected_contains: ["Clara", "Julian"]
+  - question: "When did Maya move into Westridge Apartments?"
+    expected_contains: ["March 2023"]
+  - question: "When did Maya move out of Westridge?"
+    expected_contains: ["January 2026"]
+  - question: "What helped Maya with the hearing stress?"
+    expected_contains: ["food bank", "volunteering"]
+  - question: "What did Harold say about Maya's stress?"
+    expected_contains: ["leave it at the door"]
+  - question: "Is Maya open to settling before the hearing?"
+    expected_contains: ["conflicted", "wants validation"]
+  - question: "What tips did Maya find about small claims court?"
+    expected_contains: ["simple", "facts", "evidence", "don't get emotional"]
+  - question: "What does the $1800 represent to Maya beyond money?"
+    expected_contains: ["principle", "standing up", "not taken advantage"]

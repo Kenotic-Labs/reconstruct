@@ -1,0 +1,181 @@
+story_id: 514
+story_name: "Themed Nights Begin"
+category: "Hosting and Entertaining"
+description: |
+  Maya and Julian start themed dinner nights — Japanese night, taco night.
+  The hosting identity grows. Cross-references cooking (T31), friend group,
+  climbing buddies, and Conduit coworkers.
+duration_simulated: "3 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 6:00 PM"
+    user_input: |
+      so after the ramen night was such a hit Julian and I decided to do themed dinner nights like once or twice a month and tonight is Japanese night because obviously ramen is the star but I also made gyoza and we got sake from that place on Belmont and I made a little menu card because I'm extra like that
+    expected_memory_stores:
+      - "themed dinner nights"
+      - "once or twice a month"
+      - "Japanese night"
+      - "gyoza and sake"
+      - "Belmont store"
+      - "menu card"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 8:00 PM"
+    user_input: |
+      Japanese night was perfect like the gyoza turned out amazing and Julian made these sake cocktails and Omar brought his own chopsticks which was hilarious and Leila said she's never had homemade gyoza before and I taught her how to fold them and it reminded me of learning from my mom on FaceTime with grandpa's recipe
+    expected_memory_stores:
+      - "Japanese night success"
+      - "gyoza amazing"
+      - "sake cocktails"
+      - "Omar brought chopsticks"
+      - "taught Leila to fold"
+      - "grandpa recipe connection"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 10:00 AM next week"
+    user_input: |
+      taco night is next week and Julian is WAY more excited about this one because he grew up eating tacos like George and Diane used to do taco Tuesdays when he was a kid and he wants to do carnitas and I said fine you're head chef this time and I'll do the drinks and the role reversal should be interesting
+    expected_memory_stores:
+      - "taco night planned"
+      - "Julian excited"
+      - "George and Diane taco Tuesdays"
+      - "Julian head chef"
+      - "role reversal"
+    expected_adaptation:
+      emotion_detected: "playful"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 7:00 PM"
+    user_input: |
+      taco night and Julian is in his ELEMENT like he's got three different salsas going and the carnitas have been in the slow cooker since this morning and I made margaritas which turned out too strong honestly Raj had two and was like whoa these are lethal and Meera was like that's enough Raj
+    expected_memory_stores:
+      - "taco night happening"
+      - "Julian three salsas"
+      - "carnitas in slow cooker"
+      - "Maya's strong margaritas"
+      - "Raj and Meera"
+    expected_adaptation:
+      emotion_detected: "fun"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 9:00 PM"
+    user_input: |
+      Julian's carnitas were incredible like honestly better than any restaurant and Clara said Julian you've been holding out on us and Ben said we need to rank all the themed nights and Omar said Japanese is still number one and Julian took that as a personal challenge which means taco nights are about to get competitive
+    expected_memory_stores:
+      - "carnitas incredible"
+      - "better than restaurant"
+      - "Clara impressed"
+      - "Ben ranking idea"
+      - "Omar prefers Japanese"
+      - "Julian competitive"
+    expected_adaptation:
+      emotion_detected: "entertained"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 11:00 AM"
+    user_input: |
+      thinking about what's next for themed nights and Julian suggested Italian but I feel like that's too basic and I said what about Indian night and Raj literally texted at that exact moment saying if you do Indian night my mom will send her curry recipe and I was like the universe has spoken
+    expected_memory_stores:
+      - "Italian too basic"
+      - "Indian night proposed"
+      - "Raj's mom curry recipe"
+      - "coincidence"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 3:00 PM"
+    user_input: |
+      Marcus from work asked if he could come to the next dinner night and I was like wait how do you even know about it and he said Omar told him at the climbing gym and now apparently our dinner nights are like a thing that people want invitations to which is wild because six months ago I couldn't roast a chicken
+    expected_memory_stores:
+      - "Marcus wants to come"
+      - "Omar spread the word"
+      - "climbing gym mention"
+      - "dinner nights have reputation"
+      - "six months growth"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Monday 5:00 PM"
+    user_input: |
+      Priya overheard me talking about dinner nights and she said she'd love to come sometime and I was like oh my god my boss wants to come to my dinner party and Julian said that's great and I said that's terrifying what if she sees the baby gate for the dog and thinks we're weird
+    expected_memory_stores:
+      - "Priya wants to come"
+      - "boss at dinner party"
+      - "Maya nervous"
+      - "baby gate concern"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      I realize we need more chairs if we keep adding people and Julian found some folding chairs at IKEA for like 15 bucks each and we got four which means we can seat ten now and our dining room is basically a restaurant at this point and I love it honestly this is my favorite thing we do together
+    expected_memory_stores:
+      - "need more chairs"
+      - "IKEA folding chairs $15 each"
+      - "seat ten people now"
+      - "favorite thing together"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 8:00 PM"
+    user_input: |
+      Julian made a cocktail menu to match each themed night like sake cocktails for Japanese margaritas for taco and he's researching Indian cocktails now and he found something called a mango lassi cocktail and Raj is going to lose his mind and honestly Julian found his thing the way I found ramen and I think the dinner nights are his happy place
+    expected_memory_stores:
+      - "Julian cocktail menu per theme"
+      - "mango lassi cocktail"
+      - "Raj reaction anticipated"
+      - "Julian's happy place"
+      - "parallel to Maya's ramen"
+    expected_adaptation:
+      emotion_detected: "loving"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What themed dinner nights have Maya and Julian hosted?"
+    expected_contains: ["Japanese", "taco"]
+  - question: "What is Julian's specialty at dinner parties?"
+    expected_contains: ["cocktails", "drinks"]
+  - question: "Whose curry recipe might be used for Indian night?"
+    expected_contains: ["Raj", "mom"]
+  - question: "Who asked to come to future dinner nights?"
+    expected_contains: ["Marcus", "Priya"]
+  - question: "How many people can they seat now?"
+    expected_contains: ["ten"]
+  - question: "Where did they buy extra chairs?"
+    expected_contains: ["IKEA"]
+  - question: "What cocktail is Julian researching for Indian night?"
+    expected_contains: ["mango lassi"]
+  - question: "Who ranked Japanese night as number one?"
+    expected_contains: ["Omar"]
+  - question: "What was Julian's signature taco night dish?"
+    expected_contains: ["carnitas"]
+  - question: "How did Marcus find out about the dinner nights?"
+    expected_contains: ["Omar", "climbing gym"]

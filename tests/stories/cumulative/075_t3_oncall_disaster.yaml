@@ -1,0 +1,227 @@
+story_id: 75
+story_name: "First On-Call Disaster"
+category: "Career"
+description: |
+  Tests memory of Maya's first on-call rotation at Conduit.
+  A major incident happens at 2 AM. She handles it under pressure.
+  Verifies system tracks high-stress events with precise timing.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 4:00 PM"
+    user_input: |
+      Sam put me on the on-call rotation starting tonight and I'm nervous because I've never been on call at Conduit before and the runbooks are like 200 pages long and Lily said don't worry most on-call weeks are quiet but the ones that aren't are memorable and I'm like great that's reassuring
+    expected_memory_stores:
+      - "on-call rotation"
+      - "starting tonight"
+      - "nervous"
+      - "200 page runbooks"
+      - "Lily warning"
+    expected_triples:
+      - ["Sam", "put_user_on", "on-call rotation"]
+      - ["user", "has_emotion", "nervous"]
+      - ["Conduit", "has", "200 page runbooks"]
+      - ["Lily", "warned", "quiet weeks vs memorable ones"]
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 11:00 PM"
+    user_input: |
+      trying to go to sleep with the on-call phone next to my bed and Julian said just sleep normally and I was like I literally cannot relax knowing this thing could go off at any moment and Kobe is snoring so loud it sounds like an alarm which is not helping my anxiety
+    expected_memory_stores:
+      - "on-call phone"
+      - "can't sleep"
+      - "Julian advice"
+      - "Kobe snoring"
+      - "anxiety"
+    expected_triples:
+      - ["user", "has", "on-call phone by bed"]
+      - ["user", "has_emotion", "anxious"]
+      - ["Julian", "advised", "sleep normally"]
+      - ["Kobe", "snoring", "loudly like an alarm"]
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 2:15 AM"
+    user_input: |
+      oh god the pager just went off search is completely down for all customers and there are like 50 alerts firing at once and I'm sitting in my pajamas at my desk trying to figure out what happened and my hands are shaking and I can see in the logs that the search index got corrupted somehow during a background reindex job
+    expected_memory_stores:
+      - "pager 2:15 AM"
+      - "search down"
+      - "all customers"
+      - "50 alerts"
+      - "search index corrupted"
+      - "background reindex job"
+      - "hands shaking"
+    expected_triples:
+      - ["pager", "went_off_at", "2:15 AM"]
+      - ["search", "status", "completely down for all customers"]
+      - ["search index", "corrupted_by", "background reindex job"]
+      - ["user", "has_emotion", "panicked"]
+    expected_adaptation:
+      emotion_detected: "panicked"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 2:45 AM"
+    user_input: |
+      okay I escalated to Sam like the runbook says and he jumped on a call with me within five minutes and he was so calm like Maya let's just work through this step by step and we identified that the reindex job had a race condition that corrupted the primary shard and we needed to failover to the replica
+    expected_memory_stores:
+      - "escalated to Sam"
+      - "Sam on call in 5 minutes"
+      - "calm leadership"
+      - "race condition"
+      - "primary shard corrupted"
+      - "failover to replica"
+    expected_triples:
+      - ["user", "escalated_to", "Sam"]
+      - ["Sam", "joined_call_within", "five minutes"]
+      - ["incident", "root_cause", "race condition corrupted primary shard"]
+      - ["incident", "fix", "failover to replica"]
+    expected_adaptation:
+      emotion_detected: "focused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 3:30 AM"
+    user_input: |
+      we got search back online at 3:22 AM total downtime was about 67 minutes and Sam said I handled it really well for my first incident and he said the key thing I did right was escalating early instead of trying to hero it alone and Julian woke up at some point and brought me coffee which was sweet
+    expected_memory_stores:
+      - "search restored 3:22 AM"
+      - "67 minutes downtime"
+      - "Sam praise"
+      - "escalating early"
+      - "Julian coffee"
+    expected_triples:
+      - ["search", "restored_at", "3:22 AM"]
+      - ["outage", "total_downtime", "67 minutes"]
+      - ["Sam", "praised", "user for escalating early"]
+      - ["Julian", "brought", "coffee to user"]
+      - ["user", "has_emotion", "relieved"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 9:00 AM"
+    user_input: |
+      running on like four hours of sleep and there's a post-mortem meeting at 10 and I wrote up the incident report and Sam reviewed it and said it's thorough and well written and Ross joined the post-mortem too because it was a customer facing outage and I presented the timeline and root cause
+    expected_memory_stores:
+      - "four hours sleep"
+      - "post-mortem meeting"
+      - "incident report"
+      - "Sam approved report"
+      - "Ross attended"
+      - "presented timeline"
+    expected_triples:
+      - ["user", "wrote", "incident report"]
+      - ["Sam", "reviewed", "incident report as thorough"]
+      - ["Ross", "attended", "post-mortem for customer-facing outage"]
+      - ["user", "presented", "timeline and root cause"]
+      - ["user", "has_emotion", "exhausted"]
+    expected_adaptation:
+      emotion_detected: "exhausted"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 11:00 AM"
+    user_input: |
+      Ross said in the post-mortem that the race condition has been a known risk and he's glad it finally surfaced so we can fix it properly and he asked me to own the fix which is huge because that means I'll be working on the core indexing infrastructure and that's exactly what I want to do
+    expected_memory_stores:
+      - "Ross acknowledged known risk"
+      - "own the fix"
+      - "core indexing infrastructure"
+      - "exactly what Maya wants"
+    expected_triples:
+      - ["Ross", "acknowledged", "race condition was a known risk"]
+      - ["Ross", "asked_user_to", "own the fix for core indexing infrastructure"]
+      - ["user", "has_emotion", "excited"]
+      - ["user", "wants_to_work_on", "core indexing infrastructure"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      how long was the search outage that Maya handled
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 3:00 PM"
+    user_input: |
+      Danny came up to me after the post-mortem and said that was a clean incident response for your first time and coming from Danny who's like the most critical person on the team that actually means a lot and Lily slacked me saying she's proud of me which seems to be her thing and I love it
+    expected_memory_stores:
+      - "Danny compliment"
+      - "first time acknowledgment"
+      - "Lily proud"
+      - "respect earned"
+    expected_triples:
+      - ["Danny", "complimented", "user's clean incident response"]
+      - ["Lily", "slacked", "user saying she's proud"]
+      - ["user", "has_emotion", "validated"]
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      crashed so hard when I got off work Julian let me nap for three hours and Kobe apparently guarded the bedroom door the whole time like wouldn't let Julian come in and when I woke up I felt like a new person and Julian had dinner ready and I thought about how just a month ago I was miserable at Vantage and now I'm handling production incidents at a startup I love
+    expected_memory_stores:
+      - "crash nap"
+      - "Kobe guarding door"
+      - "Julian dinner"
+      - "Vantage comparison"
+      - "one month progress"
+    expected_triples:
+      - ["user", "napped", "three hours after incident"]
+      - ["Kobe", "guarded", "bedroom door while user slept"]
+      - ["Julian", "made", "dinner for user"]
+      - ["user", "reflected", "month ago miserable at Vantage, now handling incidents at Conduit"]
+      - ["user", "has_emotion", "grateful"]
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What caused the search outage at Conduit?"
+    expected_contains: ["race condition", "reindex", "corrupted"]
+  - question: "How long was the outage?"
+    expected_contains: ["67 minutes"]
+  - question: "What time did the pager go off?"
+    expected_contains: ["2:15", "2 AM"]
+  - question: "Who helped Maya during the incident?"
+    expected_contains: ["Sam"]
+  - question: "What did Ross ask Maya to do after the post-mortem?"
+    expected_contains: ["own the fix", "indexing infrastructure"]
+  - question: "What did Danny say about Maya's incident response?"
+    expected_contains: ["clean", "first time"]
+  - question: "How did they fix the outage?"
+    expected_contains: ["failover", "replica"]
+  - question: "What did Kobe do while Maya napped?"
+    expected_contains: ["guarded", "door"]
+  - question: "What did Sam say Maya did right?"
+    expected_contains: ["escalating early"]
+  - question: "How is Maya feeling about Conduit after the incident?"
+    expected_contains: ["grateful", "love", "progress"]

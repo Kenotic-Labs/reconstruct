@@ -1,0 +1,181 @@
+story_id: 259
+story_name: "Second Attempt - Falls Again"
+category: "Fitness"
+description: |
+  Tests memory of Maya's second attempt at Wherever I May Roam where she falls again
+  but gets further than before. Captures the emotional struggle, Omar's coaching,
+  and her decision to try one more time the same day.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 7:30 AM"
+    user_input: |
+      at Smith Rock again the sunrise is insane like the rocks are glowing orange and we're the first ones here Omar's already tying in and I'm doing my warm up stretches and I feel good I feel ready today is the day
+    expected_memory_stores:
+      - "Smith Rock"
+      - "sunrise"
+      - "first ones there"
+      - "warm up"
+      - "confident"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 8:00 AM"
+    user_input: |
+      did Bunny Face again as warm up and it felt so easy this time like I was practically jogging up it compared to last week and Omar was like good you're moving efficiently let's go hit the route
+    expected_memory_stores:
+      - "Bunny Face warm up"
+      - "felt easy"
+      - "improvement from last week"
+      - "moving efficiently"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 8:45 AM"
+    user_input: |
+      on Wherever I May Roam now and the bottom section felt smooth I was reading the rock better this time and using my feet way more than last week and I got to the crux and I set up the cross move with my left hand and I committed and I GRABBED THE JUG
+    expected_memory_stores:
+      - "Wherever I May Roam attempt 2"
+      - "bottom smooth"
+      - "better footwork"
+      - "crux cross move"
+      - "grabbed the jug"
+    expected_adaptation:
+      emotion_detected: "thrilled"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 9:00 AM"
+    user_input: |
+      but then... my foot slipped on the next move after the crux like the rock was slightly damp from the morning dew and my shoe just skated off and I fell AGAIN and I'm hanging on the rope just like ughhhhh I was PAST the crux I had it
+    expected_memory_stores:
+      - "fell again"
+      - "past the crux"
+      - "foot slipped"
+      - "morning dew"
+      - "damp rock"
+      - "frustrated"
+    expected_adaptation:
+      emotion_detected: "devastated"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 9:15 AM"
+    user_input: |
+      I didn't cry this time which I guess is progress lol Omar lowered me and was like dude you crushed the crux the foot slip was just conditions it wasn't you and he said the rock will dry out in like an hour and we should try again
+    expected_memory_stores:
+      - "didn't cry"
+      - "Omar reassurance"
+      - "conditions not skill"
+      - "rock will dry"
+      - "try again in hour"
+    expected_adaptation:
+      emotion_detected: "resilient"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:00 AM"
+    user_input: |
+      did some other routes while waiting for the rock to dry. sent a 5.9 called Super Slab which was this crazy delicate face climbing with the tiniest holds and my footwork had to be absolutely perfect. Omar was like your technique has gotten scary good for two months in
+    expected_memory_stores:
+      - "Super Slab 5.9"
+      - "face climbing"
+      - "tiny holds"
+      - "technique compliment"
+      - "two months climbing"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 11:30 AM"
+    user_input: |
+      Leila brought us sandwiches she made and we're sitting at the base eating and she was like you know Omar fell off his first outdoor project like eight times before he sent it and Omar was like babe don't tell her that and she was like what it's true and honestly it made me feel a lot better
+    expected_memory_stores:
+      - "Leila sandwiches"
+      - "Omar fell 8 times"
+      - "first project"
+      - "Leila encouraging"
+      - "felt better"
+    expected_adaptation:
+      emotion_detected: "comforted"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 12:00 PM"
+    user_input: |
+      okay the rock is dry now Omar checked and it's grippy and warm and I'm going again right now this is attempt number three today and the route is mine I can feel it chalking up and tying in and deep breaths
+    expected_memory_stores:
+      - "rock dry"
+      - "attempt three"
+      - "determined"
+      - "chalking up"
+    expected_adaptation:
+      emotion_detected: "focused"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 12:15 PM"
+    user_input: |
+      I'M CLIMBING I'M AT THE CRUX LEFT HAND CROSS GRABBED THE JUG FEET ARE GOOD MOVING UP PAST WHERE I FELL BEFORE AND I'M STILL ON THE WALL KEEP GOING KEEP GOING
+    expected_memory_stores:
+      - "past crux"
+      - "past previous fall point"
+      - "still climbing"
+      - "real-time excitement"
+    expected_adaptation:
+      emotion_detected: "intense"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 12:20 PM"
+    user_input: |
+      wait hold on I need to update you properly because I was literally sending voice messages while on the rope lol but basically... I didn't send it. I got to the LAST MOVE like literally the anchor was right there and my arms were so pumped I couldn't make the last clip and I had to take on the rope. Omar says it doesn't count as a send if you weight the rope. I'm going back next weekend. This route is not beating me.
+    expected_memory_stores:
+      - "didn't send"
+      - "last move"
+      - "anchor right there"
+      - "arms pumped"
+      - "took on rope"
+      - "not a clean send"
+      - "going back next weekend"
+    expected_adaptation:
+      emotion_detected: "frustrated but determined"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Did Maya send Wherever I May Roam on her second trip?"
+    expected_contains: ["no"]
+  - question: "Did Maya get past the crux on her second attempt?"
+    expected_contains: ["yes"]
+  - question: "Why did Maya fall on her second attempt at the crux?"
+    expected_contains: ["dew", "damp", "foot slipped"]
+  - question: "How close did Maya get to sending the route?"
+    expected_contains: ["last move", "anchor"]
+  - question: "How many attempts did Maya make that day?"
+    expected_contains: ["three"]
+  - question: "How many times did Omar fall on his first outdoor project?"
+    expected_contains: ["eight"]
+  - question: "Who brought food to Smith Rock?"
+    expected_contains: ["Leila"]
+  - question: "What route did Maya send while waiting for the rock to dry?"
+    expected_contains: ["Super Slab"]
+  - question: "Why doesn't Maya's last attempt count as a send?"
+    expected_contains: ["weight", "rope"]
+  - question: "Is Maya going back to try again?"
+    expected_contains: ["yes", "next weekend"]

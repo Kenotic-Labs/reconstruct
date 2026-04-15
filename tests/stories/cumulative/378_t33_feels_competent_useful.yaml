@@ -1,0 +1,177 @@
+story_id: 378
+story_name: "Feeling Competent and Useful"
+category: "Personal Development"
+description: |
+  Tests memory of Maya's growing sense of competence and usefulness from first aid.
+  Verifies system tracks identity shifts and self-perception changes.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 12:00 PM"
+    user_input: |
+      something happened at work today someone in the office fainted in the break room and everyone was panicking and I just walked over and checked her pulse and put her in the recovery position and called 911 calmly and everyone was staring at me like who ARE you
+    expected_memory_stores:
+      - "coworker fainted"
+      - "break room"
+      - "Maya responded"
+      - "checked pulse"
+      - "recovery position"
+      - "called 911"
+      - "stayed calm"
+    expected_adaptation:
+      emotion_detected: "competent"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 12:30 PM"
+    user_input: |
+      the woman who fainted is fine it was a blood sugar thing she hadn't eaten since last night and the EMTs said I did everything right and Sam was like Chen you just became the unofficial office medic and I was like please don't put that in my job description
+    expected_memory_stores:
+      - "woman fine"
+      - "blood sugar issue"
+      - "EMTs confirmed correct"
+      - "Sam office medic comment"
+      - "Maya deflecting"
+    expected_adaptation:
+      emotion_detected: "humble"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 6:00 PM"
+    user_input: |
+      told Julian about the fainting incident and he was like babe you literally saved someone at work today and I was like I didn't save her she just fainted but he said the fact that you knew what to do and didn't freeze matters
+    expected_memory_stores:
+      - "Julian reaction"
+      - "didn't save argument"
+      - "knowing what to do matters"
+      - "didn't freeze"
+    expected_adaptation:
+      emotion_detected: "modest"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      Aisha came up to me today and said she wants to get first aid certified too because seeing me help that woman was inspiring and I was like aww and I gave her the Red Cross link and said tell them Frank is the best instructor
+    expected_memory_stores:
+      - "Aisha inspired"
+      - "wants certification"
+      - "Maya shared Red Cross info"
+      - "recommended Frank"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      Dr Tate said the fainting incident was like a real-world test of my training and the fact that I responded automatically without thinking means the knowledge has become embodied not just intellectual and that's a big deal
+    expected_memory_stores:
+      - "Dr. Tate analysis"
+      - "real-world test"
+      - "automatic response"
+      - "embodied knowledge"
+      - "big deal"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 6:00 PM"
+    user_input: |
+      put a small first aid kit under my desk at work with bandages antiseptic wipes instant cold pack and glucose tablets and Danny was like Maya has a whole emergency station and Lily was like honestly I feel safer already
+    expected_memory_stores:
+      - "office first aid kit"
+      - "bandages antiseptic"
+      - "cold pack glucose tablets"
+      - "under desk"
+      - "Danny comment"
+      - "Lily feels safer"
+    expected_adaptation:
+      emotion_detected: "prepared"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 7:00 PM"
+    user_input: |
+      mom called and she heard about the office fainting thing from Clara who I guess told her and mom was like I'm so proud of you learning all these things and honestly hearing mom say she's proud hit different because she doesn't say it that often
+    expected_memory_stores:
+      - "Vivian proud"
+      - "heard from Clara"
+      - "rare pride expression"
+      - "hit different"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 10:00 AM"
+    user_input: |
+      what happened when someone fainted at Maya's office
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 2:00 PM"
+    user_input: |
+      went climbing with Omar and Raj who I introduced and they got along great and Omar twisted his wrist slightly on a route and I immediately knew to ice it and check range of motion and Omar was like see this is why I bring you
+    expected_memory_stores:
+      - "climbing Omar and Raj"
+      - "introduced them"
+      - "got along"
+      - "Omar twisted wrist"
+      - "Maya treated"
+      - "ice and range of motion"
+    expected_adaptation:
+      emotion_detected: "useful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 6:00 PM"
+    user_input: |
+      I realize that between cooking ramen for people and being the person who knows first aid I've become this person that people rely on in different ways and it feels really good like I'm not just a software engineer I'm someone who takes care of people
+    expected_memory_stores:
+      - "identity reflection"
+      - "ramen and first aid"
+      - "person people rely on"
+      - "more than engineer"
+      - "takes care of people"
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What happened when someone fainted at Maya's office?"
+    expected_contains: ["recovery position", "called 911", "pulse"]
+  - question: "Why did the coworker faint?"
+    expected_contains: ["blood sugar", "hadn't eaten"]
+  - question: "What did Sam call Maya after the incident?"
+    expected_contains: ["office medic"]
+  - question: "Who did Maya inspire to get first aid certified?"
+    expected_contains: ["Aisha"]
+  - question: "What did Dr. Tate say about Maya's automatic response?"
+    expected_contains: ["embodied", "knowledge"]
+  - question: "What does Maya keep in her desk first aid kit?"
+    expected_contains: ["bandages", "antiseptic", "cold pack", "glucose"]
+  - question: "How has first aid changed Maya's identity?"
+    expected_contains: ["takes care", "people rely on"]
+  - question: "What happened during climbing with Omar and Raj?"
+    expected_contains: ["Omar", "wrist", "twisted"]
+  - question: "How did Maya introduce Omar and Raj?"
+    expected_contains: ["climbing"]
+  - question: "What did Vivian say about Maya's first aid skills?"
+    expected_contains: ["proud"]

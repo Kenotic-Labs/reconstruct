@@ -1,0 +1,175 @@
+story_id: 546
+story_name: "Future Feels Open"
+category: "Identity and Future"
+description: |
+  Maya's perspective shifts from fear to openness about the future. Discusses possibilities
+  with Julian. Cross-references career (T6), house (T41-T45), kids talk (T46),
+  teaching, and the mission statement.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 7:00 PM"
+    user_input: |
+      something weird is happening like the birthday spiral is completely gone and instead I feel this openness about the future that I've never felt before like thirty doesn't feel like a deadline anymore it feels like a starting point and I don't know where that shift happened but it happened
+    expected_memory_stores:
+      - "birthday spiral gone"
+      - "openness about future"
+      - "thirty as starting point"
+      - "shift happened"
+    expected_adaptation:
+      emotion_detected: "open"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 9:00 PM"
+    user_input: |
+      Julian and I were on the couch talking about the future and I said what do you want our life to look like in five years and he said I don't know exactly but I know I want to be in this house with you and Kobe and maybe another dog and I said maybe a kid and he said yeah maybe a kid and we both just sat with that and it felt big but not scary
+    expected_memory_stores:
+      - "five year conversation"
+      - "this house"
+      - "maybe another dog"
+      - "maybe a kid"
+      - "big but not scary"
+    expected_adaptation:
+      emotion_detected: "expansive"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 10:00 AM"
+    user_input: |
+      thinking about the teaching thing more and I looked up what it takes to teach at a coding bootcamp and it's not as hard as I thought like you just need industry experience and the ability to explain things clearly and I think I could do that like Aisha always said I was good at breaking things down
+    expected_memory_stores:
+      - "coding bootcamp research"
+      - "industry experience required"
+      - "explaining clearly"
+      - "Aisha said she was good"
+    expected_adaptation:
+      emotion_detected: "curious"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 1:00 PM"
+    user_input: |
+      told Clara about maybe wanting to teach or mentor someday and she said Maya you already do that at every dinner party you've taught half our friend group to fold dumplings and make ramen and you don't even realize you're teaching and I was like huh that's actually true I do love showing people how to do things
+    expected_memory_stores:
+      - "Clara's observation"
+      - "already teaching informally"
+      - "dumplings ramen at dinners"
+      - "loves showing people"
+    expected_adaptation:
+      emotion_detected: "recognized"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 4:00 PM"
+    user_input: |
+      went for a walk without my phone and I was thinking about what start something means in my mission statement and it doesn't have to be a startup right it could be a class or a mentoring program or even just a blog about engineering and cooking and life and the point is creating something that helps someone else the way Aisha and grandpa's letters helped me
+    expected_memory_stores:
+      - "start something meaning"
+      - "not necessarily startup"
+      - "class mentoring blog"
+      - "creating to help others"
+      - "Aisha and grandpa parallels"
+    expected_adaptation:
+      emotion_detected: "creative"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 7:00 PM"
+    user_input: |
+      Julian said what if the Woodstock Table becomes something bigger like what if we do community cooking classes out of our kitchen and I was like Julian our kitchen is tiny and he said we have a backyard and I said you want to teach strangers to cook in our backyard and he said why not and honestly WHY NOT
+    expected_memory_stores:
+      - "Woodstock Table expansion idea"
+      - "community cooking classes"
+      - "backyard as venue"
+      - "why not"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 10:00 AM"
+    user_input: |
+      phone-free Sunday and I'm sitting under the cherry tree which still doesn't have leaves yet but will soon and I'm thinking about how grandpa built water systems for communities and maybe I want to build something for a community too even if it's just teaching people to cook or mentor junior engineers and it doesn't have to be big to be meaningful
+    expected_memory_stores:
+      - "under cherry tree thinking"
+      - "grandpa built for communities"
+      - "Maya wants to build for community"
+      - "doesn't have to be big"
+    expected_adaptation:
+      emotion_detected: "purposeful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 2:00 PM"
+    user_input: |
+      called Jenny and told her about the future talk and the mission statement and she said Maya this is so you because you've always been the one who wants to make things better not just for yourself but for everyone and she said when you were at Vantage and things were bad you still helped other people and I said I didn't realize I did that
+    expected_memory_stores:
+      - "Jenny call"
+      - "always wanting to help"
+      - "even at Vantage when bad"
+      - "helped others naturally"
+    expected_adaptation:
+      emotion_detected: "affirmed"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 5:00 PM"
+    user_input: |
+      made a list in my journal of possible future things lead engineer at Conduit teach at a bootcamp start a cooking class mentor more engineers write about grandpa's story plant more trees be a great partner maybe be a parent and when I look at the list the future feels so open and full of possibility and none of it is on LinkedIn and all of it matters
+    expected_memory_stores:
+      - "future possibilities list"
+      - "lead engineer bootcamp cooking"
+      - "mentor write plant trees"
+      - "partner parent"
+      - "not on LinkedIn all matters"
+    expected_adaptation:
+      emotion_detected: "expansive"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 9:00 PM"
+    user_input: |
+      Julian and I are in bed and he said I'm excited about our future and I said me too and he said remember when you were spiraling about turning thirty and I said yeah that was like two weeks ago and he said feels like a year and I said that's because I grew a year in two weeks and he said you always do and then I fell asleep and I slept well
+    expected_memory_stores:
+      - "excited about future"
+      - "spiral was two weeks ago"
+      - "feels like a year"
+      - "grew a year in two weeks"
+      - "slept well"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How does Maya now feel about the future?"
+    expected_contains: ["open", "possibility", "not scary"]
+  - question: "What five-year vision did Maya and Julian discuss?"
+    expected_contains: ["house", "Kobe", "another dog", "maybe kid"]
+  - question: "What did Clara say about Maya's teaching?"
+    expected_contains: ["already", "dumplings", "ramen"]
+  - question: "What community idea did Julian suggest?"
+    expected_contains: ["cooking classes", "Woodstock Table", "backyard"]
+  - question: "What is on Maya's future possibilities list?"
+    expected_contains: ["lead engineer", "bootcamp", "cooking class", "mentor"]
+  - question: "What did Jenny say about Maya's nature?"
+    expected_contains: ["help", "make things better"]
+  - question: "What does Maya say about her list and LinkedIn?"
+    expected_contains: ["not on LinkedIn", "all matters"]
+  - question: "What coding bootcamp requirement surprised Maya?"
+    expected_contains: ["not as hard", "industry experience"]
+  - question: "How long ago was Maya's birthday spiral?"
+    expected_contains: ["two weeks"]
+  - question: "What did Julian say about Maya's growth?"
+    expected_contains: ["grew a year in two weeks", "always do"]

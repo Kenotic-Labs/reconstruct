@@ -1,0 +1,168 @@
+story_id: 302
+story_name: "Jenny Moves to Austin"
+category: "Friendships"
+description: |
+  Tests memory of Jenny Wu's actual move to Austin. Maya helps her pack,
+  deals with the emotional goodbye, and begins adjusting to life without
+  her best friend nearby. Verifies temporal tracking of move timeline.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 6:00 PM"
+    user_input: |
+      spent all afternoon helping Jenny pack up her apartment and god she has so much stuff like where did all these books come from and she was laughing about how she's been hoarding trader joes bags under her sink for three years
+    expected_memory_stores:
+      - "packing Jenny's apartment"
+      - "lots of books"
+      - "Trader Joes bags"
+    expected_adaptation:
+      emotion_detected: "bittersweet"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 8:30 PM"
+    user_input: |
+      we found our old UW sweatshirts in her closet and I literally almost cried like we bought those together at the bookstore freshman year no wait sophomore year when we first became friends and she let me keep hers
+    expected_memory_stores:
+      - "UW sweatshirts"
+      - "sophomore year"
+      - "gave Maya her sweatshirt"
+    expected_adaptation:
+      emotion_detected: "nostalgic"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 7:00 AM"
+    user_input: |
+      moving truck came at like 7am which is brutal for a Saturday and Julian helped carry the heavy stuff and Marcus came too which was nice of him and Jenny's sister Kim flew in from Seattle to help
+    expected_memory_stores:
+      - "moving truck morning"
+      - "Julian helped"
+      - "Marcus helped"
+      - "Kim Wu"
+      - "Jenny's sister"
+      - "Seattle"
+    expected_adaptation:
+      emotion_detected: "tired"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 11:00 AM"
+    user_input: |
+      Jenny's driving down to Austin with Kim and shipping the rest and I keep thinking about how her apartment is just empty now like I used to come over every Thursday for wine nights and now it's just walls and carpet
+    expected_memory_stores:
+      - "driving to Austin with Kim"
+      - "shipping belongings"
+      - "Thursday wine nights"
+      - "empty apartment"
+    expected_adaptation:
+      emotion_detected: "melancholy"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 1:00 PM"
+    user_input: |
+      said goodbye to Jenny in the parking lot and I totally cried and she cried and Julian was standing there looking uncomfortable lol and she said she'd call me when she gets to Austin and I was like you better
+    expected_memory_stores:
+      - "goodbye in parking lot"
+      - "both cried"
+      - "Julian uncomfortable"
+      - "call when arrives"
+    expected_adaptation:
+      emotion_detected: "grief"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 4:00 PM"
+    user_input: |
+      its so weird being home and knowing Jenny's not like 15 minutes away anymore you know like for four years she was just right there and now she's on I-5 heading south or I guess it's I-84 east first then south whatever the route is
+    expected_memory_stores:
+      - "Jenny 15 minutes away"
+      - "four years proximity"
+      - "driving south"
+    expected_adaptation:
+      emotion_detected: "lonely"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 8:00 PM"
+    user_input: |
+      Jenny texted from some rest stop in like northern California and sent a pic of Kim asleep in the passenger seat lol they're gonna stop in Sacramento overnight at some motel and then drive the rest tomorrow and Monday
+    expected_memory_stores:
+      - "rest stop California"
+      - "Sacramento overnight"
+      - "two day drive"
+    expected_adaptation:
+      emotion_detected: "concerned"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 10:00 AM"
+    user_input: |
+      this is the first Sunday in like forever that I'm not doing our Forest Park run and I went by myself and it was fine I guess but it wasn't the same you know Jenny always sets the pace and she talks the whole time
+    expected_memory_stores:
+      - "first solo Sunday run"
+      - "Forest Park alone"
+      - "Jenny sets pace"
+      - "misses the routine"
+    expected_adaptation:
+      emotion_detected: "lonely"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 6:00 PM"
+    user_input: |
+      Jenny made it to Austin she just called me and she's like oh my god its so hot and the apartment is cute but small and Kim helped her unload and she sounds excited which makes me feel better I think
+    expected_memory_stores:
+      - "Jenny arrived Austin"
+      - "hot weather"
+      - "apartment small but cute"
+      - "Kim helped unload"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Monday 9:30 PM"
+    user_input: |
+      Julian asked if I was ok and I was like yeah I'm fine and he was like no you're not and I was like ok fine I'm sad my best friend moved away but I'll be ok and he gave me a hug and Kobe jumped on us which honestly helped
+    expected_memory_stores:
+      - "Julian checking in"
+      - "admitting sadness"
+      - "Kobe comfort"
+    expected_adaptation:
+      emotion_detected: "vulnerable"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How did Jenny travel to Austin?"
+    expected_contains: ["drove", "driving", "Kim"]
+  - question: "Who is Kim?"
+    expected_contains: ["Jenny's sister", "Seattle"]
+  - question: "Who helped Jenny move?"
+    expected_contains: ["Julian", "Marcus", "Kim", "Maya"]
+  - question: "What Thursday tradition did Maya and Jenny have?"
+    expected_contains: ["wine nights"]
+  - question: "Where did Jenny stop overnight on the drive?"
+    expected_contains: ["Sacramento"]
+  - question: "How does Jenny feel about Austin so far?"
+    expected_contains: ["hot", "excited", "cute"]
+  - question: "What happened on Maya's first Sunday without Jenny?"
+    expected_contains: ["Forest Park", "alone", "solo"]
+  - question: "How is Maya coping with Jenny leaving?"
+    expected_contains: ["sad", "lonely"]
+  - question: "What memento did Jenny give Maya?"
+    expected_contains: ["UW sweatshirt"]
+  - question: "How did Julian support Maya?"
+    expected_contains: ["hug", "checking in"]

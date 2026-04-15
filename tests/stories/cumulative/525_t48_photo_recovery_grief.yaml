@@ -1,0 +1,175 @@
+story_id: 525
+story_name: "Photo Recovery Grief"
+category: "Phone and Digital Life"
+description: |
+  Maya processes the emotional weight of lost photos and the ones she recovered.
+  Digital memories as extensions of real memories. Cross-references grandpa (T46),
+  Japan trip (T31), Kobe, and Sophie.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00 AM"
+    user_input: |
+      so I've been going through the recovered photos from Google Photos and most of the Japan extras are there but there are still like maybe 30 photos that are just gone forever and some of them I remember specifically like there was one of me and Julian at this shrine in Kyoto at sunset and it was the most beautiful photo I've ever taken and it's just gone
+    expected_memory_stores:
+      - "going through recovered photos"
+      - "30 photos gone forever"
+      - "Kyoto shrine sunset photo"
+      - "most beautiful photo gone"
+    expected_adaptation:
+      emotion_detected: "sad"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 11:00 AM"
+    user_input: |
+      Julian said we can go back to Kyoto someday and take the photo again and I said it won't be the same and he said you're right it'll be a different beautiful photo and that actually helped but also like the version of us in that photo at that moment is gone and only exists in my memory now and that feels fragile
+    expected_memory_stores:
+      - "Julian offers to retake"
+      - "won't be the same"
+      - "different beautiful photo"
+      - "memory feels fragile"
+    expected_adaptation:
+      emotion_detected: "philosophical"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 1:00 PM"
+    user_input: |
+      found a bunch of Kobe videos that did survive and there's one of him at the dog park chasing his tail for like a solid minute and I was laughing so hard watching it and then I got sad because there were other videos of him as a younger dog that are gone and he's five now and time is just moving and photos are how we hold onto it
+    expected_memory_stores:
+      - "Kobe dog park video survived"
+      - "chasing tail"
+      - "younger dog videos lost"
+      - "Kobe is five"
+      - "photos hold time"
+    expected_adaptation:
+      emotion_detected: "bittersweet"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 3:00 PM"
+    user_input: |
+      the Sophie first steps video that Danny sent back is safe and I watched it again and she's so tiny and wobbly and my brother's voice in the background is saying come on Sophie come to daddy and she takes these three little steps and falls and everyone cheers and I would have been devastated if I'd lost that permanently
+    expected_memory_stores:
+      - "Sophie first steps video safe"
+      - "Danny's voice in background"
+      - "three little steps"
+      - "would have been devastated"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 5:00 PM"
+    user_input: |
+      it's making me think about grandpa's letters and how those were the only record of his engineering life and if we hadn't found them that whole part of his identity would have been lost forever and it's the same thing with photos like we think digital is permanent but it's not it's fragile just like paper
+    expected_memory_stores:
+      - "parallel to grandpa's letters"
+      - "digital not permanent"
+      - "fragile like paper"
+      - "identity loss risk"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 7:00 PM"
+    user_input: |
+      Julian and I decided to print some of our favorite photos and actually frame them like real physical photos and I picked the ones of us at the house on moving day and one of Kobe at the beach and one of grandpa's cherry tree in bloom and we ordered prints from this place on Hawthorne
+    expected_memory_stores:
+      - "printing physical photos"
+      - "framing real photos"
+      - "moving day photo"
+      - "Kobe at beach"
+      - "cherry tree in bloom"
+      - "Hawthorne print shop"
+    expected_adaptation:
+      emotion_detected: "proactive"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 10:00 AM"
+    user_input: |
+      on our phone-free Sunday and I'm sitting here looking at the framed photos on the wall and the physical prints of grandpa's degree and it hits me that the stuff that really matters shouldn't only live on a phone it should be on a wall or in a frame or written on paper or planted in the ground like the tree
+    expected_memory_stores:
+      - "phone-free Sunday"
+      - "framed photos on wall"
+      - "important things off phone"
+      - "wall frame paper ground"
+      - "tree reference"
+    expected_adaptation:
+      emotion_detected: "wise"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 1:00 PM"
+    user_input: |
+      called my mom and told her about the photo loss and she said Maya when I left China at 22 I had two photographs total of my entire childhood and she said you have thousands and you're grieving thirty and I know she wasn't being mean she was putting it in perspective and she's right but also those thirty mattered to me
+    expected_memory_stores:
+      - "Vivian's perspective"
+      - "two childhood photos"
+      - "left China at 22"
+      - "perspective but still valid"
+    expected_adaptation:
+      emotion_detected: "humbled"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 4:00 PM"
+    user_input: |
+      started a new habit where every Sunday on our phone-free day I pick one photo from the week and write a little note about it in my journal like what was happening and how I felt and who was there so that even if the photo disappears the context survives somewhere physical
+    expected_memory_stores:
+      - "new Sunday photo journal habit"
+      - "one photo per week"
+      - "write context in journal"
+      - "physical backup of context"
+    expected_adaptation:
+      emotion_detected: "intentional"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 7:00 PM"
+    user_input: |
+      the first journal entry is about a photo I took yesterday of Julian and Kobe on the back porch with the cherry tree in the background and I wrote about how the tree is getting bigger and Kobe was being goofy and Julian was laughing and the light was golden and even if that photo disappears someday this entry will exist and that's enough
+    expected_memory_stores:
+      - "first journal entry"
+      - "Julian Kobe porch cherry tree"
+      - "golden light"
+      - "entry survives if photo doesn't"
+    expected_adaptation:
+      emotion_detected: "at peace"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What photos did Maya permanently lose?"
+    expected_contains: ["Kyoto", "shrine", "sunset", "30"]
+  - question: "What new habit did Maya start on phone-free Sundays?"
+    expected_contains: ["photo journal", "write", "one photo"]
+  - question: "What did Julian say about the lost Kyoto photo?"
+    expected_contains: ["go back", "different beautiful"]
+  - question: "How did Vivian put the photo loss in perspective?"
+    expected_contains: ["two photographs", "left China", "22"]
+  - question: "What photos did Maya choose to print physically?"
+    expected_contains: ["moving day", "Kobe beach", "cherry tree"]
+  - question: "How old is Kobe?"
+    expected_contains: ["five"]
+  - question: "What parallel did Maya draw between photos and grandpa's letters?"
+    expected_contains: ["fragile", "not permanent"]
+  - question: "What was the first photo journal entry about?"
+    expected_contains: ["Julian", "Kobe", "porch", "cherry tree"]
+  - question: "Where did they order photo prints?"
+    expected_contains: ["Hawthorne"]
+  - question: "Is the Sophie first steps video safe?"
+    expected_contains: ["yes", "safe"]

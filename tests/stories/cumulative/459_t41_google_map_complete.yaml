@@ -1,0 +1,181 @@
+story_id: 459
+story_name: "Google Map Complete"
+category: "Road Trips"
+description: |
+  Tests memory of Maya creating the shared Google Map of all road trips.
+  Establishes cataloging behavior, relationship milestone of shared memories.
+  Verifies system can reconstruct full trip history from accumulated data.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Sunday 9:00 AM"
+    user_input: |
+      so I'm spending today organizing our road trip Google Map because I realized some of the pins don't have good notes and Julian's at a Bold Studio deadline thing so it's just me and Kobe and my laptop and I made tea and put on some music and I'm gonna make this map really nice because I want it to be something we look back on
+    expected_memory_stores:
+      - "organizing Google Map"
+      - "pin notes"
+      - "Julian at Bold Studio"
+      - "solo project"
+      - "making map nice"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Sunday 10:00 AM"
+    user_input: |
+      okay so I went through all our trips and made proper pins with notes for each one and um the first one is Columbia Gorge slash Multnomah Falls and I wrote about the older couple who told us about their 40 years of trips and Crown Point and the fruit stand and I'm getting emotional just looking at this list
+    expected_memory_stores:
+      - "Columbia Gorge pin"
+      - "Multnomah Falls"
+      - "older couple note"
+      - "Crown Point"
+      - "fruit stand"
+      - "emotional reviewing"
+    expected_adaptation:
+      emotion_detected: "nostalgic"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Sunday 10:30 AM"
+    user_input: |
+      Bend pin is done and I wrote about Deschutes and Crux and 10 Barrel and how Julian declared it his favorite place on earth and the sunset on the rooftop and the art print he wanted and how Nadia picked up Kobe and wants to come next time and honestly Bend might need a return trip soon
+    expected_memory_stores:
+      - "Bend pin details"
+      - "Deschutes Crux 10 Barrel"
+      - "Julian favorite place"
+      - "Nadia Kobe connection"
+      - "return trip idea"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Sunday 11:00 AM"
+    user_input: |
+      Cannon Beach pin has all the Kobe stuff like his first time on sand and barking at waves and being scared when one touched him and the golden retriever he played with and Mo's fish and chips and the sunset where Julian had his arm around me and I literally typed that into the pin note because I want to remember that exact moment
+    expected_memory_stores:
+      - "Cannon Beach pin"
+      - "Kobe beach memories"
+      - "Mo's"
+      - "sunset memory"
+      - "specific moment preserved"
+    expected_adaptation:
+      emotion_detected: "sentimental"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Sunday 11:30 AM"
+    user_input: |
+      Crater Lake pin is my favorite because that was our first overnight and I wrote about the blue water and Cleetwood Cove and Wizard Island and sleeping in the car and the stars and how Julian said it was better than Bend but then I said it was better than Bend and we were both right honestly every trip is the best trip
+    expected_memory_stores:
+      - "Crater Lake pin favorite"
+      - "first overnight"
+      - "blue water"
+      - "Cleetwood Cove"
+      - "Wizard Island"
+      - "star gazing"
+    expected_adaptation:
+      emotion_detected: "nostalgic"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 12:00 PM"
+    user_input: |
+      Hood River pin says Julian's Windsurfing Disaster in big letters and then I wrote about Big Winds and Travis the instructor and Julian falling in five times and the wetsuit he ripped and pFriem for lunch and the twin mountain viewpoint and how he actually wants to try again next summer which honestly shows growth
+    expected_memory_stores:
+      - "Hood River pin"
+      - "windsurfing disaster"
+      - "Big Winds Travis"
+      - "pFriem"
+      - "twin mountain viewpoint"
+      - "try again next summer"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 12:30 PM"
+    user_input: |
+      did Mt Hood and Astoria and Olympic Peninsula pins too and the Mt Hood one mentions Timberline Lodge and The Shining and how dad compared it to Taiwan mountains and the Astoria one is all about Julian's Goonies pilgrimage and the Olympic one is about the Hoh Rainforest and Rialto Beach and Kobe being called a forest guardian by that little girl
+    expected_memory_stores:
+      - "Mt Hood pin"
+      - "Timberline Lodge"
+      - "Astoria Goonies pin"
+      - "Olympic Peninsula pin"
+      - "Hoh Rainforest"
+      - "forest guardian"
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 1:00 PM"
+    user_input: |
+      how many total road trips have we done and where did we go
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 2:00 PM"
+    user_input: |
+      I shared the map with Julian and Jenny and Clara and Nadia and Julian texted back immediately with like twelve heart emojis and Jenny said she's jealous and wants to visit Portland and do a trip with us and Clara said the Crater Lake photos made Tyler want to go camping and Nadia said she and Omar claim the Bend return trip
+    expected_memory_stores:
+      - "shared map"
+      - "Julian heart emojis"
+      - "Jenny jealous wants to visit"
+      - "Clara Tyler camping"
+      - "Nadia Omar Bend trip"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 4:00 PM"
+    user_input: |
+      Julian came home and looked at the map on the big screen and got really quiet and then said this is one of the best things anyone has ever done for him and I was like babe it's just a Google Map and he was like no it's not it's our story and okay I'm crying now and Kobe is licking my tears and I should not have started this project on an emotional day but I love it and I love him and these trips are everything
+    expected_memory_stores:
+      - "Julian emotional response"
+      - "our story comment"
+      - "Maya crying"
+      - "Kobe licking tears"
+      - "trips are everything"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How many road trips has Maya documented on the Google Map?"
+    expected_contains: ["eight"]
+  - question: "Which trip was their first overnight?"
+    expected_contains: ["Crater Lake"]
+  - question: "Where did Julian's windsurfing disaster happen?"
+    expected_contains: ["Hood River"]
+  - question: "Who did Maya share the Google Map with?"
+    expected_contains: ["Julian", "Jenny", "Clara", "Nadia"]
+  - question: "What did Julian say about the Google Map?"
+    expected_contains: ["our story", "best things"]
+  - question: "Which trip does Nadia want to join?"
+    expected_contains: ["Bend"]
+  - question: "What was the first road trip on the map?"
+    expected_contains: ["Columbia Gorge", "Multnomah Falls"]
+  - question: "What movie was the Astoria trip about?"
+    expected_contains: ["Goonies"]
+  - question: "Where was Kobe called a forest guardian?"
+    expected_contains: ["Olympic Peninsula", "Hoh"]
+  - question: "What goal did Maya and Julian set for road trips?"
+    expected_contains: ["ten", "end of year"]

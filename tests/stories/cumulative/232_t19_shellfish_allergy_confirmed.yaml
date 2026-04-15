@@ -1,0 +1,178 @@
+story_id: 232
+story_name: "Shellfish Allergy Confirmed"
+category: "Health"
+description: |
+  Tests system handling medical diagnosis confirmation. Allergist confirms shellfish allergy.
+  Maya processes the lifestyle impact. Verifies medical entity tracking and life adjustment.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 10:00 AM"
+    user_input: |
+      at the allergist office right now Dr. Amy Nassif on like Macadam Ave I think and they're going to do a skin prick test and a blood test to confirm the shellfish allergy and I'm weirdly nervous like what if it's not shellfish and something else entirely
+    expected_memory_stores:
+      - "Dr. Amy Nassif"
+      - "allergist"
+      - "Macadam Ave"
+      - "skin prick test"
+      - "blood test"
+      - "nervous"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 11:30 AM"
+    user_input: |
+      ok results are back and Dr. Nassif confirmed it I'm allergic to shellfish specifically crustaceans like shrimp crab and lobster and she said the test showed a moderate to severe reaction and she was like this can develop in your twenties it's actually not uncommon
+    expected_memory_stores:
+      - "confirmed shellfish allergy"
+      - "crustaceans"
+      - "shrimp crab lobster"
+      - "moderate to severe"
+      - "develops in twenties"
+      - "not uncommon"
+    expected_adaptation:
+      emotion_detected: "resigned"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 12:00 PM"
+    user_input: |
+      she said the stomach cramps were the mild end and that if I keep eating shellfish the reactions could get worse like potentially anaphylaxis and she prescribed an EpiPen and I was like an EPIPEN and she said yes always carry it and I'm sitting here holding this pen thinking this is real
+    expected_memory_stores:
+      - "could get worse"
+      - "anaphylaxis risk"
+      - "EpiPen prescribed"
+      - "always carry it"
+      - "this is real"
+    expected_adaptation:
+      emotion_detected: "scared"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 12:30 PM"
+    user_input: |
+      she also said I need to be careful about cross contamination like if shrimp is cooked in the same oil as my food that could trigger a reaction and I need to ask restaurants about shared fryers and prep surfaces and this is a whole new world
+    expected_memory_stores:
+      - "cross contamination"
+      - "shared oil"
+      - "shared fryers"
+      - "prep surfaces"
+      - "ask restaurants"
+      - "whole new world"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 5:00 PM"
+    user_input: |
+      told Julian and he was really supportive and said ok so no more seafood boils and he immediately started googling allergy safe restaurants in Portland and he found a list and he said we'll figure this out together
+    expected_memory_stores:
+      - "told Julian"
+      - "no more seafood boils"
+      - "googling safe restaurants"
+      - "figure it out together"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 8:00 PM"
+    user_input: |
+      what did my allergist say I'm allergic to and what did she prescribe
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 9:00 AM"
+    user_input: |
+      told Clara the official diagnosis and she said she's glad I got tested and she said the EpiPen is important because shellfish allergies are one of the ones that can escalate fast and she showed me how to use it because apparently a lot of people don't know how
+    expected_memory_stores:
+      - "told Clara"
+      - "glad tested"
+      - "shellfish escalates fast"
+      - "Clara showed EpiPen use"
+    expected_adaptation:
+      emotion_detected: "serious"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      I'm reading menus differently now like every restaurant menu I'm scanning for the allergen warning and looking for hidden shellfish like fish sauce in Thai food can sometimes have shrimp paste and oyster sauce in Chinese food and it's like I never noticed any of this before
+    expected_memory_stores:
+      - "reading menus differently"
+      - "allergen warnings"
+      - "hidden shellfish"
+      - "fish sauce shrimp paste"
+      - "oyster sauce"
+      - "never noticed before"
+    expected_adaptation:
+      emotion_detected: "vigilant"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      my mom called and I told her about the allergy and Vivian was like oh no not shellfish your aunt Lily has the same thing and apparently it runs in the family on mom's side and I was like MOM this would have been useful information EARLIER
+    expected_memory_stores:
+      - "told Vivian"
+      - "Aunt Lily same allergy"
+      - "runs in family"
+      - "mom's side"
+      - "would have been useful earlier"
+    expected_adaptation:
+      emotion_detected: "annoyed"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 9:00 PM"
+    user_input: |
+      lying in bed with the EpiPen on the nightstand and it feels dramatic but Dr. Nassif said it should be within reach always and Julian kissed my forehead and said we'll adapt and Kobe doesn't care about shellfish so at least someone's unbothered
+    expected_memory_stores:
+      - "EpiPen nightstand"
+      - "within reach always"
+      - "Julian supportive"
+      - "adapting"
+      - "Kobe unbothered"
+    expected_adaptation:
+      emotion_detected: "adjusting"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who is Maya's allergist?"
+    expected_contains: ["Dr. Amy Nassif"]
+  - question: "What is Maya allergic to?"
+    expected_contains: ["shellfish", "crustaceans"]
+  - question: "What was prescribed?"
+    expected_contains: ["EpiPen"]
+  - question: "How severe is the allergy?"
+    expected_contains: ["moderate to severe"]
+  - question: "Who else in Maya's family has this allergy?"
+    expected_contains: ["Aunt Lily"]
+  - question: "What side of the family does the allergy run on?"
+    expected_contains: ["mom's side"]
+  - question: "What are the cross contamination risks?"
+    expected_contains: ["shared oil", "fryers", "fish sauce", "shrimp paste"]
+  - question: "What is the worst possible reaction?"
+    expected_contains: ["anaphylaxis"]
+  - question: "Who showed Maya how to use the EpiPen?"
+    expected_contains: ["Clara"]
+  - question: "Where is Dr. Nassif's office?"
+    expected_contains: ["Macadam"]

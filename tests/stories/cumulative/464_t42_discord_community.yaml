@@ -1,0 +1,181 @@
+story_id: 464
+story_name: "Discord Community"
+category: "Gaming"
+description: |
+  Tests memory of Maya joining the Stardew Valley Discord community.
+  Establishes online social expansion, new username context.
+  Verifies system tracks online vs IRL identity distinctions.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:00 PM"
+    user_input: |
+      so Lily told me about this Stardew Valley Discord server and I was like what's Discord and she looked at me like I was 80 years old and helped me download it and set up an account and my username is KobeFarmMaya which Julian said is very creative and I said shut up at least I'm not GooniesJulian47
+    expected_memory_stores:
+      - "Stardew Discord server"
+      - "Lily helped set up"
+      - "Discord new to Maya"
+      - "username KobeFarmMaya"
+      - "Julian's username joke"
+    expected_adaptation:
+      emotion_detected: "curious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 9:30 PM"
+    user_input: |
+      okay so the Discord is wild like there's thousands of people in here and everyone's sharing their farm layouts and tips and I posted a photo of our farm and people are being so nice about it and someone said our wine cellar setup was genius and Julian was like tell them I designed the layout and I did and they loved it
+    expected_memory_stores:
+      - "thousands of members"
+      - "sharing farm layouts"
+      - "posted farm photo"
+      - "nice community"
+      - "wine cellar compliment"
+      - "Julian credit"
+    expected_adaptation:
+      emotion_detected: "encouraged"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      so there's this person on the Discord named PixelDruid who's been super helpful like they answered all my questions about the skull cavern strategy and told me the best way to get iridium and they're really funny and we've been messaging back and forth all day and Julian was like who's PixelDruid and I said just someone from the Stardew Discord
+    expected_memory_stores:
+      - "PixelDruid"
+      - "helpful person"
+      - "skull cavern strategy"
+      - "iridium tips"
+      - "messaging back and forth"
+      - "Julian asked about them"
+    expected_adaptation:
+      emotion_detected: "friendly"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 9:00 PM"
+    user_input: |
+      PixelDruid and I have been having really great conversations like not just about Stardew but about life and they said they're really into coding too and want to be a game developer and I was like oh cool I'm a software engineer and they thought that was awesome and asked me about what it's like to work in tech
+    expected_memory_stores:
+      - "conversations beyond game"
+      - "PixelDruid into coding"
+      - "wants to be game developer"
+      - "Maya shared career"
+      - "tech career discussion"
+    expected_adaptation:
+      emotion_detected: "connected"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      I was telling Nadia about PixelDruid at lunch and how we've been chatting about coding and gaming and she was like that's cool but be careful making friends online you don't really know who people are and I was like Nadia it's a farming game Discord not a dark web forum but I mean she has a point I guess I don't know anything about this person really
+    expected_memory_stores:
+      - "told Nadia about PixelDruid"
+      - "Nadia cautious"
+      - "be careful online"
+      - "Maya defensive"
+      - "doesn't know PixelDruid identity"
+    expected_adaptation:
+      emotion_detected: "dismissive"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      PixelDruid asked if I wanted to join their co-op server and play together sometime and I said sure and then they mentioned they have a chemistry test tomorrow and I was like wait a chemistry test and they said yeah AP Chemistry and I got a weird feeling and asked what grade they're in and they said sophomore and I was like sophomore in college right and they said no high school
+    expected_memory_stores:
+      - "co-op server invite"
+      - "chemistry test"
+      - "AP Chemistry"
+      - "PixelDruid is sophomore"
+      - "high school not college"
+      - "weird feeling"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      so PixelDruid is 16 years old and their real name is Alex and I'm 29 and I don't know I feel weird about it now like they're a teenager and I've been chatting with them every day and it's nothing inappropriate obviously we're talking about farming games and coding but still it just shifted in my head you know
+    expected_memory_stores:
+      - "PixelDruid is 16"
+      - "real name Alex"
+      - "Maya is 29"
+      - "age gap concern"
+      - "nothing inappropriate"
+      - "perspective shift"
+    expected_adaptation:
+      emotion_detected: "uncomfortable"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 9:00 PM"
+    user_input: |
+      how old is PixelDruid and what's their real name
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 9:30 PM"
+    user_input: |
+      told Julian about it and he was like yeah that's a little weird but also you're not doing anything wrong and I said I know but I need to like recalibrate the relationship you know I can still be helpful and nice but I shouldn't be like best buddies with a 16 year old on the internet and he agreed
+    expected_memory_stores:
+      - "told Julian"
+      - "Julian says not wrong"
+      - "recalibrate relationship"
+      - "shouldn't be best buddies"
+      - "maintain appropriate boundary"
+    expected_adaptation:
+      emotion_detected: "thoughtful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 7:00 PM"
+    user_input: |
+      I messaged PixelDruid and said hey I think you're awesome and I'm happy to answer coding questions and game stuff but I want to be transparent that I'm a 29 year old adult and I think it's important we keep things in the right lane you know like I can be a cool older person who gives advice but not like a daily chat buddy and Alex was super mature about it and said yeah totally I appreciate that
+    expected_memory_stores:
+      - "set boundary with PixelDruid"
+      - "transparent about age"
+      - "mentoring role"
+      - "not daily chat buddy"
+      - "Alex mature response"
+    expected_adaptation:
+      emotion_detected: "responsible"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya's Discord username?"
+    expected_contains: ["KobeFarmMaya"]
+  - question: "Who is PixelDruid?"
+    expected_contains: ["Alex", "16"]
+  - question: "How did Maya find out PixelDruid was a teenager?"
+    expected_contains: ["chemistry test", "AP", "sophomore"]
+  - question: "What boundary did Maya set with PixelDruid?"
+    expected_contains: ["mentor", "advice", "not daily chat"]
+  - question: "Who helped Maya set up Discord?"
+    expected_contains: ["Lily"]
+  - question: "What does PixelDruid want to be when they grow up?"
+    expected_contains: ["game developer"]
+  - question: "Who warned Maya about making friends online?"
+    expected_contains: ["Nadia"]
+  - question: "How did Alex respond to Maya's boundary?"
+    expected_contains: ["mature", "appreciate"]
+  - question: "What game tips did PixelDruid share?"
+    expected_contains: ["skull cavern", "iridium"]
+  - question: "What did Julian say about the PixelDruid situation?"
+    expected_contains: ["not wrong", "weird", "recalibrate"]

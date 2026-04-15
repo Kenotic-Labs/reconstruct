@@ -1,0 +1,165 @@
+story_id: 403
+story_name: "Alternator Breaks"
+category: "Car Saga"
+description: |
+  Two months after the transmission repair, Maya's Civic breaks again with an
+  alternator failure. Maya is furious about spending $2800 just to have it fail again.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 7:45 AM"
+    user_input: |
+      you have GOT to be kidding me the car won't start again like I just spent 2800 dollars two months ago on the transmission and now it won't even turn over Julian tried jumping it and nothing the battery is brand new we just replaced it in January so it's not that
+    expected_memory_stores:
+      - "car won't start"
+      - "two months after transmission repair"
+      - "$2800 spent"
+      - "battery new January"
+      - "jump start failed"
+    expected_adaptation:
+      emotion_detected: "furious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 8:30 AM"
+    user_input: |
+      had to get a tow to Pacific Auto which was another 85 dollars and the tow guy was like oh yeah this sounds like your alternator and I'm like are you serious right now another major repair on this stupid car I cannot deal with this right now
+    expected_memory_stores:
+      - "tow $85"
+      - "Pacific Auto again"
+      - "alternator suspected"
+    expected_adaptation:
+      emotion_detected: "enraged"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 11:00 AM"
+    user_input: |
+      Pacific Auto confirmed it's the alternator and they quoted me like 650 for parts and labor and I was like you know what I don't even care anymore just fix it but also I'm done after this like Julian was right we should have just gotten a new car instead of doing the transmission
+    expected_memory_stores:
+      - "alternator confirmed"
+      - "$650 repair"
+      - "Julian was right"
+      - "regret transmission repair"
+    expected_adaptation:
+      emotion_detected: "defeated"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 12:30 PM"
+    user_input: |
+      so in total now I've spent like 2800 plus 650 plus the 85 for the tow plus the 120 diagnostic from last time so that's what like almost 3700 dollars on a car that's worth 4000 my dad was right this is throwing good money after bad I should have listened
+    expected_memory_stores:
+      - "total spent $3700"
+      - "car worth $4000"
+      - "dad was right"
+    expected_adaptation:
+      emotion_detected: "self-critical"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 2:00 PM"
+    user_input: |
+      Julian came to pick me up from work since the car is at the shop again and he didn't even say I told you so which was actually really sweet of him he just said we'll figure it out and then Kobe tried to lick my face from the backseat which made me laugh
+    expected_memory_stores:
+      - "Julian supportive"
+      - "no I told you so"
+      - "Kobe in backseat"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      Clara texted asking what happened and I told her the whole thing and she was like girl that car owes you nothing it's had a good life let it go and she sent me a link to some Subaru dealership in Beaverton and I was like hmm maybe
+    expected_memory_stores:
+      - "Clara advice let it go"
+      - "Subaru dealership link"
+      - "Beaverton"
+    expected_adaptation:
+      emotion_detected: "considering"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      told my mom about the alternator and she literally said I will give you the money for a new car Maya stop being stubborn and I almost cried because like she doesn't have a lot of money and the fact that she offered was just like yeah my mom is amazing even when she drives me crazy
+    expected_memory_stores:
+      - "Vivian offered car money"
+      - "Maya almost cried"
+      - "Vivian generosity"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      ok so Julian and I sat down and looked at our finances tonight and if we do like a 4 year loan and put maybe 5000 down we could probably afford a car payment of around 400 a month which is tight but doable especially since the mortgage is only 2100
+    expected_memory_stores:
+      - "4 year loan plan"
+      - "$5000 down payment"
+      - "$400/month payment"
+      - "mortgage $2100"
+    expected_adaptation:
+      emotion_detected: "pragmatic"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 9:30 PM"
+    user_input: |
+      I was looking at cars online and I really want a Toyota RAV4 they're so nice and reliable and good for Oregon with the snow and everything like the 2021 ones are going for around 27 to 30k which is in our range I think
+    expected_memory_stores:
+      - "wants Toyota RAV4"
+      - "2021 model"
+      - "$27-30k range"
+      - "good for Oregon weather"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 10:15 PM"
+    user_input: |
+      Julian said he thinks we should look at Subarus too because they're like the Oregon car everybody has one and they're great in the mountains and he mentioned the Outback specifically but I dunno I've always been a Toyota person I'll think about it
+    expected_memory_stores:
+      - "Julian suggests Subaru Outback"
+      - "Oregon car"
+      - "Maya prefers Toyota"
+    expected_adaptation:
+      emotion_detected: "open-minded"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What broke on Maya's car two months after the transmission repair?"
+    expected_contains: ["alternator"]
+  - question: "How much has Maya spent total on car repairs?"
+    expected_contains: ["3700", "3655"]
+  - question: "What car does Maya initially want to buy?"
+    expected_contains: ["Toyota RAV4"]
+  - question: "What car does Julian suggest?"
+    expected_contains: ["Subaru", "Outback"]
+  - question: "How much is the alternator repair?"
+    expected_contains: ["650"]
+  - question: "What did Vivian offer to do about the car situation?"
+    expected_contains: ["money", "give"]
+  - question: "What is Maya's monthly mortgage?"
+    expected_contains: ["2100"]
+  - question: "How much could Maya and Julian afford as a car payment?"
+    expected_contains: ["400"]
+  - question: "Who sent Maya a link to a dealership?"
+    expected_contains: ["Clara"]
+  - question: "What did Maya's dad say about the car that proved correct?"
+    expected_contains: ["good money after bad", "something else break"]

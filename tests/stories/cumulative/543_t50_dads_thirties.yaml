@@ -1,0 +1,181 @@
+story_id: 543
+story_name: "Dad's Thirties"
+category: "Identity and Future"
+description: |
+  Maya talks to George (Julian's dad) about his thirties and discovers he was terrified too.
+  Cross-generational wisdom. Cross-references Diane/George relationship (T16),
+  Julian, career, and house ownership.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Sunday 11:00 AM"
+    user_input: |
+      George called today which is unusual because he usually only calls for specific reasons like a game being on or a holiday and he said Diane told him about my birthday spiral and he wanted to check in and I was like oh god Diane knows about my spiral and he said Maya relax she's just worried
+    expected_memory_stores:
+      - "George called"
+      - "Diane told about spiral"
+      - "George checking in"
+      - "Diane worried"
+    expected_adaptation:
+      emotion_detected: "embarrassed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Sunday 11:15 AM"
+    user_input: |
+      George said when I turned thirty I was terrified and I said really you and he said yeah I had just opened the shop and I had no idea if it would work and Diane was pregnant with Julian and I was making no money and I thought my life was over and I said wait you thought your life was OVER at thirty and he said oh yeah absolutely
+    expected_memory_stores:
+      - "George terrified at 30"
+      - "just opened shop"
+      - "Diane pregnant with Julian"
+      - "making no money"
+      - "thought life was over"
+    expected_adaptation:
+      emotion_detected: "amazed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Sunday 11:30 AM"
+    user_input: |
+      he said the shop is the one he still has on um what street did he say oh yeah Burnside in Portland well not Burnside but somewhere in Eugene actually and he said the first year he lost money and the second year he broke even and by 35 he was doing ok and he said Maya nothing happens at 30 everything happens between 30 and 40
+    expected_memory_stores:
+      - "George's shop in Eugene"
+      - "lost money first year"
+      - "broke even second year"
+      - "ok by 35"
+      - "everything happens 30 to 40"
+    expected_adaptation:
+      emotion_detected: "reassured"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Sunday 11:45 AM"
+    user_input: |
+      I asked him if he ever compared himself to other people and he laughed so hard and said Maya I used to read the newspaper and see guys my age who were already running companies and I'd think what am I doing and then Diane would say George you're building something real and that would shut me up and I said sounds familiar
+    expected_memory_stores:
+      - "George compared himself too"
+      - "newspaper comparisons"
+      - "Diane's reassurance"
+      - "building something real"
+      - "sounds familiar"
+    expected_adaptation:
+      emotion_detected: "connected"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Sunday 12:00 PM"
+    user_input: |
+      George said the best advice he can give me is stop trying to figure out where you should be and start appreciating where you are and he said at 30 I had a pregnant wife a failing business and a used car and now I have a successful shop a grown son who's building a life with you and a house that's paid off and none of that happened overnight
+    expected_memory_stores:
+      - "George's advice"
+      - "stop figuring out where should be"
+      - "appreciate where you are"
+      - "30 vs now comparison"
+      - "none happened overnight"
+    expected_adaptation:
+      emotion_detected: "mentored"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 12:15 PM"
+    user_input: |
+      he said one more thing Maya you and Julian have something special and I know because Diane and I had it at your age and it's not that everything was easy it's that we wanted to build together and you two want to build together and that's the thing that matters at 30 not what you've built but WHO you're building with
+    expected_memory_stores:
+      - "George on Julian and Maya"
+      - "something special"
+      - "Diane and George had it too"
+      - "want to build together"
+      - "who not what"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 2:00 PM"
+    user_input: |
+      told Julian about the call and Julian got really quiet and said my dad usually doesn't talk like that and I said well he was amazing and Julian said yeah George has depths that he hides behind his goofy dad persona and I thought about grandpa hiding his engineering behind his quiet old man persona and it's the same thing isn't it
+    expected_memory_stores:
+      - "told Julian about George call"
+      - "Julian surprised"
+      - "George hides depths"
+      - "goofy dad persona"
+      - "parallel to grandpa hiding engineering"
+    expected_adaptation:
+      emotion_detected: "insightful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 4:00 PM"
+    user_input: |
+      called my mom and asked her what she was doing at thirty and she was quiet for a moment and said at thirty I was in America for eight years I had you and your brother I was working at the restaurant sixty hours a week I didn't have time to be scared about turning thirty I was too busy surviving and I felt like a jerk for spiraling
+    expected_memory_stores:
+      - "Vivian at thirty"
+      - "eight years in America"
+      - "Maya and Danny"
+      - "restaurant sixty hours"
+      - "too busy surviving"
+      - "Maya felt like jerk"
+    expected_adaptation:
+      emotion_detected: "humbled"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 5:00 PM"
+    user_input: |
+      my mom said don't feel guilty Maya you have the luxury of asking these questions because I worked so you could and that hit me so hard because she's right her surviving meant I got to thrive and grandpa's surviving meant she got to survive and it's this chain of sacrifice going back to Wuhan
+    expected_memory_stores:
+      - "Vivian luxury of questions"
+      - "she worked so Maya could ask"
+      - "chain of sacrifice"
+      - "grandpa to Vivian to Maya"
+      - "back to Wuhan"
+    expected_adaptation:
+      emotion_detected: "profound"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 PM"
+    user_input: |
+      lying in bed processing all of this and George was terrified at thirty and my mom was too busy surviving at thirty and grandpa was working as a janitor at thirty having lost everything and here I am with my engineering job and my house and my partner and my dog and if they could see me from their thirties they would say what are you worried about Maya and they'd be right
+    expected_memory_stores:
+      - "George terrified"
+      - "Vivian surviving"
+      - "grandpa janitor at thirty"
+      - "Maya has everything"
+      - "they would say don't worry"
+    expected_adaptation:
+      emotion_detected: "perspective"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What was George doing at 30?"
+    expected_contains: ["opened shop", "Diane pregnant", "making no money"]
+  - question: "What advice did George give Maya?"
+    expected_contains: ["stop figuring out where should be", "appreciate where you are"]
+  - question: "What did George say about building with someone?"
+    expected_contains: ["who you're building with", "not what"]
+  - question: "What was Vivian doing at 30?"
+    expected_contains: ["restaurant", "sixty hours", "two kids"]
+  - question: "What did Vivian say about Maya having the luxury to spiral?"
+    expected_contains: ["worked so you could"]
+  - question: "What chain did Maya identify?"
+    expected_contains: ["sacrifice", "grandpa", "Vivian", "Maya", "Wuhan"]
+  - question: "Where is George's shop?"
+    expected_contains: ["Eugene"]
+  - question: "When did George's shop become profitable?"
+    expected_contains: ["35"]
+  - question: "What parallel did Maya draw between George and grandpa?"
+    expected_contains: ["hiding", "persona", "depths"]
+  - question: "What was grandpa doing at 30?"
+    expected_contains: ["janitor", "lost everything"]

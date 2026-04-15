@@ -1,0 +1,172 @@
+story_id: 170
+story_name: "Julian's Career Full Circle"
+category: "Career"
+description: |
+  Reflection and summary of Julian's career journey. Tests full state
+  reconstruction of another person's career arc through Maya's eyes.
+  Includes mixed-thread references (wedding, family).
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Sunday 8:00 AM"
+    user_input: |
+      lazy Sunday morning and Julian's sleeping in because he actually can rest now without stressing about where the next project is coming from and I'm just sitting here with Kobe drinking coffee thinking about how much has changed since he lost the Thornton Group
+    expected_memory_stores:
+      - "reflection on Julian's journey"
+      - "Thornton Group loss"
+      - "Julian at peace"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Sunday 9:00 AM"
+    user_input: |
+      like let me trace it out because it's actually kind of amazing um Julian was freelancing making $7000 a month on a good month then Thornton dropped him and he went down to like $1400 then he was depressed and we kind of fought about it then Nathan told him about Bold Studio then the interview with Kevin
+    expected_memory_stores:
+      - "career timeline recap"
+      - "$7000 to $1400"
+      - "depression"
+      - "Nathan connection"
+      - "Kevin interview"
+    expected_adaptation:
+      emotion_detected: "narrative"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Sunday 9:15 AM"
+    user_input: |
+      then the offer at $78K and the debate about freedom versus stability and Diane saying take it and Marcus saying take it and him finally saying yes and then the first day and bringing Kobe and meeting Sam and Alicia and the Timber Roasters project that was his first big win
+    expected_memory_stores:
+      - "offer recap"
+      - "$78K offer"
+      - "freedom vs stability"
+      - "family support"
+      - "first day"
+      - "Timber Roasters win"
+    expected_adaptation:
+      emotion_detected: "narrative"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Sunday 9:30 AM"
+    user_input: |
+      and Kevin becoming this incredible mentor and the six month review where he got bumped to $85K and senior creative lead and now he's hiring people and volunteering at Design for All and giving talks and designing our wedding stuff and he's just this completely different person than the guy who was refreshing Dribbble in his pajamas six months ago
+    expected_memory_stores:
+      - "Kevin mentorship"
+      - "$85K senior creative lead"
+      - "hiring volunteering speaking"
+      - "transformation complete"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Sunday 10:00 AM"
+    user_input: |
+      the thing that gets me is that Julian always had the talent like he was always this good but freelancing kind of hid it because there was no one to witness it and no one to push him and now at Bold Studio people see what I've always seen and that's validating for me too honestly
+    expected_memory_stores:
+      - "Julian always talented"
+      - "freelancing hid ability"
+      - "team made talent visible"
+      - "validating for Maya"
+    expected_adaptation:
+      emotion_detected: "insightful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 11:00 AM"
+    user_input: |
+      Julian woke up and came down and I told him I was thinking about his journey and he said babe it's Sunday don't be deep before noon and I said too late and he laughed and made himself coffee and Kobe got up too because Kobe wakes up when Julian wakes up always
+    expected_memory_stores:
+      - "Julian deflects emotional depth"
+      - "morning routine"
+      - "Kobe follows Julian"
+    expected_adaptation:
+      emotion_detected: "lighthearted"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 1:00 PM"
+    user_input: |
+      oh so I forgot to mention Julian got a really sweet message from his old Thornton Group contact like the actual person he worked with not the company and she said she was sorry they dropped him and that it was a corporate decision not a reflection of his work which Julian said he needed to hear even though he's over it now
+    expected_memory_stores:
+      - "Thornton contact apologized"
+      - "corporate decision not personal"
+      - "Julian appreciated closure"
+    expected_adaptation:
+      emotion_detected: "closure"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 3:00 PM"
+    user_input: |
+      Julian's working on the Summit Trail final presentation this afternoon it's due Monday and he's adding these last finishing touches and I can see the difference between stressed freelance Julian and focused studio Julian like he's still working on a Sunday but it's because he's excited not because he's desperate
+    expected_memory_stores:
+      - "Summit Trail presentation"
+      - "due Monday"
+      - "working from excitement not desperation"
+      - "positive work mindset"
+    expected_adaptation:
+      emotion_detected: "observant"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 6:00 PM"
+    user_input: |
+      we took Kobe to the park this afternoon and ran into one of Julian's Bold Studio coworkers there with their dog and they were chatting about work stuff casually and it hit me that Julian has actual work friends now like real people he sees and talks to regularly not just names on a Slack channel and that matters
+    expected_memory_stores:
+      - "Julian has work friends"
+      - "ran into coworker at park"
+      - "social life improvement"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 9:00 PM"
+    user_input: |
+      end of a really nice quiet Sunday and I'm just grateful you know grateful that Julian took the risk grateful that Kevin is who he is grateful that losing Thornton happened because it led us here and in a couple months we'll be married and Julian will have been at Bold Studio for almost a year and life just keeps getting better honestly oh also reminder I need to call my mom about her medication thing tomorrow but that's a whole different situation
+    expected_memory_stores:
+      - "gratitude summary"
+      - "wedding approaching"
+      - "Julian at Bold almost a year"
+      - "life getting better"
+      - "Vivian medication reminder"
+      - "mom health situation"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Summarize Julian's career journey from freelance to Bold Studio."
+    expected_contains: ["Thornton", "freelance", "Bold Studio", "78K", "85K", "Kevin"]
+  - question: "What was Julian making before and after the career change?"
+    expected_contains: ["7000", "1400", "78", "85"]
+  - question: "What is Julian's current role and salary?"
+    expected_contains: ["senior creative lead", "85"]
+  - question: "Who has been Julian's most important professional relationship?"
+    expected_contains: ["Kevin Park"]
+  - question: "What projects has Julian completed at Bold Studio?"
+    expected_contains: ["Timber Roasters", "Summit Trail", "Feast Collective"]
+  - question: "How has Julian changed personally since joining Bold Studio?"
+    expected_contains: ["confident", "happy", "social"]
+  - question: "What happened with the Thornton Group contact?"
+    expected_contains: ["apologized", "corporate decision"]
+  - question: "What volunteer work does Julian do?"
+    expected_contains: ["Design for All"]
+  - question: "Who are Julian's direct reports at Bold Studio?"
+    expected_contains: ["Sam", "Alicia"]
+  - question: "What did Maya say was the best thing to happen to Julian?"
+    expected_contains: ["losing Thornton"]

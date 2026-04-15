@@ -1,0 +1,220 @@
+story_id: 63
+story_name: "Google Round Two Bombs"
+category: "Career"
+description: |
+  Tests memory of Maya's second Google interview failure.
+  She bombs it worse than the first time. Emotional crash and pivot to Conduit AI.
+  Verifies emotional arc tracking and decision-point memory.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 10:45 AM"
+    user_input: |
+      oh god the Google interview was a disaster like worse than the first one the system design was fine again but the coding I just completely blanked on a binary search variant and the interviewer was stone cold no feedback no warmth just silence while I struggled and I wanted to crawl under my desk
+    expected_memory_stores:
+      - "Google interview disaster"
+      - "binary search variant"
+      - "blanked"
+      - "stone cold interviewer"
+      - "system design fine"
+    expected_triples:
+      - ["user", "interviewed_at", "Google"]
+      - ["user", "failed", "binary search variant coding question"]
+      - ["user", "has_emotion", "humiliated"]
+      - ["Google_interviewer", "gave", "no feedback or warmth"]
+      - ["user", "passed", "system design round"]
+    expected_adaptation:
+      emotion_detected: "humiliated"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 11:30 AM"
+    user_input: |
+      I'm sitting in my car in the Vantage parking lot and I can't go back inside because my eyes are red from crying and I know it's just an interview it's not the end of the world but it feels like it right now and I keep thinking maybe I'm not good enough maybe I've been fooling myself
+    expected_memory_stores:
+      - "crying in car"
+      - "parking lot"
+      - "imposter syndrome"
+      - "self-doubt"
+    expected_triples:
+      - ["user", "location", "crying in car in Vantage parking lot"]
+      - ["user", "has_emotion", "devastated"]
+      - ["user", "experiencing", "imposter syndrome"]
+    expected_adaptation:
+      emotion_detected: "devastated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 12:00 PM"
+    user_input: |
+      texted Julian and he called me immediately and just listened while I vented and then he said babe you just had one of the best technical screens of your life at Conduit two days ago one bad interview doesn't define you and he's right I know he's right but it still hurts
+    expected_memory_stores:
+      - "Julian called"
+      - "venting"
+      - "Conduit success reminder"
+      - "one bad interview"
+      - "emotional support"
+    expected_triples:
+      - ["user", "texted", "Julian"]
+      - ["Julian", "called_immediately", "user"]
+      - ["Julian", "reminded_user_of", "successful Conduit technical screen"]
+      - ["user", "has_emotion", "hurt but comforted"]
+    expected_adaptation:
+      emotion_detected: "hurt"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 3:00 PM"
+    user_input: |
+      went back inside and Tanya from my pod noticed something was off and she didn't pry but she brought me a coffee and just said rough day huh and I nodded and she patted my shoulder and went back to her desk and that small gesture meant a lot honestly
+    expected_memory_stores:
+      - "Tanya noticed"
+      - "coffee gesture"
+      - "kindness at work"
+      - "no prying"
+    expected_triples:
+      - ["Tanya", "noticed", "user was upset"]
+      - ["Tanya", "brought", "coffee"]
+      - ["user", "has_emotion", "touched"]
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 6:00 PM"
+    user_input: |
+      Nina called and I told her it didn't go well and she was like don't worry about Google you have Conduit and they love you and Sam Okafor already told Ross he wants to bring you to the onsite round so let's focus on that and forget Google
+    expected_memory_stores:
+      - "Nina reassurance"
+      - "forget Google"
+      - "Conduit loves Maya"
+      - "Sam told Ross"
+      - "onsite round next"
+    expected_triples:
+      - ["Nina", "reassured", "user about Conduit"]
+      - ["Sam_Okafor", "told_Ross", "wants to bring user to onsite"]
+      - ["Nina", "advised", "forget Google focus on Conduit"]
+      - ["user", "has_emotion", "relieved"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 9:00 PM"
+    user_input: |
+      Julian made carbonara because he knows it's my comfort food and we watched a dumb action movie and Kobe was asleep on my feet and I just felt so grateful for this life even when work stuff is falling apart like I have these two beings who love me unconditionally
+    expected_memory_stores:
+      - "carbonara comfort food"
+      - "action movie"
+      - "Kobe on feet"
+      - "gratitude"
+      - "unconditional love"
+    expected_triples:
+      - ["Julian", "made", "carbonara"]
+      - ["user", "comfort_food", "carbonara"]
+      - ["Kobe", "slept_on", "user's feet"]
+      - ["user", "has_emotion", "grateful"]
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 9:00 AM"
+    user_input: |
+      woke up feeling better not great but better and I decided I'm done with Google permanently like I'm not gonna keep banging my head against their interview process when there's a company that actually seems to want me and appreciate my skills so Conduit AI all the way from here
+    expected_memory_stores:
+      - "done with Google"
+      - "permanent decision"
+      - "Conduit AI committed"
+      - "feeling appreciated"
+    expected_triples:
+      - ["user", "decided", "done with Google permanently"]
+      - ["user", "committed_to", "Conduit AI"]
+      - ["user", "has_emotion", "resolved"]
+    expected_adaptation:
+      emotion_detected: "resolved"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 12:00 PM"
+    user_input: |
+      how many times did Maya interview at Google total
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 3:00 PM"
+    user_input: |
+      started prepping for the Conduit onsite and the format is four rounds according to Nina one system design one coding one culture fit and one with Ross Zhang directly and it's all done over video which is nice because I don't have to fly anywhere
+    expected_memory_stores:
+      - "Conduit onsite format"
+      - "four rounds"
+      - "system design"
+      - "coding"
+      - "culture fit"
+      - "Ross Zhang round"
+      - "video format"
+    expected_triples:
+      - ["Conduit_onsite", "format", "four rounds over video"]
+      - ["Conduit_onsite", "includes", "system design"]
+      - ["Conduit_onsite", "includes", "coding"]
+      - ["Conduit_onsite", "includes", "culture fit"]
+      - ["Conduit_onsite", "includes", "round with Ross Zhang"]
+    expected_adaptation:
+      emotion_detected: "focused"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 4:00 PM"
+    user_input: |
+      Leon texted me from Stripe and said he heard about the Google thing because I'd mentioned it in our group chat and he was like dude Google's interview process is broken everyone knows that and he said at Stripe they don't do leetcode at all they do practical problems which like why can't every company be like that
+    expected_memory_stores:
+      - "Leon at Stripe"
+      - "Google process broken"
+      - "Stripe no leetcode"
+      - "practical problems"
+    expected_triples:
+      - ["Leon", "works_at", "Stripe"]
+      - ["Leon", "told_user", "Google interview process is broken"]
+      - ["Stripe", "interview_style", "practical problems not leetcode"]
+      - ["user", "has_emotion", "validated"]
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How many times did Maya interview at Google?"
+    expected_contains: ["two", "twice"]
+  - question: "What happened in Maya's second Google interview?"
+    expected_contains: ["bombed", "disaster", "blanked"]
+  - question: "What coding problem tripped Maya up?"
+    expected_contains: ["binary search"]
+  - question: "Is Maya still pursuing Google?"
+    expected_contains: ["no", "done"]
+  - question: "What is the Conduit AI onsite format?"
+    expected_contains: ["four rounds", "system design", "coding", "culture", "Ross"]
+  - question: "What comfort food did Julian make?"
+    expected_contains: ["carbonara"]
+  - question: "What did Sam Okafor tell Ross about Maya?"
+    expected_contains: ["onsite", "bring", "wants"]
+  - question: "How did Tanya support Maya?"
+    expected_contains: ["coffee"]
+  - question: "What did Leon say about Google's process?"
+    expected_contains: ["broken"]
+  - question: "What is Maya's primary interview target now?"
+    expected_contains: ["Conduit AI"]

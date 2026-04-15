@@ -1,0 +1,168 @@
+story_id: 423
+story_name: "More Responsibility"
+category: "Volunteering"
+description: |
+  Diane starts giving Maya more responsibilities at the food bank. Maya helps
+  with inventory systems and logistics planning, applying her engineering skills.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 8:30 AM"
+    user_input: |
+      so Diane pulled me aside today and said she noticed I'm really organized and she asked if I'd be willing to help with the inventory tracking because they're doing it on paper right now like PAPER spreadsheets in 2026 and I was like Diane that is a crime against efficiency let me help
+    expected_memory_stores:
+      - "Diane asks for help"
+      - "inventory tracking on paper"
+      - "Maya offered to help"
+      - "crime against efficiency"
+    expected_adaptation:
+      emotion_detected: "eager"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:00 AM"
+    user_input: |
+      spent the morning looking at their current system and it's literally binders of handwritten logs and I said Diane I can set up a Google Sheets system in like an hour that would be 10 times better than this and she was like really and I was like yes I do this for a living I'm a software engineer
+    expected_memory_stores:
+      - "handwritten logs binders"
+      - "Google Sheets proposal"
+      - "one hour setup"
+      - "Maya's engineering skills"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 12:00 PM"
+    user_input: |
+      built the spreadsheet during lunch break and it has categories for all the food types quantities expiration dates donation sources and distribution dates and I color coded it and added some basic formulas so they can see at a glance what's running low and Diane looked at it and said this is incredible
+    expected_memory_stores:
+      - "spreadsheet built"
+      - "categories quantities dates"
+      - "color coded"
+      - "formulas for low stock"
+      - "Diane loves it"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 1:30 PM"
+    user_input: |
+      Harold was like I don't trust computers and Tomas was like Harold you don't trust anything invented after 1990 and I showed Harold how to enter data on his phone and he grumbled but he did it and his handwriting is terrible anyway so honestly this is better for everyone
+    expected_memory_stores:
+      - "Harold resistant to tech"
+      - "Tomas teasing Harold"
+      - "Harold's bad handwriting"
+      - "taught Harold phone entry"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 2:30 PM"
+    user_input: |
+      Diane also asked if I could help plan the logistics for their quarterly distribution events where they do a big outdoor thing at Pioneer Courthouse Square and there's trucks and tents and volunteers and I was like sure I love logistics this is basically project management which I do at Conduit
+    expected_memory_stores:
+      - "quarterly distribution events"
+      - "Pioneer Courthouse Square"
+      - "trucks tents volunteers"
+      - "project management skills"
+      - "similar to Conduit work"
+    expected_adaptation:
+      emotion_detected: "enthusiastic"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Diane mentioned they have a budget of like 45 thousand dollars for the whole year and I was like wait that's it for serving 2000 families a month and she said yeah most of it comes from donations and grants and I felt this like pit in my stomach thinking about how tight things are
+    expected_memory_stores:
+      - "annual budget $45,000"
+      - "serves 2000 families"
+      - "donations and grants funded"
+      - "Maya concerned about budget"
+    expected_adaptation:
+      emotion_detected: "sobered"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 5:00 PM"
+    user_input: |
+      went home and told Julian about the inventory system and the logistics stuff and he said babe you're basically running the place now and I said no I'm just helping where I can and he was like that's how it starts and he might be right honestly
+    expected_memory_stores:
+      - "Julian says she's running it"
+      - "Maya deflects"
+      - "scope creep awareness"
+    expected_adaptation:
+      emotion_detected: "humble"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 6:00 PM"
+    user_input: |
+      what's the annual budget for the Portland Food Bank again and how many families do they serve
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 7:30 PM"
+    user_input: |
+      texted Diane and said I'd help with the logistics for the next quarterly event which is in about 6 weeks and she sent back like 15 heart emojis and said you're the best and honestly that felt really good like being appreciated for volunteering hits different than being appreciated at work you know
+    expected_memory_stores:
+      - "committed to quarterly event"
+      - "6 weeks away"
+      - "Diane grateful"
+      - "appreciation different from work"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 9:00 PM"
+    user_input: |
+      thinking about it more and I realize the food bank is the first place in a while where I feel like I'm using my skills for something bigger than a product or a company like at Conduit I'm building features for users but at the food bank I'm helping actual hungry families and that perspective shift is everything
+    expected_memory_stores:
+      - "skills for bigger purpose"
+      - "product vs people"
+      - "helping hungry families"
+      - "perspective shift"
+    expected_adaptation:
+      emotion_detected: "purposeful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What system did Maya build for the food bank?"
+    expected_contains: ["inventory", "Google Sheets", "spreadsheet"]
+  - question: "What was the food bank using before Maya helped?"
+    expected_contains: ["paper", "handwritten", "binders"]
+  - question: "What is the food bank's annual budget?"
+    expected_contains: ["45,000", "45000"]
+  - question: "Where do quarterly distribution events happen?"
+    expected_contains: ["Pioneer Courthouse Square"]
+  - question: "How did Harold react to the new system?"
+    expected_contains: ["resistant", "grumbled", "doesn't trust computers"]
+  - question: "What logistics role did Diane ask Maya to help with?"
+    expected_contains: ["quarterly distribution", "event planning"]
+  - question: "What skills does Maya apply from her job?"
+    expected_contains: ["project management", "engineering", "systems"]
+  - question: "How is the food bank funded?"
+    expected_contains: ["donations", "grants"]
+  - question: "When is the next quarterly event?"
+    expected_contains: ["6 weeks"]
+  - question: "How does food bank appreciation differ from work?"
+    expected_contains: ["hits different", "bigger", "families"]

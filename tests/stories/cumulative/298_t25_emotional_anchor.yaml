@@ -1,0 +1,188 @@
+story_id: 298
+story_name: "Kobe the Emotional Anchor"
+category: "Pet"
+description: |
+  Tests memory of how Kobe becomes Maya's emotional anchor after the health scare.
+  Captures the deepened bond and Maya's growing awareness that Kobe provides
+  genuine emotional support.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      had a really stressful day at work like Sam gave me feedback on a code review that was kind of harsh and I came home feeling crappy and Kobe immediately came over and put his head on my lap and just stayed there and I swear this dog can read my emotions better than most humans
+    expected_memory_stores:
+      - "stressful work day"
+      - "Sam harsh feedback"
+      - "code review"
+      - "Kobe head on lap"
+      - "reads emotions"
+      - "emotional support"
+    expected_adaptation:
+      emotion_detected: "comforted"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      noticed something since the pancreatitis scare I'm way more attached to Kobe like I used to love him obviously but now there's this deeper thing where I was genuinely afraid of losing him and that made everything more intense and Julian noticed too he said we both hover over Kobe now
+    expected_memory_stores:
+      - "deeper attachment"
+      - "since pancreatitis"
+      - "afraid of losing him"
+      - "more intense bond"
+      - "both hover now"
+      - "Julian noticed"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 8:00 PM"
+    user_input: |
+      Kobe does this thing now where when I sit on the couch he gets up from wherever he is and comes and lies down with his body pressed against my legs and sometimes he puts one paw on my foot like he's holding onto me and it's the most grounding thing in the world
+    expected_memory_stores:
+      - "Kobe against legs"
+      - "paw on foot"
+      - "grounding"
+      - "comes from wherever"
+      - "chooses to be near"
+    expected_adaptation:
+      emotion_detected: "tender"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 10:00 AM"
+    user_input: |
+      took Kobe to Sellwood Park just the two of us and we sat by the river and he was lying in the grass next to me and I was reading and it was this perfectly peaceful moment and I realized that Kobe is like my therapist but free and furry
+    expected_memory_stores:
+      - "Sellwood Park"
+      - "by the river"
+      - "grass"
+      - "reading"
+      - "peaceful moment"
+      - "therapist but furry"
+    expected_adaptation:
+      emotion_detected: "serene"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 7:00 AM"
+    user_input: |
+      Kobe has this morning routine now where he wakes up and stretches and then comes to my side of the bed and puts his nose right in my face and waits for me to pet him and THEN he goes downstairs and it's like his way of saying good morning and I look forward to it every single day
+    expected_memory_stores:
+      - "morning routine"
+      - "stretches"
+      - "nose in face"
+      - "waits for pets"
+      - "then goes downstairs"
+      - "good morning ritual"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      Julian and I had a small argument about something dumb like who forgot to pay the water bill and after he went to his studio to cool off Kobe came and sat with me and then 10 minutes later went and sat with Julian and it was like he was mediating and Julian came out and was like okay Kobe thinks we should make up
+    expected_memory_stores:
+      - "argument with Julian"
+      - "water bill"
+      - "Julian to studio"
+      - "Kobe sat with Maya"
+      - "then sat with Julian"
+      - "mediating"
+      - "making up"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 6:00 PM"
+    user_input: |
+      Priya at work asked me if I've ever thought about getting Kobe certified as a therapy dog because apparently his temperament is really good for it and you can take therapy dogs to hospitals and nursing homes and she said her aunt's nursing home has a therapy dog program
+    expected_memory_stores:
+      - "Priya suggestion"
+      - "therapy dog certification"
+      - "good temperament"
+      - "hospitals and nursing homes"
+      - "Priya's aunt nursing home"
+    expected_adaptation:
+      emotion_detected: "intrigued"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 3:00 PM"
+    user_input: |
+      researched therapy dog certification and you need to pass a test called the Canine Good Citizen test first which tests basic obedience and behavior in public settings and then additional therapy dog specific training and Kobe's leash reactivity might be an issue but Keiko said he's made enough progress that it could work
+    expected_memory_stores:
+      - "Canine Good Citizen test"
+      - "basic obedience"
+      - "public behavior"
+      - "therapy dog training"
+      - "reactivity concern"
+      - "Keiko says possible"
+    expected_adaptation:
+      emotion_detected: "considering"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 10:00 AM"
+    user_input: |
+      told Julian about the therapy dog idea and he was like that's actually perfect for Kobe because he's naturally gentle with people and loves being touched and then Julian said imagine Kobe in a little vest visiting kids in the hospital and we both got emotional about it
+    expected_memory_stores:
+      - "Julian supports therapy dog"
+      - "naturally gentle"
+      - "loves being touched"
+      - "vest visiting kids"
+      - "both got emotional"
+    expected_adaptation:
+      emotion_detected: "inspired"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 7:00 PM"
+    user_input: |
+      asked Dr. Mills about the therapy dog certification at our next appointment which is in two weeks and she said she'd be happy to evaluate whether Kobe is a good candidate and she said his health is stable enough now that there's no reason not to try and honestly this feels like the next chapter for Kobe and me
+    expected_memory_stores:
+      - "Dr. Mills will evaluate"
+      - "appointment two weeks"
+      - "health stable"
+      - "no reason not to try"
+      - "next chapter"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How does Kobe help Maya emotionally?"
+    expected_contains: ["head on lap", "ground", "comfort", "reads emotions"]
+  - question: "Is Maya considering therapy dog certification for Kobe?"
+    expected_contains: ["yes"]
+  - question: "What test does Kobe need to pass first?"
+    expected_contains: ["Canine Good Citizen"]
+  - question: "Who suggested the therapy dog idea?"
+    expected_contains: ["Priya"]
+  - question: "What is Kobe's morning routine?"
+    expected_contains: ["nose", "face", "waits", "pet"]
+  - question: "Is Kobe's health stable enough for therapy work?"
+    expected_contains: ["yes", "stable"]
+  - question: "How did Kobe act during Maya and Julian's argument?"
+    expected_contains: ["mediat", "sat with both"]
+  - question: "Could Kobe's leash reactivity prevent certification?"
+    expected_contains: ["concern", "possible", "progress"]
+  - question: "Who will evaluate Kobe for therapy dog candidacy?"
+    expected_contains: ["Dr. Mills", "Dr. Sara Mills"]
+  - question: "What would Kobe do as a therapy dog?"
+    expected_contains: ["visit", "hospital", "nursing"]

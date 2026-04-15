@@ -1,0 +1,175 @@
+story_id: 381
+story_name: "Dr. Tate Suggests Mindfulness"
+category: "Mental Health"
+description: |
+  Tests memory of Dr. Tate recommending mindfulness meditation for Maya's anxiety.
+  Verifies system captures therapeutic recommendations and initial skepticism.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 5:00 PM"
+    user_input: |
+      so I had my session with Dr Tate today and she brought up mindfulness meditation again and I was like I know I know you've mentioned it before and she said Maya I've mentioned it like five times and you always deflect
+    expected_memory_stores:
+      - "Dr. Tate session"
+      - "mindfulness meditation"
+      - "mentioned five times"
+      - "Maya deflects"
+    expected_adaptation:
+      emotion_detected: "resistant"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 5:30 PM"
+    user_input: |
+      she said my anxiety has these patterns where I take on too much and then spiral and she thinks a daily meditation practice even just a few minutes could help me catch the spiral before it starts and I was like but I can't sit still
+    expected_memory_stores:
+      - "anxiety patterns"
+      - "take on too much"
+      - "spiral pattern"
+      - "catch spiral early"
+      - "can't sit still"
+    expected_adaptation:
+      emotion_detected: "skeptical"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      she recommended this app called Insight Timer which is apparently free unlike Calm or Headspace and she said it has guided meditations for beginners and I can start with literally two minutes and I was like two minutes seems pointless but okay
+    expected_memory_stores:
+      - "Insight Timer app"
+      - "free"
+      - "guided meditations"
+      - "start with two minutes"
+      - "Maya skeptical"
+    expected_adaptation:
+      emotion_detected: "reluctant"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      told Julian about the meditation thing and he was like oh I used to meditate in college and I was like WHAT since when and he said he did it for like six months during a stressful semester and it helped but he stopped and he kind of regrets it
+    expected_memory_stores:
+      - "Julian used to meditate"
+      - "college six months"
+      - "stressful semester"
+      - "stopped regrets it"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      downloaded Insight Timer and there's like a million meditations on there and I don't even know where to start and I clicked on one called Breathing Basics for Beginners and the woman's voice was so soothing I almost fell asleep which I think is not the point
+    expected_memory_stores:
+      - "downloaded Insight Timer"
+      - "overwhelming options"
+      - "Breathing Basics for Beginners"
+      - "soothing voice"
+      - "almost fell asleep"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 8:30 PM"
+    user_input: |
+      okay tried my first actual two minute meditation sitting on the floor in the living room and I could not stop thinking about work and ramen and my grocery list and whether Kobe needs his nails trimmed and I'm like is this what meditation is supposed to feel like because this sucks
+    expected_memory_stores:
+      - "first meditation attempt"
+      - "two minutes"
+      - "living room floor"
+      - "racing thoughts"
+      - "work ramen groceries"
+      - "didn't enjoy it"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 9:00 PM"
+    user_input: |
+      Jenny was like oh my god you're gonna become one of those meditation people and I was like absolutely not I did two minutes and hated it and she was like give it a week and I was like since when are you pro meditation and she said she's not she just likes seeing me try things
+    expected_memory_stores:
+      - "Jenny teasing"
+      - "meditation people joke"
+      - "give it a week"
+      - "Jenny likes Maya trying things"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 9:30 PM"
+    user_input: |
+      what app did Dr Tate recommend for meditation
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 7:00 AM"
+    user_input: |
+      okay Dr Tate said try it in the morning before my brain gets busy so I set my alarm five minutes early and did two minutes of breathing and it was slightly better than last night like my mind still wandered but I noticed it wandering which she said is the whole point
+    expected_memory_stores:
+      - "morning attempt"
+      - "alarm five minutes early"
+      - "slightly better"
+      - "noticed mind wandering"
+      - "noticing is the point"
+    expected_adaptation:
+      emotion_detected: "curious"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      Julian tried meditating with me tonight and we lasted maybe 90 seconds before Kobe started licking Julian's face and we both started laughing and the meditation was ruined but it was honestly the happiest I've felt about meditation so far
+    expected_memory_stores:
+      - "Julian joined"
+      - "90 seconds"
+      - "Kobe licked face"
+      - "laughing"
+      - "meditation ruined"
+      - "happiest meditation moment"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who recommended meditation to Maya?"
+    expected_contains: ["Dr. Tate"]
+  - question: "What meditation app is Maya using?"
+    expected_contains: ["Insight Timer"]
+  - question: "Why does Dr. Tate think Maya needs meditation?"
+    expected_contains: ["anxiety", "spiral", "too much"]
+  - question: "How long is Maya starting with?"
+    expected_contains: ["two minutes"]
+  - question: "Has Julian ever meditated?"
+    expected_contains: ["yes", "college"]
+  - question: "What happened during Maya's first meditation?"
+    expected_contains: ["racing thoughts", "couldn't", "still"]
+  - question: "What is the point of noticing your mind wandering?"
+    expected_contains: ["whole point", "awareness"]
+  - question: "Is Insight Timer free?"
+    expected_contains: ["yes", "free"]
+  - question: "What happened when Julian tried meditating with Maya?"
+    expected_contains: ["Kobe", "licking", "laughing"]
+  - question: "When does Dr. Tate suggest meditating?"
+    expected_contains: ["morning"]

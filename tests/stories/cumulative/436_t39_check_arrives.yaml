@@ -1,0 +1,173 @@
+story_id: 436
+story_name: "Check Arrives"
+category: "Lease Dispute"
+description: |
+  The $1600 settlement check arrives two weeks later. Maya deposits it and
+  dismisses the small claims case. Final resolution of the lease dispute.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 5:30 PM"
+    user_input: |
+      it's been 8 business days since the settlement was signed and no check yet and I'm getting nervous like what if Greg Patterson doesn't pay what if he just ignores the agreement too like he ignored the demand letter and Julian said give it the full 10 days before you panic
+    expected_memory_stores:
+      - "8 business days"
+      - "no check yet"
+      - "nervous about payment"
+      - "might ignore like demand letter"
+      - "Julian says wait"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 4:00 PM"
+    user_input: |
+      DAY 10 still no check and I emailed Rachel Kim and said the 10 business day deadline is today and I expect payment immediately or I'll reinstate the court case and she responded within an hour and said the check was mailed yesterday and apologized for the delay
+    expected_memory_stores:
+      - "day 10 no check"
+      - "emailed Rachel Kim"
+      - "threatened reinstatement"
+      - "check mailed yesterday"
+      - "Rachel apologized"
+    expected_adaptation:
+      emotion_detected: "annoyed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 3:00 PM"
+    user_input: |
+      THE CHECK IS HERE oh my god it's actually here 1600 dollars from Greg Patterson and I am holding it in my hands and Julian is taking a photo of me holding it like a trophy and honestly it feels so good to see this piece of paper after months of stress
+    expected_memory_stores:
+      - "check arrived"
+      - "$1600 from Greg Patterson"
+      - "Julian taking photo"
+      - "months of stress over"
+    expected_adaptation:
+      emotion_detected: "elated"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 3:30 PM"
+    user_input: |
+      drove straight to the credit union and deposited the check and the teller said it'll clear in 2 business days and I asked her to please make sure it doesn't bounce because I will lose my mind and she laughed and said it's a certified check so it's guaranteed and I was like thank god
+    expected_memory_stores:
+      - "deposited at credit union"
+      - "clears in 2 business days"
+      - "certified check"
+      - "guaranteed funds"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 5:00 PM"
+    user_input: |
+      once the check clears I'm going to transfer the 1600 directly to our closing cost balance which is at 2200 right now so after this it'll be down to 600 which is way more manageable and Julian said we can cover the 600 from next month's savings easily
+    expected_memory_stores:
+      - "transfer to closing costs"
+      - "current balance $2200"
+      - "will be $600 after"
+      - "Julian says manageable"
+    expected_adaptation:
+      emotion_detected: "practical"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 10:00 AM"
+    user_input: |
+      check cleared this morning and I immediately transferred the 1600 to the closing cost escrow account and then I went to the courthouse website and filed the voluntary dismissal of the small claims case online which was way easier than filing the original claim took like 5 minutes
+    expected_memory_stores:
+      - "check cleared"
+      - "transferred $1600"
+      - "filed voluntary dismissal"
+      - "online filing easy"
+      - "5 minutes"
+    expected_adaptation:
+      emotion_detected: "accomplished"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Monday 12:00 PM"
+    user_input: |
+      it's officially over like the case is dismissed the money is in our account and I can finally stop thinking about Greg Patterson and Westridge Apartments forever and I feel this huge weight lifted like physically lighter if that makes sense
+    expected_memory_stores:
+      - "case dismissed"
+      - "money received"
+      - "done with Patterson"
+      - "done with Westridge"
+      - "weight lifted"
+    expected_adaptation:
+      emotion_detected: "liberated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Monday 1:00 PM"
+    user_input: |
+      how much do we still owe on closing costs after depositing the settlement check
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Monday 5:00 PM"
+    user_input: |
+      left a review on Google for Westridge Apartments warning future tenants to document everything on move-in and to know their rights under ORS 90.300 because if I can save one person from going through what I went through it's worth it and I kept it factual not angry because that's more effective
+    expected_memory_stores:
+      - "Google review for Westridge"
+      - "warning future tenants"
+      - "document everything"
+      - "ORS 90.300 reference"
+      - "factual not angry"
+    expected_adaptation:
+      emotion_detected: "protective of others"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Monday 8:00 PM"
+    user_input: |
+      told Dr Tate the whole thing is resolved and she said how do you feel and I said lighter and she said this was about more than money wasn't it and I said yeah it was about knowing I can stand up for myself and not back down when someone tries to take advantage and she said remember this feeling next time you doubt yourself
+    expected_memory_stores:
+      - "Dr Tate session"
+      - "feels lighter"
+      - "more than money"
+      - "standing up for herself"
+      - "remember this feeling"
+    expected_adaptation:
+      emotion_detected: "empowered"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Did the settlement check arrive?"
+    expected_contains: ["yes", "arrived"]
+  - question: "How much do Maya and Julian still owe on closing costs?"
+    expected_contains: ["600"]
+  - question: "Was the check a certified check?"
+    expected_contains: ["yes", "certified"]
+  - question: "Has the small claims case been dismissed?"
+    expected_contains: ["yes", "dismissed"]
+  - question: "Where did Maya deposit the check?"
+    expected_contains: ["credit union"]
+  - question: "What did Maya do to warn future tenants?"
+    expected_contains: ["Google review", "Westridge"]
+  - question: "How long did the whole lease dispute take?"
+    expected_contains: ["months"]
+  - question: "What did Dr. Tate say about the resolution?"
+    expected_contains: ["more than money", "remember this feeling"]
+  - question: "Was the check late?"
+    expected_contains: ["yes", "day 10", "mailed yesterday"]
+  - question: "How did Maya file the dismissal?"
+    expected_contains: ["online", "courthouse website"]

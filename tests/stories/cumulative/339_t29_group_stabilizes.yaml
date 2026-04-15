@@ -1,0 +1,177 @@
+story_id: 339
+story_name: "Group Stabilizes"
+category: "Friendships"
+description: |
+  Tests memory of the friend group fully stabilizing into a healthy dynamic.
+  Marcus and Nadia are comfortable. Group activities expand. Verifies system
+  captures stable relationship state and new activity patterns.
+duration_simulated: "1 month"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Week 1 Saturday 7:00 PM"
+    user_input: |
+      Round Table at Nadia's pick this month she chose Mediterranean Exploration Company on NW 21st and the food was unreal and Marcus and Nadia sat across from each other and it was completely fine no weirdness at all
+    expected_memory_stores:
+      - "Mediterranean Exploration Company"
+      - "NW 21st"
+      - "Nadia's pick"
+      - "Marcus and Nadia fine"
+      - "no weirdness"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Week 2 Sunday 11:00 AM"
+    user_input: |
+      the group started doing Sunday brunches too not every week but like every other and today it was Screen Door and Marcus made everyone laugh with a story about a parent-teacher conference where a kid called him Mr Chill instead of Mr Hill
+    expected_memory_stores:
+      - "Sunday brunches started"
+      - "every other week"
+      - "Screen Door"
+      - "Mr Chill instead of Hill"
+      - "parent-teacher conference"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Week 2 Wednesday 8:00 PM"
+    user_input: |
+      Omar showed us his latest project he's designing a community center in Beaverton and the plans are gorgeous and Nadia offered to do the signage design for free and Omar was like really and she said yeah you're my friend I got you
+    expected_memory_stores:
+      - "Omar community center Beaverton"
+      - "Nadia offered signage"
+      - "for free"
+      - "you're my friend"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Week 3 Saturday 3:00 PM"
+    user_input: |
+      group hike today at Silver Falls State Park which is further out but Omar drove and Marcus brought trail mix that was mostly M&Ms and Nadia said that's very Marcus of you and he said thank you I try and everyone laughed and I love that the joke is comfortable now
+    expected_memory_stores:
+      - "Silver Falls State Park"
+      - "Omar drove"
+      - "Marcus trail mix M&Ms"
+      - "very Marcus of you joke"
+      - "comfortable now"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Week 3 Monday 7:00 PM"
+    user_input: |
+      Marcus told me privately that his therapist said the friend group rules thing was actually really healthy and that most adult friend groups don't communicate that openly and he said he's grateful we did it and I said me too man
+    expected_memory_stores:
+      - "Marcus therapist feedback"
+      - "rules were healthy"
+      - "rare for adult groups"
+      - "Marcus grateful"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Week 3 Thursday 8:30 PM"
+    user_input: |
+      Nadia told me she met someone at the farmers market a guy named Daniel who's a woodworker and she said she's not rushing into anything but she gave him her number and she didn't tell Marcus or the group yet because she wants to wait until there's something to tell
+    expected_memory_stores:
+      - "Nadia met Daniel"
+      - "woodworker"
+      - "farmers market"
+      - "gave number"
+      - "not rushing"
+      - "keeping private for now"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Week 4 Saturday 6:00 PM"
+    user_input: |
+      another great Round Table dinner at this Georgian place called Kargi Gogo on Hawthorne and Jenny made it in person this time she flew up for the weekend and it was the first time the whole group was physically together and it was everything
+    expected_memory_stores:
+      - "Kargi Gogo"
+      - "Georgian food"
+      - "Hawthorne"
+      - "Jenny in person"
+      - "flew up"
+      - "whole group together"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Week 4 Saturday 8:00 PM"
+    user_input: |
+      what restaurant did the group go to when Jenny flew up for dinner
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Week 4 Saturday 10:00 PM"
+    user_input: |
+      Jenny met Nadia in person for the first time they'd only been on FaceTime and book club calls before and they hugged immediately and Jenny said I feel like I already know you and Nadia said same and they were inseparable the rest of the night
+    expected_memory_stores:
+      - "Jenny and Nadia met in person"
+      - "first time"
+      - "previously FaceTime only"
+      - "immediate connection"
+      - "inseparable"
+    expected_adaptation:
+      emotion_detected: "thrilled"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Week 4 Sunday 10:00 AM"
+    user_input: |
+      Sunday brunch with the FULL crew including Jenny and she was sitting between Nadia and Marcus and she whispered to me this is the best friend group I've ever been part of even from Austin and I said even the drama and she said especially the drama that's what made it real
+    expected_memory_stores:
+      - "full crew brunch"
+      - "Jenny between Nadia and Marcus"
+      - "best friend group"
+      - "even from Austin"
+      - "drama made it real"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Has the friend group fully stabilized?"
+    expected_contains: ["yes", "stable", "fine"]
+  - question: "What new activities does the group do?"
+    expected_contains: ["brunches", "hikes"]
+  - question: "What project is Omar working on?"
+    expected_contains: ["community center", "Beaverton"]
+  - question: "Who offered to do Omar's signage?"
+    expected_contains: ["Nadia"]
+  - question: "Who did Nadia meet at the farmers market?"
+    expected_contains: ["Daniel", "woodworker"]
+  - question: "When did Jenny and Nadia meet in person?"
+    expected_contains: ["Jenny flew up", "first time"]
+  - question: "What did Marcus's therapist say about the group rules?"
+    expected_contains: ["healthy", "rare"]
+  - question: "Where did the group go when Jenny visited?"
+    expected_contains: ["Kargi Gogo"]
+  - question: "What did Jenny say about the friend group?"
+    expected_contains: ["best", "drama made it real"]
+  - question: "What was the very Marcus of you joke about this time?"
+    expected_contains: ["trail mix", "M&Ms"]

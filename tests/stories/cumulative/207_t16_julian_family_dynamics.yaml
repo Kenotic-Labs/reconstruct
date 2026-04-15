@@ -1,0 +1,171 @@
+story_id: 207
+story_name: "Julian's Family Dynamics"
+category: "Relationships"
+description: |
+  Tests system's ability to store extended family dynamics. Maya learns more about the Reeves
+  family. Marcus, Bob's recovery, Diane's history. Verifies relational graph building.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      so Julian was on the phone with Marcus tonight and apparently Marcus and his wife Lauren are having issues and Julian was like yeah they fight a lot and I was like what about and he said Lauren doesn't get along with Diane either but like she doesn't even try
+    expected_memory_stores:
+      - "Marcus Reeves"
+      - "Lauren"
+      - "Marcus's wife"
+      - "fighting"
+      - "Lauren doesn't try with Diane"
+    expected_adaptation:
+      emotion_detected: "concerned"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 8:00 PM"
+    user_input: |
+      Julian said Marcus is a physical therapist in Denver and he works crazy hours and Lauren is a stay at home mom they have two kids um I think their names are Sophie and wait is it Max or Miles I think it's Miles yeah Sophie and Miles
+    expected_memory_stores:
+      - "Marcus physical therapist"
+      - "Denver"
+      - "Lauren stay at home mom"
+      - "Sophie"
+      - "Miles"
+      - "two kids"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 9:00 PM"
+    user_input: |
+      Bob's knee surgery is in like two weeks and Diane is stressed about it apparently it's a full knee replacement not just a scope like they originally thought and he'll need months of recovery and Julian is worried about his dad but trying not to show it
+    expected_memory_stores:
+      - "full knee replacement"
+      - "not a scope"
+      - "correction from original"
+      - "months of recovery"
+      - "Diane stressed"
+      - "Julian worried"
+    expected_adaptation:
+      emotion_detected: "worried"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 8:00 AM"
+    user_input: |
+      Julian asked if we could fly to Spokane after Bob's surgery to help out and I said of course like he didn't even need to ask and he got kinda emotional and said thanks babe and I think he's more worried than he lets on
+    expected_memory_stores:
+      - "fly to Spokane"
+      - "help after surgery"
+      - "Maya supportive"
+      - "Julian emotional"
+    expected_adaptation:
+      emotion_detected: "supportive"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      Diane texted me separately not the group chat just me and said she's glad we're coming for Bob's surgery and she called me her future daughter in law for the first time in a text and I dunno it hit different after everything we went through
+    expected_memory_stores:
+      - "Diane private text"
+      - "future daughter in law"
+      - "emotional significance"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 3:00 PM"
+    user_input: |
+      what kind of surgery is Bob having again and when is it
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 5:00 PM"
+    user_input: |
+      Julian told me more about growing up in Spokane and apparently his parents were high school sweethearts like Bob and Diane met at Lewis and Clark High School in like 1978 or something and they've been together ever since which is crazy sweet
+    expected_memory_stores:
+      - "Bob and Diane high school sweethearts"
+      - "Lewis and Clark High School"
+      - "1978"
+      - "Spokane childhood"
+    expected_adaptation:
+      emotion_detected: "charmed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      apparently Bob was an electrician for like 35 years and Diane was a dental hygienist before she stayed home with the kids and Julian said his dad is the most stubborn patient ever so this knee recovery is going to be a whole thing
+    expected_memory_stores:
+      - "Bob electrician"
+      - "35 years"
+      - "Diane dental hygienist"
+      - "Bob stubborn patient"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 9:00 PM"
+    user_input: |
+      I told my dad George about Bob's surgery and my dad was like oh knee replacements are rough your uncle had one and he said we should bring them a meal when we visit which is such a George thing to say he shows love through food
+    expected_memory_stores:
+      - "George Chen"
+      - "Maya's dad"
+      - "bring meal suggestion"
+      - "George shows love through food"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 8:00 AM"
+    user_input: |
+      just thinking about how different Julian's family is from mine like the Chens are all about food and gathering and being loud and the Reeves family is much more like reserved and polite but both families love hard in their own way and I'm lucky honestly
+    expected_memory_stores:
+      - "family comparison"
+      - "Chens loud and food"
+      - "Reeves reserved polite"
+      - "both love hard"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who is Marcus Reeves married to?"
+    expected_contains: ["Lauren"]
+  - question: "What are Marcus and Lauren's children's names?"
+    expected_contains: ["Sophie", "Miles"]
+  - question: "What does Marcus do for work?"
+    expected_contains: ["physical therapist"]
+  - question: "What surgery is Bob having?"
+    expected_contains: ["knee replacement"]
+  - question: "What was Bob Reeves' career?"
+    expected_contains: ["electrician"]
+  - question: "What was Diane's career before staying home?"
+    expected_contains: ["dental hygienist"]
+  - question: "Where did Bob and Diane meet?"
+    expected_contains: ["Lewis and Clark High School"]
+  - question: "What did Diane call Maya in a text?"
+    expected_contains: ["future daughter in law"]
+  - question: "What did George Chen suggest about Bob's surgery?"
+    expected_contains: ["meal", "food"]
+  - question: "How does Maya describe the difference between the Chen and Reeves families?"
+    expected_contains: ["loud", "reserved"]

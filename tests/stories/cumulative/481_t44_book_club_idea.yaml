@@ -1,0 +1,189 @@
+story_id: 481
+story_name: "Book Club Idea"
+category: "Book Club"
+description: |
+  Tests memory of Nadia suggesting a book club and recruiting members.
+  Establishes founding group, initial enthusiasm.
+  Verifies system captures group formation and cross-thread references.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      so Nadia just texted me and said what if we start a book club and I was like omg YES because I've been wanting to read more but I never do because there's no accountability and she said exactly that's the whole point and she suggested we recruit people and make it a monthly thing
+    expected_memory_stores:
+      - "Nadia suggested book club"
+      - "Maya enthusiastic"
+      - "accountability"
+      - "monthly meetings"
+      - "recruiting people"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 7:30 PM"
+    user_input: |
+      okay so we started recruiting and I asked Lily Tran from work and she was like absolutely I love reading and Omar said he's in because Nadia told him he has to be and Marcus said sure why not and then Nadia said she wants to invite her friend Tessa Brooks from the food bank who she also knows from the tabletop meetup and I was like oh Tessa she's great yeah invite her
+    expected_memory_stores:
+      - "Lily Tran joined"
+      - "Omar joined"
+      - "Nadia told Omar to join"
+      - "Marcus joined"
+      - "Tessa Brooks invited"
+      - "food bank and tabletop"
+      - "six members"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 8:30 PM"
+    user_input: |
+      so the group is me Nadia Lily Omar Marcus and Tessa which is six people and Nadia said that's perfect because you want between five and eight for good discussion and she's clearly been researching this and I was like did you Google how to start a book club and she said maybe and I was like I love you
+    expected_memory_stores:
+      - "six members confirmed"
+      - "five to eight ideal"
+      - "Nadia researched"
+      - "Googled how to start"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      we need to pick our first book and everyone's suggesting different things in the group chat and Omar wants a thriller and Marcus wants sci-fi and Lily wants literary fiction and Tessa suggested The Midnight Library by Matt Haig and said it's about a woman who gets to try different versions of her life and everyone was like ooh that sounds amazing
+    expected_memory_stores:
+      - "book suggestions"
+      - "Omar wants thriller"
+      - "Marcus wants sci-fi"
+      - "Lily wants literary fiction"
+      - "Tessa suggested Midnight Library"
+      - "Matt Haig"
+      - "alternate lives concept"
+    expected_adaptation:
+      emotion_detected: "engaged"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      we voted and The Midnight Library won because Tessa pitched it so well and we're meeting in three weeks at my house the Woodstock place and I was like wait MY house and Nadia said yes you have the biggest living room and I was like I guess I'm hosting then and Julian said he'll make snacks and disappear upstairs
+    expected_memory_stores:
+      - "Midnight Library won vote"
+      - "meeting in three weeks"
+      - "Maya's Woodstock house"
+      - "biggest living room"
+      - "Maya hosting"
+      - "Julian making snacks"
+      - "Julian upstairs"
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 7:30 PM"
+    user_input: |
+      bought The Midnight Library on Kindle and also a physical copy because I like having both and I started reading the first chapter and it's SO good like the main character Nora is having the worst day of her life and she ends up in a library between life and death where each book is a different life she could have lived and I'm already hooked
+    expected_memory_stores:
+      - "bought Kindle and physical"
+      - "started reading"
+      - "main character Nora"
+      - "worst day"
+      - "library between life and death"
+      - "different lives in books"
+      - "hooked"
+    expected_adaptation:
+      emotion_detected: "engrossed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 7:00 PM"
+    user_input: |
+      I'm halfway through The Midnight Library already which is fast for me but I can't put it down and the themes about regret and what-ifs are hitting me in a weird way because I've been thinking about my own life choices like what if I hadn't moved to Portland or what if I hadn't started at Conduit and Julian saw me all quiet reading and said you okay and I said yeah this book is just making me think
+    expected_memory_stores:
+      - "halfway through fast"
+      - "regret and what-ifs"
+      - "own life choices"
+      - "what if Portland"
+      - "what if Conduit"
+      - "Julian noticed"
+      - "making her think"
+    expected_adaptation:
+      emotion_detected: "contemplative"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 12:00 PM"
+    user_input: |
+      who suggested The Midnight Library for book club
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 7:00 PM"
+    user_input: |
+      finished the book and I am WRECKED like the ending is so beautiful and it's about choosing your actual life with all its imperfections over any hypothetical perfect life and I texted the group chat that I finished and Tessa said see I told you and Lily said she cried and Marcus hasn't started which is very Marcus
+    expected_memory_stores:
+      - "finished book"
+      - "ending beautiful"
+      - "choosing actual life"
+      - "imperfections over perfection"
+      - "texted group"
+      - "Tessa validated"
+      - "Lily cried"
+      - "Marcus hasn't started"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 9:00 PM"
+    user_input: |
+      I told Julian about the book and he was like that sounds really meaningful and I said it made me appreciate everything we have like the house and Kobe and the road trips and the guitar and even the Stardew phase and he said sounds like you chose your root life and I was like that's actually perfect the book is about roots and I'm building mine right here
+    expected_memory_stores:
+      - "told Julian about book"
+      - "appreciate what we have"
+      - "house Kobe trips guitar Stardew"
+      - "root life comment"
+      - "building roots"
+    expected_adaptation:
+      emotion_detected: "grounded"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who suggested starting a book club?"
+    expected_contains: ["Nadia"]
+  - question: "Who are the book club members?"
+    expected_contains: ["Maya", "Nadia", "Lily", "Omar", "Marcus", "Tessa"]
+  - question: "What was the first book club book?"
+    expected_contains: ["Midnight Library", "Matt Haig"]
+  - question: "Who suggested The Midnight Library?"
+    expected_contains: ["Tessa"]
+  - question: "Where does the book club meet?"
+    expected_contains: ["Maya's house", "Woodstock"]
+  - question: "What is The Midnight Library about?"
+    expected_contains: ["different lives", "regret", "library"]
+  - question: "Who hadn't started reading before the meeting?"
+    expected_contains: ["Marcus"]
+  - question: "How many members are in the book club?"
+    expected_contains: ["six"]
+  - question: "What theme resonated with Maya?"
+    expected_contains: ["regret", "what-ifs", "choosing"]
+  - question: "What will Julian do during book club meetings?"
+    expected_contains: ["snacks", "upstairs", "disappear"]

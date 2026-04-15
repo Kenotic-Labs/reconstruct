@@ -1,0 +1,178 @@
+story_id: 524
+story_name: "Screen Time Battle"
+category: "Phone and Digital Life"
+description: |
+  Maya battles screen time creep as Instagram and work Slack pull her back in.
+  Finding balance between connected and present. Cross-references work (T6),
+  mental health (T21), and relationship with Julian.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00 PM"
+    user_input: |
+      so my screen time crept back up to 3 hours today and I'm annoyed at myself because I had it down to 2.5 and the problem is Instagram like I set the 15 minute limit but I keep hitting ignore limit and scrolling and I KNOW I'm doing it and I still do it and it's like why am I like this
+    expected_memory_stores:
+      - "screen time back to 3 hours"
+      - "Instagram limit ignored"
+      - "self-awareness about habit"
+      - "frustration with self"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      the other problem is work Slack like I check it on my phone even after hours and Priya sent a message at 8pm last night and I responded immediately and Julian looked at me and said it's 8pm Maya and I said I know but what if it's important and he said it's never important at 8pm and he's probably right
+    expected_memory_stores:
+      - "work Slack after hours"
+      - "Priya 8pm message"
+      - "responded immediately"
+      - "Julian's boundary comment"
+    expected_adaptation:
+      emotion_detected: "conflicted"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 10:00 AM"
+    user_input: |
+      had a moment at the climbing gym where I was between routes and I caught myself scrolling Instagram instead of just resting and Omar was like Maya put the phone away you're at the gym and I was like you're right and I put it in my bag and then climbed my best V5 of the week so maybe there's a correlation
+    expected_memory_stores:
+      - "scrolling at climbing gym"
+      - "Omar called it out"
+      - "phone in bag"
+      - "best V5 after"
+      - "phone-performance correlation"
+    expected_adaptation:
+      emotion_detected: "caught"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 7:00 PM"
+    user_input: |
+      decided to try leaving my phone in another room when I'm cooking dinner because that's a time I used to love being present and I made grandpa's dumplings without looking at my phone once and the folding was better and the food was better and I realized the phone literally makes me worse at things I care about
+    expected_memory_stores:
+      - "phone in another room while cooking"
+      - "dumplings without phone"
+      - "folding was better"
+      - "phone makes her worse at things"
+    expected_adaptation:
+      emotion_detected: "aware"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 6:00 PM"
+    user_input: |
+      checked screen time report and I'm at 3.2 hours average this week which is not great and the breakdown shows Instagram 45 minutes Slack 40 minutes Safari 30 minutes and then a bunch of small stuff and I was like almost an hour on Instagram when I set a 15 minute limit that's embarrassing
+    expected_memory_stores:
+      - "screen time 3.2 hours average"
+      - "Instagram 45 minutes"
+      - "Slack 40 minutes"
+      - "Safari 30 minutes"
+      - "exceeding limits"
+    expected_adaptation:
+      emotion_detected: "disappointed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 9:00 AM"
+    user_input: |
+      Julian proposed something he called phone-free Sundays where we both put our phones in a drawer from the time we wake up until Monday morning and I said Julian that's insane and he said is it though and I said what if there's an emergency and he said that's what the landline is for and I said Julian we don't have a landline and he said exactly nobody's calling us in an emergency
+    expected_memory_stores:
+      - "phone-free Sundays proposal"
+      - "phones in drawer"
+      - "Maya resists"
+      - "emergency concern"
+      - "no landline"
+    expected_adaptation:
+      emotion_detected: "resistant"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 5:00 PM"
+    user_input: |
+      talked about phone-free Sundays more and Julian said ok compromise we keep the phone available for calls only but no apps no scrolling and I said that's more reasonable and we agreed to start tomorrow and I'm nervous about it which says a lot about my relationship with my phone honestly
+    expected_memory_stores:
+      - "compromise phone-free Sundays"
+      - "calls only no apps"
+      - "starting tomorrow"
+      - "nervous about it"
+      - "phone relationship concern"
+    expected_adaptation:
+      emotion_detected: "apprehensive"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 10:00 AM"
+    user_input: |
+      first phone-free Sunday and it's 10am and I've already reached for my phone like six times and it's not there well it's in the drawer but I can't use it and Julian made breakfast and we actually talked over eggs instead of both staring at our phones and I told him about this thing at work and he said I didn't know that and I was like I told you last week and he said no you texted it to me while I was in the same room
+    expected_memory_stores:
+      - "first phone-free Sunday"
+      - "reached for phone six times"
+      - "talked over breakfast"
+      - "texting instead of talking"
+      - "in the same room"
+    expected_adaptation:
+      emotion_detected: "eye-opening"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 4:00 PM"
+    user_input: |
+      it's afternoon and I baked bread from scratch because I had nothing to scroll and Kobe and I went on a long walk to the park and I sat on a bench and just watched people and dogs and clouds and I haven't done that in maybe years just sit and watch without documenting or posting or texting and my brain feels different like quieter
+    expected_memory_stores:
+      - "baked bread"
+      - "long walk to park"
+      - "sat and watched"
+      - "no documenting or posting"
+      - "brain feels quieter"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 PM"
+    user_input: |
+      phone-free Sunday is ending and I'm actually sad about it which is the opposite of what I expected and Julian said so we're doing this every week right and I said yes definitely and he said welcome back to the real world and we cuddled on the couch with Kobe and no screens and it was the best Sunday we've had in months
+    expected_memory_stores:
+      - "phone-free Sunday success"
+      - "sad it's ending"
+      - "weekly commitment"
+      - "best Sunday in months"
+      - "couch with Kobe no screens"
+    expected_adaptation:
+      emotion_detected: "converted"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is Maya's screen time problem app?"
+    expected_contains: ["Instagram"]
+  - question: "What rule did Julian propose?"
+    expected_contains: ["phone-free Sundays"]
+  - question: "What compromise did they reach?"
+    expected_contains: ["calls only", "no apps"]
+  - question: "What did Maya do on the first phone-free Sunday?"
+    expected_contains: ["baked bread", "walked", "park"]
+  - question: "How did phone-free breakfast differ?"
+    expected_contains: ["talked", "instead of staring"]
+  - question: "What embarrassing phone habit did Julian reveal?"
+    expected_contains: ["texting", "same room"]
+  - question: "Who called Maya out for phone use at the gym?"
+    expected_contains: ["Omar"]
+  - question: "What is Maya's weekly screen time average?"
+    expected_contains: ["3.2", "3 hours"]
+  - question: "How does Maya's brain feel without the phone?"
+    expected_contains: ["quieter"]
+  - question: "Will they continue phone-free Sundays?"
+    expected_contains: ["yes", "every week"]

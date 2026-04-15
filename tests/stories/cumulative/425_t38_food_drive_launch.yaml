@@ -1,0 +1,169 @@
+story_id: 425
+story_name: "Food Drive Launch"
+category: "Volunteering"
+description: |
+  The food drive launches at Conduit. Diane gives a presentation. Donations
+  start pouring in. Maya manages the whole operation.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:30 AM"
+    user_input: |
+      it's December 1st food drive day one and Lily and I set up collection bins on all three floors of the Conduit office and we put up posters that she designed and they look amazing honestly Lily is so talented with design stuff I didn't even know that about her
+    expected_memory_stores:
+      - "December 1st launch"
+      - "bins on three floors"
+      - "Lily designed posters"
+      - "Lily design talent"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 10:00 AM"
+    user_input: |
+      Diane came to Conduit and did a 20 minute presentation about food insecurity in Portland and she had these stats like 1 in 5 kids in Multnomah County experience food insecurity and the room was dead silent like people were really moved and I saw Omar wiping his eye and he'd never admit that
+    expected_memory_stores:
+      - "Diane presentation at Conduit"
+      - "20 minutes"
+      - "1 in 5 kids food insecure"
+      - "Multnomah County"
+      - "Omar emotional"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 12:00 PM"
+    user_input: |
+      by lunch on day one we already had like 30 items in the bins which is great for day one and people are coming up to me saying this is such a good idea Maya and Sam made an announcement in the all hands that the company is matching monetary donations up to 5000 and people clapped
+    expected_memory_stores:
+      - "30 items day one"
+      - "positive feedback"
+      - "Sam all hands announcement"
+      - "company match $5000"
+      - "people clapped"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 9:00 AM"
+    user_input: |
+      day two and the online donation page has already raised 1200 dollars which means with the company match that's 2400 and we're not even halfway through and the bins are filling up fast especially on the third floor where the sales team is they're like competing with each other to donate more
+    expected_memory_stores:
+      - "day two"
+      - "$1200 online donations"
+      - "$2400 with match"
+      - "bins filling fast"
+      - "sales team competition"
+    expected_adaptation:
+      emotion_detected: "amazed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 2:00 PM"
+    user_input: |
+      the intern Aisha came to me and said she organized a mini drive at her apartment building too and collected like two bags of canned goods and brought them in and I was like Aisha that's incredible you didn't have to do that and she said you inspired me which honestly made my whole week
+    expected_memory_stores:
+      - "Aisha organized mini drive"
+      - "apartment building"
+      - "two bags canned goods"
+      - "Maya inspired Aisha"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 11:00 AM"
+    user_input: |
+      day three check in and the donation page is at 1800 now and the bins are overflowing so I had Lily order extra boxes and the loading dock guy whose name is Marcus wait no not our friend Marcus this is a different Marcus the building Marcus he said he'd help us load everything when it's time for pickup
+    expected_memory_stores:
+      - "$1800 online donations"
+      - "bins overflowing"
+      - "extra boxes ordered"
+      - "building Marcus loading dock"
+      - "different from friend Marcus"
+    expected_adaptation:
+      emotion_detected: "overwhelmed positively"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 3:00 PM"
+    user_input: |
+      Diane texted me and said this is the biggest corporate drive they've ever had from a single company and it's not even done yet and I'm like wow that's amazing and she said when this is over we need to talk about you getting more involved and I said sure not knowing what that means but sure
+    expected_memory_stores:
+      - "biggest corporate drive ever"
+      - "Diane wants more involvement"
+      - "Maya agrees without knowing details"
+    expected_adaptation:
+      emotion_detected: "humbled"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      how much has the food drive raised online so far including the company match
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      told Julian about Aisha's mini drive and he was like see your thing is creating other things and he compared it to ripples in a pond and I was like ok that's cheesy but also accurate and he said Greenline Design is doing a smaller version next week which means it IS rippling
+    expected_memory_stores:
+      - "Julian ripples metaphor"
+      - "Greenline Design doing drive"
+      - "ripple effect confirmed"
+    expected_adaptation:
+      emotion_detected: "meaningful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 9:00 PM"
+    user_input: |
+      I feel like this food drive has been the most meaningful thing I've done at Conduit not because the code I write doesn't matter but because this is directly touching people's lives in a way that building software features doesn't and I want to find more ways to do both
+    expected_memory_stores:
+      - "most meaningful Conduit work"
+      - "direct impact vs software"
+      - "wants to do both"
+      - "finding balance"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How much has the food drive raised online by day three?"
+    expected_contains: ["1800"]
+  - question: "What statistic from Diane's presentation stood out?"
+    expected_contains: ["1 in 5", "kids", "food insecur"]
+  - question: "Who organized a mini drive at their apartment building?"
+    expected_contains: ["Aisha"]
+  - question: "Is this the biggest corporate drive the food bank has had?"
+    expected_contains: ["yes", "biggest"]
+  - question: "Who designed the food drive posters?"
+    expected_contains: ["Lily", "Lily Tran"]
+  - question: "Is the building Marcus the same as Maya's friend Marcus?"
+    expected_contains: ["no", "different"]
+  - question: "What is Greenline Design doing because of Maya's food drive?"
+    expected_contains: ["similar drive", "own drive", "next week"]
+  - question: "How many floors have collection bins?"
+    expected_contains: ["three", "3"]
+  - question: "Which team at Conduit is competing to donate the most?"
+    expected_contains: ["sales"]
+  - question: "How does Maya feel about the food drive vs her regular work?"
+    expected_contains: ["meaningful", "direct", "touching lives"]

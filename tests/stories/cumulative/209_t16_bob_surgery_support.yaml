@@ -1,0 +1,168 @@
+story_id: 209
+story_name: "Supporting Bob's Surgery"
+category: "Relationships"
+description: |
+  Tests system tracking family health events across entities. Maya and Julian fly to Spokane
+  to help after Bob's knee replacement. Maya bonds further with the Reeves family.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 5:00 PM"
+    user_input: |
+      ok we're at the airport waiting for our flight to Spokane Bob's surgery was yesterday and Diane said it went well but he's in a lot of pain and Julian is being quiet which means he's worried because when he's fine he won't shut up
+    expected_memory_stores:
+      - "flying to Spokane"
+      - "Bob surgery yesterday"
+      - "went well"
+      - "Bob in pain"
+      - "Julian quiet worried"
+    expected_adaptation:
+      emotion_detected: "concerned"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 9:00 PM"
+    user_input: |
+      got to Spokane and Diane picked us up and she looked exhausted and hugged Julian for like a full minute and then hugged me too and said I'm so glad you came and the house is nice actually it's this cute craftsman style with a big yard and Bob's in the downstairs den they set up a bed there
+    expected_memory_stores:
+      - "arrived Spokane"
+      - "Diane exhausted"
+      - "craftsman house"
+      - "Bob in downstairs den"
+    expected_adaptation:
+      emotion_detected: "empathetic"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 8:00 AM"
+    user_input: |
+      saw Bob this morning and he's like propped up with his knee in this big brace and he's trying to crack jokes but you can tell he's in serious pain and he was like Maya thanks for dragging my son out here and I said we wanted to come and he got a little teary
+    expected_memory_stores:
+      - "Bob in brace"
+      - "cracking jokes"
+      - "serious pain"
+      - "thanked Maya"
+      - "teary"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 12:00 PM"
+    user_input: |
+      we brought food like my dad suggested and Diane almost cried when she saw all the containers we packed like three different soups and a casserole and rice and she was like you didn't have to do all this and I was like my dad made half of it actually George is a food love language guy
+    expected_memory_stores:
+      - "brought food"
+      - "soups casserole rice"
+      - "George helped cook"
+      - "Diane grateful"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 4:00 PM"
+    user_input: |
+      Julian and Bob watched basketball together for hours and Bob kept yelling at the TV and Diane was like Bob your KNEE and he was like my knee is fine it's the Sonics wait no the Sonics aren't a thing anymore right it was some other team I don't do sports
+    expected_memory_stores:
+      - "basketball watching"
+      - "Bob yelling at TV"
+      - "father son bonding"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 9:00 AM"
+    user_input: |
+      where do Julian's parents live again and what surgery did Bob have
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 11:00 AM"
+    user_input: |
+      Diane and I went grocery shopping while Julian stayed with Bob and she introduced me to like four different neighbors at the store and she kept saying this is Julian's fiancee Maya she's a software engineer and I was like Diane stop bragging about me
+    expected_memory_stores:
+      - "grocery shopping together"
+      - "Diane bragging about Maya"
+      - "introduced to neighbors"
+    expected_adaptation:
+      emotion_detected: "flattered"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Bob's PT starts next week and they said recovery is going to be like 3 to 4 months and he's already complaining about not being able to drive and Diane is like Bob you just had SURGERY and he's like yeah but I have things to do and Julian is like dad you're retired what things
+    expected_memory_stores:
+      - "PT next week"
+      - "3 to 4 months recovery"
+      - "Bob impatient"
+      - "Bob retired"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 8:00 PM"
+    user_input: |
+      Marcus called tonight and talked to Bob for a while and then talked to Julian and apparently Marcus can't come visit for another month because of work and Lauren said she might not come at all which upset Diane but she didn't say anything
+    expected_memory_stores:
+      - "Marcus called"
+      - "can't visit for a month"
+      - "Lauren not coming"
+      - "Diane upset quietly"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 7:00 AM"
+    user_input: |
+      we leave today and Diane is making us breakfast and Bob hobbled to the kitchen table on crutches to eat with us and he said Maya you're family now don't let anyone tell you different and I just I love this grumpy old man honestly
+    expected_memory_stores:
+      - "leaving today"
+      - "Bob hobbled to kitchen"
+      - "crutches"
+      - "you're family"
+      - "Maya loves Bob"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How did Bob's surgery go?"
+    expected_contains: ["well", "pain"]
+  - question: "Where did Maya and Julian visit?"
+    expected_contains: ["Spokane"]
+  - question: "How long is Bob's recovery?"
+    expected_contains: ["3 to 4 months"]
+  - question: "What food did Maya bring?"
+    expected_contains: ["soup", "casserole"]
+  - question: "Who helped prepare the food?"
+    expected_contains: ["George"]
+  - question: "What did Bob say to Maya?"
+    expected_contains: ["family"]
+  - question: "Is Marcus visiting his dad?"
+    expected_contains: ["month", "can't come"]
+  - question: "Is Lauren coming to help?"
+    expected_contains: ["not coming", "no"]
+  - question: "What did Diane do at the grocery store?"
+    expected_contains: ["bragging", "introduced"]
+  - question: "How is Bob behaving as a patient?"
+    expected_contains: ["impatient", "complaining", "stubborn"]

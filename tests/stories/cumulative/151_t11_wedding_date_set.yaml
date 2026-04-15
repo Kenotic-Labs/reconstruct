@@ -1,0 +1,214 @@
+story_id: 151
+story_name: "Wedding Date Set"
+category: "Life Events"
+description: |
+  Maya and Julian set their wedding date for June 15. Initial excitement,
+  early venue ideas, and telling family. Tests storing date, event type,
+  and emotional state from messy excited speech.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00 AM"
+    user_input: |
+      okay okay okay so um we did it we finally picked a date like Julian and I were sitting on the couch last night with Kobe between us obviously and we just looked at each other and said let's do June 15th like that's it that's the date we're getting MARRIED
+    expected_memory_stores:
+      - "wedding date"
+      - "June 15"
+      - "Julian"
+      - "engagement"
+    expected_triples:
+      - ["user", "wedding_date_set", "June 15th"]
+      - ["user", "getting_married_to", "Julian"]
+      - ["user", "has_emotion", "ecstatic"]
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 10:30 AM"
+    user_input: |
+      I called my mom right away like literally at 11pm last night and Vivian was SO happy she started crying on the phone and Dad was in the background going about time and Clara texted me like seventeen heart emojis she's ridiculous but I love her
+    expected_memory_stores:
+      - "Vivian Chen"
+      - "George Chen"
+      - "Clara Chen"
+      - "family told about wedding"
+    expected_triples:
+      - ["Vivian Chen", "is", "user's mom"]
+      - ["George Chen", "is", "user's dad"]
+      - ["Vivian", "reacted", "cried with happiness"]
+      - ["Clara Chen", "reacted", "seventeen heart emojis"]
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 12:00 PM"
+    user_input: |
+      so Julian's mom Diane was um interesting about it she said oh that's wonderful but June is so soon don't you think and I could tell Julian was annoyed because it's literally a year away but whatever Diane's gonna Diane you know
+    expected_memory_stores:
+      - "Diane Reeves"
+      - "Julian's mom"
+      - "Diane concerned about timing"
+    expected_triples:
+      - ["Diane Reeves", "is", "Julian's mom"]
+      - ["Diane", "concerned", "June is too soon"]
+      - ["user", "has_emotion", "slightly annoyed"]
+    expected_adaptation:
+      emotion_detected: "slightly annoyed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 2:00 PM"
+    user_input: |
+      honestly the first thing we need to figure out is venue like everything else depends on that and Julian wants something outdoorsy like a lodge or a garden and I'm kind of into that too like nothing too fancy you know we're not like a ballroom kind of couple oh also Jenny Wu said she'd help look she's been my best friend since college and she's totally gonna be maid of honor
+    expected_memory_stores:
+      - "venue search starting"
+      - "outdoor preference"
+      - "lodge or garden"
+      - "Jenny Wu"
+      - "maid of honor"
+      - "best friend since college"
+    expected_triples:
+      - ["user", "venue_preference", "outdoor lodge or garden"]
+      - ["Jenny Wu", "is", "user's best friend since college"]
+      - ["Jenny Wu", "role", "maid of honor"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 5:00 PM"
+    user_input: |
+      okay so I've been googling venues all afternoon and there's this place called Pine Ridge Lodge that looks AMAZING it's like up in the hills outside Portland with this big open meadow and a covered pavilion in case of rain which let's be real it's Oregon so yeah and it fits like 120 people
+    expected_memory_stores:
+      - "Pine Ridge Lodge"
+      - "hills outside Portland"
+      - "meadow and pavilion"
+      - "capacity 120"
+    expected_triples:
+      - ["user", "found_venue", "Pine Ridge Lodge"]
+      - ["Pine Ridge Lodge", "location", "hills outside Portland"]
+      - ["Pine Ridge Lodge", "features", "meadow and covered pavilion, fits 120"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 9:00 AM"
+    user_input: |
+      so we're thinking guest list is around 120 people which like that's a lot but Julian has a big family and between my side and our friends it adds up pretty quick I started making a spreadsheet last night because obviously I did
+    expected_memory_stores:
+      - "guest list 120"
+      - "Julian big family"
+      - "spreadsheet"
+    expected_triples:
+      - ["user", "guest_list_target", "around 120 people"]
+      - ["user", "created", "guest list spreadsheet"]
+      - ["user", "has_emotion", "organized"]
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 11:30 AM"
+    user_input: |
+      Julian and I are disagreeing on food like he wants a full sit down dinner which okay yeah that's traditional but I think stations or like a nice buffet would be more fun and also cheaper honestly um we heard about this caterer Maria's Catering that does like farm to table stuff and they're supposed to be really good
+    expected_memory_stores:
+      - "food disagreement"
+      - "Julian wants sit down dinner"
+      - "Maya wants buffet or stations"
+      - "Maria's Catering"
+      - "farm to table"
+    expected_triples:
+      - ["Julian", "wants", "sit down dinner"]
+      - ["user", "wants", "buffet or stations"]
+      - ["user", "considering_caterer", "Maria's Catering farm to table"]
+    expected_adaptation:
+      emotion_detected: "mild disagreement"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 3:00 PM"
+    user_input: |
+      Clara just called and she was like okay sis I know it's early but have you thought about flowers and I was like girl we literally just set the date two days ago but she said start early because good florists book up and honestly she's probably right she planned her friend's wedding last year so she knows stuff
+    expected_memory_stores:
+      - "Clara advice on flowers"
+      - "florists book early"
+      - "Clara has wedding planning experience"
+    expected_triples:
+      - ["Clara", "advised", "book florists early"]
+      - ["Clara", "has_experience", "planned friend's wedding last year"]
+      - ["user", "has_emotion", "amused"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 6:00 PM"
+    user_input: |
+      Julian's being really sweet about all this like he keeps saying he just wants me to be happy and whatever I want is fine but I also want HIM to care you know like don't just say whatever you want actually have opinions babe anyway we agreed we need to tour Pine Ridge Lodge this weekend if they have availability
+    expected_memory_stores:
+      - "Julian accommodating"
+      - "Maya wants Julian's input"
+      - "Pine Ridge Lodge tour planned"
+    expected_triples:
+      - ["Julian", "being", "too accommodating, user wants his opinions"]
+      - ["user", "planned", "tour Pine Ridge Lodge this weekend"]
+      - ["user", "has_emotion", "loving but frustrated"]
+    expected_adaptation:
+      emotion_detected: "loving but frustrated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 9:00 PM"
+    user_input: |
+      okay so quick summary of where we're at um wedding is June 15th looking at Pine Ridge Lodge for the venue guest list around 120 Jenny Wu is maid of honor and we need to figure out caterer and flowers and like a million other things but honestly I'm so happy we're doing this Kobe's gonna be ring bearer I already decided
+    expected_memory_stores:
+      - "June 15 confirmed"
+      - "Pine Ridge Lodge"
+      - "120 guests"
+      - "Jenny Wu maid of honor"
+      - "Kobe ring bearer"
+    expected_triples:
+      - ["user", "wedding_summary", "June 15, Pine Ridge Lodge, 120 guests"]
+      - ["Jenny Wu", "confirmed", "maid of honor"]
+      - ["Kobe", "role", "ring bearer"]
+      - ["user", "has_emotion", "happy"]
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+final_verification:
+  - question: "When is Maya's wedding date?"
+    expected_contains: ["June 15"]
+  - question: "What venue is Maya looking at?"
+    expected_contains: ["Pine Ridge Lodge"]
+  - question: "Who is the maid of honor?"
+    expected_contains: ["Jenny Wu"]
+  - question: "How many guests are they planning for?"
+    expected_contains: ["120"]
+  - question: "Who is Julian's mom?"
+    expected_contains: ["Diane"]
+  - question: "What caterer did they hear about?"
+    expected_contains: ["Maria's Catering"]
+  - question: "What role will Kobe play at the wedding?"
+    expected_contains: ["ring bearer"]
+  - question: "What kind of venue does Julian prefer?"
+    expected_contains: ["outdoor", "lodge"]
+  - question: "How did Vivian react to the wedding news?"
+    expected_contains: ["happy", "crying"]
+  - question: "Who is helping Maya look at venues?"
+    expected_contains: ["Jenny Wu"]

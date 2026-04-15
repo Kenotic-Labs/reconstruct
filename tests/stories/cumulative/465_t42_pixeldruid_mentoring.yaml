@@ -1,0 +1,178 @@
+story_id: 465
+story_name: "PixelDruid Appropriate Mentoring"
+category: "Gaming"
+description: |
+  Tests memory of Maya recalibrating to appropriate mentoring with Alex.
+  Establishes boundary maintenance, career advice role.
+  Verifies emotional nuance in relationship recalibration.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      so Alex messaged me on Discord asking about Python because they're taking an intro to programming class at school and want to learn more and I was like okay this is exactly the kind of thing I CAN help with so I sent them some resources and a link to the free Python course I used back in college and it felt good to help in the right way
+    expected_memory_stores:
+      - "Alex asked about Python"
+      - "intro to programming class"
+      - "sent resources"
+      - "free Python course"
+      - "helping in right way"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      I've been keeping my Discord messages with Alex to like once or twice a week which feels right and they asked about what programming languages they should learn and I told them Python and JavaScript to start and I mentioned that Sam Okafor at my work started with Python too and made it pretty far so it's a good path
+    expected_memory_stores:
+      - "messaging once or twice weekly"
+      - "programming language advice"
+      - "Python and JavaScript"
+      - "Sam Okafor reference"
+      - "appropriate frequency"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 8:00 PM"
+    user_input: |
+      you know what this PixelDruid thing actually reminded me of Aisha Johnson when I was mentoring her at work like there's something nice about helping someone younger figure things out and keeping the right distance and I told Dr Tate about it and she said I handled it really maturely and that made me feel good
+    expected_memory_stores:
+      - "Aisha Johnson comparison"
+      - "mentoring parallel"
+      - "right distance"
+      - "Dr Tate approval"
+      - "mature handling"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 10:00 AM"
+    user_input: |
+      Alex sent me their first Python project which is a simple text-based game and it was actually pretty good for a 16 year old like the code was clean and they used functions properly and I gave them feedback and they were so excited and said no one in their life really gets the coding thing and that made me a little sad honestly
+    expected_memory_stores:
+      - "Alex's Python project"
+      - "text-based game"
+      - "clean code"
+      - "functions properly"
+      - "gave feedback"
+      - "no one in their life"
+    expected_adaptation:
+      emotion_detected: "empathetic"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Sunday 3:00 PM"
+    user_input: |
+      I noticed I've been spending less time on the Stardew Discord in general and more time just playing solo or co-op with Julian and the community is cool but it's a lot of noise and I think the PixelDruid thing made me more cautious about online interactions in general which is probably healthy honestly
+    expected_memory_stores:
+      - "less Discord time"
+      - "solo or co-op play"
+      - "community noise"
+      - "more cautious online"
+      - "healthy boundary"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 6:30 PM"
+    user_input: |
+      Julian asked if I still talk to PixelDruid and I said yeah but just like coding stuff once a week and he said that's cool and then he said you know what you should look for gaming stuff in real life like an actual in-person thing and I was like huh that's actually not a bad idea maybe like a board game group or something
+    expected_memory_stores:
+      - "Julian asked about Alex"
+      - "coding once a week"
+      - "IRL gaming suggestion"
+      - "board game group idea"
+    expected_adaptation:
+      emotion_detected: "open"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      Alex aced their AP Chemistry test and messaged me to say thanks for the study break Stardew sessions and honestly that's sweet but I realized we haven't actually played together at all since I set the boundary and that's fine I think the mentoring thing is better than the gaming buddy thing for where we're at
+    expected_memory_stores:
+      - "Alex aced AP Chemistry"
+      - "study break sessions"
+      - "haven't played together"
+      - "mentoring better than gaming"
+      - "boundary maintained"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      what grade is Alex PixelDruid in and what class did they just pass
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 5:00 PM"
+    user_input: |
+      I looked up local gaming groups and there's this thing called Portland Tabletop Meetup that meets every other Thursday at a bar called the Lucky Lab and they play board games like Settlers of Catan and Ticket to Ride and I was like okay this sounds perfect like real people real interactions real games and also beer
+    expected_memory_stores:
+      - "Portland Tabletop Meetup"
+      - "every other Thursday"
+      - "Lucky Lab bar"
+      - "Settlers of Catan"
+      - "Ticket to Ride"
+      - "IRL gaming"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 9:00 PM"
+    user_input: |
+      told Nadia about the tabletop meetup and she was like oh my god yes that's so much better than Discord and she wants to come too and I was like absolutely and also Omar might be into it since he's apparently a secret gamer with his 300 hours of Stardew and this feels like the right direction honestly IRL social gaming not online isolation
+    expected_memory_stores:
+      - "Nadia wants to come"
+      - "Omar might join"
+      - "300 hours reference"
+      - "IRL vs online"
+      - "right direction"
+    expected_adaptation:
+      emotion_detected: "optimistic"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How often does Maya message Alex now?"
+    expected_contains: ["once", "twice", "week"]
+  - question: "What did Alex's first Python project do?"
+    expected_contains: ["text-based game"]
+  - question: "What did Dr. Tate say about how Maya handled the PixelDruid situation?"
+    expected_contains: ["mature"]
+  - question: "What IRL gaming group did Maya find?"
+    expected_contains: ["Portland Tabletop Meetup"]
+  - question: "Where does the tabletop meetup happen?"
+    expected_contains: ["Lucky Lab"]
+  - question: "What board games does the meetup play?"
+    expected_contains: ["Settlers of Catan", "Ticket to Ride"]
+  - question: "Who wants to join the tabletop meetup with Maya?"
+    expected_contains: ["Nadia"]
+  - question: "What test did Alex ace?"
+    expected_contains: ["AP Chemistry"]
+  - question: "Who suggested Maya find IRL gaming?"
+    expected_contains: ["Julian"]
+  - question: "What mentoring experience does Maya compare PixelDruid to?"
+    expected_contains: ["Aisha"]

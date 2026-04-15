@@ -1,0 +1,178 @@
+story_id: 221
+story_name: "Training for Portland Marathon"
+category: "Health"
+description: |
+  Tests system capturing a fitness goal and early warning signs. Maya trains for the Portland
+  Marathon but knee pain starts. She dismisses it. Verifies health tracking and denial pattern.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 6:30 AM"
+    user_input: |
+      did my long run this morning eight miles along the waterfront and I'm training for the Portland Marathon in October and my plan has me building up to 20 miles by September and right now I'm feeling good like strong and focused and this is gonna be my first marathon ever
+    expected_memory_stores:
+      - "Portland Marathon"
+      - "October"
+      - "training plan"
+      - "eight miles"
+      - "waterfront"
+      - "first marathon"
+      - "20 miles by September"
+    expected_adaptation:
+      emotion_detected: "motivated"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 7:00 PM"
+    user_input: |
+      Julian thinks I'm crazy for wanting to run a marathon and he's like babe that's 26 miles and I said 26.2 actually and he rolled his eyes and Kobe at least is a good running buddy for the shorter runs although he gets distracted by squirrels
+    expected_memory_stores:
+      - "Julian thinks crazy"
+      - "26.2 miles"
+      - "Kobe runs with Maya"
+      - "squirrel distraction"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 6:00 AM"
+    user_input: |
+      did a tempo run this morning five miles and um my right knee felt a little twinge-y on the last mile like not pain exactly but like a weird tightness and I just stretched it out and it went away so probably nothing
+    expected_memory_stores:
+      - "tempo run"
+      - "five miles"
+      - "right knee twinge"
+      - "last mile"
+      - "tightness"
+      - "dismissed it"
+    expected_adaptation:
+      emotion_detected: "dismissive"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 6:30 AM"
+    user_input: |
+      ran again today six miles and the knee thing was there again but like barely and I googled it which I know you shouldn't do and it said it could be runner's knee or IT band stuff or just general overuse and I'm like it's fine I just need new shoes probably
+    expected_memory_stores:
+      - "six miles"
+      - "knee again"
+      - "googled symptoms"
+      - "runner's knee"
+      - "IT band"
+      - "blaming shoes"
+    expected_adaptation:
+      emotion_detected: "denial"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 12:00 PM"
+    user_input: |
+      went to the running store oh what's it called um Fleet Feet on like Hawthorne and got new shoes they're Brooks Ghost 15s and the guy said my gait looks fine and the shoes should help with the knee thing and I'm hoping he's right
+    expected_memory_stores:
+      - "Fleet Feet"
+      - "Hawthorne"
+      - "Brooks Ghost 15"
+      - "gait check"
+      - "new shoes for knee"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 7:00 AM"
+    user_input: |
+      how many miles am I running now and when is the marathon
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 8:00 AM"
+    user_input: |
+      did my long run today ten miles and the new shoes felt great for like the first seven and then the knee started again and this time it was more than a twinge it was like actual pain on the inside of my right knee and I had to walk the last half mile home
+    expected_memory_stores:
+      - "ten miles attempted"
+      - "pain after seven"
+      - "inside of right knee"
+      - "had to walk"
+      - "worse than before"
+    expected_adaptation:
+      emotion_detected: "worried"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 9:00 AM"
+    user_input: |
+      icing my knee right now and Julian was like Maya you need to see a doctor and I said it's just a sprain or something it'll go away and he gave me that look like the look that says I'm being stubborn and he's probably right but I don't want to hear it
+    expected_memory_stores:
+      - "icing knee"
+      - "Julian says see doctor"
+      - "Maya says sprain"
+      - "stubborn"
+    expected_adaptation:
+      emotion_detected: "stubborn"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 10:00 AM"
+    user_input: |
+      knee is swollen today and it hurts going down stairs and I'm pretending it's fine but Clara texted me and I mentioned it and she went full nurse mode and was like Maya if it's swollen you need imaging don't be dumb and I was like thanks for the love sis
+    expected_memory_stores:
+      - "knee swollen"
+      - "hurts on stairs"
+      - "Clara nurse advice"
+      - "need imaging"
+    expected_adaptation:
+      emotion_detected: "reluctant"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 6:00 PM"
+    user_input: |
+      ok fine I made an appointment at Providence Portland for Wednesday to get an MRI because everyone is yelling at me and the knee is still swollen and I tried to run this afternoon and made it like half a mile before the pain stopped me and that scared me honestly
+    expected_memory_stores:
+      - "MRI appointment"
+      - "Providence Portland"
+      - "Wednesday"
+      - "half a mile"
+      - "pain stopped run"
+      - "scared"
+    expected_adaptation:
+      emotion_detected: "scared"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What marathon is Maya training for?"
+    expected_contains: ["Portland Marathon"]
+  - question: "When is the marathon?"
+    expected_contains: ["October"]
+  - question: "Which knee is bothering Maya?"
+    expected_contains: ["right"]
+  - question: "Where is the knee pain?"
+    expected_contains: ["inside"]
+  - question: "What shoes did Maya buy?"
+    expected_contains: ["Brooks Ghost 15"]
+  - question: "Where is Maya getting an MRI?"
+    expected_contains: ["Providence Portland"]
+  - question: "Who told Maya to get imaging?"
+    expected_contains: ["Clara"]
+  - question: "What did Maya think was wrong with her knee?"
+    expected_contains: ["sprain"]
+  - question: "How far could Maya run before the pain stopped her?"
+    expected_contains: ["half a mile"]
+  - question: "Is Maya's knee swollen?"
+    expected_contains: ["yes"]

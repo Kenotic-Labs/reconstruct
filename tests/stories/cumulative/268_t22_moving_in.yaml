@@ -1,0 +1,183 @@
+story_id: 268
+story_name: "Moving In"
+category: "Housing"
+description: |
+  Tests memory of Maya and Julian's move from the Sellwood apartment to the Woodstock house.
+  Captures the chaos of moving day, help from friends, and the first night in the new house.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 7:00 AM"
+    user_input: |
+      moving day oh my god we have so much stuff for a 750 square foot apartment how do we have this much stuff Julian rented a U-Haul truck and Omar and Nadia are coming to help and my coworker Leon said he'd swing by too
+    expected_memory_stores:
+      - "moving day"
+      - "too much stuff"
+      - "U-Haul"
+      - "Omar helping"
+      - "Nadia helping"
+      - "Leon helping"
+    expected_adaptation:
+      emotion_detected: "stressed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 9:00 AM"
+    user_input: |
+      Omar is an absolute unit he carried our couch by himself down two flights of stairs and Nadia is organizing the truck like a Tetris game and Leon brought donuts from Voodoo Doughnut and Julian is labeling boxes like a psycho every box has a color code and a room assignment
+    expected_memory_stores:
+      - "Omar carried couch"
+      - "Nadia organizing truck"
+      - "Leon brought Voodoo donuts"
+      - "Julian labeling boxes"
+      - "color code system"
+    expected_adaptation:
+      emotion_detected: "chaotic"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 11:30 AM"
+    user_input: |
+      Kobe is at Nadia's partner's place for the day because we didn't want him underfoot during the move and I miss him already but it's definitely the right call because the last thing we need is a golden retriever running through a construction zone
+    expected_memory_stores:
+      - "Kobe at Nadia's partner's"
+      - "out of the way"
+      - "Maya misses him"
+      - "safety decision"
+    expected_adaptation:
+      emotion_detected: "missing"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 2:00 PM"
+    user_input: |
+      everything is in the truck somehow and we're doing the final walkthrough of the apartment and I'm getting emotional which is dumb because this apartment had ants and the hot water was inconsistent but also Julian and I started our life together here and Kobe came home to this apartment and now it's just empty walls
+    expected_memory_stores:
+      - "final apartment walkthrough"
+      - "emotional"
+      - "ants and hot water issues"
+      - "started life together here"
+      - "Kobe came home here"
+      - "empty walls"
+    expected_adaptation:
+      emotion_detected: "nostalgic"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 3:30 PM"
+    user_input: |
+      at the house now and unloading and it's chaos but fun chaos Omar and Leon are carrying the bed frame upstairs and Nadia and I are unpacking the kitchen boxes and Julian is directing traffic like a runway controller pointing people to rooms based on his color coded boxes
+    expected_memory_stores:
+      - "unloading at house"
+      - "Omar and Leon upstairs"
+      - "bed frame"
+      - "Nadia and Maya kitchen"
+      - "Julian directing"
+    expected_adaptation:
+      emotion_detected: "energetic"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 6:00 PM"
+    user_input: |
+      everyone left and the house is full of boxes and nothing is where it should be but the bed is set up and the couch is in the living room and the wifi router is plugged in which Julian said were the three essentials and honestly he's not wrong
+    expected_memory_stores:
+      - "helpers left"
+      - "boxes everywhere"
+      - "bed set up"
+      - "couch placed"
+      - "wifi working"
+      - "Julian's essentials"
+    expected_adaptation:
+      emotion_detected: "tired"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 7:30 PM"
+    user_input: |
+      picked up Kobe and brought him home and he was SO CONFUSED like he kept going to different rooms and sniffing and looking back at us like is this real and then he found the yard and just started running in circles and I think he's gonna love it here
+    expected_memory_stores:
+      - "Kobe home"
+      - "confused at first"
+      - "sniffing rooms"
+      - "running in yard"
+      - "gonna love it"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 9:00 PM"
+    user_input: |
+      ordered Thai food from this place called Pok Pok that's apparently a Woodstock institution according to the neighbors who came over to introduce themselves Mark and Diana they're like in their 50s and super nice and they have a cat named Pepper
+    expected_memory_stores:
+      - "Pok Pok Thai food"
+      - "Woodstock institution"
+      - "neighbors Mark and Diana"
+      - "50s age range"
+      - "cat named Pepper"
+    expected_adaptation:
+      emotion_detected: "welcoming"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 8:00 AM"
+    user_input: |
+      first morning in the new house and I woke up to sunlight streaming through the bedroom window and Kobe sleeping at the foot of the bed and Julian making coffee downstairs and I could hear birds and it was so quiet compared to the apartment on the busy Sellwood street
+    expected_memory_stores:
+      - "first morning"
+      - "sunlight"
+      - "Kobe on bed"
+      - "Julian making coffee"
+      - "birds"
+      - "quiet neighborhood"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 10:00 AM"
+    user_input: |
+      unpacking is going to take forever but Julian already set up his studio in the fourth bedroom and he's so happy he keeps saying I finally have a room for my work and honestly seeing him that excited makes the whole insane house buying process worth it
+    expected_memory_stores:
+      - "unpacking ahead"
+      - "Julian studio set up"
+      - "fourth bedroom"
+      - "Julian happy"
+      - "worth it"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who helped Maya and Julian move?"
+    expected_contains: ["Omar", "Nadia", "Leon"]
+  - question: "Who brought donuts on moving day?"
+    expected_contains: ["Leon"]
+  - question: "Where were the donuts from?"
+    expected_contains: ["Voodoo"]
+  - question: "Who are Maya's new neighbors?"
+    expected_contains: ["Mark", "Diana"]
+  - question: "What is the neighbors' cat's name?"
+    expected_contains: ["Pepper"]
+  - question: "Where did Kobe stay during the move?"
+    expected_contains: ["Nadia", "partner"]
+  - question: "What room is Julian's studio in?"
+    expected_contains: ["fourth bedroom"]
+  - question: "What Thai restaurant is near the new house?"
+    expected_contains: ["Pok Pok"]
+  - question: "How did Kobe react to the new house?"
+    expected_contains: ["confused", "running", "yard"]
+  - question: "What labeling system did Julian use for boxes?"
+    expected_contains: ["color code"]

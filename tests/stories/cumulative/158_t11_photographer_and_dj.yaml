@@ -1,0 +1,225 @@
+story_id: 158
+story_name: "Photographer and DJ"
+category: "Life Events"
+description: |
+  Booking the photographer and deciding on DJ vs band. Tests parallel
+  vendor tracking, budget management across multiple decisions, and
+  preference recording.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 9:00 AM"
+    user_input: |
+      okay next big decisions photographer and music like we need both and I've been putting it off because there's SO many options Julian said he knows a photographer from his design world named Rachel Kim who does like editorial style wedding photography and I looked at her portfolio and it's stunning
+    expected_memory_stores:
+      - "photographer search"
+      - "music decision needed"
+      - "Rachel Kim photographer"
+      - "editorial style"
+      - "Julian knows her professionally"
+    expected_triples:
+      - ["Rachel Kim", "is", "photographer with editorial style"]
+      - ["Julian", "knows_professionally", "Rachel Kim"]
+      - ["user", "needs", "photographer and music for wedding"]
+      - ["user", "has_emotion", "interested"]
+    expected_adaptation:
+      emotion_detected: "interested"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 11:00 AM"
+    user_input: |
+      met with Rachel over coffee she's so cool and she specializes in outdoor weddings which hello Pine Ridge Lodge and she does this thing where she does a first look shoot before the ceremony which Julian and I both love because then we get intimate photos without the audience and she quoted $3200 for full day coverage plus an engagement shoot
+    expected_memory_stores:
+      - "Rachel Kim met"
+      - "outdoor wedding specialist"
+      - "first look shoot"
+      - "quote $3200"
+      - "includes engagement shoot"
+    expected_triples:
+      - ["Rachel Kim", "specializes_in", "outdoor weddings"]
+      - ["Rachel Kim", "offers", "first look shoot before ceremony"]
+      - ["Rachel Kim", "quoted", "$3200 for full day plus engagement shoot"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 4:00 PM"
+    user_input: |
+      we looked at two other photographers just to compare um one was too expensive at $5000 and the other one's style was very like posed and traditional which is not us so Rachel is the one Julian already texted her to book it lol he's so decisive sometimes when he actually cares
+    expected_memory_stores:
+      - "other photographers rejected"
+      - "one too expensive $5000"
+      - "other too traditional"
+      - "Rachel Kim chosen"
+      - "Julian booked her"
+    expected_triples:
+      - ["user", "chose", "Rachel Kim as photographer"]
+      - ["Julian", "booked", "Rachel Kim"]
+      - ["user", "rejected", "two other photographers"]
+      - ["user", "has_emotion", "decided"]
+    expected_adaptation:
+      emotion_detected: "decided"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 10:00 AM"
+    user_input: |
+      now for music I really want a DJ over a band because bands are so expensive and also like you can't guarantee they'll play the songs you actually want you know Jenny went to a wedding with a live band and they didn't know any songs from after 2010 which LOL no thank you
+    expected_memory_stores:
+      - "DJ preferred over band"
+      - "bands expensive"
+      - "song selection concern"
+      - "Jenny's bad experience with band"
+    expected_triples:
+      - ["user", "prefers", "DJ over band"]
+      - ["user", "reason", "bands are expensive and inflexible on song choice"]
+      - ["Jenny", "had_bad_experience_with", "live band at wedding"]
+    expected_adaptation:
+      emotion_detected: "opinionated"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 12:00 PM"
+    user_input: |
+      Julian actually agrees on the DJ thing which is rare for us to agree on wedding stuff immediately and he found this DJ on Instagram called DJ Tomlinson and his real name is like Brian Tomlinson and he does outdoor weddings and he has this amazing sound system that's portable and he quoted $1200 for five hours
+    expected_memory_stores:
+      - "DJ Tomlinson"
+      - "Brian Tomlinson"
+      - "outdoor weddings"
+      - "portable sound system"
+      - "$1200 for five hours"
+    expected_triples:
+      - ["DJ Tomlinson", "real_name", "Brian Tomlinson"]
+      - ["DJ Tomlinson", "specializes_in", "outdoor weddings"]
+      - ["DJ Tomlinson", "quoted", "$1200 for five hours"]
+      - ["DJ Tomlinson", "has", "portable sound system"]
+    expected_adaptation:
+      emotion_detected: "interested"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 5:00 PM"
+    user_input: |
+      talked to Brian on the phone and he's super chill he asked what kind of music we're into and when I said everything from Fleetwood Mac to Doja Cat he was like my people and he said he'll put together a playlist draft for us to review before the wedding and he can MC too which saves us from hiring a separate emcee
+    expected_memory_stores:
+      - "Brian DJ consultation"
+      - "Fleetwood Mac to Doja Cat"
+      - "playlist draft before wedding"
+      - "Brian can MC"
+      - "no separate emcee needed"
+    expected_triples:
+      - ["user", "music_taste", "Fleetwood Mac to Doja Cat"]
+      - ["Brian Tomlinson", "will_provide", "playlist draft before wedding"]
+      - ["Brian Tomlinson", "can_also", "MC the wedding"]
+      - ["user", "has_emotion", "pleased"]
+    expected_adaptation:
+      emotion_detected: "pleased"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 9:00 AM"
+    user_input: |
+      booked both Rachel Kim for photography $3200 and DJ Tomlinson for $1200 so that's $4400 for photo and music combined which honestly feels really reasonable Julian's tracking all the expenses and so far we're at like um lemme think venue $8500 catering $3700 flowers $2400 dress $2800 photographer $3200 DJ $1200 that's like $21800 wait
+    expected_memory_stores:
+      - "Rachel Kim booked $3200"
+      - "DJ Tomlinson booked $1200"
+      - "running total approximately $21800"
+      - "budget tracking"
+    expected_triples:
+      - ["user", "booked", "Rachel Kim for $3200"]
+      - ["user", "booked", "DJ Tomlinson for $1200"]
+      - ["user", "wedding_running_total", "approximately $21800"]
+      - ["user", "has_emotion", "slightly worried"]
+    expected_adaptation:
+      emotion_detected: "slightly worried"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 9:30 AM"
+    user_input: |
+      wait no that's wrong because Diane is paying $800 for the rose arch so flowers are $2400 not $3200 and my parents are contributing $5000 and the save the dates were only $72 plus stamps so let me recalculate um we're actually okay I think we're right around $20000 which is exactly the budget
+    expected_memory_stores:
+      - "budget recalculation"
+      - "Diane covering $800"
+      - "parents contributing $5000"
+      - "right at $20000 budget"
+    expected_triples:
+      - ["user", "corrected", "budget total $21800 → approximately $20000"]
+      - ["Diane Reeves", "paying", "$800 for rose arch"]
+      - ["user", "wedding_budget_status", "right at $20000"]
+      - ["user", "has_emotion", "relieved"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 2:00 PM"
+    user_input: |
+      Rachel wants to do the engagement shoot in three weeks at this gorgeous park in Portland called Forest Park and she said golden hour so we'd go like 4pm and shoot for two hours and I'm already nervous about posing but she said she makes it feel natural like just walking and laughing together
+    expected_memory_stores:
+      - "engagement shoot in three weeks"
+      - "Forest Park Portland"
+      - "golden hour 4pm"
+      - "two hour shoot"
+      - "natural posing style"
+    expected_triples:
+      - ["Rachel Kim", "scheduled", "engagement shoot in three weeks"]
+      - ["user", "engagement_shoot_location", "Forest Park Portland"]
+      - ["user", "engagement_shoot_time", "4pm golden hour"]
+      - ["Rachel Kim", "posing_style", "natural walking and laughing"]
+    expected_adaptation:
+      emotion_detected: "nervous excitement"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 8:00 PM"
+    user_input: |
+      Julian and I are sitting on the couch with Kobe going through our vendor list and honestly it feels like we're in really good shape venue locked caterer locked flowers locked dress done photographer booked DJ booked save the dates sent like the big stuff is handled now it's just details and honestly I feel so much better than I did a few weeks ago
+    expected_memory_stores:
+      - "vendor list review"
+      - "all major vendors booked"
+      - "remaining items are details"
+      - "feeling good about progress"
+    expected_triples:
+      - ["user", "status", "all major wedding vendors booked"]
+      - ["user", "remaining", "details only"]
+      - ["user", "has_emotion", "content"]
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who is the wedding photographer?"
+    expected_contains: ["Rachel Kim"]
+  - question: "How much does the photographer cost?"
+    expected_contains: ["3200"]
+  - question: "Who is the wedding DJ?"
+    expected_contains: ["Tomlinson", "Brian"]
+  - question: "How much does the DJ cost?"
+    expected_contains: ["1200"]
+  - question: "Where is the engagement shoot?"
+    expected_contains: ["Forest Park"]
+  - question: "Can the DJ also be the emcee?"
+    expected_contains: ["yes", "MC"]
+  - question: "What is the total wedding budget?"
+    expected_contains: ["20000"]
+  - question: "What vendors are booked so far?"
+    expected_contains: ["venue", "caterer", "florist", "photographer", "DJ"]
+  - question: "What music does Maya like?"
+    expected_contains: ["Fleetwood Mac", "Doja Cat"]
+  - question: "What style of photography does Rachel Kim do?"
+    expected_contains: ["editorial", "outdoor"]

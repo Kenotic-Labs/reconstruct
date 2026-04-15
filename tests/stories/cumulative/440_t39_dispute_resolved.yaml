@@ -1,0 +1,175 @@
+story_id: 440
+story_name: "Dispute Fully Resolved"
+category: "Lease Dispute"
+description: |
+  Thread 39 conclusion. Maya has fully moved past the lease dispute. The
+  experience has made her stronger and more knowledgeable. Final arc wrap-up.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Sunday 9:00 AM"
+    user_input: |
+      you know I was thinking about it this morning and the whole lease dispute from start to finish took about 3 months from when I got that letter to when the check cleared and in that time I learned more about standing up for myself than in the previous 5 years probably
+    expected_memory_stores:
+      - "3 months total"
+      - "letter to check"
+      - "learned about standing up"
+      - "more than 5 years"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Sunday 10:00 AM"
+    user_input: |
+      the timeline was like February get the letter February send demand letter March no response file in court March wait for hearing mid March landlord's lawyer offers settlement we negotiate and settle case dismissed check arrives and now it's just done like a whole chapter closed
+    expected_memory_stores:
+      - "February letter"
+      - "February demand letter"
+      - "March file court"
+      - "March settlement"
+      - "case dismissed"
+      - "chapter closed"
+    expected_adaptation:
+      emotion_detected: "summarizing"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Sunday 11:00 AM"
+    user_input: |
+      I think the hardest part was the waiting like between sending the demand letter and hearing nothing and then waiting for the hearing date and then waiting for the check every phase was just waiting and I'm not good at waiting I want things resolved immediately
+    expected_memory_stores:
+      - "hardest part was waiting"
+      - "multiple waiting phases"
+      - "not good at waiting"
+      - "wants immediate resolution"
+    expected_adaptation:
+      emotion_detected: "self-aware"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Sunday 12:00 PM"
+    user_input: |
+      Dr Tate pointed out that the waiting was actually therapeutic because it forced me to sit with discomfort instead of fixing it immediately which is my default and she said that skill patience with uncertainty will serve me well in life and I was like ok I hate that you're right but you are
+    expected_memory_stores:
+      - "Dr Tate on waiting"
+      - "sitting with discomfort"
+      - "patience with uncertainty"
+      - "therapeutic skill"
+    expected_adaptation:
+      emotion_detected: "growth"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Sunday 1:00 PM"
+    user_input: |
+      Julian said the whole thing actually brought us closer together because we had to make financial decisions under pressure and we disagreed sometimes like about whether to settle or counter at full price but we worked through it together and that's what being a team means
+    expected_memory_stores:
+      - "brought them closer"
+      - "financial decisions under pressure"
+      - "disagreed but worked through"
+      - "being a team"
+    expected_adaptation:
+      emotion_detected: "bonded"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Sunday 3:00 PM"
+    user_input: |
+      made a mental checklist of everyone who helped through this Clara for moral support Julian for being there Dr Tate for the psychological framing Nadia for letting me help her which gave me purpose George for the practical advice at the start even mom for worrying because that's love
+    expected_memory_stores:
+      - "Clara moral support"
+      - "Julian always there"
+      - "Dr Tate framing"
+      - "Nadia gave purpose"
+      - "George practical advice"
+      - "Vivian worry is love"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 4:30 PM"
+    user_input: |
+      I'm officially done thinking about Greg Patterson like he doesn't deserve any more of my mental energy and I'm choosing to focus on the good stuff the house the wedding Julian Kobe work volunteering friends there's too much good in my life to dwell on one bad landlord
+    expected_memory_stores:
+      - "done with Patterson"
+      - "no more mental energy"
+      - "focus on good stuff"
+      - "house wedding Julian Kobe"
+      - "too much good"
+    expected_adaptation:
+      emotion_detected: "liberated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 5:00 PM"
+    user_input: |
+      what's the full timeline of the lease dispute from start to finish
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 6:00 PM"
+    user_input: |
+      actually one more thing Nadia's landlord returned her 950 and she told 2 of her coworkers about the process and one of them is dealing with a similar situation so the information is spreading and honestly if my whole Greg Patterson nightmare helps prevent other people from getting scammed that's a win
+    expected_memory_stores:
+      - "Nadia spread information"
+      - "2 coworkers told"
+      - "one has similar situation"
+      - "information spreading"
+      - "preventing scams"
+    expected_adaptation:
+      emotion_detected: "purposeful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 PM"
+    user_input: |
+      closing this chapter for real now and I feel different than I did 3 months ago like I know I can handle hard things and I know I have people in my corner and I know that the anxiety doesn't mean I can't do something it just means it matters and that's a lesson I'm taking with me forever
+    expected_memory_stores:
+      - "closing the chapter"
+      - "feels different"
+      - "can handle hard things"
+      - "people in corner"
+      - "anxiety means it matters"
+      - "lesson forever"
+    expected_adaptation:
+      emotion_detected: "empowered"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How long did the entire lease dispute take?"
+    expected_contains: ["3 months"]
+  - question: "What was the hardest part of the dispute for Maya?"
+    expected_contains: ["waiting"]
+  - question: "What skill did Dr. Tate say the waiting taught Maya?"
+    expected_contains: ["patience", "uncertainty", "discomfort"]
+  - question: "How did the dispute affect Maya and Julian's relationship?"
+    expected_contains: ["closer", "team", "worked through"]
+  - question: "Who did Maya thank mentally for help during the dispute?"
+    expected_contains: ["Clara", "Julian", "Dr Tate", "Nadia", "George", "Vivian"]
+  - question: "Has Maya moved past the Greg Patterson situation?"
+    expected_contains: ["yes", "done", "no more"]
+  - question: "How has the information from Maya's fight spread?"
+    expected_contains: ["Nadia", "coworkers", "spreading"]
+  - question: "What lesson does Maya take from the experience about anxiety?"
+    expected_contains: ["anxiety means it matters"]
+  - question: "What did Julian say about how the dispute affected them?"
+    expected_contains: ["closer", "team", "worked through"]
+  - question: "Is Maya now confident she can handle difficult situations?"
+    expected_contains: ["yes", "can handle hard things"]

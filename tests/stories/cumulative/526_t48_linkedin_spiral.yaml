@@ -1,0 +1,171 @@
+story_id: 526
+story_name: "LinkedIn Spiral"
+category: "Phone and Digital Life"
+description: |
+  Maya falls into a LinkedIn comparison spiral seeing peers' achievements.
+  Ties directly into identity crisis (T50). Cross-references Conduit AI job (T6),
+  career history (T1), mental health (T21), and turning 30.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00 PM"
+    user_input: |
+      made a massive mistake tonight I opened LinkedIn for the first time in weeks because someone endorsed me for Python and then I started scrolling and within ten minutes I was in a full spiral because everyone I went to college with seems to be at Google or Meta or running their own startup and I'm at a small AI company that most people haven't heard of
+    expected_memory_stores:
+      - "LinkedIn spiral"
+      - "Python endorsement"
+      - "peers at Google Meta startups"
+      - "Maya at small company"
+      - "comparison trap"
+    expected_adaptation:
+      emotion_detected: "inadequate"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 9:30 PM"
+    user_input: |
+      found my college roommate Sarah posted about making director at Amazon at 29 and I'm like DIRECTOR AT AMAZON and I'm a senior software engineer at Conduit AI which isn't even the same universe and I know comparison is the thief of joy but also like how is she a director already she was never even that good at coding
+    expected_memory_stores:
+      - "Sarah director at Amazon at 29"
+      - "Maya senior engineer at Conduit"
+      - "comparison thief of joy"
+      - "she wasn't good at coding"
+    expected_adaptation:
+      emotion_detected: "jealous"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 10:00 PM"
+    user_input: |
+      Julian found me sitting in bed looking miserable and I showed him LinkedIn and he said Maya close the app and I said no look at this guy we worked with at the hackathon he just raised 5 million for his startup and Julian said so what and I said SO WHAT Julian I'm turning 30 and what have I done
+    expected_memory_stores:
+      - "Julian found her miserable"
+      - "hackathon guy raised 5M"
+      - "turning 30"
+      - "what have I done"
+    expected_adaptation:
+      emotion_detected: "spiraling"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 10:30 PM"
+    user_input: |
+      Julian took my phone away literally took it and said Maya you bought a house you have a job you love you have a dog and a boyfriend and friends who come to your dinner parties every month and you're comparing yourself to LinkedIn which is a highlight reel not real life and I know he's right but it doesn't feel right
+    expected_memory_stores:
+      - "Julian took phone"
+      - "Julian lists Maya's achievements"
+      - "highlight reel not real life"
+      - "knows he's right but doesn't feel it"
+    expected_adaptation:
+      emotion_detected: "resistant"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 10:00 AM"
+    user_input: |
+      told Dr. Tate about the LinkedIn spiral and she said it's very common especially around milestone birthdays and she asked me to make a list of what I've actually accomplished this year not what LinkedIn says I should have accomplished and the list was surprisingly long
+    expected_memory_stores:
+      - "Dr. Tate session"
+      - "common around milestones"
+      - "accomplishment list exercise"
+      - "list was long"
+    expected_adaptation:
+      emotion_detected: "processing"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      my accomplishment list from Dr. Tate new job at Conduit AI bought a house started hosting dinner parties learned to cook fifteen dishes improved climbing to V5 maintained my mental health grieved grandpa and grew from it built a community of friends and when I look at it written down it's actually a lot
+    expected_memory_stores:
+      - "accomplishment list detailed"
+      - "new job house hosting cooking"
+      - "climbing V5 mental health"
+      - "grief growth community"
+      - "more than she thought"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 3:00 PM"
+    user_input: |
+      Priya pulled me aside at work and said she's been thinking about promoting me to lead engineer and I almost laughed because last night I was feeling like a failure and today my boss is talking about a promotion and life is just so weird sometimes
+    expected_memory_stores:
+      - "Priya promotion talk"
+      - "lead engineer"
+      - "irony after LinkedIn spiral"
+    expected_adaptation:
+      emotion_detected: "disbelief"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      deleted LinkedIn from my phone and I'm only going to check it on my laptop at work when I actually need to and Julian said that's the best decision you've made since buying this house and I said Julian that was our biggest purchase ever and he said exactly and you're better at that than scrolling
+    expected_memory_stores:
+      - "deleted LinkedIn from phone"
+      - "laptop only at work"
+      - "Julian's approval"
+      - "better at buying than scrolling"
+    expected_adaptation:
+      emotion_detected: "resolved"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      told Clara about the LinkedIn spiral and she said oh god I went through the same thing when she turned 30 she was comparing herself to everyone and then she realized the people she was jealous of were jealous of other people and it's just a chain of nobody being satisfied and you have to break the chain
+    expected_memory_stores:
+      - "Clara's similar experience"
+      - "chain of comparison"
+      - "break the chain"
+    expected_adaptation:
+      emotion_detected: "understood"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 9:00 PM"
+    user_input: |
+      screen time today was 2 hours flat because without LinkedIn and with the Instagram limit I'm just not on my phone as much and I feel calmer and Julian said your screen time report is your actual accomplishment tracker and I was like ok that's actually smart for once and he pretended to be offended
+    expected_memory_stores:
+      - "screen time 2 hours"
+      - "without LinkedIn"
+      - "feeling calmer"
+      - "screen time as accomplishment tracker"
+    expected_adaptation:
+      emotion_detected: "lighter"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What triggered Maya's LinkedIn spiral?"
+    expected_contains: ["endorsement", "Python", "scrolling"]
+  - question: "Who made director at Amazon at 29?"
+    expected_contains: ["Sarah"]
+  - question: "What did Julian do about Maya's phone?"
+    expected_contains: ["took it", "away"]
+  - question: "What exercise did Dr. Tate assign?"
+    expected_contains: ["accomplishment list"]
+  - question: "What was on Maya's accomplishment list?"
+    expected_contains: ["job", "house", "cooking", "climbing"]
+  - question: "What promotion news did Priya share?"
+    expected_contains: ["lead engineer"]
+  - question: "What did Maya do with LinkedIn?"
+    expected_contains: ["deleted", "phone"]
+  - question: "What did Clara say about comparison?"
+    expected_contains: ["chain", "jealous", "break"]
+  - question: "What is Maya's screen time without LinkedIn?"
+    expected_contains: ["2 hours"]
+  - question: "How is Maya turning 30 affecting her?"
+    expected_contains: ["milestone", "what have I done"]

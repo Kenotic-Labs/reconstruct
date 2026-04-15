@@ -1,0 +1,203 @@
+story_id: 263
+story_name: "Losing Two Bids"
+category: "Housing"
+description: |
+  Tests memory of Maya and Julian losing bids on two houses. Captures the emotional
+  toll of competitive bidding, correction handling when offer amounts change, and
+  growing frustration with the Portland housing market.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 10:00 AM"
+    user_input: |
+      put in our offer on the Division house yesterday at 495K with the escalation clause and Sarah said we should hear back by Wednesday and I'm trying not to obsessively check my phone but I keep checking my phone
+    expected_memory_stores:
+      - "offer submitted"
+      - "Division house"
+      - "$495K"
+      - "hear back Wednesday"
+      - "anxious waiting"
+    expected_triples:
+      - ["user", "submitted_offer_on", "Division house at $495K"]
+      - ["user", "has_realtor", "Sarah"]
+      - ["user", "awaiting_response_by", "Wednesday"]
+      - ["user", "has_emotion", "anxious"]
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 4:00 PM"
+    user_input: |
+      we lost the bid on Division. Sarah called and said someone came in at 545K all cash no contingencies and we were like HOW and she was like probably an investor or someone selling another property and yeah our escalation to 520 wasn't even close. I'm so bummed
+    expected_memory_stores:
+      - "lost Division bid"
+      - "winning bid $545K"
+      - "all cash no contingencies"
+      - "investor"
+      - "escalation not enough"
+    expected_triples:
+      - ["user", "lost_bid_on", "Division house"]
+      - ["Division house", "sold_for", "$545K all cash no contingencies"]
+      - ["user", "has_emotion", "defeated"]
+    expected_adaptation:
+      emotion_detected: "defeated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      Julian was really upset about it like more than I expected and he was like maybe we should just increase our budget and I was like to what 550? we can't afford that and he was like maybe we can if we're aggressive with savings and I was like babe we need to be realistic
+    expected_memory_stores:
+      - "Julian upset"
+      - "budget increase discussion"
+      - "Julian wants 550"
+      - "Maya realistic"
+      - "savings discussion"
+    expected_triples:
+      - ["Julian", "wants_to_increase_budget_to", "$550K"]
+      - ["user", "prefers", "staying realistic on budget"]
+      - ["user", "has_emotion", "tense"]
+    expected_adaptation:
+      emotion_detected: "tense"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 11:00 AM"
+    user_input: |
+      Sarah found another one in Hawthorne on SE 35th it's a cute craftsman listed at 478K three beds one bath and she said the sellers are a couple relocating to Boise so they want a quick sale which could work in our favor
+    expected_memory_stores:
+      - "new Hawthorne house"
+      - "SE 35th"
+      - "craftsman"
+      - "$478K"
+      - "three bed one bath"
+      - "sellers relocating to Boise"
+      - "quick sale"
+    expected_triples:
+      - ["Sarah", "found_listing", "Hawthorne craftsman on SE 35th"]
+      - ["Hawthorne house", "listed_at", "$478K"]
+      - ["Hawthorne house", "has_features", "3 bed 1 bath craftsman"]
+      - ["Hawthorne sellers", "relocating_to", "Boise"]
+    expected_adaptation:
+      emotion_detected: "cautiously hopeful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 12:00 PM"
+    user_input: |
+      toured it and it's really nice the yard is small but Kobe would be fine and Julian liked the natural light and there's this bonus attic space that could be his studio and we're putting in an offer at um I think we said 490 no wait Sarah said we should go 485 because of the one bathroom being a downside
+    expected_memory_stores:
+      - "toured Hawthorne craftsman"
+      - "small yard"
+      - "good natural light"
+      - "attic studio potential"
+      - "correction offer amount"
+      - "offer $485K not $490K"
+      - "one bathroom downside"
+    expected_triples:
+      - ["user", "toured", "Hawthorne craftsman"]
+      - ["Hawthorne house", "has_feature", "attic studio potential"]
+      - ["user", "corrected", "offer $490K → $485K per Sarah's advice"]
+      - ["user", "has_emotion", "hopeful"]
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 2:00 PM"
+    user_input: |
+      lost the Hawthorne house too. someone offered 510K with a waived inspection and Sarah was like I would never advise you to waive inspection that's crazy but some people do it in this market and I'm starting to feel like we're never gonna find a house
+    expected_memory_stores:
+      - "lost Hawthorne bid"
+      - "winning bid $510K"
+      - "waived inspection"
+      - "Sarah against waiving"
+      - "hopeless feeling"
+    expected_adaptation:
+      emotion_detected: "hopeless"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      Julian and I had a kind of argument tonight not a fight but like a heated discussion about whether we should just wait for the market to cool down and he was like waiting means paying another year of rent that goes nowhere and I was like but overpaying for a house is also bad and we didn't really resolve it
+    expected_memory_stores:
+      - "argument with Julian"
+      - "wait vs buy now"
+      - "rent money wasted"
+      - "overpaying concern"
+      - "unresolved"
+    expected_adaptation:
+      emotion_detected: "stressed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 9:00 AM"
+    user_input: |
+      Sarah called this morning and was like okay don't give up I have a strategy let's look at houses that have been on the market longer because they're usually priced too high and the sellers get more negotiable over time and she mentioned the Woodstock fixer upper is still available
+    expected_memory_stores:
+      - "Sarah strategy"
+      - "longer listed houses"
+      - "sellers more negotiable"
+      - "Woodstock still available"
+    expected_adaptation:
+      emotion_detected: "interested"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      how many houses have we lost bids on now and what were they again I'm losing track
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 6:00 PM"
+    user_input: |
+      going back to the Woodstock fixer upper this Saturday with Sarah and this time I'm bringing a contractor friend of Julian's to look at the actual scope of work because if we're gonna buy a project house we need to know what we're getting into
+    expected_memory_stores:
+      - "revisiting Woodstock"
+      - "Saturday plan"
+      - "contractor friend"
+      - "scope of work"
+      - "project house"
+    expected_adaptation:
+      emotion_detected: "pragmatic"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How many bids have Maya and Julian lost?"
+    expected_contains: ["two"]
+  - question: "What happened with the Division house bid?"
+    expected_contains: ["lost", "545", "cash"]
+  - question: "What happened with the Hawthorne craftsman bid?"
+    expected_contains: ["lost", "510", "waived inspection"]
+  - question: "What house are they looking at next?"
+    expected_contains: ["Woodstock"]
+  - question: "What strategy did Sarah suggest?"
+    expected_contains: ["longer", "market", "negotiable"]
+  - question: "What did Maya and Julian argue about?"
+    expected_contains: ["wait", "market", "buy"]
+  - question: "How much did they offer on the Hawthorne craftsman?"
+    expected_contains: ["485"]
+  - question: "Why was the Hawthorne craftsman a quick sale?"
+    expected_contains: ["relocating", "Boise"]
+  - question: "What bonus feature did the Hawthorne craftsman have?"
+    expected_contains: ["attic", "studio"]
+  - question: "Who are they bringing to the Woodstock house?"
+    expected_contains: ["contractor"]

@@ -1,0 +1,188 @@
+story_id: 284
+story_name: "Miguel Ghosts"
+category: "Home"
+description: |
+  Tests memory of contractor Miguel Santos disappearing after week 2 of the kitchen
+  renovation. Captures the frustration, broken trust, and scramble to find a replacement.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:00 AM"
+    user_input: |
+      week one with Miguel went great the asbestos abatement crew came and handled the tiles professionally and Miguel's guys started replacing the subfloor and it's looking really good and we paid him the first $5,000 on time like we agreed
+    expected_memory_stores:
+      - "week one good"
+      - "asbestos abatement done"
+      - "subfloor replacement started"
+      - "paid $5,000"
+      - "on schedule"
+    expected_adaptation:
+      emotion_detected: "optimistic"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 6:00 PM"
+    user_input: |
+      week two and the drywall is done and the new subfloor is in and Miguel's crew started rough-in for the plumbing and electrical and paid him the second $5,000 and he said he'd have the cabinets installed by end of next week so we're on track for the three week timeline
+    expected_memory_stores:
+      - "week two"
+      - "drywall done"
+      - "subfloor done"
+      - "plumbing and electrical rough-in"
+      - "paid second $5,000"
+      - "cabinets next week"
+      - "on track"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 8:00 AM"
+    user_input: |
+      week three and... Miguel didn't show up this morning. his crew didn't show up. nobody's here. I texted him and nothing. called him and it went to voicemail. Julian's like maybe he's sick or something and I'm like maybe but he usually texts
+    expected_memory_stores:
+      - "Miguel no show"
+      - "crew no show"
+      - "no text response"
+      - "voicemail"
+      - "unusual"
+      - "Julian optimistic"
+    expected_adaptation:
+      emotion_detected: "worried"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 10:00 AM"
+    user_input: |
+      second day no Miguel no crew no response to texts or calls and now I'm getting a bad feeling. told Eddie and Eddie was like what that's weird Miguel's usually super reliable let me try calling him. Eddie couldn't reach him either.
+    expected_memory_stores:
+      - "second day missing"
+      - "still no response"
+      - "told Eddie"
+      - "Eddie surprised"
+      - "Eddie can't reach him either"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      day three and Miguel finally texted back and just said "sorry family emergency need a few days" which okay I get it but a few days turned into a WEEK and then another text saying "still dealing with things will be back soon" and no specifics and Julian and I are living without a kitchen for going on four weeks now
+    expected_memory_stores:
+      - "Miguel texted"
+      - "family emergency"
+      - "few days turned to week"
+      - "no specifics"
+      - "still dealing with things"
+      - "four weeks without kitchen"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 7:00 PM"
+    user_input: |
+      it's been two weeks since Miguel stopped showing up and I sent him one last text saying we need a clear timeline or we have to find someone else and he just... never responded. we've paid him $15,000 including the deposit and the kitchen is maybe 60% done. I think we've been ghosted.
+    expected_memory_stores:
+      - "two weeks since Miguel left"
+      - "final text sent"
+      - "no response"
+      - "paid $15,000 total"
+      - "kitchen 60% done"
+      - "ghosted"
+    expected_adaptation:
+      emotion_detected: "angry"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 9:00 AM"
+    user_input: |
+      I'm so angry I could scream we trusted this guy Eddie vouched for him we paid him $15K and he just disappeared and our kitchen is a half-finished construction zone and Julian said we should look into legal options and I said we should find a new contractor first and deal with Miguel after
+    expected_memory_stores:
+      - "angry"
+      - "trusted and betrayed"
+      - "Eddie vouched"
+      - "$15K paid"
+      - "construction zone"
+      - "Julian wants legal"
+      - "Maya wants new contractor first"
+    expected_adaptation:
+      emotion_detected: "furious"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 12:00 PM"
+    user_input: |
+      Eddie called and he was really apologetic he had no idea Miguel would do this and he said he's heard through the grapevine that Miguel is dealing with a divorce and just stopped taking calls from everyone not just us which doesn't excuse it but at least explains it
+    expected_memory_stores:
+      - "Eddie apologetic"
+      - "Miguel going through divorce"
+      - "stopped all calls"
+      - "explanation not excuse"
+    expected_adaptation:
+      emotion_detected: "complex anger"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Eddie recommended another contractor named Anna Petrova who he said is the best kitchen person he knows and she's more expensive than Miguel but she never ghosts and has a perfect track record and honestly at this point I'll pay more for reliability
+    expected_memory_stores:
+      - "Anna Petrova"
+      - "Eddie recommended"
+      - "best kitchen person"
+      - "more expensive"
+      - "never ghosts"
+      - "perfect track record"
+      - "reliability over cost"
+    expected_adaptation:
+      emotion_detected: "cautiously hopeful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 10:00 AM"
+    user_input: |
+      Anna can come look at the kitchen on Tuesday and I'm praying she can pick up where Miguel left off because if she has to redo any of his work I might actually lose my mind. what's the name of the contractor who ghosted us again and how much did we pay him I need to write this down for when we figure out the legal stuff
+    expected_memory_stores:
+      - "Anna coming Tuesday"
+      - "hoping to continue work"
+      - "don't redo work"
+      - "GK trap"
+      - "legal documentation"
+    expected_adaptation:
+      emotion_detected: "exhausted"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What happened with Miguel Santos?"
+    expected_contains: ["ghost", "disappeared", "stopped showing"]
+  - question: "How much was Miguel paid before he left?"
+    expected_contains: ["15,000", "15000"]
+  - question: "How far along is the kitchen renovation?"
+    expected_contains: ["60%"]
+  - question: "Why did Miguel disappear?"
+    expected_contains: ["divorce", "family"]
+  - question: "Who is the new contractor?"
+    expected_contains: ["Anna Petrova"]
+  - question: "Who recommended Anna Petrova?"
+    expected_contains: ["Eddie"]
+  - question: "How long has Maya been without a kitchen?"
+    expected_contains: ["four weeks"]
+  - question: "What work did Miguel complete before leaving?"
+    expected_contains: ["asbestos", "subfloor", "drywall", "rough-in"]
+  - question: "What work remains to be done?"
+    expected_contains: ["cabinets", "counters", "plumbing", "backsplash"]
+  - question: "Is Maya considering legal action against Miguel?"
+    expected_contains: ["yes", "legal"]

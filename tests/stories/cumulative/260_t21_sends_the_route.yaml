@@ -1,0 +1,184 @@
+story_id: 260
+story_name: "Sends Wherever I May Roam"
+category: "Fitness"
+description: |
+  Tests memory of Maya finally sending her first outdoor route. Captures the triumphant
+  moment, the emotional release, celebration, and what climbing now means to her identity.
+  Completes the T21 fitness arc.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 7:00 AM"
+    user_input: |
+      third Saturday at Smith Rock let's go baby Omar and I are here early again Leila didn't come this time she has a pottery class but it's just us and the rock and I feel weirdly calm today like not nervous at all just focused
+    expected_memory_stores:
+      - "third Smith Rock trip"
+      - "early arrival"
+      - "no Leila"
+      - "pottery class"
+      - "calm not nervous"
+      - "focused"
+    expected_adaptation:
+      emotion_detected: "calm"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 8:00 AM"
+    user_input: |
+      warmed up on Bunny Face and a 5.9 called Chain Reaction which is apparently a famous route and honestly it felt easy and Omar was like your movement is so much more fluid than three weeks ago and I was like yeah because I've been on this rock three Saturdays in a row lol
+    expected_memory_stores:
+      - "warm up Bunny Face"
+      - "Chain Reaction 5.9"
+      - "famous route"
+      - "fluid movement"
+      - "three weeks improvement"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 9:00 AM"
+    user_input: |
+      at the base of Wherever I May Roam and I tied in and Omar was like you know this route now you've been on it twice you know every hold just go up there and climb your climb and I took a breath and started
+    expected_memory_stores:
+      - "Wherever I May Roam"
+      - "tied in"
+      - "Omar pep talk"
+      - "knows the route"
+      - "started climbing"
+    expected_adaptation:
+      emotion_detected: "focused"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 9:10 AM"
+    user_input: |
+      bottom section SMOOTH flew through it didn't even think about the moves my body just knew where to go clipped the bolts efficiently like Omar taught me and I'm at the crux now and my breathing is steady and my hands are chalked and here we go
+    expected_memory_stores:
+      - "bottom section smooth"
+      - "muscle memory"
+      - "efficient clipping"
+      - "at the crux"
+      - "steady breathing"
+    expected_adaptation:
+      emotion_detected: "focused"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 9:12 AM"
+    user_input: |
+      LEFT HAND CROSS TO THE JUG GOT IT feet repositioned moved through the crux I'M PAST IT and my foot didn't slip this time the rock is dry and warm and I'm past where I fell last time and I can see the anchor above me maybe 15 feet
+    expected_memory_stores:
+      - "crux completed"
+      - "left hand cross"
+      - "past fall point"
+      - "rock dry"
+      - "15 feet to anchor"
+    expected_adaptation:
+      emotion_detected: "intense"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 9:15 AM"
+    user_input: |
+      oh my god oh my god I clipped the chains I'm at the top I sent it I SENT WHEREVER I MAY ROAM I'm screaming Omar is screaming some random hikers on the trail are looking at us like we're insane I DID IT
+    expected_memory_stores:
+      - "sent the route"
+      - "Wherever I May Roam"
+      - "clipped chains"
+      - "at the top"
+      - "screaming celebration"
+      - "Omar cheering"
+    expected_adaptation:
+      emotion_detected: "euphoric"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 9:30 AM"
+    user_input: |
+      I'm literally shaking right now and I might be crying a little bit Omar gave me the biggest hug when I came down and was like dude I'm so proud of you and I called Julian from the crag and he was like BABE YES and I could hear Kobe barking in the background lol
+    expected_memory_stores:
+      - "shaking"
+      - "crying happy tears"
+      - "Omar hug"
+      - "called Julian"
+      - "Julian excited"
+      - "Kobe barking"
+    expected_adaptation:
+      emotion_detected: "overwhelmed with joy"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 12:00 PM"
+    user_input: |
+      did a few more routes after to celebrate got on a 5.10b called Heinous Cling and it felt hard but I was riding such a high that I just powered through it and SENT IT first try Omar was like okay now you're showing off
+    expected_memory_stores:
+      - "Heinous Cling 5.10b"
+      - "sent first try"
+      - "celebration climbing"
+      - "riding high"
+    expected_adaptation:
+      emotion_detected: "confident"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 5:00 PM"
+    user_input: |
+      on the drive home and I can't stop smiling Omar asked me what I want my next project to be and I was like I don't even know I just want to enjoy this for a minute and he was like fair but there's a 5.10c called Chain Reaction that I think you'd love and I was like wait wasn't that the warm up and he was like no that's a different route with the same name the 5.10c one is the famous one
+    expected_memory_stores:
+      - "drive home"
+      - "next project discussion"
+      - "Chain Reaction 5.10c"
+      - "different from warm up route"
+      - "famous route"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 8:00 PM"
+    user_input: |
+      Julian made a little celebration dinner and he got champagne and he was like to Maya the rock climber and I was like stop but I loved it and I think climbing is like actually part of my identity now you know? like I'm not just a person who climbs I'm a climber and that feels different and it started because of my dumb knee injury which is kind of poetic
+    expected_memory_stores:
+      - "celebration dinner"
+      - "champagne"
+      - "Julian toast"
+      - "climber identity"
+      - "knee injury origin"
+      - "personal growth"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Did Maya send Wherever I May Roam?"
+    expected_contains: ["yes"]
+  - question: "What grade is Wherever I May Roam?"
+    expected_contains: ["5.10a"]
+  - question: "How many trips to Smith Rock did it take Maya to send?"
+    expected_contains: ["three"]
+  - question: "Who belayed Maya when she sent the route?"
+    expected_contains: ["Omar"]
+  - question: "What route did Omar suggest as Maya's next project?"
+    expected_contains: ["Chain Reaction", "5.10c"]
+  - question: "How did Julian celebrate Maya's send?"
+    expected_contains: ["dinner", "champagne"]
+  - question: "What injury led Maya to start climbing?"
+    expected_contains: ["knee", "meniscus"]
+  - question: "What is the hardest route Maya has sent outdoors?"
+    expected_contains: ["Wherever I May Roam", "5.10a"]
+  - question: "What gym route did Maya also send on her celebration day?"
+    expected_contains: ["Heinous Cling", "5.10b"]
+  - question: "How does Maya now identify with climbing?"
+    expected_contains: ["climber", "identity"]

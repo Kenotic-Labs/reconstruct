@@ -1,0 +1,166 @@
+story_id: 417
+story_name: "Kobe Motion Alert Chaos"
+category: "Smart Home"
+description: |
+  Despite the motion zone fix, Kobe keeps triggering alerts in new creative ways.
+  50 alerts in one day. Maya and Julian adjust detection zones again.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:00 AM"
+    user_input: |
+      so remember how Julian set the motion zones on the Ring to exclude the middle of the yard well Kobe figured out a new spot he keeps sitting right at the edge of the porch which is inside the detection zone and just existing there so I got like 12 alerts before noon of just Kobe sitting
+    expected_memory_stores:
+      - "Kobe sitting on porch edge"
+      - "inside detection zone"
+      - "12 alerts before noon"
+      - "motion zone workaround failed"
+    expected_adaptation:
+      emotion_detected: "exasperated"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 12:30 PM"
+    user_input: |
+      Sam asked me at work why my phone was going off so much and I showed him the Ring app and he saw like 15 clips of just Kobe lying on the porch and Sam was laughing so hard he almost choked on his lunch and he was like your dog is fighting the algorithm
+    expected_memory_stores:
+      - "Sam saw Kobe alerts"
+      - "15 clips of Kobe"
+      - "Sam laughing"
+      - "Kobe fighting algorithm"
+    expected_adaptation:
+      emotion_detected: "amused despite frustration"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 3:00 PM"
+    user_input: |
+      checked the Ring app and I've gotten 32 motion alerts today and it's only 3pm and at least 25 of them are Kobe in various positions on the porch lying down sitting scratching his ear yawning one where he's looking directly at the camera like he knows
+    expected_memory_stores:
+      - "32 alerts by 3pm"
+      - "25 are Kobe"
+      - "various Kobe positions"
+      - "looking at camera"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 5:30 PM"
+    user_input: |
+      final count today FIFTY motion alerts and I showed Julian when he got home and he was like well at least we know Kobe is safe and I was like Julian that is not the point my phone is useless right now I can't hear actual notifications because I'm desensitized to the buzzing
+    expected_memory_stores:
+      - "50 alerts in one day"
+      - "Julian jokes about safety"
+      - "phone useless"
+      - "notification desensitization"
+    expected_adaptation:
+      emotion_detected: "at limit"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 7:00 PM"
+    user_input: |
+      Julian is redrawing the motion zones again and he's basically made the detection area just the walkway from the sidewalk to the front door and the gate area and literally nothing else like the entire porch and yard are excluded now which defeats some of the purpose but at least Kobe can't trigger it
+    expected_memory_stores:
+      - "motion zones redrawn again"
+      - "only walkway and gate"
+      - "porch and yard excluded"
+      - "defeats some purpose"
+    expected_adaptation:
+      emotion_detected: "compromising"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 8:00 PM"
+    user_input: |
+      actually Julian had a better idea he found a setting in Home Assistant where you can set the Ring to only alert for person detection not all motion and it uses the Ring's built in AI to distinguish people from animals and I was like why didn't we do this from the beginning and he said he didn't know it existed
+    expected_memory_stores:
+      - "person detection only"
+      - "Ring AI distinguishes people"
+      - "Home Assistant setting"
+      - "didn't know existed before"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 9:00 AM"
+    user_input: |
+      first morning with person-only detection and I got zero false alerts even though Kobe has been in the yard for an hour and then the mail carrier came and it alerted once correctly and I was like FINALLY this is how it should work oh my god why did this take us three weeks to figure out
+    expected_memory_stores:
+      - "person detection working"
+      - "zero false alerts"
+      - "mail carrier correctly detected"
+      - "three weeks to fix"
+    expected_adaptation:
+      emotion_detected: "ecstatic"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      how many motion alerts was Kobe triggering per day before we fixed it
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 5:00 PM"
+    user_input: |
+      full day with the new settings and I got exactly 3 alerts one for the UPS guy one for the neighbor who came to borrow our ladder and one for Julian coming home which is perfect like that's exactly the right number of alerts this is what smart should feel like
+    expected_memory_stores:
+      - "3 alerts all day"
+      - "UPS neighbor Julian"
+      - "perfect detection"
+      - "smart done right"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      showed Kobe's greatest hits compilation to Clara like all the screenshots of him triggering the camera and she was like you should make an Instagram for Kobe's surveillance footage and I'm like actually that's hilarious the one where he's staring at the camera is genuinely funny
+    expected_memory_stores:
+      - "Kobe greatest hits"
+      - "Clara Instagram idea"
+      - "surveillance footage humor"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How many motion alerts did Kobe trigger in one day?"
+    expected_contains: ["50"]
+  - question: "How did they finally fix the Kobe alert problem?"
+    expected_contains: ["person detection", "AI", "distinguish"]
+  - question: "How many correct alerts came through after the fix?"
+    expected_contains: ["3"]
+  - question: "What was Kobe's favorite spot that triggered alerts?"
+    expected_contains: ["porch", "edge"]
+  - question: "Who suggested making an Instagram for Kobe's footage?"
+    expected_contains: ["Clara"]
+  - question: "What happened when the person detection was turned on?"
+    expected_contains: ["zero false alerts", "mail carrier correct"]
+  - question: "How long did it take to solve the Kobe alert issue?"
+    expected_contains: ["three weeks"]
+  - question: "What did Sam say about Kobe and the alerts?"
+    expected_contains: ["fighting the algorithm"]
+  - question: "What detection zones did Julian try first?"
+    expected_contains: ["walkway", "gate", "exclude yard"]
+  - question: "Where did Julian find the person detection setting?"
+    expected_contains: ["Home Assistant"]

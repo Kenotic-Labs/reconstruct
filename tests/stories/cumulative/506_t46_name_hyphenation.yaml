@@ -1,0 +1,171 @@
+story_id: 506
+story_name: "Name Hyphenation"
+category: "Grief and Legacy"
+description: |
+  Maya considers hyphenating her name to Chen-Wei as a tribute. Discusses with Julian,
+  Dr. Tate, friends. Decides against it but commits to a future plan.
+  Cross-references relationship (T11), identity (T50), cultural roots (T31 Japan).
+duration_simulated: "4 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:00 PM"
+    user_input: |
+      ok so I've been thinking about this for like a week and I want to talk about it because I might be going crazy but I've been seriously considering changing my last name to Chen-Wei like hyphenating it to honor grandpa because Chen was our family name but Wei was HIS name and it feels like it should be carried forward
+    expected_memory_stores:
+      - "considering Chen-Wei"
+      - "hyphenation idea"
+      - "honoring grandpa"
+      - "Wei as his name"
+    expected_adaptation:
+      emotion_detected: "earnest"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 10:00 AM"
+    user_input: |
+      brought it up with Julian last night and he was supportive but he also said like have you thought about how it works with our last names because if we get married someday would you be Chen-Wei-Reeves or like how does that work and I said I don't know I haven't thought that far ahead and he said well maybe think about it
+    expected_memory_stores:
+      - "Julian supportive but practical"
+      - "marriage name logistics"
+      - "Chen-Wei-Reeves question"
+      - "Julian marriage reference"
+    expected_adaptation:
+      emotion_detected: "uncertain"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 11:00 AM"
+    user_input: |
+      told Jenny about it on our call she's in Denver now and she said Maya that's beautiful but also like you already honor him in so many ways and Jenny pointed out that I wear his watch every day and I hung his degree in my office and I make his dumplings and she said those are all ways of carrying the name without legally changing it
+    expected_memory_stores:
+      - "Jenny's perspective"
+      - "Jenny in Denver"
+      - "already honoring grandpa"
+      - "watch degree dumplings"
+      - "carrying name through actions"
+    expected_adaptation:
+      emotion_detected: "considering"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 4:00 PM"
+    user_input: |
+      Dr. Tate had an interesting take she said sometimes the desire to change your name after a loss is about trying to hold onto the person and she asked me what would change practically if I hyphenated versus if I didn't and honestly the answer is nothing really it's more about what it symbolizes
+    expected_memory_stores:
+      - "Dr. Tate perspective"
+      - "holding onto person"
+      - "practical vs symbolic"
+      - "nothing changes practically"
+    expected_adaptation:
+      emotion_detected: "thoughtful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 7:00 PM"
+    user_input: |
+      called my mom and asked her what she thought about me hyphenating to Chen-Wei and she got really emotional and said your grandfather would be so honored but also Maya you should know that Wei wasn't even our original family name it was his given name his family name was something else that was lost during the revolution and I was like wait WHAT
+    expected_memory_stores:
+      - "Vivian emotional about name"
+      - "Wei was given name"
+      - "original family name lost"
+      - "Cultural Revolution erasure"
+    expected_adaptation:
+      emotion_detected: "stunned"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 9:00 AM"
+    user_input: |
+      so now I'm sitting with the fact that grandpa's real family name was lost during the Cultural Revolution and that adds this whole other layer to it like names mean so much and they can just be taken away and it makes me want to hold onto every name even more
+    expected_memory_stores:
+      - "name erasure weight"
+      - "Cultural Revolution impact"
+      - "holding names tighter"
+    expected_adaptation:
+      emotion_detected: "weighted"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 5:00 PM"
+    user_input: |
+      I talked to Clara about it at the climbing gym and she said you know what would be really cool is if you save the name for something specific like a future kid or a project or something that way it's not just attached to paperwork it's attached to a life and I actually really liked that idea
+    expected_memory_stores:
+      - "Clara's suggestion"
+      - "climbing gym conversation"
+      - "save name for something specific"
+      - "future child or project"
+    expected_adaptation:
+      emotion_detected: "inspired"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 11:00 AM"
+    user_input: |
+      Julian and I went to the farmers market this morning and over coffee I said I think I'm not gonna hyphenate my name and he said ok tell me why and I said because I want to give the name Wei to something alive not just add it to paperwork and he said like a kid and I said yeah maybe someday if we have a daughter Wei could be her middle name
+    expected_memory_stores:
+      - "decided against hyphenation"
+      - "farmers market"
+      - "Wei as daughter's middle name"
+      - "Julian and Maya future child talk"
+    expected_adaptation:
+      emotion_detected: "clear"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Julian got this huge smile when I mentioned the daughter thing and he was like so we're talking about kids now huh and I was like don't get too excited it's theoretical and he said theoretical is still something and honestly it felt really good to talk about the future with him like we've been so in the present with the house and the renovation and everything
+    expected_memory_stores:
+      - "Julian excited about kids talk"
+      - "theoretical future"
+      - "good to talk about future"
+      - "house and renovation present focus"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 9:00 PM"
+    user_input: |
+      told my mom I'm not changing my name but that I want to name a future daughter Wei and she absolutely lost it crying happy tears and she said Maya that's the most beautiful thing you could do and grandpa would love that and I felt like this is the right decision like the name will live on through a person not through a hyphen
+    expected_memory_stores:
+      - "told Vivian decision"
+      - "Vivian happy tears"
+      - "name through person not hyphen"
+      - "grandpa would love it"
+    expected_adaptation:
+      emotion_detected: "resolved"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Did Maya decide to hyphenate her name to Chen-Wei?"
+    expected_contains: ["no", "decided against"]
+  - question: "What did Maya decide about the name Wei instead?"
+    expected_contains: ["daughter", "middle name"]
+  - question: "What did Jenny say about the hyphenation idea?"
+    expected_contains: ["already honor", "watch", "dumplings"]
+  - question: "What surprising fact did Vivian reveal about grandpa's name?"
+    expected_contains: ["given name", "lost", "Cultural Revolution"]
+  - question: "What was Clara's suggestion about the name?"
+    expected_contains: ["future", "kid", "project", "something alive"]
+  - question: "How did Julian react to the daughter discussion?"
+    expected_contains: ["excited", "smile", "theoretical"]
+  - question: "What did Dr. Tate say about name changes after loss?"
+    expected_contains: ["hold onto", "person", "symbolic"]
+  - question: "How did Vivian react to Maya's final decision?"
+    expected_contains: ["crying", "happy tears", "beautiful"]
+  - question: "Where is Jenny living now?"
+    expected_contains: ["Denver"]
+  - question: "Where were Maya and Julian when she told him the decision?"
+    expected_contains: ["farmers market"]

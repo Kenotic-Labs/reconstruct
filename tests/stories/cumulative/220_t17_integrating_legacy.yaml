@@ -1,0 +1,176 @@
+story_id: 220
+story_name: "Integrating Grandpa's Legacy"
+category: "Family"
+description: |
+  Tests full grief arc reconstruction. Maya integrates Grandpa Wei's legacy into her daily
+  life. The watch, the tree, his sayings become part of who she is. Verifies system can
+  track complete emotional arc from loss to integration.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00 AM"
+    user_input: |
+      started a new project at work today and I wrote at the top of my design doc build for the people who will use it after you which is from grandpa's notebook and my coworker was like that's a great principle where'd you get it and I said my grandfather was an engineer
+    expected_memory_stores:
+      - "new project"
+      - "grandpa's principle in design doc"
+      - "shared with coworker"
+      - "grandfather was an engineer"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 12:00 PM"
+    user_input: |
+      my coworker asked to translate the rest of the letter from grandma Mei and she finished it and oh man it's a love letter from when grandpa was away working on the dam and grandma writes about missing him and how she can hear the river from their apartment and how the moonlight reminds her of him
+    expected_memory_stores:
+      - "grandma's letter translated"
+      - "love letter"
+      - "during dam project"
+      - "missing him"
+      - "river and moonlight"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 7:00 PM"
+    user_input: |
+      read the letter to Julian and he was like Maya that's like a movie and I was like I know right and I'm going to frame it with the translation underneath and put it next to the bridge photo in the office because that's their love story right there
+    expected_memory_stores:
+      - "framing letter"
+      - "with translation"
+      - "next to bridge photo"
+      - "office display"
+      - "their love story"
+    expected_adaptation:
+      emotion_detected: "tender"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 8:00 AM"
+    user_input: |
+      watered the maple tree this morning and it's already looking settled like the leaves are perky and the trunk seems sturdy and I talk to it sometimes which Julian says is weird but I don't care I tell it about my day like grandpa is listening
+    expected_memory_stores:
+      - "watering maple"
+      - "tree looking settled"
+      - "talks to tree"
+      - "Julian says weird"
+      - "grandpa listening"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      I realized something today like grandpa shaped who I am more than I understood while he was alive like the engineering the resilience the kindness travels thing the build beautiful things it's all in me and I carry it forward every day without even thinking about it
+    expected_memory_stores:
+      - "realization"
+      - "grandpa shaped identity"
+      - "engineering resilience kindness"
+      - "carry forward daily"
+    expected_adaptation:
+      emotion_detected: "enlightened"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 2:00 PM"
+    user_input: |
+      what were grandpa Wei's two sayings that Maya uses a lot
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 4:00 PM"
+    user_input: |
+      I'm working on the biography document I mentioned and I wrote up the first section about grandpa coming to America and it's actually really good if I do say so myself and Clara added some medical context about his later years and dad sent me a timeline
+    expected_memory_stores:
+      - "biography writing"
+      - "first section done"
+      - "coming to America"
+      - "Clara medical context"
+      - "George sent timeline"
+    expected_adaptation:
+      emotion_detected: "productive"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      thinking about the wedding and how grandpa won't be there physically but he'll be there in the watch on my wrist and the maple tree in the yard and the moment of silence Julian suggested and his photo at the ceremony and actually he'll be everywhere
+    expected_memory_stores:
+      - "wedding thoughts"
+      - "grandpa present through watch"
+      - "maple tree"
+      - "moment of silence"
+      - "photo at ceremony"
+      - "everywhere"
+    expected_adaptation:
+      emotion_detected: "bittersweet"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      my dad said something beautiful tonight he said Maya your grandfather didn't just build bridges he built a bridge from China to here from the past to the future and you're standing on it and I was like dad when did you get so poetic
+    expected_memory_stores:
+      - "George quote"
+      - "bridge from China"
+      - "past to future"
+      - "standing on it"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 10:00 PM"
+    user_input: |
+      touching the watch before bed and saying goodnight grandpa like always and I don't cry anymore when I do it I just feel connected and I think that's what grief turns into eventually not absence but presence in a different form and grandpa would say something wise about that probably something about bridges
+    expected_memory_stores:
+      - "nightly ritual"
+      - "no longer crying"
+      - "connected"
+      - "grief becomes presence"
+      - "different form"
+      - "bridge metaphor"
+    expected_adaptation:
+      emotion_detected: "at peace"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How has Maya integrated Grandpa Wei's legacy?"
+    expected_contains: ["watch", "tree", "sayings", "engineering"]
+  - question: "What principle from Grandpa's notebook does Maya use at work?"
+    expected_contains: ["build for the people who will use it"]
+  - question: "What was in the letter from Grandma Mei?"
+    expected_contains: ["love letter", "river", "moonlight"]
+  - question: "How is Maya's grief now?"
+    expected_contains: ["peaceful", "connected", "no longer crying"]
+  - question: "What is Maya writing about Grandpa?"
+    expected_contains: ["biography", "family document"]
+  - question: "How will Grandpa be present at the wedding?"
+    expected_contains: ["watch", "photo", "moment of silence"]
+  - question: "What does Maya do before bed?"
+    expected_contains: ["goodnight grandpa", "touch watch"]
+  - question: "What did George say about Grandpa building bridges?"
+    expected_contains: ["China to here", "past to future"]
+  - question: "Does Maya talk to the memorial tree?"
+    expected_contains: ["yes"]
+  - question: "What two sayings of Grandpa's does Maya carry?"
+    expected_contains: ["kindness travels", "build beautiful things"]

@@ -1,0 +1,192 @@
+story_id: 234
+story_name: "Allergic Reaction at Thai Orchid"
+category: "Health"
+description: |
+  Tests system handling a medical emergency. Maya has an allergic reaction at a restaurant
+  despite being careful. ER visit. Verifies emergency event tracking, location, and
+  medical response details.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 7:00 PM"
+    user_input: |
+      oh god ok so we went to Thai Orchid tonight on like Division and I specifically asked about shellfish and they said the pad see ew was safe no shrimp no shellfish and I ordered it and it tasted fine but like twenty minutes in my lips started tingling
+    expected_memory_stores:
+      - "Thai Orchid"
+      - "Division"
+      - "pad see ew"
+      - "asked about shellfish"
+      - "told safe"
+      - "lips tingling"
+      - "twenty minutes in"
+    expected_triples:
+      - ["user", "ate_at", "Thai Orchid on Division"]
+      - ["user", "ordered", "pad see ew after confirming shellfish safe"]
+      - ["user", "experienced", "lips tingling twenty minutes in"]
+    expected_adaptation:
+      emotion_detected: "alarmed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 7:30 PM"
+    user_input: |
+      then my throat started to feel tight and my stomach was cramping and I looked at Julian and said I think something's wrong and he went white and said do you have your EpiPen and I did it was in my purse and he was like should we use it
+    expected_memory_stores:
+      - "throat tight"
+      - "stomach cramping"
+      - "Julian went white"
+      - "EpiPen in purse"
+      - "should we use it"
+    expected_triples:
+      - ["user", "experienced", "throat tightness and stomach cramps"]
+      - ["user", "had", "EpiPen in purse"]
+      - ["user", "has_emotion", "terrified"]
+    expected_adaptation:
+      emotion_detected: "terrified"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 7:35 PM"
+    user_input: |
+      I used the EpiPen in the restaurant bathroom and the adrenaline hit was intense like my heart was racing and the tingling in my throat eased a little but Julian called 911 because Dr. Nassif said always go to the ER after using an EpiPen even if you feel better
+    expected_memory_stores:
+      - "used EpiPen"
+      - "restaurant bathroom"
+      - "adrenaline"
+      - "heart racing"
+      - "throat eased"
+      - "Julian called 911"
+      - "always go to ER after"
+    expected_adaptation:
+      emotion_detected: "panicking"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 8:30 PM"
+    user_input: |
+      at the ER now at Providence Portland and they gave me IV Benadryl and steroids and they're monitoring me for a biphasic reaction which is apparently when the allergic reaction comes back a few hours later and Julian is holding my hand and trying not to freak out
+    expected_memory_stores:
+      - "ER"
+      - "Providence Portland"
+      - "IV Benadryl"
+      - "steroids"
+      - "biphasic reaction risk"
+      - "Julian holding hand"
+    expected_adaptation:
+      emotion_detected: "scared"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 9:00 PM"
+    user_input: |
+      the ER doctor said it was definitely an allergic reaction to shellfish and that the restaurant probably used shrimp paste in the sauce or cooked it in the same pan as shrimp dishes and that cross contamination is the biggest danger for shellfish allergies
+    expected_memory_stores:
+      - "ER doctor confirmed"
+      - "shrimp paste in sauce"
+      - "shared pan"
+      - "cross contamination"
+      - "biggest danger"
+    expected_adaptation:
+      emotion_detected: "angry"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:00 PM"
+    user_input: |
+      what restaurant did I have the allergic reaction at and what happened
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 11:00 PM"
+    user_input: |
+      Clara called because Julian texted her and she was in full nurse mode asking about my vitals and what meds they gave me and she talked to the ER nurse for like five minutes and then she told me I did the right thing using the EpiPen immediately
+    expected_memory_stores:
+      - "Clara called"
+      - "nurse mode"
+      - "talked to ER nurse"
+      - "did right thing"
+      - "EpiPen immediately"
+    expected_adaptation:
+      emotion_detected: "shaken"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Sunday 1:00 AM"
+    user_input: |
+      they're keeping me for observation for four hours total and no biphasic reaction so far and the swelling in my throat went down and the cramps stopped and I'm just tired and Julian is asleep in the chair next to me and I'm grateful but also so angry at that restaurant
+    expected_memory_stores:
+      - "four hour observation"
+      - "no biphasic reaction"
+      - "swelling down"
+      - "cramps stopped"
+      - "Julian sleeping in chair"
+      - "angry at restaurant"
+    expected_adaptation:
+      emotion_detected: "angry"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 3:00 AM"
+    user_input: |
+      discharged from the ER and we're driving home and I'm exhausted and scared and I keep touching my throat like checking that it's still open and Julian said we're never going back to Thai Orchid and I said obviously and he said maybe we should write a review and I said oh I will
+    expected_memory_stores:
+      - "discharged"
+      - "driving home"
+      - "touching throat"
+      - "never going back"
+      - "write review"
+    expected_adaptation:
+      emotion_detected: "traumatized"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 10:00 AM"
+    user_input: |
+      woke up late and the EpiPen injection site is bruised and I feel drained and Julian made me soup and I just sat on the couch with Kobe thinking about how fast it happened like one minute I was eating dinner and the next I couldn't breathe and it's terrifying to know my body can betray me like that
+    expected_memory_stores:
+      - "injection site bruised"
+      - "drained"
+      - "Julian made soup"
+      - "how fast it happened"
+      - "couldn't breathe"
+      - "body betrayal"
+    expected_adaptation:
+      emotion_detected: "shaken"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where did Maya have the allergic reaction?"
+    expected_contains: ["Thai Orchid"]
+  - question: "What did Maya eat that caused the reaction?"
+    expected_contains: ["pad see ew"]
+  - question: "What caused the cross contamination?"
+    expected_contains: ["shrimp paste", "shared pan"]
+  - question: "Did Maya use the EpiPen?"
+    expected_contains: ["yes"]
+  - question: "Where did Maya go to the ER?"
+    expected_contains: ["Providence Portland"]
+  - question: "What treatment did Maya receive?"
+    expected_contains: ["IV Benadryl", "steroids"]
+  - question: "What is a biphasic reaction?"
+    expected_contains: ["comes back", "hours later"]
+  - question: "Was Maya discharged?"
+    expected_contains: ["yes"]
+  - question: "What symptoms did Maya experience?"
+    expected_contains: ["lips tingling", "throat tight", "cramps"]
+  - question: "How is Maya feeling after the incident?"
+    expected_contains: ["scared", "angry", "shaken"]

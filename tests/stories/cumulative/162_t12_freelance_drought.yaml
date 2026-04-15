@@ -1,0 +1,176 @@
+story_id: 162
+story_name: "Freelance Drought"
+category: "Career"
+description: |
+  Julian's freelance pipeline dries up further. Financial stress mounts.
+  Tests tracking financial state changes, emotional deterioration, and
+  relationship strain from external pressure.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 6:00 PM"
+    user_input: |
+      it's been two weeks since Julian lost Thornton and things are not great like he picked up that one logo job for $800 and he has one other small client paying $600 a month for social media graphics but that's it his income went from like $7000 a month to barely $1400 and he's spiraling a little
+    expected_memory_stores:
+      - "two weeks since Thornton loss"
+      - "logo job $800"
+      - "small client $600/month"
+      - "income dropped to $1400"
+      - "Julian spiraling"
+    expected_adaptation:
+      emotion_detected: "worried"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 10:00 AM"
+    user_input: |
+      Julian barely left his desk yesterday he was on Behance and Dribbble refreshing looking at what other designers are doing and I think it's making him feel worse like comparison is the thief of joy or whatever and he keeps saying stuff like maybe I'm not good enough and it breaks my heart
+    expected_memory_stores:
+      - "Julian comparing himself"
+      - "Behance and Dribbble"
+      - "self-doubt"
+      - "Maya heartbroken"
+    expected_adaptation:
+      emotion_detected: "sad"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      we had a kind of tense conversation tonight because I suggested maybe he should do some spec work or lower his rates temporarily and he got defensive and said I'm not devaluing my work Maya and I was like I'm not saying that I'm just trying to help and then Kobe barked at us because he hates when we get loud and we both apologized to the dog which broke the tension a little
+    expected_memory_stores:
+      - "argument about rates"
+      - "Julian defensive"
+      - "Maya trying to help"
+      - "Kobe barked"
+      - "tension resolved"
+    expected_adaptation:
+      emotion_detected: "tense"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 9:00 AM"
+    user_input: |
+      Julian apologized this morning and said I know you're trying to help and I'm sorry I snapped and I said it's okay I know this is hard and we hugged and then he said he's going to seriously apply to Bold Studio today because this freelance drought isn't going to fix itself overnight
+    expected_memory_stores:
+      - "Julian apologized"
+      - "reconciliation"
+      - "Bold Studio application"
+      - "freelance drought acknowledged"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 2:00 PM"
+    user_input: |
+      another client inquiry came in but it turned out to be one of those people who wants a full brand identity for like $300 and Julian was like no thank you and I'm proud of him for not taking it because that's exploitative but also I could see it hurt him to say no when money's tight
+    expected_memory_stores:
+      - "lowball client inquiry"
+      - "full brand identity for $300"
+      - "Julian declined"
+      - "Maya proud but concerned"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 11:00 AM"
+    user_input: |
+      Julian submitted his Bold Studio application last night and he spent like four hours on it his portfolio is amazing honestly like he redesigned the whole thing and wrote this cover letter about how freelancing taught him versatility and client management and I edited it for him because hi software engineer grammar nerd here
+    expected_memory_stores:
+      - "Bold Studio application submitted"
+      - "portfolio redesigned"
+      - "cover letter about freelancing"
+      - "Maya edited it"
+    expected_adaptation:
+      emotion_detected: "supportive"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Monday 9:00 AM"
+    user_input: |
+      Julian got an email from Bold Studio already and they want to do a phone screen like they were impressed by his portfolio apparently and the call is Wednesday at 2pm with someone from their HR team and Julian literally jumped up from his chair and Kobe thought they were playing and started jumping too it was chaos
+    expected_memory_stores:
+      - "Bold Studio phone screen"
+      - "Wednesday 2pm"
+      - "HR team"
+      - "impressed by portfolio"
+      - "Julian excited"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 3:00 PM"
+    user_input: |
+      Julian just got off the phone screen and he said it went really well the HR person was named Lisa and she said they have three candidates for the role and they want to bring Julian in for an in-person interview next Monday where he'd meet the creative director who's um I think he said the name was Kevin Park
+    expected_memory_stores:
+      - "phone screen went well"
+      - "HR person Lisa"
+      - "three candidates"
+      - "in-person interview Monday"
+      - "creative director Kevin Park"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      Julian's prepping for the interview he pulled out his best work examples and he's practicing talking about his design process and I'm quizzing him like a mock interview and he's actually really good at articulating his thinking when he's not nervous and I keep telling him just be yourself
+    expected_memory_stores:
+      - "Julian prepping for interview"
+      - "Maya mock interviewing"
+      - "Julian good at articulating"
+      - "nervousness"
+    expected_adaptation:
+      emotion_detected: "encouraging"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 7:00 AM"
+    user_input: |
+      I know this is Julian's thing not mine but I'm weirdly nervous about it too like I want this for him so bad because he deserves stability and a team and health insurance that's not dependent on my job and honestly selfishly with the wedding costs I'd feel a lot better if we had two stable incomes again
+    expected_memory_stores:
+      - "Maya nervous for Julian"
+      - "wants stability for Julian"
+      - "health insurance concern"
+      - "wedding costs pressure"
+      - "two stable incomes desired"
+    expected_adaptation:
+      emotion_detected: "anxious hope"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How much is Julian currently making freelancing?"
+    expected_contains: ["1400"]
+  - question: "Has Julian applied to Bold Studio?"
+    expected_contains: ["yes", "applied"]
+  - question: "When is Julian's in-person interview at Bold Studio?"
+    expected_contains: ["Monday"]
+  - question: "Who is the creative director at Bold Studio?"
+    expected_contains: ["Kevin Park"]
+  - question: "How many candidates are there for the Bold Studio role?"
+    expected_contains: ["three"]
+  - question: "Did Julian and Maya fight about his freelance situation?"
+    expected_contains: ["argument", "rates", "tense"]
+  - question: "Why did Julian decline the $300 brand identity project?"
+    expected_contains: ["exploitative", "lowball"]
+  - question: "Who helped Julian edit his cover letter?"
+    expected_contains: ["Maya"]
+  - question: "What is Julian's financial situation since losing Thornton?"
+    expected_contains: ["dropped", "1400", "drought"]
+  - question: "Why does Maya want Julian to get the Bold Studio job?"
+    expected_contains: ["stability", "insurance", "wedding"]

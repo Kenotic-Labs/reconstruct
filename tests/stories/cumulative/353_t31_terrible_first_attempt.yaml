@@ -1,0 +1,169 @@
+story_id: 353
+story_name: "Terrible First Ramen Attempt"
+category: "Food and Cooking"
+description: |
+  Tests memory of Maya's disastrous first attempt at making ramen from scratch.
+  Verifies system captures failure details, emotional response, and learning moments.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 6:30 AM"
+    user_input: |
+      okay I'm up at 6 AM on a Saturday which is honestly criminal but the bones are soaking and I'm drinking coffee and watching this Japanese chef on YouTube do it and it looks so easy when he does it
+    expected_memory_stores:
+      - "6 AM start"
+      - "bones soaking"
+      - "YouTube Japanese chef"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 9:00 AM"
+    user_input: |
+      so I boiled the bones for like the initial blanch thing where you dump the first water and oh my god the smell was like so intense Julian actually left the apartment and took Kobe for a walk because it was that bad and I'm like is this normal
+    expected_memory_stores:
+      - "initial blanching"
+      - "terrible smell"
+      - "Julian left apartment"
+      - "Kobe walk"
+    expected_adaptation:
+      emotion_detected: "uncertain"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 12:00 PM"
+    user_input: |
+      its been like five hours of simmering and the broth is supposed to be this beautiful milky white color but mine looks like dirty dishwater and I don't know what I'm doing wrong I followed the recipe exactly or like mostly exactly
+    expected_memory_stores:
+      - "five hours simmering"
+      - "broth too thin"
+      - "not milky white"
+      - "dirty dishwater appearance"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 2:30 PM"
+    user_input: |
+      I think the problem is I didn't have the heat high enough like apparently for tonkotsu you need a really aggressive rolling boil not a gentle simmer and I've been treating it like soup which is wrong wrong wrong
+    expected_memory_stores:
+      - "heat too low"
+      - "needs rolling boil"
+      - "treated like soup"
+      - "technique error identified"
+    expected_adaptation:
+      emotion_detected: "self-critical"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 4:00 PM"
+    user_input: |
+      turned the heat way up but now it's like ten hours in and I think it's too late to fix it and also my tare is way too salty because I used regular soy sauce not the usukuchi and I forgot I had the usukuchi in the bag still sitting there unused
+    expected_memory_stores:
+      - "too late to fix broth"
+      - "tare too salty"
+      - "used wrong soy sauce"
+      - "forgot usukuchi"
+    expected_adaptation:
+      emotion_detected: "defeated"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 5:30 PM"
+    user_input: |
+      Julian came back and tried the broth and he was like hmm it's not bad which is Julian code for it's terrible and I'm like just be honest and he was like okay it's a little watery and bland and I wanted to cry honestly
+    expected_memory_stores:
+      - "Julian taste test"
+      - "watery and bland"
+      - "Julian tried to be nice"
+      - "Maya upset"
+    expected_adaptation:
+      emotion_detected: "disappointed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 6:00 PM"
+    user_input: |
+      I assembled it anyway because I spent the whole day on this and the noodles were at least good the Sun Noodle ones cooked up nice but the broth was just sad and the eggs weren't soft boiled enough they were like medium hard and the chashu was chewy not melt in your mouth
+    expected_memory_stores:
+      - "assembled anyway"
+      - "noodles good"
+      - "broth sad"
+      - "eggs overcooked"
+      - "chashu chewy"
+    expected_adaptation:
+      emotion_detected: "defeated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 7:00 PM"
+    user_input: |
+      what went wrong with the broth today like what was the main problem
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 8:00 PM"
+    user_input: |
+      Jenny FaceTimed me and I showed her the bowl and she was like oh honey and then she googled it and said most people's first attempt is terrible and it takes like five or six tries to get it right which actually made me feel better
+    expected_memory_stores:
+      - "Jenny FaceTime"
+      - "first attempts usually bad"
+      - "5-6 tries to get right"
+      - "felt better"
+    expected_adaptation:
+      emotion_detected: "comforted"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 9:30 PM"
+    user_input: |
+      okay I'm not giving up I already made a list of what to fix next time like higher heat from the start use the right soy sauce marinate the eggs longer and get pork belly not pork loin for the chashu because that was definitely the wrong cut
+    expected_memory_stores:
+      - "not giving up"
+      - "fix list"
+      - "higher heat"
+      - "correct soy sauce"
+      - "longer egg marination"
+      - "pork belly not loin"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How did Maya's first ramen attempt turn out?"
+    expected_contains: ["terrible", "watery", "bland"]
+  - question: "What was the main problem with the broth?"
+    expected_contains: ["heat", "low", "simmer"]
+  - question: "What soy sauce mistake did Maya make?"
+    expected_contains: ["usukuchi", "regular", "wrong"]
+  - question: "How were the eggs?"
+    expected_contains: ["overcooked", "hard"]
+  - question: "What was wrong with the chashu?"
+    expected_contains: ["chewy", "wrong cut", "loin"]
+  - question: "What did Julian say about the broth?"
+    expected_contains: ["watery", "bland"]
+  - question: "What did Jenny say about first attempts?"
+    expected_contains: ["five", "six", "tries"]
+  - question: "What noodle brand worked well?"
+    expected_contains: ["Sun Noodle"]
+  - question: "How long did Maya spend on the broth?"
+    expected_contains: ["ten hours", "all day"]
+  - question: "Is Maya going to try again?"
+    expected_contains: ["yes", "not giving up"]

@@ -1,0 +1,175 @@
+story_id: 520
+story_name: "The House Identity"
+category: "Hosting and Entertaining"
+description: |
+  Maya reflects on becoming "the house" in the friend group. Hosting as identity
+  and relationship glue. Cross-references all hosting events, house renovation (T41-T45),
+  relationship growth, and community building.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      so I was looking at my calendar and in the last three months we've hosted like eight events at our house between the dinner parties and the test Thanksgiving and the real Thanksgiving and Christmas and I was like when did we become these people and Julian said we became these people the day we bought this house
+    expected_memory_stores:
+      - "eight events in three months"
+      - "dinner parties Thanksgiving Christmas"
+      - "when did we become these people"
+      - "since buying house"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 8:30 PM"
+    user_input: |
+      Julian showed me his phone and he's got a spreadsheet of cocktail recipes organized by themed night and he said I want to create a signature cocktail for every month and I said Julian you have a full time job in graphic design and he said this IS my full time job and I was like sir
+    expected_memory_stores:
+      - "Julian cocktail spreadsheet"
+      - "monthly signature cocktails"
+      - "Julian prioritizing cocktails"
+      - "graphic design job"
+    expected_adaptation:
+      emotion_detected: "endeared"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 10:00 AM"
+    user_input: |
+      Clara texted the group chat and said ok what's the next Woodstock Table event and everyone immediately started throwing out ideas and Omar wants Korean BBQ night and Raj wants Indian night with his mom's curry and Leila suggested brunch which is actually genius because we've never done a daytime thing
+    expected_memory_stores:
+      - "group chat planning"
+      - "Woodstock Table reference"
+      - "Omar wants Korean BBQ"
+      - "Raj wants Indian"
+      - "Leila suggests brunch"
+    expected_adaptation:
+      emotion_detected: "popular"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      Priya mentioned at work that she told her husband about the dumplings and he wants to come next time and I'm like my coworkers are now asking for invitations to my dinner parties and I thought about a year ago when I was just a quiet engineer who ate lunch alone at Conduit and now I'm apparently a socialite who hosts themed dinners
+    expected_memory_stores:
+      - "Priya's husband wants invite"
+      - "coworkers asking for invitations"
+      - "transformation from quiet engineer"
+      - "ate lunch alone a year ago"
+    expected_adaptation:
+      emotion_detected: "amazed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 5:00 PM"
+    user_input: |
+      talked to Dr. Tate about the hosting thing and she said it's interesting because a year ago you struggled with connection and isolation and now you've created this space where connection happens naturally and I said I think buying the house changed something fundamental and she said the house was the container but you're the one who filled it
+    expected_memory_stores:
+      - "Dr. Tate session"
+      - "connection vs isolation"
+      - "house as container"
+      - "Maya filled it"
+    expected_adaptation:
+      emotion_detected: "insightful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      Jenny called from Denver and said she's jealous of the Woodstock Table and she wished she lived closer and I said Jenny you can visit anytime and she said I know but it's not the same as being part of the regular thing and I felt sad for a second because Jenny was my first real Portland friend and now she's in Denver
+    expected_memory_stores:
+      - "Jenny jealous of Woodstock Table"
+      - "wishes she lived closer"
+      - "not the same as regular"
+      - "Jenny first Portland friend"
+      - "sadness about distance"
+    expected_adaptation:
+      emotion_detected: "wistful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 8:00 PM"
+    user_input: |
+      I made a list of all the recipes I've cooked for people this year miso ramen grandpa's dumplings gyoza the terrible chicken the good chicken Julian's carnitas okay I didn't make those but I facilitated them and the list is like fifteen dishes and I went from burning scrambled eggs to feeding twenty people and I can't even believe it
+    expected_memory_stores:
+      - "recipe list"
+      - "fifteen dishes"
+      - "from burning eggs to feeding twenty"
+      - "cooking growth"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 6:00 PM"
+    user_input: |
+      Greg knocked on the door and gave us a jar of honey from his backyard bees that I didn't even know he had and he said it's a thank you for the Christmas party and I tasted it and it's incredible and Julian said we have to use this in a cocktail and I said we have to use this in everything and Greg grew bees this whole time and I had no idea
+    expected_memory_stores:
+      - "Greg brought honey"
+      - "backyard bees"
+      - "thank you for Christmas"
+      - "incredible honey"
+      - "didn't know about bees"
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 11:00 AM"
+    user_input: |
+      went to the farmers market and the woman at the honey stand knows me now and the cheese guy knows me now and I realize I'm becoming a regular at places in my neighborhood and between the market and the nursery and New Seasons and the gym and the house I've actually put down roots here like real roots not just an address
+    expected_memory_stores:
+      - "farmers market regulars"
+      - "neighborhood familiarity"
+      - "market nursery New Seasons gym"
+      - "real roots not just address"
+    expected_adaptation:
+      emotion_detected: "grounded"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 6:00 PM"
+    user_input: |
+      Saturday night and nobody's coming over tonight and it's just me and Julian and Kobe and a quiet dinner and it's nice actually like the hosting is wonderful but so is this just us in our kitchen eating pasta and Kobe begging and the rain outside and the cherry tree growing in the dark and I don't need people here to feel like this is home it already is
+    expected_memory_stores:
+      - "quiet night alone"
+      - "balance of hosting and quiet"
+      - "pasta dinner"
+      - "home without guests"
+      - "cherry tree in dark"
+    expected_adaptation:
+      emotion_detected: "at peace"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How many events has Maya hosted in three months?"
+    expected_contains: ["eight"]
+  - question: "What is the name of the dinner party series?"
+    expected_contains: ["Woodstock Table"]
+  - question: "What did Dr. Tate say about the house and connection?"
+    expected_contains: ["container", "filled it"]
+  - question: "What did Greg give Maya as a thank you?"
+    expected_contains: ["honey", "bees"]
+  - question: "What themed night ideas are in the pipeline?"
+    expected_contains: ["Korean BBQ", "Indian", "brunch"]
+  - question: "How has Maya changed socially in a year?"
+    expected_contains: ["quiet engineer", "ate alone", "socialite", "hosts"]
+  - question: "How many dishes has Maya cooked for people?"
+    expected_contains: ["fifteen"]
+  - question: "Why is Jenny sad about the Woodstock Table?"
+    expected_contains: ["Denver", "wishes", "closer"]
+  - question: "Does Maya enjoy quiet nights too?"
+    expected_contains: ["yes", "nice", "home"]
+  - question: "What surprised Maya about Greg?"
+    expected_contains: ["bees", "honey", "backyard"]

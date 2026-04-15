@@ -1,0 +1,186 @@
+story_id: 250
+story_name: "Mental Health Arc Reflection"
+category: "Mental Health"
+description: |
+  Tests full mental health arc reconstruction. Maya reflects on the complete journey
+  from breakdown to thriving. Verifies system can reconstruct medication changes,
+  diagnosis corrections, therapy progression, and identity integration.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 8:00 AM"
+    user_input: |
+      woke up today feeling rested and calm and the sun is coming through the window and Kobe is snoring and Julian is still asleep and I just lay here for a minute and thought about how different this is from three months ago when I couldn't sleep and couldn't breathe and couldn't stop my brain
+    expected_memory_stores:
+      - "rested and calm"
+      - "morning peace"
+      - "three months ago comparison"
+      - "couldn't sleep breathe"
+      - "brain wouldn't stop"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 9:00 AM"
+    user_input: |
+      thinking about the whole arc like it started with the PIP and I spiraled and I couldn't sleep and I had panic attacks and Clara said you are not fine and I made the call to Dr. Tate and that one phone call changed everything
+    expected_memory_stores:
+      - "full arc recap"
+      - "PIP trigger"
+      - "spiraled"
+      - "panic attacks"
+      - "Clara intervention"
+      - "Dr. Tate phone call"
+      - "changed everything"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 9:30 AM"
+    user_input: |
+      the medication journey was wild like first GAD diagnosis then Lexapro which made me a zombie and then the switch to Wellbutrin which actually worked and then the diagnosis correction to adjustment disorder and through all of it Dr. Tate was steady and patient and I trust her completely
+    expected_memory_stores:
+      - "medication journey"
+      - "GAD then adjustment disorder"
+      - "Lexapro zombie"
+      - "Wellbutrin worked"
+      - "diagnosis correction"
+      - "Dr. Tate steady"
+      - "complete trust"
+    expected_adaptation:
+      emotion_detected: "appreciative"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 10:00 AM"
+    user_input: |
+      the CBT tools literally rewired how I think like I used to have a thought and believe it automatically and now I question it and that sounds small but it's actually the biggest change I've ever made in my life because it touches everything not just anxiety
+    expected_memory_stores:
+      - "CBT rewired thinking"
+      - "used to believe thoughts"
+      - "now questions them"
+      - "biggest change ever"
+      - "touches everything"
+    expected_adaptation:
+      emotion_detected: "enlightened"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 12:00 PM"
+    user_input: |
+      went for a run along the waterfront and then swam at Matt Dishman and I thought about how my body has been through so much this year with the knee and the allergy and the anxiety and it's still carrying me forward and I need to be kinder to it
+    expected_memory_stores:
+      - "ran and swam"
+      - "waterfront and Matt Dishman"
+      - "body been through a lot"
+      - "knee allergy anxiety"
+      - "still carrying forward"
+      - "be kinder to body"
+    expected_adaptation:
+      emotion_detected: "compassionate"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 2:00 PM"
+    user_input: |
+      summarize my entire mental health journey from the PIP to now
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 4:00 PM"
+    user_input: |
+      Julian and I went to look at wedding stuff at a boutique and I tried on a dress just for fun and when I looked in the mirror I saw someone who has been through hell and came out whole and Julian was behind me grinning and I said I think this might be the one and he said babe it's definitely the one
+    expected_memory_stores:
+      - "wedding boutique"
+      - "tried on dress"
+      - "through hell came out whole"
+      - "might be the one"
+      - "Julian agreed"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 6:00 PM"
+    user_input: |
+      called my mom and told her about the dress and Vivian started crying immediately and my dad George got on the phone and said Maya your grandfather would be so proud of the woman you've become and I said I know dad I carry him with me every day and I touched the watch
+    expected_memory_stores:
+      - "called parents"
+      - "Vivian crying about dress"
+      - "George grandpa proud"
+      - "carry him every day"
+      - "touched watch"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 8:00 PM"
+    user_input: |
+      sitting on the back porch looking at grandpa's tree the Japanese maple and it's gotten taller since we planted it and the leaves are this deep red in the sunset light and Kobe is lying next to me and Julian is cooking inside and this moment right here this is what healing looks like
+    expected_memory_stores:
+      - "back porch"
+      - "grandpa's tree"
+      - "Japanese maple taller"
+      - "deep red leaves sunset"
+      - "Kobe next to her"
+      - "Julian cooking"
+      - "what healing looks like"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:00 PM"
+    user_input: |
+      before bed I do the thing I always do now I touch grandpa's watch and say goodnight grandpa and tonight I added and thank you for the resilience and I know that the PIP and the panic attacks and the medication trial and error and all of it led me here to someone who knows herself and I wouldn't change a thing
+    expected_memory_stores:
+      - "nightly ritual"
+      - "goodnight grandpa"
+      - "thank you resilience"
+      - "PIP panic medication"
+      - "led me here"
+      - "knows herself"
+      - "wouldn't change anything"
+    expected_adaptation:
+      emotion_detected: "at peace"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Summarize Maya's mental health journey."
+    expected_contains: ["PIP", "anxiety", "Dr. Tate", "Lexapro", "Wellbutrin", "CBT"]
+  - question: "What was Maya's initial diagnosis?"
+    expected_contains: ["GAD"]
+  - question: "What is Maya's current diagnosis?"
+    expected_contains: ["adjustment disorder"]
+  - question: "What medications did Maya try?"
+    expected_contains: ["Lexapro", "Wellbutrin"]
+  - question: "Why was Lexapro stopped?"
+    expected_contains: ["flat affect", "nausea"]
+  - question: "What therapy techniques does Maya use?"
+    expected_contains: ["cognitive restructuring", "grounding", "behavioral activation"]
+  - question: "How often does Maya see Dr. Tate now?"
+    expected_contains: ["biweekly"]
+  - question: "What is Maya's current GAD-7 score?"
+    expected_contains: ["3"]
+  - question: "What did Maya learn about her thoughts?"
+    expected_contains: ["not always facts", "question them"]
+  - question: "How does Maya describe where she is now?"
+    expected_contains: ["peaceful", "healing", "knows herself"]

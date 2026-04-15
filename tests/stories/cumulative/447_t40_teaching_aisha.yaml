@@ -1,0 +1,171 @@
+story_id: 447
+story_name: "Teaching Aisha"
+category: "Work-Life Balance"
+description: |
+  Maya notices intern Aisha falling into the same overwork pattern. Teaches her
+  the boundary lesson. Passing forward what she learned.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      leaving at 6 today and I noticed Aisha is still at her desk and she was here when I left yesterday at 6 too and the day before that and I'm getting this uncomfortable deja vu because that was me like a month ago just sitting there in the empty office thinking she had to prove herself
+    expected_memory_stores:
+      - "Aisha still at desk"
+      - "third day in a row"
+      - "deja vu"
+      - "Maya sees herself in Aisha"
+    expected_adaptation:
+      emotion_detected: "concerned"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 9:00 AM"
+    user_input: |
+      asked Aisha this morning what time she's been leaving and she said oh like 8 or 9 usually and I said Aisha that's really late for an intern and she said I just want to make sure everything is perfect because this is my first real job and I felt my heart crack a little because I know that feeling so well
+    expected_memory_stores:
+      - "Aisha leaving 8-9pm"
+      - "wants everything perfect"
+      - "first real job"
+      - "Maya recognizes pattern"
+    expected_adaptation:
+      emotion_detected: "empathetic"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 10:00 AM"
+    user_input: |
+      took Aisha to coffee and I told her listen I'm going to tell you something that took me years and a therapist to figure out and she was like ok and I said working until 9pm doesn't make you better it makes you exhausted and exhausted people make mistakes and mistakes create more work and it's a spiral
+    expected_memory_stores:
+      - "coffee with Aisha"
+      - "sharing lesson"
+      - "exhaustion creates mistakes"
+      - "spiral pattern"
+      - "took years to learn"
+    expected_adaptation:
+      emotion_detected: "mentoring"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 10:30 AM"
+    user_input: |
+      I told her about the PIP at Vantage and how it traumatized me into overworking at Conduit and she was like wait you got a PIP and I said yeah and it messed me up for a long time and she said I had no idea because you seem so confident and I was like girl it's all an act sometimes
+    expected_memory_stores:
+      - "shared PIP story"
+      - "Aisha didn't know"
+      - "Maya seems confident"
+      - "it's an act sometimes"
+    expected_adaptation:
+      emotion_detected: "vulnerable"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 11:00 AM"
+    user_input: |
+      told Aisha about the 6pm boundary and how my productivity actually went up and I showed her my sprint velocity numbers and she was like wow 23 versus 18 that's a big jump and I said exactly the constraint made me focus and she said she's going to try it starting tomorrow
+    expected_memory_stores:
+      - "shared 6pm boundary"
+      - "showed sprint numbers"
+      - "23 vs 18"
+      - "Aisha will try"
+      - "starting tomorrow"
+    expected_adaptation:
+      emotion_detected: "hopeful for Aisha"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 5:00 PM"
+    user_input: |
+      I also taught Aisha the night before planning thing with the 3 priorities and she immediately set up a note on her phone for it and she said Maya nobody told me any of this in school and I was like school doesn't teach you how to work it teaches you how to learn those are different things
+    expected_memory_stores:
+      - "taught 3 priorities planning"
+      - "Aisha set up notes"
+      - "school doesn't teach this"
+      - "work vs learn different"
+    expected_adaptation:
+      emotion_detected: "wise"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 6:00 PM"
+    user_input: |
+      Aisha left at 5:45 today and she waved at me on her way out and said day one done and I gave her a thumbs up and she looked like a kid who just learned to ride a bike and I thought about Priya my old manager at Vantage who never taught me any of this and I wish she had
+    expected_memory_stores:
+      - "Aisha left 5:45"
+      - "day one of boundary"
+      - "Priya never taught this"
+      - "wish someone had helped"
+    expected_adaptation:
+      emotion_detected: "bittersweet proud"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 7:00 PM"
+    user_input: |
+      what did I teach Aisha about work life balance this week
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 8:00 PM"
+    user_input: |
+      told Julian I had the Aisha talk today and he said that's really cool that you're passing it forward and he said most people just learn the hard way and don't help others avoid the same mistakes and I was like well I had Dr Tate and now Aisha has me and maybe she'll help someone else someday
+    expected_memory_stores:
+      - "passing it forward"
+      - "Julian proud"
+      - "Dr Tate helped Maya"
+      - "Maya helps Aisha"
+      - "chain of mentorship"
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:00 AM"
+    user_input: |
+      told Dr Tate about the Aisha conversation and she said that's a sign of real healing when you can recognize your own pattern in someone else and intervene instead of just watching and she said you're not just managing your trauma anymore you're transforming it into wisdom and I was like ok that's going on my wall
+    expected_memory_stores:
+      - "Dr Tate proud"
+      - "sign of real healing"
+      - "recognize pattern intervene"
+      - "trauma into wisdom"
+      - "going on wall"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What pattern did Maya notice in Aisha?"
+    expected_contains: ["overworking", "staying late", "8 or 9pm"]
+  - question: "What did Maya teach Aisha?"
+    expected_contains: ["6pm boundary", "3 priorities", "planning"]
+  - question: "Did Maya share her PIP story with Aisha?"
+    expected_contains: ["yes"]
+  - question: "What time did Aisha leave on her first day of the boundary?"
+    expected_contains: ["5:45"]
+  - question: "What productivity numbers did Maya show Aisha?"
+    expected_contains: ["23", "18", "sprint velocity"]
+  - question: "Who does Maya wish had taught her work-life balance?"
+    expected_contains: ["Priya", "manager", "Vantage"]
+  - question: "What did Dr. Tate say about Maya teaching Aisha?"
+    expected_contains: ["healing", "trauma into wisdom"]
+  - question: "Why was Aisha overworking?"
+    expected_contains: ["first real job", "perfect", "prove"]
+  - question: "What did Maya say about what school teaches?"
+    expected_contains: ["how to learn", "not how to work"]
+  - question: "What chain of mentorship does Maya describe?"
+    expected_contains: ["Dr Tate", "Maya", "Aisha"]

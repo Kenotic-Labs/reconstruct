@@ -1,0 +1,186 @@
+story_id: 199
+story_name: "Maya Drives to Sacramento"
+category: "Life Events"
+description: |
+  Maya drives to Sacramento with Julian and Kobe to meet Sophie properly.
+  Kobe meets the baby. Full family gathering. Tests multi-entity family
+  scene tracking and cross-thread state awareness.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 7:00 AM"
+    user_input: |
+      road trip day Julian and I are driving to Sacramento with Kobe because Julian hasn't met Sophie in person yet and Kobe definitely hasn't and it's about a 9 hour drive and Julian packed snacks for the car and I packed a whole suitcase of baby gifts and Kobe is already sleeping in the backseat
+    expected_memory_stores:
+      - "driving to Sacramento"
+      - "Julian Kobe and Maya"
+      - "9 hour drive"
+      - "Julian hasn't met Sophie"
+      - "suitcase of baby gifts"
+      - "Kobe sleeping in backseat"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 4:00 PM"
+    user_input: |
+      arrived at Clara and David's house and Julian walked in and Clara handed him Sophie immediately and Julian just froze like completely stopped moving and stared at this tiny baby in his arms and then he whispered oh my god she's so small and Clara said yeah they tend to be small when they're newborns Julian
+    expected_memory_stores:
+      - "arrived at Clara's house"
+      - "Julian held Sophie first time"
+      - "Julian froze"
+      - "whispered she's so small"
+      - "Clara teasing Julian"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 4:30 PM"
+    user_input: |
+      now for the big moment Kobe meeting Sophie we were nervous because Kobe is a golden retriever and they're gentle but he's also 70 pounds and she's 6 pounds and we brought Kobe in on his leash and he sniffed the air and his tail started wagging slowly and then he walked up to the car seat and gently touched his nose to Sophie's blanket and sat down next to her and just stayed there
+    expected_memory_stores:
+      - "Kobe met Sophie"
+      - "golden retriever 70 pounds"
+      - "Sophie 6 pounds"
+      - "Kobe on leash"
+      - "gentle nose touch"
+      - "Kobe sat next to Sophie"
+      - "protective behavior"
+    expected_adaptation:
+      emotion_detected: "melting"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 6:00 PM"
+    user_input: |
+      Mom and Dad came over for dinner and it's the whole family together for the first time since Sophie was born Maya Julian Kobe Clara David Sophie Mom and Dad and the house was chaos in the best way Kobe lying next to the car seat Dad holding Sophie Julian helping David cook and Mom directing traffic from the kitchen
+    expected_memory_stores:
+      - "whole family together"
+      - "Maya Julian Kobe Clara David Sophie George Vivian"
+      - "beautiful chaos"
+      - "Kobe by car seat"
+      - "George holding Sophie"
+      - "Julian cooking with David"
+      - "Vivian directing"
+    expected_adaptation:
+      emotion_detected: "full heart"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 9:00 PM"
+    user_input: |
+      Julian and David really hit it off they've met before but tonight they were talking for hours about like fatherhood and David's work stories from the fire department and Julian's design work and at one point I looked over and they were just laughing together and I thought my sister married a good one and so did I
+    expected_memory_stores:
+      - "Julian and David bonding"
+      - "fatherhood discussions"
+      - "fire department stories"
+      - "design work"
+      - "laughing together"
+      - "both good partners"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:00 AM"
+    user_input: |
+      this morning I was feeding Sophie a bottle while Clara slept and Julian sat next to me sketching and he was drawing Sophie like a portrait and it was so beautiful and detailed and I said you should frame that for Clara and he said I'm making it her Mother's Day present which is months away but he's thinking ahead and I love that
+    expected_memory_stores:
+      - "Maya feeding Sophie"
+      - "Julian sketching Sophie portrait"
+      - "for Clara Mother's Day"
+      - "Julian thinking ahead"
+    expected_adaptation:
+      emotion_detected: "loving"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 2:00 PM"
+    user_input: |
+      took Kobe for a walk with Dad and Dad was telling me about the dining table commission which is almost done and how Howard and him are thinking about doing the Sacramento farmers market on Saturdays to sell small items like cutting boards and picture frames and I said Dad are you starting a business at 62 and he said Maya I'm just keeping busy
+    expected_memory_stores:
+      - "walk with George and Kobe"
+      - "dining table almost done"
+      - "Sacramento farmers market idea"
+      - "cutting boards picture frames"
+      - "George downplaying business"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 6:00 PM"
+    user_input: |
+      Mom pulled me aside and said Maya how are YOU doing with everything and I said Mom I'm great and she said no really how are you because there's been a lot this year my health scare Dad's retirement Clara's pregnancy your wedding and she said make sure you're taking care of yourself too and I said I am Mom I promise
+    expected_memory_stores:
+      - "Vivian checking on Maya"
+      - "year has been a lot"
+      - "health scare retirement pregnancy wedding"
+      - "Maya assuring she's okay"
+      - "Vivian maternal concern"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 11:00 AM"
+    user_input: |
+      last morning in Sacramento and I'm holding Sophie one more time and she grabbed my finger with her whole tiny hand and she has the strongest grip for something so small and Julian was watching and he said Maya I can't wait to have one of ours someday and I looked at him and said someday but not yet and he said obviously not yet but someday and my heart did a thing
+    expected_memory_stores:
+      - "Sophie grabbed Maya's finger"
+      - "strong grip"
+      - "Julian wants kids someday"
+      - "Maya not yet"
+      - "someday agreement"
+    expected_adaptation:
+      emotion_detected: "tender hope"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 2:00 PM"
+    user_input: |
+      driving home to Portland Julian's driving I'm in the passenger seat and Kobe is sleeping in the back again and I'm looking at photos from the weekend and there's one of the whole family George holding Sophie Vivian next to him Clara and David behind them Julian and me on the side Kobe at our feet and I set it as my phone background and thought this is my family this is everything
+    expected_memory_stores:
+      - "driving home"
+      - "family photo"
+      - "everyone in photo"
+      - "new phone background"
+      - "this is everything"
+    expected_adaptation:
+      emotion_detected: "complete"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Did Julian meet Sophie in person?"
+    expected_contains: ["yes"]
+  - question: "How did Kobe react to Sophie?"
+    expected_contains: ["gentle", "nose touch", "sat next to"]
+  - question: "Did Julian and David get along?"
+    expected_contains: ["yes", "bonding"]
+  - question: "What is Julian drawing for Clara?"
+    expected_contains: ["portrait", "Sophie", "Mother's Day"]
+  - question: "Is George considering selling woodwork at a market?"
+    expected_contains: ["yes", "farmers market"]
+  - question: "Did Julian mention wanting kids?"
+    expected_contains: ["yes", "someday"]
+  - question: "How did Maya get to Sacramento?"
+    expected_contains: ["drove"]
+  - question: "Who was in the family photo?"
+    expected_contains: ["George", "Vivian", "Clara", "David", "Sophie", "Julian", "Maya", "Kobe"]
+  - question: "What did Vivian ask Maya about?"
+    expected_contains: ["taking care of yourself"]
+  - question: "How did Julian react to holding Sophie?"
+    expected_contains: ["froze", "so small"]

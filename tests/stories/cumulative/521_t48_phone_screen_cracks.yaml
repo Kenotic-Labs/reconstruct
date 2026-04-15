@@ -1,0 +1,180 @@
+story_id: 521
+story_name: "Phone Screen Cracks"
+category: "Phone and Digital Life"
+description: |
+  Maya drops her phone on the kitchen tile during renovation chaos and cracks the screen.
+  The beginning of a digital crisis. Cross-references house renovation (T41-T45),
+  cooking (T31), and daily routine.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 9:00 AM"
+    user_input: |
+      ok so I DROPPED MY PHONE on the kitchen tile this morning and the screen is completely shattered like not just a little crack the whole thing is spider webbed and I can barely see anything and it happened because I was trying to hold my phone and a pot at the same time while looking at a recipe and it just slipped right out of my hand onto that stupid new tile we put in during the renovation
+    expected_memory_stores:
+      - "phone dropped"
+      - "screen shattered"
+      - "kitchen tile"
+      - "during cooking"
+      - "renovation tile"
+    expected_adaptation:
+      emotion_detected: "devastated"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 9:30 AM"
+    user_input: |
+      the phone still works technically like I can swipe but I'm getting glass splinters in my fingers and Julian said you need to stop using it and I said I need to check if my photos backed up and he said Maya just stop and I said Julian you don't understand there are photos on here that I haven't backed up
+    expected_memory_stores:
+      - "phone still works"
+      - "glass splinters"
+      - "Julian says stop"
+      - "unbacked up photos"
+    expected_adaptation:
+      emotion_detected: "panicked"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 10:00 AM"
+    user_input: |
+      managed to connect the phone to my laptop with a cable and like most of the recent photos transferred but there's a gap from like October to December that didn't sync to anything and that includes photos from Sophie's first steps which my brother sent me and extra photos from Japan that I didn't post anywhere and Kobe videos from the dog park
+    expected_memory_stores:
+      - "connected to laptop"
+      - "most photos transferred"
+      - "gap October to December"
+      - "Sophie's first steps"
+      - "Japan extras"
+      - "Kobe videos"
+    expected_adaptation:
+      emotion_detected: "devastated"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 12:00 PM"
+    user_input: |
+      I'm crying which is embarrassing because it's a phone but it's NOT just a phone it's two months of my life and Julian said some of those photos might be on Google Photos because I had that turned on at some point and I was like what wait when did I turn that on and he said I think you had it on during the Japan trip
+    expected_memory_stores:
+      - "crying over phone"
+      - "not just a phone"
+      - "Google Photos backup possibility"
+      - "Japan trip had it on"
+    expected_adaptation:
+      emotion_detected: "distressed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 1:30 PM"
+    user_input: |
+      checked Google Photos and YES some of the Japan extras are there and a few Kobe videos but Sophie's first steps video is not there and I texted my brother Danny and asked him to resend it and he said he thinks he still has it and I said Danny please I need that video and he said chill Maya I'll find it
+    expected_memory_stores:
+      - "Google Photos partial recovery"
+      - "Japan extras recovered"
+      - "some Kobe videos recovered"
+      - "Sophie video missing"
+      - "texted brother Danny"
+      - "Danny will look for it"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 3:00 PM"
+    user_input: |
+      went to the Apple Store on NW 23rd and they said the screen replacement is 279 dollars and the phone is an iPhone 12 that's three years old and the guy basically said at this point you might want to just upgrade and I was like I can't afford a new phone right now we just did the renovation and bought the house
+    expected_memory_stores:
+      - "Apple Store NW 23rd"
+      - "screen replacement $279"
+      - "iPhone 12 three years old"
+      - "suggested upgrade"
+      - "can't afford right now"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 5:00 PM"
+    user_input: |
+      Julian found his old iPhone 8 in a drawer and wiped it and set it up for me temporarily and it's SO SLOW like going from a 12 to an 8 is painful and the camera is terrible and the battery dies in like four hours but it works and I can text and call and that's all I need right now
+    expected_memory_stores:
+      - "Julian's old iPhone 8"
+      - "temporary phone"
+      - "slow and bad camera"
+      - "battery dies in four hours"
+    expected_adaptation:
+      emotion_detected: "resigned"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 7:00 PM"
+    user_input: |
+      sitting here with this tiny old iPhone and I realize how dependent I am on my phone like I use it for recipes and music and photos and maps and banking and my calendar and my climbing app and my screen time app which is ironic and without it I feel like I'm missing a limb and that's concerning right
+    expected_memory_stores:
+      - "phone dependency realization"
+      - "recipes music photos maps banking"
+      - "calendar climbing app"
+      - "missing a limb"
+      - "concerning dependency"
+    expected_adaptation:
+      emotion_detected: "introspective"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 10:00 AM"
+    user_input: |
+      Danny sent me the Sophie video this morning and I actually screamed when I got it and immediately saved it in three places laptop Google Drive and Julian's hard drive and I'm never losing a photo again I learned my lesson the hard way and Julian said you should set up iCloud properly this time
+    expected_memory_stores:
+      - "Danny sent Sophie video"
+      - "saved in three places"
+      - "laptop Google Drive hard drive"
+      - "never losing photos again"
+      - "Julian suggests iCloud"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 3:00 PM"
+    user_input: |
+      using the iPhone 8 is actually making me realize I was on my phone way too much before like I can't scroll Instagram because it's too slow and I can't watch TikTok and honestly I've read more of my book today than I have in weeks and Kobe and I went on a walk without me looking at my phone once and it was kind of beautiful
+    expected_memory_stores:
+      - "iPhone 8 limiting usage"
+      - "can't scroll Instagram or TikTok"
+      - "reading more"
+      - "phone-free walk with Kobe"
+      - "silver lining"
+    expected_adaptation:
+      emotion_detected: "contemplative"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How did Maya's phone screen crack?"
+    expected_contains: ["dropped", "kitchen tile"]
+  - question: "What photos did Maya lose?"
+    expected_contains: ["Sophie", "first steps", "Japan", "Kobe"]
+  - question: "What temporary phone is Maya using?"
+    expected_contains: ["iPhone 8", "Julian's old"]
+  - question: "How much was the screen replacement?"
+    expected_contains: ["279"]
+  - question: "What phone did Maya have before?"
+    expected_contains: ["iPhone 12"]
+  - question: "Who sent the Sophie video back?"
+    expected_contains: ["Danny", "brother"]
+  - question: "Where did Maya save the recovered Sophie video?"
+    expected_contains: ["laptop", "Google Drive", "hard drive"]
+  - question: "What realization did the old phone give Maya?"
+    expected_contains: ["dependent", "too much", "phone"]
+  - question: "What did Maya do more of with the slow phone?"
+    expected_contains: ["reading", "walk without phone"]
+  - question: "What did Julian suggest for future photo backup?"
+    expected_contains: ["iCloud"]

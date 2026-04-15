@@ -1,0 +1,175 @@
+story_id: 441
+story_name: "Working Late Every Night"
+category: "Work-Life Balance"
+description: |
+  Maya has been working until 9-10pm every night at Conduit. Establishes
+  the overwork pattern and its impact on her relationship with Julian.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:30 PM"
+    user_input: |
+      just got home from work and Julian is already in bed with Kobe and I feel terrible because this is the third night this week I've worked past 9 and I know he ate dinner alone again and I keep saying it'll get better but honestly the workload at Conduit just keeps growing
+    expected_memory_stores:
+      - "working past 9pm"
+      - "third night this week"
+      - "Julian in bed already"
+      - "ate dinner alone"
+      - "workload growing"
+    expected_adaptation:
+      emotion_detected: "guilty"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 7:00 AM"
+    user_input: |
+      Julian barely talked to me this morning and I know it's because he's upset about me never being home and he didn't say anything directly but he made coffee for himself and not me which is his passive aggressive tell and I wanted to say something but I was already running late
+    expected_memory_stores:
+      - "Julian barely talking"
+      - "didn't make her coffee"
+      - "passive aggressive tell"
+      - "Maya running late"
+    expected_adaptation:
+      emotion_detected: "tense"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      Sam assigned me two more features for the Q2 sprint and I wanted to say Sam I'm already drowning but instead I said sure no problem because that's what I do I say yes to everything at work because I'm terrified of underperforming ever since the PIP at Vantage
+    expected_memory_stores:
+      - "two more features assigned"
+      - "Q2 sprint"
+      - "couldn't say no"
+      - "afraid of underperforming"
+      - "PIP trauma"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Tuesday 8:30 PM"
+    user_input: |
+      still at the office at 8:30 and Lily left at 6 and Omar left at 5:30 and even Sam left at 6:30 and I'm the only one here and the security guard just did his rounds and said you're here late again Maya and I was like yeah and he said your dog misses you and I almost cried because he's right
+    expected_memory_stores:
+      - "still at office 8:30"
+      - "everyone else left"
+      - "Lily 6pm Omar 5:30 Sam 6:30"
+      - "security guard comment"
+      - "dog misses you"
+    expected_adaptation:
+      emotion_detected: "isolated"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 10:00 PM"
+    user_input: |
+      got home at 10 and Julian was on the couch and he just looked at me and said Maya this isn't working and I knew exactly what he meant and I sat down and he said I feel like I'm living alone in our house and you're building something at Conduit that I never get to be part of
+    expected_memory_stores:
+      - "home at 10pm"
+      - "Julian confrontation"
+      - "this isn't working"
+      - "feels like living alone"
+      - "never part of Maya's work"
+    expected_adaptation:
+      emotion_detected: "confronted"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 10:15 PM"
+    user_input: |
+      I got defensive immediately like I said I'm building our future Julian and he said our future doesn't exist if we don't have a present and that hit me like a punch because he's right and I hate when he's right but also I felt attacked and I said you don't understand the pressure I'm under
+    expected_memory_stores:
+      - "Maya defensive"
+      - "building our future"
+      - "future doesn't exist without present"
+      - "felt attacked"
+      - "pressure at work"
+    expected_adaptation:
+      emotion_detected: "defensive"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 10:30 PM"
+    user_input: |
+      the argument got heated and Julian said when's the last time we did something together that wasn't like a chore or an errand and I couldn't answer because honestly I don't remember and he said exactly and I started crying because I didn't realize it had gotten this bad
+    expected_memory_stores:
+      - "argument escalated"
+      - "when did something together"
+      - "couldn't answer"
+      - "Maya crying"
+      - "didn't realize how bad"
+    expected_adaptation:
+      emotion_detected: "breaking down"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 11:00 PM"
+    user_input: |
+      what time have I been getting home from work lately
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 11:15 PM"
+    user_input: |
+      we calmed down and sat on the couch and Kobe came over and put his head between us like he always does when we argue because he hates tension and Julian said I'm not trying to fight I'm trying to get my partner back and I said I know I'm sorry I'll figure this out
+    expected_memory_stores:
+      - "calmed down"
+      - "Kobe mediator"
+      - "Kobe hates tension"
+      - "Julian wants partner back"
+      - "Maya promises to figure out"
+    expected_adaptation:
+      emotion_detected: "vulnerable"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 6:00 AM"
+    user_input: |
+      woke up early and Julian was already up making coffee for both of us which means we're ok and he left a note on my mug that said I love you but I miss you and I put it in my wallet because I need to remember that feeling today when I'm tempted to stay late again
+    expected_memory_stores:
+      - "Julian making coffee again"
+      - "note on mug"
+      - "I love you but I miss you"
+      - "put in wallet"
+      - "reminder to leave on time"
+    expected_adaptation:
+      emotion_detected: "determined to change"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What time has Maya been working until?"
+    expected_contains: ["9", "10", "PM"]
+  - question: "What did Julian say about their relationship?"
+    expected_contains: ["living alone", "isn't working"]
+  - question: "Why can't Maya say no at work?"
+    expected_contains: ["PIP", "Vantage", "underperforming"]
+  - question: "What was Julian's passive aggressive tell?"
+    expected_contains: ["didn't make coffee"]
+  - question: "What does Kobe do when Maya and Julian argue?"
+    expected_contains: ["head between them", "hates tension"]
+  - question: "What did the security guard say to Maya?"
+    expected_contains: ["dog misses you"]
+  - question: "What note did Julian leave Maya?"
+    expected_contains: ["I love you but I miss you"]
+  - question: "What did Maya say defensively about working late?"
+    expected_contains: ["building our future"]
+  - question: "What was Julian's response to 'building our future'?"
+    expected_contains: ["future doesn't exist", "without present"]
+  - question: "Who else at Conduit works as late as Maya?"
+    expected_contains: ["no one", "only one"]

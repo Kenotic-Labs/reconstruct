@@ -1,0 +1,176 @@
+story_id: 518
+story_name: "Julian's Cocktail Obsession"
+category: "Hosting and Entertaining"
+description: |
+  Julian's cocktail making evolves from hobby to obsession. New equipment, recipe book,
+  friends encouraging him. Cross-references dinner parties, Julian relationship,
+  house renovation (T41-T45), and digital life (T48).
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      so Julian has gone fully down the cocktail rabbit hole and he bought a cocktail shaker set for like 80 bucks and a jigger and a muddler and a strainer and these specific ice molds that make perfect cubes and I said Julian we are not a bar and he said not yet
+    expected_memory_stores:
+      - "Julian cocktail equipment"
+      - "shaker set $80"
+      - "jigger muddler strainer"
+      - "ice cube molds"
+      - "not yet joke"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      Julian's been practicing cocktails every night this week and I am his test subject and tonight he made a smoked old fashioned where he literally torches a piece of wood over the glass and I was like Julian this is extra even for you and it tasted incredible though I'll give him that
+    expected_memory_stores:
+      - "nightly cocktail practice"
+      - "Maya as test subject"
+      - "smoked old fashioned"
+      - "torch over glass"
+      - "tasted incredible"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 6:00 PM"
+    user_input: |
+      Ben posted the video of Julian's smoked old fashioned on Instagram and it got like 200 likes and Julian was so pumped and now he's talking about starting a cocktail Instagram and I said Julian you work in graphic design please don't become a cocktail influencer and he said too late I already bought the ring light
+    expected_memory_stores:
+      - "Ben posted video"
+      - "200 likes"
+      - "Julian wants cocktail Instagram"
+      - "Julian works in graphic design"
+      - "bought ring light"
+    expected_adaptation:
+      emotion_detected: "entertained"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 11:00 AM"
+    user_input: |
+      went to Powell's together and Julian bought this book called the Death and Co cocktail bible and he's been reading it like it's a novel and marking pages and I have to admit it's really cute seeing him this excited about something it's like how I got about ramen after Japan
+    expected_memory_stores:
+      - "Powell's bookstore"
+      - "Death and Co cocktail book"
+      - "Julian excited"
+      - "parallel to Maya's ramen obsession"
+    expected_adaptation:
+      emotion_detected: "endeared"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 5:00 PM"
+    user_input: |
+      Julian reorganized the bar cart in the living room the one we got during the renovation and it looks actually professional now like bottles organized by spirit type and his new tools on display and Kobe keeps sniffing the lower shelf and Julian's like Kobe bourbon is not for dogs
+    expected_memory_stores:
+      - "bar cart reorganized"
+      - "from renovation"
+      - "organized by spirit type"
+      - "Kobe sniffing shelf"
+    expected_adaptation:
+      emotion_detected: "domestic"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      Julian made a cocktail that specifically pairs with my miso ramen like he designed it to complement the umami flavors it's got sake and yuzu juice and a little bit of ginger and he called it the Ramen Companion and I was like ok that's actually genius
+    expected_memory_stores:
+      - "ramen cocktail pairing"
+      - "sake yuzu ginger"
+      - "the Ramen Companion"
+      - "pairs with miso ramen"
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 8:00 PM"
+    user_input: |
+      Raj came over just to try Julian's cocktails not even for dinner and they spent two hours experimenting and Raj suggested adding cardamom to a whiskey drink and Julian tried it and it was amazing and now they're talking about doing a cocktail night that's just cocktails no food and I was like EXCUSE ME I'm the food person
+    expected_memory_stores:
+      - "Raj came for cocktails only"
+      - "cardamom whiskey experiment"
+      - "cocktail night idea"
+      - "Maya offended about no food"
+    expected_adaptation:
+      emotion_detected: "playfully offended"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 3:00 PM"
+    user_input: |
+      took a photo of Julian's bar cart and the setup and sent it to his mom Diane and she responded saying well that's quite the setup isn't it and I can't tell if she's being supportive or judgy which is very Diane and Julian said don't read into it she's just jealous because George only drinks beer
+    expected_memory_stores:
+      - "sent photo to Diane"
+      - "Diane ambiguous response"
+      - "can't tell if supportive or judgy"
+      - "George only drinks beer"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 10:00 AM"
+    user_input: |
+      realized Julian and I have basically become this hosting power couple where I do the food and he does the drinks and the house and the music and honestly our relationship has never been better like having a shared thing that we both care about and work on together is so good and Dr. Tate would be proud of this level of partnership
+    expected_memory_stores:
+      - "hosting power couple"
+      - "shared hobby"
+      - "relationship best ever"
+      - "partnership growth"
+      - "Dr. Tate reference"
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 4:00 PM"
+    user_input: |
+      Julian officially named our dinner party series The Woodstock Table because we live in the Woodstock neighborhood and he designed a little logo for it because that's literally his job and he printed it on cards and I was like Julian this is a dinner party not a brand and he said everything is a brand Maya and I love this ridiculous man
+    expected_memory_stores:
+      - "The Woodstock Table name"
+      - "Julian designed logo"
+      - "business cards"
+      - "Woodstock neighborhood"
+      - "Julian ridiculous but loved"
+    expected_adaptation:
+      emotion_detected: "loving"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What cocktail equipment did Julian buy?"
+    expected_contains: ["shaker", "jigger", "muddler", "ice molds"]
+  - question: "What is Julian's signature flashy cocktail?"
+    expected_contains: ["smoked old fashioned"]
+  - question: "What cocktail book did Julian buy at Powell's?"
+    expected_contains: ["Death and Co"]
+  - question: "What cocktail did Julian create to pair with ramen?"
+    expected_contains: ["Ramen Companion", "sake", "yuzu"]
+  - question: "What did Julian name the dinner party series?"
+    expected_contains: ["Woodstock Table"]
+  - question: "What does Julian do for work?"
+    expected_contains: ["graphic design"]
+  - question: "Who experimented with cardamom whiskey?"
+    expected_contains: ["Raj", "Julian"]
+  - question: "What did Diane say about the bar cart?"
+    expected_contains: ["quite the setup"]
+  - question: "What parallel does Maya draw between Julian and herself?"
+    expected_contains: ["ramen", "Japan", "obsession"]
+  - question: "How has hosting affected Maya and Julian's relationship?"
+    expected_contains: ["better", "shared", "partnership"]

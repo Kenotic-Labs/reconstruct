@@ -1,0 +1,171 @@
+story_id: 434
+story_name: "Settlement Offer"
+category: "Lease Dispute"
+description: |
+  Landlord's lawyer contacts Maya with a $1200 settlement offer. Maya counters
+  at $1600. Negotiations before the hearing.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 3:00 PM"
+    user_input: |
+      ok so I got a call from a lawyer representing Greg Patterson and she said her client would like to resolve this matter before the hearing and she offered 1200 dollars as a settlement and I was like 1200 my deposit was 1800 why would I accept less and she said well court is uncertain and this is guaranteed money
+    expected_memory_stores:
+      - "lawyer contacted Maya"
+      - "representing Greg Patterson"
+      - "offered $1200 settlement"
+      - "Maya questions amount"
+      - "court uncertainty argument"
+    expected_adaptation:
+      emotion_detected: "offended"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 3:30 PM"
+    user_input: |
+      the lawyer's name is Rachel something I think Rachel Kim and she was professional but I could tell she knows her client is in the wrong because she kept using phrases like to avoid the hassle and in the interest of resolution which is lawyer speak for we don't want a judge to see this evidence
+    expected_memory_stores:
+      - "lawyer Rachel Kim"
+      - "professional tone"
+      - "knows client is wrong"
+      - "avoid hassle language"
+    expected_adaptation:
+      emotion_detected: "perceptive"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 4:00 PM"
+    user_input: |
+      told her I'd think about it and hung up and immediately called Julian and he said don't take 1200 that's insulting and I agreed but I also don't want to gamble on a hearing if I can get most of it back without the stress and Julian said counter at 1800 the full amount
+    expected_memory_stores:
+      - "will think about it"
+      - "Julian says don't take 1200"
+      - "don't want to gamble"
+      - "Julian says counter full amount"
+    expected_adaptation:
+      emotion_detected: "strategizing"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 6:00 PM"
+    user_input: |
+      talked to Clara's cousin who went through a similar thing and she said she settled for about 80 percent of her deposit because the landlord's lawyer convinced her that judges sometimes split the difference and she regretted not pushing harder so she said Maya push for what you deserve
+    expected_memory_stores:
+      - "Clara's cousin advice"
+      - "settled at 80%"
+      - "regretted not pushing"
+      - "push for what you deserve"
+    expected_adaptation:
+      emotion_detected: "determined"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 8:00 PM"
+    user_input: |
+      decided to counter at 1600 which is not the full 1800 but it's close enough and it shows I'm willing to compromise but not be pushed around and Julian was like why not 1800 and I said because 1600 gets this done without court and I can use that energy on literally anything else
+    expected_memory_stores:
+      - "counter offer $1600"
+      - "compromise position"
+      - "not be pushed around"
+      - "Julian wanted $1800"
+      - "avoiding court energy"
+    expected_adaptation:
+      emotion_detected: "strategic"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 9:00 AM"
+    user_input: |
+      called Rachel Kim back and said I'll settle for 1600 and not a penny less and I said if your client doesn't agree I'll see him in court on Thursday with my move-in photos and his signed inspection checklist and she went quiet for a second and said she'd discuss with her client
+    expected_memory_stores:
+      - "countered at $1600"
+      - "not a penny less"
+      - "mentioned evidence"
+      - "Rachel will discuss"
+    expected_adaptation:
+      emotion_detected: "firm"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Tuesday 2:00 PM"
+    user_input: |
+      Rachel called back and said her client is willing to accept 1600 and I literally fist pumped at my desk and Sam walked by and was like everything ok and I said just won a negotiation and he high fived me without even knowing what it was about which was hilarious
+    expected_memory_stores:
+      - "settlement accepted $1600"
+      - "Maya fist pumped"
+      - "Sam high five"
+      - "didn't know context"
+    expected_adaptation:
+      emotion_detected: "triumphant"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Tuesday 3:00 PM"
+    user_input: |
+      how much did the landlord's lawyer originally offer and how much did we settle for
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 5:00 PM"
+    user_input: |
+      Rachel is sending over a settlement agreement that both sides sign and then Greg Patterson has to send a check within 10 business days and once I sign and the check clears I'll dismiss the small claims case and this whole nightmare is over finally
+    expected_memory_stores:
+      - "settlement agreement"
+      - "both sides sign"
+      - "check within 10 business days"
+      - "dismiss small claims case"
+      - "nightmare over"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      Julian opened a beer to celebrate and I had one too and we sat on the back porch and he said I'm proud of you for fighting for this and I said I'm proud of me too and honestly losing 200 from the original 1800 is worth not having to go to court and deal with the stress for another 6 weeks while it processes
+    expected_memory_stores:
+      - "celebration beer"
+      - "Julian proud"
+      - "Maya proud of herself"
+      - "$200 less than full amount"
+      - "worth avoiding court"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How much did the landlord's lawyer initially offer?"
+    expected_contains: ["1200"]
+  - question: "How much did Maya counter with?"
+    expected_contains: ["1600"]
+  - question: "What was the final settlement amount?"
+    expected_contains: ["1600"]
+  - question: "Who is the landlord's lawyer?"
+    expected_contains: ["Rachel Kim"]
+  - question: "When does the landlord have to send the check?"
+    expected_contains: ["10 business days"]
+  - question: "Did Maya have to go to court?"
+    expected_contains: ["no", "settled", "before hearing"]
+  - question: "What did Clara's cousin advise about settling?"
+    expected_contains: ["push", "regretted", "80 percent"]
+  - question: "Why did Maya settle for $1600 instead of $1800?"
+    expected_contains: ["avoid court", "energy", "compromise"]
+  - question: "What will Maya do with the small claims case?"
+    expected_contains: ["dismiss"]
+  - question: "How much less than the full deposit did Maya settle for?"
+    expected_contains: ["200"]

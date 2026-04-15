@@ -1,0 +1,213 @@
+story_id: 154
+story_name: "Diane and the Flower Drama"
+category: "Life Events"
+description: |
+  Julian's mom Diane Reeves has strong opinions about flower arrangements.
+  Conflict between what Maya wants (wildflowers) and what Diane insists on
+  (roses and peonies). Tests relational tension tracking and compromise.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      so Diane called tonight and she wants to talk about flowers which like okay cool but she has very specific ideas and by specific I mean she wants roses and peonies everywhere like cascading arrangements and it's gonna be beautiful Diane but that is NOT our vibe at all
+    expected_memory_stores:
+      - "Diane Reeves wants roses and peonies"
+      - "cascading arrangements"
+      - "not Maya's style"
+    expected_triples:
+      - ["Diane Reeves", "wants", "roses and peonies for wedding"]
+      - ["Diane Reeves", "prefers", "cascading arrangements"]
+      - ["user", "disagrees_with", "Diane's flower vision"]
+      - ["user", "has_emotion", "frustrated"]
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 7:30 PM"
+    user_input: |
+      what I actually want is wildflowers like lavender and daisies and maybe some eucalyptus like loose organic arrangements that match the outdoor lodge vibe you know Pine Ridge Lodge is rustic and beautiful I don't want it to look like a hotel ballroom which is basically what Diane is describing
+    expected_memory_stores:
+      - "Maya wants wildflowers"
+      - "lavender daisies eucalyptus"
+      - "loose organic arrangements"
+      - "match rustic lodge vibe"
+    expected_triples:
+      - ["user", "wants", "wildflowers for wedding"]
+      - ["user", "prefers", "lavender, daisies, and eucalyptus"]
+      - ["user", "wants_style", "loose organic arrangements matching rustic lodge"]
+      - ["user", "has_emotion", "passionate"]
+    expected_adaptation:
+      emotion_detected: "passionate"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 9:00 AM"
+    user_input: |
+      Julian said he talked to his mom and she um well she said if we do wildflowers it'll look like we didn't try and that really hurt honestly because we ARE trying we just have different taste and Julian's caught in the middle poor guy he said he likes whatever I like but he doesn't want to upset Diane
+    expected_memory_stores:
+      - "Diane said wildflowers look lazy"
+      - "Maya hurt"
+      - "Julian caught in middle"
+    expected_triples:
+      - ["Diane Reeves", "criticized", "wildflowers as looking lazy"]
+      - ["user", "has_emotion", "hurt"]
+      - ["Julian", "caught_between", "user and Diane"]
+    expected_adaptation:
+      emotion_detected: "hurt"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      I called my mom about the flower thing and Vivian was like honey it's YOUR wedding not Diane's and you should have what you want and honestly I needed to hear that because I was starting to second guess myself like am I being difficult no I'm not it's my wedding
+    expected_memory_stores:
+      - "Vivian supports Maya's choice"
+      - "Maya second-guessing herself"
+      - "reassurance from mom"
+    expected_triples:
+      - ["Vivian", "supports", "user's flower choice"]
+      - ["Vivian", "said", "it's YOUR wedding not Diane's"]
+      - ["user", "has_emotion", "validated"]
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 4:00 PM"
+    user_input: |
+      Jenny had the best idea she said what if you do wildflower centerpieces like your style but then do a rose arch for the ceremony as a nod to Diane's taste and I was like oh that's actually genius because Diane gets her roses and I get my wildflowers everywhere else
+    expected_memory_stores:
+      - "Jenny's compromise idea"
+      - "wildflower centerpieces"
+      - "rose arch for ceremony"
+      - "compromise between Maya and Diane"
+    expected_triples:
+      - ["Jenny", "suggested", "flower compromise"]
+      - ["user", "plans", "wildflower centerpieces"]
+      - ["user", "plans", "rose arch for ceremony for Diane"]
+      - ["user", "has_emotion", "hopeful"]
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 10:00 AM"
+    user_input: |
+      pitched the compromise to Julian and he LOVED it he was like babe that's perfect Mom will be thrilled about the arch and you get your wildflowers everywhere and I was like I know right Jenny is a genius and he was like yeah okay but don't tell Jenny I said that she'll never let me hear the end of it
+    expected_memory_stores:
+      - "Julian loves compromise"
+      - "rose arch plus wildflowers"
+    expected_triples:
+      - ["Julian", "approved", "flower compromise"]
+      - ["user", "has_emotion", "relieved"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 2:00 PM"
+    user_input: |
+      called Diane to pitch the idea and she actually really liked it she said oh a rose arch would be stunning and she even offered to pay for it which is like wow okay thank you Diane that's actually really generous and she seemed genuinely happy which made me feel better about the whole thing
+    expected_memory_stores:
+      - "Diane likes compromise"
+      - "Diane offered to pay for rose arch"
+      - "tension resolved"
+    expected_triples:
+      - ["Diane Reeves", "accepted", "flower compromise"]
+      - ["Diane Reeves", "offered_to_pay_for", "rose arch"]
+      - ["user", "resolved_conflict_with", "Diane over flowers"]
+      - ["user", "has_emotion", "relieved"]
+    expected_adaptation:
+      emotion_detected: "relieved and grateful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 5:00 PM"
+    user_input: |
+      so now I need to find a florist who can do both the wildflower thing and the rose arch Clara recommended someone called Bloom & Thistle they're in Southeast Portland and apparently they specialize in like rustic outdoor weddings which sounds perfect honestly
+    expected_memory_stores:
+      - "Bloom & Thistle florist"
+      - "Southeast Portland"
+      - "rustic outdoor specialty"
+      - "Clara recommended"
+    expected_triples:
+      - ["Clara", "recommended", "Bloom & Thistle florist"]
+      - ["Bloom & Thistle", "located_in", "Southeast Portland"]
+      - ["Bloom & Thistle", "specializes_in", "rustic outdoor weddings"]
+      - ["user", "has_emotion", "optimistic"]
+    expected_adaptation:
+      emotion_detected: "optimistic"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 11:00 AM"
+    user_input: |
+      met with the owner of Bloom & Thistle her name is Ava and she totally got our vision she showed me photos of similar arrangements she's done and I literally gasped at one it was this gorgeous table with wildflowers in mason jars and eucalyptus garlands down the center YES that's what I want
+    expected_memory_stores:
+      - "Ava at Bloom & Thistle"
+      - "mason jars with wildflowers"
+      - "eucalyptus garlands"
+      - "Maya loves the style"
+    expected_triples:
+      - ["Ava", "owns", "Bloom & Thistle"]
+      - ["Bloom & Thistle", "style_includes", "mason jars with wildflowers and eucalyptus garlands"]
+      - ["user", "loves", "Bloom & Thistle style"]
+      - ["user", "has_emotion", "excited"]
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 6:00 PM"
+    user_input: |
+      booked Bloom & Thistle for the flowers total quote is $3200 which includes centerpieces bouquets boutonnieres and the rose arch that Diane's paying for separately which she said is like $800 so really we're paying $2400 which is amazing honestly the flower drama is officially over thank god
+    expected_memory_stores:
+      - "Bloom & Thistle booked"
+      - "total $3200"
+      - "rose arch $800 paid by Diane"
+      - "Maya paying $2400"
+      - "flower drama resolved"
+    expected_triples:
+      - ["user", "booked", "Bloom & Thistle"]
+      - ["Bloom & Thistle", "total_cost", "$3200"]
+      - ["Diane Reeves", "paying", "$800 for rose arch"]
+      - ["user", "paying", "$2400 for flowers"]
+      - ["user", "has_emotion", "satisfied"]
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What flowers does Maya want for her wedding?"
+    expected_contains: ["wildflower", "lavender", "daisy", "eucalyptus"]
+  - question: "What did Diane Reeves want for flowers?"
+    expected_contains: ["roses", "peonies"]
+  - question: "What was the flower compromise?"
+    expected_contains: ["rose arch", "wildflower centerpieces"]
+  - question: "Who is the florist?"
+    expected_contains: ["Bloom & Thistle"]
+  - question: "Who suggested the flower compromise?"
+    expected_contains: ["Jenny"]
+  - question: "How much are the flowers total?"
+    expected_contains: ["3200"]
+  - question: "What is Diane paying for?"
+    expected_contains: ["rose arch", "800"]
+  - question: "Who is Ava?"
+    expected_contains: ["Bloom & Thistle", "florist"]
+  - question: "Where is Bloom & Thistle located?"
+    expected_contains: ["Southeast Portland"]
+  - question: "Who recommended Bloom & Thistle?"
+    expected_contains: ["Clara"]

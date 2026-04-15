@@ -1,0 +1,211 @@
+story_id: 59
+story_name: "Leon Gives Notice"
+category: "Career"
+description: |
+  Tests memory of Leon leaving Vantage before Maya.
+  This accelerates Maya's own decision to leave.
+  Verifies relationship tracking and cascading emotional effects.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:30 AM"
+    user_input: |
+      oh my god Leon just told me he accepted an offer at Stripe and he's giving his two weeks notice today and I'm happy for him but also like devastated because he's my best friend at work and now I'm going to be alone here with Derek and the boring portal pod
+    expected_memory_stores:
+      - "Leon accepted Stripe"
+      - "two weeks notice"
+      - "Maya happy and sad"
+      - "alone at work"
+    expected_triples:
+      - ["Leon", "accepted_offer_at", "Stripe"]
+      - ["Leon", "giving", "two weeks notice today"]
+      - ["user", "has_emotion", "happy for Leon"]
+      - ["user", "has_emotion", "devastated about losing Leon"]
+    expected_adaptation:
+      emotion_detected: "bittersweet"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 10:00 AM"
+    user_input: |
+      Leon's news got around the office fast and Derek didn't even react like he just said okay thanks for letting us know and walked away which like wow not even a where can we improve or what made you decide to leave just okay and Leon said he wasn't surprised at all
+    expected_memory_stores:
+      - "Derek no reaction"
+      - "no exit interview attempt"
+      - "Leon unsurprised"
+    expected_triples:
+      - ["Derek", "reaction_to_Leon_leaving", "dismissive - just said okay"]
+      - ["Derek", "did_not", "conduct exit interview or ask why"]
+      - ["Leon", "unsurprised_by", "Derek's reaction"]
+    expected_adaptation:
+      emotion_detected: "disgusted"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Monday 12:30 PM"
+    user_input: |
+      Priya took Leon and me out to lunch and she was getting emotional and said she hates watching her best people leave and then she looked at me and said you're next aren't you and I didn't say anything but we all knew the answer
+    expected_memory_stores:
+      - "Priya lunch"
+      - "Priya emotional"
+      - "Priya suspects Maya leaving"
+      - "unspoken confirmation"
+    expected_triples:
+      - ["Priya", "took_out", "Leon and user to farewell lunch"]
+      - ["Priya", "has_emotion", "sad about losing people"]
+      - ["Priya", "asked", "user if she's leaving next"]
+      - ["user", "silently_confirmed", "plans to leave"]
+    expected_adaptation:
+      emotion_detected: "melancholy"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Monday 7:00 PM"
+    user_input: |
+      Julian and I talked about Leon leaving and he was like see this is exactly why you need to get out too and he's right but it's scary because Leon already had his offer lined up and I'm still in the early stages of interviewing like I have the Google phone screen this week and haven't even started with Conduit AI
+    expected_memory_stores:
+      - "Julian pushing to leave"
+      - "Leon had offer ready"
+      - "Maya still early stage"
+      - "Google phone screen this week"
+      - "Conduit AI not started"
+    expected_triples:
+      - ["Julian", "pushing", "user to leave Vantage"]
+      - ["user", "interview_status", "early stage - Google screen this week"]
+      - ["user", "interview_status", "haven't started with Conduit AI"]
+      - ["user", "has_emotion", "anxious"]
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Tuesday 9:00 AM"
+    user_input: |
+      sitting at my desk and Leon's desk is already feeling different like he's cleaning it out slowly and I keep looking over there and thinking about how different this place is going to be without him we used to whiteboard together every afternoon and now who am I going to do that with
+    expected_memory_stores:
+      - "Leon cleaning desk"
+      - "whiteboard sessions"
+      - "loss of work companion"
+    expected_triples:
+      - ["Leon", "cleaning_out", "desk"]
+      - ["user", "missing", "daily whiteboard sessions with Leon"]
+      - ["user", "has_emotion", "sad"]
+    expected_adaptation:
+      emotion_detected: "sad"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Tuesday 2:00 PM"
+    user_input: |
+      fun fact Derek already posted Leon's position on LinkedIn like the man hasn't even left yet and the posting says looking for a high performer with strong velocity which is such Derek language and Leon saw it and just laughed and said good luck finding someone who wants to work under that guy
+    expected_memory_stores:
+      - "Derek posted Leon's role"
+      - "Leon still there"
+      - "Derek language"
+      - "Leon sarcasm"
+    expected_triples:
+      - ["Derek", "posted", "Leon's replacement on LinkedIn before Leon left"]
+      - ["job posting", "language", "high performer with strong velocity"]
+      - ["Leon", "reaction", "laughed - good luck finding someone"]
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 10:00 AM"
+    user_input: |
+      wait so where is Leon going again I forgot
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Wednesday 4:00 PM"
+    user_input: |
+      had my Google phone screen today and um it went okay I think like the system design part was actually pretty good I nailed the distributed caching question but the coding part I fumbled on a dynamic programming problem and I'm not sure if it was enough to move forward
+    expected_memory_stores:
+      - "Google phone screen happened"
+      - "system design good"
+      - "distributed caching question"
+      - "DP problem fumbled"
+      - "uncertain outcome"
+    expected_triples:
+      - ["user", "completed", "Google phone screen"]
+      - ["user", "nailed", "distributed caching system design question"]
+      - ["user", "fumbled", "dynamic programming coding problem"]
+      - ["user", "has_emotion", "uncertain"]
+    expected_adaptation:
+      emotion_detected: "uncertain"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      told Julian about the Google screen and he said even if it doesn't work out there's still Conduit AI and other options and he made stir fry and we ate on the couch with Kobe between us and I just felt grateful that I have this stable home life while work is so chaotic
+    expected_memory_stores:
+      - "Julian reassurance"
+      - "Conduit AI backup"
+      - "stir fry"
+      - "gratitude for home"
+      - "Kobe on couch"
+    expected_triples:
+      - ["Julian", "reassured", "user about interview options"]
+      - ["Julian", "made", "stir fry"]
+      - ["user", "has_emotion", "grateful for stable home life"]
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 11:00 AM"
+    user_input: |
+      Leon's last day is next Friday and the team is planning a little going away thing and even Derek RSVPed which is rich considering he's the reason Leon is leaving but whatever I'll go and put on a smile and give Leon a proper send off because he deserves it
+    expected_memory_stores:
+      - "Leon's last day next Friday"
+      - "going away party"
+      - "Derek RSVPed"
+      - "Derek caused departure"
+    expected_triples:
+      - ["Leon", "last_day", "next Friday"]
+      - ["team", "planning", "going away party for Leon"]
+      - ["Derek", "RSVPed", "Leon's going away party"]
+      - ["user", "has_emotion", "resentful toward Derek"]
+    expected_adaptation:
+      emotion_detected: "resentful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where is Leon going after Vantage?"
+    expected_contains: ["Stripe"]
+  - question: "When is Leon's last day?"
+    expected_contains: ["Friday"]
+  - question: "How did Derek react to Leon's resignation?"
+    expected_contains: ["okay", "no reaction", "walked away"]
+  - question: "How did Maya's Google phone screen go?"
+    expected_contains: ["system design good", "coding fumbled"]
+  - question: "What did Priya say to Maya at lunch?"
+    expected_contains: ["next", "you're next"]
+  - question: "What does Maya miss most about working with Leon?"
+    expected_contains: ["whiteboard"]
+  - question: "Did Derek already post Leon's replacement role?"
+    expected_contains: ["yes", "LinkedIn"]
+  - question: "How is Maya's home life compared to work?"
+    expected_contains: ["stable", "grateful"]
+  - question: "What are Maya's current interview prospects?"
+    expected_contains: ["Google", "Conduit AI"]
+  - question: "How is Maya feeling about being at Vantage without Leon?"
+    expected_contains: ["alone", "sad", "devastated"]

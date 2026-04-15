@@ -1,0 +1,167 @@
+story_id: 408
+story_name: "Outback Love"
+category: "Car Saga"
+description: |
+  Maya settles into life with the Outback. First weeks of ownership, discovering
+  features, Kobe's new favorite spot. Tests ongoing entity tracking.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:30 AM"
+    user_input: |
+      first full week commuting in the Outback and wow I forgot what it's like to drive a car that doesn't make you nervous every time you start it like the Civic was giving me actual anxiety every morning wondering if it would turn on and now I just press the button and it purrs
+    expected_memory_stores:
+      - "first week commuting Outback"
+      - "push button start"
+      - "no more anxiety"
+      - "Civic comparison"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 5:30 PM"
+    user_input: |
+      took Kobe to the dog park after work and the cargo area is literally his throne now like he just hops in and sits there looking out the back window like a king and the seat cover we got fits perfectly and he didn't even try to chew it which for Kobe is saying something
+    expected_memory_stores:
+      - "Kobe loves cargo area"
+      - "dog park trip"
+      - "seat cover working"
+      - "Kobe not chewing"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      the EyeSight driver assist thing is actually amazing like it beeped at me when I was drifting in my lane on the highway and it has adaptive cruise control which I've never had before and it feels so fancy like I know it's not a luxury car but compared to the Civic it might as well be a Lexus
+    expected_memory_stores:
+      - "EyeSight driver assist"
+      - "lane departure warning"
+      - "adaptive cruise control"
+      - "luxury feeling"
+    expected_adaptation:
+      emotion_detected: "impressed"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 8:00 PM"
+    user_input: |
+      Clara rode in the Outback today and she was like oh this is nice I told you and she was touching all the buttons and she found the heated steering wheel which I didn't even know existed and now I use it every morning because Portland mornings are cold even in like April
+    expected_memory_stores:
+      - "Clara rode in Outback"
+      - "heated steering wheel discovered"
+      - "didn't know about feature"
+      - "uses every morning"
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 6:00 PM"
+    user_input: |
+      the gas mileage is so much better than I expected like I'm getting around 30 mpg on the highway and the tank is huge so I can go like almost 500 miles on a full tank the Civic was getting maybe 28 but felt like it needed gas constantly because the tank was tiny
+    expected_memory_stores:
+      - "30 mpg highway"
+      - "500 miles per tank"
+      - "better than Civic"
+      - "large fuel tank"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:00 AM"
+    user_input: |
+      Julian installed the roof rack today because of course he did and he was like now we can put the kayak up there and go to the river and I'm like we don't own a kayak Julian and he's like yeah but we could and I just shook my head but honestly the rack does look cool
+    expected_memory_stores:
+      - "roof rack installed"
+      - "Julian kayak idea"
+      - "don't own kayak"
+      - "looks cool"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Sunday 9:00 AM"
+    user_input: |
+      went to the car wash for the first time with the Outback and I got the premium wash because she deserves it yes I'm calling the car she now Julian was like oh great it has a gender and I was like her name is Stella because of the Subaru star logo get it Stella means star
+    expected_memory_stores:
+      - "car wash"
+      - "named car Stella"
+      - "Subaru star logo"
+      - "Stella means star"
+    expected_adaptation:
+      emotion_detected: "playful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Monday 8:00 AM"
+    user_input: |
+      the Apple CarPlay integration is so seamless like my podcasts just automatically play when I get in and the maps are on the big screen and I can do voice texts without touching anything the Civic had a tape deck adapter I'm not even joking it was that old
+    expected_memory_stores:
+      - "Apple CarPlay"
+      - "podcasts automatic"
+      - "voice texts"
+      - "Civic had tape deck adapter"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      what's the gas mileage I'm getting on the Outback again I was telling someone at work but I forgot the exact number
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      two weeks in and I have zero regrets about this car like I know we stretched our budget a little but every time I drive it I'm like yeah this was the right call and Julian keeps saying adventure mobile every time we get in and it's annoying but also kind of cute
+    expected_memory_stores:
+      - "two weeks no regrets"
+      - "right decision"
+      - "budget stretch worth it"
+      - "adventure mobile nickname"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did Maya name the Outback?"
+    expected_contains: ["Stella"]
+  - question: "Why did Maya name the car Stella?"
+    expected_contains: ["star", "Subaru", "logo"]
+  - question: "What driver assist feature does the Outback have?"
+    expected_contains: ["EyeSight"]
+  - question: "What feature did Clara discover in the Outback?"
+    expected_contains: ["heated steering wheel"]
+  - question: "What gas mileage is the Outback getting?"
+    expected_contains: ["30"]
+  - question: "What did Julian install on the Outback?"
+    expected_contains: ["roof rack"]
+  - question: "What nickname does Julian call the Outback?"
+    expected_contains: ["adventure mobile"]
+  - question: "How does Kobe like the new car?"
+    expected_contains: ["loves", "cargo area", "throne"]
+  - question: "What tech feature does Maya like most about the Outback?"
+    expected_contains: ["Apple CarPlay"]
+  - question: "What did the Civic have instead of modern audio?"
+    expected_contains: ["tape deck adapter"]

@@ -1,0 +1,172 @@
+story_id: 306
+story_name: "Jenny Visits Portland"
+category: "Friendships"
+description: |
+  Tests memory of Jenny flying back to Portland for a weekend visit.
+  The first in-person contact since the move. Maya is guarded but
+  hopeful. Verifies system tracks relationship repair dynamics.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 10:00 AM"
+    user_input: |
+      ok so Jenny texted like three days ago out of nowhere and said she booked a flight to Portland for this weekend and she's landing tonight at 8 on Alaska Airlines and she wants to stay with us and I said fine but I'm honestly still kind of mad about the birthday thing
+    expected_memory_stores:
+      - "Jenny visiting Portland"
+      - "Alaska Airlines"
+      - "landing tonight 8pm"
+      - "staying with Maya and Julian"
+      - "still mad about birthday"
+    expected_adaptation:
+      emotion_detected: "guarded"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 12:30 PM"
+    user_input: |
+      Julian said I should try to just have a good time this weekend and not bring up the birthday stuff right away and I was like I'm not gonna bring it up but if she doesn't acknowledge it then that tells me everything I need to know
+    expected_memory_stores:
+      - "Julian advice"
+      - "not bringing up birthday"
+      - "waiting for Jenny to acknowledge"
+    expected_adaptation:
+      emotion_detected: "guarded"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 5:00 PM"
+    user_input: |
+      cleaned the guest room and put fresh towels out and Kobe is going to lose his mind because he loves Jenny she used to dog-sit him all the time before she moved and I set out that lavender candle she likes
+    expected_memory_stores:
+      - "guest room ready"
+      - "Kobe loves Jenny"
+      - "Jenny used to dog-sit"
+      - "lavender candle"
+    expected_adaptation:
+      emotion_detected: "caring"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 8:45 PM"
+    user_input: |
+      picked Jenny up at PDX and she came running out of the terminal and hugged me so hard and I tried to stay mad but I couldn't because she smelled like that same perfume she always wears the Jo Malone one and she looked good like Austin agrees with her I guess
+    expected_memory_stores:
+      - "picked up at PDX"
+      - "big hug"
+      - "couldn't stay mad"
+      - "Jo Malone perfume"
+      - "Jenny looks good"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 10:30 PM"
+    user_input: |
+      we're sitting on the couch drinking wine and Kobe is literally on top of Jenny and she's catching me up on Austin stuff and it feels like no time has passed which is the most annoying thing about best friends right like you can't even stay mad properly
+    expected_memory_stores:
+      - "wine on couch"
+      - "Kobe on Jenny"
+      - "catching up"
+      - "feels like no time passed"
+      - "can't stay mad"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 9:00 AM"
+    user_input: |
+      we did a Forest Park run this morning like old times and Jenny was huffing and puffing because she said she hasn't been running in Austin because it's too hot and I was like excuses excuses and we were laughing the whole time
+    expected_memory_stores:
+      - "Forest Park run together"
+      - "like old times"
+      - "Jenny out of shape"
+      - "too hot in Austin"
+      - "laughing"
+    expected_adaptation:
+      emotion_detected: "joyful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 12:00 PM"
+    user_input: |
+      went to our pho spot on Division Street and Jenny got the same thing she always gets the number 7 with extra bean sprouts and she was like god I've missed this place and I was like yeah well you left so
+    expected_memory_stores:
+      - "Division Street pho"
+      - "Jenny orders number 7"
+      - "extra bean sprouts"
+      - "Maya passive aggressive"
+    expected_adaptation:
+      emotion_detected: "passive-aggressive"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 3:00 PM"
+    user_input: |
+      wait what airline did Jenny fly in on last night
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 5:00 PM"
+    user_input: |
+      we went to Salt and Straw and got the seasonal flavors and sat on a bench in Hawthorne and Jenny said she's really sorry she's been a bad friend and that she knows she missed my birthday and she feels terrible about it and I started crying right there on the bench
+    expected_memory_stores:
+      - "Salt and Straw"
+      - "Hawthorne bench"
+      - "Jenny apologized"
+      - "acknowledged birthday"
+      - "Maya cried"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 9:00 PM"
+    user_input: |
+      Jenny said the whole reason she came this weekend was because she realized she'd been pulling away and she felt awful about it and she wants to figure out how to be better about staying connected and I hugged her and said me too and it felt like we got our friendship back tonight
+    expected_memory_stores:
+      - "Jenny came to repair friendship"
+      - "acknowledged pulling away"
+      - "wants to stay connected"
+      - "friendship repaired"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Why did Jenny visit Portland?"
+    expected_contains: ["repair", "realized", "pulling away"]
+  - question: "How did Jenny travel to Portland?"
+    expected_contains: ["Alaska Airlines", "flew"]
+  - question: "What did Maya and Jenny do at Salt and Straw?"
+    expected_contains: ["seasonal flavors", "Hawthorne"]
+  - question: "Did Jenny acknowledge missing Maya's birthday?"
+    expected_contains: ["yes", "apologized", "sorry", "terrible"]
+  - question: "What happened at Forest Park during Jenny's visit?"
+    expected_contains: ["ran", "old times", "huffing"]
+  - question: "Where did they eat on Division Street?"
+    expected_contains: ["pho"]
+  - question: "What does Jenny always order at the pho place?"
+    expected_contains: ["number 7", "bean sprouts"]
+  - question: "How did Maya feel when she picked Jenny up at PDX?"
+    expected_contains: ["couldn't stay mad", "emotional"]
+  - question: "What perfume does Jenny wear?"
+    expected_contains: ["Jo Malone"]
+  - question: "How does Maya feel about the friendship after the visit?"
+    expected_contains: ["repaired", "got back", "grateful"]

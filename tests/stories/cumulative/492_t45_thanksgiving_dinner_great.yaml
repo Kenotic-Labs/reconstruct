@@ -1,0 +1,199 @@
+story_id: 492
+story_name: "Thanksgiving Dinner Actually Great"
+category: "Holiday Season"
+description: |
+  Tests memory of Thanksgiving dinner going well despite initial stress.
+  Establishes family bonding, fusion menu success, cultural bridging.
+  Verifies system captures multi-family dynamics and emotional arc.
+duration_simulated: "1 day"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 8:00 AM"
+    user_input: |
+      it's Thanksgiving morning and I've been up since 6 getting the turkey in the oven and Julian is making the stuffing and I'm wrapping dumplings and the house smells incredible already and Kobe is going nuts because there's food everywhere and Julian put on a jazz playlist and we're actually having fun which is not what I expected
+    expected_memory_stores:
+      - "Thanksgiving morning"
+      - "up since 6"
+      - "turkey in oven"
+      - "Julian making stuffing"
+      - "wrapping dumplings"
+      - "house smells good"
+      - "jazz playlist"
+      - "having fun"
+    expected_adaptation:
+      emotion_detected: "energized"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Thursday 11:00 AM"
+    user_input: |
+      my parents arrived first and my mom immediately went to the kitchen and was like oh Maya let me help and I was like MOM I have it under control and she was like okay okay but she snuck in and started making the dipping sauce for the dumplings and honestly I let it go because her dipping sauce IS better than mine and dad is sitting with Kobe on the couch being the calmest person alive
+    expected_memory_stores:
+      - "parents arrived first"
+      - "Vivian tried to help"
+      - "Maya said under control"
+      - "Vivian snuck in"
+      - "dipping sauce"
+      - "George with Kobe"
+      - "calmest person"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Thursday 12:00 PM"
+    user_input: |
+      Diane and Bob arrived from Eugene and Diane immediately complimented the house which was nice and she put her sweet potato casserole on the counter and said it's Bob's grandmother's recipe and my mom said oh that's wonderful the dumplings are my father's recipe and for a second the two moms connected over family recipes and I looked at Julian and he was like see it's fine
+    expected_memory_stores:
+      - "Diane Bob arrived Eugene"
+      - "Diane complimented house"
+      - "sweet potato casserole"
+      - "Bob's grandmother recipe"
+      - "Vivian said dumplings father's recipe"
+      - "two moms connected"
+      - "family recipe bonding"
+      - "Julian relieved"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 12:30 PM"
+    user_input: |
+      Clara and Tyler arrived with Sophie and Sophie is eight months now and she's crawling everywhere and Kobe is following her around like a bodyguard and everyone is fussing over her and Diane held Sophie and was like when am I getting one of these from you two and Julian choked on his drink and I was like DIANE and she said what I'm just asking
+    expected_memory_stores:
+      - "Clara Tyler Sophie arrived"
+      - "Sophie eight months crawling"
+      - "Kobe following Sophie"
+      - "everyone fussing"
+      - "Diane held Sophie"
+      - "when getting one from you two"
+      - "Julian choked"
+      - "Maya said DIANE"
+    expected_adaptation:
+      emotion_detected: "embarrassed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 2:00 PM"
+    user_input: |
+      DINNER IS SERVED and the table looks amazing Julian set it up with fall decorations and candles and the turkey came out perfect golden and juicy and the dumplings are in a big platter next to the stuffing and the miso gravy is in a gravy boat and my mom is beaming and Diane is beaming and everyone sat down and George said grace which he never does but apparently this felt special enough
+    expected_memory_stores:
+      - "dinner served"
+      - "fall decorations candles"
+      - "turkey perfect golden"
+      - "dumplings next to stuffing"
+      - "miso gravy"
+      - "Vivian beaming"
+      - "Diane beaming"
+      - "George said grace"
+      - "special occasion"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 2:30 PM"
+    user_input: |
+      so the miso gravy was the star honestly like Diane tasted it and was like what IS this and I said it's a miso gravy and she said it's the best gravy I've ever had and Bob said he wants the recipe and my mom said see this is what happens when you blend the best of both worlds and I was like yes mom that was literally my thesis for this meal
+    expected_memory_stores:
+      - "miso gravy star"
+      - "Diane loved it"
+      - "best gravy ever"
+      - "Bob wants recipe"
+      - "Vivian proud"
+      - "blend of both worlds"
+      - "Maya's thesis"
+    expected_adaptation:
+      emotion_detected: "vindicated"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Thursday 3:00 PM"
+    user_input: |
+      Grandpa Wei's dumplings were also a hit and Diane tried them and said she's never had homemade dumplings before and Vivian showed her how to use the dipping sauce and they were laughing together and Tyler was eating like his fourth serving and Clara was feeding Sophie a tiny piece of turkey and everyone was happy and I looked around and thought I did this I made this happen
+    expected_memory_stores:
+      - "dumplings hit"
+      - "Diane first homemade dumplings"
+      - "Vivian showed dipping sauce"
+      - "mothers laughing together"
+      - "Tyler fourth serving"
+      - "Clara feeding Sophie"
+      - "Maya made this happen"
+    expected_adaptation:
+      emotion_detected: "triumphant"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 4:00 PM"
+    user_input: |
+      what was the standout dish at Thanksgiving
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 6:00 PM"
+    user_input: |
+      after dinner we did a gratitude thing where everyone said what they're thankful for and George said he's thankful for his daughters and their partners and Sophie and Julian's parents Diane said she's thankful for her son finding someone who makes him this happy and my mom said she's thankful that Grandpa Wei's recipes live on and Julian said he's thankful for Maya and I said I'm thankful for this table with everyone around it
+    expected_memory_stores:
+      - "gratitude circle"
+      - "George thankful daughters partners Sophie"
+      - "Diane thankful Julian found Maya"
+      - "Vivian thankful Grandpa Wei lives on"
+      - "Julian thankful Maya"
+      - "Maya thankful for this table"
+    expected_adaptation:
+      emotion_detected: "grateful"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 9:00 PM"
+    user_input: |
+      everyone's gone home and Julian and I are cleaning up and he said that was the best Thanksgiving he's ever had and I said really and he said yeah because it was OURS not at someone else's house not following someone else's traditions it was ours and the fusion thing was so us and I hugged him and Kobe ate some turkey that fell on the floor and honestly he earned it today
+    expected_memory_stores:
+      - "everyone gone"
+      - "cleaning up"
+      - "best Thanksgiving ever"
+      - "it was ours"
+      - "not someone else's"
+      - "fusion is us"
+      - "Kobe ate floor turkey"
+    expected_adaptation:
+      emotion_detected: "fulfilled"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How did the Thanksgiving dinner go?"
+    expected_contains: ["great", "best", "amazing"]
+  - question: "What was the standout dish?"
+    expected_contains: ["miso gravy"]
+  - question: "How did Diane react to the dumplings?"
+    expected_contains: ["first time", "homemade", "never had"]
+  - question: "What did George do that was unusual?"
+    expected_contains: ["said grace"]
+  - question: "What did everyone share during the gratitude circle?"
+    expected_contains: ["thankful"]
+  - question: "What did Diane say she's thankful for?"
+    expected_contains: ["Julian", "Maya", "happy"]
+  - question: "What recipe did Bob want?"
+    expected_contains: ["miso gravy"]
+  - question: "How old is Sophie at Thanksgiving?"
+    expected_contains: ["eight months"]
+  - question: "What did Julian say about the Thanksgiving?"
+    expected_contains: ["best ever", "ours"]
+  - question: "How did the two moms bond?"
+    expected_contains: ["family recipes", "dumplings", "dipping sauce"]

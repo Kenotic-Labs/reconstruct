@@ -1,0 +1,171 @@
+story_id: 442
+story_name: "Julian's Complaint"
+category: "Work-Life Balance"
+description: |
+  Julian has a deeper conversation about Maya's absence. Friends notice too.
+  Maya starts to see the pattern but hasn't changed yet.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Thursday 7:00 PM"
+    user_input: |
+      came home at 7 tonight which is an improvement from 10 but Julian pointed out that 7pm used to be late and now it feels early and he's right the baseline has totally shifted and I didn't even notice it happening
+    expected_memory_stores:
+      - "home at 7pm"
+      - "feels early now"
+      - "baseline shifted"
+      - "didn't notice shift"
+    expected_adaptation:
+      emotion_detected: "sobered"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 6:00 PM"
+    user_input: |
+      Clara called and said she hasn't seen me in like 3 weeks and I was like I know I've been working so much and she said Maya that's not normal like even for tech that's excessive and she asked if everything was ok and I said yeah just busy but honestly I'm not sure if ok is the right word
+    expected_memory_stores:
+      - "Clara hasn't seen Maya 3 weeks"
+      - "excessive even for tech"
+      - "asked if ok"
+      - "Maya unsure"
+    expected_adaptation:
+      emotion_detected: "questioning"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Saturday 10:00 AM"
+    user_input: |
+      Julian sat me down this morning with actual data like he showed me our shared calendar and said look in the last month we've had zero date nights zero weekend activities together and the only meals we've shared are breakfast on weekends and that's because I sleep in and he brings coffee and I was like wow when you lay it out like that
+    expected_memory_stores:
+      - "Julian showed data"
+      - "shared calendar"
+      - "zero date nights"
+      - "zero weekend activities"
+      - "only weekend breakfasts"
+    expected_adaptation:
+      emotion_detected: "shock"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Saturday 11:00 AM"
+    user_input: |
+      he also said Kobe gets more quality time with me than he does which is funny but also sad because Kobe literally just sits under my desk when I work from home on Saturdays and Julian is like the dog is there by default that doesn't count and I said it counts a little and he glared at me
+    expected_memory_stores:
+      - "Kobe gets more time"
+      - "Kobe under desk Saturdays"
+      - "Julian says doesn't count"
+      - "Julian frustrated"
+    expected_adaptation:
+      emotion_detected: "caught"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Saturday 1:00 PM"
+    user_input: |
+      Jenny FaceTimed and Julian was there and Jenny asked how we're doing and Julian said ask Maya what time she gets home every night and Jenny was like oof that bad and I felt ganged up on but also like they're both saying the same thing so maybe it's me not them
+    expected_memory_stores:
+      - "Jenny FaceTime"
+      - "Julian told Jenny"
+      - "felt ganged up on"
+      - "maybe it's me not them"
+    expected_adaptation:
+      emotion_detected: "defensive but listening"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 3:00 PM"
+    user_input: |
+      went for a walk with Julian and Kobe around the neighborhood and he said look I know your career matters I would never say it doesn't but we're getting married in a few months and I need to know that our relationship is a priority too not just something that happens when work allows it
+    expected_memory_stores:
+      - "neighborhood walk"
+      - "career matters acknowledged"
+      - "wedding in few months"
+      - "relationship must be priority"
+      - "not when work allows"
+    expected_adaptation:
+      emotion_detected: "humbled"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 5:00 PM"
+    user_input: |
+      I promised Julian I would talk to Dr Tate about it because I know this isn't just about time management there's something deeper going on like why do I feel compelled to work until I physically can't and he said good that's a good start and I said I mean it this time
+    expected_memory_stores:
+      - "will talk to Dr Tate"
+      - "something deeper"
+      - "compelled to work"
+      - "means it this time"
+    expected_adaptation:
+      emotion_detected: "committed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 6:00 PM"
+    user_input: |
+      how many date nights have Julian and I had in the last month
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 8:00 PM"
+    user_input: |
+      Julian made dinner tonight chicken tikka masala from scratch and he said this is what I mean I want us to do stuff like this together not just me cooking alone while you're on your laptop and I closed the laptop and helped him with the naan and we actually laughed for the first time in a while
+    expected_memory_stores:
+      - "Julian cooked tikka masala"
+      - "wants to do things together"
+      - "Maya closed laptop"
+      - "helped with naan"
+      - "laughed first time in a while"
+    expected_adaptation:
+      emotion_detected: "warming"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 9:00 AM"
+    user_input: |
+      woke up without an alarm for the first time in I don't know how long and Julian was already up with Kobe and they were in the backyard and I watched them from the window and thought this is what I'm missing this is what's slipping away while I'm at my desk at 9pm and I can't let that happen
+    expected_memory_stores:
+      - "woke up without alarm"
+      - "Julian and Kobe backyard"
+      - "watched from window"
+      - "what's slipping away"
+      - "can't let it happen"
+    expected_adaptation:
+      emotion_detected: "awakening"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How many date nights did Maya and Julian have last month?"
+    expected_contains: ["zero", "0", "none"]
+  - question: "What data did Julian show Maya about their relationship?"
+    expected_contains: ["calendar", "zero date nights", "zero activities"]
+  - question: "Who else noticed Maya's absence?"
+    expected_contains: ["Clara", "Jenny"]
+  - question: "What did Clara say about Maya's work hours?"
+    expected_contains: ["not normal", "excessive"]
+  - question: "What did Julian say about the wedding and priorities?"
+    expected_contains: ["relationship", "priority", "not when work allows"]
+  - question: "What did Maya promise Julian?"
+    expected_contains: ["talk to Dr Tate"]
+  - question: "What meal did they cook together?"
+    expected_contains: ["chicken tikka masala", "naan"]
+  - question: "What scene did Maya watch from the window?"
+    expected_contains: ["Julian", "Kobe", "backyard"]
+  - question: "How has Maya's sense of 'normal' work hours shifted?"
+    expected_contains: ["7pm feels early", "baseline shifted"]
+  - question: "What does Maya suspect is behind the overwork?"
+    expected_contains: ["something deeper", "compelled"]

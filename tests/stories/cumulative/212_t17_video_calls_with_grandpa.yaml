@@ -1,0 +1,176 @@
+story_id: 212
+story_name: "Video Calls with Grandpa"
+category: "Family"
+description: |
+  Tests system storing recurring video call interactions. Grandpa Wei shares family stories
+  about engineering in China. Verifies temporal tracking of weekly calls and story details.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 11:00 AM"
+    user_input: |
+      video called grandpa this morning and he's on hospice now officially they set it up at his apartment in Fresno and there's a nurse who comes every day and he seemed more comfortable than last time actually the pain meds are helping
+    expected_memory_stores:
+      - "hospice official"
+      - "grandpa's apartment"
+      - "daily nurse"
+      - "pain meds helping"
+      - "more comfortable"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Saturday 11:30 AM"
+    user_input: |
+      he told me today about building bridges in Hubei province when he was young like actual bridges and he said the engineering in China in the 1960s was all about doing more with less and he said that's why he became so resourceful and I was like grandpa you're basically MacGyver
+    expected_memory_stores:
+      - "bridges in Hubei"
+      - "1960s China engineering"
+      - "doing more with less"
+      - "resourceful"
+    expected_adaptation:
+      emotion_detected: "fascinated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      called grandpa again tonight trying to do weekly calls now and he was telling me about grandma Mei who passed when I was little and how they met at university in Wuhan and she was studying literature and he was studying engineering and he said she was the smartest person he ever met
+    expected_memory_stores:
+      - "weekly calls"
+      - "grandma Mei"
+      - "passed away"
+      - "met at university"
+      - "Wuhan"
+      - "literature student"
+      - "smartest person"
+    expected_adaptation:
+      emotion_detected: "tender"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Next Saturday 10:00 AM"
+    user_input: |
+      grandpa was really lucid today and he pulled out this old photo album and showed me through the camera these pictures from when they first came to California and he was working at some factory and grandma was teaching Chinese to kids at a community center
+    expected_memory_stores:
+      - "photo album"
+      - "California arrival"
+      - "factory work"
+      - "grandma taught Chinese"
+      - "community center"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Next Saturday 10:30 AM"
+    user_input: |
+      he said he eventually got his engineering license in the US but it took him like five years because they wouldn't recognize his Chinese credentials and he had to basically redo everything and he wasn't bitter about it at all he just said Maya you do what you must
+    expected_memory_stores:
+      - "US engineering license"
+      - "five years"
+      - "credentials not recognized"
+      - "had to redo"
+      - "not bitter"
+      - "you do what you must"
+    expected_adaptation:
+      emotion_detected: "inspired"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Next Wednesday 6:00 PM"
+    user_input: |
+      what university did grandpa and grandma meet at and what were they studying
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Next Wednesday 7:00 PM"
+    user_input: |
+      called grandpa but he was sleeping and the nurse said he's been sleeping more this week and eating less and she said it's normal for hospice patients at this stage and I just sat there after the call staring at my phone feeling sick
+    expected_memory_stores:
+      - "grandpa sleeping more"
+      - "eating less"
+      - "nurse update"
+      - "normal for hospice"
+      - "Maya distressed"
+    expected_adaptation:
+      emotion_detected: "dread"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Following Saturday 9:00 AM"
+    user_input: |
+      got through to grandpa today and he was awake but foggy and he kept calling me Mei which is grandma's name and I didn't correct him I just went with it and my mom said he does that sometimes now and it breaks my heart
+    expected_memory_stores:
+      - "called Maya Mei"
+      - "confusion"
+      - "didn't correct him"
+      - "Vivian confirmed happens"
+      - "heartbreaking"
+    expected_adaptation:
+      emotion_detected: "heartbroken"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Following Saturday 9:30 AM"
+    user_input: |
+      but then he had a clear moment and looked at the camera and said Maya I want you to have my watch when I go and I was like grandpa don't talk like that and he said no I'm serious it was my father's and now it's yours and I just nodded and said ok grandpa
+    expected_memory_stores:
+      - "watch inheritance"
+      - "grandpa's father's watch"
+      - "clear moment"
+      - "Maya to receive watch"
+    expected_adaptation:
+      emotion_detected: "devastated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Following Saturday 10:00 AM"
+    user_input: |
+      after the call I just sat on the couch and Kobe put his head in my lap and I cried for like twenty minutes and Julian brought me tea and didn't say anything he just sat with me and that's exactly what I needed
+    expected_memory_stores:
+      - "crying on couch"
+      - "Kobe comforting"
+      - "Julian brought tea"
+      - "silent support"
+    expected_adaptation:
+      emotion_detected: "grieving"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How often does Maya call Grandpa Wei?"
+    expected_contains: ["weekly"]
+  - question: "Where in China did Grandpa Wei build bridges?"
+    expected_contains: ["Hubei"]
+  - question: "Who was Grandma Mei?"
+    expected_contains: ["grandpa's wife", "literature"]
+  - question: "Where did Grandpa Wei and Grandma Mei meet?"
+    expected_contains: ["Wuhan", "university"]
+  - question: "What did Grandpa Wei struggle with in the US?"
+    expected_contains: ["engineering license", "credentials"]
+  - question: "What did Grandpa Wei want to leave Maya?"
+    expected_contains: ["watch", "father's"]
+  - question: "What is happening with Grandpa's health?"
+    expected_contains: ["sleeping more", "eating less", "hospice"]
+  - question: "Who does Grandpa sometimes confuse Maya with?"
+    expected_contains: ["Mei", "grandma"]
+  - question: "What did Grandma Mei do in America?"
+    expected_contains: ["taught Chinese", "community center"]
+  - question: "What saying did Grandpa share about resilience?"
+    expected_contains: ["you do what you must"]

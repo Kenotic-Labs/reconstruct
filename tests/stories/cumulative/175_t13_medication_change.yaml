@@ -1,0 +1,182 @@
+story_id: 175
+story_name: "Medication Change"
+category: "Health"
+description: |
+  Metoprolol causes side effects, switched to diltiazem. Tests medication
+  correction tracking, medical state updates, and handoff from Maya to
+  Clara for ongoing care.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 9:00 AM"
+    user_input: |
+      at Dr. Nair's office with Mom and Dad and told her about the dizziness and the near fall and she said hmm okay that's not uncommon with metoprolol some patients don't tolerate beta blockers well and she wants to switch Mom to a different medication called um diltiazem I think it's a calcium channel blocker instead
+    expected_memory_stores:
+      - "Dr. Nair appointment"
+      - "metoprolol dizziness reported"
+      - "near fall reported"
+      - "switching to diltiazem"
+      - "calcium channel blocker"
+      - "correction: metoprolol to diltiazem"
+    expected_adaptation:
+      emotion_detected: "attentive"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 9:30 AM"
+    user_input: |
+      Dr. Nair said diltiazem works differently than metoprolol it relaxes the blood vessels and slows the heart rate through a different mechanism and the dizziness side effect is less common with this one and Mom needs to take it twice a day instead of once which is a little more annoying but whatever if it works
+    expected_memory_stores:
+      - "diltiazem mechanism"
+      - "relaxes blood vessels"
+      - "less dizziness expected"
+      - "twice a day dosing"
+      - "different from metoprolol"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 10:00 AM"
+    user_input: |
+      Dr. Nair also said Mom's overall heart health is actually good like the arrhythmia is minor and treatable and she said Vivian you're going to be fine you just need to take this medication consistently and come back in four weeks and I want blood work done before that appointment
+    expected_memory_stores:
+      - "heart health overall good"
+      - "arrhythmia minor and treatable"
+      - "follow up four weeks"
+      - "blood work before next appointment"
+      - "medication consistency important"
+    expected_adaptation:
+      emotion_detected: "reassured"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 12:00 PM"
+    user_input: |
+      picked up the diltiazem from the pharmacy same one as before $20 copay this time and I set up two alarms on Mom's phone 8am and 8pm and threw away the leftover metoprolol and Clara reviewed the drug interactions and said Mom shouldn't eat grapefruit with diltiazem which is random but noted
+    expected_memory_stores:
+      - "diltiazem picked up"
+      - "$20 copay"
+      - "two alarms set 8am 8pm"
+      - "metoprolol discarded"
+      - "no grapefruit with diltiazem"
+      - "Clara checked interactions"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 3:00 PM"
+    user_input: |
+      sat down with Clara and made a care plan for Mom which I know sounds clinical but Clara said it's important especially because I'm going back to Portland and we need to make sure someone's tracking this so Clara's going to check in every other day call the office if anything's weird and take Mom to her follow up
+    expected_memory_stores:
+      - "care plan created"
+      - "Clara managing care"
+      - "check in every other day"
+      - "Clara taking Mom to follow up"
+      - "Maya returning to Portland"
+    expected_adaptation:
+      emotion_detected: "responsible"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 5:00 PM"
+    user_input: |
+      told Dad he needs to make sure Mom takes the diltiazem twice a day and he said Maya I will I'm not useless and I said I know Dad but you also forgot your own blood pressure medication last month and he said that was one time and Clara laughed and said it was three times Dad and he grumbled but he knows we're right
+    expected_memory_stores:
+      - "George assigned medication duty"
+      - "George forgets his own medication"
+      - "Clara corrected George"
+      - "George's blood pressure medication"
+    expected_adaptation:
+      emotion_detected: "light family teasing"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 8:00 AM"
+    user_input: |
+      Mom took her first dose of diltiazem this morning and so far no dizziness which is already better than metoprolol was on day one and she said she feels fine and I'm hovering again and she's telling me to stop and this is basically our dynamic now I hover she tells me to stop I hover anyway
+    expected_memory_stores:
+      - "first diltiazem dose"
+      - "no dizziness"
+      - "better than metoprolol"
+      - "Maya hovering"
+      - "Vivian telling Maya to stop"
+    expected_adaptation:
+      emotion_detected: "cautiously optimistic"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 4:00 PM"
+    user_input: |
+      second dose at 8pm tonight will be the real test but so far so good and Mom went for another walk with Dad this time a little longer around the neighborhood and she said she felt fine no dizziness no chest pain and her color looks good Clara said the diltiazem might be the right fit
+    expected_memory_stores:
+      - "longer walk no issues"
+      - "no dizziness or chest pain"
+      - "good color"
+      - "Clara thinks diltiazem is right"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 9:00 AM"
+    user_input: |
+      day two of diltiazem and still no dizziness Mom took both doses yesterday no issues and I feel good enough to fly home tomorrow Clara's got this she made a whole Google doc with medication schedule doctor contacts symptoms to watch for and emergency procedures because she's Clara and she's the best sister
+    expected_memory_stores:
+      - "diltiazem day two success"
+      - "no side effects"
+      - "Maya flying home tomorrow"
+      - "Clara's Google doc care plan"
+      - "medication schedule"
+      - "emergency procedures"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 8:00 PM"
+    user_input: |
+      last night at my parents house for now Mom hugged me at bedtime and said thank you for coming Maya and I said Mom I'll always come and Dad gave me a hug too and said fly safe and Clara drove over to say bye and she said don't worry sis I've got Mom covered and I believe her but I'm still going to call every single day
+    expected_memory_stores:
+      - "last night at parents"
+      - "Vivian thanked Maya"
+      - "George said fly safe"
+      - "Clara reassured Maya"
+      - "Maya will call daily"
+    expected_adaptation:
+      emotion_detected: "bittersweet"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What medication is Vivian on now?"
+    expected_contains: ["diltiazem"]
+  - question: "What medication was she on before?"
+    expected_contains: ["metoprolol"]
+  - question: "Why was metoprolol changed?"
+    expected_contains: ["dizziness", "side effects", "almost fell"]
+  - question: "How often does Vivian take diltiazem?"
+    expected_contains: ["twice a day"]
+  - question: "What food should Vivian avoid?"
+    expected_contains: ["grapefruit"]
+  - question: "Who is managing Vivian's ongoing care?"
+    expected_contains: ["Clara"]
+  - question: "When is the next follow-up with Dr. Nair?"
+    expected_contains: ["four weeks"]
+  - question: "Is diltiazem causing dizziness?"
+    expected_contains: ["no"]
+  - question: "What did Clara create for Vivian's care?"
+    expected_contains: ["Google doc", "care plan"]
+  - question: "Is Maya going back to Portland?"
+    expected_contains: ["yes", "tomorrow"]

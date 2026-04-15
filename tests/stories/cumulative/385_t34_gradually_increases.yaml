@@ -1,0 +1,175 @@
+story_id: 385
+story_name: "Gradually Increases to Fifteen Minutes"
+category: "Mental Health"
+description: |
+  Tests memory of Maya expanding her meditation from 5 to 15 minutes.
+  Verifies system tracks gradual habit expansion and deepening practice.
+duration_simulated: "3 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 AM"
+    user_input: |
+      tried seven minutes today instead of five and honestly the extra two minutes felt like nothing like I was in the zone and the timer went off and I was like oh already and that has never happened before with sitting meditation
+    expected_memory_stores:
+      - "seven minutes"
+      - "extra two felt like nothing"
+      - "in the zone"
+      - "timer surprised"
+    expected_adaptation:
+      emotion_detected: "encouraged"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 7:00 AM"
+    user_input: |
+      bumped to ten minutes and I noticed something weird halfway through my thoughts kind of organized themselves like instead of random noise it was like thoughts would come up and I'd just notice them and they'd dissolve which is exactly what the guided meditations describe
+    expected_memory_stores:
+      - "ten minutes"
+      - "thoughts organized"
+      - "notice and dissolve"
+      - "matches guided description"
+    expected_adaptation:
+      emotion_detected: "insightful"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 7:30 AM"
+    user_input: |
+      ten minutes is feeling natural now and I'm starting to look forward to it in the morning which is wild because three weeks ago I was like this is pointless and now it's like brushing my teeth just something I do
+    expected_memory_stores:
+      - "ten minutes natural"
+      - "looking forward to it"
+      - "three weeks ago pointless"
+      - "like brushing teeth"
+      - "habit formed"
+    expected_adaptation:
+      emotion_detected: "satisfied"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Next Monday 7:00 AM"
+    user_input: |
+      pushed to twelve minutes today because ten felt too short and I'm finding I actually want MORE which is insane and I tried this unguided meditation for the first time just me and silence and a timer and it was harder but also deeper somehow
+    expected_memory_stores:
+      - "twelve minutes"
+      - "ten too short"
+      - "wanting more"
+      - "unguided meditation"
+      - "harder but deeper"
+    expected_adaptation:
+      emotion_detected: "growing"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Next Wednesday 5:00 PM"
+    user_input: |
+      Dr Tate asked me about my practice and I said I'm at twelve minutes and she said that's wonderful and she suggested trying to notice the gap between thoughts not just the thoughts themselves and I was like what gap and she said exactly that's what you're looking for
+    expected_memory_stores:
+      - "Dr. Tate check-in"
+      - "twelve minutes"
+      - "gap between thoughts"
+      - "what gap"
+      - "what you're looking for"
+    expected_adaptation:
+      emotion_detected: "curious"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Next Friday 7:00 AM"
+    user_input: |
+      fifteen minutes today and I found the gap Dr Tate was talking about like between one thought ending and the next one starting there's this tiny space of just awareness and it's really peaceful and it only lasted a second but I found it
+    expected_memory_stores:
+      - "fifteen minutes"
+      - "found the gap"
+      - "space between thoughts"
+      - "just awareness"
+      - "peaceful"
+      - "one second"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Next Saturday 8:00 AM"
+    user_input: |
+      fifteen minutes is feeling like the right length for now like it's long enough to get deep but not so long that I dread it and my Insight Timer streak is at 35 days and I'm doing sitting in the morning and walking in Sellwood most evenings
+    expected_memory_stores:
+      - "fifteen minutes"
+      - "right length"
+      - "35 day streak"
+      - "morning sitting evening walking"
+    expected_adaptation:
+      emotion_detected: "established"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Next Sunday 10:00 AM"
+    user_input: |
+      how long is Maya's meditation practice now compared to when she started
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Next Sunday 2:00 PM"
+    user_input: |
+      Nadia asked me about meditation because she saw me doing my walking practice at Sellwood and she was like what are you doing you look so peaceful and I explained it and she said she might try it and I didn't push because Clara said don't be that person
+    expected_memory_stores:
+      - "Nadia asked"
+      - "saw walking practice"
+      - "looked peaceful"
+      - "explained without pushing"
+      - "Clara's advice"
+    expected_adaptation:
+      emotion_detected: "balanced"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Following Monday 7:00 AM"
+    user_input: |
+      I notice now that when something stressful happens at work my first instinct isn't to panic it's to breathe and that shift happened so gradually I didn't even realize it until Sam said something intense in standup and I just breathed and responded calmly and Danny was like how are you so chill
+    expected_memory_stores:
+      - "stress response changed"
+      - "breathe first"
+      - "gradual shift"
+      - "Sam standup"
+      - "responded calmly"
+      - "Danny noticed"
+    expected_adaptation:
+      emotion_detected: "centered"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How long does Maya meditate now?"
+    expected_contains: ["fifteen minutes"]
+  - question: "How did Maya progress from two to fifteen minutes?"
+    expected_contains: ["gradual", "five", "seven", "ten", "twelve"]
+  - question: "What is the gap between thoughts that Dr. Tate described?"
+    expected_contains: ["awareness", "space", "between"]
+  - question: "How long is Maya's meditation streak?"
+    expected_contains: ["35"]
+  - question: "Has Maya tried unguided meditation?"
+    expected_contains: ["yes"]
+  - question: "How has Maya's stress response changed?"
+    expected_contains: ["breathe", "calm", "don't panic"]
+  - question: "Who saw Maya doing walking meditation?"
+    expected_contains: ["Nadia"]
+  - question: "What is Maya's daily meditation routine?"
+    expected_contains: ["morning sitting", "evening walking"]
+  - question: "What does Maya compare meditation to now?"
+    expected_contains: ["brushing teeth"]
+  - question: "Who at work noticed Maya's new calmness?"
+    expected_contains: ["Danny"]

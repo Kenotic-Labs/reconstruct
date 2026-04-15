@@ -1,0 +1,184 @@
+story_id: 198
+story_name: "Sophie Settles In"
+category: "Life Events"
+description: |
+  First weeks of Sophie's life at home. Clara and David adjusting to
+  parenthood. Remote auntie duties for Maya. Tests tracking baby
+  milestones and family adaptation from distance.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      first week of Sophie's life at home and Clara is surviving quote surviving unquote she said Maya I haven't slept more than two hours in a row since Tuesday and I said welcome to motherhood and she said if one more person says that to me I will scream and then Sophie started crying and Clara said hold on gotta go
+    expected_memory_stores:
+      - "first week home"
+      - "Clara sleep deprived"
+      - "two hours of sleep"
+      - "Sophie crying"
+      - "Clara adjusting"
+    expected_adaptation:
+      emotion_detected: "empathetic"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      David is being incredible he does all the night feeds with pumped milk so Clara can sleep for a longer stretch and he said being a paramedic prepared him for sleep deprivation which is kind of true and Clara said she married the right man and she's never been more sure of anything
+    expected_memory_stores:
+      - "David doing night feeds"
+      - "pumped milk"
+      - "paramedic sleep deprivation"
+      - "Clara appreciates David"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 7:00 PM"
+    user_input: |
+      I FaceTime Clara every day and I get to see Sophie and she's already changed like her face is filling out and she's more alert and she made this little sound today that Clara said was almost a coo and I lost my mind even though it was probably just gas but I choose to believe she was saying hi to Auntie Maya
+    expected_memory_stores:
+      - "daily FaceTime"
+      - "Sophie changing fast"
+      - "face filling out"
+      - "more alert"
+      - "first coo or gas"
+      - "Maya believes it was hello"
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Week 2 Monday 7:00 PM"
+    user_input: |
+      Sophie had her first pediatrician visit and she's gained weight she's 5 pounds 12 ounces now up from 5 eight at birth and the doctor said she's doing great for a 36 weeker and her jaundice cleared up and all her reflexes are normal and Clara was beaming she said my baby is thriving
+    expected_memory_stores:
+      - "first pediatrician visit"
+      - "5 pounds 12 ounces now"
+      - "gained from 5 lbs 8 oz"
+      - "doing great for 36 weeker"
+      - "jaundice cleared"
+      - "reflexes normal"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Week 2 Wednesday 6:00 PM"
+    user_input: |
+      Mom is at Clara's house like every day helping with laundry and cooking and she brings meals and holds Sophie so Clara can shower and Clara said Mom I don't know what I'd do without you and Mom said that's what mothers are for and then she said also I just want to hold my granddaughter as much as possible before she gets too big for my lap
+    expected_memory_stores:
+      - "Vivian helping daily"
+      - "laundry cooking meals"
+      - "holding Sophie"
+      - "Clara grateful"
+      - "Vivian maximizing grandma time"
+    expected_adaptation:
+      emotion_detected: "warm"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Week 2 Thursday 8:00 PM"
+    user_input: |
+      Julian bought a onesie online that says my aunt is cooler than your aunt and had it shipped to Clara and she put it on Sophie and sent a photo and I made it my phone wallpaper and Julian said I'm the cool uncle so there should be a matching one for me and I said Julian you can't both be the cool one and he said watch me
+    expected_memory_stores:
+      - "Julian sent onesie"
+      - "cool aunt onesie"
+      - "photo is Maya's wallpaper"
+      - "Julian wants cool uncle shirt"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Week 2 Friday 7:00 PM"
+    user_input: |
+      Clara's starting to feel more like herself the C-section incision is healing well and her blood pressure is back to normal completely and Dr. Patel cleared her and said the preeclampsia is fully resolved and Clara said great now I just need sleep and Dr. Patel laughed and said that won't happen for about 18 years
+    expected_memory_stores:
+      - "Clara healing well"
+      - "C-section incision healing"
+      - "blood pressure normal"
+      - "preeclampsia fully resolved"
+      - "Dr. Patel cleared her"
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Week 2 Saturday 10:00 AM"
+    user_input: |
+      Dad brought the finished bookshelf for the nursery and it matches the crib perfectly cherry wood same finish and he put it together in Sophie's room and then he held Sophie and I could see on the Ring camera wait no I mean Clara FaceTimed me and I saw Dad holding Sophie and talking to her in this soft voice I've never heard him use
+    expected_memory_stores:
+      - "bookshelf delivered matching crib"
+      - "cherry wood same finish"
+      - "George holding Sophie"
+      - "soft voice"
+      - "George gentle with baby"
+    expected_adaptation:
+      emotion_detected: "tender"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Week 2 Saturday 5:00 PM"
+    user_input: |
+      thinking about the wedding and how Sophie will be there she'll be about three months old by June 22nd and Clara said she's bringing her obviously and I said obviously she's basically a bridesmaid at this point and Clara said she'll be the flower baby and I said that's not a thing and Clara said it is now
+    expected_memory_stores:
+      - "Sophie at wedding"
+      - "three months old at wedding"
+      - "June 22"
+      - "flower baby"
+      - "Clara bringing Sophie"
+    expected_adaptation:
+      emotion_detected: "amused happy"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Week 2 Sunday 9:00 PM"
+    user_input: |
+      end of Sophie's second week of life and she's healthy and growing and Clara is recovering and David is an amazing dad and my parents are the happiest grandparents and I'm an aunt and the wedding is coming and everything is just SO MUCH in the best possible way like my heart can barely contain all of it honestly 2026 is the year that changed everything for the Chen family
+    expected_memory_stores:
+      - "Sophie two weeks old"
+      - "healthy and growing"
+      - "Clara recovering"
+      - "David amazing dad"
+      - "grandparents happy"
+      - "Maya is an aunt"
+      - "wedding coming"
+      - "2026 transformative year"
+    expected_adaptation:
+      emotion_detected: "overflowing gratitude"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How much does Sophie weigh now?"
+    expected_contains: ["5 pounds 12 ounces"]
+  - question: "Is Clara's preeclampsia resolved?"
+    expected_contains: ["yes", "fully"]
+  - question: "Is Clara healing well from the C-section?"
+    expected_contains: ["yes"]
+  - question: "Who helps Clara with the baby daily?"
+    expected_contains: ["Vivian", "Mom", "David"]
+  - question: "What furniture did George build for Sophie's nursery?"
+    expected_contains: ["crib", "bookshelf"]
+  - question: "Will Sophie be at the wedding?"
+    expected_contains: ["yes", "three months old"]
+  - question: "Has Sophie been to the pediatrician?"
+    expected_contains: ["yes", "doing great"]
+  - question: "What onesie did Julian send?"
+    expected_contains: ["cool aunt"]
+  - question: "Is Clara's blood pressure back to normal?"
+    expected_contains: ["yes", "normal"]
+  - question: "How old is Sophie now?"
+    expected_contains: ["two weeks"]

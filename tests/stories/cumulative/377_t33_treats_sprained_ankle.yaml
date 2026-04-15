@@ -1,0 +1,172 @@
+story_id: 377
+story_name: "Treating Sarah's Ankle - The Aftermath"
+category: "Personal Development"
+description: |
+  Tests memory of the aftermath of Maya's marathon volunteering and the impact
+  of treating Sarah's sprained ankle on her sense of purpose.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      okay so I can't stop thinking about the marathon thing like treating Sarah's ankle and keeping her calm and seeing her actually relax because someone was helping her it did something to me I don't know how to explain it
+    expected_memory_stores:
+      - "can't stop thinking"
+      - "Sarah's ankle"
+      - "keeping calm"
+      - "impact on Maya"
+    expected_adaptation:
+      emotion_detected: "reflective"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 6:00 PM"
+    user_input: |
+      told Dr Tate about the marathon volunteering and she said it sounds like I experienced what psychologists call helper's high which is like a dopamine rush from helping others and she said it's a really healthy thing and I should lean into it
+    expected_memory_stores:
+      - "Dr. Tate discussion"
+      - "helper's high"
+      - "dopamine rush"
+      - "healthy response"
+      - "lean into it"
+    expected_adaptation:
+      emotion_detected: "insightful"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 7:30 PM"
+    user_input: |
+      Sarah the runner actually found me on Instagram through the marathon volunteer group page and sent me a DM saying thank you so much you were so calm and kind and I literally teared up reading it at work and had to go to the bathroom
+    expected_memory_stores:
+      - "Sarah DM on Instagram"
+      - "marathon volunteer group"
+      - "thank you message"
+      - "Maya teared up"
+      - "at work"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 8:00 PM"
+    user_input: |
+      told Clara about Sarah's message and Clara was like see THIS is what it feels like this is why I became a nurse and she got all emotional too and I'm like are we both just crying on the phone right now and she was like yes shut up
+    expected_memory_stores:
+      - "told Clara about Sarah"
+      - "Clara emotional"
+      - "why Clara became nurse"
+      - "both crying"
+    expected_adaptation:
+      emotion_detected: "emotional"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 6:00 PM"
+    user_input: |
+      I looked into more volunteer opportunities and the Red Cross has regular events where certified volunteers can help like blood drives and disaster relief and community health fairs and I signed up for the newsletter
+    expected_memory_stores:
+      - "more volunteer opportunities"
+      - "Red Cross events"
+      - "blood drives"
+      - "disaster relief"
+      - "health fairs"
+      - "signed up newsletter"
+    expected_adaptation:
+      emotion_detected: "motivated"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 10:00 AM"
+    user_input: |
+      Omar asked me to be his first aid buddy for climbing trips because he said knowing I'm certified makes him feel safer and I was like yeah dude of course and I ordered a small first aid kit specifically for my climbing bag
+    expected_memory_stores:
+      - "Omar first aid buddy"
+      - "climbing safety"
+      - "ordered first aid kit"
+      - "climbing bag"
+    expected_adaptation:
+      emotion_detected: "useful"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 3:00 PM"
+    user_input: |
+      Raj texted the group chat and said he's organizing a community first aid workshop at his outdoor center and asked if anyone wants to help teach and I said yes immediately without even checking my calendar which is very unlike me
+    expected_memory_stores:
+      - "Raj community workshop"
+      - "outdoor center"
+      - "Maya volunteered to teach"
+      - "immediate response"
+    expected_adaptation:
+      emotion_detected: "eager"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 5:00 PM"
+    user_input: |
+      who messaged Maya to thank her for help at the marathon
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 11:00 AM"
+    user_input: |
+      Jenny was like so you went from making ramen to learning machine learning to getting certified in first aid what's next becoming an astronaut and I was like ha ha but honestly I just feel like I'm building a fuller version of myself if that makes sense
+    expected_memory_stores:
+      - "Jenny teasing"
+      - "ramen ML first aid progression"
+      - "astronaut joke"
+      - "building fuller self"
+    expected_adaptation:
+      emotion_detected: "self-aware"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 5:00 PM"
+    user_input: |
+      Julian said he's noticed I'm more confident overall like not just with first aid but in general and he said the marathon thing changed something in me and I think he's right like knowing I can help people in an emergency just makes me feel more capable as a person
+    expected_memory_stores:
+      - "Julian noticed confidence"
+      - "overall change"
+      - "marathon changed her"
+      - "capable as person"
+      - "emergency competence"
+    expected_adaptation:
+      emotion_detected: "empowered"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What did Sarah send Maya after the marathon?"
+    expected_contains: ["DM", "Instagram", "thank you"]
+  - question: "What is helper's high?"
+    expected_contains: ["dopamine", "helping others"]
+  - question: "What additional volunteering did Maya sign up for?"
+    expected_contains: ["Red Cross", "newsletter"]
+  - question: "Why is Omar glad Maya is first aid certified?"
+    expected_contains: ["climbing", "safer"]
+  - question: "What workshop is Raj organizing?"
+    expected_contains: ["community", "first aid", "outdoor"]
+  - question: "How has first aid affected Maya's overall confidence?"
+    expected_contains: ["more confident", "capable"]
+  - question: "What did Clara say about the Sarah experience?"
+    expected_contains: ["why", "became", "nurse"]
+  - question: "What did Dr. Tate call Maya's marathon experience?"
+    expected_contains: ["helper's high"]
+  - question: "What did Maya order for climbing trips?"
+    expected_contains: ["first aid kit"]
+  - question: "How does Jenny describe Maya's recent activities?"
+    expected_contains: ["ramen", "machine learning", "first aid"]

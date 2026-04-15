@@ -1,0 +1,224 @@
+story_id: 96
+story_name: "Bringing It to Sam"
+category: "Career"
+description: |
+  Tests memory of Maya escalating the credit issue to Sam formally.
+  Sam takes it seriously and acts. Resolution begins.
+  Verifies system tracks management response and resolution steps.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 10:00 AM"
+    user_input: |
+      meeting with Sam in an hour and I'm nervous but not as nervous as I was confronting Danny because Sam has always been fair and supportive and I know he'll listen and Julian texted me a picture of Kobe in a superhero cape he made which made me laugh and calmed me down
+    expected_memory_stores:
+      - "meeting in an hour"
+      - "nervous"
+      - "Sam fair"
+      - "Julian Kobe superhero cape"
+      - "calmed down"
+    expected_triples:
+      - ["user", "has_meeting_with", "Sam in one hour"]
+      - ["user", "has_emotion", "nervous"]
+      - ["Julian", "sent_photo_of", "Kobe in superhero cape"]
+      - ["user", "trusts", "Sam to be fair"]
+    expected_adaptation:
+      emotion_detected: "nervous"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Friday 11:15 AM"
+    user_input: |
+      had the meeting with Sam and I presented the whole thing chronologically the first incident the second incident the confrontation Danny's denial then improvement and I showed him the git stats the PRs the meeting notes and Lily's witness statement and Sam was quiet for a long time
+    expected_memory_stores:
+      - "met with Sam"
+      - "chronological presentation"
+      - "all evidence shown"
+      - "git stats PRs notes"
+      - "Lily's statement"
+      - "Sam quiet"
+    expected_triples:
+      - ["user", "presented_to", "Sam chronologically"]
+      - ["user", "showed", "git stats, PRs, meeting notes, Lily's statement"]
+      - ["Sam", "reacted_with", "long silence"]
+    expected_adaptation:
+      emotion_detected: "tense"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 11:30 AM"
+    user_input: |
+      Sam said first of all thank you for bringing this to me with documentation instead of just complaining and he said he had noticed something felt off in Danny's presentations but he couldn't put his finger on it and now it makes sense and he said he takes this very seriously
+    expected_memory_stores:
+      - "Sam thanked Maya"
+      - "documentation appreciated"
+      - "Sam noticed something"
+      - "makes sense now"
+      - "takes seriously"
+    expected_triples:
+      - ["Sam", "thanked", "user for documentation"]
+      - ["Sam", "had_noticed", "something off in Danny's presentations"]
+      - ["Sam", "takes_seriously", "credit attribution issue"]
+      - ["user", "has_emotion", "relieved"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Friday 11:45 AM"
+    user_input: |
+      Sam said he's going to have a direct conversation with Danny about attribution and professional integrity and he said he'll also implement a new norm where the person who wrote the code or designed the solution gets named in presentations and he said Maya this shouldn't have happened and I'm sorry I didn't catch it sooner
+    expected_memory_stores:
+      - "Sam will talk to Danny"
+      - "attribution norm"
+      - "presentation naming policy"
+      - "Sam apologized"
+      - "should have caught sooner"
+    expected_triples:
+      - ["Sam", "will_talk_to", "Danny about attribution"]
+      - ["Sam", "implementing", "presentation naming policy"]
+      - ["Sam", "apologized_for", "not catching it sooner"]
+      - ["user", "has_emotion", "validated"]
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 12:00 PM"
+    user_input: |
+      I asked Sam what I should do about my working relationship with Danny and he said Danny is talented and I don't think he's malicious I think he's competitive and doesn't realize how his behavior affects others and I'm going to coach him on this and I appreciated that Sam saw nuance in the situation
+    expected_memory_stores:
+      - "Danny talented not malicious"
+      - "competitive"
+      - "doesn't realize impact"
+      - "Sam will coach"
+      - "nuance appreciated"
+    expected_triples:
+      - ["Sam", "assessed_Danny_as", "talented not malicious"]
+      - ["Sam", "assessed_Danny_as", "competitive, unaware of impact"]
+      - ["Sam", "will_coach", "Danny"]
+    expected_adaptation:
+      emotion_detected: "understood"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 3:00 PM"
+    user_input: |
+      told Lily about the Sam meeting and she was relieved and said she's glad Sam took it seriously and she said she had been worried that management might dismiss it like happened at Uber and I said Sam is not that kind of manager and she said yeah I can see that now
+    expected_memory_stores:
+      - "Lily told"
+      - "Lily relieved"
+      - "Uber comparison"
+      - "Sam different"
+      - "Lily trusts Sam"
+    expected_triples:
+      - ["Lily", "has_emotion", "relieved"]
+      - ["Lily", "compared_to", "Uber management dismissing issues"]
+      - ["Lily", "trusts", "Sam as manager"]
+    expected_adaptation:
+      emotion_detected: "supported"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 5:00 PM"
+    user_input: |
+      what is Sam going to do about the Danny situation
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 7:00 PM"
+    user_input: |
+      Julian was so proud of me when I told him about the meeting and he said you handled this perfectly like professionally with data and fairness and he made pasta carbonara again because he knows it's my comfort food and Kobe got some plain pasta without the sauce obviously
+    expected_memory_stores:
+      - "Julian proud"
+      - "handled perfectly"
+      - "professional with data"
+      - "carbonara comfort food"
+      - "Kobe plain pasta"
+    expected_triples:
+      - ["Julian", "is_proud_of", "user"]
+      - ["Julian", "made", "pasta carbonara"]
+      - ["carbonara", "is", "user's comfort food"]
+      - ["Kobe", "ate", "plain pasta"]
+    expected_adaptation:
+      emotion_detected: "loved"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Saturday 10:00 AM"
+    user_input: |
+      Sam texted me today which is unusual for a Saturday and he said he wanted me to know he already talked to Danny and it went well and Danny expressed genuine remorse and they agreed on clear attribution guidelines going forward and Sam will monitor and I felt a weight lift off my shoulders
+    expected_memory_stores:
+      - "Sam talked to Danny"
+      - "went well"
+      - "Danny genuine remorse"
+      - "attribution guidelines"
+      - "Sam will monitor"
+      - "weight lifted"
+    expected_triples:
+      - ["Sam", "talked_to", "Danny"]
+      - ["Danny", "expressed", "genuine remorse"]
+      - ["Sam", "established", "attribution guidelines"]
+      - ["Sam", "will_monitor", "Danny's behavior"]
+      - ["user", "has_emotion", "relieved"]
+    expected_adaptation:
+      emotion_detected: "relieved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 5:00 PM"
+    user_input: |
+      spent the afternoon at the farmers market with Julian and Kobe just being normal and not thinking about work drama and I bought some fresh peaches and Julian said we should make that peach salad again from the fridgesearch recipe and I was like yes absolutely and it felt like things are going to be okay
+    expected_memory_stores:
+      - "farmers market"
+      - "normal day"
+      - "fresh peaches"
+      - "peach salad again"
+      - "fridgesearch recipe"
+      - "things okay"
+    expected_triples:
+      - ["user", "went_to", "farmers market with Julian and Kobe"]
+      - ["user", "bought", "fresh peaches"]
+      - ["Julian", "suggested", "peach salad from fridgesearch"]
+      - ["user", "has_emotion", "peaceful"]
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How did Sam respond to Maya's documentation?"
+    expected_contains: ["seriously", "thanked", "sorry"]
+  - question: "What new norm is Sam implementing?"
+    expected_contains: ["attribution", "named", "presentations"]
+  - question: "Did Sam talk to Danny?"
+    expected_contains: ["yes"]
+  - question: "How did Danny respond to Sam?"
+    expected_contains: ["genuine remorse"]
+  - question: "Does Sam think Danny is malicious?"
+    expected_contains: ["no", "competitive", "doesn't realize"]
+  - question: "What will Sam do going forward?"
+    expected_contains: ["monitor", "coach"]
+  - question: "How did Lily react to Sam's response?"
+    expected_contains: ["relieved", "glad"]
+  - question: "What comfort food did Julian make?"
+    expected_contains: ["carbonara"]
+  - question: "What is the current status of the Danny situation?"
+    expected_contains: ["resolved", "guidelines", "monitoring"]
+  - question: "How is Maya feeling after talking to Sam?"
+    expected_contains: ["relieved", "weight lifted"]

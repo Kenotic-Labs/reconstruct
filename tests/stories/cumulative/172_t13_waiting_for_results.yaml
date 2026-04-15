@@ -1,0 +1,180 @@
+story_id: 172
+story_name: "Waiting for Results"
+category: "Health"
+description: |
+  Stress test and more tests at Kaiser. Waiting for diagnosis. Tests
+  tracking medical information, temporal progression, and sustained
+  emotional state through uncertainty.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 7:00 AM"
+    user_input: |
+      barely slept last night I stayed at my parents house in my old room and it smells the same like lavender because Mom always puts those sachets everywhere and I just laid there thinking about her all night the stress test is at 10am today and I'm terrified of what they might find
+    expected_memory_stores:
+      - "Maya at parents house"
+      - "old room"
+      - "lavender sachets"
+      - "stress test 10am"
+      - "terrified"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 10:30 AM"
+    user_input: |
+      at the hospital Mom's doing the stress test right now they have her on a treadmill with all these electrodes on her chest and the tech said it takes about 15 minutes and then the cardiologist Dr. Nair will review the results Dad and I are in the waiting room and he's doing that thing where he pretends to read a magazine but he's not actually reading it
+    expected_memory_stores:
+      - "stress test in progress"
+      - "treadmill with electrodes"
+      - "15 minutes"
+      - "cardiologist Dr. Nair"
+      - "George pretending to read"
+    expected_adaptation:
+      emotion_detected: "tense"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 11:30 AM"
+    user_input: |
+      stress test is done and Dr. Nair said the results are quote interesting unquote which is NOT a word you want to hear from a cardiologist and she said there's some irregularity in the heart rhythm and she wants to do a Holter monitor for 24 hours and maybe an echocardiogram and Mom just nodded and I wanted to scream WHAT DOES THAT MEAN
+    expected_memory_stores:
+      - "stress test results irregular"
+      - "Dr. Nair"
+      - "heart rhythm irregularity"
+      - "Holter monitor 24 hours"
+      - "echocardiogram possible"
+      - "Maya frustrated with vague language"
+    expected_adaptation:
+      emotion_detected: "frustrated anxiety"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 1:00 PM"
+    user_input: |
+      Clara showed up during her lunch break still in scrubs and she talked to Dr. Nair nurse to doctor and got more information than we did basically Clara said the irregularity could be atrial fibrillation or a different kind of arrhythmia and the Holter monitor will clarify and she said it's NOT immediately life threatening which helped me breathe a little
+    expected_memory_stores:
+      - "Clara talked to Dr. Nair"
+      - "possible atrial fibrillation"
+      - "or other arrhythmia"
+      - "not immediately life threatening"
+      - "Holter monitor will clarify"
+    expected_adaptation:
+      emotion_detected: "slightly relieved"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Wednesday 3:00 PM"
+    user_input: |
+      Mom's got the Holter monitor on now it's this little device she wears on her chest for 24 hours and it records her heart rhythm continuously and she was complaining about it being uncomfortable and Dad said Vivian you just had chest pains you can handle a little device and she said George don't tell me what I can handle which lol okay they're bickering so she must be feeling better
+    expected_memory_stores:
+      - "Holter monitor attached"
+      - "24 hour recording"
+      - "Vivian complaining"
+      - "George and Vivian bickering"
+      - "bickering means she's feeling better"
+    expected_adaptation:
+      emotion_detected: "darkly amused"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      Julian called to check in and I was like hey babe and he said how's Mom and I said we're waiting still and he said Kobe misses you and I said I miss him too and then Julian said how are YOU doing and I kind of fell apart and said I'm scared Julian and he just listened which is what I needed
+    expected_memory_stores:
+      - "Julian checked in"
+      - "Kobe misses Maya"
+      - "Maya admitted being scared"
+      - "Julian listened"
+    expected_adaptation:
+      emotion_detected: "vulnerable"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Wednesday 9:00 PM"
+    user_input: |
+      Mom went to bed early with the monitor on and Dad and I sat in the kitchen and he started crying which I have literally NEVER seen my father cry in my entire life and he said Maya I can't lose her and I held my dad's hand and said you're not going to lose her Dad she's going to be fine
+    expected_memory_stores:
+      - "George cried"
+      - "first time Maya saw father cry"
+      - "George afraid of losing Vivian"
+      - "Maya comforted George"
+    expected_adaptation:
+      emotion_detected: "deeply moved"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Thursday 9:00 AM"
+    user_input: |
+      Holter monitor comes off at 10am and then we have to wait for results Dr. Nair said she should have the full picture by tomorrow morning and she also ordered the echocardiogram for this afternoon just to be thorough so we're going back to Kaiser at 2pm
+    expected_memory_stores:
+      - "Holter monitor off at 10am"
+      - "results tomorrow morning"
+      - "echocardiogram 2pm today"
+      - "back to Kaiser"
+    expected_adaptation:
+      emotion_detected: "waiting mode"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Thursday 3:00 PM"
+    user_input: |
+      echocardiogram done they looked at Mom's heart with ultrasound and the tech said the heart structure looks good no blockages no valve issues which Clara said is really encouraging because it means the arteries are clear and whatever's causing the irregular rhythm is probably electrical not structural
+    expected_memory_stores:
+      - "echocardiogram done"
+      - "heart structure good"
+      - "no blockages"
+      - "no valve issues"
+      - "likely electrical issue not structural"
+      - "Clara interpreting results"
+    expected_adaptation:
+      emotion_detected: "cautiously optimistic"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Thursday 8:00 PM"
+    user_input: |
+      one more night of waiting the diagnosis comes tomorrow morning and I'm at my parents house again and Mom made me tea even though she's the one who should be resting and she said Maya stop looking at me like I'm dying I'm fine and I said Mom you were in the ER two days ago and she said yes and now I'm making tea stop hovering
+    expected_memory_stores:
+      - "diagnosis tomorrow"
+      - "one more night waiting"
+      - "Vivian making tea"
+      - "Vivian telling Maya to stop hovering"
+      - "Vivian resilient"
+    expected_adaptation:
+      emotion_detected: "affectionate worry"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Who is Vivian's cardiologist?"
+    expected_contains: ["Dr. Nair"]
+  - question: "What tests has Vivian had?"
+    expected_contains: ["ECG", "stress test", "Holter monitor", "echocardiogram"]
+  - question: "What did the echocardiogram show?"
+    expected_contains: ["good", "no blockages"]
+  - question: "Is the heart issue likely structural or electrical?"
+    expected_contains: ["electrical"]
+  - question: "What conditions are being considered?"
+    expected_contains: ["atrial fibrillation", "arrhythmia"]
+  - question: "Who explained the medical terms to Maya?"
+    expected_contains: ["Clara"]
+  - question: "When does Vivian get her diagnosis?"
+    expected_contains: ["tomorrow", "morning"]
+  - question: "Did George Chen cry?"
+    expected_contains: ["yes", "first time"]
+  - question: "Where is Maya staying?"
+    expected_contains: ["parents house"]
+  - question: "How is Vivian behaving through this?"
+    expected_contains: ["resilient", "making tea", "fine"]

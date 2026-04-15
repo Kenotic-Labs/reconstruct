@@ -1,0 +1,173 @@
+story_id: 332
+story_name: "Marcus and Nadia Hook Up"
+category: "Friendships"
+description: |
+  Tests memory of the Marcus-Nadia relationship developing. Wine-fueled
+  hookup turns into a brief fling. Maya watches nervously from the sidelines.
+  Verifies system tracks inter-character romantic dynamics.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:00 PM"
+    user_input: |
+      Nadia and Marcus have been texting constantly since Saturday night and she keeps showing me their texts and he's being really cute sending her memes and asking about her day and I'm like ok this is adorable but also dangerous
+    expected_memory_stores:
+      - "constant texting"
+      - "Marcus sending memes"
+      - "adorable but dangerous"
+    expected_adaptation:
+      emotion_detected: "cautious"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Wednesday 7:30 PM"
+    user_input: |
+      Marcus took Nadia to dinner at Canard which is like a nice restaurant choice for Marcus who usually suggests pizza and she said he opened the car door for her and everything and I was like wow ok Marcus is trying
+    expected_memory_stores:
+      - "dinner at Canard"
+      - "nice for Marcus"
+      - "opened car door"
+      - "Marcus trying"
+    expected_adaptation:
+      emotion_detected: "surprised"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Friday 9:00 PM"
+    user_input: |
+      they went out again tonight and Nadia said they ended up back at his place and she stayed over and she was being coy about the details and I was like ok I don't need to know everything but she looked happy and that matters
+    expected_memory_stores:
+      - "second date"
+      - "stayed at Marcus's"
+      - "Nadia happy"
+      - "coy about details"
+    expected_adaptation:
+      emotion_detected: "supportive"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Week 2 Monday 7:00 PM"
+    user_input: |
+      told Jenny about Marcus and Nadia on Marco Polo and she was like wait YOUR Marcus and YOUR Nadia and she made this face like oh no and I was like yeah exactly and she said from experience dating within friend groups is always complicated
+    expected_memory_stores:
+      - "told Jenny"
+      - "Jenny worried"
+      - "dating within friend groups"
+      - "always complicated"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Week 2 Wednesday 8:00 PM"
+    user_input: |
+      Omar pulled me aside at work well not work but we met for coffee and he said he's worried about the Marcus Nadia thing because Marcus has a pattern of being super into someone for like three weeks and then ghosting and Omar said he's seen it four times
+    expected_memory_stores:
+      - "Omar worried"
+      - "coffee meeting"
+      - "Marcus pattern"
+      - "super into then ghosting"
+      - "three weeks"
+      - "four times before"
+    expected_adaptation:
+      emotion_detected: "concerned"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Week 2 Thursday 6:00 PM"
+    user_input: |
+      Nadia came to climbing and she was glowing talking about Marcus and how he made her breakfast and played guitar for her wait not bass actual guitar and she said he's the first person since Kwame who's made her feel wanted and that word WANTED made my stomach drop
+    expected_memory_stores:
+      - "Nadia glowing"
+      - "Marcus made breakfast"
+      - "played guitar for her"
+      - "first since Kwame"
+      - "feel wanted"
+      - "Maya's stomach dropped"
+    expected_adaptation:
+      emotion_detected: "worried"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Week 2 Friday 9:00 PM"
+    user_input: |
+      Julian said I need to let them figure it out and stop hovering and I said I'm not hovering I'm concerned and he said same thing and he said Marcus is a grown man and Nadia is a grown woman and I said yeah but Nadia is fragile right now and he said she might be stronger than you think
+    expected_memory_stores:
+      - "Julian said stop hovering"
+      - "let them figure it out"
+      - "Maya hovering/concerned"
+      - "Nadia fragile vs strong"
+    expected_adaptation:
+      emotion_detected: "conflicted"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Week 2 Saturday 12:00 PM"
+    user_input: |
+      how many times has Omar seen Marcus's dating pattern play out
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Week 2 Saturday 4:00 PM"
+    user_input: |
+      Marcus and Nadia came to the climbing gym together holding hands and it was cute but also super awkward because everyone at the gym now knows they're a thing and Kyle the instructor was like oh you two are together now and Nadia blushed
+    expected_memory_stores:
+      - "climbing gym together"
+      - "holding hands"
+      - "publicly a couple"
+      - "Kyle noticed"
+      - "Nadia blushed"
+    expected_adaptation:
+      emotion_detected: "uneasy"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Week 2 Sunday 8:00 PM"
+    user_input: |
+      it's been two weeks and they're basically inseparable and I want to be happy for them and I AM happy I just keep hearing Omar's voice saying three weeks and I really hope Marcus proves everyone wrong because if he hurts Nadia after everything she's been through I swear
+    expected_memory_stores:
+      - "two weeks inseparable"
+      - "want to be happy"
+      - "three week warning"
+      - "hope Marcus proves wrong"
+      - "if he hurts Nadia"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+final_verification:
+  - question: "Where did Marcus take Nadia on their first real date?"
+    expected_contains: ["Canard"]
+  - question: "What is Marcus's dating pattern according to Omar?"
+    expected_contains: ["three weeks", "ghosting"]
+  - question: "How many times has Omar seen Marcus's pattern?"
+    expected_contains: ["four"]
+  - question: "What did Nadia say Marcus made her feel?"
+    expected_contains: ["wanted"]
+  - question: "How did Julian advise Maya?"
+    expected_contains: ["let them figure it out", "stop hovering"]
+  - question: "What did Jenny say about dating in friend groups?"
+    expected_contains: ["complicated"]
+  - question: "What instrument did Marcus play for Nadia?"
+    expected_contains: ["guitar"]
+  - question: "How long have Marcus and Nadia been together?"
+    expected_contains: ["two weeks"]
+  - question: "How does Maya feel about the relationship?"
+    expected_contains: ["worried", "anxious", "hope"]
+  - question: "Who is the first person since Kwame to make Nadia feel wanted?"
+    expected_contains: ["Marcus"]

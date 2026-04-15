@@ -1,0 +1,170 @@
+story_id: 449
+story_name: "Sam Respects the Boundary"
+category: "Work-Life Balance"
+description: |
+  Sam fully accepts and even respects Maya's work-life boundary. Applies some
+  of her principles to the team. Cultural shift at Conduit begins.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 10:00 AM"
+    user_input: |
+      Sam came to me today and said I've been thinking about what you said about Parkinson's law and the time constraints and he said he wants to try something with the whole team where everyone commits to no Slack after 6:30pm and no weekend work unless it's a real emergency and I was like wait really
+    expected_memory_stores:
+      - "Sam adopting boundary"
+      - "no Slack after 6:30"
+      - "no weekend work"
+      - "real emergency only"
+      - "whole team policy"
+    expected_adaptation:
+      emotion_detected: "shocked"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Monday 11:00 AM"
+    user_input: |
+      he said he looked at the team's output data and the people who work the most hours aren't producing more than the people who work normal hours and in some cases they're producing worse code with more bugs and he said Maya your improvement was the proof he needed
+    expected_memory_stores:
+      - "output data analysis"
+      - "more hours not more output"
+      - "worse code more bugs"
+      - "Maya was proof"
+    expected_adaptation:
+      emotion_detected: "vindicated"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 3:00 PM"
+    user_input: |
+      Sam announced the new policy in the team meeting and Omar was like wait I can't work weekends anymore and Sam said you can but I'm not expecting it and the work should be scoped to fit normal hours and if it doesn't that's a planning problem not a people problem and I was like YES exactly
+    expected_memory_stores:
+      - "policy announced in meeting"
+      - "Omar surprised"
+      - "work scoped to normal hours"
+      - "planning problem not people"
+    expected_adaptation:
+      emotion_detected: "thrilled"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 5:30 PM"
+    user_input: |
+      Lily pulled me aside and said she had no idea I was working until 10 every night and she said she was starting to feel the same pressure like she wasn't doing enough because she saw my Slack messages late at night and she felt like she had to match it and I was like oh god I was creating the problem for others too
+    expected_memory_stores:
+      - "Lily felt pressure"
+      - "saw late Slack messages"
+      - "felt had to match"
+      - "Maya creating problem for others"
+    expected_adaptation:
+      emotion_detected: "horrified realization"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 12:00 PM"
+    user_input: |
+      Sam told me privately that two other team members had complained about burnout in their recent reviews and he said your boundary thing actually came at the perfect time because he was about to lose people and he didn't even realize the culture had gotten that bad
+    expected_memory_stores:
+      - "two others complained burnout"
+      - "Sam was losing people"
+      - "didn't realize culture problem"
+      - "boundary came at right time"
+    expected_adaptation:
+      emotion_detected: "sobered"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Thursday 5:00 PM"
+    user_input: |
+      Aisha came to me and said the new policy is amazing and she said she was afraid to leave early before because she thought as an intern she had to be the last one there and I said Aisha your worth is not measured in hours at your desk it's measured in what you produce and she said you should be a motivational speaker and I said absolutely not
+    expected_memory_stores:
+      - "Aisha loves new policy"
+      - "afraid to leave as intern"
+      - "worth not measured in hours"
+      - "motivational speaker joke"
+    expected_adaptation:
+      emotion_detected: "amused proud"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 5:45 PM"
+    user_input: |
+      the most surreal thing happened today the office was basically empty by 5:45 like everyone left and Sam was one of the first to go and he said have a good weekend Maya and I stood there looking at the empty office thinking a month ago I was the only one here at 9pm and now we all go home and it works
+    expected_memory_stores:
+      - "office empty by 5:45"
+      - "Sam left first"
+      - "month ago alone at 9pm"
+      - "culture shift"
+      - "it works"
+    expected_adaptation:
+      emotion_detected: "surreal"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 6:30 PM"
+    user_input: |
+      did Sam actually implement a team wide work hours policy and what does it say
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 8:00 PM"
+    user_input: |
+      told Julian that Sam adopted the boundary for the whole team and Julian was like so you changed the culture of your workplace by just going home at 6 and I said well Dr Tate changed me and I changed my hours and Sam saw the data and changed the policy so it was a team effort and Julian said no it started with you
+    expected_memory_stores:
+      - "Julian says Maya changed culture"
+      - "chain of change"
+      - "Dr Tate to Maya to Sam"
+      - "started with Maya"
+    expected_adaptation:
+      emotion_detected: "humble"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Saturday 10:00 AM"
+    user_input: |
+      got zero Slack messages last night which is the first Friday night without work Slack in I can't even remember how long and I'm sitting here with coffee and Julian and Kobe and there's nowhere I need to be and nothing I need to check and this is what weekends are supposed to feel like
+    expected_memory_stores:
+      - "zero Slack messages"
+      - "first free Friday night"
+      - "coffee Julian Kobe"
+      - "nothing to check"
+      - "what weekends should feel like"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What policy did Sam implement for the team?"
+    expected_contains: ["no Slack after 6:30", "no weekend work"]
+  - question: "What data convinced Sam to change the policy?"
+    expected_contains: ["more hours not more output", "worse code"]
+  - question: "How was Maya's overwork affecting other team members?"
+    expected_contains: ["Lily", "pressure", "late Slack messages"]
+  - question: "How many team members complained about burnout?"
+    expected_contains: ["two", "2"]
+  - question: "What did Sam say about overloaded work?"
+    expected_contains: ["planning problem", "not people problem"]
+  - question: "Why was Aisha afraid to leave early?"
+    expected_contains: ["intern", "last one there"]
+  - question: "Was the office empty by normal hours after the policy?"
+    expected_contains: ["yes", "5:45", "everyone left"]
+  - question: "How did Julian describe Maya's impact?"
+    expected_contains: ["changed culture", "started with you"]
+  - question: "Did Maya get any work Slack messages Friday night?"
+    expected_contains: ["no", "zero"]
+  - question: "What chain of change does Maya describe?"
+    expected_contains: ["Dr Tate", "Maya", "Sam"]

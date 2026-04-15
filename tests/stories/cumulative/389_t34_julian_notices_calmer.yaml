@@ -1,0 +1,174 @@
+story_id: 389
+story_name: "Julian Notices She's Calmer"
+category: "Mental Health"
+description: |
+  Tests memory of Julian explicitly recognizing the impact of meditation on Maya.
+  Verifies system tracks relationship-level impact of personal practice.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:00 PM"
+    user_input: |
+      Julian said something really nice tonight he said he thinks the meditation has made me a better partner and I was like what do you mean and he said I listen more now like actually listen instead of just waiting for my turn to talk
+    expected_memory_stores:
+      - "Julian said better partner"
+      - "listens more"
+      - "actually listens"
+      - "not waiting to talk"
+    expected_adaptation:
+      emotion_detected: "touched"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      he also said I don't catastrophize as much like when the dishwasher broke last week old Maya would've spiraled into oh god everything is falling apart but I just called the repair person and moved on and he was like that's new
+    expected_memory_stores:
+      - "less catastrophizing"
+      - "dishwasher broke example"
+      - "old Maya would spiral"
+      - "new Maya handles it"
+      - "Julian noticed"
+    expected_adaptation:
+      emotion_detected: "self-aware"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      we had a disagreement about where to go for dinner and instead of getting frustrated I just paused and said let's both think about it for a minute and Julian was like since when do you pause and I was like since I started meditating duh
+    expected_memory_stores:
+      - "dinner disagreement"
+      - "Maya paused"
+      - "think about it"
+      - "since meditation"
+    expected_adaptation:
+      emotion_detected: "humored"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 8:00 PM"
+    user_input: |
+      Julian asked if he could start meditating with me again not the walking one but the sitting one and I was like yes absolutely and we did 10 minutes together in the living room and Kobe actually lay down quietly this time instead of licking faces
+    expected_memory_stores:
+      - "Julian joining practice"
+      - "sitting meditation"
+      - "10 minutes together"
+      - "Kobe quiet this time"
+    expected_adaptation:
+      emotion_detected: "happy"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 7:00 AM"
+    user_input: |
+      meditated together this morning and Julian said afterward that he felt this warmth in his chest and I was like that's the Loving Kindness thing and he was like what and I explained it and he tried it and got emotional and I was like welcome to the club buddy
+    expected_memory_stores:
+      - "morning together"
+      - "Julian felt warmth"
+      - "Loving Kindness"
+      - "Julian got emotional"
+      - "welcome to club"
+    expected_adaptation:
+      emotion_detected: "connected"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Saturday 8:00 AM"
+    user_input: |
+      third morning in a row meditating together and Julian is actually good at it like naturally calmer than me and he said he forgot how much he missed this from college and he's going to download Insight Timer too
+    expected_memory_stores:
+      - "third morning together"
+      - "Julian naturally calm"
+      - "missed from college"
+      - "downloading Insight Timer"
+    expected_adaptation:
+      emotion_detected: "pleased"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 12:00 PM"
+    user_input: |
+      we did walking meditation together in Sellwood after breakfast and at one point we were holding hands walking in silence through the trees and I thought this is what Dr Tate means by presence being a gift you can share
+    expected_memory_stores:
+      - "walking meditation together"
+      - "Sellwood"
+      - "holding hands silence"
+      - "through trees"
+      - "presence shared"
+      - "Dr. Tate reference"
+    expected_adaptation:
+      emotion_detected: "loving"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 3:00 PM"
+    user_input: |
+      what specific changes has Julian noticed in Maya since she started meditating
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 10:00 AM"
+    user_input: |
+      told Dr Tate that Julian is meditating with me now and she literally said that's the best outcome I could've hoped for and she said couples who practice mindfulness together have stronger relationships according to research
+    expected_memory_stores:
+      - "Dr. Tate pleased"
+      - "best outcome"
+      - "couples mindfulness"
+      - "stronger relationships"
+      - "research based"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 6:00 PM"
+    user_input: |
+      sitting on the couch tonight with Julian and Kobe and I just felt this deep contentment like nothing exciting was happening we were just being together and I thought this is what meditation taught me how to notice the ordinary and feel grateful for it
+    expected_memory_stores:
+      - "deep contentment"
+      - "nothing exciting"
+      - "just being together"
+      - "notice ordinary"
+      - "grateful"
+      - "meditation taught this"
+    expected_adaptation:
+      emotion_detected: "content"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What specific changes has Julian noticed in Maya?"
+    expected_contains: ["listen", "less catastrophizing", "calmer", "pauses"]
+  - question: "Is Julian meditating now too?"
+    expected_contains: ["yes"]
+  - question: "What app is Julian using for meditation?"
+    expected_contains: ["Insight Timer"]
+  - question: "What did Julian feel during Loving Kindness meditation?"
+    expected_contains: ["warmth", "chest", "emotional"]
+  - question: "What did Dr. Tate say about couples meditating together?"
+    expected_contains: ["stronger relationships"]
+  - question: "How does Maya describe her biggest meditation lesson?"
+    expected_contains: ["notice", "ordinary", "grateful"]
+  - question: "What example showed Maya's reduced catastrophizing?"
+    expected_contains: ["dishwasher"]
+  - question: "Did Julian meditate before?"
+    expected_contains: ["yes", "college"]
+  - question: "What does Kobe do during their meditation now?"
+    expected_contains: ["quiet", "lay down"]
+  - question: "Where do Maya and Julian walk meditate together?"
+    expected_contains: ["Sellwood"]

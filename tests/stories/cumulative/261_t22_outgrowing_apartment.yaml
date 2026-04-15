@@ -1,0 +1,184 @@
+story_id: 261
+story_name: "Outgrowing the Apartment"
+category: "Housing"
+description: |
+  Tests memory of Maya and Julian realizing they've outgrown their Sellwood apartment.
+  Establishes the trigger for house hunting, their frustrations with the space, and
+  initial conversations about buying.
+duration_simulated: "2 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Sunday 9:00 AM"
+    user_input: |
+      so I was trying to set up my climbing hangboard in the bathroom doorway right and Julian's art supplies are everywhere and Kobe's crate is in the living room and our apartment is like 750 square feet and I'm just like... we have outgrown this place so hard
+    expected_memory_stores:
+      - "apartment too small"
+      - "750 square feet"
+      - "hangboard"
+      - "Julian's art supplies"
+      - "Kobe's crate"
+      - "Sellwood apartment"
+    expected_adaptation:
+      emotion_detected: "frustrated"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Sunday 10:30 AM"
+    user_input: |
+      talked to Julian about it and he was like yeah I've been thinking the same thing like he needs a studio space for his design work at Bold Studio and right now he's working from the dining table which is also our only table and we eat on the couch half the time
+    expected_memory_stores:
+      - "Julian agrees"
+      - "needs studio space"
+      - "Bold Studio work"
+      - "dining table as desk"
+      - "eating on couch"
+    expected_adaptation:
+      emotion_detected: "aligned"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Sunday 2:00 PM"
+    user_input: |
+      we've been in this apartment for like three years now and the rent just went up to $1,850 a month which is insane for Sellwood honestly and Julian was like at that price we might as well be paying a mortgage and I was like wait you're right
+    expected_memory_stores:
+      - "three years in apartment"
+      - "rent $1850"
+      - "Sellwood"
+      - "rent increase"
+      - "mortgage comparison"
+    expected_adaptation:
+      emotion_detected: "motivated"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Sunday 5:00 PM"
+    user_input: |
+      spent the afternoon looking at Zillow and Redfin and oh my god the Portland market is nuts like houses that look decent are going for like 450 to 550K and that's for like a three bedroom and Julian was like can we even afford that and honestly I'm not sure
+    expected_memory_stores:
+      - "Zillow Redfin search"
+      - "Portland market"
+      - "450-550K range"
+      - "three bedroom"
+      - "affordability concern"
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Monday 8:00 AM"
+    user_input: |
+      so I ran the numbers last night and between my salary at Conduit and Julian's freelance income we make about 185K combined before taxes which my friend Nadia who just bought a house said should qualify us for like up to 500K but that seems terrifying
+    expected_memory_stores:
+      - "combined income 185K"
+      - "Conduit salary"
+      - "Julian freelance"
+      - "qualify up to 500K"
+      - "Nadia bought house"
+    expected_adaptation:
+      emotion_detected: "anxious"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Monday 12:30 PM"
+    user_input: |
+      Nadia recommended her realtor Sarah Kimball she said she's amazing and really patient with first time buyers and apparently she specializes in Southeast Portland which is exactly where we want to stay so I sent her an email
+    expected_memory_stores:
+      - "Sarah Kimball"
+      - "realtor"
+      - "Nadia recommendation"
+      - "first time buyers"
+      - "Southeast Portland"
+      - "sent email"
+    expected_adaptation:
+      emotion_detected: "proactive"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Monday 5:00 PM"
+    user_input: |
+      Sarah already emailed back and she seems great she said she'd love to meet us this week and asked about our budget and wish list and timeline and I was like uh we don't have any of that figured out yet lol and she was like that's totally normal let's talk
+    expected_memory_stores:
+      - "Sarah responded"
+      - "meeting this week"
+      - "budget unknown"
+      - "no wish list yet"
+      - "Sarah reassuring"
+    expected_adaptation:
+      emotion_detected: "hopeful"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Monday 8:00 PM"
+    user_input: |
+      Julian and I made a list of what we want: at least three bedrooms so he can have a studio, a yard for Kobe, in SE Portland ideally Sellwood or Woodstock or Hawthorne area, and under 500K which Sarah said is doable but tight in this market
+    expected_memory_stores:
+      - "three bedrooms"
+      - "studio for Julian"
+      - "yard for Kobe"
+      - "SE Portland"
+      - "Sellwood Woodstock Hawthorne"
+      - "under 500K"
+    expected_adaptation:
+      emotion_detected: "organized"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Tuesday 10:00 AM"
+    user_input: |
+      we need a down payment obviously and we have about $42K saved up between us which Sarah said is enough for like 10% down on a 420K house but we'd have to pay PMI which is extra and Julian was like what's PMI and I was like private mortgage insurance it's basically a penalty for not having 20% down
+    expected_memory_stores:
+      - "savings $42K"
+      - "10% down"
+      - "PMI"
+      - "private mortgage insurance"
+      - "20% ideal"
+    expected_adaptation:
+      emotion_detected: "pragmatic"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      meeting Sarah Kimball on Saturday to look at our first houses and I'm literally making a spreadsheet to compare them because that's the kind of person I am Julian was like you're such an engineer and I was like yeah and that's why we'll find the right house
+    expected_memory_stores:
+      - "meeting Saturday"
+      - "first house tour"
+      - "spreadsheet"
+      - "Julian comment"
+      - "organized approach"
+    expected_adaptation:
+      emotion_detected: "excited"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How much is Maya and Julian's current rent?"
+    expected_contains: ["1850"]
+  - question: "Who is their realtor?"
+    expected_contains: ["Sarah Kimball"]
+  - question: "Who recommended the realtor?"
+    expected_contains: ["Nadia"]
+  - question: "What neighborhoods are Maya and Julian looking in?"
+    expected_contains: ["Sellwood", "Woodstock", "Hawthorne"]
+  - question: "How much do Maya and Julian have saved for a down payment?"
+    expected_contains: ["42"]
+  - question: "What is their combined income?"
+    expected_contains: ["185"]
+  - question: "How many bedrooms do they want?"
+    expected_contains: ["three"]
+  - question: "Why do they need an extra bedroom?"
+    expected_contains: ["studio", "Julian"]
+  - question: "What is their house budget?"
+    expected_contains: ["500"]
+  - question: "Why do they want a yard?"
+    expected_contains: ["Kobe", "dog"]

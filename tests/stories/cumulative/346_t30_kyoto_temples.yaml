@@ -1,0 +1,184 @@
+story_id: 346
+story_name: "Kyoto Temples and the Ryokan"
+category: "Travel"
+description: |
+  Tests memory of Kyoto experiences: Fushimi Inari, the ryokan stay, bamboo
+  grove, and temple visits. Cultural immersion. Verifies system captures
+  multi-day travel narrative and accommodation details.
+duration_simulated: "3 days"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Day 5 Saturday 11:00 AM JST"
+    user_input: |
+      took the shinkansen from Tokyo to Kyoto and the bullet train is WILD like it goes 200 mph and is so smooth you can barely feel it and Julian timed it and we went from Tokyo Station to Kyoto Station in 2 hours and 15 minutes and Mount Fuji was out the window for like 10 minutes
+    expected_memory_stores:
+      - "shinkansen bullet train"
+      - "200 mph"
+      - "2 hours 15 minutes"
+      - "Tokyo to Kyoto"
+      - "Mount Fuji visible"
+    expected_adaptation:
+      emotion_detected: "amazed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Day 5 Saturday 2:00 PM JST"
+    user_input: |
+      checked into Guesthouse Hana no Michi the ryokan and it's even better than the photos the tatami mats smell amazing and they gave us yukatas to wear and there's a little garden outside our room and Julian is pretending to be a samurai in his yukata
+    expected_memory_stores:
+      - "Guesthouse Hana no Michi"
+      - "ryokan check-in"
+      - "tatami mats"
+      - "yukatas"
+      - "garden outside room"
+      - "Julian samurai pretend"
+    expected_adaptation:
+      emotion_detected: "enchanted"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Day 5 Saturday 5:00 PM JST"
+    user_input: |
+      went to Fushimi Inari Taisha and walked through the thousands of orange torii gates and it goes up the entire mountain and we made it about halfway before my legs gave out and it was one of the most surreal things I've ever experienced like photos don't do it justice
+    expected_memory_stores:
+      - "Fushimi Inari Taisha"
+      - "thousands of torii gates"
+      - "orange gates"
+      - "up the mountain"
+      - "halfway"
+      - "surreal"
+    expected_adaptation:
+      emotion_detected: "awestruck"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Day 5 Saturday 8:00 PM JST"
+    user_input: |
+      the ryokan served us a kaiseki dinner which is this like multi-course Japanese meal and there were like 12 tiny dishes and I didn't know what half of them were but everything was beautiful and delicious and Julian tried the raw horse meat which I could NOT
+    expected_memory_stores:
+      - "kaiseki dinner"
+      - "multi-course"
+      - "12 tiny dishes"
+      - "beautiful and delicious"
+      - "Julian ate raw horse meat"
+      - "Maya couldn't"
+    expected_adaptation:
+      emotion_detected: "delighted"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Day 6 Sunday 7:00 AM JST"
+    user_input: |
+      woke up early and went to Arashiyama bamboo grove before the crowds and it was just us and like 3 other people and the bamboo was so tall and green and the light coming through was ethereal and Julian took the most amazing photos with his camera I'm so glad the luggage came
+    expected_memory_stores:
+      - "Arashiyama bamboo grove"
+      - "early before crowds"
+      - "tall green bamboo"
+      - "ethereal light"
+      - "Julian photos"
+      - "glad luggage came"
+    expected_adaptation:
+      emotion_detected: "peaceful"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Day 6 Sunday 2:00 PM JST"
+    user_input: |
+      visited Kinkaku-ji the golden temple and it was literally gold like actually gold leaf on the building and it sits on a lake and the reflection is perfect and I stood there and thought about how this building has been here for 600 years and will be here long after me
+    expected_memory_stores:
+      - "Kinkaku-ji golden temple"
+      - "gold leaf"
+      - "lake reflection"
+      - "600 years"
+      - "existential reflection"
+    expected_adaptation:
+      emotion_detected: "contemplative"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Day 6 Sunday 9:00 PM JST"
+    user_input: |
+      tried the onsen shared bath at the ryokan tonight and I was SO nervous about being naked in front of strangers but it was actually the most relaxing thing I've ever done the hot water and the steam and everyone is just quiet and present and Julian went in the men's side and said it was life changing
+    expected_memory_stores:
+      - "onsen shared bath"
+      - "nervous about nudity"
+      - "most relaxing ever"
+      - "hot water steam"
+      - "quiet and present"
+      - "Julian life changing"
+    expected_adaptation:
+      emotion_detected: "transformed"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Day 7 Monday 10:00 AM JST"
+    user_input: |
+      what's the name of the ryokan Maya and Julian are staying at in Kyoto
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Day 7 Monday 12:00 PM JST"
+    user_input: |
+      last morning in Kyoto and I'm sitting in the ryokan garden drinking matcha that the owner Mrs Tanaka made for us and she's this tiny woman in her 70s and she's been running this place for 30 years and she said in broken English you have beautiful energy and I almost cried
+    expected_memory_stores:
+      - "last morning Kyoto"
+      - "ryokan garden"
+      - "matcha from Mrs Tanaka"
+      - "owner 70s"
+      - "30 years running"
+      - "beautiful energy"
+    expected_adaptation:
+      emotion_detected: "moved"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Day 7 Monday 2:00 PM JST"
+    user_input: |
+      leaving Kyoto for Osaka and I don't want to go like I could live here and Julian said same and the ryokan was the best $450 we ever spent and I hugged Mrs Tanaka goodbye and she gave us a little omamori charm for safe travels and I'm keeping it forever
+    expected_memory_stores:
+      - "leaving Kyoto"
+      - "don't want to go"
+      - "ryokan best money spent"
+      - "hugged Mrs Tanaka"
+      - "omamori charm"
+      - "safe travels"
+    expected_adaptation:
+      emotion_detected: "bittersweet"
+      warmth_direction: increase
+
+final_verification:
+  - question: "What is the name of the Kyoto ryokan?"
+    expected_contains: ["Guesthouse Hana no Michi"]
+  - question: "What temples did Maya visit in Kyoto?"
+    expected_contains: ["Fushimi Inari", "Kinkaku-ji"]
+  - question: "What was the kaiseki dinner like?"
+    expected_contains: ["multi-course", "12 dishes"]
+  - question: "Who runs the ryokan?"
+    expected_contains: ["Mrs Tanaka"]
+  - question: "What did Mrs Tanaka give Maya?"
+    expected_contains: ["omamori charm"]
+  - question: "What was the bamboo grove experience like?"
+    expected_contains: ["Arashiyama", "early", "ethereal"]
+  - question: "How did Maya feel about the onsen?"
+    expected_contains: ["nervous", "relaxing"]
+  - question: "How did they travel from Tokyo to Kyoto?"
+    expected_contains: ["shinkansen", "bullet train"]
+  - question: "What did they see from the bullet train?"
+    expected_contains: ["Mount Fuji"]
+  - question: "What did Julian try that Maya wouldn't?"
+    expected_contains: ["raw horse meat"]

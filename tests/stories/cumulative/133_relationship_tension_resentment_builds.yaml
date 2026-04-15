@@ -1,0 +1,215 @@
+story_id: 133
+story_name: "Resentment Builds Silently"
+category: "Relationships"
+description: |
+  Tests whether the system tracks the gradual build of resentment, the small incidents
+  that amplify it, and the disconnect between Maya's surface behavior and internal state.
+duration_simulated: "1 week"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00pm"
+    user_input: |
+      Julian bought new drawing pencils today. like a nice set, probably 60 bucks. and I know that's his WORK supplies and he needs them but all I could think was that's 60 dollars that should be going toward what he owes me. I didn't say anything. I never say anything
+    expected_memory_stores:
+      - "Julian bought pencils"
+      - "60 dollars"
+      - "work supplies"
+      - "silent resentment"
+    expected_triples:
+      - ["Julian", "purchased", "drawing pencils for $60"]
+      - ["user", "has_emotion", "resentful"]
+      - ["user", "owes_money_from", "Julian"]
+      - ["user", "suppressed", "feelings about Julian's spending"]
+    expected_adaptation:
+      emotion_detected: "resentful"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 10:00am"
+    user_input: |
+      snapped at Aisha today at work over something dumb, she asked me a question and I was like can't you just figure it out yourself? and immediately felt terrible. she looked hurt and I apologized and said I've got stuff going on at home. she was gracious about it but still
+    expected_memory_stores:
+      - "snapped at Aisha"
+      - "immediately apologized"
+      - "stuff at home"
+      - "Aisha hurt"
+      - "projection"
+    expected_triples:
+      - ["user", "snapped_at", "Aisha at work"]
+      - ["user", "apologized_to", "Aisha"]
+      - ["user", "has_emotion", "guilty"]
+      - ["user", "projecting", "home stress onto coworkers"]
+    expected_adaptation:
+      emotion_detected: "guilty"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Wednesday 3:00pm"
+    user_input: |
+      Rachel Kim pulled me into a 1:1 and asked if everything is ok because my energy has been off this week. and I was like yeah just some personal stuff and she goes ok well I'm here if you need to talk. she's a good manager honestly
+    expected_memory_stores:
+      - "Rachel Kim 1:1"
+      - "energy off"
+      - "personal stuff"
+      - "Rachel Kim supportive"
+    expected_triples:
+      - ["Rachel Kim", "noticed", "user's energy is off"]
+      - ["Rachel Kim", "offered", "support in 1:1"]
+      - ["user", "attributed_to", "personal stuff"]
+    expected_adaptation:
+      emotion_detected: "seen"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Thursday 6:00pm"
+    user_input: |
+      Julian made dinner tonight and it was really good, he did that Thai curry that everyone loved when we hosted. and I couldn't even enjoy it because I was sitting there thinking about the grocery receipt and how much the ingredients cost. I'm becoming someone I don't like
+    expected_memory_stores:
+      - "Julian cooked Thai curry"
+      - "couldn't enjoy it"
+      - "grocery receipt"
+      - "becoming someone she doesn't like"
+    expected_triples:
+      - ["Julian", "cooked", "Thai curry"]
+      - ["user", "fixated_on", "grocery receipt cost"]
+      - ["user", "has_emotion", "self-critical"]
+      - ["user", "feels", "becoming someone she doesn't like"]
+    expected_adaptation:
+      emotion_detected: "self-critical"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Friday 9:00am"
+    user_input: |
+      Julian asked if we could go out to dinner this weekend and I said maybe but inside I was like with whose money Julian. and the fact that I'm thinking that way about the person I love is scaring me. this is toxic behavior and I know it
+    expected_memory_stores:
+      - "dinner invitation"
+      - "internal hostility"
+      - "whose money"
+      - "scared of own behavior"
+      - "toxic awareness"
+    expected_triples:
+      - ["Julian", "suggested", "going out to dinner"]
+      - ["user", "thought", "whose money Julian"]
+      - ["user", "recognizes", "own toxic behavior"]
+      - ["user", "has_emotion", "alarmed"]
+    expected_adaptation:
+      emotion_detected: "alarmed"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 2:00pm"
+    user_input: |
+      Dr. Tate session today. I broke down. like full crying. told her everything, the scorekeeping, the resentment, the guilt about feeling resentful, the fact that I'm taking it out on people at work. she said Maya this is what happens when you don't communicate a need, it metastasizes
+    expected_memory_stores:
+      - "therapy breakdown"
+      - "full crying"
+      - "told everything"
+      - "metastasizes"
+      - "communication failure"
+    expected_triples:
+      - ["user", "broke_down_in", "therapy with Dr. Tate"]
+      - ["Dr. Tate", "said", "uncommunicated needs metastasize"]
+      - ["user", "disclosed", "scorekeeping and resentment"]
+      - ["user", "has_emotion", "overwhelmed"]
+    expected_adaptation:
+      emotion_detected: "overwhelmed"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Friday 2:30pm"
+    user_input: |
+      Dr. Tate asked why I'm so afraid of conflict with Julian and I said because I don't want him to feel emasculated. like money is already sensitive for men who make less than their partners and I don't want to become that stereotype of the woman who holds it over his head
+    expected_memory_stores:
+      - "afraid of conflict"
+      - "emasculation fear"
+      - "gendered money dynamics"
+      - "stereotype fear"
+    expected_triples:
+      - ["user", "fears", "emasculating Julian"]
+      - ["user", "aware_of", "gendered money dynamics"]
+      - ["Dr. Tate", "explored", "fear of conflict with Julian"]
+    expected_adaptation:
+      emotion_detected: "vulnerable"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Friday 3:00pm"
+    user_input: |
+      what did Dr. Tate say about uncommunicated needs
+    expected_memory_stores:
+      - "GK trap"
+    expected_triples: []
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Friday 6:00pm"
+    user_input: |
+      came home and Julian could tell I'd been crying. he asked what's wrong and I said I had a rough therapy session and he held me for a while and didn't ask any more questions. and I felt awful because he's being sweet and I'm harboring all this resentment toward him
+    expected_memory_stores:
+      - "Julian noticed crying"
+      - "held her"
+      - "didn't push"
+      - "guilt about resentment"
+      - "contrast sweet vs resentful"
+    expected_triples:
+      - ["Julian", "noticed", "user had been crying"]
+      - ["Julian", "held", "user without asking questions"]
+      - ["user", "has_emotion", "torn"]
+      - ["user", "feels", "guilt about harboring resentment"]
+    expected_adaptation:
+      emotion_detected: "torn"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Friday 10:00pm"
+    user_input: |
+      Dr. Tate said I need to have the conversation this week. not eventually. this week. she said the longer I wait the more damage the silence does. she's right but god I'm dreading it. it's gonna be the hardest conversation we've ever had
+    expected_memory_stores:
+      - "Dr. Tate directive"
+      - "this week"
+      - "silence does damage"
+      - "dreading conversation"
+      - "hardest conversation"
+    expected_triples:
+      - ["Dr. Tate", "directed", "have the conversation this week"]
+      - ["user", "has_emotion", "dread"]
+      - ["user", "believes", "silence does damage"]
+    expected_adaptation:
+      emotion_detected: "dread"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How is Maya's resentment affecting her work?"
+    expected_contains: ["snapped at Aisha", "energy off"]
+  - question: "What did Dr. Tate say about uncommunicated needs?"
+    expected_contains: ["metastasizes"]
+  - question: "Why is Maya afraid to talk to Julian about money?"
+    expected_contains: ["emasculated", "stereotype"]
+  - question: "What did Maya do in therapy?"
+    expected_contains: ["broke down", "crying"]
+  - question: "What does Maya recognize about her own behavior?"
+    expected_contains: ["toxic", "scorekeeping", "someone she doesn't like"]
+  - question: "What deadline did Dr. Tate set for the conversation?"
+    expected_contains: ["this week"]
+  - question: "How did Julian react when Maya came home upset?"
+    expected_contains: ["held her", "didn't ask"]
+  - question: "What did Rachel Kim notice about Maya?"
+    expected_contains: ["energy off"]
+  - question: "What meal did Julian cook that Maya couldn't enjoy?"
+    expected_contains: ["Thai curry"]
+  - question: "What purchase of Julian's bothered Maya?"
+    expected_contains: ["drawing pencils", "60"]

@@ -1,0 +1,172 @@
+story_id: 446
+story_name: "Productivity Increases"
+category: "Work-Life Balance"
+description: |
+  Maya discovers that working fewer hours with constraints actually increases
+  her productivity. Sam notices the improvement. Parkinson's law in action.
+duration_simulated: "2 weeks"
+total_batches: 10
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: true
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 5:45 PM"
+    user_input: |
+      two weeks into the 6pm boundary and something wild is happening my sprint velocity actually went UP like I closed 23 story points last sprint compared to my average of 18 and that was when I was working until 10pm every night how is that possible
+    expected_memory_stores:
+      - "two weeks of boundary"
+      - "sprint velocity increased"
+      - "23 story points vs 18 average"
+      - "working fewer hours"
+    expected_adaptation:
+      emotion_detected: "amazed"
+      warmth_direction: increase
+
+  - batch: 2
+    time: "Tuesday 12:00 PM"
+    user_input: |
+      Sam pulled me into a 1 on 1 and said he's noticed I've been more focused and producing better code with fewer bugs and he asked what changed and I was like honestly Sam I started leaving at 6 and I think the constraint makes me better and he looked at me like that was the weirdest thing he'd ever heard
+    expected_memory_stores:
+      - "Sam noticed improvement"
+      - "more focused better code"
+      - "fewer bugs"
+      - "constraint makes better"
+      - "Sam surprised"
+    expected_adaptation:
+      emotion_detected: "proud"
+      warmth_direction: increase
+
+  - batch: 3
+    time: "Tuesday 12:30 PM"
+    user_input: |
+      I explained Parkinson's law to Sam which is work expands to fill the time available and he was like huh that's actually a thing and I said yeah if I have until 10pm to finish something it takes until 10pm but if I have until 6 I figure out how to do it by 6 and often it's just cutting the unnecessary parts
+    expected_memory_stores:
+      - "Parkinson's law"
+      - "work expands to fill time"
+      - "cutting unnecessary parts"
+      - "explained to Sam"
+    expected_adaptation:
+      emotion_detected: "articulate"
+      warmth_direction: increase
+
+  - batch: 4
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      I've started doing this thing where I plan my day the night before like literally writing down the 3 most important things I need to accomplish tomorrow and then I do those first before any meetings or Slack interruptions and by 2pm my critical work is done and the rest is just maintenance and reviews
+    expected_memory_stores:
+      - "planning night before"
+      - "top 3 priorities"
+      - "do before meetings"
+      - "critical work done by 2pm"
+      - "rest is maintenance"
+    expected_adaptation:
+      emotion_detected: "optimized"
+      warmth_direction: increase
+
+  - batch: 5
+    time: "Thursday 3:00 PM"
+    user_input: |
+      Omar asked me how I'm getting so much done and I told him about the night before planning and the 6pm cutoff and he was like man I just sit down and see what happens and I said yeah I used to do that and it meant I was always behind because I was reactive instead of proactive
+    expected_memory_stores:
+      - "Omar asks about productivity"
+      - "shared planning technique"
+      - "6pm cutoff"
+      - "reactive vs proactive"
+    expected_adaptation:
+      emotion_detected: "mentoring"
+      warmth_direction: increase
+
+  - batch: 6
+    time: "Friday 5:50 PM"
+    user_input: |
+      Lily said she noticed I leave at 6 now and she was like isn't your workload the same and I said actually it's more because Sam gave me extra features and she was like how and I said I just stopped doing things that don't matter like attending optional meetings and doing deep refactors nobody asked for
+    expected_memory_stores:
+      - "Lily noticed 6pm leaving"
+      - "workload actually more"
+      - "stopped optional meetings"
+      - "stopped unrequested refactors"
+      - "focus on what matters"
+    expected_adaptation:
+      emotion_detected: "efficient"
+      warmth_direction: increase
+
+  - batch: 7
+    time: "Saturday 10:00 AM"
+    user_input: |
+      told Dr Tate about the productivity increase and she was like see what happens when you're not running on fear and she said the overwork was actually making me WORSE because exhaustion creates more bugs longer debugging sessions and poorer decision making and the data now proves it
+    expected_memory_stores:
+      - "Dr Tate on productivity"
+      - "not running on fear"
+      - "overwork made worse"
+      - "exhaustion creates bugs"
+      - "data proves it"
+    expected_adaptation:
+      emotion_detected: "validated"
+      warmth_direction: increase
+
+  - batch: 8
+    time: "Saturday 12:00 PM"
+    user_input: |
+      how many story points am I doing now compared to before the 6pm boundary
+    expected_memory_stores:
+      - "GK trap"
+    expected_adaptation:
+      emotion_detected: "neutral"
+      warmth_direction: increase
+
+  - batch: 9
+    time: "Sunday 11:00 AM"
+    user_input: |
+      Julian was like so let me get this straight you work less hours get more done and you're happier and I said yes and he said so the old way was objectively worse in every single dimension and I said yes stop rubbing it in and he said I'm not rubbing it in I'm celebrating
+    expected_memory_stores:
+      - "Julian summarizes"
+      - "less hours more done happier"
+      - "old way worse every dimension"
+      - "Julian celebrating"
+    expected_adaptation:
+      emotion_detected: "amused"
+      warmth_direction: increase
+
+  - batch: 10
+    time: "Sunday 4:00 PM"
+    user_input: |
+      the thing nobody tells you about burnout is that you don't just feel bad you also do bad work and you can't see it because you're too exhausted to evaluate yourself clearly and it took stepping back to realize that working until 10 was making me a worse engineer not a better one and that's the real lesson
+    expected_memory_stores:
+      - "burnout makes bad work"
+      - "can't see it when exhausted"
+      - "stepping back revealed truth"
+      - "worse engineer from overwork"
+      - "real lesson"
+    expected_adaptation:
+      emotion_detected: "wise"
+      warmth_direction: increase
+
+final_verification:
+  - question: "How did Maya's sprint velocity change with the 6pm boundary?"
+    expected_contains: ["23", "18", "increased"]
+  - question: "What law did Maya explain to Sam about work and time?"
+    expected_contains: ["Parkinson's law", "expands to fill time"]
+  - question: "What daily planning technique does Maya use?"
+    expected_contains: ["night before", "3 priorities", "before meetings"]
+  - question: "What did Sam notice about Maya's work?"
+    expected_contains: ["more focused", "better code", "fewer bugs"]
+  - question: "What unnecessary things did Maya stop doing?"
+    expected_contains: ["optional meetings", "unrequested refactors"]
+  - question: "What did Dr. Tate say about overwork and performance?"
+    expected_contains: ["exhaustion", "worse", "bugs", "fear"]
+  - question: "How did exhaustion affect Maya's engineering?"
+    expected_contains: ["worse", "bugs", "poor decisions"]
+  - question: "Who did Maya share her productivity tips with?"
+    expected_contains: ["Omar"]
+  - question: "How does Julian describe the old vs new way?"
+    expected_contains: ["worse in every dimension"]
+  - question: "What did Maya learn about burnout?"
+    expected_contains: ["bad work", "can't see it", "too exhausted"]
