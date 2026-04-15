@@ -445,9 +445,9 @@ class RetrievalEngine:
         candidates.sort(
             key=lambda c: (
                 -c.entity_overlap,
-                -c.cluster_members,
-                _hops_key(c),
                 -c.exit_cosine,
+                _hops_key(c),
+                -c.cluster_members,
                 -(c.edge.get("sequence_number") or 0),
             )
         )
@@ -515,9 +515,9 @@ class RetrievalEngine:
         candidates.sort(
             key=lambda c: (
                 -c.entity_overlap,
-                -c.cluster_members,
-                _hops_key_r(c),
                 -c.exit_cosine,
+                _hops_key_r(c),
+                -c.cluster_members,
                 -(c.edge.get("sequence_number") or 0),
             )
         )
