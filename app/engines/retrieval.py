@@ -223,10 +223,16 @@ class RetrievalEngine:
     ) -> List[Candidate]:
         from app.engines import entity_resolver
         entities = entity_resolver.resolve_query_entities(user_id, query_text)
-        if not entities:
-            return candidates
 
+        # Self-reference invariant: every query is from the user's own
+        # perspective. Kenotic canonicalizes first-person mentions to
+        # subject='user', so the query entity set always includes 'user'
+        # even when no proper-noun entity is resolvable. This is
+        # structural, not a heuristic — it's the data-model contract.
         names = {e["name"] for e in entities}
+        names.add("user")
+        if not names:  # unreachable, but defensive
+            return candidates
         by_rid: Dict[int, Candidate] = {
             c.relationship_id: c for c in candidates
         }
@@ -318,10 +324,22 @@ class RetrievalEngine:
         )
 
         entities = entity_resolver.resolve_query_entities(user_id, query_text)
-        if not entities:
-            return candidates  # inapplicable — pass through
 
+        # Self-reference invariant — see _stage2_expand. When the
+        # candidate pool actually contains 'user' edges (Kenotic's
+        # first-person canonical subject), add 'user' to the query
+        # entity set so BFS starts from the user's subgraph too.
+        # Otherwise the data model doesn't have a user anchor and we
+        # fall back to purely named entities.
+        has_user_edges = any(
+            c.edge.get("subject") == "user" or c.edge.get("object") == "user"
+            for c in candidates
+        )
         query_names = {e["name"] for e in entities}
+        if has_user_edges:
+            query_names.add("user")
+        if not query_names:
+            return candidates  # inapplicable — pass through
 
         sql = """
             SELECT subject, object FROM relationships
