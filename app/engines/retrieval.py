@@ -201,6 +201,65 @@ class RetrievalEngine:
         out = sorted(by_rid.values(), key=lambda c: -c.entry_cosine)
         return out[: self._ENTRY_POOL_SIZE]
 
+    # ── Stage 2: Expand (entity union) ───────────────────────────
+
+    def _stage2_expand(
+        self, user_id: int, query_text: str, candidates: List[Candidate]
+    ) -> List[Candidate]:
+        from app.engines import entity_resolver
+        entities = entity_resolver.resolve_query_entities(user_id, query_text)
+        if not entities:
+            return candidates
+
+        names = {e["name"] for e in entities}
+        by_rid: Dict[int, Candidate] = {
+            c.relationship_id: c for c in candidates
+        }
+
+        placeholders = ",".join("?" * len(names))
+        sql = f"""
+            SELECT r.* FROM relationships r
+             WHERE r.user_id = ?
+               AND COALESCE(r.is_current, 1) = 1
+               AND r.tombstoned_at IS NULL
+               AND (r.subject IN ({placeholders})
+                    OR r.object IN ({placeholders}))
+        """
+        params = [user_id] + list(names) + list(names)
+        with get_db_context() as conn:
+            rows = conn.execute(sql, params).fetchall()
+
+        for row in rows:
+            rid = row["id"]
+            overlap = sum(
+                1 for n in names
+                if n == row["subject"] or n == row["object"]
+            )
+            if rid in by_rid:
+                cand = by_rid[rid]
+                if overlap > cand.entity_overlap:
+                    cand.entity_overlap = overlap
+                cand.source_stages.add("expand")
+            else:
+                cand = Candidate(relationship_id=rid, edge=dict(row),
+                                 entity_overlap=overlap)
+                cand.source_stages.add("expand")
+                by_rid[rid] = cand
+
+        # Also score existing candidates that happen to touch entities.
+        for rid, cand in by_rid.items():
+            if cand.entity_overlap == 0:
+                e = cand.edge
+                touches = sum(
+                    1 for n in names
+                    if n == e.get("subject") or n == e.get("object")
+                )
+                if touches:
+                    cand.entity_overlap = touches
+                    cand.source_stages.add("expand")
+
+        return list(by_rid.values())
+
     # ── Public API ───────────────────────────────────────────────
 
     def retrieve(self, user_id: int, query_text: str):

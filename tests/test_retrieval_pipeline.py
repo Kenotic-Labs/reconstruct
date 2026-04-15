@@ -82,3 +82,42 @@ def test_stage1_entry_returns_empty_when_both_pools_empty():
          patch.object(engine, "_fetch_edge_rows", return_value=[]):
         cands = engine._stage1_entry(user_id=1, q_emb=q)
     assert cands == []
+
+
+def test_stage2_expand_unions_entity_touching_edges(seeded_db, monkeypatch):
+    import numpy as np
+    from app.vector import embedder
+    from app.engines import entity_resolver
+    monkeypatch.setattr(embedder, "embed_text",
+                        lambda s: np.array([1.0, 0.0], dtype=np.float32))
+    monkeypatch.setattr(entity_resolver, "resolve_query_entities",
+                        lambda uid, qt: [{"id": 1, "name": "Maya",
+                                          "entity_type": "PERSON",
+                                          "score": 0.9}])
+    engine = RetrievalEngine()
+    out = engine._stage2_expand(
+        user_id=seeded_db.user_id,
+        query_text="Where does Maya work?",
+        candidates=[],
+    )
+    assert len(out) == 1
+    assert out[0].edge["subject"] == "Maya"
+    assert out[0].entity_overlap == 1
+    assert "expand" in out[0].source_stages
+
+
+def test_stage2_expand_passes_through_when_no_entities(seeded_db, monkeypatch):
+    from app.engines import entity_resolver
+    monkeypatch.setattr(entity_resolver, "resolve_query_entities",
+                        lambda uid, qt: [])
+    engine = RetrievalEngine()
+    existing = [Candidate(relationship_id=99, edge={"id": 99},
+                          entry_cosine=0.7)]
+    existing[0].source_stages.add("entry")
+    out = engine._stage2_expand(
+        user_id=seeded_db.user_id, query_text="nothing",
+        candidates=existing,
+    )
+    assert len(out) == 1
+    assert out[0].relationship_id == 99
+    assert out[0].entity_overlap == 0
