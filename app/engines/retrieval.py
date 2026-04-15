@@ -430,9 +430,23 @@ class RetrievalEngine:
 
         candidates = self._stage5_exit(q_emb, candidates)
 
-        # Tie-break by sequence_number DESC when exit cosines match.
+        # Moat lexicographic ranking — each stage's signal contributes
+        # in structural priority order. No weights.
+        #   1. entity_overlap    — how many query entities this edge touches
+        #   2. cluster_members   — narrative connectedness within survivors
+        #   3. hops_to_entity    — graph proximity (smaller is better)
+        #   4. exit_cosine       — PQ answerability
+        #   5. sequence_number   — recency tie-break
+        # Within each tier, higher wins; ties fall through to the next.
+        def _hops_key(c):
+            # Unreachable (-1) is worst; treat as +inf for ordering.
+            return c.hops_to_entity if c.hops_to_entity >= 0 else 10_000
+
         candidates.sort(
             key=lambda c: (
+                -c.entity_overlap,
+                -c.cluster_members,
+                _hops_key(c),
                 -c.exit_cosine,
                 -(c.edge.get("sequence_number") or 0),
             )
@@ -495,6 +509,18 @@ class RetrievalEngine:
         candidates = self._stage4_relate(user_id, query_text, candidates)
         candidates = self._stage5_exit(q_emb, candidates)
 
+        # Same Moat lexicographic ranking as Lookup — pick top-N for fuse.
+        def _hops_key_r(c):
+            return c.hops_to_entity if c.hops_to_entity >= 0 else 10_000
+        candidates.sort(
+            key=lambda c: (
+                -c.entity_overlap,
+                -c.cluster_members,
+                _hops_key_r(c),
+                -c.exit_cosine,
+                -(c.edge.get("sequence_number") or 0),
+            )
+        )
         survivors = candidates[: self._RECONSTRUCT_TOP_N]
         if not survivors:
             return Situation(
