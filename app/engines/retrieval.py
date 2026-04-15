@@ -39,6 +39,7 @@ import numpy as np
 from app.db.session import get_db_context
 from app.vector.embedder import embed_text
 from app.engines.wh_type import parse_expected_answer_type
+from app.engines.retrieval_types import Candidate
 
 log = logging.getLogger(__name__)
 
@@ -159,9 +160,46 @@ def _deserialize_emb(blob) -> Optional[np.ndarray]:
 class RetrievalEngine:
     """Single read path. Cosine(PQ) -> coherence -> tie-break."""
 
-    def __init__(self, memory_engine, temporal_engine):
+    _ENTRY_POOL_SIZE = 80
+
+    def __init__(self, memory_engine=None, temporal_engine=None):
         self._memory = memory_engine
         self._temporal = temporal_engine
+
+    # ── Stage 1: Entry Cosine ────────────────────────────────────
+
+    def _stage1_entry(self, user_id: int, q_emb: np.ndarray) -> List[Candidate]:
+        """Entry Cosine: max(pq_cosine, edge_cosine) per relationship_id,
+        top-K by entry_cosine. Both pools always run — no gating."""
+        pq_rows = self._fetch_pq_rows(user_id)
+        edge_rows = self._fetch_edge_rows(user_id)
+
+        by_rid: Dict[int, Candidate] = {}
+
+        for row in pq_rows:
+            rid = row["relationship_id"]
+            cos = _cosine_from_blob(q_emb, row.get("question_embedding"))
+            existing = by_rid.get(rid)
+            if existing is None:
+                cand = Candidate(relationship_id=rid, edge=dict(row), entry_cosine=cos)
+                cand.source_stages.add("entry")
+                by_rid[rid] = cand
+            elif cos > existing.entry_cosine:
+                existing.entry_cosine = cos
+
+        for row in edge_rows:
+            rid = row["relationship_id"]
+            cos = _cosine_from_blob(q_emb, row.get("edge_embedding"))
+            existing = by_rid.get(rid)
+            if existing is None:
+                cand = Candidate(relationship_id=rid, edge=dict(row), entry_cosine=cos)
+                cand.source_stages.add("entry")
+                by_rid[rid] = cand
+            elif cos > existing.entry_cosine:
+                existing.entry_cosine = cos
+
+        out = sorted(by_rid.values(), key=lambda c: -c.entry_cosine)
+        return out[: self._ENTRY_POOL_SIZE]
 
     # ── Public API ───────────────────────────────────────────────
 
