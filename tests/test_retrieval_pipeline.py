@@ -160,3 +160,38 @@ def test_stage3_group_passes_through_when_no_overlap():
                    entity_overlap=0)
     out = engine._stage3_group([c1])
     assert len(out) == 1
+
+
+def test_stage4_relate_drops_disconnected(seeded_db, monkeypatch):
+    from app.engines import entity_resolver
+    monkeypatch.setattr(entity_resolver, "resolve_query_entities",
+                        lambda uid, qt: [{"id": 1, "name": "Maya",
+                                          "entity_type": "PERSON",
+                                          "score": 0.9}])
+    engine = RetrievalEngine()
+    c_connected = Candidate(
+        relationship_id=1,
+        edge={"subject": "Maya", "object": "Vantage"})
+    c_disconnected = Candidate(
+        relationship_id=2,
+        edge={"subject": "Bob", "object": "Acme"})
+    out = engine._stage4_relate(
+        user_id=seeded_db.user_id,
+        query_text="Where does Maya work?",
+        candidates=[c_connected, c_disconnected],
+    )
+    rids = {c.relationship_id for c in out}
+    assert 1 in rids
+    assert 2 not in rids
+
+
+def test_stage4_relate_passes_through_when_no_entities(monkeypatch):
+    from app.engines import entity_resolver
+    monkeypatch.setattr(entity_resolver, "resolve_query_entities",
+                        lambda uid, qt: [])
+    engine = RetrievalEngine()
+    c = Candidate(relationship_id=1, edge={"subject": "a", "object": "b"})
+    out = engine._stage4_relate(
+        user_id=999, query_text="x", candidates=[c],
+    )
+    assert out == [c]

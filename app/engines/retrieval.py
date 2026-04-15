@@ -292,6 +292,45 @@ class RetrievalEngine:
 
         return survivors
 
+    # ── Stage 4: Relate (BFS filter) ─────────────────────────────
+
+    def _stage4_relate(
+        self, user_id: int, query_text: str, candidates: List[Candidate]
+    ) -> List[Candidate]:
+        from app.engines import entity_resolver
+        from app.engines.memgraph import (
+            build_adjacency, min_hops_to_entities,
+        )
+
+        entities = entity_resolver.resolve_query_entities(user_id, query_text)
+        if not entities:
+            return candidates  # inapplicable — pass through
+
+        query_names = {e["name"] for e in entities}
+
+        sql = """
+            SELECT subject, object FROM relationships
+             WHERE user_id = ?
+               AND COALESCE(is_current, 1) = 1
+               AND tombstoned_at IS NULL
+        """
+        with get_db_context() as conn:
+            all_edges = [dict(r) for r in conn.execute(sql, (user_id,))]
+        adj = build_adjacency(all_edges)
+
+        survivors: List[Candidate] = []
+        for c in candidates:
+            h = min_hops_to_entities(
+                subject=c.edge.get("subject") or "",
+                object_=c.edge.get("object") or "",
+                query_entities=query_names, adj=adj,
+            )
+            if h >= 0:
+                c.hops_to_entity = h
+                c.source_stages.add("relate")
+                survivors.append(c)
+        return survivors
+
     # ── Public API ───────────────────────────────────────────────
 
     def retrieve(self, user_id: int, query_text: str):
