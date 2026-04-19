@@ -1,13 +1,15 @@
 story_id: 56
-story_name: "PIP Removed but Trust Broken"
-category: "Career"
-description: |
-  Tests memory of the PIP being officially removed after mediation.
-  Maya wins the battle but the relationship with the company is damaged.
-  Verifies system tracks resolution alongside lingering emotional state.
-duration_simulated: "3 days"
-total_batches: 10
+story_name: PIP Removed but Trust Broken
+category: Career
+description: 'Tests memory of the PIP being officially removed after mediation.
 
+  Maya wins the battle but the relationship with the company is damaged.
+
+  Verifies system tracks resolution alongside lingering emotional state.
+
+  '
+duration_simulated: 3 days
+total_batches: 10
 engines_tested:
   memory: true
   retrieval: true
@@ -16,208 +18,311 @@ engines_tested:
   proactive: true
   intent_gate: true
   orchestrator: true
-
 batches:
-  - batch: 1
-    time: "Tuesday 2:30 PM"
-    user_input: |
-      okay so the mediation meeting just happened and um it was intense like Derek was there and the HR person Sarah was mediating and I presented all my evidence and Derek tried to say the PIP was about forward looking expectations not past performance and Sarah was like that's not what the document says
-    expected_memory_stores:
-      - "mediation meeting"
-      - "Derek present"
-      - "Sarah HR mediator"
-      - "evidence presented"
-      - "Derek excuse rejected"
-    expected_triples:
-      - ["user", "attended", "PIP mediation meeting"]
-      - ["Sarah", "role", "HR mediator"]
-      - ["user", "presented", "evidence against PIP"]
-      - ["Derek", "claimed", "PIP was about forward-looking expectations"]
-      - ["Sarah", "rejected", "Derek's excuse"]
-    expected_adaptation:
-      emotion_detected: "tense"
-      warmth_direction: increase
+- batch: 1
+  time: Tuesday 2:30 PM
+  user_input: 'okay so the mediation meeting just happened and um it was intense like Derek was there and the HR person Sarah was mediating and I presented all my evidence and Derek tried to say the PIP
+    was about forward looking expectations not past performance and Sarah was like that''s not what the document says
 
-  - batch: 2
-    time: "Tuesday 3:15 PM"
-    user_input: |
-      so the result is the PIP is being removed effective immediately and it won't go on my permanent record and Sarah said they take this seriously and will be reviewing Derek's use of PIPs across the board because apparently I'm not the only one who pushed back
-    expected_memory_stores:
-      - "PIP removed"
-      - "effective immediately"
-      - "no permanent record"
-      - "Derek under review"
-      - "others pushed back"
-    expected_triples:
-      - ["PIP", "status", "removed effective immediately"]
-      - ["PIP", "permanent_record", "will not appear"]
-      - ["HR", "reviewing", "Derek's use of PIPs"]
-      - ["others", "also_pushed_back_on", "Derek's PIPs"]
-      - ["user", "has_emotion", "relieved"]
-    expected_adaptation:
-      emotion_detected: "relieved"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - mediation meeting
+  - Derek present
+  - Sarah HR mediator
+  - evidence presented
+  - Derek excuse rejected
+  expected_triples:
+  - - user
+    - attended
+    - PIP mediation meeting
+  - - Sarah
+    - role
+    - HR mediator
+  - - user
+    - presented
+    - evidence against PIP
+  - - Derek
+    - claimed
+    - PIP was about forward-looking expectations
+  - - Sarah
+    - rejected
+    - Derek's excuse
+  expected_adaptation:
+    emotion_detected: tense
+    warmth_direction: increase
+- batch: 2
+  time: Tuesday 3:15 PM
+  user_input: 'so the result is the PIP is being removed effective immediately and it won''t go on my permanent record and Sarah said they take this seriously and will be reviewing Derek''s use of PIPs
+    across the board because apparently I''m not the only one who pushed back
 
-  - batch: 3
-    time: "Tuesday 4:00 PM"
-    user_input: |
-      Leon was the first person I told and he literally picked me up and spun me around in the hallway which was embarrassing but also really sweet and he was like I knew it I knew they couldn't make that stick and Priya gave me a hug and said she's so proud of me
-    expected_memory_stores:
-      - "Leon celebration"
-      - "Priya hug"
-      - "pride"
-    expected_triples:
-      - ["Leon", "celebrated", "PIP removal with user"]
-      - ["Priya", "hugged", "user"]
-      - ["Priya", "said", "proud of user"]
-      - ["user", "has_emotion", "happy"]
-    expected_adaptation:
-      emotion_detected: "happy"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - PIP removed
+  - effective immediately
+  - no permanent record
+  - Derek under review
+  - others pushed back
+  expected_triples:
+  - - PIP
+    - status
+    - removed effective immediately
+  - - PIP
+    - permanent_record
+    - will not appear
+  - - HR
+    - reviewing
+    - Derek's use of PIPs
+  - - others
+    - also_pushed_back_on
+    - Derek's PIPs
+  - - user
+    - has_emotion
+    - relieved
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+- batch: 3
+  time: Tuesday 4:00 PM
+  user_input: 'Leon was the first person I told and he literally picked me up and spun me around in the hallway which was embarrassing but also really sweet and he was like I knew it I knew they couldn''t
+    make that stick and Priya gave me a hug and said she''s so proud of me
 
-  - batch: 4
-    time: "Tuesday 7:00 PM"
-    user_input: |
-      Julian picked up champagne on the way home and we celebrated and Kobe was going nuts because we were being loud and honestly it feels good to have won but also there's this part of me that just feels hollow like I shouldn't have had to fight this hard to keep my own job you know
-    expected_memory_stores:
-      - "champagne celebration"
-      - "Julian"
-      - "Kobe excited"
-      - "hollow victory"
-      - "shouldn't have to fight"
-    expected_triples:
-      - ["Julian", "bought", "champagne to celebrate"]
-      - ["Kobe", "behavior", "going nuts from celebration noise"]
-      - ["user", "has_emotion", "bittersweet"]
-      - ["user", "feels", "shouldn't have had to fight to keep job"]
-    expected_adaptation:
-      emotion_detected: "bittersweet"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Leon celebration
+  - Priya hug
+  - pride
+  expected_triples:
+  - - Leon
+    - celebrated
+    - PIP removal with user
+  - - Priya
+    - hugged
+    - user
+  - - Priya
+    - said
+    - proud of user
+  - - user
+    - has_emotion
+    - happy
+  expected_adaptation:
+    emotion_detected: happy
+    warmth_direction: increase
+- batch: 4
+  time: Tuesday 7:00 PM
+  user_input: 'Julian picked up champagne on the way home and we celebrated and Kobe was going nuts because we were being loud and honestly it feels good to have won but also there''s this part of me that
+    just feels hollow like I shouldn''t have had to fight this hard to keep my own job you know
 
-  - batch: 5
-    time: "Wednesday 9:00 AM"
-    user_input: |
-      back at work and Derek hasn't said a word to me which is fine honestly I don't need his approval but the whole vibe is weird now like everyone knows what happened and some people are looking at me like I'm some kind of rebel and others are avoiding me and it's just not the same place anymore
-    expected_memory_stores:
-      - "Derek silent"
-      - "workplace awkwardness"
-      - "rebel perception"
-      - "avoidance"
-      - "changed workplace"
-    expected_triples:
-      - ["Derek", "behavior", "silent toward user"]
-      - ["coworkers", "perceive_user_as", "rebel"]
-      - ["coworkers", "behavior", "some avoiding user"]
-      - ["user", "has_emotion", "isolated"]
-    expected_adaptation:
-      emotion_detected: "isolated"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - champagne celebration
+  - Julian
+  - Kobe excited
+  - hollow victory
+  - shouldn't have to fight
+  expected_triples:
+  - - Julian
+    - bought
+    - champagne to celebrate
+  - - Kobe
+    - behavior
+    - going nuts from celebration noise
+  - - user
+    - has_emotion
+    - bittersweet
+  - - user
+    - feels
+    - shouldn't have had to fight to keep job
+  expected_adaptation:
+    emotion_detected: bittersweet
+    warmth_direction: increase
+- batch: 5
+  time: Wednesday 9:00 AM
+  user_input: 'back at work and Derek hasn''t said a word to me which is fine honestly I don''t need his approval but the whole vibe is weird now like everyone knows what happened and some people are looking
+    at me like I''m some kind of rebel and others are avoiding me and it''s just not the same place anymore
 
-  - batch: 6
-    time: "Wednesday 12:30 PM"
-    user_input: |
-      had lunch with Leon and I told him honestly I don't know if I can stay here like the trust is broken and even though the PIP is gone I know Derek is still my VP and he could make my life miserable in other ways and Leon was quiet for a minute and then said yeah I've been thinking about leaving too
-    expected_memory_stores:
-      - "trust broken"
-      - "considering leaving"
-      - "Derek still VP"
-      - "Leon also considering leaving"
-    expected_triples:
-      - ["user", "feels", "trust broken with Vantage"]
-      - ["user", "considering", "leaving Vantage"]
-      - ["Leon", "considering", "leaving Vantage"]
-      - ["user", "has_emotion", "disillusioned"]
-    expected_adaptation:
-      emotion_detected: "disillusioned"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Derek silent
+  - workplace awkwardness
+  - rebel perception
+  - avoidance
+  - changed workplace
+  expected_triples:
+  - - Derek
+    - behavior
+    - silent toward user
+  - - coworkers
+    - perceive_user_as
+    - rebel
+  - - coworkers
+    - behavior
+    - some avoiding user
+  - - user
+    - has_emotion
+    - isolated
+  expected_adaptation:
+    emotion_detected: isolated
+    warmth_direction: increase
+- batch: 6
+  time: Wednesday 12:30 PM
+  user_input: 'had lunch with Leon and I told him honestly I don''t know if I can stay here like the trust is broken and even though the PIP is gone I know Derek is still my VP and he could make my life
+    miserable in other ways and Leon was quiet for a minute and then said yeah I''ve been thinking about leaving too
 
-  - batch: 7
-    time: "Wednesday 5:00 PM"
-    user_input: |
-      Priya asked me to stay after standup and she said off the record that she understands if I'm thinking about leaving and she'd give me the best reference in the world and that broke me a little because she's been such a good manager and this isn't her fault at all
-    expected_memory_stores:
-      - "Priya understands"
-      - "reference offer"
-      - "off the record"
-      - "emotional moment"
-      - "not Priya's fault"
-    expected_triples:
-      - ["Priya", "understands", "user may leave"]
-      - ["Priya", "offered", "best reference"]
-      - ["user", "feels", "Priya not at fault"]
-      - ["user", "has_emotion", "touched"]
-    expected_adaptation:
-      emotion_detected: "touched"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - trust broken
+  - considering leaving
+  - Derek still VP
+  - Leon also considering leaving
+  expected_triples:
+  - - user
+    - feels
+    - trust broken with Vantage
+  - - user
+    - considering
+    - leaving Vantage
+  - - Leon
+    - considering
+    - leaving Vantage
+  - - user
+    - has_emotion
+    - disillusioned
+  expected_adaptation:
+    emotion_detected: disillusioned
+    warmth_direction: increase
+- batch: 7
+  time: Wednesday 5:00 PM
+  user_input: 'Priya asked me to stay after standup and she said off the record that she understands if I''m thinking about leaving and she''d give me the best reference in the world and that broke me a
+    little because she''s been such a good manager and this isn''t her fault at all
 
-  - batch: 8
-    time: "Thursday 10:00 AM"
-    user_input: |
-      is Maya still on a PIP
-    expected_memory_stores:
-      - "GK trap"
-    expected_triples: []
-    expected_adaptation:
-      emotion_detected: "neutral"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Priya understands
+  - reference offer
+  - off the record
+  - emotional moment
+  - not Priya's fault
+  expected_triples:
+  - - Priya
+    - understands
+    - user may leave
+  - - Priya
+    - offered
+    - best reference
+  - - user
+    - feels
+    - Priya not at fault
+  - - user
+    - has_emotion
+    - touched
+  expected_adaptation:
+    emotion_detected: touched
+    warmth_direction: increase
+- batch: 8
+  time: Thursday 10:00 AM
+  user_input: 'is Maya still on a PIP
 
-  - batch: 9
-    time: "Thursday 3:00 PM"
-    user_input: |
-      started casually looking at job listings today nothing serious just browsing LinkedIn and oh man there's so many companies hiring in Portland and remote too and I saw a few that look interesting but I'm not ready to commit to searching yet I just want to know what's out there
-    expected_memory_stores:
-      - "job browsing"
-      - "LinkedIn"
-      - "Portland"
-      - "remote"
-      - "casual not committed"
-    expected_triples:
-      - ["user", "started", "casually browsing job listings"]
-      - ["user", "browsing", "LinkedIn"]
-      - ["user", "interested_in", "Portland and remote roles"]
-      - ["user", "has_emotion", "curious"]
-    expected_adaptation:
-      emotion_detected: "curious"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - GK trap
+  expected_triples: []
+  expected_adaptation:
+    emotion_detected: neutral
+    warmth_direction: increase
+- batch: 9
+  time: Thursday 3:00 PM
+  user_input: 'started casually looking at job listings today nothing serious just browsing LinkedIn and oh man there''s so many companies hiring in Portland and remote too and I saw a few that look interesting
+    but I''m not ready to commit to searching yet I just want to know what''s out there
 
-  - batch: 10
-    time: "Thursday 8:00 PM"
-    user_input: |
-      told Julian I've been looking at job listings and he said he's been waiting for me to say that because he thinks I deserve better than Vantage at this point and honestly he's right the place I loved three years ago isn't the same place anymore Derek ruined it
-    expected_memory_stores:
-      - "Julian supportive of leaving"
-      - "deserves better"
-      - "Vantage changed"
-      - "Derek blamed"
-    expected_triples:
-      - ["Julian", "supportive_of", "user leaving Vantage"]
-      - ["Julian", "said", "user deserves better than Vantage"]
-      - ["user", "feels", "Vantage is not the same"]
-      - ["user", "blames", "Derek for ruining Vantage"]
-    expected_adaptation:
-      emotion_detected: "resolved"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - job browsing
+  - LinkedIn
+  - Portland
+  - remote
+  - casual not committed
+  expected_triples:
+  - - user
+    - started
+    - casually browsing job listings
+  - - user
+    - browsing
+    - LinkedIn
+  - - user
+    - interested_in
+    - Portland and remote roles
+  - - user
+    - has_emotion
+    - curious
+  expected_adaptation:
+    emotion_detected: curious
+    warmth_direction: increase
+- batch: 10
+  time: Thursday 8:00 PM
+  user_input: 'told Julian I''ve been looking at job listings and he said he''s been waiting for me to say that because he thinks I deserve better than Vantage at this point and honestly he''s right the
+    place I loved three years ago isn''t the same place anymore Derek ruined it
 
+    '
+  expected_memory_stores:
+  - Julian supportive of leaving
+  - deserves better
+  - Vantage changed
+  - Derek blamed
+  expected_triples:
+  - - Julian
+    - supportive_of
+    - user leaving Vantage
+  - - Julian
+    - said
+    - user deserves better than Vantage
+  - - user
+    - feels
+    - Vantage is not the same
+  - - user
+    - blames
+    - Derek for ruining Vantage
+  expected_adaptation:
+    emotion_detected: resolved
+    warmth_direction: increase
 final_verification:
-  - question: "Is Maya still on a PIP?"
-    expected_contains: ["no", "removed"]
-  - question: "Who mediated the PIP meeting?"
-    expected_contains: ["Sarah"]
-  - question: "What was the outcome of the mediation?"
-    expected_contains: ["PIP removed", "immediately"]
-  - question: "Will the PIP appear on Maya's permanent record?"
-    expected_contains: ["no"]
-  - question: "How did Derek react after the PIP was removed?"
-    expected_contains: ["silent", "hasn't said"]
-  - question: "What did Priya offer Maya?"
-    expected_contains: ["reference"]
-  - question: "Is Maya thinking about leaving Vantage?"
-    expected_contains: ["yes", "looking", "browsing"]
-  - question: "How does Julian feel about Maya leaving Vantage?"
-    expected_contains: ["supportive", "deserves better"]
-  - question: "Is Leon also thinking about leaving?"
-    expected_contains: ["yes"]
-    expected_triples:
-      - ["Leon", "considering", "leaving Vantage"]
-  - question: "What's the current trust level between Maya and Vantage?"
-    expected_contains: ["broken"]
+- question: Is Maya still on a PIP?
+  expected_contains:
+  - 'no'
+  - removed
+- question: Who mediated the PIP meeting?
+  expected_contains:
+  - Sarah
+- question: What was the outcome of the mediation?
+  expected_contains:
+  - PIP removed
+  - immediately
+- question: Will the PIP appear on Maya's permanent record?
+  expected_contains:
+  - 'no'
+- question: How did Derek react after the PIP was removed?
+  expected_contains:
+  - silent
+  - hasn't said
+- question: What did Priya offer Maya?
+  expected_contains:
+  - reference
+- question: Is Maya thinking about leaving Vantage?
+  expected_contains:
+  - 'yes'
+  - looking
+  - browsing
+- question: How does Julian feel about Maya leaving Vantage?
+  expected_contains:
+  - supportive
+  - deserves better
+- question: Is Leon also thinking about leaving?
+  expected_contains:
+  - 'yes'
+  - leaving Vantage
+  expected_triples:
+  - - Leon
+    - considering
+    - leaving Vantage
+- question: What's the current trust level between Maya and Vantage?
+  expected_contains:
+  - broken

@@ -1,13 +1,15 @@
 story_id: 81
-story_name: "Recipe App Takes Shape"
-category: "Learning"
-description: |
-  Tests memory of Maya's side project moving from idea to planning.
-  Julian contributes design work. Technical decisions being made.
-  Verifies system tracks a parallel life thread alongside work.
-duration_simulated: "1 week"
-total_batches: 10
+story_name: Recipe App Takes Shape
+category: Learning
+description: 'Tests memory of Maya''s side project moving from idea to planning.
 
+  Julian contributes design work. Technical decisions being made.
+
+  Verifies system tracks a parallel life thread alongside work.
+
+  '
+duration_simulated: 1 week
+total_batches: 10
 engines_tested:
   memory: true
   retrieval: true
@@ -16,185 +18,268 @@ engines_tested:
   proactive: true
   intent_gate: true
   orchestrator: true
-
 batches:
-  - batch: 1
-    time: "Saturday 9:00 AM"
-    user_input: |
-      okay so I'm officially starting the recipe app project this weekend and I set up a new repo on GitHub called fridgesearch and Julian designed the logo last night it's like a little magnifying glass over a fridge and it's adorable and he's so talented
-    expected_memory_stores:
-      - "recipe app started"
-      - "GitHub repo fridgesearch"
-      - "Julian logo design"
-      - "magnifying glass fridge"
-    expected_triples:
-      - ["user", "started", "recipe app project"]
-      - ["fridgesearch", "repo_on", "GitHub"]
-      - ["Julian", "designed", "logo: magnifying glass over a fridge"]
-      - ["user", "has_emotion", "excited"]
-    expected_adaptation:
-      emotion_detected: "excited"
-      warmth_direction: increase
+- batch: 1
+  time: Saturday 9:00 AM
+  user_input: 'okay so I''m officially starting the recipe app project this weekend and I set up a new repo on GitHub called fridgesearch and Julian designed the logo last night it''s like a little magnifying
+    glass over a fridge and it''s adorable and he''s so talented
 
-  - batch: 2
-    time: "Saturday 2:00 PM"
-    user_input: |
-      decided on the tech stack for fridgesearch and I'm going with Python FastAPI for the backend because that's what I know best and React for the frontend and I'll use a lightweight search engine like Meilisearch instead of Elasticsearch because it's simpler for a side project and the whole thing will run on a single VPS
-    expected_memory_stores:
-      - "tech stack decided"
-      - "Python FastAPI backend"
-      - "React frontend"
-      - "Meilisearch"
-      - "single VPS"
-    expected_triples:
-      - ["fridgesearch", "backend", "Python FastAPI"]
-      - ["fridgesearch", "frontend", "React"]
-      - ["fridgesearch", "search_engine", "Meilisearch"]
-      - ["fridgesearch", "hosted_on", "single VPS"]
-    expected_adaptation:
-      emotion_detected: "productive"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - recipe app started
+  - GitHub repo fridgesearch
+  - Julian logo design
+  - magnifying glass fridge
+  expected_triples:
+  - - user
+    - started
+    - recipe app project
+  - - fridgesearch
+    - repo_on
+    - GitHub
+  - - Julian
+    - designed
+    - 'logo: magnifying glass over a fridge'
+  - - user
+    - has_emotion
+    - excited
+  expected_adaptation:
+    emotion_detected: excited
+    warmth_direction: increase
+- batch: 2
+  time: Saturday 2:00 PM
+  user_input: 'decided on the tech stack for fridgesearch and I''m going with Python FastAPI for the backend because that''s what I know best and React for the frontend and I''ll use a lightweight search
+    engine like Meilisearch instead of Elasticsearch because it''s simpler for a side project and the whole thing will run on a single VPS
 
-  - batch: 3
-    time: "Sunday 10:00 AM"
-    user_input: |
-      built the basic ingredient matching algorithm this morning and it's actually pretty elegant like you input what you have in your fridge and it returns recipes ranked by how many of your ingredients they use and also shows you what you're missing so you can decide if it's worth buying one or two more things
-    expected_memory_stores:
-      - "ingredient matching algorithm"
-      - "fridge input"
-      - "ranked by ingredient match"
-      - "missing ingredients shown"
-    expected_triples:
-      - ["user", "built", "ingredient matching algorithm"]
-      - ["algorithm", "ranks_recipes_by", "how many user ingredients they use"]
-      - ["algorithm", "shows", "missing ingredients needed"]
-      - ["user", "has_emotion", "proud"]
-    expected_adaptation:
-      emotion_detected: "proud"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - tech stack decided
+  - Python FastAPI backend
+  - React frontend
+  - Meilisearch
+  - single VPS
+  expected_triples:
+  - - fridgesearch
+    - backend
+    - Python FastAPI
+  - - fridgesearch
+    - frontend
+    - React
+  - - fridgesearch
+    - search_engine
+    - Meilisearch
+  - - fridgesearch
+    - hosted_on
+    - single VPS
+  expected_adaptation:
+    emotion_detected: productive
+    warmth_direction: increase
+- batch: 3
+  time: Sunday 10:00 AM
+  user_input: 'built the basic ingredient matching algorithm this morning and it''s actually pretty elegant like you input what you have in your fridge and it returns recipes ranked by how many of your
+    ingredients they use and also shows you what you''re missing so you can decide if it''s worth buying one or two more things
 
-  - batch: 4
-    time: "Sunday 4:00 PM"
-    user_input: |
-      Julian has been working on the UI wireframes and they look professional like really really good he has this warm color palette with oranges and greens and the layout is super intuitive and I keep telling him he should charge me for this work and he keeps saying shut up and cook me dinner
-    expected_memory_stores:
-      - "Julian wireframes"
-      - "warm color palette"
-      - "oranges and greens"
-      - "intuitive layout"
-      - "Julian pro bono"
-    expected_adaptation:
-      emotion_detected: "happy"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - ingredient matching algorithm
+  - fridge input
+  - ranked by ingredient match
+  - missing ingredients shown
+  expected_triples:
+  - - user
+    - built
+    - ingredient matching algorithm
+  - - algorithm
+    - ranks_recipes_by
+    - how many user ingredients they use
+  - - algorithm
+    - shows
+    - missing ingredients needed
+  - - user
+    - has_emotion
+    - proud
+  expected_adaptation:
+    emotion_detected: proud
+    warmth_direction: increase
+- batch: 4
+  time: Sunday 4:00 PM
+  user_input: 'Julian has been working on the UI wireframes and they look professional like really really good he has this warm color palette with oranges and greens and the layout is super intuitive and
+    I keep telling him he should charge me for this work and he keeps saying shut up and cook me dinner
 
-  - batch: 5
-    time: "Monday 7:00 PM"
-    user_input: |
-      working on fridgesearch after work and I realized I need recipe data so I found an open source dataset with like 230 thousand recipes from various sources and I spent the evening cleaning the data and importing it into Meilisearch and the search is already working pretty well
-    expected_memory_stores:
-      - "recipe data needed"
-      - "open source dataset"
-      - "230 thousand recipes"
-      - "data cleaning"
-      - "Meilisearch import"
-    expected_adaptation:
-      emotion_detected: "productive"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Julian wireframes
+  - warm color palette
+  - oranges and greens
+  - intuitive layout
+  - Julian pro bono
+  expected_adaptation:
+    emotion_detected: happy
+    warmth_direction: increase
+  expected_triples:
+  - - fridgesearch
+    - color_palette
+    - warm oranges and greens
+- batch: 5
+  time: Monday 7:00 PM
+  user_input: 'working on fridgesearch after work and I realized I need recipe data so I found an open source dataset with like 230 thousand recipes from various sources and I spent the evening cleaning
+    the data and importing it into Meilisearch and the search is already working pretty well
 
-  - batch: 6
-    time: "Tuesday 9:00 PM"
-    user_input: |
-      so um slight problem I've been staying up too late working on fridgesearch and Sam noticed I was a bit off in standup today and Julian also said I looked tired and Kobe gave me that concerned head tilt he does so maybe I need to pace myself like it's a side project not a second job
-    expected_memory_stores:
-      - "staying up late"
-      - "Sam noticed"
-      - "Julian concerned"
-      - "Kobe head tilt"
-      - "need to pace"
-    expected_adaptation:
-      emotion_detected: "tired"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - recipe data needed
+  - open source dataset
+  - 230 thousand recipes
+  - data cleaning
+  - Meilisearch import
+  expected_adaptation:
+    emotion_detected: productive
+    warmth_direction: increase
+  expected_triples:
+  - - fridgesearch
+    - dataset_size
+    - 230 thousand recipes
+- batch: 6
+  time: Tuesday 9:00 PM
+  user_input: 'so um slight problem I''ve been staying up too late working on fridgesearch and Sam noticed I was a bit off in standup today and Julian also said I looked tired and Kobe gave me that concerned
+    head tilt he does so maybe I need to pace myself like it''s a side project not a second job
 
-  - batch: 7
-    time: "Wednesday 8:00 PM"
-    user_input: |
-      what is the name of Maya's recipe app
-    expected_memory_stores:
-      - "GK trap"
-    expected_adaptation:
-      emotion_detected: "neutral"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - staying up late
+  - Sam noticed
+  - Julian concerned
+  - Kobe head tilt
+  - need to pace
+  expected_adaptation:
+    emotion_detected: tired
+    warmth_direction: increase
+- batch: 7
+  time: Wednesday 8:00 PM
+  user_input: 'what is the name of Maya''s recipe app
 
-  - batch: 8
-    time: "Thursday 7:00 PM"
-    user_input: |
-      made a rule for myself no fridgesearch work on weeknights only weekends and Julian enforced it by literally taking my laptop at 8pm tonight and saying it's movie time and honestly that's healthy I need boundaries between work Conduit and work side project
-    expected_memory_stores:
-      - "weekends only rule"
-      - "Julian enforcement"
-      - "laptop taken"
-      - "movie time"
-      - "boundaries"
-    expected_adaptation:
-      emotion_detected: "disciplined"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - GK trap
+  expected_adaptation:
+    emotion_detected: neutral
+    warmth_direction: increase
+- batch: 8
+  time: Thursday 7:00 PM
+  user_input: 'made a rule for myself no fridgesearch work on weeknights only weekends and Julian enforced it by literally taking my laptop at 8pm tonight and saying it''s movie time and honestly that''s
+    healthy I need boundaries between work Conduit and work side project
 
-  - batch: 9
-    time: "Saturday 10:00 AM"
-    user_input: |
-      weekend coding session and I built the user account system and the ability to save your fridge inventory so you don't have to re-enter ingredients every time and Julian tested it on his phone and found three bugs which like of course he did he has an eye for that stuff
-    expected_memory_stores:
-      - "user accounts"
-      - "fridge inventory save"
-      - "Julian testing"
-      - "three bugs found"
-    expected_adaptation:
-      emotion_detected: "productive"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - weekends only rule
+  - Julian enforcement
+  - laptop taken
+  - movie time
+  - boundaries
+  expected_adaptation:
+    emotion_detected: disciplined
+    warmth_direction: increase
+  expected_triples:
+  - - user
+    - rule
+    - no fridgesearch work on weeknights, only weekends
+- batch: 9
+  time: Saturday 10:00 AM
+  user_input: 'weekend coding session and I built the user account system and the ability to save your fridge inventory so you don''t have to re-enter ingredients every time and Julian tested it on his
+    phone and found three bugs which like of course he did he has an eye for that stuff
 
-  - batch: 10
-    time: "Sunday 5:00 PM"
-    user_input: |
-      end of weekend two and fridgesearch is actually looking like a real app now you can create an account enter your ingredients search for recipes save favorites and see what you're missing and Julian's UI is coming together and I'm thinking about doing a beta launch with some friends in a couple weeks
-    expected_memory_stores:
-      - "weekend two complete"
-      - "features working"
-      - "accounts ingredients search favorites"
-      - "Julian UI progress"
-      - "beta launch planned"
-      - "couple weeks"
-    expected_adaptation:
-      emotion_detected: "optimistic"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - user accounts
+  - fridge inventory save
+  - Julian testing
+  - three bugs found
+  expected_adaptation:
+    emotion_detected: productive
+    warmth_direction: increase
+  expected_triples:
+  - - Julian
+    - found
+    - three bugs in fridgesearch
+- batch: 10
+  time: Sunday 5:00 PM
+  user_input: 'end of weekend two and fridgesearch is actually looking like a real app now you can create an account enter your ingredients search for recipes save favorites and see what you''re missing
+    and Julian''s UI is coming together and I''m thinking about doing a beta launch with some friends in a couple weeks
 
+    '
+  expected_memory_stores:
+  - weekend two complete
+  - features working
+  - accounts ingredients search favorites
+  - Julian UI progress
+  - beta launch planned
+  - couple weeks
+  expected_adaptation:
+    emotion_detected: optimistic
+    warmth_direction: increase
+  expected_triples:
+  - - fridgesearch
+    - beta_launch
+    - in a couple weeks
 final_verification:
-  - question: "What is the name of Maya's recipe app?"
-    expected_contains: ["fridgesearch", "FridgeSearch"]
-  - question: "What tech stack is fridgesearch built on?"
-    expected_contains: ["Python", "FastAPI", "React", "Meilisearch"]
-  - question: "Who designed the logo?"
-    expected_contains: ["Julian"]
-  - question: "How does the ingredient matching work?"
-    expected_contains: ["fridge", "rank", "missing"]
-  - question: "How many recipes are in the dataset?"
-    expected_contains: ["230 thousand"]
-    expected_triples:
-      - ["fridgesearch", "dataset_size", "230 thousand recipes"]
-  - question: "What rule did Maya make about side project work?"
-    expected_contains: ["weekends only"]
-    expected_triples:
-      - ["user", "rule", "no fridgesearch work on weeknights, only weekends"]
-  - question: "What color palette is the app using?"
-    expected_contains: ["oranges", "greens"]
-    expected_triples:
-      - ["fridgesearch", "color_palette", "warm oranges and greens"]
-  - question: "How many bugs did Julian find?"
-    expected_contains: ["three"]
-    expected_triples:
-      - ["Julian", "found", "three bugs in fridgesearch"]
-  - question: "When is the beta launch planned?"
-    expected_contains: ["couple weeks"]
-    expected_triples:
-      - ["fridgesearch", "beta_launch", "in a couple weeks"]
-  - question: "What features does fridgesearch have so far?"
-    expected_contains: ["account", "ingredients", "search", "favorites"]
+- question: What is the name of Maya's recipe app?
+  expected_contains:
+  - fridgesearch
+  - FridgeSearch
+- question: What tech stack is fridgesearch built on?
+  expected_contains:
+  - Python
+  - FastAPI
+  - React
+  - Meilisearch
+- question: Who designed the logo?
+  expected_contains:
+  - Julian
+- question: How does the ingredient matching work?
+  expected_contains:
+  - fridge
+  - rank
+  - missing
+- question: How many recipes are in the dataset?
+  expected_contains:
+  - 230 thousand
+  expected_triples:
+  - - fridgesearch
+    - dataset_size
+    - 230 thousand recipes
+- question: What rule did Maya make about side project work?
+  expected_contains:
+  - weekends only
+  - weeknights
+  expected_triples:
+  - - user
+    - rule
+    - no fridgesearch work on weeknights, only weekends
+- question: What color palette is the app using?
+  expected_contains:
+  - oranges
+  - greens
+  expected_triples:
+  - - fridgesearch
+    - color_palette
+    - warm oranges and greens
+- question: How many bugs did Julian find?
+  expected_contains:
+  - three
+  expected_triples:
+  - - Julian
+    - found
+    - three bugs in fridgesearch
+- question: When is the beta launch planned?
+  expected_contains:
+  - couple weeks
+  expected_triples:
+  - - fridgesearch
+    - beta_launch
+    - in a couple weeks
+- question: What features does fridgesearch have so far?
+  expected_contains:
+  - account
+  - ingredients
+  - search
+  - favorites

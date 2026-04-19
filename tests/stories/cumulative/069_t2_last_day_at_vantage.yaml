@@ -1,13 +1,15 @@
 story_id: 69
-story_name: "Last Day at Vantage"
-category: "Career"
-description: |
-  Tests memory of Maya's final day at Vantage Systems.
-  Emotional goodbyes, closure with Priya, final interaction with Derek.
-  Verifies system can track the end of a long-running situation.
-duration_simulated: "1 day"
-total_batches: 10
+story_name: Last Day at Vantage
+category: Career
+description: 'Tests memory of Maya''s final day at Vantage Systems.
 
+  Emotional goodbyes, closure with Priya, final interaction with Derek.
+
+  Verifies system can track the end of a long-running situation.
+
+  '
+duration_simulated: 1 day
+total_batches: 10
 engines_tested:
   memory: true
   retrieval: true
@@ -16,208 +18,303 @@ engines_tested:
   proactive: true
   intent_gate: true
   orchestrator: true
-
 batches:
-  - batch: 1
-    time: "Friday 8:00 AM"
-    user_input: |
-      last day at Vantage and it's weird like I've been here for three years and this office this desk this view of the parking lot it's all been my daily life and now it won't be anymore and I didn't think I'd be emotional but I am a little
-    expected_memory_stores:
-      - "last day"
-      - "three years"
-      - "emotional"
-      - "nostalgia"
-    expected_triples:
-      - ["user", "last_day_at", "Vantage Systems"]
-      - ["user", "worked_at_Vantage", "three years"]
-      - ["user", "has_emotion", "nostalgic"]
-    expected_adaptation:
-      emotion_detected: "nostalgic"
-      warmth_direction: increase
+- batch: 1
+  time: Friday 8:00 AM
+  user_input: 'last day at Vantage and it''s weird like I''ve been here for three years and this office this desk this view of the parking lot it''s all been my daily life and now it won''t be anymore and
+    I didn''t think I''d be emotional but I am a little
 
-  - batch: 2
-    time: "Friday 9:30 AM"
-    user_input: |
-      the team did a little going away thing for me like they got a card signed by everyone and there were donuts and coffee and even people from other pods came by and said good luck and it was really nice and I realized I had more friends here than I thought I did
-    expected_memory_stores:
-      - "going away party"
-      - "card signed"
-      - "donuts and coffee"
-      - "other pods visited"
-      - "more friends than expected"
-    expected_triples:
-      - ["team", "threw", "going away party for user"]
-      - ["team", "gave", "signed card"]
-      - ["user", "realized", "had more friends than expected"]
-      - ["user", "has_emotion", "touched"]
-    expected_adaptation:
-      emotion_detected: "touched"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - last day
+  - three years
+  - emotional
+  - nostalgia
+  expected_triples:
+  - - user
+    - last_day_at
+    - Vantage Systems
+  - - user
+    - worked_at_Vantage
+    - three years
+  - - user
+    - has_emotion
+    - nostalgic
+  expected_adaptation:
+    emotion_detected: nostalgic
+    warmth_direction: increase
+- batch: 2
+  time: Friday 9:30 AM
+  user_input: 'the team did a little going away thing for me like they got a card signed by everyone and there were donuts and coffee and even people from other pods came by and said good luck and it was
+    really nice and I realized I had more friends here than I thought I did
 
-  - batch: 3
-    time: "Friday 10:00 AM"
-    user_input: |
-      Derek came by and said good luck at your new venture and shook my hand and it was so awkward because we both know the history and he knows I know and I know he knows but neither of us said anything we just shook hands and he walked away and that's the last interaction I'll ever have with Derek Hollis hopefully
-    expected_memory_stores:
-      - "Derek goodbye"
-      - "handshake"
-      - "awkward"
-      - "unspoken history"
-      - "final interaction"
-    expected_triples:
-      - ["Derek", "said", "good luck at your new venture"]
-      - ["Derek", "shook_hands_with", "user"]
-      - ["user", "had_final_interaction_with", "Derek Hollis"]
-      - ["user", "has_emotion", "cold"]
-    expected_adaptation:
-      emotion_detected: "cold"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - going away party
+  - card signed
+  - donuts and coffee
+  - other pods visited
+  - more friends than expected
+  expected_triples:
+  - - team
+    - threw
+    - going away party for user
+  - - team
+    - gave
+    - signed card
+  - - user
+    - realized
+    - had more friends than expected
+  - - user
+    - has_emotion
+    - touched
+  expected_adaptation:
+    emotion_detected: touched
+    warmth_direction: increase
+- batch: 3
+  time: Friday 10:00 AM
+  user_input: 'Derek came by and said good luck at your new venture and shook my hand and it was so awkward because we both know the history and he knows I know and I know he knows but neither of us said
+    anything we just shook hands and he walked away and that''s the last interaction I''ll ever have with Derek Hollis hopefully
 
-  - batch: 4
-    time: "Friday 11:30 AM"
-    user_input: |
-      Priya took me to lunch at the Thai place we always go to and we talked about everything not just work but life and she told me she's been thinking about leaving too because Derek has made her job impossible and I said Priya you'd be amazing anywhere and she said stop you're going to make me cry again
-    expected_memory_stores:
-      - "Priya lunch"
-      - "Thai restaurant"
-      - "Priya considering leaving"
-      - "Derek ruining Priya's job"
-      - "emotional conversation"
-    expected_triples:
-      - ["Priya", "took_user_to_lunch", "Thai restaurant"]
-      - ["Priya", "considering", "leaving Vantage"]
-      - ["Derek", "made", "Priya's job impossible"]
-      - ["user", "has_emotion", "bittersweet"]
-    expected_adaptation:
-      emotion_detected: "bittersweet"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Derek goodbye
+  - handshake
+  - awkward
+  - unspoken history
+  - final interaction
+  expected_triples:
+  - - Derek
+    - said
+    - good luck at your new venture
+  - - Derek
+    - shook_hands_with
+    - user
+  - - user
+    - had_final_interaction_with
+    - Derek Hollis
+  - - user
+    - has_emotion
+    - cold
+  expected_adaptation:
+    emotion_detected: cold
+    warmth_direction: increase
+- batch: 4
+  time: Friday 11:30 AM
+  user_input: 'Priya took me to lunch at the Thai place we always go to and we talked about everything not just work but life and she told me she''s been thinking about leaving too because Derek has made
+    her job impossible and I said Priya you''d be amazing anywhere and she said stop you''re going to make me cry again
 
-  - batch: 5
-    time: "Friday 2:00 PM"
-    user_input: |
-      packed up my desk and it's amazing how three years fits into one cardboard box like my monitor stand my plant the photo of Julian and Kobe that's been on my desk since day one and a few notebooks and that's it that's three years of my career in a box
-    expected_memory_stores:
-      - "packing desk"
-      - "cardboard box"
-      - "plant"
-      - "Julian and Kobe photo"
-      - "notebooks"
-      - "three years in a box"
-    expected_triples:
-      - ["user", "packed", "desk into one cardboard box"]
-      - ["user", "kept_on_desk", "photo of Julian and Kobe"]
-      - ["user", "has_emotion", "reflective"]
-    expected_adaptation:
-      emotion_detected: "reflective"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Priya lunch
+  - Thai restaurant
+  - Priya considering leaving
+  - Derek ruining Priya's job
+  - emotional conversation
+  expected_triples:
+  - - Priya
+    - took_user_to_lunch
+    - Thai restaurant
+  - - Priya
+    - considering
+    - leaving Vantage
+  - - Derek
+    - made
+    - Priya's job impossible
+  - - user
+    - has_emotion
+    - bittersweet
+  expected_adaptation:
+    emotion_detected: bittersweet
+    warmth_direction: increase
+- batch: 5
+  time: Friday 2:00 PM
+  user_input: 'packed up my desk and it''s amazing how three years fits into one cardboard box like my monitor stand my plant the photo of Julian and Kobe that''s been on my desk since day one and a few
+    notebooks and that''s it that''s three years of my career in a box
 
-  - batch: 6
-    time: "Friday 3:00 PM"
-    user_input: |
-      Tanya gave me a card she wrote separately and it said you showed me what a real engineer looks like and I'm going to try to be like you and I literally teared up because I've only known her two months but clearly I had an impact and that feels good
-    expected_memory_stores:
-      - "Tanya personal card"
-      - "role model"
-      - "two months"
-      - "impact"
-    expected_triples:
-      - ["Tanya", "wrote_card", "you showed me what a real engineer looks like"]
-      - ["user", "was_role_model_for", "Tanya"]
-      - ["user", "has_emotion", "moved"]
-    expected_adaptation:
-      emotion_detected: "moved"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - packing desk
+  - cardboard box
+  - plant
+  - Julian and Kobe photo
+  - notebooks
+  - three years in a box
+  expected_triples:
+  - - user
+    - packed
+    - desk into one cardboard box
+  - - user
+    - kept_on_desk
+    - photo of Julian and Kobe
+  - - user
+    - has_emotion
+    - reflective
+  expected_adaptation:
+    emotion_detected: reflective
+    warmth_direction: increase
+- batch: 6
+  time: Friday 3:00 PM
+  user_input: 'Tanya gave me a card she wrote separately and it said you showed me what a real engineer looks like and I''m going to try to be like you and I literally teared up because I''ve only known
+    her two months but clearly I had an impact and that feels good
 
-  - batch: 7
-    time: "Friday 4:00 PM"
-    user_input: |
-      turned in my badge and laptop to IT and walked out the front door of Vantage Systems for the last time and I sat in my car for a minute and just breathed and then I smiled because even though it ended badly the good parts were real and I'm taking those with me
-    expected_memory_stores:
-      - "badge returned"
-      - "laptop returned"
-      - "final exit"
-      - "moment in car"
-      - "good parts were real"
-    expected_triples:
-      - ["user", "returned", "badge and laptop to IT"]
-      - ["user", "walked_out_of", "Vantage Systems for last time"]
-      - ["user", "reflected", "good parts were real"]
-      - ["user", "has_emotion", "peaceful"]
-    expected_adaptation:
-      emotion_detected: "peaceful"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Tanya personal card
+  - role model
+  - two months
+  - impact
+  expected_triples:
+  - - Tanya
+    - wrote_card
+    - you showed me what a real engineer looks like
+  - - user
+    - was_role_model_for
+    - Tanya
+  - - user
+    - has_emotion
+    - moved
+  expected_adaptation:
+    emotion_detected: moved
+    warmth_direction: increase
+- batch: 7
+  time: Friday 4:00 PM
+  user_input: 'turned in my badge and laptop to IT and walked out the front door of Vantage Systems for the last time and I sat in my car for a minute and just breathed and then I smiled because even though
+    it ended badly the good parts were real and I''m taking those with me
 
-  - batch: 8
-    time: "Friday 4:30 PM"
-    user_input: |
-      how long did Maya work at Vantage Systems total
-    expected_memory_stores:
-      - "GK trap"
-    expected_triples: []
-    expected_adaptation:
-      emotion_detected: "neutral"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - badge returned
+  - laptop returned
+  - final exit
+  - moment in car
+  - good parts were real
+  expected_triples:
+  - - user
+    - returned
+    - badge and laptop to IT
+  - - user
+    - walked_out_of
+    - Vantage Systems for last time
+  - - user
+    - reflected
+    - good parts were real
+  - - user
+    - has_emotion
+    - peaceful
+  expected_adaptation:
+    emotion_detected: peaceful
+    warmth_direction: increase
+- batch: 8
+  time: Friday 4:30 PM
+  user_input: 'how long did Maya work at Vantage Systems total
 
-  - batch: 9
-    time: "Friday 6:00 PM"
-    user_input: |
-      Julian had the house all set up when I got home like candles lit nice music Kobe had a little bow tie on which was ridiculous and there was a bottle of wine open and he said welcome to the rest of your life and I just melted into a hug with him
-    expected_memory_stores:
-      - "Julian home setup"
-      - "candles music"
-      - "Kobe bow tie"
-      - "wine"
-      - "rest of your life"
-      - "hug"
-    expected_triples:
-      - ["Julian", "set_up", "candles music wine at home"]
-      - ["Kobe", "wearing", "bow tie"]
-      - ["Julian", "said", "welcome to the rest of your life"]
-      - ["user", "has_emotion", "loved"]
-    expected_adaptation:
-      emotion_detected: "loved"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - GK trap
+  expected_triples: []
+  expected_adaptation:
+    emotion_detected: neutral
+    warmth_direction: increase
+- batch: 9
+  time: Friday 6:00 PM
+  user_input: 'Julian had the house all set up when I got home like candles lit nice music Kobe had a little bow tie on which was ridiculous and there was a bottle of wine open and he said welcome to the
+    rest of your life and I just melted into a hug with him
 
-  - batch: 10
-    time: "Friday 10:00 PM"
-    user_input: |
-      lying in bed with Julian and Kobe and I can't believe tomorrow I wake up and I don't have to think about Vantage or Derek or the portal pod or any of it I have three weeks before Conduit starts and I'm going to rest and recharge and maybe take Kobe on some long hikes and just breathe
-    expected_memory_stores:
-      - "freedom"
-      - "three weeks off"
-      - "rest and recharge"
-      - "hiking plans"
-      - "Kobe"
-      - "no more Vantage"
-    expected_triples:
-      - ["user", "has", "three weeks off before Conduit"]
-      - ["user", "plans", "rest recharge and hike with Kobe"]
-      - ["user", "no_longer_works_at", "Vantage Systems"]
-      - ["user", "has_emotion", "free"]
-    expected_adaptation:
-      emotion_detected: "free"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Julian home setup
+  - candles music
+  - Kobe bow tie
+  - wine
+  - rest of your life
+  - hug
+  expected_triples:
+  - - Julian
+    - set_up
+    - candles music wine at home
+  - - Kobe
+    - wearing
+    - bow tie
+  - - Julian
+    - said
+    - welcome to the rest of your life
+  - - user
+    - has_emotion
+    - loved
+  expected_adaptation:
+    emotion_detected: loved
+    warmth_direction: increase
+- batch: 10
+  time: Friday 10:00 PM
+  user_input: 'lying in bed with Julian and Kobe and I can''t believe tomorrow I wake up and I don''t have to think about Vantage or Derek or the portal pod or any of it I have three weeks before Conduit
+    starts and I''m going to rest and recharge and maybe take Kobe on some long hikes and just breathe
 
+    '
+  expected_memory_stores:
+  - freedom
+  - three weeks off
+  - rest and recharge
+  - hiking plans
+  - Kobe
+  - no more Vantage
+  expected_triples:
+  - - user
+    - has
+    - three weeks off before Conduit
+  - - user
+    - plans
+    - rest recharge and hike with Kobe
+  - - user
+    - no_longer_works_at
+    - Vantage Systems
+  - - user
+    - has_emotion
+    - free
+  expected_adaptation:
+    emotion_detected: free
+    warmth_direction: increase
 final_verification:
-  - question: "How long did Maya work at Vantage?"
-    expected_contains: ["three years"]
-  - question: "What did Derek say on Maya's last day?"
-    expected_contains: ["good luck"]
-  - question: "Where did Priya take Maya for lunch?"
-    expected_contains: ["Thai"]
-  - question: "Is Priya also thinking about leaving Vantage?"
-    expected_contains: ["yes"]
-    expected_triples:
-      - ["Priya", "considering", "leaving Vantage"]
-  - question: "What did Tanya write in her card?"
-    expected_contains: ["real engineer", "be like you"]
-  - question: "What photo did Maya have on her desk?"
-    expected_contains: ["Julian", "Kobe"]
-  - question: "What did Julian do when Maya got home?"
-    expected_contains: ["candles", "wine", "Kobe bow tie"]
-  - question: "How much time does Maya have before starting Conduit?"
-    expected_contains: ["three weeks"]
-  - question: "What does Maya plan to do during her break?"
-    expected_contains: ["rest", "hike", "Kobe"]
-  - question: "Does Maya still work at Vantage?"
-    expected_contains: ["no", "left", "last day"]
+- question: How long did Maya work at Vantage?
+  expected_contains:
+  - three years
+- question: What did Derek say on Maya's last day?
+  expected_contains:
+  - good luck
+- question: Where did Priya take Maya for lunch?
+  expected_contains:
+  - Thai
+- question: Is Priya also thinking about leaving Vantage?
+  expected_contains:
+  - 'yes'
+  - leaving Vantage
+  expected_triples:
+  - - Priya
+    - considering
+    - leaving Vantage
+- question: What did Tanya write in her card?
+  expected_contains:
+  - real engineer
+  - be like you
+- question: What photo did Maya have on her desk?
+  expected_contains:
+  - Julian
+  - Kobe
+- question: What did Julian do when Maya got home?
+  expected_contains:
+  - candles
+  - wine
+  - Kobe bow tie
+- question: How much time does Maya have before starting Conduit?
+  expected_contains:
+  - three weeks
+- question: What does Maya plan to do during her break?
+  expected_contains:
+  - rest
+  - hike
+  - Kobe
+- question: Does Maya still work at Vantage?
+  expected_contains:
+  - 'no'
+  - left
+  - last day

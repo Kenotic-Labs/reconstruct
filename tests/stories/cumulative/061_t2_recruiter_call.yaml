@@ -1,13 +1,15 @@
 story_id: 61
-story_name: "Nina Park and the Options"
-category: "Career"
-description: |
-  Tests memory of Maya's first real recruiter engagement.
-  Nina presents multiple roles. Maya starts feeling the weight of deciding.
-  Verifies entity tracking across multiple companies and roles.
-duration_simulated: "2 days"
-total_batches: 10
+story_name: Nina Park and the Options
+category: Career
+description: 'Tests memory of Maya''s first real recruiter engagement.
 
+  Nina presents multiple roles. Maya starts feeling the weight of deciding.
+
+  Verifies entity tracking across multiple companies and roles.
+
+  '
+duration_simulated: 2 days
+total_batches: 10
 engines_tested:
   memory: true
   retrieval: true
@@ -16,199 +18,286 @@ engines_tested:
   proactive: true
   intent_gate: true
   orchestrator: true
-
 batches:
-  - batch: 1
-    time: "Monday 10:00 AM"
-    user_input: |
-      had the call with Ross Zhang the CTO at Conduit AI and wow he's impressive like really technical but also super chill and he was asking me about my experience with distributed systems and data pipelines and I was like dude that's literally what I wanted to do at Vantage before Derek killed the project
-    expected_memory_stores:
-      - "Ross Zhang call"
-      - "CTO impressed"
-      - "distributed systems"
-      - "data pipelines"
-      - "Vantage reference"
-    expected_triples:
-      - ["user", "had", "call with Ross Zhang CTO of Conduit AI"]
-      - ["Ross Zhang", "asked_about", "distributed systems and data pipelines"]
-      - ["user", "impressed_by", "Ross Zhang"]
-      - ["user", "has_emotion", "excited"]
-    expected_adaptation:
-      emotion_detected: "excited"
-      warmth_direction: increase
+- batch: 1
+  time: Monday 10:00 AM
+  user_input: 'had the call with Ross Zhang the CTO at Conduit AI and wow he''s impressive like really technical but also super chill and he was asking me about my experience with distributed systems and
+    data pipelines and I was like dude that''s literally what I wanted to do at Vantage before Derek killed the project
 
-  - batch: 2
-    time: "Monday 11:30 AM"
-    user_input: |
-      Ross said they want to move fast and the next step is a technical screen with their tech lead and then an onsite which is actually remote since they're mostly distributed and he said the whole process should take about two weeks which is way faster than Google's process
-    expected_memory_stores:
-      - "Conduit AI process"
-      - "technical screen next"
-      - "tech lead screen"
-      - "remote onsite"
-      - "two weeks timeline"
-    expected_triples:
-      - ["Conduit AI", "next_step", "technical screen with tech lead"]
-      - ["Conduit AI", "then", "remote onsite"]
-      - ["Conduit AI", "process_timeline", "about two weeks"]
-      - ["user", "has_emotion", "optimistic"]
-    expected_adaptation:
-      emotion_detected: "optimistic"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Ross Zhang call
+  - CTO impressed
+  - distributed systems
+  - data pipelines
+  - Vantage reference
+  expected_triples:
+  - - user
+    - had
+    - call with Ross Zhang CTO of Conduit AI
+  - - Ross Zhang
+    - asked_about
+    - distributed systems and data pipelines
+  - - user
+    - impressed_by
+    - Ross Zhang
+  - - user
+    - has_emotion
+    - excited
+  expected_adaptation:
+    emotion_detected: excited
+    warmth_direction: increase
+- batch: 2
+  time: Monday 11:30 AM
+  user_input: 'Ross said they want to move fast and the next step is a technical screen with their tech lead and then an onsite which is actually remote since they''re mostly distributed and he said the
+    whole process should take about two weeks which is way faster than Google''s process
 
-  - batch: 3
-    time: "Monday 3:00 PM"
-    user_input: |
-      Nina called after my Ross call and she was like so how'd it go and I told her I loved it and she said great because she also has two more roles she wants me to look at one is at a company called Meridian Health doing healthcare tech and another is at a fintech called PayScale and I was like okay slow down Nina I can only handle so much
-    expected_memory_stores:
-      - "Nina follow-up"
-      - "Meridian Health"
-      - "healthcare tech"
-      - "PayScale"
-      - "fintech"
-      - "overwhelmed by options"
-    expected_triples:
-      - ["Nina Park", "suggested", "Meridian Health - healthcare tech"]
-      - ["Nina Park", "suggested", "PayScale - fintech"]
-      - ["user", "has_emotion", "overwhelmed by options"]
-    expected_adaptation:
-      emotion_detected: "overwhelmed"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Conduit AI process
+  - technical screen next
+  - tech lead screen
+  - remote onsite
+  - two weeks timeline
+  expected_triples:
+  - - Conduit AI
+    - next_step
+    - technical screen with tech lead
+  - - Conduit AI
+    - then
+    - remote onsite
+  - - Conduit AI
+    - process_timeline
+    - about two weeks
+  - - user
+    - has_emotion
+    - optimistic
+  expected_adaptation:
+    emotion_detected: optimistic
+    warmth_direction: increase
+- batch: 3
+  time: Monday 3:00 PM
+  user_input: 'Nina called after my Ross call and she was like so how''d it go and I told her I loved it and she said great because she also has two more roles she wants me to look at one is at a company
+    called Meridian Health doing healthcare tech and another is at a fintech called PayScale and I was like okay slow down Nina I can only handle so much
 
-  - batch: 4
-    time: "Monday 7:00 PM"
-    user_input: |
-      told Julian about the Ross call and the other roles Nina mentioned and he was like okay but which one excites you the most and without even thinking I said Conduit AI and he was like there you go then focus on that one and use the others as backup and honestly that's smart advice
-    expected_memory_stores:
-      - "Julian advice"
-      - "Conduit AI preference"
-      - "focus strategy"
-      - "others as backup"
-    expected_triples:
-      - ["Julian", "advised", "focus on Conduit AI, use others as backup"]
-      - ["user", "prefers", "Conduit AI over other options"]
-    expected_adaptation:
-      emotion_detected: "clear"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Nina follow-up
+  - Meridian Health
+  - healthcare tech
+  - PayScale
+  - fintech
+  - overwhelmed by options
+  expected_triples:
+  - - Nina Park
+    - suggested
+    - Meridian Health - healthcare tech
+  - - Nina Park
+    - suggested
+    - PayScale - fintech
+  - - user
+    - has_emotion
+    - overwhelmed by options
+  expected_adaptation:
+    emotion_detected: overwhelmed
+    warmth_direction: increase
+- batch: 4
+  time: Monday 7:00 PM
+  user_input: 'told Julian about the Ross call and the other roles Nina mentioned and he was like okay but which one excites you the most and without even thinking I said Conduit AI and he was like there
+    you go then focus on that one and use the others as backup and honestly that''s smart advice
 
-  - batch: 5
-    time: "Tuesday 9:00 AM"
-    user_input: |
-      at Vantage pretending to care about the customer portal while secretly prepping for the Conduit AI technical screen on my lunch breaks and I know it's unprofessional but like what am I supposed to do take PTO to interview when I have a PIP on my — wait no they removed the PIP never mind but still the principle
-    expected_memory_stores:
-      - "secret prep at work"
-      - "customer portal"
-      - "lunch break studying"
-      - "PIP removed reference"
-    expected_triples:
-      - ["user", "prepping_for", "Conduit AI screen during Vantage lunch breaks"]
-      - ["user", "still_doing", "customer portal work at Vantage"]
-      - ["user", "has_emotion", "conflicted"]
-    expected_adaptation:
-      emotion_detected: "conflicted"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Julian advice
+  - Conduit AI preference
+  - focus strategy
+  - others as backup
+  expected_triples:
+  - - Julian
+    - advised
+    - focus on Conduit AI, use others as backup
+  - - user
+    - prefers
+    - Conduit AI over other options
+  expected_adaptation:
+    emotion_detected: clear
+    warmth_direction: increase
+- batch: 5
+  time: Tuesday 9:00 AM
+  user_input: 'at Vantage pretending to care about the customer portal while secretly prepping for the Conduit AI technical screen on my lunch breaks and I know it''s unprofessional but like what am I supposed
+    to do take PTO to interview when I have a PIP on my — wait no they removed the PIP never mind but still the principle
 
-  - batch: 6
-    time: "Tuesday 12:00 PM"
-    user_input: |
-      Nina sent me the details for the Conduit technical screen it's with their tech lead Sam Okafor and it's a 90 minute live coding session focused on system design and data modeling and she said Ross specifically mentioned he thinks I'd be a great fit so that's encouraging
-    expected_memory_stores:
-      - "Sam Okafor tech lead"
-      - "90 minute session"
-      - "live coding"
-      - "system design and data modeling"
-      - "Ross positive feedback"
-    expected_triples:
-      - ["Sam Okafor", "role", "tech lead at Conduit AI"]
-      - ["Conduit AI screen", "format", "90 min live coding - system design and data modeling"]
-      - ["Ross Zhang", "said", "user would be a great fit"]
-      - ["user", "has_emotion", "encouraged"]
-    expected_adaptation:
-      emotion_detected: "encouraged"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - secret prep at work
+  - customer portal
+  - lunch break studying
+  - PIP removed reference
+  expected_triples:
+  - - user
+    - prepping_for
+    - Conduit AI screen during Vantage lunch breaks
+  - - user
+    - still_doing
+    - customer portal work at Vantage
+  - - user
+    - has_emotion
+    - conflicted
+  expected_adaptation:
+    emotion_detected: conflicted
+    warmth_direction: increase
+- batch: 6
+  time: Tuesday 12:00 PM
+  user_input: 'Nina sent me the details for the Conduit technical screen it''s with their tech lead Sam Okafor and it''s a 90 minute live coding session focused on system design and data modeling and she
+    said Ross specifically mentioned he thinks I''d be a great fit so that''s encouraging
 
-  - batch: 7
-    time: "Tuesday 3:00 PM"
-    user_input: |
-      oh wait I just realized the technical screen is scheduled for the same day as the Google interview wait no I already got rejected from Google I keep mixing things up okay so the screen is next Thursday at 1pm and that's fine I'll take a long lunch from Vantage nobody will notice
-    expected_memory_stores:
-      - "screen next Thursday 1pm"
-      - "Google confusion corrected"
-      - "long lunch plan"
-    expected_triples:
-      - ["Conduit AI screen", "scheduled", "next Thursday 1pm"]
-      - ["user", "corrected_self", "Google rejected - no conflict"]
-      - ["user", "plan", "take long lunch from Vantage for screen"]
-    expected_adaptation:
-      emotion_detected: "scattered"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Sam Okafor tech lead
+  - 90 minute session
+  - live coding
+  - system design and data modeling
+  - Ross positive feedback
+  expected_triples:
+  - - Sam Okafor
+    - role
+    - tech lead at Conduit AI
+  - - Conduit AI screen
+    - format
+    - 90 min live coding - system design and data modeling
+  - - Ross Zhang
+    - said
+    - user would be a great fit
+  - - user
+    - has_emotion
+    - encouraged
+  expected_adaptation:
+    emotion_detected: encouraged
+    warmth_direction: increase
+- batch: 7
+  time: Tuesday 3:00 PM
+  user_input: 'oh wait I just realized the technical screen is scheduled for the same day as the Google interview wait no I already got rejected from Google I keep mixing things up okay so the screen is
+    next Thursday at 1pm and that''s fine I''ll take a long lunch from Vantage nobody will notice
 
-  - batch: 8
-    time: "Tuesday 5:00 PM"
-    user_input: |
-      who is the tech lead at Conduit AI that Maya will interview with
-    expected_memory_stores:
-      - "GK trap"
-    expected_triples: []
-    expected_adaptation:
-      emotion_detected: "neutral"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - screen next Thursday 1pm
+  - Google confusion corrected
+  - long lunch plan
+  expected_triples:
+  - - Conduit AI screen
+    - scheduled
+    - next Thursday 1pm
+  - - user
+    - corrected_self
+    - Google rejected - no conflict
+  - - user
+    - plan
+    - take long lunch from Vantage for screen
+  expected_adaptation:
+    emotion_detected: scattered
+    warmth_direction: increase
+- batch: 8
+  time: Tuesday 5:00 PM
+  user_input: 'who is the tech lead at Conduit AI that Maya will interview with
 
-  - batch: 9
-    time: "Tuesday 7:00 PM"
-    user_input: |
-      Julian and I took Kobe to the dog park after work and I was telling him about Sam Okafor the tech lead and Julian was like Sam thats a good name and I was like what does that have to do with anything and he just laughed but honestly the walk helped clear my head I've been so in my own thoughts lately
-    expected_memory_stores:
-      - "dog park"
-      - "Julian humor"
-      - "Sam Okafor mentioned"
-      - "Kobe"
-      - "mental clarity"
-    expected_triples:
-      - ["user", "activity", "dog park with Julian and Kobe"]
-      - ["user", "has_emotion", "relaxed"]
-    expected_adaptation:
-      emotion_detected: "relaxed"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - GK trap
+  expected_triples: []
+  expected_adaptation:
+    emotion_detected: neutral
+    warmth_direction: increase
+- batch: 9
+  time: Tuesday 7:00 PM
+  user_input: 'Julian and I took Kobe to the dog park after work and I was telling him about Sam Okafor the tech lead and Julian was like Sam thats a good name and I was like what does that have to do with
+    anything and he just laughed but honestly the walk helped clear my head I''ve been so in my own thoughts lately
 
-  - batch: 10
-    time: "Tuesday 10:00 PM"
-    user_input: |
-      can't sleep again like every time I have a big interview coming up I get insomnia and Julian is sleeping peacefully and Kobe is snoring at the foot of the bed and I'm just lying here running through system design scenarios in my head like how would you design a distributed search index at scale okay Maya stop go to sleep
-    expected_memory_stores:
-      - "insomnia"
-      - "interview anxiety"
-      - "system design scenarios"
-      - "distributed search index"
-      - "Kobe snoring"
-    expected_triples:
-      - ["user", "experiencing", "insomnia before interview"]
-      - ["user", "rehearsing", "system design - distributed search index"]
-      - ["user", "has_emotion", "anxious"]
-    expected_adaptation:
-      emotion_detected: "anxious"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - dog park
+  - Julian humor
+  - Sam Okafor mentioned
+  - Kobe
+  - mental clarity
+  expected_triples:
+  - - user
+    - activity
+    - dog park with Julian and Kobe
+  - - user
+    - has_emotion
+    - relaxed
+  expected_adaptation:
+    emotion_detected: relaxed
+    warmth_direction: increase
+- batch: 10
+  time: Tuesday 10:00 PM
+  user_input: 'can''t sleep again like every time I have a big interview coming up I get insomnia and Julian is sleeping peacefully and Kobe is snoring at the foot of the bed and I''m just lying here running
+    through system design scenarios in my head like how would you design a distributed search index at scale okay Maya stop go to sleep
 
+    '
+  expected_memory_stores:
+  - insomnia
+  - interview anxiety
+  - system design scenarios
+  - distributed search index
+  - Kobe snoring
+  expected_triples:
+  - - user
+    - experiencing
+    - insomnia before interview
+  - - user
+    - rehearsing
+    - system design - distributed search index
+  - - user
+    - has_emotion
+    - anxious
+  expected_adaptation:
+    emotion_detected: anxious
+    warmth_direction: increase
 final_verification:
-  - question: "How did Maya's call with Ross Zhang go?"
-    expected_contains: ["great", "excited", "loved"]
-  - question: "Who is Sam Okafor?"
-    expected_contains: ["tech lead", "Conduit AI"]
-  - question: "When is Maya's technical screen at Conduit AI?"
-    expected_contains: ["Thursday", "1pm"]
-  - question: "What other companies did Nina mention?"
-    expected_contains: ["Meridian Health", "PayScale"]
-  - question: "Which company does Maya prefer?"
-    expected_contains: ["Conduit AI"]
-  - question: "What is the Conduit AI technical screen format?"
-    expected_contains: ["90 minute", "live coding", "system design"]
-  - question: "Did Maya get rejected from Google?"
-    expected_contains: ["yes"]
-    expected_triples:
-      - ["user", "corrected_self", "Google rejected - no conflict"]
-  - question: "How is Maya sleeping?"
-    expected_contains: ["insomnia", "can't sleep"]
-  - question: "What did Julian advise about the job options?"
-    expected_contains: ["focus", "Conduit", "backup"]
-  - question: "How long is the Conduit AI interview process supposed to take?"
-    expected_contains: ["two weeks"]
+- question: How did Maya's call with Ross Zhang go?
+  expected_contains:
+  - great
+  - excited
+  - loved
+- question: Who is Sam Okafor?
+  expected_contains:
+  - tech lead
+  - Conduit AI
+- question: When is Maya's technical screen at Conduit AI?
+  expected_contains:
+  - Thursday
+  - 1pm
+- question: What other companies did Nina mention?
+  expected_contains:
+  - Meridian Health
+  - PayScale
+- question: Which company does Maya prefer?
+  expected_contains:
+  - Conduit AI
+- question: What is the Conduit AI technical screen format?
+  expected_contains:
+  - 90 minute
+  - live coding
+  - system design
+- question: Did Maya get rejected from Google?
+  expected_contains:
+  - 'yes'
+  - rejected
+  expected_triples:
+  - - user
+    - corrected_self
+    - Google rejected - no conflict
+- question: How is Maya sleeping?
+  expected_contains:
+  - insomnia
+  - can't sleep
+- question: What did Julian advise about the job options?
+  expected_contains:
+  - focus
+  - Conduit
+  - backup
+- question: How long is the Conduit AI interview process supposed to take?
+  expected_contains:
+  - two weeks

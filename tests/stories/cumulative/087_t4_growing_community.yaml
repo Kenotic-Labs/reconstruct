@@ -1,13 +1,15 @@
 story_id: 87
-story_name: "Growing Community"
-category: "Learning"
-description: |
-  Tests memory of fridgesearch user community forming organically.
-  Users helping each other, sharing recipes, creating content.
-  Verifies system tracks community dynamics and user-generated events.
-duration_simulated: "2 weeks"
-total_batches: 10
+story_name: Growing Community
+category: Learning
+description: 'Tests memory of fridgesearch user community forming organically.
 
+  Users helping each other, sharing recipes, creating content.
+
+  Verifies system tracks community dynamics and user-generated events.
+
+  '
+duration_simulated: 2 weeks
+total_batches: 10
 engines_tested:
   memory: true
   retrieval: true
@@ -16,220 +18,335 @@ engines_tested:
   proactive: true
   intent_gate: true
   orchestrator: true
-
 batches:
-  - batch: 1
-    time: "Monday 7:00 PM"
-    user_input: |
-      so someone created a fridgesearch subreddit without me knowing and there are already like 200 members posting their cooking results and sharing tips and ingredient substitution ideas and I found out because Marcus sent me the link and was like did you know about this and I was like no what the heck
-    expected_memory_stores:
-      - "fridgesearch subreddit"
-      - "200 members"
-      - "cooking results shared"
-      - "ingredient tips"
-      - "Marcus found it"
-      - "user-created"
-    expected_triples:
-      - ["fridgesearch", "has", "user-created subreddit"]
-      - ["fridgesearch_subreddit", "has_metric", "200 members"]
-      - ["subreddit_users", "sharing", "cooking results and ingredient tips"]
-      - ["Marcus", "found", "the subreddit"]
-      - ["user", "has_emotion", "surprised"]
-    expected_adaptation:
-      emotion_detected: "surprised"
-      warmth_direction: increase
+- batch: 1
+  time: Monday 7:00 PM
+  user_input: 'so someone created a fridgesearch subreddit without me knowing and there are already like 200 members posting their cooking results and sharing tips and ingredient substitution ideas and
+    I found out because Marcus sent me the link and was like did you know about this and I was like no what the heck
 
-  - batch: 2
-    time: "Wednesday 8:00 PM"
-    user_input: |
-      a food blogger with like 50 thousand followers tweeted about fridgesearch and said it's the best cooking tool she's found this year and we got another 400 signups from that tweet alone and the server held up fine this time because I learned my lesson from the Hacker News spike
-    expected_memory_stores:
-      - "food blogger tweet"
-      - "50 thousand followers"
-      - "best cooking tool"
-      - "400 signups"
-      - "server handled it"
-      - "learned from HN"
-    expected_triples:
-      - ["food_blogger", "tweeted", "fridgesearch is best cooking tool this year"]
-      - ["food_blogger", "has", "50 thousand followers"]
-      - ["fridgesearch", "gained", "400 signups from tweet"]
-      - ["fridgesearch_server", "handled", "traffic spike fine"]
-      - ["user", "has_emotion", "proud"]
-    expected_adaptation:
-      emotion_detected: "proud"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - fridgesearch subreddit
+  - 200 members
+  - cooking results shared
+  - ingredient tips
+  - Marcus found it
+  - user-created
+  expected_triples:
+  - - fridgesearch
+    - has
+    - user-created subreddit
+  - - fridgesearch_subreddit
+    - has_metric
+    - 200 members
+  - - subreddit_users
+    - sharing
+    - cooking results and ingredient tips
+  - - Marcus
+    - found
+    - the subreddit
+  - - user
+    - has_emotion
+    - surprised
+  expected_adaptation:
+    emotion_detected: surprised
+    warmth_direction: increase
+- batch: 2
+  time: Wednesday 8:00 PM
+  user_input: 'a food blogger with like 50 thousand followers tweeted about fridgesearch and said it''s the best cooking tool she''s found this year and we got another 400 signups from that tweet alone
+    and the server held up fine this time because I learned my lesson from the Hacker News spike
 
-  - batch: 3
-    time: "Saturday 10:00 AM"
-    user_input: |
-      user count just hit 2800 and the donations are coming in steadily like about $120 a month now which almost covers the server costs and Julian designed a little badge system for the app where you get badges for cooking streaks like you cooked 7 days in a row and people love it
-    expected_memory_stores:
-      - "2800 users"
-      - "$120 monthly donations"
-      - "almost covers costs"
-      - "badge system"
-      - "cooking streaks"
-      - "Julian designed badges"
-    expected_triples:
-      - ["fridgesearch", "has_metric", "2800 users"]
-      - ["fridgesearch", "has_metric", "$120/month donations"]
-      - ["Julian", "designed", "badge system for cooking streaks"]
-      - ["user", "has_emotion", "satisfied"]
-    expected_adaptation:
-      emotion_detected: "satisfied"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - food blogger tweet
+  - 50 thousand followers
+  - best cooking tool
+  - 400 signups
+  - server handled it
+  - learned from HN
+  expected_triples:
+  - - food_blogger
+    - tweeted
+    - fridgesearch is best cooking tool this year
+  - - food_blogger
+    - has
+    - 50 thousand followers
+  - - fridgesearch
+    - gained
+    - 400 signups from tweet
+  - - fridgesearch_server
+    - handled
+    - traffic spike fine
+  - - user
+    - has_emotion
+    - proud
+  expected_adaptation:
+    emotion_detected: proud
+    warmth_direction: increase
+- batch: 3
+  time: Saturday 10:00 AM
+  user_input: 'user count just hit 2800 and the donations are coming in steadily like about $120 a month now which almost covers the server costs and Julian designed a little badge system for the app where
+    you get badges for cooking streaks like you cooked 7 days in a row and people love it
 
-  - batch: 4
-    time: "Saturday 3:00 PM"
-    user_input: |
-      someone in the subreddit organized a fridgesearch cooking challenge where you have to cook something with only four ingredients from your fridge and share the result and 30 people participated and the winning recipe was a four ingredient garlic butter shrimp that looked amazing
-    expected_memory_stores:
-      - "cooking challenge"
-      - "four ingredients"
-      - "30 participants"
-      - "garlic butter shrimp winner"
-      - "subreddit organized"
-    expected_triples:
-      - ["subreddit", "organized", "four ingredient cooking challenge"]
-      - ["cooking_challenge", "had", "30 participants"]
-      - ["cooking_challenge", "winner", "four ingredient garlic butter shrimp"]
-      - ["user", "has_emotion", "delighted"]
-    expected_adaptation:
-      emotion_detected: "delighted"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - 2800 users
+  - $120 monthly donations
+  - almost covers costs
+  - badge system
+  - cooking streaks
+  - Julian designed badges
+  expected_triples:
+  - - fridgesearch
+    - has_metric
+    - 2800 users
+  - - fridgesearch
+    - has_metric
+    - $120/month donations
+  - - Julian
+    - designed
+    - badge system for cooking streaks
+  - - user
+    - has_emotion
+    - satisfied
+  expected_adaptation:
+    emotion_detected: satisfied
+    warmth_direction: increase
+- batch: 4
+  time: Saturday 3:00 PM
+  user_input: 'someone in the subreddit organized a fridgesearch cooking challenge where you have to cook something with only four ingredients from your fridge and share the result and 30 people participated
+    and the winning recipe was a four ingredient garlic butter shrimp that looked amazing
 
-  - batch: 5
-    time: "Next Monday 7:00 PM"
-    user_input: |
-      Danny from Conduit asked me if he could contribute to fridgesearch on his own time and I was like really and he said yeah the search architecture is interesting and he wants to add fuzzy matching for ingredient spelling mistakes and I said absolutely and now Danny Ruiz is a contributor to my side project which is wild
-    expected_memory_stores:
-      - "Danny contributor"
-      - "fuzzy matching"
-      - "ingredient spelling"
-      - "own time"
-      - "wild feeling"
-    expected_triples:
-      - ["Danny", "volunteered", "contribute to fridgesearch on own time"]
-      - ["Danny", "wants_to_add", "fuzzy matching for ingredient spelling"]
-      - ["user", "accepted", "Danny as fridgesearch contributor"]
-      - ["user", "has_emotion", "amazed"]
-    expected_adaptation:
-      emotion_detected: "amazed"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - cooking challenge
+  - four ingredients
+  - 30 participants
+  - garlic butter shrimp winner
+  - subreddit organized
+  expected_triples:
+  - - subreddit
+    - organized
+    - four ingredient cooking challenge
+  - - cooking_challenge
+    - had
+    - 30 participants
+  - - cooking_challenge
+    - winner
+    - four ingredient garlic butter shrimp
+  - - user
+    - has_emotion
+    - delighted
+  - - fridgesearch_subreddit
+    - organized
+    - four ingredients cooking challenge
+  expected_adaptation:
+    emotion_detected: delighted
+    warmth_direction: increase
+- batch: 5
+  time: Next Monday 7:00 PM
+  user_input: 'Danny from Conduit asked me if he could contribute to fridgesearch on his own time and I was like really and he said yeah the search architecture is interesting and he wants to add fuzzy
+    matching for ingredient spelling mistakes and I said absolutely and now Danny Ruiz is a contributor to my side project which is wild
 
-  - batch: 6
-    time: "Next Wednesday 8:00 PM"
-    user_input: |
-      Marcus emailed me a screenshot of fridgesearch being mentioned in a TechCrunch article about indie developer projects and it was just a sentence in a listicle but still TechCrunch mentioned my weekend project and Julian framed the screenshot on the fridge which is hilarious
-    expected_memory_stores:
-      - "TechCrunch mention"
-      - "indie developer article"
-      - "Marcus screenshot"
-      - "Julian framed on fridge"
-    expected_triples:
-      - ["fridgesearch", "mentioned_in", "TechCrunch indie developer article"]
-      - ["Marcus", "sent", "screenshot of TechCrunch mention"]
-      - ["Julian", "framed", "TechCrunch screenshot on fridge"]
-      - ["user", "has_emotion", "amused"]
-    expected_adaptation:
-      emotion_detected: "amused"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Danny contributor
+  - fuzzy matching
+  - ingredient spelling
+  - own time
+  - wild feeling
+  expected_triples:
+  - - Danny
+    - volunteered
+    - contribute to fridgesearch on own time
+  - - Danny
+    - wants_to_add
+    - fuzzy matching for ingredient spelling
+  - - user
+    - accepted
+    - Danny as fridgesearch contributor
+  - - user
+    - has_emotion
+    - amazed
+  expected_adaptation:
+    emotion_detected: amazed
+    warmth_direction: increase
+- batch: 6
+  time: Next Wednesday 8:00 PM
+  user_input: 'Marcus emailed me a screenshot of fridgesearch being mentioned in a TechCrunch article about indie developer projects and it was just a sentence in a listicle but still TechCrunch mentioned
+    my weekend project and Julian framed the screenshot on the fridge which is hilarious
 
-  - batch: 7
-    time: "Next Thursday 6:00 PM"
-    user_input: |
-      has anyone from Conduit contributed to fridgesearch
-    expected_memory_stores:
-      - "GK trap"
-    expected_triples: []
-    expected_adaptation:
-      emotion_detected: "neutral"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - TechCrunch mention
+  - indie developer article
+  - Marcus screenshot
+  - Julian framed on fridge
+  expected_triples:
+  - - fridgesearch
+    - mentioned_in
+    - TechCrunch indie developer article
+  - - Marcus
+    - sent
+    - screenshot of TechCrunch mention
+  - - Julian
+    - framed
+    - TechCrunch screenshot on fridge
+  - - user
+    - has_emotion
+    - amused
+  expected_adaptation:
+    emotion_detected: amused
+    warmth_direction: increase
+- batch: 7
+  time: Next Thursday 6:00 PM
+  user_input: 'has anyone from Conduit contributed to fridgesearch
 
-  - batch: 8
-    time: "Next Saturday 11:00 AM"
-    user_input: |
-      Danny's fuzzy matching PR is ready and it's really good like if you type tomatos instead of tomatoes or parsely instead of parsley it still works and he also added support for multilingual ingredient names which I didn't even think of and now people can search in Spanish and French too
-    expected_memory_stores:
-      - "Danny PR merged"
-      - "fuzzy matching working"
-      - "spelling correction"
-      - "multilingual support"
-      - "Spanish French"
-    expected_triples:
-      - ["Danny", "merged_PR", "fuzzy matching for ingredient spelling"]
-      - ["Danny", "added", "multilingual ingredient support"]
-      - ["fridgesearch", "supports", "Spanish and French ingredient names"]
-      - ["user", "has_emotion", "impressed"]
-    expected_adaptation:
-      emotion_detected: "impressed"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - GK trap
+  expected_triples: []
+  expected_adaptation:
+    emotion_detected: neutral
+    warmth_direction: increase
+- batch: 8
+  time: Next Saturday 11:00 AM
+  user_input: 'Danny''s fuzzy matching PR is ready and it''s really good like if you type tomatos instead of tomatoes or parsely instead of parsley it still works and he also added support for multilingual
+    ingredient names which I didn''t even think of and now people can search in Spanish and French too
 
-  - batch: 9
-    time: "Next Sunday 2:00 PM"
-    user_input: |
-      took the afternoon off from coding to go to the dog park with Julian and Kobe and we ran into Clara and she said her whole book club is using fridgesearch now and they have a thing where they all cook the same recipe each week and compare results and that's the most wholesome thing I've ever heard
-    expected_memory_stores:
-      - "dog park"
-      - "Clara"
-      - "book club using fridgesearch"
-      - "same recipe challenge"
-      - "wholesome"
-    expected_triples:
-      - ["Clara", "told_user", "her book club all uses fridgesearch"]
-      - ["Clara_book_club", "does", "weekly same-recipe cooking challenge"]
-      - ["user", "went_to", "dog park with Julian and Kobe"]
-      - ["user", "has_emotion", "touched"]
-    expected_adaptation:
-      emotion_detected: "touched"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Danny PR merged
+  - fuzzy matching working
+  - spelling correction
+  - multilingual support
+  - Spanish French
+  expected_triples:
+  - - Danny
+    - merged_PR
+    - fuzzy matching for ingredient spelling
+  - - Danny
+    - added
+    - multilingual ingredient support
+  - - fridgesearch
+    - supports
+    - Spanish and French ingredient names
+  - - user
+    - has_emotion
+    - impressed
+  expected_adaptation:
+    emotion_detected: impressed
+    warmth_direction: increase
+- batch: 9
+  time: Next Sunday 2:00 PM
+  user_input: 'took the afternoon off from coding to go to the dog park with Julian and Kobe and we ran into Clara and she said her whole book club is using fridgesearch now and they have a thing where
+    they all cook the same recipe each week and compare results and that''s the most wholesome thing I''ve ever heard
 
-  - batch: 10
-    time: "Next Sunday 7:00 PM"
-    user_input: |
-      end of week recap fridgesearch has about 3100 users now the community is mostly self-sustaining the donations cover the server costs Danny is an active contributor and I'm back to a healthy balance of Conduit work during the week and fridgesearch on weekends and life is good honestly
-    expected_memory_stores:
-      - "3100 users"
-      - "self-sustaining community"
-      - "donations cover costs"
-      - "Danny active contributor"
-      - "healthy balance"
-      - "life is good"
-    expected_triples:
-      - ["fridgesearch", "has_metric", "3100 users"]
-      - ["fridgesearch_community", "is", "self-sustaining"]
-      - ["fridgesearch_donations", "cover", "server costs"]
-      - ["Danny", "is", "active contributor"]
-      - ["user", "achieved", "healthy work-life balance"]
-    expected_adaptation:
-      emotion_detected: "content"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - dog park
+  - Clara
+  - book club using fridgesearch
+  - same recipe challenge
+  - wholesome
+  expected_triples:
+  - - Clara
+    - told_user
+    - her book club all uses fridgesearch
+  - - Clara_book_club
+    - does
+    - weekly same-recipe cooking challenge
+  - - user
+    - went_to
+    - dog park with Julian and Kobe
+  - - user
+    - has_emotion
+    - touched
+  expected_adaptation:
+    emotion_detected: touched
+    warmth_direction: increase
+- batch: 10
+  time: Next Sunday 7:00 PM
+  user_input: 'end of week recap fridgesearch has about 3100 users now the community is mostly self-sustaining the donations cover the server costs Danny is an active contributor and I''m back to a healthy
+    balance of Conduit work during the week and fridgesearch on weekends and life is good honestly
 
+    '
+  expected_memory_stores:
+  - 3100 users
+  - self-sustaining community
+  - donations cover costs
+  - Danny active contributor
+  - healthy balance
+  - life is good
+  expected_triples:
+  - - fridgesearch
+    - has_metric
+    - 3100 users
+  - - fridgesearch_community
+    - is
+    - self-sustaining
+  - - fridgesearch_donations
+    - cover
+    - server costs
+  - - Danny
+    - is
+    - active contributor
+  - - user
+    - achieved
+    - healthy work-life balance
+  expected_adaptation:
+    emotion_detected: content
+    warmth_direction: increase
 final_verification:
-  - question: "How many users does fridgesearch have now?"
-    expected_contains: ["3100"]
-  - question: "Is there a fridgesearch subreddit?"
-    expected_contains: ["yes"]
-    expected_triples:
-      - ["fridgesearch", "has", "user-created subreddit"]
-  - question: "Who contributed fuzzy matching to fridgesearch?"
-    expected_contains: ["Danny"]
-  - question: "What languages does fridgesearch support?"
-    expected_contains: ["Spanish", "French"]
-  - question: "Do donations cover server costs?"
-    expected_contains: ["yes"]
-    expected_triples:
-      - ["fridgesearch_donations", "cover", "server costs"]
-  - question: "How much are monthly donations?"
-    expected_contains: ["120"]
-  - question: "Was fridgesearch mentioned in TechCrunch?"
-    expected_contains: ["yes"]
-    expected_triples:
-      - ["fridgesearch", "mentioned_in", "TechCrunch indie developer article"]
-  - question: "What cooking challenge did the subreddit organize?"
-    expected_contains: ["four ingredients"]
-  - question: "Who uses fridgesearch from Maya's neighborhood?"
-    expected_contains: ["Clara", "book club"]
-  - question: "What did Julian frame on the fridge?"
-    expected_contains: ["TechCrunch", "screenshot"]
+- question: How many users does fridgesearch have now?
+  expected_contains:
+  - '3100'
+- question: Is there a fridgesearch subreddit?
+  expected_contains:
+  - 'yes'
+  - subreddit
+  expected_triples:
+  - - fridgesearch
+    - has
+    - user-created subreddit
+- question: Who contributed fuzzy matching to fridgesearch?
+  expected_contains:
+  - Danny
+- question: What languages does fridgesearch support?
+  expected_contains:
+  - Spanish
+  - French
+- question: Do donations cover server costs?
+  expected_contains:
+  - 'yes'
+  - server costs
+  expected_triples:
+  - - fridgesearch_donations
+    - cover
+    - server costs
+- question: How much are monthly donations?
+  expected_contains:
+  - '120'
+- question: Was fridgesearch mentioned in TechCrunch?
+  expected_contains:
+  - 'yes'
+  - TechCrunch
+  expected_triples:
+  - - fridgesearch
+    - mentioned_in
+    - TechCrunch indie developer article
+- question: What cooking challenge did the subreddit organize?
+  expected_contains:
+  - four ingredients
+  expected_triples:
+  - - fridgesearch_subreddit
+    - organized
+    - four ingredients cooking challenge
+- question: Who uses fridgesearch from Maya's neighborhood?
+  expected_contains:
+  - Clara
+  - book club
+- question: What did Julian frame on the fridge?
+  expected_contains:
+  - TechCrunch
+  - screenshot

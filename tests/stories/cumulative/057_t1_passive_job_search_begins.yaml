@@ -1,13 +1,15 @@
 story_id: 57
-story_name: "Passive Job Search Begins"
-category: "Career"
-description: |
-  Tests memory of Maya transitioning from browsing to active consideration.
-  She updates her resume and starts telling close people about searching.
-  Bridges Thread 1 to Thread 2. Cross-thread with home life.
-duration_simulated: "4 days"
-total_batches: 10
+story_name: Passive Job Search Begins
+category: Career
+description: 'Tests memory of Maya transitioning from browsing to active consideration.
 
+  She updates her resume and starts telling close people about searching.
+
+  Bridges Thread 1 to Thread 2. Cross-thread with home life.
+
+  '
+duration_simulated: 4 days
+total_batches: 10
 engines_tested:
   memory: true
   retrieval: true
@@ -16,197 +18,288 @@ engines_tested:
   proactive: true
   intent_gate: true
   orchestrator: true
-
 batches:
-  - batch: 1
-    time: "Friday 9:00 AM"
-    user_input: |
-      so I updated my LinkedIn profile last night like nothing obvious just tweaked my headline and added some recent projects and within an hour I had three recruiters in my DMs which is honestly flattering but also overwhelming because I haven't job searched in three years
-    expected_memory_stores:
-      - "LinkedIn updated"
-      - "three recruiters"
-      - "hasn't searched in three years"
-    expected_triples:
-      - ["user", "updated", "LinkedIn profile"]
-      - ["user", "received", "three recruiter messages"]
-      - ["user", "last_searched", "three years ago"]
-      - ["user", "has_emotion", "flattered"]
-    expected_adaptation:
-      emotion_detected: "flattered"
-      warmth_direction: increase
+- batch: 1
+  time: Friday 9:00 AM
+  user_input: 'so I updated my LinkedIn profile last night like nothing obvious just tweaked my headline and added some recent projects and within an hour I had three recruiters in my DMs which is honestly
+    flattering but also overwhelming because I haven''t job searched in three years
 
-  - batch: 2
-    time: "Friday 12:00 PM"
-    user_input: |
-      one of the recruiters seems legit her name is Nina Park and she's recruiting for some really interesting companies in the Portland area and also some remote roles and she wants to set up a call next week so I said sure why not
-    expected_memory_stores:
-      - "Nina Park"
-      - "recruiter"
-      - "Portland and remote"
-      - "call next week"
-    expected_triples:
-      - ["Nina Park", "role", "recruiter"]
-      - ["Nina Park", "recruiting_for", "Portland and remote companies"]
-      - ["user", "scheduled", "call with Nina Park next week"]
-    expected_adaptation:
-      emotion_detected: "interested"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - LinkedIn updated
+  - three recruiters
+  - hasn't searched in three years
+  expected_triples:
+  - - user
+    - updated
+    - LinkedIn profile
+  - - user
+    - received
+    - three recruiter messages
+  - - user
+    - last_searched
+    - three years ago
+  - - user
+    - has_emotion
+    - flattered
+  expected_adaptation:
+    emotion_detected: flattered
+    warmth_direction: increase
+- batch: 2
+  time: Friday 12:00 PM
+  user_input: 'one of the recruiters seems legit her name is Nina Park and she''s recruiting for some really interesting companies in the Portland area and also some remote roles and she wants to set up
+    a call next week so I said sure why not
 
-  - batch: 3
-    time: "Saturday 10:00 AM"
-    user_input: |
-      spending the morning updating my resume and honestly it's hard to know what to include because I've done so much at Vantage over three years and Julian is helping me with the formatting because he's a designer and he made it look incredible like seriously this resume is beautiful
-    expected_memory_stores:
-      - "resume update"
-      - "Julian helping format"
-      - "designer skills"
-      - "three years at Vantage"
-    expected_triples:
-      - ["user", "updating", "resume"]
-      - ["Julian", "helped_with", "resume formatting"]
-      - ["Julian", "skill", "designer"]
-    expected_adaptation:
-      emotion_detected: "productive"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Nina Park
+  - recruiter
+  - Portland and remote
+  - call next week
+  expected_triples:
+  - - Nina Park
+    - role
+    - recruiter
+  - - Nina Park
+    - recruiting_for
+    - Portland and remote companies
+  - - user
+    - scheduled
+    - call with Nina Park next week
+  expected_adaptation:
+    emotion_detected: interested
+    warmth_direction: increase
+- batch: 3
+  time: Saturday 10:00 AM
+  user_input: 'spending the morning updating my resume and honestly it''s hard to know what to include because I''ve done so much at Vantage over three years and Julian is helping me with the formatting
+    because he''s a designer and he made it look incredible like seriously this resume is beautiful
 
-  - batch: 4
-    time: "Saturday 2:00 PM"
-    user_input: |
-      took a break to walk Kobe and ran into our neighbor Clara and she asked how work was going and I almost told her about the PIP and everything but I just said it's fine because I don't wanna be the person who complains about work to neighbors you know
-    expected_memory_stores:
-      - "Kobe walk"
-      - "Clara neighbor"
-      - "keeping work private"
-    expected_triples:
-      - ["user", "activity", "walked Kobe"]
-      - ["Clara", "relationship", "neighbor"]
-      - ["user", "keeping_private", "work problems from neighbors"]
-    expected_adaptation:
-      emotion_detected: "guarded"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - resume update
+  - Julian helping format
+  - designer skills
+  - three years at Vantage
+  expected_triples:
+  - - user
+    - updating
+    - resume
+  - - Julian
+    - helped_with
+    - resume formatting
+  - - Julian
+    - skill
+    - designer
+  expected_adaptation:
+    emotion_detected: productive
+    warmth_direction: increase
+- batch: 4
+  time: Saturday 2:00 PM
+  user_input: 'took a break to walk Kobe and ran into our neighbor Clara and she asked how work was going and I almost told her about the PIP and everything but I just said it''s fine because I don''t wanna
+    be the person who complains about work to neighbors you know
 
-  - batch: 5
-    time: "Sunday 11:00 AM"
-    user_input: |
-      called my mom and finally told her the PIP got removed and she was so relieved but then I told her I'm thinking about leaving and she was like Maya you just fought so hard to stay why would you leave and I tried to explain that it's not about the PIP anymore it's about the environment
-    expected_memory_stores:
-      - "mom informed"
-      - "PIP removed"
-      - "mom confused about leaving"
-      - "environment not PIP"
-    expected_triples:
-      - ["user", "told", "mom about PIP removal"]
-      - ["user's mom", "has_emotion", "relieved about PIP"]
-      - ["user's mom", "confused_about", "why user wants to leave after winning"]
-      - ["user", "reason_for_leaving", "toxic environment not PIP"]
-    expected_adaptation:
-      emotion_detected: "frustrated"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Kobe walk
+  - Clara neighbor
+  - keeping work private
+  expected_triples:
+  - - user
+    - activity
+    - walked Kobe
+  - - Clara
+    - relationship
+    - neighbor
+  - - user
+    - keeping_private
+    - work problems from neighbors
+  expected_adaptation:
+    emotion_detected: guarded
+    warmth_direction: increase
+- batch: 5
+  time: Sunday 11:00 AM
+  user_input: 'called my mom and finally told her the PIP got removed and she was so relieved but then I told her I''m thinking about leaving and she was like Maya you just fought so hard to stay why would
+    you leave and I tried to explain that it''s not about the PIP anymore it''s about the environment
 
-  - batch: 6
-    time: "Sunday 4:00 PM"
-    user_input: |
-      Julian and I had a long talk about finances and like if I leave Vantage we should be okay for a few months even without my salary because we've been saving and his freelance design work has been picking up a lot lately so there's less financial pressure than I thought
-    expected_memory_stores:
-      - "financial discussion"
-      - "savings"
-      - "Julian freelance"
-      - "less pressure"
-    expected_triples:
-      - ["user", "discussed", "finances with Julian"]
-      - ["user", "financial_status", "savings cover a few months without salary"]
-      - ["Julian", "work", "freelance design picking up"]
-      - ["user", "has_emotion", "reassured"]
-    expected_adaptation:
-      emotion_detected: "reassured"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - mom informed
+  - PIP removed
+  - mom confused about leaving
+  - environment not PIP
+  expected_triples:
+  - - user
+    - told
+    - mom about PIP removal
+  - - user's mom
+    - has_emotion
+    - relieved about PIP
+  - - user's mom
+    - confused_about
+    - why user wants to leave after winning
+  - - user
+    - reason_for_leaving
+    - toxic environment not PIP
+  expected_adaptation:
+    emotion_detected: frustrated
+    warmth_direction: increase
+- batch: 6
+  time: Sunday 4:00 PM
+  user_input: 'Julian and I had a long talk about finances and like if I leave Vantage we should be okay for a few months even without my salary because we''ve been saving and his freelance design work
+    has been picking up a lot lately so there''s less financial pressure than I thought
 
-  - batch: 7
-    time: "Monday 9:00 AM"
-    user_input: |
-      back at Vantage and Derek walked past me in the hallway and didn't even make eye contact which like fine whatever but it just confirms that this place is done for me even if the work itself is still boring portal stuff with Tanya and Raj
-    expected_memory_stores:
-      - "Derek avoidance"
-      - "confirmation to leave"
-      - "portal work"
-      - "Tanya and Raj"
-    expected_triples:
-      - ["Derek", "behavior", "avoided eye contact with user"]
-      - ["user", "decided", "Vantage is done"]
-      - ["user", "still_doing", "boring portal work with Tanya and Raj"]
-    expected_adaptation:
-      emotion_detected: "resolved"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - financial discussion
+  - savings
+  - Julian freelance
+  - less pressure
+  expected_triples:
+  - - user
+    - discussed
+    - finances with Julian
+  - - user
+    - financial_status
+    - savings cover a few months without salary
+  - - Julian
+    - work
+    - freelance design picking up
+  - - user
+    - has_emotion
+    - reassured
+  expected_adaptation:
+    emotion_detected: reassured
+    warmth_direction: increase
+- batch: 7
+  time: Monday 9:00 AM
+  user_input: 'back at Vantage and Derek walked past me in the hallway and didn''t even make eye contact which like fine whatever but it just confirms that this place is done for me even if the work itself
+    is still boring portal stuff with Tanya and Raj
 
-  - batch: 8
-    time: "Monday 1:00 PM"
-    user_input: |
-      what's the name of the recruiter Maya is talking to
-    expected_memory_stores:
-      - "GK trap"
-    expected_triples: []
-    expected_adaptation:
-      emotion_detected: "neutral"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Derek avoidance
+  - confirmation to leave
+  - portal work
+  - Tanya and Raj
+  expected_triples:
+  - - Derek
+    - behavior
+    - avoided eye contact with user
+  - - user
+    - decided
+    - Vantage is done
+  - - user
+    - still_doing
+    - boring portal work with Tanya and Raj
+  expected_adaptation:
+    emotion_detected: resolved
+    warmth_direction: increase
+- batch: 8
+  time: Monday 1:00 PM
+  user_input: 'what''s the name of the recruiter Maya is talking to
 
-  - batch: 9
-    time: "Monday 5:00 PM"
-    user_input: |
-      told Leon I'm actively searching now and he was like honestly good for you and he said he might start looking too but he's not as motivated as me because he doesn't have the PIP baggage he just thinks the work is boring which fair enough
-    expected_memory_stores:
-      - "Leon informed"
-      - "actively searching"
-      - "Leon might search"
-      - "different motivations"
-    expected_triples:
-      - ["user", "told", "Leon about active job search"]
-      - ["Leon", "supportive_of", "user's job search"]
-      - ["Leon", "considering", "also job searching"]
-      - ["Leon", "motivation", "bored with work not PIP trauma"]
-    expected_adaptation:
-      emotion_detected: "bonded"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - GK trap
+  expected_triples: []
+  expected_adaptation:
+    emotion_detected: neutral
+    warmth_direction: increase
+- batch: 9
+  time: Monday 5:00 PM
+  user_input: 'told Leon I''m actively searching now and he was like honestly good for you and he said he might start looking too but he''s not as motivated as me because he doesn''t have the PIP baggage
+    he just thinks the work is boring which fair enough
 
-  - batch: 10
-    time: "Monday 8:00 PM"
-    user_input: |
-      set up my call with Nina Park the recruiter for Wednesday afternoon and honestly I'm kind of nervous but also excited like this is the first real step toward leaving Vantage and starting something new and Julian said he'd take Kobe for a long walk so the house is quiet during the call
-    expected_memory_stores:
-      - "Nina Park call Wednesday"
-      - "nervous and excited"
-      - "first real step"
-      - "Julian walking Kobe"
-    expected_triples:
-      - ["user", "scheduled", "call with Nina Park Wednesday afternoon"]
-      - ["user", "has_emotion", "nervous and excited"]
-      - ["Julian", "will", "walk Kobe during recruiter call"]
-    expected_adaptation:
-      emotion_detected: "hopeful"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Leon informed
+  - actively searching
+  - Leon might search
+  - different motivations
+  expected_triples:
+  - - user
+    - told
+    - Leon about active job search
+  - - Leon
+    - supportive_of
+    - user's job search
+  - - Leon
+    - considering
+    - also job searching
+  - - Leon
+    - motivation
+    - bored with work not PIP trauma
+  expected_adaptation:
+    emotion_detected: bonded
+    warmth_direction: increase
+- batch: 10
+  time: Monday 8:00 PM
+  user_input: 'set up my call with Nina Park the recruiter for Wednesday afternoon and honestly I''m kind of nervous but also excited like this is the first real step toward leaving Vantage and starting
+    something new and Julian said he''d take Kobe for a long walk so the house is quiet during the call
 
+    '
+  expected_memory_stores:
+  - Nina Park call Wednesday
+  - nervous and excited
+  - first real step
+  - Julian walking Kobe
+  expected_triples:
+  - - user
+    - scheduled
+    - call with Nina Park Wednesday afternoon
+  - - user
+    - has_emotion
+    - nervous and excited
+  - - Julian
+    - will
+    - walk Kobe during recruiter call
+  expected_adaptation:
+    emotion_detected: hopeful
+    warmth_direction: increase
 final_verification:
-  - question: "Who is Nina Park?"
-    expected_contains: ["recruiter"]
-  - question: "When is Maya's call with the recruiter?"
-    expected_contains: ["Wednesday"]
-  - question: "Who helped Maya with her resume?"
-    expected_contains: ["Julian"]
-  - question: "How is Maya's financial situation if she leaves Vantage?"
-    expected_contains: ["okay", "savings", "Julian freelance"]
-  - question: "Does Leon know Maya is job searching?"
-    expected_contains: ["yes"]
-    expected_triples:
-      - ["user", "told", "Leon about active job search"]
-      - ["Leon", "supportive_of", "user's job search"]
-  - question: "How does Maya's mom feel about her leaving?"
-    expected_contains: ["confused", "why leave"]
-  - question: "Who is Clara?"
-    expected_contains: ["neighbor"]
-  - question: "How many recruiters contacted Maya on LinkedIn?"
-    expected_contains: ["three"]
-  - question: "Is Maya still doing portal work at Vantage?"
-    expected_contains: ["yes"]
-    expected_triples:
-      - ["user", "still_doing", "boring portal work with Tanya and Raj"]
-  - question: "What will Julian do during Maya's recruiter call?"
-    expected_contains: ["walk Kobe"]
+- question: Who is Nina Park?
+  expected_contains:
+  - recruiter
+- question: When is Maya's call with the recruiter?
+  expected_contains:
+  - Wednesday
+- question: Who helped Maya with her resume?
+  expected_contains:
+  - Julian
+- question: How is Maya's financial situation if she leaves Vantage?
+  expected_contains:
+  - okay
+  - savings
+  - Julian freelance
+- question: Does Leon know Maya is job searching?
+  expected_contains:
+  - 'yes'
+  - job search
+  expected_triples:
+  - - user
+    - told
+    - Leon about active job search
+  - - Leon
+    - supportive_of
+    - user's job search
+- question: How does Maya's mom feel about her leaving?
+  expected_contains:
+  - confused
+  - why leave
+- question: Who is Clara?
+  expected_contains:
+  - neighbor
+- question: How many recruiters contacted Maya on LinkedIn?
+  expected_contains:
+  - three
+- question: Is Maya still doing portal work at Vantage?
+  expected_contains:
+  - 'yes'
+  - portal work
+  expected_triples:
+  - - user
+    - still_doing
+    - boring portal work with Tanya and Raj
+- question: What will Julian do during Maya's recruiter call?
+  expected_contains:
+  - walk Kobe

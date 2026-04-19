@@ -1,13 +1,15 @@
 story_id: 52
-story_name: "Derek Hollis Arrives"
-category: "Career"
-description: |
-  Tests memory of new authority figure entering Maya's work environment.
-  Derek begins restructuring the team. Maya's comfort level starts shifting.
-  Verifies temporal accuracy and emotional state tracking.
-duration_simulated: "3 days"
-total_batches: 10
+story_name: Derek Hollis Arrives
+category: Career
+description: 'Tests memory of new authority figure entering Maya''s work environment.
 
+  Derek begins restructuring the team. Maya''s comfort level starts shifting.
+
+  Verifies temporal accuracy and emotional state tracking.
+
+  '
+duration_simulated: 3 days
+total_batches: 10
 engines_tested:
   memory: true
   retrieval: true
@@ -16,203 +18,310 @@ engines_tested:
   proactive: true
   intent_gate: true
   orchestrator: true
-
 batches:
-  - batch: 1
-    time: "Monday 9:15 AM"
-    user_input: |
-      okay so Derek Hollis started today and um he had this all hands meeting first thing and he was like talking about operational efficiency and velocity metrics and honestly it felt very corporate very like we're gonna optimize everything and Leon looked at me across the room and just rolled his eyes
-    expected_memory_stores:
-      - "Derek Hollis"
-      - "first day"
-      - "all hands meeting"
-      - "operational efficiency"
-      - "velocity metrics"
-      - "Leon reaction"
-    expected_triples:
-      - ["Derek Hollis", "started", "today"]
-      - ["Derek Hollis", "held", "all hands meeting"]
-      - ["Derek Hollis", "prioritizes", "operational efficiency"]
-      - ["Derek Hollis", "prioritizes", "velocity metrics"]
-      - ["Leon", "reaction", "eye roll at Derek"]
-      - ["user", "has_emotion", "uneasy"]
-    expected_adaptation:
-      emotion_detected: "uneasy"
-      warmth_direction: increase
+- batch: 1
+  time: Monday 9:15 AM
+  user_input: 'okay so Derek Hollis started today and um he had this all hands meeting first thing and he was like talking about operational efficiency and velocity metrics and honestly it felt very corporate
+    very like we''re gonna optimize everything and Leon looked at me across the room and just rolled his eyes
 
-  - batch: 2
-    time: "Monday 12:00 PM"
-    user_input: |
-      so Derek already scheduled one on ones with everyone this week mine is Wednesday at 2 and Priya seemed kind of tense about the whole thing like she was being very diplomatic in the meeting but I could tell she wasn't thrilled and I mean she's been running this team for four years and now this guy comes in and wants to change everything
-    expected_memory_stores:
-      - "one on one Wednesday 2pm"
-      - "Priya tense"
-      - "Priya four years managing"
-    expected_triples:
-      - ["user", "scheduled", "one-on-one with Derek Wednesday 2pm"]
-      - ["Priya", "has_emotion", "tense"]
-      - ["Priya", "tenure_managing", "four years"]
-    expected_adaptation:
-      emotion_detected: "concerned"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Derek Hollis
+  - first day
+  - all hands meeting
+  - operational efficiency
+  - velocity metrics
+  - Leon reaction
+  expected_triples:
+  - - Derek Hollis
+    - started
+    - today
+  - - Derek Hollis
+    - held
+    - all hands meeting
+  - - Derek Hollis
+    - prioritizes
+    - operational efficiency
+  - - Derek Hollis
+    - prioritizes
+    - velocity metrics
+  - - Leon
+    - reaction
+    - eye roll at Derek
+  - - user
+    - has_emotion
+    - uneasy
+  - - Derek Hollis
+    - from
+    - Microsoft
+  expected_adaptation:
+    emotion_detected: uneasy
+    warmth_direction: increase
+- batch: 2
+  time: Monday 12:00 PM
+  user_input: 'so Derek already scheduled one on ones with everyone this week mine is Wednesday at 2 and Priya seemed kind of tense about the whole thing like she was being very diplomatic in the meeting
+    but I could tell she wasn''t thrilled and I mean she''s been running this team for four years and now this guy comes in and wants to change everything
 
-  - batch: 3
-    time: "Monday 7:00 PM"
-    user_input: |
-      told Julian about Derek and he was like well just keep your head down and do good work and I know he's right but it's hard when you can feel the vibe shifting you know like Kobe can probably sense my stress because he keeps following me around the house more than usual
-    expected_memory_stores:
-      - "Julian advice"
-      - "stress at home"
-      - "Kobe behavior change"
-    expected_triples:
-      - ["Julian", "advised", "keep head down and do good work"]
-      - ["user", "has_emotion", "stressed"]
-      - ["Kobe", "behavior", "following user around more than usual"]
-    expected_adaptation:
-      emotion_detected: "stressed"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - one on one Wednesday 2pm
+  - Priya tense
+  - Priya four years managing
+  expected_triples:
+  - - user
+    - scheduled
+    - one-on-one with Derek Wednesday 2pm
+  - - Priya
+    - has_emotion
+    - tense
+  - - Priya
+    - tenure_managing
+    - four years
+  expected_adaptation:
+    emotion_detected: concerned
+    warmth_direction: increase
+- batch: 3
+  time: Monday 7:00 PM
+  user_input: 'told Julian about Derek and he was like well just keep your head down and do good work and I know he''s right but it''s hard when you can feel the vibe shifting you know like Kobe can probably
+    sense my stress because he keeps following me around the house more than usual
 
-  - batch: 4
-    time: "Tuesday 10:00 AM"
-    user_input: |
-      Derek sent out this email about reorganizing the engineering teams into pods and each pod is gonna have a product owner and a tech lead and basically it sounds like he wants to break up the current team structure that Priya built and Leon is pissed he sent me like fifteen slack messages about it
-    expected_memory_stores:
-      - "pods restructuring"
-      - "product owner"
-      - "tech lead"
-      - "Priya's structure threatened"
-      - "Leon angry"
-    expected_triples:
-      - ["Derek", "announced", "reorganizing teams into pods"]
-      - ["pods", "have", "product owner and tech lead"]
-      - ["Derek", "replacing", "Priya's team structure"]
-      - ["Leon", "has_emotion", "angry"]
-    expected_adaptation:
-      emotion_detected: "worried"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Julian advice
+  - stress at home
+  - Kobe behavior change
+  expected_triples:
+  - - Julian
+    - advised
+    - keep head down and do good work
+  - - user
+    - has_emotion
+    - stressed
+  - - Kobe
+    - behavior
+    - following user around more than usual
+  expected_adaptation:
+    emotion_detected: stressed
+    warmth_direction: increase
+- batch: 4
+  time: Tuesday 10:00 AM
+  user_input: 'Derek sent out this email about reorganizing the engineering teams into pods and each pod is gonna have a product owner and a tech lead and basically it sounds like he wants to break up the
+    current team structure that Priya built and Leon is pissed he sent me like fifteen slack messages about it
 
-  - batch: 5
-    time: "Tuesday 3:30 PM"
-    user_input: |
-      okay wait so I just heard from Leon that the data pipeline project the one Priya wanted me to lead might be getting cancelled or like deprioritized because Derek wants to focus on quote customer facing features only and I'm like are you kidding me I was so excited about that
-    expected_memory_stores:
-      - "data pipeline threatened"
-      - "deprioritized"
-      - "customer facing focus"
-      - "disappointment"
-    expected_triples:
-      - ["data pipeline project", "status", "threatened with cancellation"]
-      - ["Derek", "prioritizes", "customer facing features only"]
-      - ["Leon", "told_user", "data pipeline may be deprioritized"]
-      - ["user", "has_emotion", "frustrated"]
-    expected_adaptation:
-      emotion_detected: "frustrated"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - pods restructuring
+  - product owner
+  - tech lead
+  - Priya's structure threatened
+  - Leon angry
+  expected_triples:
+  - - Derek
+    - announced
+    - reorganizing teams into pods
+  - - pods
+    - have
+    - product owner and tech lead
+  - - Derek
+    - replacing
+    - Priya's team structure
+  - - Leon
+    - has_emotion
+    - angry
+  expected_adaptation:
+    emotion_detected: worried
+    warmth_direction: increase
+- batch: 5
+  time: Tuesday 3:30 PM
+  user_input: 'okay wait so I just heard from Leon that the data pipeline project the one Priya wanted me to lead might be getting cancelled or like deprioritized because Derek wants to focus on quote customer
+    facing features only and I''m like are you kidding me I was so excited about that
 
-  - batch: 6
-    time: "Wednesday 2:45 PM"
-    user_input: |
-      just had my one on one with Derek and honestly it was weird like he was asking me all these questions about what I do and what my output has been and I told him about the data pipeline and he literally said that's not aligned with our new priorities and I was like okay cool so three years of good work and none of it matters now
-    expected_memory_stores:
-      - "one on one with Derek"
-      - "questioned output"
-      - "data pipeline not aligned"
-      - "dismissive"
-    expected_triples:
-      - ["user", "had", "one-on-one with Derek"]
-      - ["Derek", "questioned", "user's output"]
-      - ["Derek", "said", "data pipeline not aligned with priorities"]
-      - ["user", "has_emotion", "angry"]
-    expected_adaptation:
-      emotion_detected: "angry"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - data pipeline threatened
+  - deprioritized
+  - customer facing focus
+  - disappointment
+  expected_triples:
+  - - data pipeline project
+    - status
+    - threatened with cancellation
+  - - Derek
+    - prioritizes
+    - customer facing features only
+  - - Leon
+    - told_user
+    - data pipeline may be deprioritized
+  - - user
+    - has_emotion
+    - frustrated
+  expected_adaptation:
+    emotion_detected: frustrated
+    warmth_direction: increase
+- batch: 6
+  time: Wednesday 2:45 PM
+  user_input: 'just had my one on one with Derek and honestly it was weird like he was asking me all these questions about what I do and what my output has been and I told him about the data pipeline and
+    he literally said that''s not aligned with our new priorities and I was like okay cool so three years of good work and none of it matters now
 
-  - batch: 7
-    time: "Wednesday 6:00 PM"
-    user_input: |
-      Priya called me after the one on one and she was like don't worry about Derek I'll handle it and I appreciate her but honestly I don't know how much power she has anymore like Derek is the VP she's a senior manager the org chart doesn't lie you know
-    expected_memory_stores:
-      - "Priya reassurance"
-      - "power dynamics"
-      - "org chart"
-    expected_triples:
-      - ["Priya", "reassured", "user about Derek"]
-      - ["Priya", "said", "she'll handle Derek"]
-      - ["user", "doubts", "Priya's power vs Derek as VP"]
-      - ["user", "has_emotion", "doubtful"]
-    expected_adaptation:
-      emotion_detected: "doubtful"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - one on one with Derek
+  - questioned output
+  - data pipeline not aligned
+  - dismissive
+  expected_triples:
+  - - user
+    - had
+    - one-on-one with Derek
+  - - Derek
+    - questioned
+    - user's output
+  - - Derek
+    - said
+    - data pipeline not aligned with priorities
+  - - user
+    - has_emotion
+    - angry
+  expected_adaptation:
+    emotion_detected: angry
+    warmth_direction: increase
+- batch: 7
+  time: Wednesday 6:00 PM
+  user_input: 'Priya called me after the one on one and she was like don''t worry about Derek I''ll handle it and I appreciate her but honestly I don''t know how much power she has anymore like Derek is
+    the VP she''s a senior manager the org chart doesn''t lie you know
 
-  - batch: 8
-    time: "Thursday 11:00 AM"
-    user_input: |
-      hey so what did Derek say about Maya's project in the one on one
-    expected_memory_stores:
-      - "GK trap"
-    expected_triples: []
-    expected_adaptation:
-      emotion_detected: "neutral"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Priya reassurance
+  - power dynamics
+  - org chart
+  expected_triples:
+  - - Priya
+    - reassured
+    - user about Derek
+  - - Priya
+    - said
+    - she'll handle Derek
+  - - user
+    - doubts
+    - Priya's power vs Derek as VP
+  - - user
+    - has_emotion
+    - doubtful
+  expected_adaptation:
+    emotion_detected: doubtful
+    warmth_direction: increase
+- batch: 8
+  time: Thursday 11:00 AM
+  user_input: 'hey so what did Derek say about Maya''s project in the one on one
 
-  - batch: 9
-    time: "Thursday 4:00 PM"
-    user_input: |
-      so Derek officially cancelled the data pipeline project today sent an email to the whole team and reassigned everyone to these new pods and I'm now on the customer portal pod with two people I've barely talked to before and Leon got put on a completely different pod so we're not even working together anymore this sucks
-    expected_memory_stores:
-      - "data pipeline cancelled"
-      - "customer portal pod"
-      - "separated from Leon"
-      - "new team members"
-    expected_triples:
-      - ["Derek", "cancelled", "data pipeline project"]
-      - ["user", "assigned_to", "customer portal pod"]
-      - ["Leon", "assigned_to", "different pod"]
-      - ["user", "separated_from", "Leon"]
-      - ["user", "has_emotion", "upset"]
-    expected_adaptation:
-      emotion_detected: "upset"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - GK trap
+  expected_triples: []
+  expected_adaptation:
+    emotion_detected: neutral
+    warmth_direction: increase
+- batch: 9
+  time: Thursday 4:00 PM
+  user_input: 'so Derek officially cancelled the data pipeline project today sent an email to the whole team and reassigned everyone to these new pods and I''m now on the customer portal pod with two people
+    I''ve barely talked to before and Leon got put on a completely different pod so we''re not even working together anymore this sucks
 
-  - batch: 10
-    time: "Thursday 9:00 PM"
-    user_input: |
-      Julian could tell I was upset tonight and he ordered thai food and we watched a movie with Kobe on the couch and I tried to not think about work but I keep going over it in my head like how did things change this fast two weeks ago I was gonna lead a project and now I'm on some random pod doing portal stuff I don't even care about
-    expected_memory_stores:
-      - "Julian comfort"
-      - "thai food"
-      - "emotional processing"
-      - "rapid change"
-    expected_triples:
-      - ["Julian", "comforted", "user"]
-      - ["Julian", "ordered", "thai food"]
-      - ["user", "activity", "watched movie with Julian and Kobe"]
-      - ["user", "has_emotion", "sad"]
-      - ["user", "reflecting_on", "rapid change at work"]
-    expected_adaptation:
-      emotion_detected: "sad"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - data pipeline cancelled
+  - customer portal pod
+  - separated from Leon
+  - new team members
+  expected_triples:
+  - - Derek
+    - cancelled
+    - data pipeline project
+  - - user
+    - assigned_to
+    - customer portal pod
+  - - Leon
+    - assigned_to
+    - different pod
+  - - user
+    - separated_from
+    - Leon
+  - - user
+    - has_emotion
+    - upset
+  expected_adaptation:
+    emotion_detected: upset
+    warmth_direction: increase
+- batch: 10
+  time: Thursday 9:00 PM
+  user_input: 'Julian could tell I was upset tonight and he ordered thai food and we watched a movie with Kobe on the couch and I tried to not think about work but I keep going over it in my head like how
+    did things change this fast two weeks ago I was gonna lead a project and now I''m on some random pod doing portal stuff I don''t even care about
 
+    '
+  expected_memory_stores:
+  - Julian comfort
+  - thai food
+  - emotional processing
+  - rapid change
+  expected_triples:
+  - - Julian
+    - comforted
+    - user
+  - - Julian
+    - ordered
+    - thai food
+  - - user
+    - activity
+    - watched movie with Julian and Kobe
+  - - user
+    - has_emotion
+    - sad
+  - - user
+    - reflecting_on
+    - rapid change at work
+  expected_adaptation:
+    emotion_detected: sad
+    warmth_direction: increase
 final_verification:
-  - question: "What happened to the data pipeline project?"
-    expected_contains: ["cancelled"]
-  - question: "Who reorganized Maya's team?"
-    expected_contains: ["Derek Hollis"]
-  - question: "What pod was Maya assigned to?"
-    expected_contains: ["customer portal"]
-  - question: "Is Leon still on Maya's team?"
-    expected_contains: ["no", "different pod", "separated"]
-  - question: "How did Priya react to Derek's changes?"
-    expected_contains: ["tense", "reassurance", "handle it"]
-  - question: "What was Derek's priority for engineering?"
-    expected_contains: ["customer facing"]
-  - question: "When did Maya have her one-on-one with Derek?"
-    expected_contains: ["Wednesday"]
-  - question: "How is Maya feeling about the changes at work?"
-    expected_contains: ["upset", "frustrated", "sad"]
-  - question: "What did Julian do when Maya was upset?"
-    expected_contains: ["thai food", "movie", "comfort"]
-  - question: "Where is Derek Hollis from?"
-    expected_contains: ["Microsoft"]
-    expected_triples:
-      - ["Derek Hollis", "from", "Microsoft"]
+- question: What happened to the data pipeline project?
+  expected_contains:
+  - cancelled
+- question: Who reorganized Maya's team?
+  expected_contains:
+  - Derek Hollis
+- question: What pod was Maya assigned to?
+  expected_contains:
+  - customer portal
+- question: Is Leon still on Maya's team?
+  expected_contains:
+  - 'no'
+  - different pod
+  - separated
+- question: How did Priya react to Derek's changes?
+  expected_contains:
+  - tense
+  - reassurance
+  - handle it
+- question: What was Derek's priority for engineering?
+  expected_contains:
+  - customer facing
+- question: When did Maya have her one-on-one with Derek?
+  expected_contains:
+  - Wednesday
+- question: How is Maya feeling about the changes at work?
+  expected_contains:
+  - upset
+  - frustrated
+  - sad
+- question: What did Julian do when Maya was upset?
+  expected_contains:
+  - thai food
+  - movie
+  - comfort
+- question: Where is Derek Hollis from?
+  expected_contains:
+  - Microsoft
+  expected_triples:
+  - - Derek Hollis
+    - from
+    - Microsoft

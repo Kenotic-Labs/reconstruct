@@ -1,13 +1,15 @@
 story_id: 89
-story_name: "Feature Polish"
-category: "Learning"
-description: |
-  Tests memory of fridgesearch maturing as a product.
-  New features added, community contributions, stable rhythm.
-  Verifies system tracks ongoing project development over time.
-duration_simulated: "2 weeks"
-total_batches: 10
+story_name: Feature Polish
+category: Learning
+description: 'Tests memory of fridgesearch maturing as a product.
 
+  New features added, community contributions, stable rhythm.
+
+  Verifies system tracks ongoing project development over time.
+
+  '
+duration_simulated: 2 weeks
+total_batches: 10
 engines_tested:
   memory: true
   retrieval: true
@@ -16,219 +18,324 @@ engines_tested:
   proactive: true
   intent_gate: true
   orchestrator: true
-
 batches:
-  - batch: 1
-    time: "Saturday 9:00 AM"
-    user_input: |
-      decided to finally build the meal planning feature that Elena requested ages ago and it's actually not as hard as I thought like you pick 5 to 7 recipes for the week and it combines all the shopping lists into one and removes duplicates so you don't buy three lemons when you only need three lemons across all recipes
-    expected_memory_stores:
-      - "meal planning feature"
-      - "Elena's request"
-      - "5 to 7 recipes"
-      - "combined shopping list"
-      - "duplicate removal"
-    expected_triples:
-      - ["user", "building", "meal planning feature Elena requested"]
-      - ["meal_planning", "allows", "pick 5-7 recipes with combined shopping list"]
-      - ["meal_planning", "has", "duplicate ingredient removal"]
-      - ["user", "has_emotion", "productive"]
-    expected_adaptation:
-      emotion_detected: "productive"
-      warmth_direction: increase
+- batch: 1
+  time: Saturday 9:00 AM
+  user_input: 'decided to finally build the meal planning feature that Elena requested ages ago and it''s actually not as hard as I thought like you pick 5 to 7 recipes for the week and it combines all
+    the shopping lists into one and removes duplicates so you don''t buy three lemons when you only need three lemons across all recipes
 
-  - batch: 2
-    time: "Saturday 4:00 PM"
-    user_input: |
-      Julian designed the meal planning UI and it's this beautiful calendar view where you drag and drop recipes onto days and there's a little animated shopping cart icon that updates the list in real time and honestly it's the best feature we've built and it took us one day
-    expected_memory_stores:
-      - "meal planning UI"
-      - "calendar view"
-      - "drag and drop"
-      - "animated shopping cart"
-      - "real time updates"
-      - "one day build"
-    expected_triples:
-      - ["Julian", "designed", "meal planning calendar UI with drag and drop"]
-      - ["meal_planning_UI", "has", "animated shopping cart with real-time updates"]
-      - ["user", "built", "meal planning feature in one day"]
-      - ["user", "has_emotion", "impressed"]
-    expected_adaptation:
-      emotion_detected: "impressed"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - meal planning feature
+  - Elena's request
+  - 5 to 7 recipes
+  - combined shopping list
+  - duplicate removal
+  expected_triples:
+  - - user
+    - building
+    - meal planning feature Elena requested
+  - - meal_planning
+    - allows
+    - pick 5-7 recipes with combined shopping list
+  - - meal_planning
+    - has
+    - duplicate ingredient removal
+  - - user
+    - has_emotion
+    - productive
+  expected_adaptation:
+    emotion_detected: productive
+    warmth_direction: increase
+- batch: 2
+  time: Saturday 4:00 PM
+  user_input: 'Julian designed the meal planning UI and it''s this beautiful calendar view where you drag and drop recipes onto days and there''s a little animated shopping cart icon that updates the list
+    in real time and honestly it''s the best feature we''ve built and it took us one day
 
-  - batch: 3
-    time: "Sunday 11:00 AM"
-    user_input: |
-      shipped the meal planning feature and Elena was the first person to use it obviously and she texted Julian saying tell Maya this is exactly what I wanted and she planned her whole week in ten minutes and the shopping list was perfect
-    expected_memory_stores:
-      - "meal planning shipped"
-      - "Elena first user"
-      - "exactly what she wanted"
-      - "ten minutes planning"
-      - "shopping list perfect"
-    expected_triples:
-      - ["user", "shipped", "meal planning feature"]
-      - ["Elena", "was", "first user of meal planning"]
-      - ["Elena", "said", "exactly what she wanted"]
-      - ["Elena", "planned_week_in", "ten minutes"]
-      - ["user", "has_emotion", "fulfilled"]
-    expected_adaptation:
-      emotion_detected: "fulfilled"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - meal planning UI
+  - calendar view
+  - drag and drop
+  - animated shopping cart
+  - real time updates
+  - one day build
+  expected_triples:
+  - - Julian
+    - designed
+    - meal planning calendar UI with drag and drop
+  - - meal_planning_UI
+    - has
+    - animated shopping cart with real-time updates
+  - - user
+    - built
+    - meal planning feature in one day
+  - - user
+    - has_emotion
+    - impressed
+  expected_adaptation:
+    emotion_detected: impressed
+    warmth_direction: increase
+- batch: 3
+  time: Sunday 11:00 AM
+  user_input: 'shipped the meal planning feature and Elena was the first person to use it obviously and she texted Julian saying tell Maya this is exactly what I wanted and she planned her whole week in
+    ten minutes and the shopping list was perfect
 
-  - batch: 4
-    time: "Next Wednesday 7:00 PM"
-    user_input: |
-      Danny merged another PR he built a pantry staples feature where you can mark certain ingredients as always available like salt pepper oil and they're automatically included in every search without having to re-enter them every time and users have been requesting this for weeks
-    expected_memory_stores:
-      - "Danny PR"
-      - "pantry staples feature"
-      - "always available ingredients"
-      - "salt pepper oil"
-      - "auto-included in search"
-    expected_triples:
-      - ["Danny", "merged_PR", "pantry staples feature"]
-      - ["pantry_staples", "allows", "mark ingredients as always available"]
-      - ["pantry_staples", "examples", "salt pepper oil"]
-      - ["user", "has_emotion", "grateful"]
-    expected_adaptation:
-      emotion_detected: "grateful"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - meal planning shipped
+  - Elena first user
+  - exactly what she wanted
+  - ten minutes planning
+  - shopping list perfect
+  expected_triples:
+  - - user
+    - shipped
+    - meal planning feature
+  - - Elena
+    - was
+    - first user of meal planning
+  - - Elena
+    - said
+    - exactly what she wanted
+  - - Elena
+    - planned_week_in
+    - ten minutes
+  - - user
+    - has_emotion
+    - fulfilled
+  expected_adaptation:
+    emotion_detected: fulfilled
+    warmth_direction: increase
+- batch: 4
+  time: Next Wednesday 7:00 PM
+  user_input: 'Danny merged another PR he built a pantry staples feature where you can mark certain ingredients as always available like salt pepper oil and they''re automatically included in every search
+    without having to re-enter them every time and users have been requesting this for weeks
 
-  - batch: 5
-    time: "Next Saturday 10:00 AM"
-    user_input: |
-      Marcus organized a second cooking challenge on the subreddit this time it's leftover makeover where you use fridgesearch to find a creative recipe using only leftover ingredients and 45 people signed up and the subreddit is at 400 members now
-    expected_memory_stores:
-      - "second cooking challenge"
-      - "leftover makeover"
-      - "45 participants"
-      - "subreddit 400 members"
-      - "Marcus organized"
-    expected_triples:
-      - ["Marcus", "organized", "second cooking challenge: leftover makeover"]
-      - ["cooking_challenge", "had", "45 participants"]
-      - ["fridgesearch_subreddit", "has_metric", "400 members"]
-      - ["user", "has_emotion", "happy"]
-    expected_adaptation:
-      emotion_detected: "happy"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Danny PR
+  - pantry staples feature
+  - always available ingredients
+  - salt pepper oil
+  - auto-included in search
+  expected_triples:
+  - - Danny
+    - merged_PR
+    - pantry staples feature
+  - - pantry_staples
+    - allows
+    - mark ingredients as always available
+  - - pantry_staples
+    - examples
+    - salt pepper oil
+  - - user
+    - has_emotion
+    - grateful
+  expected_adaptation:
+    emotion_detected: grateful
+    warmth_direction: increase
+- batch: 5
+  time: Next Saturday 10:00 AM
+  user_input: 'Marcus organized a second cooking challenge on the subreddit this time it''s leftover makeover where you use fridgesearch to find a creative recipe using only leftover ingredients and 45
+    people signed up and the subreddit is at 400 members now
 
-  - batch: 6
-    time: "Next Saturday 3:00 PM"
-    user_input: |
-      worked on performance optimization today the search response time was creeping up to 400ms with 3000+ users so I added a caching layer using Redis and got it back down to under 100ms and Danny helped test it and said the latency improvement at Conduit taught me well which made me laugh
-    expected_memory_stores:
-      - "performance optimization"
-      - "400ms to under 100ms"
-      - "Redis caching"
-      - "Danny testing"
-      - "Conduit skills applied"
-    expected_triples:
-      - ["user", "optimized", "search response 400ms to under 100ms"]
-      - ["user", "added", "Redis caching layer"]
-      - ["Danny", "helped_test", "performance optimization"]
-      - ["Danny", "joked", "Conduit latency work taught me well"]
-      - ["user", "has_emotion", "satisfied"]
-    expected_adaptation:
-      emotion_detected: "satisfied"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - second cooking challenge
+  - leftover makeover
+  - 45 participants
+  - subreddit 400 members
+  - Marcus organized
+  expected_triples:
+  - - Marcus
+    - organized
+    - 'second cooking challenge: leftover makeover'
+  - - cooking_challenge
+    - had
+    - 45 participants
+  - - fridgesearch_subreddit
+    - has_metric
+    - 400 members
+  - - user
+    - has_emotion
+    - happy
+  expected_adaptation:
+    emotion_detected: happy
+    warmth_direction: increase
+- batch: 6
+  time: Next Saturday 3:00 PM
+  user_input: 'worked on performance optimization today the search response time was creeping up to 400ms with 3000+ users so I added a caching layer using Redis and got it back down to under 100ms and
+    Danny helped test it and said the latency improvement at Conduit taught me well which made me laugh
 
-  - batch: 7
-    time: "Next Sunday 10:00 AM"
-    user_input: |
-      who has contributed code to fridgesearch besides Maya
-    expected_memory_stores:
-      - "GK trap"
-    expected_triples: []
-    expected_adaptation:
-      emotion_detected: "neutral"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - performance optimization
+  - 400ms to under 100ms
+  - Redis caching
+  - Danny testing
+  - Conduit skills applied
+  expected_triples:
+  - - user
+    - optimized
+    - search response 400ms to under 100ms
+  - - user
+    - added
+    - Redis caching layer
+  - - Danny
+    - helped_test
+    - performance optimization
+  - - Danny
+    - joked
+    - Conduit latency work taught me well
+  - - user
+    - has_emotion
+    - satisfied
+  expected_adaptation:
+    emotion_detected: satisfied
+    warmth_direction: increase
+- batch: 7
+  time: Next Sunday 10:00 AM
+  user_input: 'who has contributed code to fridgesearch besides Maya
 
-  - batch: 8
-    time: "Next Sunday 2:00 PM"
-    user_input: |
-      Kobe knocked my coffee onto my laptop during a coding session and I panicked but it was fine the MacBook survived somehow and Julian rushed in with paper towels and was like maybe this is the universe telling you to take a break and Kobe just stood there wagging his tail like he did nothing wrong
-    expected_memory_stores:
-      - "Kobe knocked coffee"
-      - "laptop survived"
-      - "Julian paper towels"
-      - "universe take a break"
-      - "Kobe innocent"
-    expected_triples:
-      - ["Kobe", "knocked", "coffee onto laptop"]
-      - ["laptop", "survived", "coffee spill"]
-      - ["Julian", "said", "universe telling you to take a break"]
-      - ["user", "has_emotion", "relieved"]
-    expected_adaptation:
-      emotion_detected: "relieved"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - GK trap
+  expected_triples: []
+  expected_adaptation:
+    emotion_detected: neutral
+    warmth_direction: increase
+- batch: 8
+  time: Next Sunday 2:00 PM
+  user_input: 'Kobe knocked my coffee onto my laptop during a coding session and I panicked but it was fine the MacBook survived somehow and Julian rushed in with paper towels and was like maybe this is
+    the universe telling you to take a break and Kobe just stood there wagging his tail like he did nothing wrong
 
-  - batch: 9
-    time: "Next Sunday 5:00 PM"
-    user_input: |
-      user count is at 3400 now and the app has a 4.8 rating on Product Hunt because someone submitted it there without telling me again and donations are at $140 per month and the server costs are $135 so we're actually net positive which means the community is literally sustaining the app
-    expected_memory_stores:
-      - "3400 users"
-      - "4.8 Product Hunt rating"
-      - "submitted without telling"
-      - "$140 donations"
-      - "$135 server costs"
-      - "net positive"
-      - "community sustaining"
-    expected_triples:
-      - ["fridgesearch", "has_metric", "3400 users"]
-      - ["fridgesearch", "has_rating", "4.8 on Product Hunt"]
-      - ["fridgesearch", "has_metric", "$140/month donations"]
-      - ["fridgesearch", "has_metric", "$135/month server costs"]
-      - ["fridgesearch", "is", "net positive financially"]
-    expected_adaptation:
-      emotion_detected: "amazed"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Kobe knocked coffee
+  - laptop survived
+  - Julian paper towels
+  - universe take a break
+  - Kobe innocent
+  expected_triples:
+  - - Kobe
+    - knocked
+    - coffee onto laptop
+  - - laptop
+    - survived
+    - coffee spill
+  - - Julian
+    - said
+    - universe telling you to take a break
+  - - user
+    - has_emotion
+    - relieved
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+- batch: 9
+  time: Next Sunday 5:00 PM
+  user_input: 'user count is at 3400 now and the app has a 4.8 rating on Product Hunt because someone submitted it there without telling me again and donations are at $140 per month and the server costs
+    are $135 so we''re actually net positive which means the community is literally sustaining the app
 
-  - batch: 10
-    time: "Next Sunday 8:00 PM"
-    user_input: |
-      reflecting on fridgesearch tonight and it's been about two months since I started it and it went from a weekend idea to something that 3400 people use to cook better meals and the community runs itself and the costs are covered and I built it with my partner and my dog supervised every coding session and honestly what more could I want
-    expected_memory_stores:
-      - "two months"
-      - "weekend idea to 3400 users"
-      - "community self-sustaining"
-      - "costs covered"
-      - "built with Julian"
-      - "Kobe supervised"
-      - "contentment"
-    expected_triples:
-      - ["fridgesearch", "age", "about two months old"]
-      - ["fridgesearch", "grew_from", "weekend idea to 3400 users"]
-      - ["user", "built_with", "Julian"]
-      - ["Kobe", "supervised", "every coding session"]
-      - ["user", "has_emotion", "grateful"]
-    expected_adaptation:
-      emotion_detected: "grateful"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - 3400 users
+  - 4.8 Product Hunt rating
+  - submitted without telling
+  - $140 donations
+  - $135 server costs
+  - net positive
+  - community sustaining
+  expected_triples:
+  - - fridgesearch
+    - has_metric
+    - 3400 users
+  - - fridgesearch
+    - has_rating
+    - 4.8 on Product Hunt
+  - - fridgesearch
+    - has_metric
+    - $140/month donations
+  - - fridgesearch
+    - has_metric
+    - $135/month server costs
+  - - fridgesearch
+    - is
+    - net positive financially
+  expected_adaptation:
+    emotion_detected: amazed
+    warmth_direction: increase
+- batch: 10
+  time: Next Sunday 8:00 PM
+  user_input: 'reflecting on fridgesearch tonight and it''s been about two months since I started it and it went from a weekend idea to something that 3400 people use to cook better meals and the community
+    runs itself and the costs are covered and I built it with my partner and my dog supervised every coding session and honestly what more could I want
 
+    '
+  expected_memory_stores:
+  - two months
+  - weekend idea to 3400 users
+  - community self-sustaining
+  - costs covered
+  - built with Julian
+  - Kobe supervised
+  - contentment
+  expected_triples:
+  - - fridgesearch
+    - age
+    - about two months old
+  - - fridgesearch
+    - grew_from
+    - weekend idea to 3400 users
+  - - user
+    - built_with
+    - Julian
+  - - Kobe
+    - supervised
+    - every coding session
+  - - user
+    - has_emotion
+    - grateful
+  expected_adaptation:
+    emotion_detected: grateful
+    warmth_direction: increase
 final_verification:
-  - question: "Does fridgesearch have meal planning now?"
-    expected_contains: ["yes"]
-    expected_triples:
-      - ["user", "shipped", "meal planning feature"]
-  - question: "Who requested the meal planning feature?"
-    expected_contains: ["Elena"]
-  - question: "What is the pantry staples feature?"
-    expected_contains: ["always available", "salt", "pepper", "auto"]
-  - question: "How many users does fridgesearch have now?"
-    expected_contains: ["3400"]
-  - question: "Are donations covering server costs?"
-    expected_contains: ["yes", "net positive"]
-  - question: "What is fridgesearch's Product Hunt rating?"
-    expected_contains: ["4.8"]
-  - question: "What caching did Maya add for performance?"
-    expected_contains: ["Redis"]
-  - question: "How fast is the search now?"
-    expected_contains: ["under 100ms"]
-  - question: "Who has contributed code besides Maya?"
-    expected_contains: ["Danny"]
-  - question: "How many members are in the fridgesearch subreddit?"
-    expected_contains: ["400"]
+- question: Does fridgesearch have meal planning now?
+  expected_contains:
+  - 'yes'
+  - meal planning
+  expected_triples:
+  - - user
+    - shipped
+    - meal planning feature
+- question: Who requested the meal planning feature?
+  expected_contains:
+  - Elena
+- question: What is the pantry staples feature?
+  expected_contains:
+  - always available
+  - salt
+  - pepper
+  - auto
+- question: How many users does fridgesearch have now?
+  expected_contains:
+  - '3400'
+- question: Are donations covering server costs?
+  expected_contains:
+  - 'yes'
+  - net positive
+- question: What is fridgesearch's Product Hunt rating?
+  expected_contains:
+  - '4.8'
+- question: What caching did Maya add for performance?
+  expected_contains:
+  - Redis
+- question: How fast is the search now?
+  expected_contains:
+  - under 100ms
+- question: Who has contributed code besides Maya?
+  expected_contains:
+  - Danny
+- question: How many members are in the fridgesearch subreddit?
+  expected_contains:
+  - '400'

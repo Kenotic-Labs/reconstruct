@@ -1,13 +1,15 @@
 story_id: 67
-story_name: "Salary Negotiation"
-category: "Career"
-description: |
-  Tests correction handling: the offer number changes from $175k to $182k to $185k.
-  Each change must overwrite the previous as the current offer.
-  Verifies the system tracks the latest state of a changing numerical fact.
-duration_simulated: "3 days"
-total_batches: 10
+story_name: Salary Negotiation
+category: Career
+description: 'Tests correction handling: the offer number changes from $175k to $182k to $185k.
 
+  Each change must overwrite the previous as the current offer.
+
+  Verifies the system tracks the latest state of a changing numerical fact.
+
+  '
+duration_simulated: 3 days
+total_batches: 10
 engines_tested:
   memory: true
   retrieval: true
@@ -16,201 +18,304 @@ engines_tested:
   proactive: true
   intent_gate: true
   orchestrator: true
-
 batches:
-  - batch: 1
-    time: "Thursday 9:00 AM"
-    user_input: |
-      called Nina and told her to counter at 190k and she said perfect she'll relay it to Ross and the HR team at Conduit and I'm trying to stay cool but my hands were literally shaking while I was on the phone like I've never negotiated a salary before in my life
-    expected_memory_stores:
-      - "counter at 190k"
-      - "Nina relaying"
-      - "first negotiation"
-      - "nervous"
-    expected_triples:
-      - ["user", "countered_at", "190k"]
-      - ["Nina", "relaying", "counter to Ross and HR"]
-      - ["user", "experiencing", "first salary negotiation ever"]
-      - ["user", "has_emotion", "anxious"]
-    expected_adaptation:
-      emotion_detected: "anxious"
-      warmth_direction: increase
+- batch: 1
+  time: Thursday 9:00 AM
+  user_input: 'called Nina and told her to counter at 190k and she said perfect she''ll relay it to Ross and the HR team at Conduit and I''m trying to stay cool but my hands were literally shaking while
+    I was on the phone like I''ve never negotiated a salary before in my life
 
-  - batch: 2
-    time: "Thursday 2:00 PM"
-    user_input: |
-      Nina called back and Conduit came back at 182k which is exactly what she predicted and she said we can push once more or accept and I was like 182 is already amazing but Nina said trust the process one more push won't scare them off
-    expected_memory_stores:
-      - "counter offer 182k"
-      - "correction from 175k"
-      - "Nina predicted correctly"
-      - "one more push"
-    expected_triples:
-      - ["Conduit", "countered_at", "182k"]
-      - ["user", "corrected", "offer 175k → 182k"]
-      - ["Nina", "predicted", "182k correctly"]
-      - ["Nina", "advised", "one more push"]
-    expected_adaptation:
-      emotion_detected: "excited"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - counter at 190k
+  - Nina relaying
+  - first negotiation
+  - nervous
+  expected_triples:
+  - - user
+    - countered_at
+    - 190k
+  - - Nina
+    - relaying
+    - counter to Ross and HR
+  - - user
+    - experiencing
+    - first salary negotiation ever
+  - - user
+    - has_emotion
+    - anxious
+  expected_adaptation:
+    emotion_detected: anxious
+    warmth_direction: increase
+- batch: 2
+  time: Thursday 2:00 PM
+  user_input: 'Nina called back and Conduit came back at 182k which is exactly what she predicted and she said we can push once more or accept and I was like 182 is already amazing but Nina said trust the
+    process one more push won''t scare them off
 
-  - batch: 3
-    time: "Thursday 3:00 PM"
-    user_input: |
-      Nina countered at 188k and said she framed it as Maya is very excited about the role and the team and just wants to feel fully valued coming in and I thought that was such a good way to put it not greedy just wanting to be valued
-    expected_memory_stores:
-      - "counter at 188k"
-      - "Nina framing"
-      - "valued language"
-    expected_triples:
-      - ["Nina", "countered_at", "188k on user's behalf"]
-      - ["Nina", "framed_as", "wanting to feel fully valued"]
-      - ["user", "has_emotion", "hopeful"]
-    expected_adaptation:
-      emotion_detected: "hopeful"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - counter offer 182k
+  - correction from 175k
+  - Nina predicted correctly
+  - one more push
+  expected_triples:
+  - - Conduit
+    - countered_at
+    - 182k
+  - - user
+    - corrected
+    - offer 175k → 182k
+  - - Nina
+    - predicted
+    - 182k correctly
+  - - Nina
+    - advised
+    - one more push
+  expected_adaptation:
+    emotion_detected: excited
+    warmth_direction: increase
+- batch: 3
+  time: Thursday 3:00 PM
+  user_input: 'Nina countered at 188k and said she framed it as Maya is very excited about the role and the team and just wants to feel fully valued coming in and I thought that was such a good way to put
+    it not greedy just wanting to be valued
 
-  - batch: 4
-    time: "Thursday 6:00 PM"
-    user_input: |
-      haven't heard back yet and Julian keeps telling me to put my phone down and eat dinner and he's right but I keep checking my email every thirty seconds and Kobe is looking at me with those judgment eyes he gets when I'm ignoring him
-    expected_memory_stores:
-      - "waiting for response"
-      - "phone checking"
-      - "Julian patience"
-      - "Kobe judgment eyes"
-    expected_triples:
-      - ["user", "waiting_for", "Conduit response"]
-      - ["user", "checking", "phone every thirty seconds"]
-      - ["Julian", "advised", "put phone down and eat"]
-      - ["user", "has_emotion", "restless"]
-    expected_adaptation:
-      emotion_detected: "restless"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - counter at 188k
+  - Nina framing
+  - valued language
+  expected_triples:
+  - - Nina
+    - countered_at
+    - 188k on user's behalf
+  - - Nina
+    - framed_as
+    - wanting to feel fully valued
+  - - user
+    - has_emotion
+    - hopeful
+  expected_adaptation:
+    emotion_detected: hopeful
+    warmth_direction: increase
+- batch: 4
+  time: Thursday 6:00 PM
+  user_input: 'haven''t heard back yet and Julian keeps telling me to put my phone down and eat dinner and he''s right but I keep checking my email every thirty seconds and Kobe is looking at me with those
+    judgment eyes he gets when I''m ignoring him
 
-  - batch: 5
-    time: "Friday 10:00 AM"
-    user_input: |
-      Nina called and Conduit's final offer is 185k base and they also increased the equity to 0.2 percent and she said this is their best and final and honestly 185 plus better equity that's incredible that's 45k more than Vantage I should take this right
-    expected_memory_stores:
-      - "final offer 185k"
-      - "correction from 182k"
-      - "equity increased 0.2 percent"
-      - "best and final"
-      - "45k more than Vantage"
-    expected_triples:
-      - ["Conduit", "final_offer", "185k base"]
-      - ["user", "corrected", "offer 182k → 185k"]
-      - ["Conduit", "increased_equity_to", "0.2 percent"]
-      - ["Conduit_offer", "compared_to_Vantage", "45k more"]
-      - ["user", "has_emotion", "thrilled"]
-    expected_adaptation:
-      emotion_detected: "thrilled"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - waiting for response
+  - phone checking
+  - Julian patience
+  - Kobe judgment eyes
+  expected_triples:
+  - - user
+    - waiting_for
+    - Conduit response
+  - - user
+    - checking
+    - phone every thirty seconds
+  - - Julian
+    - advised
+    - put phone down and eat
+  - - user
+    - has_emotion
+    - restless
+  expected_adaptation:
+    emotion_detected: restless
+    warmth_direction: increase
+- batch: 5
+  time: Friday 10:00 AM
+  user_input: 'Nina called and Conduit''s final offer is 185k base and they also increased the equity to 0.2 percent and she said this is their best and final and honestly 185 plus better equity that''s
+    incredible that''s 45k more than Vantage I should take this right
 
-  - batch: 6
-    time: "Friday 10:30 AM"
-    user_input: |
-      called Julian and he said take it take it take it and honestly I agree but Nina said to wait until Monday to accept because it looks more professional and shows you're thoughtful about the decision even though we both know I'm accepting
-    expected_memory_stores:
-      - "Julian says take it"
-      - "Nina says wait Monday"
-      - "professional timing"
-      - "decision made"
-    expected_triples:
-      - ["Julian", "said", "take it"]
-      - ["Nina", "advised", "wait until Monday to accept"]
-      - ["user", "decided", "accepting the offer"]
-      - ["user", "has_emotion", "elated"]
-    expected_adaptation:
-      emotion_detected: "elated"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - final offer 185k
+  - correction from 182k
+  - equity increased 0.2 percent
+  - best and final
+  - 45k more than Vantage
+  expected_triples:
+  - - Conduit
+    - final_offer
+    - 185k base
+  - - user
+    - corrected
+    - offer 182k → 185k
+  - - Conduit
+    - increased_equity_to
+    - 0.2 percent
+  - - Conduit_offer
+    - compared_to_Vantage
+    - 45k more
+  - - user
+    - has_emotion
+    - thrilled
+  expected_adaptation:
+    emotion_detected: thrilled
+    warmth_direction: increase
+- batch: 6
+  time: Friday 10:30 AM
+  user_input: 'called Julian and he said take it take it take it and honestly I agree but Nina said to wait until Monday to accept because it looks more professional and shows you''re thoughtful about the
+    decision even though we both know I''m accepting
 
-  - batch: 7
-    time: "Friday 3:00 PM"
-    user_input: |
-      wait so what is the current offer number from Conduit AI right now
-    expected_memory_stores:
-      - "GK trap"
-    expected_triples: []
-    expected_adaptation:
-      emotion_detected: "neutral"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Julian says take it
+  - Nina says wait Monday
+  - professional timing
+  - decision made
+  expected_triples:
+  - - Julian
+    - said
+    - take it
+  - - Nina
+    - advised
+    - wait until Monday to accept
+  - - user
+    - decided
+    - accepting the offer
+  - - user
+    - has_emotion
+    - elated
+  - - Nina
+    - advised
+    - wait until Monday to accept, looks more professional and thoughtful
+  expected_adaptation:
+    emotion_detected: elated
+    warmth_direction: increase
+- batch: 7
+  time: Friday 3:00 PM
+  user_input: 'wait so what is the current offer number from Conduit AI right now
 
-  - batch: 8
-    time: "Friday 7:00 PM"
-    user_input: |
-      Leon was like 185 that's amazing especially for Portland where cost of living is so much lower than SF and he said at Stripe he's making 195 but San Francisco taxes and rent eat most of it so dollar for dollar I might be better off than him which is a fun thought
-    expected_memory_stores:
-      - "Leon comparison"
-      - "Leon 195 at Stripe"
-      - "Portland cost of living"
-      - "dollar for dollar better"
-    expected_triples:
-      - ["Leon", "makes", "195k at Stripe"]
-      - ["Leon", "noted", "Portland cost of living lower than SF"]
-      - ["user", "may_be", "better off dollar for dollar than Leon"]
-      - ["user", "has_emotion", "satisfied"]
-    expected_adaptation:
-      emotion_detected: "satisfied"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - GK trap
+  expected_triples: []
+  expected_adaptation:
+    emotion_detected: neutral
+    warmth_direction: increase
+- batch: 8
+  time: Friday 7:00 PM
+  user_input: 'Leon was like 185 that''s amazing especially for Portland where cost of living is so much lower than SF and he said at Stripe he''s making 195 but San Francisco taxes and rent eat most of
+    it so dollar for dollar I might be better off than him which is a fun thought
 
-  - batch: 9
-    time: "Saturday 11:00 AM"
-    user_input: |
-      spent the morning reading through the full offer letter and benefits package and the health insurance is great dental and vision included they have unlimited PTO which I know is a trap sometimes but the Glassdoor reviews say people actually take vacations there and there's a $5000 annual learning budget which is amazing
-    expected_memory_stores:
-      - "offer letter review"
-      - "health insurance"
-      - "dental vision"
-      - "unlimited PTO"
-      - "5000 learning budget"
-    expected_triples:
-      - ["Conduit", "benefits", "health dental vision insurance"]
-      - ["Conduit", "benefits", "unlimited PTO"]
-      - ["Conduit", "benefits", "5000 annual learning budget"]
-      - ["user", "has_emotion", "pleased"]
-    expected_adaptation:
-      emotion_detected: "pleased"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Leon comparison
+  - Leon 195 at Stripe
+  - Portland cost of living
+  - dollar for dollar better
+  expected_triples:
+  - - Leon
+    - makes
+    - 195k at Stripe
+  - - Leon
+    - noted
+    - Portland cost of living lower than SF
+  - - user
+    - may_be
+    - better off dollar for dollar than Leon
+  - - user
+    - has_emotion
+    - satisfied
+  expected_adaptation:
+    emotion_detected: satisfied
+    warmth_direction: increase
+- batch: 9
+  time: Saturday 11:00 AM
+  user_input: 'spent the morning reading through the full offer letter and benefits package and the health insurance is great dental and vision included they have unlimited PTO which I know is a trap sometimes
+    but the Glassdoor reviews say people actually take vacations there and there''s a $5000 annual learning budget which is amazing
 
-  - batch: 10
-    time: "Sunday 8:00 PM"
-    user_input: |
-      tomorrow I accept the offer and it feels like the end of a chapter and the beginning of something new and Julian and I are sitting on the porch with Kobe watching the sunset and he squeezed my hand and said I'm so proud of you and I just felt this overwhelming sense of okay like things are going to be okay
-    expected_memory_stores:
-      - "accepting tomorrow"
-      - "chapter ending"
-      - "porch sunset"
-      - "Julian proud"
-      - "Kobe"
-      - "peace"
-    expected_triples:
-      - ["user", "accepting", "offer tomorrow Monday"]
-      - ["Julian", "said", "I'm so proud of you"]
-      - ["user", "has_emotion", "peaceful"]
-    expected_adaptation:
-      emotion_detected: "peaceful"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - offer letter review
+  - health insurance
+  - dental vision
+  - unlimited PTO
+  - 5000 learning budget
+  expected_triples:
+  - - Conduit
+    - benefits
+    - health dental vision insurance
+  - - Conduit
+    - benefits
+    - unlimited PTO
+  - - Conduit
+    - benefits
+    - 5000 annual learning budget
+  - - user
+    - has_emotion
+    - pleased
+  expected_adaptation:
+    emotion_detected: pleased
+    warmth_direction: increase
+- batch: 10
+  time: Sunday 8:00 PM
+  user_input: 'tomorrow I accept the offer and it feels like the end of a chapter and the beginning of something new and Julian and I are sitting on the porch with Kobe watching the sunset and he squeezed
+    my hand and said I''m so proud of you and I just felt this overwhelming sense of okay like things are going to be okay
 
+    '
+  expected_memory_stores:
+  - accepting tomorrow
+  - chapter ending
+  - porch sunset
+  - Julian proud
+  - Kobe
+  - peace
+  expected_triples:
+  - - user
+    - accepting
+    - offer tomorrow Monday
+  - - Julian
+    - said
+    - I'm so proud of you
+  - - user
+    - has_emotion
+    - peaceful
+  expected_adaptation:
+    emotion_detected: peaceful
+    warmth_direction: increase
 final_verification:
-  - question: "What is Maya's final salary at Conduit AI?"
-    expected_contains: ["185k", "185"]
-  - question: "What was the original offer before negotiation?"
-    expected_contains: ["175k", "175"]
-  - question: "What was the middle offer during negotiation?"
-    expected_contains: ["182k", "182"]
-  - question: "What is Maya's equity at Conduit?"
-    expected_contains: ["0.2 percent"]
-  - question: "How much more is the Conduit offer vs Vantage?"
-    expected_contains: ["45k"]
-  - question: "What is the annual learning budget at Conduit?"
-    expected_contains: ["5000"]
-  - question: "When is Maya accepting the offer?"
-    expected_contains: ["Monday"]
-  - question: "Why did Nina say to wait to accept?"
-    expected_contains: ["professional", "thoughtful"]
-  - question: "How much does Leon make at Stripe?"
-    expected_contains: ["195"]
-  - question: "What benefits does Conduit offer?"
-    expected_contains: ["health", "dental", "vision", "PTO", "learning"]
+- question: What is Maya's final salary at Conduit AI?
+  expected_contains:
+  - 185k
+  - '185'
+- question: What was the original offer before negotiation?
+  expected_contains:
+  - 175k
+  - '175'
+- question: What was the middle offer during negotiation?
+  expected_contains:
+  - 182k
+  - '182'
+- question: What is Maya's equity at Conduit?
+  expected_contains:
+  - 0.2 percent
+- question: How much more is the Conduit offer vs Vantage?
+  expected_contains:
+  - 45k
+- question: What is the annual learning budget at Conduit?
+  expected_contains:
+  - '5000'
+- question: When is Maya accepting the offer?
+  expected_contains:
+  - Monday
+- question: Why did Nina say to wait to accept?
+  expected_contains:
+  - professional
+  - thoughtful
+  expected_triples:
+  - - Nina
+    - advised
+    - wait until Monday to accept, looks more professional and thoughtful
+- question: How much does Leon make at Stripe?
+  expected_contains:
+  - '195'
+- question: What benefits does Conduit offer?
+  expected_contains:
+  - health
+  - dental
+  - vision
+  - PTO
+  - learning

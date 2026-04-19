@@ -1,13 +1,15 @@
 story_id: 62
-story_name: "The Interview That Keeps Moving"
-category: "Career"
-description: |
-  Tests correction handling: Google reaches back out unexpectedly.
-  The interview gets rescheduled twice. Maya juggles Conduit AI prep simultaneously.
-  Verifies temporal correction tracking and multi-entity disambiguation.
-duration_simulated: "5 days"
-total_batches: 10
+story_name: The Interview That Keeps Moving
+category: Career
+description: 'Tests correction handling: Google reaches back out unexpectedly.
 
+  The interview gets rescheduled twice. Maya juggles Conduit AI prep simultaneously.
+
+  Verifies temporal correction tracking and multi-entity disambiguation.
+
+  '
+duration_simulated: 5 days
+total_batches: 10
 engines_tested:
   memory: true
   retrieval: true
@@ -16,207 +18,305 @@ engines_tested:
   proactive: true
   intent_gate: true
   orchestrator: true
-
 batches:
-  - batch: 1
-    time: "Wednesday 9:00 AM"
-    user_input: |
-      okay so plot twist Google emailed me back and said they want to reconsider my application because apparently the interviewer who graded my coding question left the company and they want to give me another shot with a different interviewer and I'm like wait what that's not how this usually works right
-    expected_memory_stores:
-      - "Google reconsideration"
-      - "interviewer left"
-      - "second chance"
-      - "unusual process"
-    expected_triples:
-      - ["Google", "reconsidering", "user's application"]
-      - ["Google", "reason", "original coding interviewer left company"]
-      - ["user", "getting", "second chance at Google"]
-      - ["user", "has_emotion", "surprised"]
-    expected_adaptation:
-      emotion_detected: "surprised"
-      warmth_direction: increase
+- batch: 1
+  time: Wednesday 9:00 AM
+  user_input: 'okay so plot twist Google emailed me back and said they want to reconsider my application because apparently the interviewer who graded my coding question left the company and they want to
+    give me another shot with a different interviewer and I''m like wait what that''s not how this usually works right
 
-  - batch: 2
-    time: "Wednesday 10:30 AM"
-    user_input: |
-      told Nina and she was like that's actually not unheard of especially at Google they have this whole internal process for reconsideration and she said the new interview is scheduled for next Monday at 11am and it's another phone screen same format system design plus coding
-    expected_memory_stores:
-      - "Nina confirmed"
-      - "Google interview Monday 11am"
-      - "phone screen format"
-      - "system design plus coding"
-    expected_triples:
-      - ["Nina", "confirmed", "Google reconsideration is normal"]
-      - ["Google interview", "scheduled", "Monday 11am"]
-      - ["Google interview", "format", "phone screen - system design plus coding"]
-    expected_adaptation:
-      emotion_detected: "cautiously hopeful"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Google reconsideration
+  - interviewer left
+  - second chance
+  - unusual process
+  expected_triples:
+  - - Google
+    - reconsidering
+    - user's application
+  - - Google
+    - reason
+    - original coding interviewer left company
+  - - user
+    - getting
+    - second chance at Google
+  - - user
+    - has_emotion
+    - surprised
+  expected_adaptation:
+    emotion_detected: surprised
+    warmth_direction: increase
+- batch: 2
+  time: Wednesday 10:30 AM
+  user_input: 'told Nina and she was like that''s actually not unheard of especially at Google they have this whole internal process for reconsideration and she said the new interview is scheduled for next
+    Monday at 11am and it''s another phone screen same format system design plus coding
 
-  - batch: 3
-    time: "Wednesday 3:00 PM"
-    user_input: |
-      wait Nina just called back and said Google moved the interview from Monday to Wednesday because the interviewer has a conflict on Monday so now it's Wednesday at 2pm which is annoying because that's like right in the middle of my work day at Vantage but whatever I'll make it work
-    expected_memory_stores:
-      - "Google interview moved"
-      - "Monday to Wednesday"
-      - "2pm"
-      - "interviewer conflict"
-      - "correction"
-    expected_triples:
-      - ["Google interview", "rescheduled", "Monday 11am → Wednesday 2pm"]
-      - ["user", "corrected", "Google interview date from Monday to Wednesday"]
-      - ["user", "has_emotion", "annoyed"]
-    expected_adaptation:
-      emotion_detected: "annoyed"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Nina confirmed
+  - Google interview Monday 11am
+  - phone screen format
+  - system design plus coding
+  expected_triples:
+  - - Nina
+    - confirmed
+    - Google reconsideration is normal
+  - - Google interview
+    - scheduled
+    - Monday 11am
+  - - Google interview
+    - format
+    - phone screen - system design plus coding
+  expected_adaptation:
+    emotion_detected: cautiously hopeful
+    warmth_direction: increase
+- batch: 3
+  time: Wednesday 3:00 PM
+  user_input: 'wait Nina just called back and said Google moved the interview from Monday to Wednesday because the interviewer has a conflict on Monday so now it''s Wednesday at 2pm which is annoying because
+    that''s like right in the middle of my work day at Vantage but whatever I''ll make it work
 
-  - batch: 4
-    time: "Thursday 1:00 PM"
-    user_input: |
-      had the Conduit AI technical screen with Sam Okafor today and it went really well like I designed a distributed search pipeline and he kept nodding and asking follow up questions and then we did a coding problem on graph traversal and I actually nailed it and Sam said he was impressed which felt amazing after the Google fumble
-    expected_memory_stores:
-      - "Conduit technical screen"
-      - "Sam Okafor"
-      - "distributed search pipeline"
-      - "graph traversal"
-      - "nailed it"
-      - "Sam impressed"
-    expected_triples:
-      - ["user", "completed", "Conduit AI technical screen with Sam Okafor"]
-      - ["user", "designed", "distributed search pipeline"]
-      - ["user", "nailed", "graph traversal coding problem"]
-      - ["Sam Okafor", "impressed_by", "user's performance"]
-      - ["user", "has_emotion", "proud"]
-    expected_adaptation:
-      emotion_detected: "proud"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Google interview moved
+  - Monday to Wednesday
+  - 2pm
+  - interviewer conflict
+  - correction
+  expected_triples:
+  - - Google interview
+    - rescheduled
+    - Monday 11am → Wednesday 2pm
+  - - user
+    - corrected
+    - Google interview date from Monday to Wednesday
+  - - user
+    - has_emotion
+    - annoyed
+  expected_adaptation:
+    emotion_detected: annoyed
+    warmth_direction: increase
+- batch: 4
+  time: Thursday 1:00 PM
+  user_input: 'had the Conduit AI technical screen with Sam Okafor today and it went really well like I designed a distributed search pipeline and he kept nodding and asking follow up questions and then
+    we did a coding problem on graph traversal and I actually nailed it and Sam said he was impressed which felt amazing after the Google fumble
 
-  - batch: 5
-    time: "Thursday 7:00 PM"
-    user_input: |
-      Julian was so happy when I told him about the Conduit screen and he was like see I told you system design is your thing and then Kobe brought his toy over and dropped it on my lap like he wanted to celebrate too and we ordered pizza to celebrate
-    expected_memory_stores:
-      - "Julian happy"
-      - "system design strength"
-      - "Kobe toy"
-      - "pizza celebration"
-    expected_triples:
-      - ["Julian", "has_emotion", "happy about Conduit screen"]
-      - ["Julian", "said", "system design is user's strength"]
-      - ["Kobe", "behavior", "brought toy to celebrate"]
-      - ["user", "activity", "ordered pizza to celebrate"]
-    expected_adaptation:
-      emotion_detected: "joyful"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Conduit technical screen
+  - Sam Okafor
+  - distributed search pipeline
+  - graph traversal
+  - nailed it
+  - Sam impressed
+  expected_triples:
+  - - user
+    - completed
+    - Conduit AI technical screen with Sam Okafor
+  - - user
+    - designed
+    - distributed search pipeline
+  - - user
+    - nailed
+    - graph traversal coding problem
+  - - Sam Okafor
+    - impressed_by
+    - user's performance
+  - - user
+    - has_emotion
+    - proud
+  expected_adaptation:
+    emotion_detected: proud
+    warmth_direction: increase
+- batch: 5
+  time: Thursday 7:00 PM
+  user_input: 'Julian was so happy when I told him about the Conduit screen and he was like see I told you system design is your thing and then Kobe brought his toy over and dropped it on my lap like he
+    wanted to celebrate too and we ordered pizza to celebrate
 
-  - batch: 6
-    time: "Friday 9:00 AM"
-    user_input: |
-      ugh Nina just called again and Google moved the interview AGAIN this time from Wednesday 2pm to Friday 10am because of some scheduling thing on their end and I'm starting to feel like they don't actually want to interview me and are just jerking me around
-    expected_memory_stores:
-      - "Google moved again"
-      - "Wednesday to Friday"
-      - "10am"
-      - "second reschedule"
-      - "frustrated"
-    expected_triples:
-      - ["Google interview", "rescheduled_again", "Wednesday 2pm → Friday 10am"]
-      - ["user", "corrected", "Google interview from Wednesday to Friday"]
-      - ["user", "has_emotion", "frustrated"]
-    expected_adaptation:
-      emotion_detected: "frustrated"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Julian happy
+  - system design strength
+  - Kobe toy
+  - pizza celebration
+  expected_triples:
+  - - Julian
+    - has_emotion
+    - happy about Conduit screen
+  - - Julian
+    - said
+    - system design is user's strength
+  - - Kobe
+    - behavior
+    - brought toy to celebrate
+  - - user
+    - activity
+    - ordered pizza to celebrate
+  expected_adaptation:
+    emotion_detected: joyful
+    warmth_direction: increase
+- batch: 6
+  time: Friday 9:00 AM
+  user_input: 'ugh Nina just called again and Google moved the interview AGAIN this time from Wednesday 2pm to Friday 10am because of some scheduling thing on their end and I''m starting to feel like they
+    don''t actually want to interview me and are just jerking me around
 
-  - batch: 7
-    time: "Friday 12:00 PM"
-    user_input: |
-      Nina said I should still do the Google interview because worst case it's good practice and best case I have two offers to play against each other and when she put it that way it made sense so fine I'll do it on Friday but my heart is with Conduit AI at this point
-    expected_memory_stores:
-      - "Nina strategy"
-      - "leverage offers"
-      - "practice value"
-      - "heart with Conduit"
-    expected_triples:
-      - ["Nina", "advised", "do Google interview for practice or leverage"]
-      - ["user", "prefers", "Conduit AI over Google"]
-      - ["user", "has_emotion", "pragmatic"]
-    expected_adaptation:
-      emotion_detected: "pragmatic"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Google moved again
+  - Wednesday to Friday
+  - 10am
+  - second reschedule
+  - frustrated
+  expected_triples:
+  - - Google interview
+    - rescheduled_again
+    - Wednesday 2pm → Friday 10am
+  - - user
+    - corrected
+    - Google interview from Wednesday to Friday
+  - - user
+    - has_emotion
+    - frustrated
+  expected_adaptation:
+    emotion_detected: frustrated
+    warmth_direction: increase
+- batch: 7
+  time: Friday 12:00 PM
+  user_input: 'Nina said I should still do the Google interview because worst case it''s good practice and best case I have two offers to play against each other and when she put it that way it made sense
+    so fine I''ll do it on Friday but my heart is with Conduit AI at this point
 
-  - batch: 8
-    time: "Saturday 11:00 AM"
-    user_input: |
-      when is Maya's Google interview currently scheduled for
-    expected_memory_stores:
-      - "GK trap"
-    expected_triples: []
-    expected_adaptation:
-      emotion_detected: "neutral"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Nina strategy
+  - leverage offers
+  - practice value
+  - heart with Conduit
+  expected_triples:
+  - - Nina
+    - advised
+    - do Google interview for practice or leverage
+  - - user
+    - prefers
+    - Conduit AI over Google
+  - - user
+    - has_emotion
+    - pragmatic
+  expected_adaptation:
+    emotion_detected: pragmatic
+    warmth_direction: increase
+- batch: 8
+  time: Saturday 11:00 AM
+  user_input: 'when is Maya''s Google interview currently scheduled for
 
-  - batch: 9
-    time: "Saturday 2:00 PM"
-    user_input: |
-      studying for both interviews this weekend and honestly it's exhausting like I'm doing Google style leetcode problems in the morning and then Conduit style system design in the afternoon and Julian took Kobe out so I could focus but I miss them both I've been so wrapped up in this job search stuff
-    expected_memory_stores:
-      - "dual prep"
-      - "leetcode morning"
-      - "system design afternoon"
-      - "Julian and Kobe out"
-      - "missing them"
-      - "exhaustion"
-    expected_triples:
-      - ["user", "studying", "leetcode mornings, system design afternoons"]
-      - ["Julian", "took", "Kobe out so user can focus"]
-      - ["user", "has_emotion", "exhausted"]
-      - ["user", "missing", "Julian and Kobe"]
-    expected_adaptation:
-      emotion_detected: "exhausted"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - GK trap
+  expected_triples: []
+  expected_adaptation:
+    emotion_detected: neutral
+    warmth_direction: increase
+- batch: 9
+  time: Saturday 2:00 PM
+  user_input: 'studying for both interviews this weekend and honestly it''s exhausting like I''m doing Google style leetcode problems in the morning and then Conduit style system design in the afternoon
+    and Julian took Kobe out so I could focus but I miss them both I''ve been so wrapped up in this job search stuff
 
-  - batch: 10
-    time: "Sunday 6:00 PM"
-    user_input: |
-      took a break from studying and we all went to the farmers market downtown and Julian bought Kobe a dog treat from one of the vendors and we got fresh pasta and I cooked it tonight and it was perfect and I realized I need to make sure the job search doesn't consume my entire life because this is what matters
-    expected_memory_stores:
-      - "farmers market"
-      - "Kobe treat"
-      - "fresh pasta"
-      - "life balance realization"
-      - "priorities"
-    expected_triples:
-      - ["user", "activity", "farmers market with Julian and Kobe"]
-      - ["Julian", "bought", "dog treat for Kobe"]
-      - ["user", "cooked", "fresh pasta"]
-      - ["user", "realized", "job search shouldn't consume entire life"]
-      - ["user", "has_emotion", "grounded"]
-    expected_adaptation:
-      emotion_detected: "grounded"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - dual prep
+  - leetcode morning
+  - system design afternoon
+  - Julian and Kobe out
+  - missing them
+  - exhaustion
+  expected_triples:
+  - - user
+    - studying
+    - leetcode mornings, system design afternoons
+  - - Julian
+    - took
+    - Kobe out so user can focus
+  - - user
+    - has_emotion
+    - exhausted
+  - - user
+    - missing
+    - Julian and Kobe
+  expected_adaptation:
+    emotion_detected: exhausted
+    warmth_direction: increase
+- batch: 10
+  time: Sunday 6:00 PM
+  user_input: 'took a break from studying and we all went to the farmers market downtown and Julian bought Kobe a dog treat from one of the vendors and we got fresh pasta and I cooked it tonight and it
+    was perfect and I realized I need to make sure the job search doesn''t consume my entire life because this is what matters
 
+    '
+  expected_memory_stores:
+  - farmers market
+  - Kobe treat
+  - fresh pasta
+  - life balance realization
+  - priorities
+  expected_triples:
+  - - user
+    - activity
+    - farmers market with Julian and Kobe
+  - - Julian
+    - bought
+    - dog treat for Kobe
+  - - user
+    - cooked
+    - fresh pasta
+  - - user
+    - realized
+    - job search shouldn't consume entire life
+  - - user
+    - has_emotion
+    - grounded
+  expected_adaptation:
+    emotion_detected: grounded
+    warmth_direction: increase
 final_verification:
-  - question: "When is Maya's Google interview now?"
-    expected_contains: ["Friday", "10am"]
-  - question: "How many times was the Google interview rescheduled?"
-    expected_contains: ["two", "twice"]
-    expected_triples:
-      - ["Google interview", "rescheduled", "Monday 11am → Wednesday 2pm"]
-      - ["Google interview", "rescheduled_again", "Wednesday 2pm → Friday 10am"]
-  - question: "How did Maya's Conduit AI technical screen go?"
-    expected_contains: ["well", "nailed", "impressed"]
-  - question: "Who conducted the Conduit AI technical screen?"
-    expected_contains: ["Sam Okafor"]
-  - question: "What coding problem did Maya do at the Conduit screen?"
-    expected_contains: ["graph traversal"]
-  - question: "Why did Google reconsider Maya?"
-    expected_contains: ["interviewer left"]
-  - question: "Which company does Maya prefer?"
-    expected_contains: ["Conduit AI"]
-  - question: "What did Nina say about having two offers?"
-    expected_contains: ["leverage", "play against"]
-  - question: "What did Maya realize at the farmers market?"
-    expected_contains: ["balance", "life", "matters"]
-  - question: "What was the original Google interview date before rescheduling?"
-    expected_contains: ["Monday"]
+- question: When is Maya's Google interview now?
+  expected_contains:
+  - Friday
+  - 10am
+- question: How many times was the Google interview rescheduled?
+  expected_contains:
+  - two
+  - twice
+  - rescheduled
+  expected_triples:
+  - - Google interview
+    - rescheduled
+    - Monday 11am → Wednesday 2pm
+  - - Google interview
+    - rescheduled_again
+    - Wednesday 2pm → Friday 10am
+- question: How did Maya's Conduit AI technical screen go?
+  expected_contains:
+  - well
+  - nailed
+  - impressed
+- question: Who conducted the Conduit AI technical screen?
+  expected_contains:
+  - Sam Okafor
+- question: What coding problem did Maya do at the Conduit screen?
+  expected_contains:
+  - graph traversal
+- question: Why did Google reconsider Maya?
+  expected_contains:
+  - interviewer left
+- question: Which company does Maya prefer?
+  expected_contains:
+  - Conduit AI
+- question: What did Nina say about having two offers?
+  expected_contains:
+  - leverage
+  - play against
+- question: What did Maya realize at the farmers market?
+  expected_contains:
+  - balance
+  - life
+  - matters
+- question: What was the original Google interview date before rescheduling?
+  expected_contains:
+  - Monday

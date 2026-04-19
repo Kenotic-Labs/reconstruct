@@ -1,13 +1,15 @@
 story_id: 92
-story_name: "It Happens Again"
-category: "Career"
-description: |
-  Tests memory of Danny taking credit for the second time.
-  Pattern recognition. Maya can no longer dismiss it as accidental.
-  Verifies system tracks recurring patterns and escalating conflict.
-duration_simulated: "3 days"
-total_batches: 10
+story_name: It Happens Again
+category: Career
+description: 'Tests memory of Danny taking credit for the second time.
 
+  Pattern recognition. Maya can no longer dismiss it as accidental.
+
+  Verifies system tracks recurring patterns and escalating conflict.
+
+  '
+duration_simulated: 3 days
+total_batches: 10
 engines_tested:
   memory: true
   retrieval: true
@@ -16,185 +18,272 @@ engines_tested:
   proactive: true
   intent_gate: true
   orchestrator: true
-
 batches:
-  - batch: 1
-    time: "Wednesday 2:00 PM"
-    user_input: |
-      it happened again Danny was in a meeting with Ross and the product team and he was talking about the relevance tuning framework and he said I built a framework that lets product adjust search rankings and I said I I built and Lily was in the meeting too and she texted me immediately like did he just say I
-    expected_memory_stores:
-      - "second credit incident"
-      - "relevance tuning framework"
-      - "Danny said I built"
-      - "Ross and product meeting"
-      - "Lily witnessed"
-      - "Lily texted"
-    expected_adaptation:
-      emotion_detected: "furious"
-      warmth_direction: increase
+- batch: 1
+  time: Wednesday 2:00 PM
+  user_input: 'it happened again Danny was in a meeting with Ross and the product team and he was talking about the relevance tuning framework and he said I built a framework that lets product adjust search
+    rankings and I said I I built and Lily was in the meeting too and she texted me immediately like did he just say I
 
-  - batch: 2
-    time: "Wednesday 2:30 PM"
-    user_input: |
-      okay so the relevance tuning framework was my idea and my implementation Danny helped with one function literally one function that handles the weight normalization and he just told Ross and the product team that he built it and I'm sitting right there and I can't believe this is happening again
-    expected_memory_stores:
-      - "Maya's implementation"
-      - "Danny one function"
-      - "weight normalization"
-      - "Maya present"
-      - "can't believe"
-      - "happening again"
-    expected_adaptation:
-      emotion_detected: "outraged"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - second credit incident
+  - relevance tuning framework
+  - Danny said I built
+  - Ross and product meeting
+  - Lily witnessed
+  - Lily texted
+  expected_adaptation:
+    emotion_detected: furious
+    warmth_direction: increase
+  expected_triples:
+  - - Danny
+    - took_credit
+    - second time for relevance tuning framework
+  - - Danny
+    - claimed
+    - I built the relevance tuning framework
+  - - Lily
+    - witnessed
+    - Danny taking credit in meeting
+- batch: 2
+  time: Wednesday 2:30 PM
+  user_input: 'okay so the relevance tuning framework was my idea and my implementation Danny helped with one function literally one function that handles the weight normalization and he just told Ross
+    and the product team that he built it and I''m sitting right there and I can''t believe this is happening again
 
-  - batch: 3
-    time: "Wednesday 3:00 PM"
-    user_input: |
-      after the meeting I went to the bathroom and just stood there for a minute breathing because I was so angry and then Lily came in and she said Maya this is the second time and you can't let it slide and she said she'll back me up if I want to say something and that means a lot
-    expected_memory_stores:
-      - "bathroom breathing"
-      - "Lily second time"
-      - "Lily will back up"
-      - "support offered"
-    expected_adaptation:
-      emotion_detected: "angry"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Maya's implementation
+  - Danny one function
+  - weight normalization
+  - Maya present
+  - can't believe
+  - happening again
+  expected_adaptation:
+    emotion_detected: outraged
+    warmth_direction: increase
+  expected_triples:
+  - - Danny
+    - actual_contribution
+    - 'one function: weight normalization'
+- batch: 3
+  time: Wednesday 3:00 PM
+  user_input: 'after the meeting I went to the bathroom and just stood there for a minute breathing because I was so angry and then Lily came in and she said Maya this is the second time and you can''t
+    let it slide and she said she''ll back me up if I want to say something and that means a lot
 
-  - batch: 4
-    time: "Wednesday 5:00 PM"
-    user_input: |
-      I should have said something in the meeting I should have corrected him right there but I froze like I literally froze and just sat there while he took credit for my work and I'm so mad at myself for not speaking up Julian is going to be disappointed when I tell him
-    expected_memory_stores:
-      - "froze in meeting"
-      - "didn't speak up"
-      - "angry at self"
-      - "Julian will be disappointed"
-    expected_adaptation:
-      emotion_detected: "self-critical"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - bathroom breathing
+  - Lily second time
+  - Lily will back up
+  - support offered
+  expected_adaptation:
+    emotion_detected: angry
+    warmth_direction: increase
+- batch: 4
+  time: Wednesday 5:00 PM
+  user_input: 'I should have said something in the meeting I should have corrected him right there but I froze like I literally froze and just sat there while he took credit for my work and I''m so mad
+    at myself for not speaking up Julian is going to be disappointed when I tell him
 
-  - batch: 5
-    time: "Wednesday 7:00 PM"
-    user_input: |
-      told Julian and he wasn't disappointed he was livid like really angry and he said Maya this is a pattern not a mistake a pattern and you need to document it and confront him and if he does it a third time go to Sam and I was like you're right I know you're right
-    expected_memory_stores:
-      - "Julian livid"
-      - "pattern not mistake"
-      - "document it"
-      - "confront Danny"
-      - "third time go to Sam"
-    expected_adaptation:
-      emotion_detected: "upset"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - froze in meeting
+  - didn't speak up
+  - angry at self
+  - Julian will be disappointed
+  expected_adaptation:
+    emotion_detected: self-critical
+    warmth_direction: increase
+  expected_triples:
+  - - user
+    - froze
+    - in meeting when Danny took credit
+- batch: 5
+  time: Wednesday 7:00 PM
+  user_input: 'told Julian and he wasn''t disappointed he was livid like really angry and he said Maya this is a pattern not a mistake a pattern and you need to document it and confront him and if he does
+    it a third time go to Sam and I was like you''re right I know you''re right
 
-  - batch: 6
-    time: "Thursday 9:00 AM"
-    user_input: |
-      started a document logging both credit incidents with dates what was said who was present and the git history showing my commits and I pulled the PR records showing I authored the RFCs and the implementations and Danny's contributions were reviews and one small function
-    expected_memory_stores:
-      - "documentation started"
-      - "both incidents logged"
-      - "dates who present"
-      - "git history"
-      - "PR records"
-      - "Danny's actual contributions"
-    expected_adaptation:
-      emotion_detected: "determined"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Julian livid
+  - pattern not mistake
+  - document it
+  - confront Danny
+  - third time go to Sam
+  expected_adaptation:
+    emotion_detected: upset
+    warmth_direction: increase
+- batch: 6
+  time: Thursday 9:00 AM
+  user_input: 'started a document logging both credit incidents with dates what was said who was present and the git history showing my commits and I pulled the PR records showing I authored the RFCs and
+    the implementations and Danny''s contributions were reviews and one small function
 
-  - batch: 7
-    time: "Thursday 12:00 PM"
-    user_input: |
-      how many times has Danny taken credit for Maya's work
-    expected_memory_stores:
-      - "GK trap"
-    expected_adaptation:
-      emotion_detected: "neutral"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - documentation started
+  - both incidents logged
+  - dates who present
+  - git history
+  - PR records
+  - Danny's actual contributions
+  expected_adaptation:
+    emotion_detected: determined
+    warmth_direction: increase
+  expected_triples:
+  - - user
+    - started_documenting
+    - credit incidents with dates, git history, PR records
+- batch: 7
+  time: Thursday 12:00 PM
+  user_input: 'how many times has Danny taken credit for Maya''s work
 
-  - batch: 8
-    time: "Thursday 3:00 PM"
-    user_input: |
-      Lily and I had a long talk and she said she's seen this before at Uber where a male colleague consistently took credit for a female colleague's work and it only stopped when the woman went to management with documentation and she said Maya you have the receipts use them
-    expected_memory_stores:
-      - "Lily Uber experience"
-      - "gender dynamic"
-      - "documentation essential"
-      - "receipts"
-      - "Uber parallel"
-    expected_adaptation:
-      emotion_detected: "motivated"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - GK trap
+  expected_adaptation:
+    emotion_detected: neutral
+    warmth_direction: increase
+- batch: 8
+  time: Thursday 3:00 PM
+  user_input: 'Lily and I had a long talk and she said she''s seen this before at Uber where a male colleague consistently took credit for a female colleague''s work and it only stopped when the woman went
+    to management with documentation and she said Maya you have the receipts use them
 
-  - batch: 9
-    time: "Friday 10:00 AM"
-    user_input: |
-      decided I'm going to confront Danny directly first before going to Sam because that feels more honest and if he acknowledges it and stops then great problem solved and if he denies it then I'll escalate with the documentation and Lily as a witness
-    expected_memory_stores:
-      - "confront Danny plan"
-      - "direct first"
-      - "before Sam"
-      - "acknowledge and stop"
-      - "deny then escalate"
-      - "Lily witness"
-    expected_adaptation:
-      emotion_detected: "resolved"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Lily Uber experience
+  - gender dynamic
+  - documentation essential
+  - receipts
+  - Uber parallel
+  expected_adaptation:
+    emotion_detected: motivated
+    warmth_direction: increase
+  expected_triples:
+  - - Lily
+    - shared_Uber_experience
+    - male colleague took credit, documentation stopped it
+- batch: 9
+  time: Friday 10:00 AM
+  user_input: 'decided I''m going to confront Danny directly first before going to Sam because that feels more honest and if he acknowledges it and stops then great problem solved and if he denies it then
+    I''ll escalate with the documentation and Lily as a witness
 
-  - batch: 10
-    time: "Friday 8:00 PM"
-    user_input: |
-      Julian helped me practice what to say to Danny and we did a role play where he pretended to be Danny and I practiced being direct without being aggressive and after like five rounds I felt ready and Julian said you got this and Kobe barked like he agreed
-    expected_memory_stores:
-      - "Julian role play"
-      - "practice conversation"
-      - "direct not aggressive"
-      - "five rounds"
-      - "feeling ready"
-      - "Kobe bark"
-    expected_adaptation:
-      emotion_detected: "prepared"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - confront Danny plan
+  - direct first
+  - before Sam
+  - acknowledge and stop
+  - deny then escalate
+  - Lily witness
+  expected_adaptation:
+    emotion_detected: resolved
+    warmth_direction: increase
+  expected_triples:
+  - - user
+    - plan
+    - confront Danny directly before going to Sam
+  - - user
+    - will_escalate_to
+    - Sam with documentation if Danny denies
+- batch: 10
+  time: Friday 8:00 PM
+  user_input: 'Julian helped me practice what to say to Danny and we did a role play where he pretended to be Danny and I practiced being direct without being aggressive and after like five rounds I felt
+    ready and Julian said you got this and Kobe barked like he agreed
 
+    '
+  expected_memory_stores:
+  - Julian role play
+  - practice conversation
+  - direct not aggressive
+  - five rounds
+  - feeling ready
+  - Kobe bark
+  expected_adaptation:
+    emotion_detected: prepared
+    warmth_direction: increase
+  expected_triples:
+  - - Julian
+    - helped_prepare
+    - role play practice for confronting Danny
 final_verification:
-  - question: "How many times has Danny taken credit for Maya's work?"
-    expected_contains: ["two", "twice"]
-    expected_triples:
-      - ["Danny", "took_credit", "second time for relevance tuning framework"]
-  - question: "What did Danny claim to have built?"
-    expected_contains: ["relevance tuning framework"]
-    expected_triples:
-      - ["Danny", "claimed", "I built the relevance tuning framework"]
-  - question: "Who witnessed Danny taking credit?"
-    expected_contains: ["Lily"]
-    expected_triples:
-      - ["Lily", "witnessed", "Danny taking credit in meeting"]
-  - question: "What did Maya start documenting?"
-    expected_contains: ["credit incidents", "git history", "PR records"]
-    expected_triples:
-      - ["user", "started_documenting", "credit incidents with dates, git history, PR records"]
-  - question: "What was Danny's actual contribution to the relevance framework?"
-    expected_contains: ["one function", "weight normalization"]
-    expected_triples:
-      - ["Danny", "actual_contribution", "one function: weight normalization"]
-  - question: "What is Maya's plan for confronting Danny?"
-    expected_contains: ["direct", "confront", "before Sam"]
-    expected_triples:
-      - ["user", "plan", "confront Danny directly before going to Sam"]
-  - question: "What did Lily say about her Uber experience?"
-    expected_contains: ["male colleague", "credit", "documentation"]
-    expected_triples:
-      - ["Lily", "shared_Uber_experience", "male colleague took credit, documentation stopped it"]
-  - question: "How did Julian help Maya prepare?"
-    expected_contains: ["role play", "practice"]
-    expected_triples:
-      - ["Julian", "helped_prepare", "role play practice for confronting Danny"]
-  - question: "Why didn't Maya speak up in the meeting?"
-    expected_contains: ["froze"]
-    expected_triples:
-      - ["user", "froze", "in meeting when Danny took credit"]
-  - question: "What will Maya do if Danny denies it?"
-    expected_contains: ["escalate", "Sam", "documentation"]
-    expected_triples:
-      - ["user", "will_escalate_to", "Sam with documentation if Danny denies"]
+- question: How many times has Danny taken credit for Maya's work?
+  expected_contains:
+  - two
+  - twice
+  - second time
+  expected_triples:
+  - - Danny
+    - took_credit
+    - second time for relevance tuning framework
+- question: What did Danny claim to have built?
+  expected_contains:
+  - relevance tuning framework
+  expected_triples:
+  - - Danny
+    - claimed
+    - I built the relevance tuning framework
+- question: Who witnessed Danny taking credit?
+  expected_contains:
+  - Lily
+  expected_triples:
+  - - Lily
+    - witnessed
+    - Danny taking credit in meeting
+- question: What did Maya start documenting?
+  expected_contains:
+  - credit incidents
+  - git history
+  - PR records
+  expected_triples:
+  - - user
+    - started_documenting
+    - credit incidents with dates, git history, PR records
+- question: What was Danny's actual contribution to the relevance framework?
+  expected_contains:
+  - one function
+  - weight normalization
+  expected_triples:
+  - - Danny
+    - actual_contribution
+    - 'one function: weight normalization'
+- question: What is Maya's plan for confronting Danny?
+  expected_contains:
+  - direct
+  - confront
+  - before Sam
+  expected_triples:
+  - - user
+    - plan
+    - confront Danny directly before going to Sam
+- question: What did Lily say about her Uber experience?
+  expected_contains:
+  - male colleague
+  - credit
+  - documentation
+  expected_triples:
+  - - Lily
+    - shared_Uber_experience
+    - male colleague took credit, documentation stopped it
+- question: How did Julian help Maya prepare?
+  expected_contains:
+  - role play
+  - practice
+  expected_triples:
+  - - Julian
+    - helped_prepare
+    - role play practice for confronting Danny
+- question: Why didn't Maya speak up in the meeting?
+  expected_contains:
+  - froze
+  expected_triples:
+  - - user
+    - froze
+    - in meeting when Danny took credit
+- question: What will Maya do if Danny denies it?
+  expected_contains:
+  - escalate
+  - Sam
+  - documentation
+  expected_triples:
+  - - user
+    - will_escalate_to
+    - Sam with documentation if Danny denies

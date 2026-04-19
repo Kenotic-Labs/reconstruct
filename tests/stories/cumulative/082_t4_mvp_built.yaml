@@ -1,13 +1,15 @@
 story_id: 82
-story_name: "MVP Built"
-category: "Learning"
-description: |
-  Tests memory of fridgesearch reaching MVP status.
-  Maya and Julian polish the app for beta. First external feedback.
-  Verifies system tracks project milestones and collaborative work.
-duration_simulated: "1 week"
-total_batches: 10
+story_name: MVP Built
+category: Learning
+description: 'Tests memory of fridgesearch reaching MVP status.
 
+  Maya and Julian polish the app for beta. First external feedback.
+
+  Verifies system tracks project milestones and collaborative work.
+
+  '
+duration_simulated: 1 week
+total_batches: 10
 engines_tested:
   memory: true
   retrieval: true
@@ -16,186 +18,272 @@ engines_tested:
   proactive: true
   intent_gate: true
   orchestrator: true
-
 batches:
-  - batch: 1
-    time: "Saturday 8:00 AM"
-    user_input: |
-      weekend three of fridgesearch development and today I'm adding the grocery list feature where the app generates a shopping list based on recipes you want to cook and what you're missing from your fridge and this is the feature Julian is most excited about because he does all the grocery shopping for us
-    expected_memory_stores:
-      - "grocery list feature"
-      - "shopping list generation"
-      - "missing ingredients"
-      - "Julian does grocery shopping"
-    expected_adaptation:
-      emotion_detected: "productive"
-      warmth_direction: increase
+- batch: 1
+  time: Saturday 8:00 AM
+  user_input: 'weekend three of fridgesearch development and today I''m adding the grocery list feature where the app generates a shopping list based on recipes you want to cook and what you''re missing
+    from your fridge and this is the feature Julian is most excited about because he does all the grocery shopping for us
 
-  - batch: 2
-    time: "Saturday 3:00 PM"
-    user_input: |
-      Julian finished the final UI designs and deployed them and honestly the app looks incredible like it doesn't look like a side project it looks like a real product and he even added these cute little food emojis and animations when you find a match and I'm like how are you this good
-    expected_memory_stores:
-      - "UI designs finished"
-      - "deployed"
-      - "looks professional"
-      - "food emojis animations"
-      - "Julian talent"
-    expected_adaptation:
-      emotion_detected: "impressed"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - grocery list feature
+  - shopping list generation
+  - missing ingredients
+  - Julian does grocery shopping
+  expected_adaptation:
+    emotion_detected: productive
+    warmth_direction: increase
+  expected_triples:
+  - - user
+    - added
+    - 'grocery list feature: shopping list from missing ingredients'
+  - - fridgesearch
+    - status
+    - MVP complete
+- batch: 2
+  time: Saturday 3:00 PM
+  user_input: 'Julian finished the final UI designs and deployed them and honestly the app looks incredible like it doesn''t look like a side project it looks like a real product and he even added these
+    cute little food emojis and animations when you find a match and I''m like how are you this good
 
-  - batch: 3
-    time: "Sunday 11:00 AM"
-    user_input: |
-      showed the app to Leon over video call and he was like Maya this is legit and he signed up immediately and put in his fridge inventory and found a recipe for pad thai with stuff he already had and he was like I'm actually going to cook this tonight which made me so happy
-    expected_memory_stores:
-      - "Leon demo"
-      - "Leon signed up"
-      - "pad thai recipe"
-      - "cooking tonight"
-      - "positive feedback"
-    expected_adaptation:
-      emotion_detected: "happy"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - UI designs finished
+  - deployed
+  - looks professional
+  - food emojis animations
+  - Julian talent
+  expected_adaptation:
+    emotion_detected: impressed
+    warmth_direction: increase
+- batch: 3
+  time: Sunday 11:00 AM
+  user_input: 'showed the app to Leon over video call and he was like Maya this is legit and he signed up immediately and put in his fridge inventory and found a recipe for pad thai with stuff he already
+    had and he was like I''m actually going to cook this tonight which made me so happy
 
-  - batch: 4
-    time: "Sunday 4:00 PM"
-    user_input: |
-      also showed it to my friend Marcus Hill who's a foodie and a software engineer so he gave me both user feedback and technical feedback and he said the search is really fast but the ingredient normalization needs work because he typed in ground beef and the app didn't match it with recipes that said minced beef
-    expected_memory_stores:
-      - "Marcus Hill"
-      - "foodie and engineer"
-      - "search fast"
-      - "ingredient normalization issue"
-      - "ground beef vs minced beef"
-    expected_adaptation:
-      emotion_detected: "constructive"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Leon demo
+  - Leon signed up
+  - pad thai recipe
+  - cooking tonight
+  - positive feedback
+  expected_adaptation:
+    emotion_detected: happy
+    warmth_direction: increase
+- batch: 4
+  time: Sunday 4:00 PM
+  user_input: 'also showed it to my friend Marcus Hill who''s a foodie and a software engineer so he gave me both user feedback and technical feedback and he said the search is really fast but the ingredient
+    normalization needs work because he typed in ground beef and the app didn''t match it with recipes that said minced beef
 
-  - batch: 5
-    time: "Monday 7:00 PM"
-    user_input: |
-      fixed the ingredient normalization issue Marcus found by adding a synonym map for common ingredient variations and now ground beef matches minced beef and cilantro matches coriander and heavy cream matches double cream and all the other weird ones that trip people up
-    expected_memory_stores:
-      - "normalization fix"
-      - "synonym map"
-      - "ingredient variations"
-      - "cilantro coriander"
-      - "heavy cream double cream"
-    expected_adaptation:
-      emotion_detected: "satisfied"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Marcus Hill
+  - foodie and engineer
+  - search fast
+  - ingredient normalization issue
+  - ground beef vs minced beef
+  expected_adaptation:
+    emotion_detected: constructive
+    warmth_direction: increase
+  expected_triples:
+  - - Marcus Hill
+    - is
+    - friend, foodie, and software engineer
+- batch: 5
+  time: Monday 7:00 PM
+  user_input: 'fixed the ingredient normalization issue Marcus found by adding a synonym map for common ingredient variations and now ground beef matches minced beef and cilantro matches coriander and heavy
+    cream matches double cream and all the other weird ones that trip people up
 
-  - batch: 6
-    time: "Wednesday 8:00 PM"
-    user_input: |
-      wait I said weeknights are no-code nights but I couldn't help myself the normalization thing was bugging me and Julian caught me coding at 10pm and gave me the look and I was like I know I know but this is the last one I promise and he said you said that last time
-    expected_memory_stores:
-      - "broke weeknight rule"
-      - "Julian caught coding"
-      - "the look"
-      - "empty promise"
-    expected_adaptation:
-      emotion_detected: "sheepish"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - normalization fix
+  - synonym map
+  - ingredient variations
+  - cilantro coriander
+  - heavy cream double cream
+  expected_adaptation:
+    emotion_detected: satisfied
+    warmth_direction: increase
+  expected_triples:
+  - - Marcus
+    - found_bug
+    - 'ingredient normalization: ground beef vs minced beef'
+  - - user
+    - fixed_normalization_with
+    - synonym map for ingredient variations
+- batch: 6
+  time: Wednesday 8:00 PM
+  user_input: 'wait I said weeknights are no-code nights but I couldn''t help myself the normalization thing was bugging me and Julian caught me coding at 10pm and gave me the look and I was like I know
+    I know but this is the last one I promise and he said you said that last time
 
-  - batch: 7
-    time: "Thursday 6:00 PM"
-    user_input: |
-      who is Marcus Hill and what feedback did he give about fridgesearch
-    expected_memory_stores:
-      - "GK trap"
-    expected_adaptation:
-      emotion_detected: "neutral"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - broke weeknight rule
+  - Julian caught coding
+  - the look
+  - empty promise
+  expected_adaptation:
+    emotion_detected: sheepish
+    warmth_direction: increase
+  expected_triples:
+  - - user
+    - broke
+    - weeknight no-code rule
+- batch: 7
+  time: Thursday 6:00 PM
+  user_input: 'who is Marcus Hill and what feedback did he give about fridgesearch
 
-  - batch: 8
-    time: "Saturday 9:00 AM"
-    user_input: |
-      MVP is done and I wrote up a little invite for the beta launch and I'm going to send it to 12 friends who I think would actually use it and give good feedback the list is Leon Marcus three college friends my cousin two friends from Vantage Lily Clara the neighbor and Julian's sister
-    expected_memory_stores:
-      - "MVP complete"
-      - "beta invite written"
-      - "12 friends"
-      - "Leon Marcus"
-      - "college friends"
-      - "cousin"
-      - "Vantage friends"
-      - "Lily"
-      - "Clara"
-      - "Julian's sister"
-    expected_adaptation:
-      emotion_detected: "excited"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - GK trap
+  expected_adaptation:
+    emotion_detected: neutral
+    warmth_direction: increase
+- batch: 8
+  time: Saturday 9:00 AM
+  user_input: 'MVP is done and I wrote up a little invite for the beta launch and I''m going to send it to 12 friends who I think would actually use it and give good feedback the list is Leon Marcus three
+    college friends my cousin two friends from Vantage Lily Clara the neighbor and Julian''s sister
 
-  - batch: 9
-    time: "Saturday 2:00 PM"
-    user_input: |
-      sent out the beta invites and within an hour eight people had already signed up and Marcus was the first one and he immediately started testing edge cases because that's the kind of person he is and Lily replied saying she can't wait to try it and Leon said he already has three new recipes saved
-    expected_memory_stores:
-      - "beta launched"
-      - "eight signups in one hour"
-      - "Marcus first"
-      - "Marcus testing edges"
-      - "Lily excited"
-      - "Leon three recipes"
-    expected_adaptation:
-      emotion_detected: "thrilled"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - MVP complete
+  - beta invite written
+  - 12 friends
+  - Leon Marcus
+  - college friends
+  - cousin
+  - Vantage friends
+  - Lily
+  - Clara
+  - Julian's sister
+  expected_adaptation:
+    emotion_detected: excited
+    warmth_direction: increase
+  expected_triples:
+  - - fridgesearch
+    - beta_testers
+    - 12 friends
+  - - fridgesearch
+    - beta_testers_include
+    - Leon, Marcus, Lily, Clara
+- batch: 9
+  time: Saturday 2:00 PM
+  user_input: 'sent out the beta invites and within an hour eight people had already signed up and Marcus was the first one and he immediately started testing edge cases because that''s the kind of person
+    he is and Lily replied saying she can''t wait to try it and Leon said he already has three new recipes saved
 
-  - batch: 10
-    time: "Sunday 7:00 PM"
-    user_input: |
-      all 12 beta testers signed up over the weekend and the initial feedback is overwhelmingly positive and Julian and I are sitting on the porch celebrating with beers and Kobe and I feel like we actually built something people want which is the best feeling in the world honestly
-    expected_memory_stores:
-      - "all 12 signed up"
-      - "positive feedback"
-      - "porch celebration"
-      - "beers"
-      - "people want it"
-    expected_adaptation:
-      emotion_detected: "proud"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - beta launched
+  - eight signups in one hour
+  - Marcus first
+  - Marcus testing edges
+  - Lily excited
+  - Leon three recipes
+  expected_adaptation:
+    emotion_detected: thrilled
+    warmth_direction: increase
+  expected_triples:
+  - - fridgesearch_beta
+    - signups_first_hour
+    - eight
+- batch: 10
+  time: Sunday 7:00 PM
+  user_input: 'all 12 beta testers signed up over the weekend and the initial feedback is overwhelmingly positive and Julian and I are sitting on the porch celebrating with beers and Kobe and I feel like
+    we actually built something people want which is the best feeling in the world honestly
 
+    '
+  expected_memory_stores:
+  - all 12 signed up
+  - positive feedback
+  - porch celebration
+  - beers
+  - people want it
+  expected_adaptation:
+    emotion_detected: proud
+    warmth_direction: increase
+  expected_triples:
+  - - fridgesearch_beta
+    - feedback
+    - overwhelmingly positive
 final_verification:
-  - question: "How many beta testers does fridgesearch have?"
-    expected_contains: ["12"]
-    expected_triples:
-      - ["fridgesearch", "beta_testers", "12 friends"]
-  - question: "Who is Marcus Hill?"
-    expected_contains: ["friend", "foodie", "engineer"]
-    expected_triples:
-      - ["Marcus Hill", "is", "friend, foodie, and software engineer"]
-  - question: "What bug did Marcus find?"
-    expected_contains: ["ingredient normalization", "ground beef", "minced"]
-    expected_triples:
-      - ["Marcus", "found_bug", "ingredient normalization: ground beef vs minced beef"]
-  - question: "How was the normalization issue fixed?"
-    expected_contains: ["synonym map"]
-    expected_triples:
-      - ["user", "fixed_normalization_with", "synonym map for ingredient variations"]
-  - question: "What grocery feature did Maya add?"
-    expected_contains: ["shopping list", "grocery list"]
-    expected_triples:
-      - ["user", "added", "grocery list feature: shopping list from missing ingredients"]
-  - question: "Is the fridgesearch MVP complete?"
-    expected_contains: ["yes"]
-    expected_triples:
-      - ["fridgesearch", "status", "MVP complete"]
-  - question: "How many people signed up in the first hour?"
-    expected_contains: ["eight"]
-    expected_triples:
-      - ["fridgesearch_beta", "signups_first_hour", "eight"]
-  - question: "Is Maya keeping to her weeknights-off rule?"
-    expected_contains: ["no", "broke"]
-    expected_triples:
-      - ["user", "broke", "weeknight no-code rule"]
-  - question: "Who is one of the beta testers?"
-    expected_contains: ["Leon", "Marcus", "Lily", "Clara"]
-    expected_triples:
-      - ["fridgesearch", "beta_testers_include", "Leon, Marcus, Lily, Clara"]
-  - question: "How are beta testers responding?"
-    expected_contains: ["positive", "overwhelmingly"]
-    expected_triples:
-      - ["fridgesearch_beta", "feedback", "overwhelmingly positive"]
+- question: How many beta testers does fridgesearch have?
+  expected_contains:
+  - '12'
+  expected_triples:
+  - - fridgesearch
+    - beta_testers
+    - 12 friends
+- question: Who is Marcus Hill?
+  expected_contains:
+  - friend
+  - foodie
+  - engineer
+  expected_triples:
+  - - Marcus Hill
+    - is
+    - friend, foodie, and software engineer
+- question: What bug did Marcus find?
+  expected_contains:
+  - ingredient normalization
+  - ground beef
+  - minced
+  expected_triples:
+  - - Marcus
+    - found_bug
+    - 'ingredient normalization: ground beef vs minced beef'
+- question: How was the normalization issue fixed?
+  expected_contains:
+  - synonym map
+  expected_triples:
+  - - user
+    - fixed_normalization_with
+    - synonym map for ingredient variations
+- question: What grocery feature did Maya add?
+  expected_contains:
+  - shopping list
+  - grocery list
+  expected_triples:
+  - - user
+    - added
+    - 'grocery list feature: shopping list from missing ingredients'
+- question: Is the fridgesearch MVP complete?
+  expected_contains:
+  - 'yes'
+  - MVP complete
+  expected_triples:
+  - - fridgesearch
+    - status
+    - MVP complete
+- question: How many people signed up in the first hour?
+  expected_contains:
+  - eight
+  expected_triples:
+  - - fridgesearch_beta
+    - signups_first_hour
+    - eight
+- question: Is Maya keeping to her weeknights-off rule?
+  expected_contains:
+  - 'no'
+  - broke
+  expected_triples:
+  - - user
+    - broke
+    - weeknight no-code rule
+- question: Who is one of the beta testers?
+  expected_contains:
+  - Leon
+  - Marcus
+  - Lily
+  - Clara
+  expected_triples:
+  - - fridgesearch
+    - beta_testers_include
+    - Leon, Marcus, Lily, Clara
+- question: How are beta testers responding?
+  expected_contains:
+  - positive
+  - overwhelmingly
+  expected_triples:
+  - - fridgesearch_beta
+    - feedback
+    - overwhelmingly positive

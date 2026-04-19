@@ -1,13 +1,15 @@
 story_id: 51
-story_name: "Comfortable at Vantage Systems"
-category: "Career"
-description: |
-  Tests baseline memory of Maya's stable work situation at Vantage Systems.
-  Establishes her manager Priya, teammate Leon, role, and daily routine.
-  Verifies system can store multiple entities and relationships from messy speech.
-duration_simulated: "2 days"
-total_batches: 10
+story_name: Comfortable at Vantage Systems
+category: Career
+description: 'Tests baseline memory of Maya''s stable work situation at Vantage Systems.
 
+  Establishes her manager Priya, teammate Leon, role, and daily routine.
+
+  Verifies system can store multiple entities and relationships from messy speech.
+
+  '
+duration_simulated: 2 days
+total_batches: 10
 engines_tested:
   memory: true
   retrieval: true
@@ -16,216 +18,336 @@ engines_tested:
   proactive: true
   intent_gate: true
   orchestrator: true
-
 batches:
-  - batch: 1
-    time: "Monday 8:45 AM"
-    user_input: |
-      so like I've been at Vantage Systems for about three years now and honestly it's been pretty chill you know like my manager Priya Banerjee she's super supportive and um we have this great team dynamic with Leon Watts who sits next to me and we basically just knock out features together
-    expected_memory_stores:
-      - "Vantage Systems"
-      - "three years"
-      - "Priya Banerjee"
-      - "manager"
-      - "Leon Watts"
-      - "teammate"
-    expected_triples:
-      - ["user", "works_at", "Vantage Systems"]
-      - ["user", "tenure", "three years"]
-      - ["user", "manager", "Priya Banerjee"]
-      - ["user", "teammate", "Leon Watts"]
-    expected_adaptation:
-      emotion_detected: "content"
-      warmth_direction: increase
+- batch: 1
+  time: Monday 8:45 AM
+  user_input: 'so like I''ve been at Vantage Systems for about three years now and honestly it''s been pretty chill you know like my manager Priya Banerjee she''s super supportive and um we have this great
+    team dynamic with Leon Watts who sits next to me and we basically just knock out features together
 
-  - batch: 2
-    time: "Monday 10:30 AM"
-    user_input: |
-      oh and I should mention like I'm a mid-level software engineer there doing mostly backend stuff in Python and Go and um Julian keeps saying I should ask for a promotion but like I dunno I'm comfortable where I am you know the pay is decent at like 140k and Portland's not that expensive compared to SF
-    expected_memory_stores:
-      - "mid-level software engineer"
-      - "backend"
-      - "Python"
-      - "Go"
-      - "140k salary"
-      - "Julian"
-      - "promotion discussion"
-    expected_triples:
-      - ["user", "job_title", "mid-level software engineer"]
-      - ["user", "works_on", "backend"]
-      - ["user", "skill", "Python"]
-      - ["user", "skill", "Go"]
-      - ["user", "salary", "140k"]
-      - ["user", "partner", "Julian"]
-      - ["Julian", "suggested", "ask for promotion"]
-    expected_adaptation:
-      emotion_detected: "comfortable"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Vantage Systems
+  - three years
+  - Priya Banerjee
+  - manager
+  - Leon Watts
+  - teammate
+  expected_triples:
+  - - user
+    - works_at
+    - Vantage Systems
+  - - user
+    - tenure
+    - three years
+  - - user
+    - manager
+    - Priya Banerjee
+  - - user
+    - teammate
+    - Leon Watts
+  expected_adaptation:
+    emotion_detected: content
+    warmth_direction: increase
+- batch: 2
+  time: Monday 10:30 AM
+  user_input: 'oh and I should mention like I''m a mid-level software engineer there doing mostly backend stuff in Python and Go and um Julian keeps saying I should ask for a promotion but like I dunno
+    I''m comfortable where I am you know the pay is decent at like 140k and Portland''s not that expensive compared to SF
 
-  - batch: 3
-    time: "Monday 1:15 PM"
-    user_input: |
-      had lunch with Leon today and he was telling me about this new project we might get to work on its like a data pipeline thing for one of our enterprise clients and Priya mentioned it in standup too so I'm kinda excited about it honestly haven't been this interested in a project in a while
-    expected_memory_stores:
-      - "data pipeline project"
-      - "enterprise client"
-      - "Leon"
-      - "Priya"
-      - "standup"
-    expected_triples:
-      - ["user", "potential_project", "data pipeline"]
-      - ["data pipeline", "for", "enterprise client"]
-      - ["Leon", "told_user_about", "data pipeline project"]
-      - ["Priya", "mentioned", "data pipeline project"]
-      - ["user", "has_emotion", "excited"]
-    expected_adaptation:
-      emotion_detected: "excited"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - mid-level software engineer
+  - backend
+  - Python
+  - Go
+  - 140k salary
+  - Julian
+  - promotion discussion
+  expected_triples:
+  - - user
+    - job_title
+    - mid-level software engineer
+  - - user
+    - works_on
+    - backend
+  - - user
+    - skill
+    - Python
+  - - user
+    - skill
+    - Go
+  - - user
+    - salary
+    - 140k
+  - - user
+    - partner
+    - Julian
+  - - Julian
+    - suggested
+    - ask for promotion
+  - - user
+    - has_emotion
+    - comfortable
+  expected_adaptation:
+    emotion_detected: comfortable
+    warmth_direction: increase
+- batch: 3
+  time: Monday 1:15 PM
+  user_input: 'had lunch with Leon today and he was telling me about this new project we might get to work on its like a data pipeline thing for one of our enterprise clients and Priya mentioned it in standup
+    too so I''m kinda excited about it honestly haven''t been this interested in a project in a while
 
-  - batch: 4
-    time: "Monday 6:30 PM"
-    user_input: |
-      just got home and took Kobe for a walk he was going crazy all day apparently Julian said he knocked over his water bowl twice lol but yeah work was good today I feel like things are really solid at Vantage right now like no complaints
-    expected_memory_stores:
-      - "Kobe"
-      - "Julian at home"
-      - "work satisfaction"
-    expected_triples:
-      - ["user", "has_pet", "Kobe"]
-      - ["user", "activity", "walked Kobe"]
-      - ["Julian", "reported", "Kobe knocked over water bowl"]
-      - ["user", "has_emotion", "satisfied"]
-    expected_adaptation:
-      emotion_detected: "happy"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - data pipeline project
+  - enterprise client
+  - Leon
+  - Priya
+  - standup
+  expected_triples:
+  - - user
+    - potential_project
+    - data pipeline
+  - - data pipeline
+    - for
+    - enterprise client
+  - - Leon
+    - told_user_about
+    - data pipeline project
+  - - Priya
+    - mentioned
+    - data pipeline project
+  - - user
+    - has_emotion
+    - excited
+  expected_adaptation:
+    emotion_detected: excited
+    warmth_direction: increase
+- batch: 4
+  time: Monday 6:30 PM
+  user_input: 'just got home and took Kobe for a walk he was going crazy all day apparently Julian said he knocked over his water bowl twice lol but yeah work was good today I feel like things are really
+    solid at Vantage right now like no complaints
 
-  - batch: 5
-    time: "Tuesday 9:00 AM"
-    user_input: |
-      okay so Priya just told us in the morning meeting that there's a new VP joining next week his name is Derek Hollis and he's coming from Amazon apparently and she said he's gonna be overseeing our whole engineering org which is like I dunno 40 people maybe and honestly I'm a little nervous because new leadership always shakes things up
-    expected_memory_stores:
-      - "Derek Hollis"
-      - "new VP"
-      - "Amazon"
-      - "engineering org"
-      - "next week"
-    expected_triples:
-      - ["Derek Hollis", "role", "new VP"]
-      - ["Derek Hollis", "from", "Amazon"]
-      - ["Derek Hollis", "oversees", "engineering org"]
-      - ["Derek Hollis", "starts", "next week"]
-      - ["user", "has_emotion", "nervous"]
-    expected_adaptation:
-      emotion_detected: "nervous"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Kobe
+  - Julian at home
+  - work satisfaction
+  expected_triples:
+  - - user
+    - has_pet
+    - Kobe
+  - - user
+    - activity
+    - walked Kobe
+  - - Julian
+    - reported
+    - Kobe knocked over water bowl
+  - - user
+    - has_emotion
+    - satisfied
+  expected_adaptation:
+    emotion_detected: happy
+    warmth_direction: increase
+- batch: 5
+  time: Tuesday 9:00 AM
+  user_input: 'okay so Priya just told us in the morning meeting that there''s a new VP joining next week his name is Derek Hollis and he''s coming from Amazon apparently and she said he''s gonna be overseeing
+    our whole engineering org which is like I dunno 40 people maybe and honestly I''m a little nervous because new leadership always shakes things up
 
-  - batch: 6
-    time: "Tuesday 11:00 AM"
-    user_input: |
-      Leon's freaking out about the new VP too like he was saying Amazon guys always come in and try to make everything like Amazon with their stupid leadership principles and six pagers and stuff and I mean he's not wrong but maybe this Derek guy will be different who knows
-    expected_memory_stores:
-      - "Leon worried"
-      - "Amazon culture concerns"
-      - "Derek Hollis"
-    expected_triples:
-      - ["Leon", "has_emotion", "worried"]
-      - ["Leon", "concerned_about", "Amazon culture at Vantage"]
-      - ["user", "has_emotion", "uncertain"]
-    expected_adaptation:
-      emotion_detected: "anxious"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Derek Hollis
+  - new VP
+  - Amazon
+  - engineering org
+  - next week
+  expected_triples:
+  - - Derek Hollis
+    - role
+    - new VP
+  - - Derek Hollis
+    - from
+    - Amazon
+  - - Derek Hollis
+    - oversees
+    - engineering org
+  - - Derek Hollis
+    - starts
+    - next week
+  - - user
+    - has_emotion
+    - nervous
+  expected_adaptation:
+    emotion_detected: nervous
+    warmth_direction: increase
+- batch: 6
+  time: Tuesday 11:00 AM
+  user_input: 'Leon''s freaking out about the new VP too like he was saying Amazon guys always come in and try to make everything like Amazon with their stupid leadership principles and six pagers and stuff
+    and I mean he''s not wrong but maybe this Derek guy will be different who knows
 
-  - batch: 7
-    time: "Tuesday 2:30 PM"
-    user_input: |
-      wait I think I got the timeline wrong about the VP actually Priya sent a follow up email and Derek starts in two weeks not next week my bad and also apparently he's not from Amazon he's from Microsoft I got confused because Leon said Amazon but it was Microsoft
-    expected_memory_stores:
-      - "Derek Hollis"
-      - "starts in two weeks"
-      - "Microsoft not Amazon"
-      - "correction"
-    expected_triples:
-      - ["Derek Hollis", "starts", "two weeks"]
-      - ["Derek Hollis", "from", "Microsoft"]
-      - ["user", "corrected", "Derek from Amazon → Microsoft"]
-      - ["user", "corrected", "start date next week → two weeks"]
-    expected_adaptation:
-      emotion_detected: "neutral"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Leon worried
+  - Amazon culture concerns
+  - Derek Hollis
+  expected_triples:
+  - - Leon
+    - has_emotion
+    - worried
+  - - Leon
+    - concerned_about
+    - Amazon culture at Vantage
+  - - user
+    - has_emotion
+    - uncertain
+  expected_adaptation:
+    emotion_detected: anxious
+    warmth_direction: increase
+- batch: 7
+  time: Tuesday 2:30 PM
+  user_input: 'wait I think I got the timeline wrong about the VP actually Priya sent a follow up email and Derek starts in two weeks not next week my bad and also apparently he''s not from Amazon he''s
+    from Microsoft I got confused because Leon said Amazon but it was Microsoft
 
-  - batch: 8
-    time: "Tuesday 4:00 PM"
-    user_input: |
-      so what's the name of the new VP again and where is he coming from
-    expected_memory_stores:
-      - "GK trap"
-    expected_triples: []
-    expected_adaptation:
-      emotion_detected: "neutral"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Derek Hollis
+  - starts in two weeks
+  - Microsoft not Amazon
+  - correction
+  expected_triples:
+  - - Derek Hollis
+    - starts
+    - two weeks
+  - - Derek Hollis
+    - from
+    - Microsoft
+  - - user
+    - corrected
+    - Derek from Amazon → Microsoft
+  - - user
+    - corrected
+    - start date next week → two weeks
+  expected_adaptation:
+    emotion_detected: neutral
+    warmth_direction: increase
+- batch: 8
+  time: Tuesday 4:00 PM
+  user_input: 'so what''s the name of the new VP again and where is he coming from
 
-  - batch: 9
-    time: "Tuesday 5:45 PM"
-    user_input: |
-      Priya pulled me aside today and said she thinks I'd be a good fit to lead the data pipeline project and I was like really and she said yeah you've been solid and this could be good for your career and I'm kinda thrilled but also like what if I mess it up you know Julian always says I undersell myself
-    expected_memory_stores:
-      - "lead data pipeline"
-      - "Priya endorsement"
-      - "career growth"
-      - "Julian support"
-    expected_triples:
-      - ["Priya", "offered", "user lead data pipeline project"]
-      - ["Priya", "endorsed", "user performance"]
-      - ["user", "has_emotion", "thrilled"]
-      - ["user", "has_emotion", "anxious"]
-      - ["Julian", "says", "user undersells herself"]
-    expected_adaptation:
-      emotion_detected: "excited"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - GK trap
+  expected_triples: []
+  expected_adaptation:
+    emotion_detected: neutral
+    warmth_direction: increase
+- batch: 9
+  time: Tuesday 5:45 PM
+  user_input: 'Priya pulled me aside today and said she thinks I''d be a good fit to lead the data pipeline project and I was like really and she said yeah you''ve been solid and this could be good for
+    your career and I''m kinda thrilled but also like what if I mess it up you know Julian always says I undersell myself
 
-  - batch: 10
-    time: "Tuesday 8:00 PM"
-    user_input: |
-      Julian made dinner tonight and we talked about the project lead thing and he was so supportive like he literally said see I told you and Kobe was just sitting there with his head on my lap being all cute and honestly right now life feels really good like work is solid relationship is solid dog is healthy can't complain
-    expected_memory_stores:
-      - "Julian supportive"
-      - "dinner together"
-      - "Kobe"
-      - "life satisfaction"
-    expected_triples:
-      - ["Julian", "made", "dinner"]
-      - ["Julian", "supportive_of", "user getting project lead"]
-      - ["user", "has_pet", "Kobe"]
-      - ["user", "has_emotion", "grateful"]
-      - ["user", "has_emotion", "satisfied"]
-    expected_adaptation:
-      emotion_detected: "grateful"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - lead data pipeline
+  - Priya endorsement
+  - career growth
+  - Julian support
+  expected_triples:
+  - - Priya
+    - offered
+    - user lead data pipeline project
+  - - Priya
+    - endorsed
+    - user performance
+  - - user
+    - has_emotion
+    - thrilled
+  - - user
+    - has_emotion
+    - anxious
+  - - Julian
+    - says
+    - user undersells herself
+  expected_adaptation:
+    emotion_detected: excited
+    warmth_direction: increase
+- batch: 10
+  time: Tuesday 8:00 PM
+  user_input: 'Julian made dinner tonight and we talked about the project lead thing and he was so supportive like he literally said see I told you and Kobe was just sitting there with his head on my lap
+    being all cute and honestly right now life feels really good like work is solid relationship is solid dog is healthy can''t complain
 
+    '
+  expected_memory_stores:
+  - Julian supportive
+  - dinner together
+  - Kobe
+  - life satisfaction
+  expected_triples:
+  - - Julian
+    - made
+    - dinner
+  - - Julian
+    - supportive_of
+    - user getting project lead
+  - - user
+    - has_pet
+    - Kobe
+  - - user
+    - has_emotion
+    - grateful
+  - - user
+    - has_emotion
+    - satisfied
+  - - Kobe
+    - is_a
+    - dog
+  expected_adaptation:
+    emotion_detected: grateful
+    warmth_direction: increase
 final_verification:
-  - question: "Where does Maya work?"
-    expected_contains: ["Vantage Systems"]
-  - question: "Who is Maya's manager?"
-    expected_contains: ["Priya Banerjee"]
-  - question: "Who sits next to Maya at work?"
-    expected_contains: ["Leon Watts"]
-  - question: "Where is the new VP Derek Hollis coming from?"
-    expected_contains: ["Microsoft"]
-  - question: "When does Derek Hollis start?"
-    expected_contains: ["two weeks"]
-  - question: "What project was Maya asked to lead?"
-    expected_contains: ["data pipeline"]
-  - question: "How much does Maya make at Vantage?"
-    expected_contains: ["140"]
-  - question: "How is Maya feeling about her job right now?"
-    expected_contains: ["good", "solid", "comfortable"]
-    expected_triples:
-      - ["user", "has_emotion", "satisfied"]
-      - ["user", "has_emotion", "comfortable"]
-  - question: "What did Julian say about Maya's potential promotion?"
-    expected_contains: ["undersell", "ask"]
-  - question: "Who is Kobe?"
-    expected_contains: ["dog", "golden retriever"]
-    expected_triples:
-      - ["user", "has_pet", "Kobe"]
-      - ["Kobe", "is_a", "dog"]
+- question: Where does Maya work?
+  expected_contains:
+  - Vantage Systems
+- question: Who is Maya's manager?
+  expected_contains:
+  - Priya Banerjee
+- question: Who sits next to Maya at work?
+  expected_contains:
+  - Leon Watts
+- question: Where is the new VP Derek Hollis coming from?
+  expected_contains:
+  - Microsoft
+- question: When does Derek Hollis start?
+  expected_contains:
+  - two weeks
+- question: What project was Maya asked to lead?
+  expected_contains:
+  - data pipeline
+- question: How much does Maya make at Vantage?
+  expected_contains:
+  - '140'
+- question: How is Maya feeling about her job right now?
+  expected_contains:
+  - good
+  - solid
+  - comfortable
+  expected_triples:
+  - - user
+    - has_emotion
+    - satisfied
+  - - user
+    - has_emotion
+    - comfortable
+- question: What did Julian say about Maya's potential promotion?
+  expected_contains:
+  - undersell
+  - ask
+- question: Who is Kobe?
+  expected_contains:
+  - dog
+  - golden retriever
+  expected_triples:
+  - - user
+    - has_pet
+    - Kobe
+  - - Kobe
+    - is_a
+    - dog

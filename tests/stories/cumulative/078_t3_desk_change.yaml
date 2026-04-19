@@ -1,13 +1,15 @@
 story_id: 78
-story_name: "Desk Change and Danny Dynamics"
-category: "Career"
-description: |
-  Tests correction handling: Maya's desk/workspace assignment changes.
-  Danny and Maya develop a working relationship. Cross-thread references.
-  Verifies system tracks workspace changes and relationship evolution.
-duration_simulated: "4 days"
-total_batches: 10
+story_name: Desk Change and Danny Dynamics
+category: Career
+description: 'Tests correction handling: Maya''s desk/workspace assignment changes.
 
+  Danny and Maya develop a working relationship. Cross-thread references.
+
+  Verifies system tracks workspace changes and relationship evolution.
+
+  '
+duration_simulated: 4 days
+total_batches: 10
 engines_tested:
   memory: true
   retrieval: true
@@ -16,207 +18,305 @@ engines_tested:
   proactive: true
   intent_gate: true
   orchestrator: true
-
 batches:
-  - batch: 1
-    time: "Monday 9:00 AM"
-    user_input: |
-      so Sam reorganized the virtual workspace and instead of being paired with Lily in the search channel I'm now in a shared infrastructure channel with Danny and Amir and Lily is still on search but separate and I'm kind of bummed because I loved working closely with Lily but Sam said this makes more sense for my new role
-    expected_memory_stores:
-      - "workspace reorganized"
-      - "infrastructure channel"
-      - "Danny and Amir"
-      - "Lily separate"
-      - "correction from previous setup"
-      - "Sam's reasoning"
-    expected_triples:
-      - ["user", "corrected", "channel pairing: Lily → Danny and Amir"]
-      - ["user", "now_in", "shared infrastructure channel with Danny and Amir"]
-      - ["Lily", "moved_to", "separate search channel"]
-      - ["user", "has_emotion", "disappointed"]
-    expected_adaptation:
-      emotion_detected: "disappointed"
-      warmth_direction: increase
+- batch: 1
+  time: Monday 9:00 AM
+  user_input: 'so Sam reorganized the virtual workspace and instead of being paired with Lily in the search channel I''m now in a shared infrastructure channel with Danny and Amir and Lily is still on search
+    but separate and I''m kind of bummed because I loved working closely with Lily but Sam said this makes more sense for my new role
 
-  - batch: 2
-    time: "Monday 2:00 PM"
-    user_input: |
-      actually working more closely with Danny isn't bad because he knows the codebase inside out and he's been at Conduit since the early days like employee number 8 and he told me stories about when the whole company was five people in Ross's apartment and I was like that's so cool
-    expected_memory_stores:
-      - "Danny early employee"
-      - "employee number 8"
-      - "five people start"
-      - "Ross's apartment"
-      - "codebase knowledge"
-    expected_triples:
-      - ["Danny", "is", "employee number 8 at Conduit"]
-      - ["Conduit", "started_with", "five people in Ross's apartment"]
-      - ["Danny", "knows", "codebase inside out"]
-      - ["user", "has_emotion", "interested"]
-    expected_adaptation:
-      emotion_detected: "interested"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - workspace reorganized
+  - infrastructure channel
+  - Danny and Amir
+  - Lily separate
+  - correction from previous setup
+  - Sam's reasoning
+  expected_triples:
+  - - user
+    - corrected
+    - 'channel pairing: Lily → Danny and Amir'
+  - - user
+    - now_in
+    - shared infrastructure channel with Danny and Amir
+  - - Lily
+    - moved_to
+    - separate search channel
+  - - user
+    - has_emotion
+    - disappointed
+  expected_adaptation:
+    emotion_detected: disappointed
+    warmth_direction: increase
+- batch: 2
+  time: Monday 2:00 PM
+  user_input: 'actually working more closely with Danny isn''t bad because he knows the codebase inside out and he''s been at Conduit since the early days like employee number 8 and he told me stories about
+    when the whole company was five people in Ross''s apartment and I was like that''s so cool
 
-  - batch: 3
-    time: "Tuesday 10:00 AM"
-    user_input: |
-      Danny and I are deep into the latency optimization and we managed to parallelize the embedding computation and index lookup steps and the initial benchmarks show a 22 percent latency reduction which is already most of my 30 percent target and we haven't even touched the ranking model yet
-    expected_memory_stores:
-      - "parallelization done"
-      - "22 percent reduction"
-      - "30 percent target"
-      - "ranking model pending"
-    expected_triples:
-      - ["user", "parallelized", "embedding computation and index lookup"]
-      - ["latency", "reduced_by", "22 percent so far"]
-      - ["user", "targeting", "30 percent latency reduction"]
-      - ["user", "has_emotion", "excited"]
-    expected_adaptation:
-      emotion_detected: "excited"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Danny early employee
+  - employee number 8
+  - five people start
+  - Ross's apartment
+  - codebase knowledge
+  expected_triples:
+  - - Danny
+    - is
+    - employee number 8 at Conduit
+  - - Conduit
+    - started_with
+    - five people in Ross's apartment
+  - - Danny
+    - knows
+    - codebase inside out
+  - - user
+    - has_emotion
+    - interested
+  expected_adaptation:
+    emotion_detected: interested
+    warmth_direction: increase
+- batch: 3
+  time: Tuesday 10:00 AM
+  user_input: 'Danny and I are deep into the latency optimization and we managed to parallelize the embedding computation and index lookup steps and the initial benchmarks show a 22 percent latency reduction
+    which is already most of my 30 percent target and we haven''t even touched the ranking model yet
 
-  - batch: 4
-    time: "Tuesday 7:00 PM"
-    user_input: |
-      Julian asked about work and I was talking about the latency stuff and he was like you look so different when you talk about this compared to when you talked about the portal work at Vantage and he's right I can feel the difference too it's like the work itself feeds my energy instead of draining it
-    expected_memory_stores:
-      - "Julian observation"
-      - "energy from work"
-      - "portal comparison"
-      - "Vantage drain"
-    expected_triples:
-      - ["Julian", "observed", "user looks different talking about Conduit vs Vantage"]
-      - ["user", "feels", "work feeds energy instead of draining it"]
-      - ["user", "contrasted", "portal work at Vantage drained vs latency work energizes"]
-    expected_adaptation:
-      emotion_detected: "alive"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - parallelization done
+  - 22 percent reduction
+  - 30 percent target
+  - ranking model pending
+  expected_triples:
+  - - user
+    - parallelized
+    - embedding computation and index lookup
+  - - latency
+    - reduced_by
+    - 22 percent so far
+  - - user
+    - targeting
+    - 30 percent latency reduction
+  - - user
+    - has_emotion
+    - excited
+  expected_adaptation:
+    emotion_detected: excited
+    warmth_direction: increase
+- batch: 4
+  time: Tuesday 7:00 PM
+  user_input: 'Julian asked about work and I was talking about the latency stuff and he was like you look so different when you talk about this compared to when you talked about the portal work at Vantage
+    and he''s right I can feel the difference too it''s like the work itself feeds my energy instead of draining it
 
-  - batch: 5
-    time: "Wednesday 11:00 AM"
-    user_input: |
-      Lily and I still have virtual coffee every day even though we're in different channels now and she told me she's been wanting to transition to ML engineering and she asked if I'd mentor her on the search ranking model and I was like Lily I've been here for five weeks and you want me to mentor you and she said you clearly know your stuff so yes
-    expected_memory_stores:
-      - "Lily daily coffee"
-      - "Lily wants ML transition"
-      - "mentor request"
-      - "search ranking model"
-      - "five weeks"
-    expected_triples:
-      - ["Lily", "wants_to_transition_to", "ML engineering"]
-      - ["Lily", "asked_user_to", "mentor her on search ranking model"]
-      - ["user", "at_conduit_for", "five weeks"]
-      - ["user", "has_emotion", "surprised"]
-    expected_adaptation:
-      emotion_detected: "surprised"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Julian observation
+  - energy from work
+  - portal comparison
+  - Vantage drain
+  expected_triples:
+  - - Julian
+    - observed
+    - user looks different talking about Conduit vs Vantage
+  - - user
+    - feels
+    - work feeds energy instead of draining it
+  - - user
+    - contrasted
+    - portal work at Vantage drained vs latency work energizes
+  expected_adaptation:
+    emotion_detected: alive
+    warmth_direction: increase
+- batch: 5
+  time: Wednesday 11:00 AM
+  user_input: 'Lily and I still have virtual coffee every day even though we''re in different channels now and she told me she''s been wanting to transition to ML engineering and she asked if I''d mentor
+    her on the search ranking model and I was like Lily I''ve been here for five weeks and you want me to mentor you and she said you clearly know your stuff so yes
 
-  - batch: 6
-    time: "Wednesday 4:00 PM"
-    user_input: |
-      Kobe had a funny moment today he somehow got into my office while I was on a video call with Danny and jumped up on my lap and Danny saw him on camera and was like is that a golden retriever and I said yeah that's Kobe and Danny lit up he was like I have a golden too her name is Penny and suddenly we're bonding over dogs
-    expected_memory_stores:
-      - "Kobe on camera"
-      - "Danny has golden retriever"
-      - "Penny Danny's dog"
-      - "bonding over dogs"
-    expected_triples:
-      - ["Kobe", "appeared_on", "video call with Danny"]
-      - ["Danny", "has_dog", "Penny, a golden retriever"]
-      - ["user", "bonded_with", "Danny over dogs"]
-      - ["user", "has_emotion", "amused"]
-    expected_adaptation:
-      emotion_detected: "amused"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Lily daily coffee
+  - Lily wants ML transition
+  - mentor request
+  - search ranking model
+  - five weeks
+  expected_triples:
+  - - Lily
+    - wants_to_transition_to
+    - ML engineering
+  - - Lily
+    - asked_user_to
+    - mentor her on search ranking model
+  - - user
+    - at_conduit_for
+    - five weeks
+  - - user
+    - has_emotion
+    - surprised
+  expected_adaptation:
+    emotion_detected: surprised
+    warmth_direction: increase
+- batch: 6
+  time: Wednesday 4:00 PM
+  user_input: 'Kobe had a funny moment today he somehow got into my office while I was on a video call with Danny and jumped up on my lap and Danny saw him on camera and was like is that a golden retriever
+    and I said yeah that''s Kobe and Danny lit up he was like I have a golden too her name is Penny and suddenly we''re bonding over dogs
 
-  - batch: 7
-    time: "Thursday 9:00 AM"
-    user_input: |
-      who is Maya's desk neighbor at Conduit now — wait I mean channel partner or whatever
-    expected_memory_stores:
-      - "GK trap"
-    expected_triples: []
-    expected_adaptation:
-      emotion_detected: "neutral"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Kobe on camera
+  - Danny has golden retriever
+  - Penny Danny's dog
+  - bonding over dogs
+  expected_triples:
+  - - Kobe
+    - appeared_on
+    - video call with Danny
+  - - Danny
+    - has_dog
+    - Penny, a golden retriever
+  - - user
+    - bonded_with
+    - Danny over dogs
+  - - user
+    - has_emotion
+    - amused
+  expected_adaptation:
+    emotion_detected: amused
+    warmth_direction: increase
+- batch: 7
+  time: Thursday 9:00 AM
+  user_input: 'who is Maya''s desk neighbor at Conduit now — wait I mean channel partner or whatever
 
-  - batch: 8
-    time: "Thursday 3:00 PM"
-    user_input: |
-      Danny showed me a technique for model quantization that reduces the ranking model inference time by 40 percent with only 2 percent accuracy loss and I was like that's genius and he said he learned it from a paper that came out last month and now I'm reading the paper and it's fascinating
-    expected_memory_stores:
-      - "model quantization technique"
-      - "40 percent inference reduction"
-      - "2 percent accuracy loss"
-      - "Danny taught"
-      - "research paper"
-    expected_triples:
-      - ["Danny", "taught", "model quantization technique to user"]
-      - ["quantization", "reduces_inference_by", "40 percent with 2 percent accuracy loss"]
-      - ["user", "reading", "research paper on quantization"]
-      - ["user", "has_emotion", "fascinated"]
-    expected_adaptation:
-      emotion_detected: "fascinated"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - GK trap
+  expected_triples: []
+  expected_adaptation:
+    emotion_detected: neutral
+    warmth_direction: increase
+- batch: 8
+  time: Thursday 3:00 PM
+  user_input: 'Danny showed me a technique for model quantization that reduces the ranking model inference time by 40 percent with only 2 percent accuracy loss and I was like that''s genius and he said
+    he learned it from a paper that came out last month and now I''m reading the paper and it''s fascinating
 
-  - batch: 9
-    time: "Friday 11:00 AM"
-    user_input: |
-      combined the parallelization and quantization optimizations and total latency improvement is now 35 percent which exceeds my 30 percent target and Sam was like Maya you just hit your 90-day goal in 5 weeks and I was like oh wow I didn't even realize I was ahead of schedule
-    expected_memory_stores:
-      - "35 percent total improvement"
-      - "exceeded 30 percent target"
-      - "90-day goal in 5 weeks"
-      - "Sam impressed"
-      - "ahead of schedule"
-    expected_triples:
-      - ["search latency", "total_improvement", "35 percent"]
-      - ["user", "exceeded", "30 percent latency target"]
-      - ["user", "achieved", "90-day goal in 5 weeks"]
-      - ["Sam", "impressed_by", "user hitting goal ahead of schedule"]
-      - ["user", "has_emotion", "accomplished"]
-    expected_adaptation:
-      emotion_detected: "accomplished"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - model quantization technique
+  - 40 percent inference reduction
+  - 2 percent accuracy loss
+  - Danny taught
+  - research paper
+  expected_triples:
+  - - Danny
+    - taught
+    - model quantization technique to user
+  - - quantization
+    - reduces_inference_by
+    - 40 percent with 2 percent accuracy loss
+  - - user
+    - reading
+    - research paper on quantization
+  - - user
+    - has_emotion
+    - fascinated
+  expected_adaptation:
+    emotion_detected: fascinated
+    warmth_direction: increase
+- batch: 9
+  time: Friday 11:00 AM
+  user_input: 'combined the parallelization and quantization optimizations and total latency improvement is now 35 percent which exceeds my 30 percent target and Sam was like Maya you just hit your 90-day
+    goal in 5 weeks and I was like oh wow I didn''t even realize I was ahead of schedule
 
-  - batch: 10
-    time: "Friday 7:00 PM"
-    user_input: |
-      Leon texted saying he heard through Nina that Conduit is really happy with me and I was like how does Nina know that and he said recruiters always stay in touch especially when their placement is going well and I guess Nina and Ross talk and honestly that made me feel really good
-    expected_memory_stores:
-      - "Leon info from Nina"
-      - "recruiter follow-up"
-      - "Conduit happy"
-      - "Nina and Ross connected"
-    expected_triples:
-      - ["Leon", "told_user", "Conduit is happy with her via Nina"]
-      - ["Nina", "stays_in_touch_with", "Ross as recruiter"]
-      - ["user", "has_emotion", "validated"]
-    expected_adaptation:
-      emotion_detected: "validated"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - 35 percent total improvement
+  - exceeded 30 percent target
+  - 90-day goal in 5 weeks
+  - Sam impressed
+  - ahead of schedule
+  expected_triples:
+  - - search latency
+    - total_improvement
+    - 35 percent
+  - - user
+    - exceeded
+    - 30 percent latency target
+  - - user
+    - achieved
+    - 90-day goal in 5 weeks
+  - - Sam
+    - impressed_by
+    - user hitting goal ahead of schedule
+  - - user
+    - has_emotion
+    - accomplished
+  expected_adaptation:
+    emotion_detected: accomplished
+    warmth_direction: increase
+- batch: 10
+  time: Friday 7:00 PM
+  user_input: 'Leon texted saying he heard through Nina that Conduit is really happy with me and I was like how does Nina know that and he said recruiters always stay in touch especially when their placement
+    is going well and I guess Nina and Ross talk and honestly that made me feel really good
 
+    '
+  expected_memory_stores:
+  - Leon info from Nina
+  - recruiter follow-up
+  - Conduit happy
+  - Nina and Ross connected
+  expected_triples:
+  - - Leon
+    - told_user
+    - Conduit is happy with her via Nina
+  - - Nina
+    - stays_in_touch_with
+    - Ross as recruiter
+  - - user
+    - has_emotion
+    - validated
+  expected_adaptation:
+    emotion_detected: validated
+    warmth_direction: increase
 final_verification:
-  - question: "Who is Maya's closest workspace partner now at Conduit?"
-    expected_contains: ["Danny", "Amir"]
-  - question: "What latency improvement did Maya achieve?"
-    expected_contains: ["35 percent"]
-  - question: "What was the original latency target?"
-    expected_contains: ["30 percent"]
-  - question: "What is Danny's dog's name?"
-    expected_contains: ["Penny"]
-  - question: "What employee number was Danny at Conduit?"
-    expected_contains: ["8"]
-  - question: "Does Lily still work closely with Maya?"
-    expected_contains: ["coffee", "different channel", "daily"]
-    expected_triples:
-      - ["Lily", "wants_to_transition_to", "ML engineering"]
-      - ["Lily", "asked_user_to", "mentor her on search ranking model"]
-  - question: "What does Lily want to transition to?"
-    expected_contains: ["ML engineering"]
-  - question: "How much did model quantization reduce inference time?"
-    expected_contains: ["40 percent"]
-  - question: "How far ahead of schedule is Maya?"
-    expected_contains: ["90-day", "5 weeks"]
-  - question: "How did Leon hear Conduit is happy with Maya?"
-    expected_contains: ["Nina", "recruiter"]
+- question: Who is Maya's closest workspace partner now at Conduit?
+  expected_contains:
+  - Danny
+  - Amir
+- question: What latency improvement did Maya achieve?
+  expected_contains:
+  - 35 percent
+- question: What was the original latency target?
+  expected_contains:
+  - 30 percent
+- question: What is Danny's dog's name?
+  expected_contains:
+  - Penny
+- question: What employee number was Danny at Conduit?
+  expected_contains:
+  - '8'
+- question: Does Lily still work closely with Maya?
+  expected_contains:
+  - coffee
+  - different channel
+  - daily
+  - mentor
+  expected_triples:
+  - - Lily
+    - wants_to_transition_to
+    - ML engineering
+  - - Lily
+    - asked_user_to
+    - mentor her on search ranking model
+- question: What does Lily want to transition to?
+  expected_contains:
+  - ML engineering
+- question: How much did model quantization reduce inference time?
+  expected_contains:
+  - 40 percent
+- question: How far ahead of schedule is Maya?
+  expected_contains:
+  - 90-day
+  - 5 weeks
+- question: How did Leon hear Conduit is happy with Maya?
+  expected_contains:
+  - Nina
+  - recruiter

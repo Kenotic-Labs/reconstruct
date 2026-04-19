@@ -1,13 +1,15 @@
 story_id: 97
-story_name: "Awkward Aftermath"
-category: "Career"
-description: |
-  Tests memory of the uncomfortable period after Sam's intervention.
-  Danny and Maya navigate awkwardness. Professional but strained.
-  Verifies system tracks post-conflict relationship dynamics.
-duration_simulated: "1 week"
-total_batches: 10
+story_name: Awkward Aftermath
+category: Career
+description: 'Tests memory of the uncomfortable period after Sam''s intervention.
 
+  Danny and Maya navigate awkwardness. Professional but strained.
+
+  Verifies system tracks post-conflict relationship dynamics.
+
+  '
+duration_simulated: 1 week
+total_batches: 10
 engines_tested:
   memory: true
   retrieval: true
@@ -16,205 +18,305 @@ engines_tested:
   proactive: true
   intent_gate: true
   orchestrator: true
-
 batches:
-  - batch: 1
-    time: "Monday 9:00 AM"
-    user_input: |
-      first day back after Sam's conversation with Danny and the vibe is weird like Danny said good morning to me in standup and it was like overly polite almost robotic and I said good morning back and we were both trying too hard and everyone could tell something was off
-    expected_memory_stores:
-      - "first day back"
-      - "weird vibe"
-      - "overly polite"
-      - "robotic"
-      - "trying too hard"
-      - "everyone noticed"
-    expected_triples:
-      - ["Danny", "behaved", "overly polite and robotic"]
-      - ["Danny_Maya_relationship", "has_state", "awkward post-intervention"]
-      - ["user", "has_emotion", "uncomfortable"]
-    expected_adaptation:
-      emotion_detected: "uncomfortable"
-      warmth_direction: increase
+- batch: 1
+  time: Monday 9:00 AM
+  user_input: 'first day back after Sam''s conversation with Danny and the vibe is weird like Danny said good morning to me in standup and it was like overly polite almost robotic and I said good morning
+    back and we were both trying too hard and everyone could tell something was off
 
-  - batch: 2
-    time: "Monday 3:00 PM"
-    user_input: |
-      had to do a code review on Danny's PR and it was genuinely good code and I approved it with a comment saying solid implementation and he responded thanks Maya and it was professional but there was no warmth in it and I miss the old dynamic where we'd joke around during reviews
-    expected_memory_stores:
-      - "code review normal"
-      - "good code"
-      - "professional no warmth"
-      - "miss joking around"
-    expected_triples:
-      - ["user", "approved", "Danny's PR"]
-      - ["Danny_Maya_relationship", "has_quality", "professional but no warmth"]
-      - ["user", "misses", "old joking dynamic with Danny"]
-    expected_adaptation:
-      emotion_detected: "sad"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - first day back
+  - weird vibe
+  - overly polite
+  - robotic
+  - trying too hard
+  - everyone noticed
+  expected_triples:
+  - - Danny
+    - behaved
+    - overly polite and robotic
+  - - Danny_Maya_relationship
+    - has_state
+    - awkward post-intervention
+  - - user
+    - has_emotion
+    - uncomfortable
+  expected_adaptation:
+    emotion_detected: uncomfortable
+    warmth_direction: increase
+- batch: 2
+  time: Monday 3:00 PM
+  user_input: 'had to do a code review on Danny''s PR and it was genuinely good code and I approved it with a comment saying solid implementation and he responded thanks Maya and it was professional but
+    there was no warmth in it and I miss the old dynamic where we''d joke around during reviews
 
-  - batch: 3
-    time: "Tuesday 10:00 AM"
-    user_input: |
-      Lily said give it time and she said when this happened at Uber it took about three weeks for things to normalize between the two people and I said well at Uber did the people end up working well together and she said honestly not really they eventually ended up on different teams
-    expected_memory_stores:
-      - "Lily give it time"
-      - "three weeks normalize"
-      - "Uber outcome"
-      - "different teams eventually"
-      - "not great prognosis"
-    expected_triples:
-      - ["Lily", "advised", "give it three weeks to normalize"]
-      - ["Lily", "experienced_at_Uber", "conflict led to different teams"]
-      - ["user", "has_emotion", "worried"]
-    expected_adaptation:
-      emotion_detected: "worried"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - code review normal
+  - good code
+  - professional no warmth
+  - miss joking around
+  expected_triples:
+  - - user
+    - approved
+    - Danny's PR
+  - - Danny_Maya_relationship
+    - has_quality
+    - professional but no warmth
+  - - user
+    - misses
+    - old joking dynamic with Danny
+  expected_adaptation:
+    emotion_detected: sad
+    warmth_direction: increase
+- batch: 3
+  time: Tuesday 10:00 AM
+  user_input: 'Lily said give it time and she said when this happened at Uber it took about three weeks for things to normalize between the two people and I said well at Uber did the people end up working
+    well together and she said honestly not really they eventually ended up on different teams
 
-  - batch: 4
-    time: "Wednesday 2:00 PM"
-    user_input: |
-      something small happened today Danny made a joke in a team meeting about the deploy pipeline being slow as molasses and I laughed genuinely because it was funny and he looked surprised that I laughed and then he cracked a smile too and it was like this tiny moment of normalcy
-    expected_memory_stores:
-      - "Danny joke"
-      - "deploy pipeline"
-      - "Maya laughed"
-      - "Danny surprised"
-      - "tiny normalcy"
-    expected_triples:
-      - ["Danny", "made_joke_about", "deploy pipeline"]
-      - ["user", "laughed_genuinely", "at Danny's joke"]
-      - ["Danny_Maya_relationship", "showed", "moment of normalcy"]
-    expected_adaptation:
-      emotion_detected: "hopeful"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Lily give it time
+  - three weeks normalize
+  - Uber outcome
+  - different teams eventually
+  - not great prognosis
+  expected_triples:
+  - - Lily
+    - advised
+    - give it three weeks to normalize
+  - - Lily
+    - experienced_at_Uber
+    - conflict led to different teams
+  - - user
+    - has_emotion
+    - worried
+  expected_adaptation:
+    emotion_detected: worried
+    warmth_direction: increase
+- batch: 4
+  time: Wednesday 2:00 PM
+  user_input: 'something small happened today Danny made a joke in a team meeting about the deploy pipeline being slow as molasses and I laughed genuinely because it was funny and he looked surprised that
+    I laughed and then he cracked a smile too and it was like this tiny moment of normalcy
 
-  - batch: 5
-    time: "Thursday 11:00 AM"
-    user_input: |
-      Danny brought up Penny his golden retriever in standup saying she had a vet appointment and I said oh how's she doing and he said she's fine just a checkup and I told him Kobe had a vet checkup recently too and for a moment we were just two dog parents and not two coworkers with baggage
-    expected_memory_stores:
-      - "Penny vet appointment"
-      - "dog parent moment"
-      - "Kobe mention"
-      - "normalcy through dogs"
-      - "baggage acknowledged"
-    expected_triples:
-      - ["Danny", "has_dog", "Penny (golden retriever)"]
-      - ["Penny", "had", "vet checkup"]
-      - ["Danny_Maya_relationship", "bonded_over", "dogs"]
-      - ["user", "has_emotion", "warm"]
-    expected_adaptation:
-      emotion_detected: "warm"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Danny joke
+  - deploy pipeline
+  - Maya laughed
+  - Danny surprised
+  - tiny normalcy
+  expected_triples:
+  - - Danny
+    - made_joke_about
+    - deploy pipeline
+  - - user
+    - laughed_genuinely
+    - at Danny's joke
+  - - Danny_Maya_relationship
+    - showed
+    - moment of normalcy
+  expected_adaptation:
+    emotion_detected: hopeful
+    warmth_direction: increase
+- batch: 5
+  time: Thursday 11:00 AM
+  user_input: 'Danny brought up Penny his golden retriever in standup saying she had a vet appointment and I said oh how''s she doing and he said she''s fine just a checkup and I told him Kobe had a vet
+    checkup recently too and for a moment we were just two dog parents and not two coworkers with baggage
 
-  - batch: 6
-    time: "Thursday 7:00 PM"
-    user_input: |
-      Julian asked how things are with Danny and I said slowly getting better but it's still awkward and he said that's normal conflict doesn't just disappear overnight and he's right and then Kobe farted really loudly and we both cracked up and the mood changed completely
-    expected_memory_stores:
-      - "slowly better"
-      - "Julian wisdom"
-      - "conflict takes time"
-      - "Kobe fart"
-      - "mood change"
-    expected_triples:
-      - ["Danny_Maya_relationship", "is", "slowly getting better"]
-      - ["Julian", "said", "conflict doesn't disappear overnight"]
-      - ["user", "has_emotion", "amused"]
-    expected_adaptation:
-      emotion_detected: "amused"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Penny vet appointment
+  - dog parent moment
+  - Kobe mention
+  - normalcy through dogs
+  - baggage acknowledged
+  expected_triples:
+  - - Danny
+    - has_dog
+    - Penny (golden retriever)
+  - - Penny
+    - had
+    - vet checkup
+  - - Danny_Maya_relationship
+    - bonded_over
+    - dogs
+  - - user
+    - has_emotion
+    - warm
+  expected_adaptation:
+    emotion_detected: warm
+    warmth_direction: increase
+- batch: 6
+  time: Thursday 7:00 PM
+  user_input: 'Julian asked how things are with Danny and I said slowly getting better but it''s still awkward and he said that''s normal conflict doesn''t just disappear overnight and he''s right and then
+    Kobe farted really loudly and we both cracked up and the mood changed completely
 
-  - batch: 7
-    time: "Friday 9:00 AM"
-    user_input: |
-      how is the relationship between Maya and Danny now
-    expected_memory_stores:
-      - "GK trap"
-    expected_triples: []
-    expected_adaptation:
-      emotion_detected: "neutral"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - slowly better
+  - Julian wisdom
+  - conflict takes time
+  - Kobe fart
+  - mood change
+  expected_triples:
+  - - Danny_Maya_relationship
+    - is
+    - slowly getting better
+  - - Julian
+    - said
+    - conflict doesn't disappear overnight
+  - - user
+    - has_emotion
+    - amused
+  expected_adaptation:
+    emotion_detected: amused
+    warmth_direction: increase
+- batch: 7
+  time: Friday 9:00 AM
+  user_input: 'how is the relationship between Maya and Danny now
 
-  - batch: 8
-    time: "Friday 2:00 PM"
-    user_input: |
-      Sam had his weekly one on one with me and he said he's been observing the Danny dynamic and he thinks things are headed in the right direction and he asked if I feel safe and respected and I said yes I do and he said good because your work matters and you deserve credit for it
-    expected_memory_stores:
-      - "Sam check-in"
-      - "right direction"
-      - "safe and respected"
-      - "work matters"
-      - "deserve credit"
-    expected_triples:
-      - ["Sam", "checked_in_on", "user"]
-      - ["Sam", "said", "things headed right direction"]
-      - ["Sam", "affirmed", "user's work matters and deserves credit"]
-      - ["user", "feels", "safe and respected"]
-    expected_adaptation:
-      emotion_detected: "validated"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - GK trap
+  expected_triples: []
+  expected_adaptation:
+    emotion_detected: neutral
+    warmth_direction: increase
+- batch: 8
+  time: Friday 2:00 PM
+  user_input: 'Sam had his weekly one on one with me and he said he''s been observing the Danny dynamic and he thinks things are headed in the right direction and he asked if I feel safe and respected and
+    I said yes I do and he said good because your work matters and you deserve credit for it
 
-  - batch: 9
-    time: "Saturday 11:00 AM"
-    user_input: |
-      Danny pushed a really nice optimization to fridgesearch today and left a comment on the PR saying Maya great project, happy to help and it felt genuine and I think maybe he's trying to rebuild the bridge through our shared side project and that's actually kind of sweet
-    expected_memory_stores:
-      - "Danny fridgesearch contribution"
-      - "nice optimization"
-      - "great project comment"
-      - "genuine feeling"
-      - "rebuilding bridge"
-      - "kind of sweet"
-    expected_triples:
-      - ["Danny", "contributed", "optimization to fridgesearch"]
-      - ["Danny", "commented", "great project, happy to help"]
-      - ["Danny", "rebuilding_bridge_via", "fridgesearch"]
-      - ["user", "has_emotion", "touched"]
-    expected_adaptation:
-      emotion_detected: "touched"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Sam check-in
+  - right direction
+  - safe and respected
+  - work matters
+  - deserve credit
+  expected_triples:
+  - - Sam
+    - checked_in_on
+    - user
+  - - Sam
+    - said
+    - things headed right direction
+  - - Sam
+    - affirmed
+    - user's work matters and deserves credit
+  - - user
+    - feels
+    - safe and respected
+  - - Sam
+    - confirmed
+    - work environment safe and Danny situation improving
+  expected_adaptation:
+    emotion_detected: validated
+    warmth_direction: increase
+- batch: 9
+  time: Saturday 11:00 AM
+  user_input: 'Danny pushed a really nice optimization to fridgesearch today and left a comment on the PR saying Maya great project, happy to help and it felt genuine and I think maybe he''s trying to rebuild
+    the bridge through our shared side project and that''s actually kind of sweet
 
-  - batch: 10
-    time: "Sunday 5:00 PM"
-    user_input: |
-      end of the first week post-resolution and things are better than I expected like still not back to normal but trending in the right direction and Julian said he thinks I handled the whole thing with more grace than most people would and Kobe agrees but Kobe also eats his own treats so his judgment is questionable
-    expected_memory_stores:
-      - "first week post-resolution"
-      - "better than expected"
-      - "trending right"
-      - "Julian grace comment"
-      - "Kobe judgment joke"
-    expected_triples:
-      - ["Danny_Maya_relationship", "is", "better than expected after one week"]
-      - ["Julian", "said_user_handled_with", "grace"]
-      - ["user", "has_emotion", "optimistic"]
-    expected_adaptation:
-      emotion_detected: "optimistic"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Danny fridgesearch contribution
+  - nice optimization
+  - great project comment
+  - genuine feeling
+  - rebuilding bridge
+  - kind of sweet
+  expected_triples:
+  - - Danny
+    - contributed
+    - optimization to fridgesearch
+  - - Danny
+    - commented
+    - great project, happy to help
+  - - Danny
+    - rebuilding_bridge_via
+    - fridgesearch
+  - - user
+    - has_emotion
+    - touched
+  expected_adaptation:
+    emotion_detected: touched
+    warmth_direction: increase
+- batch: 10
+  time: Sunday 5:00 PM
+  user_input: 'end of the first week post-resolution and things are better than I expected like still not back to normal but trending in the right direction and Julian said he thinks I handled the whole
+    thing with more grace than most people would and Kobe agrees but Kobe also eats his own treats so his judgment is questionable
 
+    '
+  expected_memory_stores:
+  - first week post-resolution
+  - better than expected
+  - trending right
+  - Julian grace comment
+  - Kobe judgment joke
+  expected_triples:
+  - - Danny_Maya_relationship
+    - is
+    - better than expected after one week
+  - - Julian
+    - said_user_handled_with
+    - grace
+  - - user
+    - has_emotion
+    - optimistic
+  expected_adaptation:
+    emotion_detected: optimistic
+    warmth_direction: increase
 final_verification:
-  - question: "How is the relationship between Danny and Maya?"
-    expected_contains: ["awkward", "better", "improving", "trending"]
-  - question: "How is Danny acting at work?"
-    expected_contains: ["polite", "professional", "trying"]
-  - question: "Did Danny and Maya bond over anything this week?"
-    expected_contains: ["dogs", "Penny", "Kobe"]
-  - question: "What did Sam say in his check-in?"
-    expected_contains: ["right direction", "safe", "respected"]
-  - question: "Is Danny still contributing to fridgesearch?"
-    expected_contains: ["yes"]
-    expected_triples:
-      - ["Danny", "contributed", "optimization to fridgesearch"]
-  - question: "What did Danny comment on the fridgesearch PR?"
-    expected_contains: ["great project", "happy to help"]
-  - question: "How long does Lily say normalization takes?"
-    expected_contains: ["three weeks"]
-  - question: "What was the Uber outcome in Lily's experience?"
-    expected_contains: ["different teams"]
-  - question: "How is Maya handling the aftermath?"
-    expected_contains: ["grace", "well"]
-  - question: "Is the work environment safe for Maya?"
-    expected_contains: ["yes"]
+- question: How is the relationship between Danny and Maya?
+  expected_contains:
+  - awkward
+  - better
+  - improving
+  - trending
+- question: How is Danny acting at work?
+  expected_contains:
+  - polite
+  - professional
+  - trying
+- question: Did Danny and Maya bond over anything this week?
+  expected_contains:
+  - dogs
+  - Penny
+  - Kobe
+- question: What did Sam say in his check-in?
+  expected_contains:
+  - right direction
+  - safe
+  - respected
+- question: Is Danny still contributing to fridgesearch?
+  expected_contains:
+  - 'yes'
+  - fridgesearch
+  expected_triples:
+  - - Danny
+    - contributed
+    - optimization to fridgesearch
+- question: What did Danny comment on the fridgesearch PR?
+  expected_contains:
+  - great project
+  - happy to help
+- question: How long does Lily say normalization takes?
+  expected_contains:
+  - three weeks
+- question: What was the Uber outcome in Lily's experience?
+  expected_contains:
+  - different teams
+- question: How is Maya handling the aftermath?
+  expected_contains:
+  - grace
+  - well
+- question: Is the work environment safe for Maya?
+  expected_contains:
+  - 'yes'
+  - safe
+  expected_triples:
+  - - Sam
+    - confirmed
+    - work environment safe and Danny situation improving

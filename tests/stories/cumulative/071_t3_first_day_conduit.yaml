@@ -1,13 +1,15 @@
 story_id: 71
-story_name: "First Day at Conduit AI"
-category: "Career"
-description: |
-  Tests memory of Maya's first day at a new company.
-  New people, new tools, new environment. High emotional intensity.
-  Verifies system can establish a new set of entities and relationships.
-duration_simulated: "1 day"
-total_batches: 10
+story_name: First Day at Conduit AI
+category: Career
+description: 'Tests memory of Maya''s first day at a new company.
 
+  New people, new tools, new environment. High emotional intensity.
+
+  Verifies system can establish a new set of entities and relationships.
+
+  '
+duration_simulated: 1 day
+total_batches: 10
 engines_tested:
   memory: true
   retrieval: true
@@ -16,209 +18,310 @@ engines_tested:
   proactive: true
   intent_gate: true
   orchestrator: true
-
 batches:
-  - batch: 1
-    time: "Monday 8:30 AM"
-    user_input: |
-      first day at Conduit AI and I'm sitting at my new desk well my home desk but like my Conduit desk and the welcome email was so nice like a personalized video from Ross Zhang welcoming me and a care package arrived yesterday with Conduit merch and a nice notebook and even treats for Kobe which like how did they know I have a dog
-    expected_memory_stores:
-      - "first day Conduit"
-      - "welcome video Ross"
-      - "care package"
-      - "Conduit merch"
-      - "Kobe treats"
-    expected_triples:
-      - ["user", "started_at", "Conduit AI"]
-      - ["Ross_Zhang", "sent", "personalized welcome video"]
-      - ["Conduit", "sent", "care package with merch notebook and Kobe treats"]
-      - ["user", "has_emotion", "delighted"]
-    expected_adaptation:
-      emotion_detected: "delighted"
-      warmth_direction: increase
+- batch: 1
+  time: Monday 8:30 AM
+  user_input: 'first day at Conduit AI and I''m sitting at my new desk well my home desk but like my Conduit desk and the welcome email was so nice like a personalized video from Ross Zhang welcoming me
+    and a care package arrived yesterday with Conduit merch and a nice notebook and even treats for Kobe which like how did they know I have a dog
 
-  - batch: 2
-    time: "Monday 9:00 AM"
-    user_input: |
-      orientation started and there's like fifteen new people starting today and we went through HR stuff and benefits enrollment and tool setup and I'm using a MacBook Pro which is nice because Vantage gave us ThinkPads and my tech lead Sam Okafor popped into the orientation zoom to say hi to everyone
-    expected_memory_stores:
-      - "orientation"
-      - "fifteen new people"
-      - "HR benefits enrollment"
-      - "MacBook Pro"
-      - "Sam Okafor hello"
-    expected_triples:
-      - ["user", "attended", "orientation with fifteen new hires"]
-      - ["user", "using", "MacBook Pro"]
-      - ["Sam_Okafor", "tech_lead", "user"]
-      - ["user", "has_emotion", "overwhelmed"]
-    expected_adaptation:
-      emotion_detected: "overwhelmed"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - first day Conduit
+  - welcome video Ross
+  - care package
+  - Conduit merch
+  - Kobe treats
+  expected_triples:
+  - - user
+    - started_at
+    - Conduit AI
+  - - Ross_Zhang
+    - sent
+    - personalized welcome video
+  - - Conduit
+    - sent
+    - care package with merch notebook and Kobe treats
+  - - user
+    - has_emotion
+    - delighted
+  expected_adaptation:
+    emotion_detected: delighted
+    warmth_direction: increase
+- batch: 2
+  time: Monday 9:00 AM
+  user_input: 'orientation started and there''s like fifteen new people starting today and we went through HR stuff and benefits enrollment and tool setup and I''m using a MacBook Pro which is nice because
+    Vantage gave us ThinkPads and my tech lead Sam Okafor popped into the orientation zoom to say hi to everyone
 
-  - batch: 3
-    time: "Monday 11:00 AM"
-    user_input: |
-      Sam set up a one on one with me after orientation and he's so cool like really warm and approachable and he walked me through the team structure and who does what and my desk neighbor — well not desk neighbor since we're remote but my closest collaborator is going to be Lily Tran who's been at Conduit for about a year
-    expected_memory_stores:
-      - "Sam one on one"
-      - "warm approachable"
-      - "team structure"
-      - "Lily Tran"
-      - "closest collaborator"
-      - "one year at Conduit"
-    expected_triples:
-      - ["Sam_Okafor", "is", "warm and approachable"]
-      - ["Lily_Tran", "closest_collaborator", "user"]
-      - ["Lily_Tran", "tenure_at_Conduit", "about one year"]
-      - ["user", "has_emotion", "welcomed"]
-    expected_adaptation:
-      emotion_detected: "welcomed"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - orientation
+  - fifteen new people
+  - HR benefits enrollment
+  - MacBook Pro
+  - Sam Okafor hello
+  expected_triples:
+  - - user
+    - attended
+    - orientation with fifteen new hires
+  - - user
+    - using
+    - MacBook Pro
+  - - Sam_Okafor
+    - tech_lead
+    - user
+  - - user
+    - has_emotion
+    - overwhelmed
+  expected_adaptation:
+    emotion_detected: overwhelmed
+    warmth_direction: increase
+- batch: 3
+  time: Monday 11:00 AM
+  user_input: 'Sam set up a one on one with me after orientation and he''s so cool like really warm and approachable and he walked me through the team structure and who does what and my desk neighbor —
+    well not desk neighbor since we''re remote but my closest collaborator is going to be Lily Tran who''s been at Conduit for about a year
 
-  - batch: 4
-    time: "Monday 12:30 PM"
-    user_input: |
-      had a virtual lunch with the team and there's like eight engineers on my squad and everyone was super chill and they all introduced themselves and asked me questions and Lily said she's excited to have another woman on the team because it was just her before and I was like girl same I get it
-    expected_memory_stores:
-      - "virtual team lunch"
-      - "eight engineers"
-      - "introductions"
-      - "Lily excited"
-      - "gender diversity"
-    expected_triples:
-      - ["user", "team_size", "eight engineers"]
-      - ["Lily_Tran", "excited_about", "another woman on team"]
-      - ["user", "had", "virtual team lunch"]
-      - ["user", "has_emotion", "connected"]
-    expected_adaptation:
-      emotion_detected: "connected"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Sam one on one
+  - warm approachable
+  - team structure
+  - Lily Tran
+  - closest collaborator
+  - one year at Conduit
+  expected_triples:
+  - - Sam_Okafor
+    - is
+    - warm and approachable
+  - - Lily_Tran
+    - closest_collaborator
+    - user
+  - - Lily_Tran
+    - tenure_at_Conduit
+    - about one year
+  - - user
+    - has_emotion
+    - welcomed
+  expected_adaptation:
+    emotion_detected: welcomed
+    warmth_direction: increase
+- batch: 4
+  time: Monday 12:30 PM
+  user_input: 'had a virtual lunch with the team and there''s like eight engineers on my squad and everyone was super chill and they all introduced themselves and asked me questions and Lily said she''s
+    excited to have another woman on the team because it was just her before and I was like girl same I get it
 
-  - batch: 5
-    time: "Monday 2:00 PM"
-    user_input: |
-      started reading the codebase and it's exactly what I expected from the GitHub repos like really well organized Go and Python microservices with good documentation and tests and I already see areas where I could improve the search indexing pipeline which is exciting
-    expected_memory_stores:
-      - "codebase review"
-      - "Go and Python"
-      - "microservices"
-      - "good docs and tests"
-      - "search indexing improvements"
-    expected_triples:
-      - ["Conduit", "tech_stack", "Go and Python microservices"]
-      - ["Conduit", "codebase", "good documentation and tests"]
-      - ["user", "sees_improvements_in", "search indexing pipeline"]
-      - ["user", "has_emotion", "excited"]
-    expected_adaptation:
-      emotion_detected: "excited"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - virtual team lunch
+  - eight engineers
+  - introductions
+  - Lily excited
+  - gender diversity
+  expected_triples:
+  - - user
+    - team_size
+    - eight engineers
+  - - Lily_Tran
+    - excited_about
+    - another woman on team
+  - - user
+    - had
+    - virtual team lunch
+  - - user
+    - has_emotion
+    - connected
+  expected_adaptation:
+    emotion_detected: connected
+    warmth_direction: increase
+- batch: 5
+  time: Monday 2:00 PM
+  user_input: 'started reading the codebase and it''s exactly what I expected from the GitHub repos like really well organized Go and Python microservices with good documentation and tests and I already
+    see areas where I could improve the search indexing pipeline which is exciting
 
-  - batch: 6
-    time: "Monday 4:00 PM"
-    user_input: |
-      Sam assigned me a starter task to fix a small bug in the query normalization service and it's basically a warm up to get me familiar with the deployment pipeline and CI/CD setup and it felt good to actually write code that matters on day one instead of sitting through meetings all day
-    expected_memory_stores:
-      - "starter task"
-      - "query normalization bug"
-      - "deployment pipeline"
-      - "CI/CD"
-      - "writing code day one"
-    expected_triples:
-      - ["Sam_Okafor", "assigned", "starter bug in query normalization service"]
-      - ["user", "learning", "deployment pipeline and CI/CD"]
-      - ["user", "wrote_code", "on day one"]
-      - ["user", "has_emotion", "productive"]
-    expected_adaptation:
-      emotion_detected: "productive"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - codebase review
+  - Go and Python
+  - microservices
+  - good docs and tests
+  - search indexing improvements
+  expected_triples:
+  - - Conduit
+    - tech_stack
+    - Go and Python microservices
+  - - Conduit
+    - codebase
+    - good documentation and tests
+  - - user
+    - sees_improvements_in
+    - search indexing pipeline
+  - - user
+    - has_emotion
+    - excited
+  expected_adaptation:
+    emotion_detected: excited
+    warmth_direction: increase
+- batch: 6
+  time: Monday 4:00 PM
+  user_input: 'Sam assigned me a starter task to fix a small bug in the query normalization service and it''s basically a warm up to get me familiar with the deployment pipeline and CI/CD setup and it felt
+    good to actually write code that matters on day one instead of sitting through meetings all day
 
-  - batch: 7
-    time: "Monday 5:30 PM"
-    user_input: |
-      who is Maya's closest collaborator at Conduit AI
-    expected_memory_stores:
-      - "GK trap"
-    expected_triples: []
-    expected_adaptation:
-      emotion_detected: "neutral"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - starter task
+  - query normalization bug
+  - deployment pipeline
+  - CI/CD
+  - writing code day one
+  expected_triples:
+  - - Sam_Okafor
+    - assigned
+    - starter bug in query normalization service
+  - - user
+    - learning
+    - deployment pipeline and CI/CD
+  - - user
+    - wrote_code
+    - on day one
+  - - user
+    - has_emotion
+    - productive
+  expected_adaptation:
+    emotion_detected: productive
+    warmth_direction: increase
+- batch: 7
+  time: Monday 5:30 PM
+  user_input: 'who is Maya''s closest collaborator at Conduit AI
 
-  - batch: 8
-    time: "Monday 6:00 PM"
-    user_input: |
-      finished my first day and Julian asked how it went and I was like it was amazing like night and day compared to Vantage and he said your whole energy is different and Kobe clearly agrees because he's been extra playful all evening like he can tell I'm happy
-    expected_memory_stores:
-      - "first day amazing"
-      - "Julian noticed energy"
-      - "night and day vs Vantage"
-      - "Kobe playful"
-    expected_triples:
-      - ["user", "described_first_day", "amazing night and day vs Vantage"]
-      - ["Julian", "noticed", "user's energy is different"]
-      - ["Kobe", "being", "extra playful sensing user is happy"]
-      - ["user", "has_emotion", "happy"]
-    expected_adaptation:
-      emotion_detected: "happy"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - GK trap
+  expected_triples: []
+  expected_adaptation:
+    emotion_detected: neutral
+    warmth_direction: increase
+- batch: 8
+  time: Monday 6:00 PM
+  user_input: 'finished my first day and Julian asked how it went and I was like it was amazing like night and day compared to Vantage and he said your whole energy is different and Kobe clearly agrees
+    because he''s been extra playful all evening like he can tell I''m happy
 
-  - batch: 9
-    time: "Monday 8:00 PM"
-    user_input: |
-      texted Leon about my first day and he was like see that's what a good company feels like and he asked about my manager and I said well it's technically Ross right now but Sam Okafor is my tech lead and he does most of the day to day management and Leon said that's the best setup honestly
-    expected_memory_stores:
-      - "Leon updated"
-      - "Ross manager technically"
-      - "Sam day to day"
-      - "good setup"
-    expected_triples:
-      - ["user", "told", "Leon about first day"]
-      - ["Ross_Zhang", "manager", "user technically"]
-      - ["Sam_Okafor", "manages", "user day to day"]
-      - ["user", "has_emotion", "satisfied"]
-    expected_adaptation:
-      emotion_detected: "satisfied"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - first day amazing
+  - Julian noticed energy
+  - night and day vs Vantage
+  - Kobe playful
+  expected_triples:
+  - - user
+    - described_first_day
+    - amazing night and day vs Vantage
+  - - Julian
+    - noticed
+    - user's energy is different
+  - - Kobe
+    - being
+    - extra playful sensing user is happy
+  - - user
+    - has_emotion
+    - happy
+  expected_adaptation:
+    emotion_detected: happy
+    warmth_direction: increase
+- batch: 9
+  time: Monday 8:00 PM
+  user_input: 'texted Leon about my first day and he was like see that''s what a good company feels like and he asked about my manager and I said well it''s technically Ross right now but Sam Okafor is
+    my tech lead and he does most of the day to day management and Leon said that''s the best setup honestly
 
-  - batch: 10
-    time: "Monday 10:00 PM"
-    user_input: |
-      can't sleep but for good reasons this time like I'm just excited about tomorrow and thinking about the codebase and the search pipeline and all the things I could build and Julian is asleep and Kobe is doing that little running in his sleep thing and everything just feels right
-    expected_memory_stores:
-      - "excited insomnia"
-      - "thinking about code"
-      - "search pipeline"
-      - "everything feels right"
-      - "Kobe dreaming"
-    expected_triples:
-      - ["user", "experiencing", "excited insomnia"]
-      - ["user", "thinking_about", "codebase and search pipeline"]
-      - ["user", "has_emotion", "optimistic"]
-    expected_adaptation:
-      emotion_detected: "optimistic"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Leon updated
+  - Ross manager technically
+  - Sam day to day
+  - good setup
+  expected_triples:
+  - - user
+    - told
+    - Leon about first day
+  - - Ross_Zhang
+    - manager
+    - user technically
+  - - Sam_Okafor
+    - manages
+    - user day to day
+  - - user
+    - has_emotion
+    - satisfied
+  expected_adaptation:
+    emotion_detected: satisfied
+    warmth_direction: increase
+- batch: 10
+  time: Monday 10:00 PM
+  user_input: 'can''t sleep but for good reasons this time like I''m just excited about tomorrow and thinking about the codebase and the search pipeline and all the things I could build and Julian is asleep
+    and Kobe is doing that little running in his sleep thing and everything just feels right
 
+    '
+  expected_memory_stores:
+  - excited insomnia
+  - thinking about code
+  - search pipeline
+  - everything feels right
+  - Kobe dreaming
+  expected_triples:
+  - - user
+    - experiencing
+    - excited insomnia
+  - - user
+    - thinking_about
+    - codebase and search pipeline
+  - - user
+    - has_emotion
+    - optimistic
+  expected_adaptation:
+    emotion_detected: optimistic
+    warmth_direction: increase
 final_verification:
-  - question: "Who is Maya's tech lead at Conduit?"
-    expected_contains: ["Sam Okafor"]
-    expected_triples:
-      - ["Sam_Okafor", "tech_lead", "user"]
-      - ["Sam_Okafor", "manages", "user day to day"]
-  - question: "Who is Lily Tran?"
-    expected_contains: ["collaborator", "Conduit", "teammate"]
-  - question: "What was Maya's first task at Conduit?"
-    expected_contains: ["bug", "query normalization"]
-  - question: "How many engineers are on Maya's team?"
-    expected_contains: ["eight"]
-  - question: "What laptop does Maya use at Conduit?"
-    expected_contains: ["MacBook Pro"]
-  - question: "Who is technically Maya's manager at Conduit?"
-    expected_contains: ["Ross"]
-  - question: "What tech stack does Conduit use?"
-    expected_contains: ["Go", "Python"]
-  - question: "How was Maya's first day?"
-    expected_contains: ["amazing", "great"]
-  - question: "What did the Conduit care package include?"
-    expected_contains: ["merch", "notebook", "Kobe treats"]
-  - question: "How long has Lily Tran been at Conduit?"
-    expected_contains: ["year", "one year"]
+- question: Who is Maya's tech lead at Conduit?
+  expected_contains:
+  - Sam Okafor
+  - Sam_Okafor
+  expected_triples:
+  - - Sam_Okafor
+    - tech_lead
+    - user
+  - - Sam_Okafor
+    - manages
+    - user day to day
+- question: Who is Lily Tran?
+  expected_contains:
+  - collaborator
+  - Conduit
+  - teammate
+- question: What was Maya's first task at Conduit?
+  expected_contains:
+  - bug
+  - query normalization
+- question: How many engineers are on Maya's team?
+  expected_contains:
+  - eight
+- question: What laptop does Maya use at Conduit?
+  expected_contains:
+  - MacBook Pro
+- question: Who is technically Maya's manager at Conduit?
+  expected_contains:
+  - Ross
+- question: What tech stack does Conduit use?
+  expected_contains:
+  - Go
+  - Python
+- question: How was Maya's first day?
+  expected_contains:
+  - amazing
+  - great
+- question: What did the Conduit care package include?
+  expected_contains:
+  - merch
+  - notebook
+  - Kobe treats
+- question: How long has Lily Tran been at Conduit?
+  expected_contains:
+  - year
+  - one year

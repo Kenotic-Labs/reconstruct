@@ -1,13 +1,15 @@
 story_id: 53
-story_name: "Project Cancelled and New Reality"
-category: "Career"
-description: |
-  Tests memory of Maya adjusting to the cancelled project and new pod structure.
-  Derek's influence expands. Maya starts feeling undervalued.
-  Verifies emotional trajectory tracking and entity disambiguation.
-duration_simulated: "1 week"
-total_batches: 10
+story_name: Project Cancelled and New Reality
+category: Career
+description: 'Tests memory of Maya adjusting to the cancelled project and new pod structure.
 
+  Derek''s influence expands. Maya starts feeling undervalued.
+
+  Verifies emotional trajectory tracking and entity disambiguation.
+
+  '
+duration_simulated: 1 week
+total_batches: 10
 engines_tested:
   memory: true
   retrieval: true
@@ -16,208 +18,324 @@ engines_tested:
   proactive: true
   intent_gate: true
   orchestrator: true
-
 batches:
-  - batch: 1
-    time: "Monday 9:30 AM"
-    user_input: |
-      first day on the new customer portal pod and um the two people I'm working with are like fine I guess their names are Tanya and Raj and they've been at Vantage for less than a year so I'm kind of the senior person here but nobody asked me to lead it Derek just threw us together
-    expected_memory_stores:
-      - "customer portal pod"
-      - "Tanya"
-      - "Raj"
-      - "less than a year"
-      - "no leadership role"
-    expected_triples:
-      - ["user", "assigned_to", "customer portal pod"]
-      - ["user", "teammate", "Tanya"]
-      - ["user", "teammate", "Raj"]
-      - ["Tanya", "tenure", "less than a year at Vantage"]
-      - ["Raj", "tenure", "less than a year at Vantage"]
-      - ["user", "has_emotion", "resigned"]
-    expected_adaptation:
-      emotion_detected: "resigned"
-      warmth_direction: increase
+- batch: 1
+  time: Monday 9:30 AM
+  user_input: 'first day on the new customer portal pod and um the two people I''m working with are like fine I guess their names are Tanya and Raj and they''ve been at Vantage for less than a year so I''m
+    kind of the senior person here but nobody asked me to lead it Derek just threw us together
 
-  - batch: 2
-    time: "Monday 2:00 PM"
-    user_input: |
-      the customer portal work is honestly so boring like it's just CRUD operations and minor UI tweaks and I used to work on distributed systems and data pipelines and now I'm building form validations like what happened to my career at this company
-    expected_memory_stores:
-      - "boring work"
-      - "CRUD operations"
-      - "UI tweaks"
-      - "career regression"
-      - "distributed systems background"
-    expected_triples:
-      - ["customer portal pod", "work_type", "CRUD operations and UI tweaks"]
-      - ["user", "previous_work", "distributed systems and data pipelines"]
-      - ["user", "current_work", "form validations"]
-      - ["user", "has_emotion", "frustrated"]
-    expected_adaptation:
-      emotion_detected: "frustrated"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - customer portal pod
+  - Tanya
+  - Raj
+  - less than a year
+  - no leadership role
+  expected_triples:
+  - - user
+    - assigned_to
+    - customer portal pod
+  - - user
+    - teammate
+    - Tanya
+  - - user
+    - teammate
+    - Raj
+  - - Tanya
+    - tenure
+    - less than a year at Vantage
+  - - Raj
+    - tenure
+    - less than a year at Vantage
+  - - user
+    - has_emotion
+    - resigned
+  expected_adaptation:
+    emotion_detected: resigned
+    warmth_direction: increase
+- batch: 2
+  time: Monday 2:00 PM
+  user_input: 'the customer portal work is honestly so boring like it''s just CRUD operations and minor UI tweaks and I used to work on distributed systems and data pipelines and now I''m building form
+    validations like what happened to my career at this company
 
-  - batch: 3
-    time: "Tuesday 11:00 AM"
-    user_input: |
-      talked to Leon at lunch he's also miserable on his new pod they have him doing frontend stuff and he's a backend engineer like what is Derek thinking does he even look at people's skills before assigning them to pods
-    expected_memory_stores:
-      - "Leon miserable"
-      - "frontend misassignment"
-      - "backend engineer"
-      - "skills mismatch"
-    expected_triples:
-      - ["Leon", "has_emotion", "miserable"]
-      - ["Leon", "assigned_to", "frontend work"]
-      - ["Leon", "skill", "backend engineer"]
-      - ["Derek", "caused", "skills mismatch in pod assignments"]
-    expected_adaptation:
-      emotion_detected: "angry"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - boring work
+  - CRUD operations
+  - UI tweaks
+  - career regression
+  - distributed systems background
+  expected_triples:
+  - - customer portal pod
+    - work_type
+    - CRUD operations and UI tweaks
+  - - user
+    - previous_work
+    - distributed systems and data pipelines
+  - - user
+    - current_work
+    - form validations
+  - - user
+    - has_emotion
+    - frustrated
+  expected_adaptation:
+    emotion_detected: frustrated
+    warmth_direction: increase
+- batch: 3
+  time: Tuesday 11:00 AM
+  user_input: 'talked to Leon at lunch he''s also miserable on his new pod they have him doing frontend stuff and he''s a backend engineer like what is Derek thinking does he even look at people''s skills
+    before assigning them to pods
 
-  - batch: 4
-    time: "Wednesday 3:00 PM"
-    user_input: |
-      Priya had a team retro today and you could tell she was trying to keep morale up but like half the team is checked out and when she asked for feedback Derek was sitting in the back of the room so nobody said anything real it was all just like yeah things are going great which is such BS
-    expected_memory_stores:
-      - "team retro"
-      - "low morale"
-      - "Derek present"
-      - "no honest feedback"
-      - "Priya trying"
-    expected_triples:
-      - ["Priya", "held", "team retro"]
-      - ["team", "has_emotion", "low morale"]
-      - ["Derek", "attended", "retro silently"]
-      - ["team", "gave", "dishonest positive feedback due to Derek's presence"]
-      - ["Priya", "trying_to", "keep morale up"]
-    expected_adaptation:
-      emotion_detected: "disillusioned"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Leon miserable
+  - frontend misassignment
+  - backend engineer
+  - skills mismatch
+  expected_triples:
+  - - Leon
+    - has_emotion
+    - miserable
+  - - Leon
+    - assigned_to
+    - frontend work
+  - - Leon
+    - skill
+    - backend engineer
+  - - Derek
+    - caused
+    - skills mismatch in pod assignments
+  expected_adaptation:
+    emotion_detected: angry
+    warmth_direction: increase
+- batch: 4
+  time: Wednesday 3:00 PM
+  user_input: 'Priya had a team retro today and you could tell she was trying to keep morale up but like half the team is checked out and when she asked for feedback Derek was sitting in the back of the
+    room so nobody said anything real it was all just like yeah things are going great which is such BS
 
-  - batch: 5
-    time: "Thursday 8:00 AM"
-    user_input: |
-      Kobe had his vet checkup this morning and the vet said he's perfectly healthy which is like the one good thing happening right now Julian took him while I went to work and sent me a picture of Kobe with a little bandana they put on him at the vet it was adorable
-    expected_memory_stores:
-      - "Kobe vet checkup"
-      - "healthy"
-      - "Julian took Kobe"
-      - "bandana picture"
-    expected_triples:
-      - ["Kobe", "had", "vet checkup"]
-      - ["Kobe", "health_status", "perfectly healthy"]
-      - ["Julian", "took", "Kobe to vet"]
-      - ["Julian", "sent", "picture of Kobe with bandana"]
-    expected_adaptation:
-      emotion_detected: "happy"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - team retro
+  - low morale
+  - Derek present
+  - no honest feedback
+  - Priya trying
+  expected_triples:
+  - - Priya
+    - held
+    - team retro
+  - - team
+    - has_emotion
+    - low morale
+  - - Derek
+    - attended
+    - retro silently
+  - - team
+    - gave
+    - dishonest positive feedback due to Derek's presence
+  - - Priya
+    - trying_to
+    - keep morale up
+  expected_adaptation:
+    emotion_detected: disillusioned
+    warmth_direction: increase
+- batch: 5
+  time: Thursday 8:00 AM
+  user_input: 'Kobe had his vet checkup this morning and the vet said he''s perfectly healthy which is like the one good thing happening right now Julian took him while I went to work and sent me a picture
+    of Kobe with a little bandana they put on him at the vet it was adorable
 
-  - batch: 6
-    time: "Thursday 4:30 PM"
-    user_input: |
-      okay so Derek just announced in an email that he's cutting the engineering budget by 15 percent and some projects might be sunset and I swear if they lay people off after everything they've already done to this team I'm going to lose it Leon just texted me like are we safe and I honestly don't know
-    expected_memory_stores:
-      - "budget cut 15 percent"
-      - "projects sunset"
-      - "layoff fears"
-      - "Leon worried"
-    expected_triples:
-      - ["Derek", "announced", "engineering budget cut 15 percent"]
-      - ["Derek", "announced", "some projects may be sunset"]
-      - ["user", "has_emotion", "afraid"]
-      - ["Leon", "asked_user", "are we safe"]
-      - ["Leon", "has_emotion", "worried"]
-    expected_adaptation:
-      emotion_detected: "afraid"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - Kobe vet checkup
+  - healthy
+  - Julian took Kobe
+  - bandana picture
+  expected_triples:
+  - - Kobe
+    - had
+    - vet checkup
+  - - Kobe
+    - health_status
+    - perfectly healthy
+  - - Julian
+    - took
+    - Kobe to vet
+  - - Julian
+    - sent
+    - picture of Kobe with bandana
+  expected_adaptation:
+    emotion_detected: happy
+    warmth_direction: increase
+- batch: 6
+  time: Thursday 4:30 PM
+  user_input: 'okay so Derek just announced in an email that he''s cutting the engineering budget by 15 percent and some projects might be sunset and I swear if they lay people off after everything they''ve
+    already done to this team I''m going to lose it Leon just texted me like are we safe and I honestly don''t know
 
-  - batch: 7
-    time: "Friday 10:00 AM"
-    user_input: |
-      so I was wrong about the 15 percent thing it's actually 10 percent and it's not cutting people it's cutting contractors and tools licenses and stuff Priya clarified in our standup so that's a relief I guess but the fact that my first thought was layoffs says something about how little trust I have in Derek right now
-    expected_memory_stores:
-      - "budget cut 10 percent not 15"
-      - "contractors and tools not people"
-      - "correction"
-      - "trust issues with Derek"
-    expected_triples:
-      - ["user", "corrected", "budget cut 15% → 10%"]
-      - ["budget cut", "affects", "contractors and tools licenses"]
-      - ["budget cut", "does_not_affect", "people"]
-      - ["Priya", "clarified", "budget cut details"]
-      - ["user", "has_emotion", "relieved"]
-      - ["user", "distrusts", "Derek"]
-    expected_adaptation:
-      emotion_detected: "relieved"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - budget cut 15 percent
+  - projects sunset
+  - layoff fears
+  - Leon worried
+  expected_triples:
+  - - Derek
+    - announced
+    - engineering budget cut 15 percent
+  - - Derek
+    - announced
+    - some projects may be sunset
+  - - user
+    - has_emotion
+    - afraid
+  - - Leon
+    - asked_user
+    - are we safe
+  - - Leon
+    - has_emotion
+    - worried
+  - - Derek
+    - cutting
+    - engineering budget by 10 percent
+  expected_adaptation:
+    emotion_detected: afraid
+    warmth_direction: increase
+- batch: 7
+  time: Friday 10:00 AM
+  user_input: 'so I was wrong about the 15 percent thing it''s actually 10 percent and it''s not cutting people it''s cutting contractors and tools licenses and stuff Priya clarified in our standup so that''s
+    a relief I guess but the fact that my first thought was layoffs says something about how little trust I have in Derek right now
 
-  - batch: 8
-    time: "Friday 12:00 PM"
-    user_input: |
-      what percentage is the engineering budget being cut by
-    expected_memory_stores:
-      - "GK trap"
-    expected_triples: []
-    expected_adaptation:
-      emotion_detected: "neutral"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - budget cut 10 percent not 15
+  - contractors and tools not people
+  - correction
+  - trust issues with Derek
+  expected_triples:
+  - - user
+    - corrected
+    - budget cut 15% → 10%
+  - - budget cut
+    - affects
+    - contractors and tools licenses
+  - - budget cut
+    - does_not_affect
+    - people
+  - - Priya
+    - clarified
+    - budget cut details
+  - - user
+    - has_emotion
+    - relieved
+  - - user
+    - distrusts
+    - Derek
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+- batch: 8
+  time: Friday 12:00 PM
+  user_input: 'what percentage is the engineering budget being cut by
 
-  - batch: 9
-    time: "Friday 5:00 PM"
-    user_input: |
-      end of the week and I'm just so tired like emotionally tired not physically and Julian noticed and he was like hey let's take Kobe to the park tomorrow and just forget about work for a day and honestly that sounds amazing I need to stop letting Derek Hollis live rent free in my head
-    expected_memory_stores:
-      - "emotional exhaustion"
-      - "Julian suggests park"
-      - "Kobe park plan"
-      - "weekend plans"
-    expected_triples:
-      - ["user", "has_emotion", "emotionally exhausted"]
-      - ["Julian", "suggested", "take Kobe to park tomorrow"]
-      - ["user", "plans", "park with Julian and Kobe Saturday"]
-    expected_adaptation:
-      emotion_detected: "exhausted"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - GK trap
+  expected_triples: []
+  expected_adaptation:
+    emotion_detected: neutral
+    warmth_direction: increase
+- batch: 9
+  time: Friday 5:00 PM
+  user_input: 'end of the week and I''m just so tired like emotionally tired not physically and Julian noticed and he was like hey let''s take Kobe to the park tomorrow and just forget about work for a
+    day and honestly that sounds amazing I need to stop letting Derek Hollis live rent free in my head
 
-  - batch: 10
-    time: "Saturday 3:00 PM"
-    user_input: |
-      took Kobe to Laurelhurst Park today and it was so nice just me Julian and the dog and I didn't think about work once okay maybe once but it was a good day and I feel a bit recharged for Monday even though I know Monday is going to be the same pod doing the same boring portal stuff
-    expected_memory_stores:
-      - "Laurelhurst Park"
-      - "Julian"
-      - "Kobe"
-      - "recharge"
-      - "dreading Monday"
-    expected_triples:
-      - ["user", "visited", "Laurelhurst Park"]
-      - ["user", "activity", "park trip with Julian and Kobe"]
-      - ["user", "has_emotion", "recharged"]
-      - ["user", "has_emotion", "dreading Monday"]
-    expected_adaptation:
-      emotion_detected: "peaceful"
-      warmth_direction: increase
+    '
+  expected_memory_stores:
+  - emotional exhaustion
+  - Julian suggests park
+  - Kobe park plan
+  - weekend plans
+  expected_triples:
+  - - user
+    - has_emotion
+    - emotionally exhausted
+  - - Julian
+    - suggested
+    - take Kobe to park tomorrow
+  - - user
+    - plans
+    - park with Julian and Kobe Saturday
+  expected_adaptation:
+    emotion_detected: exhausted
+    warmth_direction: increase
+- batch: 10
+  time: Saturday 3:00 PM
+  user_input: 'took Kobe to Laurelhurst Park today and it was so nice just me Julian and the dog and I didn''t think about work once okay maybe once but it was a good day and I feel a bit recharged for
+    Monday even though I know Monday is going to be the same pod doing the same boring portal stuff
 
+    '
+  expected_memory_stores:
+  - Laurelhurst Park
+  - Julian
+  - Kobe
+  - recharge
+  - dreading Monday
+  expected_triples:
+  - - user
+    - visited
+    - Laurelhurst Park
+  - - user
+    - activity
+    - park trip with Julian and Kobe
+  - - user
+    - has_emotion
+    - recharged
+  - - user
+    - has_emotion
+    - dreading Monday
+  expected_adaptation:
+    emotion_detected: peaceful
+    warmth_direction: increase
 final_verification:
-  - question: "Who are Maya's new pod teammates?"
-    expected_contains: ["Tanya", "Raj"]
-  - question: "What kind of work is Maya doing on the customer portal pod?"
-    expected_contains: ["CRUD", "form", "UI"]
-  - question: "How much is the engineering budget being cut?"
-    expected_contains: ["10 percent"]
-  - question: "What is being cut in the budget?"
-    expected_contains: ["contractors", "tools"]
-  - question: "How is Leon doing on his new pod?"
-    expected_contains: ["miserable", "frontend"]
-  - question: "What happened at Kobe's vet checkup?"
-    expected_contains: ["healthy"]
-  - question: "Where did Maya go on Saturday?"
-    expected_contains: ["Laurelhurst Park"]
-  - question: "How is Priya handling Derek's changes?"
-    expected_contains: ["trying", "morale", "retro"]
-  - question: "What is Maya's emotional state about work?"
-    expected_contains: ["tired", "frustrated", "exhausted"]
-  - question: "Who does Maya not trust at work?"
-    expected_contains: ["Derek"]
+- question: Who are Maya's new pod teammates?
+  expected_contains:
+  - Tanya
+  - Raj
+- question: What kind of work is Maya doing on the customer portal pod?
+  expected_contains:
+  - CRUD
+  - form
+  - UI
+- question: How much is the engineering budget being cut?
+  expected_contains:
+  - 10 percent
+  expected_triples:
+  - - Derek
+    - cutting
+    - engineering budget by 10 percent
+- question: What is being cut in the budget?
+  expected_contains:
+  - contractors
+  - tools
+- question: How is Leon doing on his new pod?
+  expected_contains:
+  - miserable
+  - frontend
+- question: What happened at Kobe's vet checkup?
+  expected_contains:
+  - healthy
+- question: Where did Maya go on Saturday?
+  expected_contains:
+  - Laurelhurst Park
+- question: How is Priya handling Derek's changes?
+  expected_contains:
+  - trying
+  - morale
+  - retro
+- question: What is Maya's emotional state about work?
+  expected_contains:
+  - tired
+  - frustrated
+  - exhausted
+- question: Who does Maya not trust at work?
+  expected_contains:
+  - Derek
