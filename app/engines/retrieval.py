@@ -738,7 +738,7 @@ class RetrievalEngine:
                    r.predicate        AS predicate,
                    r.object           AS object,
                    r.confidence       AS confidence,
-                   r.sequence_number  AS sequence_number,
+                   r.id               AS sequence_number,
                    r.cluster_id       AS cluster_id,
                    r.subject_type     AS subject_type,
                    r.object_type      AS object_type,
@@ -775,7 +775,7 @@ class RetrievalEngine:
                    r.predicate       AS predicate,
                    r.object          AS object,
                    r.confidence      AS confidence,
-                   r.sequence_number AS sequence_number,
+                   r.id              AS sequence_number,
                    r.cluster_id      AS cluster_id,
                    r.subject_type    AS subject_type,
                    r.object_type     AS object_type,
@@ -828,7 +828,24 @@ class RetrievalEngine:
             obj = e.get("object") or ""
             if obj:
                 if (e.get("object_type") or "").upper() in _PARTICIPANT_TYPES:
-                    participants.add(obj)
+                    # Structural filter: multi-word objects containing
+                    # prepositions, determiners, or verbs are descriptive
+                    # phrases ("Riya on Wednesday", "at her company"),
+                    # not entity names. POS-based, not a word list.
+                    _is_phrase = False
+                    if " " in obj:
+                        try:
+                            import nltk as _nltk_part
+                            _obj_tags = _nltk_part.pos_tag(obj.split())
+                            _phrase_pos = {"IN", "TO", "DT", "VB",
+                                           "VBD", "VBG", "VBN", "VBZ",
+                                           "VBP", "PRP$"}
+                            if any(t in _phrase_pos for _, t in _obj_tags):
+                                _is_phrase = True
+                        except Exception:
+                            pass
+                    if not _is_phrase:
+                        participants.add(obj)
 
         # Dominant mood from stored labels — structural passthrough of
         # write-time emotion classification. No thresholds on valence.
@@ -1047,7 +1064,10 @@ class RetrievalEngine:
             # failed parse (e.g. head POS-mistagged) render as verb
             # phrases: "{Subject} {pred} {obj}". POS on the head token
             # is the structural discriminator — no word lists.
-            noun_compound = "noun_compound" in (parsed.failure_reason or "")
+            noun_compound = (
+                "noun_compound" in (parsed.failure_reason or "")
+                or "head_not_verb" in (parsed.failure_reason or "")
+            )
             from app.engines.predicate_shape import is_verb_token as _is_verb
             from app.engines.predicate_shape import _pos_tag as _pt_fallback
             from app.engines.predicate_shape import _wn_morphy as _wn_morphy_raw
@@ -1092,19 +1112,21 @@ class RetrievalEngine:
                 and len(segs) >= 2
                 and _is_verb(segs[1])
             )
-            # Modal-verb pattern: head is MD ("should", "would", "could")
-            # followed by a verb (e.g., "should_review", "should_avoid").
+            # Modal-verb pattern: head is MD ("should", "would", "could",
+            # "might") followed by any word. Modals are structural
+            # verb-selectors — the complement is grammatically always a
+            # verb regardless of its WordNet synset distribution.
             modal_verb = (
                 head_pos == "MD"
                 and len(segs) >= 2
-                and _is_verb(segs[1])
             )
             if verb_headed:
                 # Verb-headed compound: render as verb phrase
+                _o_art = self._maybe_article(o_raw) if o_raw else ""
                 if subject_surface:
-                    body = f"{subject_surface} {pred_natural} {o_raw}".strip()
+                    body = f"{subject_surface} {pred_natural} {_o_art}".strip()
                 else:
-                    body = f"{pred_natural} {o_raw}".strip()
+                    body = f"{pred_natural} {_o_art}".strip()
             elif adverb_verb:
                 # Adverb + verb: detect tense from verb morphology,
                 # then render as "{subject} {adv} {verb_inflected} {rest} {obj}"
@@ -1126,7 +1148,7 @@ class RetrievalEngine:
                         rest_parts = [p for p in segs[2:] if p]
                         parts = [subject_surface, adv, copula, verb_seg] + rest_parts
                         if o_raw:
-                            parts.append(o_raw)
+                            parts.append(self._maybe_article(o_raw))
                         body = " ".join(p for p in parts if p).strip()
                         return self._finalize_sentence(connective + body)
                     else:
@@ -1138,7 +1160,7 @@ class RetrievalEngine:
                     v_inflected = inflect_verb(verb_lemma, tense, person)
                 parts = [subject_surface, adv, v_inflected] + [s for s in segs[2:] if s]
                 if o_raw:
-                    parts.append(o_raw)
+                    parts.append(self._maybe_article(o_raw))
                 body = " ".join(p for p in parts if p).strip()
             elif modal_verb:
                 # Modal + verb: render as "{subject} {modal} {verb_base} {rest} {obj}"
@@ -1147,7 +1169,7 @@ class RetrievalEngine:
                 verb_lemma = _wn_morphy_v(verb_seg) or verb_seg
                 parts = [subject_surface, modal, verb_lemma] + [s for s in segs[2:] if s]
                 if o_raw:
-                    parts.append(o_raw)
+                    parts.append(self._maybe_article(o_raw))
                 body = " ".join(p for p in parts if p).strip()
             elif adj_headed:
                 # Adjective-headed predicate (allergic_to, anxious_because):
@@ -1168,7 +1190,12 @@ class RetrievalEngine:
                 else:
                     body = f"{copula} {pred_natural} {o_raw}".strip()
             elif is_user_subject and noun_compound:
-                body = f"Your {pred_natural} is {o_raw}".strip()
+                # Lemmatize the head for copular: "shows pattern" → "show pattern"
+                _nc_segs = [s for s in p_raw.split("_") if s]
+                _nc_head = _nc_segs[0] if _nc_segs else ""
+                _nc_lemma = _wn_morphy_raw(_nc_head, "n") or _nc_head
+                _nc_natural = " ".join([_nc_lemma] + _nc_segs[1:])
+                body = f"Your {_nc_natural} is {o_raw}".strip()
             elif is_user_subject:
                 body = f"Your {pred_natural} is {o_raw}".strip()
             elif subject_surface:
@@ -1207,7 +1234,7 @@ class RetrievalEngine:
                 parts.append(parsed.verb_surface)
                 parts.extend(parsed.middle)
                 if o_raw:
-                    parts.append(o_raw)
+                    parts.append(self._maybe_article(o_raw))
                 body = " ".join([p for p in parts if p]).strip()
                 return self._finalize_sentence(connective + body)
             # ── Structural tense rule ──
@@ -1252,12 +1279,6 @@ class RetrievalEngine:
                     # Past-tense morphology — use stored surface, no "will"
                     verb_surface = parsed.verb_surface
                     tense = "past"
-                elif surface_pos == "VBZ" or is_mistagged_verb:
-                    # 3rd-person singular present ("has", "feels", "prefers")
-                    # or mistagged NNS that is structurally VBZ.
-                    # Re-inflect for correct person agreement.
-                    verb_surface = inflect_verb(parsed.verb_lemma, "present", person)
-                    tense = "present"
                 elif surface_pos == "VBG":
                     # Present participle ("helping", "working", "studying")
                     # Render as progressive: "is/are {-ing}"
@@ -1269,9 +1290,60 @@ class RetrievalEngine:
                     parts.append(parsed.verb_surface)
                     parts.extend(parsed.middle)
                     if o_raw:
-                        parts.append(o_raw)
+                        parts.append(self._maybe_article(o_raw))
                     body = " ".join([p for p in parts if p]).strip()
                     return self._finalize_sentence(connective + body)
+                elif is_mistagged_verb:
+                    # NN/NNS-tagged but structurally a verb (morphy
+                    # resolves to the known lemma). Sub-classify the
+                    # actual tense from suffix morphology — the POS
+                    # tagger failed but the morphology is unambiguous:
+                    #   -ing suffix  → progressive (VBG)
+                    #   verb.exc map → irregular past (VBD)
+                    #   otherwise    → present 3s (VBZ, e.g. "feels")
+                    _sfc = parsed.verb_surface.lower()
+                    if _sfc.endswith("ing"):
+                        # Progressive: "planning" → "are planning"
+                        copula = "are" if person == "2s" else "is"
+                        parts = []
+                        if subject_surface:
+                            parts.append(subject_surface)
+                        parts.append(copula)
+                        parts.append(parsed.verb_surface)
+                        parts.extend(parsed.middle)
+                        if o_raw:
+                            parts.append(self._maybe_article(o_raw))
+                        body = " ".join([p for p in parts if p]).strip()
+                        return self._finalize_sentence(connective + body)
+                    else:
+                        # Check WordNet verb exceptions: if the surface
+                        # form appears as an irregular past of the lemma,
+                        # it's VBD ("met" → past of "meet"), not VBZ.
+                        _is_irreg_past = False
+                        try:
+                            from nltk.corpus import wordnet as _wn_tense
+                            _wn_tense.morphy("be", "v")  # trigger load
+                            _vexc = _wn_tense._exception_map.get("v", {})
+                            _exc_base = _vexc.get(_sfc)
+                            if _exc_base:
+                                _bases = _exc_base if isinstance(_exc_base, (list, tuple)) else [_exc_base]
+                                if parsed.verb_lemma in _bases:
+                                    _is_irreg_past = True
+                        except Exception:
+                            pass
+                        if _is_irreg_past:
+                            # Irregular past: use stored surface as-is
+                            verb_surface = parsed.verb_surface
+                            tense = "past"
+                        else:
+                            # Present 3s mistagged as NNS ("feels", "needs")
+                            verb_surface = inflect_verb(parsed.verb_lemma, "present", person)
+                            tense = "present"
+                elif surface_pos == "VBZ":
+                    # 3rd-person singular present ("has", "feels")
+                    # Re-inflect for correct person agreement.
+                    verb_surface = inflect_verb(parsed.verb_lemma, "present", person)
+                    tense = "present"
                 else:
                     # Other inflected forms — re-inflect for person, present
                     verb_surface = inflect_verb(parsed.verb_lemma, "present", person)
@@ -1304,7 +1376,7 @@ class RetrievalEngine:
             parts.append(aux)
             parts.append(pp)
             parts.extend(parsed.middle)
-            parts.append(o_raw)
+            parts.append(self._maybe_article(o_raw))
             body = " ".join([p for p in parts if p]).strip()
             return self._finalize_sentence(connective + body)
 
@@ -1318,11 +1390,116 @@ class RetrievalEngine:
         if tense == "future" and not morphology_carries_tense and verb_surface.lower() != "will":
             parts.append("will")
         parts.append(verb_surface)
-        parts.extend(parsed.middle)
+        # Word-order fix: when the predicate carries a preposition +
+        # embedded noun (entity) and the object starts with an adjective,
+        # the object is a descriptor that should precede the prepositional
+        # phrase: "feel jealous but happy about Riya" not
+        # "feel about Riya jealous but happy". Structural tell: the
+        # object's first token is JJ-tagged (adjective).
+        from app.engines.predicate_shape import _pos_tag as _pt_mid
+        _obj_first_tag = ""
         if o_raw:
-            parts.append(o_raw)
+            _obj_first_word = o_raw.split()[0] if o_raw.split() else ""
+            _obj_first_tag = _pt_mid(_obj_first_word) if _obj_first_word else ""
+        _reorder_obj_before_prep = (
+            parsed.preposition is not None
+            and parsed.embedded_noun is not None
+            and _obj_first_tag.startswith("JJ")
+        )
+        if _reorder_obj_before_prep:
+            # Place object before the prep+entity tail
+            if o_raw:
+                parts.append(self._maybe_article(o_raw))
+            for seg in parsed.middle:
+                # Title-case embedded noun (entity reference in predicate)
+                if seg == parsed.embedded_noun and seg[0].islower():
+                    parts.append(seg.title())
+                else:
+                    parts.append(seg)
+        else:
+            # Normal order: middle segments then object
+            _has_embedded_article = False
+            for seg in parsed.middle:
+                if _pt_mid(seg) == "NN" and parsed.embedded_noun == seg:
+                    parts.append(self._maybe_article(seg))
+                    _has_embedded_article = True
+                else:
+                    parts.append(seg)
+            if o_raw:
+                # Skip article on object when the predicate already
+                # carries an embedded noun with its own article — the
+                # object modifies that noun, not a new noun phrase.
+                # Insert a linking preposition "for" when the embedded
+                # noun has no preposition after it and the object is a
+                # bare noun phrase (not starting with a preposition).
+                if _has_embedded_article:
+                    # Insert linking "for" when the embedded noun has
+                    # no trailing preposition and the object doesn't
+                    # start with one. POS-tagged: IN/TO = preposition.
+                    _obj_lead = o_raw.split()[0] if o_raw.split() else ""
+                    _obj_lead_tag = _pt_mid(_obj_lead) if _obj_lead else ""
+                    _needs_link = (
+                        parsed.preposition is None
+                        and _obj_lead_tag not in ("IN", "TO")
+                    )
+                    if _needs_link:
+                        parts.append("for")
+                    parts.append(o_raw)
+                else:
+                    # Skip article after infinitive "to" — the object
+                    # starts a verb phrase, not a noun phrase.
+                    _last_mid = parsed.middle[-1] if parsed.middle else ""
+                    if _last_mid.lower() == "to":
+                        parts.append(o_raw)
+                    else:
+                        parts.append(self._maybe_article(o_raw))
         body = " ".join([p for p in parts if p]).strip()
         return self._finalize_sentence(connective + body)
+
+    # ── Article insertion ──
+
+    @staticmethod
+    def _maybe_article(obj: str) -> str:
+        """Prepend 'a'/'an' to an object phrase when the first word is a
+        bare singular count noun (POS=NN).  POS-based, not a word list.
+
+        Skips when:
+          - object is empty or starts with a determiner/possessive/number
+          - first word is a proper noun (NNP/NNPS)
+          - first word is plural (NNS)
+          - first word is an adjective (JJ) followed by a proper noun
+            (the adjective modifies a name, not a count noun)
+        """
+        if not obj:
+            return obj
+        tokens = obj.split()
+        if not tokens:
+            return obj
+        first = tokens[0]
+        # Already has a determiner, possessive, or digit lead
+        fl = first.lower()
+        if fl in ("a", "an", "the", "this", "that", "these", "those",
+                  "my", "your", "his", "her", "its", "our", "their",
+                  "some", "any", "every", "each", "no"):
+            return obj
+        if first[0].isdigit():
+            return obj
+        # Proper noun heuristic: if the first word starts with an
+        # uppercase letter, it's likely a proper noun (entity name,
+        # day of week, place). Objects are raw stored text, never
+        # sentence-initial, so uppercase = proper noun.
+        if first[0].isupper():
+            return obj
+        try:
+            from app.engines.predicate_shape import _pos_tag as _pt_art
+            tag = _pt_art(first)
+            if tag == "NN":
+                # Singular count noun — needs article
+                article = "an" if fl[0] in "aeiou" else "a"
+                return article + " " + obj
+        except Exception:
+            pass
+        return obj
 
     # ── Morphological polish for _finalize_sentence ──
 
@@ -1399,7 +1576,7 @@ class RetrievalEngine:
                          AND LOWER(subject) LIKE ('%' || LOWER(?) || '%')
                          AND COALESCE(is_current, 1) = 1
                          AND tombstoned_at IS NULL
-                       ORDER BY COALESCE(sequence_number, id) DESC
+                       ORDER BY id DESC
                        LIMIT 10""",
                     (user_id, entity),
                 ).fetchall()
@@ -1413,7 +1590,7 @@ class RetrievalEngine:
                          AND LOWER(object) LIKE ('%' || LOWER(?) || '%')
                          AND COALESCE(is_current, 1) = 1
                          AND tombstoned_at IS NULL
-                       ORDER BY COALESCE(sequence_number, id) DESC
+                       ORDER BY id DESC
                        LIMIT 10""",
                     (user_id, entity, entity),
                 ).fetchall()
@@ -1454,14 +1631,18 @@ class RetrievalEngine:
             }
             # Collect consecutive capitalized tokens as a single entity
             # (e.g. "Meridian Labs" -> "meridian labs")
+            # Structural rule: sentence-initial capitalization (index 0)
+            # is English orthography, not a proper-noun signal. Only
+            # mid-sentence capitalization indicates a proper noun.
             entity_parts: List[str] = []
-            for tok in tokens:
+            for i, tok in enumerate(tokens):
                 clean = tok.strip("?.,!;:'\"()")
                 if not clean:
                     if entity_parts:
                         return " ".join(entity_parts).lower()
                     continue
-                if clean[0].isupper() and clean.lower() not in _skip:
+                if (clean[0].isupper() and clean.lower() not in _skip
+                        and i > 0):
                     entity_parts.append(clean)
                 else:
                     if entity_parts:

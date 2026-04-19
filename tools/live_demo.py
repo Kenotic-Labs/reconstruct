@@ -68,16 +68,16 @@ print('  Turn 2: Met Riya Wednesday. She got promoted. User feels jealous but ha
 # Turn 3: Weekend plans
 mem.store(user_id=1, subject="user", predicate="planning", object="hike to Eagle Creek Saturday",
     source_text="This weekend I'm planning to do that hike up to Eagle Creek with my partner Jo. We've been talking about it for months. I need it honestly, just to clear my head after this week.")
-mem.store(user_id=1, subject="user", predicate="partners_with", object="Jo",
+mem.store(user_id=1, subject="user", predicate="partner", object="Jo",
     source_text="that hike up to Eagle Creek with my partner Jo.")
-mem.store(user_id=1, subject="user", predicate="needs_to", object="clear head after rough week",
+mem.store(user_id=1, subject="user", predicate="needs_to", object="decompress after this week",
     source_text="I need it honestly, just to clear my head after this week.")
 print('  Turn 3: Hiking Eagle Creek Saturday with partner Jo. Needs to decompress.')
 
 # Turn 4: Health + proactive request
-mem.store(user_id=1, subject="user", predicate="has_appointment", object="dentist Tuesday morning",
+mem.store(user_id=1, subject="user", predicate="has", object="dentist appointment Tuesday morning",
     source_text="Oh and I have a dentist appointment Tuesday morning so I'll be late to standup. Can you remind me Monday night?")
-mem.store(user_id=1, subject="user", predicate="wants_reminder", object="Monday night about dentist",
+mem.store(user_id=1, subject="user", predicate="wants", object="reminder Monday night about dentist",
     source_text="Can you remind me Monday night?")
 print('  Turn 4: Dentist Tuesday. Wants reminder Monday night.')
 
@@ -112,16 +112,16 @@ mem_b = MemoryEngine()
 mem_b.store(user_id=1, subject="user", predicate="might_benefit_from",
     object="career goals conversation",
     source_text="The work frustration combined with seeing Riya's promotion suggests this person could benefit from reflecting on their own career trajectory.")
-mem_b.store(user_id=1, subject="user", predicate="shows_pattern",
-    object="uses outdoor activity to process stress",
+mem_b.store(user_id=1, subject="user", predicate="copes_by",
+    object="hiking outdoors when stressed",
     source_text="Planning a hike specifically to clear head after a rough work week. This is a coping pattern worth noting.")
-mem_b.store(user_id=1, subject="user", predicate="action_needed",
-    object="send reminder Monday night about dentist",
+mem_b.store(user_id=1, subject="user", predicate="requested",
+    object="reminder Monday night about dentist",
     source_text="User explicitly asked for a Monday night reminder about Tuesday dentist appointment. This is a proactive commitment.")
 print('  -> Stored 3 triples:')
 print('     - Career insight: might benefit from goals conversation')
-print('     - Pattern: uses outdoor activity to process stress')
-print('     - Action: send reminder Monday night about dentist')
+print('     - Coping pattern: stress through outdoor activity')
+print('     - Action: reminder Monday night about dentist')
 print('\n  Agent B session ends. GPT goes offline.\n')
 
 # ================================================================

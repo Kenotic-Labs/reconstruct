@@ -97,7 +97,23 @@ def is_verb_token(token: str) -> bool:
         m = _wn_morphy(token, "v")
         if m and m != token.lower():
             return True
-        return _wn_is_verb(token)
+        # Base-form noun/verb ambiguity: when morphy returns the same
+        # form (not inflected) AND noun synsets outnumber verb synsets,
+        # the dominant reading is nominal. Words like "action", "reason",
+        # "pattern" have rare verb synsets but are structurally nouns in
+        # predicate position. Synset-count is a WordNet structural
+        # property, not a curated threshold.
+        if _wn_is_verb(token):
+            try:
+                from nltk.corpus import wordnet as _wn_dom
+                _n_n = len(_wn_dom.synsets(token.lower(), pos="n"))
+                _n_v = len(_wn_dom.synsets(token.lower(), pos="v"))
+                if _n_n > _n_v:
+                    return False  # noun-dominant: not a verb
+            except Exception:
+                pass
+            return True
+        return False
     if not tag:
         return _wn_is_verb(token)
     return _wn_is_verb(token)
@@ -191,12 +207,29 @@ def parse_predicate(predicate: str) -> ParsedPredicate:
             # The structural tell: exactly 2 segments, both NN-tagged,
             # and the immediate next segment is NN (not IN/TO/RB which
             # would indicate a verb phrase like "earns_from").
+            #
+            # Exception: if the verb lemma is verb-dominant in WordNet
+            # (more verb synsets than noun synsets), it's a transitive
+            # verb + direct object ("shows_pattern" = "show" + "pattern"),
+            # not a noun compound. Synset-count is structural, not curated.
             if len(segs) == 2 and _pos_tag(segs[1]).startswith("NN"):
-                return ParsedPredicate(
-                    verb_surface=head,
-                    failure_reason=f"noun_compound_head:{head}",
-                    ok=False,
-                )
+                _is_verb_dominant = False
+                try:
+                    from nltk.corpus import wordnet as _wn_vc
+                    _nv = len(_wn_vc.synsets(verb_morphy, pos="v"))
+                    _nn = len(_wn_vc.synsets(verb_morphy, pos="n"))
+                    if _nv > _nn:
+                        _is_verb_dominant = True
+                except Exception:
+                    pass
+                if _is_verb_dominant:
+                    pass  # fall through to verb parsing
+                else:
+                    return ParsedPredicate(
+                        verb_surface=head,
+                        failure_reason=f"noun_compound_head:{head}",
+                        ok=False,
+                    )
 
     # Gerund + noun compound detection: VBG head followed immediately
     # by an NN-tagged segment is a gerund-noun compound
