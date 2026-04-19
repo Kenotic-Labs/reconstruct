@@ -70,6 +70,19 @@ AGENT_C_TAG = "[Agent C -- Gemini]"
 AGENT_A_RETURN_TAG = "[Agent A -- Claude returns]"
 
 
+class _SuppressStdout:
+    """Context manager to suppress stdout/stderr during noisy init."""
+    def __enter__(self):
+        self._stdout = sys.stdout
+        self._stderr = sys.stderr
+        sys.stdout = io.StringIO()
+        sys.stderr = io.StringIO()
+        return self
+    def __exit__(self, *args):
+        sys.stdout = self._stdout
+        sys.stderr = self._stderr
+
+
 def init_db():
     """Wipe and re-create the demo database."""
     Path(DEMO_DB).parent.mkdir(parents=True, exist_ok=True)
@@ -78,8 +91,9 @@ def init_db():
     except Exception:
         pass
     conn = sqlite3.connect(DEMO_DB)
-    conn.executescript(MIGRATIONS)
-    run_schema_upgrades(conn)
+    with _SuppressStdout():
+        conn.executescript(MIGRATIONS)
+        run_schema_upgrades(conn)
     try:
         conn.execute("ALTER TABLE relationships ADD COLUMN sequence_number INTEGER")
         conn.execute(
@@ -91,15 +105,28 @@ def init_db():
     conn.close()
 
 
+_engines_initialized = False
+
+
 def fresh_engines():
     """Create fresh engine instances (simulates fresh agent session).
 
     Each call returns genuinely new objects pointing at the same DB.
+    First call suppresses embedding model load noise.
     """
-    mem = MemoryEngine()
-    tmp = TemporalEngine()
-    tmp.bind_memory(mem)
-    ret = RetrievalEngine(memory_engine=mem, temporal_engine=tmp)
+    global _engines_initialized
+    if not _engines_initialized:
+        with _SuppressStdout():
+            mem = MemoryEngine()
+            tmp = TemporalEngine()
+            tmp.bind_memory(mem)
+            ret = RetrievalEngine(memory_engine=mem, temporal_engine=tmp)
+        _engines_initialized = True
+    else:
+        mem = MemoryEngine()
+        tmp = TemporalEngine()
+        tmp.bind_memory(mem)
+        ret = RetrievalEngine(memory_engine=mem, temporal_engine=tmp)
     return mem, tmp, ret
 
 
@@ -149,6 +176,50 @@ def print_qa(retrieval, user_id, question, mode="lookup"):
     return text
 
 
+def type1_vs_type2(user_id, question, retrieval, mode="lookup"):
+    """Show Type 1 (flat fact retrieval) vs Type 2 (Kenotic) side by side."""
+    # --- Type 1: raw SPO triples from DB, no reconstruction ---
+    type1_facts = []
+    try:
+        from app.db.session import get_db_context
+        with get_db_context() as conn:
+            rows = conn.execute(
+                """SELECT subject, predicate, object
+                   FROM relationships
+                   WHERE user_id = ?
+                     AND COALESCE(is_current, 1) = 1
+                     AND tombstoned_at IS NULL
+                   ORDER BY COALESCE(sequence_number, id) DESC
+                   LIMIT 5""",
+                (user_id,),
+            ).fetchall()
+            for r in rows:
+                s = r["subject"] if isinstance(r, sqlite3.Row) else r[0]
+                p = r["predicate"] if isinstance(r, sqlite3.Row) else r[1]
+                o = r["object"] if isinstance(r, sqlite3.Row) else r[2]
+                type1_facts.append(f"{s} {p} {o}")
+    except Exception as e:
+        type1_facts = [f"(error: {e})"]
+
+    # --- Type 2: Kenotic reconstruction ---
+    type2_text, _ = ask(retrieval, user_id, question, mode)
+
+    print(f"  {'=' * 55}")
+    print(f"  TYPE 1 (Fact Retrieval -- what Mem0/ChatGPT Memory does):")
+    print(f"  Q: {question}")
+    print(f"  A:")
+    for fact in type1_facts:
+        print(f"     * {fact}")
+    print(f"     (flat facts, no arc, no emotion, no timeline)")
+    print()
+    print(f"  TYPE 2 (Understanding Continuity -- what Kenotic does):")
+    print(f"  Q: {question}")
+    print(f"  A: {type2_text}")
+    print(f"     (reconstructed situation with temporal arc + emotional state)")
+    print(f"  {'=' * 55}")
+    print()
+
+
 def point_header(n, name):
     print(HEAVY)
     print(f"  POINT {n}: {name}")
@@ -195,6 +266,10 @@ def point1_core_continuity():
     ]
     store_triples(mem, uid, triples)
     agent_separator("Agent A")
+
+    # --- Type 1 vs Type 2 contrast ---
+    mem_cmp, tmp_cmp, ret_cmp = fresh_engines()
+    type1_vs_type2(uid, "What event do I have coming up?", ret_cmp)
 
     # --- Agent B: GPT queries and adds its own contributions ---
     print(f"  {AGENT_B_TAG} (fresh session)")
@@ -278,6 +353,10 @@ def point2_update_continuity():
     store_triples(mem, uid, updates)
     agent_separator("Agent A")
 
+    # --- Type 1 vs Type 2 contrast ---
+    mem_cmp, tmp_cmp, ret_cmp = fresh_engines()
+    type1_vs_type2(uid, "When is the team presentation now?", ret_cmp)
+
     # --- Agent B: GPT queries and adds workflow help ---
     print(f"  {AGENT_B_TAG} (fresh session)")
     print(f'  "Checking in on this user\'s presentation situation..."')
@@ -352,6 +431,10 @@ def point3_disambiguation():
     ]
     store_triples(mem, uid, triples)
     agent_separator("Agent A")
+
+    # --- Type 1 vs Type 2 contrast ---
+    mem_cmp, tmp_cmp, ret_cmp = fresh_engines()
+    type1_vs_type2(uid, "Where is my interview?", ret_cmp)
 
     # --- Agent B: GPT disambiguates and adds prep for each ---
     print(f"  {AGENT_B_TAG} (fresh session)")
@@ -432,6 +515,10 @@ def point4_multihop():
     store_triples(mem, uid, triples)
     agent_separator("Agent A")
 
+    # --- Type 1 vs Type 2 contrast ---
+    mem_cmp, tmp_cmp, ret_cmp = fresh_engines()
+    type1_vs_type2(uid, "What am I preparing for?", ret_cmp)
+
     # --- Agent B: GPT does multi-hop lookup, adds strategic notes ---
     print(f"  {AGENT_B_TAG} (fresh session)")
     print(f'  "Connecting the dots on this user\'s career transition..."')
@@ -507,6 +594,10 @@ def point5_model_agnostic():
     ]
     store_triples(mem, uid, triples)
     agent_separator("Agent A")
+
+    # --- Type 1 vs Type 2 contrast ---
+    mem_cmp, tmp_cmp, ret_cmp = fresh_engines()
+    type1_vs_type2(uid, "What am I working on?", ret_cmp)
 
     # --- Agent B: GPT (different model entirely) queries and adds ---
     print(f"  {AGENT_B_TAG} (different model, same DB)")
@@ -587,6 +678,10 @@ def point6_institutional():
     store_triples(mem, uid, triples)
     agent_separator("Agent A")
 
+    # --- Type 1 vs Type 2 contrast ---
+    mem_cmp, tmp_cmp, ret_cmp = fresh_engines()
+    type1_vs_type2(uid, "What is the standup situation?", ret_cmp)
+
     # --- Agent B: GPT checks on logistics and adds ops notes ---
     print(f"  {AGENT_B_TAG} (fresh session)")
     print(f'  "Reviewing the standup logistics..."')
@@ -665,6 +760,10 @@ def point7_physical_operational():
     store_triples(mem, uid, triples)
     agent_separator("Agent A")
 
+    # --- Type 1 vs Type 2 contrast ---
+    mem_cmp, tmp_cmp, ret_cmp = fresh_engines()
+    type1_vs_type2(uid, "What happened with the delivery?", ret_cmp)
+
     # --- Agent B: GPT reviews incident and adds resolution notes ---
     print(f"  {AGENT_B_TAG} (fresh session)")
     print(f'  "Reviewing the delivery incident report..."')
@@ -731,6 +830,24 @@ def main() -> int:
     print()
 
     init_db()
+
+    # Warm up embedding model (suppresses noisy load output)
+    with _SuppressStdout():
+        _warmup_mem = MemoryEngine()
+        _warmup_mem.store(
+            user_id=0, subject="warmup", predicate="init", object="test",
+            source_text="warmup", confidence=0.5,
+        )
+        del _warmup_mem
+    # Remove warmup data
+    conn = sqlite3.connect(DEMO_DB)
+    conn.execute("DELETE FROM relationships WHERE user_id = 0")
+    try:
+        conn.execute("DELETE FROM memory_traces WHERE relationship_id NOT IN (SELECT id FROM relationships)")
+    except Exception:
+        pass
+    conn.commit()
+    conn.close()
 
     try:
         point1_core_continuity()

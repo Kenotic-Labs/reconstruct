@@ -184,6 +184,32 @@ def parse_predicate(predicate: str) -> ParsedPredicate:
                         failure_reason=f"noun_compound_head:{head}",
                         ok=False,
                     )
+        else:
+            # Even when head looks like an inflected verb, if the
+            # predicate is a 2-segment compound where BOTH segments
+            # are NN-tagged, it's a noun compound ("supplies_status").
+            # The structural tell: exactly 2 segments, both NN-tagged,
+            # and the immediate next segment is NN (not IN/TO/RB which
+            # would indicate a verb phrase like "earns_from").
+            if len(segs) == 2 and _pos_tag(segs[1]).startswith("NN"):
+                return ParsedPredicate(
+                    verb_surface=head,
+                    failure_reason=f"noun_compound_head:{head}",
+                    ok=False,
+                )
+
+    # Gerund + noun compound detection: VBG head followed immediately
+    # by an NN-tagged segment is a gerund-noun compound
+    # ("scheduling_note", "working_title"), not a verb phrase.
+    # VBN is excluded — "received_advice" IS a verb phrase (past
+    # tense + direct object), not a compound noun.
+    if head_tag == "VBG" and len(segs) >= 2:
+        if _pos_tag(segs[1]).startswith("NN"):
+            return ParsedPredicate(
+                verb_surface=head,
+                failure_reason=f"noun_compound_head:{head}",
+                ok=False,
+            )
 
     # Head validation: must be verb-shaped. is_verb_token uses POS first,
     # WordNet fallback — same contract as the write-path gate.
@@ -384,11 +410,18 @@ def inflect_verb(lemma: str, tense: Optional[str], person: str = "2s") -> str:
 
     t = (tense or "").lower().strip()
 
-    # The verb "be" is the only lemma the renderer special-cases (via
-    # _YOU_CONJUGATE in retrieval.py). If we see it here, return base
-    # and let the caller apply its map.
+    # "be" and "have" are the only English verbs with irregular
+    # 3rd-person-singular present forms (is/has vs regular -s/-es).
+    # These are morphological facts, not a word list — every other
+    # English verb follows the regular -s rule.
     if lemma == "be":
         return lemma
+    if lemma == "have":
+        if t in ("", "present") and person == "3s":
+            return "has"
+        if t == "past":
+            return "had"
+        return "have"
 
     if t == "past":
         irreg = _irregular_past_via_wordnet(lemma)

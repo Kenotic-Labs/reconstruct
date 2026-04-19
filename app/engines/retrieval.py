@@ -1012,23 +1012,30 @@ class RetrievalEngine:
             body = f"{subject_surface} {verb} {o_raw}"
             return self._finalize_sentence(connective + body)
 
-        # ── Branch 2: emotional edge (label equals object, legacy) ──
-        emo_label = (edge.get("edge_emotional_label") or "").strip()
-        if emo_label and emo_label.lower() == o_raw.lower() and o_raw:
-            verb = "felt" if tense == "past" else "feel" if is_user_subject else "feels"
-            body = f"{subject_surface} {verb} {o_raw}"
-            return self._finalize_sentence(connective + body)
-
-        # Branch 2 -- structural SPO via predicate-shape parser.
+        # ── Structural SPO via predicate-shape parser ──
         from app.engines.predicate_shape import parse_predicate, inflect_verb
 
         tense = (edge.get("edge_temporal_context") or "").lower().strip()
         person = "2s" if (is_user_subject or (subject_surface and subject_surface.lower() == "you")) else "3s"
         parsed = parse_predicate(p_raw)
 
+        # ── Branch 2: emotional edge (label equals object, legacy) ──
+        # Only fires when the predicate is NOT a parseable verb phrase.
+        # This prevents false matches where the cosine classifier
+        # assigned the object text as the emotional label (e.g.,
+        # predicate="has_event", object="team presentation",
+        # emotional_label="team presentation" — a coincidence, not
+        # a real emotional edge).
+        if not parsed.ok:
+            emo_label = (edge.get("edge_emotional_label") or "").strip()
+            if emo_label and emo_label.lower() == o_raw.lower() and o_raw:
+                verb = "felt" if tense == "past" else "feel" if is_user_subject else "feels"
+                body = f"{subject_surface} {verb} {o_raw}"
+                return self._finalize_sentence(connective + body)
+
         if not parsed.ok:
             try:
-                log.warning(
+                log.debug(
                     "predicate_shape_fallback: predicate=%r reason=%r edge_id=%s",
                     p_raw, parsed.failure_reason, edge.get("id"),
                 )
@@ -1043,16 +1050,114 @@ class RetrievalEngine:
             noun_compound = "noun_compound" in (parsed.failure_reason or "")
             from app.engines.predicate_shape import is_verb_token as _is_verb
             from app.engines.predicate_shape import _pos_tag as _pt_fallback
+            from app.engines.predicate_shape import _wn_morphy as _wn_morphy_raw
+            def _wn_morphy_v(tok):
+                return _wn_morphy_raw(tok, "v")
             head_token = p_raw.split("_")[0] if "_" in p_raw else p_raw
             head_pos = _pt_fallback(head_token)
+            # Gerund/participial-noun compound detection: if head is
+            # VBG or VBN tagged and a subsequent segment is NN-tagged,
+            # it's a modifier acting as noun prefix ("scheduling_note",
+            # "recommended_action"), not a verb phrase. Treat as noun
+            # compound for rendering.
+            if head_pos in ("VBG", "VBN") and not noun_compound:
+                for seg in segs[1:]:
+                    if _pt_fallback(seg).startswith("NN"):
+                        noun_compound = True
+                        break
             verb_headed = _is_verb(head_token) and not noun_compound
+            # Adjective detection: POS JJ* is primary. For NN-tagged
+            # words, check WordNet: if it has adj synsets but NO noun
+            # synsets, the tagger mistagged an adjective as a noun
+            # (e.g., "allergic" → NN in isolation, but WN says adj).
+            adj_headed = head_pos in ("JJ", "JJR", "JJS")
+            if not adj_headed and head_pos.startswith("NN") and not noun_compound:
+                try:
+                    from nltk.corpus import wordnet as _wn_adj
+                    has_adj = bool(_wn_adj.synsets(head_token.lower(), pos="a")
+                                   or _wn_adj.synsets(head_token.lower(), pos="s"))
+                    has_noun = bool(_wn_adj.synsets(head_token.lower(), pos="n"))
+                    if has_adj and not has_noun:
+                        adj_headed = True
+                except Exception:
+                    pass
             prep_headed = head_pos in ("IN", "TO", "RB")
+            # Adverb-verb pattern: head is RB/adverb and next segment
+            # is a verb (e.g., "now_feels", "now_scheduled_for",
+            # "originally_set_for", "previously_requested"). Structural
+            # tell: RB head + verb-shaped second segment.
+            segs = [s for s in p_raw.split("_") if s]
+            adverb_verb = (
+                head_pos == "RB"
+                and len(segs) >= 2
+                and _is_verb(segs[1])
+            )
+            # Modal-verb pattern: head is MD ("should", "would", "could")
+            # followed by a verb (e.g., "should_review", "should_avoid").
+            modal_verb = (
+                head_pos == "MD"
+                and len(segs) >= 2
+                and _is_verb(segs[1])
+            )
             if verb_headed:
                 # Verb-headed compound: render as verb phrase
                 if subject_surface:
                     body = f"{subject_surface} {pred_natural} {o_raw}".strip()
                 else:
                     body = f"{pred_natural} {o_raw}".strip()
+            elif adverb_verb:
+                # Adverb + verb: detect tense from verb morphology,
+                # then render as "{subject} {adv} {verb_inflected} {rest} {obj}"
+                adv = segs[0]
+                verb_seg = segs[1]
+                verb_lemma = _wn_morphy_v(verb_seg) or verb_seg
+                # Tense from morphology: if verb_seg != lemma, the verb
+                # carries its own tense; detect via POS.
+                if verb_seg.lower() != verb_lemma.lower():
+                    vpos = _pt_fallback(verb_seg)
+                    vm = _wn_morphy_raw(verb_seg, "v")
+                    is_mistag = vpos.startswith("NN") and vm and vm == verb_lemma
+                    if vpos in ("VBD", "VBN"):
+                        v_inflected = verb_seg  # past morphology
+                    elif vpos == "VBZ" or is_mistag:
+                        v_inflected = inflect_verb(verb_lemma, "present", person)
+                    elif vpos == "VBG":
+                        copula = "are" if person == "2s" else "is"
+                        rest_parts = [p for p in segs[2:] if p]
+                        parts = [subject_surface, adv, copula, verb_seg] + rest_parts
+                        if o_raw:
+                            parts.append(o_raw)
+                        body = " ".join(p for p in parts if p).strip()
+                        return self._finalize_sentence(connective + body)
+                    else:
+                        v_inflected = inflect_verb(verb_lemma, "present", person)
+                else:
+                    # Base form: surface == lemma (ambiguous tense, e.g.,
+                    # "set", "put", "cut"). Use cosine-detected tense as
+                    # tiebreaker — it's the only structural signal left.
+                    v_inflected = inflect_verb(verb_lemma, tense, person)
+                parts = [subject_surface, adv, v_inflected] + [s for s in segs[2:] if s]
+                if o_raw:
+                    parts.append(o_raw)
+                body = " ".join(p for p in parts if p).strip()
+            elif modal_verb:
+                # Modal + verb: render as "{subject} {modal} {verb_base} {rest} {obj}"
+                modal = segs[0]
+                verb_seg = segs[1]
+                verb_lemma = _wn_morphy_v(verb_seg) or verb_seg
+                parts = [subject_surface, modal, verb_lemma] + [s for s in segs[2:] if s]
+                if o_raw:
+                    parts.append(o_raw)
+                body = " ".join(p for p in parts if p).strip()
+            elif adj_headed:
+                # Adjective-headed predicate (allergic_to, anxious_because):
+                # copular with "is/are" + adjective phrase.
+                # "You are allergic to shellfish"
+                copula = "are" if is_user_subject else "is"
+                if subject_surface:
+                    body = f"{subject_surface} {copula} {pred_natural} {o_raw}".strip()
+                else:
+                    body = f"{copula} {pred_natural} {o_raw}".strip()
             elif prep_headed:
                 # Prepositional-headed predicate (in_relationship_with,
                 # on_hiring_panel, together_for): copular with "is/are"
@@ -1105,17 +1210,74 @@ class RetrievalEngine:
                     parts.append(o_raw)
                 body = " ".join([p for p in parts if p]).strip()
                 return self._finalize_sentence(connective + body)
-            # Preserve stored tense morphology when the stored surface
-            # differs from the lemma. The predicate's verb_surface carries
-            # the tense the user spoke ("accepted", "interviewed",
-            # "started"). Re-inflecting from the lemma based on
-            # edge_temporal_context can lose this original tense when the
-            # context label disagrees with the surface morphology.
-            # Structural rule: if verb_surface != verb_lemma (tense was
-            # baked into the predicate), prefer the stored surface.
-            if parsed.verb_surface.lower() != parsed.verb_lemma.lower():
-                verb_surface = parsed.verb_surface
+            # ── Structural tense rule ──
+            # The verb's OWN morphology (baked into the stored predicate)
+            # is the ground truth for tense. The cosine-detected
+            # edge_temporal_context is a noisy secondary signal.
+            #
+            # When verb_surface != verb_lemma, the predicate carries
+            # inflected morphology ("has", "feels", "received", "booked").
+            # We derive the rendering tense FROM that morphology via POS
+            # tag, ignoring the cosine label. This prevents "will has",
+            # "will received", etc.
+            #
+            # When verb_surface == verb_lemma (base form), the predicate
+            # did not carry tense — use the cosine-detected tense to
+            # inflect.
+            morphology_carries_tense = (
+                parsed.verb_surface.lower() != parsed.verb_lemma.lower()
+            )
+
+            if morphology_carries_tense:
+                # POS-tag the stored surface to determine its tense.
+                # Caveat: NLTK POS-tags verbs like "feels", "needs",
+                # "prefers" as NNS in isolation. The structural tell for
+                # a mistagged verb: morphy(surface, 'v') returns a
+                # DIFFERENT lemma. In that case, treat as present-tense
+                # verb and re-inflect for person agreement.
+                from app.engines.predicate_shape import _pos_tag as _pt_morph
+                from app.engines.predicate_shape import _wn_morphy as _morph_check
+                surface_pos = _pt_morph(parsed.verb_surface)
+
+                # Detect mistagged verbs: NNS/NN-tagged but morphy('v')
+                # resolves to the known lemma — structurally a verb.
+                morphy_v = _morph_check(parsed.verb_surface, "v")
+                is_mistagged_verb = (
+                    surface_pos.startswith("NN")
+                    and morphy_v is not None
+                    and morphy_v == parsed.verb_lemma
+                )
+
+                if surface_pos in ("VBD", "VBN"):
+                    # Past-tense morphology — use stored surface, no "will"
+                    verb_surface = parsed.verb_surface
+                    tense = "past"
+                elif surface_pos == "VBZ" or is_mistagged_verb:
+                    # 3rd-person singular present ("has", "feels", "prefers")
+                    # or mistagged NNS that is structurally VBZ.
+                    # Re-inflect for correct person agreement.
+                    verb_surface = inflect_verb(parsed.verb_lemma, "present", person)
+                    tense = "present"
+                elif surface_pos == "VBG":
+                    # Present participle ("helping", "working", "studying")
+                    # Render as progressive: "is/are {-ing}"
+                    copula = "are" if person == "2s" else "is"
+                    parts = []
+                    if subject_surface:
+                        parts.append(subject_surface)
+                    parts.append(copula)
+                    parts.append(parsed.verb_surface)
+                    parts.extend(parsed.middle)
+                    if o_raw:
+                        parts.append(o_raw)
+                    body = " ".join([p for p in parts if p]).strip()
+                    return self._finalize_sentence(connective + body)
+                else:
+                    # Other inflected forms — re-inflect for person, present
+                    verb_surface = inflect_verb(parsed.verb_lemma, "present", person)
+                    tense = "present"
             else:
+                # Base form — use cosine-detected tense to inflect
                 verb_surface = inflect_verb(parsed.verb_lemma, tense, person)
 
         passive = parsed.preposition == "by" and tense == "past"
@@ -1149,7 +1311,11 @@ class RetrievalEngine:
         parts = []
         if subject_surface:
             parts.append(subject_surface)
-        if tense == "future" and verb_surface.lower() != "will":
+        # Only prepend "will" when tense is future AND the morphology
+        # did NOT carry its own tense (base-form verbs only). If the
+        # stored surface was already inflected, the tense variable was
+        # overridden above to match the morphology.
+        if tense == "future" and not morphology_carries_tense and verb_surface.lower() != "will":
             parts.append("will")
         parts.append(verb_surface)
         parts.extend(parsed.middle)
@@ -1190,6 +1356,9 @@ class RetrievalEngine:
         text = text.strip()
         if not text:
             return ""
+        # Collapse multiple spaces (from empty join segments)
+        import re as _re_finalize
+        text = _re_finalize.sub(r"  +", " ", text)
         text = self._substitute_user_pronoun(text)
         if not text[0].isupper():
             text = text[0].upper() + text[1:]
