@@ -369,15 +369,12 @@ class RetrievalEngine:
     def _stage5_exit(
         self, q_emb: np.ndarray, candidates: List[Candidate]
     ) -> List[Candidate]:
-        """Exit Cosine: rank by PQ (answerability), fall back to edge
-        cosine (similarity) only when a candidate has no PQ. PQ measures
-        'does this edge answer the query?'; edge_embedding measures
-        surface similarity. Exit picks the answer, not the lookalike."""
+        """Exit Cosine: max(pq_cosine, edge_cosine). Additive — never
+        discards a signal, just picks the stronger one per candidate.
+        PQ measures answerability; edge measures surface similarity.
+        Whichever is higher for this (query, edge) pair wins."""
         for c in candidates:
-            if c.pq_cosine > 0:
-                c.exit_cosine = c.pq_cosine
-            else:
-                c.exit_cosine = c.edge_cosine
+            c.exit_cosine = max(c.pq_cosine, c.edge_cosine)
             c.source_stages.add("exit")
         return sorted(candidates, key=lambda c: -c.exit_cosine)
 

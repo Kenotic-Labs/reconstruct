@@ -35,7 +35,37 @@ from typing import List, Optional, Tuple
 
 import numpy as np
 
+import spacy
+
 from app.vector.embedder import embed_text
+
+# Lazy-loaded spaCy model for POS-based verb lemmatization.
+_nlp = None
+
+
+def _get_nlp():
+    global _nlp
+    if _nlp is None:
+        _nlp = spacy.load("en_core_web_sm")
+    return _nlp
+
+
+def _lemmatize_predicate(pred_clean: str) -> str:
+    """Lemmatize the head verb of a predicate phrase using spaCy POS.
+
+    'works at' -> 'work at', 'assigned to' -> 'assign to'.
+    Only the first VERB token is lemmatized; everything else passes through.
+    """
+    doc = _get_nlp()(pred_clean)
+    tokens = []
+    verb_done = False
+    for tok in doc:
+        if not verb_done and tok.pos_ == "VERB":
+            tokens.append(tok.lemma_)
+            verb_done = True
+        else:
+            tokens.append(tok.text)
+    return " ".join(tokens)
 
 # Closed WH-type set for this foundation layer.
 WH_WHO = "WHO"
@@ -233,7 +263,7 @@ def _applicable_wh_types(
         out.append(WH_WHO)
     if object_type == TIME or _predicate_is_temporal(predicate):
         out.append(WH_WHEN)
-    if object_type == LOCATION:
+    if object_type in (LOCATION, "ORG"):
         out.append(WH_WHERE)
     # Dedup preserving order.
     seen = set()
@@ -275,6 +305,7 @@ def generate_predicted_queries(
     # Vantage Systems?"). Structural templates are topic-aligned and
     # cosine-stable even when grammar is crude.
     pred_clean = predicate.replace("_", " ")
+    pred_lemma = _lemmatize_predicate(pred_clean)
 
     results: List[Tuple[str, np.ndarray]] = []
     for wh in wh_types:
@@ -283,19 +314,35 @@ def generate_predicted_queries(
             if subject_type == PERSON:
                 question = f"Who {pred_clean} {object}?"
             else:
-                question = f"Who does {subject} {pred_clean}?"
+                question = f"Who does {subject} {pred_lemma}?"
         elif wh == WH_WHEN:
-            question = f"When did {subject} {pred_clean} {object}?"
+            question = f"When did {subject} {pred_lemma} {object}?"
         elif wh == WH_WHERE:
-            question = f"Where does {subject} {pred_clean}?"
+            question = f"Where does {subject} {pred_lemma}?"
         else:  # WH_WHAT
-            question = f"What does {subject} {pred_clean}?"
+            question = f"What does {subject} {pred_lemma}?"
 
         try:
             emb = embed_text(question)
         except Exception:
             continue
         results.append((question, emb))
+
+        # Object-foregrounded variant: foreground the object as topic.
+        if wh == WH_WHO:
+            obj_question = f"Who is {object}?"
+        elif wh == WH_WHERE:
+            obj_question = f"Where is {object}?"
+        elif wh == WH_WHEN:
+            obj_question = f"When is {object}?"
+        else:  # WH_WHAT
+            obj_question = f"What is {object}?"
+
+        try:
+            obj_emb = embed_text(obj_question)
+        except Exception:
+            continue
+        results.append((obj_question, obj_emb))
 
     return results
 
