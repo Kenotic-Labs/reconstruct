@@ -33,6 +33,7 @@ No other module stores relationships. No parallel read paths over the store.
 from __future__ import annotations
 
 import json
+import os
 import sqlite3
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
@@ -212,29 +213,47 @@ class MemoryEngine:
 
     @staticmethod
     def _parse_t5_triplets(raw: str) -> List[Tuple[str, str, str]]:
-        """Parse T5 <triplets> output '(a, b, c) | (d, e, f)' into tuples."""
+        """Parse T5 <triplets> output '(a, b, c) | (d, e, f)' into tuples.
+
+        Sanitizes each field after parsing — T5 occasionally leaks the
+        delimiter characters ')' '(' '|' into fields (e.g. output like
+        '(user, made, tea) |' where the trailing ' |' gets absorbed into
+        the last object). Every field is stripped of these structural
+        tokens on all sides, and triplets with empty or punctuation-only
+        fields after cleanup are dropped.
+        """
         if not raw or not raw.strip():
             return []
+
+        # Structural tokens that must never appear inside a field. These
+        # are the T5 <triplets> syntax characters — not content. Stripping
+        # them from field edges is sanitization of the SERIALIZATION, not
+        # the semantics.
+        STRUCTURAL_CHARS = " \t\n)(|"
+
+        def sanitize(field: str) -> str:
+            field = field.strip().strip(STRUCTURAL_CHARS).strip()
+            # Drop if the field is now empty or consists only of
+            # punctuation / structural fragments.
+            if not field:
+                return ""
+            if all(c in STRUCTURAL_CHARS + ".,;:-" for c in field):
+                return ""
+            return field
+
         results: List[Tuple[str, str, str]] = []
         for segment in raw.split(" | "):
-            segment = segment.strip()
-            if not segment:
-                continue
-            if segment.startswith("(") and segment.endswith(")"):
-                segment = segment[1:-1]
-            elif segment.startswith("("):
-                segment = segment[1:]
-            elif segment.endswith(")"):
-                segment = segment[:-1]
-            segment = segment.strip()
+            segment = segment.strip().strip(STRUCTURAL_CHARS).strip()
             if not segment:
                 continue
             parts = segment.split(", ")
             if len(parts) < 3:
                 continue
-            s = parts[0].strip()
-            p = parts[1].strip().lower().replace(" ", "_")
-            o = ", ".join(parts[2:]).strip()
+            s = sanitize(parts[0])
+            p_raw = sanitize(parts[1])
+            o = sanitize(", ".join(parts[2:]))
+            # Predicate normalization: lowercase + underscore
+            p = p_raw.lower().replace(" ", "_") if p_raw else ""
             if s and p and o:
                 results.append((s, p, o))
         return results
@@ -266,6 +285,7 @@ class MemoryEngine:
         source_timestamp: Optional[str] = None,
         speaker: Optional[str] = None,
         confidence: float = 0.9,
+        source_tag: Optional[str] = None,
     ) -> int:
         """End-to-end write-path entry for raw text:
           1. T5 cleanup
@@ -294,18 +314,172 @@ class MemoryEngine:
 
         count = 0
         for s, p, o in triples:
+            # T5 path ONLY: validate against the Core contract before
+            # store(). Hand-authored triples bypass this because they
+            # don't go through ingest_text(). This is architectural
+            # separation — T5 is the source that produces contract
+            # violations, so T5's pipeline cleans its own output.
+            resolved_s = _resolve(s)
+            resolved_o = _resolve(o)
+            ok, normalized, reason = self._validate_triple(
+                resolved_s, p, resolved_o
+            )
+            if not ok:
+                if os.environ.get("RAYA_VALIDATE_VERBOSE") == "1":
+                    print(f"[validate] reject ({resolved_s!r},{p!r},{resolved_o!r}): {reason}")
+                continue
+            resolved_s, p, resolved_o = normalized
+
             rel_id = self.store(
                 user_id=user_id,
-                subject=_resolve(s),
+                subject=resolved_s,
                 predicate=p,
-                object=_resolve(o),
+                object=resolved_o,
                 source_text=cleaned,
                 confidence=confidence,
                 source_timestamp=source_timestamp,
+                source_tag=source_tag,
             )
             if rel_id:
                 count += 1
         return count
+
+    # ──────────────────────────────────────────────────────────────
+    # Track 1.6 — write-path validation gate
+    # ──────────────────────────────────────────────────────────────
+    #
+    # Enforces the Core contract: subject is a concrete entity,
+    # predicate is a verb shape, object is a bounded noun phrase. Any
+    # triple that fails the contract is dropped at write time rather
+    # than corrupting retrieval + reconstruction downstream.
+    #
+    # All tests are morphological / dictionary-based — no domain
+    # content curation, no magic thresholds.
+
+    def _pos_tag(self, token: str) -> str:
+        """Return the Penn Treebank POS tag for a single token.
+
+        Delegates to NLTK's averaged-perceptron tagger — a trained
+        model of English grammar, not a list curated by this project.
+        Returns the tag string (e.g. 'VB', 'VBG', 'NN', 'PRP') or
+        empty string if the tagger is unavailable (fail-open).
+
+        The tag is the equation: whatever English grammar says this
+        token is, that's what it is. No lists.
+        """
+        if not token:
+            return ""
+        try:
+            import nltk
+            tags = nltk.pos_tag([token.lower()])
+            return tags[0][1] if tags else ""
+        except Exception:
+            return ""
+
+    def _is_verb(self, token: str) -> bool:
+        """Strict verb test via POS only. Used by the object-clause
+        check where a false positive costs a real triple (Sulphur /
+        trip would WordNet-match as verbs and cause legitimate noun
+        objects to look like clauses)."""
+        tag = self._pos_tag(token)
+        return tag.startswith("VB") if tag else True  # fail-open
+
+    def _is_verb_lexical(self, token: str) -> bool:
+        """Permissive verb test. POS first, WordNet fallback. Used by
+        the predicate-shape check where NLTK mis-tags single tokens
+        out of context (stayed/works/cut/drove all tag as nouns in
+        isolation). WordNet is a curated English verb inventory, not
+        a handcrafted project-specific list."""
+        if not token:
+            return False
+        tag = self._pos_tag(token)
+        if tag.startswith("VB"):
+            return True
+        if not tag:
+            return True  # fail-open when tagger unavailable
+        try:
+            from nltk.corpus import wordnet as _wn
+            if _wn.synsets(token.lower(), pos="v"):
+                return True
+        except Exception:
+            pass
+        return False
+
+    def _is_pronoun(self, token: str) -> bool:
+        """Tag starts with 'PRP' or is 'WP'/'WP$' — all pronoun forms."""
+        tag = self._pos_tag(token)
+        if not tag:
+            return False  # fail-open (don't over-reject)
+        return tag.startswith("PRP") or tag in ("WP", "WP$")
+
+    def _validate_triple(
+        self,
+        subject: str,
+        predicate: str,
+        object: str,
+    ) -> Tuple[bool, Optional[Tuple[str, str, str]], str]:
+        """Core-contract validation gate. Returns (ok, normalized, reason).
+
+        Contract:
+          - subject:   1–4 tokens, non-empty, no structural artifacts
+          - predicate: first token is verb-shaped (verb in WordNet OR
+                       irregular base form OR -ed/-ing morphology);
+                       OR predicate is compound (contains underscore,
+                       meaning T5 concatenated verb+preposition like
+                       "works_at", "moved_to", "has_emotion")
+          - object:    ≤ 8 tokens, not a clause fragment, free of
+                       serialization artifacts, no embedded "user"
+                       standalone
+        """
+        # Serialization artifacts (covers cleanup#1 fallthroughs)
+        ARTIFACTS = set("()|")
+        for field_name, field_val in (("subject", subject),
+                                      ("predicate", predicate),
+                                      ("object", object)):
+            if any(c in ARTIFACTS for c in field_val):
+                return False, None, f"{field_name}_has_artifact"
+
+        # Subject: 1-4 tokens
+        s_tokens = subject.split()
+        if not 1 <= len(s_tokens) <= 4:
+            return False, None, f"subject_wrong_length_{len(s_tokens)}"
+
+        # Predicate: POS-based verb test. Bare predicates must POS-tag
+        # as VB*. Compound predicates (with underscore) are trusted
+        # only if the first segment is verb-tagged — T5 constructs
+        # them as verb+preposition/particle pairs.
+        if "_" not in predicate:
+            if not self._is_verb_lexical(predicate):
+                return False, None, "predicate_not_verb"
+        else:
+            first_seg = predicate.split("_", 1)[0]
+            if not self._is_verb_lexical(first_seg):
+                return False, None, "compound_predicate_not_verb"
+
+        # Object: token budget
+        o_tokens = object.split()
+        if len(o_tokens) > 8:
+            return False, None, f"object_too_long_{len(o_tokens)}"
+
+        # Object: not a clause fragment. Structural test via POS —
+        # if the first token POS-tags as pronoun (PRP/PRP$/WP/WP$)
+        # or as verb (VB*), the object is a predication, not a noun
+        # phrase. Single-word verb-capable tokens can still be
+        # legitimate nouns ("love", "fear") — the len>1 guard on the
+        # verb case leaves those alone.
+        if o_tokens:
+            first_o = o_tokens[0]
+            if self._is_pronoun(first_o):
+                return False, None, "object_starts_with_pronoun"
+            if len(o_tokens) > 1 and self._is_verb(first_o):
+                return False, None, "object_starts_with_verb"
+
+        # Object: strip standalone "user" token if it leaked in alone.
+        # (Compound forms like "user feedback" are legitimate.)
+        if len(o_tokens) == 1 and o_tokens[0].lower() == "user":
+            return False, None, "object_is_bare_user"
+
+        return True, (subject, predicate, object), "ok"
 
     # ──────────────────────────────────────────────────────────────
     # Public: store a triple (the one canonical write method)
@@ -321,6 +495,7 @@ class MemoryEngine:
         confidence: float = 0.9,
         utterance_type_id: Optional[int] = None,
         source_timestamp: Optional[str] = None,
+        source_tag: Optional[str] = None,
     ) -> int:
         """Atomically:
           1. Upsert the (subject, predicate, object) relationship row,
@@ -338,12 +513,19 @@ class MemoryEngine:
         if not subject or not predicate or not object:
             return 0
 
+        # store() trusts the caller. Validation happens one level up in
+        # ingest_text() (T5 pipeline), because T5 is the source that
+        # produces contract violations. Callers passing hand-authored
+        # triples are trusted. Callers going through T5 are validated
+        # before their triples reach store().
+
         try:
             with get_db_context() as conn:
                 # 1. Upsert relationship row
                 rel_id = self._upsert_relationship_row(
                     conn, user_id, subject, predicate, object,
                     confidence, utterance_type_id, source_timestamp,
+                    source_text=source_text, source_tag=source_tag,
                 )
                 if not rel_id:
                     return 0
@@ -359,6 +541,62 @@ class MemoryEngine:
                 self._write_edge_traces(
                     conn, rel_id, source_text, subject, predicate, object
                 )
+
+                # 5. 9-axis write-path labeling: cluster_id + situation_id.
+                # Structural, no LLM. TemporalEngine.cluster() produces an
+                # adjacency-based cluster handle which we persist as a
+                # stable string key. situation_id is only set if the
+                # TemporalEngine detects a situation signal; otherwise
+                # stays NULL (structural refusal at the read layer if
+                # the axis is queried with no matching cluster).
+                try:
+                    self._label_cluster_and_situation(
+                        conn, user_id, rel_id, source_text or ""
+                    )
+                except Exception as _e:
+                    # fail-open: labeling is observational, not a hard
+                    # contract with the write path
+                    pass
+
+                # 6. Ingest-time coherence (axis 7): if there are other
+                # is_current rows with the same (subject, predicate), mark
+                # the OLDER ones superseded_by=this rel_id. Retrieval
+                # stays read-only; conflicts are resolved at write time.
+                try:
+                    self._enforce_coherence_on_insert(
+                        conn, user_id, rel_id, subject, predicate
+                    )
+                except Exception:
+                    pass
+
+                # 7. Entity-type tagging + predicted-queries write-path
+                # foundation (2026-04-14). Structural only: NER/WordNet
+                # for types, T5 for questions, no curated lists.
+                subj_type = "GENERIC"
+                obj_type = "GENERIC"
+                try:
+                    self._label_entity_types(
+                        conn, user_id, rel_id, subject, object
+                    )
+                    # Reload the types we just wrote so the predicted
+                    # queries step sees the same vocabulary.
+                    row = conn.execute(
+                        "SELECT subject_type, object_type FROM relationships WHERE id = ?",
+                        (rel_id,),
+                    ).fetchone()
+                    if row:
+                        subj_type = row["subject_type"] or "GENERIC"
+                        obj_type = row["object_type"] or "GENERIC"
+                except Exception:
+                    pass
+
+                try:
+                    self._write_predicted_queries(
+                        conn, user_id, rel_id, subject, predicate, object,
+                        subj_type, obj_type, source_text,
+                    )
+                except Exception:
+                    pass
 
                 conn.commit()
                 return rel_id
@@ -376,6 +614,8 @@ class MemoryEngine:
         confidence: float,
         utterance_type_id: Optional[int],
         source_timestamp: Optional[str],
+        source_text: Optional[str] = None,
+        source_tag: Optional[str] = None,
     ) -> int:
         """Insert or update a relationship. Returns relationship_id."""
         # Check existing
@@ -392,22 +632,51 @@ class MemoryEngine:
                 """UPDATE relationships SET
                      confidence = MAX(confidence, ?),
                      last_confirmed_at = datetime('now'),
-                     is_current = 1
+                     is_current = 1,
+                     tombstoned_at = NULL,
+                     tombstone_reason = NULL,
+                     tombstone_op_id = NULL
                    WHERE id = ?""",
                 (confidence, rel_id),
             )
+            # Backfill source_text / source_tag if they weren't set before.
+            try:
+                if source_text:
+                    conn.execute(
+                        "UPDATE relationships SET source_text = COALESCE(source_text, ?) WHERE id = ?",
+                        (source_text, rel_id),
+                    )
+                if source_tag:
+                    conn.execute(
+                        "UPDATE relationships SET source_tag = COALESCE(source_tag, ?) WHERE id = ?",
+                        (source_tag, rel_id),
+                    )
+            except sqlite3.OperationalError:
+                pass
             return rel_id
 
         # Insert new. sequence_number column is added by schema upgrade;
         # the assign logic: next row in this user's relationships.
-        cur = conn.execute(
-            """INSERT INTO relationships
-                 (user_id, subject, predicate, object, confidence,
-                  utterance_type_id, source_timestamp, is_current)
-               VALUES (?, ?, ?, ?, ?, ?, ?, 1)""",
-            (user_id, subject, predicate, object, confidence,
-             utterance_type_id, source_timestamp),
-        )
+        try:
+            cur = conn.execute(
+                """INSERT INTO relationships
+                     (user_id, subject, predicate, object, confidence,
+                      utterance_type_id, source_timestamp, is_current,
+                      source_text, source_tag)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, 1, ?, ?)""",
+                (user_id, subject, predicate, object, confidence,
+                 utterance_type_id, source_timestamp, source_text, source_tag),
+            )
+        except sqlite3.OperationalError:
+            # Columns not yet migrated — fall back to pre-migration insert.
+            cur = conn.execute(
+                """INSERT INTO relationships
+                     (user_id, subject, predicate, object, confidence,
+                      utterance_type_id, source_timestamp, is_current)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, 1)""",
+                (user_id, subject, predicate, object, confidence,
+                 utterance_type_id, source_timestamp),
+            )
         rel_id = cur.lastrowid
 
         # Assign sequence_number = relationship_id for now (monotonic).
@@ -488,28 +757,67 @@ class MemoryEngine:
         except Exception:
             return
 
-        # edge_embedding = embedding of "predicate object" — the SLOT
-        # that retrieval fills. A query like "Who is Maya's manager?"
-        # with predicate_emb = embed("manager") should cosine-match
-        # edges whose edge_embedding = embed("manager Priya Banerjee").
+        # edge_embedding = embedding of "subject predicate object" — the
+        # full triple surface text. Including subject anchors the vector
+        # so edges with the same predicate but different subjects produce
+        # distinct embeddings ("user works at Vantage" vs "Leon works at
+        # Different Company").
         pred_natural = predicate.replace("_", " ")
         try:
-            edge_emb = embed_text(f"{pred_natural} {object}")
+            edge_emb = embed_text(f"{subject} {pred_natural} {object}")
         except Exception:
             edge_emb = src_emb
 
         # --- Emotional: valence + label ---
-        pos_sim = self._cos(src_emb, self._anchor("emo_pos", _EMO_POS_ANCHOR))
-        neg_sim = self._cos(src_emb, self._anchor("emo_neg", _EMO_NEG_ANCHOR))
+        # Classify on the OBJECT of the triple, not the batch source text.
+        # Two signals derived:
+        #   - valence:    pos_sim / (pos_sim + neg_sim)  — continuous [0,1]
+        #   - label:      the OBJECT WORD itself, when the object is a
+        #                 distributional outlier vs unrelated words on
+        #                 the emotion axis. Otherwise None.
+        # Storing the OBJECT (not the category "positive"/"negative") as
+        # the label is what lets downstream rendering recognize emotion
+        # edges structurally (emo_label == object → "X feel Y"). The
+        # polarity survives in the valence column.
+        try:
+            obj_emb = embed_text(object) if object else src_emb
+        except Exception:
+            obj_emb = src_emb
+        pos_sim = self._cos(obj_emb, self._anchor("emo_pos", _EMO_POS_ANCHOR))
+        neg_sim = self._cos(obj_emb, self._anchor("emo_neg", _EMO_NEG_ANCHOR))
         total = abs(pos_sim) + abs(neg_sim)
         valence = (pos_sim / total) if total > 0 else 0.5
-        # Label: present iff source text has any emotional content —
-        # "emotional" means the valence deviates from neutral 0.5.
-        # We don't need a threshold: the label is the argmax choice.
-        if pos_sim > neg_sim and pos_sim > 0:
-            emo_label = "positive"
-        elif neg_sim > pos_sim and neg_sim > 0:
-            emo_label = "negative"
+
+        # "Is the object an emotion word?" — two-gate test:
+        # (1) Morphological: emotion words are single words or short
+        #     phrases (≤ 2 tokens). Multi-word objects are descriptions
+        #     ("three years positive reviews"), not feelings.
+        # (2) Relative contrast: the object's similarity to EITHER
+        #     emotion anchor must exceed its similarity to a neutral
+        #     topic anchor AND a neutral action anchor. Being closer to
+        #     emotion-space than to both object-space and action-space
+        #     means the word IS in emotion-space.
+        # No magic thresholds, no hardcoded emotion lexicon.
+        obj_tokens = (object or "").split()
+        morph_gate = 0 < len(obj_tokens) <= 2
+        neutral_topic = self._anchor(
+            "emo_neutral_topic",
+            "object thing item tool place building material",
+        )
+        neutral_action = self._anchor(
+            "emo_neutral_action",
+            "went moved said did made had told left took gave came",
+        )
+        obj_topic_sim = self._cos(obj_emb, neutral_topic)
+        obj_action_sim = self._cos(obj_emb, neutral_action)
+        obj_max_emo_sim = max(pos_sim, neg_sim)
+        contrast_gate = (
+            obj_max_emo_sim > obj_topic_sim
+            and obj_max_emo_sim > obj_action_sim
+        )
+        is_emotional = morph_gate and contrast_gate
+        if is_emotional and object:
+            emo_label = object.strip()
         else:
             emo_label = None
 
@@ -522,7 +830,14 @@ class MemoryEngine:
         }
         temporal_context = max(temp_scores, key=temp_scores.get)
 
-        # --- Schematic category: argmax over schema anchors ---
+        # --- Schematic category: argmax over schema anchors WITH
+        # distributional margin. Force-assigning every edge to its top-1
+        # schema over-fragments arcs (one PIP story splits across 6
+        # schemas due to noisy cosines). Instead: require the top cosine
+        # to be a distributional outlier — greater than mean + std of the
+        # anchor distribution for THIS edge. If no anchor stands out,
+        # mark 'uncategorized' so downstream clustering treats the edge
+        # as ambient rather than miscategorizing it.
         schema_anchors = {
             "career": "job work employer salary promotion office colleague",
             "health": "doctor medicine hospital symptom diagnosis exercise diet",
@@ -537,11 +852,21 @@ class MemoryEngine:
             "identity": "name age birthday background origin ethnicity",
             "relationship": "partner dating marriage engagement boyfriend girlfriend",
         }
-        best_schema, best_schema_sim = None, -1.0
+        schema_sims: Dict[str, float] = {}
         for label, desc in schema_anchors.items():
-            s = self._cos(src_emb, self._anchor(f"sch_{label}", desc))
-            if s > best_schema_sim:
-                best_schema_sim, best_schema = s, label
+            schema_sims[label] = self._cos(
+                src_emb, self._anchor(f"sch_{label}", desc)
+            )
+        sim_values = list(schema_sims.values())
+        sim_mu = float(np.mean(sim_values))
+        sim_sigma = float(np.std(sim_values))
+        best_schema = max(schema_sims, key=schema_sims.get)
+        best_schema_sim = schema_sims[best_schema]
+        # Distributional margin: top must exceed mean + sigma of the
+        # anchor distribution to be trusted. Otherwise all anchors are
+        # weakly activated (= edge is ambient, not schema-specific).
+        if best_schema_sim < sim_mu + sim_sigma:
+            best_schema = "uncategorized"
 
         # --- Relational type: argmax over relationship-shape anchors ---
         rel_scores = {
@@ -602,6 +927,7 @@ class MemoryEngine:
         params: List[Any] = [user_id]
         if only_current:
             conditions.append("COALESCE(is_current, 1) = 1")
+            conditions.append("tombstoned_at IS NULL")
         if subject:
             conditions.append("LOWER(subject) = LOWER(?)")
             params.append(subject)
@@ -787,6 +1113,470 @@ class MemoryEngine:
                 conn.commit()
         except Exception as e:
             print(f"[MemoryEngine.supersede] failed: {e}")
+
+    # ──────────────────────────────────────────────────────────────
+    # Write-path labeling helpers
+    # ──────────────────────────────────────────────────────────────
+
+    def _label_cluster_and_situation(
+        self,
+        conn,
+        user_id: int,
+        rel_id: int,
+        source_text: str,
+    ) -> None:
+        """Persist cluster_id (and optionally situation_id) on the row.
+
+        We do not import TemporalEngine at module top-level to avoid a
+        circular dep. Import lazily here.
+        """
+        # Cluster: a stable handle built from the recent-window member
+        # list. We use the MIN(id) of the recent window as the cluster
+        # handle string, so all members of one narrative window share a
+        # deterministic key. If TemporalEngine is unavailable or returns
+        # an empty window, we fall back to the row's own id as its own
+        # single-member cluster (still structural, still binary).
+        cluster_key: Optional[str] = None
+        try:
+            from app.engines.temporal import get_temporal_engine
+            te = get_temporal_engine()
+            clust = te.cluster(user_id, source_text)
+            members = [m for m in (clust.member_relationship_ids or []) if m]
+            members.append(rel_id)
+            cluster_key = f"c_{min(members)}"
+        except Exception:
+            cluster_key = f"c_{rel_id}"
+
+        try:
+            conn.execute(
+                "UPDATE relationships SET cluster_id = ? WHERE id = ?",
+                (cluster_key, rel_id),
+            )
+        except sqlite3.OperationalError:
+            pass
+
+        # situation_id: only write if not already set and the temporal
+        # engine has a situation signal. Today's TemporalEngine has no
+        # explicit detect_situation call; we leave situation_id as-is.
+        # This is intentional -- structural refusal is preferable to a
+        # heuristic guess.
+        return
+
+    def _enforce_coherence_on_insert(
+        self,
+        conn,
+        user_id: int,
+        new_rel_id: int,
+        subject: str,
+        predicate: str,
+    ) -> None:
+        """Axis 7: coherence at ingest.
+
+        Find any OTHER is_current rows with same (subject, predicate) for
+        this user; mark them superseded_by=new_rel_id. The newest row
+        wins (max sequence_number). Retrieval stays read-only.
+        """
+        try:
+            rows = conn.execute(
+                """SELECT id FROM relationships
+                   WHERE user_id = ?
+                     AND LOWER(subject) = LOWER(?)
+                     AND LOWER(predicate) = LOWER(?)
+                     AND id != ?
+                     AND COALESCE(is_current, 1) = 1
+                     AND tombstoned_at IS NULL""",
+                (user_id, subject, predicate, new_rel_id),
+            ).fetchall()
+        except sqlite3.OperationalError:
+            return
+        for r in rows:
+            old_id = r["id"]
+            try:
+                conn.execute(
+                    """UPDATE relationships SET
+                         is_current = 0,
+                         superseded_at = datetime('now'),
+                         superseded_by = ?
+                       WHERE id = ?""",
+                    (new_rel_id, old_id),
+                )
+            except sqlite3.OperationalError:
+                pass
+
+    # ──────────────────────────────────────────────────────────────
+    # Write-path foundation (2026-04-14): entity types + predicted queries
+    # ──────────────────────────────────────────────────────────────
+
+    def _label_entity_types(
+        self,
+        conn,
+        user_id: int,
+        rel_id: int,
+        subject: str,
+        object: str,
+    ) -> None:
+        """Resolve subject_type / object_type via NER+WordNet and write
+        them on the relationship row. Also backfill entities.entity_type
+        where it is NULL or 'unknown'. Structural only; fail-open."""
+        try:
+            from app.engines.type_resolver import resolve_entity_type
+        except Exception:
+            return
+
+        try:
+            s_type = resolve_entity_type(subject)
+        except Exception:
+            s_type = "GENERIC"
+        try:
+            o_type = resolve_entity_type(object)
+        except Exception:
+            o_type = "GENERIC"
+
+        try:
+            conn.execute(
+                """UPDATE relationships
+                     SET subject_type = ?, object_type = ?
+                   WHERE id = ?""",
+                (s_type, o_type, rel_id),
+            )
+        except sqlite3.OperationalError:
+            # Column not yet migrated on this DB.
+            pass
+
+        # Propagate into entities table. "user" is excluded by _upsert_entity
+        # already, so only non-user strings arrive here.
+        for name, typ in ((subject, s_type), (object, o_type)):
+            nm = (name or "").strip()
+            if not nm or nm.lower() in ("user", "i", "me", "myself"):
+                continue
+            try:
+                conn.execute(
+                    """UPDATE entities
+                         SET entity_type = ?
+                       WHERE user_id = ?
+                         AND LOWER(name) = LOWER(?)
+                         AND (entity_type IS NULL OR entity_type = 'unknown' OR entity_type = '')""",
+                    (typ, user_id, nm),
+                )
+            except sqlite3.OperationalError:
+                pass
+
+    def _write_predicted_queries(
+        self,
+        conn,
+        user_id: int,
+        rel_id: int,
+        subject: str,
+        predicate: str,
+        object: str,
+        subject_type: str,
+        object_type: str,
+        source_text: str,
+    ) -> None:
+        """Generate + persist predicted question rows for this edge.
+
+        The answer_text field carries the source utterance (or a derived
+        SPO surface when no source text was provided) so the retrieval
+        layer can return a human-shaped answer directly from the row.
+        """
+        try:
+            from app.engines.predicted_queries import generate_predicted_queries
+        except Exception:
+            return
+
+        try:
+            pairs = generate_predicted_queries(
+                subject, predicate, object, subject_type, object_type
+            )
+        except Exception:
+            return
+
+        if not pairs:
+            return
+
+        answer_text = source_text or f"{subject} {predicate.replace('_', ' ')} {object}"
+
+        for question, emb in pairs:
+            try:
+                emb_blob = emb.tobytes() if emb is not None else None
+            except Exception:
+                emb_blob = None
+            if emb_blob is None:
+                continue
+            try:
+                # Skip duplicates (same question already present for this
+                # relationship_id). Idempotent on replay.
+                existing = conn.execute(
+                    """SELECT 1 FROM predicted_queries
+                       WHERE relationship_id = ? AND predicted_question = ?""",
+                    (rel_id, question),
+                ).fetchone()
+                if existing:
+                    continue
+                conn.execute(
+                    """INSERT INTO predicted_queries
+                         (relationship_id, user_id, predicted_question,
+                          answer_text, answer_subject, question_embedding,
+                          confidence)
+                       VALUES (?, ?, ?, ?, ?, ?, ?)""",
+                    (rel_id, user_id, question, answer_text, subject,
+                     emb_blob, 0.9),
+                )
+            except sqlite3.OperationalError:
+                # predicted_queries table not migrated on this DB.
+                return
+            except Exception:
+                continue
+
+    # ──────────────────────────────────────────────────────────────
+    # Forget (soft tombstone) + faceted show
+    # ──────────────────────────────────────────────────────────────
+    #
+    # Tombstone semantics: we cannot INSERT a duplicate tombstone row
+    # because of UNIQUE(user_id, subject, predicate, object). Instead,
+    # we flip the existing row in-place by setting tombstoned_at and
+    # append a single summary row into `memories` as an append-only
+    # audit trail. A forget op never modifies subject/predicate/object
+    # or the edge_* trace columns.
+
+    def _append_forget_audit(
+        self, conn, user_id: int, op_id: str, reason: str, count: int
+    ) -> None:
+        """Append an audit log row into the memories table for a forget op."""
+        try:
+            conn.execute(
+                """INSERT INTO memories (user_id, content, memory_type, importance)
+                   VALUES (?, ?, 'summary', 0.9)""",
+                (
+                    user_id,
+                    f"forget op {op_id}: reason={reason}, n={count}",
+                ),
+            )
+        except Exception as e:
+            print(f"[MemoryEngine._append_forget_audit] failed: {e}")
+
+    def _tombstone_rows(
+        self, conn, user_id: int, ids: List[int], reason: str, op_id: str
+    ) -> int:
+        """Flip tombstone flags on a set of relationship rows. Returns count
+        of rows actually flipped (ignores rows that were already tombstoned)."""
+        if not ids:
+            return 0
+        placeholders = ",".join("?" for _ in ids)
+        cur = conn.execute(
+            f"""UPDATE relationships SET
+                  tombstoned_at = datetime('now'),
+                  tombstone_reason = ?,
+                  tombstone_op_id = ?
+                WHERE user_id = ? AND tombstoned_at IS NULL
+                  AND id IN ({placeholders})""",
+            [reason, op_id, user_id] + list(ids),
+        )
+        return cur.rowcount or 0
+
+    def forget_by_triple_id(self, user_id: int, triple_id: int) -> int:
+        """Tombstone a single triple by its relationship id.
+
+        Returns the count of tombstones emitted (0 or 1). Idempotent:
+        if the row is already tombstoned, returns 0.
+        """
+        from uuid import uuid4
+        op_id = uuid4().hex
+        reason = f"by_triple_id:{int(triple_id)}"
+        try:
+            with get_db_context() as conn:
+                row = conn.execute(
+                    """SELECT id FROM relationships
+                       WHERE user_id = ? AND id = ?
+                         AND tombstoned_at IS NULL
+                         AND COALESCE(is_current, 1) = 1""",
+                    (user_id, int(triple_id)),
+                ).fetchone()
+                if not row:
+                    return 0
+                count = self._tombstone_rows(
+                    conn, user_id, [row["id"]], reason, op_id
+                )
+                if count:
+                    self._append_forget_audit(conn, user_id, op_id, reason, count)
+                conn.commit()
+                return count
+        except Exception as e:
+            print(f"[MemoryEngine.forget_by_triple_id] failed: {e}")
+            return 0
+
+    def forget_by_entity(self, user_id: int, entity_name: str) -> int:
+        """Tombstone every live triple where the entity appears as subject
+        or object (case-insensitive exact match)."""
+        from uuid import uuid4
+        if not entity_name or not entity_name.strip():
+            return 0
+        name = entity_name.strip()
+        op_id = uuid4().hex
+        reason = f"by_entity:{name}"
+        try:
+            with get_db_context() as conn:
+                rows = conn.execute(
+                    """SELECT id FROM relationships
+                       WHERE user_id = ? AND tombstoned_at IS NULL
+                         AND COALESCE(is_current, 1) = 1
+                         AND (LOWER(subject) = LOWER(?) OR LOWER(object) = LOWER(?))""",
+                    (user_id, name, name),
+                ).fetchall()
+                ids = [r["id"] for r in rows]
+                count = self._tombstone_rows(conn, user_id, ids, reason, op_id)
+                if count:
+                    self._append_forget_audit(conn, user_id, op_id, reason, count)
+                conn.commit()
+                return count
+        except Exception as e:
+            print(f"[MemoryEngine.forget_by_entity] failed: {e}")
+            return 0
+
+    def forget_by_time_range(
+        self, user_id: int, start_iso: str, end_iso: str
+    ) -> int:
+        """Tombstone every live triple whose effective source time falls
+        inclusively within [start_iso, end_iso].
+
+        Effective source time is COALESCE(source_timestamp, first_learned_at).
+        v1 behaviour: rows where source_timestamp IS NULL are SKIPPED (not
+        fallback-matched on first_learned_at) because first_learned_at is
+        an ingestion timestamp, not a source-wall-clock timestamp, and
+        time-range forget is a user-facing operation over source time.
+        """
+        from uuid import uuid4
+        op_id = uuid4().hex
+        reason = f"by_time_range:{start_iso}..{end_iso}"
+        try:
+            with get_db_context() as conn:
+                rows = conn.execute(
+                    """SELECT id FROM relationships
+                       WHERE user_id = ? AND tombstoned_at IS NULL
+                         AND COALESCE(is_current, 1) = 1
+                         AND source_timestamp IS NOT NULL
+                         AND source_timestamp >= ?
+                         AND source_timestamp <= ?""",
+                    (user_id, start_iso, end_iso),
+                ).fetchall()
+                ids = [r["id"] for r in rows]
+                count = self._tombstone_rows(conn, user_id, ids, reason, op_id)
+                if count:
+                    self._append_forget_audit(conn, user_id, op_id, reason, count)
+                conn.commit()
+                return count
+        except Exception as e:
+            print(f"[MemoryEngine.forget_by_time_range] failed: {e}")
+            return 0
+
+    def forget_by_source(self, user_id: int, source_tag: str) -> int:
+        """Tombstone every live triple whose source_tag exactly matches."""
+        from uuid import uuid4
+        if source_tag is None:
+            return 0
+        op_id = uuid4().hex
+        reason = f"by_source:{source_tag}"
+        try:
+            with get_db_context() as conn:
+                rows = conn.execute(
+                    """SELECT id FROM relationships
+                       WHERE user_id = ? AND tombstoned_at IS NULL
+                         AND COALESCE(is_current, 1) = 1
+                         AND source_tag = ?""",
+                    (user_id, source_tag),
+                ).fetchall()
+                ids = [r["id"] for r in rows]
+                count = self._tombstone_rows(conn, user_id, ids, reason, op_id)
+                if count:
+                    self._append_forget_audit(conn, user_id, op_id, reason, count)
+                conn.commit()
+                return count
+        except Exception as e:
+            print(f"[MemoryEngine.forget_by_source] failed: {e}")
+            return 0
+
+    def list_by_facet(
+        self,
+        user_id: int,
+        facet: str,
+        value: Optional[str] = None,
+        limit: int = 100,
+    ) -> List[Dict[str, Any]]:
+        """Return live triples matching a facet view. Facets:
+
+          - 'time'   : ordered by source_timestamp DESC (NULLs last).
+                       If `value` is an ISO prefix it acts as a LIKE filter.
+          - 'entity' : subject OR object case-insensitive equals `value`.
+          - 'source' : source_tag exact match on `value`.
+          - 'trace'  : live triples ordered by recency. `value` optionally
+                       filters on edge_schematic_category.
+
+        Returns dicts with keys: id, subject, predicate, object,
+        source_timestamp, source_tag, confidence, source_text. The caller
+        (SDK.show) strips source_text unless export_raw_text=True. Does
+        NOT include any edge_* trace columns.
+        """
+        if facet not in ("time", "entity", "source", "trace"):
+            raise ValueError(f"Unknown facet: {facet}")
+        limit = max(1, min(int(limit or 100), 1000))
+
+        base_cols = (
+            "id, subject, predicate, object, "
+            "source_timestamp, source_tag, confidence, source_text"
+        )
+        where = ["user_id = ?", "tombstoned_at IS NULL",
+                 "COALESCE(is_current, 1) = 1"]
+        params: List[Any] = [user_id]
+        order = "id DESC"
+
+        if facet == "time":
+            if value:
+                where.append("source_timestamp LIKE ?")
+                params.append(f"{value}%")
+            order = ("CASE WHEN source_timestamp IS NULL THEN 1 ELSE 0 END, "
+                     "source_timestamp DESC, id DESC")
+        elif facet == "entity":
+            if not value:
+                return []
+            where.append("(LOWER(subject) = LOWER(?) OR LOWER(object) = LOWER(?))")
+            params.extend([value, value])
+        elif facet == "source":
+            if value is None:
+                return []
+            where.append("source_tag = ?")
+            params.append(value)
+        elif facet == "trace":
+            if value:
+                where.append("edge_schematic_category = ?")
+                params.append(value)
+
+        sql = (
+            f"SELECT {base_cols} FROM relationships "
+            f"WHERE {' AND '.join(where)} "
+            f"ORDER BY {order} LIMIT ?"
+        )
+        params.append(limit)
+
+        try:
+            with get_db_context() as conn:
+                rows = conn.execute(sql, params).fetchall()
+        except Exception as e:
+            print(f"[MemoryEngine.list_by_facet] failed: {e}")
+            return []
+
+        out: List[Dict[str, Any]] = []
+        for r in rows:
+            out.append({
+                "id": r["id"],
+                "subject": r["subject"],
+                "predicate": r["predicate"],
+                "object": r["object"],
+                "source_timestamp": r["source_timestamp"],
+                "source_tag": r["source_tag"],
+                "confidence": r["confidence"] or 0.9,
+                "source_text": r["source_text"],
+            })
+        return out
 
     # ──────────────────────────────────────────────────────────────
     # Summarize (stub for Phase 4+)
