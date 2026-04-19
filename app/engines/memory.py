@@ -793,15 +793,20 @@ class MemoryEngine:
         total = abs(pos_sim) + abs(neg_sim)
         valence = (pos_sim / total) if total > 0 else 0.5
 
-        # "Is the object an emotion word?" — two-gate test:
+        # "Is this edge an emotion edge?" — three-gate test:
         # (1) Morphological: emotion words are single words or short
-        #     phrases (≤ 2 tokens). Multi-word objects are descriptions
+        #     phrases (<=2 tokens). Multi-word objects are descriptions
         #     ("three years positive reviews"), not feelings.
-        # (2) Relative contrast: the object's similarity to EITHER
+        # (2) Object contrast: the object's similarity to EITHER
         #     emotion anchor must exceed its similarity to a neutral
-        #     topic anchor AND a neutral action anchor. Being closer to
-        #     emotion-space than to both object-space and action-space
-        #     means the word IS in emotion-space.
+        #     topic anchor AND a neutral action anchor.
+        # (3) Predicate contrast: the PREDICATE must be closer to
+        #     emotional predicates ("has_emotion feels mood sentiment")
+        #     than to factual predicates ("works_at manager salary
+        #     skill title role"). This prevents names, durations, and
+        #     skills from being labeled emotional just because the
+        #     object embedding lands near emotion-space. The predicate
+        #     carries the relational semantics of the edge.
         # No magic thresholds, no hardcoded emotion lexicon.
         obj_tokens = (object or "").split()
         morph_gate = 0 < len(obj_tokens) <= 2
@@ -816,11 +821,29 @@ class MemoryEngine:
         obj_topic_sim = self._cos(obj_emb, neutral_topic)
         obj_action_sim = self._cos(obj_emb, neutral_action)
         obj_max_emo_sim = max(pos_sim, neg_sim)
-        contrast_gate = (
+        obj_contrast_gate = (
             obj_max_emo_sim > obj_topic_sim
             and obj_max_emo_sim > obj_action_sim
         )
-        is_emotional = morph_gate and contrast_gate
+
+        # Predicate gate: is the predicate itself emotional?
+        try:
+            pred_emb = embed_text(pred_natural)
+        except Exception:
+            pred_emb = src_emb
+        emo_pred_anchor = self._anchor(
+            "emo_pred_emo",
+            "has emotion feels mood sentiment feeling emotional state",
+        )
+        factual_pred_anchor = self._anchor(
+            "emo_pred_fact",
+            "works at manager salary skill title role partner tenure has pet from",
+        )
+        pred_emo_sim = self._cos(pred_emb, emo_pred_anchor)
+        pred_fact_sim = self._cos(pred_emb, factual_pred_anchor)
+        pred_gate = pred_emo_sim > pred_fact_sim
+
+        is_emotional = morph_gate and obj_contrast_gate and pred_gate
         if is_emotional and object:
             emo_label = object.strip()
         else:
@@ -1100,9 +1123,28 @@ class MemoryEngine:
     # ──────────────────────────────────────────────────────────────
 
     def supersede(self, relationship_id: int, superseded_by: int) -> None:
-        """Mark a prior relationship as superseded by a newer one."""
+        """Mark a prior relationship as superseded by a newer one.
+
+        Cascade: when an edge is superseded, also supersede other edges
+        with the same subject AND same edge_schematic_category whose
+        object textually contains the old superseded edge's object value.
+        This is structural — same subject + same schema category + object
+        references old value = cascade candidate.  Example: superseding
+        (Derek, previously_worked_at, Amazon) also cascades to
+        (Derek, worked_at_amazon_for, four years) because "amazon"
+        appears in the object/predicate of edges sharing Derek's schema.
+        """
         try:
             with get_db_context() as conn:
+                # Read the superseded edge's subject, object, and schema
+                old_row = conn.execute(
+                    """SELECT subject, predicate, object,
+                              edge_schematic_category
+                       FROM relationships WHERE id = ?""",
+                    (relationship_id,),
+                ).fetchone()
+
+                # Primary supersession
                 conn.execute(
                     """UPDATE relationships SET
                          is_current = 0,
@@ -1115,6 +1157,47 @@ class MemoryEngine:
                     "DELETE FROM predicted_queries WHERE relationship_id = ?",
                     (relationship_id,),
                 )
+
+                # Cascade: find related edges to auto-supersede
+                if old_row:
+                    old_subj = (old_row["subject"] or "").strip()
+                    old_obj = (old_row["object"] or "").strip().lower()
+                    old_cat = (old_row["edge_schematic_category"] or "").strip()
+
+                    if old_subj and old_obj and old_cat and old_cat != "uncategorized":
+                        # Find edges with same subject + same schema category
+                        # whose object OR predicate contains the old object value.
+                        # Exclude the already-superseded edge and the superseding edge.
+                        cascade_rows = conn.execute(
+                            """SELECT id, predicate, object
+                               FROM relationships
+                               WHERE LOWER(subject) = LOWER(?)
+                                 AND edge_schematic_category = ?
+                                 AND id != ? AND id != ?
+                                 AND COALESCE(is_current, 1) = 1
+                                 AND tombstoned_at IS NULL""",
+                            (old_subj, old_cat, relationship_id, superseded_by),
+                        ).fetchall()
+
+                        for cr in cascade_rows:
+                            cr_obj = (cr["object"] or "").lower()
+                            cr_pred = (cr["predicate"] or "").replace("_", " ").lower()
+                            # Cascade if the old object value appears in this
+                            # edge's object or predicate (structural containment).
+                            if old_obj in cr_obj or old_obj in cr_pred:
+                                conn.execute(
+                                    """UPDATE relationships SET
+                                         is_current = 0,
+                                         superseded_at = datetime('now'),
+                                         superseded_by = ?
+                                       WHERE id = ?""",
+                                    (superseded_by, cr["id"]),
+                                )
+                                conn.execute(
+                                    "DELETE FROM predicted_queries WHERE relationship_id = ?",
+                                    (cr["id"],),
+                                )
+
                 conn.commit()
         except Exception as e:
             print(f"[MemoryEngine.supersede] failed: {e}")

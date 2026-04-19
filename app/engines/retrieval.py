@@ -238,6 +238,22 @@ class RetrievalEngine:
 
     # ── Stage 2: Expand (entity union) ───────────────────────────
 
+    def _count_entity_overlap(
+        self, names: Set[str], subject: str, object_: str,
+    ) -> Tuple[int, int]:
+        """Return (total_overlap, non_self_overlap).
+        Exact case-sensitive match of entity name to edge
+        subject/object fields — same semantics as the original
+        entity_overlap computation."""
+        total = 0
+        non_self = 0
+        for n in names:
+            if n == subject or n == object_:
+                total += 1
+                if n != "user":
+                    non_self += 1
+        return total, non_self
+
     def _stage2_expand(
         self, user_id: int, query_text: str, candidates: List[Candidate]
     ) -> List[Candidate]:
@@ -272,18 +288,20 @@ class RetrievalEngine:
 
         for row in rows:
             rid = row["id"]
-            overlap = sum(
-                1 for n in names
-                if n == row["subject"] or n == row["object"]
+            overlap, non_self = self._count_entity_overlap(
+                names, row["subject"] or "", row["object"] or "",
             )
             if rid in by_rid:
                 cand = by_rid[rid]
                 if overlap > cand.entity_overlap:
                     cand.entity_overlap = overlap
+                if non_self > cand.non_self_entity_overlap:
+                    cand.non_self_entity_overlap = non_self
                 cand.source_stages.add("expand")
             else:
                 cand = Candidate(relationship_id=rid, edge=dict(row),
-                                 entity_overlap=overlap)
+                                 entity_overlap=overlap,
+                                 non_self_entity_overlap=non_self)
                 cand.source_stages.add("expand")
                 by_rid[rid] = cand
 
@@ -291,13 +309,59 @@ class RetrievalEngine:
         for rid, cand in by_rid.items():
             if cand.entity_overlap == 0:
                 e = cand.edge
-                touches = sum(
-                    1 for n in names
-                    if n == e.get("subject") or n == e.get("object")
+                overlap, non_self = self._count_entity_overlap(
+                    names, e.get("subject") or "", e.get("object") or "",
                 )
-                if touches:
-                    cand.entity_overlap = touches
+                if overlap:
+                    cand.entity_overlap = overlap
+                    cand.non_self_entity_overlap = non_self
                     cand.source_stages.add("expand")
+
+        # Schematic co-expansion: pull in edges that share BOTH an
+        # entity AND an edge_schematic_category with current anchors.
+        # This expands within category boundaries (career stays with
+        # career, health with health) rather than pulling in unrelated
+        # edges that happen to mention the same person.
+        anchor_categories = {
+            c.edge.get("edge_schematic_category")
+            for c in by_rid.values()
+            if c.entity_overlap > 0 and c.edge.get("edge_schematic_category")
+            and c.edge.get("edge_schematic_category") != "uncategorized"
+        }
+        if anchor_categories and names:
+            cat_placeholders = ",".join("?" * len(anchor_categories))
+            name_placeholders = ",".join("?" * len(names))
+            schema_sql = f"""
+                SELECT r.* FROM relationships r
+                 WHERE r.user_id = ?
+                   AND COALESCE(r.is_current, 1) = 1
+                   AND r.tombstoned_at IS NULL
+                   AND r.edge_schematic_category IN ({cat_placeholders})
+                   AND (r.subject IN ({name_placeholders})
+                        OR r.object IN ({name_placeholders}))
+            """
+            schema_params = (
+                [user_id]
+                + list(anchor_categories)
+                + list(names)
+                + list(names)
+            )
+            with get_db_context() as conn:
+                schema_rows = conn.execute(schema_sql, schema_params).fetchall()
+            for row in schema_rows:
+                rid = row["id"]
+                if rid in by_rid:
+                    continue
+                overlap, non_self = self._count_entity_overlap(
+                    names, row["subject"] or "", row["object"] or "",
+                )
+                cand = Candidate(
+                    relationship_id=rid, edge=dict(row),
+                    entity_overlap=overlap,
+                    non_self_entity_overlap=non_self,
+                )
+                cand.source_stages.add("expand")
+                by_rid[rid] = cand
 
         return list(by_rid.values())
 
@@ -482,10 +546,54 @@ class RetrievalEngine:
         obj = top.edge.get("object") or ""
         source_text = (top.edge.get("source_text") or "").strip()
 
-        # Prefer the original utterance (source_text) when available —
-        # it carries the full context the user spoke. Fall back to
-        # SPO surface reconstruction when no source text was recorded.
-        answer_text = source_text if source_text else self._triple_to_sentence(subj, pred, obj)
+        # Render the winning triple via the grammar engine. Then
+        # aggregate: include other edges that mention the primary entity.
+        # The primary entity comes from the QUERY (via entity resolver),
+        # falling back to the winning edge's non-self entity. This is
+        # structural entity-focused aggregation — when the user asks
+        # "Who is Mika?", the answer includes all current facts about
+        # Mika, not just the single highest-cosine triple.
+        #
+        # Two-pass aggregation:
+        #   Pass 1: surviving candidates (already cosine-ranked)
+        #   Pass 2: direct DB fetch by entity name (fills gaps where
+        #           cosine didn't surface the edge but it's structurally
+        #           relevant via entity identity)
+        primary_entity = self._lookup_primary_entity_from_query(
+            user_id, query_text, top
+        )
+        sentences = [self._edge_to_sentence(top.edge, None)]
+        seen_edges = {top.relationship_id}
+
+        if primary_entity:
+            # Pass 1: candidates already in the pool
+            for c in candidates[1:]:
+                if c.relationship_id in seen_edges:
+                    continue
+                c_subj = (c.edge.get("subject") or "").lower()
+                c_obj = (c.edge.get("object") or "").lower()
+                if primary_entity in c_subj or primary_entity in c_obj:
+                    sent = self._edge_to_sentence(c.edge, None)
+                    if sent and sent not in sentences:
+                        sentences.append(sent)
+                        seen_edges.add(c.relationship_id)
+                    if len(sentences) >= 20:
+                        break
+
+            # Pass 2: direct entity fetch from DB for completeness
+            if len(sentences) < 20:
+                entity_edges = self._fetch_entity_edges(
+                    user_id, primary_entity, seen_edges
+                )
+                for e in entity_edges:
+                    sent = self._edge_to_sentence(e, None)
+                    if sent and sent not in sentences:
+                        sentences.append(sent)
+                        seen_edges.add(e.get("id", 0))
+                    if len(sentences) >= 20:
+                        break
+
+        answer_text = " ".join(sentences)
 
         return Answer(
             text=answer_text,
@@ -496,6 +604,7 @@ class RetrievalEngine:
                 "query": query_text,
                 "entry_cosine": top.entry_cosine,
                 "entity_overlap": top.entity_overlap,
+                "non_self_entity_overlap": top.non_self_entity_overlap,
                 "cluster_members": top.cluster_members,
                 "hops_to_entity": top.hops_to_entity,
                 "exit_cosine": top.exit_cosine,
@@ -503,6 +612,7 @@ class RetrievalEngine:
                 "sequence_number": top.edge.get("sequence_number"),
                 "source_stages": sorted(top.source_stages),
                 "validate_warning": warning,
+                "source_text": source_text,
             },
         )
 
@@ -552,11 +662,18 @@ class RetrievalEngine:
                 convergence_details={"reason": "no_structural_match"},
             )
 
-        # Group by cluster_id — feed the existing fuser.
-        groups: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
-        for c in survivors:
-            key = c.edge.get("cluster_id") or "__unclustered__"
-            groups[key].append(c.edge)
+        # Read-time reclustering via TemporalEngine — entity-graph
+        # connected components instead of fragmented write-time cluster_id.
+        survivor_edges = [c.edge for c in survivors]
+        if (self._temporal is not None
+                and hasattr(self._temporal, 'recluster_for_reconstruction')):
+            groups = self._temporal.recluster_for_reconstruction(survivor_edges)
+        else:
+            # Fallback: write-time cluster_id grouping
+            groups = defaultdict(list)
+            for e in survivor_edges:
+                key = e.get("cluster_id") or "__unclustered__"
+                groups[key].append(e)
 
         cluster_tuples: List[Tuple[str, str, List[Dict[str, Any]]]] = []
         for key, edges in groups.items():
@@ -581,6 +698,23 @@ class RetrievalEngine:
         only_unclustered = (
             set(groups.keys()) == {"__unclustered__"}
         )
+
+        # Arc detection: identify temporal arcs (subject continuity
+        # across sequence_numbers) in the survivor edges. Surfaced
+        # in convergence_details for downstream consumers.
+        arc_info: Dict[str, Any] = {}
+        if (self._temporal is not None
+                and hasattr(self._temporal, 'detect_arcs')):
+            arcs = self._temporal.detect_arcs(survivor_edges)
+            if arcs:
+                arc_info = {
+                    "arc_count": len(arcs),
+                    "arc_keys": list(arcs.keys()),
+                    "arc_edge_counts": {
+                        k: len(v) for k, v in arcs.items()
+                    },
+                }
+
         return Situation(
             narrative=narrative, clusters=fused,
             participants=sorted(all_participants),
@@ -589,6 +723,7 @@ class RetrievalEngine:
             grounding_map=grounding_map,
             source="unclustered" if only_unclustered else "reconstruct",
             survivors=sum(len(c.edges) for c in fused),
+            convergence_details=arc_info,
         )
 
     # ── Fetchers (used by Stage 1 Entry) ──────────────────────────
@@ -676,12 +811,24 @@ class RetrievalEngine:
     ) -> Cluster:
         key_type, key_value, edges = cluster_tuple
 
+        # Only PERSON/ORG/LOCATION entities appear as participants.
+        # "user" is the canonical self-reference and always qualifies.
+        # subject_type / object_type are set at write time by
+        # MemoryEngine._label_entity_types(). When NULL, the value
+        # is excluded — fail-closed, not fail-open.
+        _PARTICIPANT_TYPES = {"PERSON", "ORG", "LOCATION"}
         participants: Set[str] = set()
         for e in edges:
-            if e.get("subject"):
-                participants.add(e["subject"])
-            if e.get("object"):
-                participants.add(e["object"])
+            subj = e.get("subject") or ""
+            if subj:
+                if subj.lower() == "user":
+                    participants.add(subj)
+                elif (e.get("subject_type") or "").upper() in _PARTICIPANT_TYPES:
+                    participants.add(subj)
+            obj = e.get("object") or ""
+            if obj:
+                if (e.get("object_type") or "").upper() in _PARTICIPANT_TYPES:
+                    participants.add(obj)
 
         # Dominant mood from stored labels — structural passthrough of
         # write-time emotion classification. No thresholds on valence.
@@ -729,72 +876,147 @@ class RetrievalEngine:
         sentences: List[str] = []
         grounding: Dict[int, List[int]] = {}
 
-        for cluster in clusters:
+        for ci, cluster in enumerate(clusters):
             if not cluster.edges:
                 continue
-            intro = self._cluster_intro(cluster)
+            intro = self._cluster_intro(cluster, ci)
             if intro:
                 sentences.append(intro)
                 grounding[len(sentences) - 1] = list(cluster.timeline_edge_ids)
 
             prev_subject: Optional[str] = None
-            for e in cluster.edges:
-                sent = self._edge_to_sentence(e, prev_subject)
+            prev_predicate: Optional[str] = None
+            for ei, e in enumerate(cluster.edges):
+                sent = self._edge_to_sentence(
+                    e, prev_subject,
+                    prev_predicate=prev_predicate,
+                    position_in_cluster=ei,
+                    cluster_size=len(cluster.edges),
+                )
                 if not sent:
                     continue
                 sentences.append(sent)
                 grounding[len(sentences) - 1] = [e["id"]]
                 prev_subject = (e.get("subject") or "").lower() or None
+                prev_predicate = (e.get("predicate") or "").lower() or None
 
         narrative = " ".join(sentences)
         return narrative, grounding
 
     # ── Grammar helpers (structural, no curated lexicons) ──
 
-    def _cluster_intro(self, cluster: Cluster) -> Optional[str]:
+    def _cluster_intro(
+        self, cluster: Cluster, cluster_index: int = 0,
+    ) -> Optional[str]:
+        """Generate a contextual cluster introduction from structural
+        metadata: participants, mood, and cluster type. No curated
+        templates -- the intro is assembled from stored data."""
         kt = cluster.key_type
-        if kt == "cluster_id":
-            return "In this narrative window:"
-        if kt == "unclustered":
-            return "Elsewhere:"
+
+        # Build a participant phrase from non-user participants.
+        named = [p for p in cluster.participants if p.lower() != "user"]
+        has_user = any(p.lower() == "user" for p in cluster.participants)
+
+        if kt == "unclustered" and cluster_index > 0:
+            return "Separately:"
+
+        # Skip intro for small clusters — the edges speak for themselves.
+        # Structural gate: intro only adds value when the cluster has
+        # enough edges to form a sub-narrative worth framing.
+        if len(cluster.edges) < 3:
+            return None
+
+        # If we have named participants, use them in the intro.
+        if named:
+            if has_user and len(named) == 1:
+                people_phrase = f"you and {named[0]}"
+            elif has_user and len(named) > 1:
+                people_phrase = "you, " + ", ".join(named[:-1]) + f" and {named[-1]}"
+            elif len(named) == 1:
+                people_phrase = named[0]
+            else:
+                people_phrase = ", ".join(named[:-1]) + f" and {named[-1]}"
+
+            mood = cluster.dominant_mood
+            if mood:
+                return self._finalize_sentence(
+                    f"Here is what happened with {people_phrase} \u2014 "
+                    f"the overall feeling was {mood}"
+                )
+            return self._finalize_sentence(
+                f"Here is what happened with {people_phrase}"
+            )
+
+        # No named participants -- generic but still not robotic.
         return None
 
     def _edge_to_sentence(
         self,
         edge: Dict[str, Any],
         prev_subject: Optional[str],
+        *,
+        prev_predicate: Optional[str] = None,
+        position_in_cluster: int = 0,
+        cluster_size: int = 1,
     ) -> str:
         """Render ONE edge into ONE sentence via structural dispatch.
 
-        Two branches gated on stored columns, not predicate content:
-          1. Emotional edge: edge_emotional_label == object
-          2. Default SPO via predicate_shape parser.
+        Three branches gated on stored columns, not predicate content:
+          1. Emotional edge: predicate is 'has_emotion'
+          2. Emotional edge (legacy): edge_emotional_label == object
+          3. Default SPO via predicate_shape parser.
+
+        Discourse connectives are derived from episodic significance
+        and temporal context — never from curated templates.
         """
         s_raw = (edge.get("subject") or "").strip()
         p_raw = (edge.get("predicate") or "").strip()
         o_raw = (edge.get("object") or "").strip()
         s_lower = s_raw.lower()
         is_user_subject = s_lower == "user"
+        tense = (edge.get("edge_temporal_context") or "").lower().strip()
 
         subject_surface = "You" if is_user_subject else s_raw
 
+        # ── Discourse connective selection ──
+        # Structural signals: same subject continuity, episodic significance,
+        # temporal context. No curated phrase lists — the connective is
+        # selected by the intersection of two categorical dimensions:
+        #   (same_subject x episodic_significance)
         connective = ""
-        if prev_subject and prev_subject == s_lower:
-            sig = (edge.get("edge_episodic_significance") or "").lower()
-            if sig and sig != "routine":
+        same_subject = prev_subject is not None and prev_subject == s_lower
+        sig = (edge.get("edge_episodic_significance") or "").lower()
+
+        if same_subject:
+            if sig == "pivotal":
                 connective = "Then "
+            elif sig == "milestone":
+                connective = "At that point, "
+            elif sig == "resolution":
+                connective = "In the end, "
             else:
-                connective = "Also "
+                connective = ""  # routine continuation — no filler word
             if is_user_subject:
                 subject_surface = "you"
+        elif prev_subject is not None and position_in_cluster > 0:
+            # Subject switch within a cluster — signal the shift.
+            if sig == "pivotal":
+                connective = "Meanwhile, "
+                if is_user_subject:
+                    subject_surface = "you"
+            # else: no connective — the subject change itself signals shift
 
-        # Branch 1 -- emotional edge (label equals object)
+        # ── Branch 1: explicit emotion predicate (has_emotion) ──
+        if p_raw.lower() == "has_emotion" and o_raw:
+            verb = "felt" if tense == "past" else "feel" if is_user_subject else "feels"
+            body = f"{subject_surface} {verb} {o_raw}"
+            return self._finalize_sentence(connective + body)
+
+        # ── Branch 2: emotional edge (label equals object, legacy) ──
         emo_label = (edge.get("edge_emotional_label") or "").strip()
         if emo_label and emo_label.lower() == o_raw.lower() and o_raw:
-            if is_user_subject:
-                body = f"feel {o_raw}" if not subject_surface else f"{subject_surface} feel {o_raw}"
-            else:
-                body = f"feels {o_raw}" if not subject_surface else f"{subject_surface} feels {o_raw}"
+            verb = "felt" if tense == "past" else "feel" if is_user_subject else "feels"
+            body = f"{subject_surface} {verb} {o_raw}"
             return self._finalize_sentence(connective + body)
 
         # Branch 2 -- structural SPO via predicate-shape parser.
@@ -813,12 +1035,41 @@ class RetrievalEngine:
             except Exception:
                 pass
             pred_natural = p_raw.replace("_", " ")
-            if is_user_subject:
+            # Noun-compound predicates (birth_date, phone_number) use
+            # copular form "Your X is Y". Verb-headed compounds that
+            # failed parse (e.g. head POS-mistagged) render as verb
+            # phrases: "{Subject} {pred} {obj}". POS on the head token
+            # is the structural discriminator — no word lists.
+            noun_compound = "noun_compound" in (parsed.failure_reason or "")
+            from app.engines.predicate_shape import is_verb_token as _is_verb
+            from app.engines.predicate_shape import _pos_tag as _pt_fallback
+            head_token = p_raw.split("_")[0] if "_" in p_raw else p_raw
+            head_pos = _pt_fallback(head_token)
+            verb_headed = _is_verb(head_token) and not noun_compound
+            prep_headed = head_pos in ("IN", "TO", "RB")
+            if verb_headed:
+                # Verb-headed compound: render as verb phrase
+                if subject_surface:
+                    body = f"{subject_surface} {pred_natural} {o_raw}".strip()
+                else:
+                    body = f"{pred_natural} {o_raw}".strip()
+            elif prep_headed:
+                # Prepositional-headed predicate (in_relationship_with,
+                # on_hiring_panel, together_for): copular with "is/are"
+                # + predicate phrase. "You are in relationship with Mika"
+                copula = "are" if is_user_subject else "is"
+                if subject_surface:
+                    body = f"{subject_surface} {copula} {pred_natural} {o_raw}".strip()
+                else:
+                    body = f"{copula} {pred_natural} {o_raw}".strip()
+            elif is_user_subject and noun_compound:
+                body = f"Your {pred_natural} is {o_raw}".strip()
+            elif is_user_subject:
                 body = f"Your {pred_natural} is {o_raw}".strip()
             elif subject_surface:
-                body = f"{subject_surface}'s {pred_natural} is {o_raw}".strip()
+                body = f"{subject_surface} {pred_natural} {o_raw}".strip()
             else:
-                body = f"{pred_natural} is {o_raw}".strip()
+                body = f"{pred_natural} {o_raw}".strip()
             return self._finalize_sentence(connective + body)
 
         if parsed.verb_lemma == "be":
@@ -827,7 +1078,45 @@ class RetrievalEngine:
             else:
                 verb_surface = "are" if person == "2s" else "is"
         else:
-            verb_surface = inflect_verb(parsed.verb_lemma, tense, person)
+            # Participial adjective detection: if the stored verb surface
+            # is VBN/JJ-tagged AND the predicate structure is
+            # verb + preposition WITHOUT an embedded noun between them,
+            # the construction is adjectival copular:
+            # "Mika is excited about X", not "Mika excites about X".
+            # Structural tell: VBN/JJ tag + preposition + no embedded noun.
+            # If there IS an embedded noun (asked_user_to), the verb is
+            # active past tense with a direct object, not adjectival.
+            from app.engines.predicate_shape import _pos_tag as _pt
+            surface_tag = _pt(parsed.verb_surface)
+            if (surface_tag in ("VBN", "JJ")
+                    and parsed.preposition
+                    and parsed.embedded_noun is None):
+                # Copular construction: "{subject} is/was {surface} {prep} {obj}"
+                copula = "were" if person == "2s" and tense == "past" else \
+                         "was" if tense == "past" else \
+                         "are" if person == "2s" else "is"
+                parts = []
+                if subject_surface:
+                    parts.append(subject_surface)
+                parts.append(copula)
+                parts.append(parsed.verb_surface)
+                parts.extend(parsed.middle)
+                if o_raw:
+                    parts.append(o_raw)
+                body = " ".join([p for p in parts if p]).strip()
+                return self._finalize_sentence(connective + body)
+            # Preserve stored tense morphology when the stored surface
+            # differs from the lemma. The predicate's verb_surface carries
+            # the tense the user spoke ("accepted", "interviewed",
+            # "started"). Re-inflecting from the lemma based on
+            # edge_temporal_context can lose this original tense when the
+            # context label disagrees with the surface morphology.
+            # Structural rule: if verb_surface != verb_lemma (tense was
+            # baked into the predicate), prefer the stored surface.
+            if parsed.verb_surface.lower() != parsed.verb_lemma.lower():
+                verb_surface = parsed.verb_surface
+            else:
+                verb_surface = inflect_verb(parsed.verb_lemma, tense, person)
 
         passive = parsed.preposition == "by" and tense == "past"
         if passive:
@@ -914,6 +1203,110 @@ class RetrievalEngine:
         except Exception:
             pass
         return text
+
+    # ── Lookup entity aggregation ────────────────────────────────
+
+    def _fetch_entity_edges(
+        self, user_id: int, entity: str, exclude_ids: Set[int]
+    ) -> List[Dict[str, Any]]:
+        """Fetch current edges where the entity appears as subject or object.
+
+        Structural: direct graph lookup by entity name. No cosine,
+        no scoring — pure entity identity. Returns edges ordered by
+        sequence_number DESC (most recent first), limited to 5.
+        """
+        try:
+            with get_db_context() as conn:
+                # Fetch subject-matches first (most relevant), then
+                # object-matches. Structural priority: edges where the
+                # entity IS the subject are more informative about the
+                # entity than edges where it merely appears in the object.
+                subj_rows = conn.execute(
+                    """SELECT id, subject, predicate, object,
+                              edge_temporal_context, edge_emotional_label,
+                              edge_episodic_significance
+                       FROM relationships
+                       WHERE user_id = ?
+                         AND LOWER(subject) LIKE ('%' || LOWER(?) || '%')
+                         AND COALESCE(is_current, 1) = 1
+                         AND tombstoned_at IS NULL
+                       ORDER BY COALESCE(sequence_number, id) DESC
+                       LIMIT 10""",
+                    (user_id, entity),
+                ).fetchall()
+                obj_rows = conn.execute(
+                    """SELECT id, subject, predicate, object,
+                              edge_temporal_context, edge_emotional_label,
+                              edge_episodic_significance
+                       FROM relationships
+                       WHERE user_id = ?
+                         AND LOWER(subject) NOT LIKE ('%' || LOWER(?) || '%')
+                         AND LOWER(object) LIKE ('%' || LOWER(?) || '%')
+                         AND COALESCE(is_current, 1) = 1
+                         AND tombstoned_at IS NULL
+                       ORDER BY COALESCE(sequence_number, id) DESC
+                       LIMIT 10""",
+                    (user_id, entity, entity),
+                ).fetchall()
+                rows = list(subj_rows) + list(obj_rows)
+            seen_ids = set()
+            result = []
+            for r in rows:
+                if r["id"] not in exclude_ids and r["id"] not in seen_ids:
+                    result.append(dict(r))
+                    seen_ids.add(r["id"])
+                if len(result) >= 10:
+                    break
+            return result
+        except Exception:
+            return []
+
+    def _lookup_primary_entity_from_query(
+        self, user_id: int, query_text: str, top: Candidate
+    ) -> Optional[str]:
+        """Extract the primary non-self entity for lookup aggregation.
+
+        Structural extraction: find the first capitalized token in the
+        query that is not a common English function word. This captures
+        proper nouns (Mika, Rohan, Biscuit, Derek, Meridian Labs) without
+        NER or word lists — capitalization is the structural signal for
+        proper-noun-hood in English.
+
+        Fallback: non-self entity from the winning edge.
+
+        Returns the entity lowercased, or None if no non-self entity.
+        """
+        if query_text:
+            tokens = query_text.split()
+            _skip = {
+                "who", "what", "where", "when", "why", "how",
+                "is", "are", "do", "does", "did", "was", "were",
+                "tell", "the", "my", "me", "i", "a", "an",
+            }
+            # Collect consecutive capitalized tokens as a single entity
+            # (e.g. "Meridian Labs" -> "meridian labs")
+            entity_parts: List[str] = []
+            for tok in tokens:
+                clean = tok.strip("?.,!;:'\"()")
+                if not clean:
+                    if entity_parts:
+                        return " ".join(entity_parts).lower()
+                    continue
+                if clean[0].isupper() and clean.lower() not in _skip:
+                    entity_parts.append(clean)
+                else:
+                    if entity_parts:
+                        return " ".join(entity_parts).lower()
+            if entity_parts:
+                return " ".join(entity_parts).lower()
+        # Fallback to winning edge's non-self entity
+        subj = (top.edge.get("subject") or "").strip().lower()
+        obj = (top.edge.get("object") or "").strip().lower()
+        if subj and subj != "user":
+            return subj
+        if obj and obj != "user":
+            return obj
+        return None
 
     # ── Sentence reconstruction (retrieve single-fact path) ───────
 
