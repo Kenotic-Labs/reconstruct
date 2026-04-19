@@ -159,21 +159,43 @@ batches:
 final_verification:
   - question: "What happened at the all hands meeting?"
     expected_contains: ["Danny", "credit", "latency", "we"]
+    expected_triples:
+      - ["Danny", "presented", "quarterly wins using 'we' for Maya's work"]
+      - ["Danny", "took_credit_for", "search latency improvements"]
   - question: "Whose work was the search latency improvement?"
     expected_contains: ["Maya"]
+    expected_triples:
+      - ["user", "did_most_work_on", "search latency improvements"]
   - question: "Did Maya confront Danny?"
     expected_contains: ["no"]
+    expected_triples:
+      - ["user", "did_not", "confront Danny"]
   - question: "Who noticed Danny taking credit?"
     expected_contains: ["Lily"]
+    expected_triples:
+      - ["Lily", "noticed", "Danny glossing over user's contributions"]
   - question: "What did Sam say privately?"
     expected_contains: ["knows", "Maya's work", "acknowledges"]
+    expected_triples:
+      - ["Sam", "acknowledges_privately", "latency work was primarily user's"]
   - question: "Why is Maya hesitant to confront Danny?"
     expected_contains: ["friendship", "relationship", "fridgesearch"]
+    expected_triples:
+      - ["user", "hesitant_because", "Danny is fridgesearch contributor and coworker friend"]
   - question: "What did Julian advise?"
     expected_contains: ["speak up", "say something"]
+    expected_triples:
+      - ["Julian", "advised", "speak up with data"]
   - question: "What parallel did Julian draw?"
     expected_contains: ["PIP"]
+    expected_triples:
+      - ["Julian", "drew_parallel_to", "PIP: user spoke up with data and won"]
   - question: "What are Danny and Maya's dogs' names?"
     expected_contains: ["Kobe", "Penny"]
+    expected_triples:
+      - ["user", "has_dog", "Kobe"]
+      - ["Danny", "has_dog", "Penny"]
   - question: "Is Maya planning to let this go?"
     expected_contains: ["yes", "this time"]
+    expected_triples:
+      - ["user", "decided", "let it go this time"]

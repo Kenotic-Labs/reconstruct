@@ -201,8 +201,13 @@ final_verification:
     expected_contains: ["analytics dashboard"]
   - question: "How did they divide the work?"
     expected_contains: ["Maya data", "Danny visualization"]
+    expected_triples:
+      - ["user", "owns", "data aggregation pipeline and search metrics"]
+      - ["Danny", "owns", "visualization layer and real-time streaming"]
   - question: "Did the dashboard demo go well?"
     expected_contains: ["yes", "Ross impressed"]
+    expected_triples:
+      - ["Ross", "was_impressed_by", "dashboard demo"]
   - question: "Were both names in the demo slides?"
     expected_contains: ["yes", "both"]
   - question: "Did Danny defer to Maya on anything?"
@@ -217,3 +222,5 @@ final_verification:
     expected_contains: ["masterclass"]
   - question: "Is the credit attribution working now?"
     expected_contains: ["yes", "both names"]
+    expected_triples:
+      - ["Sam", "credited", "user for data layer and Danny for visualization"]

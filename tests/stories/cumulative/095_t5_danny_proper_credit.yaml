@@ -198,18 +198,26 @@ batches:
 final_verification:
   - question: "Did Danny give Maya proper credit in the latest meeting?"
     expected_contains: ["yes", "specifically", "named"]
+    expected_triples:
+      - ["Danny", "gave", "proper attribution in presentation"]
+      - ["Danny", "credited", "user for isolation layer"]
+      - ["Danny", "credited", "user for latency optimization"]
   - question: "Did Danny apologize formally?"
     expected_contains: ["no", "not formal", "something"]
   - question: "What did Danny say on Slack after the meeting?"
     expected_contains: ["heard", "do better"]
   - question: "Is Maya still keeping documentation?"
     expected_contains: ["yes"]
+    expected_triples:
+      - ["user", "keeping", "documentation of credit incidents"]
   - question: "When is Maya meeting with Sam?"
     expected_contains: ["Friday"]
   - question: "Is Maya presenting this as a complaint?"
     expected_contains: ["no", "heads up", "record"]
   - question: "Is Danny still working on fridgesearch?"
     expected_contains: ["yes"]
+    expected_triples:
+      - ["Danny", "asked_to", "add feature to fridgesearch"]
   - question: "What did Julian say about Maya fighting fair?"
     expected_contains: ["different", "Derek"]
   - question: "Does Maya note Danny's improvement in her documentation?"

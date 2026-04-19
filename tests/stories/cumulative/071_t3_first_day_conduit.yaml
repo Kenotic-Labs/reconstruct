@@ -201,6 +201,9 @@ batches:
 final_verification:
   - question: "Who is Maya's tech lead at Conduit?"
     expected_contains: ["Sam Okafor"]
+    expected_triples:
+      - ["Sam_Okafor", "tech_lead", "user"]
+      - ["Sam_Okafor", "manages", "user day to day"]
   - question: "Who is Lily Tran?"
     expected_contains: ["collaborator", "Conduit", "teammate"]
   - question: "What was Maya's first task at Conduit?"

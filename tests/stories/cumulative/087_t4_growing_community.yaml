@@ -211,16 +211,22 @@ final_verification:
     expected_contains: ["3100"]
   - question: "Is there a fridgesearch subreddit?"
     expected_contains: ["yes"]
+    expected_triples:
+      - ["fridgesearch", "has", "user-created subreddit"]
   - question: "Who contributed fuzzy matching to fridgesearch?"
     expected_contains: ["Danny"]
   - question: "What languages does fridgesearch support?"
     expected_contains: ["Spanish", "French"]
   - question: "Do donations cover server costs?"
     expected_contains: ["yes"]
+    expected_triples:
+      - ["fridgesearch_donations", "cover", "server costs"]
   - question: "How much are monthly donations?"
     expected_contains: ["120"]
   - question: "Was fridgesearch mentioned in TechCrunch?"
     expected_contains: ["yes"]
+    expected_triples:
+      - ["fridgesearch", "mentioned_in", "TechCrunch indie developer article"]
   - question: "What cooking challenge did the subreddit organize?"
     expected_contains: ["four ingredients"]
   - question: "Who uses fridgesearch from Maya's neighborhood?"

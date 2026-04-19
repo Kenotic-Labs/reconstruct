@@ -206,6 +206,8 @@ final_verification:
     expected_contains: ["right direction", "safe", "respected"]
   - question: "Is Danny still contributing to fridgesearch?"
     expected_contains: ["yes"]
+    expected_triples:
+      - ["Danny", "contributed", "optimization to fridgesearch"]
   - question: "What did Danny comment on the fridgesearch PR?"
     expected_contains: ["great project", "happy to help"]
   - question: "How long does Lily say normalization takes?"

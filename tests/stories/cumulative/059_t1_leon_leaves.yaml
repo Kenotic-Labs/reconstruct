@@ -197,6 +197,10 @@ final_verification:
     expected_contains: ["okay", "no reaction", "walked away"]
   - question: "How did Maya's Google phone screen go?"
     expected_contains: ["system design good", "coding fumbled"]
+    expected_triples:
+      - ["user", "completed", "Google phone screen"]
+      - ["user", "nailed", "distributed caching system design question"]
+      - ["user", "fumbled", "dynamic programming coding problem"]
   - question: "What did Priya say to Maya at lunch?"
     expected_contains: ["next", "you're next"]
   - question: "What does Maya miss most about working with Leon?"

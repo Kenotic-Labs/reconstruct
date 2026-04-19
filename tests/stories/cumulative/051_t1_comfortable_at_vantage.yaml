@@ -219,7 +219,13 @@ final_verification:
     expected_contains: ["140"]
   - question: "How is Maya feeling about her job right now?"
     expected_contains: ["good", "solid", "comfortable"]
+    expected_triples:
+      - ["user", "has_emotion", "satisfied"]
+      - ["user", "has_emotion", "comfortable"]
   - question: "What did Julian say about Maya's potential promotion?"
     expected_contains: ["undersell", "ask"]
   - question: "Who is Kobe?"
     expected_contains: ["dog", "golden retriever"]
+    expected_triples:
+      - ["user", "has_pet", "Kobe"]
+      - ["Kobe", "is_a", "dog"]

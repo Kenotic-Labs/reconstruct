@@ -195,6 +195,9 @@ final_verification:
     expected_contains: ["okay", "savings", "Julian freelance"]
   - question: "Does Leon know Maya is job searching?"
     expected_contains: ["yes"]
+    expected_triples:
+      - ["user", "told", "Leon about active job search"]
+      - ["Leon", "supportive_of", "user's job search"]
   - question: "How does Maya's mom feel about her leaving?"
     expected_contains: ["confused", "why leave"]
   - question: "Who is Clara?"
@@ -203,5 +206,7 @@ final_verification:
     expected_contains: ["three"]
   - question: "Is Maya still doing portal work at Vantage?"
     expected_contains: ["yes"]
+    expected_triples:
+      - ["user", "still_doing", "boring portal work with Tanya and Raj"]
   - question: "What will Julian do during Maya's recruiter call?"
     expected_contains: ["walk Kobe"]

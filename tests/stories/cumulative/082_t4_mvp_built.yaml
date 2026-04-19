@@ -161,21 +161,41 @@ batches:
 final_verification:
   - question: "How many beta testers does fridgesearch have?"
     expected_contains: ["12"]
+    expected_triples:
+      - ["fridgesearch", "beta_testers", "12 friends"]
   - question: "Who is Marcus Hill?"
     expected_contains: ["friend", "foodie", "engineer"]
+    expected_triples:
+      - ["Marcus Hill", "is", "friend, foodie, and software engineer"]
   - question: "What bug did Marcus find?"
     expected_contains: ["ingredient normalization", "ground beef", "minced"]
+    expected_triples:
+      - ["Marcus", "found_bug", "ingredient normalization: ground beef vs minced beef"]
   - question: "How was the normalization issue fixed?"
     expected_contains: ["synonym map"]
+    expected_triples:
+      - ["user", "fixed_normalization_with", "synonym map for ingredient variations"]
   - question: "What grocery feature did Maya add?"
     expected_contains: ["shopping list", "grocery list"]
+    expected_triples:
+      - ["user", "added", "grocery list feature: shopping list from missing ingredients"]
   - question: "Is the fridgesearch MVP complete?"
     expected_contains: ["yes"]
+    expected_triples:
+      - ["fridgesearch", "status", "MVP complete"]
   - question: "How many people signed up in the first hour?"
     expected_contains: ["eight"]
+    expected_triples:
+      - ["fridgesearch_beta", "signups_first_hour", "eight"]
   - question: "Is Maya keeping to her weeknights-off rule?"
     expected_contains: ["no", "broke"]
+    expected_triples:
+      - ["user", "broke", "weeknight no-code rule"]
   - question: "Who is one of the beta testers?"
     expected_contains: ["Leon", "Marcus", "Lily", "Clara"]
+    expected_triples:
+      - ["fridgesearch", "beta_testers_include", "Leon, Marcus, Lily, Clara"]
   - question: "How are beta testers responding?"
     expected_contains: ["positive", "overwhelmingly"]
+    expected_triples:
+      - ["fridgesearch_beta", "feedback", "overwhelmingly positive"]

@@ -207,6 +207,8 @@ final_verification:
     expected_contains: ["Thai"]
   - question: "Is Priya also thinking about leaving Vantage?"
     expected_contains: ["yes"]
+    expected_triples:
+      - ["Priya", "considering", "leaving Vantage"]
   - question: "What did Tanya write in her card?"
     expected_contains: ["real engineer", "be like you"]
   - question: "What photo did Maya have on her desk?"

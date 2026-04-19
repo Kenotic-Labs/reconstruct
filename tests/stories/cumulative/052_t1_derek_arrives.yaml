@@ -214,3 +214,5 @@ final_verification:
     expected_contains: ["thai food", "movie", "comfort"]
   - question: "Where is Derek Hollis from?"
     expected_contains: ["Microsoft"]
+    expected_triples:
+      - ["Derek Hollis", "from", "Microsoft"]

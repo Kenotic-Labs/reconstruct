@@ -199,6 +199,8 @@ final_verification:
     expected_contains: ["4 hours"]
   - question: "What was the latest feature added?"
     expected_contains: ["seasonal", "ingredient"]
+    expected_triples:
+      - ["user", "added", "seasonal ingredient filter"]
   - question: "Who is managing the fridgesearch community?"
     expected_contains: ["Marcus"]
   - question: "What did Ross say about the blog post?"
@@ -207,5 +209,9 @@ final_verification:
     expected_contains: ["open source", "GitHub"]
   - question: "What recipe did Maya and Julian make with the seasonal filter?"
     expected_contains: ["peach salad", "burrata"]
+    expected_triples:
+      - ["user", "cooked", "summer peach salad with burrata and basil"]
   - question: "What has fridgesearch taught Maya?"
     expected_contains: ["build things", "outside work", "matter"]
+    expected_triples:
+      - ["user", "learned", "can build things outside of work that matter"]

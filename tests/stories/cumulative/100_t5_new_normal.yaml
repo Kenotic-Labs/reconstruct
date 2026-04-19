@@ -222,14 +222,25 @@ final_verification:
     expected_contains: ["4000"]
   - question: "Where does Maya work now?"
     expected_contains: ["Conduit AI"]
+    expected_triples:
+      - ["user", "works_at", "Conduit"]
   - question: "Who is Maya's manager?"
     expected_contains: ["Sam Okafor"]
+    expected_triples:
+      - ["Sam_Okafor", "manages", "user day to day"]
   - question: "What happened to the PIP reason?"
     expected_contains: ["budget reallocation"]
+    expected_triples:
+      - ["PIP", "reason_corrected", "performance → budget reallocation"]
   - question: "What was the final Conduit offer before negotiation?"
     expected_contains: ["185k", "185"]
+    expected_triples:
+      - ["Conduit", "final_offer", "185k base"]
   - question: "Is the Danny credit issue resolved?"
     expected_contains: ["yes"]
+    expected_triples:
+      - ["Danny", "expressed", "genuine remorse"]
+      - ["Sam", "established", "attribution guidelines"]
   - question: "Who are Maya's closest people?"
     expected_contains: ["Julian", "Lily", "Leon"]
   - question: "What is Maya's overall emotional state now?"

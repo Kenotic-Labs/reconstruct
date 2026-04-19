@@ -212,6 +212,8 @@ batches:
 final_verification:
   - question: "Does fridgesearch have meal planning now?"
     expected_contains: ["yes"]
+    expected_triples:
+      - ["user", "shipped", "meal planning feature"]
   - question: "Who requested the meal planning feature?"
     expected_contains: ["Elena"]
   - question: "What is the pantry staples feature?"

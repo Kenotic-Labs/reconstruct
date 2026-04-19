@@ -204,6 +204,8 @@ final_verification:
     expected_contains: ["90 minute", "live coding", "system design"]
   - question: "Did Maya get rejected from Google?"
     expected_contains: ["yes"]
+    expected_triples:
+      - ["user", "corrected_self", "Google rejected - no conflict"]
   - question: "How is Maya sleeping?"
     expected_contains: ["insomnia", "can't sleep"]
   - question: "What did Julian advise about the job options?"

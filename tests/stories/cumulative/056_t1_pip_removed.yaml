@@ -217,5 +217,7 @@ final_verification:
     expected_contains: ["supportive", "deserves better"]
   - question: "Is Leon also thinking about leaving?"
     expected_contains: ["yes"]
+    expected_triples:
+      - ["Leon", "considering", "leaving Vantage"]
   - question: "What's the current trust level between Maya and Vantage?"
     expected_contains: ["broken"]

@@ -178,13 +178,23 @@ final_verification:
     expected_contains: ["fridge", "rank", "missing"]
   - question: "How many recipes are in the dataset?"
     expected_contains: ["230 thousand"]
+    expected_triples:
+      - ["fridgesearch", "dataset_size", "230 thousand recipes"]
   - question: "What rule did Maya make about side project work?"
     expected_contains: ["weekends only"]
+    expected_triples:
+      - ["user", "rule", "no fridgesearch work on weeknights, only weekends"]
   - question: "What color palette is the app using?"
     expected_contains: ["oranges", "greens"]
+    expected_triples:
+      - ["fridgesearch", "color_palette", "warm oranges and greens"]
   - question: "How many bugs did Julian find?"
     expected_contains: ["three"]
+    expected_triples:
+      - ["Julian", "found", "three bugs in fridgesearch"]
   - question: "When is the beta launch planned?"
     expected_contains: ["couple weeks"]
+    expected_triples:
+      - ["fridgesearch", "beta_launch", "in a couple weeks"]
   - question: "What features does fridgesearch have so far?"
     expected_contains: ["account", "ingredients", "search", "favorites"]

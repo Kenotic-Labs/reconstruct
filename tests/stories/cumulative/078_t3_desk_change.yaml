@@ -209,6 +209,9 @@ final_verification:
     expected_contains: ["8"]
   - question: "Does Lily still work closely with Maya?"
     expected_contains: ["coffee", "different channel", "daily"]
+    expected_triples:
+      - ["Lily", "wants_to_transition_to", "ML engineering"]
+      - ["Lily", "asked_user_to", "mentor her on search ranking model"]
   - question: "What does Lily want to transition to?"
     expected_contains: ["ML engineering"]
   - question: "How much did model quantization reduce inference time?"

@@ -201,6 +201,9 @@ final_verification:
     expected_contains: ["Friday", "10am"]
   - question: "How many times was the Google interview rescheduled?"
     expected_contains: ["two", "twice"]
+    expected_triples:
+      - ["Google interview", "rescheduled", "Monday 11am → Wednesday 2pm"]
+      - ["Google interview", "rescheduled_again", "Wednesday 2pm → Friday 10am"]
   - question: "How did Maya's Conduit AI technical screen go?"
     expected_contains: ["well", "nailed", "impressed"]
   - question: "Who conducted the Conduit AI technical screen?"

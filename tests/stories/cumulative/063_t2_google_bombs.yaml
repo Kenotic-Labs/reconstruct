@@ -200,6 +200,9 @@ batches:
 final_verification:
   - question: "How many times did Maya interview at Google?"
     expected_contains: ["two", "twice"]
+    expected_triples:
+      - ["user", "interviewed_at", "Google"]
+      - ["user", "decided", "done with Google permanently"]
   - question: "What happened in Maya's second Google interview?"
     expected_contains: ["bombed", "disaster", "blanked"]
   - question: "What coding problem tripped Maya up?"

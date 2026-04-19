@@ -208,6 +208,8 @@ final_verification:
     expected_contains: ["attribution", "named", "presentations"]
   - question: "Did Sam talk to Danny?"
     expected_contains: ["yes"]
+    expected_triples:
+      - ["Sam", "talked_to", "Danny"]
   - question: "How did Danny respond to Sam?"
     expected_contains: ["genuine remorse"]
   - question: "Does Sam think Danny is malicious?"
