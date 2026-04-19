@@ -197,25 +197,24 @@ def test_stage4_relate_passes_through_when_no_entities(monkeypatch):
     assert out == [c]
 
 
-def test_stage5_exit_ranks_by_pq_cosine_not_edge():
-    """Exit measures answerability (PQ) — the edge whose PQ best
-    matches the query wins, even if another edge has a higher surface
-    similarity."""
+def test_stage5_exit_ranks_by_max_of_pq_and_edge():
+    """Exit uses max(pq_cosine, edge_cosine) — additive, never discards
+    a signal. The candidate with the higher max wins."""
     engine = RetrievalEngine()
     q_emb = np.array([1.0, 0.0], dtype=np.float32)
-    # c1: low edge similarity (0.2), HIGH pq answerability (0.9)
+    # c1: low edge similarity (0.2), HIGH pq answerability (0.9) → max=0.9
     c1 = Candidate(
         relationship_id=1, edge={},
         pq_cosine=0.9, edge_cosine=0.2,
     )
-    # c2: HIGH edge similarity (0.95), low pq answerability (0.3)
+    # c2: HIGH edge similarity (0.95), low pq answerability (0.3) → max=0.95
     c2 = Candidate(
         relationship_id=2, edge={},
         pq_cosine=0.3, edge_cosine=0.95,
     )
     out = engine._stage5_exit(q_emb=q_emb, candidates=[c2, c1])
-    assert out[0].relationship_id == 1  # pq wins over surface
-    assert out[1].relationship_id == 2
+    assert out[0].relationship_id == 2  # max(0.3, 0.95) > max(0.9, 0.2)
+    assert out[1].relationship_id == 1
 
 
 def test_stage5_exit_falls_back_to_edge_when_no_pq():

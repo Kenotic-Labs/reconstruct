@@ -447,9 +447,15 @@ class RetrievalEngine:
         subj = top.edge.get("subject") or ""
         pred = top.edge.get("predicate") or ""
         obj = top.edge.get("object") or ""
+        source_text = (top.edge.get("source_text") or "").strip()
+
+        # Prefer the original utterance (source_text) when available —
+        # it carries the full context the user spoke. Fall back to
+        # SPO surface reconstruction when no source text was recorded.
+        answer_text = source_text if source_text else self._triple_to_sentence(subj, pred, obj)
 
         return Answer(
-            text=self._triple_to_sentence(subj, pred, obj),
+            text=answer_text,
             subject=subj, predicate=pred, object=obj,
             confidence=1.0, source="moat_pipeline_lookup",
             survivors=len(candidates),
@@ -573,7 +579,8 @@ class RetrievalEngine:
                    r.edge_temporal_context   AS edge_temporal_context,
                    r.edge_relational_type    AS edge_relational_type,
                    r.edge_embedding          AS edge_embedding,
-                   r.arc_id                  AS arc_id
+                   r.arc_id                  AS arc_id,
+                   r.source_text             AS source_text
               FROM predicted_queries pq
               JOIN relationships r ON r.id = pq.relationship_id
              WHERE pq.user_id = ?
@@ -609,7 +616,8 @@ class RetrievalEngine:
                    r.edge_episodic_significance AS edge_episodic_significance,
                    r.edge_temporal_context   AS edge_temporal_context,
                    r.edge_relational_type    AS edge_relational_type,
-                   r.arc_id                  AS arc_id
+                   r.arc_id                  AS arc_id,
+                   r.source_text             AS source_text
               FROM relationships r
              WHERE r.user_id = ?
                AND COALESCE(r.is_current, 1) = 1

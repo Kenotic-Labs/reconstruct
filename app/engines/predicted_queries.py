@@ -277,6 +277,22 @@ def _applicable_wh_types(
 
 # ---- public API --------------------------------------------------------
 
+def _is_canonical_user(subject: str) -> bool:
+    """True when the subject is the first-person canonical placeholder.
+
+    Kenotic's decomposer maps I/me/myself to 'user'. This token is
+    structurally a PERSON — every 'user' edge is a first-person
+    statement about the speaker. Recognizing this lets PQ generation
+    fire PERSON-applicable templates and produce entity-agnostic
+    variants that cosine-match third-person queries ("Where does Maya
+    work?" ↔ "Who works at Vantage Systems?").
+
+    This is the English first-person pronoun paradigm — a closed
+    grammatical class, not a curated word list.
+    """
+    return (subject or "").strip().lower() in ("user", "i", "me", "myself")
+
+
 def generate_predicted_queries(
     subject: str,
     predicate: str,
@@ -290,6 +306,14 @@ def generate_predicted_queries(
     unavailable we fall back to a structural question skeleton built
     from the triple (still not a curated list -- it's the SPO surface
     re-ordered into an interrogative form).
+
+    When subject is the canonical 'user' placeholder, we additionally
+    generate entity-agnostic variants that drop the subject token.
+    This is additive — all original PQs are kept, the agnostic variants
+    are appended. The rationale: 'user' is a variable standing for the
+    speaker's real name, so PQs that rely on predicate+object rather
+    than subject will cosine-match third-person queries that use the
+    speaker's name.
     """
     subject = (subject or "").strip()
     predicate = (predicate or "").strip()
@@ -297,7 +321,13 @@ def generate_predicted_queries(
     if not subject or not predicate or not object:
         return []
 
-    wh_types = _applicable_wh_types(subject_type, object_type, predicate)
+    # Structural identity: 'user' IS a person (the speaker). Promote
+    # to PERSON so WHO templates fire for first-person edges.
+    effective_subject_type = subject_type
+    if _is_canonical_user(subject) and subject_type == "GENERIC":
+        effective_subject_type = PERSON
+
+    wh_types = _applicable_wh_types(effective_subject_type, object_type, predicate)
 
     # ML QG disabled — the raya-srl-220m-v4 model mangles first-person
     # subjects and confuses relation direction (e.g., "user works_at
@@ -307,11 +337,13 @@ def generate_predicted_queries(
     pred_clean = predicate.replace("_", " ")
     pred_lemma = _lemmatize_predicate(pred_clean)
 
+    is_user = _is_canonical_user(subject)
+
     results: List[Tuple[str, np.ndarray]] = []
     for wh in wh_types:
         # Structural interrogative — one template per WH class.
         if wh == WH_WHO:
-            if subject_type == PERSON:
+            if effective_subject_type == PERSON:
                 question = f"Who {pred_clean} {object}?"
             else:
                 question = f"Who does {subject} {pred_lemma}?"
@@ -343,6 +375,26 @@ def generate_predicted_queries(
         except Exception:
             continue
         results.append((obj_question, obj_emb))
+
+        # Entity-agnostic variant for canonical-user edges. The subject
+        # 'user' is a variable — anyone could ask about this fact using
+        # the speaker's real name. Drop the subject token and produce a
+        # predicate+object focused question that cosine-matches
+        # third-person queries. Additive: original PQs are preserved.
+        if is_user and wh != WH_WHO:
+            # WHO variant already drops subject ("Who works_at X?").
+            # For other WH types, produce a subject-dropped form.
+            if wh == WH_WHEN:
+                agnostic_q = f"When was {object}?"
+            elif wh == WH_WHERE:
+                agnostic_q = f"Where is {pred_clean} {object}?"
+            else:  # WH_WHAT
+                agnostic_q = f"What about {pred_clean} {object}?"
+            try:
+                agnostic_emb = embed_text(agnostic_q)
+                results.append((agnostic_q, agnostic_emb))
+            except Exception:
+                pass
 
     return results
 
