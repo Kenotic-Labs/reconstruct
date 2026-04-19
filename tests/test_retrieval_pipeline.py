@@ -198,8 +198,8 @@ def test_stage4_relate_passes_through_when_no_entities(monkeypatch):
 
 
 def test_stage5_exit_ranks_by_max_of_pq_and_edge():
-    """Exit uses max(pq_cosine, edge_cosine) — additive, never discards
-    a signal. The candidate with the higher max wins."""
+    """Exit uses max(pq_cosine, edge_cosine, predicate_cosine) — additive,
+    never discards a signal. The candidate with the higher max wins."""
     engine = RetrievalEngine()
     q_emb = np.array([1.0, 0.0], dtype=np.float32)
     # c1: low edge similarity (0.2), HIGH pq answerability (0.9) → max=0.9
@@ -213,8 +213,31 @@ def test_stage5_exit_ranks_by_max_of_pq_and_edge():
         pq_cosine=0.3, edge_cosine=0.95,
     )
     out = engine._stage5_exit(q_emb=q_emb, candidates=[c2, c1])
-    assert out[0].relationship_id == 2  # max(0.3, 0.95) > max(0.9, 0.2)
+    assert out[0].relationship_id == 2  # max(0.3, 0.95, 0) > max(0.9, 0.2, 0)
     assert out[1].relationship_id == 1
+
+
+def test_stage5_exit_predicate_cosine_can_win():
+    """When PQ and edge cosine are both low, predicate_cosine can be the
+    strongest signal and determine the exit ranking."""
+    engine = RetrievalEngine()
+    q_emb = np.array([1.0, 0.0], dtype=np.float32)
+    # c1: low PQ, low edge, HIGH predicate alignment
+    c1 = Candidate(
+        relationship_id=1, edge={},
+        pq_cosine=0.3, edge_cosine=0.2, predicate_cosine=0.85,
+    )
+    # c2: moderate PQ and edge, low predicate alignment
+    c2 = Candidate(
+        relationship_id=2, edge={},
+        pq_cosine=0.5, edge_cosine=0.6, predicate_cosine=0.1,
+    )
+    out = engine._stage5_exit(q_emb=q_emb, candidates=[c2, c1])
+    # c1: max(0.3, 0.2, 0.85)=0.85 > c2: max(0.5, 0.6, 0.1)=0.6
+    assert out[0].relationship_id == 1
+    assert out[0].exit_cosine == 0.85
+    assert out[1].relationship_id == 2
+    assert out[1].exit_cosine == 0.6
 
 
 def test_stage5_exit_falls_back_to_edge_when_no_pq():

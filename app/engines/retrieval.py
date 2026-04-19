@@ -170,10 +170,17 @@ class RetrievalEngine:
     # ── Stage 1: Entry Cosine ────────────────────────────────────
 
     def _stage1_entry(self, user_id: int, q_emb: np.ndarray) -> List[Candidate]:
-        """Entry Cosine: max(pq_cosine, edge_cosine) per relationship_id,
-        top-K by entry_cosine. Both pools always run — no gating. Stores
-        pq_cosine and edge_cosine separately so Exit can rank by
-        answerability (PQ) while Entry cast the wide net (max)."""
+        """Entry Cosine: max(pq_cosine, edge_cosine, predicate_cosine) per
+        relationship_id, top-K by entry_cosine. All three cosine
+        dimensions always run — no gating. Stores each separately so
+        Exit can rank by the three-signal max while Entry casts the wide
+        net.
+
+        predicate_cosine isolates the *relational* dimension of the
+        triple: cosine(query, embed(predicate)).  This discriminates
+        between same-subject edges whose entities produce similar PQ
+        and edge embeddings but whose predicates differ (the core
+        wrong_ranking pattern)."""
         pq_rows = self._fetch_pq_rows(user_id)
         edge_rows = self._fetch_edge_rows(user_id)
 
@@ -209,9 +216,22 @@ class RetrievalEngine:
             elif cos > existing.edge_cosine:
                 existing.edge_cosine = cos
 
-        # entry_cosine = max(pq, edge) — recall key.
+        # Predicate pool — embed the predicate text for each unique edge,
+        # giving the query a relational-alignment signal that is
+        # independent of which entities fill the subject/object slots.
+        _pred_emb_cache: Dict[str, np.ndarray] = {}
         for c in by_rid.values():
-            c.entry_cosine = max(c.pq_cosine, c.edge_cosine)
+            pred_text = (c.edge.get("predicate") or "").replace("_", " ")
+            if not pred_text:
+                continue
+            if pred_text not in _pred_emb_cache:
+                _pred_emb_cache[pred_text] = embed_text(pred_text)
+            c.predicate_cosine = _cosine(q_emb, _pred_emb_cache[pred_text])
+
+        # entry_cosine = max(pq, edge, predicate) — recall key.
+        for c in by_rid.values():
+            c.entry_cosine = max(c.pq_cosine, c.edge_cosine,
+                                 c.predicate_cosine)
 
         out = sorted(by_rid.values(), key=lambda c: -c.entry_cosine)
         return out[: self._ENTRY_POOL_SIZE]
@@ -369,12 +389,24 @@ class RetrievalEngine:
     def _stage5_exit(
         self, q_emb: np.ndarray, candidates: List[Candidate]
     ) -> List[Candidate]:
-        """Exit Cosine: max(pq_cosine, edge_cosine). Additive — never
-        discards a signal, just picks the stronger one per candidate.
-        PQ measures answerability; edge measures surface similarity.
-        Whichever is higher for this (query, edge) pair wins."""
+        """Exit Cosine: max(pq_cosine, edge_cosine, predicate_cosine).
+        Three cosine dimensions, each measuring a different aspect of
+        relevance:
+
+        - pq_cosine: answerability (does a predicted question match?)
+        - edge_cosine: surface similarity (does the full triple match?)
+        - predicate_cosine: relational alignment (does the *relation
+          type* match what the query is asking about?)
+
+        Additive — never discards a signal, just picks the strongest
+        dimension per candidate. The three-signal max widens precision
+        coverage: when two same-subject edges tie on PQ and edge
+        cosine, predicate_cosine can break the tie structurally
+        by favouring the edge whose predicate aligns with the query's
+        relational intent."""
         for c in candidates:
-            c.exit_cosine = max(c.pq_cosine, c.edge_cosine)
+            c.exit_cosine = max(c.pq_cosine, c.edge_cosine,
+                                c.predicate_cosine)
             c.source_stages.add("exit")
         return sorted(candidates, key=lambda c: -c.exit_cosine)
 
@@ -427,13 +459,14 @@ class RetrievalEngine:
 
         candidates = self._stage5_exit(q_emb, candidates)
 
-        # Final ranking: PQ answerability (exit_cosine) with
+        # Final ranking: three-signal exit_cosine with
         # sequence_number DESC tie-break. Structural signals
         # (entity_overlap, cluster_members, hops_to_entity) already
         # gated the pool at Stages 2-4 — they decided who survives,
-        # not who wins at the top. PQ cosine is the right final
-        # discriminator because it measures answerability, not
-        # similarity.
+        # not who wins at the top. The three-signal max
+        # (pq + edge + predicate) is the final discriminator —
+        # pq measures answerability, edge measures surface similarity,
+        # and predicate measures relational alignment.
         candidates.sort(
             key=lambda c: (
                 -c.exit_cosine,
@@ -466,6 +499,7 @@ class RetrievalEngine:
                 "cluster_members": top.cluster_members,
                 "hops_to_entity": top.hops_to_entity,
                 "exit_cosine": top.exit_cosine,
+                "predicate_cosine": top.predicate_cosine,
                 "sequence_number": top.edge.get("sequence_number"),
                 "source_stages": sorted(top.source_stages),
                 "validate_warning": warning,
