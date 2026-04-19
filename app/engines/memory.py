@@ -559,12 +559,17 @@ class MemoryEngine:
                     pass
 
                 # 6. Ingest-time coherence (axis 7): if there are other
-                # is_current rows with the same (subject, predicate), mark
-                # the OLDER ones superseded_by=this rel_id. Retrieval
+                # is_current rows with the same (subject, predicate, object),
+                # mark the OLDER ones superseded_by=this rel_id. Retrieval
                 # stays read-only; conflicts are resolved at write time.
+                # Note: matching on the full triple (s, p, o) so that
+                # multiple distinct objects under the same predicate
+                # coexist (e.g. multiple emotions, metrics). True
+                # temporal supersession of *different* objects is
+                # handled by TemporalEngine.supersede().
                 try:
                     self._enforce_coherence_on_insert(
-                        conn, user_id, rel_id, subject, predicate
+                        conn, user_id, rel_id, subject, predicate, object
                     )
                 except Exception:
                     pass
@@ -1169,12 +1174,18 @@ class MemoryEngine:
         new_rel_id: int,
         subject: str,
         predicate: str,
+        object: str = "",
     ) -> None:
         """Axis 7: coherence at ingest.
 
-        Find any OTHER is_current rows with same (subject, predicate) for
-        this user; mark them superseded_by=new_rel_id. The newest row
+        Find any OTHER is_current rows with same (subject, predicate, object)
+        for this user; mark them superseded_by=new_rel_id. The newest row
         wins (max sequence_number). Retrieval stays read-only.
+
+        Matching on the full triple ensures that multiple distinct objects
+        under the same predicate coexist (e.g. multiple emotions, metrics).
+        True temporal supersession of *different* objects is handled by
+        TemporalEngine.supersede().
         """
         try:
             rows = conn.execute(
@@ -1182,10 +1193,11 @@ class MemoryEngine:
                    WHERE user_id = ?
                      AND LOWER(subject) = LOWER(?)
                      AND LOWER(predicate) = LOWER(?)
+                     AND LOWER(object) = LOWER(?)
                      AND id != ?
                      AND COALESCE(is_current, 1) = 1
                      AND tombstoned_at IS NULL""",
-                (user_id, subject, predicate, new_rel_id),
+                (user_id, subject, predicate, object, new_rel_id),
             ).fetchall()
         except sqlite3.OperationalError:
             return
