@@ -18,8 +18,6 @@ from app.db.session import get_db_context
 from app.vector import embedder as _embedder_module
 
 
-TAU_ENTITY = 0.55
-
 _STOPWORDS = {
     "who", "what", "when", "where", "why", "which", "whose", "how",
     "is", "are", "was", "were", "do", "does", "did", "can", "will",
@@ -72,8 +70,10 @@ def _cosine(a: np.ndarray, b: np.ndarray) -> float:
 
 def resolve_query_entities(
     user_id: int, query_text: str, top_k: int = 10,
-    min_score: float = TAU_ENTITY,
 ) -> List[Dict[str, Any]]:
+    """Return the top-K entities ranked by cosine to query noun-phrases.
+    No threshold gating — return ranked results and let downstream
+    structural stages (Expand, Relate) decide who survives."""
     candidates = _extract_candidates(query_text)
     if not candidates:
         return []
@@ -85,7 +85,7 @@ def resolve_query_entities(
     with get_db_context() as conn:
         rows = conn.execute(sql, (user_id,)).fetchall()
 
-    best: Dict[int, Dict[str, Any]] = {}
+    scored: List[Dict[str, Any]] = []
     for r in rows:
         if not r["embedding"]:
             continue
@@ -95,11 +95,11 @@ def resolve_query_entities(
             c = _cosine(ev, pe)
             if c > top:
                 top = c
-        if top >= min_score:
-            best[r["id"]] = {
+        if top > 0.0:
+            scored.append({
                 "id": r["id"], "name": r["name"],
                 "entity_type": r["entity_type"], "score": top,
-            }
+            })
 
-    ranked = sorted(best.values(), key=lambda x: -x["score"])
-    return ranked[:top_k]
+    scored.sort(key=lambda x: -x["score"])
+    return scored[:top_k]

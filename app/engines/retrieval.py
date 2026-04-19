@@ -649,21 +649,18 @@ class RetrievalEngine:
             if e.get("object"):
                 participants.add(e["object"])
 
-        valences = [
-            float(e["edge_emotional_valence"])
+        # Dominant mood from stored labels — structural passthrough of
+        # write-time emotion classification. No thresholds on valence.
+        mood_labels = [
+            e["edge_emotional_label"]
             for e in edges
-            if e.get("edge_emotional_valence") is not None
+            if e.get("edge_emotional_label")
         ]
-        mean_val = float(np.mean(valences)) if valences else None
-
-        if mean_val is None:
-            dominant_mood = None
-        elif mean_val > 0.55:
-            dominant_mood = "positive"
-        elif mean_val < 0.45:
-            dominant_mood = "negative"
+        if mood_labels:
+            from collections import Counter as _Counter
+            dominant_mood = _Counter(mood_labels).most_common(1)[0][0]
         else:
-            dominant_mood = "neutral"
+            dominant_mood = None
 
         pivotal_ids = [
             e["id"] for e in edges
@@ -686,7 +683,7 @@ class RetrievalEngine:
             edges=timeline,
             participants=sorted(participants),
             dominant_mood=dominant_mood,
-            mean_valence=mean_val,
+            mean_valence=None,
             pivotal_edge_ids=pivotal_ids,
             timeline_edge_ids=timeline_ids,
         )
