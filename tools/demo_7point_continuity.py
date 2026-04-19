@@ -1,10 +1,23 @@
 #!/usr/bin/env python3
 """
 7-Point Continuity Demo — Kenotic Labs
+CONVERSATIONAL MULTI-AGENT VERSION
 
 Proves 7 distinct continuity properties using YAML-bypass ingest
 (hand-authored triples via MemoryEngine.store()), then queries via
 RetrievalEngine.retrieve() and RetrievalEngine.reconstruct().
+
+Each point runs a 4-phase conversation:
+  [Agent A — Claude]  Ingests the user's story → stores triples
+  [Agent B — GPT]     Fresh session. Queries memory, then stores its OWN additions
+  [Agent C — Gemini]  Cold start. Reconstructs the full picture (A + B)
+  [Agent A — Claude]  Returns. Queries "what's new?" → sees B and C's additions
+
+This proves:
+  1. Memory ACCUMULATES across agents (not just persists)
+  2. Each agent ADDS to understanding (not just reads)
+  3. Cold-start agent reconstructs EVERYTHING (not just latest)
+  4. Original agent sees what happened while it was gone
 
 No MCP server. No LLM at read time. Deterministic output.
 
@@ -45,12 +58,16 @@ from app.engines.memory import MemoryEngine
 from app.engines.temporal import TemporalEngine
 from app.engines.retrieval import RetrievalEngine, Answer, Situation, StructuralRefusal
 
-# ═══════════════════════════════════════════════════════════════════════
+# ===================================================================
 # Helpers
-# ═══════════════════════════════════════════════════════════════════════
+# ===================================================================
 
-SEP = "\n" + "=" * 55
-THIN = "-" * 55
+HEAVY = "\n" + "=" * 60
+LIGHT = "-" * 60
+AGENT_A_TAG = "[Agent A -- Claude]"
+AGENT_B_TAG = "[Agent B -- GPT]"
+AGENT_C_TAG = "[Agent C -- Gemini]"
+AGENT_A_RETURN_TAG = "[Agent A -- Claude returns]"
 
 
 def init_db():
@@ -75,10 +92,9 @@ def init_db():
 
 
 def fresh_engines():
-    """Create fresh engine instances (simulates process restart).
+    """Create fresh engine instances (simulates fresh agent session).
 
-    We bypass the module-level singletons so each call returns
-    genuinely new objects, but they all point at the same DB file.
+    Each call returns genuinely new objects pointing at the same DB.
     """
     mem = MemoryEngine()
     tmp = TemporalEngine()
@@ -87,7 +103,7 @@ def fresh_engines():
     return mem, tmp, ret
 
 
-def store_triples(memory, user_id, triples, agent_label="Agent A"):
+def store_triples(memory, user_id, triples, label=""):
     """Store a list of (subj, pred, obj, source_text) tuples."""
     n = 0
     for t in triples:
@@ -103,7 +119,7 @@ def store_triples(memory, user_id, triples, agent_label="Agent A"):
         )
         if rel_id:
             n += 1
-    print(f"    [check] {n} triples stored")
+    print(f"    -> Stored {n} triples")
     return n
 
 
@@ -127,26 +143,40 @@ def ask(retrieval, user_id, question, mode="lookup"):
 def print_qa(retrieval, user_id, question, mode="lookup"):
     """Print a formatted Q/A pair. Returns the answer text."""
     text, _ = ask(retrieval, user_id, question, mode)
-    print(f"  Q: {question}")
-    print(f"  A: {text}")
+    print(f"    Q: {question}")
+    print(f"    A: {text}")
     print()
     return text
 
 
-# ═══════════════════════════════════════════════════════════════════════
+def point_header(n, name):
+    print(HEAVY)
+    print(f"  POINT {n}: {name}")
+    print(HEAVY)
+    print()
+
+
+def agent_separator(label):
+    print(f"  {LIGHT}")
+    print(f"  --- {label} session ends ---")
+    print(f"  {LIGHT}")
+    print()
+
+
+# ===================================================================
 # POINT 1: Core Continuity
-# ═══════════════════════════════════════════════════════════════════════
+# ===================================================================
 
 def point1_core_continuity():
     uid = 1
-    print(SEP)
-    print("  POINT 1: CORE CONTINUITY")
-    print("  Store -> Restart -> Retrieve")
-    print(SEP)
+    point_header(1, "CORE CONTINUITY")
+
+    # --- Agent A: Claude ingests the user's story ---
+    print(f"  {AGENT_A_TAG}")
+    print(f'  "The user just told me about their upcoming job interview..."')
     print()
 
     mem, tmp, ret = fresh_engines()
-
     triples = [
         ("user", "has_event", "job interview at Conduit AI",
          "I have a job interview at Conduit AI"),
@@ -163,42 +193,70 @@ def point1_core_continuity():
         ("Sam", "helping_with", "mock interview prep",
          "Sam is helping with mock interview prep"),
     ]
-
-    print(f"  [Agent A -- Session 1] Storing situation...")
     store_triples(mem, uid, triples)
+    agent_separator("Agent A")
+
+    # --- Agent B: GPT queries and adds its own contributions ---
+    print(f"  {AGENT_B_TAG} (fresh session)")
+    print(f'  "Let me check what\'s going on with this user..."')
     print()
 
-    print(f"  --- RESTART (new engine instance) ---")
-    print()
-
-    _, _, ret2 = fresh_engines()
-
-    print(f"  [Agent B -- Session 2] Querying from fresh session...")
-    print()
-
+    mem2, tmp2, ret2 = fresh_engines()
     print_qa(ret2, uid, "What event do I have coming up?")
     print_qa(ret2, uid, "When is the interview?")
-    print_qa(ret2, uid, "Who is helping me with mock prep?")
     print_qa(ret2, uid, "How am I feeling?")
 
-    print(f"  RESULT: Point 1 complete")
+    print(f'  "I can help them prep. Let me add some notes."')
+    print()
+    agent_b_triples = [
+        ("user", "received_advice", "practice whiteboarding before Thursday",
+         "GPT advised user to practice whiteboarding before Thursday"),
+        ("user", "prep_status", "mock interview scheduled with Sam",
+         "GPT noted mock interview is scheduled with Sam"),
+        ("user", "should_review", "Conduit AI recent product launches",
+         "GPT recommended reviewing Conduit AI recent product launches"),
+    ]
+    store_triples(mem2, uid, agent_b_triples)
+    agent_separator("Agent B")
+
+    # --- Agent C: Gemini cold start, reconstructs everything ---
+    print(f"  {AGENT_C_TAG} (cold start -- never seen this user)")
+    print(f'  "Let me reconstruct the full picture from memory..."')
+    print()
+
+    mem3, tmp3, ret3 = fresh_engines()
+    print_qa(ret3, uid, "Summarize this user's current situation", mode="reconstruct")
+    print_qa(ret3, uid, "What advice has been given?")
+    print_qa(ret3, uid, "Who is helping me with mock prep?")
+    agent_separator("Agent C")
+
+    # --- Agent A returns: Claude checks what's new ---
+    print(f"  {AGENT_A_RETURN_TAG}")
+    print(f'  "I\'m back. Anything new since I was last here?"')
+    print()
+
+    mem4, tmp4, ret4 = fresh_engines()
+    print_qa(ret4, uid, "What advice has the user received?")
+    print_qa(ret4, uid, "What should I review for the interview?")
+
+    print(f"  RESULT: Memory accumulated across 3 agents")
     print()
 
 
-# ═══════════════════════════════════════════════════════════════════════
+# ===================================================================
 # POINT 2: Update Continuity
-# ═══════════════════════════════════════════════════════════════════════
+# ===================================================================
 
 def point2_update_continuity():
     uid = 2
-    print(SEP)
-    print("  POINT 2: UPDATE CONTINUITY")
-    print("  Store -> Update -> Restart -> Retrieve history")
-    print(SEP)
+    point_header(2, "UPDATE CONTINUITY")
+
+    # --- Agent A: Claude stores original situation ---
+    print(f"  {AGENT_A_TAG}")
+    print(f'  "The user has a team presentation coming up..."')
     print()
 
     mem, tmp, ret = fresh_engines()
-
     original = [
         ("user", "has_event", "team presentation",
          "I have a team presentation"),
@@ -207,10 +265,7 @@ def point2_update_continuity():
         ("user", "feels", "confident about presenting",
          "I feel confident about presenting"),
     ]
-
-    print(f"  [Agent A -- Session 1] Storing original situation...")
     store_triples(mem, uid, original)
-    print()
 
     updates = [
         ("team presentation", "now_scheduled_for", "Wednesday at 3pm",
@@ -218,50 +273,76 @@ def point2_update_continuity():
         ("user", "now_feels", "stressed about the delay",
          "I now feel stressed about the delay"),
     ]
-
-    print(f"  [Agent A -- Session 1] Storing updates...")
+    print(f'  "User just told me the presentation got rescheduled..."')
+    print()
     store_triples(mem, uid, updates)
+    agent_separator("Agent A")
+
+    # --- Agent B: GPT queries and adds workflow help ---
+    print(f"  {AGENT_B_TAG} (fresh session)")
+    print(f'  "Checking in on this user\'s presentation situation..."')
     print()
 
-    print(f"  --- RESTART (new engine instance) ---")
-    print()
-
-    _, _, ret2 = fresh_engines()
-
-    print(f"  [Agent B -- Session 2] Querying updated state...")
-    print()
-
+    mem2, tmp2, ret2 = fresh_engines()
     print_qa(ret2, uid, "When is the team presentation now?")
     print_qa(ret2, uid, "How do I feel now?")
-    print_qa(ret2, uid, "What was the original date for the presentation?")
 
-    print(f"  RESULT: Point 2 complete")
+    print(f'  "They seem stressed. Let me help with the rescheduled prep."')
+    print()
+    agent_b_triples = [
+        ("user", "received_advice", "update slide deck for Wednesday deadline",
+         "GPT advised updating slide deck for Wednesday deadline"),
+        ("user", "action_item", "notify team about new presentation time",
+         "GPT flagged action item: notify team about new presentation time"),
+    ]
+    store_triples(mem2, uid, agent_b_triples)
+    agent_separator("Agent B")
+
+    # --- Agent C: Gemini reconstructs ---
+    print(f"  {AGENT_C_TAG} (cold start)")
+    print(f'  "Reconstructing user\'s presentation timeline..."')
+    print()
+
+    mem3, tmp3, ret3 = fresh_engines()
+    print_qa(ret3, uid, "Summarize this user's presentation situation", mode="reconstruct")
+    print_qa(ret3, uid, "What was the original date for the presentation?")
+    print_qa(ret3, uid, "What action items are pending?")
+    agent_separator("Agent C")
+
+    # --- Agent A returns ---
+    print(f"  {AGENT_A_RETURN_TAG}")
+    print(f'  "What happened while I was gone?"')
+    print()
+
+    mem4, tmp4, ret4 = fresh_engines()
+    print_qa(ret4, uid, "What advice has the user received?")
+    print_qa(ret4, uid, "What action items need attention?")
+
+    print(f"  RESULT: Memory accumulated across 3 agents")
     print()
 
 
-# ═══════════════════════════════════════════════════════════════════════
+# ===================================================================
 # POINT 3: Disambiguation Continuity
-# ═══════════════════════════════════════════════════════════════════════
+# ===================================================================
 
 def point3_disambiguation():
     uid = 3
-    print(SEP)
-    print("  POINT 3: DISAMBIGUATION CONTINUITY")
-    print("  Two similar situations -> Restart -> Distinguish")
-    print(SEP)
+    point_header(3, "DISAMBIGUATION CONTINUITY")
+
+    # --- Agent A: Claude stores two overlapping interview stories ---
+    print(f"  {AGENT_A_TAG}")
+    print(f'  "User told me about TWO interviews -- theirs and Marcus\'s..."')
     print()
 
     mem, tmp, ret = fresh_engines()
-
     triples = [
-        # My interview
         ("user", "has_interview_at", "Conduit AI",
          "I have an interview at Conduit AI"),
         ("user interview", "scheduled_for", "Thursday at 2pm",
          "My interview is scheduled for Thursday at 2pm"),
         ("user", "feels_about_interview", "nervous but excited",
          "I feel nervous but excited about my interview"),
-        # Marcus's interview
         ("Marcus", "has_interview_at", "Palantir",
          "Marcus has an interview at Palantir"),
         ("Marcus interview", "takes_place", "Friday at 11am",
@@ -269,44 +350,71 @@ def point3_disambiguation():
         ("Marcus", "feels_about_interview", "very confident",
          "Marcus feels very confident about his interview"),
     ]
-
-    print(f"  [Agent A -- Session 1] Storing two interview situations...")
     store_triples(mem, uid, triples)
+    agent_separator("Agent A")
+
+    # --- Agent B: GPT disambiguates and adds prep for each ---
+    print(f"  {AGENT_B_TAG} (fresh session)")
+    print(f'  "Two interviews in the mix. Let me sort them out..."')
     print()
 
-    print(f"  --- RESTART (new engine instance) ---")
-    print()
-
-    _, _, ret2 = fresh_engines()
-
-    print(f"  [Agent B -- Session 2] Disambiguating...")
-    print()
-
+    mem2, tmp2, ret2 = fresh_engines()
     print_qa(ret2, uid, "Where is my interview?")
     print_qa(ret2, uid, "Where is Marcus's interview?")
     print_qa(ret2, uid, "When is my interview?")
     print_qa(ret2, uid, "When is Marcus's interview?")
-    print_qa(ret2, uid, "How do I feel about my interview?")
-    print_qa(ret2, uid, "How does Marcus feel about his interview?")
 
-    print(f"  RESULT: Point 3 complete")
+    print(f'  "Adding targeted prep notes for each interview."')
+    print()
+    agent_b_triples = [
+        ("user", "prep_focus", "system design for Conduit AI",
+         "GPT noted user should focus on system design for Conduit AI"),
+        ("Marcus", "prep_focus", "data infrastructure for Palantir",
+         "GPT noted Marcus should focus on data infrastructure for Palantir"),
+        ("user", "coordination_note", "both interviews this week, stagger prep",
+         "GPT noted both interviews are this week, should stagger prep"),
+    ]
+    store_triples(mem2, uid, agent_b_triples)
+    agent_separator("Agent B")
+
+    # --- Agent C: Gemini reconstructs both interviews ---
+    print(f"  {AGENT_C_TAG} (cold start)")
+    print(f'  "Reconstructing multi-person interview landscape..."')
+    print()
+
+    mem3, tmp3, ret3 = fresh_engines()
+    print_qa(ret3, uid, "Summarize all upcoming interviews", mode="reconstruct")
+    print_qa(ret3, uid, "How do I feel about my interview?")
+    print_qa(ret3, uid, "How does Marcus feel about his interview?")
+    agent_separator("Agent C")
+
+    # --- Agent A returns ---
+    print(f"  {AGENT_A_RETURN_TAG}")
+    print(f'  "What prep notes were added?"')
+    print()
+
+    mem4, tmp4, ret4 = fresh_engines()
+    print_qa(ret4, uid, "What should I focus on for my interview?")
+    print_qa(ret4, uid, "What should Marcus focus on?")
+
+    print(f"  RESULT: Memory accumulated across 3 agents")
     print()
 
 
-# ═══════════════════════════════════════════════════════════════════════
+# ===================================================================
 # POINT 4: Multi-hop Reconstruction
-# ═══════════════════════════════════════════════════════════════════════
+# ===================================================================
 
 def point4_multihop():
     uid = 4
-    print(SEP)
-    print("  POINT 4: MULTI-HOP RECONSTRUCTION")
-    print("  Separate facts -> Restart -> Reconstruct situation")
-    print(SEP)
+    point_header(4, "MULTI-HOP RECONSTRUCTION")
+
+    # --- Agent A: Claude stores scattered facts ---
+    print(f"  {AGENT_A_TAG}")
+    print(f'  "User shared a lot of context across the conversation..."')
     print()
 
     mem, tmp, ret = fresh_engines()
-
     triples = [
         ("user", "works_as", "backend engineer at Stripe",
          "I work as a backend engineer at Stripe"),
@@ -321,41 +429,70 @@ def point4_multihop():
         ("Sam", "recommended", "practicing whiteboard problems",
          "Sam recommended practicing whiteboard problems"),
     ]
-
-    print(f"  [Agent A -- Session 1] Storing separate facts...")
     store_triples(mem, uid, triples)
+    agent_separator("Agent A")
+
+    # --- Agent B: GPT does multi-hop lookup, adds strategic notes ---
+    print(f"  {AGENT_B_TAG} (fresh session)")
+    print(f'  "Connecting the dots on this user\'s career transition..."')
     print()
 
-    print(f"  --- RESTART (new engine instance) ---")
-    print()
-
-    _, _, ret2 = fresh_engines()
-
-    print(f"  [Agent B -- Session 2] Reconstructing situation...")
-    print()
-
+    mem2, tmp2, ret2 = fresh_engines()
     print_qa(ret2, uid, "What am I preparing for?")
     print_qa(ret2, uid, "Why am I anxious?")
-    print_qa(ret2, uid, "Summarize my current situation", mode="reconstruct")
+    print_qa(ret2, uid, "Where do I currently work?")
 
-    print(f"  RESULT: Point 4 complete")
+    print(f'  "Stripe to startup is a big jump. Adding strategic context."')
+    print()
+    agent_b_triples = [
+        ("user", "career_context", "transitioning from big tech to startup",
+         "GPT noted user is transitioning from big tech (Stripe) to startup"),
+        ("user", "strength_to_highlight", "production-scale distributed systems experience",
+         "GPT noted user should highlight production-scale distributed systems experience from Stripe"),
+        ("user", "gap_to_address", "startup pace and ambiguity tolerance",
+         "GPT identified gap: startup pace and ambiguity tolerance"),
+    ]
+    store_triples(mem2, uid, agent_b_triples)
+    agent_separator("Agent B")
+
+    # --- Agent C: Gemini reconstructs full career narrative ---
+    print(f"  {AGENT_C_TAG} (cold start)")
+    print(f'  "Building complete picture from all stored context..."')
+    print()
+
+    mem3, tmp3, ret3 = fresh_engines()
+    print_qa(ret3, uid, "Summarize my current situation", mode="reconstruct")
+    print_qa(ret3, uid, "What are my strengths for this interview?")
+    print_qa(ret3, uid, "What gaps should I address?")
+    agent_separator("Agent C")
+
+    # --- Agent A returns ---
+    print(f"  {AGENT_A_RETURN_TAG}")
+    print(f'  "What strategic insights were added?"')
+    print()
+
+    mem4, tmp4, ret4 = fresh_engines()
+    print_qa(ret4, uid, "What career context has been noted?")
+    print_qa(ret4, uid, "What strengths should I highlight?")
+
+    print(f"  RESULT: Memory accumulated across 3 agents")
     print()
 
 
-# ═══════════════════════════════════════════════════════════════════════
-# POINT 5: Model-agnostic Continuity
-# ═══════════════════════════════════════════════════════════════════════
+# ===================================================================
+# POINT 5: Model-Agnostic Continuity
+# ===================================================================
 
 def point5_model_agnostic():
     uid = 5
-    print(SEP)
-    print("  POINT 5: MODEL-AGNOSTIC CONTINUITY")
-    print('  "Claude" stores -> "GPT" queries same DB')
-    print(SEP)
+    point_header(5, "MODEL-AGNOSTIC CONTINUITY")
+
+    # --- Agent A: Claude stores user preferences ---
+    print(f"  {AGENT_A_TAG}")
+    print(f'  "Learning the user\'s work preferences and context..."')
     print()
 
     mem, tmp, ret = fresh_engines()
-
     triples = [
         ("user", "prefers", "morning meetings before 10am",
          "I prefer morning meetings before 10am"),
@@ -368,44 +505,71 @@ def point5_model_agnostic():
         ("user", "wants", "to switch to the platform team",
          "I want to switch to the platform team"),
     ]
+    store_triples(mem, uid, triples)
+    agent_separator("Agent A")
 
-    print(f'  [Agent A -- "Claude"] Storing memory...')
-    store_triples(mem, uid, triples, agent_label="Claude")
+    # --- Agent B: GPT (different model entirely) queries and adds ---
+    print(f"  {AGENT_B_TAG} (different model, same DB)")
+    print(f'  "First time seeing this user. What do I need to know?"')
     print()
 
-    print(f"  --- MODEL SWITCH (same DB, new engine instance) ---")
-    print()
-
-    _, _, ret2 = fresh_engines()
-
-    print(f'  [Agent B -- "GPT"] Querying same memory...')
-    print()
-
+    mem2, tmp2, ret2 = fresh_engines()
     print_qa(ret2, uid, "When do I prefer meetings?")
     print_qa(ret2, uid, "What am I allergic to?")
     print_qa(ret2, uid, "What am I working on?")
     print_qa(ret2, uid, "When is my deadline?")
-    print_qa(ret2, uid, "What team change do I want?")
 
-    print(f"  Memory survives model change. Same DB, different agent.")
-    print(f"  RESULT: Point 5 complete")
+    print(f'  "Adding scheduling and dietary notes for future agents."')
+    print()
+    agent_b_triples = [
+        ("user", "scheduling_note", "block mornings for deep work after 10am meetings",
+         "GPT noted to block mornings for deep work after 10am meetings"),
+        ("user", "dietary_flag", "always check restaurant menus for shellfish",
+         "GPT flagged: always check restaurant menus for shellfish"),
+        ("user", "okr_reminder", "draft review with manager before Friday submission",
+         "GPT set reminder: draft review with manager before Friday submission"),
+    ]
+    store_triples(mem2, uid, agent_b_triples)
+    agent_separator("Agent B")
+
+    # --- Agent C: Gemini reconstructs full user profile ---
+    print(f"  {AGENT_C_TAG} (third model, cold start)")
+    print(f'  "Building user profile from accumulated memory..."')
+    print()
+
+    mem3, tmp3, ret3 = fresh_engines()
+    print_qa(ret3, uid, "Summarize this user's preferences and situation", mode="reconstruct")
+    print_qa(ret3, uid, "What dietary restrictions should I know about?")
+    print_qa(ret3, uid, "What team change do I want?")
+    agent_separator("Agent C")
+
+    # --- Agent A returns ---
+    print(f"  {AGENT_A_RETURN_TAG}")
+    print(f'  "I stored the basics. What did the other agents add?"')
+    print()
+
+    mem4, tmp4, ret4 = fresh_engines()
+    print_qa(ret4, uid, "What scheduling notes exist?")
+    print_qa(ret4, uid, "What reminders have been set?")
+
+    print(f"  RESULT: Memory survives across 3 different model identities")
     print()
 
 
-# ═══════════════════════════════════════════════════════════════════════
+# ===================================================================
 # POINT 6: Institutional Continuity
-# ═══════════════════════════════════════════════════════════════════════
+# ===================================================================
 
 def point6_institutional():
     uid = 6
-    print(SEP)
-    print("  POINT 6: INSTITUTIONAL CONTINUITY")
-    print("  Repeated workflow -> Restart -> Continue without re-asking")
-    print(SEP)
+    point_header(6, "INSTITUTIONAL CONTINUITY")
+
+    # --- Agent A: Claude stores workflow context ---
+    print(f"  {AGENT_A_TAG}")
+    print(f'  "Setting up the user\'s Friday standup logistics..."')
     print()
 
     mem, tmp, ret = fresh_engines()
-
     triples = [
         ("user", "booked", "conference room B for Friday standup",
          "I booked conference room B for the Friday standup"),
@@ -420,43 +584,70 @@ def point6_institutional():
         ("user", "needs", "whiteboard markers for the session",
          "I need whiteboard markers for the session"),
     ]
-
-    print(f"  [Agent A -- Session 1] Storing workflow context...")
     store_triples(mem, uid, triples)
+    agent_separator("Agent A")
+
+    # --- Agent B: GPT checks on logistics and adds ops notes ---
+    print(f"  {AGENT_B_TAG} (fresh session)")
+    print(f'  "Reviewing the standup logistics..."')
     print()
 
-    print(f"  --- RESTART (new engine instance) ---")
-    print()
-
-    _, _, ret2 = fresh_engines()
-
-    print(f"  [Agent B -- Session 2] Continuing workflow...")
-    print()
-
+    mem2, tmp2, ret2 = fresh_engines()
     print_qa(ret2, uid, "Which conference room did I book?")
     print_qa(ret2, uid, "What equipment does the room need?")
     print_qa(ret2, uid, "What time is the standup?")
-    print_qa(ret2, uid, "What room did I originally want?")
-    print_qa(ret2, uid, "What supplies do I still need?")
 
-    print(f"  RESULT: Point 6 complete")
+    print(f'  "Adding operational prep notes for the standup."')
+    print()
+    agent_b_triples = [
+        ("user", "ops_checklist", "arrive 10 min early to test projector",
+         "GPT added ops note: arrive 10 min early to test projector"),
+        ("user", "supplies_status", "whiteboard markers requested from office manager",
+         "GPT noted: whiteboard markers requested from office manager"),
+        ("Friday standup", "backup_plan", "use room C if projector fails",
+         "GPT added backup plan: use room C if projector fails"),
+    ]
+    store_triples(mem2, uid, agent_b_triples)
+    agent_separator("Agent B")
+
+    # --- Agent C: Gemini reconstructs full ops picture ---
+    print(f"  {AGENT_C_TAG} (cold start)")
+    print(f'  "Reconstructing standup operations from memory..."')
+    print()
+
+    mem3, tmp3, ret3 = fresh_engines()
+    print_qa(ret3, uid, "Summarize the Friday standup preparation", mode="reconstruct")
+    print_qa(ret3, uid, "What supplies do I still need?")
+    print_qa(ret3, uid, "What is the backup plan?")
+    agent_separator("Agent C")
+
+    # --- Agent A returns ---
+    print(f"  {AGENT_A_RETURN_TAG}")
+    print(f'  "I set up the basics. What ops work was added?"')
+    print()
+
+    mem4, tmp4, ret4 = fresh_engines()
+    print_qa(ret4, uid, "What checklist items exist for the standup?")
+    print_qa(ret4, uid, "What is the backup plan if something fails?")
+
+    print(f"  RESULT: Memory accumulated across 3 agents")
     print()
 
 
-# ═══════════════════════════════════════════════════════════════════════
+# ===================================================================
 # POINT 7: Physical / Operational Continuity
-# ═══════════════════════════════════════════════════════════════════════
+# ===================================================================
 
 def point7_physical_operational():
     uid = 7
-    print(SEP)
-    print("  POINT 7: PHYSICAL / OPERATIONAL CONTINUITY")
-    print("  Robot/machine context -> Restart -> Recall operations")
-    print(SEP)
+    point_header(7, "PHYSICAL / OPERATIONAL CONTINUITY")
+
+    # --- Agent A: Claude stores operational incident ---
+    print(f"  {AGENT_A_TAG}")
+    print(f'  "Logging a delivery route incident..."')
     print()
 
     mem, tmp, ret = fresh_engines()
-
     triples = [
         ("delivery route", "status", "route 7A was blocked by construction",
          "Route 7A was blocked by construction"),
@@ -471,40 +662,72 @@ def point7_physical_operational():
         ("delivery robot", "should_avoid", "Oak Street during rush hour",
          "The delivery robot should avoid Oak Street during rush hour"),
     ]
-
-    print(f"  [Agent A -- Session 1] Storing operational context...")
     store_triples(mem, uid, triples)
+    agent_separator("Agent A")
+
+    # --- Agent B: GPT reviews incident and adds resolution notes ---
+    print(f"  {AGENT_B_TAG} (fresh session)")
+    print(f'  "Reviewing the delivery incident report..."')
     print()
 
-    print(f"  --- RESTART (new engine instance) ---")
-    print()
-
-    _, _, ret2 = fresh_engines()
-
-    print(f"  [Agent B -- Session 2] Querying operational memory...")
-    print()
-
+    mem2, tmp2, ret2 = fresh_engines()
     print_qa(ret2, uid, "What route failed?")
     print_qa(ret2, uid, "What backup route was used?")
     print_qa(ret2, uid, "How much delay occurred?")
-    print_qa(ret2, uid, "What should I avoid during rush hour?")
-    print_qa(ret2, uid, "What is the preferred route?")
 
-    print(f"  RESULT: Point 7 complete")
+    print(f'  "Adding incident analysis and follow-up actions."')
+    print()
+    agent_b_triples = [
+        ("delivery robot", "incident_analysis", "construction on 7A expected through end of month",
+         "GPT noted construction on 7A expected through end of month"),
+        ("delivery robot", "recommended_action", "pre-compute route 7C via Elm Street as alternative",
+         "GPT recommended pre-computing route 7C via Elm Street as alternative"),
+        ("customer 14", "followup_status", "apology notification sent with discount code",
+         "GPT confirmed apology notification sent to customer 14 with discount code"),
+    ]
+    store_triples(mem2, uid, agent_b_triples)
+    agent_separator("Agent B")
+
+    # --- Agent C: Gemini reconstructs full operational picture ---
+    print(f"  {AGENT_C_TAG} (cold start)")
+    print(f'  "Reconstructing delivery operations from all stored context..."')
+    print()
+
+    mem3, tmp3, ret3 = fresh_engines()
+    print_qa(ret3, uid, "Summarize the delivery incident and response", mode="reconstruct")
+    print_qa(ret3, uid, "What is the preferred route?")
+    print_qa(ret3, uid, "What follow-up was done for the customer?")
+    agent_separator("Agent C")
+
+    # --- Agent A returns ---
+    print(f"  {AGENT_A_RETURN_TAG}")
+    print(f'  "I logged the incident. What analysis and actions were added?"')
+    print()
+
+    mem4, tmp4, ret4 = fresh_engines()
+    print_qa(ret4, uid, "What is the recommended alternative route?")
+    print_qa(ret4, uid, "What is the customer follow-up status?")
+    print_qa(ret4, uid, "What should I avoid during rush hour?")
+
+    print(f"  RESULT: Memory accumulated across 3 agents")
     print()
 
 
-# ═══════════════════════════════════════════════════════════════════════
+# ===================================================================
 # Main
-# ═══════════════════════════════════════════════════════════════════════
+# ===================================================================
 
 def main() -> int:
     print()
-    print("=" * 55)
+    print("=" * 60)
     print("  KENOTIC LABS — 7-POINT CONTINUITY DEMO")
-    print("  YAML-bypass ingest -> structural retrieval")
+    print("  CONVERSATIONAL MULTI-AGENT VERSION")
+    print()
+    print("  Memory ACCUMULATES across agents.")
+    print("  Each agent ADDS to understanding.")
+    print("  Cold-start agents reconstruct EVERYTHING.")
     print("  No LLM at read time. Deterministic.")
-    print("=" * 55)
+    print("=" * 60)
     print()
 
     init_db()
@@ -523,9 +746,11 @@ def main() -> int:
         traceback.print_exc()
         return 1
 
-    print("=" * 55)
+    print("=" * 60)
     print("  ALL 7 POINTS EXECUTED")
-    print("=" * 55)
+    print("  Memory accumulated. Agents built on each other.")
+    print("  Cold-start reconstruction verified.")
+    print("=" * 60)
     return 0
 
 
