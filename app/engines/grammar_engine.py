@@ -1992,93 +1992,110 @@ def _extract_traces_from_sentence(
     root = _get_root(sent_doc)
     source_text = str(sent_doc).strip()
 
-    # Cleft sentence detection: "what happened was I applied for the grant"
-    # Pattern: ROOT is "be" + csubj (WH-clause) + ccomp (content clause).
-    # Skip the "be" frame, extract from the ccomp content.
-    if (root and root.lemma_ == "be"
-            and any(c.dep_ == "csubj" for c in root.children)
-            and any(c.dep_ == "ccomp" and c.pos_ == "VERB"
-                    for c in root.children)):
-        ccomp_verb = next(
-            c for c in root.children
-            if c.dep_ == "ccomp" and c.pos_ == "VERB"
-        )
-        # Re-extract from the content clause
-        ccomp_subtree = sorted(ccomp_verb.subtree, key=lambda t: t.i)
-        ccomp_text = " ".join(t.text for t in ccomp_subtree).strip()
-        if ccomp_text:
-            ccomp_doc = _get_nlp_fragment()(ccomp_text)
-            _patch_fragment_lemmas(ccomp_doc, ccomp_subtree)
-            return _extract_traces_from_sentence(
-                ccomp_doc, speaker, tense_aspect, listener=listener,
-            )
+    # ----------------------------------------------------------------
+    # Universal frame skipper: walk past framing verbs to the content.
+    # Grammar reference pp. 212-220, 283-295: control/raising verbs.
+    #
+    # Rule: skip ROOT to its xcomp/ccomp child IF:
+    #   - ccomp → always skip (embedded clause with own subject)
+    #   - xcomp → skip ONLY if ROOT has no dobj (subject control)
+    #              AND ROOT is not PREFERENCE class
+    # Handles: speech verbs, intent verbs, phase verbs, clefts,
+    # causative guards, "used to", "ended up", "keeps telling" — all
+    # in one recursive walk. No special cases.
+    # ----------------------------------------------------------------
+    def _find_content_verb(verb, _depth=0):
+        if verb is None or _depth >= 4:
+            return verb
+        complement = None
+        for child in verb.children:
+            if child.dep_ == "ccomp" and child.pos_ == "VERB":
+                complement = child
+                break
+            if child.dep_ == "xcomp" and child.pos_ == "VERB":
+                complement = child
+                break
+        if complement is None:
+            return verb
+        if complement.dep_ == "ccomp":
+            # ccomp: skip only if current is a SPEECH verb or BE (cleft).
+            # "told me she moved" → skip (SPEECH). "helped him move" → keep.
+            _cur_vc = classify_verb_class(verb.lemma_)
+            if _cur_vc == VerbClass.SPEECH or verb.lemma_ == "be":
+                return _find_content_verb(complement, _depth + 1)
+            return verb  # not a frame verb — content IS here
+        # xcomp: skip only if no dobj on current (subject control)
+        # and current is not PREFERENCE class ("I like swimming" →
+        # "like" IS the content, don't skip)
+        has_dobj = any(c.dep_ == "dobj" for c in verb.children)
+        if has_dobj:
+            # Exception: SPEECH verbs with dobj are indirect objects
+            # ("telling ME to settle" — "me" is recipient, not ECM)
+            _cur_vc = classify_verb_class(verb.lemma_)
+            if _cur_vc != VerbClass.SPEECH:
+                return verb  # ECM/causative — verb IS the content
+        _vc = classify_verb_class(verb.lemma_)
+        if _vc == VerbClass.PREFERENCE:
+            return verb  # preference IS the fact
+        return _find_content_verb(complement, _depth + 1)
 
-    # Phrasal verb: root + particle (dep=prt)
+    content_root = _find_content_verb(root) if root else root
+
+    # Phrasal verb: content_root + particle (dep=prt)
     particle = None
-    if root:
-        for child in root.children:
+    if content_root:
+        for child in content_root.children:
             if child.dep_ == "prt":
                 particle = child.lemma_
                 break
 
-    # Verb class classification
+    # Verb class classification — on the CONTENT verb, not the frame
     verb_class = VerbClass.UNKNOWN
-    if root and root.pos_ in ("VERB", "AUX"):
+    if content_root and content_root.pos_ in ("VERB", "AUX"):
         if particle:
-            phrasal = f"{root.lemma_}_{particle}"
+            phrasal = f"{content_root.lemma_}_{particle}"
             verb_class = classify_verb_class(phrasal)
             if verb_class == VerbClass.UNKNOWN:
-                verb_class = classify_verb_class(root.lemma_)
+                verb_class = classify_verb_class(content_root.lemma_)
         else:
-            verb_class = classify_verb_class(root.lemma_)
-        verb_class = _reclassify_location_by_object(sent_doc, root, verb_class)
-        verb_class = _detect_planning_pattern(sent_doc, root, verb_class)
+            verb_class = classify_verb_class(content_root.lemma_)
+        verb_class = _reclassify_location_by_object(
+            sent_doc, content_root, verb_class,
+        )
+        verb_class = _detect_planning_pattern(
+            sent_doc, content_root, verb_class,
+        )
 
-    # 1. Episodic trace
-    episodic_fact = _extract_episodic(sent_doc, root)
+    # 1. Episodic trace — extract from content verb's perspective
+    episodic_fact = _extract_episodic(sent_doc, content_root)
 
-    # Grammatical object (THE most important extraction)
-    gram_object = _extract_grammatical_object(sent_doc, root)
+    # Grammatical object — from content verb
+    gram_object = _extract_grammatical_object(sent_doc, content_root)
 
-    # 4. Relational trace (extracted early; may be mutated by reported speech)
+    # 4. Relational trace
     relational_subject, relational_entities, relational_type_base = (
         _extract_relational(sent_doc, speaker, listener=listener)
     )
 
-    # Reported speech handling (Spec Part 2, Reported Speech):
-    # When root is a SPEECH verb, skip the speech frame and extract
-    # from the embedded clause.
-    # relational_subject = speaker of the embedded content (Spec Part 2).
-    _embedded_predicate_verb = None  # used later for predicate derivation
-    if verb_class == VerbClass.SPEECH and root:
-        for child in root.children:
-            if child.dep_ in ("ccomp", "xcomp") and child.pos_ == "VERB":
-                _embedded_predicate_verb = child
-                # Recursive: if embedded verb is ALSO speech, keep delegating.
-                # "told me that therapist said she should try" → try
-                _depth = 0
-                while _depth < 3:
-                    _emb_vc = classify_verb_class(_embedded_predicate_verb.lemma_)
-                    if _emb_vc != VerbClass.SPEECH:
-                        break
-                    _next = None
-                    for gc in _embedded_predicate_verb.children:
-                        if gc.dep_ in ("ccomp", "xcomp") and gc.pos_ == "VERB":
-                            _next = gc
+    # Reported speech: if frame-skipper jumped past a SPEECH verb,
+    # update relational_subject to the speaker of the embedded content.
+    _embedded_predicate_verb = (
+        content_root if content_root is not root else None
+    )
+    if _embedded_predicate_verb and root:
+        _root_vc = classify_verb_class(root.lemma_)
+        if _root_vc == VerbClass.SPEECH:
+            embedded_subj = None
+            # Find the first ccomp/xcomp child of root (the speech frame)
+            for child in root.children:
+                if child.dep_ in ("ccomp", "xcomp") and child.pos_ == "VERB":
+                    for gc in child.children:
+                        if gc.dep_ in ("nsubj", "nsubjpass"):
+                            embedded_subj = gc.text
                             break
-                    if _next is None:
-                        break
-                    _embedded_predicate_verb = _next
-                    _depth += 1
-                embedded_subj = None
-                for gc in child.children:
-                    if gc.dep_ in ("nsubj", "nsubjpass"):
-                        embedded_subj = gc.text
-                        break
-                episodic_fact = _extract_episodic(sent_doc, child)
-                gram_object = _extract_grammatical_object(sent_doc, child)
-                if embedded_subj and embedded_subj not in relational_entities:
-                    relational_entities.append(embedded_subj)
+                    break
+            if embedded_subj and embedded_subj not in relational_entities:
+                relational_entities.append(embedded_subj)
 
                 # --- M3 fix: set relational_subject to the speaker of
                 # the embedded content, not the conversation speaker.
@@ -2119,8 +2136,6 @@ def _extract_traces_from_sentence(
                     if main_nsubj_name:
                         relational_subject = main_nsubj_name
 
-                break
-
     # Invariant 1: object is ALWAYS a noun phrase, never a full sentence.
     # Do NOT fall back to episodic_fact -- leave empty if no NP extracted.
 
@@ -2138,8 +2153,8 @@ def _extract_traces_from_sentence(
         verb_class, relational_type_base,
     )
 
-    # 5. Schematic trace
-    schematic_category = _extract_schematic(sent_doc, root, verb_class)
+    # 5. Schematic trace — from content verb, not frame
+    schematic_category = _extract_schematic(sent_doc, content_root, verb_class)
 
     # Significance (stative vs dynamic via Grammar Gap #6)
     significance = _compute_significance(verb_class, tense_aspect)
@@ -2189,62 +2204,13 @@ def _extract_traces_from_sentence(
         mood = "conditional"
 
     # Derive predicate (Spec Part 1, Field: predicate)
-    # If reported speech extracted an embedded clause verb, use it as the
-    # predicate source instead of the speech-frame root verb.
-    _pred_root = _embedded_predicate_verb if _embedded_predicate_verb else root
+    # content_root already points to the content verb (frame-skipper did
+    # the delegation). No special cases needed — just use content_root.
+    _pred_root = content_root
     root_lemma = _pred_root.lemma_ if _pred_root else ""
-    # Delegate predicate to xcomp/ccomp/acomp when root is AUX, or when
-    # root is a framing verb (PLANNING/SPEECH/ABILITY) with an xcomp child,
-    # or when root is an intent/phase verb whose semantic content is in xcomp.
-    # "I want to pursue counseling" -> predicate = "pursue" (from xcomp).
-    _DELEGATING_CLASSES = frozenset({
-        VerbClass.PLANNING, VerbClass.SPEECH, VerbClass.ABILITY,
-    })
-    # Structural subject-control detection: a verb delegates its predicate to
-    # its xcomp when (1) the xcomp child is a VERB, and (2) the xcomp child
-    # has NO overt nsubj/nsubjpass — meaning its subject is controlled by the
-    # matrix clause.  This catches ALL subject-control verbs (want, hope, try,
-    # decide, opt, aspire, endeavor, elect, refuse, …) without a word list.
-    def _has_subject_control_xcomp(verb):
-        for child in verb.children:
-            if child.dep_ == "xcomp" and child.pos_ == "VERB":
-                if not any(c.dep_ in ("nsubj", "nsubjpass") for c in child.children):
-                    return True
-        return False
 
-    _should_delegate = (
-        (_pred_root and _pred_root.pos_ == "AUX")
-        or (_pred_root and _pred_root.pos_ == "VERB"
-            and verb_class in _DELEGATING_CLASSES
-            and any(c.dep_ == "xcomp" for c in _pred_root.children))
-        or (_pred_root and _pred_root.pos_ == "VERB"
-            and _has_subject_control_xcomp(_pred_root))
-    )
-    if _should_delegate:
-        for child in _pred_root.children:
-            if child.dep_ in ("xcomp", "ccomp"):
-                if child.pos_ == "VERB":
-                    root_lemma = child.lemma_
-                    _pred_root = child  # update for prep frame extraction
-                    break
-            # acomp delegation only for VERB complements (not ADJ).
-            # "The sunday was lovely" → predicate stays "be", not "lovely".
-            # "I felt accepted" → predicate stays "accept" (VBN=VERB).
-            elif child.dep_ == "acomp" and child.pos_ == "VERB":
-                root_lemma = child.lemma_
-                _pred_root = child
-                break
-
-    # Recompute particle for embedded verb if in reported speech
-    _pred_particle = particle
-    if _embedded_predicate_verb:
-        _pred_particle = None
-        for child in _embedded_predicate_verb.children:
-            if child.dep_ == "prt":
-                _pred_particle = child.lemma_
-                break
-
-    predicate = (f"{root_lemma}_{_pred_particle}" if _pred_particle else root_lemma).lower()
+    # Particle already computed from content_root (line above)
+    predicate = (f"{root_lemma}_{particle}" if particle else root_lemma).lower()
 
     # Lemmatizer fallback: when spaCy's lemma equals the surface form on an
     # inflected verb (VBD/VBG/VBN/VBZ), the lemmatizer failed on the fragment.
