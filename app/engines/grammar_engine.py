@@ -3673,21 +3673,32 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
             decompositions.append(decomp)
             all_triples.append(_derive_triple(decomp))
 
-        # Step 6b: Gerund coordination — when ROOT is VBG with VBG conj
-        # children, each element is a separate activity.
-        # "Running, reading, or playing my violin" → 3 traces.
+        # Step 6b: Compound predicate (Grammar ref p.829, lines 5895-5911)
+        # One subject + multiple conj verbs → each verb is a separate fact.
+        # "moved to Chicago, worked three years, relocated to Portland"
+        # → 3 traces, all sharing ROOT's subject.
+        # Also handles gerund coordination: "Running, reading, playing"
         # Walk the full conj chain (conj of conj of conj...).
         root_tok = _get_root(sent_doc)
-        if root_tok and root_tok.tag_ == "VBG":
+        if root_tok and root_tok.pos_ in ("VERB", "AUX"):
             conj_queue = [c for c in root_tok.children
-                          if c.dep_ == "conj" and c.tag_ in ("VBG", "NN")]
+                          if c.dep_ == "conj" and c.pos_ in ("VERB", "AUX", "NOUN")]
             frag_nlp = _get_nlp_fragment()
             while conj_queue:
                 conj_child = conj_queue.pop(0)
+                # Skip conj verbs with their own nsubj — those are
+                # compound SENTENCES, already split by _split_compound_clauses.
+                # Compound predicates share ROOT's subject (no own nsubj).
+                _has_own_subj = any(
+                    c.dep_ in ("nsubj", "nsubjpass")
+                    for c in conj_child.children
+                )
+                if _has_own_subj:
+                    continue
                 # Add this node's conj children to the queue (chain)
                 conj_queue.extend(
                     c for c in conj_child.children
-                    if c.dep_ == "conj" and c.tag_ in ("VBG", "NN")
+                    if c.dep_ == "conj" and c.pos_ in ("VERB", "AUX", "NOUN")
                 )
                 conj_subtree = sorted(conj_child.subtree, key=lambda t: t.i)
                 # Filter out conj children's subtrees (they get their own trace)
@@ -3701,10 +3712,14 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
                 conj_text = " ".join(t.text for t in conj_tokens).strip()
                 if conj_text:
                     conj_doc = frag_nlp(conj_text)
+                    _patch_fragment_lemmas(conj_doc, conj_tokens)
                     conj_decomp = _extract_traces_from_sentence(
                         conj_doc, speaker, sent_tense, listener=listener,
                     )
-                    conj_decomp.extraction_rule = "trace_conj_additive"
+                    # Inherit subject from main trace (compound predicate)
+                    conj_decomp.subject = decomp.subject
+                    conj_decomp.relational_subject = decomp.relational_subject
+                    conj_decomp.extraction_rule = "trace_compound_predicate"
                     decompositions.append(conj_decomp)
                     all_triples.append(_derive_triple(conj_decomp))
 
