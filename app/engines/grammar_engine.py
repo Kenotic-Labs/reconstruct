@@ -59,8 +59,11 @@ def _get_nlp():
     global _nlp
     if _nlp is None:
         import spacy
-        _nlp = spacy.load("en_core_web_md")
-        _nlp.max_length = 100000
+        from app.engines.pipeline_config import (
+            SPACY_MODEL, SPACY_FULL_PIPELINE_DISABLE, SPACY_MAX_LENGTH,
+        )
+        _nlp = spacy.load(SPACY_MODEL, disable=SPACY_FULL_PIPELINE_DISABLE)
+        _nlp.max_length = SPACY_MAX_LENGTH
     return _nlp
 
 
@@ -71,7 +74,12 @@ def _get_nlp_fragment():
     global _nlp_fragment
     if _nlp_fragment is None:
         import spacy
-        _nlp_fragment = spacy.load("en_core_web_md", disable=["ner", "senter"])
+        from app.engines.pipeline_config import (
+            SPACY_MODEL, SPACY_FRAGMENT_PIPELINE_DISABLE,
+        )
+        _nlp_fragment = spacy.load(
+            SPACY_MODEL, disable=SPACY_FRAGMENT_PIPELINE_DISABLE,
+        )
     return _nlp_fragment
 
 

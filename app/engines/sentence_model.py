@@ -137,7 +137,8 @@ def polish(sentence: str) -> str:
 
     try:
         import torch
-        prompt = "Fix grammatical errors in this sentence: " + key
+        from app.engines.pipeline_config import COEDIT_TASK_PREFIX
+        prompt = COEDIT_TASK_PREFIX + " " + key
         inp = _TOKENIZER(
             prompt, return_tensors="pt", max_length=128, truncation=True,
         ).to(_DEVICE)
@@ -165,101 +166,175 @@ def polish(sentence: str) -> str:
 def cleanup(text: str, speaker: str = None) -> str:
     """Two-pass dialogue cleanup:
 
-    Pass 1 (structural): spaCy POS-based filler stripping.
-      - INTJ tokens (yeah, oh, wow, like-as-filler) → removed
-      - parataxis clauses (you know, I mean) → removed
-      - Pure structural, no model needed.
+    Pass 1 (structural): spaCy dep-label rules from pipeline_config.
+      - 7 detection patterns, all structural
+      - No model inference beyond spaCy's dep parse
 
-    Pass 2 (model): CoEdit grammar polish on the cleaned text.
-      - Fix remaining grammar issues
-      - Normalize punctuation
+    Pass 2 (model): CoEdit grammar polish (GEC only).
+      - One task prefix, one model, semantic guards
+      - Does NOT change meaning — only fixes grammar
 
-    No pronoun resolution — retrieval handles that at read time
-    via backward entity scoping.
+    Rules are defined in pipeline_config.py (the "system prompt" for each model).
     """
     if not text or not text.strip():
         return text or ""
 
-    # -- Pass 1: structural filler stripping via spaCy --
+    from app.engines.pipeline_config import (
+        FILLER_POS, SCAFFOLDING_DEPS, DISCOURSE_FRAME_LEMMAS,
+        DISCOURSE_SUBJECT_LEMMAS, DISCOURSE_FILLER_NOUNS,
+        IDIOM_FRAMES, RETRACTION_PHRASES, CONTRACTION_MAP,
+    )
+
+    # -- Pass 1: structural cleanup via spaCy dep labels --
     stripped = text.strip()
     try:
-        from app.engines.grammar_engine import _get_nlp
+        from app.engines.grammar_engine import _get_nlp, _get_root
         _nlp = _get_nlp()
+
+        # Step 0: Contraction normalization (before spaCy parse)
+        _lower = stripped.lower()
+        for informal, formal in CONTRACTION_MAP.items():
+            if informal in _lower:
+                import re
+                stripped = re.sub(
+                    r'\b' + re.escape(informal) + r'\b',
+                    formal, stripped, flags=re.IGNORECASE,
+                )
+
+        # Step 5: Retraction detection (before full parse — cheap check)
+        _lower_stripped = stripped.lower().rstrip(".,!? ")
+        for phrase in RETRACTION_PHRASES:
+            if _lower_stripped.endswith(phrase):
+                return ""  # speaker withdrew — discard entire utterance
+
         _doc = _nlp(stripped)
-        # Remove INTJ tokens and parataxis clauses
-        keep_tokens = []
-        for tok in _doc:
-            # Skip interjections (yeah, oh, wow, like-as-filler)
-            if tok.pos_ == "INTJ":
-                continue
-            # Skip parataxis discourse markers ("you know", "I mean")
-            if tok.dep_ == "parataxis":
-                # Skip the parataxis token and its entire subtree
-                parataxis_indices = {t.i for t in tok.subtree}
-                # Mark for removal (handled below)
-                continue
-            keep_tokens.append(tok)
 
-        # Second pass: remove parataxis subtrees
-        parataxis_indices = set()
-        for tok in _doc:
-            if tok.dep_ == "parataxis":
-                parataxis_indices |= {t.i for t in tok.subtree}
+        # Step 1: Collect indices to remove
+        _remove_indices = set()
 
-        # Third pass: detect discourse/meta frames and promote content.
-        # "Wait what was I saying" / "Oh that reminds me, I need to..."
-        # Pattern: ROOT is meta-speech verb with first-person subject,
-        # and has ccomp/xcomp/conj child with its own subject.
-        # Strip the frame, keep only the content clause(s).
-        from app.engines.grammar_engine import _get_root
+        # 1a: INTJ tokens (POS-based)
+        for tok in _doc:
+            if tok.pos_ in FILLER_POS:
+                _remove_indices.add(tok.i)
+
+        # 1b: Parataxis subtrees (dep-based)
+        for tok in _doc:
+            if tok.dep_ in SCAFFOLDING_DEPS:
+                _remove_indices |= {t.i for t in tok.subtree}
+
+        # Step 3: Discourse frame detection
         _root = _get_root(_doc)
-        _discourse_indices = set()
-        if _root and _root.pos_ in ("VERB", "AUX"):
-            _root_lemma = _root.lemma_.lower()
-            _has_first_person_subj = any(
-                c.dep_ in ("nsubj", "nsubjpass")
-                and c.text.lower() in ("i", "we")
-                for c in _root.children
-            )
-            # Meta-speech: first-person ROOT with subordinate content
-            _meta_verbs = frozenset({
-                "wait", "remind", "mean", "say", "tell", "know",
-                "think", "wonder", "guess", "suppose", "remember",
-            })
-            if _has_first_person_subj and _root_lemma in _meta_verbs:
-                # Check for content clause with its own subject
-                _content_child = None
-                for c in _root.children:
-                    if (c.dep_ in ("ccomp", "xcomp", "conj", "parataxis")
-                            and c.pos_ in ("VERB", "AUX")
-                            and any(gc.dep_ in ("nsubj", "nsubjpass")
-                                    for gc in c.children)):
-                        _content_child = c
-                        break
-                if _content_child is not None:
-                    # Strip the discourse frame — keep content subtree
-                    _content_indices = {t.i for t in _content_child.subtree}
-                    _discourse_indices = (
-                        {t.i for t in _doc}
-                        - _content_indices
-                        - {t.i for t in _doc if t.pos_ == "PUNCT"}
-                    )
 
-        clean_tokens = [tok for tok in _doc
-                        if tok.i not in parataxis_indices
-                        and tok.i not in _discourse_indices
-                        and tok.pos_ != "INTJ"]
+        # 3a: ROOT or ccomp is discourse frame verb
+        if _root and _root.pos_ in ("VERB", "AUX"):
+            _frame_verb = None
+            _content_verb = None
+
+            # Check ROOT as frame
+            if _root.lemma_.lower() in DISCOURSE_FRAME_LEMMAS:
+                _subj_ok = any(
+                    c.dep_ in ("nsubj", "nsubjpass")
+                    and c.text.lower() in DISCOURSE_SUBJECT_LEMMAS
+                    for c in _root.children
+                )
+                if _subj_ok:
+                    # Find content clause with its own subject
+                    for c in _root.children:
+                        if (c.dep_ in ("ccomp", "xcomp", "conj", "parataxis")
+                                and c.pos_ in ("VERB", "AUX")
+                                and any(gc.dep_ in ("nsubj", "nsubjpass")
+                                        for gc in c.children)):
+                            # Guard: only strip if content subject differs
+                            # from ROOT subject (else it's the same person's fact)
+                            _root_subj = next(
+                                (rc for rc in _root.children
+                                 if rc.dep_ in ("nsubj", "nsubjpass")), None
+                            )
+                            _content_subj = next(
+                                (gc for gc in c.children
+                                 if gc.dep_ in ("nsubj", "nsubjpass")), None
+                            )
+                            if (_root_subj and _content_subj
+                                    and _root_subj.text.lower()
+                                    != _content_subj.text.lower()):
+                                _frame_verb = _root
+                                _content_verb = c
+                            break
+
+            # Check ROOT as filler noun frame:
+            # "The thing is, I applied" → ROOT=is, nsubj=thing, ccomp=applied
+            if _frame_verb is None and _root.lemma_.lower() == "be":
+                _root_subj = next(
+                    (c for c in _root.children
+                     if c.dep_ in ("nsubj", "nsubjpass")), None
+                )
+                if (_root_subj
+                        and _root_subj.lemma_.lower() in DISCOURSE_FILLER_NOUNS):
+                    _content_ccomp = next(
+                        (c for c in _root.children
+                         if c.dep_ == "ccomp" and c.pos_ in ("VERB", "AUX")),
+                        None,
+                    )
+                    if _content_ccomp is not None:
+                        _frame_verb = _root
+                        _content_verb = _content_ccomp
+
+            # Check ccomp as frame (discourse in subordinate position)
+            if _frame_verb is None:
+                for c in _root.children:
+                    if c.dep_ == "ccomp" and c.pos_ in ("VERB", "AUX"):
+                        if c.lemma_.lower() == "be":
+                            _ccomp_subj = next(
+                                (gc for gc in c.children
+                                 if gc.dep_ in ("nsubj", "nsubjpass")), None
+                            )
+                            if (_ccomp_subj and _ccomp_subj.lemma_.lower()
+                                    in DISCOURSE_FILLER_NOUNS):
+                                _frame_verb = c
+                                _content_verb = _root
+                                break
+
+            if _frame_verb is not None and _content_verb is not None:
+                _content_indices = {t.i for t in _content_verb.subtree}
+                _frame_indices = {t.i for t in _doc} - _content_indices
+                # Keep punctuation
+                _frame_indices -= {t.i for t in _doc if t.pos_ == "PUNCT"}
+                _remove_indices |= _frame_indices
+
+        # 3b: Idiom adverbial frames at sentence start
+        _sent_text_lower = stripped.lower()
+        for idiom in IDIOM_FRAMES:
+            if _sent_text_lower.startswith(idiom):
+                # Remove tokens up to and including the comma after the idiom
+                _idiom_len = len(idiom.split())
+                _removed = 0
+                for tok in _doc:
+                    if _removed < _idiom_len or tok.text == ",":
+                        _remove_indices.add(tok.i)
+                        if tok.pos_ != "PUNCT":
+                            _removed += 1
+                    else:
+                        break
+                break
+
+        # Build cleaned text
+        clean_tokens = [tok for tok in _doc if tok.i not in _remove_indices]
 
         if clean_tokens:
             stripped = " ".join(tok.text for tok in clean_tokens).strip()
-            # Clean up double spaces and leading conjunctions
             stripped = " ".join(stripped.split())
-            # Strip leading "and", "but", "so" after filler removal
-            first_word = stripped.split()[0].lower() if stripped else ""
-            if first_word in ("and", "but", "so", "or"):
-                stripped = " ".join(stripped.split()[1:])
+            # Strip leading conjunctions left after filler removal
+            if stripped:
+                first_word = stripped.split()[0].lower()
+                if first_word in ("and", "but", "so", "or"):
+                    stripped = " ".join(stripped.split()[1:])
+
+        # Guard: if cleanup stripped everything, return original
+        if not stripped or not stripped.strip():
+            stripped = text.strip()
+
     except (OSError, ImportError):
-        pass  # fail-open: spaCy not installed, use raw text
+        pass  # spaCy not installed — use raw text
 
     if not stripped:
         stripped = text.strip()
@@ -287,7 +362,8 @@ def cleanup(text: str, speaker: str = None) -> str:
             Semantic guard: if CoEdit changes ROOT verb, loses NER entities,
             or significantly changes length, reject the rewrite — it changed
             meaning, not just grammar."""
-            prompt = "Fix grammatical errors in this sentence:" + sentence
+            from app.engines.pipeline_config import COEDIT_TASK_PREFIX
+            prompt = COEDIT_TASK_PREFIX + " " + sentence
             inp = _TOKENIZER(
                 prompt, return_tensors="pt", max_length=128, truncation=True,
             ).to(_DEVICE)
