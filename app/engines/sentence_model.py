@@ -33,6 +33,40 @@ from typing import Dict, Optional
 
 logger = logging.getLogger(__name__)
 
+# -----------------------------------------------------------------------
+# Model rules — "system prompts" for off-the-shelf models
+# -----------------------------------------------------------------------
+
+# CoEdit task prefix — ONLY grammar correction. Other tasks (simplify,
+# paraphrase, formality) change meaning, violating the lossless contract.
+_COEDIT_TASK_PREFIX = "Fix grammatical errors in this sentence:"
+
+# Structural cleanup rules — spaCy dep labels that signal noise
+_FILLER_POS = frozenset({"INTJ"})
+_SCAFFOLDING_DEPS = frozenset({"parataxis"})
+_DISCOURSE_FRAME_LEMMAS = frozenset({
+    "wait", "remind", "mean", "say", "tell", "know",
+    "think", "wonder", "guess", "suppose", "remember",
+    "hear", "listen", "look",
+})
+_DISCOURSE_SUBJECT_LEMMAS = frozenset({"i", "we", "you"})
+_DISCOURSE_FILLER_NOUNS = frozenset({
+    "thing", "point", "deal", "fact", "truth", "matter",
+    "problem", "issue", "question",
+})
+_IDIOM_FRAMES = frozenset({
+    "long story short", "bottom line", "at the end of the day",
+    "truth be told", "between you and me", "to be honest",
+    "to be fair", "for what it's worth", "if you ask me",
+    "believe it or not", "here's the thing", "here's the deal",
+})
+_RETRACTION_PHRASES = frozenset({
+    "never mind", "nevermind", "forget it", "forget that",
+    "scratch that", "disregard that", "ignore that",
+})
+    # No contraction map — spaCy was trained on web text including informal
+    # speech. Regex replacement before parse changes tokenization and can
+    # break dep trees. Let spaCy handle what it was trained on.
 
 _MODEL = None
 _TOKENIZER = None
@@ -137,8 +171,7 @@ def polish(sentence: str) -> str:
 
     try:
         import torch
-        from app.engines.pipeline_config import COEDIT_TASK_PREFIX
-        prompt = COEDIT_TASK_PREFIX + " " + key
+        prompt = _COEDIT_TASK_PREFIX + " " + key
         inp = _TOKENIZER(
             prompt, return_tensors="pt", max_length=128, truncation=True,
         ).to(_DEVICE)
@@ -179,11 +212,6 @@ def cleanup(text: str, speaker: str = None) -> str:
     if not text or not text.strip():
         return text or ""
 
-    from app.engines.pipeline_config import (
-        FILLER_POS, SCAFFOLDING_DEPS, DISCOURSE_FRAME_LEMMAS,
-        DISCOURSE_SUBJECT_LEMMAS, DISCOURSE_FILLER_NOUNS,
-        IDIOM_FRAMES, RETRACTION_PHRASES, CONTRACTION_MAP,
-    )
 
     # -- Pass 1: structural cleanup via spaCy dep labels --
     stripped = text.strip()
@@ -191,19 +219,9 @@ def cleanup(text: str, speaker: str = None) -> str:
         from app.engines.grammar_engine import _get_nlp, _get_root
         _nlp = _get_nlp()
 
-        # Step 0: Contraction normalization (before spaCy parse)
-        _lower = stripped.lower()
-        for informal, formal in CONTRACTION_MAP.items():
-            if informal in _lower:
-                import re
-                stripped = re.sub(
-                    r'\b' + re.escape(informal) + r'\b',
-                    formal, stripped, flags=re.IGNORECASE,
-                )
-
         # Step 5: Retraction detection (before full parse — cheap check)
         _lower_stripped = stripped.lower().rstrip(".,!? ")
-        for phrase in RETRACTION_PHRASES:
+        for phrase in _RETRACTION_PHRASES:
             if _lower_stripped.endswith(phrase):
                 return ""  # speaker withdrew — discard entire utterance
 
@@ -214,12 +232,12 @@ def cleanup(text: str, speaker: str = None) -> str:
 
         # 1a: INTJ tokens (POS-based)
         for tok in _doc:
-            if tok.pos_ in FILLER_POS:
+            if tok.pos_ in _FILLER_POS:
                 _remove_indices.add(tok.i)
 
         # 1b: Parataxis subtrees (dep-based)
         for tok in _doc:
-            if tok.dep_ in SCAFFOLDING_DEPS:
+            if tok.dep_ in _SCAFFOLDING_DEPS:
                 _remove_indices |= {t.i for t in tok.subtree}
 
         # Step 3: Discourse frame detection
@@ -231,10 +249,10 @@ def cleanup(text: str, speaker: str = None) -> str:
             _content_verb = None
 
             # Check ROOT as frame
-            if _root.lemma_.lower() in DISCOURSE_FRAME_LEMMAS:
+            if _root.lemma_.lower() in _DISCOURSE_FRAME_LEMMAS:
                 _subj_ok = any(
                     c.dep_ in ("nsubj", "nsubjpass")
-                    and c.text.lower() in DISCOURSE_SUBJECT_LEMMAS
+                    and c.text.lower() in _DISCOURSE_SUBJECT_LEMMAS
                     for c in _root.children
                 )
                 if _subj_ok:
@@ -269,7 +287,7 @@ def cleanup(text: str, speaker: str = None) -> str:
                      if c.dep_ in ("nsubj", "nsubjpass")), None
                 )
                 if (_root_subj
-                        and _root_subj.lemma_.lower() in DISCOURSE_FILLER_NOUNS):
+                        and _root_subj.lemma_.lower() in _DISCOURSE_FILLER_NOUNS):
                     _content_ccomp = next(
                         (c for c in _root.children
                          if c.dep_ == "ccomp" and c.pos_ in ("VERB", "AUX")),
@@ -289,7 +307,7 @@ def cleanup(text: str, speaker: str = None) -> str:
                                  if gc.dep_ in ("nsubj", "nsubjpass")), None
                             )
                             if (_ccomp_subj and _ccomp_subj.lemma_.lower()
-                                    in DISCOURSE_FILLER_NOUNS):
+                                    in _DISCOURSE_FILLER_NOUNS):
                                 _frame_verb = c
                                 _content_verb = _root
                                 break
@@ -303,7 +321,7 @@ def cleanup(text: str, speaker: str = None) -> str:
 
         # 3b: Idiom adverbial frames at sentence start
         _sent_text_lower = stripped.lower()
-        for idiom in IDIOM_FRAMES:
+        for idiom in _IDIOM_FRAMES:
             if _sent_text_lower.startswith(idiom):
                 # Remove tokens up to and including the comma after the idiom
                 _idiom_len = len(idiom.split())
@@ -362,8 +380,7 @@ def cleanup(text: str, speaker: str = None) -> str:
             Semantic guard: if CoEdit changes ROOT verb, loses NER entities,
             or significantly changes length, reject the rewrite — it changed
             meaning, not just grammar."""
-            from app.engines.pipeline_config import COEDIT_TASK_PREFIX
-            prompt = COEDIT_TASK_PREFIX + " " + sentence
+            prompt = _COEDIT_TASK_PREFIX + " " + sentence
             inp = _TOKENIZER(
                 prompt, return_tensors="pt", max_length=128, truncation=True,
             ).to(_DEVICE)
