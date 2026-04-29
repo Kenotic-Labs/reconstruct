@@ -2241,15 +2241,17 @@ def _extract_traces_from_sentence(
     )
 
     # Reported speech: if frame-skipper jumped past a SPEECH verb,
-    # update relational_subject to the speaker of the embedded content.
+    # the relational_subject should be the EMBEDDED clause's subject,
+    # not the reporter. _extract_relational found ROOT's nsubj (the
+    # reporter). We need to correct it to the embedded subject.
     _embedded_predicate_verb = (
         content_root if content_root is not root else None
     )
     if _embedded_predicate_verb and root:
         _root_vc = classify_verb_class(root.lemma_)
         if _root_vc == VerbClass.SPEECH:
+            # Find embedded clause's nsubj
             embedded_subj = None
-            # Find the first ccomp/xcomp child of root (the speech frame)
             for child in root.children:
                 if child.dep_ in ("ccomp", "xcomp") and child.pos_ == "VERB":
                     for gc in child.children:
@@ -2257,47 +2259,36 @@ def _extract_traces_from_sentence(
                             embedded_subj = gc.text
                             break
                     break
-            if embedded_subj and embedded_subj not in relational_entities:
-                relational_entities.append(embedded_subj)
-
-                # --- M3 fix: set relational_subject to the speaker of
-                # the embedded content, not the conversation speaker.
-                # Only override when the main clause nsubj is a concrete
-                # named entity (not a pronoun like "I" or "they").
-                # Strategy: find main nsubj; if it's part of a PERSON/ORG
-                # NER span or is a PROPN (proper noun), treat it as the
-                # speaker of the embedded content.  Pronouns and common
-                # nouns are left as-is (relational_subject stays as the
-                # conversation speaker).
-                main_nsubj_tok = None
-                for rc in root.children:
-                    if rc.dep_ in ("nsubj", "nsubjpass"):
-                        main_nsubj_tok = rc
-                        break
-                if main_nsubj_tok is not None:
-                    # First: check for a NER entity spanning this token
-                    main_nsubj_name = None
-                    for ent in sent_doc.ents:
-                        if (ent.label_ in ("PERSON", "ORG")
-                                and ent.start <= main_nsubj_tok.i < ent.end):
-                            main_nsubj_name = ent.text
+            if embedded_subj:
+                if embedded_subj not in relational_entities:
+                    relational_entities.append(embedded_subj)
+                # Set relational_subject to the embedded subject:
+                # "Caroline said SHE moved" → subj = "Caroline" (reporter
+                #   is the referent of "she" in reported speech)
+                # "Caroline said I need help" → subj = speaker (first person)
+                if embedded_subj.lower() in _FIRST_PERSON:
+                    relational_subject = speaker or "user"
+                elif embedded_subj.lower() in (
+                    "she", "he", "they", "it", "her", "him", "them",
+                ):
+                    # Third-person pronoun in reported speech → reporter
+                    # is the likely referent ("Caroline said SHE moved")
+                    main_nsubj_tok = None
+                    for rc in root.children:
+                        if rc.dep_ in ("nsubj", "nsubjpass"):
+                            main_nsubj_tok = rc
                             break
-                    # Fallback: PROPN that isn't the conversation speaker
-                    # (covers cases where NER labels a name as ORG/PERSON
-                    # or misses it entirely but POS is correct)
-                    if not main_nsubj_name and main_nsubj_tok.pos_ == "PROPN":
-                        # Collect the full proper-noun span (handles
-                        # multi-token names like "Caroline Smith")
-                        span_tokens = [main_nsubj_tok]
-                        for left in main_nsubj_tok.lefts:
-                            if left.pos_ == "PROPN" and left.dep_ == "compound":
-                                span_tokens.insert(0, left)
-                        for right in main_nsubj_tok.rights:
-                            if right.pos_ == "PROPN" and right.dep_ == "flat":
-                                span_tokens.append(right)
-                        main_nsubj_name = " ".join(t.text for t in span_tokens)
-                    if main_nsubj_name:
-                        relational_subject = main_nsubj_name
+                    if main_nsubj_tok and main_nsubj_tok.pos_ == "PROPN":
+                        relational_subject = _span_text(main_nsubj_tok)
+                    elif main_nsubj_tok:
+                        for ent in sent_doc.ents:
+                            if (ent.label_ == "PERSON"
+                                    and ent.start <= main_nsubj_tok.i < ent.end):
+                                relational_subject = ent.text
+                                break
+                else:
+                    # Named embedded subject ("The doctor said Sam needs...")
+                    relational_subject = embedded_subj
 
     # Invariant 1: object is ALWAYS a noun phrase, never a full sentence.
     # Do NOT fall back to episodic_fact -- leave empty if no NP extracted.
