@@ -3439,6 +3439,72 @@ def _split_compound_clauses(doc) -> List:
                         clauses.append((clause_doc, conj_type))
             continue  # skip conjunction splitting for this sentence
 
+        # ---- Phase 1.5: comma splice detection ----
+        # Pattern: ccomp child with its own nsubj, preceded by comma,
+        # no subordinating conjunction. "I have a cat, they are rescues"
+        # spaCy treats first clause as ccomp of second. Split at comma.
+        _comma_split_done = False
+        root_tok = None
+        for tok in sent_tokens:
+            if tok.dep_ == "ROOT":
+                root_tok = tok
+                break
+        if root_tok:
+            for child in root_tok.children:
+                if (child.dep_ == "ccomp" and child.pos_ in ("VERB", "AUX")
+                        and any(gc.dep_ in ("nsubj", "nsubjpass")
+                                for gc in child.children)):
+                    # Check: no subordinating conjunction (mark) on ccomp
+                    has_mark = any(
+                        gc.dep_ == "mark" for gc in child.children
+                    )
+                    if has_mark:
+                        continue
+                    # Find comma between ccomp subtree and ROOT
+                    ccomp_end = max(t.i for t in child.subtree)
+                    comma_idx = None
+                    for t in sent_tokens:
+                        if (t.text == "," and t.i > ccomp_end
+                                and t.i < root_tok.i):
+                            comma_idx = t.i
+                            break
+                        elif (t.text == "," and t.i < root_tok.i
+                              and t.i > min(tc.i for tc in child.subtree)):
+                            comma_idx = t.i
+                            break
+                    if comma_idx is None:
+                        # Comma might be between ccomp's last token and root's nsubj
+                        for t in sent_tokens:
+                            if t.text == ",":
+                                comma_idx = t.i
+                                break
+                    if comma_idx is not None:
+                        # Split: left = ccomp subtree, right = rest
+                        left_toks = [t for t in sent_tokens if t.i <= ccomp_end]
+                        right_toks = [t for t in sent_tokens
+                                      if t.i > comma_idx and t.text != ","]
+                        if (left_toks and right_toks
+                                and _span_has_subject_and_verb(left_toks)
+                                and _span_has_subject_and_verb(right_toks)):
+                            left_text = " ".join(
+                                t.text for t in left_toks
+                            ).strip().rstrip(" ,")
+                            right_text = " ".join(
+                                t.text for t in right_toks
+                            ).strip()
+                            if left_text and right_text:
+                                left_doc = frag_nlp(left_text)
+                                _patch_fragment_lemmas(left_doc, left_toks)
+                                right_doc = frag_nlp(right_text)
+                                _patch_fragment_lemmas(right_doc, right_toks)
+                                clauses.append((left_doc, None))
+                                clauses.append((right_doc, "additive"))
+                                _comma_split_done = True
+                                break
+
+        if _comma_split_done:
+            continue
+
         # ---- Phase 2: split on coordinating conjunctions (FANBOYS) ----
         # Each entry is (split_index, conjunction_type_string).
         split_points: List[Tuple[int, Optional[str]]] = []

@@ -206,8 +206,48 @@ def cleanup(text: str, speaker: str = None) -> str:
             if tok.dep_ == "parataxis":
                 parataxis_indices |= {t.i for t in tok.subtree}
 
+        # Third pass: detect discourse/meta frames and promote content.
+        # "Wait what was I saying" / "Oh that reminds me, I need to..."
+        # Pattern: ROOT is meta-speech verb with first-person subject,
+        # and has ccomp/xcomp/conj child with its own subject.
+        # Strip the frame, keep only the content clause(s).
+        from app.engines.grammar_engine import _get_root
+        _root = _get_root(_doc)
+        _discourse_indices = set()
+        if _root and _root.pos_ in ("VERB", "AUX"):
+            _root_lemma = _root.lemma_.lower()
+            _has_first_person_subj = any(
+                c.dep_ in ("nsubj", "nsubjpass")
+                and c.text.lower() in ("i", "we")
+                for c in _root.children
+            )
+            # Meta-speech: first-person ROOT with subordinate content
+            _meta_verbs = frozenset({
+                "wait", "remind", "mean", "say", "tell", "know",
+                "think", "wonder", "guess", "suppose", "remember",
+            })
+            if _has_first_person_subj and _root_lemma in _meta_verbs:
+                # Check for content clause with its own subject
+                _content_child = None
+                for c in _root.children:
+                    if (c.dep_ in ("ccomp", "xcomp", "conj", "parataxis")
+                            and c.pos_ in ("VERB", "AUX")
+                            and any(gc.dep_ in ("nsubj", "nsubjpass")
+                                    for gc in c.children)):
+                        _content_child = c
+                        break
+                if _content_child is not None:
+                    # Strip the discourse frame — keep content subtree
+                    _content_indices = {t.i for t in _content_child.subtree}
+                    _discourse_indices = (
+                        {t.i for t in _doc}
+                        - _content_indices
+                        - {t.i for t in _doc if t.pos_ == "PUNCT"}
+                    )
+
         clean_tokens = [tok for tok in _doc
                         if tok.i not in parataxis_indices
+                        and tok.i not in _discourse_indices
                         and tok.pos_ != "INTJ"]
 
         if clean_tokens:
@@ -268,13 +308,30 @@ def cleanup(text: str, speaker: str = None) -> str:
                 ci = r.find(")", oi + 1)
                 if ci != -1 and r[oi + 1:ci].count(",") >= 2:
                     return sentence
-            # Semantic guard: compare input vs output via spaCy
+            # Semantic guard: compare input vs output via spaCy.
+            # If CoEdit changed the ROOT verb, lost NER entities, or
+            # significantly shortened the text, it changed meaning —
+            # reject the rewrite and keep the structurally cleaned input.
             try:
-                from app.engines.grammar_engine import _get_nlp_fragment
+                from app.engines.grammar_engine import (
+                    _get_nlp_fragment, _get_root,
+                )
                 _snlp = _get_nlp_fragment()
                 _in_doc = _snlp(sentence)
                 _out_doc = _snlp(r)
-                # Check 1: NER entities not lost
+                # Check 1: ROOT verb lemma preserved
+                _in_root = _get_root(_in_doc)
+                _out_root = _get_root(_out_doc)
+                if (_in_root and _out_root
+                        and _in_root.pos_ in ("VERB", "AUX")
+                        and _in_root.lemma_ != _out_root.lemma_):
+                    logger.warning(
+                        "[SentenceModel] CoEdit changed ROOT verb: "
+                        "%r (%s) -> %r (%s)",
+                        sentence, _in_root.lemma_, r, _out_root.lemma_,
+                    )
+                    return sentence
+                # Check 2: NER entities not lost
                 _in_ents = {e.text.lower() for e in _in_doc.ents}
                 _out_ents = {e.text.lower() for e in _out_doc.ents}
                 if _in_ents and not (_in_ents & _out_ents):
@@ -283,7 +340,7 @@ def cleanup(text: str, speaker: str = None) -> str:
                         sentence, r,
                     )
                     return sentence
-                # Check 2: output not drastically shorter (content lost)
+                # Check 3: output not drastically shorter (content lost)
                 if len(r.split()) < len(sentence.split()) * 0.5:
                     logger.warning(
                         "[SentenceModel] CoEdit truncated content: %r -> %r",
