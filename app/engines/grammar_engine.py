@@ -248,24 +248,51 @@ _STATIVE_VERB_CLASSES: frozenset = frozenset({
 
 
 def _compute_significance(verb_class: "VerbClass", tense_aspect: "TenseAspect") -> str:
-    """Compute episodic_significance from verb class and tense/aspect.
+    """Compute episodic_significance from tense x aspect x verb_class.
 
-    - ACHIEVEMENT verbs -> "milestone"
-    - EXPERIENCE verbs -> "notable"
-    - Stative verb classes (BE, HAVE, PREFERENCE, STATUS) in simple aspect
-      -> "stative" (ongoing state, not a one-time event)
-    - Everything else -> "routine"
+    The tense-aspect combination is the primary signal:
+      present + simple -> stative (persisting state: "I work at Google")
+      past + simple + ACHIEVEMENT -> milestone (completed achievement: "I graduated")
+      past + simple + other -> routine (past event: "I ate breakfast")
+      present + continuous -> routine (ongoing action: "I'm eating lunch")
+      past + habitual -> stative (former persisting state: "I used to work at Google")
+      future + any -> routine (hasn't happened yet)
 
-    Grammar Gap #6: Stative verbs in simple tenses describe persisting states
-    ("I love chocolate", "I own a car"). The same verb in continuous aspect
-    becomes dynamic ("I'm having dinner") and gets "routine" instead.
+    Verb class refines within tense-aspect categories:
+      EXPERIENCE verbs in any past tense -> notable
+      ACHIEVEMENT verbs in past simple -> milestone
     """
-    if verb_class == VerbClass.ACHIEVEMENT:
-        return "milestone"
-    if verb_class == VerbClass.EXPERIENCE:
-        return "notable"
-    if verb_class in _STATIVE_VERB_CLASSES and tense_aspect.aspect == "simple":
+    tense = tense_aspect.tense    # past | present | future
+    aspect = tense_aspect.aspect  # simple | continuous | perfect | perfect_continuous | habitual
+
+    # Present simple = persisting state (regardless of verb class)
+    # "I work at Google", "I love chocolate", "I live in Portland", "I own a cat"
+    if tense == "present" and aspect == "simple":
         return "stative"
+
+    # Past habitual = former persisting state
+    # "I used to work at Google", "I used to live in Boston"
+    if tense == "past" and aspect == "habitual":
+        return "stative"
+
+    # Stative verb classes in present perfect = persisting state
+    # "I've lived here for 10 years", "I've known him since college"
+    if verb_class in _STATIVE_VERB_CLASSES and aspect == "perfect" and tense == "present":
+        return "stative"
+
+    # Past simple + ACHIEVEMENT = milestone
+    # "I graduated", "I got married", "I won the award"
+    if tense == "past" and aspect == "simple" and verb_class == VerbClass.ACHIEVEMENT:
+        return "milestone"
+
+    # Past + EXPERIENCE = notable
+    # "I visited Paris", "I went skydiving"
+    if tense == "past" and verb_class == VerbClass.EXPERIENCE:
+        return "notable"
+
+    # Everything else = routine
+    # Present continuous ("I'm eating"), past simple non-achievement ("I ate"),
+    # future ("I will go"), etc.
     return "routine"
 
 
@@ -289,7 +316,17 @@ _VERB_CLASS_ANCHORS: dict[VerbClass, list[str]] = {
     VerbClass.SPEECH: [
         "communicate.v.02", "say.v.01", "tell.v.01", "think.v.01",
     ],
-    VerbClass.ACHIEVEMENT: ["succeed.v.01", "win.v.01", "achieve.v.01"],
+    VerbClass.ACHIEVEMENT: [
+        "succeed.v.01", "win.v.01", "achieve.v.01",
+        # Life-event structural parents found via WordNet hypernym paths:
+        "unite.v.01",       # marry.v.01 -> join.v.01 -> unite.v.01
+        "receive.v.01",     # graduate.v.01 -> get.v.01 -> receive.v.01
+        "leave.v.08",       # retire.v.01 -> leave_office.v.01 -> leave.v.08
+        "separate.v.08",    # divorce.v.02 -> separate.v.08
+        # Direct synsets (short chains that overlap other classes in closure):
+        "die.v.01",         # change_state.v.01 parent overlaps STATUS
+        "enroll.v.01",      # have.v.01 ancestor overlaps HAVE
+    ],
     VerbClass.EXPERIENCE: ["experience.v.01", "visit.v.01", "travel.v.01"],
     VerbClass.PLANNING: ["plan.v.01", "intend.v.01", "schedule.v.01"],
     VerbClass.HABIT: ["use.v.01", "practice.v.01"],
@@ -1647,7 +1684,7 @@ def _extract_relational(
         1. First-person pronouns -> subject is speaker
         2. Second-person pronouns (as nsubj) -> subject is listener
         3. Collect PERSON/ORG/GPE/LOC/FAC/NORP NER entities
-        Speaker name is appended downstream by memory.py _write_edge_traces.
+        Speaker name is appended downstream by memory.py _prepare_row.
     """
     relational_subject = speaker or "user"
 
@@ -2167,10 +2204,10 @@ def _find_content_verb(verb, _depth=0):
         return verb
     complement = None
     for child in verb.children:
-        if child.dep_ == "ccomp" and child.pos_ == "VERB":
+        if child.dep_ == "ccomp" and child.pos_ in ("VERB", "AUX"):
             complement = child
             break
-        if child.dep_ == "xcomp" and child.pos_ == "VERB":
+        if child.dep_ == "xcomp" and child.pos_ in ("VERB", "AUX"):
             complement = child
             break
     if complement is None:
@@ -2253,7 +2290,7 @@ def _extract_traces_from_sentence(
             # Find embedded clause's nsubj
             embedded_subj = None
             for child in root.children:
-                if child.dep_ in ("ccomp", "xcomp") and child.pos_ == "VERB":
+                if child.dep_ in ("ccomp", "xcomp") and child.pos_ in ("VERB", "AUX"):
                     for gc in child.children:
                         if gc.dep_ in ("nsubj", "nsubjpass"):
                             embedded_subj = gc.text

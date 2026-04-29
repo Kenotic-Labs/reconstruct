@@ -126,28 +126,57 @@ CREATE INDEX IF NOT EXISTS idx_entities_name ON entities(user_id, name);
 CREATE INDEX IF NOT EXISTS idx_entities_type ON entities(user_id, entity_type);
 
 -- =============================================================================
--- RELATIONSHIPS TABLE (Graph edges) - How entities relate to user and each other
+-- RELATIONSHIPS TABLE (Graph edges) - Trace-primary schema (2026-04-25)
+-- source_text_hash is the dedup key; subject/predicate/object are optional
+-- derived fields. 5 trace columns carry NOT NULL defaults (same sentinel
+-- values already used in memory.py _write_edge_traces() at lines 867-869
+-- and in scripts/migrate_traces_primary.py v2 table at lines 151-156).
+-- Root cause: UNIQUE(user_id, subject, predicate, object) caused two
+-- distinct utterances producing the same triple to collide, losing trace
+-- data from the first. source_text_hash dedup preserves each utterance.
 -- =============================================================================
 CREATE TABLE IF NOT EXISTS relationships (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
-    subject TEXT NOT NULL,        -- "user" or entity name
-    predicate TEXT NOT NULL,      -- "sister", "trainer", "works_at", "married_to"
-    object TEXT NOT NULL,         -- Entity name or value
+    source_text TEXT NOT NULL DEFAULT '',
+    source_text_hash TEXT NOT NULL DEFAULT '',
+    created_at TEXT DEFAULT (datetime('now')),
+
+    -- 5 traces (primary data; defaults are unknown-state sentinels,
+    -- not branching values -- retrieval uses embedding cosine, not
+    -- if/else on these strings)
+    edge_schematic_category TEXT NOT NULL DEFAULT 'uncategorized',
+    edge_temporal_context TEXT NOT NULL DEFAULT 'present',
+    edge_relational_type TEXT NOT NULL DEFAULT 'personal',
+    edge_episodic_significance TEXT NOT NULL DEFAULT 'routine',
+    edge_emotional_valence REAL NOT NULL DEFAULT 0.5,
+    edge_emotional_label TEXT,
+    edge_affiliation REAL,
+
+    -- Derived triple (optional — nullable for trace-only edges)
+    subject TEXT,
+    predicate TEXT,
+    object TEXT,
+
+    -- Metadata
     confidence REAL DEFAULT 0.9,
     first_learned_at TEXT DEFAULT (datetime('now')),
     last_confirmed_at TEXT DEFAULT (datetime('now')),
     provenance_memory_id INTEGER,
-    UNIQUE(user_id, subject, predicate, object)
+    UNIQUE(user_id, source_text_hash, created_at)
 );
 
 CREATE INDEX IF NOT EXISTS idx_relationships_user ON relationships(user_id);
 CREATE INDEX IF NOT EXISTS idx_relationships_subject ON relationships(user_id, subject);
 CREATE INDEX IF NOT EXISTS idx_relationships_predicate ON relationships(user_id, predicate);
 CREATE INDEX IF NOT EXISTS idx_relationships_object ON relationships(user_id, object);
+CREATE INDEX IF NOT EXISTS idx_rel_schema_cat ON relationships(user_id, edge_schematic_category);
+CREATE INDEX IF NOT EXISTS idx_rel_subject_schema ON relationships(user_id, subject, edge_schematic_category);
+CREATE INDEX IF NOT EXISTS idx_rel_source_hash ON relationships(user_id, source_text_hash);
 
 -- =============================================================================
 -- MEMORY TRACES TABLE (Distributed Trace Convergence Memory)
+-- DEPRECATED: table retained for backward-compat reads; get_traces() removed 2026-04-24.
 -- Decomposed trace metadata per relationship triple
 -- =============================================================================
 CREATE TABLE IF NOT EXISTS memory_traces (
@@ -197,6 +226,41 @@ CREATE TABLE IF NOT EXISTS predicted_queries (
 );
 
 CREATE INDEX IF NOT EXISTS idx_predicted_queries_user ON predicted_queries(user_id);
+
+-- =============================================================================
+-- ARCS TABLE (Story arcs for proactive engine)
+-- =============================================================================
+CREATE TABLE IF NOT EXISTS arcs (
+    id TEXT PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    topic TEXT NOT NULL,
+    topic_embedding BLOB,
+    start_edge_id INTEGER,
+    emotional_baseline REAL,
+    status TEXT DEFAULT 'open',
+    created_at TEXT DEFAULT (datetime('now')),
+    last_checked_at TEXT DEFAULT (datetime('now')),
+    resolved_at TEXT
+);
+
+CREATE INDEX IF NOT EXISTS idx_arcs_user_status ON arcs(user_id, status);
+CREATE INDEX IF NOT EXISTS idx_arcs_last_checked ON arcs(user_id, last_checked_at);
+
+-- =============================================================================
+-- TIMERS TABLE (Short-term reminders for proactive engine)
+-- =============================================================================
+CREATE TABLE IF NOT EXISTS timers (
+    id TEXT PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    fire_at TEXT NOT NULL,
+    callback_type TEXT,
+    payload TEXT,
+    fired INTEGER DEFAULT 0,
+    created_at TEXT DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_timers_user ON timers(user_id, fired);
+CREATE INDEX IF NOT EXISTS idx_timers_fire ON timers(fire_at, fired);
 
 -- =============================================================================
 -- SCHEMA UPGRADES (for existing databases)
@@ -292,15 +356,9 @@ def run_schema_upgrades(conn) -> None:
         except Exception:
             pass
 
-    # --- Situation linking: situation_id on relationships ---
-    if "situation_id" not in rel_columns:
-        try:
-            conn.execute("ALTER TABLE relationships ADD COLUMN situation_id TEXT")
-            conn.execute("CREATE INDEX IF NOT EXISTS idx_rel_situation ON relationships(user_id, situation_id)")
-            conn.commit()
-            print("[DB] Applied: ALTER TABLE relationships ADD COLUMN situation_id")
-        except Exception:
-            pass
+    # --- situation_id: DEPRECATED (2026-04-23). Column was never populated.
+    # Existing databases retain the column for backward compat but it is
+    # no longer added to new databases. No code reads or writes it. ---
 
     # --- Source timestamp: when the source utterance occurred ---
     # Used by temporal engine to resolve "when did X happen?" queries.
@@ -315,7 +373,7 @@ def run_schema_upgrades(conn) -> None:
         except Exception:
             pass
 
-    # --- T5 SRL: continuous dimension columns on memory_traces ---
+    # --- Continuous dimension columns on memory_traces (legacy T5 SRL naming, kept for schema compat) ---
     trace_cursor = conn.execute("PRAGMA table_info(memory_traces)")
     trace_columns = {row[1] for row in trace_cursor.fetchall()}
 
@@ -381,6 +439,7 @@ def run_schema_upgrades(conn) -> None:
         "edge_episodic_significance": "TEXT",
         "edge_relational_type": "TEXT",
         "edge_temporal_context": "TEXT",
+        "edge_affiliation": "REAL DEFAULT 0.5",
     }
     for col, col_type in edge_trace_cols.items():
         if col not in rel_columns:
@@ -390,3 +449,320 @@ def run_schema_upgrades(conn) -> None:
                 print(f"[DB] Applied: ALTER TABLE relationships ADD COLUMN {col}")
             except Exception:
                 pass
+
+    # --- Predicate embedding cache (2026-04-24): store the embedded
+    # predicate at write time so retrieval can skip embed_text() per edge.
+    if "predicate_embedding" not in rel_columns:
+        try:
+            conn.execute("ALTER TABLE relationships ADD COLUMN predicate_embedding BLOB")
+            conn.commit()
+            print("[DB] Applied: ALTER TABLE relationships ADD COLUMN predicate_embedding")
+        except Exception:
+            pass
+
+    # --- Forget/Show migration (2026-04-14): tombstone columns +
+    # source provenance on relationships, plus live-query indexes. ---
+    forget_cols = {
+        "tombstoned_at": "TEXT",
+        "tombstone_reason": "TEXT",
+        "tombstone_op_id": "TEXT",
+        "source_text": "TEXT",
+        "source_tag": "TEXT",
+    }
+    for col, col_type in forget_cols.items():
+        if col not in rel_columns:
+            try:
+                conn.execute(f"ALTER TABLE relationships ADD COLUMN {col} {col_type}")
+                conn.commit()
+                print(f"[DB] Applied: ALTER TABLE relationships ADD COLUMN {col}")
+            except Exception:
+                pass
+
+    forget_indexes = [
+        "CREATE INDEX IF NOT EXISTS idx_rel_live_subject "
+        "ON relationships(user_id, tombstoned_at, subject)",
+        "CREATE INDEX IF NOT EXISTS idx_rel_live_object "
+        "ON relationships(user_id, tombstoned_at, object)",
+        "CREATE INDEX IF NOT EXISTS idx_rel_live_source_ts "
+        "ON relationships(user_id, tombstoned_at, source_timestamp)",
+        "CREATE INDEX IF NOT EXISTS idx_rel_live_source_tag "
+        "ON relationships(user_id, tombstoned_at, source_tag)",
+    ]
+    for sql in forget_indexes:
+        try:
+            conn.execute(sql)
+            conn.commit()
+        except Exception:
+            pass
+
+    # --- Set-op 9-axis pipeline (2026-04-14): cluster_id + arc_id.
+    # cluster_id is persisted at write time via TemporalEngine.cluster.
+    # arc_id stays NULL (placeholder for multi-session arc grouping).
+    if "cluster_id" not in rel_columns:
+        try:
+            conn.execute("ALTER TABLE relationships ADD COLUMN cluster_id TEXT")
+            conn.execute("CREATE INDEX IF NOT EXISTS idx_rel_cluster ON relationships(user_id, cluster_id)")
+            conn.commit()
+            print("[DB] Applied: ALTER TABLE relationships ADD COLUMN cluster_id")
+        except Exception:
+            pass
+
+    if "arc_id" not in rel_columns:
+        try:
+            conn.execute("ALTER TABLE relationships ADD COLUMN arc_id TEXT")
+            conn.execute("CREATE INDEX IF NOT EXISTS idx_rel_arc ON relationships(user_id, arc_id)")
+            conn.commit()
+            print("[DB] Applied: ALTER TABLE relationships ADD COLUMN arc_id")
+        except Exception:
+            pass
+
+    # --- Write-path foundation (2026-04-14): entity-type tagging on the
+    # triple. object_type already exists from an earlier migration; add
+    # subject_type on relationships and ensure entity_type is indexed on
+    # entities. Values drawn from the closed vocabulary resolved by
+    # app.engines.type_resolver: PERSON | ORG | LOCATION | TIME | EVENT |
+    # QUANTITY | WORK_OF_ART | PRODUCT | GENERIC.
+    if "subject_type" not in rel_columns:
+        try:
+            conn.execute("ALTER TABLE relationships ADD COLUMN subject_type TEXT")
+            conn.commit()
+            print("[DB] Applied: ALTER TABLE relationships ADD COLUMN subject_type")
+        except Exception:
+            pass
+
+    # --- Resolved event date (2026-04-25): the actual date of the event
+    # described in the source text, resolved from DATE/TIME NER spans
+    # against source_timestamp. Distinct from source_timestamp (session
+    # wall-clock) — this is what the user said happened WHEN.
+    # Root cause: "when" queries found the right edge but returned no
+    # date because source_timestamp is session time, not event time.
+    if "resolved_event_date" not in rel_columns:
+        try:
+            conn.execute("ALTER TABLE relationships ADD COLUMN resolved_event_date TEXT")
+            conn.execute("CREATE INDEX IF NOT EXISTS idx_rel_event_date ON relationships(user_id, resolved_event_date)")
+            conn.commit()
+            print("[DB] Applied: ALTER TABLE relationships ADD COLUMN resolved_event_date")
+        except Exception:
+            pass
+
+    # --- Grammar engine decomposition columns (2026-04-25): persist
+    # temporal_expression and relational_entities from TraceDecomposition.
+    if "temporal_expression" not in rel_columns:
+        try:
+            conn.execute("ALTER TABLE relationships ADD COLUMN temporal_expression TEXT")
+            conn.commit()
+            print("[DB] Applied: ALTER TABLE relationships ADD COLUMN temporal_expression")
+        except Exception:
+            pass
+
+    if "relational_entities" not in rel_columns:
+        try:
+            conn.execute("ALTER TABLE relationships ADD COLUMN relational_entities TEXT")
+            conn.commit()
+            print("[DB] Applied: ALTER TABLE relationships ADD COLUMN relational_entities")
+        except Exception:
+            pass
+
+    # --- Type confidence columns (2026-04-24): signals whether NER and
+    # WordNet agreed on the entity type. HIGH = agreement or single-source,
+    # LOW = disagreement (type is uncertain). Used by retrieval as a soft
+    # tiebreaker — low-confidence types don't gate, only nudge.
+    if "subject_type_confidence" not in rel_columns:
+        try:
+            conn.execute("ALTER TABLE relationships ADD COLUMN subject_type_confidence TEXT DEFAULT 'high'")
+            conn.commit()
+            print("[DB] Applied: ALTER TABLE relationships ADD COLUMN subject_type_confidence")
+        except Exception:
+            pass
+    if "object_type_confidence" not in rel_columns:
+        try:
+            conn.execute("ALTER TABLE relationships ADD COLUMN object_type_confidence TEXT DEFAULT 'high'")
+            conn.commit()
+            print("[DB] Applied: ALTER TABLE relationships ADD COLUMN object_type_confidence")
+        except Exception:
+            pass
+
+    # Ensure object_type index exists with the canonical name expected by
+    # the coherence gate (older migration used a DEFAULT 'unknown' and a
+    # different index; we add the canonical one idempotently).
+    for sql in (
+        "CREATE INDEX IF NOT EXISTS idx_rel_object_type ON relationships(user_id, object_type)",
+        "CREATE INDEX IF NOT EXISTS idx_rel_subject_type ON relationships(user_id, subject_type)",
+    ):
+        try:
+            conn.execute(sql)
+            conn.commit()
+        except Exception:
+            pass
+
+    # --- sequence_number column (2026-04-25): narrative-time axis.
+    # Root cause: memory.py lines 747-755 writes sequence_number via
+    # UPDATE but the column was never formally added via ALTER TABLE or
+    # included in the base CREATE TABLE. Retrieval.py references it in
+    # ORDER BY clauses (lines 774, 956, 1183, 1309, 1351, 1396, 1439).
+    # On databases created from MIGRATIONS alone, the column does not
+    # exist and those ORDER BY clauses silently get NULLs.
+    if "sequence_number" not in rel_columns:
+        try:
+            conn.execute("ALTER TABLE relationships ADD COLUMN sequence_number INTEGER")
+            conn.commit()
+            print("[DB] Applied: ALTER TABLE relationships ADD COLUMN sequence_number")
+        except Exception:
+            pass
+
+    # --- Negation column (2026-04-27): grammar engine sets negated=True
+    # on TraceDecomposition but _write_edge_traces never persisted it.
+    if "edge_negated" not in rel_columns:
+        try:
+            conn.execute("ALTER TABLE relationships ADD COLUMN edge_negated INTEGER DEFAULT 0")
+            conn.commit()
+            print("[DB] Applied: ALTER TABLE relationships ADD COLUMN edge_negated")
+        except Exception:
+            pass
+
+    # --- Mood column (2026-04-28): stores "indicative", "interrogative",
+    # "imperative", "conditional" from grammar engine TraceDecomposition.
+    # Retrieval filters out non-indicative edges so imposed facts from
+    # questions/commands don't leak as answers.
+    if "edge_mood" not in rel_columns:
+        try:
+            conn.execute("ALTER TABLE relationships ADD COLUMN edge_mood TEXT DEFAULT 'indicative'")
+            conn.commit()
+            print("[DB] Applied: ALTER TABLE relationships ADD COLUMN edge_mood")
+        except Exception:
+            pass
+
+    # --- is_historical column (2026-04-29): grammar engine sets
+    # is_historical=True for past-tense facts (e.g. "I used to work at
+    # Google"). Retrieval can distinguish current vs historical facts.
+    if "is_historical" not in rel_columns:
+        try:
+            conn.execute("ALTER TABLE relationships ADD COLUMN is_historical INTEGER DEFAULT 0")
+            conn.commit()
+            print("[DB] Applied: ALTER TABLE relationships ADD COLUMN is_historical")
+        except Exception:
+            pass
+
+    # --- episodic_fact column (2026-04-29): normalized sentence-level
+    # fact from TraceDecomposition. The canonical natural-language form
+    # of what was stored, independent of triple decomposition.
+    if "episodic_fact" not in rel_columns:
+        try:
+            conn.execute("ALTER TABLE relationships ADD COLUMN episodic_fact TEXT")
+            conn.commit()
+            print("[DB] Applied: ALTER TABLE relationships ADD COLUMN episodic_fact")
+        except Exception:
+            pass
+
+    # --- emotional_target column (2026-04-29): what the emotion is
+    # about (e.g. "the job interview" when user says "I'm nervous about
+    # the job interview"). From TraceDecomposition.emotional_target.
+    if "emotional_target" not in rel_columns:
+        try:
+            conn.execute("ALTER TABLE relationships ADD COLUMN emotional_target TEXT")
+            conn.commit()
+            print("[DB] Applied: ALTER TABLE relationships ADD COLUMN emotional_target")
+        except Exception:
+            pass
+
+    # --- extraction_rule column (2026-04-29): provenance trace showing
+    # which grammar rule produced this edge (trace|imposed|
+    # free_indirect_speech etc.). From TraceDecomposition.extraction_rule.
+    if "extraction_rule" not in rel_columns:
+        try:
+            conn.execute("ALTER TABLE relationships ADD COLUMN extraction_rule TEXT")
+            conn.commit()
+            print("[DB] Applied: ALTER TABLE relationships ADD COLUMN extraction_rule")
+        except Exception:
+            pass
+
+    # --- source_text_hash column (Phase 6, 2026-04-25): SHA-256 of
+    # source_text. Root cause: the full trace-primary migration
+    # (scripts/migrate_traces_primary.py) replaces the UNIQUE constraint,
+    # but memory.py store() needs to start writing hashes before the full
+    # migration runs. This column-add is the incremental bridge so
+    # store() can populate the hash on each INSERT.
+    if "source_text_hash" not in rel_columns:
+        try:
+            conn.execute("ALTER TABLE relationships ADD COLUMN source_text_hash TEXT")
+            conn.execute("CREATE INDEX IF NOT EXISTS idx_rel_source_hash ON relationships(user_id, source_text_hash)")
+            conn.commit()
+            print("[DB] Applied: ALTER TABLE relationships ADD COLUMN source_text_hash")
+        except Exception:
+            pass
+
+    # entities.entity_type already exists in the base CREATE TABLE; ensure
+    # its index is named idx_entity_type for the coherence gate.
+    try:
+        conn.execute(
+            "CREATE INDEX IF NOT EXISTS idx_entity_type ON entities(user_id, entity_type)"
+        )
+        conn.commit()
+    except Exception:
+        pass
+
+    # --- FTS5 full-text search on relationships (BM25 hybrid retrieval) ---
+    # Content-sync FTS5 virtual table: external content points to the
+    # relationships table. Queries use BM25 ranking over the concatenated
+    # subject + predicate + object + source_text. Zero new dependencies —
+    # FTS5 is built into SQLite 3.9+ (Python 3.10 ships 3.37+).
+    #
+    # Migration (2026-04-24): added source_text as 4th FTS column so BM25
+    # can match the raw user utterance. Existing 3-column FTS tables are
+    # detected and rebuilt automatically.
+    _fts_needs_rebuild = False
+    try:
+        # Detect whether the FTS table exists and has the expected columns.
+        # FTS5 content-sync tables expose columns via PRAGMA; if source_text
+        # is missing we must drop + recreate.
+        _fts_cols = {
+            row[1]
+            for row in conn.execute("PRAGMA table_info(relationships_fts)").fetchall()
+        }
+        if _fts_cols and "source_text" not in _fts_cols:
+            conn.execute("DROP TABLE IF EXISTS relationships_fts")
+            conn.commit()
+            _fts_needs_rebuild = True
+            print("[DB] Dropped old 3-column relationships_fts for source_text migration")
+    except Exception:
+        pass
+
+    try:
+        conn.execute("""
+            CREATE VIRTUAL TABLE IF NOT EXISTS relationships_fts
+            USING fts5(
+                subject, predicate, object, source_text,
+                content='relationships',
+                content_rowid='id'
+            )
+        """)
+        conn.commit()
+        print("[DB] Applied: CREATE VIRTUAL TABLE relationships_fts (FTS5, 4-col)")
+    except Exception:
+        pass
+
+    # Populate FTS5 index for any existing rows not yet indexed.
+    # This is idempotent: INSERT OR IGNORE semantics via FTS5's
+    # content-sync mechanism. For content-sync tables, we rebuild
+    # if the table is empty (fresh migration) or after a schema rebuild.
+    try:
+        fts_count = conn.execute(
+            "SELECT COUNT(*) FROM relationships_fts"
+        ).fetchone()[0]
+        if fts_count == 0 or _fts_needs_rebuild:
+            # Clear any stale rows from a partial state before full backfill.
+            if _fts_needs_rebuild and fts_count > 0:
+                conn.execute(
+                    "INSERT INTO relationships_fts(relationships_fts) VALUES('delete-all')"
+                )
+            conn.execute("""
+                INSERT INTO relationships_fts(rowid, subject, predicate, object, source_text)
+                SELECT id, subject, REPLACE(predicate, '_', ' '), object,
+                       COALESCE(source_text, '')
+                FROM relationships
+                WHERE tombstoned_at IS NULL
+            """)
+            conn.commit()
+            print("[DB] Applied: backfill relationships_fts from existing rows")
+    except Exception:
+        pass
