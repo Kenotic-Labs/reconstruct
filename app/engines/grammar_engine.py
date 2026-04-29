@@ -238,8 +238,12 @@ _VERB_CLASS_TO_RELTYPE: Dict[VerbClass, str] = {
 # Stative verb classes: describe states rather than events/actions.
 # When aspect is "simple", these produce ongoing states (not one-time events).
 # Grammar Gap #6: stative vs dynamic verb distinction.
+# Grammar reference pp. 239-247: stative verbs express states, not actions.
+# Categories: BE, HAVE, preference, cognition (ABILITY), possession,
+# perception, measurement. These produce persisting facts, not events.
 _STATIVE_VERB_CLASSES: frozenset = frozenset({
     VerbClass.BE, VerbClass.HAVE, VerbClass.PREFERENCE, VerbClass.STATUS,
+    VerbClass.ABILITY,  # know, understand, believe, think
 })
 
 
@@ -634,12 +638,29 @@ def detect_mood(doc) -> str:
             if child.dep_ in ("ccomp", "xcomp"):
                 return "subjunctive"
 
-    # Subjunctive: ccomp verb with no tense marking
+    # Subjunctive: ccomp verb with no tense marking, OR
+    # mandative subjunctive: 3rd-person subject + base-form verb (VB not VBZ).
+    # "I recommend she study harder" — "study" is VB where VBZ expected.
+    # Grammar pp.735-739: morphological disagreement IS the structural signal.
     for tok in doc:
-        if tok.dep_ == "ccomp" and tok.pos_ == "VERB":
+        if tok.dep_ == "ccomp" and tok.pos_ in ("VERB", "AUX"):
             if (tok.morph.get("Tense") == []
                     and tok.morph.get("VerbForm") in (["Inf"], [])):
                 return "subjunctive"
+            # Mandative: 3rd person singular nsubj + non-VBZ verb form.
+            # "I recommend she study harder" — "study" is VBP (not VBZ
+            # "studies"). spaCy tags it VBP, not VB. The mismatch between
+            # 3rd person singular subject and VBP (not VBZ) = mandative.
+            if tok.tag_ in ("VB", "VBP"):
+                ccomp_nsubj = next(
+                    (c for c in tok.children
+                     if c.dep_ in ("nsubj", "nsubjpass")), None
+                )
+                if (ccomp_nsubj
+                        and ccomp_nsubj.morph.get("Person") == ["3"]
+                        and ccomp_nsubj.morph.get("Number") == ["Sing"]
+                        and tok.tag_ != "VBZ"):
+                    return "subjunctive"
 
     # Subjunctive: "were" with 1st/3rd person singular subject
     if root.lemma_ == "be" and root.text.lower() == "were":
