@@ -54,14 +54,6 @@ Full list of changes:
 - arcs + timers tables
 - FTS5 virtual table with backfill migration
 
-### Retrieval (`app/engines/retrieval.py`)
-
-- Decay table (DECAY_TABLE) + get_decay_params() + compute_decay_factor()
-- query_references_past() detection + _skip_decay flag
-- Decay wired into 4 ranking sorts (retrieve, reference resolution, multi-hop, reconstruct)
-- Significance vocabulary aligned to grammar engine values
-- Stative no longer misclassified as pivotal
-
 ### Test
 
 - `tests/test_e2e_writepath.py` — 20-sentence E2E test, runs full pipeline, checks every table and column
@@ -155,24 +147,6 @@ Full list of changes:
 
 **Evidence:** #19 "I feel guilty about not visiting my grandmother" → `target=I` (should be "grandmother" or "visiting my grandmother")
 **Root cause:** The emotional_target extractor falls back to nsubj when it can't find a pobj. The negation ("not visiting") disrupts the prep→pobj chain.
-
----
-
-## Retrieval Engine — what's left to do (not in this commit)
-
-7 threads laid by the memory engine that retrieval doesn't pull yet:
-
-| Thread | Written | Read by retrieval? |
-|--------|---------|-------------------|
-| edge_embedding | BLOB | Fetched but _cosine_from_blob never called |
-| predicate_embedding | BLOB | Not even in SELECT |
-| edge_affiliation | REAL | Fetched but not used in scoring |
-| predicted_queries | Table populated | Never queried by retrieve() |
-| facts table | Populated via tier router | Never read by retrieval |
-| milestones table | Populated via tier router | Never read by retrieval |
-| arc_id | TEXT on relationships | Fetched but no ranking use |
-
-These are the next workstream — wiring the read side to pull the threads the write side laid.
 
 ---
 
