@@ -567,8 +567,10 @@ def _reclassify_location_by_object(doc, root, verb_class):
                 return VerbClass.LOCATION
             return VerbClass.EXPERIENCE
 
+    # Check ALL prep children, not just "to". "go through a rough patch",
+    # "go into business", "go over the details" are EXPERIENCE, not LOCATION.
     for child in root.children:
-        if child.dep_ == "prep" and child.lemma_ == "to":
+        if child.dep_ == "prep":
             for gc in child.children:
                 if gc.dep_ == "pobj":
                     ner_types = {t.ent_type_ for t in gc.subtree if t.ent_type_}
@@ -1146,6 +1148,17 @@ def classify_utterance(
             5, CoarseBin.STATEMENT.value, "tag_question",
             False, False, False, False, True)
 
+    # Cleft sentences: "What happened was I applied..." — NOT a question.
+    # Pattern: ROOT is "be" + csubj (WH-clause) + ccomp (content).
+    _cleft_root = _get_root(doc)
+    if (_cleft_root and _cleft_root.lemma_ == "be"
+            and any(c.dep_ == "csubj" for c in _cleft_root.children)
+            and any(c.dep_ == "ccomp" and c.pos_ == "VERB"
+                    for c in _cleft_root.children)):
+        return UtteranceClassification(
+            5, CoarseBin.STATEMENT.value, "cleft",
+            False, False, False, False, True)
+
     if (_has_question_mark(doc)
             or _has_interrogative_fronted(doc)
             or _has_subject_aux_inversion(doc)):
@@ -1191,6 +1204,17 @@ def _extract_episodic(doc, root) -> str:
     sent_text = str(doc).strip()
     if root is None:
         return sent_text
+
+    # Gerund/clausal subject as content: when nsubj is a csubj (gerund
+    # phrase) on a stative/linking ROOT, the subject IS the meaningful
+    # content. "Being transgender in a small town was isolating" →
+    # episodic = "Being transgender in a small town", not "isolating".
+    for child in root.children:
+        if child.dep_ == "csubj":
+            csubj_span = sorted(child.subtree, key=lambda t: t.i)
+            csubj_text = " ".join(t.text for t in csubj_span).strip()
+            if csubj_text:
+                return csubj_text.rstrip(".,;:!?")
 
     # Find subject token — check root's children first, then all tokens
     # (spaCy may attach nsubj to an auxpass rather than ROOT)
@@ -1968,6 +1992,27 @@ def _extract_traces_from_sentence(
     root = _get_root(sent_doc)
     source_text = str(sent_doc).strip()
 
+    # Cleft sentence detection: "what happened was I applied for the grant"
+    # Pattern: ROOT is "be" + csubj (WH-clause) + ccomp (content clause).
+    # Skip the "be" frame, extract from the ccomp content.
+    if (root and root.lemma_ == "be"
+            and any(c.dep_ == "csubj" for c in root.children)
+            and any(c.dep_ == "ccomp" and c.pos_ == "VERB"
+                    for c in root.children)):
+        ccomp_verb = next(
+            c for c in root.children
+            if c.dep_ == "ccomp" and c.pos_ == "VERB"
+        )
+        # Re-extract from the content clause
+        ccomp_subtree = sorted(ccomp_verb.subtree, key=lambda t: t.i)
+        ccomp_text = " ".join(t.text for t in ccomp_subtree).strip()
+        if ccomp_text:
+            ccomp_doc = _get_nlp_fragment()(ccomp_text)
+            _patch_fragment_lemmas(ccomp_doc, ccomp_subtree)
+            return _extract_traces_from_sentence(
+                ccomp_doc, speaker, tense_aspect, listener=listener,
+            )
+
     # Phrasal verb: root + particle (dep=prt)
     particle = None
     if root:
@@ -2009,6 +2054,22 @@ def _extract_traces_from_sentence(
         for child in root.children:
             if child.dep_ in ("ccomp", "xcomp") and child.pos_ == "VERB":
                 _embedded_predicate_verb = child
+                # Recursive: if embedded verb is ALSO speech, keep delegating.
+                # "told me that therapist said she should try" → try
+                _depth = 0
+                while _depth < 3:
+                    _emb_vc = classify_verb_class(_embedded_predicate_verb.lemma_)
+                    if _emb_vc != VerbClass.SPEECH:
+                        break
+                    _next = None
+                    for gc in _embedded_predicate_verb.children:
+                        if gc.dep_ in ("ccomp", "xcomp") and gc.pos_ == "VERB":
+                            _next = gc
+                            break
+                    if _next is None:
+                        break
+                    _embedded_predicate_verb = _next
+                    _depth += 1
                 embedded_subj = None
                 for gc in child.children:
                     if gc.dep_ in ("nsubj", "nsubjpass"):
@@ -3558,6 +3619,41 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
         if not sent_cls.is_question:
             decompositions.append(decomp)
             all_triples.append(_derive_triple(decomp))
+
+        # Step 6b: Gerund coordination — when ROOT is VBG with VBG conj
+        # children, each element is a separate activity.
+        # "Running, reading, or playing my violin" → 3 traces.
+        # Walk the full conj chain (conj of conj of conj...).
+        root_tok = _get_root(sent_doc)
+        if root_tok and root_tok.tag_ == "VBG":
+            conj_queue = [c for c in root_tok.children
+                          if c.dep_ == "conj" and c.tag_ in ("VBG", "NN")]
+            frag_nlp = _get_nlp_fragment()
+            while conj_queue:
+                conj_child = conj_queue.pop(0)
+                # Add this node's conj children to the queue (chain)
+                conj_queue.extend(
+                    c for c in conj_child.children
+                    if c.dep_ == "conj" and c.tag_ in ("VBG", "NN")
+                )
+                conj_subtree = sorted(conj_child.subtree, key=lambda t: t.i)
+                # Filter out conj children's subtrees (they get their own trace)
+                conj_child_indices = set()
+                for cc in conj_child.children:
+                    if cc.dep_ == "conj":
+                        conj_child_indices |= {t.i for t in cc.subtree}
+                conj_tokens = [t for t in conj_subtree
+                               if t.i not in conj_child_indices
+                               and t.dep_ != "cc" and t.pos_ != "PUNCT"]
+                conj_text = " ".join(t.text for t in conj_tokens).strip()
+                if conj_text:
+                    conj_doc = frag_nlp(conj_text)
+                    conj_decomp = _extract_traces_from_sentence(
+                        conj_doc, speaker, sent_tense, listener=listener,
+                    )
+                    conj_decomp.extraction_rule = "trace_conj_additive"
+                    decompositions.append(conj_decomp)
+                    all_triples.append(_derive_triple(conj_decomp))
 
         # Step 7: Extract imposed facts from subordinate constructions
         # ALWAYS runs for ALL sentence types (questions, commands, statements).

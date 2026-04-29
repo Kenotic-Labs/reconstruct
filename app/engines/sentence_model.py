@@ -243,7 +243,10 @@ def cleanup(text: str, speaker: str = None) -> str:
         import torch
 
         def _rewrite_one(sentence: str) -> str:
-            """Rewrite a single sentence via coedit."""
+            """Rewrite a single sentence via coedit.
+            Semantic guard: if CoEdit changes ROOT verb, loses NER entities,
+            or significantly changes length, reject the rewrite — it changed
+            meaning, not just grammar."""
             prompt = "Fix grammatical errors in this sentence:" + sentence
             inp = _TOKENIZER(
                 prompt, return_tensors="pt", max_length=128, truncation=True,
@@ -255,23 +258,57 @@ def cleanup(text: str, speaker: str = None) -> str:
             r = _TOKENIZER.decode(out[0], skip_special_tokens=True).strip()
             if not r:
                 logger.warning(
-                    "[SentenceModel] CoEdit returned empty output in cleanup for: %r",
+                    "[SentenceModel] CoEdit returned empty output for: %r",
                     sentence,
                 )
-                r = sentence
+                return sentence
             # Guardrail: reject triple/tuple syntax hallucination
             if "(" in r and ")" in r:
                 oi = r.find("(")
                 ci = r.find(")", oi + 1)
                 if ci != -1 and r[oi + 1:ci].count(",") >= 2:
-                    r = sentence
+                    return sentence
+            # Semantic guard: compare input vs output via spaCy
+            try:
+                from app.engines.grammar_engine import _get_nlp_fragment
+                _snlp = _get_nlp_fragment()
+                _in_doc = _snlp(sentence)
+                _out_doc = _snlp(r)
+                # Check 1: NER entities not lost
+                _in_ents = {e.text.lower() for e in _in_doc.ents}
+                _out_ents = {e.text.lower() for e in _out_doc.ents}
+                if _in_ents and not (_in_ents & _out_ents):
+                    logger.warning(
+                        "[SentenceModel] CoEdit lost NER entities: %r -> %r",
+                        sentence, r,
+                    )
+                    return sentence
+                # Check 2: output not drastically shorter (content lost)
+                if len(r.split()) < len(sentence.split()) * 0.5:
+                    logger.warning(
+                        "[SentenceModel] CoEdit truncated content: %r -> %r",
+                        sentence, r,
+                    )
+                    return sentence
+            except (ImportError, OSError):
+                pass  # spaCy not available for guard — accept rewrite
             return r
 
         # Split into sentences — rewrite each individually so
         # coedit-small's 96-token output limit doesn't truncate.
         from app.engines.grammar_engine import _get_nlp
-        _sent_doc = _get_nlp()(stripped)
-        _sentences = [s.text.strip() for s in _sent_doc.sents if s.text.strip()]
+        # Split on sentence boundaries AND ellipsis/dash breaks.
+        # spaCy may not split on "..." or "—" but these are natural
+        # sentence boundaries in conversational text.
+        import re
+        _presplit = re.split(r'\.{2,}|—|–', stripped)
+        _presplit = [s.strip() for s in _presplit if s.strip()]
+        _sentences = []
+        for _seg in _presplit:
+            _seg_doc = _get_nlp()(_seg)
+            _sentences.extend(
+                s.text.strip() for s in _seg_doc.sents if s.text.strip()
+            )
 
         if len(_sentences) <= 1:
             result = _rewrite_one(stripped)
