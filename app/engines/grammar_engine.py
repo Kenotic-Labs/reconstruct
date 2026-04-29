@@ -673,6 +673,25 @@ def detect_mood(doc) -> str:
                 if mn == ["Sing"] and mp in (["1"], ["3"]):
                     return "subjunctive"
 
+    # Gap 12: "if only" -> subjunctive (wish), not conditional.
+    # Must be checked BEFORE the conditional block.
+    for tok in doc:
+        if tok.text.lower() == "if" and (tok.i + 1) < len(doc) and doc[tok.i + 1].text.lower() == "only":
+            return "subjunctive"
+
+    # Gap 10: Habitual "would" detection — "would" + temporal/frequency marker
+    # and NO conditional subordinator (if/unless/whether) → indicative, not
+    # conditional. "We would go fishing every summer" = past habitual.
+    _HABITUAL_MARKERS = frozenset({"every", "always", "often", "usually", "frequently"})
+    _CONDITIONAL_SUBORDINATORS = frozenset({"if", "unless", "whether"})
+    has_conditional_sub = any(
+        tok.dep_ in ("mark", "advmod") and tok.lemma_.lower() in _CONDITIONAL_SUBORDINATORS
+        for tok in doc
+    )
+    has_habitual_signal = any(tok.text.lower() in _HABITUAL_MARKERS for tok in doc)
+    # Also check for DATE/TIME NER as temporal context
+    has_temporal_ner = any(ent.label_ in ("DATE", "TIME") for ent in doc.ents)
+
     # Conditional: modal aux (would/could) governing a verb,
     # OR subordinating conjunction "if"/"unless"/"whether" (dep_=mark/advmod).
     # Checked BEFORE interrogative so "Would you recommend...?" => conditional
@@ -682,6 +701,12 @@ def detect_mood(doc) -> str:
     for tok in doc:
         if tok.dep_ == "aux" and tok.lemma_.lower() in _conditional_lemmas:
             if tok.head.pos_ == "VERB":
+                # Gap 10 guard: habitual "would" with temporal marker and no
+                # conditional subordinator → indicative, not conditional
+                if (tok.lemma_.lower() == "would"
+                        and not has_conditional_sub
+                        and (has_habitual_signal or has_temporal_ner)):
+                    break  # skip conditional, fall through to indicative
                 return "conditional"
     for tok in doc:
         if (tok.dep_ in ("mark", "advmod")
@@ -755,6 +780,10 @@ def detect_tense_aspect(doc) -> TenseAspect:
                 and tok.tag_ == "VBD"
                 and i + 1 < len(tokens)
                 and tokens[i + 1].text.lower() == "to"):
+            # Gap 5: "be used to" = accustomed, NOT habitual.
+            # If preceded by a form of "be", skip habitual detection.
+            if i > 0 and tokens[i - 1].lemma_.lower() == "be":
+                continue  # "am/is/are/was/were used to" = accustomed
             # Verify there's a verb after "to"
             if i + 2 < len(tokens) and tokens[i + 2].pos_ == "VERB":
                 return TenseAspect(tense="past", aspect="habitual")
@@ -904,6 +933,11 @@ def resolve_pronouns(doc, speaker: Optional[str] = None, listener: str = "user")
             tokens.append(listener_name)
         elif lower == "yours":
             tokens.append(listener_name + "'s")
+        # Gap 6: Standalone possessive pronouns
+        elif lower == "mine":
+            tokens.append(speaker_name + "'s")
+        elif lower == "ours":
+            tokens.append(speaker_name + "'s")
         # Contraction conjugation: after "I" -> speaker (3rd person),
         # AUX needs 3rd-person form.
         elif tok.pos_ == "AUX" and tok.text.startswith("'"):
@@ -1585,6 +1619,21 @@ def _extract_temporal(doc, tense_aspect: TenseAspect) -> Tuple[str, Optional[str
                         direction = "past"
                     break
 
+    # Gap 15: Frequency adverbs — closed grammatical class, enriches temporal trace
+    _FREQUENCY_ADVERBS = frozenset({
+        "always", "never", "often", "usually", "sometimes", "rarely",
+        "daily", "weekly", "monthly", "yearly", "annually",
+        "frequently", "seldom", "occasionally", "regularly",
+    })
+    for tok in doc:
+        if tok.dep_ == "advmod" and tok.lemma_.lower() in _FREQUENCY_ADVERBS:
+            freq = tok.text.lower()
+            if expression:
+                expression = f"{freq} {expression}"
+            else:
+                expression = freq
+            break  # one frequency adverb per clause
+
     return (direction, expression)
 
 
@@ -1619,7 +1668,17 @@ def _extract_relational(
             relational_subject = speaker
         elif nsubj_tok.pos_ == "PRON" and nsubj_lower in _THIRD_PERSON_PRONOUNS:
             # Third-person pronoun -> keep as-is, do NOT default to speaker
-            relational_subject = nsubj_tok.text
+            # Gap 8: Dummy "it" — weather/impersonal verbs produce a
+            # meaningless "it" subject. Detect and set to empty string.
+            _DUMMY_IT_LEMMAS = frozenset({
+                "rain", "snow", "hail", "sleet", "drizzle", "thunder",
+                "pour", "seem", "appear",
+            })
+            _root = _get_root(doc)
+            if nsubj_lower == "it" and _root is not None and _root.lemma_.lower() in _DUMMY_IT_LEMMAS:
+                relational_subject = ""
+            else:
+                relational_subject = nsubj_tok.text
         elif nsubj_tok.pos_ == "PROPN":
             # Proper noun -> use its text
             # Collect full proper-noun span (multi-token names)
@@ -1635,6 +1694,11 @@ def _extract_relational(
             # Common noun subject (e.g., "The window was broken")
             # Use the noun span text, not the speaker default
             relational_subject = _span_text(nsubj_tok)
+        elif nsubj_tok.pos_ == "PRON":
+            # Gap 7: Any remaining PRON not caught above (indefinite pronouns
+            # like everyone, someone, nobody, anything, etc.) — keep as-is
+            # instead of defaulting to speaker.
+            relational_subject = nsubj_tok.text
         # else: no nsubj match above -> keep default (speaker)
     else:
         # No nsubj at all -> keep default (speaker)
@@ -1661,6 +1725,89 @@ def _extract_relational(
                 and ent.text not in seen):
             entities.append(ent.text)
             seen.add(ent.text)
+
+    # Gap 1: Indirect objects (dative/iobj) that are PROPN or PERSON NER
+    # may not appear in doc.ents.  "I gave Sarah the book" -> Sarah.
+    for tok in doc:
+        if tok.dep_ in ("dative", "iobj"):
+            if tok.pos_ == "PROPN" or tok.ent_type_ == "PERSON":
+                name = _span_text(tok)
+                if name not in seen:
+                    entities.append(name)
+                    seen.add(name)
+
+    # Gap 2: Causative dobj as participant entity.
+    # "She made him cry" — ROOT has xcomp/ccomp child (causative), dobj is participant.
+    # spaCy may parse the caused-entity as dobj of ROOT or nsubj of the complement.
+    root_tok = _get_root(doc)
+    if root_tok is not None:
+        for comp_child in root_tok.children:
+            if comp_child.dep_ in ("xcomp", "ccomp") and comp_child.pos_ == "VERB":
+                # Check dobj of ROOT
+                for child in root_tok.children:
+                    if child.dep_ == "dobj" and child.pos_ in ("PRON", "PROPN"):
+                        name = child.text
+                        if name not in seen:
+                            entities.append(name)
+                            seen.add(name)
+                # Also check nsubj of the complement (spaCy's ECM parse)
+                for gc in comp_child.children:
+                    if gc.dep_ == "nsubj" and gc.pos_ in ("PRON", "PROPN"):
+                        name = gc.text
+                        if name not in seen:
+                            entities.append(name)
+                            seen.add(name)
+                break  # only process first complement
+
+        # Gap 3: Factitive oprd — "They elected him chairman".
+        # When both dobj and oprd exist, dobj is the affected person.
+        has_oprd = any(c.dep_ == "oprd" for c in root_tok.children)
+        if has_oprd:
+            for child in root_tok.children:
+                if child.dep_ == "dobj" and child.pos_ in ("PRON", "PROPN"):
+                    name = child.text
+                    if name not in seen:
+                        entities.append(name)
+                        seen.add(name)
+
+    # Gap 20: Vocatives — addressee detection enriches relational trace
+    for tok in doc:
+        if tok.dep_ == "vocative" or (
+            tok.pos_ == "PROPN"
+            and tok.dep_ in ("npadvmod", "appos", "ROOT", "dep")
+            and tok.i == 0
+            and tok.nbor(1).text == ","
+            if tok.i + 1 < len(doc) else False
+        ):
+            name = _span_text(tok)
+            if name not in seen:
+                entities.append(name)
+                seen.add(name)
+
+    # Gap 22: Compound subjects — split conjoined nsubj into separate entities
+    if nsubj_tok is not None:
+        for conj_child in nsubj_tok.children:
+            if conj_child.dep_ == "conj" and conj_child.pos_ in ("PROPN", "NOUN"):
+                name = _span_text(conj_child)
+                if name not in seen:
+                    entities.append(name)
+                    seen.add(name)
+        # Also add the nsubj itself if it's a PROPN not yet in entities
+        if nsubj_tok.pos_ == "PROPN":
+            name = _span_text(nsubj_tok)
+            if name not in seen:
+                entities.append(name)
+                seen.add(name)
+
+    # Gap 23: Passive "by" agent — extract pobj of agent dep
+    for tok in doc:
+        if tok.dep_ == "agent" and tok.head.tag_ in ("VBN", "VBD"):
+            for child in tok.children:
+                if child.dep_ == "pobj":
+                    name = _span_text(child)
+                    if name not in seen:
+                        entities.append(name)
+                        seen.add(name)
 
     return (relational_subject, entities, "personal")
 
@@ -2002,6 +2149,48 @@ def _build_trace_decomposition(
 # Spec Part 1: all 5 traces from a single sentence
 # ---------------------------------------------------------------------------
 
+def _find_content_verb(verb, _depth=0):
+    """Universal frame skipper: walk past framing verbs to the content.
+
+    Grammar reference pp. 212-220, 283-295: control/raising verbs.
+
+    Rule: skip ROOT to its xcomp/ccomp child IF:
+      - ccomp → skip only if current is SPEECH class or "be" (cleft)
+      - xcomp → skip only if ROOT has no dobj (subject control)
+                AND ROOT is not PREFERENCE class
+
+    Handles: speech verbs, intent verbs, phase verbs, clefts,
+    causative guards, "used to", "ended up", "keeps telling" — all
+    in one recursive walk. No special cases.
+    """
+    if verb is None or _depth >= 4:
+        return verb
+    complement = None
+    for child in verb.children:
+        if child.dep_ == "ccomp" and child.pos_ == "VERB":
+            complement = child
+            break
+        if child.dep_ == "xcomp" and child.pos_ == "VERB":
+            complement = child
+            break
+    if complement is None:
+        return verb
+    if complement.dep_ == "ccomp":
+        _cur_vc = classify_verb_class(verb.lemma_)
+        if _cur_vc == VerbClass.SPEECH or verb.lemma_ == "be":
+            return _find_content_verb(complement, _depth + 1)
+        return verb
+    has_dobj = any(c.dep_ == "dobj" for c in verb.children)
+    if has_dobj:
+        _cur_vc = classify_verb_class(verb.lemma_)
+        if _cur_vc != VerbClass.SPEECH:
+            return verb
+    _vc = classify_verb_class(verb.lemma_)
+    if _vc == VerbClass.PREFERENCE:
+        return verb
+    return _find_content_verb(complement, _depth + 1)
+
+
 def _extract_traces_from_sentence(
     sent_doc,
     speaker: Optional[str],
@@ -2012,53 +2201,6 @@ def _extract_traces_from_sentence(
     Spec Part 2, Statement extraction path."""
     root = _get_root(sent_doc)
     source_text = str(sent_doc).strip()
-
-    # ----------------------------------------------------------------
-    # Universal frame skipper: walk past framing verbs to the content.
-    # Grammar reference pp. 212-220, 283-295: control/raising verbs.
-    #
-    # Rule: skip ROOT to its xcomp/ccomp child IF:
-    #   - ccomp → always skip (embedded clause with own subject)
-    #   - xcomp → skip ONLY if ROOT has no dobj (subject control)
-    #              AND ROOT is not PREFERENCE class
-    # Handles: speech verbs, intent verbs, phase verbs, clefts,
-    # causative guards, "used to", "ended up", "keeps telling" — all
-    # in one recursive walk. No special cases.
-    # ----------------------------------------------------------------
-    def _find_content_verb(verb, _depth=0):
-        if verb is None or _depth >= 4:
-            return verb
-        complement = None
-        for child in verb.children:
-            if child.dep_ == "ccomp" and child.pos_ == "VERB":
-                complement = child
-                break
-            if child.dep_ == "xcomp" and child.pos_ == "VERB":
-                complement = child
-                break
-        if complement is None:
-            return verb
-        if complement.dep_ == "ccomp":
-            # ccomp: skip only if current is a SPEECH verb or BE (cleft).
-            # "told me she moved" → skip (SPEECH). "helped him move" → keep.
-            _cur_vc = classify_verb_class(verb.lemma_)
-            if _cur_vc == VerbClass.SPEECH or verb.lemma_ == "be":
-                return _find_content_verb(complement, _depth + 1)
-            return verb  # not a frame verb — content IS here
-        # xcomp: skip only if no dobj on current (subject control)
-        # and current is not PREFERENCE class ("I like swimming" →
-        # "like" IS the content, don't skip)
-        has_dobj = any(c.dep_ == "dobj" for c in verb.children)
-        if has_dobj:
-            # Exception: SPEECH verbs with dobj are indirect objects
-            # ("telling ME to settle" — "me" is recipient, not ECM)
-            _cur_vc = classify_verb_class(verb.lemma_)
-            if _cur_vc != VerbClass.SPEECH:
-                return verb  # ECM/causative — verb IS the content
-        _vc = classify_verb_class(verb.lemma_)
-        if _vc == VerbClass.PREFERENCE:
-            return verb  # preference IS the fact
-        return _find_content_verb(complement, _depth + 1)
 
     content_root = _find_content_verb(root) if root else root
 
@@ -2229,6 +2371,16 @@ def _extract_traces_from_sentence(
     # the delegation). No special cases needed — just use content_root.
     _pred_root = content_root
     root_lemma = _pred_root.lemma_ if _pred_root else ""
+
+    # Gap 4: Light verb predicate delegation.
+    # "took a shower" -> pred=shower instead of pred=take.
+    _LIGHT_VERB_PRED = frozenset({"do", "have", "take", "make", "give", "get"})
+    if (_pred_root and root_lemma.lower() in _LIGHT_VERB_PRED
+            and not particle):
+        for child in _pred_root.children:
+            if child.dep_ == "dobj":
+                root_lemma = child.lemma_
+                break
 
     # Particle already computed from content_root (line above)
     predicate = (f"{root_lemma}_{particle}" if particle else root_lemma).lower()
@@ -2865,19 +3017,14 @@ def _extract_imposed_facts(
                         if sibling.dep_ == "aux" and sibling.lemma_ == "be":
                             _is_going_to_future = True
                             break
-                # Check if head verb is a subject-control verb (skip those)
-                _CONTROL_VERBS = frozenset({
-                    "want", "need", "try", "hope", "expect", "plan",
-                    "decide", "agree", "refuse", "promise", "offer",
-                    "learn", "forget", "remember", "begin", "start",
-                    "continue", "like", "love", "hate", "prefer",
-                    "seem", "appear", "tend", "manage", "fail",
-                    "ask", "tell", "advise", "allow", "permit",
-                    "force", "require", "intend", "mean", "wish",
-                })
-                head_lemma = tok.head.lemma_.lower()
-                if (not _is_going_to_future
-                        and head_lemma not in _CONTROL_VERBS):
+                # Check if head verb is a control/framing verb via the
+                # universal frame skipper. If _find_content_verb skips
+                # past the head to this xcomp, it's subject control
+                # (not purpose). If it stays on the head, head IS
+                # the content verb and this xcomp is purpose.
+                _content = _find_content_verb(tok.head)
+                _is_control = (_content != tok.head)
+                if (not _is_going_to_future and not _is_control):
                     # This is a purpose xcomp — extract as imposed fact
                     subtree_sorted = sorted(tok.subtree, key=lambda t: t.i)
 
@@ -3738,29 +3885,33 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
         # --- Type 13: update perspective subject for next clause ---
         # If this sentence has a PERSON/PROPN nsubj + mental/perception
         # verb, store the subject as the perspective holder.
-        _MENTAL_LEMMAS = frozenset({
-            "believe", "think", "feel", "wonder", "realize", "know",
-            "see", "notice", "imagine", "remember", "hope", "sense",
-            "suspect", "fear", "assume", "consider", "suppose",
-            "understand", "recognize", "observe", "perceive", "dream",
-            "wish", "expect", "doubt",
-        })
+        # Detect mental/perception verbs via VerbClass + clausal complement.
+        # No word list — uses WordNet hypernym closure (VerbClass.ABILITY
+        # covers know/understand/believe; EXPERIENCE covers feel/sense).
+        # Structural fallback: any verb with ccomp/xcomp that isn't SPEECH
+        # or PLANNING frames a proposition → mental/perception.
         _cur_root = _get_root(sent_doc)
         _found_perspective = False
         if _cur_root and _cur_root.pos_ in ("VERB", "AUX"):
             _root_lemma = _cur_root.lemma_.lower()
-            _is_mental = _root_lemma in _MENTAL_LEMMAS
-            if not _is_mental:
-                # Fallback: check if verb takes ccomp/xcomp (structural
-                # proxy for mental verbs not in the set).
-                _has_clausal = any(
-                    c.dep_ in ("ccomp", "xcomp") for c in _cur_root.children
-                )
-                _cur_vc = classify_verb_class(_root_lemma)
-                if _has_clausal and _cur_vc not in (
-                    VerbClass.SPEECH, VerbClass.PLANNING,
-                ):
-                    _is_mental = True
+            _cur_vc = classify_verb_class(_root_lemma)
+            _has_clausal = any(
+                c.dep_ in ("ccomp", "xcomp") for c in _cur_root.children
+            )
+            _is_mental = _cur_vc in (VerbClass.ABILITY, VerbClass.EXPERIENCE)
+            if not _is_mental and _has_clausal:
+                if _cur_vc not in (VerbClass.PLANNING,):
+                    # SPEECH verbs are mental when used without a recipient
+                    # dobj. "She believed it" = mental. "She told me" = speech.
+                    if _cur_vc == VerbClass.SPEECH:
+                        _has_recipient = any(
+                            c.dep_ == "dobj" and c.pos_ == "PRON"
+                            for c in _cur_root.children
+                        )
+                        if not _has_recipient:
+                            _is_mental = True
+                    else:
+                        _is_mental = True
             if _is_mental:
                 for child in _cur_root.children:
                     if child.dep_ in ("nsubj", "nsubjpass"):
