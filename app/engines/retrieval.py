@@ -162,6 +162,7 @@ class RetrievalEngine:
     """Single read path. Cosine(PQ) -> coherence -> tie-break."""
 
     _ENTRY_POOL_SIZE = 80
+    _ENTITY_EDGE_LIMIT = 10
 
     def __init__(self, memory_engine=None, temporal_engine=None):
         self._memory = memory_engine
@@ -490,12 +491,70 @@ class RetrievalEngine:
 
     # ── Public API ───────────────────────────────────────────────
 
+    def _try_facts_lookup(
+        self, user_id: int, query_text: str,
+    ) -> Optional[Answer]:
+        """Direct fact lookup. Returns Answer if a fact matches, None
+        otherwise. Falls through to the moat pipeline on any miss.
+
+        Uses classify_query to get match_subject + match_schema, then
+        builds the fact key schema::VerbClass::subject. The facts table
+        has exactly ONE current value per key — no ranking needed."""
+        try:
+            from app.engines.grammar_engine import (
+                classify_query, classify_verb_class,
+            )
+            qd = classify_query(query_text)
+            # Skip facts for temporal queries — facts store values not dates.
+            if qd.return_field == "temporal":
+                return None
+            subject = qd.match_subject or qd.match_entity
+            schema = qd.match_schema
+            if not subject or not schema:
+                return None
+
+            verb_class = "UNKNOWN"
+            if qd.match_predicate:
+                vc = classify_verb_class(qd.match_predicate)
+                verb_class = vc.name
+
+            with get_db_context() as conn:
+                # Try exact key
+                key = f"{schema}::{verb_class}::{subject}"
+                row = conn.execute(
+                    "SELECT value, confidence FROM facts "
+                    "WHERE user_id = ? AND key = ?",
+                    (user_id, key),
+                ).fetchone()
+                if row and row["value"]:
+                    return Answer(
+                        text=row["value"],
+                        confidence=row["confidence"] or 1.0,
+                        source="fact_fast_path",
+                        convergence_details={
+                            "query": query_text, "fact_key": key,
+                        },
+                    )
+
+                # No wildcard fallback — exact key only. The wildcard
+                # schema::%::subject is too loose (career::%::Sam matches
+                # any career fact regardless of what the query asks).
+        except Exception:
+            pass
+        return None
+
     def retrieve(self, user_id: int, query_text: str):
         """Moat pipeline — Lookup mode.
-        Entry → Expand → Group → Relate → Exit Cosine → Validate (warn) → top-1."""
+        Step 0: facts fast-path (O(1) for stative facts).
+        Then: Entry → Expand → Group → Relate → Exit Cosine → Validate → top-1."""
         query_text = (query_text or "").strip()
         if not query_text:
             return StructuralRefusal(reason="empty_query")
+
+        # Step 0: Facts fast-path
+        fact_answer = self._try_facts_lookup(user_id, query_text)
+        if fact_answer is not None:
+            return fact_answer
 
         try:
             q_emb = _embedder_module.embed_text(query_text)
@@ -531,14 +590,147 @@ class RetrievalEngine:
         # (pq + edge + predicate) is the final discriminator —
         # pq measures answerability, edge measures surface similarity,
         # and predicate measures relational alignment.
+        # Infer schema for tiebreaking — same function as write path.
+        _inferred_schema = None
+        try:
+            from app.engines.grammar_engine import (
+                _get_nlp as _ge_nlp, _get_root as _ge_root,
+                classify_verb_class, _reclassify_location_by_object,
+                _extract_schematic, _VERB_CLASS_TO_SCHEMA,
+                _noun_to_schema_via_wordnet,
+            )
+            _qdoc = _ge_nlp()(query_text)
+            _qroot = _ge_root(_qdoc)
+            # Strategy 1: content noun IS a schema name.
+            # Pull actual schemas from DB + verb class map (no hardcoded set).
+            _known = set(_VERB_CLASS_TO_SCHEMA.values())
+            try:
+                with get_db_context() as _sc:
+                    for _sr in _sc.execute(
+                        "SELECT DISTINCT edge_schematic_category FROM relationships WHERE edge_schematic_category IS NOT NULL"
+                    ).fetchall():
+                        if _sr[0]:
+                            _known.add(_sr[0].lower())
+            except Exception:
+                pass
+            for tok in _qdoc:
+                if tok.pos_ == "NOUN" and not tok.is_stop and tok.lemma_.lower() in _known:
+                    _inferred_schema = tok.lemma_.lower()
+                    break
+            # Strategy 1b: noun-to-schema via WordNet
+            if not _inferred_schema:
+                for tok in _qdoc:
+                    if tok.pos_ == "NOUN" and not tok.is_stop:
+                        _ns = _noun_to_schema_via_wordnet(tok.lemma_)
+                        if _ns and _ns != "uncategorized":
+                            _inferred_schema = _ns
+                            break
+            # Strategy 2: verb class
+            if not _inferred_schema and _qroot is not None:
+                _v = _qroot
+                if _qroot.pos_ == "AUX":
+                    for ch in _qroot.children:
+                        if ch.dep_ in ("xcomp", "ccomp") and ch.pos_ == "VERB":
+                            _v = ch
+                            break
+                _vc = classify_verb_class(_v.lemma_)
+                _vc = _reclassify_location_by_object(_qdoc, _v, _vc)
+                _s = _extract_schematic(_qdoc, _qroot, _vc)
+                if _s and _s != "uncategorized":
+                    _inferred_schema = _s
+        except Exception:
+            pass
+
+        # Detect if query is present-tense via spaCy morph (no word list).
+        # Past tense on ROOT or AUX → query asks about the past.
+        _query_is_present = True
+        try:
+            _adv_doc = _adv_nlp(query_text)
+            for _tok in _adv_doc:
+                if _tok.dep_ in ("ROOT", "aux") and "Past" in _tok.morph.get("Tense", []):
+                    _query_is_present = False
+                    break
+                # "used to" construction: VBD lemma="use" + xcomp
+                if (_tok.lemma_ == "use" and _tok.tag_ == "VBD"
+                        and any(c.dep_ == "xcomp" for c in _tok.children)):
+                    _query_is_present = False
+                    break
+        except Exception:
+            pass
+
+        # exit_cosine first — PQ cosine=1.0 (exact match) must win.
+        # Schema and is_current are tiebreakers only.
+        _schema_l = (_inferred_schema or "").lower()
         candidates.sort(
             key=lambda c: (
                 -c.exit_cosine,
+                -(1 if _schema_l and (c.edge.get("edge_schematic_category") or "").lower() == _schema_l else 0),
+                -(1 if _query_is_present and not c.edge.get("is_historical") else 0),
                 -(c.edge.get("sequence_number") or 0),
             )
         )
 
         top = candidates[0]
+
+        # ── Adversarial speaker filter ─────────────────────────────
+        # If the query mentions a specific entity (NER PERSON/ORG/GPE),
+        # verify the winning edge is ABOUT that entity.
+        _query_entities: list = []
+        try:
+            from app.engines.grammar_engine import _get_nlp as _ge_get_nlp
+            _adv_nlp = _ge_get_nlp()  # cached, not reloaded
+            _qdoc = _adv_nlp(query_text)
+            _query_entities = [
+                ent.text.lower() for ent in _qdoc.ents
+                if ent.label_ in ("PERSON", "ORG", "GPE")
+            ]
+            if not _query_entities:
+                _query_entities = [
+                    tok.text.lower() for tok in _qdoc
+                    if tok.pos_ == "PROPN"
+                ]
+        except Exception:
+            pass
+
+        if _query_entities:
+            def _edge_matches_entity(edge_dict, qe_list):
+                """Check if any query entity appears in the edge's text.
+                Also maps 'user' ↔ query entity (edges store subject='user'
+                for first-person, but queries use the speaker's name)."""
+                _text = " ".join([
+                    (edge_dict.get("subject") or ""),
+                    (edge_dict.get("object") or ""),
+                    (edge_dict.get("relational_entities") or ""),
+                    (edge_dict.get("source_text") or ""),
+                ]).lower()
+                # Direct match
+                if any(qe in _text for qe in qe_list):
+                    return True
+                # "user" ↔ speaker mapping: if subject is "user", the
+                # edge is first-person. Check relational_entities for
+                # the speaker's real name (always appended by write path).
+                if (edge_dict.get("subject") or "").lower() == "user":
+                    rel = (edge_dict.get("relational_entities") or "").lower()
+                    if any(qe in rel for qe in qe_list):
+                        return True
+                return False
+
+            if not _edge_matches_entity(top.edge, _query_entities):
+                _found_match = False
+                for alt in candidates[1:]:
+                    if _edge_matches_entity(alt.edge, _query_entities):
+                        top = alt
+                        _found_match = True
+                        break
+                if not _found_match:
+                    return StructuralRefusal(
+                        reason="no_entity_match",
+                        convergence_details={
+                            "query": query_text,
+                            "query_entities": _query_entities,
+                        },
+                    )
+
         warning = self._stage6_validate(query_text, top)
 
         subj = top.edge.get("subject") or ""
@@ -546,54 +738,37 @@ class RetrievalEngine:
         obj = top.edge.get("object") or ""
         source_text = (top.edge.get("source_text") or "").strip()
 
-        # Render the winning triple via the grammar engine. Then
-        # aggregate: include other edges that mention the primary entity.
-        # The primary entity comes from the QUERY (via entity resolver),
-        # falling back to the winning edge's non-self entity. This is
-        # structural entity-focused aggregation — when the user asks
-        # "Who is Mika?", the answer includes all current facts about
-        # Mika, not just the single highest-cosine triple.
-        #
-        # Two-pass aggregation:
-        #   Pass 1: surviving candidates (already cosine-ranked)
-        #   Pass 2: direct DB fetch by entity name (fills gaps where
-        #           cosine didn't surface the edge but it's structurally
-        #           relevant via entity identity)
-        primary_entity = self._lookup_primary_entity_from_query(
-            user_id, query_text, top
-        )
-        sentences = [self._edge_to_sentence(top.edge, None)]
-        seen_edges = {top.relationship_id}
+        # ── Answer extraction by wh_type ───────────────────────────
+        # Return the SHORT answer from the edge's structural fields,
+        # not a full reconstruction. LoCoMo F1 scores against short
+        # gold answers — verbose text kills precision.
+        expected_type = parse_expected_answer_type(query_text)
+        if expected_type == "TIME":
+            # Temporal: prefer resolved_event_date or temporal_expression
+            answer_text = (
+                top.edge.get("temporal_expression")
+                or top.edge.get("resolved_event_date")
+                or obj
+            )
+        elif expected_type == "PERSON":
+            # Relational: the entity that ISN'T the query entity.
+            # "user" is canonical first-person, never the answer.
+            _subj_l = subj.lower()
+            if _subj_l == "user":
+                answer_text = obj
+            elif _query_entities and any(qe in _subj_l for qe in _query_entities):
+                answer_text = obj
+            else:
+                answer_text = subj
+        elif expected_type == "LOCATION":
+            answer_text = obj or subj
+        else:
+            # Episodic default: object is the short noun phrase
+            answer_text = obj
 
-        if primary_entity:
-            # Pass 1: candidates already in the pool
-            for c in candidates[1:]:
-                if c.relationship_id in seen_edges:
-                    continue
-                c_subj = (c.edge.get("subject") or "").lower()
-                c_obj = (c.edge.get("object") or "").lower()
-                if primary_entity in c_subj or primary_entity in c_obj:
-                    sent = self._edge_to_sentence(c.edge, None)
-                    if sent and sent not in sentences:
-                        sentences.append(sent)
-                        seen_edges.add(c.relationship_id)
-                    if len(sentences) >= 20:
-                        break
-
-            # Pass 2: direct entity fetch from DB for completeness
-            if len(sentences) < 20:
-                entity_edges = self._fetch_entity_edges(
-                    user_id, primary_entity, seen_edges
-                )
-                for e in entity_edges:
-                    sent = self._edge_to_sentence(e, None)
-                    if sent and sent not in sentences:
-                        sentences.append(sent)
-                        seen_edges.add(e.get("id", 0))
-                    if len(sentences) >= 20:
-                        break
-
-        answer_text = " ".join(sentences)
+        # If answer is empty or very short, fall back to source_text
+        if not answer_text or len(answer_text.strip()) <= 1:
+            answer_text = source_text
 
         return Answer(
             text=answer_text,
@@ -749,11 +924,17 @@ class RetrievalEngine:
                    r.edge_relational_type    AS edge_relational_type,
                    r.edge_embedding          AS edge_embedding,
                    r.arc_id                  AS arc_id,
-                   r.source_text             AS source_text
+                   r.source_text             AS source_text,
+                   r.relational_entities     AS relational_entities,
+                   r.temporal_expression     AS temporal_expression,
+                   r.resolved_event_date     AS resolved_event_date,
+                   r.emotional_target        AS emotional_target,
+                   r.is_historical           AS is_historical,
+                   r.edge_schematic_category AS edge_schematic_category,
+                   r.predicate_embedding     AS predicate_embedding
               FROM predicted_queries pq
               JOIN relationships r ON r.id = pq.relationship_id
              WHERE pq.user_id = ?
-               AND COALESCE(r.is_current, 1) = 1
                AND r.tombstoned_at IS NULL
         """
         out: List[Dict[str, Any]] = []
@@ -786,10 +967,16 @@ class RetrievalEngine:
                    r.edge_temporal_context   AS edge_temporal_context,
                    r.edge_relational_type    AS edge_relational_type,
                    r.arc_id                  AS arc_id,
-                   r.source_text             AS source_text
+                   r.source_text             AS source_text,
+                   r.relational_entities     AS relational_entities,
+                   r.temporal_expression     AS temporal_expression,
+                   r.resolved_event_date     AS resolved_event_date,
+                   r.emotional_target        AS emotional_target,
+                   r.is_historical           AS is_historical,
+                   r.edge_schematic_category AS edge_schematic_category,
+                   r.predicate_embedding     AS predicate_embedding
               FROM relationships r
              WHERE r.user_id = ?
-               AND COALESCE(r.is_current, 1) = 1
                AND r.tombstoned_at IS NULL
         """
         out: List[Dict[str, Any]] = []
@@ -1073,7 +1260,8 @@ class RetrievalEngine:
             from app.engines.predicate_shape import _wn_morphy as _wn_morphy_raw
             def _wn_morphy_v(tok):
                 return _wn_morphy_raw(tok, "v")
-            head_token = p_raw.split("_")[0] if "_" in p_raw else p_raw
+            segs = [s for s in p_raw.split("_") if s]
+            head_token = segs[0] if segs else p_raw
             head_pos = _pt_fallback(head_token)
             # Gerund/participial-noun compound detection: if head is
             # VBG or VBN tagged and a subsequent segment is NN-tagged,
@@ -1106,7 +1294,6 @@ class RetrievalEngine:
             # is a verb (e.g., "now_feels", "now_scheduled_for",
             # "originally_set_for", "previously_requested"). Structural
             # tell: RB head + verb-shaped second segment.
-            segs = [s for s in p_raw.split("_") if s]
             adverb_verb = (
                 head_pos == "RB"
                 and len(segs) >= 2
@@ -1577,8 +1764,8 @@ class RetrievalEngine:
                          AND COALESCE(is_current, 1) = 1
                          AND tombstoned_at IS NULL
                        ORDER BY id DESC
-                       LIMIT 10""",
-                    (user_id, entity),
+                       LIMIT ?""",
+                    (user_id, entity, self._ENTITY_EDGE_LIMIT),
                 ).fetchall()
                 obj_rows = conn.execute(
                     """SELECT id, subject, predicate, object,
@@ -1591,8 +1778,8 @@ class RetrievalEngine:
                          AND COALESCE(is_current, 1) = 1
                          AND tombstoned_at IS NULL
                        ORDER BY id DESC
-                       LIMIT 10""",
-                    (user_id, entity, entity),
+                       LIMIT ?""",
+                    (user_id, entity, entity, self._ENTITY_EDGE_LIMIT),
                 ).fetchall()
                 rows = list(subj_rows) + list(obj_rows)
             seen_ids = set()
@@ -1627,7 +1814,7 @@ class RetrievalEngine:
             _skip = {
                 "who", "what", "where", "when", "why", "how",
                 "is", "are", "do", "does", "did", "was", "were",
-                "tell", "the", "my", "me", "i", "a", "an",
+                "the", "my", "me", "i", "a", "an",
             }
             # Collect consecutive capitalized tokens as a single entity
             # (e.g. "Meridian Labs" -> "meridian labs")

@@ -19,6 +19,7 @@ class Candidate:
     edge_cosine: float = 0.0      # question↔edge_embedding cosine — similarity
     predicate_cosine: float = 0.0  # question↔predicate cosine — relational alignment
     entity_overlap: int = 0
+    non_self_entity_overlap: int = 0
     cluster_members: int = 0
     hops_to_entity: int = -1
     exit_cosine: float = 0.0      # precision sort key — three-signal max

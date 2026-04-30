@@ -329,72 +329,146 @@ def generate_predicted_queries(
 
     wh_types = _applicable_wh_types(effective_subject_type, object_type, predicate)
 
-    # ML QG disabled — the raya-srl-220m-v4 model mangles first-person
-    # subjects and confuses relation direction (e.g., "user works_at
-    # Vantage" becomes "What is the name of the company that works at
-    # Vantage Systems?"). Structural templates are topic-aligned and
-    # cosine-stable even when grammar is crude.
+    # ── Grammar-aware question generation ──────────────────────────
+    # 5 rules from English grammar for question formation:
+    #   1. "be" inverts directly (no do-support)
+    #   2. Action verbs use do-support, verb → base form
+    #   3. WH-word replaces the answer NP, prepositional frame stays
+    #   4. Temporal expressions in object → generate WHEN questions
+    #   5. Possessive/kinship subjects → generate questions about possessor
     pred_clean = predicate.replace("_", " ")
     pred_lemma = _lemmatize_predicate(pred_clean)
-
     is_user = _is_canonical_user(subject)
+
+    # Parse object to extract prepositional frame and detect temporals.
+    nlp = _get_nlp()
+    _obj_doc = nlp(object)
+
+    # Rule 3: Extract prepositional frame from object.
+    # "allergic to peanuts" → frame="allergic to", answer_np="peanuts"
+    # "married to Sarah in June 2024" → frame="married to", answer_np="Sarah in June 2024"
+    _obj_frame = ""
+    _obj_answer_np = object
+    try:
+        for _tok in _obj_doc:
+            if _tok.dep_ == "prep" or (_tok.pos_ == "ADP" and _tok.i < len(_obj_doc) - 1):
+                _obj_frame = _obj_doc[:_tok.i + 1].text
+                _obj_answer_np = _obj_doc[_tok.i + 1:].text
+                break
+    except Exception:
+        pass
+
+    # Extract verb and prep from predicate ("work_at" → verb="work", prep="at")
+    _pred_parts = pred_clean.split()
+    _verb_base = _pred_parts[0] if _pred_parts else pred_lemma
+    _pred_prep = " ".join(_pred_parts[1:]) if len(_pred_parts) > 1 else ""
+
+    # Rule 4: Detect temporal expressions in the object via NER.
+    _has_temporal_in_obj = False
+    try:
+        for ent in _obj_doc.ents:
+            if ent.label_ in ("DATE", "TIME"):
+                _has_temporal_in_obj = True
+                break
+    except Exception:
+        pass
+    # Also detect temporal adverbs/phrases structurally
+    if not _has_temporal_in_obj:
+        _temporal_deps = {"npadvmod", "advmod", "prep"}
+        for tok in _obj_doc:
+            if tok.dep_ in _temporal_deps and tok.ent_type_ in ("DATE", "TIME"):
+                _has_temporal_in_obj = True
+                break
+
+    # Add WHEN to wh_types if temporal detected in object
+    if _has_temporal_in_obj and WH_WHEN not in wh_types:
+        wh_types.append(WH_WHEN)
+
+    _is_be = pred_lemma == "be"
 
     results: List[Tuple[str, np.ndarray]] = []
     for wh in wh_types:
-        # Structural interrogative — one template per WH class.
+        # ── Build the primary question ────────────────────────────
         if wh == WH_WHO:
             if effective_subject_type == PERSON:
+                # Subject IS the answer: "Who works at Google?" → Sam
                 question = f"Who {pred_clean} {object}?"
+            elif _is_be and _obj_frame:
+                question = f"Who is {subject} {_obj_frame}?"
+            elif _is_be:
+                question = f"Who is {subject}?"
             else:
                 question = f"Who does {subject} {pred_lemma}?"
+
         elif wh == WH_WHEN:
-            question = f"When did {subject} {pred_lemma} {object}?"
+            if _is_be:
+                question = f"When is {subject} {_obj_frame}?".strip()
+                if not question.endswith("?"):
+                    question += "?"
+            else:
+                question = f"When did {subject} {_verb_base}?"
+
         elif wh == WH_WHERE:
-            question = f"Where does {subject} {pred_lemma}?"
+            if _is_be:
+                question = f"Where is {subject}?"
+            elif _pred_prep:
+                question = f"Where does {subject} {_verb_base}?"
+            else:
+                question = f"Where does {subject} {pred_lemma}?"
+
         else:  # WH_WHAT
-            question = f"What does {subject} {pred_lemma}?"
+            if _is_be and _obj_frame:
+                question = f"What is {subject} {_obj_frame}?"
+            elif _is_be:
+                question = f"What is {subject}?"
+            elif _pred_prep:
+                question = f"What does {subject} {_verb_base} {_pred_prep}?"
+            else:
+                question = f"What does {subject} {pred_lemma}?"
 
         try:
             emb = embed_text(question)
+            results.append((question, emb))
         except Exception:
-            continue
-        results.append((question, emb))
+            pass
 
-        # Object-foregrounded variant: foreground the object as topic.
+        # ── Object-foregrounded variant ───────────────────────────
+        # "What is allergic to peanuts?" / "Who is Google?"
         if wh == WH_WHO:
-            obj_question = f"Who is {object}?"
+            obj_q = f"Who is {object}?"
         elif wh == WH_WHERE:
-            obj_question = f"Where is {object}?"
+            obj_q = f"Where is {object}?"
         elif wh == WH_WHEN:
-            obj_question = f"When is {object}?"
-        else:  # WH_WHAT
-            obj_question = f"What is {object}?"
-
+            obj_q = f"When is {object}?"
+        else:
+            obj_q = f"What is {object}?"
         try:
-            obj_emb = embed_text(obj_question)
+            results.append((obj_q, embed_text(obj_q)))
         except Exception:
-            continue
-        results.append((obj_question, obj_emb))
+            pass
 
-        # Entity-agnostic variant for canonical-user edges. The subject
-        # 'user' is a variable — anyone could ask about this fact using
-        # the speaker's real name. Drop the subject token and produce a
-        # predicate+object focused question that cosine-matches
-        # third-person queries. Additive: original PQs are preserved.
+        # ── Entity-agnostic variant for canonical-user edges ──────
         if is_user and wh != WH_WHO:
-            # WHO variant already drops subject ("Who works_at X?").
-            # For other WH types, produce a subject-dropped form.
             if wh == WH_WHEN:
-                agnostic_q = f"When was {object}?"
+                ag_q = f"When was {object}?"
             elif wh == WH_WHERE:
-                agnostic_q = f"Where is {pred_clean} {object}?"
-            else:  # WH_WHAT
-                agnostic_q = f"What about {pred_clean} {object}?"
+                ag_q = f"Where is {pred_clean} {object}?"
+            else:
+                ag_q = f"What about {pred_clean} {object}?"
             try:
-                agnostic_emb = embed_text(agnostic_q)
-                results.append((agnostic_q, agnostic_emb))
+                results.append((ag_q, embed_text(ag_q)))
             except Exception:
                 pass
+
+    # ── Rule 5: Possessive/kinship subjects ───────────────────────
+    # If subject looks like "My mom 's name" or "Sam 's brother",
+    # generate a question about the possessor.
+    if "'s" in subject or subject.lower().startswith("my "):
+        poss_q = f"Who is {subject}?"
+        try:
+            results.append((poss_q, embed_text(poss_q)))
+        except Exception:
+            pass
 
     return results
 
