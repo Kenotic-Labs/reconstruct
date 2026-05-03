@@ -145,6 +145,160 @@ class TemporalEngine:
     def unfreeze(self) -> None:
         self._frozen_now = None
 
+
+    # == Calendar model ====================================================
+    # Real-time understanding of time — not just wall-clock, but what
+    # time MEANS: proximity, urgency, ordering, duration, upcoming events.
+
+    def temporal_context(self):
+        """What the engine knows about NOW."""
+        n = self.now()
+        return {
+            "now": n.isoformat(), "weekday": n.strftime("%A"),
+            "date": n.strftime("%Y-%m-%d"), "time": n.strftime("%H:%M"),
+            "hour": n.hour, "day_of_week": n.weekday(),
+            "is_weekend": n.weekday() >= 5,
+            "month": n.strftime("%B"), "year": n.year,
+        }
+
+    def days_until(self, target):
+        """Days from now until target. Negative = past."""
+        target_dt = self._to_datetime(target)
+        if target_dt is None:
+            return None
+        now_naive = self.now().replace(tzinfo=None)
+        return (target_dt - now_naive).total_seconds() / 86400.0
+
+    def days_since(self, target):
+        """Days since target until now. Negative = future."""
+        d = self.days_until(target)
+        return -d if d is not None else None
+
+    def proximity(self, target):
+        """Human proximity: 'tomorrow', 'in 3 days', '2 weeks ago'."""
+        days = self.days_until(target)
+        if days is None:
+            return None
+        ad = abs(days)
+        fut = days > 0
+        if ad < 0.04:
+            return "right now"
+        if ad < 1:
+            return "today" if fut else "earlier today"
+        if ad < 2:
+            return "tomorrow" if fut else "yesterday"
+        if ad < 7:
+            n = round(ad)
+            return f"in {n} days" if fut else f"{n} days ago"
+        if ad < 30:
+            n = round(ad / 7)
+            u = "week" if n == 1 else "weeks"
+            return f"in {n} {u}" if fut else f"{n} {u} ago"
+        if ad < 365:
+            n = round(ad / 30)
+            u = "month" if n == 1 else "months"
+            return f"in {n} {u}" if fut else f"{n} {u} ago"
+        n = round(ad / 365)
+        u = "year" if n == 1 else "years"
+        return f"in {n} {u}" if fut else f"{n} {u} ago"
+
+    def is_before(self, a, b):
+        """Is event A before event B?"""
+        dt_a, dt_b = self._to_datetime(a), self._to_datetime(b)
+        if dt_a is None or dt_b is None:
+            return None
+        return dt_a < dt_b
+
+    def duration_between(self, a, b):
+        """Seconds between two events. Always positive."""
+        dt_a, dt_b = self._to_datetime(a), self._to_datetime(b)
+        if dt_a is None or dt_b is None:
+            return None
+        return abs((dt_b - dt_a).total_seconds())
+
+    def urgency(self, user_id, relationship_id):
+        """How urgent is this edge right now?"""
+        try:
+            with get_db_context() as conn:
+                row = conn.execute(
+                    "SELECT resolved_event_date, temporal_expression, "
+                    "edge_emotional_valence, edge_schematic_category, is_current "
+                    "FROM relationships WHERE id = ? AND user_id = ?",
+                    (relationship_id, user_id),
+                ).fetchone()
+            if not row:
+                return None
+            date_str = row["resolved_event_date"] or row["temporal_expression"]
+            if not date_str:
+                return None
+            days = self.days_until(date_str)
+            if days is None:
+                return None
+            return {
+                "days": round(days, 1),
+                "proximity": self.proximity(date_str),
+                "is_upcoming": 0 < days <= 7,
+                "is_overdue": days < 0 and bool(row["is_current"]),
+                "schema": row["edge_schematic_category"],
+                "valence": row["edge_emotional_valence"],
+            }
+        except Exception:
+            return None
+
+    def upcoming_events(self, user_id, window_days=7):
+        """Edges with resolved dates within the next N days."""
+        n = self.now()
+        cutoff = (n + timedelta(days=window_days)).isoformat()
+        now_str = n.isoformat()
+        try:
+            with get_db_context() as conn:
+                rows = conn.execute(
+                    "SELECT id, subject, predicate, object, "
+                    "resolved_event_date, source_text, edge_schematic_category "
+                    "FROM relationships WHERE user_id = ? "
+                    "AND resolved_event_date IS NOT NULL "
+                    "AND resolved_event_date >= ? AND resolved_event_date <= ? "
+                    "AND COALESCE(is_current, 1) = 1 AND tombstoned_at IS NULL "
+                    "ORDER BY resolved_event_date ASC",
+                    (user_id, now_str, cutoff),
+                ).fetchall()
+            result = []
+            for r in rows:
+                days = self.days_until(r["resolved_event_date"])
+                result.append({
+                    "id": r["id"], "subject": r["subject"],
+                    "predicate": r["predicate"], "object": r["object"],
+                    "date": r["resolved_event_date"],
+                    "days_until": round(days, 1) if days is not None else None,
+                    "proximity": self.proximity(r["resolved_event_date"]),
+                    "schema": r["edge_schematic_category"],
+                })
+            return result
+        except Exception:
+            return []
+
+    def _to_datetime(self, value):
+        """Convert anything temporal to naive datetime."""
+        if value is None:
+            return None
+        if isinstance(value, datetime):
+            return value.replace(tzinfo=None) if value.tzinfo else value
+        if isinstance(value, str):
+            try:
+                dt = datetime.fromisoformat(value.replace("Z", "+00:00"))
+                return dt.replace(tzinfo=None) if dt.tzinfo else dt
+            except (ValueError, TypeError):
+                pass
+            resolved = self.resolve_event_date(value, self.now().isoformat())
+            if resolved:
+                try:
+                    dt = datetime.fromisoformat(resolved)
+                    return dt.replace(tzinfo=None) if dt.tzinfo else dt
+                except (ValueError, TypeError):
+                    pass
+        return None
+
+
     # ── Anchor cache ──────────────────────────────────────────────
 
     def _anchor(self, key: str, text: str) -> np.ndarray:

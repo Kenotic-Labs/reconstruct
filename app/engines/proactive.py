@@ -91,6 +91,16 @@ class ProactiveEngine:
             # Get user's temporal patterns (circadian, weekly)
             patterns = _te.patterns(user_id)
 
+            # Surface upcoming events (next 7 days)
+            upcoming = _te.upcoming_events(user_id, window_days=7)
+            for event in upcoming:
+                insights.append(ProactiveInsight(
+                    arc_id=None,
+                    topic=event.get("object") or event.get("predicate") or "",
+                    reason="upcoming_event",
+                    staleness_days=event.get("days_until") or 0,
+                ))
+
             # Get open arcs that are due for check-in
             with get_db_context() as conn:
                 arcs = conn.execute(
