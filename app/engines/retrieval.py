@@ -1798,6 +1798,60 @@ class RetrievalEngine:
     # VERIFICATION LOOP
     # ===================================================================
 
+    def _try_facts_lookup(self, user_id: int, qd) -> Optional[Answer]:
+        """Direct fact lookup from the facts table. O(1) for stative facts.
+
+        The facts table stores canonical key-value pairs:
+          key = "career::WORK::user", value = "Google"
+
+        classify_query gives us match_subject + match_schema + match_predicate.
+        We build the fact key and do a single SQL lookup. If found, return
+        Answer immediately — no moat pipeline needed.
+
+        This is the committed version's fast path restored, now using
+        grammar engine's classify_query instead of custom parsing.
+        """
+        try:
+            from app.engines.grammar_engine import classify_verb_class
+
+            subject = qd.match_subject or qd.match_entity
+            schema = qd.match_schema
+            if not subject or not schema:
+                return None
+
+            # Skip facts for temporal queries — facts store values not dates.
+            # "When" questions need temporal_expression, not fact values.
+            if qd.return_field == "temporal":
+                return None
+            if qd.wh_word in ("when",):
+                return None
+
+            verb_class = "UNKNOWN"
+            if qd.match_predicate:
+                vc = classify_verb_class(qd.match_predicate)
+                verb_class = vc.name if hasattr(vc, 'name') else str(vc)
+
+            with get_db_context() as conn:
+                key = f"{schema}::{verb_class}::{subject}"
+                row = conn.execute(
+                    "SELECT value, confidence FROM facts "
+                    "WHERE user_id = ? AND key = ?",
+                    (user_id, key),
+                ).fetchone()
+                if row and row["value"]:
+                    return Answer(
+                        text=row["value"],
+                        confidence=row["confidence"] or 1.0,
+                        source="fact_fast_path",
+                        convergence_details={
+                            "query": qd.wh_word,
+                            "fact_key": key,
+                        },
+                    )
+        except Exception:
+            pass
+        return None
+
     def _infer_query_schema(self, query_text: str) -> Optional[str]:
         """Infer schematic category from query using grammar engine.
 
@@ -1977,6 +2031,7 @@ class RetrievalEngine:
         query_text: str,
         q_emb: np.ndarray,
         temporal_mode: str = "current",
+        inferred_schema: Optional[str] = None,
     ) -> Union[Answer, StructuralRefusal]:
         """Schema-aware verification with entity filtering.
 
@@ -1992,7 +2047,8 @@ class RetrievalEngine:
         lemma gating that kills category queries."""
 
         # Infer query schema for re-ranking
-        inferred_schema = self._infer_query_schema(query_text)
+        if not inferred_schema:
+            inferred_schema = self._infer_query_schema(query_text)
 
         # exit_cosine primary, schema secondary. PQ exact matches
         # (cosine=1.0) always win. Schema breaks ties among
@@ -2392,6 +2448,26 @@ class RetrievalEngine:
                 confidence=0.0,
             )
 
+        # ── Step 0: Grammar engine query decomposition ──────────────
+        # classify_query gives us subject, predicate, object, schema,
+        # return_field in one structural parse. This replaces piecemeal
+        # extraction (_extract_query_verb, _infer_query_schema, etc.)
+        qd = None
+        try:
+            from app.engines.grammar_engine import classify_query
+            qd = classify_query(query)
+        except Exception:
+            pass
+
+        # ── Step 0b: Facts fast path (O(1) for stative facts) ─────
+        # If classify_query found a subject + schema, try direct fact
+        # lookup before running the full moat pipeline. "Where do I
+        # work?" → facts["career::WORK::user"] → "Google". Done.
+        if qd and qd.is_structural and qd.match_subject and qd.match_schema:
+            fact_answer = self._try_facts_lookup(user_id, qd)
+            if fact_answer is not None:
+                return fact_answer
+
         resolution = self._resolve_indirect_references(user_id, query)
 
         # IndirectResolution typed fields: if the resolver produced
@@ -2544,6 +2620,7 @@ class RetrievalEngine:
             result = self._verification_loop(
                 candidates, query_entity, canonical_fact, query, q_emb,
                 temporal_mode,
+                inferred_schema=qd.match_schema if qd else None,
             )
 
         # Negation / absence confirmation (CWA):
