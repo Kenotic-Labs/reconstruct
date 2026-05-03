@@ -142,9 +142,7 @@ CREATE TABLE IF NOT EXISTS relationships (
     source_text_hash TEXT NOT NULL DEFAULT '',
     created_at TEXT DEFAULT (datetime('now')),
 
-    -- 5 traces (primary data; defaults are unknown-state sentinels,
-    -- not branching values -- retrieval uses embedding cosine, not
-    -- if/else on these strings)
+    -- 5 traces (primary data)
     edge_schematic_category TEXT NOT NULL DEFAULT 'uncategorized',
     edge_temporal_context TEXT NOT NULL DEFAULT 'present',
     edge_relational_type TEXT NOT NULL DEFAULT 'personal',
@@ -153,10 +151,48 @@ CREATE TABLE IF NOT EXISTS relationships (
     edge_emotional_label TEXT,
     edge_affiliation REAL,
 
-    -- Derived triple (optional — nullable for trace-only edges)
+    -- Derived triple
     subject TEXT,
     predicate TEXT,
     object TEXT,
+
+    -- Type resolution (grammar engine + type_resolver)
+    subject_type TEXT,
+    object_type TEXT,
+    subject_type_confidence REAL,
+    object_type_confidence REAL,
+
+    -- Temporal (temporal engine)
+    source_timestamp TEXT,
+    temporal_expression TEXT,
+    resolved_event_date TEXT,
+    is_historical INTEGER DEFAULT 0,
+    is_current INTEGER DEFAULT 1,
+    superseded_at TEXT,
+    superseded_by INTEGER,
+    tombstoned_at TEXT,
+    tombstone_reason TEXT,
+    tombstone_op_id INTEGER,
+
+    -- Embeddings (MiniLM)
+    edge_embedding BLOB,
+    predicate_embedding BLOB,
+
+    -- Structure (memory engine)
+    cluster_id TEXT,
+    arc_id TEXT,
+    sequence_number INTEGER,
+    utterance_type_id INTEGER,
+    source_tag TEXT,
+    relational_entities TEXT,
+
+    -- Grammar traces
+    edge_negated INTEGER DEFAULT 0,
+    edge_mood TEXT DEFAULT 'indicative',
+    episodic_fact TEXT,
+    emotional_target TEXT,
+    extraction_rule TEXT,
+    canonical_fields TEXT,
 
     -- Metadata
     confidence REAL DEFAULT 0.9,
@@ -173,6 +209,18 @@ CREATE INDEX IF NOT EXISTS idx_relationships_object ON relationships(user_id, ob
 CREATE INDEX IF NOT EXISTS idx_rel_schema_cat ON relationships(user_id, edge_schematic_category);
 CREATE INDEX IF NOT EXISTS idx_rel_subject_schema ON relationships(user_id, subject, edge_schematic_category);
 CREATE INDEX IF NOT EXISTS idx_rel_source_hash ON relationships(user_id, source_text_hash);
+CREATE INDEX IF NOT EXISTS idx_rel_is_current ON relationships(user_id, is_current);
+CREATE INDEX IF NOT EXISTS idx_rel_seq ON relationships(user_id, sequence_number);
+CREATE INDEX IF NOT EXISTS idx_rel_arc ON relationships(user_id, arc_id);
+CREATE INDEX IF NOT EXISTS idx_rel_cluster ON relationships(user_id, cluster_id);
+CREATE INDEX IF NOT EXISTS idx_rel_resolved_date ON relationships(user_id, resolved_event_date);
+CREATE INDEX IF NOT EXISTS idx_rel_tombstoned ON relationships(user_id, tombstoned_at);
+
+-- Full-text search on relationships (subject, predicate, object, source_text)
+CREATE VIRTUAL TABLE IF NOT EXISTS relationships_fts USING fts5(
+    subject, predicate, object, source_text,
+    content='relationships', content_rowid='id'
+);
 
 -- =============================================================================
 -- MEMORY TRACES TABLE (Distributed Trace Convergence Memory)
