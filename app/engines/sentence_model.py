@@ -39,7 +39,7 @@ logger = logging.getLogger(__name__)
 
 # CoEdit task prefix — ONLY grammar correction. Other tasks (simplify,
 # paraphrase, formality) change meaning, violating the lossless contract.
-_COEDIT_TASK_PREFIX = "Fix grammatical errors in this sentence:"
+_COEDIT_TASK_PREFIX = "Rewrite to be more formal:"
 
 # Structural cleanup rules — spaCy dep labels that signal noise
 _FILLER_POS = frozenset({"INTJ"})
@@ -78,7 +78,7 @@ _CACHE: Dict[str, str] = {}
 _ENV_MODEL = "RAYA_SENTENCE_MODEL"
 _ENV_DEVICE = "RAYA_SENTENCE_DEVICE"
 _ENV_ENABLE = "RAYA_SENTENCE_POLISH"   # set to "0" to disable, default ON
-_DEFAULT_MODEL = "jbochi/coedit-small"
+_DEFAULT_MODEL = "models/coedit-raya"
 
 
 def is_enabled() -> bool:
