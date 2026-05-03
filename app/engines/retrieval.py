@@ -1661,6 +1661,10 @@ class RetrievalEngine:
         from app.engines.temporal import get_temporal_engine
         _te = get_temporal_engine()
 
+        # Batch staleness — single DB query for all candidates
+        all_ids = [c.relationship_id for c in candidates]
+        freshness_map = _te.staleness_batch(all_ids)
+
         for c in candidates:
             c.predicate_cosine = _cosine_from_blob(
                 q_emb, c.edge.get("predicate_embedding"),
@@ -1669,7 +1673,7 @@ class RetrievalEngine:
                 c.pq_cosine, c.edge_cosine, c.predicate_cosine,
             )
             # Weight by staleness — fresh edges rank higher than stale
-            freshness = _te.staleness(c.relationship_id)
+            freshness = freshness_map.get(c.relationship_id, 1.0)
             c.exit_cosine = raw_cosine * freshness
 
         candidates.sort(key=lambda c: (

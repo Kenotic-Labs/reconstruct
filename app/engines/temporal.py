@@ -156,7 +156,12 @@ class TemporalEngine:
         return emb
 
     def _cos(self, a: np.ndarray, b: np.ndarray) -> float:
-        return float(np.dot(a, b))
+        """Cosine similarity, not raw dot product."""
+        na = float(np.linalg.norm(a))
+        nb = float(np.linalg.norm(b))
+        if na == 0.0 or nb == 0.0:
+            return 0.0
+        return float(np.dot(a, b) / (na * nb))
 
     # ── resolve_event_date ────────────────────────────────────────
     # ROOT CAUSE: memory.py line 1000 calls this but it did not exist,
@@ -373,12 +378,26 @@ class TemporalEngine:
             "RETURN_AS_TIMEZONE_AWARE": False,
         }
 
-        # Check if text contains duration markers
-        text_lower = text.lower()
-        has_since = "since" in text_lower
-        has_for = "for" in text_lower
+        # Check for duration structure via spaCy dependency parse:
+        # Duration expressions have prep/mark tokens ('since', 'for')
+        # governing a temporal NP. Using dep parse, not string matching.
+        has_duration_dep = False
+        try:
+            nlp = _get_spacy()
+            doc = nlp(text)
+            for tok in doc:
+                if tok.dep_ in ("prep", "mark") and tok.pos_ == "ADP":
+                    # Check if this preposition governs a DATE/TIME entity
+                    for child in tok.children:
+                        if child.ent_type_ in ("DATE", "TIME"):
+                            has_duration_dep = True
+                            break
+                if has_duration_dep:
+                    break
+        except Exception:
+            pass
 
-        if not (has_since or has_for):
+        if not has_duration_dep:
             return None
 
         for span_text in duration_spans:
@@ -389,44 +408,6 @@ class TemporalEngine:
                     return diff
 
         return None
-
-    # ── Clusters ──────────────────────────────────────────────────
-
-    def cluster(
-        self,
-        user_id: int,
-        utterance: str,
-        source_timestamp: Optional[datetime] = None,
-    ) -> Cluster:
-        """Return the cluster this utterance belongs to.
-
-        Cluster membership is derived on the fly from recent relationships.
-        """
-        if source_timestamp is None:
-            source_timestamp = self.now()
-
-        try:
-            utt_emb = embed_text(utterance)
-        except Exception:
-            utt_emb = None
-
-        with get_db_context() as conn:
-            rows = conn.execute(
-                """SELECT id, subject, predicate, object, first_learned_at
-                   FROM relationships
-                   WHERE user_id = ? AND COALESCE(is_current, 1) = 1
-                   ORDER BY id DESC LIMIT 10""",
-                (user_id,),
-            ).fetchall()
-
-        member_ids = [r["id"] for r in rows]
-        return Cluster(
-            cluster_id=0,
-            member_relationship_ids=member_ids,
-            span_seconds=0.0,
-            centroid_embedding=utt_emb,
-            last_updated_at=source_timestamp.isoformat() if source_timestamp else None,
-        )
 
     # ── Supersession ──────────────────────────────────────────────
     # ROOT CAUSE: memory.py line 370 passes an int (rel_id) but old
@@ -558,7 +539,17 @@ class TemporalEngine:
             prior_obj = (prior["object"] or "").lower()
             if prior_obj != new_obj:
                 # Different object with same (subject, predicate class) = supersession
-                self._memory.supersede(prior["id"], new_id)
+                # Temporal engine owns the write — mark old edge directly.
+                try:
+                    conn.execute(
+                        "UPDATE relationships SET is_current = 0, "
+                        "superseded_at = datetime('now'), superseded_by = ? "
+                        "WHERE id = ?",
+                        (new_id, prior["id"]),
+                    )
+                    conn.commit()
+                except Exception:
+                    pass
                 return SupersessionEvent(
                     superseded_relationship_id=prior["id"],
                     superseding_relationship_id=new_id,
@@ -789,7 +780,7 @@ class TemporalEngine:
     def edges_valid_at(
         self,
         user_id: int,
-        timestamp: str,
+        timestamp: Any,  # str or datetime
     ) -> List[dict]:
         """Return edges valid at a given timestamp.
 
@@ -797,6 +788,7 @@ class TemporalEngine:
         (tombstoned_at IS NULL OR tombstoned_at > timestamp).
         """
         try:
+            ts_str = timestamp.isoformat() if hasattr(timestamp, 'isoformat') else str(timestamp)
             with get_db_context() as conn:
                 rows = conn.execute(
                     """SELECT id, subject, predicate, object, resolved_event_date,
@@ -806,7 +798,7 @@ class TemporalEngine:
                          AND (resolved_event_date IS NOT NULL AND resolved_event_date <= ?)
                          AND (tombstoned_at IS NULL OR tombstoned_at > ?)
                        ORDER BY resolved_event_date ASC""",
-                    (user_id, timestamp, timestamp),
+                    (user_id, ts_str, ts_str),
                 ).fetchall()
             return [dict(r) for r in rows]
         except Exception:
@@ -916,30 +908,44 @@ class TemporalEngine:
 
     # ── Staleness ─────────────────────────────────────────────────
 
-    def staleness(self, relationship_id: int) -> float:
-        """Recency decay score in [0, 1]. 1.0 = fresh, 0.0 = stale.
-
-        Uses last_confirmed_at vs now(). Exponential decay with
-        time constant = 30 days (continuity horizon from thesis)."""
+    def staleness_batch(self, relationship_ids: List[int]) -> Dict[int, float]:
+        """Batch recency decay for a set of edges. Single DB query.
+        Returns {rel_id: score} where score in [0,1], 1.0=fresh."""
+        if not relationship_ids:
+            return {}
+        result: Dict[int, float] = {rid: 1.0 for rid in relationship_ids}
         try:
+            placeholders = ",".join("?" for _ in relationship_ids)
             with get_db_context() as conn:
-                row = conn.execute(
-                    "SELECT last_confirmed_at, confidence FROM relationships WHERE id = ?",
-                    (relationship_id,),
-                ).fetchone()
-            if not row or not row["last_confirmed_at"]:
-                return 1.0
-            last_conf = datetime.fromisoformat(row["last_confirmed_at"].replace("Z", "+00:00"))
-            if last_conf.tzinfo is None:
-                last_conf = last_conf.replace(tzinfo=timezone.utc)
-            age_s = (self.now() - last_conf).total_seconds()
-            if age_s <= 0:
-                return 1.0
-            # 30-day half-life: time constant for continuity horizon.
+                rows = conn.execute(
+                    f"SELECT id, last_confirmed_at FROM relationships "
+                    f"WHERE id IN ({placeholders})",
+                    tuple(relationship_ids),
+                ).fetchall()
+            now = self.now()
             time_constant = 30 * 86400.0
-            return float(np.exp(-age_s / time_constant))
+            for row in rows:
+                rid = row["id"]
+                lc = row["last_confirmed_at"]
+                if not lc:
+                    continue
+                try:
+                    last_conf = datetime.fromisoformat(lc.replace("Z", "+00:00"))
+                    if last_conf.tzinfo is None:
+                        last_conf = last_conf.replace(tzinfo=timezone.utc)
+                    age_s = (now - last_conf).total_seconds()
+                    if age_s > 0:
+                        result[rid] = float(np.exp(-age_s / time_constant))
+                except Exception:
+                    pass
         except Exception:
-            return 1.0
+            pass
+        return result
+
+    def staleness(self, relationship_id: int) -> float:
+        """Single-edge staleness. Delegates to batch for consistency."""
+        batch = self.staleness_batch([relationship_id])
+        return batch.get(relationship_id, 1.0)
 
     # ── Humanize ──────────────────────────────────────────────────
 
