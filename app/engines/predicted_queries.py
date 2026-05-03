@@ -82,7 +82,7 @@ TIME = "TIME"
 
 _model = None
 _tokenizer = None
-_device = "cpu"
+_device = "cuda"
 _model_name = None  # "raya" or "flan" after init
 _probed = False
 
@@ -109,7 +109,7 @@ def _load_model(pref: str) -> Optional[Tuple[object, object, str]]:
         path = "google/flan-t5-base"
 
     try:
-        device = "cuda" if torch.cuda.is_available() else "cpu"
+        device = "cuda"
         tok = AutoTokenizer.from_pretrained(path)
         mdl = T5ForConditionalGeneration.from_pretrained(path).to(device).eval()
         return (mdl, tok, device)

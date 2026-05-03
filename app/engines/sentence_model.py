@@ -108,8 +108,7 @@ def _load() -> bool:
 
             dev = os.environ.get(_ENV_DEVICE,
                                  os.environ.get("RAYA_EMBED_DEVICE", "cuda"))
-            if dev == "cuda" and not torch.cuda.is_available():
-                dev = "cpu"
+            # GPU only — no CPU fallback
 
             # Force offline — load from local cache, never ping HF
             os.environ["HF_HUB_OFFLINE"] = "1"
