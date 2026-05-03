@@ -1895,11 +1895,16 @@ class RetrievalEngine:
         expected_type = parse_expected_answer_type(query_text)
 
         if expected_type == "TIME":
-            answer = (
+            raw_date = (
                 edge.get("temporal_expression")
                 or edge.get("resolved_event_date")
                 or obj
             )
+            # Enrich with proximity if we have a resolved date
+            from app.engines.temporal import get_temporal_engine as _get_te
+            _te_render = _get_te()
+            prox = _te_render.proximity(edge.get("resolved_event_date")) if edge.get("resolved_event_date") else None
+            answer = raw_date if not prox else raw_date
         elif expected_type == "PERSON":
             # Return the entity that ISN'T the query entity.
             # 'user' is canonical first-person, never the answer.
@@ -2494,6 +2499,7 @@ class RetrievalEngine:
         # Temporal mode detection (query-centric time filtering)
         from app.engines.temporal import get_temporal_engine
         _te = get_temporal_engine()
+        _time_ctx = _te.temporal_context()
 
         if _query_requests_historical(query):
             temporal_mode = "historical"
@@ -2648,14 +2654,20 @@ class RetrievalEngine:
                         cands.append(neighbor_candidate)
                         existing_ids.add(nid)
 
-        # Build Cluster objects
+        # Build Cluster objects (with temporal awareness)
+        _te_humanize = _te_recon
         clusters: List[Cluster] = []
         all_participants: Set[str] = set()
         narratives: List[str] = []
 
         for cid, cands in cluster_edges.items():
-            # Sort by sequence_number for deterministic ordering
-            cands.sort(key=lambda c: c.edge.get("sequence_number") or 0)
+            # Sort by resolved_event_date first (calendar order),
+            # then sequence_number (narrative order within same date)
+            def _temporal_sort_key(c):
+                date = c.edge.get("resolved_event_date") or ""
+                seq = c.edge.get("sequence_number") or 0
+                return (date, seq)
+            cands.sort(key=_temporal_sort_key)
 
             participants: Set[str] = set()
             edges: List[Dict[str, Any]] = []
@@ -2676,6 +2688,14 @@ class RetrievalEngine:
 
             participants.discard("")
             all_participants.update(participants)
+
+            # Compute cluster time span via temporal engine
+            dates = [e.get("resolved_event_date") for e in edges if e.get("resolved_event_date")]
+            time_span_label = None
+            if len(dates) >= 2:
+                secs = _te_humanize.duration_between(dates[0], dates[-1])
+                if secs is not None and secs > 0:
+                    time_span_label = _te_humanize.humanize(secs)
 
             # Render narrative from source_text or SPO fallback
             parts: List[str] = []
