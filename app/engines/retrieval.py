@@ -556,20 +556,47 @@ def _extract_query_object_hint(query: str) -> Optional[str]:
 
 
 def _query_requests_historical(query: str) -> bool:
-    q = (query or "").lower()
-    return (
-        "used to" in q
-        or " before " in f" {q} "
-        or "previously" in q
-        or "formerly" in q
-        or "last worked" in q
-        or "last lived" in q
-    )
+    """Wire 1: structural tense detection via grammar engine.
+    Root cause: string matching misses structural past tense.
+    Past habitual = always historical. Past simple + temporal
+    advmod = historical (the advmod dep label is the structural
+    signal, no word list needed)."""
+    try:
+        from app.engines.grammar_engine import detect_tense_aspect, _get_nlp
+        doc = _get_nlp()(query)
+        ta = detect_tense_aspect(doc)
+        if ta.tense == "past" and ta.aspect == "habitual":
+            return True
+        if ta.tense == "past" and ta.aspect == "simple":
+            # Structural signal: any advmod that modifies the root verb
+            # indicates temporal qualification of the past event.
+            for tok in doc:
+                if tok.dep_ == "advmod" and tok.head.dep_ == "ROOT" and tok.tag_ not in ("WRB", "WDT", "WP", "WP$"):
+                    return True
+        return False
+    except Exception:
+        return False
 
 
 def _query_requests_current_state(query: str) -> bool:
-    q_words = set(_split_words(query))
-    return bool(q_words & {"still", "currently", "now", "current", "today"})
+    """Wire 1b: structural continuation detection via grammar engine.
+    Root cause: need explicit signal like "still"/"currently" -- present
+    tense alone is the default, not a current-state filter."""
+    try:
+        from app.engines.grammar_engine import detect_tense_aspect, _get_nlp
+        doc = _get_nlp()(query)
+        # Only return True for explicit continuation advmods on root
+        # (structural signal, not a word list -- dep_=advmod is the gate)
+        for tok in doc:
+            if tok.dep_ == "advmod" and tok.head.dep_ == "ROOT":
+                # Exclude WH-words (interrogative, not continuation)
+                if tok.tag_ not in ("WRB", "WDT", "WP", "WP$"):
+                    ta = detect_tense_aspect(doc)
+                    if ta.tense == "present":
+                        return True
+        return False
+    except Exception:
+        return False
 
 
 def _is_count_query(query: str) -> bool:
@@ -1462,6 +1489,7 @@ class RetrievalEngine:
                 except Exception:
                     log.debug("FTS recall failed", exc_info=True)
 
+
         # Sort by entry_cosine desc, cap at ENTRY_CAP
         pool = sorted(seen.values(), key=lambda c: -c.entry_cosine)
         return pool[:ENTRY_CAP]
@@ -1665,6 +1693,17 @@ class RetrievalEngine:
         all_ids = [c.relationship_id for c in candidates]
         freshness_map = _te.staleness_batch(all_ids)
 
+        # Wire 15: urgency -- compute for edges with resolved dates.
+        urgency_map: Dict[int, Dict] = {}
+        if self._temporal:
+            for c in candidates:
+                try:
+                    u = self._temporal.urgency(0, c.relationship_id)
+                    if u:
+                        urgency_map[c.relationship_id] = u
+                except Exception:
+                    pass
+
         for c in candidates:
             c.predicate_cosine = _cosine_from_blob(
                 q_emb, c.edge.get("predicate_embedding"),
@@ -1714,6 +1753,22 @@ class RetrievalEngine:
                 })
                 seen_entities.add(name.lower())
 
+
+        # Wire 10: entity_link -- cosine entity linker for missed mentions.
+        if self._memory:
+            try:
+                for name in _extract_query_entity_fallback(query_text):
+                    linked = self._memory.entity_link(user_id, name)
+                    if linked and linked.name.lower() not in seen_entities:
+                        resolved_entities.append({
+                            "id": None,
+                            "name": linked.name,
+                            "entity_type": linked.entity_type,
+                            "score": 0.9,
+                        })
+                        seen_entities.add(linked.name.lower())
+            except Exception:
+                pass
         # Stage 2: EXPAND
         candidates = self._stage2_expand(user_id, candidates, resolved_entities)
         log.debug("Stage 2 EXPAND: %d candidates", len(candidates))
@@ -1948,6 +2003,31 @@ class RetrievalEngine:
 
         expected_type = parse_expected_answer_type(query_text)
 
+        # Wire 7: return_field unifies type selection.
+        try:
+            from app.engines.grammar_engine import classify_query as _cq
+            _qd_render = _cq(query_text)
+            _rf = _qd_render.return_field
+            if expected_type == "ENTITY" and _rf == "temporal":
+                expected_type = "TIME"
+            elif expected_type == "ENTITY" and _rf == "relational":
+                expected_type = "PERSON"
+            elif expected_type == "ENTITY" and _rf == "emotional":
+                elabel = (edge.get("edge_emotional_label") or "").strip()
+                if elabel:
+                    return elabel
+        except Exception:
+            pass
+
+        # Wire 4: detect_voice on source_text
+        edge_is_passive = False
+        try:
+            from app.engines.grammar_engine import detect_voice
+            if source_text:
+                edge_is_passive = (detect_voice(source_text) == "passive")
+        except Exception:
+            pass
+
         if expected_type == "TIME":
             raw_date = (
                 edge.get("temporal_expression")
@@ -1960,15 +2040,15 @@ class RetrievalEngine:
             prox = _te_render.proximity(edge.get("resolved_event_date")) if edge.get("resolved_event_date") else None
             answer = raw_date if not prox else raw_date
         elif expected_type == "PERSON":
-            # Return the entity that ISN'T the query entity.
-            # 'user' is canonical first-person, never the answer.
-            subj_lower = subj.lower()
+            # Wire 4: passive voice may invert subject/object in SPO.
+            _subj, _obj = (subj, obj) if not edge_is_passive else (obj, subj)
+            subj_lower = _subj.lower()
             if subj_lower == "user":
-                answer = obj
+                answer = _obj
             elif query_entity and query_entity.lower() in subj_lower:
-                answer = obj
+                answer = _obj
             else:
-                answer = subj
+                answer = _subj
         elif expected_type == "LOCATION":
             answer = obj or subj
         else:
@@ -2209,9 +2289,24 @@ class RetrievalEngine:
                         )
 
         edge = best_c.edge
+
+        # Wire 2: detect_negation on winning edge source_text.
+        edge_negated = False
+        try:
+            from app.engines.grammar_engine import detect_negation
+            _src = (edge.get("source_text") or "").strip()
+            if _src:
+                edge_negated = detect_negation(_src)
+        except Exception:
+            pass
         answer_text = self._render_answer_text(
             edge, query_entity, query_text,
         )
+
+
+        # For yes/no queries, a negated source edge means No
+        if _is_yes_no_query(query_text) and edge_negated and answer_text:
+            answer_text = "No"
 
         return Answer(
             text=answer_text,
@@ -2230,8 +2325,21 @@ class RetrievalEngine:
                 "relationship_id": best_c.relationship_id,
                 "source_stages": list(best_c.source_stages),
                 "inferred_schema": inferred_schema,
+                "edge_negated": edge_negated,
+                "days_until_event": self._compute_days_until(edge),
             },
         )
+
+    def _compute_days_until(self, edge: Dict[str, Any]) -> Optional[float]:
+        """Wire 13: days_until for edges with resolved_event_date."""
+        date_str = edge.get("resolved_event_date")
+        if not date_str or not self._temporal:
+            return None
+        try:
+            d = self._temporal.days_until(date_str)
+            return round(d, 1) if d is not None else None
+        except Exception:
+            return None
 
     @staticmethod
     def _best_source(c: Candidate) -> str:
@@ -2247,23 +2355,34 @@ class RetrievalEngine:
 
     def _entity_exists(self, user_id: int, entity_name: str) -> bool:
         """Check if entity has ANY edges in the graph (CWA check).
-        Returns True if the entity appears as subject or object
-        in at least one relationship for this user."""
+        Wire 9: delegates to memory engine get_entity.
+        Wire 8: delegates to memory engine get_relationships."""
         if not entity_name:
             return False
+        # Wire 9: memory engine get_entity
+        if self._memory:
+            try:
+                ent_obj = self._memory.get_entity(user_id, entity_name)
+                if ent_obj is not None:
+                    return True
+            except Exception:
+                pass
+        # _FIRST_PERSON is closed grammatical class (UD personal pronouns)
+        ent = entity_name
+        if ent.lower() in _FIRST_PERSON:
+            ent = "user"
+        # Wire 8: memory engine get_relationships
+        if self._memory:
+            try:
+                rels = self._memory.get_relationships(user_id, subject=ent)
+                if rels:
+                    return True
+                rels = self._memory.get_relationships(user_id, object=ent)
+                if rels:
+                    return True
+            except Exception:
+                pass
         with get_db_context() as conn:
-            # Check entities table first
-            row = conn.execute(
-                "SELECT 1 FROM entities WHERE user_id = ? "
-                "AND LOWER(name) = LOWER(?) LIMIT 1",
-                (user_id, entity_name),
-            ).fetchone()
-            if row:
-                return True
-            # Fallback: check relationships
-            ent = entity_name
-            if ent.lower() in _FIRST_PERSON:
-                ent = "user"
             row = conn.execute(
                 "SELECT 1 FROM relationships WHERE user_id = ? "
                 "AND (LOWER(subject) = LOWER(?) OR LOWER(object) = LOWER(?)) "
@@ -2459,6 +2578,45 @@ class RetrievalEngine:
         except Exception:
             pass
 
+        # ── Step 0a-2: Structural query analysis (grammar engine) ──
+        # Wire 3 (detect_mood) + Wire 6 (classify_utterance):
+        # Root cause: retrieve() processes all inputs identically.
+        query_utterance = None
+        query_mood = None
+        try:
+            from app.engines.grammar_engine import (
+                classify_utterance as _classify_utt,
+                detect_mood as _detect_mood,
+                _get_nlp as _grammar_nlp,
+            )
+            _qdoc = _grammar_nlp()(query)
+            query_utterance = _classify_utt(_qdoc)
+            query_mood = _detect_mood(_qdoc)
+
+            # Wire 6: backchannel = not a real query
+            if query_utterance and query_utterance.is_backchannel:
+                return StructuralRefusal(
+                    reason="backchannel_detected",
+                    text="",
+                    confidence=0.0,
+                )
+        except Exception:
+            pass
+
+        # Wire 5: resolve_pronouns for structural first-person detection.
+        _query_is_first_person = False
+        try:
+            from app.engines.grammar_engine import resolve_pronouns as _resolve_pn, _get_nlp as _gn2
+            _pn_doc = _gn2()(query)
+            _resolved_tokens = _resolve_pn(_pn_doc, speaker="user")
+            if hasattr(_resolved_tokens, '__iter__') and not isinstance(_resolved_tokens, str):
+                _resolved_str = " ".join(t.text if hasattr(t, 'text') else str(t) for t in _resolved_tokens)
+            else:
+                _resolved_str = str(_resolved_tokens)
+            _query_is_first_person = _resolved_str.lower() != query.lower()
+        except Exception:
+            pass
+
         # ── Step 0b: Facts fast path (O(1) for stative facts) ─────
         # If classify_query found a subject + schema, try direct fact
         # lookup before running the full moat pipeline. "Where do I
@@ -2550,14 +2708,12 @@ class RetrievalEngine:
                 pass
             query_entity = subj_entity or resolved_entities[0]["name"]
 
-        # First-person override: if the query uses first-person
-        # language, target is "user". Only apply when indirect
-        # resolution did NOT produce a graph-traversal result —
-        # if we resolved "speaker's girlfriend" to "Suki", the
-        # terminal entity is "Suki", not "user".
+        # Wire 5: structural first-person override via resolve_pronouns.
+        # _FIRST_PERSON is closed grammatical class (UD personal pronouns).
         if len(indirect_refs) <= 1:
-            query_words_lower = {w.lower() for w in query.split()}
-            if query_words_lower & _FIRST_PERSON:
+            if _query_is_first_person:
+                query_entity = "user"
+            elif query_entity and query_entity.lower() in _FIRST_PERSON:
                 query_entity = "user"
             elif query_entity and query_entity.lower() in _FIRST_PERSON:
                 query_entity = "user"
@@ -2738,13 +2894,32 @@ class RetrievalEngine:
         narratives: List[str] = []
 
         for cid, cands in cluster_edges.items():
-            # Sort by resolved_event_date first (calendar order),
+            # Wire 16: is_before -- temporal engine calendar ordering.
             # then sequence_number (narrative order within same date)
             def _temporal_sort_key(c):
                 date = c.edge.get("resolved_event_date") or ""
                 seq = c.edge.get("sequence_number") or 0
                 return (date, seq)
-            cands.sort(key=_temporal_sort_key)
+            if self._temporal and len(cands) > 1:
+                import functools
+                def _cmp(a, b):
+                    da = a.edge.get("resolved_event_date")
+                    db = b.edge.get("resolved_event_date")
+                    if da and db:
+                        try:
+                            result = self._temporal.is_before(da, db)
+                            if result is True:
+                                return -1
+                            elif result is False:
+                                return 1
+                        except Exception:
+                            pass
+                    ka = _temporal_sort_key(a)
+                    kb = _temporal_sort_key(b)
+                    return (ka > kb) - (ka < kb)
+                cands.sort(key=functools.cmp_to_key(_cmp))
+            else:
+                cands.sort(key=_temporal_sort_key)
 
             participants: Set[str] = set()
             edges: List[Dict[str, Any]] = []
@@ -2784,6 +2959,17 @@ class RetrievalEngine:
                     parts.append(_edge_to_fact_statement(e))
 
             narrative = " ".join(parts)
+
+            # Wire 14: days_since -- annotate cluster with temporal context.
+            if dates and self._temporal:
+                try:
+                    ds = self._temporal.days_since(dates[0])
+                    if ds is not None:
+                        prox = self._temporal.proximity(dates[0])
+                        if prox:
+                            narrative = f"({prox}) {narrative}"
+                except Exception:
+                    pass
             narratives.append(narrative)
 
             # Dominant schema category
@@ -2807,8 +2993,49 @@ class RetrievalEngine:
                 emotional_tone=tone_dominant,
             ))
 
+        # Wire 17: upcoming_events -- dedicated cluster for broad queries.
+        if self._temporal:
+            try:
+                upcoming = self._temporal.upcoming_events(user_id)
+                if upcoming:
+                    ue_edges = []
+                    ue_parts = []
+                    for ev in upcoming:
+                        prox = ev.get("proximity", "")
+                        desc = "{} {} {}".format(ev["subject"], ev["predicate"], ev["object"])
+                        if prox:
+                            desc = "{} ({})".format(desc, prox)
+                        ue_parts.append(desc)
+                        ue_edges.append({
+                            "id": ev["id"], "subject": ev["subject"],
+                            "predicate": ev["predicate"], "object": ev["object"],
+                            "source_text": desc,
+                        })
+                    if ue_parts:
+                        ue_narrative = "Upcoming: " + ". ".join(ue_parts)
+                        narratives.append(ue_narrative)
+                        clusters.append(Cluster(
+                            cluster_id="upcoming", participants=[],
+                            edges=ue_edges, narrative=ue_narrative,
+                            schema_category="temporal", emotional_tone=None,
+                        ))
+            except Exception:
+                pass
+
         full_narrative = " ".join(narratives)
 
+
+        # Wire 11: summarize -- enrich narrative with entity summaries.
+        if self._memory and all_participants:
+            try:
+                for p in sorted(all_participants):
+                    if p.lower() == "user" or not p:
+                        continue
+                    summary = self._memory.summarize(user_id, entity=p)
+                    if summary and summary not in full_narrative:
+                        full_narrative = full_narrative + " " + summary
+            except Exception:
+                pass
         return Situation(
             clusters=clusters,
             survivor_count=len(top),
