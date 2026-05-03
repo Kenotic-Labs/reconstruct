@@ -611,7 +611,7 @@ def f1(pred, gold):
 import app.engines.retrieval as _ret_mod
 _ret_mod._singleton = None
 
-engine = RetrievalEngine(memory_engine=None, temporal_engine=None)
+engine = RetrievalEngine(None, None)
 
 print("\n" + "=" * 70)
 print("RUNNING 25 QUERIES")
