@@ -381,9 +381,16 @@ class MemoryEngine:
                         (rel_id,),
                     ).fetchone()
                     _cid = _cr["cluster_id"] if _cr else None
-                    self._assign_arc(conn, user_id, rel_id, _cid)
+                    # Arc detection via temporal engine (single owner)
+                    from app.engines.temporal import get_temporal_engine
+                    _arc_id = get_temporal_engine().detect_arcs(user_id, rel_id, _cid)
+                    if _arc_id:
+                        conn.execute(
+                            "UPDATE relationships SET arc_id = ? WHERE id = ?",
+                            (_arc_id, rel_id),
+                        )
                 except Exception as e:
-                    log.warning("arc assignment lookup failed for rel_id=%s: %s", rel_id, e)
+                    log.warning("arc assignment failed for rel_id=%s: %s", rel_id, e)
 
                 conn.commit()
                 return rel_id

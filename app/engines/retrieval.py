@@ -2580,33 +2580,21 @@ class RetrievalEngine:
         # Take top N survivors
         top = candidates[:RECONSTRUCT_TOP_N]
 
-        # Recluster by shared non-self entities
-        entity_to_cluster: Dict[str, str] = {}
+        # Recluster via temporal engine (single owner of clustering)
+        from app.engines.temporal import get_temporal_engine
+        edge_ids = [c.relationship_id for c in top]
+        temporal_clusters = get_temporal_engine().recluster_for_reconstruction(
+            user_id, edge_ids,
+        )
+
+        # Map temporal clusters back to candidate objects
+        id_to_candidate = {c.relationship_id: c for c in top}
         cluster_edges: Dict[str, List[Candidate]] = defaultdict(list)
-        cluster_counter = 0
-
-        for c in top:
-            s = (c.edge.get("subject") or "").lower()
-            o = (c.edge.get("object") or "").lower()
-            non_self = [
-                x for x in (s, o)
-                if x and x != "user"
-            ]
-
-            assigned = None
-            for ent in non_self:
-                if ent in entity_to_cluster:
-                    assigned = entity_to_cluster[ent]
-                    break
-
-            if assigned is None:
-                cluster_counter += 1
-                assigned = f"rc_{cluster_counter}"
-
-            for ent in non_self:
-                entity_to_cluster[ent] = assigned
-
-            cluster_edges[assigned].append(c)
+        for tc in temporal_clusters:
+            cid = str(tc.get("cluster_id", 0))
+            for eid in tc.get("edge_ids", []):
+                if eid in id_to_candidate:
+                    cluster_edges[cid].append(id_to_candidate[eid])
 
         # Build Cluster objects
         clusters: List[Cluster] = []
