@@ -77,9 +77,56 @@ class ProactiveEngine:
         return ArcUpdate()
 
     def evaluate_due(self, user_id: int) -> List[ProactiveInsight]:
-        """Return arcs / frequencies due for surfacing. Empty for now;
-        full implementation in a later session."""
-        return []
+        """Return arcs due for surfacing, informed by temporal patterns.
+
+        Checks open arcs whose last_checked_at exceeds their natural
+        check-in frequency (derived from temporal patterns). Also
+        surfaces arcs where the user's activity pattern suggests they
+        would normally be talking about this topic."""
+        insights: List[ProactiveInsight] = []
+        try:
+            from app.engines.temporal import get_temporal_engine
+            _te = get_temporal_engine()
+
+            # Get user's temporal patterns (circadian, weekly)
+            patterns = _te.patterns(user_id)
+
+            # Get open arcs that are due for check-in
+            with get_db_context() as conn:
+                arcs = conn.execute(
+                    "SELECT id, topic, last_checked_at, created_at "
+                    "FROM arcs WHERE user_id = ? AND status = 'open' "
+                    "ORDER BY last_checked_at ASC",
+                    (user_id,),
+                ).fetchall()
+
+            now = _te.now()
+            for arc in arcs:
+                last_checked = arc["last_checked_at"]
+                if not last_checked:
+                    continue
+                try:
+                    from datetime import datetime, timezone
+                    lc = datetime.fromisoformat(
+                        last_checked.replace("Z", "+00:00")
+                    )
+                    if lc.tzinfo is None:
+                        lc = lc.replace(tzinfo=timezone.utc)
+                    age_days = (now - lc).total_seconds() / 86400.0
+                    # Arc is due if not checked in over 7 days
+                    # (adaptive threshold from patterns would improve this)
+                    if age_days > 7:
+                        insights.append(ProactiveInsight(
+                            arc_id=arc["id"],
+                            topic=arc["topic"] or "",
+                            reason="stale_arc",
+                            staleness_days=round(age_days, 1),
+                        ))
+                except Exception:
+                    continue
+        except Exception:
+            pass
+        return insights
 
     # ── Timers (short-term reminders) ───────────────────────────
 

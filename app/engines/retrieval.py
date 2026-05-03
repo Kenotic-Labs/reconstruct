@@ -1658,13 +1658,19 @@ class RetrievalEngine:
         """Final ordering. Compute predicate_cosine, exit_cosine.
         Sort by exit_cosine desc, sequence_number desc."""
 
+        from app.engines.temporal import get_temporal_engine
+        _te = get_temporal_engine()
+
         for c in candidates:
             c.predicate_cosine = _cosine_from_blob(
                 q_emb, c.edge.get("predicate_embedding"),
             )
-            c.exit_cosine = max(
+            raw_cosine = max(
                 c.pq_cosine, c.edge_cosine, c.predicate_cosine,
             )
+            # Weight by staleness — fresh edges rank higher than stale
+            freshness = _te.staleness(c.relationship_id)
+            c.exit_cosine = raw_cosine * freshness
 
         candidates.sort(key=lambda c: (
             -c.exit_cosine,
@@ -2482,12 +2488,25 @@ class RetrievalEngine:
             )
 
         # Temporal mode detection (query-centric time filtering)
+        from app.engines.temporal import get_temporal_engine
+        _te = get_temporal_engine()
+
         if _query_requests_historical(query):
             temporal_mode = "historical"
         elif _query_requests_current_state(query):
             temporal_mode = "current"
         else:
             temporal_mode = "current"
+
+        # Temporal graph: if query has a resolved date, scope candidates
+        # to edges valid at that time via temporal engine
+        _parsed = _te.parse(query)
+        if _parsed.parsed_datetime and temporal_mode != "current":
+            valid_edges = _te.edges_valid_at(user_id, _parsed.parsed_datetime)
+            valid_ids = {e["id"] for e in valid_edges}
+            if valid_ids:
+                candidates = [c for c in candidates
+                              if c.relationship_id in valid_ids] or candidates
 
         # Facts lookup against original query
         canonical_fact = self._load_facts_for_entity(
@@ -2595,6 +2614,35 @@ class RetrievalEngine:
             for eid in tc.get("edge_ids", []):
                 if eid in id_to_candidate:
                     cluster_edges[cid].append(id_to_candidate[eid])
+
+        # Enrich clusters with temporal neighbors — sequence-adjacent
+        # edges that share entities get folded into the cluster for
+        # richer narrative context.
+        _te_recon = get_temporal_engine()
+        existing_ids = {c.relationship_id for c in top}
+        for cid, cands in list(cluster_edges.items()):
+            cluster_entities = set()
+            for c in cands:
+                cluster_entities.add((c.edge.get("subject") or "").lower())
+                cluster_entities.add((c.edge.get("object") or "").lower())
+            cluster_entities.discard("")
+            cluster_entities.discard("user")
+
+            for c in list(cands):
+                for n in _te_recon.temporal_neighbors(user_id, c.relationship_id):
+                    nid = n.get("id")
+                    if not nid or nid in existing_ids:
+                        continue
+                    # Only include if neighbor shares an entity with cluster
+                    n_subj = (n.get("subject") or "").lower()
+                    n_obj = (n.get("object") or "").lower()
+                    if (n_subj in cluster_entities or n_obj in cluster_entities):
+                        neighbor_candidate = Candidate(
+                            relationship_id=nid, edge=n,
+                            source_stages={"temporal_neighbor"},
+                        )
+                        cands.append(neighbor_candidate)
+                        existing_ids.add(nid)
 
         # Build Cluster objects
         clusters: List[Cluster] = []
