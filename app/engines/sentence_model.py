@@ -39,7 +39,7 @@ logger = logging.getLogger(__name__)
 
 # CoEdit task prefix — ONLY grammar correction. Other tasks (simplify,
 # paraphrase, formality) change meaning, violating the lossless contract.
-_COEDIT_TASK_PREFIX = "Rewrite to be more formal:"
+_COEDIT_TASK_PREFIX = "Fix grammatical errors in this sentence:"
 
 # Structural cleanup rules — spaCy dep labels that signal noise
 _FILLER_POS = frozenset({"INTJ"})
