@@ -2176,8 +2176,28 @@ class RetrievalEngine:
         else:
             answer = obj
 
-        # Fallback to source_text if answer is empty
+        # Root cause: T5 SRL extraction on conversational text produces
+        # garbage object fields ("it", "them", "That") — pronouns/deictics
+        # that carry no semantic content. source_text has the actual
+        # utterance. Fallback when object is empty OR is entirely
+        # function words (spaCy is_stop — structural NLP property,
+        # same pattern as tok.dep_ already used throughout this file).
+        _use_source = False
         if not answer or len(answer.strip()) <= 1:
+            _use_source = True
+        elif len(answer.split()) <= 2:
+            try:
+                import spacy as _sp_fc
+                _nlp_fc = _sp_fc.load("en_core_web_sm")
+                _doc_fc = _nlp_fc(answer)
+                _use_source = all(
+                    tok.is_stop or tok.is_punct or tok.is_space
+                    for tok in _doc_fc
+                )
+            except Exception:
+                pass
+
+        if _use_source:
             answer = source_text
 
         return (answer or "").strip()
@@ -2330,18 +2350,57 @@ class RetrievalEngine:
         # so "Does Suki cook?" picks work_at (highest Suki cosine)
         # instead of cook.
         lemma_aligned: List[Candidate] = []
+        content_aligned: List[Candidate] = []
+
+        # Extract content words from query for tier 2 overlap check.
+        # Content words = non-stop, non-punct tokens with length > 2.
+        # Same spaCy structural NLP as used throughout (tok.is_stop, tok.dep_).
+        _q_content = set()
+        try:
+            import spacy as _sp_qa
+            _nlp_qa = _sp_qa.load("en_core_web_sm")
+            _doc_qa = _nlp_qa(query_text)
+            for _tok_qa in _doc_qa:
+                if not _tok_qa.is_stop and not _tok_qa.is_punct and len(_tok_qa.text) > 2:
+                    _q_content.add(_tok_qa.lemma_.lower())
+        except Exception:
+            pass
+
         if query_verb:
             verb_lemmas = _normalized_words(query_verb)
-            for c in verified:
-                pred_text = (c.edge.get("predicate") or "").replace("_", " ")
-                if verb_lemmas & _normalized_words(pred_text):
-                    lemma_aligned.append(c)
+        else:
+            verb_lemmas = set()
 
-        # Pool selection: lemma-aligned candidates preferred when
-        # available (structural precision). Otherwise fall through
-        # to all verified candidates in their original exit_cosine
-        # order — PQ cosine is a reliable signal for WH queries.
-        pool = lemma_aligned if lemma_aligned else verified
+        for c in verified:
+            pred_text = (c.edge.get("predicate") or "").replace("_", " ")
+            if verb_lemmas and (verb_lemmas & _normalized_words(pred_text)):
+                lemma_aligned.append(c)
+            elif _q_content:
+                # Tier 2: source_text/object content word overlap.
+                # Root cause: for narrative queries, the correct edge's
+                # source_text contains the query's content words but the
+                # predicate may not lemma-match. "What did the charity
+                # race raise awareness for?" — source_text mentions
+                # "charity race" and "awareness", predicate is "run".
+                _edge_text = ' '.join([
+                    (c.edge.get("source_text") or ""),
+                    (c.edge.get("object") or ""),
+                ]).lower()
+                _edge_lemmas = _normalized_words(_edge_text)
+                _overlap = _q_content & _edge_lemmas
+                if len(_overlap) >= 2:
+                    content_aligned.append(c)
+
+        # Three-tier pool selection:
+        # Tier 1: lemma overlap on predicate (precise).
+        # Tier 2: content word overlap on source_text (semantic).
+        # Tier 3: fallback to exit_cosine ordering.
+        if lemma_aligned:
+            pool = lemma_aligned
+        elif content_aligned:
+            pool = content_aligned
+        else:
+            pool = verified
         best_c = pool[0]
 
         # Predicate absence for yes/no queries (CWA negation).
@@ -2840,15 +2899,14 @@ class RetrievalEngine:
             elif query_entity and query_entity.lower() in _FIRST_PERSON:
                 query_entity = "user"
 
-        # No entity resolved — refuse. We don't know who the
-        # query is about, so no candidate can be coherent.
+        # No entity resolved — default to "user" (the speaker).
+        # Root cause: Cat 4 queries about events/things ("What did
+        # the charity race raise awareness for?") have no named
+        # PERSON entity. Refusing here kills all non-person queries.
+        # The speaker filter (below) handles adversarial cases; the
+        # verification loop handles wrong-edge selection.
         if not query_entity:
-            return StructuralRefusal(
-                reason="no_entity_resolved",
-                text=REFUSAL_TEXT,
-                confidence=0.0,
-                survivors=len(candidates),
-            )
+            query_entity = "user"
 
         # Temporal mode detection (query-centric time filtering)
         from app.engines.temporal import get_temporal_engine
@@ -2898,17 +2956,25 @@ class RetrievalEngine:
             pass
 
         if _query_person_for_filter:
-            _speaker_filtered = [
+            # Root cause: in multi-speaker conversations (LOCOMO),
+            # edges about person X may be spoken BY person Y. The
+            # speaker filter must not discard edges that MENTION the
+            # query person in subject/object/relational_entities.
+            # Only refuse when the person doesn't appear in ANY edge.
+            _entity_mentioned = [
                 c for c in candidates
-                if _edge_speaker_matches_entity(c.edge, _query_person_for_filter)
+                if _edge_mentions_entity(
+                    c.edge.get("subject", ""),
+                    c.edge.get("object", ""),
+                    _query_person_for_filter,
+                    c.edge.get("relational_entities", ""),
+                )
             ]
-            if _speaker_filtered:
-                candidates = _speaker_filtered
+            if _entity_mentioned:
+                # Person is mentioned in edges — use entity-filtered set
+                candidates = _entity_mentioned
             else:
-                # No edges match the queried person as speaker.
-                # This is the Cat 5 adversarial case: the question
-                # asks about person X but all edges are from person Y.
-                # Refuse rather than returning wrong-speaker content.
+                # Person not mentioned anywhere — Cat 5 adversarial case
                 return StructuralRefusal(
                     reason="speaker_not_found",
                     text=REFUSAL_TEXT,
@@ -2944,29 +3010,21 @@ class RetrievalEngine:
                 inferred_schema=qd.match_schema if qd else None,
             )
 
-        # Speaker attribution gate (Cat 5 adversarial filter).
+        # Post-verification speaker attribution gate (Cat 5 adversarial).
         # Root cause: Cat 5 adversarial questions ask about person X
-        # but retrieve edges spoken by person Y. The entity gate passes
-        # because edge content overlaps with query topics. This post-
-        # verification gate checks if the winning edge was spoken by
-        # the same person the query asks about.
-        #
-        # Uses spaCy NER to extract PERSON entities from the raw query
-        # text. Only engages when the query mentions a named person
-        # (not pronouns, not concepts from graph traversal).
+        # but retrieve edges spoken by person Y. However, in multi-speaker
+        # conversations, edges ABOUT person X may be spoken by person Y.
+        # Only refuse if the winning edge doesn't MENTION the query person
+        # at all (not in subject, object, or relational_entities).
         if isinstance(result, Answer) and result.convergence_details:
             _rid = result.convergence_details.get("relationship_id")
             if _rid is not None:
-                # Find the winning edge from candidates
                 _winning_edge = None
                 for _c in candidates:
                     if _c.relationship_id == _rid:
                         _winning_edge = _c.edge
                         break
                 if _winning_edge is not None:
-                    # Extract PERSON names from query via spaCy NER.
-                    # This gives us actual person names, not resolved
-                    # concepts like "playing guitar" or "nervous".
                     _query_persons = []
                     try:
                         import spacy as _spacy_speaker
@@ -2980,10 +3038,14 @@ class RetrievalEngine:
                     except Exception:
                         pass
                     if _query_persons:
-                        _speaker_ok = _edge_speaker_matches_entity(
-                            _winning_edge, _query_persons[0],
+                        # Check if query person is mentioned in the edge
+                        _mentioned = _edge_mentions_entity(
+                            _winning_edge.get("subject", ""),
+                            _winning_edge.get("object", ""),
+                            _query_persons[0],
+                            _winning_edge.get("relational_entities", ""),
                         )
-                        if not _speaker_ok:
+                        if not _mentioned:
                             result = StructuralRefusal(
                                 reason="speaker_mismatch",
                                 text=REFUSAL_TEXT,
