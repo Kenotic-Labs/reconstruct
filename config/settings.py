@@ -26,6 +26,12 @@ class Settings(BaseSettings):
     vector_index_path: str = "Memory Storage/vector_index.faiss"
     memory_jsonl_path: str = "Memory Storage/memory.jsonl"
 
+    # Retrieval mode
+    # True = only reconstruct on explicit trigger words ("summarize", "what's going on")
+    # False = is_situational() auto-routes via WH-grammar
+    # LOCOMO benchmark sets True — forces short factual answers, no narrative
+    explicit_reconstruct_only: bool = True
+
     # API
     api_host: str = "0.0.0.0"
     api_port: int = 8000
