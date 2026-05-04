@@ -2277,9 +2277,33 @@ class RetrievalEngine:
         # (cosine=1.0) always win. Schema breaks ties among
         # similar-cosine candidates.
         schema_l = (inferred_schema or "").lower()
+        # Extract content words from query for source_text matching.
+        # Content words = non-stop, non-WH, non-AUX tokens from spaCy.
+        _query_content_words = set()
+        try:
+            import spacy as _sp_rank
+            _nlp_rank = _sp_rank.load("en_core_web_sm")
+            _doc_rank = _nlp_rank(query_text)
+            for _tok_r in _doc_rank:
+                if (not _tok_r.is_stop and _tok_r.pos_ not in ("PUNCT", "SPACE", "DET", "AUX")
+                        and _tok_r.tag_ not in ("WDT", "WP", "WP$", "WRB")
+                        and len(_tok_r.lemma_) > 2):
+                    _query_content_words.add(_tok_r.lemma_.lower())
+        except Exception:
+            pass
+
+        def _content_overlap(c):
+            """Count how many query content words appear in edge source_text."""
+            src = (c.edge.get("source_text") or "").lower()
+            obj = (c.edge.get("object") or "").lower()
+            pred = (c.edge.get("predicate") or "").replace("_", " ").lower()
+            combined = src + " " + obj + " " + pred
+            return sum(1 for w in _query_content_words if w in combined)
+
         candidates.sort(
             key=lambda c: (
                 -c.exit_cosine,
+                -_content_overlap(c),  # content words as tiebreaker
                 -(1 if schema_l and (c.edge.get("edge_schematic_category") or "").lower() == schema_l else 0),
                 -(c.edge.get("sequence_number") or 0),
             ),
@@ -2361,8 +2385,17 @@ class RetrievalEngine:
             import spacy as _sp_qa
             _nlp_qa = _sp_qa.load("en_core_web_sm")
             _doc_qa = _nlp_qa(query_text)
+            # Exclude PROPN (entity names like Caroline) and possessive
+            # pronouns — these appear in every edge and aren't content signals.
+            _ner_spans = set()
+            for _ent_qa in _doc_qa.ents:
+                _ner_spans.update(range(_ent_qa.start, _ent_qa.end))
             for _tok_qa in _doc_qa:
-                if not _tok_qa.is_stop and not _tok_qa.is_punct and len(_tok_qa.text) > 2:
+                if (_tok_qa.i not in _ner_spans
+                        and not _tok_qa.is_stop and not _tok_qa.is_punct
+                        and _tok_qa.pos_ not in ("PROPN", "PRON", "DET", "AUX", "PART")
+                        and _tok_qa.tag_ not in ("WDT", "WP", "WP$", "WRB", "POS")
+                        and len(_tok_qa.text) > 2):
                     _q_content.add(_tok_qa.lemma_.lower())
         except Exception:
             pass
