@@ -2962,20 +2962,18 @@ class RetrievalEngine:
             # speaker filter must not discard edges that MENTION the
             # query person in subject/object/relational_entities.
             # Only refuse when the person doesn't appear in ANY edge.
-            _entity_mentioned = [
+            _speaker_matched = [
                 c for c in candidates
-                if _edge_mentions_entity(
-                    c.edge.get("subject", ""),
-                    c.edge.get("object", ""),
-                    _query_person_for_filter,
-                    c.edge.get("relational_entities", ""),
-                )
+                if _edge_speaker_matches_entity(c.edge, _query_person_for_filter)
             ]
-            if _entity_mentioned:
-                # Person is mentioned in edges — use entity-filtered set
-                candidates = _entity_mentioned
+            if _speaker_matched:
+                # Speaker matches — use speaker-filtered set for Cat 5 defense
+                candidates = _speaker_matched
             else:
-                # Person not mentioned anywhere — Cat 5 adversarial case
+                # Query person never SPOKE about anything — Cat 5 adversarial.
+                # But check: does the person appear in ANY edge at all?
+                # If not mentioned anywhere, refuse. If mentioned but didn't
+                # speak, also refuse (the question asks about THEIR facts).
                 return StructuralRefusal(
                     reason="speaker_not_found",
                     text=REFUSAL_TEXT,
