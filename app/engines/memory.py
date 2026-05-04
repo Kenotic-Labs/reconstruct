@@ -26,8 +26,8 @@ Public interface:
     forget_by_time_range()  -> tombstone triples in time window
     forget_by_source()      -> tombstone triples by source_tag
     list_by_facet()         -> faceted listing (time/entity/source/trace)
-    clean()                 -> backward compat stub
-    extract()               -> backward compat stub
+    clean()                 -> singular cleanup path
+    extract()               -> singular extraction path
 """
 from __future__ import annotations
 
@@ -103,21 +103,73 @@ class MemoryEngine:
         pass
 
     # ------------------------------------------------------------------
-    # Backward compat stubs
+    # Singular ingestion path
     # ------------------------------------------------------------------
+
+    def _run_ingestion_path(
+        self,
+        text: str,
+        speaker: Optional[str] = None,
+    ) -> Tuple[str, List[Tuple[str, str, str, Any]], Any]:
+        """The one write-path entry: cleanup -> grammar -> SPO/decomp rows.
+
+        This is the only ingestion pipeline. `clean()`, `extract()`, and
+        `ingest_text()` all route through it so KenoticV1 cannot drift onto
+        a different extraction path.
+        """
+        if not text or not text.strip():
+            return "", [], None
+
+        from app.engines.sentence_model import cleanup as _cleanup
+        from app.engines import grammar_engine as _grammar_eng
+
+        cleaned = _cleanup(text.strip(), speaker=speaker)
+        grammar_result = _grammar_eng.process(cleaned, speaker=speaker)
+
+        rows: List[Tuple[str, str, str, Any]] = []
+        decomps = grammar_result.trace_decompositions or []
+        for idx, triple in enumerate(grammar_result.triples):
+            decomp = decomps[idx] if idx < len(decomps) else None
+            rows.append((triple.subject, triple.predicate, triple.object, decomp))
+
+        for idx in range(len(grammar_result.triples), len(decomps)):
+            decomp = decomps[idx]
+            rows.append(
+                (
+                    getattr(decomp, "subject", ""),
+                    getattr(decomp, "predicate", ""),
+                    getattr(decomp, "object", ""),
+                    decomp,
+                )
+            )
+
+        final_text = grammar_result.resolved_text or cleaned
+        return final_text, rows, grammar_result
 
     def clean(self, text: str) -> str:
-        """Legacy cleanup passthrough. Retained for API compatibility."""
+        """Run the singular cleanup path used by live ingestion."""
         if not text or not text.strip():
             return text or ""
-        return text.strip()
+        from app.engines.sentence_model import cleanup as _cleanup
+        return _cleanup(text.strip())
 
-    def extract(self, text: str) -> List[Tuple[str, str, str]]:
-        """Legacy extraction stub. Retained for API compatibility."""
-        return []
+    def extract(self, text: str) -> List[Tuple[str, str, str, bool]]:
+        """Run the singular extraction path used by live ingestion."""
+        _, rows, _ = self._run_ingestion_path(text)
+        extracted: List[Tuple[str, str, str, bool]] = []
+        for s, p, o, decomp in rows:
+            extracted.append(
+                (
+                    s,
+                    p,
+                    o,
+                    bool(getattr(decomp, "is_historical", False)) if decomp else False,
+                )
+            )
+        return extracted
 
     # ------------------------------------------------------------------
-    # ingest_text -- simplified: grammar -> store, no validation gate
+    # ingest_text -- singular cleanup -> grammar -> store
     # ------------------------------------------------------------------
 
     def ingest_text(
@@ -144,41 +196,10 @@ class MemoryEngine:
         if not text or not text.strip():
             return 0
 
-        # -- Extraction via grammar engine --
-        triples_with_decomp: List[Tuple[str, str, str, Any]] = []
-        cleaned = text.strip()
-
-        try:
-            from app.engines.sentence_model import cleanup as _cleanup
-            cleaned = _cleanup(cleaned, speaker=speaker)
-        except Exception:
-            pass  # fail-open: use raw text if CoEdit unavailable
-
-        try:
-            from app.engines import grammar_engine as _grammar_eng
-            grammar_result = _grammar_eng.process(cleaned, speaker=speaker)
-            decomps = grammar_result.trace_decompositions or []
-            for idx, t in enumerate(grammar_result.triples):
-                decomp = decomps[idx] if idx < len(decomps) else None
-                triples_with_decomp.append(
-                    (t.subject, t.predicate, t.object, decomp)
-                )
-            # Decompositions beyond len(triples) are trace-only edges
-            for idx in range(len(grammar_result.triples), len(decomps)):
-                decomp = decomps[idx]
-                triples_with_decomp.append(
-                    (
-                        getattr(decomp, 'subject', ''),
-                        getattr(decomp, 'predicate', ''),
-                        getattr(decomp, 'object', ''),
-                        decomp,
-                    )
-                )
-            if grammar_result.resolved_text:
-                cleaned = grammar_result.resolved_text
-        except (ImportError, Exception):
-            # Fallback: no decompositions available
-            cleaned = self.clean(text)
+        cleaned, triples_with_decomp, _grammar_result = self._run_ingestion_path(
+            text,
+            speaker=speaker,
+        )
 
         # -- Speaker resolution --
         def _resolve(tok: str) -> str:

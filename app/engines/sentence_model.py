@@ -226,6 +226,27 @@ def cleanup(text: str, speaker: str = None) -> str:
 
         _doc = _nlp(stripped)
 
+        # Step 0: rhetorical/discourse question followed by factual answer.
+        # Keep the factual answer clause and drop the scaffolding question.
+        _raw_segments = [seg.strip() for seg in stripped.split("?") if seg.strip()]
+        if len(_raw_segments) >= 2:
+            _first_doc = _nlp(_raw_segments[0] + "?")
+            _first_root = _get_root(_first_doc)
+            _first_text = _raw_segments[0].lower()
+            _is_discourse_question = (
+                _first_text.startswith("you know")
+                or any(_first_text.startswith(frame) for frame in _IDIOM_FRAMES)
+                or (
+                    _first_root is not None
+                    and _first_root.lemma_.lower() in _DISCOURSE_FRAME_LEMMAS
+                )
+            )
+            if _is_discourse_question:
+                _tail = "? ".join(_raw_segments[1:]).strip()
+                if _tail:
+                    stripped = _tail
+                    _doc = _nlp(stripped)
+
         # Step 1: Collect indices to remove
         _remove_indices = set()
 
@@ -322,23 +343,68 @@ def cleanup(text: str, speaker: str = None) -> str:
         _sent_text_lower = stripped.lower()
         for idiom in _IDIOM_FRAMES:
             if _sent_text_lower.startswith(idiom):
-                # Remove tokens up to and including the comma after the idiom
-                _idiom_len = len(idiom.split())
+                # Remove the full idiom span as tokenized by spaCy, not
+                # by naive whitespace. This handles "here's the deal"
+                # -> ["here", "'s", "the", "deal"].
+                _idiom_doc = _nlp(idiom)
+                _idiom_tokens = [
+                    t.text.lower() for t in _idiom_doc
+                    if not t.is_space
+                ]
                 _removed = 0
                 for tok in _doc:
-                    if _removed < _idiom_len or tok.text == ",":
+                    if _removed < len(_idiom_tokens):
                         _remove_indices.add(tok.i)
-                        if tok.pos_ != "PUNCT":
+                        if tok.text.lower() == _idiom_tokens[_removed]:
                             _removed += 1
+                    elif tok.text == ",":
+                        _remove_indices.add(tok.i)
                     else:
                         break
                 break
+
+        # Strip rhetorical tail fragments left after idiom removal:
+        # "Deal? I work at Google..." -> "I work at Google..."
+        _clean_probe = [tok for tok in _doc if tok.i not in _remove_indices]
+        if _clean_probe:
+            _probe_tokens = [tok.text for tok in _clean_probe]
+            while _probe_tokens:
+                if not _clean_probe:
+                    break
+                _first = _probe_tokens[0].lower()
+                if _first in _DISCOURSE_FILLER_NOUNS:
+                    _remove_indices.add(_clean_probe[0].i)
+                    _clean_probe = _clean_probe[1:]
+                    _probe_tokens = [tok.text for tok in _clean_probe]
+                    continue
+                if _first in ("?", ",", ":", ";", "-", "—", "–"):
+                    _remove_indices.add(_clean_probe[0].i)
+                    _clean_probe = _clean_probe[1:]
+                    _probe_tokens = [tok.text for tok in _clean_probe]
+                    continue
+                if len(_clean_probe) > 1 and _clean_probe[1].text == "?":
+                    _remove_indices.add(_clean_probe[0].i)
+                    _remove_indices.add(_clean_probe[1].i)
+                    _clean_probe = _clean_probe[2:]
+                    _probe_tokens = [tok.text for tok in _clean_probe]
+                else:
+                    break
 
         # Build cleaned text
         clean_tokens = [tok for tok in _doc if tok.i not in _remove_indices]
 
         if clean_tokens:
+            _normalized_tokens = []
+            _last_text = None
+            for tok in clean_tokens:
+                _text = tok.text
+                if (_text == "," and (_last_text is None or _last_text == ",")):
+                    continue
+                _normalized_tokens.append(_text)
+                _last_text = _text
             stripped = " ".join(tok.text for tok in clean_tokens).strip()
+            if _normalized_tokens:
+                stripped = " ".join(_normalized_tokens).strip()
             stripped = " ".join(stripped.split())
             # Strip leading conjunctions left after filler removal
             if stripped:
@@ -411,19 +477,10 @@ def cleanup(text: str, speaker: str = None) -> str:
                 _snlp = _get_nlp_fragment()
                 _in_doc = _snlp(sentence)
                 _out_doc = _snlp(r)
-                # Check 1: ROOT verb lemma preserved
-                _in_root = _get_root(_in_doc)
-                _out_root = _get_root(_out_doc)
-                if (_in_root and _out_root
-                        and _in_root.pos_ in ("VERB", "AUX")
-                        and _in_root.lemma_ != _out_root.lemma_):
-                    logger.warning(
-                        "[SentenceModel] CoEdit changed ROOT verb: "
-                        "%r (%s) -> %r (%s)",
-                        sentence, _in_root.lemma_, r, _out_root.lemma_,
-                    )
-                    return sentence
-                # Check 2: NER entities not lost
+                # Check 1: NER entities not lost. Cleanup is allowed to
+                # rewrite syntax, split clauses, and improve punctuation,
+                # but it should not drop the named entities that anchor
+                # the stored fact.
                 _in_ents = {e.text.lower() for e in _in_doc.ents}
                 _out_ents = {e.text.lower() for e in _out_doc.ents}
                 if _in_ents and not (_in_ents & _out_ents):
@@ -432,10 +489,18 @@ def cleanup(text: str, speaker: str = None) -> str:
                         sentence, r,
                     )
                     return sentence
-                # Check 3: output not drastically shorter (content lost)
+                # Check 2: output not drastically shorter (content lost)
                 if len(r.split()) < len(sentence.split()) * 0.5:
                     logger.warning(
                         "[SentenceModel] CoEdit truncated content: %r -> %r",
+                        sentence, r,
+                    )
+                    return sentence
+                # Check 3: do not let the rewrite invent a question form
+                # from a declarative cleanup input.
+                if "?" not in sentence and "?" in r:
+                    logger.warning(
+                        "[SentenceModel] CoEdit changed sentence mood: %r -> %r",
                         sentence, r,
                     )
                     return sentence
@@ -464,6 +529,44 @@ def cleanup(text: str, speaker: str = None) -> str:
         else:
             rewritten = [_rewrite_one(s) for s in _sentences]
             result = " ".join(rewritten)
+
+        try:
+            _result_doc = _get_nlp()(result)
+            _result_sents = [s for s in _result_doc.sents if s.text.strip()]
+            if _result_sents:
+                _lead_tokens = [
+                    tok for tok in _result_sents[0]
+                    if not tok.is_punct and not tok.is_space
+                ]
+                _lead_lemmas = {tok.lemma_.lower() for tok in _lead_tokens}
+                if (
+                    _lead_tokens
+                    and len(_lead_tokens) <= 3
+                    and _lead_lemmas <= (_DISCOURSE_FRAME_LEMMAS | {"actually"})
+                ):
+                    result = " ".join(
+                        sent.text.strip() for sent in _result_sents[1:]
+                    ).strip()
+
+            _trim_doc = _get_nlp()(result) if result else None
+            if _trim_doc is not None:
+                _trim_tokens = [
+                    tok for tok in _trim_doc
+                    if not tok.is_space
+                ]
+                if (
+                    len(_trim_tokens) >= 3
+                    and _trim_tokens[-1].text in (".", "!", "?")
+                    and _trim_tokens[-2].lemma_.lower() == "also"
+                    and _trim_tokens[-3].lemma_.lower() == "but"
+                ):
+                    result = "".join(
+                        tok.text_with_ws for tok in _trim_doc[:-3]
+                    ).strip()
+                    if result:
+                        result = result + "."
+        except (OSError, ImportError):
+            pass
 
         if not result:
             logger.warning(
