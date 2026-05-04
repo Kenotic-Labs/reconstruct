@@ -335,9 +335,10 @@ def _edge_mentions_entity(
     query_is_first_person = ent in _FIRST_PERSON
     if query_is_first_person and (subj == "user" or obj == "user"):
         return True
-    # 'user' edges match when relational_entities contains the query entity
-    # (speaker's real name appended by write path)
-    if subj == "user" and relational_entities:
+    # Check relational_entities for the query entity — speaker name is
+    # appended by write path to ALL edges, not just "user" edges.
+    # "My necklace symbolize love" has relational_entities=["Caroline"]
+    if relational_entities:
         rel_lower = relational_entities.lower()
         if query_entity.lower() in rel_lower:
             return True
