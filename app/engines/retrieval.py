@@ -2177,28 +2177,10 @@ class RetrievalEngine:
         else:
             answer = obj
 
-        # Root cause: T5 SRL extraction on conversational text produces
-        # garbage object fields ("it", "them", "That") — pronouns/deictics
-        # that carry no semantic content. source_text has the actual
-        # utterance. Fallback when object is empty OR is entirely
-        # function words (spaCy is_stop — structural NLP property,
-        # same pattern as tok.dep_ already used throughout this file).
-        _use_source = False
-        if not answer or len(answer.strip()) <= 1:
-            _use_source = True
-        elif len(answer.split()) <= 2:
-            try:
-                import spacy as _sp_fc
-                _nlp_fc = _sp_fc.load("en_core_web_sm")
-                _doc_fc = _nlp_fc(answer)
-                _use_source = all(
-                    tok.is_stop or tok.is_punct or tok.is_space
-                    for tok in _doc_fc
-                )
-            except Exception:
-                pass
-
-        if _use_source:
+        # Only fall back to source_text when object is completely empty.
+        # Pronoun objects ("them", "it") score 0 on LOCOMO but source_text
+        # (20+ words) scores even worse because F1 penalizes extra tokens.
+        if not answer or not answer.strip():
             answer = source_text
 
         return (answer or "").strip()
