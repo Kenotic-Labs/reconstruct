@@ -1,0 +1,549 @@
+"""
+Kenotic — the main SDK client.
+
+One class, one entry point: process().
+
+  k = Kenotic(user_id=1, db_path="test.db")
+  result = k.process("I got a job at Google starting Tuesday.")
+  result = k.process("Where do I work?")
+  result = k.process("What's going on in my life?")
+  result = k.process("Forget about Google.")
+
+process() classifies intent via the grammar engine and routes internally
+to the appropriate capability (ingest, retrieve, reconstruct, forget,
+check_proactive). Returns a ProcessResult with action discriminator.
+
+The 8 internal methods (ingest, retrieve, reconstruct, forget, show,
+trace, check_proactive, profile) remain available for direct use by
+runners and tests that need fine-grained control.
+
+No runtime levers. Validation, grammar, and grounding are all always
+on in the SDK variant.
+"""
+from __future__ import annotations
+
+import logging
+import os
+from pathlib import Path
+from typing import Dict, List, Optional, Union
+
+from sdk.types import Situation, Answer, ProcessResult
+
+_log = logging.getLogger("kenotic.sdk")
+
+
+class Kenotic:
+    """Continuity-layer client. One per user/database."""
+
+    def __init__(
+        self,
+        user_id: int = 0,
+        db_path: Union[str, Path] = "~/.kenotic/memory.db",
+        *,
+        embed_device: str = "cuda",
+    ):
+        """Initialize an isolated continuity layer bound to a SQLite file.
+
+        Args:
+          user_id: integer partition key. Defaults to 0 (single-user mode
+                   used by the MCP Continuity Bridge). Edges are stored
+                   under this ID and never cross to other user_ids at
+                   retrieval time.
+          db_path: path to the SQLite file. Created if missing.
+          embed_device: 'cuda' or 'cpu' for MiniLM embedding inference.
+        """
+        self.user_id = int(user_id)
+        self.db_path = str(db_path)
+
+        # Wire env used by the engines before import-time side effects
+        os.environ.setdefault("RAYA_EMBED_DEVICE", embed_device)
+
+        # Point the engines at the caller's DB path
+        from config.settings import settings
+        settings.sqlite_path = self.db_path
+
+        # Ensure schema exists
+        self._init_schema()
+
+        # Lazy engine construction — deferred to first use to keep
+        # __init__ cheap
+        self._memory = None
+        self._temporal = None
+
+        # kenoticArchitectureV1 runtime verifier — runs ONCE per instance.
+        # Pure observability: delegates to architecture_verifier, logs summary.
+        # Never blocks init, never changes control flow.
+        self._architecture_status: List[Dict[str, str]] = self._run_verifier()
+
+    # -- Architecture verifier --------------------------------------
+
+    def _run_verifier(self) -> List[Dict[str, str]]:
+        """Run kenoticArchitectureV1 and log a one-line summary.
+
+        Returns the full results list for caching. If the verifier itself
+        fails (import error, DB issue), returns an empty list and logs the
+        exception — never crashes init.
+        """
+        try:
+            from app.engines.architecture_verifier import (
+                verify_kenotic_architecture_v1,
+            )
+            results = verify_kenotic_architecture_v1(db_path=self.db_path)
+        except Exception:
+            _log.warning(
+                "kenoticArchitectureV1: verifier could not run",
+                exc_info=True,
+            )
+            return []
+
+        passed = sum(1 for r in results if r["status"] == "PASS")
+        failed = sum(1 for r in results if r["status"] == "FAIL")
+        total = len(results)
+
+        _log.info(
+            "kenoticArchitectureV1: %d/%d PASS, %d FAIL",
+            passed, total, failed,
+        )
+        for r in results:
+            if r["status"] == "FAIL":
+                _log.warning(
+                    "  FAIL: %s -- %s", r["check"], r["detail"],
+                )
+        return results
+
+    def architecture_status(self) -> List[Dict[str, str]]:
+        """Return cached kenoticArchitectureV1 verifier results.
+
+        Each entry is a dict with keys: check, status, detail.
+        Ran once at init; this method returns the cached snapshot.
+        """
+        return self._architecture_status
+
+    # -- Private engine loader --------------------------------------
+
+    def _engines(self):
+        # Root cause: old code imported get_retrieval_engine from
+        # app.engines.retrieval which was deleted after v3 regression.
+        # Guard changed from _retrieval to _memory. Retrieval replaced
+        # by reconstruction engine (app.engines.reconstruction).
+        if self._memory is None:
+            from app.engines.memory import get_memory_engine
+            from app.engines.temporal import get_temporal_engine
+            self._memory = get_memory_engine()
+            self._temporal = get_temporal_engine()
+            self._temporal.bind_memory(self._memory)
+        return self._memory, self._temporal
+
+    def _init_schema(self):
+        import sqlite3
+        from app.db.models import MIGRATIONS, run_schema_upgrades
+        Path(self.db_path).parent.mkdir(parents=True, exist_ok=True)
+        conn = sqlite3.connect(self.db_path)
+        conn.executescript(MIGRATIONS)
+        run_schema_upgrades(conn)
+        # Phase 6 sequence_number column
+        try:
+            conn.execute("ALTER TABLE relationships ADD COLUMN sequence_number INTEGER")
+            conn.execute(
+                "CREATE INDEX IF NOT EXISTS idx_rel_seq "
+                "ON relationships(user_id, sequence_number)"
+            )
+        except Exception:
+            pass
+        conn.commit()
+        conn.close()
+
+    # -- Public API -------------------------------------------------
+
+    def ingest(
+        self,
+        text: str,
+        *,
+        source_timestamp: Optional[str] = None,
+        speaker: Optional[str] = None,
+        speaker_is_user: bool = True,
+        confidence: float = 0.9,
+        model_response: Optional[str] = None,
+    ) -> int:
+        """Extract triples from raw text and store them.
+
+        The singular write path runs:
+        structural cleanup -> grammar correction -> grammar engine
+        extraction -> trace-primary persistence.
+
+        There is no alternate extraction branch in the SDK path.
+
+        If model_response is provided and non-empty, runs the same
+        extraction pipeline on the model's response and stores those
+        triples with source_tag="model_comprehension". The tag is fixed
+        and not caller-controlled.
+
+        Args:
+          text: the raw user utterance or conversation turn.
+          source_timestamp: ISO datetime of the utterance. Used by the
+                            temporal engine for supersession + cluster
+                            recency.
+          speaker: if provided, 'I'/'me'/'myself' in extracted triples
+                   are resolved to this name.
+          confidence: 0.0—1.0 confidence for every resulting triple.
+          model_response: the model's response text. If non-empty, triples
+                          extracted from it are stored with
+                          source_tag="model_comprehension".
+
+        Returns:
+          Combined number of triples stored from both passes.
+        """
+        # Root cause: _engines() returns 2 values (memory, temporal) since
+        # retrieval.py was deleted. Was 3-value unpack; third was retrieval.
+        memory, _ = self._engines()
+        count = memory.ingest_text(
+            user_id=self.user_id,
+            text=text,
+            source_timestamp=source_timestamp,
+            speaker=speaker,
+            speaker_is_user=speaker_is_user,
+            confidence=confidence,
+        )
+        if model_response and model_response.strip():
+            count += memory.ingest_text(
+                user_id=self.user_id,
+                text=model_response,
+                source_timestamp=source_timestamp,
+                speaker=speaker,
+                speaker_is_user=speaker_is_user,
+                confidence=confidence,
+                source_tag="model_comprehension",
+            )
+        return count
+
+    def retrieve(self, query: str) -> Union[Answer, Situation]:
+        """Query the continuity layer.
+
+        Situational queries ('summarize X', 'why is Y', 'what's
+        happening with Z') route to reconstruction and return a
+        Situation. Lookup queries ('who is Maya's manager?') route to
+        Filter->Complete and return an Answer.
+
+        Routing is determined by WH-grammar + discourse verbs in the
+        query — not by a flag.
+        """
+        # Route situational queries to the reconstruction path.
+        # When explicit_reconstruct_only is True, only fire reconstruct()
+        # if the query contains an explicit trigger word ("reconstruct",
+        # "what's going on", "summarize", "tell me about").
+        # When False, is_situational() routes automatically via WH-grammar.
+        from config.settings import settings
+        try:
+            if settings.explicit_reconstruct_only:
+                _lower = query.lower()
+                _triggers = ("reconstruct", "what's going on", "whats going on",
+                             "summarize", "tell me about", "what is going on",
+                             "what's happening", "whats happening",
+                             "how is everything", "catch me up",
+                             "give me a summary", "overview")
+                if any(t in _lower for t in _triggers):
+                    return self.reconstruct(query)
+            else:
+                from app.engines.wh_type import is_situational
+                if is_situational(query):
+                    return self.reconstruct(query)
+        except Exception:
+            pass  # fail-open: fall through to lookup
+
+        # Root cause: old code called retrieval.retrieve() from deleted
+        # app.engines.retrieval. Now routes through reconstruction engine.
+        from app.engines.reconstruction import reconstruct as _reconstruct
+        rr = _reconstruct(self.user_id, query)
+        if rr.refusal:
+            # Use reconstruction engine's answer if it provides one (e.g. low-coverage CWA),
+            # otherwise fall back to the standard refusal text.
+            refusal_text = rr.answer or "This information is not mentioned in the conversation."
+            return Answer(
+                text=refusal_text,
+                refusal=True, refusal_reason=rr.refusal_reason,
+            )
+        return Answer(
+            text=rr.answer or "",
+            grounding=rr.grounding,
+            edge_ids=rr.edge_ids,
+            return_field=rr.return_field,
+        )
+
+    def forget(
+        self,
+        by: str,            # 'entity' | 'time_range' | 'source' | 'triple_id'
+        scope,              # str | int | (str, str) tuple / list
+    ) -> int:
+        """Tombstone memory by entity, time range, source tag, or triple id.
+
+        Returns the count of tombstones emitted. Idempotent — calling
+        again with the same scope returns 0.
+        """
+        memory, _ = self._engines()
+        if by == 'entity':
+            return memory.forget_by_entity(self.user_id, scope)
+        if by == 'time_range':
+            start, end = scope  # tuple/list unpack
+            return memory.forget_by_time_range(self.user_id, start, end)
+        if by == 'source':
+            return memory.forget_by_source(self.user_id, scope)
+        if by == 'triple_id':
+            return memory.forget_by_triple_id(self.user_id, int(scope))
+        raise ValueError(f"Unknown forget scope: {by}")
+
+    def show(
+        self,
+        facet: str,         # 'time' | 'entity' | 'source' | 'trace'
+        value: Optional[str] = None,
+        limit: int = 100,
+        export_raw_text: bool = False,
+    ) -> list:
+        """Return a browsable view of stored memory.
+
+        Never returns trace internals (edge_*, embeddings, convergence
+        state, salience). If export_raw_text=True, includes the original
+        source_text field. Otherwise, returns only fact summaries.
+        """
+        memory, _ = self._engines()
+        rows = memory.list_by_facet(
+            self.user_id, facet, value=value, limit=limit
+        )
+        if not export_raw_text:
+            for r in rows:
+                r.pop('source_text', None)
+        return rows
+
+    def trace(self, subject: str, predicate: str) -> list:
+        """Return the full supersession history for a subject+predicate pair.
+
+        Surfaces every object value ever stored for this (subject, predicate)
+        combination — both active and superseded — ordered oldest to newest.
+        Each entry is a dict with keys: id, object, is_active,
+        first_learned_at, source_timestamp, source_tag, superseded_by,
+        superseded_at, sequence_number.
+
+        Pure delegation to MemoryEngine.trace(). No logic added here.
+        """
+        memory, _ = self._engines()
+        return memory.trace(self.user_id, subject, predicate)
+
+    def check_proactive(self) -> list:
+        """Return proactive insights (arcs due for surfacing).
+
+        Queries the arcs table for open arcs. Returns a list of
+        ProactiveInsight dataclasses. Returns [] if the arcs table
+        doesn't exist or no arcs are due.
+        """
+        from app.engines.proactive import get_proactive_engine
+        memory, temporal = self._engines()
+        proactive = get_proactive_engine(memory, temporal)
+        return proactive.evaluate_due(self.user_id)
+
+    def profile(self):
+        """Return the current adaptation profile for this user.
+
+        Returns an AdaptationProfile dataclass with warmth, formality,
+        initiative, and check_in_frequency dimensions (all 0.0—1.0).
+        """
+        from app.engines.adaptability import get_adaptability_engine
+        memory, _ = self._engines()
+        adapt = get_adaptability_engine(memory)
+        return adapt.profile(self.user_id)
+
+
+    def process(
+        self,
+        text: str,
+        *,
+        speaker: str = "user",
+        speaker_is_user: bool = True,
+        source_timestamp: Optional[str] = None,
+        model_response: Optional[str] = None,
+        check_proactive: bool = False,
+    ) -> ProcessResult:
+        """Unified entry point. The architecture decides everything.
+
+        Classifies intent via the grammar engine, routes to the correct
+        internal capability, and returns a ProcessResult.
+
+        Args:
+          text: raw user utterance. Empty string with check_proactive=True
+                triggers proactive-only mode.
+          speaker: identity for pronoun resolution in extraction.
+          source_timestamp: ISO datetime of the utterance.
+          model_response: assistant reply text for model_comprehension storage.
+          check_proactive: if True and text is empty, return proactive insights
+                           only. If True and text is non-empty, proactive
+                           insights are appended to store results.
+
+        Returns:
+          ProcessResult with action discriminator and typed result.
+        """
+        # Proactive-only mode: no text, just check for due arcs.
+        if check_proactive and not text.strip():
+            insights = self.check_proactive()
+            return ProcessResult(
+                action="proactive",
+                result=insights,
+                proactive=insights,
+            )
+
+        # Classify intent via grammar engine (primary) or structural fallback.
+        is_question = False
+        is_command = False
+        is_backchannel = False
+
+        try:
+            from app.engines.grammar_engine import process as grammar_process
+            gram = grammar_process(text, speaker=speaker)
+            is_question = gram.classification.is_question
+            is_command = gram.classification.is_command
+            is_backchannel = gram.classification.is_backchannel
+        except ImportError:
+            # Structural fallback: ? = question, imperative verbs = command
+            stripped = text.strip()
+            if stripped.endswith("?"):
+                is_question = True
+            elif stripped.lower().split()[0] in ("forget", "delete", "remove") if stripped else False:
+                is_command = True
+
+        # BACKCHANNEL — skip entirely
+        if is_backchannel:
+            return ProcessResult(action="skipped")
+
+        # COMMAND — route to forget
+        if is_command:
+            target = self._parse_forget_target(text)
+            if target:
+                count = self.forget(by="entity", scope=target)
+                return ProcessResult(action="forgot", result=count)
+            return ProcessResult(action="skipped")
+
+        # QUESTION — sub-route: situational vs factual
+        # Respects explicit_reconstruct_only setting (same logic as retrieve())
+        if is_question:
+            try:
+                if settings.explicit_reconstruct_only:
+                    _lower = text.lower()
+                    _triggers = ("reconstruct", "what's going on", "whats going on",
+                                 "summarize", "tell me about", "what is going on",
+                                 "what's happening", "whats happening",
+                                 "how is everything", "catch me up",
+                                 "give me a summary", "overview")
+                    if any(t in _lower for t in _triggers):
+                        situation = self.reconstruct(text)
+                        return ProcessResult(action="reconstructed", result=situation)
+                else:
+                    from app.engines.wh_type import is_situational
+                    if is_situational(text):
+                        situation = self.reconstruct(text)
+                        return ProcessResult(action="reconstructed", result=situation)
+            except Exception:
+                pass
+            answer = self.retrieve(text)
+            return ProcessResult(action="answered", result=answer)
+
+        # STATEMENT — write path + optional proactive check
+        count = self.ingest(
+            text,
+            speaker=speaker,
+            speaker_is_user=speaker_is_user,
+            source_timestamp=source_timestamp,
+            model_response=model_response,
+        )
+        insights = self.check_proactive() if check_proactive else []
+        return ProcessResult(
+            action="stored",
+            result=count,
+            proactive=insights,
+            triples_stored=count,
+        )
+
+    @staticmethod
+    def _parse_forget_target(text: str) -> Optional[str]:
+        """Extract the entity target from a forget/delete/remove command.
+
+        Strips the imperative verb and common prepositions to isolate the
+        entity name. Returns None if nothing remains.
+        """
+        stripped = text.strip().rstrip(".").rstrip("!")
+        tokens = stripped.split()
+        if not tokens:
+            return None
+        # Drop the imperative verb
+        rest = tokens[1:]
+        # Drop leading prepositions ("about", "all about", "everything about")
+        skip = {"about", "all", "everything"}
+        while rest and rest[0].lower() in skip:
+            rest = rest[1:]
+        target = " ".join(rest).strip()
+        return target if target else None
+
+    def reconstruct(self, query: str) -> Situation:
+        """Force the reconstruction path.
+
+        Root cause: old code called retrieval.reconstruct() from deleted
+        app.engines.retrieval. Now routes through reconstruction engine.
+        """
+        from app.engines.reconstruction import reconstruct as _reconstruct
+        rr = _reconstruct(self.user_id, query)
+        return Situation(
+            narrative=rr.answer or "",
+            grounding=rr.grounding,
+            edge_ids=rr.edge_ids,
+        )
+
+
+# -- Module-level singleton -----------------------------------------------
+
+_singleton: Optional[Kenotic] = None
+
+
+def KenoticV1(
+    text: str,
+    *,
+    speaker: str = "user",
+    speaker_is_user: bool = True,
+    source_timestamp: Optional[str] = None,
+    model_response: Optional[str] = None,
+    check_proactive: bool = False,
+    user_id: int = 0,
+    db_path: Union[str, Path] = "~/.kenotic/memory.db",
+    embed_device: str = "cuda",
+):
+    """The entire Kenotic continuity architecture in ONE function call.
+
+    Send text. Get continuity. The architecture handles everything:
+    - Statements  -> grammar engine -> typed extraction -> 5-trace store -> supersession -> proactive arcs
+    - Questions   -> classify -> situational reconstruction OR factual lookup
+    - Commands    -> parse target -> soft tombstone
+    - Backchannels -> skip
+
+    First call initializes the engine stack (lazy). Subsequent calls reuse it.
+    Runtime verifier (144 checks) runs once at init.
+
+    Args:
+        text: any English text -- statement, question, command, anything.
+        speaker: who said it (for pronoun resolution).
+        source_timestamp: ISO datetime of the utterance.
+        model_response: the AI's response (stored as model_comprehension).
+        check_proactive: if True with empty text, returns arcs due for surfacing.
+        user_id: partition key (default 0 for single-user).
+        db_path: SQLite file path.
+        embed_device: 'cuda' or 'cpu'.
+
+    Returns:
+        ProcessResult -- contains action, result, proactive insights, triples_stored.
+    """
+    global _singleton
+    if _singleton is None or _singleton.db_path != str(db_path) or _singleton.user_id != int(user_id):
+        _singleton = Kenotic(user_id=user_id, db_path=db_path, embed_device=embed_device)
+
+    return _singleton.process(
+        text,
+        speaker=speaker,
+        speaker_is_user=speaker_is_user,
+        source_timestamp=source_timestamp,
+        model_response=model_response,
+        check_proactive=check_proactive,
+    )
