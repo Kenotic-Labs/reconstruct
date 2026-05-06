@@ -438,12 +438,9 @@ def _tier0_facts(conn: sqlite3.Connection, user_id: int,
     # E.g. "research" → VerbClass.STUDY → key "education::STUDY::Caroline"
     verb_class_name = None
     if qd.match_predicate:
-        try:
-            from app.engines.grammar_engine import classify_verb_class
-            vc = classify_verb_class(qd.match_predicate.lower())
-            verb_class_name = vc.name  # e.g. "WORK", "LIVE", "STUDY"
-        except Exception:
-            verb_class_name = qd.match_predicate.upper()
+        from app.engines.grammar_engine import classify_verb_class
+        vc = classify_verb_class(qd.match_predicate.lower())
+        verb_class_name = vc.name  # e.g. "WORK", "LIVE", "STUDY"
 
     parts = []
     if qd.match_schema:
@@ -881,10 +878,7 @@ def _apply_ranking_signals(candidates: List[Candidate], query: str,
 
     query_pred_emb = None
     if qd.match_predicate:
-        try:
-            query_pred_emb = embed_text(qd.match_predicate.lower())
-        except Exception:
-            pass
+        query_pred_emb = embed_text(qd.match_predicate.lower())
 
     for c in candidates:
         ce_score = c.score  # Cross-encoder score (already set by _rerank)
@@ -892,12 +886,9 @@ def _apply_ranking_signals(candidates: List[Candidate], query: str,
         # Predicate cosine
         pred_cosine = 0.0
         if query_pred_emb is not None and c.predicate_embedding:
-            try:
-                pred_emb = np.frombuffer(c.predicate_embedding, dtype=np.float32)
-                if pred_emb.shape == query_pred_emb.shape:
-                    pred_cosine = max(0.0, float(np.dot(pred_emb, query_pred_emb)))
-            except Exception:
-                pass
+            pred_emb = np.frombuffer(c.predicate_embedding, dtype=np.float32)
+            if pred_emb.shape == query_pred_emb.shape:
+                pred_cosine = max(0.0, float(np.dot(pred_emb, query_pred_emb)))
 
         # Significance score
         sig_map = {"milestone": 1.0, "emphatic": 0.7, "routine": 0.3}
@@ -911,10 +902,11 @@ def _apply_ranking_signals(candidates: List[Candidate], query: str,
         if c.last_confirmed_at:
             try:
                 confirmed = datetime.fromisoformat(c.last_confirmed_at)
+            except ValueError:
+                confirmed = None
+            if confirmed:
                 delta_days = (datetime.now() - confirmed).days
                 recency_score = max(0.1, 1.0 - delta_days / 365.0)
-            except Exception:
-                pass
 
         # Affiliation
         aff_score = c.edge_affiliation if c.edge_affiliation else 0.5
@@ -969,15 +961,12 @@ def _check_coherence(c: Candidate, qd, query: str) -> bool:
             return True
         # Predicate embedding cosine
         if c.predicate_embedding:
-            try:
-                pred_emb = np.frombuffer(c.predicate_embedding, dtype=np.float32)
-                query_pred_emb = embed_text(qp)
-                if pred_emb.shape == query_pred_emb.shape:
-                    cos = float(np.dot(pred_emb, query_pred_emb))
-                    if cos > 0.45:
-                        return True
-            except Exception:
-                pass
+            pred_emb = np.frombuffer(c.predicate_embedding, dtype=np.float32)
+            query_pred_emb = embed_text(qp)
+            if pred_emb.shape == query_pred_emb.shape:
+                cos = float(np.dot(pred_emb, query_pred_emb))
+                if cos > 0.45:
+                    return True
         return False
 
     return True
@@ -1036,12 +1025,11 @@ def _relevance_gate(query: str, candidate: Candidate) -> float:
     Returns relevance score. Below RELEVANCE_GATE_THRESHOLD → refuse."""
     reranker = _get_reranker()
     if reranker is None:
+        # No cross-encoder available — cannot gate. Log and pass through.
+        log.warning("Relevance gate: no reranker loaded, cannot score")
         return 1.0
-    try:
-        score = float(reranker.predict([(query, candidate.source_text)])[0])
-        return score
-    except Exception:
-        return 1.0
+    score = float(reranker.predict([(query, candidate.source_text)])[0])
+    return score
 
 
 # ===========================================================================
@@ -1066,17 +1054,17 @@ def _extract_answer(candidate: Candidate, qd, query: str) -> str:
             if "how long ago" in q_lower:
                 try:
                     dt = datetime.fromisoformat(date[:10])
-                    delta = datetime.now() - dt
-                    years = delta.days // 365
-                    months = (delta.days % 365) // 30
-                    if years > 0:
-                        return f"{years} year{'s' if years != 1 else ''} ago"
-                    elif months > 0:
-                        return f"{months} month{'s' if months != 1 else ''} ago"
-                    else:
-                        return f"{delta.days} day{'s' if delta.days != 1 else ''} ago"
-                except Exception:
-                    pass
+                except ValueError:
+                    return date  # Non-ISO date string — return as-is
+                delta = datetime.now() - dt
+                years = delta.days // 365
+                months = (delta.days % 365) // 30
+                if years > 0:
+                    return f"{years} year{'s' if years != 1 else ''} ago"
+                elif months > 0:
+                    return f"{months} month{'s' if months != 1 else ''} ago"
+                else:
+                    return f"{delta.days} day{'s' if delta.days != 1 else ''} ago"
             # "what year" → year only
             if "what year" in q_lower:
                 return date[:4]
@@ -1104,10 +1092,12 @@ def _extract_answer(candidate: Candidate, qd, query: str) -> str:
         if rel and rel != "[]":
             try:
                 entities = json.loads(rel)
-                if entities:
-                    return ", ".join(str(e) for e in entities)
-            except Exception:
-                pass
+            except json.JSONDecodeError:
+                log.warning("Malformed relational_entities JSON on edge %d: %s",
+                            candidate.edge_id, rel[:50])
+                entities = []
+            if entities:
+                return ", ".join(str(e) for e in entities)
         return candidate.subject or candidate.object
 
     # Default: episodic
@@ -1774,18 +1764,14 @@ def _is_contentful_object(text: str) -> bool:
     """
     if not text or not text.strip():
         return False
-    try:
-        from app.engines.grammar_engine import _get_nlp
-        nlp = _get_nlp()
-        doc = nlp(text.strip())
-        content_pos = {"NOUN", "PROPN", "ADJ", "NUM"}
-        for tok in doc:
-            if tok.pos_ in content_pos:
-                return True
-        return False
-    except Exception:
-        # If spaCy unavailable, fall back to length heuristic
-        return len(text.strip()) > 4
+    from app.engines.grammar_engine import _get_nlp
+    nlp = _get_nlp()
+    doc = nlp(text.strip())
+    content_pos = {"NOUN", "PROPN", "ADJ", "NUM"}
+    for tok in doc:
+        if tok.pos_ in content_pos:
+            return True
+    return False
 
 
 def _clean_article(text: str) -> str:
@@ -2022,19 +2008,13 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
         # Doc lines 1951-1965: runs cheaply on ALL candidates BEFORE cross-encoder
         # narrows to top-20. Catches predicate synonymy ("visit" vs "went_to").
         if qd.match_predicate:
-            try:
-                _qpred_emb = embed_text(qd.match_predicate.lower())
-                for c in candidates:
-                    if c.predicate_embedding:
-                        try:
-                            _pemb = np.frombuffer(c.predicate_embedding, dtype=np.float32)
-                            if _pemb.shape == _qpred_emb.shape:
-                                c.score += float(np.dot(_pemb, _qpred_emb)) * 0.3
-                        except Exception:
-                            pass
-                candidates.sort(key=lambda c: c.score, reverse=True)
-            except Exception:
-                pass
+            _qpred_emb = embed_text(qd.match_predicate.lower())
+            for c in candidates:
+                if c.predicate_embedding:
+                    _pemb = np.frombuffer(c.predicate_embedding, dtype=np.float32)
+                    if _pemb.shape == _qpred_emb.shape:
+                        c.score += float(np.dot(_pemb, _qpred_emb)) * 0.3
+            candidates.sort(key=lambda c: c.score, reverse=True)
 
         # ---- Step 5: Cross-encoder reranking ----
         candidates = _rerank(query, candidates)
