@@ -1947,22 +1947,41 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
             t2, pq_hit = _tier2_predicted_queries(conn, user_id, query)
             if pq_hit and pq_hit[2] >= PQ_HIGH_CONFIDENCE:
                 pq_answer, pq_edge_id, pq_cos = pq_hit
-                # Entity check: verify the PQ edge belongs to the queried entity.
-                # Cat 5 adversarial swaps speakers — "What did Melanie research?"
-                # when the edge is Caroline/research/adoption. Must reject.
-                query_entity = qd.match_entity or qd.match_subject or ""
+                # Entity check: verify ALL named entities in the query appear
+                # in the edge. Cat 5 adversarial swaps speakers — "Is Oscar
+                # Melanie's pet?" when Oscar is Caroline's pet. Must check
+                # both Oscar AND Melanie, not just the first entity.
+                # Uses spaCy NER — no entity lists.
+                from app.engines.grammar_engine import _get_nlp
+                _nlp = _get_nlp()
+                _qdoc = _nlp(query)
+                _query_entities = [
+                    ent.text.lower() for ent in _qdoc.ents
+                    if ent.label_ in ("PERSON", "ORG", "GPE")
+                ]
+                # Also add match_entity/match_subject if not already covered
+                for _qe in (qd.match_entity, qd.match_subject):
+                    if _qe and _qe.lower() not in ("user", ""):
+                        _qe_low = _qe.lower()
+                        if not any(_qe_low in e or e in _qe_low for e in _query_entities):
+                            _query_entities.append(_qe_low)
+
                 entity_ok = True
-                if query_entity and query_entity.lower() not in ("user", ""):
+                if _query_entities:
                     edge_row = conn.execute(
-                        "SELECT subject, relational_entities FROM relationships WHERE id = ?",
+                        "SELECT subject, relational_entities, source_text FROM relationships WHERE id = ?",
                         (pq_edge_id,),
                     ).fetchone()
                     if edge_row:
-                        subj = (edge_row["subject"] or "").lower()
-                        rel = (edge_row["relational_entities"] or "").lower()
-                        qe = query_entity.lower()
-                        if qe not in subj and subj not in qe and qe not in rel:
-                            entity_ok = False
+                        _edge_text = " ".join([
+                            (edge_row["subject"] or ""),
+                            (edge_row["relational_entities"] or ""),
+                            (edge_row["source_text"] or ""),
+                        ]).lower()
+                        for _qe in _query_entities:
+                            if _qe not in _edge_text:
+                                entity_ok = False
+                                break
                 if entity_ok:
                     # Don't return raw PQ answer — route through return_field
                     # extraction so temporal/emotional/relational answers are correct.
@@ -1972,6 +1991,20 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
                     ).fetchone()
                     if pq_edge_row:
                         pq_candidate = _row_to_candidate(pq_edge_row, "pq_hit")
+                        # Yes/no queries: PQ confirms edge exists → Yes/No
+                        # (doc line 1428: yes/no routing before answer extraction)
+                        if _is_yesno_query(query, qd.wh_word):
+                            if pq_candidate.edge_negated:
+                                return ReconstructionResult(
+                                    answer="No", return_field="episodic",
+                                    edge_ids=[pq_edge_id],
+                                    grounding=[pq_candidate.source_text],
+                                )
+                            return ReconstructionResult(
+                                answer="Yes", return_field="episodic",
+                                edge_ids=[pq_edge_id],
+                                grounding=[pq_candidate.source_text],
+                            )
                         answer = _extract_answer(pq_candidate, qd, query)
                         log.debug("PQ short-circuit: cos=%.3f edge=%d answer=%s",
                                   pq_cos, pq_edge_id, answer[:50] if answer else "")
