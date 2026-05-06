@@ -1111,10 +1111,19 @@ def _extract_answer(candidate: Candidate, qd, query: str) -> str:
         return candidate.subject or candidate.object
 
     # Default: episodic
-    answer = candidate.object or candidate.episodic_fact or ""
-    if not answer:
-        answer = candidate.source_text
-    return answer
+    # Object field may contain pronouns ("them"), determiners ("this"),
+    # or empty fragments from grammar engine extraction. When the object
+    # isn't a contentful noun phrase, fall back to source_text.
+    # Use spaCy POS tagging to detect — no word lists.
+    obj = candidate.object or ""
+    if obj.strip():
+        if _is_contentful_object(obj):
+            return obj
+
+    if candidate.episodic_fact:
+        return candidate.episodic_fact
+
+    return candidate.source_text or ""
 
 
 # ===========================================================================
@@ -1755,6 +1764,29 @@ def _write_back_pq(conn: sqlite3.Connection, user_id: int,
 # ===========================================================================
 # UTILITY
 # ===========================================================================
+
+def _is_contentful_object(text: str) -> bool:
+    """Check if an object string is a contentful noun phrase vs a pronoun/stub.
+
+    Uses spaCy POS tagging — no word lists. A contentful object has at least
+    one NOUN, PROPN, or ADJ token. Pure pronouns (PRON), determiners (DET),
+    or single-token function words are not contentful answers.
+    """
+    if not text or not text.strip():
+        return False
+    try:
+        from app.engines.grammar_engine import _get_nlp
+        nlp = _get_nlp()
+        doc = nlp(text.strip())
+        content_pos = {"NOUN", "PROPN", "ADJ", "NUM"}
+        for tok in doc:
+            if tok.pos_ in content_pos:
+                return True
+        return False
+    except Exception:
+        # If spaCy unavailable, fall back to length heuristic
+        return len(text.strip()) > 4
+
 
 def _clean_article(text: str) -> str:
     """Strip leading articles/determiners from match_object."""
