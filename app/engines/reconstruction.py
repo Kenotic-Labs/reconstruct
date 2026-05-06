@@ -1931,21 +1931,11 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
                     grounding=[f"facts:{qd.match_entity or qd.match_subject}"],
                 )
 
-        # Trace-scoped retrieval (plan #2) — when no S/P/O available
-        candidates: List[Candidate] = []
-        if not _has_spo(qd):
-            candidates = _trace_scoped_retrieval(conn, user_id, qd, query)
-
-        # Tier 1: Structural SQL (with speaker attr, negation, mood filters)
-        if not candidates:
-            candidates = _tier1_structural(conn, user_id, qd, query, temporal_filter)
-
-        # Tier 2: Predicted queries (if Tier 1 insufficient)
-        # High-confidence PQ match short-circuits the entire pipeline —
-        # the PQ was written at ingest time specifically for this query pattern.
-        if len(candidates) < 3:
-            t2, pq_hit = _tier2_predicted_queries(conn, user_id, query)
-            if pq_hit and pq_hit[2] >= PQ_HIGH_CONFIDENCE:
+        # ---- PQ short-circuit (highest precision, entity-gated) ----
+        # Runs BEFORE tier cascade. If PQ cos >= threshold AND all query
+        # entities found in edge → return directly. Otherwise fall through.
+        t2, pq_hit = _tier2_predicted_queries(conn, user_id, query)
+        if pq_hit and pq_hit[2] >= PQ_HIGH_CONFIDENCE:
                 pq_answer, pq_edge_id, pq_cos = pq_hit
                 # Entity check: verify ALL named entities in the query appear
                 # in the edge. Cat 5 adversarial swaps speakers — "Is Oscar
@@ -2014,12 +2004,24 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
                             edge_ids=[pq_edge_id],
                             grounding=[pq_candidate.source_text],
                         )
-            candidates = _merge_candidates(candidates, t2)
 
-        # Tier 3: RRF hybrid (if still insufficient)
-        if len(candidates) < 3:
-            t3 = _tier3_rrf(conn, user_id, query)
-            candidates = _merge_candidates(candidates, t3)
+        # ---- If PQ didn't short-circuit, run normal tier cascade ----
+
+        # Trace-scoped retrieval — when no S/P/O available
+        candidates: List[Candidate] = []
+        if not _has_spo(qd):
+            candidates = _trace_scoped_retrieval(conn, user_id, qd, query)
+
+        # Tier 1: Structural SQL
+        if not candidates:
+            candidates = _tier1_structural(conn, user_id, qd, query, temporal_filter)
+
+        # Merge Tier 2 PQ candidates (already computed above)
+        candidates = _merge_candidates(candidates, t2)
+
+        # Tier 3: RRF hybrid
+        t3 = _tier3_rrf(conn, user_id, query)
+        candidates = _merge_candidates(candidates, t3)
 
         if not candidates:
             # No candidates — check CWA or arc expansion
