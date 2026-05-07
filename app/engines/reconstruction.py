@@ -1217,13 +1217,24 @@ def _extract_answer(candidate: Candidate, qd, query: str) -> str:
         date = candidate.resolved_event_date or candidate.temporal_expression or ""
         if date:
             q_lower = query.lower()
-            # Plan #15: "how long" → compute delta from date to now
+            # Plan #15: "how long" → compute delta from date to reference time.
+            # Use the candidate's source_timestamp as reference (conversation time),
+            # NOT datetime.now() — LOCOMO conversations happen in 2023 but we may
+            # run in 2026.
             if "how long" in q_lower:
                 try:
                     dt = datetime.fromisoformat(date[:10])
                 except ValueError:
                     return date  # Non-ISO date string — return as-is
-                delta = datetime.now() - dt
+                ref_time = datetime.now()
+                if candidate.source_timestamp:
+                    try:
+                        ref_time = datetime.fromisoformat(
+                            candidate.source_timestamp[:19]
+                        )
+                    except (ValueError, TypeError):
+                        pass
+                delta = ref_time - dt
                 years = delta.days // 365
                 months = (delta.days % 365) // 30
                 ago_suffix = " ago" if "ago" in q_lower else ""
