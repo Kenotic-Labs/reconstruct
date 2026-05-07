@@ -1488,6 +1488,12 @@ def _handle_aggregation_query(
     # Sort by cosine descending, take all
     scored_objects.sort(key=lambda x: x[1], reverse=True)
 
+    if not scored_objects:
+        return None
+
+    # Sort by cosine descending, take all
+    scored_objects.sort(key=lambda x: x[1], reverse=True)
+
     # Collect unique objects
     items = [obj for obj, _cos, _eid in scored_objects]
 
