@@ -23,6 +23,7 @@ Public names (imported by retrieval, memory, tests, SDK):
     _build_trace_decomposition
     detect_mood, detect_negation, detect_tense_aspect, detect_voice, resolve_pronouns
     classify_utterance, extract_typed_triple
+    generate_predicted_queries, pq_active_model_name
 """
 
 from __future__ import annotations
@@ -34,6 +35,61 @@ from enum import Enum
 from typing import Any, Dict, List, Optional, Tuple
 
 logger = logging.getLogger(__name__)
+
+# ---------------------------------------------------------------------------
+# Entry / Exit checks
+# ---------------------------------------------------------------------------
+
+_ENTRY_CHECKED = False
+
+
+class GrammarEntryError(RuntimeError):
+    """Raised when grammar engine's dependencies are not available."""
+    pass
+
+
+def _check_entry():
+    """Verify ingestion and memory are importable. Runs once."""
+    global _ENTRY_CHECKED
+    if _ENTRY_CHECKED:
+        return
+    missing = []
+    try:
+        from app.engines import ingestion  # noqa: F401
+        if not hasattr(ingestion, 'cleanup'):
+            missing.append("ingestion.cleanup")
+    except ImportError:
+        missing.append("ingestion")
+    try:
+        from app.engines import memory  # noqa: F401
+        if not hasattr(memory, 'get_memory_engine'):
+            missing.append("memory.get_memory_engine")
+    except ImportError:
+        missing.append("memory")
+    if missing:
+        raise GrammarEntryError(
+            f"grammar_engine entry check failed — missing: {', '.join(missing)}"
+        )
+    _ENTRY_CHECKED = True
+
+
+def check_exit(result) -> bool:
+    """Validate GrammarResult has valid trace decompositions."""
+    if result is None:
+        return False
+    decomps = getattr(result, 'trace_decompositions', None)
+    if not decomps:
+        return True  # no decomps is valid (backchannel etc.)
+    for td in decomps:
+        # Every trace decomposition must have the 5 trace fields
+        for field_name in ('episodic_fact', 'emotional_valence',
+                           'temporal_direction', 'relational_subject',
+                           'schematic_category'):
+            if not hasattr(td, field_name):
+                logger.error("grammar exit check: TraceDecomposition missing %s", field_name)
+                return False
+    return True
+
 
 # ---------------------------------------------------------------------------
 # Lazy-loaded singletons
@@ -537,6 +593,11 @@ def _extract_grammatical_object(doc, root, _is_recursive: bool = False) -> str:
                     }
                     if _pobj_ner & frozenset({"DATE", "TIME"}):
                         break  # temporal prep, skip to next prep child
+                    return _span_text(gc)
+                # pcomp: prepositional complement (gerund).
+                # "thinking of [working with trans people]" — "working"
+                # has dep=pcomp under prep "of". Extract its full subtree.
+                if gc.dep_ == "pcomp" and gc.tag_ == "VBG":
                     return _span_text(gc)
 
     # 5-6. Xcomp / ccomp chains
@@ -1470,13 +1531,32 @@ def _extract_emotional(doc, root) -> Tuple[Optional[str], Optional[float], Optio
     if emotion_adj is None:
         return (None, None, None)
 
-    # Valence: check negation on the emotion token or its head
+    # Valence: SentiWordNet average across synsets for the token's POS,
+    # then flip sign if syntactic negation is present.
+    # Maps spaCy POS to WordNet POS for synset lookup.
+    _SPACY_TO_WN_POS = {"ADJ": "a", "NOUN": "n", "VERB": "v", "ADV": "r"}
+    wn_pos = _SPACY_TO_WN_POS.get(emotion_tok.pos_, "a")
+    valence = 0.0
+    try:
+        from nltk.corpus import sentiwordnet as _swn
+        ss = list(_swn.senti_synsets(emotion_tok.lemma_.lower(), wn_pos))
+        if not ss:
+            # Fallback: try adjective POS if primary POS missed
+            ss = list(_swn.senti_synsets(emotion_tok.lemma_.lower(), "a"))
+        if ss:
+            vals = [s.pos_score() - s.neg_score() for s in ss]
+            valence = sum(vals) / len(vals)
+    except Exception:
+        pass
+
+    # Negation flips the sign: "not happy" → negative
     has_negation = any(child.dep_ == "neg" for child in emotion_tok.children)
     if not has_negation and emotion_tok.head is not None:
         has_negation = any(
             child.dep_ == "neg" for child in emotion_tok.head.children
         )
-    valence = float(not has_negation)
+    if has_negation:
+        valence = -valence
 
     # Target: pobj of prep child, or nsubj of head verb
     target = None
@@ -1666,9 +1746,11 @@ def _extract_temporal(doc, tense_aspect: TenseAspect) -> Tuple[str, Optional[str
         if tok.dep_ == "advmod" and tok.lemma_.lower() in _FREQUENCY_ADVERBS:
             freq = tok.text.lower()
             if expression:
+                # Prepend frequency to a real temporal expression
                 expression = f"{freq} {expression}"
-            else:
-                expression = freq
+            # else: frequency adverb alone is NOT a temporal expression —
+            # "always", "often" etc. enrich direction but don't locate an event
+            # in time. Only real DATE/TIME spans or structural patterns qualify.
             break  # one frequency adverb per clause
 
     return (direction, expression)
@@ -3016,8 +3098,26 @@ def _extract_imposed_facts(
                 )
                 if decomp is not None:
                     # Time advcl: promote clause content as temporal expression
+                    # ONLY if the clause contains a real temporal signal (DATE/TIME
+                    # NER or structural time noun). Without this guard, phrasal
+                    # verbs like "look after" trigger false time classification and
+                    # stuff entire clauses ("I look after myself") into the field.
                     if advcl_type == "time" and clean_text:
-                        decomp.temporal_expression = clean_text
+                        _advcl_doc = _get_nlp()(clean_text)
+                        _has_date_ent = any(
+                            e.label_ in ("DATE", "TIME") for e in _advcl_doc.ents
+                        )
+                        _TIME_NOUNS = frozenset({
+                            "year", "month", "week", "day", "hour", "minute",
+                            "decade", "century", "semester", "quarter",
+                            "morning", "afternoon", "evening", "night",
+                            "weekend", "tonight", "tomorrow", "yesterday",
+                        })
+                        _has_time_noun = any(
+                            t.lemma_.lower() in _TIME_NOUNS for t in _advcl_doc
+                        )
+                        if _has_date_ent or _has_time_noun:
+                            decomp.temporal_expression = clean_text
                     imposed.append(decomp)
                     seen_subtree_starts.add(tok.i)
 
@@ -3758,6 +3858,7 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
 
     Spec Part 2: extraction rules by sentence type.
     """
+    _check_entry()
     nlp = _get_nlp()
     doc = nlp(text)
 
@@ -4034,8 +4135,20 @@ def _wh_to_return_field(wh_tok) -> str:
     """Map a WH-token to a return_field using spaCy POS/dep features.
     Grammar reference Section 9: Question Decomposition.
 
-    WRB advmod -> temporal (unless locative or manner+ADJ)
-    WP$/WP in subject -> relational
+    Root cause of prior bug: all WRB advmod tokens were handled by one
+    code path that used verb class to decide the return field.  But
+    "when" (temporal), "where" (locative), "why" (causal), and "how"
+    (manner) are structurally distinct question types in the closed
+    WH-word class and must be distinguished by lemma first.
+
+    WRB "when"  -> temporal  (always — asks about time)
+    WRB "where" -> episodic  (location lives in object/prep trace)
+    WRB "why"   -> episodic  (reason/cause lives in episodic trace)
+    WRB "how"   -> temporal  if head is temporal ADV ("how long"),
+                   emotional if head has ADJ complement,
+                   else episodic
+    WP$         -> relational
+    WP subj/attr-> relational
     Everything else -> episodic
     """
     if wh_tok is None:
@@ -4043,35 +4156,51 @@ def _wh_to_return_field(wh_tok) -> str:
 
     dep = wh_tok.dep_
     tag = wh_tok.tag_
+    lemma = wh_tok.lemma_.lower()
 
+    # --- WRB advmod: distinguish by lemma (closed grammatical class) ---
     if tag == "WRB" and dep == "advmod":
+        # "when" always asks about time
+        if lemma == "when":
+            return "temporal"
+
+        # "where" asks about location — stored in episodic trace
+        if lemma == "where":
+            return "episodic"
+
+        # "why" asks for reason/cause — episodic
+        if lemma == "why":
+            return "episodic"
+
+        # "how" — context-dependent
         head = wh_tok.head
+        # "how long" / "how long ago" -> temporal
+        if head.pos_ == "ADV" and head.lemma_.lower() == "long":
+            return "temporal"
+        # "how" + ADJ complement (e.g. "how did she feel") -> emotional
         has_adj_complement = any(
             c.dep_ in ("acomp", "oprd") and c.pos_ == "ADJ"
             for c in head.children
         )
         if has_adj_complement:
             return "emotional"
-        if head.pos_ in ("VERB", "AUX"):
-            head_vc = classify_verb_class(head.lemma_)
-            if head_vc == VerbClass.LOCATION:
-                head_vc = _reclassify_location_by_object(
-                    head.doc, head, head_vc,
-                )
-                if head_vc == VerbClass.LOCATION:
-                    return "episodic"
-        has_locative_prep = any(
-            c.dep_ == "prep" and c.pos_ == "ADP"
-            for c in head.children
-        )
-        if not has_locative_prep:
-            return "temporal"
+        return "episodic"
 
+    # --- WP$ ("whose") -> relational ---
     if tag == "WP$":
         return "relational"
 
+    # --- WP ("who"/"whom"/"what") in subject position ---
+    # Note: WP in attr (e.g. "What is X?" / "Who is X?") maps to episodic
+    # because en_core_web_sm lacks morph features to distinguish [+human]
+    # "who" from [-human] "what" — both are WP with empty morph.
+    # Returning episodic (object field) is correct for the majority case
+    # ("What is X's Y?" queries outnumber "Who is X?" queries).
     if tag == "WP":
-        if dep in ("nsubj", "nsubjpass"):
+        # Only "who"/"whom" in subject position → relational.
+        # "What" in subject position (e.g. "What motivated X?") asks about
+        # things, not people — return episodic so we extract from object.
+        if dep in ("nsubj", "nsubjpass") and lemma in ("who", "whom"):
             return "relational"
 
     return "episodic"
@@ -4160,6 +4289,10 @@ def classify_query(query_text: str) -> QueryDecomposition:
 
     # Derive match_schema — uses the SAME 7-step _extract_schematic() as the
     # write path so that stored schema and query schema never diverge.
+    # Note: _reclassify_location_by_object is NOT called here because the
+    # write path calls it on content_root (after _find_content_verb), not on
+    # root. Adding it here on root caused Cat 5 to regress (29.8% -> 19.2%)
+    # without improving Cat 1-4.
     try:
         vc = VerbClass.UNKNOWN
         if root.pos_ == "VERB":
@@ -4177,3 +4310,441 @@ def classify_query(query_text: str) -> QueryDecomposition:
         pass
 
     return result
+
+
+# ===========================================================================
+# Predicted Queries — absorbed from predicted_queries.py
+# ===========================================================================
+# Question generator for the DTCM write path.
+#
+# For each stored triple (subject, predicate, object) with entity types
+# (subject_type, object_type), emit one predicted question per WH-type the
+# triple can answer:
+#
+#     WHO   -- fires if subject_type or object_type is PERSON
+#     WHAT  -- always fires
+#     WHEN  -- fires if object_type is TIME, or predicate carries a
+#              temporal stem (WordNet closure over time_period.n.01)
+#     WHERE -- fires if object_type is LOCATION
+#
+# Each question is embedded via the shared MiniLM embedder (same path the
+# edge_embedding uses) so the retrieval layer can compare question vectors
+# with one cosine op.
+
+import os as _pq_os
+
+import numpy as _pq_np
+
+from app.vector.embedder import embed_text as _pq_embed_text
+
+# Lazy-loaded spaCy model for POS-based verb lemmatization (en_core_web_sm).
+# Separate from grammar_engine's _nlp which uses en_core_web_md.
+_pq_nlp = None
+
+
+def _pq_get_nlp():
+    global _pq_nlp
+    if _pq_nlp is None:
+        import spacy as _spacy
+        _pq_nlp = _spacy.load("en_core_web_sm")
+    return _pq_nlp
+
+
+def _pq_lemmatize_predicate(pred_clean: str) -> str:
+    """Lemmatize the head verb of a predicate phrase using spaCy POS.
+
+    'works at' -> 'work at', 'assigned to' -> 'assign to'.
+    Only the first VERB token is lemmatized; everything else passes through.
+    """
+    doc = _pq_get_nlp()(pred_clean)
+    tokens = []
+    verb_done = False
+    for tok in doc:
+        if not verb_done and tok.pos_ == "VERB":
+            tokens.append(tok.lemma_)
+            verb_done = True
+        else:
+            tokens.append(tok.text)
+    return " ".join(tokens)
+
+# Closed WH-type set for this foundation layer.
+_PQ_WH_WHO = "WHO"
+_PQ_WH_WHAT = "WHAT"
+_PQ_WH_WHEN = "WHEN"
+_PQ_WH_WHERE = "WHERE"
+
+# Type constants mirrored from type_resolver (avoid circular import).
+_PQ_PERSON = "PERSON"
+_PQ_LOCATION = "LOCATION"
+_PQ_TIME = "TIME"
+
+# ---- Model selection ---------------------------------------------------
+
+_pq_model = None
+_pq_tokenizer = None
+_pq_device = "cuda"
+_pq_model_name = None  # "raya" or "flan" after init
+_pq_probed = False
+
+
+def _pq_raya_path() -> str:
+    from pathlib import Path
+    here = Path(__file__).resolve()
+    return str(here.parents[2] / "models" / "raya-srl-220m-v4" / "final")
+
+
+def _pq_load_model(pref: str):
+    try:
+        import torch
+        from transformers import T5ForConditionalGeneration, AutoTokenizer
+    except Exception as e:
+        print(f"[predicted_queries] transformers unavailable: {e}")
+        return None
+
+    if pref == "raya":
+        path = _pq_os.environ.get("NURA_T5_MODEL_PATH", _pq_raya_path())
+    else:
+        _pq_os.environ.setdefault("HF_HOME", "D:/Nura/Env/hf_cache")
+        _pq_os.environ.setdefault("HF_HUB_OFFLINE", "1")
+        path = "google/flan-t5-base"
+
+    try:
+        device = "cuda"
+        tok = AutoTokenizer.from_pretrained(path)
+        mdl = T5ForConditionalGeneration.from_pretrained(path).to(device).eval()
+        return (mdl, tok, device)
+    except Exception as e:
+        print(f"[predicted_queries] {pref} load failed: {e}")
+        return None
+
+
+def _pq_generate_with(model, tokenizer, device, prompt: str, max_new: int = 32) -> str:
+    import torch
+    try:
+        inp = tokenizer(
+            prompt, return_tensors="pt", truncation=True, max_length=256
+        ).to(device)
+        with torch.no_grad():
+            out = model.generate(
+                **inp, max_new_tokens=max_new, num_beams=4, do_sample=False
+            )
+        return tokenizer.decode(out[0], skip_special_tokens=True).strip()
+    except Exception:
+        return ""
+
+
+def _pq_build_prompt(model_name: str, s: str, p: str, o: str, wh: str) -> str:
+    pred_clean = p.replace("_", " ")
+    if model_name == "raya":
+        return f"generate questions: {s}|{pred_clean}|{o} -> {wh}"
+    # flan
+    return (
+        f"Generate a {wh} question whose answer is the fact that "
+        f"{s} {pred_clean} {o}. Question:"
+    )
+
+
+def _pq_is_parseable(text: str) -> bool:
+    """A generated string is parseable if it is non-empty and starts with
+    a WH-word or an auxiliary-verb question stem."""
+    if not text:
+        return False
+    t = text.strip()
+    if not t:
+        return False
+    first = t.split()[0].lower().strip(".,?!:;")
+    # WH words form a closed grammatical class; this is not a curated
+    # topical list, it is the English interrogative paradigm.
+    return first in {
+        "who", "what", "when", "where", "why", "which", "whose", "how",
+        "is", "are", "was", "were", "do", "does", "did", "can", "will",
+    }
+
+
+# 5-triple probe corpus used at first-call to pick the winner.
+_PQ_PROBE_TRIPLES = [
+    ("Maya", "works_at", "Google", "PERSON", "ORG", _PQ_WH_WHO),
+    ("Sam", "lives_in", "Ann_Arbor", "PERSON", "LOCATION", _PQ_WH_WHERE),
+    ("meeting", "scheduled_on", "Tuesday", "EVENT", "TIME", _PQ_WH_WHEN),
+    ("Emily", "married_to", "Jake", "PERSON", "PERSON", _PQ_WH_WHO),
+    ("Raya", "is", "assistant", "GENERIC", "GENERIC", _PQ_WH_WHAT),
+]
+
+
+def _pq_ensure_model() -> bool:
+    """Load and probe models. Prefer raya; fall back to flan-t5-base."""
+    global _pq_model, _pq_tokenizer, _pq_device, _pq_model_name, _pq_probed
+    if _pq_probed:
+        return _pq_model is not None
+
+    _pq_probed = True
+
+    # Probe raya first.
+    attempt = _pq_load_model("raya")
+    if attempt is not None:
+        mdl, tok, dev = attempt
+        passes = 0
+        for (s, p, o, st, ot, wh) in _PQ_PROBE_TRIPLES:
+            out = _pq_generate_with(mdl, tok, dev, _pq_build_prompt("raya", s, p, o, wh))
+            if _pq_is_parseable(out):
+                passes += 1
+        if passes >= 4:
+            _pq_model, _pq_tokenizer, _pq_device, _pq_model_name = mdl, tok, dev, "raya"
+            print(f"[predicted_queries] model=raya probe_pass={passes}/5")
+            return True
+        else:
+            print(f"[predicted_queries] raya probe_pass={passes}/5 -> falling back")
+
+    # Fall back to flan.
+    attempt = _pq_load_model("flan")
+    if attempt is None:
+        print("[predicted_queries] no QG model available")
+        return False
+    mdl, tok, dev = attempt
+    passes = 0
+    for (s, p, o, st, ot, wh) in _PQ_PROBE_TRIPLES:
+        out = _pq_generate_with(mdl, tok, dev, _pq_build_prompt("flan", s, p, o, wh))
+        if _pq_is_parseable(out):
+            passes += 1
+    _pq_model, _pq_tokenizer, _pq_device, _pq_model_name = mdl, tok, dev, "flan"
+    print(f"[predicted_queries] model=flan probe_pass={passes}/5")
+    return True
+
+
+# ---- WH applicability --------------------------------------------------
+
+_PQ_PREDICATE_TEMPORAL_CACHE: dict = {}
+
+
+def _pq_predicate_is_temporal(predicate: str) -> bool:
+    """Return True if the predicate's head lemma's WordNet closure
+    contains time_period.n.01 OR if it contains event.n.01 with a
+    temporal sense. Structural via WordNet; no curated stem list."""
+    if not predicate:
+        return False
+    key = predicate.lower()
+    if key in _PQ_PREDICATE_TEMPORAL_CACHE:
+        return _PQ_PREDICATE_TEMPORAL_CACHE[key]
+
+    head = predicate.replace("_", " ").strip().split()[0].lower() if predicate else ""
+    result = False
+    try:
+        from nltk.corpus import wordnet as wn  # type: ignore
+        for pos in (wn.VERB, wn.NOUN):
+            for syn in wn.synsets(head, pos=pos):
+                for path in syn.hypernym_paths():
+                    for anc in path:
+                        if anc.name() in ("time_period.n.01", "time.n.05", "time.n.01"):
+                            result = True
+                            break
+                    if result:
+                        break
+                if result:
+                    break
+            if result:
+                break
+    except Exception:
+        result = False
+
+    _PQ_PREDICATE_TEMPORAL_CACHE[key] = result
+    return result
+
+
+def _pq_applicable_wh_types(
+    subject_type: str, object_type: str, predicate: str
+) -> List[str]:
+    """Return WH-types the triple can answer. Structural, not calibrated."""
+    out: List[str] = [_PQ_WH_WHAT]  # always
+    if subject_type == _PQ_PERSON or object_type == _PQ_PERSON:
+        out.append(_PQ_WH_WHO)
+    if object_type == _PQ_TIME or _pq_predicate_is_temporal(predicate):
+        out.append(_PQ_WH_WHEN)
+    if object_type in (_PQ_LOCATION, "ORG"):
+        out.append(_PQ_WH_WHERE)
+    # Dedup preserving order.
+    seen = set()
+    ordered = []
+    for w in out:
+        if w not in seen:
+            ordered.append(w)
+            seen.add(w)
+    return ordered
+
+
+# ---- public API --------------------------------------------------------
+
+def _pq_is_canonical_user(subject: str) -> bool:
+    """True when the subject is the first-person canonical placeholder."""
+    return (subject or "").strip().lower() in ("user", "i", "me", "myself")
+
+
+def generate_predicted_queries(
+    subject: str,
+    predicate: str,
+    object: str,
+    subject_type: str = "GENERIC",
+    object_type: str = "GENERIC",
+) -> List[Tuple[str, '_pq_np.ndarray']]:
+    """Return a list of (question_text, embedding) tuples -- 2..5 rows.
+
+    One row per WH-type the triple can answer. If the QG model is
+    unavailable we fall back to a structural question skeleton built
+    from the triple (still not a curated list -- it's the SPO surface
+    re-ordered into an interrogative form).
+
+    When subject is the canonical 'user' placeholder, we additionally
+    generate entity-agnostic variants that drop the subject token.
+    This is additive — all original PQs are kept, the agnostic variants
+    are appended. The rationale: 'user' is a variable standing for the
+    speaker's real name, so PQs that rely on predicate+object rather
+    than subject will cosine-match third-person queries that use the
+    speaker's name.
+    """
+    subject = (subject or "").strip()
+    predicate = (predicate or "").strip()
+    object = (object or "").strip()
+    if not subject or not predicate or not object:
+        return []
+
+    # Structural identity: 'user' IS a person (the speaker). Promote
+    # to PERSON so WHO templates fire for first-person edges.
+    effective_subject_type = subject_type
+    if _pq_is_canonical_user(subject) and subject_type == "GENERIC":
+        effective_subject_type = _PQ_PERSON
+
+    wh_types = _pq_applicable_wh_types(effective_subject_type, object_type, predicate)
+
+    # ── Grammar-aware question generation ──────────────────────────
+    pred_clean = predicate.replace("_", " ")
+    pred_lemma = _pq_lemmatize_predicate(pred_clean)
+    is_user = _pq_is_canonical_user(subject)
+
+    # Parse object to extract prepositional frame and detect temporals.
+    nlp = _pq_get_nlp()
+    _obj_doc = nlp(object)
+
+    # Rule 3: Extract prepositional frame from object.
+    _obj_frame = ""
+    _obj_answer_np = object
+    try:
+        for _tok in _obj_doc:
+            if _tok.dep_ == "prep" or (_tok.pos_ == "ADP" and _tok.i < len(_obj_doc) - 1):
+                _obj_frame = _obj_doc[:_tok.i + 1].text
+                _obj_answer_np = _obj_doc[_tok.i + 1:].text
+                break
+    except Exception:
+        pass
+
+    # Extract verb and prep from predicate
+    _pred_parts = pred_clean.split()
+    _verb_base = _pred_parts[0] if _pred_parts else pred_lemma
+    _pred_prep = " ".join(_pred_parts[1:]) if len(_pred_parts) > 1 else ""
+
+    # Rule 4: Detect temporal expressions in the object via NER.
+    _has_temporal_in_obj = False
+    try:
+        for ent in _obj_doc.ents:
+            if ent.label_ in ("DATE", "TIME"):
+                _has_temporal_in_obj = True
+                break
+    except Exception:
+        pass
+    if not _has_temporal_in_obj:
+        _temporal_deps = {"npadvmod", "advmod", "prep"}
+        for tok in _obj_doc:
+            if tok.dep_ in _temporal_deps and tok.ent_type_ in ("DATE", "TIME"):
+                _has_temporal_in_obj = True
+                break
+
+    # Add WHEN to wh_types if temporal detected in object
+    if _has_temporal_in_obj and _PQ_WH_WHEN not in wh_types:
+        wh_types.append(_PQ_WH_WHEN)
+
+    _is_be = pred_lemma == "be"
+
+    results: List[Tuple[str, '_pq_np.ndarray']] = []
+    for wh in wh_types:
+        # ── Build the primary question ────────────────────────────
+        if wh == _PQ_WH_WHO:
+            if effective_subject_type == _PQ_PERSON:
+                question = f"Who {pred_clean} {object}?"
+            elif _is_be and _obj_frame:
+                question = f"Who is {subject} {_obj_frame}?"
+            elif _is_be:
+                question = f"Who is {subject}?"
+            else:
+                question = f"Who does {subject} {pred_lemma}?"
+
+        elif wh == _PQ_WH_WHEN:
+            if _is_be:
+                question = f"When is {subject} {_obj_frame}?".strip()
+                if not question.endswith("?"):
+                    question += "?"
+            else:
+                question = f"When did {subject} {_verb_base}?"
+
+        elif wh == _PQ_WH_WHERE:
+            if _is_be:
+                question = f"Where is {subject}?"
+            elif _pred_prep:
+                question = f"Where does {subject} {_verb_base}?"
+            else:
+                question = f"Where does {subject} {pred_lemma}?"
+
+        else:  # WH_WHAT
+            if _is_be and _obj_frame:
+                question = f"What is {subject} {_obj_frame}?"
+            elif _is_be:
+                question = f"What is {subject}?"
+            elif _pred_prep:
+                question = f"What does {subject} {_verb_base} {_pred_prep}?"
+            else:
+                question = f"What does {subject} {pred_lemma}?"
+
+        try:
+            emb = _pq_embed_text(question)
+            results.append((question, emb))
+        except Exception:
+            pass
+
+        # ── Object-foregrounded variant ───────────────────────────
+        if wh == _PQ_WH_WHO:
+            obj_q = f"Who is {object}?"
+        elif wh == _PQ_WH_WHERE:
+            obj_q = f"Where is {object}?"
+        elif wh == _PQ_WH_WHEN:
+            obj_q = f"When is {object}?"
+        else:
+            obj_q = f"What is {object}?"
+        try:
+            results.append((obj_q, _pq_embed_text(obj_q)))
+        except Exception:
+            pass
+
+        # ── Entity-agnostic variant for canonical-user edges ──────
+        if is_user and wh != _PQ_WH_WHO:
+            if wh == _PQ_WH_WHEN:
+                ag_q = f"When was {object}?"
+            elif wh == _PQ_WH_WHERE:
+                ag_q = f"Where is {pred_clean} {object}?"
+            else:
+                ag_q = f"What about {pred_clean} {object}?"
+            try:
+                results.append((ag_q, _pq_embed_text(ag_q)))
+            except Exception:
+                pass
+
+    # ── Rule 5: Possessive/kinship subjects ───────────────────────
+    if "'s" in subject or subject.lower().startswith("my "):
+        poss_q = f"Who is {subject}?"
+        try:
+            results.append((poss_q, _pq_embed_text(poss_q)))
+        except Exception:
+            pass
+
+    return results
+
+
+def pq_active_model_name():
+    """Return which QG model is currently active ('raya', 'flan', or None)."""
+    return _pq_model_name
