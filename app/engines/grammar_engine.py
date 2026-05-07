@@ -4264,7 +4264,13 @@ def classify_query(query_text: str) -> QueryDecomposition:
             break
     if dobj_tok is not None:
         if dobj_tok.tag_ not in ("WDT", "WP", "WP$", "WRB"):
-            result.match_object = _span_text(dobj_tok).strip()
+            # Strip WH-determiners from the span: "What book" → "book"
+            subtree = sorted(dobj_tok.subtree, key=lambda t: t.i)
+            obj_text = " ".join(
+                t.text for t in subtree
+                if t.tag_ not in ("WDT", "WP", "WP$", "WRB")
+            ).strip()
+            result.match_object = obj_text if obj_text else None
 
     if result.match_object is None:
         prep, pobj = _get_prep_object(root)
