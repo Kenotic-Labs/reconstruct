@@ -2341,7 +2341,7 @@ def _is_contentful_object(text: str) -> bool:
     from app.engines.grammar_engine import _get_nlp
     nlp = _get_nlp()
     doc = nlp(text.strip())
-    content_pos = {"NOUN", "PROPN", "ADJ", "NUM"}
+    content_pos = {"NOUN", "PROPN", "ADJ", "NUM", "VERB"}
     for tok in doc:
         if tok.pos_ in content_pos:
             return True
