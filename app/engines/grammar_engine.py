@@ -4086,6 +4086,26 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
                     emotion = child.text.lower()
                     break
 
+    # Minimal post-processing: pronoun subjects + predicate-in-object recovery
+    _spk = speaker if speaker else "user"
+    for _td in decompositions:
+        # Fix possessive pronoun subjects: "My son" → "Speaker's son"
+        if _td.subject and _td.subject.startswith("My "):
+            _td.subject = f"{_spk}'s {_td.subject[3:]}"
+        elif _td.subject and _td.subject.startswith("my "):
+            _td.subject = f"{_spk}'s {_td.subject[3:]}"
+        # Fix predicate-is-substring-of-object: recover ROOT verb
+        if _td.predicate and _td.object and _td.source_text:
+            _pl = _td.predicate.lower()
+            _ol = _td.object.lower()
+            if _pl in _ol and len(_pl) > 2:
+                _src_doc = _get_nlp()(_td.source_text)
+                for _tok in _src_doc:
+                    if _tok.dep_ == "ROOT" and _tok.pos_ in ("VERB", "AUX"):
+                        _td.predicate = _tok.lemma_
+                        break
+    all_triples = [_derive_triple(d) for d in decompositions]
+
     return GrammarResult(
         trace_decompositions=decompositions,
         triples=all_triples,
