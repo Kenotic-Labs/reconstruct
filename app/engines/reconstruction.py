@@ -1378,8 +1378,17 @@ def _extract_answer(candidate: Candidate, qd, query: str,
     src = candidate.source_text or ""
 
     if obj.strip() and _is_contentful_object(obj):
-        # prefer_source disabled — source_text in first person ("I went to...")
-        # scores poorly against third-person gold answers. Causes Cat 1/4 regressions.
+        # For non-aggregation queries: prefer pronoun-resolved source_text
+        # when it's third-person (contains subject name) AND short enough.
+        # Fresh-ingested edges have resolved source_text that scores better
+        # against gold answers. Hand-populated edges have first-person
+        # source_text that should NOT be preferred.
+        if (prefer_source and src and len(obj.split()) <= 3
+                and len(src) < 90
+                and candidate.subject
+                and candidate.subject.lower() in src.lower()
+                and not src.lower().startswith("i ")):
+            return src
         return obj
 
     if candidate.episodic_fact:
