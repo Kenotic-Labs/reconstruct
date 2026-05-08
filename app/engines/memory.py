@@ -291,10 +291,19 @@ class MemoryEngine:
                 except Exception:
                     pass
 
+            # Also resolve the cleaned fallback
+            _final_src = decomp_src or cleaned
+            if not decomp_src and cleaned and speaker:
+                try:
+                    from app.engines.grammar_engine import resolve_pronouns
+                    _final_src = resolve_pronouns(cleaned, speaker)
+                except Exception:
+                    pass
+
             rel_id = self.store(
                 user_id=user_id,
                 trace_decomposition=decomp,
-                source_text=decomp_src or cleaned,
+                source_text=_final_src,
                 source_timestamp=source_timestamp,
                 source_tag=source_tag,
                 subject=resolved_s if has_spo else None,
