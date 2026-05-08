@@ -1276,7 +1276,18 @@ def _extract_answer(candidate: Candidate, qd, query: str,
                     except ValueError:
                         pass
             return date
-        return candidate.object
+        # No resolved_event_date — return source_text ONLY when:
+        # 1. Object is a very short duration phrase (≤ 2 tokens like "5 years")
+        # 2. Source_text is a concise sentence that contextualizes it
+        # 3. Source_text is < 70 chars (prevents verbose sentences)
+        # This helps "5 years" → "married for 5 years" but avoids
+        # "2016" → "Seven years now making art... since 2016" (too long).
+        obj = candidate.object or ""
+        src = candidate.source_text or ""
+        if (obj and src and len(obj.split()) <= 2
+                and len(src) < 55 and obj.lower() in src.lower()):
+            return src
+        return obj
 
     if rf == "emotional":
         # Plan #14: include valence
