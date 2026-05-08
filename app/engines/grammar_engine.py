@@ -4248,7 +4248,17 @@ def classify_query(query_text: str) -> QueryDecomposition:
 
     # Extract predicate
     if root.pos_ == "VERB":
-        result.match_predicate = root.lemma_.lower()
+        # For light verbs with xcomp ("decided to pursue", "want to study"),
+        # prefer the xcomp verb as predicate — it carries the real action.
+        xcomp_verb = None
+        for child in root.children:
+            if child.dep_ == "xcomp" and child.pos_ == "VERB":
+                xcomp_verb = child
+                break
+        if xcomp_verb:
+            result.match_predicate = xcomp_verb.lemma_.lower()
+        else:
+            result.match_predicate = root.lemma_.lower()
     elif root.pos_ == "AUX":
         for child in root.children:
             if child.dep_ in ("xcomp", "ccomp", "acomp", "attr"):
