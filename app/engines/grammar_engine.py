@@ -4191,6 +4191,35 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
             "i", "me", "it", "this", "that", "them", "us",
             "my son", "him", "her", "he", "myself",
         ) and decomp.source_text:
+            # If object is still a pronoun after acomp check, try prep object
+            if decomp.object and decomp.object.lower() in (
+                "this", "that", "it", "me", "them",
+            ) and decomp.source_text:
+                src_doc = _get_nlp()(decomp.source_text)
+                root_tok = _get_root(src_doc)
+                if root_tok:
+                    for child in root_tok.children:
+                        if child.dep_ == "prep":
+                            # Direct pobj
+                            for gc in child.children:
+                                if gc.dep_ == "pobj":
+                                    pobj_span = sorted(gc.subtree, key=lambda t: t.i)
+                                    _pobj_text = " ".join(t.text for t in pobj_span).strip()
+                                    if _pobj_text and len(_pobj_text) > 3:
+                                        decomp.object = _pobj_text
+                                        break
+                                # pcomp (gerund): "after visiting X" → X
+                                elif gc.dep_ == "pcomp" and gc.pos_ == "VERB":
+                                    for ggc in gc.children:
+                                        if ggc.dep_ == "dobj":
+                                            dobj_span = sorted(ggc.subtree, key=lambda t: t.i)
+                                            _d_text = " ".join(t.text for t in dobj_span).strip()
+                                            if _d_text and len(_d_text) > 3:
+                                                decomp.object = _d_text
+                                                break
+                            if decomp.object.lower() not in ("this", "that", "it"):
+                                break
+
             # Also fix predicate if it's a pronoun
             if decomp.predicate and decomp.predicate.lower() in (
                 "it", "this", "that", "them", "me",
