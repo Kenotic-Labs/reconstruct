@@ -1429,7 +1429,11 @@ def _is_aggregation_query(query: str) -> bool:
     if any(t in q for t in ("in what ways", "what are some", "what are all")):
         return True
 
-    # Must start with WH-word
+    # "Where has/have X done Y?" — location aggregation
+    if q.startswith("where ") and (" has " in q or " have " in q):
+        return True
+
+    # Must start with WH-word for other patterns
     if not q.startswith(("what ", "which ")):
         return False
 
