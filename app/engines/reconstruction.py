@@ -1383,12 +1383,13 @@ def _extract_answer(candidate: Candidate, qd, query: str,
         # Fresh-ingested edges have resolved source_text that scores better
         # against gold answers. Hand-populated edges have first-person
         # source_text that should NOT be preferred.
-        if (prefer_source and src and len(obj.split()) <= 3
-                and len(src) < 90
-                and candidate.subject
-                and candidate.subject.lower() in src.lower()
-                and not src.lower().startswith("i ")):
-            return src
+        # Prefer source_text when object is very short (≤2 tokens) and
+        # source_text provides richer context (more tokens, < 90 chars).
+        # Works for both hand-populated (first-person) and fresh-ingested
+        # (pronoun-resolved) edges.
+        # Source_text preference disabled for now — every variant regresses
+        # hand-populated DB. Need a different signal to distinguish fresh
+        # ingest (where source_text helps) from hand-populated (where it hurts).
         return obj
 
     if candidate.episodic_fact:
