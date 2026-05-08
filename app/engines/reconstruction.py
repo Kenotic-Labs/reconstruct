@@ -2010,10 +2010,13 @@ def _handle_inference_query(
 ) -> Optional[ReconstructionResult]:
     """Handle inference questions: 'Would X likely do Y?', 'Would X enjoy Z?'
 
-    Strategy: embed the query, find the best matching edge for the entity.
-    If cosine > 0.45 → evidence supports it → "Yes" + explanation.
-    If cosine < 0.35 → no evidence → "Likely no".
-    Between → uncertain.
+    Strategy: embed the query, find the best matching edge by edge embedding.
+    High cosine (> 0.65) → evidence supports it → "Yes" + detail.
+    Low cosine → "Likely no".
+
+    Uses edge embedding (not PQ) because PQ cosine is too permissive —
+    PQs about ANY topic for the entity get high cosine with inference
+    questions, causing false "Yes" answers.
     """
     entity = qd.match_entity or qd.match_subject
     if not entity:
@@ -2036,7 +2039,7 @@ def _handle_inference_query(
             return_field="episodic",
         )
 
-    # Find best matching edge by cosine
+    # Find best matching edge by edge embedding cosine
     best_cos = 0.0
     best_row = None
     for r in rows:
@@ -2052,17 +2055,19 @@ def _handle_inference_query(
                 pass
 
     if best_cos >= 0.65 and best_row:
-        # Evidence supports it — return short "Yes" + key detail from source
         src = best_row["source_text"] or ""
-        # Use source_text for the detail — more natural than raw object
+        obj = best_row["object"] or ""
+        detail = obj if len(obj) < 60 else src[:80]
         return ReconstructionResult(
-            answer=f"Yes, {src}" if src else "Yes",
+            answer=f"Yes, {detail}" if detail else "Yes",
             return_field="episodic",
             edge_ids=[best_row["id"]],
             grounding=[src],
         )
 
-    # No strong evidence → "Likely no"
+    # No strong direct evidence → "Likely no"
+    # (Threshold 0.65 is intentionally high to avoid false "Yes" from
+    # generic personality edges that have cos ~0.42 with many queries.)
     return ReconstructionResult(
         answer="Likely no",
         return_field="episodic",
