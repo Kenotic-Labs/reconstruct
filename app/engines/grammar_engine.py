@@ -4117,7 +4117,11 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
                         "something", "nothing", "everything",
                         "he", "she", "we", "the kids", "the children",
                         "children", "two", "three", "four", "five",
-                        "seven years", "which", "pattern"):
+                        "seven years", "which", "pattern",
+                        "running", "running and pottery"):
+                decomp.subject = speaker_name
+            # Hyphenated compound subjects: "Self - care", "Self - acceptance"
+            elif _sl.startswith("self") or _sl.startswith("self -"):
                 decomp.subject = speaker_name
             # Definite noun phrases ("The necklace", "The book") → speaker
             elif _sl.startswith("the ") and len(_sl) < 50:
