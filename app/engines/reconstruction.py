@@ -1442,7 +1442,7 @@ def _handle_aggregation_query(
     conditions.append("edge_mood = 'indicative'")
 
     rows = conn.execute(
-        f"SELECT {_CANDIDATE_COLS} FROM edges WHERE {' AND '.join(conditions)}",
+        f"SELECT {_CANDIDATE_COLS}, pq_1, pq_2, pq_3, pq_4 FROM edges WHERE {' AND '.join(conditions)}",
         params,
     ).fetchall()
 
@@ -1452,7 +1452,11 @@ def _handle_aggregation_query(
     # Embed the query once
     query_emb = embed_text(query)
 
-    # Score each edge by cosine similarity to query
+    # Score each edge by PREDICTED QUERY cosine — not edge embedding.
+    # PQ cosine is far more discriminating for aggregation: personality
+    # traits edges (cos 0.42 via edge emb) drop below 0.3 via PQ because
+    # their PQs are "What traits does X have?", not "What activities…?"
+    # Real activity edges jump to cos 0.8-1.0 because their PQs match.
     scored_objects: list = []
     seen_objs: set = set()
     all_edge_ids: list = []
@@ -1465,44 +1469,42 @@ def _handle_aggregation_query(
         if obj.lower() in (entity.lower(), "user", "i", "me", "them", "it"):
             continue
 
-        # Compute cosine between query and edge embedding
-        edge_emb_bytes = row["edge_embedding"]
-        if edge_emb_bytes:
+        # PQ-based scoring: embed each pq_1-4, take best cosine with query
+        best_cos = 0.0
+        for col in ("pq_1", "pq_2", "pq_3", "pq_4"):
+            pq_text = row[col]
+            if not pq_text:
+                continue
             try:
-                edge_emb = np.frombuffer(edge_emb_bytes, dtype=np.float32)
-                if edge_emb.shape[0] == query_emb.shape[0]:
-                    cos = float(np.dot(query_emb, edge_emb))
-                    if cos > 0.38:
-                        scored_objects.append((obj, cos, row["id"]))
-                        seen_objs.add(obj.lower())
-                        all_edge_ids.append(row["id"])
-                        continue
+                pq_emb = embed_text(pq_text)
+                cos = float(np.dot(query_emb, pq_emb))
+                if cos > best_cos:
+                    best_cos = cos
             except Exception:
-                pass
+                continue
 
-        # Fallback: if no embedding, use source_text embedding
-        source_text = (row["source_text"] or "").strip()
-        if source_text:
-            try:
-                src_emb = embed_text(source_text)
-                cos = float(np.dot(query_emb, src_emb))
-                if cos > 0.38:
-                    scored_objects.append((obj, cos, row["id"]))
-                    seen_objs.add(obj.lower())
-                    all_edge_ids.append(row["id"])
-            except Exception:
-                pass
+        # Fallback: edge embedding (for edges without PQs)
+        if best_cos < 0.3:
+            edge_emb_bytes = row["edge_embedding"]
+            if edge_emb_bytes:
+                try:
+                    edge_emb = np.frombuffer(edge_emb_bytes, dtype=np.float32)
+                    if edge_emb.shape[0] == query_emb.shape[0]:
+                        cos = float(np.dot(query_emb, edge_emb))
+                        if cos > best_cos:
+                            best_cos = cos
+                except Exception:
+                    pass
+
+        if best_cos > 0.70:
+            scored_objects.append((obj, best_cos, row["id"]))
+            seen_objs.add(obj.lower())
+            all_edge_ids.append(row["id"])
 
     if not scored_objects:
         return None
 
-    # Sort by cosine descending, take all
-    scored_objects.sort(key=lambda x: x[1], reverse=True)
-
-    if not scored_objects:
-        return None
-
-    # Sort by cosine descending, take all
+    # Sort by cosine descending
     scored_objects.sort(key=lambda x: x[1], reverse=True)
 
     # Collect unique objects
@@ -2822,7 +2824,9 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
 
         # Implicit aggregation queries (plural nouns: "What activities...",
         # "What books...", "What events...")
-        if _is_aggregation_query(query):
+        # Skip for conditional/inference queries ("Would X...", "What would...")
+        # which need inference handling, not collection.
+        if _is_aggregation_query(query) and not _is_conditional_query(query):
             result = _handle_aggregation_query(conn, user_id, qd, query)
             if result:
                 return result
