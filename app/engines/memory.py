@@ -282,6 +282,15 @@ class MemoryEngine:
             has_spo = bool(resolved_s and p and resolved_o)
             decomp_src = getattr(decomp, 'source_text', '') if decomp else ''
 
+            # Resolve pronouns in source_text before storage
+            # "My son got into an accident" → "Melanie's son got into an accident"
+            if decomp_src and speaker:
+                try:
+                    from app.engines.grammar_engine import resolve_pronouns
+                    decomp_src = resolve_pronouns(decomp_src, speaker)
+                except Exception:
+                    pass
+
             rel_id = self.store(
                 user_id=user_id,
                 trace_decomposition=decomp,
