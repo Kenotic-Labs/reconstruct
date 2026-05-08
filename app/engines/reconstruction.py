@@ -3097,9 +3097,13 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
                 ent.text.lower() for ent in _qdoc.ents
                 if ent.label_ in ("PERSON", "ORG", "GPE")
             ]
+            _wh_words = {"what", "which", "who", "where", "when", "how", "why"}
             for _qe in (qd.match_entity, qd.match_subject):
                 if _qe and _qe.lower() not in ("user", ""):
                     _qe_low = _qe.lower()
+                    # Skip WH-phrases ("What career path") — not real entities
+                    if _qe_low.split()[0] in _wh_words:
+                        continue
                     if not any(_qe_low in e or e in _qe_low for e in _query_entities):
                         _query_entities.append(_qe_low)
 
