@@ -3214,16 +3214,24 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
             _qe_low = (qd.match_entity or qd.match_subject or "").lower()
             _topic_nouns = []
             for tok in _qdoc:
-                if tok.pos_ in ("NOUN", "PROPN") and tok.text.lower() != _qe_low:
+                # Include VERBs in advcl/xcomp — they carry topic content
+                # ("do while camping" → "camping" is the topic)
+                _is_topic_pos = tok.pos_ in ("NOUN", "PROPN")
+                if tok.pos_ == "VERB" and tok.dep_ in ("advcl", "xcomp", "conj"):
+                    _is_topic_pos = True
+                if _is_topic_pos and tok.text.lower() != _qe_low:
                     # Skip indirect objects with "to" preposition attached
                     # to root verb ("recommend to Melanie") — recipients.
                     # Keep "for" ("make for a church") — purpose/beneficiary
                     # IS a distinguishing topic term.
                     if tok.dep_ == "pobj" and tok.head.dep_ == "prep":
                         if tok.head.text.lower() == "to":
-                            _prep_head = tok.head.head
-                            if _prep_head.dep_ == "ROOT" and _prep_head.pos_ == "VERB":
-                                continue
+                            # Only skip PERSON recipients ("recommend to Melanie"),
+                            # not locations ("go to the beach")
+                            if tok.pos_ == "PROPN" or tok.ent_type_ == "PERSON":
+                                _prep_head = tok.head.head
+                                if _prep_head.dep_ == "ROOT" and _prep_head.pos_ == "VERB":
+                                    continue
                     if len(tok.text) > 2 and tok.text.lower() not in (
                         "kind", "type", "way", "thing", "time", "year",
                         "month", "week", "day", "question", "career",
