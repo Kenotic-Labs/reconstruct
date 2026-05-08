@@ -1599,18 +1599,24 @@ def _handle_aggregation_query(
         # Single item — let the normal pipeline handle it for better answer extraction
         return None
 
-    # Check if the top item is a comprehensive summary (contains "and" or
-    # numbers) that subsumes the others. If so, prefer it alone. This handles
-    # "What pets?" → "two cats and a dog" over listing individual pets.
+    # Check if the top item is a comprehensive summary or dominant answer.
+    # 1. Contains "and" or numbers → summary ("two cats and a dog")
+    # 2. Top cosine >> second cosine → dominant single answer
     top_obj = items[0]
-    if len(items) > 3 and (" and " in top_obj.lower() or any(c.isdigit() for c in top_obj)):
-        # Top item might be a summary — check if it's short enough (<50 chars)
-        if len(top_obj) < 50:
-            log.debug("Aggregation: using summary item %r", top_obj)
-            return ReconstructionResult(
-                answer=top_obj,
-                return_field="episodic",
-                edge_ids=[scored_objects[0][2]],
+    top_cos = scored_objects[0][1]
+    second_cos = scored_objects[1][1] if len(scored_objects) > 1 else 0
+
+    # Dominant answer: top has summary markers or big cosine gap
+    is_summary = " and " in top_obj.lower() or any(c.isdigit() for c in top_obj)
+    is_dominant = (top_cos - second_cos) > 0.15
+
+    if len(items) > 3 and (is_summary or is_dominant) and len(top_obj) < 50:
+        log.debug("Aggregation: using top item %r (cos=%.2f, gap=%.2f)",
+                  top_obj, top_cos, top_cos - second_cos)
+        return ReconstructionResult(
+            answer=top_obj,
+            return_field="episodic",
+            edge_ids=[scored_objects[0][2]],
                 grounding=[f"aggregation:{entity}"],
             )
 
