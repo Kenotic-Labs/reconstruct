@@ -258,7 +258,7 @@ class MemoryEngine:
                 try:
                     from app.engines.grammar_engine import _get_nlp
                     _doc = _get_nlp()(obj_to_check.strip())
-                    _CONTENT_POS = frozenset({"NOUN", "PROPN", "NUM", "ADJ"})
+                    _CONTENT_POS = frozenset({"NOUN", "PROPN", "NUM", "ADJ", "VERB"})
                     if not any(tok.pos_ in _CONTENT_POS for tok in _doc):
                         continue
                 except Exception:
