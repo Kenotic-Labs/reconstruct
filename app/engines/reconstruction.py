@@ -1387,7 +1387,7 @@ def _extract_answer(candidate: Candidate, qd, query: str,
         # source_text provides richer context (more tokens, < 90 chars).
         # Works for both hand-populated (first-person) and fresh-ingested
         # (pronoun-resolved) edges.
-        pass  # source_text preference disabled — regresses hand-populated
+        pass  # source_text preference disabled — every variant regresses hand-populated
         return obj
 
     if candidate.episodic_fact:
