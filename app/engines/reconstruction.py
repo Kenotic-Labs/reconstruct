@@ -3134,9 +3134,10 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
                         "month", "week", "day", "question", "career",
                         "people", "life", "activity", "activities",
                         "event", "events", "plan", "plans", "experience",
-                        "journey", "process", "decision", "reason",
+                        "journey", "process", "decision", "reason", "project",
                         "work", "job", "support", "family", "friend",
-                        "friends", "art", "painting", "music", "book",
+                        "friends", "kids", "children", "son", "daughter",
+                        "art", "painting", "music", "book",
                         "books", "hobby", "hobbies", "community",
                         "artists", "bands", "recommend", "share",
                     ):
