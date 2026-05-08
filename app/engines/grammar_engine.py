@@ -4101,12 +4101,17 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
             elif subj.startswith("Our ") or subj.startswith("our "):
                 decomp.subject = f"{speaker_name}'s {subj[4:]}"
 
-        # Fix 2: Filter garbage subjects (pronouns, determiners, 3rd person)
+        # Fix 2: Filter garbage/pronoun subjects
         if decomp.subject:
             _sl = decomp.subject.lower()
+            # Direct pronouns → speaker
             if _sl in ("it", "this", "that", "there", "here", "they", "them",
                         "something", "nothing", "everything",
                         "he", "she", "we", "the kids", "the children"):
+                decomp.subject = speaker_name
+            # Definite noun phrases ("The necklace", "The book") → speaker
+            # These are often about the speaker's possessions
+            elif _sl.startswith("the ") and len(_sl) < 30:
                 decomp.subject = speaker_name
 
         # Fix 3: Predicate cleanup
