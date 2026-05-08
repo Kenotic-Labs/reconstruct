@@ -1615,7 +1615,7 @@ def _handle_aggregation_query(
 
     # Dominant answer: top has summary markers or big cosine gap
     is_summary = " and " in top_obj.lower() or any(c.isdigit() for c in top_obj)
-    is_dominant = (top_cos - second_cos) > 0.15
+    is_dominant = (top_cos - second_cos) > 0.12
 
     if len(items) > 3 and (is_summary or is_dominant) and len(top_obj) < 50:
         log.debug("Aggregation: using top item %r (cos=%.2f, gap=%.2f)",
