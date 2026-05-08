@@ -4086,6 +4086,46 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
                     emotion = child.text.lower()
                     break
 
+    # Post-processing: fix common extraction errors
+    speaker_name = speaker if speaker else "user"
+    for decomp in decompositions:
+        # Fix 1: Resolve possessive pronouns in subjects
+        # "My son" → "Melanie's son", "My friend" → "Caroline's friend"
+        if decomp.subject:
+            subj = decomp.subject
+            if subj.startswith("My ") or subj.startswith("my "):
+                decomp.subject = f"{speaker_name}'s {subj[3:]}"
+            elif subj == "I" or subj == "i":
+                decomp.subject = speaker_name
+            # "Our" → speaker's
+            elif subj.startswith("Our ") or subj.startswith("our "):
+                decomp.subject = f"{speaker_name}'s {subj[4:]}"
+
+        # Fix 2: Filter garbage subjects (pronouns, determiners)
+        if decomp.subject and decomp.subject.lower() in (
+            "it", "this", "that", "there", "here", "they", "them",
+            "something", "nothing", "everything",
+        ):
+            decomp.subject = speaker_name
+
+        # Fix 3: If predicate is a noun (not a verb), try to recover
+        # the actual verb. "I have a guinea pig" → predicate should be
+        # "have" not "pig"
+        if decomp.predicate and decomp.object:
+            pred_lower = decomp.predicate.lower()
+            obj_lower = decomp.object.lower()
+            if pred_lower in obj_lower and len(pred_lower) > 2:
+                # Predicate is part of the object — likely a parse error.
+                # Try to find the actual verb in the source text.
+                src_doc = _get_nlp()(decomp.source_text or "")
+                for tok in src_doc:
+                    if tok.dep_ == "ROOT" and tok.pos_ in ("VERB", "AUX"):
+                        decomp.predicate = tok.lemma_
+                        break
+
+    # Rebuild triples from fixed decompositions
+    all_triples = [_derive_triple(d) for d in decompositions]
+
     return GrammarResult(
         trace_decompositions=decompositions,
         triples=all_triples,
