@@ -4137,6 +4137,10 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
                 decomp.subject = speaker_name
             elif _sl.startswith("that ") and len(_sl) < 50:
                 decomp.subject = speaker_name
+            # Long possessive subjects → just use speaker
+            # "Melanie's favorite book growing up" → "Melanie"
+            elif f"{speaker_name.lower()}'s" in _sl and len(_sl) > 20:
+                decomp.subject = speaker_name
             # Possessive noun phrases not caught by Fix 1
             # "My hand-painted bowl" → "Melanie's hand-painted bowl"
             elif _sl.startswith(f"{speaker_name.lower()}'s "):
