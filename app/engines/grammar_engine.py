@@ -4150,17 +4150,16 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
             _src_doc = _get_nlp()(decomp.source_text)
             for _ent in _src_doc.ents:
                 if _ent.label_ == "PERSON" and _ent.text != speaker_name:
-                    # Check if this PERSON is at the start of the sentence
                     if _ent.start == 0 or (_ent.start == 1 and _src_doc[0].pos_ == "PUNCT"):
                         decomp.subject = _ent.text
                         break
-            # Possessive noun phrases not caught by Fix 1
-            # "My hand-painted bowl" → "Melanie's hand-painted bowl"
-            elif _sl.startswith(f"{speaker_name.lower()}'s "):
-                pass  # Already resolved
+
+        # Re-check subject after Fix 2b
+        if decomp.subject:
+            _sl2 = decomp.subject.lower()
             # Non-person proper nouns in subject of "be" copula
             # "Bach are my favorites" → speaker = Melanie
-            elif decomp.predicate == "be" and decomp.object:
+            if decomp.predicate == "be" and decomp.object:
                 _obj_l = decomp.object.lower()
                 if "my " in _obj_l or "favorite" in _obj_l:
                     decomp.subject = speaker_name
