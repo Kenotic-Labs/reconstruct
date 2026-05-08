@@ -3223,6 +3223,10 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
                 _is_topic_pos = tok.pos_ in ("NOUN", "PROPN")
                 if tok.pos_ == "VERB" and tok.dep_ in ("advcl", "xcomp", "conj"):
                     _is_topic_pos = True
+                # Skip DATE/CARDINAL/ORDINAL entities — they're temporal
+                # context, not topic content ("on October 13, 2023")
+                if tok.ent_type_ in ("DATE", "CARDINAL", "ORDINAL", "TIME"):
+                    _is_topic_pos = False
                 if _is_topic_pos and tok.text.lower() != _qe_low:
                     # Skip indirect objects with "to" preposition attached
                     # to root verb ("recommend to Melanie") — recipients.
