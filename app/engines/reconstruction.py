@@ -3047,11 +3047,22 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
                         "artists", "bands", "recommend", "share",
                     ):
                         _topic_nouns.append(tok.text.lower())
+            _edge_text = f"{best.source_text} {best.object} {best.predicate}".lower()
+
             if _topic_nouns and len(_topic_nouns) <= 3:
-                _edge_text = f"{best.source_text} {best.object} {best.predicate}".lower()
                 _any_match = any(n in _edge_text for n in _topic_nouns)
                 if not _any_match:
                     return _refuse("topic_not_in_edge")
+
+            # Possessor check: nouns in poss/compound position that specify
+            # the entity ("grandpa's gift", "hand-painted bowl") MUST appear
+            # in the edge. These distinguish the query from similar queries
+            # about different entities (grandma vs grandpa).
+            for tok in _qdoc:
+                if tok.dep_ in ("poss", "compound") and tok.pos_ in ("NOUN", "PROPN"):
+                    if tok.text.lower() != _qe_low and len(tok.text) > 2:
+                        if tok.text.lower() not in _edge_text:
+                            return _refuse("possessor_mismatch")
         except Exception:
             pass
 
@@ -3100,7 +3111,11 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
                     break
 
         # ---- Step 11b: Multi-answer aggregation ----
-        if len(verified) > 1 and qd.return_field == "episodic":
+        # Only aggregate when explicitly detected as aggregation query.
+        # Without this guard, Cat 4 narrative questions get objects from
+        # multiple unrelated edges concatenated.
+        if (len(verified) > 1 and qd.return_field == "episodic"
+                and _is_aggregation_query(query) and not _is_conditional_query(query)):
             unique_objects = []
             seen_objs = set()
             all_edge_ids = []
