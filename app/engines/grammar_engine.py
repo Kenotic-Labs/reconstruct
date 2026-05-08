@@ -4164,10 +4164,10 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
                 obj_lower = decomp.object.lower()
                 if pred_lower in obj_lower and len(pred_lower) > 2:
                     _need_root = True
-            # Check if predicate is a common noun (not a verb) via spaCy
+            # Check if predicate is a common noun or adjective (not a verb)
             if not _need_root and decomp.source_text:
                 _pred_doc = _get_nlp()(decomp.predicate)
-                if _pred_doc and _pred_doc[0].pos_ in ("NOUN",):
+                if _pred_doc and _pred_doc[0].pos_ in ("NOUN", "ADJ"):
                     _need_root = True
             if _need_root and decomp.source_text:
                 src_doc = _get_nlp()(decomp.source_text)
