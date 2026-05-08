@@ -319,11 +319,17 @@ class MemoryEngine:
             object = object or getattr(td, 'object', '') or ''
             if not source_text and getattr(td, 'source_text', ''):
                 # Use resolved (pronoun-replaced) source_text when available.
-                # "My son got into an accident" → "Melanie's son got into an accident"
-                # Better F1 scoring against third-person gold answers.
-                from app.engines.grammar_engine import resolve_pronouns
-                _resolved = resolve_pronouns(td.source_text, speaker)
-                source_text = _resolved if _resolved else td.source_text
+                # Resolve using relational_subject as speaker name.
+                _speaker = getattr(td, 'relational_subject', None) or subject
+                if _speaker:
+                    try:
+                        from app.engines.grammar_engine import resolve_pronouns
+                        _resolved = resolve_pronouns(td.source_text, _speaker)
+                        source_text = _resolved if _resolved else td.source_text
+                    except Exception:
+                        source_text = td.source_text
+                else:
+                    source_text = td.source_text
 
         subject = (subject or "").strip()
         predicate = (predicate or "").strip().lower().replace(" ", "_")
