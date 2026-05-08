@@ -1286,8 +1286,28 @@ def _extract_answer(candidate: Candidate, qd, query: str,
                             candidate.edge_id, rel[:50])
                 entities = []
             if entities:
-                return ", ".join(str(e) for e in entities)
-        return candidate.subject or candidate.object
+                # For "who" (not "whose") questions, filter out entities
+                # that are just the edge subject — they don't answer "Who
+                # did X?" (the subject is who the query is about, not the
+                # answer). "Whose" questions want the subject/possessor.
+                if qd.wh_word == "who":
+                    subj_lower = candidate.subject.lower()
+                    other_entities = [
+                        e for e in entities
+                        if str(e).lower() != subj_lower
+                    ]
+                    if other_entities:
+                        return ", ".join(str(e) for e in other_entities)
+                    # All relational entities are the subject — fall
+                    # through to object extraction
+                else:
+                    return ", ".join(str(e) for e in entities)
+        # For "who" questions, the answer is typically in the object
+        # (who did X → object is the person). Prefer object over subject.
+        obj = candidate.object or ""
+        if obj.strip() and _is_contentful_object(obj):
+            return obj
+        return candidate.subject or ""
 
     # Default: episodic
     # Object field may contain pronouns ("them"), determiners ("this"),
