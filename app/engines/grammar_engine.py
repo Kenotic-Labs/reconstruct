@@ -1017,11 +1017,7 @@ def resolve_pronouns(doc, speaker: Optional[str] = None, listener: str = "user")
         lower = tok.text.lower()
         if lower == "i" and tok.dep_ in ("nsubj", "nsubjpass", "ROOT"):
             tokens.append(speaker_name)
-        elif lower == "we" and tok.dep_ in ("nsubj", "nsubjpass"):
-            tokens.append(speaker_name)
         elif lower == "me" and tok.dep_ in ("dobj", "pobj", "dative"):
-            tokens.append(speaker_name)
-        elif lower == "us" and tok.dep_ in ("dobj", "pobj", "dative"):
             tokens.append(speaker_name)
         elif lower == "my":
             tokens.append(speaker_name + "'s")
@@ -4090,198 +4086,6 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
                     emotion = child.text.lower()
                     break
 
-    # Post-processing: fix common extraction errors
-    speaker_name = speaker if speaker else "user"
-    for _di, decomp in enumerate(decompositions):
-        # Fix 1: Resolve possessive pronouns in subjects
-        # "My son" → "Melanie's son", "My friend" → "Caroline's friend"
-        if decomp.subject:
-            subj = decomp.subject
-            if subj.startswith("My ") or subj.startswith("my "):
-                decomp.subject = f"{speaker_name}'s {subj[3:]}"
-            # Handle spaCy tokenization: "My hand - painted bowl" (spaces around hyphen)
-            elif "My " in subj or "my " in subj:
-                decomp.subject = subj.replace("My ", f"{speaker_name}'s ").replace("my ", f"{speaker_name}'s ")
-            # "His/Her X" → speaker's X (in first-person narrative)
-            elif subj.startswith("His ") or subj.startswith("his "):
-                decomp.subject = f"{speaker_name}'s {subj[4:]}"
-            elif subj.startswith("Her ") or subj.startswith("her "):
-                decomp.subject = f"{speaker_name}'s {subj[4:]}"
-            # "Your X" → listener's X
-            elif subj.startswith("Your ") or subj.startswith("your "):
-                decomp.subject = f"user's {subj[5:]}"
-            elif subj == "I" or subj == "i":
-                decomp.subject = speaker_name
-            # "Our" → speaker's
-            elif subj.startswith("Our ") or subj.startswith("our "):
-                decomp.subject = f"{speaker_name}'s {subj[4:]}"
-
-        # Fix 2: Filter garbage/pronoun subjects
-        if decomp.subject:
-            _sl = decomp.subject.lower()
-            # Direct pronouns → speaker
-            if _sl in ("it", "this", "that", "there", "here", "they", "them",
-                        "something", "nothing", "everything",
-                        "he", "she", "we", "me", "us",
-                        "the kids", "the children",
-                        "children", "two", "three", "four", "five",
-                        "seven years", "which", "pattern",
-                        "running", "running and pottery",
-                        "you", "having"):
-                decomp.subject = speaker_name
-            # Hyphenated compound subjects: "Self - care", "Self - acceptance"
-            elif _sl.startswith("self") or _sl.startswith("self -"):
-                decomp.subject = speaker_name
-            # Definite noun phrases ("The necklace", "The book") → speaker
-            elif _sl.startswith("the ") and len(_sl) < 50:
-                decomp.subject = speaker_name
-            elif _sl.startswith("that ") and len(_sl) < 50:
-                decomp.subject = speaker_name
-            # Long possessive subjects → just use speaker
-            # "Melanie's favorite book growing up" → "Melanie"
-            elif f"{speaker_name.lower()}'s" in _sl and len(_sl) > 20:
-                decomp.subject = speaker_name
-
-        # Fix 2b: If subject became speaker but source_text starts with
-        # a DIFFERENT person's name (spaCy PROPN compound misparse),
-        # use that person's name instead.
-        # "Joanna volunteers at..." → subject should be "Joanna" not speaker
-        if decomp.subject == speaker_name and decomp.source_text:
-            _src_doc = _get_nlp()(decomp.source_text)
-            for _ent in _src_doc.ents:
-                if _ent.label_ == "PERSON" and _ent.text != speaker_name:
-                    if _ent.start == 0 or (_ent.start == 1 and _src_doc[0].pos_ == "PUNCT"):
-                        decomp.subject = _ent.text
-                        break
-
-        # Re-check subject after Fix 2b
-        if decomp.subject:
-            _sl2 = decomp.subject.lower()
-            # Non-person proper nouns in subject of "be" copula
-            # "Bach are my favorites" → speaker = Melanie
-            if decomp.predicate == "be" and decomp.object:
-                _obj_l = decomp.object.lower()
-                if "my " in _obj_l or "favorite" in _obj_l:
-                    decomp.subject = speaker_name
-
-        # Fix 3: Predicate cleanup
-        if decomp.predicate:
-            # 3a: Strip preposition suffix first
-            # "time_at" → "time", "cup_with" → "cup", "go_in" → "go"
-            if "_" in decomp.predicate:
-                parts = decomp.predicate.split("_")
-                last = parts[-1].lower()
-                if last in ("with", "after", "before", "in", "on", "at",
-                            "from", "to", "for", "by", "about", "of"):
-                    decomp.predicate = "_".join(parts[:-1])
-
-            # 3b: If predicate is a noun (substring of object) or a bare
-            # preposition or a common noun → recover the actual ROOT verb
-            pred_lower = decomp.predicate.lower()
-            _need_root = False
-            if pred_lower in ("with", "after", "before", "in", "on",
-                              "at", "from", "to", "for"):
-                _need_root = True
-            elif decomp.object:
-                obj_lower = decomp.object.lower()
-                if pred_lower in obj_lower and len(pred_lower) > 2:
-                    _need_root = True
-            # Check if predicate is a common noun or adjective (not a verb)
-            if not _need_root and decomp.source_text:
-                _pred_doc = _get_nlp()(decomp.predicate)
-                if _pred_doc and _pred_doc[0].pos_ == "NOUN":
-                    _need_root = True
-                elif _pred_doc and _pred_doc[0].pos_ == "ADJ":
-                    # For ADJ predicates, set to "be" if ROOT recovery
-                    # would just return the same ADJ (verbless fragment)
-                    decomp.predicate = "be"
-            if _need_root and decomp.source_text:
-                src_doc = _get_nlp()(decomp.source_text)
-                _found_verb = False
-                for tok in src_doc:
-                    if tok.dep_ == "ROOT" and tok.pos_ in ("VERB", "AUX"):
-                        decomp.predicate = tok.lemma_
-                        _found_verb = True
-                        break
-                # If no verb ROOT found (verbless fragment), default to "have"
-                if not _found_verb:
-                    decomp.predicate = "have"
-
-        # Fix 4: Pronoun/garbage object cleanup
-        # "I am lactose intolerant" → object="I" should be "lactose intolerant"
-        if decomp.object and decomp.object.lower() in (
-            "i", "me", "it", "this", "that", "them", "us",
-            "my son", "him", "her", "he", "myself",
-        ) and decomp.source_text:
-            # If object is still a pronoun after acomp check, try prep object
-            if decomp.object and decomp.object.lower() in (
-                "this", "that", "it", "me", "them",
-            ) and decomp.source_text:
-                src_doc = _get_nlp()(decomp.source_text)
-                root_tok = _get_root(src_doc)
-                if root_tok:
-                    for child in root_tok.children:
-                        if child.dep_ == "prep":
-                            # Direct pobj
-                            for gc in child.children:
-                                if gc.dep_ == "pobj":
-                                    pobj_span = sorted(gc.subtree, key=lambda t: t.i)
-                                    _pobj_text = " ".join(t.text for t in pobj_span).strip()
-                                    if _pobj_text and len(_pobj_text) > 3:
-                                        decomp.object = _pobj_text
-                                        break
-                                # pcomp (gerund): "after visiting X" → X
-                                elif gc.dep_ == "pcomp" and gc.pos_ == "VERB":
-                                    for ggc in gc.children:
-                                        if ggc.dep_ == "dobj":
-                                            dobj_span = sorted(ggc.subtree, key=lambda t: t.i)
-                                            _d_text = " ".join(t.text for t in dobj_span).strip()
-                                            if _d_text and len(_d_text) > 3:
-                                                decomp.object = _d_text
-                                                break
-                            if decomp.object.lower() not in ("this", "that", "it"):
-                                break
-
-            # Also fix predicate if it's a pronoun
-            if decomp.predicate and decomp.predicate.lower() in (
-                "it", "this", "that", "them", "me",
-            ) and decomp.source_text:
-                src_doc = _get_nlp()(decomp.source_text)
-                for tok in src_doc:
-                    if tok.dep_ == "ROOT" and tok.pos_ in ("VERB", "AUX"):
-                        decomp.predicate = tok.lemma_
-                        break
-            src_doc = _get_nlp()(decomp.source_text)
-            root_tok = _get_root(src_doc)
-            if root_tok:
-                # Try acomp (adjective complement): "am lactose intolerant"
-                for child in root_tok.children:
-                    if child.dep_ in ("acomp", "oprd"):
-                        span = sorted(child.subtree, key=lambda t: t.i)
-                        decomp.object = " ".join(t.text for t in span).strip()
-                        break
-
-        # Fix 5: Empty object for passive + prep constructions
-        # "married for 5 years" → object should be "5 years"
-        if not decomp.object and decomp.source_text:
-            src_doc = _get_nlp()(decomp.source_text)
-            root_tok = _get_root(src_doc)
-            if root_tok:
-                for child in root_tok.children:
-                    if child.dep_ == "prep":
-                        for gc in child.children:
-                            if gc.dep_ == "pobj":
-                                pobj_span = sorted(gc.subtree, key=lambda t: t.i)
-                                decomp.object = " ".join(
-                                    t.text for t in pobj_span
-                                ).strip()
-                                break
-                        if decomp.object:
-                            break
-
-    # Rebuild triples from fixed decompositions
-    all_triples = [_derive_triple(d) for d in decompositions]
-
     return GrammarResult(
         trace_decompositions=decompositions,
         triples=all_triples,
@@ -4488,8 +4292,6 @@ def classify_query(query_text: str) -> QueryDecomposition:
     for ent in doc.ents:
         if ent.label_ in ("PERSON", "ORG", "GPE", "LOC", "FAC", "NORP"):
             entity_text = ent.text
-            # Strip possessive suffixes: "Caroline's" → "Caroline",
-            # "Carolines" → "Caroline" (informal possessive without apostrophe)
             if entity_text.endswith("'s"):
                 entity_text = entity_text[:-2]
             elif (ent.label_ == "PERSON" and entity_text.endswith("s")
