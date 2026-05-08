@@ -4116,7 +4116,8 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
             if _sl in ("it", "this", "that", "there", "here", "they", "them",
                         "something", "nothing", "everything",
                         "he", "she", "we", "the kids", "the children",
-                        "two", "three", "four", "five"):
+                        "children", "two", "three", "four", "five",
+                        "seven years", "which", "pattern"):
                 decomp.subject = speaker_name
             # Definite noun phrases ("The necklace", "The book") → speaker
             elif _sl.startswith("the ") and len(_sl) < 50:
