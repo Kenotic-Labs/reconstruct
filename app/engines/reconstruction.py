@@ -2098,7 +2098,7 @@ def _handle_inference_query(
                                 best_tr = r
                         except Exception:
                             pass
-                if best_tc >= 0.45 and best_tr:
+                if best_tc >= 0.35 and best_tr:
                     src = best_tr["source_text"] or ""
                     obj = best_tr["object"] or ""
                     detail = obj if len(obj) < 60 else src[:80]
