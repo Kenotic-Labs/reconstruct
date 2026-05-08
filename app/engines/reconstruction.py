@@ -1372,12 +1372,8 @@ def _extract_answer(candidate: Candidate, qd, query: str,
     src = candidate.source_text or ""
 
     if obj.strip() and _is_contentful_object(obj):
-        # When prefer_source is set (single-answer queries, not aggregation),
-        # use source_text for short objects (≤3 tokens) when source_text is
-        # a concise sentence (< 120 chars). Source_text has better token
-        # overlap with gold answers for Cat 4 narrative questions.
-        # prefer_source reserved for future use — source_text in first person
-        # ("I went to...") scores poorly against third-person gold answers.
+        # prefer_source disabled — source_text in first person ("I went to...")
+        # scores poorly against third-person gold answers. Causes Cat 1/4 regressions.
         return obj
 
     if candidate.episodic_fact:
