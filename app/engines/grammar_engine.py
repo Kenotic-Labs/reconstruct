@@ -4118,10 +4118,12 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
             # Direct pronouns → speaker
             if _sl in ("it", "this", "that", "there", "here", "they", "them",
                         "something", "nothing", "everything",
-                        "he", "she", "we", "the kids", "the children",
+                        "he", "she", "we", "me", "us",
+                        "the kids", "the children",
                         "children", "two", "three", "four", "five",
                         "seven years", "which", "pattern",
-                        "running", "running and pottery"):
+                        "running", "running and pottery",
+                        "you", "having"):
                 decomp.subject = speaker_name
             # Hyphenated compound subjects: "Self - care", "Self - acceptance"
             elif _sl.startswith("self") or _sl.startswith("self -"):
