@@ -2865,7 +2865,7 @@ def _pq_text_short_circuit(conn: sqlite3.Connection, user_id: int,
     Returns:
         (edge_id, source_text) if match found, else None.
     """
-    q_lower = query.lower().strip("?.,!").replace("'s", "s").replace("\u2019s", "s")
+    q_lower = query.lower().strip("?.,!").replace("'s", "s").replace("\u2019s", "s").replace('"', '').replace('\u201c', '').replace('\u201d', '')
 
     # Try exact containment first — query inside PQ or PQ inside query
     pq_rows = conn.execute(
