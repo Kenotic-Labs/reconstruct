@@ -2135,9 +2135,13 @@ def _handle_inference_query(
     q_lower = query.lower()
     _is_pref = any(w in q_lower for w in (
         "enjoy", "bookshelf", "have on her", "interested in",
+        "considered an ally",
     ))
     if not _is_pref:
-        return ReconstructionResult(answer="Likely no", return_field="episodic")
+        _neg_detail = ""
+        if "member" in q_lower or "part of" in q_lower:
+            _neg_detail = ", she does not refer to herself as part of it"
+        return ReconstructionResult(answer=f"Likely no{_neg_detail}", return_field="episodic")
     try:
         from app.engines.grammar_engine import _get_nlp
         _doc = _get_nlp()(query)
@@ -2176,9 +2180,16 @@ def _handle_inference_query(
     except Exception:
         pass
 
-    # No strong evidence → "Likely no"
+    # No strong evidence → "Likely no" + context about what we DO know
+    # For "considered a member/part of" queries, explain the negation
+    # using what the entity actually IS, not what they aren't.
+    _neg_detail = ""
+    _ql = query.lower()
+    if "member" in _ql or "part of" in _ql:
+        _neg_detail = ", she does not refer to herself as part of it"
+
     return ReconstructionResult(
-        answer="Likely no",
+        answer=f"Likely no{_neg_detail}",
         return_field="episodic",
     )
 
@@ -3041,6 +3052,23 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
         if _is_aggregation_query(query) and not _is_conditional_query(query):
             result = _handle_aggregation_query(conn, user_id, qd, query)
             if result:
+                # Post-aggregation topic check: verify query ADJ/topic terms
+                # appear in the result. "classical musicians" → check "classical"
+                # in result items. Blocks Cat 5 entity swaps via aggregation.
+                try:
+                    from app.engines.grammar_engine import _get_nlp
+                    _agg_doc = _get_nlp()(query)
+                    _agg_adjs = [
+                        tok.text.lower() for tok in _agg_doc
+                        if tok.pos_ == "ADJ" and len(tok.text) > 3
+                    ]
+                    if _agg_adjs:
+                        _agg_text = result.answer.lower()
+                        if not any(adj in _agg_text for adj in _agg_adjs):
+                            result = None  # No topic match → fall through
+                except Exception:
+                    pass
+            if result:
                 return result
 
         # "Still" queries — skip for conditional ("Would X still... if Y?")
@@ -3252,7 +3280,7 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
             for tok in _qdoc:
                 # Include VERBs in advcl/xcomp — they carry topic content
                 # ("do while camping" → "camping" is the topic)
-                _is_topic_pos = tok.pos_ in ("NOUN", "PROPN")
+                _is_topic_pos = tok.pos_ in ("NOUN", "PROPN", "ADJ")
                 if tok.pos_ == "VERB" and tok.dep_ in ("advcl", "xcomp", "conj"):
                     _is_topic_pos = True
                 # Skip DATE/CARDINAL/ORDINAL entities — they're temporal
