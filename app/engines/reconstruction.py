@@ -2065,9 +2065,51 @@ def _handle_inference_query(
             grounding=[src],
         )
 
-    # No strong direct evidence → "Likely no"
-    # (Threshold 0.65 is intentionally high to avoid false "Yes" from
-    # generic personality edges that have cos ~0.42 with many queries.)
+    # Fallback for preference queries: topic-to-object cosine.
+    # Only for "enjoy/like/bookshelf/have" pattern — these ask about
+    # category preferences where cosine between topic and object works:
+    # "Vivaldi" (topic) ↔ "Bach, Mozart" (object) = same music category.
+    q_lower = query.lower()
+    _is_pref = any(w in q_lower for w in ("enjoy", "bookshelf", "have on her"))
+    if _is_pref:
+        try:
+            from app.engines.grammar_engine import _get_nlp
+            _doc = _get_nlp()(query)
+            ent_lower = entity.lower()
+            topic_words = [
+                tok.text for tok in _doc
+                if tok.pos_ in ("NOUN", "PROPN") and len(tok.text) > 2
+                and tok.text.lower() not in (ent_lower, "likely")
+            ]
+            if topic_words:
+                topic_emb = embed_text(" ".join(topic_words))
+                best_tc = 0.0
+                best_tr = None
+                for r in rows:
+                    obj_text = r["object"] or ""
+                    if obj_text and len(obj_text) > 2:
+                        try:
+                            obj_emb = embed_text(obj_text)
+                            cos = float(np.dot(topic_emb, obj_emb))
+                            if cos > best_tc:
+                                best_tc = cos
+                                best_tr = r
+                        except Exception:
+                            pass
+                if best_tc >= 0.45 and best_tr:
+                    src = best_tr["source_text"] or ""
+                    obj = best_tr["object"] or ""
+                    detail = obj if len(obj) < 60 else src[:80]
+                    return ReconstructionResult(
+                        answer=f"Yes, {detail}" if detail else "Yes",
+                        return_field="episodic",
+                        edge_ids=[best_tr["id"]],
+                        grounding=[src],
+                    )
+        except Exception:
+            pass
+
+    # No strong evidence → "Likely no"
     return ReconstructionResult(
         answer="Likely no",
         return_field="episodic",
