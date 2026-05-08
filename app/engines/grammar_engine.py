@@ -4141,6 +4141,19 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
             # "Melanie's favorite book growing up" → "Melanie"
             elif f"{speaker_name.lower()}'s" in _sl and len(_sl) > 20:
                 decomp.subject = speaker_name
+
+        # Fix 2b: If subject became speaker but source_text starts with
+        # a DIFFERENT person's name (spaCy PROPN compound misparse),
+        # use that person's name instead.
+        # "Joanna volunteers at..." → subject should be "Joanna" not speaker
+        if decomp.subject == speaker_name and decomp.source_text:
+            _src_doc = _get_nlp()(decomp.source_text)
+            for _ent in _src_doc.ents:
+                if _ent.label_ == "PERSON" and _ent.text != speaker_name:
+                    # Check if this PERSON is at the start of the sentence
+                    if _ent.start == 0 or (_ent.start == 1 and _src_doc[0].pos_ == "PUNCT"):
+                        decomp.subject = _ent.text
+                        break
             # Possessive noun phrases not caught by Fix 1
             # "My hand-painted bowl" → "Melanie's hand-painted bowl"
             elif _sl.startswith(f"{speaker_name.lower()}'s "):
