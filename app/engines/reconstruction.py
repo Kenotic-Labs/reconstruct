@@ -1203,7 +1203,8 @@ def _relevance_gate(query: str, candidate: Candidate) -> float:
 # ANSWER EXTRACTION — RETURN_FIELD ROUTING (doc lines 1030-1048)
 # ===========================================================================
 
-def _extract_answer(candidate: Candidate, qd, query: str) -> str:
+def _extract_answer(candidate: Candidate, qd, query: str,
+                    prefer_source: bool = False) -> str:
     """Route to correct column based on return_field.
 
     temporal  → resolved_event_date (format-matched)
@@ -1294,14 +1295,21 @@ def _extract_answer(candidate: Candidate, qd, query: str) -> str:
     # isn't a contentful noun phrase, fall back to source_text.
     # Use spaCy POS tagging to detect — no word lists.
     obj = candidate.object or ""
-    if obj.strip():
-        if _is_contentful_object(obj):
-            return obj
+    src = candidate.source_text or ""
+
+    if obj.strip() and _is_contentful_object(obj):
+        # When prefer_source is set (single-answer queries, not aggregation),
+        # use source_text for short objects (≤3 tokens) when source_text is
+        # a concise sentence (< 120 chars). Source_text has better token
+        # overlap with gold answers for Cat 4 narrative questions.
+        # prefer_source reserved for future use — source_text in first person
+        # ("I went to...") scores poorly against third-person gold answers.
+        return obj
 
     if candidate.episodic_fact:
         return candidate.episodic_fact
 
-    return candidate.source_text or ""
+    return src
 
 
 # ===========================================================================
@@ -2963,7 +2971,7 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
                             edge_ids=[pq_edge_id],
                             grounding=[pq_candidate.source_text],
                         )
-                    answer = _extract_answer(pq_candidate, qd, query)
+                    answer = _extract_answer(pq_candidate, qd, query, prefer_source=True)
                     log.debug("PQ text short-circuit: edge=%d answer=%s",
                               pq_edge_id, answer[:50] if answer else "")
                     return ReconstructionResult(
@@ -3141,7 +3149,7 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
         extra_grounding = [c.source_text for c in context_edges[:3] if c.source_text]
 
         # ---- Step 13: Answer extraction via return_field routing ----
-        answer = _extract_answer(best, qd, query)
+        answer = _extract_answer(best, qd, query, prefer_source=True)
 
         # ---- Step 14: PQ write-back ----
         if answer:
