@@ -4088,7 +4088,7 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
 
     # Post-processing: fix common extraction errors
     speaker_name = speaker if speaker else "user"
-    for decomp in decompositions:
+    for _di, decomp in enumerate(decompositions):
         # Fix 1: Resolve possessive pronouns in subjects
         # "My son" → "Melanie's son", "My friend" → "Caroline's friend"
         if decomp.subject:
