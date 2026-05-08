@@ -4165,6 +4165,7 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
         # "I am lactose intolerant" → object="I" should be "lactose intolerant"
         if decomp.object and decomp.object.lower() in (
             "i", "me", "it", "this", "that", "them", "us",
+            "my son", "him", "her", "he",
         ) and decomp.source_text:
             src_doc = _get_nlp()(decomp.source_text)
             root_tok = _get_root(src_doc)
