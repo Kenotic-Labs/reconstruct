@@ -1553,6 +1553,17 @@ def _handle_aggregation_query(
         # Skip if object is just the entity name or a pronoun
         if obj.lower() in (entity.lower(), "user", "i", "me", "them", "it"):
             continue
+        # Substring dedup: skip if this object is a substring of an
+        # existing one or vice versa ("adoption agencies" ⊂ "researching
+        # adoption agencies")
+        obj_lower = obj.lower()
+        is_dup = False
+        for existing in list(seen_objs):
+            if obj_lower in existing or existing in obj_lower:
+                is_dup = True
+                break
+        if is_dup:
+            continue
 
         # PQ-based scoring: embed each pq_1-4, take best cosine with query
         best_cos = 0.0
