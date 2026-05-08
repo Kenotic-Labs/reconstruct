@@ -4180,8 +4180,17 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
         # "I am lactose intolerant" → object="I" should be "lactose intolerant"
         if decomp.object and decomp.object.lower() in (
             "i", "me", "it", "this", "that", "them", "us",
-            "my son", "him", "her", "he",
+            "my son", "him", "her", "he", "myself",
         ) and decomp.source_text:
+            # Also fix predicate if it's a pronoun
+            if decomp.predicate and decomp.predicate.lower() in (
+                "it", "this", "that", "them", "me",
+            ) and decomp.source_text:
+                src_doc = _get_nlp()(decomp.source_text)
+                for tok in src_doc:
+                    if tok.dep_ == "ROOT" and tok.pos_ in ("VERB", "AUX"):
+                        decomp.predicate = tok.lemma_
+                        break
             src_doc = _get_nlp()(decomp.source_text)
             root_tok = _get_root(src_doc)
             if root_tok:
