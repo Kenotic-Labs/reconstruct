@@ -4107,12 +4107,22 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
             # Direct pronouns → speaker
             if _sl in ("it", "this", "that", "there", "here", "they", "them",
                         "something", "nothing", "everything",
-                        "he", "she", "we", "the kids", "the children"):
+                        "he", "she", "we", "the kids", "the children",
+                        "two", "three", "four", "five"):
                 decomp.subject = speaker_name
             # Definite noun phrases ("The necklace", "The book") → speaker
-            # These are often about the speaker's possessions
             elif _sl.startswith("the ") and len(_sl) < 50:
                 decomp.subject = speaker_name
+            # Possessive noun phrases not caught by Fix 1
+            # "My hand-painted bowl" → "Melanie's hand-painted bowl"
+            elif _sl.startswith(f"{speaker_name.lower()}'s "):
+                pass  # Already resolved
+            # Non-person proper nouns in subject of "be" copula
+            # "Bach are my favorites" → speaker = Melanie
+            elif decomp.predicate == "be" and decomp.object:
+                _obj_l = decomp.object.lower()
+                if "my " in _obj_l or "favorite" in _obj_l:
+                    decomp.subject = speaker_name
 
         # Fix 3: Predicate cleanup
         if decomp.predicate:
