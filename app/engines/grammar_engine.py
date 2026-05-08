@@ -4175,10 +4175,15 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
                     decomp.predicate = "be"
             if _need_root and decomp.source_text:
                 src_doc = _get_nlp()(decomp.source_text)
+                _found_verb = False
                 for tok in src_doc:
                     if tok.dep_ == "ROOT" and tok.pos_ in ("VERB", "AUX"):
                         decomp.predicate = tok.lemma_
+                        _found_verb = True
                         break
+                # If no verb ROOT found (verbless fragment), default to "have"
+                if not _found_verb:
+                    decomp.predicate = "have"
 
         # Fix 4: Pronoun/garbage object cleanup
         # "I am lactose intolerant" → object="I" should be "lactose intolerant"
