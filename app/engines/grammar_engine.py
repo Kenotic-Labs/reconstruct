@@ -4143,7 +4143,22 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
                         decomp.predicate = tok.lemma_
                         break
 
-        # Fix 4: Empty object for passive + prep constructions
+        # Fix 4: Pronoun/garbage object cleanup
+        # "I am lactose intolerant" → object="I" should be "lactose intolerant"
+        if decomp.object and decomp.object.lower() in (
+            "i", "me", "it", "this", "that", "them", "us",
+        ) and decomp.source_text:
+            src_doc = _get_nlp()(decomp.source_text)
+            root_tok = _get_root(src_doc)
+            if root_tok:
+                # Try acomp (adjective complement): "am lactose intolerant"
+                for child in root_tok.children:
+                    if child.dep_ in ("acomp", "oprd"):
+                        span = sorted(child.subtree, key=lambda t: t.i)
+                        decomp.object = " ".join(t.text for t in span).strip()
+                        break
+
+        # Fix 5: Empty object for passive + prep constructions
         # "married for 5 years" → object should be "5 years"
         if not decomp.object and decomp.source_text:
             src_doc = _get_nlp()(decomp.source_text)
