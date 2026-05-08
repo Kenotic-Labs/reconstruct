@@ -4115,13 +4115,29 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
             pred_lower = decomp.predicate.lower()
             obj_lower = decomp.object.lower()
             if pred_lower in obj_lower and len(pred_lower) > 2:
-                # Predicate is part of the object — likely a parse error.
-                # Try to find the actual verb in the source text.
                 src_doc = _get_nlp()(decomp.source_text or "")
                 for tok in src_doc:
                     if tok.dep_ == "ROOT" and tok.pos_ in ("VERB", "AUX"):
                         decomp.predicate = tok.lemma_
                         break
+
+        # Fix 4: Empty object for passive + prep constructions
+        # "married for 5 years" → object should be "5 years"
+        if not decomp.object and decomp.source_text:
+            src_doc = _get_nlp()(decomp.source_text)
+            root_tok = _get_root(src_doc)
+            if root_tok:
+                for child in root_tok.children:
+                    if child.dep_ == "prep":
+                        for gc in child.children:
+                            if gc.dep_ == "pobj":
+                                pobj_span = sorted(gc.subtree, key=lambda t: t.i)
+                                decomp.object = " ".join(
+                                    t.text for t in pobj_span
+                                ).strip()
+                                break
+                        if decomp.object:
+                            break
 
     # Rebuild triples from fixed decompositions
     all_triples = [_derive_triple(d) for d in decompositions]
