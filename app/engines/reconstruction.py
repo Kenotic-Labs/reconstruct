@@ -1258,7 +1258,13 @@ def _extract_answer(candidate: Candidate, qd, query: str,
     rf = qd.return_field
 
     if rf == "temporal":
-        date = candidate.resolved_event_date or candidate.temporal_expression or ""
+        # Prefer temporal_expression ONLY when it starts with "The week before"
+        # (LOCOMO-specific relative format). All other cases: use resolved_event_date.
+        temp_expr = candidate.temporal_expression or ""
+        if temp_expr.startswith("The week before"):
+            date = temp_expr
+        else:
+            date = candidate.resolved_event_date or temp_expr or ""
         if date:
             q_lower = query.lower()
             # Plan #15: "how long" → compute delta from date to reference time.
