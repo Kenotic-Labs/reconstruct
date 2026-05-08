@@ -574,6 +574,7 @@ class MemoryEngine:
 
             # Temporal expression + relational entities
             edge["temporal_expression"] = getattr(td, 'temporal_expression', None)
+            edge["episodic_fact"] = getattr(td, 'episodic_fact', None) or None
             _rel_subj = getattr(td, 'relational_subject', None)
             _rel_ents = getattr(td, 'relational_entities', None) or []
             if isinstance(_rel_ents, list) and _rel_subj and _rel_subj.lower() != 'user':
