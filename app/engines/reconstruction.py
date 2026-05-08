@@ -1384,8 +1384,8 @@ def _extract_answer(candidate: Candidate, qd, query: str,
         # Safe for hand-populated DB because hand-crafted objects are already
         # multi-token and won't trigger this.
         ef = candidate.episodic_fact or ""
-        if (prefer_source and ef and len(obj.split()) <= 2
-                and len(ef.split()) > len(obj.split())
+        if (prefer_source and ef and len(obj.split()) <= 3
+                and len(ef.split()) > len(obj.split()) + 1
                 and len(ef) < 80):
             return ef
         return obj
