@@ -4095,6 +4095,9 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
             subj = decomp.subject
             if subj.startswith("My ") or subj.startswith("my "):
                 decomp.subject = f"{speaker_name}'s {subj[3:]}"
+            # Handle spaCy tokenization: "My hand - painted bowl" (spaces around hyphen)
+            elif "My " in subj or "my " in subj:
+                decomp.subject = subj.replace("My ", f"{speaker_name}'s ").replace("my ", f"{speaker_name}'s ")
             elif subj == "I" or subj == "i":
                 decomp.subject = speaker_name
             # "Our" → speaker's
