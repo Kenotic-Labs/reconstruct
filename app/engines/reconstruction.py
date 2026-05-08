@@ -3215,14 +3215,15 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
             _topic_nouns = []
             for tok in _qdoc:
                 if tok.pos_ in ("NOUN", "PROPN") and tok.text.lower() != _qe_low:
-                    # Skip indirect objects where the preposition attaches
-                    # directly to the root verb ("recommend to Melanie") —
-                    # they're recipients, not topics. Don't skip prepositional
-                    # phrases that modify nouns ("plans with respect to adoption").
+                    # Skip indirect objects with "to" preposition attached
+                    # to root verb ("recommend to Melanie") — recipients.
+                    # Keep "for" ("make for a church") — purpose/beneficiary
+                    # IS a distinguishing topic term.
                     if tok.dep_ == "pobj" and tok.head.dep_ == "prep":
-                        _prep_head = tok.head.head
-                        if _prep_head.dep_ == "ROOT" and _prep_head.pos_ == "VERB":
-                            continue
+                        if tok.head.text.lower() == "to":
+                            _prep_head = tok.head.head
+                            if _prep_head.dep_ == "ROOT" and _prep_head.pos_ == "VERB":
+                                continue
                     if len(tok.text) > 2 and tok.text.lower() not in (
                         "kind", "type", "way", "thing", "time", "year",
                         "month", "week", "day", "question", "career",
