@@ -4111,7 +4111,7 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
                 decomp.subject = speaker_name
             # Definite noun phrases ("The necklace", "The book") → speaker
             # These are often about the speaker's possessions
-            elif _sl.startswith("the ") and len(_sl) < 30:
+            elif _sl.startswith("the ") and len(_sl) < 50:
                 decomp.subject = speaker_name
 
         # Fix 3: Predicate cleanup
