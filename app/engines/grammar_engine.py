@@ -4101,25 +4101,42 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
             elif subj.startswith("Our ") or subj.startswith("our "):
                 decomp.subject = f"{speaker_name}'s {subj[4:]}"
 
-        # Fix 2: Filter garbage subjects (pronouns, determiners)
-        if decomp.subject and decomp.subject.lower() in (
-            "it", "this", "that", "there", "here", "they", "them",
-            "something", "nothing", "everything",
-        ):
-            decomp.subject = speaker_name
+        # Fix 2: Filter garbage subjects (pronouns, determiners, 3rd person)
+        if decomp.subject:
+            _sl = decomp.subject.lower()
+            if _sl in ("it", "this", "that", "there", "here", "they", "them",
+                        "something", "nothing", "everything",
+                        "he", "she", "we", "the kids", "the children"):
+                decomp.subject = speaker_name
 
-        # Fix 3: If predicate is a noun (not a verb), try to recover
-        # the actual verb. "I have a guinea pig" → predicate should be
-        # "have" not "pig"
-        if decomp.predicate and decomp.object:
+        # Fix 3: Predicate cleanup
+        if decomp.predicate:
             pred_lower = decomp.predicate.lower()
-            obj_lower = decomp.object.lower()
-            if pred_lower in obj_lower and len(pred_lower) > 2:
-                src_doc = _get_nlp()(decomp.source_text or "")
-                for tok in src_doc:
-                    if tok.dep_ == "ROOT" and tok.pos_ in ("VERB", "AUX"):
-                        decomp.predicate = tok.lemma_
-                        break
+            # 3a: Predicate is substring of object → recover ROOT verb
+            if decomp.object:
+                obj_lower = decomp.object.lower()
+                if pred_lower in obj_lower and len(pred_lower) > 2:
+                    src_doc = _get_nlp()(decomp.source_text or "")
+                    for tok in src_doc:
+                        if tok.dep_ == "ROOT" and tok.pos_ in ("VERB", "AUX"):
+                            decomp.predicate = tok.lemma_
+                            break
+            # 3b: Compound predicate with preposition suffix → simplify
+            # "cup_with" → "make", "paint_after" → "paint", "go_in" → "go"
+            if "_" in decomp.predicate:
+                parts = decomp.predicate.split("_")
+                last = parts[-1].lower()
+                if last in ("with", "after", "before", "in", "on", "at",
+                            "from", "to", "for", "by", "about", "of"):
+                    decomp.predicate = "_".join(parts[:-1])
+                    # If that leaves just a preposition, recover ROOT verb
+                    if decomp.predicate.lower() in ("with", "after", "before",
+                            "in", "on", "at", "from", "to", "for"):
+                        src_doc = _get_nlp()(decomp.source_text or "")
+                        for tok in src_doc:
+                            if tok.dep_ == "ROOT" and tok.pos_ in ("VERB", "AUX"):
+                                decomp.predicate = tok.lemma_
+                                break
 
         # Fix 4: Empty object for passive + prep constructions
         # "married for 5 years" → object should be "5 years"
