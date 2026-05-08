@@ -4167,8 +4167,12 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
             # Check if predicate is a common noun or adjective (not a verb)
             if not _need_root and decomp.source_text:
                 _pred_doc = _get_nlp()(decomp.predicate)
-                if _pred_doc and _pred_doc[0].pos_ in ("NOUN", "ADJ"):
+                if _pred_doc and _pred_doc[0].pos_ == "NOUN":
                     _need_root = True
+                elif _pred_doc and _pred_doc[0].pos_ == "ADJ":
+                    # For ADJ predicates, set to "be" if ROOT recovery
+                    # would just return the same ADJ (verbless fragment)
+                    decomp.predicate = "be"
             if _need_root and decomp.source_text:
                 src_doc = _get_nlp()(decomp.source_text)
                 for tok in src_doc:
