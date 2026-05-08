@@ -259,6 +259,12 @@ class MemoryEngine:
                     from app.engines.grammar_engine import _get_nlp
                     _doc = _get_nlp()(obj_to_check.strip())
                     _CONTENT_POS = frozenset({"NOUN", "PROPN", "NUM", "ADJ", "VERB"})
+                    # Also skip if object is just "everything", "something", "nothing"
+                    _obj_lower = obj_to_check.strip().lower()
+                    if _obj_lower in ("everything", "something", "nothing",
+                                      "anything", "everyone", "someone",
+                                      "a lot", "a bit", "a while"):
+                        continue
                     if not any(tok.pos_ in _CONTENT_POS for tok in _doc):
                         continue
                 except Exception:
