@@ -3233,13 +3233,13 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
                     # Keep "for" ("make for a church") — purpose/beneficiary
                     # IS a distinguishing topic term.
                     if tok.dep_ == "pobj" and tok.head.dep_ == "prep":
-                        if tok.head.text.lower() == "to":
-                            # Only skip PERSON recipients ("recommend to Melanie"),
-                            # not locations ("go to the beach")
-                            if tok.pos_ == "PROPN" or tok.ent_type_ == "PERSON":
-                                _prep_head = tok.head.head
-                                if _prep_head.dep_ == "ROOT" and _prep_head.pos_ == "VERB":
-                                    continue
+                        prep_text = tok.head.text.lower()
+                        # Skip PERSON recipients after "to"/"with" prep
+                        # ("recommend to Melanie", "share with Melanie")
+                        if prep_text in ("to", "with") and (tok.pos_ == "PROPN" or tok.ent_type_ == "PERSON"):
+                            _prep_head = tok.head.head
+                            if _prep_head.dep_ == "ROOT" and _prep_head.pos_ == "VERB":
+                                continue
                     if len(tok.text) > 2 and tok.text.lower() not in (
                         "kind", "type", "way", "thing", "time", "year",
                         "month", "week", "day", "question", "career",
