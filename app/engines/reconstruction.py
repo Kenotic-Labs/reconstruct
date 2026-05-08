@@ -1363,9 +1363,8 @@ def _handle_count_query(conn: sqlite3.Connection, user_id: int,
         if obj:
             conditions.append("object LIKE ?")
             params.append(f"%{obj}%")
-    if qd.match_schema:
-        conditions.append("edge_schematic_category = ?")
-        params.append(qd.match_schema)
+    # Schema omitted — grammar-derived schema often misclassifies
+    # (e.g. "beach" → "housing") which widens or narrows incorrectly.
     if qd.match_entity or qd.match_subject:
         entity = qd.match_entity or qd.match_subject
         conditions.append("(subject LIKE ? OR relational_entities LIKE ?)")
@@ -2841,6 +2840,14 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
             if result:
                 return result
 
+        # Count queries — BEFORE session handler because "how many times"
+        # triggers both, and count handler gives correct entity-scoped count
+        # while session handler counts all sessions.
+        if _is_count_query(query):
+            result = _handle_count_query(conn, user_id, qd)
+            if result:
+                return result
+
         # Session/conversation scoping (plan #4)
         if _is_session_query(query):
             result = _handle_session_query(conn, user_id, query)
@@ -2862,12 +2869,6 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
         # Emotional trend queries (plan #10)
         if _is_emotional_trend_query(query):
             result = _handle_emotional_trend(conn, user_id, qd)
-            if result:
-                return result
-
-        # Count queries
-        if _is_count_query(query):
-            result = _handle_count_query(conn, user_id, qd)
             if result:
                 return result
 
