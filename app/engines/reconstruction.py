@@ -2070,6 +2070,20 @@ def _handle_inference_query(
     if not entity:
         return None
 
+    # Counterfactual negation: "if X hadn't/didn't/wasn't..." → "Likely no"
+    # The "if" clause removes the causal factor, negating the conclusion.
+    q_lower = query.lower()
+    if " if " in q_lower:
+        _neg_markers = ("hadn't", "didn't", "wasn't", "weren't", "hadn",
+                        "had not", "did not", "was not", "were not",
+                        "never", "without")
+        _if_clause = q_lower.split(" if ", 1)[1]
+        if any(m in _if_clause for m in _neg_markers):
+            return ReconstructionResult(
+                answer="Likely no",
+                return_field="episodic",
+            )
+
     query_emb = embed_text(query)
 
     rows = conn.execute(
@@ -2185,6 +2199,18 @@ def _handle_causal_query(conn: sqlite3.Connection, user_id: int,
     entity = qd.match_entity or qd.match_subject
     if not entity:
         return None
+
+    # Counterfactual: "if X hadn't/didn't/wasn't..." → "Likely no"
+    _ql = query.lower()
+    if " if " in _ql:
+        _if_clause = _ql.split(" if ", 1)[1]
+        _neg = ("hadn't", "didn't", "wasn't", "weren't", "had not",
+                "did not", "was not", "were not", "never", "without")
+        if any(m in _if_clause for m in _neg):
+            return ReconstructionResult(
+                answer="Likely no",
+                return_field="episodic",
+            )
 
     # Retrieve all edges about this entity
     rows = conn.execute(
@@ -3017,8 +3043,8 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
             if result:
                 return result
 
-        # "Still" queries
-        if _is_still_query(query):
+        # "Still" queries — skip for conditional ("Would X still... if Y?")
+        if _is_still_query(query) and not _is_conditional_query(query):
             result = _handle_still_query(conn, user_id, qd, query)
             if result:
                 return result
