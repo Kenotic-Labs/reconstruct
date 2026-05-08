@@ -1570,6 +1570,21 @@ def _handle_aggregation_query(
         # Single item — let the normal pipeline handle it for better answer extraction
         return None
 
+    # Check if the top item is a comprehensive summary (contains "and" or
+    # numbers) that subsumes the others. If so, prefer it alone. This handles
+    # "What pets?" → "two cats and a dog" over listing individual pets.
+    top_obj = items[0]
+    if len(items) > 3 and (" and " in top_obj.lower() or any(c.isdigit() for c in top_obj)):
+        # Top item might be a summary — check if it's short enough (<50 chars)
+        if len(top_obj) < 50:
+            log.debug("Aggregation: using summary item %r", top_obj)
+            return ReconstructionResult(
+                answer=top_obj,
+                return_field="episodic",
+                edge_ids=[scored_objects[0][2]],
+                grounding=[f"aggregation:{entity}"],
+            )
+
     log.debug("Aggregation query: %d items for entity=%s query=%r",
               len(items), entity, query)
     return ReconstructionResult(
