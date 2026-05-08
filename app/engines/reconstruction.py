@@ -1134,6 +1134,20 @@ def _check_coherence(c: Candidate, qd, query: str) -> bool:
                     return True
         if qp in c.source_text.lower():
             return True
+        # If the overall query-edge cosine is high (> 0.45), the edge is
+        # topically relevant even if predicates don't match lexically.
+        # "Which song motivates X?" vs edge with predicate "love_song" —
+        # different verbs but same topic.
+        if c.edge_embedding:
+            try:
+                query_emb = embed_text(query)
+                edge_emb = np.frombuffer(c.edge_embedding, dtype=np.float32)
+                if edge_emb.shape[0] == query_emb.shape[0]:
+                    cos = float(np.dot(query_emb, edge_emb))
+                    if cos > 0.50:
+                        return True
+            except Exception:
+                pass
         return False
 
     return True
