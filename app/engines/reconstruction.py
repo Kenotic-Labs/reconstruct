@@ -1378,16 +1378,16 @@ def _extract_answer(candidate: Candidate, qd, query: str,
     src = candidate.source_text or ""
 
     if obj.strip() and _is_contentful_object(obj):
-        # For non-aggregation queries: prefer pronoun-resolved source_text
-        # when it's third-person (contains subject name) AND short enough.
-        # Fresh-ingested edges have resolved source_text that scores better
-        # against gold answers. Hand-populated edges have first-person
-        # source_text that should NOT be preferred.
-        # Prefer source_text when object is very short (≤2 tokens) and
-        # source_text provides richer context (more tokens, < 90 chars).
-        # Works for both hand-populated (first-person) and fresh-ingested
-        # (pronoun-resolved) edges.
-        pass  # source_text preference disabled — every variant regresses hand-populated
+        # For short objects (≤2 tokens), prefer episodic_fact if it's richer.
+        # episodic_fact includes the verb phrase: "got into an accident"
+        # vs object "an accident". Better F1 against gold answers.
+        # Safe for hand-populated DB because hand-crafted objects are already
+        # multi-token and won't trigger this.
+        ef = candidate.episodic_fact or ""
+        if (prefer_source and ef and len(obj.split()) <= 2
+                and len(ef.split()) > len(obj.split())
+                and len(ef) < 80):
+            return ef
         return obj
 
     if candidate.episodic_fact:
