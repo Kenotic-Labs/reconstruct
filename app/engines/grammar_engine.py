@@ -4149,7 +4149,7 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
                     decomp.predicate = "_".join(parts[:-1])
 
             # 3b: If predicate is a noun (substring of object) or a bare
-            # preposition → recover the actual ROOT verb from source text
+            # preposition or a common noun → recover the actual ROOT verb
             pred_lower = decomp.predicate.lower()
             _need_root = False
             if pred_lower in ("with", "after", "before", "in", "on",
@@ -4158,6 +4158,11 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
             elif decomp.object:
                 obj_lower = decomp.object.lower()
                 if pred_lower in obj_lower and len(pred_lower) > 2:
+                    _need_root = True
+            # Check if predicate is a common noun (not a verb) via spaCy
+            if not _need_root and decomp.source_text:
+                _pred_doc = _get_nlp()(decomp.predicate)
+                if _pred_doc and _pred_doc[0].pos_ in ("NOUN",):
                     _need_root = True
             if _need_root and decomp.source_text:
                 src_doc = _get_nlp()(decomp.source_text)
