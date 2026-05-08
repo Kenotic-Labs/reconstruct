@@ -4103,6 +4103,9 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
                 decomp.subject = f"{speaker_name}'s {subj[4:]}"
             elif subj.startswith("Her ") or subj.startswith("her "):
                 decomp.subject = f"{speaker_name}'s {subj[4:]}"
+            # "Your X" → listener's X
+            elif subj.startswith("Your ") or subj.startswith("your "):
+                decomp.subject = f"user's {subj[5:]}"
             elif subj == "I" or subj == "i":
                 decomp.subject = speaker_name
             # "Our" → speaker's
