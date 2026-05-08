@@ -2517,6 +2517,19 @@ def _step1_trace_sql(conn: sqlite3.Connection, user_id: int,
         _subj_lower = (qd.match_subject or "").lower()
         if _obj_lower and (_obj_lower == _ent_lower or _obj_lower == _subj_lower):
             _skip_obj = True
+        # Skip single-word category noun objects ("book", "song", "pet")
+        # when entity + predicate already provide sufficient filtering.
+        # These category nouns won't appear in stored objects which contain
+        # specific answers ("Becoming Nicole", "Brave by Sara Bareilles").
+        if (not _skip_obj and has_filter and qd.match_predicate
+                and " " not in _obj_lower.strip()):
+            try:
+                from app.engines.grammar_engine import _get_nlp
+                _od = _get_nlp()(_obj_lower)
+                if len(_od) == 1 and _od[0].tag_ in ("NN", "NNS"):
+                    _skip_obj = True
+            except Exception:
+                pass
     if qd.match_object and not _skip_obj:
         obj = _clean_article(qd.match_object)
         if obj:
@@ -3077,6 +3090,14 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
             _topic_nouns = []
             for tok in _qdoc:
                 if tok.pos_ in ("NOUN", "PROPN") and tok.text.lower() != _qe_low:
+                    # Skip indirect objects where the preposition attaches
+                    # directly to the root verb ("recommend to Melanie") —
+                    # they're recipients, not topics. Don't skip prepositional
+                    # phrases that modify nouns ("plans with respect to adoption").
+                    if tok.dep_ == "pobj" and tok.head.dep_ == "prep":
+                        _prep_head = tok.head.head
+                        if _prep_head.dep_ == "ROOT" and _prep_head.pos_ == "VERB":
+                            continue
                     if len(tok.text) > 2 and tok.text.lower() not in (
                         "kind", "type", "way", "thing", "time", "year",
                         "month", "week", "day", "question", "career",
