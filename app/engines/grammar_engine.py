@@ -4291,7 +4291,15 @@ def classify_query(query_text: str) -> QueryDecomposition:
     # Spec: relational_entities collects PERSON, ORG, GPE, LOC, FAC, NORP
     for ent in doc.ents:
         if ent.label_ in ("PERSON", "ORG", "GPE", "LOC", "FAC", "NORP"):
-            result.match_entity = ent.text
+            entity_text = ent.text
+            # Strip possessive suffixes: "Caroline's" → "Caroline",
+            # "Carolines" → "Caroline" (informal possessive without apostrophe)
+            if entity_text.endswith("'s"):
+                entity_text = entity_text[:-2]
+            elif (ent.label_ == "PERSON" and entity_text.endswith("s")
+                  and len(entity_text) > 4 and not entity_text.endswith("ss")):
+                entity_text = entity_text[:-1]
+            result.match_entity = entity_text
             break
 
     # Utterance type
