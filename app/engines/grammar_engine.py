@@ -4098,6 +4098,11 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
             # Handle spaCy tokenization: "My hand - painted bowl" (spaces around hyphen)
             elif "My " in subj or "my " in subj:
                 decomp.subject = subj.replace("My ", f"{speaker_name}'s ").replace("my ", f"{speaker_name}'s ")
+            # "His/Her X" → speaker's X (in first-person narrative)
+            elif subj.startswith("His ") or subj.startswith("his "):
+                decomp.subject = f"{speaker_name}'s {subj[4:]}"
+            elif subj.startswith("Her ") or subj.startswith("her "):
+                decomp.subject = f"{speaker_name}'s {subj[4:]}"
             elif subj == "I" or subj == "i":
                 decomp.subject = speaker_name
             # "Our" → speaker's
