@@ -1017,7 +1017,11 @@ def resolve_pronouns(doc, speaker: Optional[str] = None, listener: str = "user")
         lower = tok.text.lower()
         if lower == "i" and tok.dep_ in ("nsubj", "nsubjpass", "ROOT"):
             tokens.append(speaker_name)
+        elif lower == "we" and tok.dep_ in ("nsubj", "nsubjpass"):
+            tokens.append(speaker_name)
         elif lower == "me" and tok.dep_ in ("dobj", "pobj", "dative"):
+            tokens.append(speaker_name)
+        elif lower == "us" and tok.dep_ in ("dobj", "pobj", "dative"):
             tokens.append(speaker_name)
         elif lower == "my":
             tokens.append(speaker_name + "'s")
