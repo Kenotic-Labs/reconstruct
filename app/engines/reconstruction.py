@@ -2070,7 +2070,7 @@ def _handle_inference_query(
     # category preferences where cosine between topic and object works:
     # "Vivaldi" (topic) ↔ "Bach, Mozart" (object) = same music category.
     q_lower = query.lower()
-    _is_pref = any(w in q_lower for w in ("enjoy", "bookshelf", "have on her"))
+    _is_pref = any(w in q_lower for w in ("enjoy", "bookshelf", "have on her", "interested in"))
     if _is_pref:
         try:
             from app.engines.grammar_engine import _get_nlp
