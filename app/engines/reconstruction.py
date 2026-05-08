@@ -447,7 +447,12 @@ def _is_same_comparison_query(query: str) -> bool:
 
 
 def _is_conditional_query(query: str) -> bool:
-    q = query.lower()
+    q = query.lower().strip()
+    # WH-questions with "would" are information-seeking, not conditionals.
+    # "What fields would X pursue?" → not conditional.
+    # "Would X still do Y?" → conditional.
+    if q.startswith(("what ", "which ", "where ", "when ", "how ", "why ")):
+        return "if " in q  # Only conditional if "if" clause present
     return any(w in q for w in ("would ", "could ", "if "))
 
 
