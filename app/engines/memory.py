@@ -285,6 +285,8 @@ class MemoryEngine:
                 _pronoun_subjects = frozenset({
                     "it", "this", "that", "there", "here",
                     "user", "", "something", "everything",
+                    "what", "how", "why", "who", "where", "when",
+                    "which",
                 })
                 if not _rs or _rs_low in _pronoun_subjects:
                     decomp.relational_subject = speaker
@@ -380,7 +382,7 @@ class MemoryEngine:
             "it", "this", "that", "there", "here", "last",
             "something", "everything", "nothing", "anyone",
             "what", "how", "why", "who", "where", "when",
-            "which", "we", "they", "he", "she",
+            "which",
         })
         if _subj_low in _garbage_subjects:
             # Resolve to speaker name from trace decomposition
