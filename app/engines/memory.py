@@ -404,6 +404,11 @@ class MemoryEngine:
         has_source = bool(source_text and source_text.strip())
         if not has_triple and not has_source:
             return 0
+        # Skip very short source texts — these are backchannels,
+        # greetings, and fragments that don't carry factual content.
+        # "Mel !", "Good to see you!", "Caroline !" → no useful edges.
+        if source_text and len(source_text.strip()) < 15 and not object:
+            return 0
 
         if not has_source and has_triple:
             source_text = f"{subject} {predicate.replace('_', ' ')} {object}"
