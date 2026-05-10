@@ -252,18 +252,26 @@ class MemoryEngine:
             resolved_o = _resolve(o)
 
             # Content filter: skip edges where object is just pronouns/
-            # function words. Uses spaCy POS, not word lists.
+            # function words, too short, or same as subject/speaker.
             obj_to_check = resolved_o or (getattr(decomp, 'object', '') if decomp else '')
             if obj_to_check:
                 try:
                     from app.engines.grammar_engine import _get_nlp
                     _doc = _get_nlp()(obj_to_check.strip())
                     _CONTENT_POS = frozenset({"NOUN", "PROPN", "NUM", "ADJ", "VERB"})
-                    # Also skip if object is just "everything", "something", "nothing"
                     _obj_lower = obj_to_check.strip().lower()
+                    # Skip indefinite pronouns
                     if _obj_lower in ("everything", "something", "nothing",
                                       "anything", "everyone", "someone",
                                       "a lot", "a bit", "a while"):
+                        continue
+                    # Skip very short objects (< 3 chars)
+                    if len(_obj_lower) < 3:
+                        continue
+                    # Skip objects that are just the speaker or subject name
+                    if speaker and _obj_lower == speaker.lower():
+                        continue
+                    if resolved_s and _obj_lower == resolved_s.lower():
                         continue
                     if not any(tok.pos_ in _CONTENT_POS for tok in _doc):
                         continue
@@ -371,6 +379,8 @@ class MemoryEngine:
         _garbage_subjects = frozenset({
             "it", "this", "that", "there", "here", "last",
             "something", "everything", "nothing", "anyone",
+            "what", "how", "why", "who", "where", "when",
+            "which", "we", "they", "he", "she",
         })
         if _subj_low in _garbage_subjects:
             # Resolve to speaker name from trace decomposition

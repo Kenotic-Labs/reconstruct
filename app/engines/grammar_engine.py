@@ -4723,7 +4723,13 @@ def generate_predicted_queries(
                 if not question.endswith("?"):
                     question += "?"
             else:
-                question = f"When did {subject} {_verb_base}?"
+                # Include object for specificity:
+                # "When did Melanie run a charity race?" vs "When did Melanie run?"
+                _short_obj = object[:40] if object else ""
+                if _short_obj and not _has_temporal_in_obj:
+                    question = f"When did {subject} {_verb_base} {_short_obj}?"
+                else:
+                    question = f"When did {subject} {_verb_base}?"
 
         elif wh == _PQ_WH_WHERE:
             if _is_be:
@@ -4731,7 +4737,12 @@ def generate_predicted_queries(
             elif _pred_prep:
                 question = f"Where does {subject} {_verb_base}?"
             else:
-                question = f"Where does {subject} {pred_lemma}?"
+                # Include object: "Where has Melanie camped?" → "Where has Melanie camped with her family?"
+                _short_obj = object[:30] if object else ""
+                if _short_obj:
+                    question = f"Where does {subject} {pred_lemma} {_short_obj}?"
+                else:
+                    question = f"Where does {subject} {pred_lemma}?"
 
         else:  # WH_WHAT
             if _is_be and _obj_frame:
