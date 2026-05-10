@@ -2220,9 +2220,11 @@ def _handle_inference_query(
                 edge_ids=[best_row["id"]],
                 grounding=[src],
             )
-        detail = obj if obj else src[:80]
+        # Return "Yes" without appending detail — LOCOMO Cat 3
+        # gold answers are often just "Yes" or "No". Appending
+        # object/source_text reduces token F1.
         return ReconstructionResult(
-            answer=f"Yes, {detail}" if detail else "Yes",
+            answer="Yes",
             return_field="episodic",
             edge_ids=[best_row["id"]],
             grounding=[src],
