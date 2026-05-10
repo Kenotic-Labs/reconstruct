@@ -3748,6 +3748,20 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
         # ---- Step 13: Answer extraction via return_field routing ----
         answer = _extract_answer(best, qd, query, prefer_source=True)
 
+        # ---- Step 13b: Generic answer demotion ----
+        # If the answer is very short (<=2 words) and there are more
+        # verified candidates, prefer a candidate with a longer/richer
+        # object. Prevents generic catch-all edges ("a difference",
+        # "others", "great") from winning over specific answers.
+        if (answer and len(answer.split()) <= 2 and len(verified) > 1
+                and qd.return_field == "episodic"):
+            for _alt in verified[1:]:
+                _alt_ans = _extract_answer(_alt, qd, query)
+                if _alt_ans and len(_alt_ans.split()) > len(answer.split()) + 1:
+                    answer = _alt_ans
+                    best = _alt
+                    break
+
         # ---- Step 14: PQ write-back ----
         if answer:
             _write_back_pq(conn, user_id, best.edge_id, query, answer)
