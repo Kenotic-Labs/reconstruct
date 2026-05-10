@@ -3117,6 +3117,53 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
         _resolve_pronoun(conn, user_id, qd)
         _resolve_possessive(conn, user_id, qd, query)
 
+        # ---- Step 2c: Early PQ exact-match return ----
+        # If the query exactly matches an edge's PQ_1, return the object
+        # directly. Skips handlers that corrupt the answer.
+        # Skip for aggregation queries — they need multiple edges combined.
+        _early_pq = conn.execute(
+            f"""SELECT {_CANDIDATE_COLS}
+                FROM edges
+                WHERE user_id = ? AND tombstoned_at IS NULL
+                  AND pq_1 = ?
+                LIMIT 1""",
+            (user_id, query),
+        ).fetchone()
+        # For aggregation queries, check if MULTIPLE edges share this PQ.
+        # If so, skip early return — aggregation needs to combine them.
+        if _early_pq and _is_aggregation_query(query):
+            _pq_count = conn.execute(
+                "SELECT COUNT(*) FROM edges WHERE user_id = ? AND tombstoned_at IS NULL AND pq_1 = ?",
+                (user_id, query),
+            ).fetchone()[0]
+            if _pq_count > 1:
+                _early_pq = None  # multiple edges → need aggregation
+        if _early_pq and _early_pq["object"]:
+            _epq_obj = _early_pq["object"]
+            # Entity check: query entity must match edge subject
+            _epq_entity = (qd.match_entity or "").lower()
+            _epq_subj = (_early_pq["subject"] or "").lower()
+            _epq_ok = (
+                not _epq_entity
+                or _epq_entity == "user"
+                or _epq_entity in _epq_subj
+                or _epq_subj in _epq_entity
+            )
+            if _epq_ok:
+                # For temporal, use date formatting on the object
+                if qd.return_field == "temporal":
+                    try:
+                        _tmp_cand = _row_to_candidate(_early_pq, "early_pq")
+                        _epq_obj = _extract_answer(_tmp_cand, qd, query)
+                    except Exception:
+                        pass
+                return ReconstructionResult(
+                    answer=_epq_obj,
+                    return_field=qd.return_field,
+                    edge_ids=[_early_pq["id"]],
+                    grounding=[_early_pq["source_text"] or ""],
+                )
+
         # ---- Step 3: Question-type routing ----
 
         # Duration queries (fix #3)
@@ -3338,19 +3385,25 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
                 ).fetchone()
                 if pq_edge_row:
                     pq_candidate = _row_to_candidate(pq_edge_row, "pq_hit")
-                    if _is_yesno_query(query, qd.wh_word):
+                    # Direct object return: when the PQ exactly matches
+                    # the query and the object is non-empty, return it
+                    # directly. No inference routing, no aggregation,
+                    # no temporal formatting, no source_text bleed.
+                    # The object IS the verified answer.
+                    _pq_obj = pq_candidate.object or ""
+                    if _pq_obj and len(_pq_obj) > 1:
+                        # For temporal queries, still need date formatting
+                        if qd.return_field == "temporal":
+                            answer = _extract_answer(pq_candidate, qd, query)
+                        else:
+                            answer = _pq_obj
+                    elif _is_yesno_query(query, qd.wh_word):
                         if pq_candidate.edge_negated:
-                            return ReconstructionResult(
-                                answer="No", return_field="episodic",
-                                edge_ids=[pq_edge_id],
-                                grounding=[pq_candidate.source_text],
-                            )
-                        return ReconstructionResult(
-                            answer="Yes", return_field="episodic",
-                            edge_ids=[pq_edge_id],
-                            grounding=[pq_candidate.source_text],
-                        )
-                    answer = _extract_answer(pq_candidate, qd, query, prefer_source=True)
+                            answer = "No"
+                        else:
+                            answer = "Yes"
+                    else:
+                        answer = _extract_answer(pq_candidate, qd, query, prefer_source=True)
                     log.debug("PQ text short-circuit: edge=%d answer=%s",
                               pq_edge_id, answer[:50] if answer else "")
                     return ReconstructionResult(
@@ -3672,6 +3725,25 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
         # ---- Step 12: Cluster expansion for grounding (plan #13) ----
         context_edges = _expand_cluster(conn, user_id, best)
         extra_grounding = [c.source_text for c in context_edges[:3] if c.source_text]
+
+        # ---- Step 12b: Verified object return ----
+        # When the best edge's PQ closely matches the query AND the
+        # object is non-empty, return the object directly. This skips
+        # all answer transformation (aggregation, inference prefix,
+        # temporal formatting, source_text bleed) that could corrupt
+        # the stored answer.
+        if best.pq_1 and best.object and len(best.object) > 1:
+            _pq_low = best.pq_1.lower().strip("?.,!")
+            _q_low = query.lower().strip("?.,!")
+            if _pq_low == _q_low:
+                answer = best.object
+                grounding = [best.source_text] + extra_grounding if extra_grounding else [best.source_text]
+                return ReconstructionResult(
+                    answer=answer,
+                    return_field=qd.return_field,
+                    edge_ids=[best.edge_id],
+                    grounding=grounding,
+                )
 
         # ---- Step 13: Answer extraction via return_field routing ----
         answer = _extract_answer(best, qd, query, prefer_source=True)
