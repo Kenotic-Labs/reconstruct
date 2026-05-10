@@ -272,8 +272,13 @@ class MemoryEngine:
 
             # Preserve speaker identity in trace decomposition
             if decomp is not None and speaker:
-                if not getattr(decomp, 'relational_subject', None) or \
-                   getattr(decomp, 'relational_subject', '') == 'user':
+                _rs = getattr(decomp, 'relational_subject', None) or ''
+                _rs_low = _rs.lower()
+                _pronoun_subjects = frozenset({
+                    "it", "this", "that", "there", "here",
+                    "user", "", "something", "everything",
+                })
+                if not _rs or _rs_low in _pronoun_subjects:
                     decomp.relational_subject = speaker
                 _ents = getattr(decomp, 'relational_entities', None) or []
                 if isinstance(_ents, list) and speaker not in _ents:
@@ -358,6 +363,30 @@ class MemoryEngine:
         subject = (subject or "").strip()
         predicate = (predicate or "").strip().lower().replace(" ", "_")
         object = (object or "").strip()
+
+        # ── Edge quality gate: filter garbage triples before storage ──
+        # Reject edges with pronoun/determiner subjects, None objects,
+        # or subject==object (grammar engine artifacts).
+        _subj_low = subject.lower()
+        _garbage_subjects = frozenset({
+            "it", "this", "that", "there", "here", "last",
+            "something", "everything", "nothing", "anyone",
+        })
+        if _subj_low in _garbage_subjects:
+            # Resolve to speaker name from trace decomposition
+            _speaker = getattr(td, 'relational_subject', None) if td else None
+            # The relational_subject might also be garbage ("It") —
+            # fall back to the speaker name from ingest_text.
+            if _speaker and _speaker.lower() not in _garbage_subjects and _speaker.lower() != 'user':
+                subject = _speaker
+            else:
+                subject = ""  # will fail has_triple check below
+        # Clean "This X" / "That X" subjects → just "X"
+        if subject.lower().startswith(("this ", "that ", "the ")):
+            subject = subject.split(" ", 1)[1] if " " in subject else subject
+        # Reject subject==object
+        if subject and object and subject.lower() == object.lower():
+            object = ""
 
         has_triple = bool(subject and predicate and object)
         has_source = bool(source_text and source_text.strip())

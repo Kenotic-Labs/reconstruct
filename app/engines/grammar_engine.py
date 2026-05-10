@@ -4742,6 +4742,25 @@ def generate_predicted_queries(
                 question = f"What does {subject} {_verb_base} {_pred_prep}?"
             else:
                 question = f"What does {subject} {pred_lemma}?"
+            # Add object-enriched variant: "What {head_noun} does X verb?"
+            # Makes PQs more specific for retrieval matching.
+            if not _is_be and object:
+                try:
+                    _obj_head = None
+                    for _t in _obj_doc:
+                        if _t.dep_ in ("ROOT", "dobj", "attr", "pobj") and _t.pos_ in ("NOUN", "PROPN"):
+                            _obj_head = _t.text
+                            break
+                    if not _obj_head and len(_obj_doc) > 0:
+                        _obj_head = _obj_doc[0].text if _obj_doc[0].pos_ in ("NOUN", "PROPN") else None
+                    if _obj_head and len(_obj_head) > 2:
+                        _enriched = f"What {_obj_head} does {subject} {pred_lemma}?"
+                        try:
+                            results.append((_enriched, _pq_embed_text(_enriched)))
+                        except Exception:
+                            pass
+                except Exception:
+                    pass
 
         try:
             emb = _pq_embed_text(question)
