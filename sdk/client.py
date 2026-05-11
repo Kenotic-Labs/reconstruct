@@ -155,38 +155,35 @@ class Kenotic:
         speaker_is_user: bool = True,
         confidence: float = 0.9,
         model_response: Optional[str] = None,
+        llm_id: Optional[str] = None,
     ) -> int:
         """Extract triples from raw text and store them.
 
         The singular write path runs:
-        structural cleanup -> grammar correction -> grammar engine
-        extraction -> trace-primary persistence.
+        ingestion cleanup -> grammar engine extraction -> temporal engine
+        -> memory store.
 
-        There is no alternate extraction branch in the SDK path.
-
-        If model_response is provided and non-empty, runs the same
-        extraction pipeline on the model's response and stores those
-        triples with source_tag="model_comprehension". The tag is fixed
-        and not caller-controlled.
+        Source identity:
+          - User input:    source_tag="user", speaker=user's name
+          - LLM response:  source_tag="llm:{llm_id}", speaker=llm_id
+          "I" always resolves to speaker — grammar engine handles it.
 
         Args:
           text: the raw user utterance or conversation turn.
-          source_timestamp: ISO datetime of the utterance. Used by the
-                            temporal engine for supersession + cluster
-                            recency.
-          speaker: if provided, 'I'/'me'/'myself' in extracted triples
-                   are resolved to this name.
+          source_timestamp: ISO datetime of the utterance.
+          speaker: who said it. "I" resolves to this name.
           confidence: 0.0—1.0 confidence for every resulting triple.
-          model_response: the model's response text. If non-empty, triples
-                          extracted from it are stored with
-                          source_tag="model_comprehension".
+          model_response: the AI's response text.
+          llm_id: which LLM generated model_response (e.g. "claude",
+                  "gpt", "cursor", "grok"). Stored in source_tag as
+                  "llm:{llm_id}" for provenance tracking.
 
         Returns:
           Combined number of triples stored from both passes.
         """
-        # Root cause: _engines() returns 2 values (memory, temporal) since
-        # retrieval.py was deleted. Was 3-value unpack; third was retrieval.
         memory, _ = self._engines()
+
+        # User input — source_tag = "user"
         count = memory.ingest_text(
             user_id=self.user_id,
             text=text,
@@ -194,16 +191,22 @@ class Kenotic:
             speaker=speaker,
             speaker_is_user=speaker_is_user,
             confidence=confidence,
+            source_tag="user",
         )
+
+        # LLM response — source_tag = "llm:{llm_id}"
+        # "I" in LLM output resolves to llm_id (the LLM's identity).
         if model_response and model_response.strip():
+            _llm_speaker = llm_id or "assistant"
+            _llm_tag = f"llm:{llm_id}" if llm_id else "llm:unknown"
             count += memory.ingest_text(
                 user_id=self.user_id,
                 text=model_response,
                 source_timestamp=source_timestamp,
-                speaker=speaker,
-                speaker_is_user=speaker_is_user,
+                speaker=_llm_speaker,
+                speaker_is_user=False,
                 confidence=confidence,
-                source_tag="model_comprehension",
+                source_tag=_llm_tag,
             )
         return count
 
@@ -351,6 +354,7 @@ class Kenotic:
         source_timestamp: Optional[str] = None,
         model_response: Optional[str] = None,
         check_proactive: bool = False,
+        llm_id: Optional[str] = None,
     ) -> ProcessResult:
         """Unified entry point. The architecture decides everything.
 
@@ -442,6 +446,7 @@ class Kenotic:
             speaker_is_user=speaker_is_user,
             source_timestamp=source_timestamp,
             model_response=model_response,
+            llm_id=llm_id,
         )
         insights = self.check_proactive() if check_proactive else []
         return ProcessResult(
@@ -498,6 +503,7 @@ def KenoticV1(
     speaker_is_user: bool = True,
     source_timestamp: Optional[str] = None,
     model_response: Optional[str] = None,
+    llm_id: Optional[str] = None,
     check_proactive: bool = False,
     user_id: int = 0,
     db_path: Union[str, Path] = "~/.kenotic/memory.db",
@@ -520,18 +526,23 @@ def KenoticV1(
         - Commands    → forget (soft tombstone)
         - Backchannels → skip
 
+    Source identity:
+        User input:   speaker="Sam", source_tag="user"
+        LLM response: llm_id="claude" → speaker="claude", source_tag="llm:claude"
+        "I" resolves to speaker. Grammar engine handles it.
+
     Args:
         text: any English text -- statement, question, command, anything.
-        speaker: who said it (for pronoun resolution).
+        speaker: who said it (for pronoun resolution). "I" → speaker name.
         source_timestamp: ISO datetime of the utterance.
-        model_response: the AI's response (stored as model_comprehension).
+        model_response: the AI's response text.
+        llm_id: which LLM generated model_response ("claude", "gpt",
+                "cursor", "grok"). Stored as source_tag="llm:{llm_id}".
         check_proactive: if True with empty text, returns arcs due for surfacing.
         user_id: partition key (default 0 for single-user).
         db_path: SQLite file path.
         embed_device: 'cuda' or 'cpu'.
-        locomo_mode: if True, forces short factual answers (no narrative
-                     reconstruction). For LOCOMO benchmark scoring where
-                     gold answers are 1-4 words and every extra word hurts F1.
+        locomo_mode: if True, forces short factual answers.
 
     Returns:
         ProcessResult -- contains action, result, proactive insights, triples_stored.
@@ -553,5 +564,6 @@ def KenoticV1(
         speaker_is_user=speaker_is_user,
         source_timestamp=source_timestamp,
         model_response=model_response,
+        llm_id=llm_id,
         check_proactive=check_proactive,
     )
