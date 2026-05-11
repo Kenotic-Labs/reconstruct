@@ -675,8 +675,9 @@ def _is_used_to_query(query: str) -> bool:
 
 
 def _is_session_query(query: str) -> bool:
-    """spaCy: DATE/TIME NER entities that reference sessions or days.
-    'last time', 'on Tuesday', 'this week' — all captured by NER."""
+    """spaCy: detects queries about conversation sessions.
+    Signals: DATE/TIME entities, "we" + communication verb,
+    session/conversation nouns."""
     doc = _get_query_doc(query)
     if doc is None:
         return False
@@ -684,14 +685,25 @@ def _is_session_query(query: str) -> bool:
     for ent in doc.ents:
         if ent.label_ in ("DATE", "TIME"):
             return True
-    # "we" as subject + communication verb = session reference
+    # "we" as subject + any verb = session reference (we = user + AI)
     root = _get_query_root(doc)
-    if root and root.pos_ in ("VERB", "AUX"):
-        has_we = any(tok.lemma_.lower() == "we"
-                     and tok.dep_ in ("nsubj", "nsubjpass")
-                     for tok in root.children)
-        if has_we and _verb_in_wordnet_domain(root.lemma_.lower(), "talk.v.01"):
-            return True
+    has_we = any(tok.lemma_.lower() == "we"
+                 and tok.dep_ in ("nsubj", "nsubjpass")
+                 for tok in doc)
+    if has_we:
+        # "we" + communication verb (talk, discuss, chat, etc.)
+        if root and root.pos_ in ("VERB", "AUX"):
+            if _verb_in_wordnet_domain(root.lemma_.lower(), "communicate.v.02"):
+                return True
+        # "we" + any verb still implies session context
+        return True
+    # Session/conversation nouns via WordNet
+    for tok in doc:
+        if tok.pos_ == "NOUN":
+            if _noun_in_wordnet_domain(tok.lemma_.lower(), "session.n.01"):
+                return True
+            if _noun_in_wordnet_domain(tok.lemma_.lower(), "conversation.n.01"):
+                return True
     return False
 
 
@@ -1648,19 +1660,29 @@ def _extract_answer(candidate: Candidate, qd, query: str,
                     try:
                         _sess_dt = datetime.fromisoformat(_src_ts[:10])
                         _sess_fmt = f"{_sess_dt.day} {_sess_dt.strftime('%B')} {_sess_dt.year}"
-                        # Find the temporal noun (week, friday, weekend, etc.)
+                        # Extract temporal structure via spaCy POS
                         _has_last = any(tok.lemma_.lower() == "last" for tok in _te_doc2)
-                        _has_two = any(tok.text.lower() == "two" for tok in _te_doc2)
-                        if _has_last or _has_two:
-                            # Extract the temporal noun
-                            _temp_noun = None
-                            for tok in _te_doc2:
-                                if tok.pos_ in ("NOUN", "PROPN") and tok.lemma_.lower() not in ("last",):
-                                    _temp_noun = tok.text
-                                    break
-                            if _temp_noun:
-                                prefix = "two" if _has_two else "The"
-                                _expanded = f"{prefix} {_temp_noun} before {_sess_fmt}"
+                        _num_tok = None
+                        for tok in _te_doc2:
+                            if tok.pos_ == "NUM":
+                                _num_tok = tok.text
+                                break
+                        # Extract the temporal noun (week, friday, weekend)
+                        _temp_noun = None
+                        for tok in _te_doc2:
+                            if tok.pos_ in ("NOUN", "PROPN") and tok.lemma_.lower() not in ("last", "ago"):
+                                _temp_noun = tok.lemma_  # use lemma to singularize
+                                # Capitalize day names
+                                if tok.pos_ == "PROPN":
+                                    _temp_noun = tok.text.capitalize()
+                                break
+                        if _temp_noun and (_has_last or _num_tok):
+                            if _num_tok:
+                                _expanded = f"{_num_tok} {_temp_noun}s before {_sess_fmt}"
+                            else:
+                                _expanded = f"The {_temp_noun} before {_sess_fmt}"
+                        elif temp_expr.lower() == "yesterday":
+                            _expanded = f"The day before {_sess_fmt}"
                     except (ValueError, TypeError):
                         pass
             if _expanded:
@@ -2737,11 +2759,13 @@ def _handle_causal_query(conn: sqlite3.Connection, user_id: int,
         _pred_lemma = pred.split()[0] if pred else ""
         _is_causal = False
         if _pred_lemma:
-            try:
-                from app.engines.grammar_engine import classify_verb_class, VerbClass
-                _is_causal = _verb_in_wordnet_domain(_pred_lemma, "cause.v.01")
-            except Exception:
-                pass
+            # Causal verbs span multiple WordNet hypernym paths —
+            # no single anchor covers them. Use multiple anchors.
+            _CAUSAL_ANCHORS = ("cause.v.01", "induce.v.02", "change.v.01", "act.v.01")
+            for _ca in _CAUSAL_ANCHORS:
+                if _verb_in_wordnet_domain(_pred_lemma, _ca):
+                    _is_causal = True
+                    break
         if _is_causal:
                 # Found a causal edge — the cause is in the object,
                 # the effect is in the subject's domain
