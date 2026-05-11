@@ -325,6 +325,17 @@ class MemoryEngine:
             resolved_s = s
             resolved_o = o
 
+            # Skip edges with no object — (Subject, predicate, None) is useless
+            if not resolved_o and not (getattr(decomp, 'object', '') if decomp else ''):
+                continue
+
+            # Skip edges where object contains the subject — grammar leak
+            # e.g. (Caroline, love, Caroline is keen on counseling...)
+            if (resolved_s and resolved_o
+                    and resolved_s.lower() in resolved_o.lower()
+                    and len(resolved_o) > len(resolved_s) + 10):
+                continue
+
             # Content filter: skip edges where object is just pronouns/
             # function words, too short, or same as subject/speaker.
             obj_to_check = resolved_o or (getattr(decomp, 'object', '') if decomp else '')

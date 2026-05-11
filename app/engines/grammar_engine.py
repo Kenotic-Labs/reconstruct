@@ -1012,45 +1012,63 @@ def resolve_pronouns(doc, speaker: Optional[str] = None, listener: str = "user")
     tokens: list[str] = []
     speaker_name = speaker if speaker else "user"
     listener_name = listener
+    _replaced_first_person = False  # track if previous token was 1st person → speaker
 
     for tok in doc:
-        lower = tok.text.lower()
-        if lower == "i" and tok.dep_ in ("nsubj", "nsubjpass", "ROOT"):
-            tokens.append(speaker_name)
-        elif lower == "me" and tok.dep_ in ("dobj", "pobj", "dative"):
-            tokens.append(speaker_name)
-        elif lower == "my":
-            tokens.append(speaker_name + "'s")
-        elif lower == "myself":
-            tokens.append(speaker_name)
-        elif lower == "you":
-            tokens.append(listener_name)
-        elif lower == "your":
-            tokens.append(listener_name + "'s")
-        elif lower == "yourself":
-            tokens.append(listener_name)
-        elif lower == "yours":
-            tokens.append(listener_name + "'s")
-        # Gap 6: Standalone possessive pronouns
-        elif lower == "mine":
-            tokens.append(speaker_name + "'s")
-        elif lower == "ours":
-            tokens.append(speaker_name + "'s")
-        # Contraction conjugation: after "I" -> speaker (3rd person),
-        # AUX needs 3rd-person form.
+        person = tok.morph.get("Person", [""])[0]
+        is_poss = "Yes" in tok.morph.get("Poss", [])
+        is_reflex = "Yes" in tok.morph.get("Reflex", [])
+
+        # First person (I, me, my, myself, mine, we, us, our, ours)
+        if tok.pos_ == "PRON" and person == "1":
+            if is_poss:
+                tokens.append(speaker_name + "'s")
+            else:
+                tokens.append(speaker_name)
+                # Track for verb agreement fix on next token
+                case = tok.morph.get("Case", [""])[0]
+                if case == "Nom" and not is_reflex:
+                    _replaced_first_person = True
+                    continue  # skip whitespace reset below
+        # Second person (you, your, yourself, yours)
+        elif tok.pos_ == "PRON" and person == "2":
+            if is_poss:
+                tokens.append(listener_name + "'s")
+            else:
+                tokens.append(listener_name)
+        # Verb agreement: after 1st person subject → 3rd person form
+        elif _replaced_first_person and tok.pos_ in ("AUX", "VERB"):
+            lemma = tok.lemma_
+            tense = tok.morph.get("Tense", ["Pres"])[0] if tok.morph.get("Tense") else "Pres"
+            is_contraction = tok.text.startswith("'")
+            prefix = " " if is_contraction else ""
+            if lemma == "be":
+                _form = "is" if tense == "Pres" else "was" if tense == "Past" else lemma
+                tokens.append(f"{prefix}{_form}")
+            elif lemma == "have":
+                _form = "has" if tense == "Pres" else "had"
+                tokens.append(f"{prefix}{_form}")
+            elif lemma == "do":
+                _form = "does" if tense == "Pres" else "did"
+                tokens.append(_form)
+            elif is_contraction:
+                # 'd → would, 'll → will, etc.
+                tokens.append(f" {lemma}")
+            else:
+                tokens.append(tok.text)
+        # Contraction on non-1st-person subject (she's, he'd)
         elif tok.pos_ == "AUX" and tok.text.startswith("'"):
             lemma = tok.lemma_
-            morph = tok.morph
+            tense = tok.morph.get("Tense", ["Pres"])[0] if tok.morph.get("Tense") else "Pres"
             if lemma == "be":
-                t = morph.get("Tense", ["Pres"])[0] if morph.get("Tense") else "Pres"
-                tokens.append(" is" if t == "Pres" else " was" if t == "Past" else " " + lemma)
+                tokens.append(" is" if tense == "Pres" else " was" if tense == "Past" else " " + lemma)
             elif lemma == "have":
-                t = morph.get("Tense", ["Pres"])[0] if morph.get("Tense") else "Pres"
-                tokens.append(" has" if t == "Pres" else " had")
+                tokens.append(" has" if tense == "Pres" else " had")
             else:
                 tokens.append(" " + lemma)
         else:
             tokens.append(tok.text)
+        _replaced_first_person = False
 
     resolved = ""
     for i, tok in enumerate(doc):
