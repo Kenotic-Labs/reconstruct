@@ -307,14 +307,8 @@ class MemoryEngine:
 
         from app.engines.grammar_engine import _get_nlp
 
-        # -- Speaker resolution --
-        def _resolve(tok: str) -> str:
-            if not tok:
-                return tok
-            lower = tok.strip().lower()
-            if lower in ("user", "i", "me", "myself"):
-                return speaker if speaker else "user"
-            return tok
+        # Pronouns already resolved by grammar_engine.process().
+        # No manual _resolve() needed.
 
         # Gate: skip non-storable decompositions (backchannels, questions).
         if _grammar_result is not None and hasattr(_grammar_result, 'classification'):
@@ -328,8 +322,8 @@ class MemoryEngine:
 
         count = 0
         for s, p, o, decomp in triples_with_decomp:
-            resolved_s = _resolve(s)
-            resolved_o = _resolve(o)
+            resolved_s = s
+            resolved_o = o
 
             # Content filter: skip edges where object is just pronouns/
             # function words, too short, or same as subject/speaker.
@@ -388,23 +382,9 @@ class MemoryEngine:
             has_spo = bool(resolved_s and p and resolved_o)
             decomp_src = getattr(decomp, 'source_text', '') if decomp else ''
 
-            # Resolve pronouns in source_text before storage
-            # "My son got into an accident" → "Melanie's son got into an accident"
-            if decomp_src and speaker:
-                try:
-                    from app.engines.grammar_engine import resolve_pronouns
-                    decomp_src = resolve_pronouns(decomp_src, speaker)
-                except Exception:
-                    pass
-
-            # Also resolve the cleaned fallback
+            # Pronouns already resolved by grammar_engine.process() before
+            # trace extraction. No duplicate resolve needed.
             _final_src = decomp_src or cleaned
-            if not decomp_src and cleaned and speaker:
-                try:
-                    from app.engines.grammar_engine import resolve_pronouns
-                    _final_src = resolve_pronouns(cleaned, speaker)
-                except Exception:
-                    pass
 
             rel_id = self.store(
                 user_id=user_id,
@@ -452,18 +432,8 @@ class MemoryEngine:
             predicate = predicate or getattr(td, 'predicate', '') or ''
             object = object or getattr(td, 'object', '') or ''
             if not source_text and getattr(td, 'source_text', ''):
-                # Use resolved (pronoun-replaced) source_text when available.
-                # Resolve using relational_subject as speaker name.
-                _speaker = getattr(td, 'relational_subject', None) or subject
-                if _speaker:
-                    try:
-                        from app.engines.grammar_engine import resolve_pronouns
-                        _resolved = resolve_pronouns(td.source_text, _speaker)
-                        source_text = _resolved if _resolved else td.source_text
-                    except Exception:
-                        source_text = td.source_text
-                else:
-                    source_text = td.source_text
+                # Pronouns already resolved by grammar_engine.process()
+                source_text = td.source_text
 
         subject = (subject or "").strip()
         predicate = (predicate or "").strip().lower().replace(" ", "_")

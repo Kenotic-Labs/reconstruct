@@ -3860,7 +3860,15 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
     """
     _check_entry()
     nlp = _get_nlp()
-    doc = nlp(text)
+
+    # Resolve pronouns BEFORE extraction so traces get proper names.
+    # "I went to the store" → "Caroline went to the store" → extract
+    # (Caroline, go_to, store) instead of (I, go_to, store).
+    if speaker:
+        resolved_text_pre = resolve_pronouns(nlp(text), speaker, listener=listener)
+        doc = nlp(resolved_text_pre)
+    else:
+        doc = nlp(text)
 
     clause_tuples = _split_compound_clauses(doc)
 
@@ -3885,7 +3893,8 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
             primary_classification = sent_cls
             primary_sent_doc = sent_doc
 
-        resolved_parts.append(resolve_pronouns(sent_doc, speaker, listener=listener))
+        # Pronouns already resolved before parse — just collect the text
+        resolved_parts.append(str(sent_doc).strip())
         sent_tense = detect_tense_aspect(sent_doc)
 
         # ============================================================
