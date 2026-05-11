@@ -273,6 +273,15 @@ class MemoryEngine:
                         continue
                     if resolved_s and _obj_lower == resolved_s.lower():
                         continue
+                    # Skip single-token ADJ/ADV objects — commentary, not facts.
+                    # "great", "awesome", "glad" are not storable facts.
+                    # Multi-word objects with nouns ARE facts.
+                    if len(_doc) == 1 and _doc[0].pos_ in ("ADJ", "ADV", "INTJ"):
+                        continue
+                    # Skip 2-token DET+ADJ objects ("the best", "so cool")
+                    if (len(_doc) == 2 and _doc[0].pos_ in ("DET", "ADV")
+                            and _doc[1].pos_ in ("ADJ", "ADV")):
+                        continue
                     if not any(tok.pos_ in _CONTENT_POS for tok in _doc):
                         continue
                 except Exception:
@@ -327,6 +336,48 @@ class MemoryEngine:
             )
             if rel_id:
                 count += 1
+
+        # ── Sentence-level trace edges ──
+        # Store each non-trivial sentence as a searchable edge with the
+        # FULL resolved text as object. This ensures narrative content
+        # that SPO extraction misses is still findable by FTS/embedding.
+        # The grammar engine's SPO triples capture syntax; sentence edges
+        # capture SEMANTICS — the full episodic trace.
+        if speaker and cleaned and len(cleaned) > 30:
+            try:
+                from app.engines.grammar_engine import _get_nlp, resolve_pronouns
+                _nlp = _get_nlp()
+                _doc = _nlp(cleaned)
+                for _sent in _doc.sents:
+                    _sent_text = str(_sent).strip()
+                    if len(_sent_text) < 20:
+                        continue  # skip short fragments
+                    # Resolve pronouns in the sentence
+                    _resolved_sent = resolve_pronouns(_sent_text, speaker)
+                    if len(_resolved_sent) < 20:
+                        continue
+                    # Extract root verb as predicate
+                    _root = None
+                    for _tok in _sent:
+                        if _tok.dep_ == "ROOT":
+                            _root = _tok
+                            break
+                    _pred = _root.lemma_ if _root and _root.pos_ in ("VERB", "AUX") else "say"
+                    # Store with source_tag to distinguish from SPO edges
+                    _sid = self.store(
+                        user_id=user_id,
+                        subject=speaker,
+                        predicate=_pred,
+                        object=_resolved_sent,
+                        source_text=_resolved_sent,
+                        source_timestamp=source_timestamp,
+                        source_tag="sentence_trace",
+                    )
+                    if _sid:
+                        count += 1
+            except Exception:
+                pass
+
         return count
 
     # ------------------------------------------------------------------
