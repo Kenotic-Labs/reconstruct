@@ -3709,14 +3709,17 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
                         unique_objects.append(obj)
                         seen_objs.add(obj.lower())
                         all_edge_ids.append(c.edge_id)
-            if len(unique_objects) > 1:
-                answer = ", ".join(unique_objects)
+            if 1 < len(unique_objects) <= 8:
+                # Cap at 5 items — more than that is noise
+                answer = ", ".join(unique_objects[:5])
                 return ReconstructionResult(
                     answer=answer,
                     return_field=qd.return_field,
-                    edge_ids=all_edge_ids,
+                    edge_ids=all_edge_ids[:5],
                     grounding=[c.source_text for c in verified[:5]],
                 )
+            # >8 unique objects = noise from generic edges — skip aggregation,
+            # use best single candidate instead
 
         # ---- Step 12: Cluster expansion for grounding (plan #13) ----
         context_edges = _expand_cluster(conn, user_id, best)
