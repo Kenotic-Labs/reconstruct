@@ -1456,7 +1456,7 @@ def _handle_aggregation_query(
     1. Find the entity from QD
     2. Query ALL edges for that entity (no LIMIT)
     3. Embed the query and compute cosine with each edge's edge_embedding
-    4. Collect objects from edges where cosine > 0.3
+    4. Collect objects from matching edges via PQ match
     5. Deduplicate and return comma-separated
     """
     entity = qd.match_entity or qd.match_subject
@@ -1480,15 +1480,9 @@ def _handle_aggregation_query(
     if not rows:
         return None
 
-    # Embed the query once
+    # Collect unique objects from matching edges — no scoring
     query_emb = embed_text(query)
-
-    # Score each edge by PREDICTED QUERY cosine — not edge embedding.
-    # PQ cosine is far more discriminating for aggregation: personality
-    # traits edges (cos 0.42 via edge emb) drop below 0.3 via PQ because
-    # their PQs are "What traits does X have?", not "What activities…?"
-    # Real activity edges jump to cos 0.8-1.0 because their PQs match.
-    scored_objects: list = []
+    matched_objects: list = []
     seen_objs: set = set()
     all_edge_ids: list = []
 
@@ -1496,89 +1490,36 @@ def _handle_aggregation_query(
         obj = (row["object"] or "").strip()
         if not obj or obj.lower() in seen_objs:
             continue
-        # Skip if object is just the entity name or a pronoun
         if obj.lower() in (entity.lower(), "user", "i", "me", "them", "it"):
             continue
-        # Substring dedup: skip if this object is a substring of an
-        # existing one or vice versa ("adoption agencies" ⊂ "researching
-        # adoption agencies")
+        # Dedup substrings
         obj_lower = obj.lower()
-        is_dup = False
-        for existing in list(seen_objs):
-            if obj_lower in existing or existing in obj_lower:
-                is_dup = True
-                break
-        if is_dup:
+        if any(obj_lower in ex or ex in obj_lower for ex in seen_objs):
             continue
 
-        # PQ-based scoring: embed each pq_1-4, take best cosine with query
-        best_cos = 0.0
+        # Binary PQ match — does this edge's PQ match the query?
+        pq_matched = False
         for col in ("pq_1", "pq_2", "pq_3", "pq_4"):
             pq_text = row[col]
             if not pq_text:
                 continue
-            try:
-                pq_emb = embed_text(pq_text)
-                cos = float(np.dot(query_emb, pq_emb))
-                if cos > best_cos:
-                    best_cos = cos
-            except Exception:
-                continue
+            pq_emb = embed_text(pq_text)
+            cos = float(np.dot(query_emb, pq_emb))
+            if cos >= 0.60:  # looser for aggregation — collecting multiple items
+                pq_matched = True
+                break
 
-        # Fallback: edge embedding (for edges without PQs)
-        if best_cos < 0.3:
-            edge_emb_bytes = row["edge_embedding"]
-            if edge_emb_bytes:
-                try:
-                    edge_emb = np.frombuffer(edge_emb_bytes, dtype=np.float32)
-                    if edge_emb.shape[0] == query_emb.shape[0]:
-                        cos = float(np.dot(query_emb, edge_emb))
-                        if cos > best_cos:
-                            best_cos = cos
-                except Exception:
-                    pass
-
-        if best_cos > 0.70:
-            scored_objects.append((obj, best_cos, row["id"]))
-            seen_objs.add(obj.lower())
+        if pq_matched:
+            matched_objects.append((obj, row["id"]))
+            seen_objs.add(obj_lower)
             all_edge_ids.append(row["id"])
 
-    if not scored_objects:
+    if not matched_objects:
         return None
 
-    # Sort by cosine descending
-    scored_objects.sort(key=lambda x: x[1], reverse=True)
-
-    # Collect unique objects
-    items = [obj for obj, _cos, _eid in scored_objects]
-
+    items = [obj for obj, _eid in matched_objects]
     if len(items) < 2:
-        # Single item — let the normal pipeline handle it for better answer extraction
         return None
-
-    # Check if the top item is a comprehensive summary or dominant answer.
-    # 1. Contains "and" or numbers → summary ("two cats and a dog")
-    # 2. Top cosine >> second cosine → dominant single answer
-    top_obj = items[0]
-    top_cos = scored_objects[0][1]
-    second_cos = scored_objects[1][1] if len(scored_objects) > 1 else 0
-
-    # Dominant answer: top has summary markers or big cosine gap
-    is_summary = " and " in top_obj.lower() or any(c.isdigit() for c in top_obj)
-    is_dominant = (top_cos - second_cos) > 0.12
-
-    if len(items) > 3 and (is_summary or is_dominant) and len(top_obj) < 50:
-        log.debug("Aggregation: using top item %r (cos=%.2f, gap=%.2f)",
-                  top_obj, top_cos, top_cos - second_cos)
-        return ReconstructionResult(
-            answer=top_obj,
-            return_field="episodic",
-            edge_ids=[scored_objects[0][2]],
-                grounding=[f"aggregation:{entity}"],
-            )
-
-    log.debug("Aggregation query: %d items for entity=%s query=%r",
-              len(items), entity, query)
     return ReconstructionResult(
         answer=", ".join(items),
         return_field="episodic",
@@ -2030,7 +1971,7 @@ def _handle_inference_query(
     """Handle inference questions: 'Would X likely do Y?', 'Would X enjoy Z?'
 
     Strategy: embed the query, find the best matching edge by edge embedding.
-    High cosine (> 0.65) → evidence supports it → "Yes" + detail.
+    If matching edge found → "Yes" + detail.
     Low cosine → "Likely no".
 
     Uses edge embedding (not PQ) because PQ cosine is too permissive —
@@ -2077,109 +2018,33 @@ def _handle_inference_query(
             return_field="episodic",
         )
 
-    # Find best matching edge by edge embedding cosine
-    best_cos = 0.0
+    # Binary: use PQ match to find relevant edge
+    query_emb = embed_text(query)
     best_row = None
     for r in rows:
-        if r["edge_embedding"]:
-            try:
-                ee = np.frombuffer(r["edge_embedding"], dtype=np.float32)
-                if ee.shape[0] == query_emb.shape[0]:
-                    cos = float(np.dot(query_emb, ee))
-                    if cos > best_cos:
-                        best_cos = cos
-                        best_row = r
-            except Exception:
-                pass
+        for col in ("pq_1",):
+            pq_text = r.get(col)
+            if pq_text:
+                pq_emb = embed_text(pq_text)
+                cos = float(np.dot(query_emb, pq_emb))
+                if cos >= 0.60:
+                    best_row = r
+                    break
+        if best_row:
+            break
 
-    if best_cos >= 0.65 and best_row:
+    if best_row:
         src = best_row["source_text"] or ""
         obj = best_row["object"] or ""
-        # If the object already has an answer (starts with response particle),
-        # return it directly — it contains the gold answer text.
-        _obj_doc = _get_query_doc(obj)
-        _obj_is_answer = False
-        if _obj_doc and len(_obj_doc) > 0:
-            _first = _obj_doc[0]
-            _obj_is_answer = (
-                _first.pos_ == "INTJ"  # yes, no
-                or _first.pos_ == "ADV" and _first.lemma_.lower() in ("likely", "probably")
-            )
-        if _obj_is_answer:
-            return ReconstructionResult(
-                answer=obj,
-                return_field="episodic",
-                edge_ids=[best_row["id"]],
-                grounding=[src],
-            )
-        # Return "Yes" without appending detail — LOCOMO Cat 3
-        # gold answers are often just "Yes" or "No". Appending
-        # object/source_text reduces token F1.
         return ReconstructionResult(
-            answer="Yes",
+            answer=f"Yes, {obj}" if obj else "Yes",
             return_field="episodic",
             edge_ids=[best_row["id"]],
             grounding=[src],
         )
 
-    # Fallback: topic-to-object inference using gte-small (70MB, MTEB
-    # clustering 44.89 vs MiniLM's 38). gte-small gives Vivaldi↔Bach = 0.82
-    # vs MiniLM's 0.45. Used ONLY for inference, not stored embeddings.
-    # ONLY for preference/enjoyment queries to avoid false "Yes" on
-    # counterfactual questions ("Would X go on another roadtrip?" = no).
-    _is_pref = _detect_query_preference(query)
-    if not _is_pref:
-        _neg_detail = ""
-        if _detect_query_membership(query):
-            _neg_detail = ", she does not refer to herself as part of it"
-        return ReconstructionResult(answer=f"Likely no{_neg_detail}", return_field="episodic")
-    try:
-        from app.engines.grammar_engine import _get_nlp
-        _doc = _get_nlp()(query)
-        ent_lower = entity.lower()
-        topic_words = [
-            tok.text for tok in _doc
-            if tok.pos_ in ("NOUN", "PROPN") and len(tok.text) > 2
-            and tok.text.lower() not in (ent_lower, "likely")
-        ]
-        if topic_words:
-            topic_text = " ".join(topic_words)
-            topic_emb = _gte_embed(topic_text)
-            best_tc = 0.0
-            best_tr = None
-            for r in rows:
-                obj_text = r["object"] or ""
-                if obj_text and len(obj_text) > 2:
-                    try:
-                        obj_emb = _gte_embed(obj_text)
-                        cos = float(np.dot(topic_emb, obj_emb))
-                        if cos > best_tc:
-                            best_tc = cos
-                            best_tr = r
-                    except Exception:
-                        pass
-            if best_tc >= 0.75 and best_tr:
-                src = best_tr["source_text"] or ""
-                obj = best_tr["object"] or ""
-                detail = obj if len(obj) < 60 else src[:80]
-                return ReconstructionResult(
-                    answer=f"Yes, {detail}" if detail else "Yes",
-                    return_field="episodic",
-                    edge_ids=[best_tr["id"]],
-                    grounding=[src],
-                )
-    except Exception:
-        pass
-
-    # No strong evidence → "Likely no" + context about what we DO know
-    # For "considered a member/part of" queries, explain the negation
-    # using what the entity actually IS, not what they aren't.
-    _neg_detail = ""
-    if _detect_query_membership(query):
-        _neg_detail = ", she does not refer to herself as part of it"
-
     return ReconstructionResult(
-        answer=f"Likely no{_neg_detail}",
+        answer="Likely no",
         return_field="episodic",
     )
 
@@ -2910,19 +2775,9 @@ def _pq_text_short_circuit(conn: sqlite3.Connection, user_id: int,
                 continue
             pq_lower = pq_text.lower().strip("?.,!").replace("'s", "s").replace("\u2019s", "s")
 
-            # Exact containment: query in PQ or PQ in query
+            # Exact containment: query in PQ or PQ in query — binary match
             if q_lower in pq_lower or pq_lower in q_lower:
-                # Compute overlap ratio for ranking
-                shorter = min(len(q_lower), len(pq_lower))
-                longer = max(len(q_lower), len(pq_lower))
-                ratio = shorter / longer if longer > 0 else 0.0
-                if ratio > best_ratio:
-                    best_ratio = ratio
-                    best_match = (row["id"], row["source_text"])
-
-    # Only short-circuit if high overlap (>= 70% length ratio)
-    if best_match and best_ratio >= 0.70:
-        return best_match
+                return (row["id"], row["source_text"])
 
     return None
 
@@ -3001,8 +2856,7 @@ def _find_pq_match(conn, user_id: int, query: str, qd) -> Optional[Reconstructio
                 best_cos = cos
                 best_row = row
 
-    # Binary: 0.80+ = PQ asks the same question
-    if best_row is None or best_cos < 0.80:
+    if best_row is None:
         return None
 
     cand = _row_to_candidate(best_row, "pq_match")
