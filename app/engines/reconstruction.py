@@ -3504,6 +3504,79 @@ def _refuse_low_coverage() -> ReconstructionResult:
 
 
 # ===========================================================================
+# PQ MATCH — binary retrieval, no scoring
+# ===========================================================================
+
+def _find_pq_match(conn, user_id: int, query: str, qd) -> Optional[ReconstructionResult]:
+    """Binary PQ matching — the primary retrieval mechanism.
+
+    Each edge has predicted queries (pq_1..pq_4) generated at write time.
+    If a PQ matches the query, the edge answers the question.
+    No scoring. No ranking. PQ matches or it doesn't.
+    """
+    q_emb = embed_text(query)
+    entity = (qd.match_entity or "").lower()
+
+    _PQ_COLS = f"{_CANDIDATE_COLS}, pq_2, pq_3, pq_4"
+    if entity and entity != "user":
+        pq_rows = conn.execute(
+            f"""SELECT {_PQ_COLS}
+                FROM edges
+                WHERE {_BASE_WHERE} AND tombstoned_at IS NULL
+                  AND (subject LIKE ? OR relational_entities LIKE ?)
+                  AND pq_1 IS NOT NULL""",
+            (user_id, f"%{entity}%", f"%{entity}%"),
+        ).fetchall()
+    else:
+        pq_rows = conn.execute(
+            f"""SELECT {_PQ_COLS}
+                FROM edges
+                WHERE {_BASE_WHERE} AND tombstoned_at IS NULL
+                  AND pq_1 IS NOT NULL
+                LIMIT 200""",
+            (user_id,),
+        ).fetchall()
+
+    if not pq_rows:
+        return None
+
+    best_row = None
+    best_cos = 0.0
+    for row in pq_rows:
+        for col in ("pq_1", "pq_2", "pq_3", "pq_4"):
+            pq_text = row[col]
+            if not pq_text:
+                continue
+            pq_emb = embed_text(pq_text)
+            cos = float(np.dot(q_emb, pq_emb))
+            if cos > best_cos:
+                best_cos = cos
+                best_row = row
+
+    # Binary: 0.80+ = PQ asks the same question
+    if best_row is None or best_cos < 0.80:
+        return None
+
+    cand = _row_to_candidate(best_row, "pq_match")
+
+    if _is_yesno_query(query, qd.wh_word):
+        answer = "No" if cand.edge_negated else "Yes"
+    elif qd.return_field == "temporal":
+        answer = _extract_answer(cand, qd, query)
+    elif cand.object:
+        answer = cand.object
+    else:
+        answer = cand.source_text[:80] if cand.source_text else ""
+
+    return ReconstructionResult(
+        answer=answer,
+        return_field=qd.return_field,
+        edge_ids=[cand.edge_id],
+        grounding=[cand.source_text],
+    )
+
+
+# ===========================================================================
 # MAIN ENTRY POINT
 # ===========================================================================
 
@@ -3695,33 +3768,21 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
         elif _is_still_query(query):
             temporal_filter = "present"
 
-        # ---- Step 4: 3-step search ----
+        # ---- Step 4: Binary match — PQ matches query or it doesn't ----
 
-        # Step 4a: Trace-scoped SQL (always runs first)
+        # Step 4a: PQ match — the primary retrieval mechanism.
+        # Each edge has predicted queries (pq_1..pq_4) generated at write time.
+        # If a PQ matches the query, the edge answers the question. Binary.
+        _pq_match = _find_pq_match(conn, user_id, query, qd)
+        if _pq_match:
+            return _pq_match
+
+        # Step 4b: Structural SQL match — entity + predicate
         candidates: List[Candidate] = _step1_trace_sql(
             conn, user_id, qd, query, temporal_filter,
         )
 
-        # Step 4a-filter: Subject attribution pre-filter
-        # If query entity is a PERSON and NO candidates have it as subject,
-        # the topic likely belongs to a different person → refuse early.
-        # Only applies when match_entity is set (person/org extracted).
-        # When match_entity is None, the "entity" is a thing/event from
-        # match_subject — don't filter by subject column.
-        _qe = (qd.match_entity or "").lower()
-        if _qe and _qe != "user" and candidates:
-            _subj_matched = [c for c in candidates
-                             if _qe in c.subject.lower() or c.subject.lower() in _qe]
-            if not _subj_matched:
-                # Also check object and relational_entities — entities like
-                # pets/children may appear as objects ("dog named Oliver")
-                _obj_matched = [c for c in candidates
-                                if _qe in c.object.lower()
-                                or _qe in c.relational_entities.lower()]
-                if not _obj_matched:
-                    return _refuse("no_subject_match")
-
-        # Step 4b: Tier 0 facts table (O(1), keep)
+        # Step 4c: Tier 0 facts table
         fact_value = _tier0_facts(conn, user_id, qd)
         if fact_value and qd.return_field == "episodic":
             entity = qd.match_entity or qd.match_subject or ""
@@ -3731,471 +3792,47 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
                 grounding=[f"facts:{entity}"],
             )
 
-        # ---- PQ text short-circuit (entity-gated, no embeddings) ----
-        pq_match = _pq_text_short_circuit(conn, user_id, query)
-        if pq_match:
-            pq_edge_id, _pq_src = pq_match
-            # Entity check: verify ALL named entities in the query appear
-            # in the edge. Cat 5 adversarial swaps speakers.
-            from app.engines.grammar_engine import _get_nlp
-            _nlp = _get_nlp()
-            _qdoc = _nlp(query)
-            _query_entities = [
-                ent.text.lower() for ent in _qdoc.ents
-                if ent.label_ in ("PERSON", "ORG", "GPE")
-            ]
-            _wh_words = {"what", "which", "who", "where", "when", "how", "why"}
-            for _qe in (qd.match_entity, qd.match_subject):
-                if _qe and _qe.lower() not in ("user", ""):
-                    _qe_low = _qe.lower()
-                    # Skip WH-phrases ("What career path") — not real entities
-                    if _qe_low.split()[0] in _wh_words:
-                        continue
-                    if not any(_qe_low in e or e in _qe_low for e in _query_entities):
-                        _query_entities.append(_qe_low)
-
-            entity_ok = True
-            if _query_entities:
-                edge_row = conn.execute(
-                    "SELECT subject, relational_entities, source_text FROM edges WHERE id = ?",
-                    (pq_edge_id,),
-                ).fetchone()
-                if edge_row:
-                    _edge_text = " ".join([
-                        (edge_row["subject"] or ""),
-                        (edge_row["relational_entities"] or ""),
-                        (edge_row["source_text"] or ""),
-                    ]).lower()
-                    for _qe in _query_entities:
-                        _qe_clean = _strip_determiners(_qe)
-                        if _qe_clean not in _edge_text and _qe not in _edge_text:
-                            entity_ok = False
-                            break
-            # Possessive entity check: "Caroline's bowl" must have
-            # Caroline as subject. Catches Cat 5 adversarial via PQ path.
-            if entity_ok and qd.match_entity:
-                try:
-                    _pq_doc = _nlp(query)
-                    _pq_ent_low = qd.match_entity.lower()
-                    for _ptok in _pq_doc:
-                        if (_ptok.dep_ == "poss" and _ptok.pos_ == "PROPN"
-                                and _ptok.text.lower() == _pq_ent_low):
-                            _pq_subj = (edge_row["subject"] or "").lower()
-                            if (_pq_ent_low not in _pq_subj
-                                    and _pq_subj not in _pq_ent_low):
-                                entity_ok = False
-                            break
-                except Exception:
-                    pass
-
-            if entity_ok:
-                pq_edge_row = conn.execute(
-                    f"SELECT {_CANDIDATE_COLS} FROM edges WHERE id = ?",
-                    (pq_edge_id,),
-                ).fetchone()
-                if pq_edge_row:
-                    pq_candidate = _row_to_candidate(pq_edge_row, "pq_hit")
-                    # Direct object return: when the PQ exactly matches
-                    # the query and the object is non-empty, return it
-                    # directly. No inference routing, no aggregation,
-                    # no temporal formatting, no source_text bleed.
-                    # The object IS the verified answer.
-                    _pq_obj = pq_candidate.object or ""
-                    if _pq_obj and len(_pq_obj) > 1:
-                        # For temporal queries, still need date formatting
-                        if qd.return_field == "temporal":
-                            answer = _extract_answer(pq_candidate, qd, query)
-                        else:
-                            answer = _pq_obj
-                    elif _is_yesno_query(query, qd.wh_word):
-                        if pq_candidate.edge_negated:
-                            answer = "No"
-                        else:
-                            answer = "Yes"
-                    else:
-                        answer = _extract_answer(pq_candidate, qd, query, prefer_source=True)
-                    log.debug("PQ text short-circuit: edge=%d answer=%s",
-                              pq_edge_id, answer[:50] if answer else "")
-                    return ReconstructionResult(
-                        answer=answer,
-                        return_field=qd.return_field,
-                        edge_ids=[pq_edge_id],
-                        grounding=[pq_candidate.source_text],
-                    )
-
-        # Step 4c: FTS5 + PQ text match
+        # Step 4d: FTS candidates
         fts_pq_candidates = _step2_fts_pq(conn, user_id, query)
         candidates = _merge_candidates(candidates, fts_pq_candidates)
 
-        # Step 4d: Embedding rerank on small set (only if > 20 candidates)
-        candidates = _step3_embed_rerank(candidates, query)
-
         if not candidates:
-            # Embedding search fallback: when FTS/PQ find nothing,
-            # search by query-edge embedding cosine. Catches cases
-            # where vocabulary differs (e.g. "speech" vs "talked").
-            entity = qd.match_entity or qd.match_subject
-            if entity and entity.lower() != "user":
-                _q_emb = embed_text(query)
-                _emb_rows = conn.execute(
-                    f"""SELECT {_CANDIDATE_COLS} FROM edges
-                        WHERE {_BASE_WHERE}
-                          AND (subject LIKE ? OR relational_entities LIKE ?)
-                          AND edge_embedding IS NOT NULL
-                        LIMIT 100""",
-                    (user_id, f"%{entity}%", f"%{entity}%"),
-                ).fetchall()
-                if _emb_rows:
-                    _scored = []
-                    for _r in _emb_rows:
-                        _c = _row_to_candidate(_r, "embed_fallback")
-                        if _c.edge_embedding:
-                            _e = np.frombuffer(_c.edge_embedding, dtype=np.float32)
-                            if _e.shape[0] == _q_emb.shape[0]:
-                                _cos = float(np.dot(_q_emb, _e))
-                                if _cos > 0.40:
-                                    _c.score = _cos
-                                    _scored.append(_c)
-                    if _scored:
-                        _scored.sort(key=lambda c: c.score, reverse=True)
-                        candidates = _scored[:20]
-
-            if not candidates:
-                # No candidates — check CWA or arc expansion
-                arc_result = _expand_arc(conn, user_id, qd)
-                if arc_result:
-                    return arc_result
-
-                if entity and _is_yesno_query(query, qd.wh_word):
-                    cwa = _check_scoped_cwa(conn, user_id, entity)
-                    if cwa == "no":
-                        return ReconstructionResult(answer="No", return_field="episodic")
-                    else:
-                        return _refuse_low_coverage()
-                return _refuse("not_mentioned")
-
-        # ---- Step 5: Predicate cosine pre-scoring ----
-        if qd.match_predicate:
-            _qpred_emb = embed_text(qd.match_predicate.lower())
-            for c in candidates:
-                if c.predicate_embedding:
-                    _pemb = np.frombuffer(c.predicate_embedding, dtype=np.float32)
-                    if _pemb.shape == _qpred_emb.shape:
-                        c.score += float(np.dot(_pemb, _qpred_emb)) * 0.3
-            candidates.sort(key=lambda c: c.score, reverse=True)
-
-        # ---- Step 6: Cross-encoder reranking ----
-        candidates = _rerank(query, candidates)
-
-        # ---- Step 7: Ranking signal stack (plan #8) ----
-        candidates = _apply_ranking_signals(candidates, query, qd)
-
-        # ---- Step 8: Verification loop ----
-        verified = _verify_candidates(candidates, qd, query, conn, user_id)
-
-        if not verified:
             entity = qd.match_entity or qd.match_subject
             if entity and _is_yesno_query(query, qd.wh_word):
                 cwa = _check_scoped_cwa(conn, user_id, entity)
                 if cwa == "no":
                     return ReconstructionResult(answer="No", return_field="episodic")
-                else:
-                    return _refuse_low_coverage()
-            return _refuse("verification_rejected")
+            return _refuse("not_mentioned")
 
-        best = verified[0]
+        # ---- Step 5: First matching candidate → answer ----
+        best = candidates[0]
 
-        # ---- Step 9: Topic specificity gate ----
-        try:
-            from app.engines.grammar_engine import _get_nlp
-            _nlp_g = _get_nlp()
-            _qdoc = _nlp_g(query)
-            _qe_low = (qd.match_entity or qd.match_subject or "").lower()
-            _topic_nouns = []
-            for tok in _qdoc:
-                # Include VERBs in advcl/xcomp — they carry topic content
-                # ("do while camping" → "camping" is the topic)
-                _is_topic_pos = tok.pos_ in ("NOUN", "PROPN", "ADJ")
-                if tok.pos_ == "VERB" and tok.dep_ in ("advcl", "xcomp", "conj"):
-                    _is_topic_pos = True
-                # Skip DATE/CARDINAL/ORDINAL entities — they're temporal
-                # context, not topic content ("on October 13, 2023")
-                if tok.ent_type_ in ("DATE", "CARDINAL", "ORDINAL", "TIME"):
-                    _is_topic_pos = False
-                if _is_topic_pos and tok.text.lower() != _qe_low:
-                    # Skip indirect objects with "to" preposition attached
-                    # to root verb ("recommend to Melanie") — recipients.
-                    # Keep "for" ("make for a church") — purpose/beneficiary
-                    # IS a distinguishing topic term.
-                    if tok.dep_ == "pobj" and tok.head.dep_ == "prep":
-                        prep_text = tok.head.text.lower()
-                        # Skip PERSON recipients after "to"/"with" prep
-                        # ("recommend to Melanie", "share with Melanie")
-                        if prep_text in ("to", "with") and (tok.pos_ == "PROPN" or tok.ent_type_ == "PERSON"):
-                            _prep_head = tok.head.head
-                            if _prep_head.dep_ == "ROOT" and _prep_head.pos_ == "VERB":
-                                continue
-                    if len(tok.text) > 2 and tok.text.lower() not in (
-                        "kind", "type", "way", "thing", "time", "year",
-                        "month", "week", "day", "question", "career",
-                        "people", "life", "activity", "activities",
-                        "event", "events", "plan", "plans", "experience",
-                        "journey", "process", "decision", "reason", "project",
-                        "work", "job", "support", "family", "friend",
-                        "friends", "kids", "children", "son", "daughter",
-                        "art", "painting", "music", "book",
-                        "books", "hobby", "hobbies", "community",
-                        "artists", "bands", "recommend", "share",
-                    ):
-                        _topic_nouns.append(tok.text.lower())
-            _edge_text = f"{best.source_text} {best.object} {best.predicate}".lower()
+        # Entity check: query entity must appear in edge
+        _qe = (qd.match_entity or "").lower()
+        if _qe and _qe != "user":
+            _entity_matched = [c for c in candidates
+                               if _qe in c.subject.lower()
+                               or c.subject.lower() in _qe
+                               or _qe in c.relational_entities.lower()]
+            if _entity_matched:
+                best = _entity_matched[0]
+            else:
+                return _refuse("no_entity_match")
 
-            if _topic_nouns and len(_topic_nouns) <= 3:
-                _any_match = any(n in _edge_text for n in _topic_nouns)
-                if not _any_match:
-                    # Try subsequent verified candidates
-                    _found_topic = False
-                    for _alt in verified[1:]:
-                        _alt_text = f"{_alt.source_text} {_alt.object} {_alt.predicate}".lower()
-                        if any(n in _alt_text for n in _topic_nouns):
-                            best = _alt
-                            _edge_text = _alt_text
-                            _found_topic = True
-                            break
-                    if not _found_topic:
-                        return _refuse("topic_not_in_edge")
-
-            # Possessor check: nouns in poss/compound position that specify
-            # the entity ("grandpa's gift", "hand-painted bowl") MUST appear
-            # in the edge. These distinguish the query from similar queries
-            # about different entities (grandma vs grandpa).
-            for tok in _qdoc:
-                if tok.dep_ in ("poss", "compound") and tok.pos_ in ("NOUN", "PROPN"):
-                    if tok.text.lower() != _qe_low and len(tok.text) > 2:
-                        if tok.text.lower() not in _edge_text:
-                            return _refuse("possessor_mismatch")
-
-            # Possessive entity attribution: when the query entity is in
-            # possessive position ("Caroline's bowl"), the edge's subject
-            # must be that entity. Prevents Cat 5 adversarial entity-swap
-            # where the edge belongs to a different person.
-            if _qe_low and qd.match_entity:
-                for tok in _qdoc:
-                    if (tok.dep_ == "poss" and tok.pos_ == "PROPN"
-                            and tok.text.lower() == _qe_low):
-                        _best_subj = best.subject.lower()
-                        if (_qe_low not in _best_subj
-                                and _best_subj not in _qe_low):
-                            return _refuse("possessive_entity_mismatch")
-                        break
-            # PQ specificity check: if the best edge has a PQ that
-            # semantically differs from the query, the edge might answer
-            # a DIFFERENT question about the same entity/topic. Cat 5
-            # adversarial queries are designed to be close but not identical
-            # to real facts. Compare query against edge's PQ.
-            if best.pq_1 and qd.return_field != "temporal":
-                _pq1_lower = best.pq_1.lower().strip("?.,!")
-                _q_lower = query.lower().strip("?.,!")
-                if _pq1_lower != _q_lower:
-                    _q_emb = embed_text(query)
-                    # Extract content nouns — skip light/generic nouns via dep label.
-                    # Light nouns (kind, type, way, thing) are typically heads of
-                    # "what kind of X" structures with dep=attr/nsubj and a prep child.
-                    _q_nouns = set()
-                    for t in _qdoc:
-                        if t.pos_ not in ("NOUN", "ADJ") or len(t.text) <= 3:
-                            continue
-                        # Skip light nouns that are WH-complement heads
-                        if (t.dep_ in ("attr", "nsubj") and
-                                any(c.dep_ == "prep" for c in t.children)):
-                            if not any(c.pos_ in ("NOUN", "PROPN") for c in t.children):
-                                continue
-                        _q_nouns.add(t.text.lower())
-
-                    def _pq_matches(candidate):
-                        """Check if candidate's PQ matches the query."""
-                        if not candidate.pq_1:
-                            return True  # no PQ to check
-                        _cl = candidate.pq_1.lower().strip("?.,!")
-                        if _cl == _q_lower:
-                            return True
-                        _cos = float(np.dot(embed_text(candidate.pq_1), _q_emb))
-                        if _cos >= 0.92:
-                            return True
-                        _pq_doc = _get_nlp()(candidate.pq_1)
-                        _pn = set()
-                        for t in _pq_doc:
-                            if t.pos_ not in ("NOUN", "ADJ") or len(t.text) <= 3:
-                                continue
-                            if (t.dep_ in ("attr", "nsubj") and
-                                    any(c.dep_ == "prep" for c in t.children)):
-                                if not any(c.pos_ in ("NOUN", "PROPN") for c in t.children):
-                                    continue
-                            _pn.add(t.text.lower())
-                        if _q_nouns and _pn:
-                            _j = len(_q_nouns & _pn) / len(_q_nouns | _pn)
-                            return _j >= 0.5
-                        return _cos >= 0.88
-
-                    if not _pq_matches(best):
-                        # Try all remaining candidates and pick the one
-                        # with the highest PQ-query cosine.
-                        _best_alt = None
-                        _best_alt_cos = -1.0
-                        for _alt in verified[1:]:
-                            if _pq_matches(_alt) and _alt.pq_1:
-                                _alt_cos = float(np.dot(
-                                    embed_text(_alt.pq_1), _q_emb))
-                                if _alt_cos > _best_alt_cos:
-                                    _best_alt = _alt
-                                    _best_alt_cos = _alt_cos
-                        if _best_alt:
-                            best = _best_alt
-                            _edge_text = f"{best.source_text} {best.object} {best.predicate}".lower()
-                        else:
-                            return _refuse("pq_topic_mismatch")
-
-        except Exception:
-            pass
-
-        # ---- Step 10: Yes/No with specificity check ----
+        # Yes/No questions
         if _is_yesno_query(query, qd.wh_word):
-            # Verify the best edge actually matches the specific claim
-            # in the question, not just the entity. Cat 5 swaps attributes.
-            if best.edge_embedding:
-                try:
-                    _qemb = embed_text(query)
-                    _eemb = np.frombuffer(best.edge_embedding, dtype=np.float32)
-                    if _eemb.shape[0] == _qemb.shape[0]:
-                        _cos = float(np.dot(_qemb, _eemb))
-                        if _cos < 0.4:
-                            return _refuse("yesno_low_relevance")
-                except Exception:
-                    pass
-            # Verify all proper nouns from the query appear in the edge.
-            # Catches adversarial entity swaps ("Is Oscar Melanie's pet?"
-            # where Oscar belongs to Caroline, not Melanie).
-            try:
-                from app.engines.grammar_engine import _get_nlp
-                _yn_doc = _get_nlp()(query)
-                _edge_full = f"{best.subject} {best.object} {best.source_text}".lower()
-                for _tok in _yn_doc:
-                    if _tok.pos_ == "PROPN" and len(_tok.text) > 2:
-                        if _tok.text.lower() not in _edge_full:
-                            return _refuse("yesno_propn_missing")
-            except Exception:
-                pass
-            # If the object already contains reasoning (Cat 3 inference),
-            # return it directly — spaCy: first token is response particle/adverb.
-            _obj = best.object or ""
-            _obj_doc2 = _get_query_doc(_obj)
-            _obj_has_answer = False
-            if _obj_doc2 and len(_obj_doc2) > 0:
-                _f2 = _obj_doc2[0]
-                _obj_has_answer = (
-                    _f2.pos_ == "INTJ"
-                    or _f2.pos_ == "ADV" and _f2.lemma_.lower() in ("likely", "probably", "possibly")
-                )
-            if _obj_has_answer:
-                return ReconstructionResult(
-                    answer=_obj, return_field="episodic",
-                    edge_ids=[best.edge_id], grounding=[best.source_text],
-                )
             if best.edge_negated:
-                return ReconstructionResult(
-                    answer="No", return_field="episodic",
-                    edge_ids=[best.edge_id], grounding=[best.source_text],
-                )
-            return ReconstructionResult(
-                answer="Yes", return_field="episodic",
-                edge_ids=[best.edge_id], grounding=[best.source_text],
-            )
+                return ReconstructionResult(answer="No", return_field="episodic",
+                                           edge_ids=[best.edge_id], grounding=[best.source_text])
+            return ReconstructionResult(answer="Yes", return_field="episodic",
+                                       edge_ids=[best.edge_id], grounding=[best.source_text])
 
-        # ---- Step 11: Mood check (factual queries skip conditional edges) ----
-        if not _is_conditional_query(query) and best.edge_mood == "conditional":
-            for c in verified[1:]:
-                if c.edge_mood != "conditional":
-                    best = c
-                    break
-
-        # ---- Step 11b: Multi-answer aggregation ----
-        # Only aggregate when explicitly detected as aggregation query.
-        # Without this guard, Cat 4 narrative questions get objects from
-        # multiple unrelated edges concatenated.
-        if (len(verified) > 1 and qd.return_field == "episodic"
-                and _is_aggregation_query(query) and not _is_conditional_query(query)):
-            unique_objects = []
-            seen_objs = set()
-            all_edge_ids = []
-            for c in verified:
-                obj = _extract_answer(c, qd, query)
-                if obj and obj.lower() not in seen_objs and obj.lower() != best.subject.lower():
-                    # Skip if it's just the entity name or a pronoun
-                    if len(obj) > 1 and obj.lower() not in ('user', 'i', 'me'):
-                        unique_objects.append(obj)
-                        seen_objs.add(obj.lower())
-                        all_edge_ids.append(c.edge_id)
-            if 1 < len(unique_objects) <= 8:
-                # Cap at 5 items — more than that is noise
-                answer = ", ".join(unique_objects[:5])
-                return ReconstructionResult(
-                    answer=answer,
-                    return_field=qd.return_field,
-                    edge_ids=all_edge_ids[:5],
-                    grounding=[c.source_text for c in verified[:5]],
-                )
-            # >8 unique objects = noise from generic edges — skip aggregation,
-            # use best single candidate instead
-
-        # ---- Step 12: Cluster expansion for grounding (plan #13) ----
-        context_edges = _expand_cluster(conn, user_id, best)
-        extra_grounding = [c.source_text for c in context_edges[:3] if c.source_text]
-
-        # ---- Step 12b: Verified object return ----
-        # When the best edge's PQ closely matches the query AND the
-        # object is non-empty, return the object directly. This skips
-        # all answer transformation (aggregation, inference prefix,
-        # temporal formatting, source_text bleed) that could corrupt
-        # the stored answer.
-        if best.pq_1 and best.object and len(best.object) > 1:
-            _pq_low = best.pq_1.lower().strip("?.,!")
-            _q_low = query.lower().strip("?.,!")
-            if _pq_low == _q_low:
-                answer = best.object
-                grounding = [best.source_text] + extra_grounding if extra_grounding else [best.source_text]
-                return ReconstructionResult(
-                    answer=answer,
-                    return_field=qd.return_field,
-                    edge_ids=[best.edge_id],
-                    grounding=grounding,
-                )
-
-        # ---- Step 13: Answer extraction via return_field routing ----
+        # Extract answer from best candidate
         answer = _extract_answer(best, qd, query, prefer_source=True)
-
-        # ---- Step 13b: Generic answer demotion ----
-        # If the answer is very short (<=2 words) and there are more
-        # verified candidates, prefer a candidate with a longer/richer
-        # object. Prevents generic catch-all edges ("a difference",
-        # "others", "great") from winning over specific answers.
-        if (answer and len(answer.split()) <= 2 and len(verified) > 1
-                and qd.return_field == "episodic"):
-            for _alt in verified[1:]:
-                _alt_ans = _extract_answer(_alt, qd, query)
-                if _alt_ans and len(_alt_ans.split()) > len(answer.split()) + 1:
-                    answer = _alt_ans
-                    best = _alt
-                    break
-
-        # ---- Step 14: PQ write-back ----
-        if answer:
-            _write_back_pq(conn, user_id, best.edge_id, query, answer)
-
-        grounding = [best.source_text] + extra_grounding if extra_grounding else [best.source_text]
 
         return ReconstructionResult(
             answer=answer,
             return_field=qd.return_field,
             edge_ids=[best.edge_id],
-            grounding=grounding,
+            grounding=[best.source_text],
         )
