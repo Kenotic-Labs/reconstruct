@@ -70,15 +70,30 @@ _RETRACTION_PHRASES = frozenset({
 
 _MODEL = None
 _TOKENIZER = None
+_ENCODE = None
+_DECODE = None
 _DEVICE: Optional[str] = None
 _LOCK = Lock()
 _UNAVAILABLE = False
-_CACHE: Dict[str, str] = {}
+_POLISH_CACHE: Dict[str, str] = {}
+_CLEANUP_CACHE: Dict[tuple, str] = {}
 
-_ENV_MODEL = "RAYA_SENTENCE_MODEL"
 _ENV_DEVICE = "RAYA_SENTENCE_DEVICE"
 _ENV_ENABLE = "RAYA_SENTENCE_POLISH"   # set to "0" to disable, default ON
-_DEFAULT_MODEL = "models/coedit-raya"
+_GECTOR_MODEL_ID = "models/gector-raya"
+
+# GECToR configuration — explicit instructions for the correction model:
+#   n_iteration=5:     run up to 5 correction passes (complex errors need
+#                      multiple passes: detect→fix→re-detect residual errors)
+#   min_error_prob=0:  consider ALL predicted corrections regardless of
+#                      confidence (let the model decide, not a threshold)
+#   keep_confidence=0: no bias toward keeping original tokens — if the model
+#                      predicts an edit, apply it
+#   batch_size=128:    process up to 128 sentences in one GPU forward pass
+_GECTOR_N_ITER = 5
+_GECTOR_MIN_ERROR_PROB = 0.0
+_GECTOR_KEEP_CONFIDENCE = 0.0
+_GECTOR_BATCH_SIZE = 128
 
 
 def is_enabled() -> bool:
@@ -92,7 +107,14 @@ def is_available() -> bool:
 
 
 def _load() -> bool:
-    global _MODEL, _TOKENIZER, _DEVICE, _UNAVAILABLE
+    """Load GECToR (encoder-only grammar tagger) on GPU.
+
+    GECToR = single forward pass, not autoregressive.
+    ~10ms/sentence vs coedit's ~500ms/sentence.
+    Corrections are applied as edit tags (keep/delete/replace/insert),
+    not generated token by token.
+    """
+    global _MODEL, _TOKENIZER, _ENCODE, _DECODE, _DEVICE, _UNAVAILABLE
     if _UNAVAILABLE:
         return False
     if _MODEL is not None:
@@ -103,56 +125,66 @@ def _load() -> bool:
         if _UNAVAILABLE:
             return False
         try:
-            import torch
-            from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+            import json as _json
+            from transformers import AutoTokenizer
+            from gector import GECToR
 
             dev = os.environ.get(_ENV_DEVICE,
-                                 os.environ.get("RAYA_EMBED_DEVICE", "cuda"))
-            # GPU only — no CPU fallback
+                                 os.environ.get("RAYA_EMBED_DEVICE", "cuda:0"))
+            # GPU only — RTX 4000 (cuda:0). No CPU fallback.
 
-            # Force offline — load from local cache, never ping HF
-            os.environ["HF_HUB_OFFLINE"] = "1"
-            os.environ["TRANSFORMERS_OFFLINE"] = "1"
-
-            name = os.environ.get(_ENV_MODEL, _DEFAULT_MODEL)
-            tok = AutoTokenizer.from_pretrained(name, local_files_only=True)
-            model = AutoModelForSeq2SeqLM.from_pretrained(name, local_files_only=True)
-            if dev == "cuda":
-                model = model.half()
+            # Temporarily allow local file access — app/__init__.py sets
+            # HF_HUB_OFFLINE=1 globally, but we load from a local directory.
+            _saved_offline = os.environ.pop("HF_HUB_OFFLINE", None)
+            _saved_toffline = os.environ.pop("TRANSFORMERS_OFFLINE", None)
+            try:
+                model = GECToR.from_pretrained(_GECTOR_MODEL_ID, local_files_only=True)
+                tok = AutoTokenizer.from_pretrained(_GECTOR_MODEL_ID, local_files_only=True)
+            finally:
+                if _saved_offline is not None:
+                    os.environ["HF_HUB_OFFLINE"] = _saved_offline
+                if _saved_toffline is not None:
+                    os.environ["TRANSFORMERS_OFFLINE"] = _saved_toffline
+            _vocab_dir = os.path.join(
+                os.path.dirname(os.path.dirname(os.path.dirname(__file__))),
+                _GECTOR_MODEL_ID,
+            )
+            with open(os.path.join(_vocab_dir, "encode_vocab.json")) as f:
+                encode = _json.load(f)
+            with open(os.path.join(_vocab_dir, "decode_vocab.json")) as f:
+                decode = _json.load(f)
             model = model.to(dev).eval()
 
             _MODEL = model
             _TOKENIZER = tok
+            _ENCODE = encode
+            _DECODE = decode
             _DEVICE = dev
-            print(f"[SentenceModel] Loaded {name} on {dev} (fp16={dev=='cuda'})")
+            params = sum(p.numel() for p in model.parameters()) / 1e6
+            print(f"[SentenceModel] GECToR loaded ({params:.0f}M params) on {dev}")
             return True
         except (OSError, ImportError, ValueError) as e:
-            # Model not installed or transformers not available — expected.
             print(f"[SentenceModel] Unavailable ({e}); polishing disabled")
             _UNAVAILABLE = True
             return False
         except Exception as e:
-            # Unexpected error (CUDA init failure, corrupt weights, etc.)
-            # — propagate so the caller sees it rather than silently degrading.
             raise RuntimeError(
                 f"[SentenceModel] Unexpected error loading model: {e}"
             ) from e
 
 
 def polish(sentence: str) -> str:
-    """Polish one sentence via CoEdit grammar error correction.
+    """Polish one sentence via GECToR grammar error correction.
 
-    Model: jbochi/coedit-small (77M params, flan-t5-small fine-tuned)
-    Task prefix: "Fix grammatical errors in this sentence:" (GEC task)
-    Max input: 128 tokens (truncated by tokenizer)
-    Max output: 96 tokens (per sentence — callers must split multi-sentence input)
-    Beam search: 2 beams, no sampling (deterministic)
-    Source: CoEdIT paper (EMNLP 2023, Raheja et al.)
+    Model: gotutiyan/gector-roberta-base-5k (124M params, encoder-only)
+    Architecture: non-autoregressive tagger — single forward pass.
+    Predicts edit tags (keep/delete/replace/insert) per token, then
+    applies edits deterministically. ~10ms/sentence on GPU.
 
-    Supported models (via RAYA_SENTENCE_MODEL env var):
-        - jbochi/coedit-small (default, 77M params, fastest)
-        - grammarly/coedit-large (770M params, higher quality, needs GPU)
-        - grammarly/coedit-xl (3B params, highest quality, needs large GPU)
+    GECToR configuration (explicit instructions):
+      n_iteration=5:  up to 5 correction passes for complex errors
+      min_error_prob=0: apply all predicted corrections
+      keep_confidence=0: no bias toward keeping original tokens
 
     Returns input unchanged if polish disabled, model unavailable, or
     sentence is trivial."""
@@ -162,51 +194,54 @@ def polish(sentence: str) -> str:
         return sentence
 
     key = sentence.strip()
-    if key in _CACHE:
-        return _CACHE[key]
+    if key in _POLISH_CACHE:
+        return _POLISH_CACHE[key]
 
     if not _load():
         return sentence
 
     try:
-        import torch
-        prompt = _COEDIT_TASK_PREFIX + " " + key
-        inp = _TOKENIZER(
-            prompt, return_tensors="pt", max_length=128, truncation=True,
-        ).to(_DEVICE)
-        with torch.no_grad():
-            out = _MODEL.generate(
-                **inp, max_length=96, num_beams=2, do_sample=False,
-            )
-        result = _TOKENIZER.decode(out[0], skip_special_tokens=True).strip()
+        from gector import predict as gector_predict
+        corrected = gector_predict(
+            _MODEL, _TOKENIZER, [key], _ENCODE, _DECODE,
+            keep_confidence=_GECTOR_KEEP_CONFIDENCE,
+            min_error_prob=_GECTOR_MIN_ERROR_PROB,
+            n_iteration=_GECTOR_N_ITER,
+            batch_size=_GECTOR_BATCH_SIZE,
+        )
+        result = corrected[0].strip() if corrected else key
         if not result:
-            logger.warning(
-                "[SentenceModel] CoEdit returned empty output for: %r "
-                "— model may be broken, returning input unchanged", key
-            )
             result = sentence
-        _CACHE[key] = result
+        _POLISH_CACHE[key] = result
         return result
     except (RuntimeError, ValueError) as e:
-        # RuntimeError: CUDA OOM or tensor errors
-        # ValueError: tokenizer encoding issues
         logger.warning("[SentenceModel] polish error (%s); returning input unchanged", e)
-        _CACHE[key] = sentence
+        _POLISH_CACHE[key] = sentence
         return sentence
 
 
 def cleanup(text: str, speaker: str = None) -> str:
-    """Two-pass dialogue cleanup:
+    """Three-pass pipeline: STT → structured declarative sentences.
 
-    Pass 1 (structural): spaCy dep-label rules from pipeline_config.
-      - 7 detection patterns, all structural
-      - No model inference beyond spaCy's dep parse
+    HARNESS ROLE: Convert messy conversational text into clean,
+    structured declarative sentences that the grammar engine can
+    extract clean traces from.
 
-    Pass 2 (model): CoEdit grammar polish (GEC only).
-      - One task prefix, one model, semantic guards
-      - Does NOT change meaning — only fixes grammar
+    Pass 1 (PRE — structural normalization):
+      - Resolve pronouns: I/me/my → speaker name
+      - Strip backchannel/commentary: "Wow!", "That's great!"
+      - spaCy dep-label rules for structural cleanup
 
-    Rules are defined in pipeline_config.py (the "system prompt" for each model).
+    Pass 2 (MODEL — GECToR grammar correction):
+      - Fix grammar: "goed" → "went", "dont" → "doesn't"
+      - Insert missing words, fix agreement
+      - Does NOT restructure — only corrects
+
+    Pass 3 (POST — structural decomposition):
+      - Split compound sentences into simple SVO clauses
+      - Each clause = one extractable fact
+      - "Melanie ran a race and it was rewarding" →
+        "Melanie ran a race. The race was rewarding."
     """
     if not text or not text.strip():
         return text or ""
@@ -422,15 +457,25 @@ def cleanup(text: str, speaker: str = None) -> str:
     if not stripped:
         stripped = text.strip()
 
-    # Pass 2: CoEdit "Rewrite to be formal:" per-sentence.
-    # coedit-small has max_length=96 output tokens. Multi-sentence
-    # turns get truncated. Fix: split into sentences, rewrite each
-    # individually, rejoin. No content loss.
+    # ── Pass 1b (PRE): Resolve pronouns BEFORE GECToR ──
+    # "I ran a race" → "Melanie ran a race" BEFORE grammar correction.
+    # This way GECToR corrects "Melanie ran" not "I ran", and the
+    # grammar engine receives text with resolved entities.
+    if speaker and stripped:
+        try:
+            from app.engines.grammar_engine import resolve_pronouns
+            stripped = resolve_pronouns(stripped, speaker)
+        except Exception:
+            pass
+
+    # Pass 2: GECToR grammar correction.
+    # Non-autoregressive tagger — all sentences batched in ONE forward pass.
+    # ~10ms total for a multi-sentence turn vs coedit's ~2000ms.
     if not is_enabled():
         return stripped
 
     key = ("cleanup", stripped, speaker or "")
-    cached = _CACHE.get(key)
+    cached = _CLEANUP_CACHE.get(key)
     if cached is not None:
         return cached
 
@@ -438,82 +483,10 @@ def cleanup(text: str, speaker: str = None) -> str:
         return stripped
 
     try:
-        import torch
+        from gector import predict as gector_predict
 
-        def _rewrite_one(sentence: str) -> str:
-            """Rewrite a single sentence via coedit.
-            Semantic guard: if CoEdit changes ROOT verb, loses NER entities,
-            or significantly changes length, reject the rewrite — it changed
-            meaning, not just grammar."""
-            prompt = _COEDIT_TASK_PREFIX + " " + sentence
-            inp = _TOKENIZER(
-                prompt, return_tensors="pt", max_length=128, truncation=True,
-            ).to(_DEVICE)
-            with torch.no_grad():
-                out = _MODEL.generate(
-                    **inp, max_length=96, num_beams=2, do_sample=False,
-                )
-            r = _TOKENIZER.decode(out[0], skip_special_tokens=True).strip()
-            if not r:
-                logger.warning(
-                    "[SentenceModel] CoEdit returned empty output for: %r",
-                    sentence,
-                )
-                return sentence
-            # Guardrail: reject triple/tuple syntax hallucination
-            if "(" in r and ")" in r:
-                oi = r.find("(")
-                ci = r.find(")", oi + 1)
-                if ci != -1 and r[oi + 1:ci].count(",") >= 2:
-                    return sentence
-            # Semantic guard: compare input vs output via spaCy.
-            # If CoEdit changed the ROOT verb, lost NER entities, or
-            # significantly shortened the text, it changed meaning —
-            # reject the rewrite and keep the structurally cleaned input.
-            try:
-                from app.engines.grammar_engine import (
-                    _get_nlp_fragment, _get_root,
-                )
-                _snlp = _get_nlp_fragment()
-                _in_doc = _snlp(sentence)
-                _out_doc = _snlp(r)
-                # Check 1: NER entities not lost. Cleanup is allowed to
-                # rewrite syntax, split clauses, and improve punctuation,
-                # but it should not drop the named entities that anchor
-                # the stored fact.
-                _in_ents = {e.text.lower() for e in _in_doc.ents}
-                _out_ents = {e.text.lower() for e in _out_doc.ents}
-                if _in_ents and not (_in_ents & _out_ents):
-                    logger.warning(
-                        "[SentenceModel] CoEdit lost NER entities: %r -> %r",
-                        sentence, r,
-                    )
-                    return sentence
-                # Check 2: output not drastically shorter (content lost)
-                if len(r.split()) < len(sentence.split()) * 0.5:
-                    logger.warning(
-                        "[SentenceModel] CoEdit truncated content: %r -> %r",
-                        sentence, r,
-                    )
-                    return sentence
-                # Check 3: do not let the rewrite invent a question form
-                # from a declarative cleanup input.
-                if "?" not in sentence and "?" in r:
-                    logger.warning(
-                        "[SentenceModel] CoEdit changed sentence mood: %r -> %r",
-                        sentence, r,
-                    )
-                    return sentence
-            except (ImportError, OSError):
-                pass  # spaCy not available for guard — accept rewrite
-            return r
-
-        # Split into sentences — rewrite each individually so
-        # coedit-small's 96-token output limit doesn't truncate.
+        # Split into sentences via spaCy
         from app.engines.grammar_engine import _get_nlp
-        # Split on sentence boundaries AND ellipsis/dash breaks.
-        # spaCy may not split on "..." or "—" but these are natural
-        # sentence boundaries in conversational text.
         import re
         _presplit = re.split(r'\.{2,}|—|–', stripped)
         _presplit = [s.strip() for s in _presplit if s.strip()]
@@ -524,12 +497,87 @@ def cleanup(text: str, speaker: str = None) -> str:
                 s.text.strip() for s in _seg_doc.sents if s.text.strip()
             )
 
-        if len(_sentences) <= 1:
-            result = _rewrite_one(stripped)
-        else:
-            rewritten = [_rewrite_one(s) for s in _sentences]
-            result = " ".join(rewritten)
+        if not _sentences:
+            _sentences = [stripped]
 
+        # Batch ALL sentences through GECToR in one forward pass
+        corrected = gector_predict(
+            _MODEL, _TOKENIZER, _sentences, _ENCODE, _DECODE,
+            keep_confidence=_GECTOR_KEEP_CONFIDENCE,
+            min_error_prob=_GECTOR_MIN_ERROR_PROB,
+            n_iteration=_GECTOR_N_ITER,
+            batch_size=_GECTOR_BATCH_SIZE,
+        )
+
+        result = " ".join(s.strip() for s in corrected if s.strip())
+
+        # ── Pass 3 (POST): structural decomposition ──
+        # Split compound sentences into simple SVO clauses.
+        # "Melanie ran a race and it was rewarding" →
+        # "Melanie ran a race. It was rewarding."
+        try:
+            _post_doc = _get_nlp()(result)
+            _decomposed = []
+            for _sent in _post_doc.sents:
+                _sent_root = None
+                for _t in _sent:
+                    if _t.dep_ == "ROOT":
+                        _sent_root = _t
+                        break
+                if not _sent_root:
+                    _decomposed.append(str(_sent).strip())
+                    continue
+                # Find conjunct verbs sharing the same subject
+                _conj_verbs = [
+                    c for c in _sent_root.children
+                    if c.dep_ == "conj" and c.pos_ in ("VERB", "AUX")
+                ]
+                if _conj_verbs:
+                    # Extract the main clause (up to the conjunction)
+                    _conj_start = min(c.i for c in _conj_verbs)
+                    # Find the "and"/"but" before the conj verb
+                    _cc_idx = _conj_start
+                    for _t in _sent:
+                        if _t.dep_ == "cc" and _t.i < _conj_start:
+                            _cc_idx = _t.i
+                    _main = str(_sent[:_cc_idx]).strip().rstrip(",;")
+                    if _main and len(_main) > 10:
+                        _decomposed.append(_main + ".")
+                    # Each conj verb becomes its own clause
+                    for _cv in _conj_verbs:
+                        # Get the subject — inherit from root if not explicit
+                        _cv_subj = None
+                        for _ch in _cv.children:
+                            if _ch.dep_ in ("nsubj", "nsubjpass"):
+                                _cv_subj = _ch
+                                break
+                        if _cv_subj:
+                            _clause = str(_sent[_cv_subj.i:]).strip()
+                        else:
+                            # Inherit subject from main clause
+                            _main_subj = None
+                            for _ch in _sent_root.children:
+                                if _ch.dep_ in ("nsubj", "nsubjpass"):
+                                    _main_subj = str(_ch)
+                                    break
+                            if _main_subj:
+                                _cv_span = str(_sent[_cv.i:]).strip()
+                                _clause = f"{_main_subj} {_cv_span}"
+                            else:
+                                _clause = str(_sent[_cv.i:]).strip()
+                        _clause = _clause.rstrip(",;").strip()
+                        if _clause and len(_clause) > 10:
+                            if not _clause.endswith("."):
+                                _clause += "."
+                            _decomposed.append(_clause)
+                else:
+                    _decomposed.append(str(_sent).strip())
+            if _decomposed:
+                result = " ".join(_decomposed)
+        except Exception:
+            pass
+
+        # Post-cleanup: strip leading discourse frames left after correction
         try:
             _result_doc = _get_nlp()(result)
             _result_sents = [s for s in _result_doc.sents if s.text.strip()]
@@ -547,44 +595,22 @@ def cleanup(text: str, speaker: str = None) -> str:
                     result = " ".join(
                         sent.text.strip() for sent in _result_sents[1:]
                     ).strip()
-
-            _trim_doc = _get_nlp()(result) if result else None
-            if _trim_doc is not None:
-                _trim_tokens = [
-                    tok for tok in _trim_doc
-                    if not tok.is_space
-                ]
-                if (
-                    len(_trim_tokens) >= 3
-                    and _trim_tokens[-1].text in (".", "!", "?")
-                    and _trim_tokens[-2].lemma_.lower() == "also"
-                    and _trim_tokens[-3].lemma_.lower() == "but"
-                ):
-                    result = "".join(
-                        tok.text_with_ws for tok in _trim_doc[:-3]
-                    ).strip()
-                    if result:
-                        result = result + "."
         except (OSError, ImportError):
             pass
 
         if not result:
-            logger.warning(
-                "[SentenceModel] cleanup produced empty result for: %r", stripped
-            )
             result = text.strip()
 
-        _CACHE[key] = result
+        _CLEANUP_CACHE[key] = result
         return result
     except (RuntimeError, ValueError) as e:
-        # RuntimeError: CUDA OOM or tensor errors
-        # ValueError: tokenizer encoding issues
         logger.warning("[SentenceModel] cleanup error (%s); returning input unchanged", e)
         fallback = text.strip()
-        _CACHE[key] = fallback
+        _CLEANUP_CACHE[key] = fallback
         return fallback
 
 
 def reset_cache():
-    global _CACHE
-    _CACHE = {}
+    global _POLISH_CACHE, _CLEANUP_CACHE
+    _POLISH_CACHE = {}
+    _CLEANUP_CACHE = {}
