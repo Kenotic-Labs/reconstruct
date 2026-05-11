@@ -152,6 +152,7 @@ class Kenotic:
         *,
         source_timestamp: Optional[str] = None,
         speaker: Optional[str] = None,
+        listener: Optional[str] = None,
         speaker_is_user: bool = True,
         confidence: float = 0.9,
         model_response: Optional[str] = None,
@@ -189,13 +190,15 @@ class Kenotic:
             text=text,
             source_timestamp=source_timestamp,
             speaker=speaker,
+            listener=listener,
             speaker_is_user=speaker_is_user,
             confidence=confidence,
             source_tag="user",
         )
 
         # LLM response — source_tag = "llm:{llm_id}"
-        # "I" in LLM output resolves to llm_id (the LLM's identity).
+        # "I" in LLM output resolves to llm_id.
+        # "you" in LLM output resolves to the user (speaker).
         if model_response and model_response.strip():
             _llm_speaker = llm_id or "assistant"
             _llm_tag = f"llm:{llm_id}" if llm_id else "llm:unknown"
@@ -204,6 +207,7 @@ class Kenotic:
                 text=model_response,
                 source_timestamp=source_timestamp,
                 speaker=_llm_speaker,
+                listener=speaker,  # LLM's "you" = the user
                 speaker_is_user=False,
                 confidence=confidence,
                 source_tag=_llm_tag,
@@ -350,6 +354,7 @@ class Kenotic:
         text: str,
         *,
         speaker: str = "user",
+        listener: Optional[str] = None,
         speaker_is_user: bool = True,
         source_timestamp: Optional[str] = None,
         model_response: Optional[str] = None,
@@ -443,6 +448,7 @@ class Kenotic:
         count = self.ingest(
             text,
             speaker=speaker,
+            listener=listener,
             speaker_is_user=speaker_is_user,
             source_timestamp=source_timestamp,
             model_response=model_response,
@@ -500,6 +506,7 @@ def KenoticV1(
     text: str,
     *,
     speaker: str = "user",
+    listener: Optional[str] = None,
     speaker_is_user: bool = True,
     source_timestamp: Optional[str] = None,
     model_response: Optional[str] = None,
@@ -561,6 +568,7 @@ def KenoticV1(
     return _singleton.process(
         text,
         speaker=speaker,
+        listener=listener,
         speaker_is_user=speaker_is_user,
         source_timestamp=source_timestamp,
         model_response=model_response,

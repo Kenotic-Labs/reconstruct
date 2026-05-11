@@ -153,6 +153,7 @@ class MemoryEngine:
         self,
         text: str,
         speaker: Optional[str] = None,
+        listener: Optional[str] = None,
         source_timestamp: Optional[str] = None,
     ) -> "MemoryEngine.IngestionResult":
         """The one write-path entry.
@@ -183,7 +184,9 @@ class MemoryEngine:
         result.cleaned_text = cleaned
 
         # ── Grammar engine: clean text → traces, SPO, decompositions ──
-        grammar_result = _grammar_eng.process(cleaned, speaker=speaker)
+        grammar_result = _grammar_eng.process(
+            cleaned, speaker=speaker, listener=listener or "user",
+        )
         result.grammar_result = grammar_result
 
         rows: List[Tuple[str, str, str, Any]] = []
@@ -282,6 +285,7 @@ class MemoryEngine:
         text: str,
         source_timestamp: Optional[str] = None,
         speaker: Optional[str] = None,
+        listener: Optional[str] = None,
         speaker_is_user: bool = True,
         confidence: float = 0.9,
         source_tag: Optional[str] = None,
@@ -301,6 +305,7 @@ class MemoryEngine:
         ingestion = self._run_ingestion_path(
             text,
             speaker=speaker,
+            listener=listener,
             source_timestamp=source_timestamp,
         )
         cleaned = ingestion.cleaned_text
@@ -315,10 +320,14 @@ class MemoryEngine:
         # Pronouns already resolved by grammar_engine.process().
         # No manual _resolve() needed.
 
-        # Gate: skip non-storable decompositions (backchannels, questions).
+        # Gate: skip non-storable decompositions.
+        # Backchannels, questions → keep only imposed facts.
+        # Commands/imperatives → skip entirely (not facts).
         if _grammar_result is not None and hasattr(_grammar_result, 'classification'):
             _cls = _grammar_result.classification
-            if _cls.is_backchannel or _cls.is_question:
+            if _cls.is_command:
+                triples_with_decomp = []  # "take a look", "keep up" — not facts
+            elif _cls.is_backchannel or _cls.is_question:
                 triples_with_decomp = [
                     (s, p, o, d) for s, p, o, d in triples_with_decomp
                     if d is not None and getattr(d, 'extraction_rule', '') and
@@ -460,25 +469,27 @@ class MemoryEngine:
         # ── Edge quality gate: filter garbage triples before storage ──
         # Reject edges with pronoun/determiner subjects, None objects,
         # or subject==object (grammar engine artifacts).
-        # Reject subjects that are pronouns/placeholders — via spaCy POS
+        # Reject subjects that are pronouns/placeholders — via spaCy POS.
+        # 3rd person pronouns (it, he, she, they) → skip edge entirely
+        # (we can't resolve them without coreference).
+        # Non-pronoun garbage (determiners, adverbs) → also skip.
         _subj_low = subject.lower()
         _subj_is_garbage = False
         if _subj_low:
             _subj_doc = _get_nlp()(_subj_low)
             if _subj_doc and len(_subj_doc) == 1:
-                _subj_is_garbage = _subj_doc[0].pos_ in ("PRON", "DET", "ADV", "SCONJ")
+                _tok = _subj_doc[0]
+                if _tok.pos_ in ("DET", "ADV", "SCONJ"):
+                    _subj_is_garbage = True
+                elif _tok.pos_ == "PRON":
+                    # 3rd person pronouns → can't resolve, skip
+                    _person = _tok.morph.get("Person", [""])[0]
+                    if _person == "3":
+                        subject = ""  # skip — no coreference
+                    else:
+                        _subj_is_garbage = True
         if _subj_is_garbage:
-            # Resolve to speaker name from trace decomposition
-            _speaker = getattr(td, 'relational_subject', None) if td else None
-            _speaker_ok = False
-            if _speaker and _speaker.lower() != 'user':
-                _sp_doc = _get_nlp()(_speaker.lower())
-                _speaker_ok = not (_sp_doc and len(_sp_doc) == 1
-                                   and _sp_doc[0].pos_ in ("PRON", "DET", "ADV"))
-            if _speaker_ok:
-                subject = _speaker
-            else:
-                subject = ""  # will fail has_triple check below
+            subject = ""  # will fail has_triple check below
         # Strip leading determiners from subject via spaCy POS
         if subject:
             _subj_doc2 = _get_nlp()(subject)
