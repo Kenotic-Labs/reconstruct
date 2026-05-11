@@ -1,0 +1,128 @@
+story_id: 49
+story_name: "Neighborhood Cleanup Project"
+category: "Life Events"
+description: |
+  User is leading a neighborhood cleanup project, partnering with city council
+  member Patricia Hayes. The team has 15 volunteers focusing on Riverside Park.
+  They received a $5,000 grant from Green City Foundation. Monthly meetings are
+  held at the community center. Tests memory of civic engagement details,
+  participant names, and project logistics.
+duration_simulated: "5 weeks"
+total_batches: 8
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 6:00 PM"
+    user_input: |
+      I've decided to lead a neighborhood cleanup project. The area around
+      Riverside Park has been neglected for years - litter, overgrown paths,
+      broken benches. I reached out to our city council member Patricia Hayes
+      and she's on board to partner with us. She said the city will provide
+      supplies like trash bags and gloves.
+    expected_memory_stores:
+      - "neighborhood cleanup"
+      - "Riverside Park"
+      - "Patricia Hayes"
+      - "city council"
+      - "supplies"
+
+  - batch: 2
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      We had our first planning meeting at the community center tonight.
+      15 volunteers showed up! I was expecting maybe 8. We're going to meet
+      monthly at the community center to plan and coordinate. The first big
+      cleanup day is scheduled for the last Saturday of the month.
+    expected_memory_stores:
+      - "15 volunteers"
+      - "community center"
+      - "monthly"
+      - "last Saturday"
+      - "planning meeting"
+
+  - batch: 3
+    time: "Thursday 10:00 AM"
+    user_input: "What are some effective community organizing strategies?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["community", "organizing"]
+
+  - batch: 4
+    time: "Friday 2:00 PM"
+    user_input: |
+      Amazing news! We received a $5,000 grant from the Green City Foundation
+      for our project! Patricia Hayes helped us with the application. The
+      money will go toward new benches, planting trees, and fixing the
+      walking paths in Riverside Park. We're also going to install recycling
+      bins.
+    expected_memory_stores:
+      - "5,000"
+      - "Green City Foundation"
+      - "grant"
+      - "benches"
+      - "trees"
+      - "walking paths"
+      - "recycling bins"
+
+  - batch: 5
+    time: "Week 2 Monday 11:00 AM"
+    user_input: "How much grant money did we receive and from whom?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["5,000", "Green City Foundation"]
+
+  - batch: 6
+    time: "Week 3 Saturday 1:00 PM"
+    user_input: |
+      First big cleanup day was a huge success! All 15 volunteers plus some
+      neighbors who just walked up to help. We collected 47 bags of trash,
+      cleared the overgrown paths, and Patricia Hayes brought a local news
+      crew to cover the event. One of the volunteers, Marcus, suggested we
+      start a community garden in the cleared area.
+    expected_memory_stores:
+      - "47 bags"
+      - "cleared paths"
+      - "news crew"
+      - "Marcus"
+      - "community garden"
+
+  - batch: 7
+    time: "Week 4 Tuesday 9:00 AM"
+    user_input: "What are the environmental benefits of community gardens?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["environment", "food"]
+
+  - batch: 8
+    time: "Week 5 Monday 4:00 PM"
+    user_input: "Who is the city council member I'm partnering with and where do we hold meetings?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Patricia Hayes", "community center"]
+
+final_verification:
+  - question: "What park is the cleanup project focused on?"
+    expected_contains: ["Riverside Park"]
+  - question: "Who is the city council member involved?"
+    expected_contains: ["Patricia Hayes"]
+  - question: "How many volunteers are on the team?"
+    expected_contains: ["15"]
+  - question: "How much was the grant and who provided it?"
+    expected_contains: ["5,000", "Green City Foundation"]
+  - question: "Where are the monthly meetings held?"
+    expected_contains: ["community center"]

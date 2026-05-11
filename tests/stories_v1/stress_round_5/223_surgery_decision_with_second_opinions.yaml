@@ -1,0 +1,78 @@
+story_id: 223
+story_name: Surgery Decision With Second Opinions
+category: Health
+description: User weighs a surgery decision against multiple opinions.
+duration_simulated: 6 weeks
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: Torn meniscus in my knee. Dr. Ramon Jauregui said surgery is the right move. Dr. Abel Okonkwo
+    said to try PT first.
+  expected_stores:
+  - Torn meniscus
+  - Dr. Ramon Jauregui
+  - surgery
+  - Dr. Abel Okonkwo
+  - PT first
+- batch: 2
+  time: Week 2
+  user_input: Got a third opinion from Dr. Henriette Volkov. She said it depends on my activity level
+    — do I want to run ultras? If yes, surgery. If not, PT.
+  expected_stores:
+  - Dr. Henriette Volkov
+  - ultras
+- batch: 3
+  time: Week 3
+  user_input: What's the tallest building in North America?
+- batch: 4
+  time: Week 4
+  user_input: Decided on PT. I am NOT doing ultras. My PT is Teodoro Rivera. 3 times a week for 6 weeks.
+  expected_stores:
+  - PT
+  - not doing ultras
+  - Teodoro Rivera
+  - 3 times a week
+  - 6 weeks
+- batch: 5
+  time: Week 6
+  user_input: PT is working. Dr. Volkov said if it keeps improving, no surgery needed. Teodoro is incredible.
+  expected_stores:
+  - Dr. Volkov
+  - Teodoro
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+questions:
+- question_id: 223_q1
+  question: Who recommended surgery?
+  expected_contains:
+  - Ramon Jauregui
+- question_id: 223_q2
+  question: Who recommended PT?
+  expected_contains:
+  - Abel Okonkwo
+- question_id: 223_q3
+  question: Who gave the third opinion?
+  expected_contains:
+  - Henriette Volkov
+- question_id: 223_q4
+  question: Who is my PT?
+  expected_contains:
+  - Teodoro Rivera
+- question_id: 223_q5
+  question: Did I mention Torn meniscus?
+  expected_contains:
+  - Torn meniscus
+- question_id: 223_q6
+  question: Did I mention Dr. Ramon Jauregui?
+  expected_contains:
+  - Dr. Ramon Jauregui
+- question_id: 223_q7
+  question: Did I mention surgery?
+  expected_contains:
+  - surgery
+- question_id: 223_q8
+  question: Did I mention Dr. Abel Okonkwo?
+  expected_contains:
+  - Dr. Abel Okonkwo

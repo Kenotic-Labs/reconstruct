@@ -1,0 +1,100 @@
+story_id: 119
+story_name: Parent in ICU After a Stroke
+category: Health
+description: User's father has a stroke and is in the ICU.
+duration_simulated: 3 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1 Monday 4 AM
+  user_input: My mom Benedetta called me at 4 AM. My dad Enzo had a stroke. He's at Mount Sinai in the
+    ICU. I'm flying out now.
+  expected_stores:
+  - Benedetta
+  - mom
+  - Enzo
+  - dad
+  - stroke
+  - Mount Sinai
+  - ICU
+  expected_adaptation:
+    emotion_detected: panic
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Week 1 Tuesday
+  user_input: Enzo is stable but his right side is weak and his speech is slurred. Dr. Mira Shah is his
+    neurologist. She told Mom and me the next 48 hours are critical.
+  expected_stores:
+  - Enzo
+  - Dr. Mira Shah
+  - neurologist
+  - Mom
+  - 48 hours
+- batch: 3
+  time: Week 1 Thursday
+  user_input: Enzo is past the critical window. Dr. Shah said he's responding well. My sister Natasha
+    flew in from Denver. She and I are taking shifts with Mom.
+  expected_stores:
+  - Enzo
+  - Dr. Shah
+  - Natasha
+  - Denver
+- batch: 4
+  time: Week 2 Monday
+  user_input: What's the fastest computer in the world?
+- batch: 5
+  time: Week 2 Wednesday
+  user_input: Enzo transferred out of ICU to rehab. His speech therapist is Olivier Cadieux. Physical
+    therapist is a woman named Vivienne.
+  expected_stores:
+  - Enzo
+  - rehab
+  - Olivier Cadieux
+  - speech therapist
+  - Vivienne
+  - physical therapist
+- batch: 6
+  time: Week 3
+  user_input: Enzo said my name today for the first time since the stroke. Mom cried. I cried. Natasha
+    FaceTimed in and she cried too.
+  expected_stores:
+  - Enzo
+  - Mom
+  - Natasha
+  expected_adaptation:
+    emotion_detected: overjoyed
+    warmth_direction: increase
+questions:
+- question_id: 119_q1
+  question: Who is my mom?
+  expected_contains:
+  - Benedetta
+- question_id: 119_q2
+  question: Who is my dad?
+  expected_contains:
+  - Enzo
+- question_id: 119_q3
+  question: What hospital is he at?
+  expected_contains:
+  - Mount Sinai
+- question_id: 119_q4
+  question: Who is his neurologist?
+  expected_contains:
+  - Mira Shah
+- question_id: 119_q5
+  question: Who is my sister?
+  expected_contains:
+  - Natasha
+- question_id: 119_q6
+  question: Who is his speech therapist?
+  expected_contains:
+  - Olivier Cadieux
+- question_id: 119_q7
+  question: Did I mention mom?
+  expected_contains:
+  - mom
+- question_id: 119_q8
+  question: Did I mention dad?
+  expected_contains:
+  - dad

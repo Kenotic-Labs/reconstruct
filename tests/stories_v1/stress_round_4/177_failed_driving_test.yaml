@@ -1,0 +1,76 @@
+story_id: 177
+story_name: Failed Driving Test
+category: Learning
+description: User fails their driving test and retakes it.
+duration_simulated: 1 month
+total_batches: 4
+batches:
+- batch: 1
+  time: Week 1
+  user_input: I failed my driving test today. Instructor was Mr. Aroon Tiwari at the Petaluma DMV. He
+    failed me for a rolling stop and not checking my blind spot.
+  expected_stores:
+  - failed
+  - Mr. Aroon Tiwari
+  - Petaluma DMV
+  - rolling stop
+  - blind spot
+  expected_adaptation:
+    emotion_detected: embarrassed
+    warmth_direction: neutral
+- batch: 2
+  time: Week 2
+  user_input: Booked 3 lessons with my instructor Marlena. She and I focused on full stops and mirror
+    checks.
+  expected_stores:
+  - 3 lessons
+  - Marlena
+  - full stops
+  - mirror checks
+- batch: 3
+  time: Week 3
+  user_input: What's the capital of Kenya?
+- batch: 4
+  time: Week 4
+  user_input: Retake today. Different DMV instructor — a woman named Betsy Rahal. I passed with a 92.
+    Marlena sent me a 'proud of you' text.
+  expected_stores:
+  - Betsy Rahal
+  - '92'
+  - Marlena
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+questions:
+- question_id: 177_q1
+  question: Who failed me?
+  expected_contains:
+  - Aroon Tiwari
+- question_id: 177_q2
+  question: Where is the DMV?
+  expected_contains:
+  - Petaluma
+- question_id: 177_q3
+  question: Who is my driving instructor?
+  expected_contains:
+  - Marlena
+- question_id: 177_q4
+  question: Who passed me on the retake?
+  expected_contains:
+  - Betsy Rahal
+- question_id: 177_q5
+  question: Did I mention failed?
+  expected_contains:
+  - failed
+- question_id: 177_q6
+  question: Did I mention Mr. Aroon Tiwari?
+  expected_contains:
+  - Mr. Aroon Tiwari
+- question_id: 177_q7
+  question: Did I mention Petaluma DMV?
+  expected_contains:
+  - Petaluma DMV
+- question_id: 177_q8
+  question: Did I mention rolling stop?
+  expected_contains:
+  - rolling stop

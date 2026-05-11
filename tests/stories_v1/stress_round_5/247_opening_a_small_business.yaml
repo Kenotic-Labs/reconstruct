@@ -1,0 +1,79 @@
+story_id: 247
+story_name: Opening a Small Business
+category: Life Events
+description: User opens her first physical retail store.
+duration_simulated: 3 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: Signing a lease tomorrow on a small retail space in Temescal for my plant shop. Landlord
+    is Mr. Vittorio Clemente. Rent is 3200 a month.
+  expected_stores:
+  - Temescal
+  - plant shop
+  - Vittorio Clemente
+  - landlord
+  - 3200 a month
+- batch: 2
+  time: Month 1 Week 3
+  user_input: My contractor is building out the space — shelves, checkout counter, overhead plant shelves.
+    Contractor is Fergus Lachlan. Cost is 22000 dollars.
+  expected_stores:
+  - Fergus Lachlan
+  - contractor
+  - 22000 dollars
+- batch: 3
+  time: Month 2
+  user_input: What's the world's oldest language?
+- batch: 4
+  time: Month 2 Week 2
+  user_input: Named the shop Green Room. Business license approved. My first hire is a part timer named
+    Lucia Nguyen.
+  expected_stores:
+  - Green Room
+  - Lucia Nguyen
+  - part timer
+- batch: 5
+  time: Month 3
+  user_input: Soft opening tomorrow. Vittorio is coming to support. Lucia's first day. I am NOT sleeping
+    tonight.
+  expected_stores:
+  - Vittorio
+  - Lucia
+  expected_adaptation:
+    emotion_detected: anxious/excited
+    warmth_direction: increase
+questions:
+- question_id: 247_q1
+  question: What is my shop called?
+  expected_contains:
+  - Green Room
+- question_id: 247_q2
+  question: Who is my landlord?
+  expected_contains:
+  - Vittorio Clemente
+- question_id: 247_q3
+  question: Who is my contractor?
+  expected_contains:
+  - Fergus Lachlan
+- question_id: 247_q4
+  question: Who is my first hire?
+  expected_contains:
+  - Lucia Nguyen
+- question_id: 247_q5
+  question: Do I know someone named Temescal?
+  expected_contains:
+  - Temescal
+- question_id: 247_q6
+  question: Did I mention plant shop?
+  expected_contains:
+  - plant shop
+- question_id: 247_q7
+  question: Did I mention landlord?
+  expected_contains:
+  - landlord
+- question_id: 247_q8
+  question: Did I mention 3200 a month?
+  expected_contains:
+  - 3200 a month

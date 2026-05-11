@@ -1,0 +1,108 @@
+story_id: 18
+story_name: Knee Surgery Recovery
+category: Health
+description: 'User had ACL reconstruction knee surgery performed by Dr. Patel at
+
+  St. Luke''s Hospital. They are on crutches for six weeks, attending physical
+
+  therapy twice a week with Maria Santos, prescribed Ibuprofen 800mg for pain,
+
+  wearing a DonJoy brace, and targeting a return to running by summer.
+
+  '
+duration_simulated: 4 weeks
+total_batches: 8
+batches:
+- batch: 1
+  time: Wednesday 11:00 AM
+  user_input: 'Had my knee surgery last Tuesday — ACL reconstruction with Dr. Patel at
+
+    St. Luke''s Hospital. I''m home now recovering. He said I''ll be on crutches
+
+    for about six weeks. They also fitted me with a DonJoy brace to keep
+
+    everything stable.
+
+    '
+  expected_stores:
+  - ACL reconstruction
+  - Dr. Patel
+  - St. Luke's
+  - crutches
+  - six weeks
+  - DonJoy
+- batch: 2
+  time: Wednesday 3:00 PM
+  user_input: 'The doctor prescribed Ibuprofen 800mg for the pain and swelling. I''m
+
+    supposed to take it three times a day with food. Also icing the knee for
+
+    20 minutes every couple of hours.
+
+    '
+  expected_stores:
+  - Ibuprofen 800mg
+  - three times a day
+- batch: 3
+  time: Friday 10:00 AM
+  user_input: 'Just had my first physical therapy session with Maria Santos. She''s great.
+
+    We''re going to meet twice a week — Tuesdays and Fridays. She started me
+
+    on some gentle range-of-motion exercises.
+
+    '
+  expected_stores:
+  - Maria Santos
+  - physical therapy
+  - twice a week
+  - Tuesdays and Fridays
+- batch: 4
+  time: Friday 2:00 PM
+  user_input: What is a typical ACL reconstruction recovery timeline?
+- batch: 5
+  time: Week 2 - Tuesday 11:30 AM
+  user_input: 'PT session went well today. Maria said my range of motion is improving
+
+    faster than expected. My big goal is to get back to running by summer.
+
+    She thinks it''s realistic if I stay consistent.
+
+    '
+  expected_stores:
+  - range of motion improving
+  - running by summer
+- batch: 6
+  time: Week 2 - Thursday 9:00 AM
+  user_input: Who is my physical therapist and how often do I see her?
+- batch: 7
+  time: Week 3 - Monday 8:00 AM
+  user_input: Are there any supplements that help with joint recovery?
+- batch: 8
+  time: Week 3 - Friday 4:00 PM
+  user_input: What brace am I wearing and what pain medication was I prescribed?
+questions:
+- question_id: 18_q1
+  question: Who performed my knee surgery and where?
+  expected_contains:
+  - Dr. Patel
+  - St. Luke's
+- question_id: 18_q2
+  question: What type of knee surgery did I have?
+  expected_contains:
+  - ACL reconstruction
+- question_id: 18_q3
+  question: Who is my physical therapist and what days do we meet?
+  expected_contains:
+  - Maria Santos
+  - Tuesdays
+  - Fridays
+- question_id: 18_q4
+  question: What is my recovery goal?
+  expected_contains:
+  - run
+  - summer
+- question_id: 18_q5
+  question: What brace brand am I using?
+  expected_contains:
+  - DonJoy

@@ -1,0 +1,89 @@
+story_id: 159
+story_name: The Wedding That Got Postponed
+category: Relationships
+description: User's wedding gets postponed due to a family emergency.
+duration_simulated: 2 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1 Week 1
+  user_input: My fiancee Yolanda and I are getting married on June 12th. 85 guests. Venue is a vineyard
+    called Rolling Hills.
+  expected_stores:
+  - Yolanda
+  - fiancee
+  - June 12th
+  - 85 guests
+  - Rolling Hills
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Yolanda's dad Xavier had a heart attack this week. He's stable but the wedding is on hold.
+    We're not sure when to reschedule.
+  expected_stores:
+  - Yolanda
+  - Xavier
+  - dad
+  - heart attack
+  - on hold
+  expected_adaptation:
+    emotion_detected: worried
+    warmth_direction: increase
+    vulnerability: true
+- batch: 3
+  time: Month 2 Week 1
+  user_input: What's the capital of Egypt?
+- batch: 4
+  time: Month 2 Week 2
+  user_input: Xavier is doing much better. We moved the wedding from June 12th to September 21st. Rolling
+    Hills was accommodating.
+  expected_stores:
+  - Xavier
+  - June 12th
+  - September 21st
+  - Rolling Hills
+- batch: 5
+  time: Month 2 Week 4
+  user_input: Yolanda and I are NOT stressed about the delay. Her parents are both coming — Xavier cleared
+    by his cardiologist Dr. Imelda Ramos.
+  expected_stores:
+  - Yolanda
+  - not stressed
+  - Xavier
+  - Imelda Ramos
+  - cardiologist
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+questions:
+- question_id: 159_q1
+  question: Who am I marrying?
+  expected_contains:
+  - Yolanda
+- question_id: 159_q2
+  question: Who is her dad?
+  expected_contains:
+  - Xavier
+- question_id: 159_q3
+  question: What happened to Xavier?
+  expected_contains:
+  - heart attack
+- question_id: 159_q4
+  question: What is the new wedding date?
+  expected_contains:
+  - September 21st
+- question_id: 159_q5
+  question: Where is the venue?
+  expected_contains:
+  - Rolling Hills
+- question_id: 159_q6
+  question: Who is Xavier's cardiologist?
+  expected_contains:
+  - Imelda Ramos
+- question_id: 159_q7
+  question: Did I mention fiancee?
+  expected_contains:
+  - fiancee
+- question_id: 159_q8
+  question: When is June 12th?
+  expected_contains:
+  - June 12th

@@ -1,0 +1,97 @@
+story_id: 98
+story_name: A Close Friend's Wedding
+category: Life Events
+description: User attends a friend's destination wedding.
+duration_simulated: 3 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My friend Kiera is getting married next weekend in Tulum. I'm flying in Thursday with my
+    husband Rami.
+  expected_stores:
+  - Kiera
+  - Tulum
+  - Thursday
+  - Rami
+  - husband
+- batch: 2
+  time: Week 1 Wednesday
+  user_input: We're staying at Nest Tulum for four nights, 1200 dollars total. Kiera booked a group rate
+    for wedding guests.
+  expected_stores:
+  - Nest Tulum
+  - four nights
+  - 1200 dollars
+  - Kiera
+- batch: 3
+  time: Week 2 Friday
+  user_input: Rehearsal dinner tonight on the beach. Kiera's fiance Marco is Italian — his family flew
+    in from Bologna. About 60 people at the dinner.
+  expected_stores:
+  - rehearsal dinner
+  - beach
+  - Marco
+  - Italian
+  - Bologna
+  - 60 people
+- batch: 4
+  time: Week 2 Saturday noon
+  user_input: Ceremony is in four hours. Kiera is getting her hair done. The forecast says maybe a 20
+    percent chance of rain which is making everyone nervous.
+  expected_stores:
+  - four hours
+  - Kiera
+  - 20 percent chance of rain
+- batch: 5
+  time: Week 2 Saturday evening
+  user_input: It didn't rain. Wedding was gorgeous. Kiera cried during her vows, Marco cried harder. Rami
+    made a toast that had everyone in stitches.
+  expected_stores:
+  - Kiera
+  - Marco
+  - Rami
+  expected_adaptation:
+    emotion_detected: joyful
+    warmth_direction: increase
+- batch: 6
+  time: Week 3 Tuesday
+  user_input: What's the capital of Mexico?
+- batch: 7
+  time: Week 3 Wednesday
+  user_input: Back home. Kiera texted me a photo of her and Marco on their honeymoon in Oaxaca. Best weekend
+    in a long time.
+  expected_stores:
+  - Kiera
+  - Marco
+  - honeymoon
+  - Oaxaca
+questions:
+- question_id: 98_q1
+  question: Who got married?
+  expected_contains:
+  - Kiera
+- question_id: 98_q2
+  question: Where was the wedding?
+  expected_contains:
+  - Tulum
+- question_id: 98_q3
+  question: Who is her husband?
+  expected_contains:
+  - Marco
+- question_id: 98_q4
+  question: Where is his family from?
+  expected_contains:
+  - Bologna
+- question_id: 98_q5
+  question: Where did we stay?
+  expected_contains:
+  - Nest Tulum
+- question_id: 98_q6
+  question: Where is their honeymoon?
+  expected_contains:
+  - Oaxaca
+- question_id: 98_q7
+  question: When is Thursday?
+  expected_contains:
+  - Thursday

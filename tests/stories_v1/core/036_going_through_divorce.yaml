@@ -1,0 +1,146 @@
+story_id: 36
+story_name: Going Through Divorce
+category: Life Events
+description: 'User is going through a divorce from spouse Blake. Their lawyer is Jennifer
+
+  Walsh at Walsh & Associates. The mediator is Dr. Howard. They are selling
+
+  the shared house on Birch Road and splitting custody of daughter Chloe
+
+  (age 7). The user is in therapy with Dr. Simone. Tests memory of legal
+
+  details, emotional context, and family arrangements.
+
+  '
+duration_simulated: 6 weeks
+total_batches: 9
+batches:
+- batch: 1
+  time: Monday 7:00 PM
+  user_input: 'Blake and I are getting divorced. We''ve been trying to make it work
+
+    for the past year but it''s just not happening. I hired a lawyer,
+
+    Jennifer Walsh at Walsh & Associates. She says the process should
+
+    take about 4-6 months. I''m trying to stay strong for our daughter
+
+    Chloe. She''s only 7.
+
+    '
+  expected_stores:
+  - Blake
+  - divorce
+  - Jennifer Walsh
+  - Walsh & Associates
+  - Chloe
+  - '7'
+  - 4-6 months
+- batch: 2
+  time: Wednesday 11:00 AM
+  user_input: 'We met with a mediator today - Dr. Howard. He''s going to help Blake
+
+    and me work out the custody arrangement for Chloe without going to
+
+    court. We''re aiming for a 50/50 split. Blake was actually reasonable
+
+    today, which gave me some hope.
+
+    '
+  expected_stores:
+  - Dr. Howard
+  - mediator
+  - custody
+  - 50/50
+- batch: 3
+  time: Thursday 3:00 PM
+  user_input: What is the difference between mediation and arbitration?
+- batch: 4
+  time: Friday 5:00 PM
+  user_input: 'We decided to sell the house on Birch Road. Too many memories there
+
+    for either of us. Jennifer thinks we should list it soon to get it
+
+    done before the divorce is finalized. It''s a 3-bedroom place and the
+
+    market is good right now.
+
+    '
+  expected_stores:
+  - Birch Road
+  - selling house
+  - 3-bedroom
+- batch: 5
+  time: Week 2 Monday 10:00 AM
+  user_input: Who is our mediator and what custody arrangement are we working toward?
+- batch: 6
+  time: Week 2 Wednesday 6:00 PM
+  user_input: 'I started therapy with Dr. Simone. I needed someone to talk to who
+
+    isn''t involved in the situation. She''s helping me process the grief
+
+    and the guilt. Chloe seems to be handling things okay, she''s got a
+
+    school counselor she talks to. Blake and I agreed to never fight in
+
+    front of her.
+
+    '
+  expected_stores:
+  - Dr. Simone
+  - therapy
+  - school counselor
+- batch: 7
+  time: Week 3 Tuesday 9:00 AM
+  user_input: What is cognitive behavioral therapy?
+- batch: 8
+  time: Week 4 Thursday 2:00 PM
+  user_input: 'The house on Birch Road got an offer already. It''s above asking price.
+
+    Jennifer and Blake''s lawyer are reviewing it. If all goes well, we
+
+    close in 30 days. I found a 2-bedroom apartment near Chloe''s school
+
+    so she doesn''t have to switch.
+
+    '
+  expected_stores:
+  - offer
+  - above asking
+  - 30 days
+  - apartment
+  - near school
+- batch: 9
+  time: Week 5 Monday 4:00 PM
+  user_input: Who is my therapist and what is the name of the house we're selling?
+questions:
+- question_id: 36_q1
+  question: Who is my spouse that I'm divorcing?
+  expected_contains:
+  - Blake
+- question_id: 36_q2
+  question: Who is my lawyer and what firm?
+  expected_contains:
+  - Jennifer Walsh
+  - Walsh & Associates
+- question_id: 36_q3
+  question: Who is the mediator?
+  expected_contains:
+  - Dr. Howard
+- question_id: 36_q4
+  question: What is my daughter's name and age?
+  expected_contains:
+  - Chloe
+  - '7'
+- question_id: 36_q5
+  question: Where is the house we're selling?
+  expected_contains:
+  - Birch Road
+- question_id: 36_q6
+  question: Who is my therapist?
+  expected_contains:
+  - Dr. Simone
+- question_id: 36_q7
+  question: What custody arrangement are we aiming for?
+  expected_contains:
+  - 50/50

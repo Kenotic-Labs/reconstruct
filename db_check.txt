@@ -1,0 +1,23 @@
+4 edges
+
+S=Melanie P=special O=special
+  rel=["Melanie"] src=Melanie painted that lake sunrise last year!  It's special to Melanie.
+
+S=Caroline P=powerful O=so powerful
+  rel=["Caroline"] src=Caroline went to a LGBTQ support group yesterday it was so powerful .
+
+S=Melanie P=start O=really important
+  rel=["Melanie"] src=Melanie'm starting to realize that self-care is really important.
+
+S=Caroline P=keen O=keen on counseling or working in mental health
+  rel=["Caroline"] src=Caroline'm keen on counseling or working in mental health.
+
+Q: Who painted the sunrise? -> REFUSED: no_edges
+  details: {'query': 'Who painted the sunrise?', 'search_entities': [], 'keywords': ['paint', 'sunrise']}
+
+Q: What did Melanie realize? -> really important
+  details: {'query': 'What did Melanie realize?', 'search_entities': ['Melanie'], 'keywords': ['realize'], 'wh_type': 'episodic', 'pool_size': 1, 'sequence_number': 3, 'source_text': "Melanie'm starting to realize that self-care is really important."}
+
+Q: What is Caroline interested in? -> keen on counseling or working in mental health
+  details: {'query': 'What is Caroline interested in?', 'search_entities': ['Caroline'], 'keywords': [], 'wh_type': 'episodic', 'pool_size': 2, 'sequence_number': 4, 'source_text': "Caroline'm keen on counseling or working in mental health."}
+

@@ -1,0 +1,78 @@
+story_id: 179
+story_name: Switching Majors Mid College
+category: Learning
+description: User switches from biology to creative writing in college.
+duration_simulated: 1 semester
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: I'm switching my major from Biology to Creative Writing. Parents Neelam and Arvind are NOT
+    thrilled.
+  expected_stores:
+  - Biology
+  - Creative Writing
+  - Neelam
+  - Arvind
+  - not thrilled
+- batch: 2
+  time: Week 3
+  user_input: Met with my new advisor Professor Beatrix Ferreira. She's helping me plan out the next two
+    years.
+  expected_stores:
+  - Beatrix Ferreira
+  - two years
+- batch: 3
+  time: Week 5
+  user_input: Who was the 16th US president?
+- batch: 4
+  time: Week 8
+  user_input: Turned in my first short story for Beatrix's workshop. She gave me an A- and said I 'already
+    sound like a writer'.
+  expected_stores:
+  - Beatrix
+  - A-
+  - sound like a writer
+  expected_adaptation:
+    emotion_detected: validated
+    warmth_direction: increase
+- batch: 5
+  time: Week 12
+  user_input: Parents are softening. Mom Neelam sent me a writing journal in the mail. It wasn't much
+    but it meant a lot.
+  expected_stores:
+  - Neelam
+questions:
+- question_id: 179_q1
+  question: What is my old major?
+  expected_contains:
+  - Biology
+- question_id: 179_q2
+  question: What is my new major?
+  expected_contains:
+  - Creative Writing
+- question_id: 179_q3
+  question: Who is my new advisor?
+  expected_contains:
+  - Beatrix Ferreira
+- question_id: 179_q4
+  question: Who are my parents?
+  expected_contains:
+  - Neelam
+  - Arvind
+- question_id: 179_q5
+  question: Did I mention not thrilled?
+  expected_contains:
+  - not thrilled
+- question_id: 179_q6
+  question: Did I mention two years?
+  expected_contains:
+  - two years
+- question_id: 179_q7
+  question: Do I know someone named Beatrix?
+  expected_contains:
+  - Beatrix
+- question_id: 179_q8
+  question: Did I mention A-?
+  expected_contains:
+  - A-

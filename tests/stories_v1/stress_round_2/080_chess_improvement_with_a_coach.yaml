@@ -1,0 +1,100 @@
+story_id: 80
+story_name: Chess Improvement With a Coach
+category: Learning
+description: User takes up competitive chess and works with a coach to raise their rating.
+duration_simulated: 4 months
+total_batches: 7
+batches:
+- batch: 1
+  time: Month 1 Week 1
+  user_input: I hired a chess coach, Grandmaster Nikolai Volkov from Chess.com's coach directory. 80 dollars
+    per hour. My current Lichess rating is 1420.
+  expected_stores:
+  - Nikolai Volkov
+  - Grandmaster
+  - Chess.com
+  - 80 dollars per hour
+  - Lichess
+  - '1420'
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Nikolai's diagnosis was that my openings are fine but my endgame is a mess. We're going
+    to spend 6 weeks on rook endgames.
+  expected_stores:
+  - Nikolai
+  - openings
+  - endgame
+  - 6 weeks
+  - rook endgames
+- batch: 3
+  time: Month 2 Week 2
+  user_input: I've been studying the Lucena and Philidor positions for weeks. Solved 200 endgame puzzles
+    on Chess.com. My rating jumped to 1510.
+  expected_stores:
+  - Lucena
+  - Philidor
+  - 200 endgame puzzles
+  - '1510'
+- batch: 4
+  time: Month 3 Week 1
+  user_input: What's the boiling point of mercury?
+- batch: 5
+  time: Month 3 Week 2
+  user_input: Played in my first over-the-board tournament at a club in Oakland — the Mechanics' Institute
+    branch. Went 3-2 across 5 games.
+  expected_stores:
+  - over-the-board tournament
+  - Mechanics' Institute
+  - Oakland
+  - 3-2
+  - 5 games
+- batch: 6
+  time: Month 4 Week 1
+  user_input: Nikolai is moving me onto middle game strategy next. We covered the minority attack and
+    isolated queen pawn positions.
+  expected_stores:
+  - Nikolai
+  - middle game
+  - minority attack
+  - isolated queen pawn
+- batch: 7
+  time: Month 4 Week 3
+  user_input: Online rating is 1620 now. 200 points in four months. Nikolai said this pace is unusually
+    fast, warned me it'll slow down.
+  expected_stores:
+  - '1620'
+  - 200 points
+  - four months
+  - Nikolai
+  expected_adaptation:
+    emotion_detected: proud
+    warmth_direction: increase
+questions:
+- question_id: 80_q1
+  question: Who is my coach?
+  expected_contains:
+  - Nikolai Volkov
+- question_id: 80_q2
+  question: What was my starting rating?
+  expected_contains:
+  - '1420'
+- question_id: 80_q3
+  question: What is my current rating?
+  expected_contains:
+  - '1620'
+- question_id: 80_q4
+  question: What endgame positions did I study?
+  expected_contains:
+  - Lucena
+- question_id: 80_q5
+  question: Where was my first tournament?
+  expected_contains:
+  - Mechanics
+- question_id: 80_q6
+  question: How much does Nikolai charge per hour?
+  expected_contains:
+  - '80'
+- question_id: 80_q7
+  question: How did I do in the tournament?
+  expected_contains:
+  - 3-2

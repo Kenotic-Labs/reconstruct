@@ -1,0 +1,99 @@
+story_id: 118
+story_name: Partner Diagnosed With MS
+category: Health
+description: User supports their partner through a multiple sclerosis diagnosis.
+duration_simulated: 3 months
+total_batches: 6
+batches:
+- batch: 1
+  time: Month 1 Week 1
+  user_input: My wife Rosalind got her diagnosis — relapsing-remitting MS. Her neurologist is Dr. Kenji
+    Arita at Stanford.
+  expected_stores:
+  - Rosalind
+  - wife
+  - relapsing-remitting MS
+  - Dr. Kenji Arita
+  - Stanford
+  expected_adaptation:
+    emotion_detected: shock
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Rosalind and I went to her treatment planning session with Dr. Arita together. He recommended
+    Ocrevus, given every 6 months by infusion.
+  expected_stores:
+  - Rosalind
+  - Dr. Arita
+  - Ocrevus
+  - 6 months
+  - infusion
+- batch: 3
+  time: Month 2
+  user_input: What's the distance from the Earth to the Moon?
+- batch: 4
+  time: Month 2 Week 2
+  user_input: First infusion today. It took 4 hours at the Stanford infusion center. The nurse Danielle
+    was gentle and Rosalind slept through most of it.
+  expected_stores:
+  - 4 hours
+  - Stanford infusion center
+  - Danielle
+  - nurse
+  - Rosalind
+- batch: 5
+  time: Month 2 Week 4
+  user_input: Rosalind and I went to a local MS support group at the YMCA. She met a woman named Odette
+    who has been living well with MS for 15 years.
+  expected_stores:
+  - Rosalind
+  - MS support group
+  - YMCA
+  - Odette
+  - 15 years
+- batch: 6
+  time: Month 3
+  user_input: Rosalind is feeling steadier. We started swim classes together twice a week — Dr. Arita
+    said swimming is ideal for MS patients.
+  expected_stores:
+  - Rosalind
+  - swim classes
+  - twice a week
+  - Dr. Arita
+  expected_adaptation:
+    emotion_detected: hopeful
+    warmth_direction: increase
+questions:
+- question_id: 118_q1
+  question: Who is my wife?
+  expected_contains:
+  - Rosalind
+- question_id: 118_q2
+  question: What did she get diagnosed with?
+  expected_contains:
+  - MS
+- question_id: 118_q3
+  question: Who is her neurologist?
+  expected_contains:
+  - Kenji Arita
+- question_id: 118_q4
+  question: Where does he practice?
+  expected_contains:
+  - Stanford
+- question_id: 118_q5
+  question: What medication is she on?
+  expected_contains:
+  - Ocrevus
+- question_id: 118_q6
+  question: Who did she meet at the support group?
+  expected_contains:
+  - Odette
+- question_id: 118_q7
+  question: How often are the infusions?
+  expected_contains:
+  - 6 months
+- question_id: 118_q8
+  question: Did I mention wife?
+  expected_contains:
+  - wife

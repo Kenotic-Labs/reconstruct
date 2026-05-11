@@ -1,0 +1,98 @@
+story_id: 16
+story_name: Mediterranean Diet Transition
+category: Health
+description: 'User is switching to a Mediterranean diet on the recommendation of their
+
+  nutritionist Dr. Karen Wells. They track macros using MyFitnessPal with a
+
+  goal of 2000 calories per day, meal prep on Sundays, and order from
+
+  Sweetgreen on busy days. Their favorite new recipe is a Greek chicken bowl.
+
+  Over two weeks they lose 4 pounds and see cholesterol improvements.
+
+  '
+duration_simulated: 3 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Monday 9:00 AM
+  user_input: 'I just came back from my nutritionist Dr. Karen Wells and she recommended
+
+    I switch to a Mediterranean diet. I''m setting up MyFitnessPal to track my
+
+    macros and aiming for about 2000 calories a day. I''m pretty excited to
+
+    try this out.
+
+    '
+  expected_stores:
+  - Mediterranean diet
+  - Dr. Karen Wells
+  - MyFitnessPal
+  - 2000 calories
+- batch: 2
+  time: Monday 12:30 PM
+  user_input: What are the general health benefits of a Mediterranean diet?
+- batch: 3
+  time: Wednesday 6:45 PM
+  user_input: 'I tried making a Greek chicken bowl tonight and it was amazing. Grilled
+
+    chicken, cucumber, tomatoes, feta, kalamata olives, and tzatziki over
+
+    brown rice. Definitely going to be my go-to recipe.
+
+    '
+  expected_stores:
+  - Greek chicken bowl
+  - favorite recipe
+- batch: 4
+  time: Sunday 10:00 AM
+  user_input: 'Spending this morning doing meal prep for the week. I''m going to batch
+
+    cook chicken and roast a bunch of veggies. On busy days I''ll just grab
+
+    lunch from Sweetgreen since they have good Mediterranean-style options.
+
+    '
+  expected_stores:
+  - meal prep Sundays
+  - Sweetgreen
+- batch: 5
+  time: Wednesday 7:00 PM
+  user_input: How much protein should someone typically eat per day?
+- batch: 6
+  time: Week 2 - Monday 8:00 AM
+  user_input: 'Two weeks into this diet and I''ve already lost 4 pounds! I also got my
+
+    bloodwork back and my cholesterol dropped noticeably. Dr. Wells is really
+
+    pleased with the progress.
+
+    '
+  expected_stores:
+  - lost 4 pounds
+  - cholesterol dropped
+  - two weeks
+- batch: 7
+  time: Week 2 - Tuesday 1:00 PM
+  user_input: What was the calorie goal my nutritionist and I set?
+questions:
+- question_id: 16_q1
+  question: Who is my nutritionist and what diet did she recommend?
+  expected_contains:
+  - Dr. Karen Wells
+  - Mediterranean
+- question_id: 16_q2
+  question: What's my favorite new recipe I've been making?
+  expected_contains:
+  - Greek chicken bowl
+- question_id: 16_q3
+  question: Where do I get lunch on busy days?
+  expected_contains:
+  - Sweetgreen
+- question_id: 16_q4
+  question: How has the diet been going so far?
+  expected_contains:
+  - 4 pounds
+  - cholesterol

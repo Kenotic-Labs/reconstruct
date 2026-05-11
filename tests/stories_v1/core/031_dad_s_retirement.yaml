@@ -1,0 +1,121 @@
+story_id: 31
+story_name: Dad's Retirement
+category: Life Events
+description: 'User''s father George is retiring after 35 years at Boeing. A retirement party
+
+  is held at the Hilton. He receives a gold watch. George and his wife Dorothy
+
+  plan to travel to Italy. They are also selling the family car, a Ford Mustang.
+
+  Tests memory of family details, career history, and future plans.
+
+  '
+duration_simulated: 3 weeks
+total_batches: 8
+batches:
+- batch: 1
+  time: Monday 8:00 AM
+  user_input: 'Big news - my dad George is finally retiring! He''s been at Boeing for
+
+    35 years. His last day is next Friday. I''m so happy for him but also
+
+    a little emotional. That job has been his whole life.
+
+    '
+  expected_stores:
+  - George
+  - retiring
+  - Boeing
+  - 35 years
+  - Friday
+- batch: 2
+  time: Tuesday 10:00 AM
+  user_input: 'We''re throwing Dad a retirement party at the Hilton next Saturday. My
+
+    sister and I are organizing it. Boeing is giving him a gold watch, which
+
+    is a tradition for long-term employees. We''re expecting about 60 people,
+
+    including his old colleagues.
+
+    '
+  expected_stores:
+  - Hilton
+  - retirement party
+  - gold watch
+  - 60 people
+  - sister
+- batch: 3
+  time: Wednesday 9:00 AM
+  user_input: What is Boeing's stock ticker symbol?
+- batch: 4
+  time: Thursday 2:00 PM
+  user_input: 'Dad and Mom are already making plans for retirement. They want to travel
+
+    to Italy first - Rome and Florence. Mom''s name is Dorothy and she''s
+
+    been dreaming of seeing the Colosseum for decades. They booked the trip
+
+    for March.
+
+    '
+  expected_stores:
+  - Dorothy
+  - Italy
+  - Rome
+  - Florence
+  - March
+  - Colosseum
+- batch: 5
+  time: Friday 11:00 AM
+  user_input: Where is my dad's retirement party being held?
+- batch: 6
+  time: Saturday 3:00 PM
+  user_input: 'Dad also decided to sell the family car. It''s a Ford Mustang, a 1967
+
+    classic. He''s had it for 20 years. I''m honestly heartbroken about it,
+
+    I learned to drive in that car. He says he won''t need two cars anymore.
+
+    '
+  expected_stores:
+  - Ford Mustang
+  - '1967'
+  - selling
+  - 20 years
+- batch: 7
+  time: Week 2 Monday 9:00 AM
+  user_input: What is the speed of light in a vacuum?
+- batch: 8
+  time: Week 2 Wednesday 4:00 PM
+  user_input: Where are my parents planning to travel after dad retires?
+questions:
+- question_id: 31_q1
+  question: What is my father's name and where did he work?
+  expected_contains:
+  - George
+  - Boeing
+- question_id: 31_q2
+  question: How many years did my dad work before retiring?
+  expected_contains:
+  - '35'
+- question_id: 31_q3
+  question: Where is the retirement party?
+  expected_contains:
+  - Hilton
+- question_id: 31_q4
+  question: What gift is Boeing giving my dad?
+  expected_contains:
+  - gold watch
+- question_id: 31_q5
+  question: What is my mother's name?
+  expected_contains:
+  - Dorothy
+- question_id: 31_q6
+  question: What family car are they selling?
+  expected_contains:
+  - Ford Mustang
+- question_id: 31_q7
+  question: Where are my parents traveling to?
+  expected_contains:
+  - Italy

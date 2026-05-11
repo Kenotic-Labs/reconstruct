@@ -1,0 +1,74 @@
+story_id: 217
+story_name: Friendship Over a Misunderstanding
+category: Relationships
+description: User loses a friend over a misunderstanding that never gets resolved.
+duration_simulated: 3 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: My friend Olamide accused me of talking about her behind her back to our mutual friend Zainab.
+    I did NOT do it.
+  expected_stores:
+  - Olamide
+  - Zainab
+  - mutual friend
+  - did not
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Zainab confirmed to Olamide that I didn't say anything. Olamide still refused to believe
+    me.
+  expected_stores:
+  - Zainab
+  - Olamide
+- batch: 3
+  time: Month 2
+  user_input: What's the largest planet?
+- batch: 4
+  time: Month 2 Week 2
+  user_input: Olamide unfollowed me everywhere. I wrote her a letter explaining my side. She never responded.
+  expected_stores:
+  - Olamide
+- batch: 5
+  time: Month 3
+  user_input: Accepting the friendship is over. Zainab and I are closer than before — she stood by me.
+    Some losses don't get resolved.
+  expected_stores:
+  - Olamide
+  - Zainab
+  expected_adaptation:
+    emotion_detected: accepting grief
+    warmth_direction: increase
+questions:
+- question_id: 217_q1
+  question: Who accused me?
+  expected_contains:
+  - Olamide
+- question_id: 217_q2
+  question: Who is our mutual friend?
+  expected_contains:
+  - Zainab
+- question_id: 217_q3
+  question: Did I actually talk behind her back?
+  expected_contains:
+  - not
+- question_id: 217_q4
+  question: Did I mention mutual friend?
+  expected_contains:
+  - mutual friend
+- question_id: 217_q5
+  question: Did I mention did not?
+  expected_contains:
+  - did not
+- question_id: 217_q6
+  question: Was Olamide mentioned?
+  expected_contains:
+  - Olamide
+- question_id: 217_q7
+  question: Was Zainab mentioned?
+  expected_contains:
+  - Zainab
+- question_id: 217_q8
+  question: Was mutual friend part of what I talked about?
+  expected_contains:
+  - mutual friend

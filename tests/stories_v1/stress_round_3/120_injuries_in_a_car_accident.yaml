@@ -1,0 +1,94 @@
+story_id: 120
+story_name: Injuries in a Car Accident
+category: Health
+description: User and friend are injured in a minor car accident.
+duration_simulated: 6 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Day 1
+  user_input: My friend Lola and I were rear-ended on the 101 this afternoon. We're both banged up — I
+    have whiplash, she has a fractured wrist.
+  expected_stores:
+  - Lola
+  - friend
+  - rear-ended
+  - '101'
+  - whiplash
+  - fractured wrist
+- batch: 2
+  time: Day 2
+  user_input: ER at Kaiser. Dr. Francisco Morales cleared me with a soft collar and muscle relaxants.
+    Lola's wrist got a cast at the orthopedic wing.
+  expected_stores:
+  - Kaiser
+  - Dr. Francisco Morales
+  - soft collar
+  - Lola
+  - cast
+- batch: 3
+  time: Week 1
+  user_input: Who is the current president of France?
+- batch: 4
+  time: Week 2
+  user_input: Lola and I met with our lawyer Marion Silver for the insurance claim. The other driver's
+    name is Calvin Teague and he admitted fault.
+  expected_stores:
+  - Lola
+  - Marion Silver
+  - lawyer
+  - Calvin Teague
+  - admitted fault
+- batch: 5
+  time: Week 3
+  user_input: Started PT at Bayside Physical Therapy. My therapist is Ahmad Rashidi and he has me doing
+    neck stretches three times a day.
+  expected_stores:
+  - Bayside Physical Therapy
+  - Ahmad Rashidi
+  - neck stretches
+  - three times a day
+- batch: 6
+  time: Week 6
+  user_input: Final PT session today. Ahmad cleared me. Lola's cast came off yesterday. We went out for
+    ice cream at Smitten to celebrate.
+  expected_stores:
+  - Ahmad
+  - Lola
+  - Smitten
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+questions:
+- question_id: 120_q1
+  question: Who was I with?
+  expected_contains:
+  - Lola
+- question_id: 120_q2
+  question: What injury did I have?
+  expected_contains:
+  - whiplash
+- question_id: 120_q3
+  question: What injury did Lola have?
+  expected_contains:
+  - wrist
+- question_id: 120_q4
+  question: Who was our ER doctor?
+  expected_contains:
+  - Francisco Morales
+- question_id: 120_q5
+  question: Who is our lawyer?
+  expected_contains:
+  - Marion Silver
+- question_id: 120_q6
+  question: Who is the other driver?
+  expected_contains:
+  - Calvin Teague
+- question_id: 120_q7
+  question: Who is my PT?
+  expected_contains:
+  - Ahmad Rashidi
+- question_id: 120_q8
+  question: Did I mention friend?
+  expected_contains:
+  - friend

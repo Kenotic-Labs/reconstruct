@@ -1,0 +1,74 @@
+story_id: 181
+story_name: Online Class Disappointment
+category: Learning
+description: User takes an online class that didn't meet expectations.
+duration_simulated: 8 weeks
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: Signed up for a Masterclass with chef Francois Duprey. 8 hour class for 180 dollars.
+  expected_stores:
+  - Masterclass
+  - Francois Duprey
+  - 8 hour
+  - 180 dollars
+- batch: 2
+  time: Week 3
+  user_input: The videos are shallow. Francois talks about his 'philosophy' but never shows real technique.
+    It is NOT what I expected.
+  expected_stores:
+  - Francois
+  - not what I expected
+- batch: 3
+  time: Week 4
+  user_input: What year did WWII end?
+- batch: 4
+  time: Week 5
+  user_input: Found a better free channel by a chef named Ingrid Markland on YouTube. She teaches actual
+    knife technique in 15 minute videos.
+  expected_stores:
+  - Ingrid Markland
+  - YouTube
+  - knife technique
+  - 15 minute
+- batch: 5
+  time: Week 8
+  user_input: Cancelled my Masterclass membership. Watching Ingrid's videos instead. Learned more in 2
+    weeks than 8 weeks with Francois.
+  expected_stores:
+  - Masterclass
+  - Ingrid
+  - Francois
+  expected_adaptation:
+    emotion_detected: satisfied
+    warmth_direction: increase
+questions:
+- question_id: 181_q1
+  question: Who was the Masterclass chef?
+  expected_contains:
+  - Francois Duprey
+- question_id: 181_q2
+  question: Who am I watching instead?
+  expected_contains:
+  - Ingrid Markland
+- question_id: 181_q3
+  question: Did Masterclass meet expectations?
+  expected_contains:
+  - not
+- question_id: 181_q4
+  question: Do I know someone named Masterclass?
+  expected_contains:
+  - Masterclass
+- question_id: 181_q5
+  question: When is 8 hour?
+  expected_contains:
+  - 8 hour
+- question_id: 181_q6
+  question: How much money is 180 dollars?
+  expected_contains:
+  - 180 dollars
+- question_id: 181_q7
+  question: Do I know someone named Francois?
+  expected_contains:
+  - Francois

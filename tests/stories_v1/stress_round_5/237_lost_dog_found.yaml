@@ -1,0 +1,83 @@
+story_id: 237
+story_name: Lost Dog Found
+category: Daily Life
+description: User's dog gets lost and is eventually found across town.
+duration_simulated: 1 week
+total_batches: 5
+batches:
+- batch: 1
+  time: Day 1
+  user_input: My dog Cookie ran out the gate this afternoon. Can't find her. Posted on Nextdoor and at
+    the local shelter Oakland Animal Services.
+  expected_stores:
+  - Cookie
+  - ran out the gate
+  - Nextdoor
+  - Oakland Animal Services
+  expected_adaptation:
+    emotion_detected: panic
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Day 2
+  user_input: Neighbor Magdalena saw Cookie near Lake Merritt this morning. I drove there and searched
+    for 3 hours. No luck.
+  expected_stores:
+  - Magdalena
+  - Lake Merritt
+  - 3 hours
+- batch: 3
+  time: Day 4
+  user_input: What's the largest desert in the world?
+- batch: 4
+  time: Day 5
+  user_input: Someone named Gwyneth Merrill called — she found Cookie near a park in Berkeley. Cookie
+    traveled 4 miles.
+  expected_stores:
+  - Gwyneth Merrill
+  - Cookie
+  - Berkeley
+  - 4 miles
+- batch: 5
+  time: Day 6
+  user_input: Got Cookie back. Gave Gwyneth a reward and a box of cookies. Cookie is sleeping like she
+    didn't just have an adventure.
+  expected_stores:
+  - Cookie
+  - Gwyneth
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+questions:
+- question_id: 237_q1
+  question: What is my dog's name?
+  expected_contains:
+  - Cookie
+- question_id: 237_q2
+  question: Who found her?
+  expected_contains:
+  - Gwyneth Merrill
+- question_id: 237_q3
+  question: Where was she found?
+  expected_contains:
+  - Berkeley
+- question_id: 237_q4
+  question: Who saw her near Lake Merritt?
+  expected_contains:
+  - Magdalena
+- question_id: 237_q5
+  question: Did I mention ran out the gate?
+  expected_contains:
+  - ran out the gate
+- question_id: 237_q6
+  question: Do I know someone named Nextdoor?
+  expected_contains:
+  - Nextdoor
+- question_id: 237_q7
+  question: Do I know someone named Oakland Animal Services?
+  expected_contains:
+  - Oakland Animal Services
+- question_id: 237_q8
+  question: Do I know someone named Lake Merritt?
+  expected_contains:
+  - Lake Merritt

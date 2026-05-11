@@ -1,0 +1,133 @@
+story_id: 30
+story_name: "Learning to Drive"
+category: "Learning"
+description: |
+  Adult user learning to drive through SafeRoad Academy with
+  instructor Tony. Tests memory of driving school details, lesson
+  schedule, practice vehicle, test dates, scores, and specific
+  challenges like parallel parking.
+duration_simulated: "3 weeks"
+total_batches: 7
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00 AM"
+    user_input: |
+      I finally signed up for driving lessons! I'm learning at SafeRoad
+      Academy and my instructor's name is Tony. Lessons are every Saturday
+      at 10am. The practice car is a white Toyota Corolla. I already passed
+      the written test last week with a score of 92%, so now it's time
+      for the actual driving part. My road test is scheduled for
+      February 20th at the DMV on Central Avenue.
+    expected_memory_stores:
+      - "SafeRoad Academy"
+      - "Tony"
+      - "Saturday"
+      - "10am"
+      - "white Toyota Corolla"
+      - "92%"
+      - "February 20th"
+      - "DMV"
+      - "Central Avenue"
+
+  - batch: 2
+    time: "Saturday 11:30 AM"
+    user_input: |
+      First lesson done! Tony is super patient. We started in an empty
+      parking lot and I practiced starting, stopping, and basic turns.
+      I stalled the car twice but Tony said that's completely normal.
+      We also went over mirror adjustments and proper hand position
+      on the steering wheel.
+    expected_memory_stores:
+      - "parking lot"
+      - "starting"
+      - "stopping"
+      - "turns"
+      - "stalled"
+      - "mirror adjustments"
+
+  - batch: 3
+    time: "Monday 3:00 PM"
+    user_input: "What does a flashing yellow traffic light mean?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["caution", "slow"]
+
+  - batch: 4
+    time: "Next Saturday 11:30 AM"
+    user_input: |
+      Second lesson with Tony today. We drove on actual roads for the
+      first time! I practiced lane changes and right turns at
+      intersections. Tony says I need to check my blind spots more
+      consistently. Then we tried parallel parking and it was a
+      disaster. I just cannot get the angles right. Tony said we'll
+      focus on that next week.
+    expected_memory_stores:
+      - "lane changes"
+      - "right turns"
+      - "blind spots"
+      - "parallel parking"
+      - "struggling"
+
+  - batch: 5
+    time: "Next Sunday 2:00 PM"
+    user_input: "What score did I get on my written driving test?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["92%"]
+
+  - batch: 6
+    time: "Third Saturday 11:45 AM"
+    user_input: |
+      Tony had me practice parallel parking for the entire first
+      half of the lesson today. I finally got the hang of it by
+      using the reference points he taught me: align with the car,
+      turn the wheel one full rotation, then straighten out. I
+      nailed it 3 out of 5 tries by the end! We also practiced
+      three-point turns and highway merging. Tony says I'm ready
+      for the test if I keep practicing.
+    expected_memory_stores:
+      - "reference points"
+      - "3 out of 5"
+      - "three-point turns"
+      - "highway merging"
+      - "ready for test"
+
+  - batch: 7
+    time: "Third Saturday 6:00 PM"
+    user_input: "When is my driving test and where?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["February 20th", "Central Avenue"]
+
+final_verification:
+  - question: "Where am I taking driving lessons?"
+    expected_contains: ["SafeRoad Academy"]
+
+  - question: "Who is my driving instructor?"
+    expected_contains: ["Tony"]
+
+  - question: "What car am I practicing in?"
+    expected_contains: ["Toyota Corolla", "white"]
+
+  - question: "When is my road test scheduled?"
+    expected_contains: ["February 20th"]
+
+  - question: "What was I struggling with in driving lessons?"
+    expected_contains: ["parallel parking"]
+
+  - question: "What did I score on the written driving test?"
+    expected_contains: ["92%"]

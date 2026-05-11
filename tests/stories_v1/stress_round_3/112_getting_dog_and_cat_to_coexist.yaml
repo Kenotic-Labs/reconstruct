@@ -1,0 +1,92 @@
+story_id: 112
+story_name: Getting Dog and Cat to Coexist
+category: Relationships
+description: User and partner navigate introducing a new cat to their existing dog.
+duration_simulated: 3 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My husband Dion and I brought home a cat named Clementine yesterday. Our dog Pepper has
+    been sniffing the door nonstop.
+  expected_stores:
+  - Dion
+  - husband
+  - Clementine
+  - cat
+  - Pepper
+  - dog
+- batch: 2
+  time: Week 1 Day 3
+  user_input: Dion set up a barrier gate so Pepper and Clementine can see each other without contact.
+    Pepper is obsessed; Clementine is unbothered.
+  expected_stores:
+  - Dion
+  - barrier gate
+  - Pepper
+  - Clementine
+- batch: 3
+  time: Week 2
+  user_input: Our vet Dr. Amalia Rossi gave us a handout on cat-dog introductions. She said Pepper's behavior
+    is normal and to be patient.
+  expected_stores:
+  - Dr. Amalia Rossi
+  - vet
+  - Pepper
+- batch: 4
+  time: Week 2 Thursday
+  user_input: What's the tallest building in the world?
+- batch: 5
+  time: Week 2 Saturday
+  user_input: First supervised contact today. Dion held Pepper on a leash while I held Clementine. They
+    sniffed for about 30 seconds and then Clementine walked away.
+  expected_stores:
+  - Dion
+  - Pepper
+  - leash
+  - Clementine
+  - 30 seconds
+- batch: 6
+  time: Week 3
+  user_input: Pepper and Clementine are coexisting. She sits on the couch and he lies on the floor. Dion
+    caught them napping in the same room yesterday.
+  expected_stores:
+  - Pepper
+  - Clementine
+  - Dion
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+questions:
+- question_id: 112_q1
+  question: Who is my husband?
+  expected_contains:
+  - Dion
+- question_id: 112_q2
+  question: What is the cat's name?
+  expected_contains:
+  - Clementine
+- question_id: 112_q3
+  question: What is the dog's name?
+  expected_contains:
+  - Pepper
+- question_id: 112_q4
+  question: Who is our vet?
+  expected_contains:
+  - Amalia Rossi
+- question_id: 112_q5
+  question: How did the first contact go?
+  expected_contains:
+  - 30 seconds
+- question_id: 112_q6
+  question: Did I mention husband?
+  expected_contains:
+  - husband
+- question_id: 112_q7
+  question: Did I mention cat?
+  expected_contains:
+  - cat
+- question_id: 112_q8
+  question: Did I mention dog?
+  expected_contains:
+  - dog

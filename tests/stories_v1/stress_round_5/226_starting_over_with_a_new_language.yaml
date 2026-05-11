@@ -1,0 +1,81 @@
+story_id: 226
+story_name: Starting Over With a New Language
+category: Learning
+description: User decides to restart learning a language after a false start.
+duration_simulated: 3 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: I stopped studying German two years ago. Starting over. My new tutor is Ilse Weiland — old
+    tutor was Rüdiger whom I didn't click with.
+  expected_stores:
+  - German
+  - two years ago
+  - Ilse Weiland
+  - Rüdiger
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Ilse and I meet Wednesdays at 7 PM. She uses a different method than Rüdiger — immersion
+    first, grammar second.
+  expected_stores:
+  - Ilse
+  - Wednesdays 7 PM
+  - Rüdiger
+  - immersion first
+- batch: 3
+  time: Month 2
+  user_input: What's the oldest university in the world?
+- batch: 4
+  time: Month 2 Week 2
+  user_input: My progress is faster than it ever was with Rüdiger. Ilse is NOT focused on perfection.
+    She emphasizes comprehension.
+  expected_stores:
+  - Rüdiger
+  - Ilse
+  - not focused on perfection
+- batch: 5
+  time: Month 3
+  user_input: Can hold a basic conversation. Ilse said I should take the Goethe-Institut A2 exam in 3
+    months.
+  expected_stores:
+  - Ilse
+  - Goethe-Institut
+  - A2
+  - 3 months
+  expected_adaptation:
+    emotion_detected: proud
+    warmth_direction: increase
+questions:
+- question_id: 226_q1
+  question: What language am I learning?
+  expected_contains:
+  - German
+- question_id: 226_q2
+  question: Who is my new tutor?
+  expected_contains:
+  - Ilse Weiland
+- question_id: 226_q3
+  question: Who was my old tutor?
+  expected_contains:
+  - Rüdiger
+- question_id: 226_q4
+  question: What exam am I taking?
+  expected_contains:
+  - Goethe-Institut
+- question_id: 226_q5
+  question: Did I mention two years ago?
+  expected_contains:
+  - two years ago
+- question_id: 226_q6
+  question: Do I know someone named Ilse?
+  expected_contains:
+  - Ilse
+- question_id: 226_q7
+  question: Did I mention Wednesdays 7 PM?
+  expected_contains:
+  - Wednesdays 7 PM
+- question_id: 226_q8
+  question: Did I mention immersion first?
+  expected_contains:
+  - immersion first

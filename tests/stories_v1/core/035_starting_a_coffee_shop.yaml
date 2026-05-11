@@ -1,0 +1,140 @@
+story_id: 35
+story_name: Starting a Coffee Shop
+category: Life Events
+description: 'User is launching a coffee shop called Bean & Leaf on Harbor Street with
+
+  business partner and best friend Theo. They secured an SBA loan of $75,000.
+
+  An architect designed the space and the grand opening is planned for April.
+
+  Tests memory of business details, financial specifics, and partnership dynamics.
+
+  '
+duration_simulated: 5 weeks
+total_batches: 9
+batches:
+- batch: 1
+  time: Monday 8:00 AM
+  user_input: 'Theo and I are finally doing it - we''re opening a coffee shop! We''ve
+
+    been talking about this for years. The shop is called Bean & Leaf.
+
+    We found the perfect location on Harbor Street, right between the
+
+    bookstore and the flower shop. Great foot traffic.
+
+    '
+  expected_stores:
+  - Theo
+  - coffee shop
+  - Bean & Leaf
+  - Harbor Street
+- batch: 2
+  time: Wednesday 10:00 AM
+  user_input: 'We got approved for an SBA loan - $75,000! That combined with our
+
+    savings should be enough to get started. The loan officer said our
+
+    business plan was solid. Theo is handling the supplier contracts and
+
+    I''m managing the buildout.
+
+    '
+  expected_stores:
+  - SBA loan
+  - 75,000
+  - business plan
+  - supplier contracts
+  - buildout
+- batch: 3
+  time: Thursday 2:00 PM
+  user_input: What is the average profit margin for a coffee shop?
+- batch: 4
+  time: Friday 11:00 AM
+  user_input: 'We hired an architect to design the interior. She came up with an
+
+    amazing concept - exposed brick walls, warm lighting, and a communal
+
+    table in the center. The espresso bar will be the focal point. She''s
+
+    also adding a small stage area for open mic nights.
+
+    '
+  expected_stores:
+  - architect
+  - exposed brick
+  - communal table
+  - espresso bar
+  - open mic
+  - stage
+- batch: 5
+  time: Week 2 Monday 9:00 AM
+  user_input: What's the name of our coffee shop and where is it located?
+- batch: 6
+  time: Week 2 Thursday 3:00 PM
+  user_input: 'Construction started this week. Theo found an amazing coffee bean
+
+    supplier from Colombia. We''re also going to serve pastries from a
+
+    local bakery. The grand opening is planned for April. We''re going to
+
+    do a soft launch the week before for friends and family.
+
+    '
+  expected_stores:
+  - Colombia
+  - pastries
+  - grand opening
+  - April
+  - soft launch
+- batch: 7
+  time: Week 3 Tuesday 11:00 AM
+  user_input: What is the difference between arabica and robusta coffee beans?
+- batch: 8
+  time: Week 4 Monday 10:00 AM
+  user_input: 'We''re designing the menu now. The signature drink will be a lavender
+
+    honey latte. Theo wants to add a chai spice cold brew too. We''re
+
+    keeping prices competitive - regular coffee at $3.50, lattes at $5.
+
+    Also hired our first barista, a girl named Priya who has five years
+
+    of experience.
+
+    '
+  expected_stores:
+  - lavender honey latte
+  - chai spice cold brew
+  - '3.50'
+  - '5'
+  - Priya
+  - barista
+- batch: 9
+  time: Week 5 Wednesday 2:00 PM
+  user_input: How much was our SBA loan and when is the grand opening?
+questions:
+- question_id: 35_q1
+  question: What is the name of the coffee shop?
+  expected_contains:
+  - Bean & Leaf
+- question_id: 35_q2
+  question: Who is my business partner?
+  expected_contains:
+  - Theo
+- question_id: 35_q3
+  question: Where is the shop located?
+  expected_contains:
+  - Harbor Street
+- question_id: 35_q4
+  question: How much was the SBA loan?
+  expected_contains:
+  - 75,000
+- question_id: 35_q5
+  question: When is the grand opening?
+  expected_contains:
+  - April
+- question_id: 35_q6
+  question: What is the signature drink?
+  expected_contains:
+  - lavender honey latte

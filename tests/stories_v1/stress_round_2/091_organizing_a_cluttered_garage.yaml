@@ -1,0 +1,92 @@
+story_id: 91
+story_name: Organizing a Cluttered Garage
+category: Daily Life
+description: User spends a weekend systematically clearing and organizing their garage.
+duration_simulated: 2 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1 Saturday 8 AM
+  user_input: Starting my garage cleanout. It's basically a storage unit for boxes I haven't opened in
+    6 years. Goal is to reclaim half the space.
+  expected_stores:
+  - garage cleanout
+  - 6 years
+  - half the space
+- batch: 2
+  time: Week 1 Saturday 2 PM
+  user_input: Filled one contractor bag for donation, one for trash. Found my late grandfather's toolbox
+    — keeping that. My dad Rashid is going to help me sort the rest next weekend.
+  expected_stores:
+  - donation
+  - trash
+  - toolbox
+  - Rashid
+  - dad
+- batch: 3
+  time: Week 1 Sunday
+  user_input: Rented a dumpster from Bin There Dump That. 380 dollars for a 15 yard bin, two weeks. Being
+    delivered Tuesday.
+  expected_stores:
+  - Bin There Dump That
+  - 380 dollars
+  - 15 yard bin
+  - Tuesday
+- batch: 4
+  time: Week 2 Wednesday
+  user_input: Why is the sky blue?
+- batch: 5
+  time: Week 2 Saturday
+  user_input: Rashid and I spent 8 hours sorting through boxes. Found photos from his wedding in 1984,
+    his old army uniform, and 12 books from my mom Liliane who passed in 2019.
+  expected_stores:
+  - Rashid
+  - 8 hours
+  - wedding
+  - '1984'
+  - army uniform
+  - 12 books
+  - Liliane
+  - mom
+  - '2019'
+  expected_adaptation:
+    emotion_detected: bittersweet
+    warmth_direction: increase
+- batch: 6
+  time: Week 2 Sunday
+  user_input: Installed wall shelving from Ikea — 4 Gorm units, 220 dollars total. Garage now has room
+    for my bike, workbench, and two parking spaces.
+  expected_stores:
+  - Ikea
+  - 4 Gorm units
+  - 220 dollars
+  - two parking spaces
+questions:
+- question_id: 91_q1
+  question: Who helped me clean the garage?
+  expected_contains:
+  - Rashid
+- question_id: 91_q2
+  question: What rental service did I use for the dumpster?
+  expected_contains:
+  - Bin There Dump That
+- question_id: 91_q3
+  question: Who is my late mom?
+  expected_contains:
+  - Liliane
+- question_id: 91_q4
+  question: What year did she pass?
+  expected_contains:
+  - '2019'
+- question_id: 91_q5
+  question: What shelving did I install?
+  expected_contains:
+  - Gorm
+- question_id: 91_q6
+  question: How much was the dumpster?
+  expected_contains:
+  - '380'
+- question_id: 91_q7
+  question: Did I mention garage cleanout?
+  expected_contains:
+  - garage cleanout

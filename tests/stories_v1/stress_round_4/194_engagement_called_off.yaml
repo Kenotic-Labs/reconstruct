@@ -1,0 +1,77 @@
+story_id: 194
+story_name: Engagement Called Off
+category: Life Events
+description: User calls off her engagement after six months.
+duration_simulated: 2 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: I called off my engagement to Dorian today. Six months in. We had fundamentally different
+    visions for our future.
+  expected_stores:
+  - Dorian
+  - engagement
+  - Six months
+  - fundamentally different
+  expected_adaptation:
+    emotion_detected: grief
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Month 1 Week 2
+  user_input: Dorian moved out. I kept the apartment. My sister Pilar flew in from Madrid to stay with
+    me for a week.
+  expected_stores:
+  - Dorian
+  - Pilar
+  - sister
+  - Madrid
+- batch: 3
+  time: Month 2
+  user_input: Who painted Guernica?
+- batch: 4
+  time: Month 2 Week 1
+  user_input: Started seeing a therapist Dr. Rosalind Berger. Meeting weekly to work through the grief.
+    I'm NOT going to date for a long while.
+  expected_stores:
+  - Dr. Rosalind Berger
+  - weekly
+  - not going to date
+- batch: 5
+  time: Month 2 Week 3
+  user_input: Sold the engagement ring back. Jeweler Vlada Petrov gave me 80 percent of what Dorian paid.
+    Money went into savings.
+  expected_stores:
+  - Vlada Petrov
+  - 80 percent
+  - Dorian
+questions:
+- question_id: 194_q1
+  question: Who was my fiance?
+  expected_contains:
+  - Dorian
+- question_id: 194_q2
+  question: Who is my sister?
+  expected_contains:
+  - Pilar
+- question_id: 194_q3
+  question: Where does Pilar live?
+  expected_contains:
+  - Madrid
+- question_id: 194_q4
+  question: Who is my therapist?
+  expected_contains:
+  - Rosalind Berger
+- question_id: 194_q5
+  question: Who bought the ring back?
+  expected_contains:
+  - Vlada Petrov
+- question_id: 194_q6
+  question: Did I mention engagement?
+  expected_contains:
+  - engagement
+- question_id: 194_q7
+  question: Did I mention Six months?
+  expected_contains:
+  - Six months

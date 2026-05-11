@@ -1,0 +1,94 @@
+story_id: 127
+story_name: Salsa Dance Classes
+category: Learning
+description: User takes up salsa dancing with friends.
+duration_simulated: 10 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1
+  user_input: Started salsa classes at Rumba Room with my friends Lucia and Felix. 10 week beginner course,
+    Wednesdays at 7 PM. 180 dollars.
+  expected_stores:
+  - salsa
+  - Rumba Room
+  - Lucia
+  - Felix
+  - Wednesdays 7 PM
+  - 180 dollars
+- batch: 2
+  time: Week 2
+  user_input: Our instructor is a tall man named Hector Delgado. He has us rotating partners so we all
+    get practice with different leads and follows.
+  expected_stores:
+  - Hector Delgado
+  - rotating partners
+- batch: 3
+  time: Week 4
+  user_input: What's the smallest planet?
+- batch: 4
+  time: Week 4 Wednesday
+  user_input: Lucia and I were struggling with the cross body lead until Hector broke it down for us.
+    Felix figured it out two classes ago.
+  expected_stores:
+  - Lucia
+  - cross body lead
+  - Hector
+  - Felix
+- batch: 5
+  time: Week 7
+  user_input: Felix invited Lucia and me to his birthday party — salsa club in the Mission called Cafe
+    Cocomo. Hector said we're ready for social dancing.
+  expected_stores:
+  - Felix
+  - birthday party
+  - Cafe Cocomo
+  - Mission
+  - Hector
+- batch: 6
+  time: Week 10
+  user_input: Final class. Lucia and I are signing up for intermediate together. Felix is switching to
+    bachata instead. Hector said he's proud of all three of us.
+  expected_stores:
+  - Lucia
+  - intermediate
+  - Felix
+  - bachata
+  - Hector
+  expected_adaptation:
+    emotion_detected: happy
+    warmth_direction: increase
+questions:
+- question_id: 127_q1
+  question: Who are my friends in the class?
+  expected_contains:
+  - Lucia
+  - Felix
+- question_id: 127_q2
+  question: Who is our instructor?
+  expected_contains:
+  - Hector Delgado
+- question_id: 127_q3
+  question: Where is the studio?
+  expected_contains:
+  - Rumba Room
+- question_id: 127_q4
+  question: Where is Felix's birthday party?
+  expected_contains:
+  - Cafe Cocomo
+- question_id: 127_q5
+  question: What is Felix switching to?
+  expected_contains:
+  - bachata
+- question_id: 127_q6
+  question: When does the class meet?
+  expected_contains:
+  - Wednesdays
+- question_id: 127_q7
+  question: Did I mention salsa?
+  expected_contains:
+  - salsa
+- question_id: 127_q8
+  question: Did I mention Wednesdays 7 PM?
+  expected_contains:
+  - Wednesdays 7 PM

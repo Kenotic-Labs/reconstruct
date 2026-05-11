@@ -1,0 +1,96 @@
+story_id: 82
+story_name: AWS Solutions Architect Certification
+category: Learning
+description: User studies for and takes the AWS Solutions Architect Associate exam.
+duration_simulated: 6 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1
+  user_input: I'm studying for the AWS Solutions Architect Associate exam. Bought the Adrian Cantrill
+    course on Udemy for 25 dollars.
+  expected_stores:
+  - AWS Solutions Architect Associate
+  - Adrian Cantrill
+  - Udemy
+  - 25 dollars
+- batch: 2
+  time: Week 2
+  user_input: Worked through the VPC and EC2 sections this week. The networking stuff is the hardest for
+    me — subnets, NACLs, security groups.
+  expected_stores:
+  - VPC
+  - EC2
+  - networking
+  - subnets
+  - NACLs
+  - security groups
+- batch: 3
+  time: Week 3
+  user_input: My friend Deepak, who is already certified, is helping me with practice questions. We meet
+    on Tuesdays and Saturdays to review.
+  expected_stores:
+  - Deepak
+  - Tuesdays
+  - Saturdays
+- batch: 4
+  time: Week 4
+  user_input: What planet is known as the Red Planet?
+- batch: 5
+  time: Week 4 Thursday
+  user_input: Did my first practice exam from Tutorials Dojo. Scored 68 percent. Passing is 720 out of
+    1000 which is 72 percent.
+  expected_stores:
+  - Tutorials Dojo
+  - 68 percent
+  - 720 out of 1000
+  - 72 percent
+- batch: 6
+  time: Week 5
+  user_input: 'Second practice exam: 78 percent. Deepak said I''m ready but I want one more week to review
+    S3, DynamoDB, and RDS.'
+  expected_stores:
+  - 78 percent
+  - Deepak
+  - S3
+  - DynamoDB
+  - RDS
+- batch: 7
+  time: Week 6 Friday
+  user_input: Took the real exam at a Pearson Vue center. Passed with a 812. Certified!
+  expected_stores:
+  - Pearson Vue
+  - '812'
+  - Certified
+  expected_adaptation:
+    emotion_detected: elated
+    warmth_direction: increase
+questions:
+- question_id: 82_q1
+  question: What certification am I studying for?
+  expected_contains:
+  - Solutions Architect Associate
+- question_id: 82_q2
+  question: Whose course am I using?
+  expected_contains:
+  - Adrian Cantrill
+- question_id: 82_q3
+  question: Who is my study friend?
+  expected_contains:
+  - Deepak
+- question_id: 82_q4
+  question: What practice site did I use?
+  expected_contains:
+  - Tutorials Dojo
+- question_id: 82_q5
+  question: What was my final score?
+  expected_contains:
+  - '812'
+- question_id: 82_q6
+  question: What is the passing score?
+  expected_contains:
+  - '720'
+- question_id: 82_q7
+  question: Where did I take the exam?
+  expected_contains:
+  - Pearson Vue

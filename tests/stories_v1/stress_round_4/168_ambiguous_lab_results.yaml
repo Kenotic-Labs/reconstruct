@@ -1,0 +1,83 @@
+story_id: 168
+story_name: Ambiguous Lab Results
+category: Health
+description: User gets unclear lab results and waits for clarification.
+duration_simulated: 3 weeks
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My doctor Dr. Salma Farouk called me with 'mostly normal' lab results. Two markers were
+    slightly elevated — ALT and AST.
+  expected_stores:
+  - Dr. Salma Farouk
+  - mostly normal
+  - ALT
+  - AST
+- batch: 2
+  time: Week 1 Friday
+  user_input: Dr. Farouk ordered a follow up panel and an ultrasound. She said it's NOT urgent but worth
+    investigating.
+  expected_stores:
+  - Dr. Farouk
+  - follow up
+  - ultrasound
+  - not urgent
+- batch: 3
+  time: Week 2
+  user_input: What is the speed of light?
+- batch: 4
+  time: Week 2 Thursday
+  user_input: Ultrasound looked clean. Technician said there was NOTHING suspicious visible. Follow up
+    labs came back normal — ALT and AST back in range.
+  expected_stores:
+  - clean
+  - nothing suspicious
+  - ALT
+  - AST
+  - in range
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+- batch: 5
+  time: Week 3
+  user_input: Dr. Farouk said the initial bump was probably from the ibuprofen I'd been taking for back
+    pain. Not worried anymore.
+  expected_stores:
+  - Dr. Farouk
+  - ibuprofen
+  - back pain
+questions:
+- question_id: 168_q1
+  question: Who is my doctor?
+  expected_contains:
+  - Salma Farouk
+- question_id: 168_q2
+  question: What markers were elevated?
+  expected_contains:
+  - ALT
+  - AST
+- question_id: 168_q3
+  question: Was the ultrasound clean?
+  expected_contains:
+  - clean
+- question_id: 168_q4
+  question: What caused the initial bump?
+  expected_contains:
+  - ibuprofen
+- question_id: 168_q5
+  question: Did I mention Dr. Salma Farouk?
+  expected_contains:
+  - Dr. Salma Farouk
+- question_id: 168_q6
+  question: Did I mention mostly normal?
+  expected_contains:
+  - mostly normal
+- question_id: 168_q7
+  question: Did I mention Dr. Farouk?
+  expected_contains:
+  - Dr. Farouk
+- question_id: 168_q8
+  question: Did I mention follow up?
+  expected_contains:
+  - follow up

@@ -1,0 +1,89 @@
+story_id: 193
+story_name: Moving for a Job Fell Through
+category: Life Events
+description: User moves for a job that then gets rescinded.
+duration_simulated: 6 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1
+  user_input: Moved from Boston to Seattle for a new job at Amazon. Signed a 12 month lease in Capitol
+    Hill.
+  expected_stores:
+  - Boston
+  - Seattle
+  - Amazon
+  - 12 month lease
+  - Capitol Hill
+- batch: 2
+  time: Week 2
+  user_input: Three days before my start date, Amazon rescinded my offer due to a 'hiring freeze'. I am
+    NOT taking this well.
+  expected_stores:
+  - Amazon
+  - rescinded
+  - hiring freeze
+  - not taking this well
+  expected_adaptation:
+    emotion_detected: panic
+    warmth_direction: increase
+    vulnerability: true
+- batch: 3
+  time: Week 3
+  user_input: What's the highest mountain in the US?
+- batch: 4
+  time: Week 4
+  user_input: Reached out to 30 recruiters in my network. A woman named Anouk Degroot at Microsoft offered
+    me an interview on Monday.
+  expected_stores:
+  - 30 recruiters
+  - Anouk Degroot
+  - Microsoft
+  - Monday
+- batch: 5
+  time: Week 5
+  user_input: Microsoft offered me a role. Similar level, similar pay. I accepted. Anouk made it happen
+    in one week.
+  expected_stores:
+  - Microsoft
+  - Anouk
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+- batch: 6
+  time: Week 6
+  user_input: First day at Microsoft was today. My new manager Denis Wilcox is kind. I kept the Capitol
+    Hill apartment after all.
+  expected_stores:
+  - Microsoft
+  - Denis Wilcox
+  - Capitol Hill
+questions:
+- question_id: 193_q1
+  question: Where did I move from?
+  expected_contains:
+  - Boston
+- question_id: 193_q2
+  question: Where did I move to?
+  expected_contains:
+  - Seattle
+- question_id: 193_q3
+  question: Which company rescinded my offer?
+  expected_contains:
+  - Amazon
+- question_id: 193_q4
+  question: Where am I working now?
+  expected_contains:
+  - Microsoft
+- question_id: 193_q5
+  question: Who is my recruiter at Microsoft?
+  expected_contains:
+  - Anouk Degroot
+- question_id: 193_q6
+  question: Who is my new manager?
+  expected_contains:
+  - Denis Wilcox
+- question_id: 193_q7
+  question: When is 12 month lease?
+  expected_contains:
+  - 12 month lease

@@ -1,0 +1,119 @@
+story_id: 49
+story_name: Parent Visit
+category: Relationships
+description: 'User''s parents are visiting from Chicago for Thanksgiving. Tracks family
+
+  details, health considerations, dietary restrictions, hotel booking, and
+
+  restaurant plans. Tests memory of personal and logistical details.
+
+  '
+duration_simulated: 2 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Monday 6:00 PM
+  user_input: 'Nura, my parents are coming to visit for Thanksgiving! My dad Robert
+
+    and my mom Linda are flying in from Chicago. I haven''t seen them
+
+    since last Christmas so I really want everything to be perfect.
+
+    '
+  expected_stores:
+  - Robert
+  - Linda
+  - Thanksgiving
+  - Chicago
+  - parents
+- batch: 2
+  time: Tuesday 10:00 AM
+  user_input: 'I booked my parents at the Hampton Inn downtown. I made sure to get
+
+    a ground floor room because Dad has a bad knee and stairs are really
+
+    hard for him. Mom also reminded me she''s allergic to shellfish, so
+
+    I need to keep that in mind for all our meals.
+
+    '
+  expected_stores:
+  - Hampton Inn
+  - ground floor
+  - bad knee
+  - allergic
+  - shellfish
+- batch: 3
+  time: Wednesday 1:00 PM
+  user_input: What is the longest river in the world?
+- batch: 4
+  time: Thursday 7:00 PM
+  user_input: 'I''m planning to take Mom and Dad to my favorite restaurant Trattoria
+
+    Roma on Friday night. They have amazing Italian food and I already
+
+    checked — no shellfish in any of their signature dishes. Dad will
+
+    love their osso buco.
+
+    '
+  expected_stores:
+  - Trattoria Roma
+  - Italian
+  - Friday night
+  - osso buco
+- batch: 5
+  time: Friday 9:00 AM
+  user_input: Which hotel did I book for my parents? I need to confirm the reservation.
+- batch: 6
+  time: Saturday 5:00 PM
+  user_input: 'Mom and Dad arrived safely! Dad said the ground floor room was perfect
+
+    for his knee. Mom already wants to go shopping tomorrow. I''m cooking
+
+    the Thanksgiving turkey myself this year — Mom offered to make her
+
+    famous apple pie.
+
+    '
+  expected_stores:
+  - arrived
+  - shopping
+  - turkey
+  - apple pie
+- batch: 7
+  time: Sunday 11:00 AM
+  user_input: Remind me, what food allergy does my mom have? I'm making a grocery list.
+questions:
+- question_id: 49_q1
+  question: What is my dad's name?
+  expected_contains:
+  - Robert
+- question_id: 49_q2
+  question: What is my mom's name?
+  expected_contains:
+  - Linda
+- question_id: 49_q3
+  question: Where are my parents from?
+  expected_contains:
+  - Chicago
+- question_id: 49_q4
+  question: What hotel are my parents staying at?
+  expected_contains:
+  - Hampton Inn
+- question_id: 49_q5
+  question: What health issue does my dad have?
+  expected_contains:
+  - knee
+- question_id: 49_q6
+  question: What is my mom allergic to?
+  expected_contains:
+  - shellfish
+- question_id: 49_q7
+  question: What restaurant am I taking my parents to?
+  expected_contains:
+  - Trattoria Roma
+- question_id: 49_q8
+  question: What is Mom making for Thanksgiving?
+  expected_contains:
+  - apple pie

@@ -1,0 +1,111 @@
+story_id: 19
+story_name: "Pregnancy Journey"
+category: "Health"
+description: |
+  User's partner Sam is 12 weeks pregnant. Their OB-GYN is Dr. Rachel Kim
+  at Valley Medical Center with a due date of September 3rd. They use the
+  BabyBump app to track milestones, had a first ultrasound showing a healthy
+  heartbeat, are planning a woodland animals nursery theme, and take Nature
+  Made prenatal vitamins.
+duration_simulated: "4 weeks"
+total_batches: 8
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 10:00 AM"
+    user_input: |
+      Big news! Sam and I just found out we're at 12 weeks pregnant. Our OB-GYN
+      is Dr. Rachel Kim over at Valley Medical Center. The due date is
+      September 3rd. We're both so thrilled.
+    expected_memory_stores:
+      - "Sam"
+      - "12 weeks pregnant"
+      - "Dr. Rachel Kim"
+      - "Valley Medical Center"
+      - "September 3rd"
+
+  - batch: 2
+    time: "Monday 2:00 PM"
+    user_input: |
+      We downloaded the BabyBump app to track all the milestones week by week.
+      Also, Sam started taking Nature Made prenatal vitamins — the doctor said
+      that brand is solid.
+    expected_memory_stores:
+      - "BabyBump"
+      - "Nature Made"
+      - "prenatal vitamins"
+
+  - batch: 3
+    time: "Tuesday 11:00 AM"
+    user_input: "What foods should be avoided during pregnancy?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["raw fish", "unpasteurized", "deli meat"]
+
+  - batch: 4
+    time: "Thursday 3:30 PM"
+    user_input: |
+      We had the first ultrasound today and everything looks great. Strong
+      healthy heartbeat. Dr. Kim said development is right on track. I almost
+      cried in the office.
+    expected_memory_stores:
+      - "first ultrasound"
+      - "healthy heartbeat"
+
+  - batch: 5
+    time: "Saturday 1:00 PM"
+    user_input: |
+      Sam and I spent the afternoon browsing nursery ideas on Pinterest. We
+      decided on a woodland animals theme — foxes, deer, owls, that kind of
+      thing. Going to start painting next month.
+    expected_memory_stores:
+      - "nursery"
+      - "woodland animals"
+
+  - batch: 6
+    time: "Week 2 - Monday 9:00 AM"
+    user_input: "What brand of prenatal vitamins is Sam taking?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Nature Made"]
+
+  - batch: 7
+    time: "Week 2 - Wednesday 4:00 PM"
+    user_input: "When does the second trimester typically start?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["week 13", "trimester"]
+
+  - batch: 8
+    time: "Week 3 - Friday 11:00 AM"
+    user_input: "Can you remind me when the baby is due and who our doctor is?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["September 3rd", "Dr. Rachel Kim"]
+
+final_verification:
+  - question: "Who is our OB-GYN and where is their office?"
+    expected_contains: ["Dr. Rachel Kim", "Valley Medical Center"]
+  - question: "What app are we using to track the pregnancy?"
+    expected_contains: ["BabyBump"]
+  - question: "What did the first ultrasound show?"
+    expected_contains: ["healthy heartbeat"]
+  - question: "What nursery theme did we pick?"
+    expected_contains: ["woodland animals"]
+  - question: "When is the due date?"
+    expected_contains: ["September 3rd"]

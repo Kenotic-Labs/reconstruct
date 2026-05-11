@@ -1,0 +1,93 @@
+story_id: 129
+story_name: Woodworking Apprenticeship
+category: Learning
+description: User takes on a woodworking apprenticeship with a local craftsman.
+duration_simulated: 6 months
+total_batches: 6
+batches:
+- batch: 1
+  time: Month 1
+  user_input: I started a woodworking apprenticeship with a master named Calder Strickland at his shop
+    in Petaluma. Saturdays 9 to 4, 75 dollars per day.
+  expected_stores:
+  - Calder Strickland
+  - Petaluma
+  - Saturdays 9 to 4
+  - 75 dollars
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Calder has me on the hand tools first — no power tools for two months. I'm learning to sharpen
+    chisels, plane boards by hand.
+  expected_stores:
+  - Calder
+  - hand tools
+  - two months
+  - sharpen chisels
+- batch: 3
+  time: Month 2
+  user_input: Another apprentice started this week. Her name is Beatrice Yuen, she's a former architect.
+    She and I have been swapping tips.
+  expected_stores:
+  - Beatrice Yuen
+  - former architect
+- batch: 4
+  time: Month 3
+  user_input: What's the capital of Brazil?
+- batch: 5
+  time: Month 4
+  user_input: Built my first piece — a small side table in cherry. Calder said the joinery is solid for
+    a beginner. Beatrice built a stool.
+  expected_stores:
+  - side table
+  - cherry
+  - Calder
+  - Beatrice
+  - stool
+  expected_adaptation:
+    emotion_detected: proud
+    warmth_direction: increase
+- batch: 6
+  time: Month 6
+  user_input: Finished my Windsor chair today after 12 weeks of work. Calder took a photo for his shop
+    wall. Beatrice gave me a hug.
+  expected_stores:
+  - Windsor chair
+  - 12 weeks
+  - Calder
+  - Beatrice
+  expected_adaptation:
+    emotion_detected: accomplished
+    warmth_direction: increase
+questions:
+- question_id: 129_q1
+  question: Who is my master?
+  expected_contains:
+  - Calder Strickland
+- question_id: 129_q2
+  question: Where is the shop?
+  expected_contains:
+  - Petaluma
+- question_id: 129_q3
+  question: Who is my fellow apprentice?
+  expected_contains:
+  - Beatrice Yuen
+- question_id: 129_q4
+  question: What did Beatrice used to be?
+  expected_contains:
+  - architect
+- question_id: 129_q5
+  question: What was my first piece?
+  expected_contains:
+  - side table
+- question_id: 129_q6
+  question: What did I finish at the end?
+  expected_contains:
+  - Windsor chair
+- question_id: 129_q7
+  question: Did I mention Saturdays 9 to 4?
+  expected_contains:
+  - Saturdays 9 to 4
+- question_id: 129_q8
+  question: How much money is 75 dollars?
+  expected_contains:
+  - 75 dollars

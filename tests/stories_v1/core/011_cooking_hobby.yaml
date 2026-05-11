@@ -1,0 +1,104 @@
+story_id: 11
+story_name: Cooking Hobby
+category: Daily Life
+description: 'User has started learning to cook Italian food, taking classes at Sur La Table
+
+  with Chef Antonio every Saturday. Tracks equipment purchases, recipes mastered,
+
+  and the cookbook being followed.
+
+  '
+duration_simulated: 4 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Saturday 1:00 PM
+  user_input: 'I just got back from my first Italian cooking class at Sur La Table!
+
+    The instructor is Chef Antonio - he''s originally from Naples and he''s
+
+    an incredible teacher. The classes are every Saturday morning. I''m
+
+    really excited to learn proper Italian cooking.
+
+    '
+  expected_stores:
+  - Sur La Table
+  - Chef Antonio
+  - Naples
+  - Saturday morning
+  - Italian cooking
+- batch: 2
+  time: Saturday 6:00 PM
+  user_input: 'Chef Antonio recommended a cookbook - "Essentials of Italian Cooking" by
+
+    Marcella Hazan. I picked it up on the way home. He says it''s the bible
+
+    of Italian cooking. Already started reading through the pasta chapter.
+
+    '
+  expected_stores:
+  - Essentials of Italian Cooking
+  - Marcella Hazan
+  - cookbook
+- batch: 3
+  time: Monday 7:00 PM
+  user_input: What is the difference between carbonara and cacio e pepe?
+- batch: 4
+  time: Wednesday 8:00 PM
+  user_input: 'I went on a bit of a shopping spree for kitchen equipment. Got a KitchenAid
+
+    stand mixer - the Artisan model in red. Also splurged on a Le Creuset dutch
+
+    oven. These should last me forever.
+
+    '
+  expected_stores:
+  - KitchenAid
+  - stand mixer
+  - Le Creuset
+  - dutch oven
+- batch: 5
+  time: Saturday 2:00 PM
+  user_input: 'Second class today was all about pasta. I made my first homemade carbonara
+
+    from scratch and it turned out amazing. Chef Antonio said I had a natural
+
+    feel for it. I think carbonara might become my signature dish.
+
+    '
+  expected_stores:
+  - carbonara
+  - signature dish
+  - homemade
+  - pasta
+- batch: 6
+  time: Sunday 10:00 AM
+  user_input: What cookbook did Chef Antonio recommend to me?
+- batch: 7
+  time: Tuesday 9:00 PM
+  user_input: What kitchen equipment did I buy recently for my cooking hobby?
+questions:
+- question_id: 11_q1
+  question: Where am I taking cooking classes and who is the instructor?
+  expected_contains:
+  - Sur La Table
+  - Chef Antonio
+- question_id: 11_q2
+  question: When are my cooking classes?
+  expected_contains:
+  - Saturday
+- question_id: 11_q3
+  question: What is my signature dish?
+  expected_contains:
+  - carbonara
+- question_id: 11_q4
+  question: What cookbook am I following?
+  expected_contains:
+  - Essentials of Italian Cooking
+  - Marcella Hazan
+- question_id: 11_q5
+  question: What major kitchen equipment did I purchase?
+  expected_contains:
+  - KitchenAid
+  - Le Creuset

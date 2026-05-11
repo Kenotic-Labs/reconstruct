@@ -1,0 +1,124 @@
+story_id: 37
+story_name: Immigration Journey
+category: Life Events
+description: 'User moved to the US from Brazil 6 months ago. Their immigration lawyer is
+
+  Mr. Reeves. They hold an H-1B visa through employer TechGlobal. They live
+
+  in an apartment in Brooklyn, are learning English at NYU extension, and miss
+
+  their family in Sao Paulo. Tests memory of immigration details, cultural
+
+  adaptation, and personal challenges.
+
+  '
+duration_simulated: 4 weeks
+total_batches: 8
+batches:
+- batch: 1
+  time: Monday 9:00 AM
+  user_input: 'It''s been 6 months since I moved to the US from Brazil. Some days are
+
+    great, other days I miss home terribly. My immigration lawyer Mr. Reeves
+
+    has been really helpful with all the paperwork. I''m here on an H-1B
+
+    visa through my employer TechGlobal.
+
+    '
+  expected_stores:
+  - Brazil
+  - 6 months
+  - Mr. Reeves
+  - H-1B
+  - TechGlobal
+- batch: 2
+  time: Tuesday 7:00 PM
+  user_input: 'I''m living in a small apartment in Brooklyn. It''s nothing fancy but
+
+    it''s mine. My neighborhood has a lot of Brazilian restaurants which
+
+    makes me feel a little closer to home. I video call my family in
+
+    Sao Paulo every Sunday.
+
+    '
+  expected_stores:
+  - Brooklyn
+  - apartment
+  - Brazilian restaurants
+  - Sao Paulo
+  - Sunday
+  - video call
+- batch: 3
+  time: Wednesday 12:00 PM
+  user_input: How many time zones does Brazil have?
+- batch: 4
+  time: Thursday 6:00 PM
+  user_input: 'I enrolled in English classes at NYU extension. My English is okay
+
+    for work but I want to improve my writing and academic vocabulary.
+
+    The classes are on Tuesday and Thursday evenings. My teacher Ms. Park
+
+    said my pronunciation is already very good.
+
+    '
+  expected_stores:
+  - NYU extension
+  - English classes
+  - Tuesday
+  - Thursday
+  - Ms. Park
+  - pronunciation
+- batch: 5
+  time: Friday 3:00 PM
+  user_input: What visa am I on and what company do I work for?
+- batch: 6
+  time: Week 2 Monday 10:00 AM
+  user_input: 'Work is going well at TechGlobal. My manager Sarah is very supportive
+
+    and understands the challenges of being new to the country. I''m on the
+
+    data engineering team. Mr. Reeves said my visa renewal should be
+
+    straightforward as long as I stay employed.
+
+    '
+  expected_stores:
+  - Sarah
+  - manager
+  - data engineering
+  - visa renewal
+- batch: 7
+  time: Week 2 Wednesday 8:00 PM
+  user_input: What is the population of Brazil?
+- batch: 8
+  time: Week 3 Tuesday 5:00 PM
+  user_input: Where am I taking English classes and where is my family?
+questions:
+- question_id: 37_q1
+  question: Where did I move from?
+  expected_contains:
+  - Brazil
+- question_id: 37_q2
+  question: Who is my immigration lawyer?
+  expected_contains:
+  - Mr. Reeves
+- question_id: 37_q3
+  question: What visa am I on and who is my employer?
+  expected_contains:
+  - H-1B
+  - TechGlobal
+- question_id: 37_q4
+  question: Where do I live in the US?
+  expected_contains:
+  - Brooklyn
+- question_id: 37_q5
+  question: Where am I learning English?
+  expected_contains:
+  - NYU extension
+- question_id: 37_q6
+  question: Where is my family?
+  expected_contains:
+  - Sao Paulo

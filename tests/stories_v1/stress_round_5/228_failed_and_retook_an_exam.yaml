@@ -1,0 +1,83 @@
+story_id: 228
+story_name: Failed and Retook an Exam
+category: Learning
+description: User fails the CFA Level 2 and retakes it.
+duration_simulated: 8 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: Took the CFA Level 2 last month. Failed by 5 points. Going to retake in 6 months. My prep
+    course is Schweser.
+  expected_stores:
+  - CFA Level 2
+  - failed
+  - 5 points
+  - 6 months
+  - Schweser
+- batch: 2
+  time: Month 3
+  user_input: Formed a study group with 3 others — Vivek, Priya Nair, and Oghenekaro. We meet Saturdays
+    at my house.
+  expected_stores:
+  - Vivek
+  - Priya Nair
+  - Oghenekaro
+  - Saturdays
+- batch: 3
+  time: Month 5
+  user_input: What is the largest country by area?
+- batch: 4
+  time: Month 6
+  user_input: Took my second attempt. Felt much better than the first. Results in 2 months.
+  expected_stores:
+  - second attempt
+  - 2 months
+- batch: 5
+  time: Month 8
+  user_input: Passed. Vivek and Priya also passed. Oghenekaro did NOT pass and is retaking. He's already
+    signed up.
+  expected_stores:
+  - Passed
+  - Vivek
+  - Priya
+  - Oghenekaro
+  - not pass
+  expected_adaptation:
+    emotion_detected: triumphant
+    warmth_direction: increase
+questions:
+- question_id: 228_q1
+  question: What exam did I take?
+  expected_contains:
+  - CFA Level 2
+- question_id: 228_q2
+  question: What prep course did I use?
+  expected_contains:
+  - Schweser
+- question_id: 228_q3
+  question: Who were my study group members?
+  expected_contains:
+  - Vivek
+  - Priya Nair
+  - Oghenekaro
+- question_id: 228_q4
+  question: Who did not pass?
+  expected_contains:
+  - Oghenekaro
+- question_id: 228_q5
+  question: Did I mention failed?
+  expected_contains:
+  - failed
+- question_id: 228_q6
+  question: Did I mention 5 points?
+  expected_contains:
+  - 5 points
+- question_id: 228_q7
+  question: When is 6 months?
+  expected_contains:
+  - 6 months
+- question_id: 228_q8
+  question: Do I know someone named Saturdays?
+  expected_contains:
+  - Saturdays

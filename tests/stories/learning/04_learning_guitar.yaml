@@ -1,0 +1,125 @@
+story_id: 4
+story_name: "Learning Guitar"
+category: "Learning"
+description: |
+  User starts learning to play guitar with online lessons.
+  Tests memory of musical concepts, practice progress,
+  and learning milestones.
+duration_simulated: "1 month"
+total_batches: 8
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00 AM"
+    user_input: |
+      I just bought my first guitar! It's a Fender acoustic in sunburst
+      color. I signed up for lessons with an app called GuitarMaster.
+      My goal is to play Wonderwall by my birthday in June.
+    expected_memory_stores:
+      - "Fender"
+      - "acoustic"
+      - "sunburst"
+      - "GuitarMaster"
+      - "Wonderwall"
+      - "June"
+
+  - batch: 2
+    time: "Sunday 3:00 PM"
+    user_input: |
+      First practice session done. Learned the basic chords G, C, and D.
+      My fingers hurt so much! The instructor in the app is named Maria
+      and she's really patient.
+    expected_memory_stores:
+      - "G"
+      - "C"
+      - "D"
+      - "Maria"
+      - "fingers hurt"
+
+  - batch: 3
+    time: "Monday 12:00 PM"
+    user_input: "Who wrote the song Wonderwall?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["Oasis"]
+
+  - batch: 4
+    time: "Tuesday 7:00 PM"
+    user_input: "What chords have I learned so far?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["G", "C", "D"]
+
+  - batch: 5
+    time: "Next Saturday 11:00 AM"
+    user_input: |
+      Week 2 of guitar! I can now transition between G and C smoothly.
+      Learned the Em and Am chords today. Maria says I'm making great
+      progress. Practiced for 45 minutes today.
+    expected_memory_stores:
+      - "Em"
+      - "Am"
+      - "45 minutes"
+      - "progress"
+
+  - batch: 6
+    time: "Next Sunday 2:00 PM"
+    user_input: "What's the capital of Portugal?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["Lisbon"]
+
+  - batch: 7
+    time: "Third Saturday 10:00 AM"
+    user_input: |
+      Three weeks in and I can play the intro to Wonderwall! Still
+      working on the strumming pattern. My calluses are finally
+      forming so my fingers don't hurt as much.
+    expected_memory_stores:
+      - "intro"
+      - "strumming pattern"
+      - "calluses"
+
+  - batch: 8
+    time: "Fourth Saturday 6:00 PM"
+    user_input: |
+      I DID IT! I played Wonderwall all the way through for my family!
+      They loved it. Maria sent me a certificate of completion for
+      the beginner course. Next up is learning fingerpicking.
+    expected_memory_stores:
+      - "family"
+      - "certificate"
+      - "fingerpicking"
+
+final_verification:
+  - question: "What kind of guitar did I buy?"
+    expected_contains: ["Fender", "acoustic"]
+
+  - question: "What song am I learning to play?"
+    expected_contains: ["Wonderwall"]
+
+  - question: "Who is my guitar instructor?"
+    expected_contains: ["Maria"]
+
+  - question: "What app am I using for lessons?"
+    expected_contains: ["GuitarMaster"]
+
+  - question: "What basic chords did I learn first?"
+    expected_contains: ["G", "C", "D"]
+
+  - question: "What technique am I learning next?"
+    expected_contains: ["fingerpicking"]

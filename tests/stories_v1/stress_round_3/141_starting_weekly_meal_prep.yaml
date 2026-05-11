@@ -1,0 +1,89 @@
+story_id: 141
+story_name: Starting Weekly Meal Prep
+category: Daily Life
+description: User commits to Sunday meal prep with their spouse.
+duration_simulated: 6 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My husband Abel and I started Sunday meal prep. Goal is lunch for 5 days and two dinners.
+    We're using a system from a blog called Good Cheap Eats.
+  expected_stores:
+  - Abel
+  - husband
+  - Sunday meal prep
+  - 5 days
+  - two dinners
+  - Good Cheap Eats
+- batch: 2
+  time: Week 2
+  user_input: Abel and I spent 180 dollars at Safeway this week. Made sheet pan chicken, lentil soup,
+    and roasted veg with quinoa.
+  expected_stores:
+  - Abel
+  - 180 dollars
+  - Safeway
+  - sheet pan chicken
+  - lentil soup
+- batch: 3
+  time: Week 3
+  user_input: What's the deepest lake in the world?
+- batch: 4
+  time: Week 3 Saturday
+  user_input: We hit a wall — tired of the same meals. My aunt Celestine gave us her Moroccan tagine recipe
+    which sounded exotic enough.
+  expected_stores:
+  - Celestine
+  - aunt
+  - Moroccan tagine
+- batch: 5
+  time: Week 4
+  user_input: Made the tagine on Sunday. Abel said it's his new favorite. Prep took 3 hours total with
+    the marinade.
+  expected_stores:
+  - tagine
+  - Abel
+  - 3 hours
+  - marinade
+  expected_adaptation:
+    emotion_detected: satisfied
+    warmth_direction: increase
+- batch: 6
+  time: Week 6
+  user_input: Six weeks in. Abel and I are saving around 70 dollars a week vs takeout and we're eating
+    better. Our friend Denis wants our meal plan.
+  expected_stores:
+  - six weeks
+  - Abel
+  - 70 dollars a week
+  - Denis
+questions:
+- question_id: 141_q1
+  question: Who is my husband?
+  expected_contains:
+  - Abel
+- question_id: 141_q2
+  question: What blog are we using?
+  expected_contains:
+  - Good Cheap Eats
+- question_id: 141_q3
+  question: Who gave us the tagine recipe?
+  expected_contains:
+  - Celestine
+- question_id: 141_q4
+  question: Who wants our meal plan?
+  expected_contains:
+  - Denis
+- question_id: 141_q5
+  question: How much are we saving per week?
+  expected_contains:
+  - '70'
+- question_id: 141_q6
+  question: Did I mention husband?
+  expected_contains:
+  - husband
+- question_id: 141_q7
+  question: When is Sunday meal prep?
+  expected_contains:
+  - Sunday meal prep

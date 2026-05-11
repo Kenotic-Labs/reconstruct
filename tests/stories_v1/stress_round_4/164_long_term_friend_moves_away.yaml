@@ -1,0 +1,94 @@
+story_id: 164
+story_name: Long Term Friend Moves Away
+category: Relationships
+description: User's best friend of 20 years moves across the country.
+duration_simulated: 2 months
+total_batches: 6
+batches:
+- batch: 1
+  time: Month 1 Week 1
+  user_input: My best friend of 20 years, Althea, told me she's moving to Atlanta. Her husband Roderick
+    got a job at Emory. Moving date is in 6 weeks.
+  expected_stores:
+  - Althea
+  - best friend
+  - 20 years
+  - Atlanta
+  - Roderick
+  - husband
+  - Emory
+  - 6 weeks
+  expected_adaptation:
+    emotion_detected: sad
+    warmth_direction: increase
+- batch: 2
+  time: Month 1 Week 2
+  user_input: Helped Althea pack her kitchen this weekend. She and I cried twice. Her kids Jules and Cassidy
+    ran around pretending to be moving trucks.
+  expected_stores:
+  - Althea
+  - Jules
+  - Cassidy
+  - kids
+- batch: 3
+  time: Month 1 Week 4
+  user_input: What year did Apollo 11 land on the moon?
+- batch: 4
+  time: Month 2 Week 1
+  user_input: Althea and I had our last in-person dinner before the move. She and I committed to video
+    calls every Sunday evening.
+  expected_stores:
+  - Althea
+  - Sunday evening
+- batch: 5
+  time: Month 2 Week 2
+  user_input: They moved. Althea texted me from the new house in Decatur. Kids already love their rooms.
+    Roderick started at Emory Monday.
+  expected_stores:
+  - Althea
+  - Decatur
+  - Roderick
+  - Emory
+- batch: 6
+  time: Month 2 Week 4
+  user_input: Althea and I did our first Sunday call. It felt almost normal — like a phone call from summer
+    camp when we were kids.
+  expected_stores:
+  - Althea
+  expected_adaptation:
+    emotion_detected: tender
+    warmth_direction: increase
+questions:
+- question_id: 164_q1
+  question: Who is my best friend?
+  expected_contains:
+  - Althea
+- question_id: 164_q2
+  question: Who is her husband?
+  expected_contains:
+  - Roderick
+- question_id: 164_q3
+  question: Where did they move?
+  expected_contains:
+  - Atlanta
+- question_id: 164_q4
+  question: Where is Roderick working?
+  expected_contains:
+  - Emory
+- question_id: 164_q5
+  question: Who are her kids?
+  expected_contains:
+  - Jules
+  - Cassidy
+- question_id: 164_q6
+  question: When are our calls?
+  expected_contains:
+  - Sunday
+- question_id: 164_q7
+  question: Did I mention best friend?
+  expected_contains:
+  - best friend
+- question_id: 164_q8
+  question: When is 20 years?
+  expected_contains:
+  - 20 years

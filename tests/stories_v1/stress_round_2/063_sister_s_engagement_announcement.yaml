@@ -1,0 +1,96 @@
+story_id: 63
+story_name: Sister's Engagement Announcement
+category: Relationships
+description: User learns their sister is engaged and navigates the family reaction.
+duration_simulated: 2 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1 Sunday 7 PM
+  user_input: My sister Elena just called me — she got engaged to her boyfriend Rafe this weekend at Big
+    Sur. They've been dating for 14 months.
+  expected_stores:
+  - Elena
+  - sister
+  - engaged
+  - Rafe
+  - Big Sur
+  - 14 months
+  expected_adaptation:
+    emotion_detected: excited
+    warmth_direction: increase
+- batch: 2
+  time: Week 1 Monday
+  user_input: Mom Beatrice took it hard — she thinks Elena is rushing. Dad Vincent is quietly supportive.
+  expected_stores:
+  - Beatrice
+  - mom
+  - Vincent
+  - dad
+  expected_adaptation:
+    emotion_detected: conflicted
+    warmth_direction: neutral
+- batch: 3
+  time: Week 1 Wednesday
+  user_input: Rafe is a high school teacher in Oakland, teaches chemistry. Elena met him at a friend's
+    housewarming last year.
+  expected_stores:
+  - Rafe
+  - high school teacher
+  - Oakland
+  - chemistry
+  - housewarming
+- batch: 4
+  time: Week 2 Tuesday
+  user_input: What element has the symbol Fe?
+- batch: 5
+  time: Week 2 Thursday
+  user_input: Elena asked me to be maid of honor. I said yes immediately. The wedding is targeted for
+    next spring.
+  expected_stores:
+  - Elena
+  - maid of honor
+  - next spring
+  expected_adaptation:
+    emotion_detected: honored
+    warmth_direction: increase
+- batch: 6
+  time: Week 2 Saturday
+  user_input: Had coffee with Mom. She's coming around. She admitted she was scared of Elena being far
+    from home eventually.
+  expected_stores:
+  - Mom
+  - Elena
+questions:
+- question_id: 63_q1
+  question: Who got engaged?
+  expected_contains:
+  - Elena
+- question_id: 63_q2
+  question: Who is her fiance?
+  expected_contains:
+  - Rafe
+- question_id: 63_q3
+  question: What does Rafe do?
+  expected_contains:
+  - teacher
+- question_id: 63_q4
+  question: Who is my mom?
+  expected_contains:
+  - Beatrice
+- question_id: 63_q5
+  question: Who is my dad?
+  expected_contains:
+  - Vincent
+- question_id: 63_q6
+  question: When is the wedding targeted for?
+  expected_contains:
+  - spring
+- question_id: 63_q7
+  question: Where did Rafe propose?
+  expected_contains:
+  - Big Sur
+- question_id: 63_q8
+  question: How long have Elena and Rafe been dating?
+  expected_contains:
+  - 14 months

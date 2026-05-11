@@ -1,0 +1,96 @@
+story_id: 99
+story_name: Starting to Foster a Child
+category: Life Events
+description: User and partner begin fostering a young child for the first time.
+duration_simulated: 3 months
+total_batches: 7
+batches:
+- batch: 1
+  time: Month 1 Week 1
+  user_input: My husband Graham and I completed our foster care certification last week. We're licensed
+    through Alameda County Social Services.
+  expected_stores:
+  - Graham
+  - husband
+  - foster care certification
+  - Alameda County Social Services
+- batch: 2
+  time: Month 1 Week 2
+  user_input: Got the call today. A six year old boy named Leo needs placement. His caseworker is Trisha
+    Okonkwo. We said yes.
+  expected_stores:
+  - six year old
+  - Leo
+  - Trisha Okonkwo
+  - caseworker
+  expected_adaptation:
+    emotion_detected: nervous/excited
+    warmth_direction: increase
+- batch: 3
+  time: Month 1 Week 3
+  user_input: Leo arrived yesterday with one backpack. He's quiet and watchful. Graham set up the guest
+    room as his bedroom with dinosaur sheets.
+  expected_stores:
+  - Leo
+  - one backpack
+  - Graham
+  - dinosaur sheets
+- batch: 4
+  time: Month 2 Week 1
+  user_input: Leo started at Thornwood Elementary this week. His teacher is Miss Saige Robinson and she's
+    been incredibly kind.
+  expected_stores:
+  - Leo
+  - Thornwood Elementary
+  - Saige Robinson
+- batch: 5
+  time: Month 2 Week 3
+  user_input: How does photosynthesis work?
+- batch: 6
+  time: Month 2 Week 4
+  user_input: Leo laughed for the first time yesterday — Graham was making pancakes and flipped one onto
+    the counter by accident. Leo laughed so hard he got hiccups.
+  expected_stores:
+  - Leo
+  - Graham
+  - pancakes
+  expected_adaptation:
+    emotion_detected: moved
+    warmth_direction: increase
+- batch: 7
+  time: Month 3 Week 2
+  user_input: Trisha visited for a check-in. She said Leo has visibly relaxed and is making progress.
+    His mom's situation is still uncertain — could be 6 more months.
+  expected_stores:
+  - Trisha
+  - Leo
+  - 6 more months
+questions:
+- question_id: 99_q1
+  question: Who is my husband?
+  expected_contains:
+  - Graham
+- question_id: 99_q2
+  question: What's the foster child's name?
+  expected_contains:
+  - Leo
+- question_id: 99_q3
+  question: Who is Leo's caseworker?
+  expected_contains:
+  - Trisha Okonkwo
+- question_id: 99_q4
+  question: Where does Leo go to school?
+  expected_contains:
+  - Thornwood
+- question_id: 99_q5
+  question: Who is his teacher?
+  expected_contains:
+  - Saige Robinson
+- question_id: 99_q6
+  question: How old is Leo?
+  expected_contains:
+  - six
+- question_id: 99_q7
+  question: Did I mention husband?
+  expected_contains:
+  - husband

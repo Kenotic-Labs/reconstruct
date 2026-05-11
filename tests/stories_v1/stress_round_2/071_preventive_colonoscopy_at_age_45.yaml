@@ -1,0 +1,87 @@
+story_id: 71
+story_name: Preventive Colonoscopy at Age 45
+category: Health
+description: User undergoes first preventive colonoscopy and navigates prep.
+duration_simulated: 2 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1 Monday
+  user_input: My doctor Rosa Alvarez wants me to schedule my first colonoscopy now that I'm 45. She referred
+    me to Dr. Hiroshi Tanaka, a GI specialist.
+  expected_stores:
+  - Rosa Alvarez
+  - '45'
+  - Dr. Hiroshi Tanaka
+  - GI specialist
+- batch: 2
+  time: Week 1 Wednesday
+  user_input: Scheduled the procedure for next Friday the 14th at Bay Endoscopy Center. Need to do prep
+    the day before.
+  expected_stores:
+  - next Friday
+  - 14th
+  - Bay Endoscopy Center
+  - prep
+- batch: 3
+  time: Week 2 Monday
+  user_input: Picked up the Suprep prep kit at Walgreens. 120 dollars even with insurance — ridiculous.
+    Clear liquid diet starts Thursday.
+  expected_stores:
+  - Suprep
+  - Walgreens
+  - 120 dollars
+  - Thursday
+- batch: 4
+  time: Week 2 Thursday noon
+  user_input: What's the longest river in the world?
+- batch: 5
+  time: Week 2 Thursday 6 PM
+  user_input: Started the prep. This is as bad as everyone warned. My husband Tomas is being a saint.
+  expected_stores:
+  - prep
+  - Tomas
+  - husband
+  expected_adaptation:
+    emotion_detected: miserable
+    warmth_direction: increase
+- batch: 6
+  time: Week 2 Friday 11 AM
+  user_input: Procedure done. Dr. Tanaka said everything looked clean — no polyps, no concerning lesions.
+    Next one in 10 years.
+  expected_stores:
+  - Dr. Tanaka
+  - no polyps
+  - 10 years
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+questions:
+- question_id: 71_q1
+  question: Who is my PCP?
+  expected_contains:
+  - Rosa Alvarez
+- question_id: 71_q2
+  question: Who is my GI specialist?
+  expected_contains:
+  - Hiroshi Tanaka
+- question_id: 71_q3
+  question: Where was the procedure done?
+  expected_contains:
+  - Bay Endoscopy
+- question_id: 71_q4
+  question: Who is my husband?
+  expected_contains:
+  - Tomas
+- question_id: 71_q5
+  question: When is my next colonoscopy?
+  expected_contains:
+  - 10 years
+- question_id: 71_q6
+  question: What prep kit did I use?
+  expected_contains:
+  - Suprep
+- question_id: 71_q7
+  question: How old am I?
+  expected_contains:
+  - '45'

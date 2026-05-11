@@ -1,0 +1,103 @@
+story_id: 14
+story_name: "Remote Work Transition"
+category: "Career"
+description: |
+  User is transitioning to remote work at their company CloudBase. They share details
+  about their manager, team tools, home office setup, coworking space routine, and
+  productivity app. Tests memory of workplace logistics, equipment specifics, schedules,
+  and tool preferences.
+duration_simulated: "2 weeks"
+total_batches: 7
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:30 AM"
+    user_input: |
+      I'm officially transitioning to fully remote work at CloudBase starting this week.
+      My manager Priya approved it. Our team communicates through Slack for messaging and
+      Notion for documentation and project tracking.
+    expected_memory_stores:
+      - "remote work"
+      - "CloudBase"
+      - "Priya"
+      - "Slack"
+      - "Notion"
+
+  - batch: 2
+    time: "Tuesday 10:00 AM"
+    user_input: |
+      I set up my home office over the weekend. Got a standing desk from FlexiDesk and
+      an LG UltraWide monitor. The desk was pricey but totally worth it — my back already
+      feels better.
+    expected_memory_stores:
+      - "standing desk"
+      - "FlexiDesk"
+      - "LG UltraWide"
+      - "home office"
+
+  - batch: 3
+    time: "Wednesday 9:00 AM"
+    user_input: "What are the best practices for staying productive while working from home?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["routine", "workspace", "breaks"]
+
+  - batch: 4
+    time: "Thursday 11:00 AM"
+    user_input: |
+      I also signed up at a coworking space called WorkHub downtown. I plan to go there
+      on Tuesdays and Thursdays to get some social interaction and a change of scenery.
+    expected_memory_stores:
+      - "WorkHub"
+      - "coworking"
+      - "Tuesdays"
+      - "Thursdays"
+      - "downtown"
+
+  - batch: 5
+    time: "Friday 2:00 PM"
+    user_input: |
+      I started using a productivity app called Focusmate. It pairs you with an
+      accountability partner for 50-minute focus sessions. It's been really helpful
+      for staying on track.
+    expected_memory_stores:
+      - "Focusmate"
+      - "productivity"
+      - "accountability"
+
+  - batch: 6
+    time: "Monday 9:00 AM"
+    user_input: "What monitor and desk did I get for my home office?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["LG UltraWide", "FlexiDesk", "standing desk"]
+
+  - batch: 7
+    time: "Tuesday 8:00 AM"
+    user_input: "Which days do I go to the coworking space, and what's it called?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["WorkHub", "Tuesdays", "Thursdays"]
+
+final_verification:
+  - question: "What company do I work at and who is my manager?"
+    expected_contains: ["CloudBase", "Priya"]
+  - question: "What tools does my team use for communication and documentation?"
+    expected_contains: ["Slack", "Notion"]
+  - question: "What productivity app am I using?"
+    expected_contains: ["Focusmate"]
+  - question: "What brand is my standing desk?"
+    expected_contains: ["FlexiDesk"]

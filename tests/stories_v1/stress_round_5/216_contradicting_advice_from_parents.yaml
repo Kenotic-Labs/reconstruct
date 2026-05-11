@@ -1,0 +1,81 @@
+story_id: 216
+story_name: Contradicting Advice From Parents
+category: Relationships
+description: User gets contradicting advice from her divorced parents about a life decision.
+duration_simulated: 3 weeks
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: I'm deciding whether to take a big new job in Singapore. My mom Marcella said go. My dad
+    Phaedros said NOT to go.
+  expected_stores:
+  - Singapore
+  - Marcella
+  - mom
+  - Phaedros
+  - dad
+  - not to go
+- batch: 2
+  time: Week 2
+  user_input: Marcella's reasoning is 'career growth.' Phaedros's is 'don't abandon your roots.' They
+    are divorced and both call me the same day.
+  expected_stores:
+  - Marcella
+  - Phaedros
+  - divorced
+- batch: 3
+  time: Week 2 Thursday
+  user_input: What's the oldest religion?
+- batch: 4
+  time: Week 3
+  user_input: Decided to go. Singapore for 2 years. Marcella is thrilled. Phaedros accepted it but asked
+    me to video call him weekly.
+  expected_stores:
+  - Singapore
+  - 2 years
+  - Marcella
+  - Phaedros
+- batch: 5
+  time: Week 3 Friday
+  user_input: Told Phaedros I'd call every Sunday. He told me he's proud of me — first time he's ever
+    said that out loud.
+  expected_stores:
+  - Phaedros
+  - every Sunday
+  expected_adaptation:
+    emotion_detected: moved
+    warmth_direction: increase
+questions:
+- question_id: 216_q1
+  question: Where is the new job?
+  expected_contains:
+  - Singapore
+- question_id: 216_q2
+  question: Who is my mom?
+  expected_contains:
+  - Marcella
+- question_id: 216_q3
+  question: Who is my dad?
+  expected_contains:
+  - Phaedros
+- question_id: 216_q4
+  question: How long is the assignment?
+  expected_contains:
+  - 2 years
+- question_id: 216_q5
+  question: Did I mention mom?
+  expected_contains:
+  - mom
+- question_id: 216_q6
+  question: Did I mention dad?
+  expected_contains:
+  - dad
+- question_id: 216_q7
+  question: Did I mention not to go?
+  expected_contains:
+  - not to go
+- question_id: 216_q8
+  question: Did I mention divorced?
+  expected_contains:
+  - divorced

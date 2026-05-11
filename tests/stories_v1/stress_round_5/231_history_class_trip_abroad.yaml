@@ -1,0 +1,83 @@
+story_id: 231
+story_name: History Class Trip Abroad
+category: Learning
+description: User takes a history class that culminates in a trip to Rome.
+duration_simulated: 4 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: Enrolled in 'Ancient Rome' at UC Berkeley Extension. Professor Lars Olofsson teaches it.
+    10 weeks, culminates in a group trip to Rome.
+  expected_stores:
+  - Ancient Rome
+  - UC Berkeley Extension
+  - Lars Olofsson
+  - 10 weeks
+- batch: 2
+  time: Month 2
+  user_input: Our class has 14 students. I partnered with a woman named Saskia van Meer for our midterm
+    paper on the Roman Republic.
+  expected_stores:
+  - 14 students
+  - Saskia van Meer
+  - midterm
+  - Roman Republic
+- batch: 3
+  time: Month 3
+  user_input: What's the tallest mountain in Africa?
+- batch: 4
+  time: Month 3 Week 3
+  user_input: Trip to Rome happened. 10 days. Saskia and I shared a hotel room. Professor Olofsson led
+    us through the Forum and the Colosseum.
+  expected_stores:
+  - Rome
+  - 10 days
+  - Saskia
+  - Olofsson
+  - Forum
+  - Colosseum
+  expected_adaptation:
+    emotion_detected: awed
+    warmth_direction: increase
+- batch: 5
+  time: Month 4
+  user_input: Back home. Final paper due next week. Saskia and I are already planning another history
+    trip — probably Greece in the fall.
+  expected_stores:
+  - Saskia
+  - Greece
+  - fall
+questions:
+- question_id: 231_q1
+  question: What class am I taking?
+  expected_contains:
+  - Ancient Rome
+- question_id: 231_q2
+  question: Who is my professor?
+  expected_contains:
+  - Lars Olofsson
+- question_id: 231_q3
+  question: Who is my classmate?
+  expected_contains:
+  - Saskia van Meer
+- question_id: 231_q4
+  question: Where is the next trip planned?
+  expected_contains:
+  - Greece
+- question_id: 231_q5
+  question: Did I mention UC Berkeley Extension?
+  expected_contains:
+  - UC Berkeley Extension
+- question_id: 231_q6
+  question: When is 10 weeks?
+  expected_contains:
+  - 10 weeks
+- question_id: 231_q7
+  question: Did I mention 14 students?
+  expected_contains:
+  - 14 students
+- question_id: 231_q8
+  question: Did I mention midterm?
+  expected_contains:
+  - midterm

@@ -1,0 +1,113 @@
+story_id: 19
+story_name: Therapy for Anxiety
+category: Health
+description: 'User started seeing therapist Dr. Nguyen for anxiety with sessions every
+
+  Thursday at 4pm at an office on Elm Street. Treatment involves CBT and
+
+  mindfulness techniques. Homework includes morning journaling and daily
+
+  10-minute meditation using the Headspace app. User notices improvement
+
+  after three weeks of consistent effort.
+
+  '
+duration_simulated: 4 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Thursday 5:15 PM
+  user_input: 'I just had my first session with a therapist, Dr. Nguyen. I''ve been
+
+    dealing with anxiety and finally decided to get help. Her office is on
+
+    Elm Street and we''re going to meet every Thursday at 4pm. She seems
+
+    really knowledgeable and I already feel a bit more hopeful.
+
+    '
+  expected_stores:
+  - Dr. Nguyen
+  - anxiety
+  - Thursday at 4pm
+  - Elm Street
+- batch: 2
+  time: Thursday 5:30 PM
+  user_input: 'Dr. Nguyen is going to use CBT — cognitive behavioral therapy — along
+
+    with some mindfulness techniques. For homework she wants me to start
+
+    journaling every morning, writing down my thoughts and feelings before
+
+    the day gets going.
+
+    '
+  expected_stores:
+  - CBT
+  - cognitive behavioral therapy
+  - mindfulness
+  - journaling every morning
+- batch: 3
+  time: Saturday 9:00 AM
+  user_input: What is CBT and how does it work for anxiety?
+- batch: 4
+  time: Monday 7:30 AM
+  user_input: 'I downloaded the Headspace app and started doing 10 minutes of guided
+
+    meditation every morning right after journaling. It''s actually really
+
+    calming. Dr. Nguyen suggested it as a complement to the CBT work.
+
+    '
+  expected_stores:
+  - Headspace
+  - 10 minutes
+  - meditation
+  - every morning
+- batch: 5
+  time: Week 2 - Thursday 5:00 PM
+  user_input: What techniques is my therapist using with me?
+- batch: 6
+  time: Week 3 - Friday 10:00 AM
+  user_input: 'Three weeks in and I''m genuinely noticing a difference. The journaling
+
+    has helped me catch negative thought spirals early, and the meditation
+
+    makes my mornings so much calmer. Dr. Nguyen said my progress is
+
+    encouraging.
+
+    '
+  expected_stores:
+  - improvement after 3 weeks
+  - negative thought spirals
+  - progress encouraging
+- batch: 7
+  time: Week 3 - Sunday 8:00 PM
+  user_input: How many minutes of meditation do I do each day and what app do I use?
+questions:
+- question_id: 19_q1
+  question: Who is my therapist and where is her office?
+  expected_contains:
+  - Dr. Nguyen
+  - Elm Street
+- question_id: 19_q2
+  question: When are my therapy sessions?
+  expected_contains:
+  - Thursday
+  - 4pm
+- question_id: 19_q3
+  question: What homework did my therapist assign?
+  expected_contains:
+  - journaling
+  - morning
+- question_id: 19_q4
+  question: What meditation app am I using and for how long each day?
+  expected_contains:
+  - Headspace
+  - 10 minutes
+- question_id: 19_q5
+  question: Have I noticed any improvement?
+  expected_contains:
+  - 3 weeks
+  - improvement

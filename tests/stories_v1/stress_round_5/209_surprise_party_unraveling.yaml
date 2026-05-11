@@ -1,0 +1,89 @@
+story_id: 209
+story_name: Surprise Party Unraveling
+category: Relationships
+description: User organizes a surprise party that is accidentally revealed.
+duration_simulated: 3 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1
+  user_input: I'm planning a surprise 40th birthday party for my husband Tobias. Venue booked at a wine
+    bar called Cask & Barrel. Date is the 18th.
+  expected_stores:
+  - Tobias
+  - husband
+  - 40th
+  - Cask & Barrel
+  - 18th
+- batch: 2
+  time: Week 2
+  user_input: 30 guests confirmed. My sister Lila is co-hosting. Caterer is Marcello's Kitchen. Cake is
+    from Wildflour bakery.
+  expected_stores:
+  - 30 guests
+  - Lila
+  - Marcello's Kitchen
+  - Wildflour
+- batch: 3
+  time: Week 2 Friday
+  user_input: Tobias found the guest list on my laptop by accident. I told him it was a surprise anniversary
+    dinner not a birthday party. He seemed to buy it.
+  expected_stores:
+  - Tobias
+  - anniversary dinner
+  - not a birthday party
+- batch: 4
+  time: Week 3 Monday
+  user_input: What's the tallest structure in Europe?
+- batch: 5
+  time: Week 3 Wednesday
+  user_input: Lila accidentally emailed Tobias about the cake. The jig is up. Tobias called me laughing
+    and said he'll pretend to be surprised.
+  expected_stores:
+  - Lila
+  - Tobias
+- batch: 6
+  time: Week 3 Saturday
+  user_input: Party happened. Tobias pretended flawlessly. Lila gave a toast. Cask & Barrel owner Rami
+    comped us two bottles of champagne.
+  expected_stores:
+  - Tobias
+  - Lila
+  - Cask & Barrel
+  - Rami
+  expected_adaptation:
+    emotion_detected: joyful
+    warmth_direction: increase
+questions:
+- question_id: 209_q1
+  question: Who is my husband?
+  expected_contains:
+  - Tobias
+- question_id: 209_q2
+  question: Who is my sister?
+  expected_contains:
+  - Lila
+- question_id: 209_q3
+  question: Where was the party?
+  expected_contains:
+  - Cask & Barrel
+- question_id: 209_q4
+  question: What bakery?
+  expected_contains:
+  - Wildflour
+- question_id: 209_q5
+  question: Who owns the venue?
+  expected_contains:
+  - Rami
+- question_id: 209_q6
+  question: Did I mention husband?
+  expected_contains:
+  - husband
+- question_id: 209_q7
+  question: Did I mention 40th?
+  expected_contains:
+  - 40th
+- question_id: 209_q8
+  question: Did I mention 18th?
+  expected_contains:
+  - 18th

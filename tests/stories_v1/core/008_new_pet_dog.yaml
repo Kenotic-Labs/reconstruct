@@ -1,0 +1,119 @@
+story_id: 8
+story_name: New Pet Dog
+category: Daily Life
+description: 'User adopts a rescue dog and adjusts to pet ownership.
+
+  Tests memory of pet details, vet visits, training progress,
+
+  and daily routines.
+
+  '
+duration_simulated: 2 weeks
+total_batches: 8
+batches:
+- batch: 1
+  time: Saturday 2:00 PM
+  user_input: 'I just adopted a dog from the shelter! His name is Max and he''s
+
+    a 3-year-old golden retriever mix. He was found as a stray but
+
+    he''s so sweet and gentle. I''m so happy!
+
+    '
+  expected_stores:
+  - Max
+  - 3-year-old
+  - golden retriever
+  - shelter
+  - stray
+- batch: 2
+  time: Sunday 10:00 AM
+  user_input: 'Max''s first night went well! He slept on his new bed in my room.
+
+    I need to take him to the vet Dr. Peterson on Tuesday for a
+
+    checkup. He really loves the squeaky toy I got him.
+
+    '
+  expected_stores:
+  - bed
+  - Dr. Peterson
+  - Tuesday
+  - squeaky toy
+- batch: 3
+  time: Monday 9:00 AM
+  user_input: How often should dogs be walked?
+- batch: 4
+  time: Tuesday 4:00 PM
+  user_input: What's my dog's name again?
+- batch: 5
+  time: Tuesday 6:00 PM
+  user_input: 'Just got back from the vet! Dr. Peterson said Max is healthy but
+
+    slightly underweight. She recommended Blue Buffalo food and
+
+    gave him his rabies shot. He was so brave!
+
+    '
+  expected_stores:
+  - healthy
+  - underweight
+  - Blue Buffalo
+  - rabies shot
+- batch: 6
+  time: Wednesday 7:00 AM
+  user_input: What's 8 times 7?
+- batch: 7
+  time: Next Saturday 3:00 PM
+  user_input: 'Max learned his first trick - sit! We''ve been practicing every
+
+    day with treats. He''s also gotten better on the leash. Our
+
+    morning walks are now 30 minutes. He loves the dog park!
+
+    '
+  expected_stores:
+  - sit
+  - treats
+  - leash
+  - 30 minutes
+  - dog park
+- batch: 8
+  time: Next Sunday 8:00 PM
+  user_input: 'Two weeks with Max and I can''t imagine life without him. He''s
+
+    gained 2 pounds already. Best decision I ever made adopting him.
+
+    We have a routine now - walks at 7am and 6pm.
+
+    '
+  expected_stores:
+  - 2 pounds
+  - routine
+  - 7am
+  - 6pm
+questions:
+- question_id: 8_q1
+  question: What is my dog's name?
+  expected_contains:
+  - Max
+- question_id: 8_q2
+  question: What breed is my dog?
+  expected_contains:
+  - golden retriever
+- question_id: 8_q3
+  question: Who is my vet?
+  expected_contains:
+  - Dr. Peterson
+- question_id: 8_q4
+  question: What food was recommended for Max?
+  expected_contains:
+  - Blue Buffalo
+- question_id: 8_q5
+  question: What trick did Max learn?
+  expected_contains:
+  - sit
+- question_id: 8_q6
+  question: What time are our morning walks?
+  expected_contains:
+  - '7'

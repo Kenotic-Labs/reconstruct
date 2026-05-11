@@ -1,0 +1,100 @@
+story_id: 6
+story_name: Job Change to Stellar Labs
+category: Career
+description: 'User is leaving their current company TechVault to join Stellar Labs as a Principal
+
+  Engineer. They share details about the new role, salary, notice period, last day,
+
+  going-away party, and new team lead. Tests memory of career transitions, dates,
+
+  compensation, people, and events.
+
+  '
+duration_simulated: 3 weeks
+total_batches: 8
+batches:
+- batch: 1
+  time: Monday 9:00 AM
+  user_input: 'Big news — I''ve decided to leave my current company TechVault. I accepted an offer
+
+    from Stellar Labs for a Principal Engineer position. The salary is $210k which is
+
+    a huge jump from what I''m making now.
+
+    '
+  expected_stores:
+  - TechVault
+  - leaving
+  - Stellar Labs
+  - Principal Engineer
+  - $210k
+- batch: 2
+  time: Monday 3:00 PM
+  user_input: 'I gave my two weeks notice today. My last day at TechVault will be December 15th.
+
+    My manager took it well — she said she''s happy for me even though the team will
+
+    miss me.
+
+    '
+  expected_stores:
+  - two weeks notice
+  - December 15th
+  - last day
+- batch: 3
+  time: Wednesday 10:00 AM
+  user_input: What should I focus on during a two-week notice period to ensure a smooth transition?
+- batch: 4
+  time: Thursday 12:00 PM
+  user_input: 'My coworker Amanda is organizing a going-away party for me next Friday. She''s been
+
+    my closest work friend at TechVault for the past two years. It''s really sweet of
+
+    her to do that.
+
+    '
+  expected_stores:
+  - Amanda
+  - going-away party
+  - Friday
+- batch: 5
+  time: Friday 9:00 AM
+  user_input: What's the name of the company I'm joining and what will my title be?
+- batch: 6
+  time: Monday 11:00 AM
+  user_input: 'I just found out that my new team lead at Stellar Labs will be Chris Park. He
+
+    reached out to welcome me and we had a great introductory call. He seems like
+
+    a really collaborative leader.
+
+    '
+  expected_stores:
+  - Chris Park
+  - team lead
+  - Stellar Labs
+- batch: 7
+  time: Tuesday 2:00 PM
+  user_input: What are the typical things to negotiate beyond salary when starting a new senior engineering
+    role?
+- batch: 8
+  time: Wednesday 10:00 AM
+  user_input: When is my last day at TechVault and who is throwing me a going-away party?
+questions:
+- question_id: 6_q1
+  question: What company am I leaving and what company am I joining?
+  expected_contains:
+  - TechVault
+  - Stellar Labs
+- question_id: 6_q2
+  question: What is my new salary at Stellar Labs?
+  expected_contains:
+  - '210'
+- question_id: 6_q3
+  question: Who is my new team lead at Stellar Labs?
+  expected_contains:
+  - Chris Park
+- question_id: 6_q4
+  question: When is my last day at my current job?
+  expected_contains:
+  - December 15th

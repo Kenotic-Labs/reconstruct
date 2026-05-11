@@ -1,0 +1,110 @@
+story_id: 22
+story_name: "Tree Nut Allergy Discovery"
+category: "Health"
+description: |
+  User discovered they are allergic to tree nuts (but not peanuts) after
+  visiting allergist Dr. Foster at the Allergy & Asthma Center. They were
+  prescribed an EpiPen which they carry in their backpack, and are also mildly
+  lactose intolerant and use Lactaid pills. They had an allergic reaction at
+  Sakura Sushi restaurant due to walnut hidden in a sauce, and have ordered
+  a medic alert bracelet.
+duration_simulated: "3 weeks"
+total_batches: 7
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 4:00 PM"
+    user_input: |
+      So I finally went to see an allergist — Dr. Foster at the Allergy &
+      Asthma Center. Turns out I'm allergic to tree nuts. Walnuts, almonds,
+      cashews, that kind of thing. But not peanuts, which is good because I
+      love peanut butter. She prescribed me an EpiPen just in case and I keep
+      it in my backpack at all times.
+    expected_memory_stores:
+      - "tree nuts"
+      - "not peanuts"
+      - "Dr. Foster"
+      - "Allergy & Asthma Center"
+      - "EpiPen"
+      - "backpack"
+
+  - batch: 2
+    time: "Monday 4:15 PM"
+    user_input: |
+      Dr. Foster also confirmed I'm mildly lactose intolerant, which I've
+      suspected for a while. She said it's not severe though — I just need to
+      take Lactaid pills before dairy and I should be fine.
+    expected_memory_stores:
+      - "lactose intolerant"
+      - "Lactaid pills"
+
+  - batch: 3
+    time: "Tuesday 12:00 PM"
+    user_input: "What is the difference between a tree nut allergy and a peanut allergy?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["legume", "tree nut", "different"]
+
+  - batch: 4
+    time: "Friday 8:30 PM"
+    user_input: |
+      Had a scary experience tonight. We went to Sakura Sushi for dinner and I
+      had an allergic reaction — turns out one of the sauces had crushed walnut
+      in it. My throat started to swell up. I used the EpiPen and went to the
+      ER. I'm okay now but that was terrifying.
+    expected_memory_stores:
+      - "Sakura Sushi"
+      - "walnut in sauce"
+      - "allergic reaction"
+      - "used EpiPen"
+
+  - batch: 5
+    time: "Saturday 10:00 AM"
+    user_input: |
+      After last night I ordered a medic alert bracelet online. It lists the
+      tree nut allergy and that I carry an EpiPen. Should arrive in a few days.
+      I'm not taking any more chances.
+    expected_memory_stores:
+      - "medic alert bracelet"
+
+  - batch: 6
+    time: "Week 2 - Monday 9:00 AM"
+    user_input: "What am I allergic to and what am I NOT allergic to?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["tree nuts", "not peanuts"]
+
+  - batch: 7
+    time: "Week 2 - Wednesday 3:00 PM"
+    user_input: "What are common hidden sources of tree nuts in restaurant food?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["sauces", "pesto", "baked goods"]
+
+final_verification:
+  - question: "Who is my allergist and where is their office?"
+    expected_contains: ["Dr. Foster", "Allergy & Asthma Center"]
+  - question: "What am I allergic to?"
+    expected_contains: ["tree nuts"]
+  - question: "Where do I keep my EpiPen?"
+    expected_contains: ["backpack"]
+  - question: "What happened at Sakura Sushi?"
+    expected_contains: ["allergic reaction", "walnut", "sauce"]
+  - question: "What do I take for my lactose intolerance?"
+    expected_contains: ["Lactaid"]
+  - question: "What safety item did I order after the restaurant incident?"
+    expected_contains: ["medic alert bracelet"]

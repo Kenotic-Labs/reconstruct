@@ -1,0 +1,80 @@
+story_id: 245
+story_name: First House After Renting Forever
+category: Life Events
+description: User buys their first house at age 52.
+duration_simulated: 4 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: I'm 52 and I'm finally buying my first house. Pre-approved at 580000 by my loan officer
+    Tamsin Acheson at Umpqua Bank.
+  expected_stores:
+  - '52'
+  - '580000'
+  - Tamsin Acheson
+  - Umpqua Bank
+- batch: 2
+  time: Month 2
+  user_input: Found a small Craftsman in Alameda. 540000 asking. Realtor is Madrigal Kaplan. I am NOT
+    in a bidding war.
+  expected_stores:
+  - Craftsman
+  - Alameda
+  - '540000'
+  - Madrigal Kaplan
+  - not in a bidding war
+- batch: 3
+  time: Month 3
+  user_input: What's the longest novel ever written?
+- batch: 4
+  time: Month 3 Week 2
+  user_input: Offer accepted at 550. Inspection was clean. Closing in 3 weeks.
+  expected_stores:
+  - '550'
+  - 3 weeks
+- batch: 5
+  time: Month 4
+  user_input: Closed. Madrigal handed me the keys. I cried in the empty living room. My friends Opal and
+    Cassia are coming tomorrow to help me move in.
+  expected_stores:
+  - Madrigal
+  - Opal
+  - Cassia
+  expected_adaptation:
+    emotion_detected: emotional
+    warmth_direction: increase
+questions:
+- question_id: 245_q1
+  question: Who is my loan officer?
+  expected_contains:
+  - Tamsin Acheson
+- question_id: 245_q2
+  question: Who is my realtor?
+  expected_contains:
+  - Madrigal Kaplan
+- question_id: 245_q3
+  question: What was the final price?
+  expected_contains:
+  - '550'
+- question_id: 245_q4
+  question: Who is helping me move?
+  expected_contains:
+  - Opal
+  - Cassia
+- question_id: 245_q5
+  question: What number is 52?
+  expected_contains:
+  - '52'
+- question_id: 245_q6
+  question: What number is 580000?
+  expected_contains:
+  - '580000'
+- question_id: 245_q7
+  question: Do I know someone named Umpqua Bank?
+  expected_contains:
+  - Umpqua Bank
+- question_id: 245_q8
+  question: Do I know someone named Craftsman?
+  expected_contains:
+  - Craftsman

@@ -1,0 +1,34 @@
+story_id: 205
+story_name: "Model-Agnostic Understanding Transfer"
+category: "understanding"
+description: |
+  Agent A ingests a situation with a rich model_response containing inferences
+  the user never stated. The same user_id is then queried as if a different
+  agent (Agent B) is reading — with only a retrieval question, no context.
+  A passing answer proves the model_comprehension triples are user-id-keyed
+  and accessible to any future session without re-learning.
+
+batches:
+  - batch: 1
+    time: "Thursday 10:00 AM"
+    user_input: |
+      I've been working on this side project for six months now. It's a
+      budgeting tool for freelancers. Haven't told anyone at work about it.
+    model_response: |
+      You're building something in stealth mode — you're not ready to let
+      your employer know you're thinking about an independent path. The six
+      months of quiet work suggests this isn't a casual hobby; you're
+      seriously considering making freelancing your primary income.
+    expected_memory_stores:
+      - "budgeting"
+      - "freelancers"
+
+final_verification:
+  - question: "What is Sam's intention behind the side project?"
+    expected_contains: ["freelancing"]
+
+  - question: "Why hasn't Sam told anyone at work about the project?"
+    expected_contains: ["stealth"]
+
+  - question: "How long has Sam been working on the side project?"
+    expected_contains: ["six months"]

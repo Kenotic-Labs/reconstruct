@@ -1,0 +1,80 @@
+story_id: 169
+story_name: Surgery Postponed Twice
+category: Health
+description: User's surgery gets rescheduled multiple times.
+duration_simulated: 2 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My gallbladder surgery is scheduled for the 12th of next month. Surgeon is Dr. Dmitri Ivanov
+    at Alta Bates.
+  expected_stores:
+  - gallbladder surgery
+  - 12th
+  - Dr. Dmitri Ivanov
+  - Alta Bates
+- batch: 2
+  time: Week 3
+  user_input: Surgery moved from the 12th to the 19th — Dr. Ivanov has a conflict. My scheduler Tamsyn
+    Reid called me.
+  expected_stores:
+  - 12th
+  - 19th
+  - Dr. Ivanov
+  - Tamsyn Reid
+- batch: 3
+  time: Week 4
+  user_input: What's the smallest state in the US?
+- batch: 4
+  time: Week 5
+  user_input: Pre-op bloodwork showed a borderline INR. Surgery postponed AGAIN from the 19th to the 26th.
+    Dr. Ivanov is being cautious.
+  expected_stores:
+  - INR
+  - 19th
+  - 26th
+  - Dr. Ivanov
+- batch: 5
+  time: Week 8
+  user_input: Surgery finally happened on the 26th. Laparoscopic. I was home by evening. My sister Francesca
+    stayed with me for two days.
+  expected_stores:
+  - 26th
+  - laparoscopic
+  - Francesca
+  - sister
+  - two days
+questions:
+- question_id: 169_q1
+  question: Who is my surgeon?
+  expected_contains:
+  - Dmitri Ivanov
+- question_id: 169_q2
+  question: What hospital?
+  expected_contains:
+  - Alta Bates
+- question_id: 169_q3
+  question: What was the final surgery date?
+  expected_contains:
+  - 26th
+- question_id: 169_q4
+  question: Who stayed with me after?
+  expected_contains:
+  - Francesca
+- question_id: 169_q5
+  question: Who is the scheduler?
+  expected_contains:
+  - Tamsyn Reid
+- question_id: 169_q6
+  question: Did I mention gallbladder surgery?
+  expected_contains:
+  - gallbladder surgery
+- question_id: 169_q7
+  question: Did I mention 12th?
+  expected_contains:
+  - 12th
+- question_id: 169_q8
+  question: Did I mention Dr. Dmitri Ivanov?
+  expected_contains:
+  - Dr. Dmitri Ivanov

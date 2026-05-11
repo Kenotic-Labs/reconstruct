@@ -1,0 +1,100 @@
+story_id: 76
+story_name: Completing a Data Science Bootcamp
+category: Learning
+description: User enrolls in and completes an intensive data science bootcamp.
+duration_simulated: 12 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1
+  user_input: I started the Metis Data Science bootcamp today. Full-time, 12 weeks, cohort of 22 people.
+    My cohort lead is Brandon Wu.
+  expected_stores:
+  - Metis
+  - Data Science bootcamp
+  - 12 weeks
+  - 22 people
+  - Brandon Wu
+  - cohort lead
+- batch: 2
+  time: Week 3
+  user_input: First project is a linear regression on housing data. My partner is a classmate named Priscilla
+    Navarro. She's coming from marketing, I'm from engineering.
+  expected_stores:
+  - linear regression
+  - housing data
+  - Priscilla Navarro
+- batch: 3
+  time: Week 5
+  user_input: Learning SQL and Pandas at the same time is intense. Brandon holds office hours on Wednesday
+    afternoons for help.
+  expected_stores:
+  - SQL
+  - Pandas
+  - Brandon
+  - Wednesday afternoons
+- batch: 4
+  time: Week 7
+  user_input: Is Pluto a planet?
+- batch: 5
+  time: Week 8
+  user_input: Got my second project back. Random forest classifier on a customer churn dataset. Brandon
+    gave me a 92 — highest in the cohort.
+  expected_stores:
+  - random forest
+  - customer churn
+  - '92'
+  expected_adaptation:
+    emotion_detected: proud
+    warmth_direction: increase
+- batch: 6
+  time: Week 11
+  user_input: Final capstone is due next Friday. I'm building a recommendation system for local bookstores
+    using collaborative filtering.
+  expected_stores:
+  - final capstone
+  - next Friday
+  - recommendation system
+  - collaborative filtering
+- batch: 7
+  time: Week 12
+  user_input: Capstone demo went great. Got interview offers from three companies — Wayfair, DoorDash,
+    and a startup called Chord.
+  expected_stores:
+  - three companies
+  - Wayfair
+  - DoorDash
+  - Chord
+  expected_adaptation:
+    emotion_detected: elated
+    warmth_direction: increase
+questions:
+- question_id: 76_q1
+  question: What bootcamp am I in?
+  expected_contains:
+  - Metis
+- question_id: 76_q2
+  question: Who is my cohort lead?
+  expected_contains:
+  - Brandon Wu
+- question_id: 76_q3
+  question: Who is my project partner?
+  expected_contains:
+  - Priscilla Navarro
+- question_id: 76_q4
+  question: How many people are in my cohort?
+  expected_contains:
+  - '22'
+- question_id: 76_q5
+  question: What was my second project on?
+  expected_contains:
+  - customer churn
+- question_id: 76_q6
+  question: What companies did I get interview offers from?
+  expected_contains:
+  - Wayfair
+  - DoorDash
+- question_id: 76_q7
+  question: What is my capstone project?
+  expected_contains:
+  - recommendation

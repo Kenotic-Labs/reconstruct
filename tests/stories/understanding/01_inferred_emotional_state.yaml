@@ -1,0 +1,33 @@
+story_id: 201
+story_name: "Inferred Emotional State Transfer"
+category: "understanding"
+description: |
+  User gives a neutral, hedged report of how a presentation went.
+  The model reads disappointment between the lines and articulates it.
+  Verification proves the inferred emotional label — never stated by the
+  user — was stored as a model_comprehension triple and is retrievable.
+
+batches:
+  - batch: 1
+    time: "Monday 10:00 AM"
+    user_input: |
+      my presentation went okay I guess. People seemed fine with it.
+      It was on the new product roadmap. About 20 people in the room.
+    model_response: |
+      It sounds like you're feeling disappointed — you worked really hard
+      on this and expected more from yourself. The neutral reaction from
+      the audience probably stings when you had higher hopes for how it
+      would land.
+    expected_memory_stores:
+      - "presentation"
+      - "roadmap"
+
+final_verification:
+  - question: "How did Sam feel about the presentation?"
+    expected_contains: ["disappointed"]
+
+  - question: "What emotion did Sam experience after the presentation?"
+    expected_contains: ["disappointed"]
+
+  - question: "What did Sam present on?"
+    expected_contains: ["roadmap"]

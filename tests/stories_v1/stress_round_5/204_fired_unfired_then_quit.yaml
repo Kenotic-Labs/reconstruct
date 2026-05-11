@@ -1,0 +1,87 @@
+story_id: 204
+story_name: Fired, Unfired, Then Quit
+category: Career
+description: User's boss fires her, reverses it, and then she quits anyway.
+duration_simulated: 3 weeks
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1 Monday
+  user_input: My boss Bellamy fired me today. Said I wasn't a culture fit. I'm in shock. HR contact is
+    Natasha Voyce.
+  expected_stores:
+  - Bellamy
+  - fired
+  - not a culture fit
+  - Natasha Voyce
+  - HR
+  expected_adaptation:
+    emotion_detected: shock
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Week 1 Wednesday
+  user_input: Natasha called me. The firing was NOT approved by HR — Bellamy overstepped. My job is reinstated.
+    Bellamy is being investigated.
+  expected_stores:
+  - Natasha
+  - not approved
+  - Bellamy
+  - reinstated
+- batch: 3
+  time: Week 2 Monday
+  user_input: What's the speed of sound in water?
+- batch: 4
+  time: Week 2 Thursday
+  user_input: Back at work. Bellamy was demoted and I report to a new director named Wren Halcyon. Wren
+    is kinder but the environment is poisoned.
+  expected_stores:
+  - Bellamy
+  - Wren Halcyon
+  - new director
+- batch: 5
+  time: Week 3
+  user_input: I quit anyway. Natasha was disappointed. Wren asked me to stay. I told both the poison is
+    done and my next gig starts in 3 weeks — at Notion.
+  expected_stores:
+  - quit
+  - Natasha
+  - Wren
+  - 3 weeks
+  - Notion
+  expected_adaptation:
+    emotion_detected: resolved
+    warmth_direction: increase
+questions:
+- question_id: 204_q1
+  question: Who fired me?
+  expected_contains:
+  - Bellamy
+- question_id: 204_q2
+  question: Who is my HR contact?
+  expected_contains:
+  - Natasha Voyce
+- question_id: 204_q3
+  question: Was the firing approved?
+  expected_contains:
+  - not
+- question_id: 204_q4
+  question: Who is my new director?
+  expected_contains:
+  - Wren Halcyon
+- question_id: 204_q5
+  question: Where am I going next?
+  expected_contains:
+  - Notion
+- question_id: 204_q6
+  question: Did I mention fired?
+  expected_contains:
+  - fired
+- question_id: 204_q7
+  question: Did I mention not a culture fit?
+  expected_contains:
+  - not a culture fit
+- question_id: 204_q8
+  question: Did I mention HR?
+  expected_contains:
+  - HR

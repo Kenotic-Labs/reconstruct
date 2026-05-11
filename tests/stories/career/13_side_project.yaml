@@ -1,0 +1,110 @@
+story_id: 13
+story_name: "Side Project App ParkFinder"
+category: "Career"
+description: |
+  User is building a side project mobile app called ParkFinder with a college friend.
+  They discuss the tech stack, co-founder details, launch targets, and a hackathon win.
+  Tests memory of project specifics, technical choices, people, dates, and milestones.
+duration_simulated: "3 weeks"
+total_batches: 8
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00 AM"
+    user_input: |
+      I've been working on a side project app called ParkFinder. It helps people find
+      available parking spots in real time. I'm building it with my college friend Ryan —
+      he's my co-founder on this.
+    expected_memory_stores:
+      - "ParkFinder"
+      - "parking"
+      - "Ryan"
+      - "co-founder"
+      - "college friend"
+
+  - batch: 2
+    time: "Saturday 2:00 PM"
+    user_input: |
+      For the tech stack, we're using React Native for the mobile app, Firebase for the
+      backend and auth, and Google Maps API for the map and location features.
+    expected_memory_stores:
+      - "React Native"
+      - "Firebase"
+      - "Google Maps API"
+
+  - batch: 3
+    time: "Sunday 11:00 AM"
+    user_input: "What are the pros and cons of using Firebase versus a custom backend with PostgreSQL?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["Firebase", "scalability", "database"]
+
+  - batch: 4
+    time: "Monday 7:00 PM"
+    user_input: |
+      We actually won a local hackathon last weekend with the ParkFinder prototype!
+      The judges loved the real-time availability feature. It was a great validation
+      of the concept.
+    expected_memory_stores:
+      - "hackathon"
+      - "won"
+      - "prototype"
+      - "real-time availability"
+
+  - batch: 5
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      Our target launch date is March. We're aiming to get 1000 beta users in the
+      first month after launch. Ryan is handling the marketing side while I focus
+      on development.
+    expected_memory_stores:
+      - "March"
+      - "1000 beta users"
+      - "launch"
+      - "marketing"
+
+  - batch: 6
+    time: "Thursday 9:00 AM"
+    user_input: "What tech stack am I using for ParkFinder?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["React Native", "Firebase", "Google Maps API"]
+
+  - batch: 7
+    time: "Friday 6:00 PM"
+    user_input: "How does mobile app deep linking work on iOS and Android?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["URL", "link", "app"]
+
+  - batch: 8
+    time: "Saturday 11:00 AM"
+    user_input: "Remind me — what's our beta user goal and when are we launching?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["1000", "beta users", "March"]
+
+final_verification:
+  - question: "What is my side project called and who is my co-founder?"
+    expected_contains: ["ParkFinder", "Ryan"]
+  - question: "What happened at the hackathon?"
+    expected_contains: ["won", "hackathon"]
+  - question: "What backend am I using for ParkFinder?"
+    expected_contains: ["Firebase"]
+  - question: "How many beta users are we targeting at launch?"
+    expected_contains: ["1000"]

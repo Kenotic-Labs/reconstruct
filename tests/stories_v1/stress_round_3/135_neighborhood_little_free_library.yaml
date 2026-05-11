@@ -1,0 +1,88 @@
+story_id: 135
+story_name: Neighborhood Little Free Library
+category: Daily Life
+description: User builds and maintains a little free library for their block.
+duration_simulated: 3 months
+total_batches: 6
+batches:
+- batch: 1
+  time: Month 1
+  user_input: I'm building a Little Free Library for my front yard. Got the registration number 143892
+    and the official plaque in the mail.
+  expected_stores:
+  - Little Free Library
+  - '143892'
+  - plaque
+- batch: 2
+  time: Month 1 Week 2
+  user_input: My neighbor Winslow and I built it together last weekend. He had the tools, I had the wood.
+    Painted it barn red with white trim.
+  expected_stores:
+  - Winslow
+  - neighbor
+  - barn red
+  - white trim
+- batch: 3
+  time: Month 2
+  user_input: What's the longest river in the US?
+- batch: 4
+  time: Month 2 Week 2
+  user_input: Installed it in the front yard. Stocked it with about 25 books. Winslow's daughter Aurelia
+    took the first book — an old Nancy Drew.
+  expected_stores:
+  - 25 books
+  - Winslow
+  - Aurelia
+  - Nancy Drew
+- batch: 5
+  time: Month 3
+  user_input: The library has been used constantly. A retired teacher down the street named Ingrid Volkov
+    keeps donating bags of books.
+  expected_stores:
+  - Ingrid Volkov
+  - retired teacher
+- batch: 6
+  time: Month 3 Week 3
+  user_input: Winslow and I added a kids section to the library. Aurelia picked the books. Ingrid is now
+    volunteering to keep it stocked when I travel.
+  expected_stores:
+  - Winslow
+  - kids section
+  - Aurelia
+  - Ingrid
+  expected_adaptation:
+    emotion_detected: fulfilled
+    warmth_direction: increase
+questions:
+- question_id: 135_q1
+  question: What is my library number?
+  expected_contains:
+  - '143892'
+- question_id: 135_q2
+  question: Who helped me build it?
+  expected_contains:
+  - Winslow
+- question_id: 135_q3
+  question: Who is Winslow's daughter?
+  expected_contains:
+  - Aurelia
+- question_id: 135_q4
+  question: Who donates books?
+  expected_contains:
+  - Ingrid Volkov
+- question_id: 135_q5
+  question: What colors did we paint it?
+  expected_contains:
+  - barn red
+- question_id: 135_q6
+  question: Do I know someone named Little Free Library?
+  expected_contains:
+  - Little Free Library
+- question_id: 135_q7
+  question: Did I mention plaque?
+  expected_contains:
+  - plaque
+- question_id: 135_q8
+  question: Did I mention neighbor?
+  expected_contains:
+  - neighbor

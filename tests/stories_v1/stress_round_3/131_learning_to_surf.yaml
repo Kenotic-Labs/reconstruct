@@ -1,0 +1,92 @@
+story_id: 131
+story_name: Learning to Surf
+category: Learning
+description: User takes surfing lessons and works toward riding their first wave.
+duration_simulated: 3 months
+total_batches: 6
+batches:
+- batch: 1
+  time: Month 1 Week 1
+  user_input: Signed up for beginner surf lessons with Salty School in Pacifica. My instructor is a woman
+    named Indigo Rivera. First lesson Saturday at 8 AM.
+  expected_stores:
+  - Salty School
+  - Pacifica
+  - Indigo Rivera
+  - Saturday 8 AM
+- batch: 2
+  time: Month 1 Week 2
+  user_input: Rented a soft top longboard for the month. Indigo taught me the pop-up on the sand first
+    — I'm terrible at it.
+  expected_stores:
+  - soft top longboard
+  - Indigo
+  - pop-up
+  expected_adaptation:
+    emotion_detected: frustrated but determined
+    warmth_direction: increase
+- batch: 3
+  time: Month 2
+  user_input: What's the deepest part of the ocean?
+- batch: 4
+  time: Month 2 Week 2
+  user_input: Rode my first wave today, all the way to shore. Indigo whooped from the beach. Another student
+    named Wyatt clapped when I paddled back out.
+  expected_stores:
+  - first wave
+  - Indigo
+  - Wyatt
+  expected_adaptation:
+    emotion_detected: elated
+    warmth_direction: increase
+- batch: 5
+  time: Month 3
+  user_input: Bought my own board — a 7'6 funboard from a used shop called Aqua Surf. 380 dollars. Indigo
+    approved.
+  expected_stores:
+  - 7'6 funboard
+  - Aqua Surf
+  - 380 dollars
+  - Indigo
+- batch: 6
+  time: Month 3 Week 3
+  user_input: Wyatt and I have been going out on Sundays together. Indigo still teaches Saturdays. Last
+    Sunday I stayed up on five waves.
+  expected_stores:
+  - Wyatt
+  - Sundays
+  - Indigo
+  - five waves
+questions:
+- question_id: 131_q1
+  question: Who is my surf instructor?
+  expected_contains:
+  - Indigo Rivera
+- question_id: 131_q2
+  question: Where do I surf?
+  expected_contains:
+  - Pacifica
+- question_id: 131_q3
+  question: Where did I buy my board?
+  expected_contains:
+  - Aqua Surf
+- question_id: 131_q4
+  question: Who do I surf with on Sundays?
+  expected_contains:
+  - Wyatt
+- question_id: 131_q5
+  question: How much was my board?
+  expected_contains:
+  - '380'
+- question_id: 131_q6
+  question: Where is Salty School?
+  expected_contains:
+  - Salty School
+- question_id: 131_q7
+  question: When is Saturday 8 AM?
+  expected_contains:
+  - Saturday 8 AM
+- question_id: 131_q8
+  question: Did I mention soft top longboard?
+  expected_contains:
+  - soft top longboard

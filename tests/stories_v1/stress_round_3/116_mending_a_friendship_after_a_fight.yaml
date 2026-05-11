@@ -1,0 +1,93 @@
+story_id: 116
+story_name: Mending a Friendship After a Fight
+category: Relationships
+description: User mends a friendship after a serious argument.
+duration_simulated: 6 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My oldest friend Sunday and I had a huge fight last weekend. She said something cruel about
+    my job and I said something cruel about her marriage.
+  expected_stores:
+  - Sunday
+  - oldest friend
+  expected_adaptation:
+    emotion_detected: hurt
+    warmth_direction: neutral
+- batch: 2
+  time: Week 2
+  user_input: Sunday and I haven't talked in ten days. Her husband Alistair texted me to say Sunday is
+    really shaken up too.
+  expected_stores:
+  - Sunday
+  - ten days
+  - Alistair
+  - husband
+- batch: 3
+  time: Week 3
+  user_input: I wrote Sunday a letter. Three pages. I apologized for the things I said and I asked her
+    if we could talk when she was ready.
+  expected_stores:
+  - Sunday
+  - three pages
+- batch: 4
+  time: Week 3 Friday
+  user_input: Who painted Starry Night?
+- batch: 5
+  time: Week 4
+  user_input: Sunday called me. She and I talked for two hours. She apologized too. We agreed to meet
+    in person.
+  expected_stores:
+  - Sunday
+  - two hours
+- batch: 6
+  time: Week 5
+  user_input: Sunday and I met at our old coffee spot called Copa Vida. She cried and I cried and then
+    we laughed at how ridiculous we are.
+  expected_stores:
+  - Sunday
+  - Copa Vida
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+- batch: 7
+  time: Week 6
+  user_input: Sunday texted me to say she's been telling Alistair that we're better friends now than before
+    the fight.
+  expected_stores:
+  - Sunday
+  - Alistair
+questions:
+- question_id: 116_q1
+  question: Who is my oldest friend?
+  expected_contains:
+  - Sunday
+- question_id: 116_q2
+  question: Who is her husband?
+  expected_contains:
+  - Alistair
+- question_id: 116_q3
+  question: How many pages was my letter?
+  expected_contains:
+  - three
+- question_id: 116_q4
+  question: Where did we meet to reconcile?
+  expected_contains:
+  - Copa Vida
+- question_id: 116_q5
+  question: How long did our phone call last?
+  expected_contains:
+  - two hours
+- question_id: 116_q6
+  question: Did I mention oldest friend?
+  expected_contains:
+  - oldest friend
+- question_id: 116_q7
+  question: Did I mention ten days?
+  expected_contains:
+  - ten days
+- question_id: 116_q8
+  question: Did I mention husband?
+  expected_contains:
+  - husband

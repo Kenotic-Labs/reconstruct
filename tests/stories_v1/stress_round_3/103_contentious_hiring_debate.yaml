@@ -1,0 +1,98 @@
+story_id: 103
+story_name: Contentious Hiring Debate
+category: Career
+description: User and their team disagree over a contested candidate.
+duration_simulated: 2 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1 Monday
+  user_input: We interviewed a candidate named Gregor Malkovich today. My hiring manager Sloane loved
+    him, but my teammate Julianne and I had concerns.
+  expected_stores:
+  - Gregor Malkovich
+  - Sloane
+  - hiring manager
+  - Julianne
+  - teammate
+- batch: 2
+  time: Week 1 Tuesday
+  user_input: Julianne and I wrote up our concerns together — she flagged his communication style, I flagged
+    a technical gap in distributed systems. Sloane read it and said she understood.
+  expected_stores:
+  - Julianne
+  - communication style
+  - distributed systems
+  - Sloane
+- batch: 3
+  time: Week 1 Thursday
+  user_input: What is the chemical formula for water?
+- batch: 4
+  time: Week 1 Friday
+  user_input: Sloane brought in a senior engineer named Chika Obi to do a second technical panel with
+    Gregor. She said she'd defer to Chika's read.
+  expected_stores:
+  - Sloane
+  - Chika Obi
+  - senior engineer
+  - Gregor
+- batch: 5
+  time: Week 2 Monday
+  user_input: Chika did the second panel and concluded that Gregor's distributed systems background was
+    indeed thin. She recommended no hire.
+  expected_stores:
+  - Chika
+  - Gregor
+  - distributed systems
+  - no hire
+- batch: 6
+  time: Week 2 Wednesday
+  user_input: Sloane made the final call — passed on Gregor. She thanked Julianne and me for speaking
+    up. Julianne told me she was relieved and I was too.
+  expected_stores:
+  - Sloane
+  - Gregor
+  - Julianne
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+- batch: 7
+  time: Week 2 Friday
+  user_input: Sloane invited Julianne and me to lead the next interview round ourselves so we can shape
+    the bar. We both said yes.
+  expected_stores:
+  - Sloane
+  - Julianne
+questions:
+- question_id: 103_q1
+  question: Who is my hiring manager?
+  expected_contains:
+  - Sloane
+- question_id: 103_q2
+  question: Who is my teammate?
+  expected_contains:
+  - Julianne
+- question_id: 103_q3
+  question: Who was the candidate?
+  expected_contains:
+  - Gregor Malkovich
+- question_id: 103_q4
+  question: Who did the second technical panel?
+  expected_contains:
+  - Chika Obi
+- question_id: 103_q5
+  question: What technical gap did I flag?
+  expected_contains:
+  - distributed systems
+- question_id: 103_q6
+  question: What did Julianne flag?
+  expected_contains:
+  - communication
+- question_id: 103_q7
+  question: Did we end up hiring Gregor?
+  expected_contains:
+  - 'no'
+- question_id: 103_q8
+  question: Did I mention hiring manager?
+  expected_contains:
+  - hiring manager

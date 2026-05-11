@@ -1,0 +1,99 @@
+story_id: 69
+story_name: Physical Therapy for a Shoulder Injury
+category: Health
+description: User attends physical therapy after a rotator cuff tear.
+duration_simulated: 8 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1
+  user_input: MRI confirmed a partial rotator cuff tear in my left shoulder from rock climbing. Orthopedist
+    Dr. Ben Akagi said PT for 8 weeks before considering surgery.
+  expected_stores:
+  - rotator cuff tear
+  - left shoulder
+  - rock climbing
+  - Dr. Ben Akagi
+  - orthopedist
+  - 8 weeks
+- batch: 2
+  time: Week 1 Thursday
+  user_input: First PT session with Jen Morales at Bay Area Sports PT in Oakland. She said I have about
+    60 percent range of motion right now.
+  expected_stores:
+  - Jen Morales
+  - Bay Area Sports PT
+  - Oakland
+  - 60 percent range of motion
+- batch: 3
+  time: Week 3
+  user_input: PT twice a week plus daily home exercises. Jen gave me resistance bands and a list of 6
+    exercises to do morning and night.
+  expected_stores:
+  - twice a week
+  - Jen
+  - resistance bands
+  - 6 exercises
+- batch: 4
+  time: Week 4
+  user_input: How many bones are in the human body?
+- batch: 5
+  time: Week 5
+  user_input: Range of motion is up to 80 percent. Less pain at night. Jen added three new strength exercises
+    focused on the deltoid.
+  expected_stores:
+  - 80 percent
+  - Jen
+  - three new strength
+  - deltoid
+- batch: 6
+  time: Week 7
+  user_input: Had a setback — pulled something on Monday doing yard work. Jen was frustrated with me but
+    we're back to baseline by Friday.
+  expected_stores:
+  - Monday
+  - yard work
+  - Jen
+  expected_adaptation:
+    emotion_detected: frustrated
+    warmth_direction: neutral
+- batch: 7
+  time: Week 8
+  user_input: Final assessment today. 95 percent range of motion, minimal pain. Jen cleared me to start
+    climbing again in two weeks.
+  expected_stores:
+  - 95 percent
+  - Jen
+  - two weeks
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+questions:
+- question_id: 69_q1
+  question: What injury do I have?
+  expected_contains:
+  - rotator cuff
+- question_id: 69_q2
+  question: Who is my orthopedist?
+  expected_contains:
+  - Ben Akagi
+- question_id: 69_q3
+  question: Who is my physical therapist?
+  expected_contains:
+  - Jen Morales
+- question_id: 69_q4
+  question: Where is the PT clinic?
+  expected_contains:
+  - Oakland
+- question_id: 69_q5
+  question: How often am I going to PT?
+  expected_contains:
+  - twice a week
+- question_id: 69_q6
+  question: What caused the injury?
+  expected_contains:
+  - rock climbing
+- question_id: 69_q7
+  question: When can I start climbing again?
+  expected_contains:
+  - two weeks

@@ -1,0 +1,94 @@
+story_id: 165
+story_name: Meeting the Birth Parents
+category: Relationships
+description: User meets their biological parents for the first time as an adult.
+duration_simulated: 4 months
+total_batches: 6
+batches:
+- batch: 1
+  time: Month 1
+  user_input: I matched with my biological parents on Ancestry. They are Leif Holmberg and Cressida Marsh.
+    They live in Minneapolis.
+  expected_stores:
+  - Leif Holmberg
+  - Cressida Marsh
+  - biological parents
+  - Ancestry
+  - Minneapolis
+- batch: 2
+  time: Month 2
+  user_input: First video call with Leif and Cressida. An hour. I was nervous. My adoptive mom Rosa was
+    supportive — she's NOT threatened.
+  expected_stores:
+  - Leif
+  - Cressida
+  - Rosa
+  - adoptive mom
+  - not threatened
+- batch: 3
+  time: Month 3
+  user_input: What's the longest mammal pregnancy?
+- batch: 4
+  time: Month 3 Week 2
+  user_input: Flew to Minneapolis to meet them. Leif cried when he hugged me. I have his exact eyes. Cressida
+    is quieter but gave me a photo album she'd been keeping.
+  expected_stores:
+  - Minneapolis
+  - Leif
+  - Cressida
+  - photo album
+  expected_adaptation:
+    emotion_detected: emotional
+    warmth_direction: increase
+- batch: 5
+  time: Month 4
+  user_input: I have two biological half siblings — Sven and Marisol. They both came to dinner on my second
+    night in Minneapolis.
+  expected_stores:
+  - Sven
+  - Marisol
+  - biological half siblings
+- batch: 6
+  time: Month 4 Week 3
+  user_input: Back home. Rosa asked a thousand questions at dinner. She said she's so glad this happened.
+    I feel more whole than before.
+  expected_stores:
+  - Rosa
+  expected_adaptation:
+    emotion_detected: peaceful
+    warmth_direction: increase
+questions:
+- question_id: 165_q1
+  question: Who are my biological parents?
+  expected_contains:
+  - Leif Holmberg
+  - Cressida Marsh
+- question_id: 165_q2
+  question: Where do they live?
+  expected_contains:
+  - Minneapolis
+- question_id: 165_q3
+  question: Who is my adoptive mom?
+  expected_contains:
+  - Rosa
+- question_id: 165_q4
+  question: Who are my half siblings?
+  expected_contains:
+  - Sven
+  - Marisol
+- question_id: 165_q5
+  question: Did I mention biological parents?
+  expected_contains:
+  - biological parents
+- question_id: 165_q6
+  question: Do I know someone named Ancestry?
+  expected_contains:
+  - Ancestry
+- question_id: 165_q7
+  question: Do I know someone named Leif?
+  expected_contains:
+  - Leif
+- question_id: 165_q8
+  question: Do I know someone named Cressida?
+  expected_contains:
+  - Cressida

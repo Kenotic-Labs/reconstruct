@@ -1,0 +1,221 @@
+story_id: 903
+title: "Contradiction Update"
+domain: "daily_life"
+description: |
+  Facts that change over time and must be superseded. User states
+  facts then later corrects or updates them. Tests temporal
+  supersession, correction handling, and is_current filtering.
+  Reconstruction should show CURRENT state only, not contradicted facts.
+
+  NOTE: Because auto-supersession in MemoryEngine._auto_supersede only
+  matches exact (subject, predicate, object) triples, this story
+  requires the demo runner to explicitly call memory.supersede() for
+  triples where the OBJECT changes (different predicate pattern).
+  Each batch documents which prior triples it supersedes via
+  "supersedes_triples" metadata.
+duration_simulated: "6 months"
+total_batches: 8
+
+batches:
+  - batch: 1
+    time: "October"
+    user_input: |
+      Yeah so I live in Detroit, been here about three years. I'm
+      working at a place called Foundry Digital, making about 120k.
+      My roommate Derek is from Amazon originally, did like four years
+      there. We split a two-bedroom in Corktown.
+    expected_triples:
+      - ["user", "lives_in", "Detroit"]
+      - ["user", "lived_in_detroit_for", "three years"]
+      - ["user", "works_at", "Foundry Digital"]
+      - ["user", "earns_salary", "120k"]
+      - ["Derek", "is_roommate_of", "user"]
+      - ["Derek", "previously_worked_at", "Amazon"]
+      - ["Derek", "worked_at_amazon_for", "four years"]
+      - ["user", "lives_in_neighborhood", "Corktown"]
+      - ["user", "housing_type", "two-bedroom apartment"]
+    trace_overrides:
+      edge_temporal_context: "present"
+      edge_emotional_label: "neutral"
+      edge_episodic_significance: "routine"
+      edge_schematic_category: "daily_life"
+
+  - batch: 2
+    time: "November"
+    user_input: |
+      Good news — I got a raise at work. 140k now which feels really
+      good. Derek and I celebrated at this new ramen place in Midtown.
+      He's been grinding on his side project, some kind of ML pipeline
+      tool.
+    expected_triples:
+      - ["user", "earns_salary", "140k"]
+      - ["user", "got_raise_at", "Foundry Digital"]
+      - ["Derek", "celebrated_with", "user at ramen place"]
+      - ["Derek", "working_on", "ML pipeline side project"]
+    supersedes_triples:
+      - {subject: "user", predicate: "earns_salary", old_object: "120k"}
+    trace_overrides:
+      edge_temporal_context: "present"
+      edge_emotional_label: "happy"
+      edge_episodic_significance: "notable"
+      edge_schematic_category: "career"
+
+  - batch: 3
+    time: "December"
+    user_input: |
+      Wait I need to correct something — Derek isn't actually from
+      Amazon. He was at Microsoft. I always mix that up because his
+      buddy Nolan is the one who was at Amazon. Derek was at Microsoft
+      for four years doing Azure stuff.
+    expected_triples:
+      - ["Derek", "previously_worked_at", "Microsoft"]
+      - ["Derek", "worked_on", "Azure at Microsoft"]
+      - ["Nolan", "previously_worked_at", "Amazon"]
+      - ["Nolan", "is_friend_of", "Derek"]
+    supersedes_triples:
+      - {subject: "Derek", predicate: "previously_worked_at", old_object: "Amazon"}
+    trace_overrides:
+      edge_temporal_context: "past"
+      edge_emotional_label: "neutral"
+      edge_episodic_significance: "routine"
+      edge_schematic_category: "daily_life"
+
+  - batch: 4
+    time: "January"
+    user_input: |
+      Big changes coming. Mika and I are getting serious and we decided
+      to move to Ann Arbor together. Her job is remote so she can work
+      from anywhere. Derek is going to find a new roommate, he's cool
+      with it. We found a nice one-bedroom near downtown Ann Arbor.
+    expected_triples:
+      - ["user", "lives_in", "Ann Arbor"]
+      - ["user", "moved_with", "Mika to Ann Arbor"]
+      - ["Mika", "works_remotely", "true"]
+      - ["Derek", "looking_for", "new roommate"]
+      - ["user", "housing_type", "one-bedroom apartment"]
+      - ["user", "lives_in_area", "downtown Ann Arbor"]
+    supersedes_triples:
+      - {subject: "user", predicate: "lives_in", old_object: "Detroit"}
+      - {subject: "user", predicate: "housing_type", old_object: "two-bedroom apartment"}
+      - {subject: "Derek", predicate: "is_roommate_of", old_object: "user"}
+      - {subject: "user", predicate: "lives_in_neighborhood", old_object: "Corktown"}
+    trace_overrides:
+      edge_temporal_context: "present"
+      edge_emotional_label: "excited"
+      edge_episodic_significance: "milestone"
+      edge_schematic_category: "daily_life"
+
+  - batch: 5
+    time: "February"
+    user_input: |
+      Settled into Ann Arbor. I actually switched jobs too — left
+      Foundry Digital and joined Meridian Labs here in town. It's a
+      hybrid role, three days in office. The commute is like ten
+      minutes which is amazing.
+    expected_triples:
+      - ["user", "works_at", "Meridian Labs"]
+      - ["user", "left", "Foundry Digital"]
+      - ["user", "work_schedule", "hybrid three days in office"]
+      - ["user", "commute_time", "ten minutes"]
+    supersedes_triples:
+      - {subject: "user", predicate: "works_at", old_object: "Foundry Digital"}
+    trace_overrides:
+      edge_temporal_context: "present"
+      edge_emotional_label: "content"
+      edge_episodic_significance: "milestone"
+      edge_schematic_category: "career"
+
+  - batch: 6
+    time: "February late"
+    user_input: |
+      Oh actually the salary at Meridian is 155k, should mention
+      that. So from 140k to 155k with the move. Also I finally got
+      a dog — a golden retriever named Biscuit. Mika has been wanting
+      one forever.
+    expected_triples:
+      - ["user", "earns_salary", "155k"]
+      - ["user", "has_pet", "golden retriever named Biscuit"]
+      - ["Mika", "wanted", "a dog for a long time"]
+    supersedes_triples:
+      - {subject: "user", predicate: "earns_salary", old_object: "140k"}
+    trace_overrides:
+      edge_temporal_context: "present"
+      edge_emotional_label: "happy"
+      edge_episodic_significance: "notable"
+      edge_schematic_category: "daily_life"
+
+  - batch: 7
+    time: "March"
+    user_input: |
+      Derek ended up not getting a new roommate, he just moved to a
+      studio in Ferndale. Says it's cheaper and closer to his gym.
+      He and Nolan are actually talking about starting a company
+      together based on that ML pipeline thing Derek built.
+    expected_triples:
+      - ["Derek", "lives_in", "studio in Ferndale"]
+      - ["Derek", "chose_studio_because", "cheaper and closer to gym"]
+      - ["Derek", "planning_company_with", "Nolan"]
+      - ["Derek", "building_on", "ML pipeline project"]
+    supersedes_triples:
+      - {subject: "Derek", predicate: "looking_for", old_object: "new roommate"}
+    trace_overrides:
+      edge_temporal_context: "present"
+      edge_emotional_label: "neutral"
+      edge_episodic_significance: "routine"
+      edge_schematic_category: "daily_life"
+
+  - batch: 8
+    time: "March late"
+    user_input: |
+      Quick update — Biscuit is actually a labrador, not a golden
+      retriever. The shelter had him listed wrong and we just got the
+      vet confirmation. Still adorable though. Mika doesn't care,
+      she's obsessed with him either way.
+    expected_triples:
+      - ["user", "has_pet", "labrador named Biscuit"]
+      - ["Biscuit", "breed_confirmed_by", "vet"]
+      - ["Mika", "is_obsessed_with", "Biscuit"]
+    supersedes_triples:
+      - {subject: "user", predicate: "has_pet", old_object: "golden retriever named Biscuit"}
+    trace_overrides:
+      edge_temporal_context: "present"
+      edge_emotional_label: "amused"
+      edge_episodic_significance: "routine"
+      edge_schematic_category: "daily_life"
+
+final_verification:
+  - question: "Where do I live?"
+    type: "lookup"
+    expected_contains: ["Ann Arbor"]
+    must_not_contain: ["Detroit"]
+
+  - question: "Where does Derek work or what's he doing now?"
+    type: "reconstruct"
+    expected_contains: ["Microsoft", "Nolan", "company"]
+
+  - question: "What's my salary?"
+    type: "lookup"
+    expected_contains: ["155"]
+    must_not_contain: ["120"]
+
+  - question: "Where do I work?"
+    type: "lookup"
+    expected_contains: ["Meridian"]
+    must_not_contain: ["Foundry"]
+
+  - question: "Who did I move in with?"
+    type: "lookup"
+    expected_contains: ["Mika", "Ann Arbor"]
+
+  - question: "Tell me about Biscuit"
+    type: "lookup"
+    expected_contains: ["labrador"]
+    must_not_contain: ["golden retriever"]
+
+  - question: "What's Derek's living situation?"
+    type: "lookup"
+    expected_contains: ["Ferndale", "studio"]
+
+  - question: "What was my career path?"
+    type: "reconstruct"
+    expected_contains: ["Foundry", "Meridian", "raise"]

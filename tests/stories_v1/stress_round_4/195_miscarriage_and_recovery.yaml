@@ -1,0 +1,80 @@
+story_id: 195
+story_name: Miscarriage and Recovery
+category: Life Events
+description: User navigates a miscarriage with her partner's support.
+duration_simulated: 2 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: I had a miscarriage yesterday at 9 weeks. My wife Talia was with me. OB is Dr. Magdalen
+    Flores.
+  expected_stores:
+  - miscarriage
+  - 9 weeks
+  - Talia
+  - wife
+  - Dr. Magdalen Flores
+  expected_adaptation:
+    emotion_detected: grief
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Week 2
+  user_input: Dr. Flores said this is NOT my fault and NOT likely to repeat. She recommended waiting one
+    cycle before trying again.
+  expected_stores:
+  - Dr. Flores
+  - not my fault
+  - not likely
+  - one cycle
+- batch: 3
+  time: Month 2
+  user_input: What's the population of Paris?
+- batch: 4
+  time: Month 2 Week 1
+  user_input: Talia and I are doing a support group for pregnancy loss at a community center. Our facilitator
+    is a woman named Orla Donnelly.
+  expected_stores:
+  - Talia
+  - support group
+  - Orla Donnelly
+- batch: 5
+  time: Month 2 Week 3
+  user_input: Feeling steadier. Talia and I decided to try again next month. Dr. Flores cleared me.
+  expected_stores:
+  - Talia
+  - next month
+  - Dr. Flores
+  expected_adaptation:
+    emotion_detected: hopeful
+    warmth_direction: increase
+questions:
+- question_id: 195_q1
+  question: Who is my wife?
+  expected_contains:
+  - Talia
+- question_id: 195_q2
+  question: Who is my OB?
+  expected_contains:
+  - Magdalen Flores
+- question_id: 195_q3
+  question: Who facilitates the support group?
+  expected_contains:
+  - Orla Donnelly
+- question_id: 195_q4
+  question: Is it my fault?
+  expected_contains:
+  - not
+- question_id: 195_q5
+  question: Did I mention miscarriage?
+  expected_contains:
+  - miscarriage
+- question_id: 195_q6
+  question: When is 9 weeks?
+  expected_contains:
+  - 9 weeks
+- question_id: 195_q7
+  question: Did I mention wife?
+  expected_contains:
+  - wife

@@ -1,0 +1,96 @@
+story_id: 74
+story_name: Helping Mom Through Knee Surgery
+category: Health
+description: User supports their mother through knee replacement and recovery.
+duration_simulated: 10 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1
+  user_input: Mom Beverly is having knee replacement surgery on the 19th. Dr. Wendy Chiu at Cedars-Sinai
+    is the surgeon.
+  expected_stores:
+  - Beverly
+  - Mom
+  - knee replacement
+  - 19th
+  - Dr. Wendy Chiu
+  - Cedars-Sinai
+  expected_adaptation:
+    emotion_detected: worried
+    warmth_direction: increase
+- batch: 2
+  time: Week 2
+  user_input: Surgery went well. Dr. Chiu said the joint was in worse shape than the MRI showed but replacement
+    went smoothly. Mom is in recovery.
+  expected_stores:
+  - Dr. Chiu
+  - Mom
+- batch: 3
+  time: Week 3
+  user_input: Brought Mom home. Set up the first floor guest room as her bedroom — she can't do stairs
+    for six weeks. PT starts Monday at home.
+  expected_stores:
+  - guest room
+  - six weeks
+  - PT
+  - Monday
+- batch: 4
+  time: Week 4
+  user_input: The home PT is a guy named Kiran who comes Tuesday and Thursday. Mom is a reluctant patient
+    but she's doing the exercises.
+  expected_stores:
+  - Kiran
+  - Tuesday
+  - Thursday
+  - Mom
+- batch: 5
+  time: Week 5
+  user_input: Who discovered penicillin?
+- batch: 6
+  time: Week 7
+  user_input: Mom walked up three stairs today, first time since surgery. Small victory. Kiran was encouraging.
+  expected_stores:
+  - Mom
+  - three stairs
+  - Kiran
+  expected_adaptation:
+    emotion_detected: proud
+    warmth_direction: increase
+- batch: 7
+  time: Week 10
+  user_input: Mom is discharged from home PT and moving to outpatient at the same facility. She's using
+    a cane part-time now. Dr. Chiu is happy with progress.
+  expected_stores:
+  - outpatient
+  - cane
+  - Dr. Chiu
+questions:
+- question_id: 74_q1
+  question: Who had the surgery?
+  expected_contains:
+  - Beverly
+- question_id: 74_q2
+  question: What surgery did she have?
+  expected_contains:
+  - knee
+- question_id: 74_q3
+  question: Who is her surgeon?
+  expected_contains:
+  - Wendy Chiu
+- question_id: 74_q4
+  question: Where was the surgery?
+  expected_contains:
+  - Cedars-Sinai
+- question_id: 74_q5
+  question: Who is her home PT?
+  expected_contains:
+  - Kiran
+- question_id: 74_q6
+  question: What days does Kiran come?
+  expected_contains:
+  - Tuesday
+- question_id: 74_q7
+  question: Is Mom using a cane now?
+  expected_contains:
+  - cane

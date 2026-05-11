@@ -1,0 +1,93 @@
+story_id: 117
+story_name: Dad's Remarriage
+category: Relationships
+description: User navigates their widowed father remarrying.
+duration_simulated: 4 months
+total_batches: 6
+batches:
+- batch: 1
+  time: Month 1
+  user_input: My dad Reynold told me today that he's engaged to his partner Giselle. My mom Elena passed
+    three years ago. I'm happy for him and also sad.
+  expected_stores:
+  - Reynold
+  - dad
+  - Giselle
+  - Elena
+  - mom
+  - three years
+  expected_adaptation:
+    emotion_detected: mixed
+    warmth_direction: increase
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Giselle invited me to lunch just the two of us at a Japanese place called Ippuku. She and
+    I had a real conversation about Mom and about her own late husband Stanton.
+  expected_stores:
+  - Giselle
+  - Ippuku
+  - Stanton
+- batch: 3
+  time: Month 2
+  user_input: My sister Iris is struggling with it more than I am. She and I talked late last night —
+    she said she feels like Dad is replacing Mom.
+  expected_stores:
+  - Iris
+  - sister
+- batch: 4
+  time: Month 2 Week 3
+  user_input: What's the boiling point of iron?
+- batch: 5
+  time: Month 3
+  user_input: Dad and Giselle picked a date — August 15. Small wedding, just family, at Reynold's garden.
+    Giselle's daughter Marlowe is coming from France.
+  expected_stores:
+  - August 15
+  - Reynold
+  - garden
+  - Marlowe
+  - France
+- batch: 6
+  time: Month 4
+  user_input: The wedding was beautiful. Iris gave Giselle a hug at the end and I knew they'd be okay.
+    Marlowe and I are friends now — she and I danced for an hour.
+  expected_stores:
+  - Iris
+  - Giselle
+  - Marlowe
+  expected_adaptation:
+    emotion_detected: happy
+    warmth_direction: increase
+questions:
+- question_id: 117_q1
+  question: Who is my dad?
+  expected_contains:
+  - Reynold
+- question_id: 117_q2
+  question: Who is my late mom?
+  expected_contains:
+  - Elena
+- question_id: 117_q3
+  question: Who is my dad remarrying?
+  expected_contains:
+  - Giselle
+- question_id: 117_q4
+  question: Who is my sister?
+  expected_contains:
+  - Iris
+- question_id: 117_q5
+  question: Who is Giselle's late husband?
+  expected_contains:
+  - Stanton
+- question_id: 117_q6
+  question: Who is Giselle's daughter?
+  expected_contains:
+  - Marlowe
+- question_id: 117_q7
+  question: When was the wedding?
+  expected_contains:
+  - August 15
+- question_id: 117_q8
+  question: Did I mention dad?
+  expected_contains:
+  - dad

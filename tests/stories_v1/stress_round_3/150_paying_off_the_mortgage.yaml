@@ -1,0 +1,82 @@
+story_id: 150
+story_name: Paying Off the Mortgage
+category: Life Events
+description: User makes the final payment on their 30-year mortgage.
+duration_simulated: 3 months
+total_batches: 6
+batches:
+- batch: 1
+  time: Month 1
+  user_input: I'm making my final mortgage payment in three months. 30 years ago, my late husband Emmerich
+    and I bought this house for 185000. Now worth 1.2 million.
+  expected_stores:
+  - final mortgage payment
+  - three months
+  - Emmerich
+  - late husband
+  - '185000'
+  - 1.2 million
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Talked to my financial advisor Dalia Obi about what to do post-payoff. She recommended rerouting
+    the mortgage cash to my retirement accounts.
+  expected_stores:
+  - Dalia Obi
+  - financial advisor
+- batch: 3
+  time: Month 2
+  user_input: What's the freezing point of water in Celsius?
+- batch: 4
+  time: Month 2 Week 3
+  user_input: My son Dominic is flying in from Chicago for the payoff milestone. He said he wants to be
+    there when I press send.
+  expected_stores:
+  - Dominic
+  - son
+  - Chicago
+- batch: 5
+  time: Month 3
+  user_input: Final payment went through this morning. Dominic was sitting next to me. I poured us both
+    a drink and toasted his dad Emmerich.
+  expected_stores:
+  - Dominic
+  - Emmerich
+  expected_adaptation:
+    emotion_detected: emotional/accomplished
+    warmth_direction: increase
+- batch: 6
+  time: Month 3 Week 2
+  user_input: Received the deed free and clear in the mail. I'm framing it. Dalia called to say she's
+    proud of me.
+  expected_stores:
+  - deed
+  - Dalia
+questions:
+- question_id: 150_q1
+  question: Who is my late husband?
+  expected_contains:
+  - Emmerich
+- question_id: 150_q2
+  question: Who is my financial advisor?
+  expected_contains:
+  - Dalia Obi
+- question_id: 150_q3
+  question: Who is my son?
+  expected_contains:
+  - Dominic
+- question_id: 150_q4
+  question: Where does Dominic live?
+  expected_contains:
+  - Chicago
+- question_id: 150_q5
+  question: What did we pay for the house originally?
+  expected_contains:
+  - '185000'
+- question_id: 150_q6
+  question: What is it worth now?
+  expected_contains:
+  - 1.2 million
+- question_id: 150_q7
+  question: Did I mention final mortgage payment?
+  expected_contains:
+  - final mortgage payment

@@ -1,0 +1,96 @@
+story_id: 246
+story_name: Dad's Final Days
+category: Life Events
+description: User spends the final weeks with her dying father.
+duration_simulated: 6 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My dad Gideon was given 6 to 8 weeks to live. Pancreatic cancer. Hospice nurse Rosaline
+    Wu is coordinating care at home.
+  expected_stores:
+  - Gideon
+  - dad
+  - 6 to 8 weeks
+  - pancreatic cancer
+  - Rosaline Wu
+  - hospice
+  expected_adaptation:
+    emotion_detected: grief
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Week 2
+  user_input: My brother Yosef flew in from Tel Aviv. Gideon is lucid most days. Mom Lilibet is holding
+    up but tired.
+  expected_stores:
+  - Yosef
+  - brother
+  - Tel Aviv
+  - Gideon
+  - Lilibet
+  - mom
+- batch: 3
+  time: Week 3
+  user_input: What year did Shakespeare die?
+- batch: 4
+  time: Week 4
+  user_input: Gideon told me he's proud of me today. It was out of character for him — he's not one for
+    sentiment. I'm NOT going to forget it.
+  expected_stores:
+  - Gideon
+  - not going to forget
+- batch: 5
+  time: Week 5
+  user_input: Gideon stopped eating this week. Rosaline said it's the beginning of the transition. Yosef
+    and I took turns sitting with him.
+  expected_stores:
+  - Gideon
+  - Rosaline
+  - transition
+  - Yosef
+- batch: 6
+  time: Week 6
+  user_input: Dad passed peacefully Tuesday morning. Mom, Yosef, and I were all there. Rosaline stayed
+    with us until the funeral home came.
+  expected_stores:
+  - Gideon
+  - Yosef
+  - Rosaline
+  expected_adaptation:
+    emotion_detected: grief
+    warmth_direction: increase
+questions:
+- question_id: 246_q1
+  question: Who was my dad?
+  expected_contains:
+  - Gideon
+- question_id: 246_q2
+  question: Who is my mom?
+  expected_contains:
+  - Lilibet
+- question_id: 246_q3
+  question: Who is my brother?
+  expected_contains:
+  - Yosef
+- question_id: 246_q4
+  question: Where did Yosef fly in from?
+  expected_contains:
+  - Tel Aviv
+- question_id: 246_q5
+  question: Who was the hospice nurse?
+  expected_contains:
+  - Rosaline Wu
+- question_id: 246_q6
+  question: Did I mention dad?
+  expected_contains:
+  - dad
+- question_id: 246_q7
+  question: When is 6 to 8 weeks?
+  expected_contains:
+  - 6 to 8 weeks
+- question_id: 246_q8
+  question: Did I mention pancreatic cancer?
+  expected_contains:
+  - pancreatic cancer

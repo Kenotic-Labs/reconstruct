@@ -1,0 +1,107 @@
+story_id: 121
+story_name: IVF Journey
+category: Health
+description: User and partner start IVF treatment.
+duration_simulated: 4 months
+total_batches: 7
+batches:
+- batch: 1
+  time: Month 1
+  user_input: My wife Imogen and I started IVF at Pacific Reproductive Center. Our fertility specialist
+    is Dr. Aisha Okonkwo.
+  expected_stores:
+  - Imogen
+  - wife
+  - IVF
+  - Pacific Reproductive Center
+  - Dr. Aisha Okonkwo
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Imogen started the stim shots. She has to inject twice a day. I'm learning how to help —
+    Dr. Okonkwo's nurse Bree trained us both.
+  expected_stores:
+  - Imogen
+  - stim shots
+  - twice a day
+  - Dr. Okonkwo
+  - Bree
+  - nurse
+- batch: 3
+  time: Month 2
+  user_input: What's the tallest tree in the world?
+- batch: 4
+  time: Month 2 Week 2
+  user_input: Egg retrieval today. Dr. Okonkwo got 14 eggs. Imogen is recovering at home. I took the day
+    off to be with her.
+  expected_stores:
+  - 14 eggs
+  - Dr. Okonkwo
+  - Imogen
+- batch: 5
+  time: Month 2 Week 4
+  user_input: We have 6 embryos that made it to day 5. Three are graded high quality. Imogen and I cried
+    when Dr. Okonkwo called.
+  expected_stores:
+  - 6 embryos
+  - day 5
+  - three
+  - high quality
+  - Dr. Okonkwo
+  expected_adaptation:
+    emotion_detected: emotional/hopeful
+    warmth_direction: increase
+- batch: 6
+  time: Month 3
+  user_input: First transfer happened today. One embryo. Now the two week wait. Imogen is on progesterone
+    supplements and told to take it easy.
+  expected_stores:
+  - first transfer
+  - one embryo
+  - two week wait
+  - Imogen
+  - progesterone
+- batch: 7
+  time: Month 4
+  user_input: Beta came back positive. 186. Imogen and I are officially pregnant. Dr. Okonkwo called to
+    congratulate us personally.
+  expected_stores:
+  - '186'
+  - Imogen
+  - pregnant
+  - Dr. Okonkwo
+  expected_adaptation:
+    emotion_detected: joy
+    warmth_direction: increase
+questions:
+- question_id: 121_q1
+  question: Who is my wife?
+  expected_contains:
+  - Imogen
+- question_id: 121_q2
+  question: Who is our fertility doctor?
+  expected_contains:
+  - Aisha Okonkwo
+- question_id: 121_q3
+  question: Where is the clinic?
+  expected_contains:
+  - Pacific Reproductive
+- question_id: 121_q4
+  question: Who is the nurse who trained us?
+  expected_contains:
+  - Bree
+- question_id: 121_q5
+  question: How many eggs were retrieved?
+  expected_contains:
+  - '14'
+- question_id: 121_q6
+  question: How many embryos made it to day 5?
+  expected_contains:
+  - '6'
+- question_id: 121_q7
+  question: What was the beta number?
+  expected_contains:
+  - '186'
+- question_id: 121_q8
+  question: Did I mention wife?
+  expected_contains:
+  - wife

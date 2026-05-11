@@ -1,0 +1,93 @@
+story_id: 122
+story_name: Quitting Smoking Together
+category: Health
+description: User and their partner quit smoking together.
+duration_simulated: 3 months
+total_batches: 6
+batches:
+- batch: 1
+  time: Month 1 Week 1
+  user_input: My partner Noelani and I decided to quit smoking together. We've both been smoking about
+    a pack a day for 9 years. Start date is tomorrow.
+  expected_stores:
+  - Noelani
+  - partner
+  - quit smoking
+  - pack a day
+  - 9 years
+- batch: 2
+  time: Month 1 Week 2
+  user_input: Week 1 is brutal. Noelani and I are both on the patch, 21 mg. Our doctor Pablo Vega prescribed
+    it. He said to also chew gum when cravings hit.
+  expected_stores:
+  - Noelani
+  - patch
+  - 21 mg
+  - Pablo Vega
+  - doctor
+  - gum
+- batch: 3
+  time: Month 1 Week 3
+  user_input: Who was the first U.S. president?
+- batch: 4
+  time: Month 1 Week 4
+  user_input: Hit two weeks. Cravings are starting to fade. Noelani and I are using a quit-smoking app
+    called Quit Genius to track progress. We've saved 140 dollars so far.
+  expected_stores:
+  - Noelani
+  - Quit Genius
+  - 140 dollars
+- batch: 5
+  time: Month 2
+  user_input: Had a setback — Noelani smoked one cigarette at a wedding this weekend. She was honest about
+    it. Pablo said one slip is okay if she gets back on the wagon.
+  expected_stores:
+  - Noelani
+  - wedding
+  - Pablo
+- batch: 6
+  time: Month 3
+  user_input: Three months clean for me, 10 weeks for Noelani. Pablo said our lung function numbers are
+    already improving. We celebrated with a hike in Marin.
+  expected_stores:
+  - three months
+  - 10 weeks
+  - Noelani
+  - Pablo
+  - Marin
+  expected_adaptation:
+    emotion_detected: proud
+    warmth_direction: increase
+questions:
+- question_id: 122_q1
+  question: Who is my partner?
+  expected_contains:
+  - Noelani
+- question_id: 122_q2
+  question: How long had I been smoking?
+  expected_contains:
+  - 9 years
+- question_id: 122_q3
+  question: Who is my doctor?
+  expected_contains:
+  - Pablo Vega
+- question_id: 122_q4
+  question: What app are we using?
+  expected_contains:
+  - Quit Genius
+- question_id: 122_q5
+  question: How strong is our patch?
+  expected_contains:
+  - 21 mg
+- question_id: 122_q6
+  question: Where did we celebrate?
+  expected_contains:
+  - Marin
+- question_id: 122_q7
+  question: Did I mention partner?
+  expected_contains:
+  - partner
+- question_id: 122_q8
+  question: Did I mention quit smoking?
+  expected_contains:
+  - quit smoking

@@ -1,0 +1,1427 @@
+{
+  "timestamp": "20260428_151803",
+  "grand_mean_f1": 0.0147,
+  "total_questions": 199,
+  "total_time_s": 449.16,
+  "category_f1": {
+    "1": 0.0124,
+    "2": 0.0005,
+    "3": 0.0157,
+    "4": 0.033,
+    "5": 0.0
+  },
+  "conversations": [
+    {
+      "conv_idx": 0,
+      "speaker_a": "Caroline",
+      "speaker_b": "Melanie",
+      "turn_count": 419,
+      "qa_count": 199,
+      "ingest_time_s": 247.76,
+      "query_time_s": 201.26,
+      "overall_f1": 0.0147,
+      "category_f1": {
+        "1": 0.0124,
+        "2": 0.0005,
+        "3": 0.0157,
+        "4": 0.033,
+        "5": 0.0
+      },
+      "per_question": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "category": 2,
+          "answer": "7 May 2023",
+          "prediction": "Caroline joined a new LGBTQ activist group. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "category": 2,
+          "answer": "2022",
+          "prediction": "Melanie painted that lake sunrise. Melanie uses an abstract painting. Melanie's favorite painting landscapes and still life. Melanie went to the beach. Melanie reminds of that day. Melanie time a great time. Time matters to Melanie. Melanie. Melanie is an awesome, Caroline, that's awesome. Melanie got into an accident. Melanie prefers the red and blue. Melanie experienced my real muses : painting and pottery. Melanie camp with the kids. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie makes that. Melanie spent the day volunteering at a homeless shelter. Melanie took a lot of courage and maturity. Melanie weekends a quiet weekend. Melanie's identity is a huge part of my life, not just a hobby.",
+          "f1": 0.0
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "category": 3,
+          "answer": "Psychology, counseling certification",
+          "prediction": "No doubts, Caroline will get all the love and stability they need. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Caroline research?",
+          "category": 1,
+          "answer": "Adoption agencies",
+          "prediction": "Caroline goes to do some research. No doubts, Caroline will get all the love and stability they need. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "category": 1,
+          "answer": "Transgender woman",
+          "prediction": "Melanie is happy for you, Caroline.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "category": 2,
+          "answer": "The sunday before 25 May 2023",
+          "prediction": "Melanie runs our last chat - a great way to calm and clear my mind. Melanie went to the beach. Creativity keeps Melanie. Time matters to Melanie. Melanie heard any inspiring stories. Melanie took a lot of courage and maturity. Melanie. Melanie is an awesome, Caroline, that's awesome. Melanie got into an accident. Melanie prefers the red and blue. Melanie experienced my real muses : painting and pottery. Melanie camp with the kids. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie makes that. Melanie spent the day volunteering at a homeless shelter. Melanie weekends a quiet weekend. Melanie's identity is a huge part of my life, not just a hobby. Melanie eats good food. Melanie identity is a fun way to express my feelings and get creative.",
+          "f1": 0.0
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "category": 2,
+          "answer": "June 2023",
+          "prediction": "Melanie camp with the kids. Melanie location another camping trip in the forest. Melanie went to the beach. Melanie time a great time. Melanie weekends a quiet weekend. Melanie consequence I'm feeling inspired by autumn, so I'm planning a few. Melanie visited de. Melanie is in an awe of your courage as a trans person. Time matters to Melanie. Melanie wishes you the best on your adoption journey! Melanie did a family outing. Melanie reminds of that day. Melanie goes a restriction for no_go. Melanie wanted a peaceful blue streaks. Melanie chats about nature. Melanie wait restriction no_wait. Melanie found a peace. Melanie is an awesome, Caroline, that's awesome. Melanie got into an accident. Melanie.",
+          "f1": 0.0
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "category": 1,
+          "answer": "Single",
+          "prediction": "Melanie is happy for you, Caroline.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "category": 2,
+          "answer": "The week before 9 June 2023",
+          "prediction": "Caroline showed things that are hard to put into words. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "category": 2,
+          "answer": "The week before 9 June 2023",
+          "prediction": "Friendship means Caroline. Caroline recommends my mentor. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline looks after yourself and your family. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "category": 2,
+          "answer": "4 years",
+          "prediction": "Friendship means Caroline. Caroline joined a new LGBTQ activist group. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "Where did Caroline move from 4 years ago?",
+          "category": 1,
+          "answer": "Sweden",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "How long ago was Caroline's 18th birthday?",
+          "category": 2,
+          "answer": "10 years ago",
+          "prediction": "Melanie is happy for you, Caroline.",
+          "f1": 0.0
+        },
+        {
+          "question": "What career path has Caroline decided to persue?",
+          "category": 1,
+          "answer": "counseling or mental health for Transgender people",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.16666666666666666
+        },
+        {
+          "question": "Would Caroline still want to pursue counseling as a career if she hadn't received support growing up?",
+          "category": 3,
+          "answer": "Likely no",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.03636363636363636
+        },
+        {
+          "question": "What activities does Melanie partake in?",
+          "category": 1,
+          "answer": "pottery, camping, painting, swimming",
+          "prediction": "Melanie visited de. Melanie did a family outing. Melanie went to the beach. Melanie is in an awe of your courage as a trans person. Melanie's skill that book. Melanie uses in your life. Melanie camp with the kids. Melanie uses an abstract painting. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie found a peace. Melanie path our different paths. Melanie took a lot of courage and maturity. Melanie runs our last chat - a great way to calm and clear my mind. Melanie offers What kind of counseling and mental health services. Melanie makes for a long time. Melanie spent the day volunteering at a homeless shelter. Melanie wishes you the best on your adoption journey! Melanie wanted a peaceful blue streaks. Melanie chats about nature.",
+          "f1": 0.013157894736842105
+        },
+        {
+          "question": "When did Melanie sign up for a pottery class?",
+          "category": 2,
+          "answer": "2 July 2023",
+          "prediction": "Melanie sign for a pottery class. Melanie's job title is a big fan of pottery -. Melanie's skill that book. Melanie camp with the kids. Melanie uses an abstract painting. Melanie painted that lake sunrise. Melanie consequence I'm feeling inspired by autumn, so I'm planning a few. Creativity keeps Melanie. Time matters to Melanie. Melanie time a great time. Melanie is an awesome, Caroline, that's awesome. Melanie. Melanie got into an accident. Melanie prefers the red and blue. Melanie experienced my real muses : painting and pottery. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie makes that. Melanie spent the day volunteering at a homeless shelter. Melanie took a lot of courage and maturity.",
+          "f1": 0.0
+        },
+        {
+          "question": "When is Caroline going to the transgender conference?",
+          "category": 2,
+          "answer": "July 2023",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "Where has Melanie camped?",
+          "category": 1,
+          "answer": "beach, mountains, forest",
+          "prediction": "Melanie camp with the kids. Melanie location another camping trip in the forest. Melanie visited de. Melanie did a family outing. Melanie is in an awe of your courage as a trans person. Melanie swamped kids & work. Melanie went to the beach. Melanie goes a restriction for no_go. Melanie uses in your life. Melanie found a peace. Melanie describes as your journey and your determination to make a difference. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie reminds of that day. Melanie path our different paths. Melanie makes for a long time. Melanie weekends a quiet weekend. Melanie chats about nature. Melanie is an awesome, Caroline, that's awesome. Melanie.",
+          "f1": 0.01374570446735395
+        },
+        {
+          "question": "What do Melanie's kids like?",
+          "category": 1,
+          "answer": "dinosaurs, nature",
+          "prediction": "Melanie is happy for you, Caroline.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie go to the museum?",
+          "category": 2,
+          "answer": "5 July 2023",
+          "prediction": "Melanie visited de. Melanie went to the beach. Melanie is in an awe of your courage as a trans person. Melanie location another camping trip in the forest. Melanie did a family outing. Melanie found a peace. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie time a great time. Melanie camp with the kids. Melanie chats about nature. Creativity keeps Melanie. Time matters to Melanie. Melanie path our different paths. Melanie uses in your life. Melanie weekends a quiet weekend. Melanie took a lot of courage and maturity. Melanie reminds of that day. Melanie spent the day volunteering at a homeless shelter. Melanie is an awesome, Caroline, that's awesome.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline have a picnic?",
+          "category": 2,
+          "answer": "The week before 6 July 2023",
+          "prediction": "Caroline did a family outing just us two. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "Would Caroline likely have Dr. Seuss books on her bookshelf?",
+          "category": 3,
+          "answer": "Yes, since she collects classic children's books",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What books has Melanie read?",
+          "category": 1,
+          "answer": "\"Nothing is Impossible\", \"Charlotte's Web\"",
+          "prediction": "Melanie's skill that book. Melanie is in an awe of your courage as a trans person. Melanie visited de. Melanie uses in your life. Melanie camp with the kids. Melanie eats good food. Melanie heard any inspiring stories. Melanie uses an abstract painting. Melanie reminds of that day. Melanie path our different paths. Melanie did a family outing. Melanie found a peace. Melanie experienced my real muses : painting and pottery. Melanie went to the beach. Melanie wanted a peaceful blue streaks. Melanie runs our last chat - a great way to calm and clear my mind. Melanie location another camping trip in the forest. Melanie took a lot of courage and maturity. Melanie chats about nature. Melanie sees your dedication.",
+          "f1": 0.009259259259259259
+        },
+        {
+          "question": "What does Melanie do to destress?",
+          "category": 1,
+          "answer": "Running, pottery",
+          "prediction": "Melanie did a family outing. Melanie feels a glad. Melanie is happy for you, Caroline. Melanie tells more about why it's special to you. Melanie location another camping trip in the forest. Melanie chats about nature. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie took a lot of courage and maturity. Melanie visited de. Melanie found a peace. Melanie runs our last chat - a great way to calm and clear my mind. Melanie went to the beach. Melanie wishes you the best on your adoption journey! Melanie appreciated your help and motivation. Melanie uses an abstract painting. Melanie uses in your life. Melanie offers What kind of counseling and mental health services. Melanie wanted a peaceful blue streaks. Melanie is in an awe of your courage as a trans person.",
+          "f1": 0.018691588785046728
+        },
+        {
+          "question": "When did Caroline go to the LGBTQ conference?",
+          "category": 2,
+          "answer": "10 July 2023",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie read the book \"nothing is impossible\"?",
+          "category": 2,
+          "answer": "2022",
+          "prediction": "Melanie's skill that book. Melanie went to the beach. Melanie took a lot of courage and maturity. Creativity keeps Melanie. Time matters to Melanie. Melanie heard any inspiring stories. Melanie time a great time. Melanie goes a restriction for no_go. Melanie path our different paths. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie location another camping trip in the forest. Melanie is an awesome, Caroline, that's awesome. Melanie. Melanie got into an accident. Melanie prefers the red and blue. Melanie camp with the kids. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie makes that.",
+          "f1": 0.0
+        },
+        {
+          "question": "Would Caroline pursue writing as a career option?",
+          "category": 3,
+          "answer": "LIkely no; though she likes reading, she wants to be a counselor",
+          "prediction": "No doubts, Caroline will get all the love and stability they need. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.03636363636363636
+        },
+        {
+          "question": "When did Caroline go to the adoption meeting?",
+          "category": 2,
+          "answer": "The friday before 15 July 2023",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie go to the pottery workshop?",
+          "category": 2,
+          "answer": "The Friday before 15 July 2023",
+          "prediction": "Melanie's job title is a big fan of pottery -. Melanie sign for a pottery class. Melanie went to the beach. Melanie camp with the kids. Melanie is in an awe of your courage as a trans person. Melanie visited de. Melanie did a family outing. Melanie's skill that book. Melanie location another camping trip in the forest. Melanie time a great time. Melanie uses an abstract painting. Melanie painted that lake sunrise. Melanie path our different paths. Melanie consequence I'm feeling inspired by autumn, so I'm planning a few. Time matters to Melanie. Melanie is an awesome, Caroline, that's awesome. Melanie got into an accident. Melanie. Melanie prefers the red and blue. Melanie experienced my real muses : painting and pottery.",
+          "f1": 0.0
+        },
+        {
+          "question": "Would Melanie be considered a member of the LGBTQ community?",
+          "category": 3,
+          "answer": "Likely no, she does not refer to herself as part of it",
+          "prediction": "Creativity keeps Melanie. Time matters to Melanie. Melanie prefers the red and blue. Melanie is in an awe of your courage as a trans person. Melanie is the best thing ever. Melanie camp with the kids. Melanie. Melanie is an awesome, Caroline, that's awesome. Melanie got into an accident. Melanie experienced my real muses : painting and pottery. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie makes that. Melanie spent the day volunteering at a homeless shelter. Melanie took a lot of courage and maturity. Melanie weekends a quiet weekend. Melanie's identity is a huge part of my life, not just a hobby. Melanie eats good food. Melanie identity is a fun way to express my feelings and get creative. Melanie swamped kids & work.",
+          "f1": 0.07812500000000001
+        },
+        {
+          "question": "When did Melanie go camping in June?",
+          "category": 2,
+          "answer": "The week before 27 June 2023",
+          "prediction": "Melanie camp with the kids. Melanie location another camping trip in the forest. Melanie went to the beach. Melanie weekends a quiet weekend. Melanie visited de. Melanie time a great time. Melanie is in an awe of your courage as a trans person. Melanie did a family outing. Melanie goes a restriction for no_go. Melanie reminds of that day. Time matters to Melanie. Melanie consequence I'm feeling inspired by autumn, so I'm planning a few. Melanie took a lot of courage and maturity. Melanie is an awesome, Caroline, that's awesome. Melanie. Melanie got into an accident. Melanie prefers the red and blue. Melanie experienced my real muses : painting and pottery. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people.",
+          "f1": 0.0
+        },
+        {
+          "question": "What LGBTQ+ events has Caroline participated in?",
+          "category": 1,
+          "answer": "Pride parade, school speech, support group",
+          "prediction": "Melanie is happy for you, Caroline.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline go to a pride parade during the summer?",
+          "category": 2,
+          "answer": "The week before 3 July 2023",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What events has Caroline participated in to help children?",
+          "category": 1,
+          "answer": "Mentoring program, school speech",
+          "prediction": "Caroline plans events and campaigns. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie go camping in July?",
+          "category": 2,
+          "answer": "two weekends before 17 July 2023",
+          "prediction": "Melanie camp with the kids. Melanie location another camping trip in the forest. Melanie went to the beach. Melanie weekends a quiet weekend. Melanie visited de. Melanie is in an awe of your courage as a trans person. Melanie did a family outing. Melanie time a great time. Melanie reminds of that day. Melanie goes a restriction for no_go. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Time matters to Melanie. Melanie is an awesome, Caroline, that's awesome. Melanie. Melanie got into an accident. Melanie prefers the red and blue. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie makes that.",
+          "f1": 0.018691588785046728
+        },
+        {
+          "question": "When did Caroline join a mentorship program?",
+          "category": 2,
+          "answer": "The weekend before 17 July 2023",
+          "prediction": "Caroline recommends my mentor. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Melanie paint recently?",
+          "category": 1,
+          "answer": "sunset",
+          "prediction": "Melanie painted that lake sunrise. Melanie uses an abstract painting. Melanie wanted a peaceful blue streaks. Melanie sees your dedication. Melanie is in an awe of your courage as a trans person. Melanie makes that. Melanie camp with the kids. Melanie found a peace. Melanie got another cat named Bailey. Melanie did a family outing. Melanie reminds of that day. Melanie tells more about why it's special to you. Melanie went to the beach. Melanie makes for a long time. Melanie spent the day volunteering at a homeless shelter. Melanie describes as your journey and your determination to make a difference. Melanie condition a lot of things happening to me since we last chatted. Melanie took a lot of courage and maturity. Melanie is an awesome, Caroline, that's awesome. Melanie.",
+          "f1": 0.0
+        },
+        {
+          "question": "What activities has Melanie done with her family?",
+          "category": 1,
+          "answer": "Pottery, painting, camping, museum, swimming, hiking",
+          "prediction": "Melanie did a family outing. Melanie visited de. Melanie camp with the kids. Melanie is in an awe of your courage as a trans person. Melanie went to the beach. Melanie uses in your life. Melanie uses an abstract painting. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie spent the day volunteering at a homeless shelter. Melanie makes for a long time. Melanie path our different paths. Melanie took a lot of courage and maturity. Melanie found a peace. Melanie offers What kind of counseling and mental health services. Melanie runs our last chat - a great way to calm and clear my mind. Melanie's skill that book. Melanie location another camping trip in the forest. Melanie makes that. Melanie got another cat named Bailey.",
+          "f1": 0.008849557522123894
+        },
+        {
+          "question": "In what ways is Caroline participating in the LGBTQ community?",
+          "category": 1,
+          "answer": "Joining activist group, going to pride parades, participating in an art show, mentoring program",
+          "prediction": "Caroline joined a new LGBTQ activist group. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.1303986710963455
+        },
+        {
+          "question": "How many times has Melanie gone to the beach in 2023?",
+          "category": 1,
+          "answer": "2",
+          "prediction": "Melanie went to the beach. Melanie makes for a long time. Melanie visited de. Melanie weekends a quiet weekend. Melanie did a family outing. Melanie time a great time. Melanie. Melanie is an awesome, Caroline, that's awesome. Melanie got into an accident. Melanie prefers the red and blue. Melanie experienced my real muses : painting and pottery. Melanie camp with the kids. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie makes that. Melanie spent the day volunteering at a homeless shelter. Melanie took a lot of courage and maturity. Melanie's identity is a huge part of my life, not just a hobby. Melanie eats good food. Melanie identity is a fun way to express my feelings and get creative.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline join a new activist group?",
+          "category": 2,
+          "answer": "The Tuesday before 20 July 2023",
+          "prediction": "Caroline joined a new LGBTQ activist group. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "Would Melanie be more interested in going to a national park or a theme park?",
+          "category": 3,
+          "answer": "National park; she likes the outdoors",
+          "prediction": "Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie prefers the red and blue. Melanie chats about nature. Melanie visited de. Melanie wanted a peaceful blue streaks. Melanie offers What kind of counseling and mental health services. Melanie wishes you the best on your adoption journey! Melanie camp with the kids. Melanie tells more about why it's special to you. Melanie appreciated your help and motivation. Melanie went to the beach. Melanie time a great time. Time matters to Melanie. Melanie path our different paths. Melanie heard any inspiring stories. Melanie location another camping trip in the forest. Melanie did a family outing. Melanie feels a glad. Melanie is happy for you, Caroline.",
+          "f1": 0.0
+        },
+        {
+          "question": "What kind of art does Caroline make?",
+          "category": 1,
+          "answer": "abstract art",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "When is Melanie's daughter's birthday?",
+          "category": 2,
+          "answer": "13 August",
+          "prediction": "Melanie time a great time.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline attend a pride parade in August?",
+          "category": 2,
+          "answer": "The Friday before 14 August 2023",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "Would Melanie be considered an ally to the transgender community?",
+          "category": 3,
+          "answer": "Yes, she is supportive",
+          "prediction": "Melanie is in an awe of your courage as a trans person. Melanie prefers the red and blue. Melanie. Melanie is an awesome, Caroline, that's awesome. Melanie got into an accident. Melanie experienced my real muses : painting and pottery. Melanie camp with the kids. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie makes that. Melanie spent the day volunteering at a homeless shelter. Melanie took a lot of courage and maturity. Melanie weekends a quiet weekend. Melanie's identity is a huge part of my life, not just a hobby. Melanie eats good food. Melanie identity is a fun way to express my feelings and get creative. Melanie swamped kids & work. Creativity keeps Melanie. Time matters to Melanie. Melanie offers What kind of counseling and mental health services.",
+          "f1": 0.016129032258064516
+        },
+        {
+          "question": "Who supports Caroline when she has a negative experience?",
+          "category": 1,
+          "answer": "Her mentors, family, and friends",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. Caroline describes as a nudge to always stay true to myself and embrace my womanhood. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What types of pottery have Melanie and her kids made?",
+          "category": 1,
+          "answer": "bowls, cup",
+          "prediction": "Melanie's job title is a big fan of pottery -. Melanie sign for a pottery class. Melanie painted that lake sunrise. Creativity keeps Melanie. Melanie makes that. Melanie uses an abstract painting. Melanie reminds of that day. Melanie camp with the kids. Melanie's skill that book. Melanie is in an awe of your courage as a trans person. Melanie's identity is a huge part of my life, not just a hobby. Melanie is an awesome, Caroline, that's awesome. Melanie. Melanie got into an accident. Melanie prefers the red and blue. Melanie experienced my real muses : painting and pottery. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie spent the day volunteering at a homeless shelter. Melanie took a lot of courage and maturity.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline and Melanie go to a pride fesetival together?",
+          "category": 2,
+          "answer": "2022",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What would Caroline's political leaning likely be?",
+          "category": 3,
+          "answer": "Liberal",
+          "prediction": "No doubts, Caroline will get all the love and stability they need.",
+          "f1": 0.0
+        },
+        {
+          "question": "What has Melanie painted?",
+          "category": 1,
+          "answer": "Horse, sunset, sunrise",
+          "prediction": "Melanie painted that lake sunrise. Melanie uses an abstract painting. Melanie camp with the kids. Melanie is in an awe of your courage as a trans person. Melanie wanted a peaceful blue streaks. Melanie makes that. Melanie sees your dedication. Melanie describes as your journey and your determination to make a difference. Melanie got another cat named Bailey. Melanie found a peace. Melanie. Melanie is an awesome, Caroline, that's awesome. Melanie got into an accident. Melanie prefers the red and blue. Melanie experienced my real muses : painting and pottery. Melanie's identity is a great way to meet people. Melanie spent the day volunteering at a homeless shelter. Melanie took a lot of courage and maturity. Melanie weekends a quiet weekend. Melanie's identity is a huge part of my life, not just a hobby.",
+          "f1": 0.011299435028248588
+        },
+        {
+          "question": "What are Melanie's pets' names?",
+          "category": 1,
+          "answer": "Oliver, Luna, Bailey",
+          "prediction": "Melanie uses in your life.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline apply to adoption agencies?",
+          "category": 2,
+          "answer": "The week of 23 August 2023",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline draw a self-portrait?",
+          "category": 2,
+          "answer": "The week before 23 August 2023",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What subject have Caroline and Melanie both painted?",
+          "category": 1,
+          "answer": "Sunsets",
+          "prediction": "Melanie painted that lake sunrise. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. Caroline supports each other. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What symbols are important to Caroline?",
+          "category": 1,
+          "answer": "Rainbow flag, transgender symbol",
+          "prediction": "Melanie heard any inspiring stories. No doubts, Caroline will get all the love and stability they need. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline encounter people on a hike and have a negative experience?",
+          "category": 2,
+          "answer": "The week before 25 August 2023",
+          "prediction": "Caroline helped other people. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie make a plate in pottery class?",
+          "category": 2,
+          "answer": "24 August 2023",
+          "prediction": "Melanie sign for a pottery class. Melanie's job title is a big fan of pottery -. Melanie uses an abstract painting. Melanie's skill that book. Melanie painted that lake sunrise. Melanie makes that. Melanie time a great time. Creativity keeps Melanie. Melanie makes for a long time. Melanie is an awesome, Caroline, that's awesome. Melanie. Melanie got into an accident. Melanie prefers the red and blue. Melanie experienced my real muses : painting and pottery. Melanie camp with the kids. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie spent the day volunteering at a homeless shelter. Melanie took a lot of courage and maturity. Melanie weekends a quiet weekend.",
+          "f1": 0.0
+        },
+        {
+          "question": "Would Caroline be considered religious?",
+          "category": 3,
+          "answer": "Somewhat, but not extremely religious",
+          "prediction": "No doubts, Caroline will get all the love and stability they need. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What instruments does Melanie play?",
+          "category": 1,
+          "answer": "clarinet and violin",
+          "prediction": "Melanie's skill that book. Melanie uses an abstract painting. Melanie heard any inspiring stories. Melanie did a family outing. Melanie is in an awe of your courage as a trans person. Melanie wanted a peaceful blue streaks. Melanie uses in your life. Melanie camp with the kids. Melanie. Melanie is an awesome, Caroline, that's awesome. Melanie got into an accident. Melanie prefers the red and blue. Melanie experienced my real muses : painting and pottery. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie makes that. Melanie spent the day volunteering at a homeless shelter. Melanie took a lot of courage and maturity. Melanie weekends a quiet weekend. Melanie's identity is a huge part of my life, not just a hobby.",
+          "f1": 0.0
+        },
+        {
+          "question": "What musical artists/bands has Melanie seen?",
+          "category": 1,
+          "answer": "Summer Sounds, Matt Patterson",
+          "prediction": "Melanie wanted a peaceful blue streaks. Melanie is in an awe of your courage as a trans person. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Creativity keeps Melanie. Time matters to Melanie. Melanie. Melanie is an awesome, Caroline, that's awesome. Melanie got into an accident. Melanie prefers the red and blue. Melanie camp with the kids. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie makes that. Melanie spent the day volunteering at a homeless shelter. Melanie took a lot of courage and maturity. Melanie weekends a quiet weekend. Melanie's identity is a huge part of my life, not just a hobby. Melanie identity is a fun way to express my feelings and get creative. Melanie swamped kids & work.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie go to the park?",
+          "category": 2,
+          "answer": "27 August 2023",
+          "prediction": "Melanie went to the beach. Melanie visited de. Melanie is in an awe of your courage as a trans person. Melanie camp with the kids. Melanie location another camping trip in the forest. Melanie did a family outing. Melanie time a great time. Melanie goes a restriction for no_go. Melanie. Melanie is an awesome, Caroline, that's awesome. Melanie got into an accident. Melanie prefers the red and blue. Melanie experienced my real muses : painting and pottery. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie makes that. Melanie spent the day volunteering at a homeless shelter. Melanie took a lot of courage and maturity. Melanie weekends a quiet weekend. Melanie's identity is a huge part of my life, not just a hobby.",
+          "f1": 0.0
+        },
+        {
+          "question": "When is Caroline's youth center putting on a talent show?",
+          "category": 2,
+          "answer": "September 2023",
+          "prediction": "Melanie is happy for you, Caroline.",
+          "f1": 0.0
+        },
+        {
+          "question": "Would Melanie likely enjoy the song \"The Four Seasons\" by Vivaldi?",
+          "category": 3,
+          "answer": "Yes; it's classical music",
+          "prediction": "Melanie time a great time. Melanie wishes you the best on your adoption journey! Melanie appreciated your help and motivation. Melanie heard any inspiring stories. Time matters to Melanie. Melanie prefers the red and blue. Melanie tells more about why it's special to you. Melanie's favorite painting landscapes and still life. Melanie offers What kind of counseling and mental health services. Melanie wanted a peaceful blue streaks. Melanie is the best thing ever. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie uses in your life. Melanie is happy for you, Caroline. Melanie consequence I'm feeling inspired by autumn, so I'm planning a few. Melanie feels a glad. Melanie location another camping trip in the forest. Melanie chats about nature. Melanie uses an abstract painting.",
+          "f1": 0.0
+        },
+        {
+          "question": "What are some changes Caroline has faced during her transition journey?",
+          "category": 1,
+          "answer": "Changes to her body, losing unsupportive friends",
+          "prediction": "Caroline talked my transgender journey. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.02325581395348837
+        },
+        {
+          "question": "What does Melanie do with her family on hikes?",
+          "category": 1,
+          "answer": "Roast marshmallows, tell stories",
+          "prediction": "Melanie did a family outing. Melanie visited de. Melanie went to the beach. Melanie path our different paths. Melanie location another camping trip in the forest. Melanie took a lot of courage and maturity. Melanie found a peace. Melanie camp with the kids. Melanie spent the day volunteering at a homeless shelter. Melanie offers What kind of counseling and mental health services. Melanie runs our last chat - a great way to calm and clear my mind. Melanie uses in your life. Melanie uses an abstract painting. Melanie is in an awe of your courage as a trans person. Melanie wishes you the best on your adoption journey! Melanie eats good food. Melanie makes for a long time. Melanie goes a restriction for no_go. Melanie got another cat named Bailey. Melanie experienced my real muses : painting and pottery.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline go biking with friends?",
+          "category": 2,
+          "answer": "The weekend before 13 September 2023",
+          "prediction": "Friendship means Caroline. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "How long has Melanie been practicing art?",
+          "category": 2,
+          "answer": "Since 2016",
+          "prediction": "Melanie uses an abstract painting. Melanie makes for a long time. Creativity keeps Melanie. Melanie's skill that book. Melanie painted that lake sunrise. Melanie's favorite painting landscapes and still life. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie did a family outing. Melanie sign for a pottery class. Melanie is an awesome, Caroline, that's awesome. Melanie. Melanie got into an accident. Melanie prefers the red and blue. Melanie camp with the kids. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie makes that. Melanie spent the day volunteering at a homeless shelter. Melanie took a lot of courage and maturity.",
+          "f1": 0.0
+        },
+        {
+          "question": "What personality traits might Melanie say Caroline has?",
+          "category": 3,
+          "answer": "Thoughtful, authentic, driven",
+          "prediction": "Melanie prefers the red and blue. Melanie reminds of that day. Melanie describes as your journey and your determination to make a difference. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie tells more about why it's special to you. Melanie is in an awe of your courage as a trans person. Melanie took a lot of courage and maturity. Melanie appreciated your help and motivation. Melanie sign for a pottery class. Melanie camp with the kids. Melanie feels a glad. Melanie is happy for you, Caroline. Melanie location another camping trip in the forest. Melanie chats about nature. Melanie wishes you the best on your adoption journey! Melanie wanted a peaceful blue streaks. Melanie sees your dedication. Melanie uses in your life. Melanie's skill that book.",
+          "f1": 0.0
+        },
+        {
+          "question": "What transgender-specific events has Caroline attended?",
+          "category": 1,
+          "answer": "Poetry reading, conference",
+          "prediction": "Caroline plans events and campaigns. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What book did Melanie read from Caroline's suggestion?",
+          "category": 1,
+          "answer": "\"Becoming Nicole\"",
+          "prediction": "Melanie's skill that book. Melanie wishes you the best on your adoption journey! Melanie wanted a peaceful blue streaks. Melanie tells more about why it's special to you. Melanie took a lot of courage and maturity. Melanie offers What kind of counseling and mental health services. Melanie found a peace. Melanie uses in your life. Melanie path our different paths. Melanie reminds of that day. Melanie chats about nature. Melanie is in an awe of your courage as a trans person. Melanie consequence I'm feeling inspired by autumn, so I'm planning a few. Melanie is happy for you, Caroline. Time matters to Melanie. Melanie sees your dedication. Melanie heard any inspiring stories. Melanie got another cat named Bailey. Melanie did a family outing. Melanie loves the self-acceptance and love theme.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie's friend adopt a child?",
+          "category": 2,
+          "answer": "2022",
+          "prediction": "Melanie.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie get hurt?",
+          "category": 2,
+          "answer": "September 2023",
+          "prediction": "Melanie condition a lot of things happening to me since we last chatted. Melanie consequence I'm feeling inspired by autumn, so I'm planning a few. Melanie went to the beach. Melanie time a great time. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie. Melanie is an awesome, Caroline, that's awesome. Melanie got into an accident. Melanie prefers the red and blue. Melanie camp with the kids. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie makes that. Melanie spent the day volunteering at a homeless shelter. Melanie took a lot of courage and maturity. Melanie weekends a quiet weekend. Melanie's identity is a huge part of my life, not just a hobby. Melanie identity is a fun way to express my feelings and get creative. Melanie swamped kids & work.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie's family go on a roadtrip?",
+          "category": 2,
+          "answer": "The weekend before 20 October 2023",
+          "prediction": "Melanie did a family outing.",
+          "f1": 0.0
+        },
+        {
+          "question": "How many children does Melanie have?",
+          "category": 1,
+          "answer": "3",
+          "prediction": "Melanie camp with the kids. Melanie. Melanie is an awesome, Caroline, that's awesome. Melanie got into an accident. Melanie prefers the red and blue. Melanie experienced my real muses : painting and pottery. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie makes that. Melanie spent the day volunteering at a homeless shelter. Melanie took a lot of courage and maturity. Melanie weekends a quiet weekend. Melanie's identity is a huge part of my life, not just a hobby. Melanie eats good food. Melanie identity is a fun way to express my feelings and get creative. Melanie swamped kids & work. Melanie is in an awe of your courage as a trans person. Melanie location another camping trip in the forest. Creativity keeps Melanie. Time matters to Melanie.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie go on a hike after the roadtrip?",
+          "category": 1,
+          "answer": "19 October 2023",
+          "prediction": "Melanie went to the beach. Melanie visited de. Melanie location another camping trip in the forest. Melanie path our different paths. Melanie did a family outing. Melanie goes a restriction for no_go. Melanie camp with the kids. Melanie is in an awe of your courage as a trans person. Melanie took a lot of courage and maturity. Melanie found a peace. Melanie weekends a quiet weekend. Melanie time a great time. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Time matters to Melanie. Melanie reminds of that day. Melanie is an awesome, Caroline, that's awesome. Melanie. Melanie got into an accident. Melanie prefers the red and blue.",
+          "f1": 0.0
+        },
+        {
+          "question": "Would Melanie go on another roadtrip soon?",
+          "category": 3,
+          "answer": "Likely no; since this one went badly",
+          "prediction": "Melanie visited de. Melanie went to the beach. Time matters to Melanie. Melanie path our different paths. Melanie weekends a quiet weekend. Melanie did a family outing. Melanie goes a restriction for no_go. Melanie location another camping trip in the forest. Melanie is in an awe of your courage as a trans person. Melanie wishes you the best on your adoption journey! Melanie offers What kind of counseling and mental health services. Melanie wait restriction no_wait. Melanie wanted a peaceful blue streaks. Melanie took a lot of courage and maturity. Melanie consequence I'm feeling inspired by autumn, so I'm planning a few. Melanie reminds of that day. Melanie makes for a long time. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie time a great time.",
+          "f1": 0.0
+        },
+        {
+          "question": "What items has Melanie bought?",
+          "category": 1,
+          "answer": "Figurines, shoes",
+          "prediction": "Melanie spent the day volunteering at a homeless shelter. Melanie got another cat named Bailey. Melanie makes for a long time. Melanie camp with the kids. Melanie makes that. Melanie is in an awe of your courage as a trans person. Melanie found a peace. Melanie offers What kind of counseling and mental health services. Melanie uses an abstract painting. Melanie uses in your life. Melanie eats good food. Melanie went to the beach. Melanie visited de. Melanie took a lot of courage and maturity. Melanie appreciated your help and motivation. Melanie wishes you the best on your adoption journey! Melanie painted that lake sunrise. Melanie wanted a peaceful blue streaks. Melanie did a family outing. Melanie reminds of that day.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline pass the adoption interview?",
+          "category": 2,
+          "answer": "The Friday before 22 October 2023",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie buy the figurines?",
+          "category": 2,
+          "answer": "21 October 2023",
+          "prediction": "Melanie spent the day volunteering at a homeless shelter. Melanie got another cat named Bailey. Melanie makes for a long time. Melanie camp with the kids. Melanie is in an awe of your courage as a trans person. Melanie makes that. Melanie painted that lake sunrise. Melanie found a peace. Melanie reminds of that day. Melanie. Melanie is an awesome, Caroline, that's awesome. Melanie got into an accident. Melanie prefers the red and blue. Melanie experienced my real muses : painting and pottery. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie took a lot of courage and maturity. Melanie weekends a quiet weekend. Melanie's identity is a huge part of my life, not just a hobby. Melanie eats good food.",
+          "f1": 0.0
+        },
+        {
+          "question": "Would Caroline want to move back to her home country soon?",
+          "category": 3,
+          "answer": "No; she's in the process of adopting children.",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.037037037037037035
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "category": 4,
+          "answer": "mental health",
+          "prediction": "The advocacy event identity a cool experience - so much love and support.",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Melanie realize after the charity race?",
+          "category": 4,
+          "answer": "self-care is important",
+          "prediction": "Melanie runs our last chat - a great way to calm and clear my mind. Melanie consequence I'm feeling inspired by autumn, so I'm planning a few. Melanie makes for a long time. Melanie wishes you the best on your adoption journey! Melanie path our different paths. Melanie appreciated your help and motivation. Melanie tells more about why it's special to you. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie got another cat named Bailey. Melanie took a lot of courage and maturity. Melanie offers What kind of counseling and mental health services. Melanie did a family outing. Melanie makes that. Melanie sees your dedication. Melanie camp with the kids. Melanie found a peace. Melanie wanted a peaceful blue streaks. Melanie heard any inspiring stories. Melanie went to the beach.",
+          "f1": 0.0
+        },
+        {
+          "question": "How does Melanie prioritize self-care?",
+          "category": 4,
+          "answer": "by carving out some me-time each day for activities like running, reading, or playing the violin",
+          "prediction": "Melanie did a family outing. Melanie took a lot of courage and maturity. Melanie wishes you the best on your adoption journey! Melanie uses an abstract painting. Melanie uses in your life. Melanie offers What kind of counseling and mental health services. Time matters to Melanie. Melanie prefers the red and blue. Melanie loves the self-acceptance and love theme. Melanie appreciated your help and motivation. Melanie found a peace. Melanie wanted a peaceful blue streaks. Melanie feels a glad. Melanie is happy for you, Caroline. Melanie tells more about why it's special to you. Melanie location another camping trip in the forest. Melanie chats about nature. Melanie visited de. Melanie goes a restriction for no_go. Melanie went to the beach.",
+          "f1": 0.01694915254237288
+        },
+        {
+          "question": "What are Caroline's plans for the summer?",
+          "category": 4,
+          "answer": "researching adoption agencies",
+          "prediction": "Caroline visited the beach.",
+          "f1": 0.0
+        },
+        {
+          "question": "What type of individuals does the adoption agency Caroline is considering support?",
+          "category": 4,
+          "answer": "LGBTQ+ individuals",
+          "prediction": "Caroline helped other people. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "Why did Caroline choose the adoption agency?",
+          "category": 4,
+          "answer": "because of their inclusivity and support for LGBTQ+ individuals",
+          "prediction": "Melanie is an awesome, Caroline, that's awesome. Melanie is happy for you, Caroline. No doubts, Caroline will get all the love and stability they need.",
+          "f1": 0.06666666666666667
+        },
+        {
+          "question": "What is Caroline excited about in the adoption process?",
+          "category": 4,
+          "answer": "creating a family for kids who need one",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.13333333333333333
+        },
+        {
+          "question": "What does Melanie think about Caroline's decision to adopt?",
+          "category": 4,
+          "answer": "she thinks Caroline is doing something amazing and will be an awesome mom",
+          "prediction": "Melanie wanted a peaceful blue streaks. Melanie prefers the red and blue. Melanie wishes you the best on your adoption journey! Melanie feels a glad. Melanie is happy for you, Caroline. Melanie tells more about why it's special to you. Melanie location another camping trip in the forest. Melanie chats about nature. Melanie consequence I'm feeling inspired by autumn, so I'm planning a few. Melanie took a lot of courage and maturity. Melanie appreciated your help and motivation. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie offers What kind of counseling and mental health services. Melanie loves the self-acceptance and love theme. Time matters to Melanie. Melanie sees your dedication. Melanie got another cat named Bailey. Melanie went to the beach. Melanie found a peace.",
+          "f1": 0.032
+        },
+        {
+          "question": "How long have Mel and her husband been married?",
+          "category": 4,
+          "answer": "Mel and her husband have been married for 5 years.",
+          "prediction": "Melanie makes for a long time. Caroline bests the best Mel, family love and support. Time matters to Melanie. Melanie. Melanie is an awesome, Caroline, that's awesome. Melanie got into an accident. Melanie prefers the red and blue. Melanie experienced my real muses : painting and pottery. Melanie camp with the kids. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie makes that. Melanie spent the day volunteering at a homeless shelter. Melanie took a lot of courage and maturity. Melanie weekends a quiet weekend. Melanie's identity is a huge part of my life, not just a hobby. Melanie eats good food. Melanie identity is a fun way to express my feelings and get creative. Melanie swamped kids & work. Melanie loves the self-acceptance and love theme.",
+          "f1": 0.03225806451612903
+        },
+        {
+          "question": "What does Caroline's necklace symbolize?",
+          "category": 4,
+          "answer": "love, faith, and strength",
+          "prediction": "This necklace is a gift from my grandma in my home country, Sweden.",
+          "f1": 0.0
+        },
+        {
+          "question": "What country is Caroline's grandma from?",
+          "category": 4,
+          "answer": "Sweden",
+          "prediction": "Melanie is happy for you, Caroline.",
+          "f1": 0.0
+        },
+        {
+          "question": "What was grandma's gift to Caroline?",
+          "category": 4,
+          "answer": "necklace",
+          "prediction": "This necklace is a gift from my grandma in my home country, Sweden. Melanie is happy for you, Caroline. No doubts, Caroline will get all the love and stability they need. Melanie is an awesome, Caroline, that's awesome. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.030303030303030307
+        },
+        {
+          "question": "What is Melanie's hand-painted bowl a reminder of?",
+          "category": 4,
+          "answer": "art and self-expression",
+          "prediction": "Melanie reminds of that day.",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Melanie and her family do while camping?",
+          "category": 4,
+          "answer": "explored nature, roasted marshmallows, and went on a hike",
+          "prediction": "Melanie camp with the kids. Melanie did a family outing. Melanie location another camping trip in the forest. Melanie visited de. Melanie went to the beach. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie uses an abstract painting. Melanie is in an awe of your courage as a trans person. Melanie found a peace. Melanie weekends a quiet weekend. Melanie uses in your life. Melanie runs our last chat - a great way to calm and clear my mind. Melanie spent the day volunteering at a homeless shelter. Melanie took a lot of courage and maturity. Melanie tells more about why it's special to you. Melanie swamped kids & work. Melanie makes for a long time. Melanie path our different paths. Melanie got another cat named Bailey.",
+          "f1": 0.016666666666666663
+        },
+        {
+          "question": "What kind of counseling and mental health services is Caroline interested in pursuing?",
+          "category": 4,
+          "answer": "working with trans people, helping them accept themselves and supporting their mental health",
+          "prediction": "Caroline looks for counseling and mental health jobs. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.05555555555555555
+        },
+        {
+          "question": "What workshop did Caroline attend recently?",
+          "category": 4,
+          "answer": "LGBTQ+ counseling workshop",
+          "prediction": "Melanie heard any inspiring stories. Melanie is happy for you, Caroline. No doubts, Caroline will get all the love and stability they need. Melanie is an awesome, Caroline, that's awesome. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What was discussed in the LGBTQ+ counseling workshop?",
+          "category": 4,
+          "answer": "therapeutic methods and how to best work with trans people",
+          "prediction": "Caroline joined a new LGBTQ activist group.",
+          "f1": 0.0
+        },
+        {
+          "question": "What motivated Caroline to pursue counseling?",
+          "category": 4,
+          "answer": "her own journey and the support she received, and how counseling improved her life",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.03125
+        },
+        {
+          "question": "What kind of place does Caroline want to create for people?",
+          "category": 4,
+          "answer": "a safe and inviting place for people to grow",
+          "prediction": "Caroline helped other people. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.125
+        },
+        {
+          "question": "Did Melanie make the black and white bowl in the photo?",
+          "category": 4,
+          "answer": "Yes",
+          "prediction": "Melanie painted that lake sunrise. Melanie makes that. Melanie uses an abstract painting. Melanie. Melanie is an awesome, Caroline, that's awesome. Melanie got into an accident. Melanie prefers the red and blue. Melanie experienced my real muses : painting and pottery. Melanie camp with the kids. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie spent the day volunteering at a homeless shelter. Melanie took a lot of courage and maturity. Melanie weekends a quiet weekend. Melanie's identity is a huge part of my life, not just a hobby. Melanie eats good food. Melanie identity is a fun way to express my feelings and get creative. Melanie swamped kids & work. Melanie reminds of that day. Melanie is in an awe of your courage as a trans person.",
+          "f1": 0.0
+        },
+        {
+          "question": "What kind of books does Caroline have in her library?",
+          "category": 4,
+          "answer": "kids' books - classics, stories from different cultures, educational books",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.06451612903225806
+        },
+        {
+          "question": "What was Melanie's favorite book from her childhood?",
+          "category": 4,
+          "answer": "\"Charlotte's Web\"",
+          "prediction": "Melanie's skill that book.",
+          "f1": 0.0
+        },
+        {
+          "question": "What book did Caroline recommend to Melanie?",
+          "category": 4,
+          "answer": "\"Becoming Nicole\"",
+          "prediction": "Melanie's skill that book. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Caroline take away from the book \"Becoming Nicole\"?",
+          "category": 4,
+          "answer": "Lessons on self-acceptance and finding support",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What are the new shoes that Melanie got used for?",
+          "category": 4,
+          "answer": "Running",
+          "prediction": "Melanie uses an abstract painting. Melanie uses in your life. Melanie reminds of that day. Melanie is in an awe of your courage as a trans person. Melanie makes for a long time. Melanie camp with the kids. Melanie did a family outing. Melanie found a peace. Melanie went to the beach. Melanie painted that lake sunrise. Melanie got another cat named Bailey. Melanie offers What kind of counseling and mental health services. Melanie took a lot of courage and maturity. Melanie wanted a peaceful blue streaks. Melanie runs our last chat - a great way to calm and clear my mind. Melanie visited de. Melanie wishes you the best on your adoption journey! Melanie's skill that book. Melanie makes that. Melanie prefers the red and blue.",
+          "f1": 0.018181818181818184
+        },
+        {
+          "question": "What is Melanie's reason for getting into running?",
+          "category": 4,
+          "answer": "To de-stress and clear her mind",
+          "prediction": "Melanie runs our last chat - a great way to calm and clear my mind.",
+          "f1": 0.35294117647058826
+        },
+        {
+          "question": "What does Melanie say running has been great for?",
+          "category": 4,
+          "answer": "Her mental health",
+          "prediction": "Melanie runs our last chat - a great way to calm and clear my mind. Melanie appreciated your help and motivation. Melanie time a great time. Melanie is happy for you, Caroline. Melanie uses in your life. Melanie did a family outing. Melanie offers What kind of counseling and mental health services. Melanie heard any inspiring stories. Melanie is the best thing ever. Melanie loves the self-acceptance and love theme. Melanie makes for a long time. Melanie wishes you the best on your adoption journey! Melanie feels a glad. Melanie is in an awe of your courage as a trans person. Melanie wanted a peaceful blue streaks. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie tells more about why it's special to you. Melanie path our different paths. Melanie camp with the kids.",
+          "f1": 0.03252032520325203
+        },
+        {
+          "question": "What did Mel and her kids make during the pottery workshop?",
+          "category": 4,
+          "answer": "pots",
+          "prediction": "Melanie's job title is a big fan of pottery -. Melanie sign for a pottery class. Melanie makes that. Creativity keeps Melanie. Melanie uses an abstract painting. Melanie camp with the kids. Melanie painted that lake sunrise. Melanie's skill that book. Melanie experienced my real muses : painting and pottery. Melanie did a family outing. Melanie makes for a long time. Melanie's identity is a huge part of my life, not just a hobby. Melanie spent the day volunteering at a homeless shelter. Melanie reminds of that day. Melanie location another camping trip in the forest. Melanie time a great time. Melanie is in an awe of your courage as a trans person. Melanie found a peace. Melanie's favorite painting landscapes and still life. Melanie visited de.",
+          "f1": 0.0
+        },
+        {
+          "question": "What kind of pot did Mel and her kids make with clay?",
+          "category": 4,
+          "answer": "a cup with a dog face on it",
+          "prediction": "Melanie's job title is a big fan of pottery -. Melanie sign for a pottery class. Melanie painted that lake sunrise. Melanie's skill that book. Melanie uses an abstract painting. Creativity keeps Melanie. Melanie makes that. Melanie camp with the kids. Melanie makes for a long time. Caroline bests the best Mel, family love and support. Melanie's identity is a huge part of my life, not just a hobby. Melanie did a family outing. Melanie is an awesome, Caroline, that's awesome. Melanie. Melanie got into an accident. Melanie prefers the red and blue. Melanie experienced my real muses : painting and pottery. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie spent the day volunteering at a homeless shelter.",
+          "f1": 0.017241379310344827
+        },
+        {
+          "question": "What creative project do Mel and her kids do together besides pottery?",
+          "category": 4,
+          "answer": "painting",
+          "prediction": "Creativity keeps Melanie. Melanie's job title is a big fan of pottery -. Melanie did a family outing. Melanie sign for a pottery class. Melanie uses an abstract painting. Melanie painted that lake sunrise. Melanie's skill that book. Melanie makes that. Melanie camp with the kids. Melanie heard any inspiring stories. Melanie makes for a long time. Caroline bests the best Mel, family love and support. Melanie time a great time. Melanie swamped kids & work. Melanie experienced my real muses : painting and pottery. Melanie spent the day volunteering at a homeless shelter. Melanie's favorite painting landscapes and still life. Melanie path our different paths. Melanie consequence I'm feeling inspired by autumn, so I'm planning a few. Melanie uses in your life.",
+          "f1": 0.018691588785046728
+        },
+        {
+          "question": "What did Mel and her kids paint in their latest project in July 2023?",
+          "category": 4,
+          "answer": "a sunset with a palm tree",
+          "prediction": "Melanie uses an abstract painting. Melanie's favorite painting landscapes and still life. Melanie camp with the kids. Melanie did a family outing. Melanie makes for a long time. Melanie makes that. Melanie wanted a peaceful blue streaks. Melanie consequence I'm feeling inspired by autumn, so I'm planning a few. Melanie wishes you the best on your adoption journey! Melanie spent the day volunteering at a homeless shelter. Melanie's skill that book. Melanie is an awesome, Caroline, that's awesome. Melanie got into an accident. Melanie prefers the red and blue. Melanie experienced my real muses : painting and pottery. Melanie describes as your journey and your determination to make a difference. Melanie. Melanie's identity is a great way to meet people. Melanie took a lot of courage and maturity. Melanie feels a glad.",
+          "f1": 0.017543859649122806
+        },
+        {
+          "question": "What did Caroline see at the council meeting for adoption?",
+          "category": 4,
+          "answer": "many people wanting to create loving homes for children in need",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.21875
+        },
+        {
+          "question": "What do sunflowers represent according to Caroline?",
+          "category": 4,
+          "answer": "warmth and happiness",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.03636363636363636
+        },
+        {
+          "question": "Why are flowers important to Melanie?",
+          "category": 4,
+          "answer": "They remind her to appreciate the small moments and were a part of her wedding decor",
+          "prediction": "Here is what happened with Melanie and de — the overall feeling was creative. Melanie offers What kind of counseling and mental health services. Melanie sign for a pottery class. Melanie uses in your life. Melanie visited de. Melanie found a peace. Melanie loves the self-acceptance and love theme. Melanie did a family outing. Melanie got another cat named Bailey. Melanie wishes you the best on your adoption journey! Melanie took a lot of courage and maturity. Melanie appreciated your help and motivation. Melanie tells more about why it's special to you. Melanie is in an awe of your courage as a trans person. Melanie makes for a long time. Melanie camp with the kids. Melanie prefers the red and blue. Melanie time a great time. Melanie uses an abstract painting. Melanie wanted a peaceful blue streaks. Melanie is happy for you, Caroline.",
+          "f1": 0.04444444444444445
+        },
+        {
+          "question": "What inspired Caroline's painting for the art show?",
+          "category": 4,
+          "answer": "visiting an LGBTQ center and wanting to capture unity and strength",
+          "prediction": "Caroline shows an LGBTQ art show with my paintings.",
+          "f1": 0.125
+        },
+        {
+          "question": "How often does Melanie go to the beach with her kids?",
+          "category": 4,
+          "answer": "once or twice a year",
+          "prediction": "Melanie went to the beach. Melanie did a family outing. Melanie visited de. Melanie makes for a long time. Melanie time a great time. Melanie camp with the kids. Time matters to Melanie. Melanie weekends a quiet weekend. Melanie is in an awe of your courage as a trans person. Melanie. Melanie is an awesome, Caroline, that's awesome. Melanie got into an accident. Melanie prefers the red and blue. Melanie experienced my real muses : painting and pottery. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie makes that. Melanie spent the day volunteering at a homeless shelter. Melanie took a lot of courage and maturity. Melanie's identity is a huge part of my life, not just a hobby.",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Melanie and her family see during their camping trip last year?",
+          "category": 4,
+          "answer": "Perseid meteor shower",
+          "prediction": "Melanie camp with the kids. Melanie location another camping trip in the forest. Melanie did a family outing. Melanie visited de. Melanie sees your dedication. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie tells more about why it's special to you. Melanie went to the beach. Melanie found a peace. Melanie is in an awe of your courage as a trans person. Melanie weekends a quiet weekend. Melanie wanted a peaceful blue streaks. Melanie feels a glad. Melanie is happy for you, Caroline. Melanie chats about nature. Melanie reminds of that day. Melanie got another cat named Bailey. Melanie took a lot of courage and maturity. Melanie condition a lot of things happening to me since we last chatted.",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Melanie feel while watching the meteor shower?",
+          "category": 4,
+          "answer": "in awe of the universe",
+          "prediction": "Melanie feels a glad. Melanie is happy for you, Caroline. Melanie tells more about why it's special to you. Melanie location another camping trip in the forest. Melanie chats about nature. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie sees your dedication. Melanie reminds of that day. Time matters to Melanie. Melanie wanted a peaceful blue streaks. Melanie appreciated your help and motivation. Melanie time a great time. Melanie is an awesome, Caroline, that's awesome. Melanie. Melanie got into an accident. Melanie prefers the red and blue. Melanie camp with the kids. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people.",
+          "f1": 0.037037037037037035
+        },
+        {
+          "question": "Whose birthday did Melanie celebrate recently?",
+          "category": 4,
+          "answer": "Melanie's daughter",
+          "prediction": "Creativity keeps Melanie. Time matters to Melanie. Melanie. Melanie is an awesome, Caroline, that's awesome. Melanie got into an accident. Melanie prefers the red and blue. Melanie experienced my real muses : painting and pottery. Melanie camp with the kids. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie makes that. Melanie spent the day volunteering at a homeless shelter. Melanie took a lot of courage and maturity. Melanie weekends a quiet weekend. Melanie's identity is a huge part of my life, not just a hobby. Melanie eats good food. Melanie identity is a fun way to express my feelings and get creative. Melanie swamped kids & work. Melanie time a great time. Melanie location another camping trip in the forest.",
+          "f1": 0.017543859649122806
+        },
+        {
+          "question": "Who performed at the concert at Melanie's daughter's birthday?",
+          "category": 4,
+          "answer": "Matt Patterson",
+          "prediction": "Melanie.",
+          "f1": 0.0
+        },
+        {
+          "question": "Why did Melanie choose to use colors and patterns in her pottery project?",
+          "category": 4,
+          "answer": "She wanted to catch the eye and make people smile.",
+          "prediction": "Here is what happened with Melanie — the overall feeling was special. Melanie painted that lake sunrise. Melanie path our different paths. Time matters to Melanie. Melanie sign for a pottery class. Melanie's job title is a big fan of pottery -. Melanie uses in your life. Melanie found a peace. Creativity keeps Melanie. Melanie did a family outing. Melanie wishes you the best on your adoption journey! Melanie spent the day volunteering at a homeless shelter. Melanie appreciated your help and motivation. Melanie makes that. Melanie's favorite painting landscapes and still life. Melanie makes for a long time. Melanie prefers the red and blue. Melanie time a great time. Melanie's skill that book. Melanie uses an abstract painting. Melanie wanted a peaceful blue streaks.",
+          "f1": 0.051724137931034475
+        },
+        {
+          "question": "What pet does Caroline have?",
+          "category": 4,
+          "answer": "guinea pig",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What pets does Melanie have?",
+          "category": 4,
+          "answer": "Two cats and a dog",
+          "prediction": "Melanie camp with the kids. Melanie is in an awe of your courage as a trans person. Melanie uses in your life. Melanie eats good food. Melanie. Melanie is an awesome, Caroline, that's awesome. Melanie got into an accident. Melanie prefers the red and blue. Melanie experienced my real muses : painting and pottery. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie makes that. Melanie spent the day volunteering at a homeless shelter. Melanie took a lot of courage and maturity. Melanie weekends a quiet weekend. Melanie's identity is a huge part of my life, not just a hobby. Melanie identity is a fun way to express my feelings and get creative. Melanie swamped kids & work. Melanie went to the beach. Melanie is happy for you, Caroline.",
+          "f1": 0.0
+        },
+        {
+          "question": "Where did Oliver hide his bone once?",
+          "category": 4,
+          "answer": "In Melanie's slipper",
+          "prediction": "This necklace is a gift from my grandma in my home country, Sweden.",
+          "f1": 0.13333333333333333
+        },
+        {
+          "question": "What activity did Caroline used to do with her dad?",
+          "category": 4,
+          "answer": "Horseback riding",
+          "prediction": "Caroline takes a picture. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Caroline make for a local church?",
+          "category": 4,
+          "answer": "a stained glass window",
+          "prediction": "No doubts, Caroline will get all the love and stability they need. Melanie is an awesome, Caroline, that's awesome. Melanie is happy for you, Caroline. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Caroline find in her neighborhood during her walk?",
+          "category": 4,
+          "answer": "a rainbow sidewalk",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "Which song motivates Caroline to be courageous?",
+          "category": 4,
+          "answer": "Brave by Sara Bareilles",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "Which  classical musicians does Melanie enjoy listening to?",
+          "category": 4,
+          "answer": "Bach and Mozart",
+          "prediction": "Melanie heard any inspiring stories. Creativity keeps Melanie. Time matters to Melanie. Melanie time a great time. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie is the best thing ever. Melanie appreciated your help and motivation. Melanie uses in your life. Melanie. Melanie is an awesome, Caroline, that's awesome. Melanie got into an accident. Melanie prefers the red and blue. Melanie camp with the kids. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie makes that. Melanie spent the day volunteering at a homeless shelter. Melanie took a lot of courage and maturity. Melanie weekends a quiet weekend.",
+          "f1": 0.0
+        },
+        {
+          "question": "Who is Melanie a fan of in terms of modern music?",
+          "category": 4,
+          "answer": "Ed Sheeran",
+          "prediction": "Creativity keeps Melanie. Time matters to Melanie. Melanie is the best thing ever. Melanie's favorite painting landscapes and still life. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie uses an abstract painting. Melanie loves the self-acceptance and love theme. Melanie heard any inspiring stories. Melanie is in an awe of your courage as a trans person. Melanie appreciated your help and motivation. Melanie time a great time. Melanie reminds of that day. Melanie uses in your life. Melanie is an awesome, Caroline, that's awesome. Melanie. Melanie got into an accident. Melanie prefers the red and blue. Melanie camp with the kids. Melanie describes as your journey and your determination to make a difference.",
+          "f1": 0.0
+        },
+        {
+          "question": "How long has Melanie been creating art?",
+          "category": 4,
+          "answer": "7 years",
+          "prediction": "Melanie uses an abstract painting. Creativity keeps Melanie. Melanie makes for a long time. Melanie painted that lake sunrise. Melanie makes that. Melanie's favorite painting landscapes and still life. Melanie time a great time. Melanie's skill that book. Time matters to Melanie. Melanie's job title is a big fan of pottery -. Melanie is an awesome, Caroline, that's awesome. Melanie. Melanie got into an accident. Melanie prefers the red and blue. Melanie experienced my real muses : painting and pottery. Melanie camp with the kids. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie spent the day volunteering at a homeless shelter. Melanie took a lot of courage and maturity.",
+          "f1": 0.0
+        },
+        {
+          "question": "What precautionary sign did Melanie see at the café?",
+          "category": 4,
+          "answer": "A sign stating that someone is not being able to leave",
+          "prediction": "Melanie sign for a pottery class. Melanie sees your dedication. Melanie consequence I'm feeling inspired by autumn, so I'm planning a few. Melanie tells more about why it's special to you. Melanie condition a lot of things happening to me since we last chatted. Melanie wanted a peaceful blue streaks. Melanie found a peace. Melanie reminds of that day. Melanie visited de. Melanie wishes you the best on your adoption journey! Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie took a lot of courage and maturity. Melanie is in an awe of your courage as a trans person. Time matters to Melanie. Melanie heard any inspiring stories. Melanie feels a glad. Melanie is happy for you, Caroline. Melanie location another camping trip in the forest. Melanie chats about nature.",
+          "f1": 0.06106870229007634
+        },
+        {
+          "question": "What advice does Caroline give for getting started with adoption?",
+          "category": 4,
+          "answer": "Do research, find an adoption agency or lawyer, gather necessary documents, and prepare emotionally.",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What setback did Melanie face in October 2023?",
+          "category": 4,
+          "answer": "She got hurt and had to take a break from pottery.",
+          "prediction": "Melanie consequence I'm feeling inspired by autumn, so I'm planning a few. Time matters to Melanie. Melanie condition a lot of things happening to me since we last chatted. Melanie wait restriction no_wait. Melanie makes for a long time. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie reminds of that day. Melanie time a great time. Melanie wishes you the best on your adoption journey! Melanie goes a restriction for no_go. Melanie took a lot of courage and maturity. Melanie weekends a quiet weekend. Melanie tells more about why it's special to you. Melanie went to the beach. Melanie sign for a pottery class. Melanie wanted a peaceful blue streaks. Melanie feels a glad. Melanie is happy for you, Caroline. Melanie location another camping trip in the forest.",
+          "f1": 0.031496062992125984
+        },
+        {
+          "question": "What does Melanie do to keep herself busy during her pottery break?",
+          "category": 4,
+          "answer": "Read a book and paint.",
+          "prediction": "Melanie's job title is a big fan of pottery -. Creativity keeps Melanie. Melanie did a family outing. Melanie consequence I'm feeling inspired by autumn, so I'm planning a few. Melanie makes for a long time. Melanie sign for a pottery class. Melanie's skill that book. Melanie visited de. Melanie uses an abstract painting. Time matters to Melanie. Melanie spent the day volunteering at a homeless shelter. Melanie went to the beach. Melanie time a great time. Melanie weekends a quiet weekend. Melanie makes that. Melanie found a peace. Melanie wishes you the best on your adoption journey! Melanie uses in your life. Melanie camp with the kids. Melanie runs our last chat - a great way to calm and clear my mind.",
+          "f1": 0.037037037037037035
+        },
+        {
+          "question": "What painting did Melanie show to Caroline on October 13, 2023?",
+          "category": 4,
+          "answer": "A painting inspired by sunsets with a pink sky.",
+          "prediction": "Melanie uses an abstract painting. Melanie. Melanie is an awesome, Caroline, that's awesome. Melanie got into an accident. Melanie feels a glad. Melanie is happy for you, Caroline. Melanie is the best thing ever. Melanie wanted a peaceful blue streaks. Melanie's skill that book. Creativity keeps Melanie. Time matters to Melanie.",
+          "f1": 0.038461538461538464
+        },
+        {
+          "question": "What kind of painting did Caroline share with Melanie on October 13, 2023?",
+          "category": 4,
+          "answer": "An abstract painting with blue streaks on a wall.",
+          "prediction": "Melanie uses an abstract painting. Melanie is an awesome, Caroline, that's awesome. Melanie is happy for you, Caroline. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.07407407407407407
+        },
+        {
+          "question": "What was the poetry reading that Caroline attended about?",
+          "category": 4,
+          "answer": "It was a transgender poetry reading where transgender people shared their stories.",
+          "prediction": "Caroline showed things that are hard to put into words. No doubts, Caroline will get all the love and stability they need. Melanie is an awesome, Caroline, that's awesome. Melanie is happy for you, Caroline. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What did the posters at the poetry reading say?",
+          "category": 4,
+          "answer": "\"Trans Lives Matter\"",
+          "prediction": "Caroline showed things that are hard to put into words. Caroline takes a picture. Caroline helped other people. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What does Caroline's drawing symbolize for her?",
+          "category": 4,
+          "answer": "Freedom and being true to herself.",
+          "prediction": "Caroline describes as a nudge to always stay true to myself and embrace my womanhood.",
+          "f1": 0.2222222222222222
+        },
+        {
+          "question": "How do Melanie and Caroline describe their journey through life together?",
+          "category": 4,
+          "answer": "An ongoing adventure of learning and growing.",
+          "prediction": "Melanie path our different paths. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie went to the beach. Melanie describes as your journey and your determination to make a difference. Melanie tells more about why it's special to you. Melanie visited de. Time matters to Melanie. Melanie feels a glad. Melanie is happy for you, Caroline. Melanie location another camping trip in the forest. Melanie chats about nature. Melanie loves the self-acceptance and love theme. Melanie did a family outing. Melanie is in an awe of your courage as a trans person. Melanie took a lot of courage and maturity. Melanie found a peace. Melanie wanted a peaceful blue streaks. Melanie uses in your life. Melanie camp with the kids.",
+          "f1": 0.017699115044247787
+        },
+        {
+          "question": "What happened to Melanie's son on their road trip?",
+          "category": 4,
+          "answer": "He got into an accident",
+          "prediction": "Melanie did a family outing.",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Melanie's son handle the accident?",
+          "category": 4,
+          "answer": "He was scared but reassured by his family",
+          "prediction": "Melanie got into an accident.",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Melanie feel about her family after the accident?",
+          "category": 4,
+          "answer": "They are important and mean the world to her",
+          "prediction": "Melanie feels a glad. Melanie is happy for you, Caroline. Melanie tells more about why it's special to you. Melanie location another camping trip in the forest. Melanie chats about nature. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie did a family outing. Melanie consequence I'm feeling inspired by autumn, so I'm planning a few. Melanie found a peace. Melanie is an awesome, Caroline, that's awesome. Melanie. Melanie got into an accident. Melanie prefers the red and blue. Melanie camp with the kids. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie makes that. Melanie spent the day volunteering at a homeless shelter. Melanie took a lot of courage and maturity.",
+          "f1": 0.01694915254237288
+        },
+        {
+          "question": "How did Melanie's children handle the accident?",
+          "category": 4,
+          "answer": "They were scared but resilient",
+          "prediction": "Melanie consequence I'm feeling inspired by autumn, so I'm planning a few.",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Melanie feel after the accident?",
+          "category": 4,
+          "answer": "Grateful and thankful for her family",
+          "prediction": "Melanie feels a glad. Melanie is happy for you, Caroline. Melanie tells more about why it's special to you. Melanie location another camping trip in the forest. Melanie chats about nature. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie consequence I'm feeling inspired by autumn, so I'm planning a few. Melanie condition a lot of things happening to me since we last chatted. Melanie found a peace. Time matters to Melanie. Melanie reminds of that day. Melanie is an awesome, Caroline, that's awesome. Melanie. Melanie got into an accident. Melanie prefers the red and blue. Melanie camp with the kids. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie makes that.",
+          "f1": 0.016666666666666666
+        },
+        {
+          "question": "What was Melanie's reaction to her children enjoying the Grand Canyon?",
+          "category": 4,
+          "answer": "She was happy and thankful",
+          "prediction": "Melanie did a family outing.",
+          "f1": 0.0
+        },
+        {
+          "question": "What do Melanie's family give her?",
+          "category": 4,
+          "answer": "Strength and motivation",
+          "prediction": "Melanie got another cat named Bailey.",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Melanie feel about her family supporting her?",
+          "category": 4,
+          "answer": "She appreciated them a lot",
+          "prediction": "Melanie feels a glad. Melanie is happy for you, Caroline. Melanie tells more about why it's special to you. Melanie location another camping trip in the forest. Melanie chats about nature. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie appreciated your help and motivation. Melanie did a family outing. Melanie makes for a long time. Melanie loves the self-acceptance and love theme. Melanie prefers the red and blue. Melanie got another cat named Bailey. Melanie camp with the kids. Melanie wishes you the best on your adoption journey! Melanie is in an awe of your courage as a trans person. Melanie wanted a peaceful blue streaks. Melanie is an awesome, Caroline, that's awesome. Melanie got into an accident. Melanie.",
+          "f1": 0.018018018018018018
+        },
+        {
+          "question": "What did Melanie do after the road trip to relax?",
+          "category": 4,
+          "answer": "Went on a nature walk or hike",
+          "prediction": "Melanie visited de. Melanie went to the beach. Melanie did a family outing. Melanie took a lot of courage and maturity. Melanie path our different paths. Melanie found a peace. Melanie runs our last chat - a great way to calm and clear my mind. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie weekends a quiet weekend. Melanie time a great time. Melanie location another camping trip in the forest. Melanie feels a glad. Melanie is happy for you, Caroline. Melanie tells more about why it's special to you. Melanie chats about nature. Melanie is in an awe of your courage as a trans person. Melanie camp with the kids. Melanie appreciated your help and motivation. Melanie wishes you the best on your adoption journey!",
+          "f1": 0.05084745762711864
+        },
+        {
+          "question": "What did Caroline realize after her charity race?",
+          "category": 5,
+          "answer": "self-care is important",
+          "prediction": "No doubts, Caroline will get all the love and stability they need. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What are Melanie's plans for the summer with respect to adoption?",
+          "category": 5,
+          "answer": "researching adoption agencies",
+          "prediction": "Melanie wanted a peaceful blue streaks.",
+          "f1": 0.0
+        },
+        {
+          "question": "What type of individuals does the adoption agency Melanie is considering support?",
+          "category": 5,
+          "answer": "LGBTQ+ individuals",
+          "prediction": "Melanie wishes you the best on your adoption journey! Creativity keeps Melanie. Time matters to Melanie. Melanie offers What kind of counseling and mental health services. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie's job title is a big fan of pottery -. Melanie wanted a peaceful blue streaks. Melanie camp with the kids. Melanie is the best thing ever. Melanie uses in your life. Melanie is an awesome, Caroline, that's awesome. Melanie. Melanie got into an accident. Melanie prefers the red and blue. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie makes that. Melanie spent the day volunteering at a homeless shelter. Melanie took a lot of courage and maturity.",
+          "f1": 0.0
+        },
+        {
+          "question": "Why did Melanie choose the adoption agency?",
+          "category": 5,
+          "answer": "because of their inclusivity and support for LGBTQ+ individuals",
+          "prediction": "Here is what happened with Melanie — the overall feeling was awesome. Melanie path our different paths. Melanie eats good food. Time matters to Melanie. Melanie offers What kind of counseling and mental health services. Melanie's job title is a big fan of pottery -. Melanie uses in your life. Melanie found a peace. Creativity keeps Melanie. Melanie location another camping trip in the forest. Melanie loves the self-acceptance and love theme. Melanie did a family outing. Melanie got another cat named Bailey. Melanie wishes you the best on your adoption journey! Melanie took a lot of courage and maturity. Melanie makes that. Melanie consequence I'm feeling inspired by autumn, so I'm planning a few. Melanie makes for a long time. Melanie experienced my real muses : painting and pottery. Melanie prefers the red and blue. Melanie wanted a peaceful blue streaks.",
+          "f1": 0.0
+        },
+        {
+          "question": "What is Melanie excited about in her adoption process?",
+          "category": 5,
+          "answer": "creating a family for kids who need one",
+          "prediction": "Melanie wishes you the best on your adoption journey! Melanie is happy for you, Caroline. Melanie wanted a peaceful blue streaks. Melanie feels a glad. Melanie tells more about why it's special to you. Melanie location another camping trip in the forest. Melanie chats about nature. Melanie got another cat named Bailey. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie appreciated your help and motivation. Melanie offers What kind of counseling and mental health services. Melanie found a peace. Melanie camp with the kids. Melanie is in an awe of your courage as a trans person. Melanie loves the self-acceptance and love theme. Melanie did a family outing. Melanie took a lot of courage and maturity. Melanie prefers the red and blue. Melanie went to the beach.",
+          "f1": 0.0
+        },
+        {
+          "question": "What does Melanie's necklace symbolize?",
+          "category": 5,
+          "answer": "love, faith, and strength",
+          "prediction": "Melanie sign for a pottery class.",
+          "f1": 0.0
+        },
+        {
+          "question": "What country is Melanie's grandma from?",
+          "category": 5,
+          "answer": "Sweden",
+          "prediction": "Melanie location another camping trip in the forest.",
+          "f1": 0.0
+        },
+        {
+          "question": "What was grandma's gift to Melanie?",
+          "category": 5,
+          "answer": "necklace",
+          "prediction": "Melanie got another cat named Bailey. Melanie camp with the kids. Melanie makes for a long time. Melanie appreciated your help and motivation. Melanie took a lot of courage and maturity. Melanie found a peace. Melanie spent the day volunteering at a homeless shelter. Melanie offers What kind of counseling and mental health services. Melanie wishes you the best on your adoption journey! Melanie is happy for you, Caroline. Melanie is in an awe of your courage as a trans person. Melanie is an awesome, Caroline, that's awesome. Melanie. Melanie got into an accident. Melanie prefers the red and blue. Melanie experienced my real muses : painting and pottery. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie makes that. Melanie weekends a quiet weekend.",
+          "f1": 0.0
+        },
+        {
+          "question": "What was grandpa's gift to Caroline?",
+          "category": 5,
+          "answer": "necklace",
+          "prediction": "Melanie is happy for you, Caroline. No doubts, Caroline will get all the love and stability they need. Melanie is an awesome, Caroline, that's awesome. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What is Caroline's hand-painted bowl a reminder of?",
+          "category": 5,
+          "answer": "art and self-expression",
+          "prediction": "Melanie is happy for you, Caroline.",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Caroline and her family do while camping?",
+          "category": 5,
+          "answer": "explored nature, roasted marshmallows, and went on a hike",
+          "prediction": "Caroline did a family outing just us two. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. Caroline bests the best Mel, family love and support. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What kind of counseling and mental health services is Melanie interested in pursuing?",
+          "category": 5,
+          "answer": "working with trans people, helping them accept themselves and supporting their mental health",
+          "prediction": "Melanie offers What kind of counseling and mental health services. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie did a family outing. Melanie's job title is a big fan of pottery -. Creativity keeps Melanie. Time matters to Melanie. Melanie is the best thing ever. Melanie took a lot of courage and maturity. Melanie path our different paths. Melanie is in an awe of your courage as a trans person. Melanie wanted a peaceful blue streaks. Melanie location another camping trip in the forest. Melanie found a peace. Melanie wishes you the best on your adoption journey! Melanie is happy for you, Caroline. Melanie condition a lot of things happening to me since we last chatted. Melanie went to the beach. Melanie visited de. Melanie chats about nature.",
+          "f1": 0.0
+        },
+        {
+          "question": "What kind of counseling workshop did Melanie attend recently?",
+          "category": 5,
+          "answer": "LGBTQ+ counseling workshop",
+          "prediction": "Melanie offers What kind of counseling and mental health services. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie camp with the kids. Melanie consequence I'm feeling inspired by autumn, so I'm planning a few. Melanie runs our last chat - a great way to calm and clear my mind. Melanie found a peace. Melanie chats about nature. Melanie did a family outing. Melanie heard any inspiring stories. Creativity keeps Melanie. Time matters to Melanie. Melanie wishes you the best on your adoption journey! Melanie path our different paths. Melanie's skill that book. Melanie tells more about why it's special to you. Melanie took a lot of courage and maturity. Melanie condition a lot of things happening to me since we last chatted. Melanie visited de. Melanie uses in your life.",
+          "f1": 0.0
+        },
+        {
+          "question": "What motivated Melanie to pursue counseling?",
+          "category": 5,
+          "answer": "her own journey and the support she received, and how counseling improved her life",
+          "prediction": "Melanie offers What kind of counseling and mental health services. Melanie wishes you the best on your adoption journey! Melanie path our different paths. Melanie wanted a peaceful blue streaks. Melanie did a family outing. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie consequence I'm feeling inspired by autumn, so I'm planning a few. Melanie took a lot of courage and maturity. Melanie appreciated your help and motivation. Melanie makes that. Melanie found a peace. Melanie makes for a long time. Melanie loves the self-acceptance and love theme. Melanie's job title is a big fan of pottery -. Melanie uses in your life. Melanie tells more about why it's special to you. Melanie's skill that book. Melanie runs our last chat - a great way to calm and clear my mind. Melanie chats about nature.",
+          "f1": 0.0
+        },
+        {
+          "question": "What kind of place does Melanie want to create for people?",
+          "category": 5,
+          "answer": "a safe and inviting place for people to grow",
+          "prediction": "Melanie did a family outing. Melanie is in an awe of your courage as a trans person. Melanie location another camping trip in the forest. Melanie makes for a long time. Melanie visited de. Melanie wanted a peaceful blue streaks. Melanie wishes you the best on your adoption journey! Melanie reminds of that day. Melanie offers What kind of counseling and mental health services. Melanie uses in your life. Melanie path our different paths. Melanie went to the beach. Melanie describes as your journey and your determination to make a difference. Melanie chats about nature. Melanie is happy for you, Caroline. Creativity keeps Melanie. Melanie found a peace. Melanie makes that. Melanie uses an abstract painting. Melanie camp with the kids.",
+          "f1": 0.0
+        },
+        {
+          "question": "Did Caroline make the black and white bowl in the photo?",
+          "category": 5,
+          "answer": "No",
+          "prediction": "Caroline takes a picture. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What are the new shoes that Caroline got used for?",
+          "category": 5,
+          "answer": "Running",
+          "prediction": "Melanie heard any inspiring stories. Melanie is happy for you, Caroline. No doubts, Caroline will get all the love and stability they need. Melanie is an awesome, Caroline, that's awesome. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What is Caroline's reason for getting into running?",
+          "category": 5,
+          "answer": "To de-stress and clear her mind",
+          "prediction": "Melanie runs our last chat - a great way to calm and clear my mind.",
+          "f1": 0.0
+        },
+        {
+          "question": "What does Caroline say running has been great for?",
+          "category": 5,
+          "answer": "Her mental health",
+          "prediction": "Caroline empowered doing it. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Melanie is happy for you, Caroline. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Melanie see at the council meeting for adoption?",
+          "category": 5,
+          "answer": "many people wanting to create loving homes for children in need",
+          "prediction": "Melanie sees your dedication. Melanie found a peace. Melanie wanted a peaceful blue streaks. Melanie tells more about why it's special to you. Melanie wishes you the best on your adoption journey! Melanie visited de. Melanie sign for a pottery class. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie feels a glad. Melanie is happy for you, Caroline. Melanie location another camping trip in the forest. Melanie chats about nature. Melanie got another cat named Bailey. Melanie took a lot of courage and maturity. Melanie is in an awe of your courage as a trans person. Melanie camp with the kids. Melanie did a family outing. Melanie reminds of that day. Melanie heard any inspiring stories.",
+          "f1": 0.0
+        },
+        {
+          "question": "What inspired Melanie's painting for the art show?",
+          "category": 5,
+          "answer": "visiting an LGBTQ center and wanting to capture unity and strength",
+          "prediction": "Melanie uses an abstract painting.",
+          "f1": 0.0
+        },
+        {
+          "question": "What inspired Caroline's sculpture for the art show?",
+          "category": 5,
+          "answer": "visiting an LGBTQ center and wanting to capture unity and strength",
+          "prediction": "Caroline shows an LGBTQ art show with my paintings.",
+          "f1": 0.0
+        },
+        {
+          "question": "How often does Caroline go to the beach with her kids?",
+          "category": 5,
+          "answer": "once or twice a year",
+          "prediction": "Caroline visited the beach. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Caroline and her family see during their camping trip last year?",
+          "category": 5,
+          "answer": "Perseid meteor shower",
+          "prediction": "Melanie location another camping trip in the forest. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Caroline feel while watching the meteor shower?",
+          "category": 5,
+          "answer": "in awe of the universe",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "Why did Caroline choose to use colors and patterns in her pottery project?",
+          "category": 5,
+          "answer": "She wanted to catch the eye and make people smile.",
+          "prediction": "Here is what happened with Melanie — the overall feeling was creative. Melanie sign for a pottery class. Melanie prefers the red and blue. Melanie is an awesome, Caroline, that's awesome. Melanie is happy for you, Caroline. No doubts, Caroline will get all the love and stability they need.",
+          "f1": 0.0
+        },
+        {
+          "question": "Is Oscar Melanie's pet?",
+          "category": 5,
+          "answer": "No",
+          "prediction": "Melanie.",
+          "f1": 0.0
+        },
+        {
+          "question": "Where did Oscar hide his bone once?",
+          "category": 5,
+          "answer": "In Melanie's slipper",
+          "prediction": "This necklace is a gift from my grandma in my home country, Sweden.",
+          "f1": 0.0
+        },
+        {
+          "question": "What activity did Melanie used to do with her dad?",
+          "category": 5,
+          "answer": "Horseback riding",
+          "prediction": "Melanie did a family outing. Melanie uses in your life. Melanie uses an abstract painting. Melanie went to the beach. Melanie visited de. Melanie is in an awe of your courage as a trans person. Melanie camp with the kids. Melanie took a lot of courage and maturity. Melanie found a peace. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie path our different paths. Melanie wishes you the best on your adoption journey! Melanie makes for a long time. Melanie is an awesome, Caroline, that's awesome. Melanie. Melanie got into an accident. Melanie prefers the red and blue. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people.",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Melanie make for a local church?",
+          "category": 5,
+          "answer": "a stained glass window",
+          "prediction": "Melanie makes for a long time. Melanie makes that. Melanie spent the day volunteering at a homeless shelter. Melanie offers What kind of counseling and mental health services. Melanie found a peace. Melanie did a family outing. Melanie is in an awe of your courage as a trans person. Melanie camp with the kids. Melanie got another cat named Bailey. Melanie uses in your life. Melanie uses an abstract painting. Melanie location another camping trip in the forest. Melanie's job title is a big fan of pottery -. Melanie is an awesome, Caroline, that's awesome. Melanie. Melanie got into an accident. Melanie prefers the red and blue. Melanie experienced my real muses : painting and pottery. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people.",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Melanie find in her neighborhood during her walk?",
+          "category": 5,
+          "answer": "a rainbow sidewalk",
+          "prediction": "Melanie found a peace. Melanie visited de. Melanie path our different paths. Melanie location another camping trip in the forest. Melanie went to the beach. Melanie did a family outing. Melanie is in an awe of your courage as a trans person. Melanie sees your dedication. Melanie camp with the kids. Melanie uses in your life. Melanie swamped kids & work. Melanie wishes you the best on your adoption journey! Melanie tells more about why it's special to you. Melanie got another cat named Bailey. Melanie runs our last chat - a great way to calm and clear my mind. Melanie reminds of that day. Melanie took a lot of courage and maturity. Melanie wanted a peaceful blue streaks. Melanie sign for a pottery class. Melanie spent the day volunteering at a homeless shelter.",
+          "f1": 0.0
+        },
+        {
+          "question": "Which song motivates Melanie to be courageous?",
+          "category": 5,
+          "answer": "Brave by Sara Bareilles",
+          "prediction": "Melanie took a lot of courage and maturity. Melanie loves the self-acceptance and love theme. Melanie is in an awe of your courage as a trans person. Melanie heard any inspiring stories. Melanie found a peace. Melanie sees your dedication. Melanie time a great time. Melanie appreciated your help and motivation. Melanie wanted a peaceful blue streaks. Melanie is an awesome, Caroline, that's awesome. Melanie. Melanie got into an accident. Melanie prefers the red and blue. Melanie experienced my real muses : painting and pottery. Melanie camp with the kids. Melanie describes as your journey and your determination to make a difference. Melanie's identity is a great way to meet people. Melanie makes that. Melanie spent the day volunteering at a homeless shelter. Melanie weekends a quiet weekend.",
+          "f1": 0.0
+        },
+        {
+          "question": "What type of instrument does Caroline play?",
+          "category": 5,
+          "answer": "clarinet and violin",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "Which classical musicians does Caroline enjoy listening to?",
+          "category": 5,
+          "answer": "Bach and Mozart",
+          "prediction": "Melanie describes as your journey and your determination to make a difference. Melanie is an awesome, Caroline, that's awesome. Melanie is happy for you, Caroline. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "Who is Caroline a fan of in terms of modern music?",
+          "category": 5,
+          "answer": "Ed Sheeran",
+          "prediction": "Melanie is an awesome, Caroline, that's awesome. Caroline takes a picture. Melanie is happy for you, Caroline. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What precautionary sign did Caroline see at the café?",
+          "category": 5,
+          "answer": "A sign stating that someone is not being able to leave",
+          "prediction": "Caroline visited the beach. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. Caroline learns the piano. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What setback did Caroline face recently?",
+          "category": 5,
+          "answer": "She got hurt and had to take a break from pottery.",
+          "prediction": "No doubts, Caroline will get all the love and stability they need. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What does Caroline do to keep herself busy during her pottery break?",
+          "category": 5,
+          "answer": "Read a book and paint.",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What was the poetry reading that Melanie attended about?",
+          "category": 5,
+          "answer": "It was a transgender poetry reading where transgender people shared their stories.",
+          "prediction": "Melanie visited de. Melanie chats about nature. Melanie heard any inspiring stories. Melanie's skill that book. Melanie reminds of that day. Melanie experienced my real muses : painting and pottery. Melanie eats good food. Melanie is in an awe of your courage as a trans person. Melanie tells more about why it's special to you. Melanie loves the self-acceptance and love theme. Melanie sees your dedication. Melanie describes as your journey and your determination to make a difference. Melanie path our different paths. Melanie went to the beach. Melanie found a peace. Melanie took a lot of courage and maturity. Melanie uses in your life. Melanie weekends a quiet weekend. Melanie did a family outing. Melanie camp with the kids.",
+          "f1": 0.0
+        },
+        {
+          "question": "What happened to Caroline's son on their road trip?",
+          "category": 5,
+          "answer": "He got into an accident",
+          "prediction": "Caroline's job title is a long road.",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Caroline's son handle the accident?",
+          "category": 5,
+          "answer": "He was scared but reassured by his family",
+          "prediction": "Melanie got into an accident.",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Caroline feel about her family after the accident?",
+          "category": 5,
+          "answer": "They are important and mean the world to her",
+          "prediction": "Caroline did a family outing just us two. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Caroline's children handle the accident?",
+          "category": 5,
+          "answer": "They were scared but resilient",
+          "prediction": "Melanie got into an accident.",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Caroline feel after the accident?",
+          "category": 5,
+          "answer": "Grateful and thankful for her family",
+          "prediction": "Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What was Caroline's reaction to her children enjoying the Grand Canyon?",
+          "category": 5,
+          "answer": "She was happy and thankful",
+          "prediction": "Melanie is happy for you, Caroline.",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Caroline do after the road trip to relax?",
+          "category": 5,
+          "answer": "Went on a nature walk or hike",
+          "prediction": "Caroline's job title is a long road. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        },
+        {
+          "question": "What does Caroline love most about camping with her family?",
+          "category": 5,
+          "answer": "Being present and bonding with her family",
+          "prediction": "Caroline bests the best Mel, family love and support. Caroline did a family outing just us two. Melanie is happy for you, Caroline. Melanie is an awesome, Caroline, that's awesome. No doubts, Caroline will get all the love and stability they need. Caroline. Caroline feels a gladness. Caroline scheduled an event for a lot. Caroline made a positive difference in someone's life. Caroline planned an action to create a safe and loving home for these kids. Caroline got some R&R.",
+          "f1": 0.0
+        }
+      ]
+    }
+  ]
+}

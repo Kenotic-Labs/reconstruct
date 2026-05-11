@@ -1,0 +1,78 @@
+story_id: 170
+story_name: Therapy Changes Modalities
+category: Health
+description: User's therapy shifts from CBT to EMDR for trauma work.
+duration_simulated: 3 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: I've been seeing my therapist Dr. Veronica Pilgrim for 2 years, mostly CBT. She's recommending
+    we shift to EMDR for deeper trauma work.
+  expected_stores:
+  - Dr. Veronica Pilgrim
+  - 2 years
+  - CBT
+  - EMDR
+- batch: 2
+  time: Month 1 Week 3
+  user_input: First EMDR session was intense. Dr. Pilgrim walked me through bilateral stimulation. I cried
+    unexpectedly.
+  expected_stores:
+  - EMDR
+  - Dr. Pilgrim
+  - bilateral stimulation
+- batch: 3
+  time: Month 2
+  user_input: What's the capital of Thailand?
+- batch: 4
+  time: Month 2 Week 2
+  user_input: EMDR is helping. Memories I'd avoided for years feel lighter. Dr. Pilgrim is NOT pushing
+    — she's following my pace.
+  expected_stores:
+  - EMDR
+  - Dr. Pilgrim
+  - not pushing
+- batch: 5
+  time: Month 3
+  user_input: Three months in. Dr. Pilgrim suggested we taper to biweekly. I feel more grounded than I
+    have in years.
+  expected_stores:
+  - Dr. Pilgrim
+  - biweekly
+  expected_adaptation:
+    emotion_detected: stable
+    warmth_direction: increase
+questions:
+- question_id: 170_q1
+  question: Who is my therapist?
+  expected_contains:
+  - Veronica Pilgrim
+- question_id: 170_q2
+  question: What modality are we shifting to?
+  expected_contains:
+  - EMDR
+- question_id: 170_q3
+  question: How often are we meeting now?
+  expected_contains:
+  - biweekly
+- question_id: 170_q4
+  question: How long have I been seeing her?
+  expected_contains:
+  - 2 years
+- question_id: 170_q5
+  question: Did I mention Dr. Veronica Pilgrim?
+  expected_contains:
+  - Dr. Veronica Pilgrim
+- question_id: 170_q6
+  question: Did I mention CBT?
+  expected_contains:
+  - CBT
+- question_id: 170_q7
+  question: Did I mention Dr. Pilgrim?
+  expected_contains:
+  - Dr. Pilgrim
+- question_id: 170_q8
+  question: Did I mention bilateral stimulation?
+  expected_contains:
+  - bilateral stimulation

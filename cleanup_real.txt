@@ -1,0 +1,24 @@
+[Caroline]
+RAW:   The transgender stories were so inspiring! I was so happy and thankful for all the support.
+CLEAN: The transgender stories were so inspiring! I was so happy and thankful for all the support.
+
+[Melanie]
+RAW:   Wow, love that painting! So cool you found such a helpful group. What's it done for you?
+CLEAN: , love that painting! So you found such a helpful group. What's done for you?
+
+[Caroline]
+RAW:   The support group has made me feel accepted and given me courage to embrace myself.
+CLEAN: I feel accepted and given courage to embrace myself.
+
+[Caroline]
+RAW:   Thanks, Melanie! It's awesome to have our own platform to be ourselves and support others' rights. Our group, 'Connected LGBTQ Activists', is made of all kinds of people investing in positive changes. We have regular meetings, plan events and campaigns, to get together and support each other.
+CLEAN: Thanks, Melanie! It is awesome to have our own platform to be ourselves and support others'rights. It is made of all kinds of people investing in positive changes. We have regular meetings, planning events and campaigns, to get together and support each other.
+
+[Caroline]
+RAW:   Last weekend our city held a pride parade! So many people marched through the streets waving flags, holding signs and celebrating love and diversity. I missed it but it was a powerful reminder that we are not alone in this fight for equality and inclusivity. Change is possible!
+CLEAN: Our city held a pride parade last weekend! So many people marched through the streets waving flags, holding signs and celebrating love and diversity. I missed it but it was a powerful reminder that we are not alone in this fight for equality and inclusivity. Change is possible!
+
+[Melanie]
+RAW:   Hey Caroline! Last night was amazing! We celebrated my daughter's birthday with a concert surrounded by music, joy and the warm summer breeze.
+CLEAN: Caroline! Last night was amazing! We celebrated my daughter's birthday with a concert surrounded by music, joy and the warm summer breeze.
+

@@ -1,0 +1,98 @@
+story_id: 88
+story_name: Weekly Farmers Market Routine
+category: Daily Life
+description: User builds a weekly farmers market habit and gets to know vendors.
+duration_simulated: 8 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1 Saturday
+  user_input: Started going to the Ferry Building farmers market on Saturday mornings. Spent 72 dollars
+    on produce, bread, and eggs.
+  expected_stores:
+  - Ferry Building
+  - Saturday mornings
+  - 72 dollars
+- batch: 2
+  time: Week 2 Saturday
+  user_input: Met a farmer named Raul from Harley Farms. His goat cheese is amazing. Also got a sourdough
+    from Acme Bread.
+  expected_stores:
+  - Raul
+  - Harley Farms
+  - goat cheese
+  - Acme Bread
+  - sourdough
+- batch: 3
+  time: Week 3 Saturday
+  user_input: Raul remembered me this week and threw in a free log of herbed chevre. His wife Anita works
+    the booth too on weekends.
+  expected_stores:
+  - Raul
+  - herbed chevre
+  - Anita
+  - wife
+  expected_adaptation:
+    emotion_detected: pleased
+    warmth_direction: increase
+- batch: 4
+  time: Week 4 Thursday
+  user_input: What's the chemical symbol for gold?
+- batch: 5
+  time: Week 4 Saturday
+  user_input: Found a new favorite — Frog Hollow Farm's stone fruit. Got 3 pounds of peaches and a dozen
+    apricots, 28 dollars total.
+  expected_stores:
+  - Frog Hollow Farm
+  - stone fruit
+  - 3 pounds
+  - peaches
+  - dozen apricots
+  - 28 dollars
+- batch: 6
+  time: Week 6 Saturday
+  user_input: Skipped the market this week because I was sick. Anita at Harley Farms texted me to check
+    in — Raul had given me their number.
+  expected_stores:
+  - Anita
+  - Harley Farms
+  - Raul
+- batch: 7
+  time: Week 8 Saturday
+  user_input: Raul's daughter Camila is working the booth today, she's home from college. She's studying
+    agriculture at UC Davis.
+  expected_stores:
+  - Raul
+  - Camila
+  - UC Davis
+  - agriculture
+questions:
+- question_id: 88_q1
+  question: What market do I go to?
+  expected_contains:
+  - Ferry Building
+- question_id: 88_q2
+  question: Who is my favorite farmer?
+  expected_contains:
+  - Raul
+- question_id: 88_q3
+  question: What farm does Raul work at?
+  expected_contains:
+  - Harley Farms
+- question_id: 88_q4
+  question: Who is Raul's wife?
+  expected_contains:
+  - Anita
+- question_id: 88_q5
+  question: Who is Raul's daughter and where does she study?
+  expected_contains:
+  - Camila
+  - UC Davis
+- question_id: 88_q6
+  question: What bread do I get?
+  expected_contains:
+  - Acme
+- question_id: 88_q7
+  question: When is Saturday mornings?
+  expected_contains:
+  - Saturday mornings

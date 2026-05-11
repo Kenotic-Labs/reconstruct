@@ -1,0 +1,87 @@
+story_id: 144
+story_name: Moving Across the Country
+category: Life Events
+description: User relocates from the east coast to the west for a fresh start.
+duration_simulated: 2 months
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1
+  user_input: I'm moving from Brooklyn to Portland, Oregon. Fresh start after my breakup with my ex Anselm.
+    My sister Lavinia lives in Portland and I'll stay with her initially.
+  expected_stores:
+  - Brooklyn
+  - Portland
+  - Anselm
+  - ex
+  - Lavinia
+  - sister
+- batch: 2
+  time: Week 2
+  user_input: Hired PODS for the move — 2800 dollars for a 12-foot container. My friend Theodora is helping
+    me pack for the next two weekends.
+  expected_stores:
+  - PODS
+  - 2800 dollars
+  - 12-foot container
+  - Theodora
+- batch: 3
+  time: Week 4
+  user_input: What's the currency of Japan?
+- batch: 4
+  time: Week 5
+  user_input: Drove cross-country in 5 days. Theodora flew out to keep me company on the last leg from
+    Salt Lake City.
+  expected_stores:
+  - 5 days
+  - Theodora
+  - Salt Lake City
+- batch: 5
+  time: Week 6
+  user_input: Arrived at Lavinia's place in the Pearl District. She made me Thai food from her favorite
+    place called Pok Pok. First night in Portland felt like an exhale.
+  expected_stores:
+  - Lavinia
+  - Pearl District
+  - Pok Pok
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+- batch: 6
+  time: Month 2 Week 2
+  user_input: Found my own apartment in the Alberta Arts District. Lavinia's neighbor Valentina recommended
+    a mover called Rose City Moving to transfer my PODS stuff.
+  expected_stores:
+  - Alberta Arts District
+  - Lavinia
+  - Valentina
+  - Rose City Moving
+questions:
+- question_id: 144_q1
+  question: Where am I moving from?
+  expected_contains:
+  - Brooklyn
+- question_id: 144_q2
+  question: Where am I moving to?
+  expected_contains:
+  - Portland
+- question_id: 144_q3
+  question: Who is my sister?
+  expected_contains:
+  - Lavinia
+- question_id: 144_q4
+  question: Who is my ex?
+  expected_contains:
+  - Anselm
+- question_id: 144_q5
+  question: Who helped me pack?
+  expected_contains:
+  - Theodora
+- question_id: 144_q6
+  question: Where is my new apartment?
+  expected_contains:
+  - Alberta Arts
+- question_id: 144_q7
+  question: Did I mention ex?
+  expected_contains:
+  - ex

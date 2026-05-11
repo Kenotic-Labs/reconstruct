@@ -1,0 +1,94 @@
+story_id: 106
+story_name: Defending a Budget Proposal
+category: Career
+description: User and their director defend a budget proposal to the CFO.
+duration_simulated: 3 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My director Azariah and I have a meeting with the CFO Priti Goswami next Wednesday to defend
+    our Q3 budget ask of 2.4 million.
+  expected_stores:
+  - Azariah
+  - director
+  - Priti Goswami
+  - CFO
+  - next Wednesday
+  - 2.4 million
+- batch: 2
+  time: Week 1 Friday
+  user_input: Azariah and I built the justification document together — 24 pages, broken out by headcount,
+    tools, and infrastructure.
+  expected_stores:
+  - Azariah
+  - justification
+  - 24 pages
+  - headcount
+  - tools
+  - infrastructure
+- batch: 3
+  time: Week 2 Monday
+  user_input: Priti's assistant Nora Kellerman reached out asking for an early copy. Azariah told me to
+    send it — she said it's a good sign.
+  expected_stores:
+  - Priti
+  - Nora Kellerman
+  - assistant
+  - Azariah
+- batch: 4
+  time: Week 2 Tuesday
+  user_input: Who discovered electricity?
+- batch: 5
+  time: Week 2 Wednesday
+  user_input: The meeting went well. Priti had sharp questions but she seemed convinced. She asked Azariah
+    and me to cut 200k from tools — we agreed.
+  expected_stores:
+  - Priti
+  - Azariah
+  - 200k
+  - tools
+- batch: 6
+  time: Week 3
+  user_input: Budget approved at 2.2 million. Azariah sent me a note saying I did a great job in the room.
+    Priti also sent a brief compliment.
+  expected_stores:
+  - 2.2 million
+  - Azariah
+  - Priti
+  expected_adaptation:
+    emotion_detected: proud
+    warmth_direction: increase
+questions:
+- question_id: 106_q1
+  question: Who is my director?
+  expected_contains:
+  - Azariah
+- question_id: 106_q2
+  question: Who is the CFO?
+  expected_contains:
+  - Priti Goswami
+- question_id: 106_q3
+  question: Who is the CFO's assistant?
+  expected_contains:
+  - Nora Kellerman
+- question_id: 106_q4
+  question: What was our original ask?
+  expected_contains:
+  - 2.4 million
+- question_id: 106_q5
+  question: What was the final approved budget?
+  expected_contains:
+  - 2.2 million
+- question_id: 106_q6
+  question: How much did we cut from tools?
+  expected_contains:
+  - 200k
+- question_id: 106_q7
+  question: Did I mention director?
+  expected_contains:
+  - director
+- question_id: 106_q8
+  question: Did I mention CFO?
+  expected_contains:
+  - CFO

@@ -1,0 +1,89 @@
+story_id: 87
+story_name: Replacing a Failing Water Heater
+category: Daily Life
+description: User's water heater fails and they navigate the replacement process.
+duration_simulated: 1 week
+total_batches: 6
+batches:
+- batch: 1
+  time: Monday 7 AM
+  user_input: My water heater is leaking from the base. It's 14 years old. Shut the water off at 7 AM.
+    Going to need to replace this week.
+  expected_stores:
+  - water heater
+  - leaking
+  - 14 years old
+  - 7 AM
+  expected_adaptation:
+    emotion_detected: stressed
+    warmth_direction: increase
+- batch: 2
+  time: Monday afternoon
+  user_input: Got three quotes. Best one is from a plumber named Ed Fawcett at 1850 dollars installed
+    for a 50 gallon Rheem. He can come Wednesday.
+  expected_stores:
+  - three quotes
+  - Ed Fawcett
+  - plumber
+  - 1850 dollars
+  - 50 gallon Rheem
+  - Wednesday
+- batch: 3
+  time: Tuesday
+  user_input: Taking cold showers and boiling water on the stove for dishes. My wife Pilar is being a
+    champ about it.
+  expected_stores:
+  - cold showers
+  - boiling water
+  - Pilar
+  - wife
+- batch: 4
+  time: Wednesday 10 AM
+  user_input: Ed arrived on time. Installation took about three hours. He also replaced the shutoff valve
+    because the old one was seized.
+  expected_stores:
+  - Ed
+  - three hours
+  - shutoff valve
+- batch: 5
+  time: Wednesday 3 PM
+  user_input: What temperature does water freeze at?
+- batch: 6
+  time: Thursday
+  user_input: Hot water is back. Pilar took a 20 minute shower because she'd been deprived. Ed's invoice
+    came to 1920 with the extra valve work.
+  expected_stores:
+  - Pilar
+  - 20 minute shower
+  - Ed
+  - '1920'
+  - extra valve
+questions:
+- question_id: 87_q1
+  question: Who was my plumber?
+  expected_contains:
+  - Ed Fawcett
+- question_id: 87_q2
+  question: What brand water heater did I get?
+  expected_contains:
+  - Rheem
+- question_id: 87_q3
+  question: What size water heater?
+  expected_contains:
+  - 50 gallon
+- question_id: 87_q4
+  question: What was the final bill?
+  expected_contains:
+  - '1920'
+- question_id: 87_q5
+  question: Who is my wife?
+  expected_contains:
+  - Pilar
+- question_id: 87_q6
+  question: How old was the old water heater?
+  expected_contains:
+  - 14 years
+- question_id: 87_q7
+  question: Did I mention water heater?
+  expected_contains:
+  - water heater

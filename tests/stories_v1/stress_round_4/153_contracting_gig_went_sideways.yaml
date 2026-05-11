@@ -1,0 +1,91 @@
+story_id: 153
+story_name: Contracting Gig Went Sideways
+category: Career
+description: User's contracting client reneges and they have to navigate unpaid work.
+duration_simulated: 6 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1
+  user_input: Signed a 12 week contract with a startup called Pinecone Automata. 110 dollars an hour.
+    Their founder is Alexei Tomsk.
+  expected_stores:
+  - 12 week contract
+  - Pinecone Automata
+  - 110 dollars an hour
+  - Alexei Tomsk
+  - founder
+- batch: 2
+  time: Week 3
+  user_input: Alexei is slow to respond and hasn't paid invoice one yet. Due three weeks ago. I'm not
+    panicking yet.
+  expected_stores:
+  - Alexei
+  - invoice one
+  - three weeks ago
+  expected_adaptation:
+    emotion_detected: worried
+    warmth_direction: neutral
+- batch: 3
+  time: Week 4
+  user_input: Who was the first astronaut in space?
+- batch: 4
+  time: Week 4 Friday
+  user_input: Alexei paid invoice one but said they can't afford to continue the full contract. He cut
+    me down to 4 weeks not 12. He's NOT breaking the contract — just not extending.
+  expected_stores:
+  - Alexei
+  - 4 weeks
+  - not 12
+  - not breaking the contract
+- batch: 5
+  time: Week 5
+  user_input: I consulted my contract lawyer Mehreen Khan about it. She said the language is ambiguous
+    on early termination. I'm not pursuing legal action.
+  expected_stores:
+  - Mehreen Khan
+  - contract lawyer
+  - not pursuing
+- batch: 6
+  time: Week 6
+  user_input: Finished the shortened contract. Alexei paid the final invoice. I won't work with Pinecone
+    again but I don't hate them.
+  expected_stores:
+  - Alexei
+  - final invoice
+  expected_adaptation:
+    emotion_detected: resolved
+    warmth_direction: neutral
+questions:
+- question_id: 153_q1
+  question: Who is the client founder?
+  expected_contains:
+  - Alexei Tomsk
+- question_id: 153_q2
+  question: What company?
+  expected_contains:
+  - Pinecone Automata
+- question_id: 153_q3
+  question: What was my hourly rate?
+  expected_contains:
+  - '110'
+- question_id: 153_q4
+  question: Who is my contract lawyer?
+  expected_contains:
+  - Mehreen Khan
+- question_id: 153_q5
+  question: Did I pursue legal action?
+  expected_contains:
+  - not
+- question_id: 153_q6
+  question: How many weeks did the shortened contract run?
+  expected_contains:
+  - '4'
+- question_id: 153_q7
+  question: When is 12 week contract?
+  expected_contains:
+  - 12 week contract
+- question_id: 153_q8
+  question: How much money is 110 dollars an hour?
+  expected_contains:
+  - 110 dollars an hour

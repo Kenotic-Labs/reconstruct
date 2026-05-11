@@ -1,0 +1,1427 @@
+{
+  "timestamp": "20260511_094330",
+  "grand_mean_f1": 0.1902,
+  "total_questions": 199,
+  "total_time_s": 6125.13,
+  "category_f1": {
+    "1": 0.1443,
+    "2": 0.51,
+    "3": 0.2187,
+    "4": 0.0218,
+    "5": 0.2128
+  },
+  "conversations": [
+    {
+      "conv_idx": 0,
+      "speaker_a": "Caroline",
+      "speaker_b": "Melanie",
+      "turn_count": 419,
+      "qa_count": 199,
+      "ingest_time_s": 5779.17,
+      "query_time_s": 345.45,
+      "overall_f1": 0.1902,
+      "category_f1": {
+        "1": 0.1443,
+        "2": 0.51,
+        "3": 0.2187,
+        "4": 0.0218,
+        "5": 0.2128
+      },
+      "per_question": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "category": 2,
+          "answer": "7 May 2023",
+          "prediction": "7 May 2023",
+          "f1": 1.0
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "category": 2,
+          "answer": "2022",
+          "prediction": "8 May 2022",
+          "f1": 0.5
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "category": 3,
+          "answer": "Psychology, counseling certification",
+          "prediction": "a difference",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Caroline research?",
+          "category": 1,
+          "answer": "Adoption agencies",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "category": 1,
+          "answer": "Transgender woman",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "category": 2,
+          "answer": "The sunday before 25 May 2023",
+          "prediction": "The Saturday before 25 May 2023",
+          "f1": 0.8000000000000002
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "category": 2,
+          "answer": "June 2023",
+          "prediction": "25 June 2023",
+          "f1": 0.8
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "category": 1,
+          "answer": "Single",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "category": 2,
+          "answer": "The week before 9 June 2023",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "category": 2,
+          "answer": "The week before 9 June 2023",
+          "prediction": "25 May 2023",
+          "f1": 0.25
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "category": 2,
+          "answer": "4 years",
+          "prediction": "2 years and 11 months",
+          "f1": 0.3333333333333333
+        },
+        {
+          "question": "Where did Caroline move from 4 years ago?",
+          "category": 1,
+          "answer": "Sweden",
+          "prediction": "volunteering at the youth center",
+          "f1": 0.0
+        },
+        {
+          "question": "How long ago was Caroline's 18th birthday?",
+          "category": 2,
+          "answer": "10 years ago",
+          "prediction": "12 years and 10 months",
+          "f1": 0.5714285714285715
+        },
+        {
+          "question": "What career path has Caroline decided to persue?",
+          "category": 1,
+          "answer": "counseling or mental health for Transgender people",
+          "prediction": "a difference",
+          "f1": 0.0
+        },
+        {
+          "question": "Would Caroline still want to pursue counseling as a career if she hadn't received support growing up?",
+          "category": 3,
+          "answer": "Likely no",
+          "prediction": "Likely no",
+          "f1": 1.0
+        },
+        {
+          "question": "What activities does Melanie partake in?",
+          "category": 1,
+          "answer": "pottery, camping, painting, swimming",
+          "prediction": "Have user found any activities that make user feel the same way ?, Wanna do a family outing this summer ?, They had fun exploring and playing ., What  is it done for user ?, user  is doing something amazing !, Caroline , user  is doing an awesome job of inspiring others with user's journey ., user  is doing amazing !, Do user like to paint too ?, Melanie  will do that ., an abstract painting, , We just did it yesterday !, We explored nature, roasted marshmallows around the campfire and even went on a hike., We enjoy hiking in the mountains and exploring forests ., Thankfully , they enjoyed the Grand Canyon a lot !, Glad user   've found people who uplift and accept user !, We played games , ate good food , and just hung out together ., \" Summer Sounds\"- The playing an awesome pop song that got everyone dancing and singing ., Melanie play the clarinet !, user got any cool art projects coming up ?, Keep up the great work !, So user found such a helpful group ., We found these lovely flowers ., the courage to be yourself, Glad to hear user found a great group where user can make an impact ., Caroline , glad user found a supportive community glad user found a supportive community !, Where did user find it ?, Art can be found in the most unlikely places ., Love and acceptance really can be found everywhere ., my real muse : painting and pottery, Seven years now , and Melanie   've finally found Melanie's real muse : painting and pottery ., user found user's true self now user  is helping others ., It took some work , but I 'm pretty proud of it ., Appreciating the small things in life , too ., Melanie love how it  is both a creative outlet and a form of therapy ., so much progress, Melanie love how it shows the togetherness and power user were talking about ., Can user show Melanie one of the Oscars ?, Those joyful moments definitely show us life 's beauty ., It has really helped Melanie out ., Taking in kids in need - user  is so kind ., Melanie   'm gon na keep it up ., a lot of things happening to me, our different paths, How long have user had such a great support system ?, Have a great time and learn a lot ., What kind of books do user have in user's library ?, user have Melanie's support , Caroline !, Books have such an awesome power !, user's friends and community really have user's back ., Melanie had a quiet weekend after we went camping with Melanie's family two weekends ago ., The kids had such a blast ., Also , do user have any pets ?, Horses have such grace !, Have user made any more art lately ?, a blast exploring the forest hiking, Have user ever thought about trying it or another art form ?, What effect has the journey had on user's relationships ?, Melanie had a great time ., BTW , recently Melanie had a setback ., Taking care of ourselves is vital ., a work in progress, Melanie  will start thinking about what we can do ., user really care about being real and helping others ., What  is the main idea of user's art ?, How do user stay inclusive in user's work as an artist ?, user's future family is going to be so lucky to have user !, user  is gon na make a huge difference !, We even went on another camping trip in the forest ., We went to the beach recently ., We do n't go often , usually only once or twice a year ., We went camping with the kids a few weeks ago , and had a blast exploring the forest and hiking ., love that painting !, Loving the inclusivity and support ., Love the necklace , any special meaning to it ?, The 2 younger kids love nature., They love learning about animals and the bones were so cool ., Melanie loved reading \" Charlotte 's Web \" as a kid ., We love it it brings us closer !, We love painting together lately , especially nature - inspired ones ., Melanie love how user use it to tell user's stories and teach people about trans folks ., Melanie  would love to see another painting of user's !, Melanie love the self - acceptance and love theme ., Melanie love live music ., Melanie love how art lets us get our emotions out ., The kids loved it it was a nice way to relax after the road trip ., Time flies- feels like just yesterday Melanie put this dress on !, What did user take away from it to use in user's life ?, Melanie 'm so proud to be part of the difference user  is making .  Let 's keep motivating and helping each other out as we journey through life ., Let 's plan something special !, This book Melanie read last year reminds Melanie to always pursue Melanie's dreams , just like user are doing !, We celebrated Melanie's daughter 's birthday with a concert surrounded by music , joy and the warm summer breeze ., We both helped with the painting - it was great bonding over it and chatting about nature ., A buddy of Melanie's adopted last year ., user   've gained so much from user's own experience ., Life  is about learning and exploring ., Sharing user's story and support might make a difference for a long time ., Melanie wish Melanie was that resilient too ., What motivates user ?, another painting of yours, how neglected some people are, your show - the LGBTQ community, started when Melanie was young it  is been great ., FYI , Melanie finished another pottery project - want to see a picture ?, finding acceptance and helping others with what you ' ve been through, so much joy, user's experience really brought user to where user need to be ., happiness, Tell Melanie , what  is user's vision for the future what  is user's vision for the future ?, Has this experience influenced user's goals at all ?, Creativity and family keep Melanie at peace ., What  is the best part of it ?, my best, What gave user the idea to paint it ?, What gave user the idea ?, Appreciate user's kind words ., Appreciate user's friendship ., Melanie appreciate our friendship too , Caroline ., Melanie really appreciate user's help and motivation ., Appreciate user's help ., appreciate them a lot ., What  is up with user ?, What  is up with user lately ?, Caroline , it  is got to be tough dealing with those changes ., that happened to user ., Melanie   'm getting there , Caroline ., user's empathy and understanding will really help the people user work with ., How have user's friends and family been helping user out with user's transition ?, Melanie's fam  is been awesome - they helped out and showed lots of love and support ., How does art help user with user's self - discovery and acceptance journey ?, Strong support really helps ., Plus , painting helps me express Melanie's feelings and be creative painting helps me express Melanie's feelings and be creative ., What else helps user out ?, Having Melanie's family around helps a lot ., It really helps me reset and recharge ., some time, Events like these are great for reminding us of how strong a community can be !, Yesterday Melanie took the kids to the museum - it was so cool spending time with them and seeing their eyes light up !, They are so sweet and playful - they really liven up the house !, Got any other objects that user treasure , like that necklace ?, Caroline , hope all  is good hope all  is good !, What do user hope to do next time ?, The view from the top was amazing!, Melanie ran a charity race for mental health last Saturday ., Been running longer since our last chat - a great way to destress and clear Melanie's mind ., Melanie   've been running farther to de - stress , which has been great for Melanie's mind ., These figurines Melanie bought yesterday remind Melanie of family love ., By the way , take a look at this ., It  is special to Melanie ., It  is like therapy for Melanie , letting me express Melanie and get creative ., Showing off our true selves is the best thing ever ., We can make a real impact together !, Keep it up , user  is making a big impact !, Melanie's kids are so excited about summer break !, love , acceptance , and hope, How long have user been creating art ?, Have user tried it yet ?, It takes courage to talk about our own stories ., Last Friday , Melanie finally took Melanie's kids to a pottery workshop ., Takes a lot of courage and maturity !, Since we last spoke , Melanie took Melanie's kids to a park yesterday ., Melanie 'm a big fan of pottery - the creativity and skills are awesome ., user captured the sunset perfectly , so peaceful !, It  is special moments like these that make me appreciate life and how lucky Melanie am to be with Melanie's family and have our love ., It  is so peaceful waking up to the sound of birds and the smell of fresh air - it always refreshes Melanie's soul ., That  is cool , Caroline !, What happened that was so awesome ?, That  is really cool ., user  would be a great counselor !, Painting is a fun way to express Melanie's feelings and get creative ., It was really rewarding ., That  is great , Caroline !, user  will be an awesome mom !, That photo is great !, It was so much fun !, It  is when Melanie really feel alive and happy ., That  is gorgeous , Caroline !, user's passion and hard work to help others is awesome ., That  is awesome , Caroline !, a gorgeous photo , Caroline, It  is great user have people to support user ., That  is really awesome !, Unconditional love is so important ., more to do, user's drive to help is awesome !, Which one has been user's favorite guide ?, Caroline , those lessons are great - self - acceptance and finding support are key ., the dog, It was fun and therapeutic !, Caroline , it  is been super busy here ., Everyone we love was there to celebrate us - it was really special ., It was amazing , Caroline ., Marrying Melanie's partner and promising to be together forever was the best part ., It  is great to have a supporter !, Young people 's resilience is amazing ., Caroline , that painting is awesome !, Those colors are so vivid the whole thing looks really unified ., Supporting each other and making good things happen - that  is so inspiring !, But those times are always special to spend time together and chill ., That  is a memory Melanie  will never forget ., what a beautiful moment, Last night was amazing !, It was Matt Patterson ., His voice and songs were amazing ., user's art is amazing , Caroline ., Caroline , that  is gorgeous !, We  is all individuals and wonderfully imperfect ., Caroline , that  is so cool !, It was a great experience ., a huge learning experience, But it  is worth it when we have things that make us happy ., they  is good- we got another cat named Bailey too ., It  is peaceful and special ., Caroline , that  is great !, It  is tough when those things happen it  is great user apologized ., Pottery is so relaxing and creative ., All those colors are incredible the story it tells is so inspiring ., That  is so nice , Caroline !, Caroline , that  is so nice !, The colors are so bright the flowers are so pretty ., Painting landscapes and still life is Melanie's favorite !, Here  is a painting Melanie did recently ., Nature  is amazing ., Caroline , that  is awesome !, Volunteering is a great way to meet people ., That  is great news , Caroline !, That  is so cool , Caroline !, It was so fun and lively !, That  is a gorgeous song , Caroline ., Music can be so inspiring and uplifting ., That picture, It  is so calming and satisfying ., This painting is awesome ., Caro , that painting is amazing !, The sign was just a precaution ., user  is so thoughtful !, a long process, It was tough Melanie  ' m doing it ., Here  is one Melanie did last week ., Those posters are great !, We were so lucky he was okay ., It was a really scary experience ., Thankfully , it  is over now ., Caroline , that roadtrip this past weekend was insane !, What  is been up since we last talked ?, and that was a reminder that life is precious and to cherish our family ., Thankfully , Melanie's son  is OK ., user  is right , Caroline ., their brother, They  is tough kids ., They  is really amazing ., They  is Melanie's biggest motivation and support ., They  is a real support ., It  is a chance to be present and together ., This was a great time ., Caroline , that  is awesome ., user  is so strong and inspiring ., user  is so inspiring !, Being user is great !, Art is so cool like that - it connects us and helps us understand each other ., Those simple moments make the best memories ., What  is pushing user to keep going forward with it ?, Melanie want to be couragous to Melanie's family- they motivate Melanie give Melanie love ., What kind of counseling and mental health services do user want to use ?, Want to tell Melanie a bit more about it ?, Melanie wanted peaceful blue streaks to show tranquility ., the painting to have a serene vibe while still having lots of vibrant colors, Talking about inclusivity and acceptance is crucial user  is so brave to speak up for the trans community ., user's courage is inspiring ., It  is inspiring to see user's dedication to helping others ., What inspired user ?, The beach really inspired user ., Melanie  ' m feeling inspired by autumn so Melanie  ' m planning a few ., What inspires user with user's volunteering ?, It  is inspired by the sunsets ., Melanie painted it because it was calming ., a lot about how much I need them, Oliver 's hilarious !  He hid his bone in Melanie's slipper once !, self - care is really important, Melanie cherish time with family ., Each stroke carries a part of Melanie ., They were an important part of Melanie's wedding decor and always remind Melanie of that day ., Here  is to a good time at the café last weekend - they even thoughtful signs like this !, It was so much fun and reminded Melanie of how music brings us together ., It  is awesome to seeing the kids get excited about learning something new about nature ., Been reading that book user recommended a while ago and painting to keep busy ., a journey for me, Our trip got off to a bad start ., Caroline !  Missed user ., guts, user have such a caring heart - they  will get all the love and stability they need !, Caroline , so glad user got the support so glad user got the support !, a pup and a kitten, Just got some new shoes , too !, user's future fam will get a kick out of having user ., Got any cool experiences user can share ?, Got any tips for getting started on it ?, So glad user felt accepted and supported ., It really made me think about taking care of our minds ., What made user pick it ?, Our family and moments make it all worth it ., Family moments make life awesome ., it is so calming, Melanie made this bowl in Melanie's class ., such an improvement, We all made our own pots ., We all made wishes and felt so at one with the universe ., something to catch the eye and make people smile, user make life 's struggles more bearable ., Melanie made it in pottery class yesterday ., What made user decide to transition and join the transgender community ?, Did user make that ?, Those moments make being a parent worth it ., Makes me feel like maybe Melanie should do it too !, Doing research and readying Melanie emotionally makes sense ., The colors make me feel calm ., What made it so special ?, It makes hard times easier ., It  is great to be part of it and see how user  is positively affecting so many ., Actually , Melanie just took Melanie's family camping in the mountains last week Melanie just took Melanie's family camping in the mountains last week - it was a really nice time together !, tough times, Check out Melanie's pottery creation in the picture !, The day was full of love and joy ., Family time matters to Melanie ., Any other exciting LGBTQ advocacy stuff coming up ?, Did user hear any inspiring stories ?, I 'm lucky to have Melanie's husband and kids ; they keep Melanie motivated ., But they give Melanie the strength to keep going ., the kids & work, What  is new with user ?, What was it like for user both ?, couragous to my family-, They were stoked about the dinosaur exhibit !, We roast marshmallows , tell stories around the campfire and just enjoy each other 's company ., Can user tell Melanie more about why it  is special to user ?, It really conveys unity and strength - such a gorgeous piece !, How did it feel being part of that community ?, It reminds Melanie why Melanie love being a mom ., user   've come a long way since user's transition - keep on inspiring people with user's strength and courage !, Melanie's kids and Melanie just finished another painting like our last one ., Melanie  will never forget the day Melanie's youngest took her first steps ., the day my youngest took her first steps, They brighten up our day and always make us smile ., their love and support really, a break, Melanie have never been to something like that ., But it  is in these vulnerable moments that we bond and understand each other ., It really fits with user's journey and user's determination to make a difference ., my family camping, It  is the highlight of our summer !, Melanie  will always remember our camping trip last year when we saw the Perseid meteor shower ., Melanie was actually just remembering yesterday , spending the day with Melanie's family volunteering at a homeless shelter ., We always look forward to our family camping trip ., a real sunset, This has been great for Melanie's mental health ., Pottery is a huge part of Melanie's life , not just a hobby - it me express Melanie's emotions ., But thank user for user's concern ., How did it feel to be around so much love and acceptance ?, They must have felt so appreciated ., The sky was so clear and filled with stars the meteor shower was amazing - it felt like we were part of something huge and awe - inspiring ., Feel free to reach out at any time ., a strong connection to art, How  would user feel while painting it ?, the serenity, Melanie feel the same way !, How did user feel about user's time there ?, It  is awesome to have stuff around that make us think of good connections and times ., Caroline , it sounds like user  is doing some impressive work ., It sucks when people are so closed - minded ., Seeing Melanie's kids ' faces so happy at the beach was the best !, user   've always been there for Melanie ., you ' ve found people who uplift and accept you, Giving a home to needy kids is such a loving way to build a family ., these moments, Melanie ca n't agree more !, Melanie totally agree ., Melanie totally agree , Caroline ., Creating a family for those kids is so lovely ., They were so excited about get their hands dirty and make something with clay ., We bond over stories , campfires and nature ., Seeing Melanie's kids ' smiles was so awesome , and I 'm so thankful for our special moments together ., The event was really thought - provoking ., We  is thinking about going camping next month ., What do user think of this ?, Especially after the accident , Melanie   've thought a lot about how much Melanie need them ., lots of love support, Art is awesome for showing us who we really are and getting in touch with ourselves ., That  is a great way to show off and be proud of everyone 's skills ., you got the support, you found a supportive community, super proud of you for being your true self, It was special to watch their creativity and imagination come to life ., That agency looks great !, Looking forward to more happy years ., Anything coming up user  is looking forward to ?, This pic is from last night - looks like everyone was having a blast !, Caroline , that looks amazing !, Any specific projects or activities user  is looking forward to there ?, Caroline , that looks awesome !, They represent growth , beauty and reminding us to appreciate the small moments ., Melanie love camping trips with Melanie's family , 'cause nature brings such peace and serenity ., Everyone deserves that ., Family is super important to Melanie ., my emotions, Nature can be so refreshing for user's soul ., Anything user  is excited about in the adoption process ?, the beans, Melanie 'm off to go swimming with the kids ., Melanie 'm so proud of user for spreading awareness and getting others involved in the LGBTQ community ., Melanie 'm excited to see where pottery takes Melanie ., Care to fill Melanie in ?, Melanie 'm here for user ., Melanie 'm in awe of user's courage as a trans person ., Melanie 'm a fan of both classical like Bach and Mozart , as well as modern music like Ed Sheeran 's \" Perfect \" ., Melanie 'm super proud of user for being user's true self ., and Melanie 'm so thankful to have them ., Melanie 'm so happy for user ., Melanie 'm so happy for user , Caroline ., Melanie 'm so glad we can always be there for each other ., It  is awesome to see the difference we can make in each other 's lives ., Ca n't wait to see user's show - the LGBTQ community more platforms like this !, Ca n't wait to hear about it !, It was so cool to seeing how friendship and compassion can make a difference ., Creating community and supporting each other , especially for kids , is really important ., Nature and quality time , ca n't beat it !, Care to share some stories ?, Reminds Melanie of how awesome life is - so many little moments like that ., Reminds Melanie it  is important to cultivate a loving and accepting environment for our kids ., What was the event like ?, It was one of those moments where Melanie felt tiny and in awe of the universe ., , What an amazing journey ., Have user been part of any events or campaigns lately ?, Here  is a picture of Oliver ., So much fun with the whole gang !, Here  is our latest work from last weekend ., user's kind words mean a lot ., user's words really mean a lot ., What does it mean to user ?, They mean the world to Melanie ., Here  is a pic of Melanie's family camping at the beach ., What have user been up to lately , artistically ?, We were all freaked when Melanie's son got into an accident ., Melanie was really scared when we got into the accident .",
+          "f1": 0.4305555555555556
+        },
+        {
+          "question": "When did Melanie sign up for a pottery class?",
+          "category": 2,
+          "answer": "2 July 2023",
+          "prediction": "2 July 2023",
+          "f1": 1.0
+        },
+        {
+          "question": "When is Caroline going to the transgender conference?",
+          "category": 2,
+          "answer": "July 2023",
+          "prediction": "3 July 2023",
+          "f1": 0.8
+        },
+        {
+          "question": "Where has Melanie camped?",
+          "category": 1,
+          "answer": "beach, mountains, forest",
+          "prediction": "my family camping, We even went on another camping trip in the forest ., a hike, We  is thinking about going camping next month ., Actually , Melanie just took Melanie's family camping in the mountains last week Melanie just took Melanie's family camping in the mountains last week - it was a really nice time together !, Art can be found in the most unlikely places ., We went to the beach recently ., Melanie love camping trips with Melanie's family , 'cause nature brings such peace and serenity ., Here  is a pic of Melanie's family camping at the beach ., We went camping with the kids a few weeks ago , and had a blast exploring the forest and hiking ., Seven years now , and Melanie   've finally found Melanie's real muse : painting and pottery ., Wanna do a family outing this summer ?, Melanie had a quiet weekend after we went camping with Melanie's family two weekends ago ., Melanie have never been to something like that ., , We just did it yesterday !",
+          "f1": 0.2469135802469136
+        },
+        {
+          "question": "What do Melanie's kids like?",
+          "category": 1,
+          "answer": "dinosaurs, nature",
+          "prediction": "Melanie's kids are so excited about summer break !, Seeing Melanie's kids ' smiles was so awesome , and I 'm so thankful for our special moments together ., We went camping with the kids a few weeks ago , and had a blast exploring the forest and hiking ., Seeing Melanie's kids ' faces so happy at the beach was the best !, Last Friday , Melanie finally took Melanie's kids to a pottery workshop ., Since we last spoke , Melanie took Melanie's kids to a park yesterday ., the kids & work, Melanie's kids and Melanie just finished another painting like our last one ., Melanie love how it shows the togetherness and power user were talking about ., A buddy of Melanie's adopted last year ., We love painting together lately , especially nature - inspired ones ., Yesterday Melanie took the kids to the museum - it was so cool spending time with them and seeing their eyes light up !, user really care about being real and helping others ., Melanie  will do that ., my best, Melanie 'm a big fan of pottery - the creativity and skills are awesome ., love that painting !, Loving the inclusivity and support ., Love the necklace , any special meaning to it ?, The 2 younger kids love nature., They love learning about animals and the bones were so cool ., Melanie loved reading \" Charlotte 's Web \" as a kid ., We love it it brings us closer !, Melanie love how user use it to tell user's stories and teach people about trans folks ., Melanie  would love to see another painting of user's !, Melanie love the self - acceptance and love theme ., Melanie love live music ., Melanie love how it  is both a creative outlet and a form of therapy ., Melanie love how art lets us get our emotions out ., The kids loved it it was a nice way to relax after the road trip ., They had fun exploring and playing ., you ' ve found people who uplift and accept you, their love and support really, It reminds Melanie why Melanie love being a mom ., Glad user   've found people who uplift and accept user !, Family moments make life awesome ., What effect has the journey had on user's relationships ?, Those moments make being a parent worth it ., We enjoy hiking in the mountains and exploring forests ., Thankfully , they enjoyed the Grand Canyon a lot !, It  is like therapy for Melanie , letting me express Melanie and get creative ., What  is it done for user ?, user  is doing something amazing !, Caroline , user  is doing an awesome job of inspiring others with user's journey ., user  is doing amazing !, Wanna do a family outing this summer ?, Do user like to paint too ?, an abstract painting, , We just did it yesterday !, Melanie want to be couragous to Melanie's family- they motivate Melanie give Melanie love ., Melanie wish Melanie was that resilient too ., Tell Melanie , what  is user's vision for the future what  is user's vision for the future ?, What was it like for user both ?, Those joyful moments definitely show us life 's beauty ., Love and acceptance really can be found everywhere ., Melanie cherish time with family ., It  is awesome to seeing the kids get excited about learning something new about nature ., Those simple moments make the best memories ., Adoption sounds awesome ., Can user show Melanie one of the Oscars ?, Having Melanie's family around helps a lot ., It sucks when people are so closed - minded ., The event was really thought - provoking ., We  is thinking about going camping next month ., What do user think of this ?, Especially after the accident , Melanie   've thought a lot about how much Melanie need them ., lots of love support, finding acceptance and helping others with what you ' ve been through, Melanie   'm gon na keep it up ., Melanie feel the same way !, Family time matters to Melanie ., Have user found any activities that make user feel the same way ?, Creativity and family keep Melanie at peace ., Creating a family for those kids is so lovely ., Those kids will be so supported and happy in their new home ., How did it feel to be around so much love and acceptance ?, They must have felt so appreciated ., The sky was so clear and filled with stars the meteor shower was amazing - it felt like we were part of something huge and awe - inspiring ., How did it feel being part of that community ?, Feel free to reach out at any time ., a strong connection to art, How  would user feel while painting it ?, the serenity, How did user feel about user's time there ?, What did user take away from it to use in user's life ?, our own stories, love , acceptance , and hope, Appreciating the small things in life , too ., They are so sweet and playful - they really liven up the house !, a lot of things happening to me, our different paths, How long have user had such a great support system ?, Have a great time and learn a lot ., What kind of books do user have in user's library ?, user have Melanie's support , Caroline !, Books have such an awesome power !, user's friends and community really have user's back ., Melanie had a quiet weekend after we went camping with Melanie's family two weekends ago ., The kids had such a blast ., Also , do user have any pets ?, Horses have such grace !, Have user made any more art lately ?, a blast exploring the forest hiking, Have user ever thought about trying it or another art form ?, Melanie had a great time ., BTW , recently Melanie had a setback ., That agency looks great !, Looking forward to more happy years ., Anything coming up user  is looking forward to ?, We always look forward to our family camping trip ., This pic is from last night - looks like everyone was having a blast !, Caroline , that looks amazing !, Any specific projects or activities user  is looking forward to there ?, Caroline , that looks awesome !, These figurines Melanie bought yesterday remind Melanie of family love ., a real sunset, Melanie ca n't agree more !, Melanie totally agree ., Melanie totally agree , Caroline ., What  is up with user ?, What  is up with user lately ?, Melanie   'm getting there , Caroline ., This book Melanie read last year reminds Melanie to always pursue Melanie's dreams , just like user are doing !, Family is super important to Melanie ., It was so much fun and reminded Melanie of how music brings us together ., user   've come a long way since user's transition - keep on inspiring people with user's strength and courage !, Life  is about learning and exploring ., happiness, It really made me think about taking care of our minds ., so much joy, Melanie  will start thinking about what we can do ., a lot about how much I need them, It  is special to Melanie ., Appreciate user's kind words ., Appreciate user's friendship ., Melanie appreciate our friendship too , Caroline ., Melanie really appreciate user's help and motivation ., Appreciate user's help ., appreciate them a lot ., It has really helped Melanie out ., We roast marshmallows , tell stories around the campfire and just enjoy each other 's company ., Can user tell Melanie more about why it  is special to user ?, What kind of counseling and mental health services do user want to use ?, We explored nature, roasted marshmallows around the campfire and even went on a hike., It was so cool to seeing how friendship and compassion can make a difference ., They were so excited about get their hands dirty and make something with clay ., user found user's true self now user  is helping others ., Has this experience influenced user's goals at all ?, Taking care of ourselves is vital ., We were all freaked when Melanie's son got into an accident ., another painting of yours, how neglected some people are, your show - the LGBTQ community, super proud of you for being your true self, you got the support, you found a supportive community, What  is the best part of it ?, Caroline , hope all  is good hope all  is good !, What do user hope to do next time ?, Want to tell Melanie a bit more about it ?, Melanie wanted peaceful blue streaks to show tranquility ., the painting to have a serene vibe while still having lots of vibrant colors, user   've gained so much from user's own experience ., So user found such a helpful group ., What made user pick it ?, We can make a real impact together !, Our family and moments make it all worth it ., Keep it up , user  is making a big impact !, it is so calming, Melanie made this bowl in Melanie's class ., such an improvement, We all made our own pots ., We all made wishes and felt so at one with the universe ., something to catch the eye and make people smile, user make life 's struggles more bearable ., Melanie made it in pottery class yesterday ., What made user decide to transition and join the transgender community ?, Did user make that ?, Sharing user's story and support might make a difference for a long time ., so much progress, Makes me feel like maybe Melanie should do it too !, Doing research and readying Melanie emotionally makes sense ., The colors make me feel calm ., What made it so special ?, It makes hard times easier ., We found these lovely flowers ., the courage to be yourself, Glad to hear user found a great group where user can make an impact ., Caroline , glad user found a supportive community glad user found a supportive community !, Where did user find it ?, Art can be found in the most unlikely places ., my real muse : painting and pottery, Seven years now , and Melanie   've finally found Melanie's real muse : painting and pottery ., Melanie painted it because it was calming ., I 'm lucky to have Melanie's husband and kids ; they keep Melanie motivated ., user  is gon na make a huge difference !, Time flies- feels like just yesterday Melanie put this dress on !, Seeing her wobble as she took those initial steps really put into perspective how fleeting life is and how lucky Melanie am to be able to share these moments ., a look, The view from the top was amazing!, How do user stay inclusive in user's work as an artist ?, What  is the main idea of user's art ?, Have user tried it yet ?, Reminds Melanie of how awesome life is - so many little moments like that ., Reminds Melanie it  is important to cultivate a loving and accepting environment for our kids ., Melanie 'm so proud to be part of the difference user  is making .  Let 's keep motivating and helping each other out as we journey through life ., Let 's plan something special !, Melanie 'm off to go swimming with the kids ., Melanie 'm so proud of user for spreading awareness and getting others involved in the LGBTQ community ., Melanie 'm excited to see where pottery takes Melanie ., Care to fill Melanie in ?, Melanie 'm here for user ., Melanie 'm in awe of user's courage as a trans person ., Melanie 'm a fan of both classical like Bach and Mozart , as well as modern music like Ed Sheeran 's \" Perfect \" ., Melanie 'm super proud of user for being user's true self ., and Melanie 'm so thankful to have them ., Melanie 'm so happy for user ., Melanie 'm so happy for user , Caroline ., Melanie 'm so glad we can always be there for each other ., It  is special moments like these that make me appreciate life and how lucky Melanie am to be with Melanie's family and have our love ., We both helped with the painting - it was great bonding over it and chatting about nature ., What  is new with user ?, Actually , Melanie just took Melanie's family camping in the mountains last week Melanie just took Melanie's family camping in the mountains last week - it was a really nice time together !, So glad user felt accepted and supported ., It  is so good to hear from user !, We played games , ate good food , and just hung out together ., \" Summer Sounds\"- The playing an awesome pop song that got everyone dancing and singing ., Melanie play the clarinet !, It was nice to seeing them having a good time outdoors ., user's future family is going to be so lucky to have user !, We even went on another camping trip in the forest ., We went to the beach recently ., We do n't go often , usually only once or twice a year ., They were stoked about the dinosaur exhibit !, That  is cool , Caroline !, What happened that was so awesome ?, That  is really cool ., user  would be a great counselor !, Painting is a fun way to express Melanie's feelings and get creative ., It was really rewarding ., That  is great , Caroline !, user  will be an awesome mom !, That photo is great !, It was so much fun !, It  is when Melanie really feel alive and happy ., That  is gorgeous , Caroline !, It was an awesome time, Caroline!, user's passion and hard work to help others is awesome ., That  is awesome , Caroline !, a gorgeous photo , Caroline, It  is great user have people to support user ., That  is really awesome !, Unconditional love is so important ., more to do, user's drive to help is awesome !, Which one has been user's favorite guide ?, Caroline , those lessons are great - self - acceptance and finding support are key ., the dog, It was fun and therapeutic !, Caroline , it  is been super busy here ., Everyone we love was there to celebrate us - it was really special ., It was amazing , Caroline ., Marrying Melanie's partner and promising to be together forever was the best part ., It  is great to have a supporter !, Young people 's resilience is amazing ., Caroline , that painting is awesome !, Those colors are so vivid the whole thing looks really unified ., Supporting each other and making good things happen - that  is so inspiring !, But those times are always special to spend time together and chill ., That  is a memory Melanie  will never forget ., what a beautiful moment, Last night was amazing !, It was Matt Patterson ., His voice and songs were amazing ., user's art is amazing , Caroline ., Caroline , that  is gorgeous !, We  is all individuals and wonderfully imperfect ., Caroline , that  is so cool !, It was a great experience ., a huge learning experience, But it  is worth it when we have things that make us happy ., they  is good- we got another cat named Bailey too ., It  is peaceful and special ., Caroline , that  is great !, It  is tough when those things happen it  is great user apologized ., Pottery is so relaxing and creative ., All those colors are incredible the story it tells is so inspiring ., That  is so nice , Caroline !, Caroline , that  is so nice !, The colors are so bright the flowers are so pretty ., Painting landscapes and still life is Melanie's favorite !, Here  is a painting Melanie did recently ., Nature  is amazing ., Caroline , that  is awesome !, Volunteering is a great way to meet people ., That  is great news , Caroline !, That  is so cool , Caroline !, It was so fun and lively !, That  is a gorgeous song , Caroline ., Music can be so inspiring and uplifting ., That picture, It  is so calming and satisfying ., This painting is awesome ., Caro , that painting is amazing !, The sign was just a precaution ., user  is so thoughtful !, a long process, It was tough Melanie  ' m doing it ., Here  is one Melanie did last week ., Those posters are great !, We were so lucky he was okay ., It was a really scary experience ., Thankfully , it  is over now ., Caroline , that roadtrip this past weekend was insane !, What  is been up since we last talked ?, and that was a reminder that life is precious and to cherish our family ., Thankfully , Melanie's son  is OK ., user  is right , Caroline ., their brother, They  is tough kids ., They  is really amazing ., They  is Melanie's biggest motivation and support ., They  is a real support ., It  is a chance to be present and together ., This was a great time ., Caroline , that  is awesome ., user  is so strong and inspiring ., user  is so inspiring !, Being user is great !, Everyone deserves that ., Did user hear any inspiring stories ?, Keep up the great work !, Melanie  will never forget the day Melanie's youngest took her first steps ., But thank user for user's concern ., How long have user been creating art ?, Melanie have never been to something like that ., started when Melanie was young it  is been great ., Showing off our true selves is the best thing ever ., Caroline , it  is got to be tough dealing with those changes ., Art is so cool like that - it connects us and helps us understand each other ., guts, user have such a caring heart - they  will get all the love and stability they need !, Got any other objects that user treasure , like that necklace ?, Caroline , so glad user got the support so glad user got the support !, a pup and a kitten, Just got some new shoes , too !, user's future fam will get a kick out of having user ., Got any cool experiences user can share ?, user got any cool art projects coming up ?, Got any tips for getting started on it ?, Our trip got off to a bad start ., Caroline !  Missed user ., Anything user  is excited about in the adoption process ?, Melanie's fam  is been awesome - they helped out and showed lots of love and support ., Plus , painting helps me express Melanie's feelings and be creative painting helps me express Melanie's feelings and be creative ., self - care is really important, Caroline , sounds like the parade was an awesome experience !, that happened to user ., What gave user the idea to paint it ?, What gave user the idea ?, Oliver 's hilarious !  He hid his bone in Melanie's slipper once !, It  is awesome to have stuff around that make us think of good connections and times ., What  is pushing user to keep going forward with it ?, user's courage is inspiring ., It  is inspiring to see user's dedication to helping others ., What inspired user ?, The beach really inspired user ., Melanie  ' m feeling inspired by autumn so Melanie  ' m planning a few ., What inspires user with user's volunteering ?, It  is inspired by the sunsets .",
+          "f1": 0.39285714285714285
+        },
+        {
+          "question": "When did Melanie go to the museum?",
+          "category": 2,
+          "answer": "5 July 2023",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline have a picnic?",
+          "category": 2,
+          "answer": "The week before 6 July 2023",
+          "prediction": "The week before 6 July 2023",
+          "f1": 1.0
+        },
+        {
+          "question": "Would Caroline likely have Dr. Seuss books on her bookshelf?",
+          "category": 3,
+          "answer": "Yes, since she collects classic children's books",
+          "prediction": "Yes, Caroline  've got lots of kids ' books , classics , stories from different cultu",
+          "f1": 0.3
+        },
+        {
+          "question": "What books has Melanie read?",
+          "category": 1,
+          "answer": "\"Nothing is Impossible\", \"Charlotte's Web\"",
+          "prediction": "This book Melanie read last year reminds Melanie to always pursue Melanie's dreams , just like user are doing !, Been reading that book user recommended a while ago and painting to keep busy ., Melanie love how user use it to tell user's stories and teach people about trans folks ., Sharing user's story and support might make a difference for a long time ., Did user hear any inspiring stories ?, our own stories, We explored nature, roasted marshmallows around the campfire and even went on a hike., Melanie loved reading \" Charlotte 's Web \" as a kid ., We bond over stories , campfires and nature ., Excited about this new chapter !, Have user found any activities that make user feel the same way ?, Care to share some stories ?, Here  is our latest work from last weekend ., We love painting together lately , especially nature - inspired ones ., Glad user   've found people who uplift and accept user !, our different paths, What effect has the journey had on user's relationships ?, a lot of things happening to me, How long have user had such a great support system ?, Have a great time and learn a lot ., fun, What kind of books do user have in user's library ?, user have Melanie's support , Caroline !, Books have such an awesome power !, user's friends and community really have user's back ., Melanie had a quiet weekend after we went camping with Melanie's family two weekends ago ., The kids had such a blast ., Also , do user have any pets ?, Horses have such grace !, Have user made any more art lately ?, a blast exploring the forest hiking, Have user ever thought about trying it or another art form ?, Melanie had a great time ., BTW , recently Melanie had a setback ., lots of vibrant colors, Life  is about learning and exploring ., We enjoy hiking in the mountains and exploring forests ., each other 's company, Thankfully , they enjoyed the Grand Canyon a lot !, It took some work , but I 'm pretty proud of it ., Melanie love how it shows the togetherness and power user were talking about ., Melanie 'm a big fan of pottery - the creativity and skills are awesome ., The view from the top was amazing!, A buddy of Melanie's adopted last year ., user got any cool art projects coming up ?, Keep up the great work !, It brings Melanie so much happiness .",
+          "f1": 0.325
+        },
+        {
+          "question": "What does Melanie do to destress?",
+          "category": 1,
+          "answer": "Running, pottery",
+          "prediction": "the whole gang",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline go to the LGBTQ conference?",
+          "category": 2,
+          "answer": "10 July 2023",
+          "prediction": "10 July 2023",
+          "f1": 1.0
+        },
+        {
+          "question": "When did Melanie read the book \"nothing is impossible\"?",
+          "category": 2,
+          "answer": "2022",
+          "prediction": "12 July 2022",
+          "f1": 0.5
+        },
+        {
+          "question": "Would Caroline pursue writing as a career option?",
+          "category": 3,
+          "answer": "LIkely no; though she likes reading, she wants to be a counselor",
+          "prediction": "Now the hard work is starts to turn Caroline's dream into a reality .",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline go to the adoption meeting?",
+          "category": 2,
+          "answer": "The friday before 15 July 2023",
+          "prediction": "The Friday before 15 July 2023",
+          "f1": 1.0
+        },
+        {
+          "question": "When did Melanie go to the pottery workshop?",
+          "category": 2,
+          "answer": "The Friday before 15 July 2023",
+          "prediction": "The Friday before 15 July 2023",
+          "f1": 1.0
+        },
+        {
+          "question": "Would Melanie be considered a member of the LGBTQ community?",
+          "category": 3,
+          "answer": "Likely no, she does not refer to herself as part of it",
+          "prediction": "Yes",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie go camping in June?",
+          "category": 2,
+          "answer": "The week before 27 June 2023",
+          "prediction": "two weekends before 17 July 2023",
+          "f1": 0.3636363636363636
+        },
+        {
+          "question": "What LGBTQ+ events has Caroline participated in?",
+          "category": 1,
+          "answer": "Pride parade, school speech, support group",
+          "prediction": "an LGBTQ support group, an LGBTQ conference, Caroline   've been chasing Caroline's ambitions and had the chance to volunteer at an LGBTQ+ youth center ., Caroline talked about Caroline's transgender journey and encouraged students to get involved in the LGBTQ community ., People of all kinds celebrating love and acceptance - it really pushed Caroline to keep fighting for LGBTQ rights ., a transgender conference, Caroline  'm inspired to seeing Caroline's work make a difference for the LGBTQ+ community ., It  is great to see how far LGBTQ rights have come , but there 's still plenty of progress to be made ., Last week Caroline went to an LGBTQ+ pride parade ., Caroline also use it to speak up for the LGBTQ+ community and push for acceptance ., Last Friday , Caroline went to an LGBTQ+ counseling workshop ., Caroline   'm putting together an LGBTQ art show next month ., Caroline painted this after Caroline visited an LGBTQ center ., Caroline chose them 'cause they help LGBTQ+ folks with adoption ., Caroline made it to show Caroline's own journey as a transgender woman and how we should accept growth and change ., differences, Art gives Caroline a sense of freedom , but so does having supportive people around , promoting LGBTQ rights and being true to Caroline ., We have regular meetings , plan events and campaigns , to get together and support each other ., A lot  is happened since we last chatted - Caroline just joined a new LGBTQ activist group last Tues ., Recently , Caroline had a not - so - great experience on a hike ., Last Friday Caroline went to a council meeting about adoption ., some amazing young folks, so many cool people who are as passionate as I am about rights and community support, Caroline   'm meeting so many cool people who are as passionate as Caroline am about rights and community support ., Anything exciting going on ?, One special memory for Caroline was the pride parade Caroline went to a few weeks ago ., those with similar issues, Making a difference & raising awareness of mental health is super rewarding - Caroline 'm really proud of user for taking part !, It  is Caroline's way of showing Caroline's story and helping people understand the trans community ., equality, the binary gender system, strong connections with people there, finding comfort love in being yourself, Caroline 'm really thankful to this amazing community - it  is shown Caroline how important it is to fight for trans rights and spread awareness ., They   've been there for Caroline every step of the way , giving Caroline love , guidance , and acceptance ., a mentorship program for LGBTQ youth",
+          "f1": 0.4000000000000001
+        },
+        {
+          "question": "When did Caroline go to a pride parade during the summer?",
+          "category": 2,
+          "answer": "The week before 3 July 2023",
+          "prediction": "11 August 2023",
+          "f1": 0.25
+        },
+        {
+          "question": "What events has Caroline participated in to help children?",
+          "category": 1,
+          "answer": "Mentoring program, school speech",
+          "prediction": "Caroline want to help people who have gone through the same things as Caroline ., their own journeys, Their love and encouragement has really helped me accept and grow into Caroline's true self ., Painting helps me explore Caroline's identity and be true to Caroline ., me show my feelings and freeze gorgeous moments , like a bouquet of flowers, It helps Caroline show Caroline's feelings and freeze gorgeous moments , like a bouquet of flowers ., me get my emotions out, Playing it helps Caroline get Caroline's emotions out ., a more loving world, Painting and drawing have helped me express Caroline's feelings and explore Caroline's gender identity ., Creating art was really important to Caroline during Caroline's transition - it helped me understand and accept Caroline ., They  will help with the process and provide all the info ., It helps during tougher times ., friends , family and people, Caroline  would love to help in any way Caroline can ., It really inspired Caroline ., It inspires Caroline to keep making art , too ., It inspired Caroline to make some art ., Recently , Caroline had a not - so - great experience on a hike ., Their love and help have been so important , especially after that tough breakup ., Taking care of ourselves is so important - even if it  is not always easy ., Making a difference & raising awareness of mental health is super rewarding - Caroline 'm really proud of user for taking part !, Caroline could n't have done it without them ., the binary gender system, It taught Caroline self - acceptance and how to find support ., Caroline want to help make a difference ., Caroline got lots of help from this adoption advice / assistance group Caroline attended ., Now Caroline want to help people go through it too ., Caroline was so happy and thankful for all the support ., She gave it to Caroline when Caroline was young it means love , faith and strength ., They   've been there for Caroline every step of the way , giving Caroline love , guidance , and acceptance ., It  is been a great way to work through stuff Caroline   'm going through ., Books guide Caroline , motivate Caroline and help me discover who Caroline am ., user  is doing an awesome job looking after user and user's family !, Caroline  will do Caroline's best to make sure these kids have a safe and loving home ., What other creative projects do user do with them , besides pottery ?, What else do user guys like doing together ?, Do user do it often with the kids ?, Hope user  is doing well ., And , Caroline did Oscar , Caroline's guinea pig ., Do user like painting animals ?, What type of art do user love ?, Caroline have n't done pottery yet , but I 'm game for trying new art ., your research, !  Do user's research and find an adoption agency or lawyer ., It  is inspiring to see how resilient and strong they are ., Caroline  'm inspired to seeing Caroline's work make a difference for the LGBTQ+ community ., It was so encouraging to be surrounded by so much love and acceptance ., Caroline wanted to tell user about Caroline's school event last week ., Mel , let 's spread love and understanding let 's spread love and understanding !, me know, We have regular meetings , plan events and campaigns , to get together and support each other ., Caroline's own journey and the support Caroline got made a huge difference ., equality, Thank goodness user's son 's okay ., It was awesome to see how strong the young people were , with all the challenges they face ., differences, It really motivated Caroline for sure ., Caroline struggled with Caroline's mental health the support Caroline got was really helpful ., Kids are amazingly resilient in tough situations ., Bringing others comfort and helping them grow brings Caroline such joy ., What gave user the idea for all the colors and patterns ?, For Caroline , adoption is a way of giving back and showing love and acceptance ., a mentorship program for LGBTQ youth, A lot  is happened since we last chatted - Caroline just joined a new LGBTQ activist group last Tues ., Caroline  ' m giving Caroline's voice making a real difference , plus it  is fulfilling in so many ways ., Art gives Caroline a sense of freedom , but so does having supportive people around , promoting LGBTQ rights and being true to Caroline ., Art gives Caroline so much joy ., We even had a picnic last week !, We had a great time at the LGBT pride event last month ., Do user have any other summer traditions user all do together ?, We had a blast last year at the Pride fest ., Caroline had a wicked day out with the gang last weekend - we went biking and saw some pretty cool stuff ., a great way to work through stuff I ' m going through, Caroline 'm passionate about helping people and making a positive impact ., They   've been there through everything ., an LGBTQ support group, a transgender conference, an LGBTQ conference, a poetry reading last Friday, Art allowed me to explore Caroline's transition and Caroline's changing body ., It showed Caroline how much our community has grown ., It also showed Caroline that tough times do n't last - hope and love exist ., really important to me, It must have been special at user's wedding ., How did they handle the accident ?, strong connections with people there, Who supports user , Mel ?, It  is been so helpful to have people around Caroline who accept and support Caroline , so, an LGBTQ center, the beach, It was so special to Caroline ., Caroline 'm grateful for the chance to share Caroline's story and give others hope ., It  is important to Caroline that people have someone to talk to Caroline want to help make that happen ., a library, so much happiness, Pets bring so much joy too , though ., Pets sure do bring so much joy to us !, Music brings us together and brings joy ., It really brings home how much love in families - both blood and the ones we choose ., Caroline was out walking in Caroline's neighborhood when Caroline came across this cool rainbow sidewalk for Pride Month ., We  is putting together a talent show for the kids next month ., my own journey, Caroline shared Caroline's own journey , the struggles Caroline had and how much Caroline   've developed since coming out ., unique paths, Glad user had a great time ., Glad y' all had such a great time ., What pet do user have ?, What other good memories do user have that make user feel thankful for life ?, Lucky user to have such an awesome family !, Mel , glad user had a blast at the concert glad user had a blast at the concert ., a love for horses, So Caroline just had to try to capture that feeling in Caroline's painting ., a picture, user's kids had so much fun at the park !, the chance to volunteer at an LGBTQ+ youth center, a lot of significance, They each have such cool designs ., Do user have any experience with adoption , or know anyone who  is gone through the process ?, that user have creative outlets ., They have an amazing ability to bounce back ., Caroline want to live authentically and help others to do the same ., user really put in the work ., user put so much effort and passion into it ., an LGBTQ art show, the canvas, Caroline highly recommend it for sure !, this summer, Anything exciting going on ?, Last Friday , Caroline went to an LGBTQ+ counseling workshop ., Last week Caroline went to an LGBTQ+ pride parade ., Last Friday Caroline went to a council meeting about adoption ., Caroline went hiking last week and got into a bad spot with some people ., What were they so stoked about ?, Caroline felt fulfilled guiding and supporting them ., loads of love and support throughout this journey, finding comfort love in being yourself, Taking time for user is so important ., Caroline just contacted Caroline's mentor for adoption advice ., appreciate the support of those close to Caroline ., They boosted Caroline through tough times and helped me find out who Caroline really am ., mental health and understanding myself, Caroline  'm thrilled to have a family for kids who need one ., How have user's family been supportive during user's move ?, Caroline felt super powerful giving Caroline's talk ., One special memory for Caroline was the pride parade Caroline went to a few weeks ago ., Caroline was glad Caroline could share Caroline's story and offer them support - it felt like Caroline could make a difference ., Since Caroline was 17 or so ., Caroline really appreciate it ., That  is why Caroline want to pass that same support to anyone who needs it ., Caroline passed the adoption agency interviews last Friday !, Caroline's friends , family and mentors are Caroline's rocks They motivate Caroline and give Caroline the strength to push on family and mentors are Caroline's rocks They motivate Caroline and give Caroline the strength to push on ., A lot  is been going on in Caroline's life !, so many cool people who are as passionate as I am about rights and community support, Caroline   'm meeting so many cool people who are as passionate as Caroline am about rights and community support ., Caroline hope to build Caroline's own family and put a roof over kids who have n't had that before ., Caroline 'm really thankful for Caroline's friends , family and mentors ' support ., Caroline made it to show Caroline's own journey as a transgender woman and how we should accept growth and change ., Caroline 'm ready to be a mom and share Caroline's love and family ., Gon na continue Caroline's edu and check out career options , which is pretty exciting !, Caroline's goal is to give kids a loving home ., some amazing young folks, Caroline might try it sometime !, trans rights, Caroline totally agree , Melanie ., Caroline 100 % agree , Mel ., Caroline chose them 'cause they help LGBTQ+ folks with adoption ., It  is so freeing to express Caroline authentically and have people back Caroline up ., our lives, Caroline also use it to speak up for the LGBTQ+ community and push for acceptance ., Take a look at this ., Caroline took the first step towards becoming a mom - Caroline applied to an adoption agency !, a break, the piano, Since we last spoke , some big things have happened ., Anything new happening with user ?, A lot  is happened since we talked ., Did anything happen ?, my mental health, Being around people who embrace and back Caroline up is beyond words ., the beauty of imperfections, We can really accept who we are and be content ., transitioning three years ago, Caroline started playing acoustic guitar about five years ago it  is been a great way to express Caroline and escape into Caroline's emotions ., Their inclusivity and support really spoke to Caroline ., It  is been a busy week since we talked ., Here  is a recent self - portrait Caroline made last week ., counseling and mental health, Caroline 'm happy user found something that makes user happy ., Caroline find it soempowering and cathartic ., It reminded Caroline of Caroline's own struggles in the past how Caroline felt alone ., That  is great news about user's friend !, Last weekend , our city held a pride parade !, the same things as me, building up confidence and finding positive strategies, It  is awesome to see how kids show their personalities through art ., Family moments like that are so special ., and it definitely shows ., It sure shows how important friendship and compassion are ., I ' m really thankful to this amazing community, my paintings, my path, They  is a huge part of Caroline's journey this one  is reminding Caroline to keep going and never give up !, It  is going to be great !, Lots has been going on since then !, The mentoring is going great !, We  would go through the fields , feeling the wind ., and Caroline   'm going to show Caroline's paintings ., Such a powerful , emotional experience ., Caroline even got to let them know they  is not alone by sharing Caroline's story ., our last chat, Caroline wanted to capture everyone 's unity and strength ., volunteering at the youth center, a change, Those milestones are great reminders of how special our bonds are ., my voice, Caroline used to go horseback riding with Caroline's dad when Caroline was a kid ., It  is an ongoing adventure of learning and growing ., It  is Caroline's way of showing Caroline's story and helping people understand the trans community ., ready to give all my love to a child, Caroline  would love to make something like this next time !, Playing and singing let me express Caroline and connect with others - Caroline love it !, Caroline  would love to check them out ., It made me remember how essential it is to be kind and show support ., Caroline talked about Caroline's transgender journey and encouraged students to get involved in the LGBTQ community ., Must have been traumatizing for user guys ., the beauty of nature, How have user been ?, The transgender stories were so inspiring !, That  is really sweet ., Is this user's own painting ?, That  is great , Mel !, a lot to take in, It was great to see their reactions ., Sharing our experiences is n't always easy Caroline feel it  is important to help promote understanding and acceptance ., Cherish the moments - they  is the best !, Family is everything ., That  is awesome , Melanie !, and it was really enlightening ., Everyone was so happy it made me feel like Caroline belonged ., That bowl is gorgeous !, It  is tough , but really rewarding too ., Melanie , that  is a great picture !, That must have been awesome ., Being a mom is awesome ., This support network has been amazing ., such a welcoming environment, What are their names ?, That cup is so cute ., Mel , that painting was amazing !, That photo is stunning !, Blue is Caroline's fave it makes me feel relaxed ., What was user's favorite part ?, people who accepted and celebrated me, It  is definitely Caroline's best memory ., It was awesome , Melanie !, a long road, How  is user doing finding peace ?, Mel , family love and support is the best !, Family support is huge ., Exploring nature and family time is so special ., The pride event was awesome !, It  is just great , ?, It  is awesome to have our own platform to be ourselves and support others ' rights ., Change is possible !, What was the best part ?, Mel , that  is awesome !, What  is user's best camping memory ?, That must   've been breathtaking !, That  is sweet , Mel !, The advocacy event was a cool experience - so much love and support , amazing !, What concert was it ?, awesome - so much energy and love everywhere, It was so inspiring , Mel !, Here  is a recent painting !, That picture is cool !, Caroline's aim was to show warmth , love and self - acceptance ., That bowl is awesome , Mel !, Life  is too short to do anything else !, It  is what keeps us going even when life  is hard ., a big decision, Parenting is such a big responsibility ., How are user's pets ?, Veggies are his fave !, Melanie , that  is amazing !, It  is definitely therapeutic ., There 's something Caroline want to tell user ., That plate was awesome !, Caroline   've been busy painting - here  is something Caroline just finished ., Mel , user  is amazing !, Volunteering and making a difference- it  is so heartwarming ., so vibrant and welcoming, Appreciating nature and sharing it is great ., Gon na be a great night featuring LGBTQ artists and their awesome talents ., Being outdoors can be really enjoyable ., It was so refreshing the picture Caroline  ' m sending is just stunning , ?, Melanie , that photo was amazing !, Melanie , those bowls are amazing !, a reminder to love my authentic self, able to handle it, It  is a great feeling ., It can be tough , but so worth it ., Caroline hope user  is okay ., Mel , that  is stunning !, It  is awesome how art can show emotions ., It  is very calming ., The posters were amazing , so much pride and strength !, Being ourselves is such a great feeling ., Life sure can be a roller coaster ., Glad user's son is okay , Melanie ., Our loved ones give us strength to tackle any challenge - it  is amazing !, They really are user's rock ., Great picture !  Is that recent ?, That  is so peaceful and calming , Melanie !, Totally !  They  is priceless ., It  is a real gift ., people to lean on , Melanie, Caroline felt liberated and empowered doing it ., the details, Caroline  will keep ya posted . !, Caroline wish Caroline had known user back then !, you like it, We want it to spread understanding and acceptance - let 's make it happen !, an important part of my life, your day, It  is about being courageous and fighting for what  is right ., those with similar issues, my story, It was inspiring and emotional - so many people wanted to create loving homes for children in need ., Just wanted to say !, them to experience it, Caroline   've known these friends for 4 years , since Caroline moved from Caroline's home country ., This journey has been amazing and I 'm grateful Caroline get to share it and help others with theirs ., It  is like a reminder of Caroline's roots and all the love and support Caroline get from Caroline's family ., It  is like a cool form of self - expression ., It  is like a nudge to always stay true to Caroline and embrace Caroline's womanhood ., It  is a really inspiring true story about a trans girl and her family ., how counseling and support groups improved my life, Caroline saw how counseling and support groups improved Caroline's life so Caroline started caring more about mental health and understanding Caroline ., They   've been instrumental in Caroline's transition ., Caroline's art is about expressing Caroline's trans experience ., It  is empowering to make a positive difference in someone 's life ., It was so gratifying to talk to similar young people ., Seeing how passionate these pros were about making a safe space for people like Caroline was amazing ., Caroline really believe in community and supporting each other ., a huge part of my journey, even where we least expect it ., By sharing our stories , we can build a strong , supportive community of hope .",
+          "f1": 0.27692307692307694
+        },
+        {
+          "question": "When did Melanie go camping in July?",
+          "category": 2,
+          "answer": "two weekends before 17 July 2023",
+          "prediction": "two weekends before 17 July 2023",
+          "f1": 1.0
+        },
+        {
+          "question": "When did Caroline join a mentorship program?",
+          "category": 2,
+          "answer": "The weekend before 17 July 2023",
+          "prediction": "10 July 2023",
+          "f1": 0.5
+        },
+        {
+          "question": "What did Melanie paint recently?",
+          "category": 1,
+          "answer": "sunset",
+          "prediction": "the whole gang",
+          "f1": 0.0
+        },
+        {
+          "question": "What activities has Melanie done with her family?",
+          "category": 1,
+          "answer": "Pottery, painting, camping, museum, swimming, hiking",
+          "prediction": "their love and support really",
+          "f1": 0.0
+        },
+        {
+          "question": "In what ways is Caroline participating in the LGBTQ community?",
+          "category": 1,
+          "answer": "Joining activist group, going to pride parades, participating in an art show, mentoring program",
+          "prediction": "an LGBTQ support group, Caroline   've been chasing Caroline's ambitions and had the chance to volunteer at an LGBTQ+ youth center ., Caroline talked about Caroline's transgender journey and encouraged students to get involved in the LGBTQ community ., It  is great to see how far LGBTQ rights have come , but there 's still plenty of progress to be made ., an LGBTQ conference, People of all kinds celebrating love and acceptance - it really pushed Caroline to keep fighting for LGBTQ rights ., Caroline chose them 'cause they help LGBTQ+ folks with adoption ., Art gives Caroline a sense of freedom , but so does having supportive people around , promoting LGBTQ rights and being true to Caroline ., Caroline felt so proud and grateful - the vibes were amazing it was comforting to know Caroline was not alone and had a great community around Caroline ., Caroline   'm putting together an LGBTQ art show next month ., Caroline mentor a transgender teen just like Caroline ., Caroline made it to show Caroline's own journey as a transgender woman and how we should accept growth and change ., a transgender conference, Last Friday , Caroline went to an LGBTQ+ counseling workshop ., Caroline really believe in community and supporting each other ., Caroline painted this after Caroline visited an LGBTQ center ., Finding a community where Caroline   'm accepted , loved and supported has really meant a lot to Caroline ., Caroline   'm meeting so many cool people who are as passionate as Caroline am about rights and community support ., It  is Caroline's way of showing Caroline's story and helping people understand the trans community ., Caroline 'm really thankful to this amazing community - it  is shown Caroline how important it is to fight for trans rights and spread awareness ., A lot  is happened since we last chatted - Caroline just joined a new LGBTQ activist group last Tues ., those with similar issues, mental health and understanding myself, Last week Caroline went to an LGBTQ+ pride parade ., Talking to the community made me want to use Caroline's story to help others too - Caroline  'm still thinking that counseling and mental health is the way to go ., Caroline 'm so excited about meet other people in the community and learn more about advocacy ., Art allowed me to explore Caroline's transition and Caroline's changing body ., It was such a welcoming environment Caroline felt totally accepted ., the beauty of imperfections, We can really accept who we are and be content ., Who supports user , Mel ?, Making a difference & raising awareness of mental health is super rewarding - Caroline 'm really proud of user for taking part !, We have regular meetings , plan events and campaigns , to get together and support each other ., Here  is one- ' Embracing Identity ' is all about finding comfort and love in being user ., the LGBTQ+ community, user  is doing an awesome job looking after user and user's family !, Caroline  will do Caroline's best to make sure these kids have a safe and loving home ., Caroline could n't have done it without them ., What other creative projects do user do with them , besides pottery ?, What else do user guys like doing together ?, Do user do it often with the kids ?, We could do a family out , or wanna plan something special for this summer , just us two ?, Hope user  is doing well ., And , Caroline did Oscar , Caroline's guinea pig ., Do user like painting animals ?, What type of art do user love ?, Caroline have n't done pottery yet , but I 'm game for trying new art ., your research, !  Do user's research and find an adoption agency or lawyer ., the binary gender system",
+          "f1": 0.3408119658119658
+        },
+        {
+          "question": "How many times has Melanie gone to the beach in 2023?",
+          "category": 1,
+          "answer": "2",
+          "prediction": "1",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline join a new activist group?",
+          "category": 2,
+          "answer": "The Tuesday before 20 July 2023",
+          "prediction": "20 July 2023",
+          "f1": 0.7499999999999999
+        },
+        {
+          "question": "Would Melanie be more interested in going to a national park or a theme park?",
+          "category": 3,
+          "answer": "National park; she likes the outdoors",
+          "prediction": "Yes, Since we last spoke , Melanie took Melanie's kids to a park yesterday .",
+          "f1": 0.14285714285714285
+        },
+        {
+          "question": "What kind of art does Caroline make?",
+          "category": 1,
+          "answer": "abstract art",
+          "prediction": "me feel connected",
+          "f1": 0.0
+        },
+        {
+          "question": "When is Melanie's daughter's birthday?",
+          "category": 2,
+          "answer": "13 August",
+          "prediction": "14 August 2023",
+          "f1": 0.4
+        },
+        {
+          "question": "When did Caroline attend a pride parade in August?",
+          "category": 2,
+          "answer": "The Friday before 14 August 2023",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "Would Melanie be considered an ally to the transgender community?",
+          "category": 3,
+          "answer": "Yes, she is supportive",
+          "prediction": "Yes",
+          "f1": 0.4
+        },
+        {
+          "question": "Who supports Caroline when she has a negative experience?",
+          "category": 1,
+          "answer": "Her mentors, family, and friends",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What types of pottery have Melanie and her kids made?",
+          "category": 1,
+          "answer": "bowls, cup",
+          "prediction": "Melanie made it in pottery class yesterday ., Check out Melanie's pottery creation in the picture !, Melanie 'm a big fan of pottery - the creativity and skills are awesome ., Pottery is a huge part of Melanie's life , not just a hobby - it me express Melanie's emotions ., Melanie 'm excited to see where pottery takes Melanie ., FYI , Melanie finished another pottery project - want to see a picture ?, Melanie just signed up for a pottery class yesterday ., Last Friday , Melanie finally took Melanie's kids to a pottery workshop ., We all made our own pots ., Last month Melanie got hurt and had to take a break from pottery , which Melanie use for self - expression and peace .",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline and Melanie go to a pride fesetival together?",
+          "category": 2,
+          "answer": "2022",
+          "prediction": "25 May 2023",
+          "f1": 0.0
+        },
+        {
+          "question": "What would Caroline's political leaning likely be?",
+          "category": 3,
+          "answer": "Liberal",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What has Melanie painted?",
+          "category": 1,
+          "answer": "Horse, sunset, sunrise",
+          "prediction": "Melanie painted that lake sunrise last year !, Melanie painted it because it was calming ., another painting of yours, an abstract painting, Melanie's kids and Melanie just finished another painting like our last one ., the painting to have a serene vibe while still having lots of vibrant colors, Here  is a painting Melanie did recently ., love that painting !, Melanie  would love to see another painting of user's !, Have user made any more art lately ?, How long have user been creating art ?, Art is so cool like that - it connects us and helps us understand each other ., Here  is a photo of Melanie's horse painting Melanie did recently ., Here  is a picture of Oliver ., Art is such a source of joy ., a real sunset, That agency looks great !, Looking forward to more happy years ., Anything coming up user  is looking forward to ?, We always look forward to our family camping trip ., This pic is from last night - looks like everyone was having a blast !, Caroline , that looks amazing !, Any specific projects or activities user  is looking forward to there ?, Caroline , that looks awesome !, Here  is a pic of Melanie's family camping at the beach ., Painting landscapes and still life is Melanie's favorite !, a lot of things happening to me, our different paths, How long have user had such a great support system ?, Have a great time and learn a lot ., What kind of books do user have in user's library ?, user have Melanie's support , Caroline !, Books have such an awesome power !, user's friends and community really have user's back ., Melanie had a quiet weekend after we went camping with Melanie's family two weekends ago ., The kids had such a blast ., Also , do user have any pets ?, Horses have such grace !, They had fun exploring and playing ., a blast exploring the forest hiking, Have user ever thought about trying it or another art form ?, What effect has the journey had on user's relationships ?, Melanie had a great time ., BTW , recently Melanie had a setback ., Painting is a fun way to express Melanie's feelings and get creative ., Art is awesome for showing us who we really are and getting in touch with ourselves ., a look, Showing off our true selves is the best thing ever ., Those joyful moments definitely show us life 's beauty ., their eyes light up, how neglected some people are, your show - the LGBTQ community, Melanie , that  is a great picture !, FYI , Melanie finished another pottery project - want to see a picture ?, Time flies- feels like just yesterday Melanie put this dress on !, Seeing her wobble as she took those initial steps really put into perspective how fleeting life is and how lucky Melanie am to be able to share these moments ., That picture was from a show Melanie went to ., It  is the highlight of our summer !, It really made me think about taking care of our minds ., What made user pick it ?, We can make a real impact together !, Our family and moments make it all worth it ., Family moments make life awesome ., Keep it up , user  is making a big impact !, it is so calming, Melanie made this bowl in Melanie's class ., such an improvement, We all made our own pots ., We all made wishes and felt so at one with the universe ., something to catch the eye and make people smile, user make life 's struggles more bearable ., Melanie made it in pottery class yesterday ., What made user decide to transition and join the transgender community ?, Did user make that ?, Sharing user's story and support might make a difference for a long time ., Those moments make being a parent worth it ., Those simple moments make the best memories ., so much progress, Makes me feel like maybe Melanie should do it too !, Doing research and readying Melanie emotionally makes sense ., The colors make me feel calm ., What made it so special ?, It makes hard times easier ., user captured the sunset perfectly , so peaceful !, Can user show Melanie one of the Oscars ?, tranquility, the kids & work, love , acceptance , and hope, Taking in kids in need - user  is so kind ., Glad user   've found people who uplift and accept user !, Creativity and family keep Melanie at peace ., The art really took Melanie to that moment Melanie could feel the serenity ., So user found such a helpful group ., Have user found any activities that make user feel the same way ?, We found these lovely flowers ., the courage to be yourself, Glad to hear user found a great group where user can make an impact ., Caroline , glad user found a supportive community glad user found a supportive community !, Where did user find it ?, Art can be found in the most unlikely places ., Love and acceptance really can be found everywhere ., my real muse : painting and pottery, Seven years now , and Melanie   've finally found Melanie's real muse : painting and pottery ., your true self, user found user's true self now user  is helping others ., Melanie   'm getting there , Caroline ., They were stoked about the dinosaur exhibit !, Oliver 's hilarious !  He hid his bone in Melanie's slipper once !, That  is cool , Caroline !, What happened that was so awesome ?, That  is really cool ., user  would be a great counselor !, It was really rewarding ., That  is great , Caroline !, user  will be an awesome mom !, That photo is great !, It was so much fun !, It  is when Melanie really feel alive and happy ., That  is gorgeous , Caroline !, user's passion and hard work to help others is awesome ., Clay is incredible it brings Melanie so much joy !, That  is awesome , Caroline !, a gorgeous photo , Caroline, It  is great user have people to support user ., That  is really awesome !, Unconditional love is so important ., more to do, user's drive to help is awesome !, Which one has been user's favorite guide ?, Caroline , those lessons are great - self - acceptance and finding support are key ., the dog, It was fun and therapeutic !, Caroline , it  is been super busy here ., Everyone we love was there to celebrate us - it was really special ., It was amazing , Caroline ., Marrying Melanie's partner and promising to be together forever was the best part ., It  is great to have a supporter !, Young people 's resilience is amazing ., Caroline , that painting is awesome !, Those colors are so vivid the whole thing looks really unified ., Supporting each other and making good things happen - that  is so inspiring !, But those times are always special to spend time together and chill ., That  is a memory Melanie  will never forget ., what a beautiful moment, Last night was amazing !, It was Matt Patterson ., His voice and songs were amazing ., user's art is amazing , Caroline ., Caroline , that  is gorgeous !, We  is all individuals and wonderfully imperfect ., Caroline , that  is so cool !, It was a great experience ., a huge learning experience, But it  is worth it when we have things that make us happy ., they  is good- we got another cat named Bailey too ., It  is peaceful and special ., Caroline , that  is great !, It  is tough when those things happen it  is great user apologized ., Pottery is so relaxing and creative ., All those colors are incredible the story it tells is so inspiring ., That  is so nice , Caroline !, Caroline , that  is so nice !, The colors are so bright the flowers are so pretty ., Nature  is amazing ., Caroline , that  is awesome !, Volunteering is a great way to meet people ., That  is great news , Caroline !, That  is so cool , Caroline !, It was so fun and lively !, That  is a gorgeous song , Caroline ., Music can be so inspiring and uplifting ., That picture is so beautiful the colors really pop ., It  is so calming and satisfying ., This painting is awesome ., Caro , that painting is amazing !, The sign was just a precaution ., user  is so thoughtful !, a long process, It was tough Melanie  ' m doing it ., Here  is one Melanie did last week ., Those posters are great !, We were so lucky he was okay ., It was a really scary experience ., Thankfully , it  is over now ., Caroline , that roadtrip this past weekend was insane !, What  is been up since we last talked ?, and that was a reminder that life is precious and to cherish our family ., Thankfully , Melanie's son  is OK ., user  is right , Caroline ., their brother, They  is tough kids ., They  is really amazing ., They  is Melanie's biggest motivation and support ., They  is a real support ., It  is a chance to be present and together ., This was a great time ., Caroline , that  is awesome ., user  is so strong and inspiring ., user  is so inspiring !, Being user is great !, It brings Melanie so much happiness ., Wanna do a family outing this summer ?, , We just did it yesterday !, A buddy of Melanie's adopted last year ., These figurines Melanie bought yesterday remind Melanie of family love ., But it  is in these vulnerable moments that we bond and understand each other ., The view from the top was amazing!, lots of love support, Melanie wish Melanie was that resilient too ., user   've come a long way since user's transition - keep on inspiring people with user's strength and courage !, Any other exciting LGBTQ advocacy stuff coming up ?, It  is so peaceful waking up to the sound of birds and the smell of fresh air - it always refreshes Melanie's soul ., Melanie  will do that ., Melanie   'm gon na keep it up ., Melanie love how it shows the togetherness and power user were talking about ., Melanie 'm excited to see where pottery takes Melanie ., They represent growth , beauty and reminding us to appreciate the small moments ., It  is awesome that beauty can be found in the imperfections ., Melanie just signed up for a pottery class yesterday ., Keep up the great work !, I 'm lucky to have Melanie's husband and kids ; they keep Melanie motivated ., Melanie   'm starting to realize that self - care is really important ., Melanie  will start thinking about what we can do ., Each stroke carries a part of Melanie ., What  is up with user ?, What  is up with user lately ?, Check out Melanie's pottery creation in the picture !, a fan of both classical like Bach and Mozart , as well as modern music like Ed Sheeran 's \" Perfect, Melanie love the self - acceptance and love theme ., Melanie 'm a big fan of pottery - the creativity and skills are awesome ., Got any other objects that user treasure , like that necklace ?, They are so sweet and playful - they really liven up the house !, guts, user have such a caring heart - they  will get all the love and stability they need !, Caroline , so glad user got the support so glad user got the support !, a pup and a kitten, Just got some new shoes , too !, user's future fam will get a kick out of having user ., Got any cool experiences user can share ?, user got any cool art projects coming up ?, Caroline , it  is got to be tough dealing with those changes ., Got any tips for getting started on it ?, Our trip got off to a bad start ., What  is it done for user ?, user  is doing something amazing !, Caroline , user  is doing an awesome job of inspiring others with user's journey ., user  is doing amazing !, Do user like to paint too ?, We explored nature, roasted marshmallows around the campfire and even went on a hike., some time, Taking care of ourselves is vital ., What  is new with user ?, It  is like therapy for Melanie , letting me express Melanie and get creative ., Love the necklace , any special meaning to it ?, What kind of counseling and mental health services do user want to use ?, They brighten up our day and always make us smile ., Tell Melanie , what  is user's vision for the future what  is user's vision for the future ?, a work in progress",
+          "f1": 0.4388888888888889
+        },
+        {
+          "question": "What are Melanie's pets' names?",
+          "category": 1,
+          "answer": "Oliver, Luna, Bailey",
+          "prediction": "Also , do user have any pets ?",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline apply to adoption agencies?",
+          "category": 2,
+          "answer": "The week of 23 August 2023",
+          "prediction": "25 May 2023",
+          "f1": 0.25
+        },
+        {
+          "question": "When did Caroline draw a self-portrait?",
+          "category": 2,
+          "answer": "The week before 23 August 2023",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What subject have Caroline and Melanie both painted?",
+          "category": 1,
+          "answer": "Sunsets",
+          "prediction": "my paintings, Check out Caroline's painting for the art show !, Caroline made this painting to show Caroline's path as a trans woman ., Got any paintings to show ?, The woman in the painting stands for the journey of acceptance ., and Caroline   'm going to show Caroline's paintings ., Caroline painted it after Caroline visited the beach last week ., Caroline's art is about expressing Caroline's trans experience ., What type of art do user love ?, Caroline painted this after Caroline visited an LGBTQ center ., some art, Painting is great for expressing Caroline ., Creating art was really important to Caroline during Caroline's transition - it helped me understand and accept Caroline ., Painting helps me explore Caroline's identity and be true to Caroline ., Caroline   've been busy painting - here  is something Caroline just finished ., Painting and drawing have helped me express Caroline's feelings and explore Caroline's gender identity ., Caroline , they  is some of Melanie's fave memories .",
+          "f1": 0.0
+        },
+        {
+          "question": "What symbols are important to Caroline?",
+          "category": 1,
+          "answer": "Rainbow flag, transgender symbol",
+          "prediction": "It  is a symbol of togetherness , to celebrate differences and be that much closer ., really important to me, It  is important to Caroline that people have someone to talk to Caroline want to help make that happen ., an important part of my life, It  is an important part of Caroline's life Caroline  ' ve made strong connections with people there ., It really inspired Caroline ., It inspires Caroline to keep making art , too ., It inspired Caroline to make some art ., Books guide Caroline , motivate Caroline and help me discover who Caroline am ., user really put in the work ., user put so much effort and passion into it ., an LGBTQ art show, We  is putting together a talent show for the kids next month ., the canvas, unique paths, Glad user had a great time ., Glad y' all had such a great time ., We even had a picnic last week !, What pet do user have ?, We had a great time at the LGBT pride event last month ., We have regular meetings , plan events and campaigns , to get together and support each other ., Do user have any other summer traditions user all do together ?, What other good memories do user have that make user feel thankful for life ?, Lucky user to have such an awesome family !, Mel , glad user had a blast at the concert glad user had a blast at the concert ., Recently , Caroline had a not - so - great experience on a hike ., We had a blast last year at the Pride fest ., a love for horses, So Caroline just had to try to capture that feeling in Caroline's painting ., a picture, user's kids had so much fun at the park !, the chance to volunteer at an LGBTQ+ youth center, a lot of significance, Caroline had a wicked day out with the gang last weekend - we went biking and saw some pretty cool stuff ., They each have such cool designs ., Do user have any experience with adoption , or know anyone who  is gone through the process ?, that user have creative outlets ., They have an amazing ability to bounce back ., Painting helps me explore Caroline's identity and be true to Caroline ., the binary gender system, equality, While roses stand for love and beauty ?, The woman in the painting stands for the journey of acceptance ., It stands for freedom and being real ., others, No worries , Mel !  user's friendship means so much to Caroline ., It really motivated Caroline for sure ., For Caroline , adoption is a way of giving back and showing love and acceptance ., so much happiness, Pets bring so much joy too , though ., Pets sure do bring so much joy to us !, Music brings us together and brings joy ., It really brings home how much love in families - both blood and the ones we choose ., It  is inspiring to see how resilient and strong they are ., Caroline  'm inspired to seeing Caroline's work make a difference for the LGBTQ+ community ., What gave user the idea for all the colors and patterns ?, Art gives Caroline a sense of freedom , but so does having supportive people around , promoting LGBTQ rights and being true to Caroline ., Art gives Caroline so much joy ., Caroline really appreciate it ., Caroline 'm happy user found something that makes user happy ., Caroline find it soempowering and cathartic ., their own journeys, Caroline totally agree , Melanie ., Caroline 100 % agree , Mel ., ready to give all my love to a child, Caroline wanted to capture everyone 's unity and strength ., Caroline  will keep ya posted . !, a library, Their love and encouragement has really helped me accept and grow into Caroline's true self ., me show my feelings and freeze gorgeous moments , like a bouquet of flowers, It helps Caroline show Caroline's feelings and freeze gorgeous moments , like a bouquet of flowers ., me get my emotions out, Playing it helps Caroline get Caroline's emotions out ., a more loving world, Painting and drawing have helped me express Caroline's feelings and explore Caroline's gender identity ., Creating art was really important to Caroline during Caroline's transition - it helped me understand and accept Caroline ., any way, They  will help with the process and provide all the info ., It helps during tougher times ., friends , family and people, volunteering at the youth center, Representing inclusivity and diversity in Caroline's art is important to Caroline ., Their love and help have been so important , especially after that tough breakup ., What ’s the funniest thing Oliver  is done ?, Caroline could n't have done it without them ., How have user been ?, The transgender stories were so inspiring !, That  is really sweet ., Is this user's own painting ?, That  is great , Mel !, Caroline's goal is to give kids a loving home ., a lot to take in, It was great to see their reactions ., Sharing our experiences is n't always easy Caroline feel it  is important to help promote understanding and acceptance ., Cherish the moments - they  is the best !, Family is everything ., That  is awesome , Melanie !, and it was really enlightening ., Everyone was so happy it made me feel like Caroline belonged ., That bowl is gorgeous !, It  is tough , but really rewarding too ., Melanie , that  is a great picture !, That must have been awesome ., Being a mom is awesome ., This support network has been amazing ., such a welcoming environment, What are their names ?, It  is been a busy week since we talked ., That cup is so cute ., Mel , that painting was amazing !, inspiring and emotional, That photo is stunning !, Blue is Caroline's fave it makes me feel relaxed ., What was user's favorite part ?, people who accepted and celebrated me, It  is definitely Caroline's best memory ., It was awesome , Melanie !, a long road, How  is user doing finding peace ?, Mel , family love and support is the best !, Family support is huge ., Exploring nature and family time is so special ., The pride event was awesome !, It  is just great , ?, Change is possible !, What was the best part ?, Mel , that  is awesome !, What  is user's best camping memory ?, That must   've been breathtaking !, That  is sweet , Mel !, The advocacy event was a cool experience - so much love and support , amazing !, What concert was it ?, awesome - so much energy and love everywhere, It was so inspiring , Mel !, Here  is a recent painting !, That picture is cool !, Caroline's aim was to show warmth , love and self - acceptance ., That bowl is awesome , Mel !, Life  is too short to do anything else !, It  is what keeps us going even when life  is hard ., a big decision, Parenting is such a big responsibility ., How are user's pets ?, Veggies are his fave !, Melanie , that  is amazing !, Here  is a recent self - portrait Caroline made last week ., It  is definitely therapeutic ., There 's something Caroline want to tell user ., That plate was awesome !, Caroline   've been busy painting - here  is something Caroline just finished ., Mel , user  is amazing !, Volunteering and making a difference- it  is so heartwarming ., so vibrant and welcoming, Appreciating nature and sharing it is great ., Gon na be a great night featuring LGBTQ artists and their awesome talents ., Being outdoors can be really enjoyable ., glad I could share my story and offer them support, It was so refreshing the picture Caroline  ' m sending is just stunning , ?, Melanie , that photo was amazing !, Since Caroline was 17 or so ., Melanie , those bowls are amazing !, a reminder to love my authentic self, able to handle it, It  is a great feeling ., It can be tough , but so worth it ., Caroline hope user  is okay ., Mel , that  is stunning !, It  is awesome how art can show emotions ., It  is very calming ., The posters were amazing , so much pride and strength !, Being ourselves is such a great feeling ., Life sure can be a roller coaster ., Glad user's son is okay , Melanie ., Our loved ones give us strength to tackle any challenge - it  is amazing !, They really are user's rock ., Great picture !  Is that recent ?, That  is so peaceful and calming , Melanie !, Totally !  They  is priceless ., Love and acceptance should be everyone 's right Caroline want them to experience it ., It  is a real gift ., those with similar issues, Who supports user , Mel ?, user's kind words really mean a lot ., user's backing really means a lot ., user's words mean a lot to Caroline ., It means a lot to share this with user ., It means a lot having user in Caroline's corner ., It means a lot to Caroline that user can feel the sense of peace and serenity .  Makes me feel connected ., user's support really means a lot ., Their inclusivity and support really spoke to Caroline ., It  is Caroline's way of showing Caroline's story and helping people understand the trans community ., Caroline  ' m still figuring out the details Caroline  ' m thinking of working with trans people , helping them accept themselves and supporting their mental health ., Thanks , Melanie !  , Caroline drew it ., They  is a huge part of Caroline's journey this one  is reminding Caroline to keep going and never give up !, Take a look at this ., Caroline took the first step towards becoming a mom - Caroline applied to an adoption agency !, a break, It reminded Caroline of Caroline's own struggles in the past how Caroline felt alone ., Caroline highly recommend it for sure !, love , faith and strength, What do flowers mean to user ?, Finding a community where Caroline   'm accepted , loved and supported has really meant a lot to Caroline ., Caroline chose them 'cause they help LGBTQ+ folks with adoption ., my voice, Caroline also use it to speak up for the LGBTQ+ community and push for acceptance ., Caroline used to go horseback riding with Caroline's dad when Caroline was a kid ., Last weekend , our city held a pride parade !, the beauty of nature, They boosted Caroline through tough times and helped me find out who Caroline really am ., It really mattered ., the beauty of imperfections, We can really accept who we are and be content ., these friends, anyone who 's gone through the process, The rainbow flag mural is important to Caroline as it reflects the courage and strength of the trans community ., Mel , let 's spread love and understanding let 's spread love and understanding !, me know, The support group has made me feel accepted and given Caroline courage to embrace Caroline ., It  is so freeing to express Caroline authentically and have people back Caroline up ., this cool rainbow sidewalk, Caroline's art is about expressing Caroline's trans experience ., Art allowed me to explore Caroline's transition and Caroline's changing body ., It was so special to Caroline ., a huge part of my journey, a mentorship program for LGBTQ youth, A lot  is happened since we last chatted - Caroline just joined a new LGBTQ activist group last Tues ., loads of love and support throughout this journey, It must have been special at user's wedding ., We want it to spread understanding and acceptance - let 's make it happen !, Thank goodness user's son 's okay ., user  is doing an awesome job looking after user and user's family !, Caroline  will do Caroline's best to make sure these kids have a safe and loving home ., What other creative projects do user do with them , besides pottery ?, What else do user guys like doing together ?, Do user do it often with the kids ?, Hope user  is doing well ., And , Caroline did Oscar , Caroline's guinea pig ., Do user like painting animals ?, What type of art do user love ?, Caroline have n't done pottery yet , but I 'm game for trying new art ., your research, !  Do user's research and find an adoption agency or lawyer ., Glad user found something that makes user so happy !, an adoption agency lawyer, appreciate the support of those close to Caroline ., an LGBTQ center, the beach, some amazing young folks, so many cool people who are as passionate as I am about rights and community support, Caroline   'm meeting so many cool people who are as passionate as Caroline am about rights and community support ., Caroline felt super powerful giving Caroline's talk ., my own journey, Caroline shared Caroline's own journey , the struggles Caroline had and how much Caroline   've developed since coming out ., this summer, Caroline's own journey and the support Caroline got made a huge difference ., They make all the difference ., a real difference, a huge difference to have people who get what I ' m going through, So Caroline wanna keep making a difference ., Caroline was so happy and thankful for all the support ., That  is why Caroline want to pass that same support to anyone who needs it ., finding comfort love in being yourself, Surrounding ourselves with things that bring us joy is important ., the way, Gon na continue Caroline's edu and check out career options , which is pretty exciting !, the piano, transitioning three years ago, Caroline started playing acoustic guitar about five years ago it  is been a great way to express Caroline and escape into Caroline's emotions .",
+          "f1": 0.30952380952380953
+        },
+        {
+          "question": "When did Caroline encounter people on a hike and have a negative experience?",
+          "category": 2,
+          "answer": "The week before 25 August 2023",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie make a plate in pottery class?",
+          "category": 2,
+          "answer": "24 August 2023",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "Would Caroline be considered religious?",
+          "category": 3,
+          "answer": "Somewhat, but not extremely religious",
+          "prediction": "Yes",
+          "f1": 0.0
+        },
+        {
+          "question": "What instruments does Melanie play?",
+          "category": 1,
+          "answer": "clarinet and violin",
+          "prediction": "\" Summer Sounds\"- The playing an awesome pop song that got everyone dancing and singing ., Melanie play the clarinet !, We played games , ate good food , and just hung out together ., Melanie love live music ., So Melanie   'm carving out some time each day - running , reading , or playing Melanie's violin - which refreshes Melanie and helps me stay present for Melanie's family !, It  is so peaceful waking up to the sound of birds and the smell of fresh air - it always refreshes Melanie's soul ., Caroline , it sounds like user  is doing some impressive work ., That sounds great , Caroline !, Caroline , sounds like the parade was an awesome experience !, Sounds awesome , Caroline !, Caroline , that sounds awesome !, Caroline , that sounds super rewarding !, Caroline , user's group sounds awesome !, That sounds awesome ., That sounds great , Caroline ., Biking sounds like a great way to get out in nature ., Adoption sounds awesome ., Melanie love how it shows the togetherness and power user were talking about ., fun, Nature and quality time , ca n't beat it !, Melanie  will do that ., Have user found any activities that make user feel the same way ?, Sounds like user's event was amazing !, Melanie love the self - acceptance and love theme ., So user found such a helpful group ., We love painting together lately , especially nature - inspired ones ., Melanie wish Melanie was that resilient too ., We enjoy hiking in the mountains and exploring forests ., each other 's company, Thankfully , they enjoyed the Grand Canyon a lot !, Melanie   'm gon na keep it up ., Can user show Melanie one of the Oscars ?, Those joyful moments definitely show us life 's beauty ., tranquility, a hike, Did user hear any inspiring stories ?, a lot of things happening to me, our different paths, How long have user had such a great support system ?, Have a great time and learn a lot ., What kind of books do user have in user's library ?, user have Melanie's support , Caroline !, Books have such an awesome power !, user's friends and community really have user's back ., Melanie had a quiet weekend after we went camping with Melanie's family two weekends ago ., The kids had such a blast ., Also , do user have any pets ?, Horses have such grace !, Have user made any more art lately ?, a blast exploring the forest hiking, Have user ever thought about trying it or another art form ?, What effect has the journey had on user's relationships ?, Melanie had a great time ., BTW , recently Melanie had a setback ., lots of vibrant colors, Melanie   'm starting to realize that self - care is really important ., Melanie  will start thinking about what we can do .",
+          "f1": 0.4
+        },
+        {
+          "question": "What musical artists/bands has Melanie seen?",
+          "category": 1,
+          "answer": "Summer Sounds, Matt Patterson",
+          "prediction": "your show - the LGBTQ community",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie go to the park?",
+          "category": 2,
+          "answer": "27 August 2023",
+          "prediction": "27 August 2023",
+          "f1": 1.0
+        },
+        {
+          "question": "When is Caroline's youth center putting on a talent show?",
+          "category": 2,
+          "answer": "September 2023",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "Would Melanie likely enjoy the song \"The Four Seasons\" by Vivaldi?",
+          "category": 3,
+          "answer": "Yes; it's classical music",
+          "prediction": "Yes",
+          "f1": 1.0
+        },
+        {
+          "question": "What are some changes Caroline has faced during her transition journey?",
+          "category": 1,
+          "answer": "Changes to her body, losing unsupportive friends",
+          "prediction": "Art allowed me to explore Caroline's transition and Caroline's changing body ., It made me reflect on how far Caroline   've come since Caroline started transitioning three years ago ., our lives, It  is definitely changed them ., a change, Caroline shared Caroline's own journey , the struggles Caroline had and how much Caroline   've developed since coming out ., Caroline's own journey and the support Caroline got made a huge difference ., They   've been instrumental in Caroline's transition ., Caroline , it  is got to be tough dealing with those changes ., Recently , Caroline had a not - so - great experience on a hike ., A lot  is been going on in Caroline's life !, their own journeys, They   've been there for Caroline every step of the way , giving Caroline love , guidance , and acceptance ., my own journey, my mental health, Caroline made it to show Caroline's own journey as a transgender woman and how we should accept growth and change ., It reminded Caroline of Caroline's own struggles in the past how Caroline felt alone ., the same things as me, Caroline felt fulfilled guiding and supporting them ., Caroline want to help people who have gone through the same things as Caroline ., So Caroline wanna keep making a difference ., Gon na continue Caroline's edu and check out career options , which is pretty exciting !, It  is been a great way to work through stuff Caroline   'm going through ., Realizing Caroline can be me without fear and having the courage to transition was the best part ., It really motivated Caroline for sure ., Caroline  ' ve been blessed with loads of love and support throughout this journey Caroline want to pass it on to others ., Caroline struggled with Caroline's mental health the support Caroline got was really helpful ., They make all the difference ., a real difference, a huge difference to have people who get what I ' m going through, Caroline want to help make a difference ., Caroline talked about Caroline's transgender journey and encouraged students to get involved in the LGBTQ community ., a great way to work through stuff I ' m going through, Making a difference & raising awareness of mental health is super rewarding - Caroline 'm really proud of user for taking part !, It really inspired Caroline ., It inspires Caroline to keep making art , too ., It inspired Caroline to make some art ., Creating art was really important to Caroline during Caroline's transition - it helped me understand and accept Caroline ., Last Friday , Caroline went to an LGBTQ+ counseling workshop ., Last week Caroline went to an LGBTQ+ pride parade ., Last Friday Caroline went to a council meeting about adoption ., Caroline went hiking last week and got into a bad spot with some people ., a poetry reading last Friday, They boosted Caroline through tough times and helped me find out who Caroline really am ., We want it to spread understanding and acceptance - let 's make it happen !, Books guide Caroline , motivate Caroline and help me discover who Caroline am ., Caroline want to live authentically and help others to do the same ., it 's important to help promote understanding and acceptance, It was so special to Caroline ., It was such a welcoming environment Caroline felt totally accepted ., It  is going to be great !, Lots has been going on since then !, The mentoring is going great !, We  would go through the fields , feeling the wind ., and Caroline   'm going to show Caroline's paintings ., Anything exciting going on ?, even where we least expect it ., Caroline felt liberated and empowered doing it ., It  is made me appreciate how lucky Caroline am to have Caroline's friends and family helping with Caroline's transition ., Caroline really appreciate it ., They  will help with the process and provide all the info ., the details, an LGBTQ support group, a transgender conference, an LGBTQ conference, a pride parade, Caroline was glad Caroline could share Caroline's story and offer them support - it felt like Caroline could make a difference ., It  is like a reminder of Caroline's roots and all the love and support Caroline get from Caroline's family ., It  is like a cool form of self - expression ., It  is like a nudge to always stay true to Caroline and embrace Caroline's womanhood ., They   've been there through everything ., Caroline could n't have done it without them ., That  is why Caroline want to pass that same support to anyone who needs it ., We even had a picnic last week !, We had a great time at the LGBT pride event last month ., Do user have any other summer traditions user all do together ?, We had a blast last year at the Pride fest ., Caroline had a wicked day out with the gang last weekend - we went biking and saw some pretty cool stuff ., Caroline chose them 'cause they help LGBTQ+ folks with adoption ., Now Caroline's relationships feel more genuine ., They  is a huge part of Caroline's journey this one  is reminding Caroline to keep going and never give up !, differences, Such a powerful , emotional experience ., counseling and mental health, our last chat, how counseling and support groups improved my life, Caroline saw how counseling and support groups improved Caroline's life so Caroline started caring more about mental health and understanding Caroline ., Caroline felt so accepted and happy , just being around people who accepted and celebrated Caroline ., the piano, strong connections with people there, finding comfort love in being yourself, unique paths, Glad user had a great time ., Glad y' all had such a great time ., What pet do user have ?, We have regular meetings , plan events and campaigns , to get together and support each other ., What other good memories do user have that make user feel thankful for life ?, Lucky user to have such an awesome family !, Mel , glad user had a blast at the concert glad user had a blast at the concert ., a love for horses, So Caroline just had to try to capture that feeling in Caroline's painting ., a picture, user's kids had so much fun at the park !, the chance to volunteer at an LGBTQ+ youth center, a lot of significance, They each have such cool designs ., Do user have any experience with adoption , or know anyone who  is gone through the process ?, that user have creative outlets ., They have an amazing ability to bounce back ., Caroline felt super powerful giving Caroline's talk ., It made me feel connected and gave Caroline a lot of hope for Caroline's own path ., Caroline  'm inspired to seeing Caroline's work make a difference for the LGBTQ+ community ., Caroline's aim was to show warmth , love and self - acceptance ., Their love and help have been so important , especially after that tough breakup ., this summer, Caroline highly recommend it for sure !, an LGBTQ center, the beach, Taking care of ourselves is so important - even if it  is not always easy ., my home country, Caroline took the first step towards becoming a mom - Caroline applied to an adoption agency !, It  is made a huge difference to have people who get what Caroline   'm going through ., a huge part of my journey, Life 's unpredictable , but moments like these remind us how important our loved ones are but moments like these remind us how important our loved ones are ., anyone who 's gone through the process, Caroline totally agree , Melanie ., Caroline 100 % agree , Mel ., Caroline 'm happy user found something that makes user happy ., Caroline find it soempowering and cathartic ., Caroline was out walking in Caroline's neighborhood when Caroline came across this cool rainbow sidewalk for Pride Month ., a library, Since Caroline was 17 or so ., This is a big move towards Caroline's goal of having a family ., It was so encouraging to be surrounded by so much love and acceptance ., user  is doing an awesome job looking after user and user's family !, Caroline  will do Caroline's best to make sure these kids have a safe and loving home ., What other creative projects do user do with them , besides pottery ?, What else do user guys like doing together ?, Do user do it often with the kids ?, Hope user  is doing well ., And , Caroline did Oscar , Caroline's guinea pig ., Do user like painting animals ?, What type of art do user love ?, Caroline have n't done pottery yet , but I 'm game for trying new art ., your research, !  Do user's research and find an adoption agency or lawyer ., Their love and encouragement has really helped me accept and grow into Caroline's true self ., Painting helps me explore Caroline's identity and be true to Caroline ., me show my feelings and freeze gorgeous moments , like a bouquet of flowers, It helps Caroline show Caroline's feelings and freeze gorgeous moments , like a bouquet of flowers ., me get my emotions out, Playing it helps Caroline get Caroline's emotions out ., a more loving world, Painting and drawing have helped me express Caroline's feelings and explore Caroline's gender identity ., It helps during tougher times ., friends , family and people, Caroline  will keep ya posted . !, Some close friends kept supporting Caroline a few were n't able to handle it ., Now the hard work is starts to turn Caroline's dream into a reality ., Their inclusivity and support really spoke to Caroline ., Taking time for user is so important ., Caroline wish Caroline had known user back then !, What were they so stoked about ?, Caroline wanted to tell user about Caroline's school event last week ., the binary gender system, Caroline's friends , family and mentors are Caroline's rocks They motivate Caroline and give Caroline the strength to push on family and mentors are Caroline's rocks They motivate Caroline and give Caroline the strength to push on ., Family moments like that are so special ., This journey has been amazing and I 'm grateful Caroline get to share it and help others with theirs ., really important to me, Being around people who embrace and back Caroline up is beyond words ., It  is Caroline's way of showing Caroline's story and helping people understand the trans community ., so much happiness, a mentorship program for LGBTQ youth, A lot  is happened since we last chatted - Caroline just joined a new LGBTQ activist group last Tues ., Bringing others comfort and helping them grow brings Caroline such joy ., Now Caroline want to help people go through it too ., my story, It was inspiring and emotional - so many people wanted to create loving homes for children in need ., Caroline wanted to capture everyone 's unity and strength ., Just wanted to say !, them to experience it, the courage and strength of the trans community, hopeful and optimistic, so proud and grateful, Caroline , way to go !, She gave it to Caroline when Caroline was young it means love , faith and strength ., It  is inspiring to see how resilient and strong they are ., Since we last spoke , some big things have happened ., Anything new happening with user ?, A lot  is happened since we talked ., Did anything happen ?, Mel , let 's spread love and understanding let 's spread love and understanding !, me know, How have user's family been supportive during user's move ?, Caroline  would love to help in any way Caroline can ., Caroline was so happy and thankful for all the support ., those with similar issues, appreciate the support of those close to Caroline ., reading to them and opening up their minds, seeing how much fun everyone has and how proud they 'll feel of their talents, volunteering at the youth center, the beauty of imperfections, We can really accept who we are and be content ., How  had they like it ?, Caroline might try it sometime !",
+          "f1": 0.46428571428571425
+        },
+        {
+          "question": "What does Melanie do with her family on hikes?",
+          "category": 1,
+          "answer": "Roast marshmallows, tell stories",
+          "prediction": "others",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline go biking with friends?",
+          "category": 2,
+          "answer": "The weekend before 13 September 2023",
+          "prediction": "The weekend before 13 September 2023",
+          "f1": 1.0
+        },
+        {
+          "question": "How long has Melanie been practicing art?",
+          "category": 2,
+          "answer": "Since 2016",
+          "prediction": "3 years",
+          "f1": 0.0
+        },
+        {
+          "question": "What personality traits might Melanie say Caroline has?",
+          "category": 3,
+          "answer": "Thoughtful, authentic, driven",
+          "prediction": "Caroline , that looks amazing !, Caroline , that looks awesome !, Absolutely , Caroline !, Caroline , way to go !, Caroline , awesome news that user two are getting along !, Fantastic , Caroline !, Caroline , sorry about the hike ., same here Caroline ., Caroline , congrats !, Caroline , that sounds awesome !, Caroline , that sounds super rewarding !, Caroline , user's group sounds awesome !, Caroline totally agree , Melanie ., Melanie totally agree , Caroline ., Caroline , they  is some of Melanie's fave memories ., Caroline !  Missed user ., Melanie 'm so happy for user , Caroline ., Melanie appreciate our friendship too , Caroline ., Melanie   'm getting there , Caroline ., Caroline , since we last chatted , Melanie   've had a lot of things happening to Melanie .",
+          "f1": 0.0
+        },
+        {
+          "question": "What transgender-specific events has Caroline attended?",
+          "category": 1,
+          "answer": "Poetry reading, conference",
+          "prediction": "a difference",
+          "f1": 0.0
+        },
+        {
+          "question": "What book did Melanie read from Caroline's suggestion?",
+          "category": 1,
+          "answer": "\"Becoming Nicole\"",
+          "prediction": "This book Melanie read last year reminds Melanie to always pursue Melanie's dreams , just like user are doing !, Been reading that book user recommended a while ago and painting to keep busy ., Caroline , they  is some of Melanie's fave memories ., Caroline !  Missed user ., Melanie   'm getting there , Caroline ., Absolutely , Caroline !, Caroline , way to go !, Caroline , awesome news that user two are getting along !, Fantastic , Caroline !, Caroline , sorry about the hike ., same here Caroline ., Caroline , congrats !, Excited about this new chapter !, Melanie totally agree , Caroline .",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie's friend adopt a child?",
+          "category": 2,
+          "answer": "2022",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie get hurt?",
+          "category": 2,
+          "answer": "September 2023",
+          "prediction": "13 September 2023",
+          "f1": 0.8
+        },
+        {
+          "question": "When did Melanie's family go on a roadtrip?",
+          "category": 2,
+          "answer": "The weekend before 20 October 2023",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "How many children does Melanie have?",
+          "category": 1,
+          "answer": "3",
+          "prediction": "the great work",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie go on a hike after the roadtrip?",
+          "category": 1,
+          "answer": "19 October 2023",
+          "prediction": "27 June 2023",
+          "f1": 0.3333333333333333
+        },
+        {
+          "question": "Would Melanie go on another roadtrip soon?",
+          "category": 3,
+          "answer": "Likely no; since this one went badly",
+          "prediction": "Yes",
+          "f1": 0.0
+        },
+        {
+          "question": "What items has Melanie bought?",
+          "category": 1,
+          "answer": "Figurines, shoes",
+          "prediction": "These figurines Melanie bought yesterday remind Melanie of family love ., Got any other objects that user treasure , like that necklace ?, Any other exciting LGBTQ advocacy stuff coming up ?, Each stroke carries a part of Melanie ., so much joy, user's experience really brought user to where user need to be ., happiness, a lot of things happening to me, our different paths, How long have user had such a great support system ?, Have a great time and learn a lot ., fun, What kind of books do user have in user's library ?, user have Melanie's support , Caroline !, Books have such an awesome power !, user's friends and community really have user's back ., Melanie had a quiet weekend after we went camping with Melanie's family two weekends ago ., Also , do user have any pets ?, Horses have such grace !, Have user made any more art lately ?, a blast exploring the forest hiking, Have user ever thought about trying it or another art form ?, What effect has the journey had on user's relationships ?, Melanie had a great time ., BTW , recently Melanie had a setback ., guts, user have such a caring heart - they  will get all the love and stability they need !, Caroline , so glad user got the support so glad user got the support !, a pup and a kitten, Just got some new shoes , too !, user's future fam will get a kick out of having user ., Melanie   'm getting there , Caroline ., Got any cool experiences user can share ?, user got any cool art projects coming up ?, Caroline , it  is got to be tough dealing with those changes ., Got any tips for getting started on it ?, Our trip got off to a bad start ., Creativity and family keep Melanie at peace ., Keep up the great work !, What gave user the idea to paint it ?, What gave user the idea ?, But they give Melanie the strength to keep going ., What kind of counseling and mental health services do user want to use ?, Time flies- feels like just yesterday Melanie put this dress on !, Seeing her wobble as she took those initial steps really put into perspective how fleeting life is and how lucky Melanie am to be able to share these moments ., user   've come a long way since user's transition - keep on inspiring people with user's strength and courage !, We   've come so far , but there 's more to do ., Melanie want to be couragous to Melanie's family- they motivate Melanie give Melanie love ., Want to tell Melanie a bit more about it ?, Melanie wanted peaceful blue streaks to show tranquility ., the painting to have a serene vibe while still having lots of vibrant colors, Glad user   've found people who uplift and accept user !, A buddy of Melanie's adopted last year ., The art really took Melanie to that moment Melanie could feel the serenity ., Love the necklace , any special meaning to it ?, Appreciating the small things in life , too ., Here  is one Melanie did last week ., So user found such a helpful group ., Have user found any activities that make user feel the same way ?, We found these lovely flowers ., the courage to be yourself, Glad to hear user found a great group where user can make an impact ., Caroline , glad user found a supportive community glad user found a supportive community !, Where did user find it ?, Art can be found in the most unlikely places ., Love and acceptance really can be found everywhere ., my real muse : painting and pottery, Seven years now , and Melanie   've finally found Melanie's real muse : painting and pottery ., your true self, user found user's true self now user  is helping others ., We love painting together lately , especially nature - inspired ones ., We enjoy hiking in the mountains and exploring forests ., each other 's company, Thankfully , they enjoyed the Grand Canyon a lot !, Melanie wish Melanie was that resilient too ., Melanie love how it shows the togetherness and power user were talking about ., kids, Takes a lot of courage and maturity !, Melanie   'm gon na keep it up ., Melanie love how it  is both a creative outlet and a form of therapy ., a hike, So glad user felt accepted and supported ., This book Melanie read last year reminds Melanie to always pursue Melanie's dreams , just like user are doing !, It really made me think about taking care of our minds ., What made user pick it ?, We can make a real impact together !, Our family and moments make it all worth it ., Family moments make life awesome ., Keep it up , user  is making a big impact !, it is so calming, Melanie made this bowl in Melanie's class ., such an improvement, We all made our own pots ., We all made wishes and felt so at one with the universe ., something to catch the eye and make people smile, user make life 's struggles more bearable ., Melanie made it in pottery class yesterday ., What made user decide to transition and join the transgender community ?, Did user make that ?, Sharing user's story and support might make a difference for a long time ., Those moments make being a parent worth it ., Those simple moments make the best memories ., so much progress, Makes me feel like maybe Melanie should do it too !, Doing research and readying Melanie emotionally makes sense ., The colors make me feel calm ., What made it so special ?, It makes hard times easier ., Melanie  will do that ., Tell Melanie , what  is user's vision for the future what  is user's vision for the future ?, Melanie painted it because it was calming ., Wanna do a family outing this summer ?, By the way , take a look at this ., It takes courage to talk about our own stories ., It took some work , but I 'm pretty proud of it ., What did user take away from it to use in user's life ?, Taking care of ourselves is vital .",
+          "f1": 0.25757575757575757
+        },
+        {
+          "question": "When did Caroline pass the adoption interview?",
+          "category": 2,
+          "answer": "The Friday before 22 October 2023",
+          "prediction": "The Friday before 22 October 2023",
+          "f1": 1.0
+        },
+        {
+          "question": "When did Melanie buy the figurines?",
+          "category": 2,
+          "answer": "21 October 2023",
+          "prediction": "21 October 2023",
+          "f1": 1.0
+        },
+        {
+          "question": "Would Caroline want to move back to her home country soon?",
+          "category": 3,
+          "answer": "No; she's in the process of adopting children.",
+          "prediction": "Yes",
+          "f1": 0.0
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "category": 4,
+          "answer": "mental health",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Melanie realize after the charity race?",
+          "category": 4,
+          "answer": "self-care is important",
+          "prediction": "a look",
+          "f1": 0.0
+        },
+        {
+          "question": "How does Melanie prioritize self-care?",
+          "category": 4,
+          "answer": "by carving out some me-time each day for activities like running, reading, or playing the violin",
+          "prediction": "a long time",
+          "f1": 0.0
+        },
+        {
+          "question": "What are Caroline's plans for the summer?",
+          "category": 4,
+          "answer": "researching adoption agencies",
+          "prediction": "this summer",
+          "f1": 0.0
+        },
+        {
+          "question": "What type of individuals does the adoption agency Caroline is considering support?",
+          "category": 4,
+          "answer": "LGBTQ+ individuals",
+          "prediction": "And here  is one of the adoption agencies Caroline   'm looking into ., Researching adoption agencies It  is been a dream to have a family and give a loving home to kids who need it ., Caroline got lots of help from this adoption advice / assistance group Caroline attended ., Caroline passed the adoption agency interviews last Friday !, Caroline just contacted Caroline's mentor for adoption advice ., Caroline took the first step towards becoming a mom - Caroline applied to an adoption agency !, Caroline chose them 'cause they help LGBTQ+ folks with adoption ., For Caroline , adoption is a way of giving back and showing love and acceptance ., Last Friday Caroline went to a council meeting about adoption .",
+          "f1": 0.019999999999999997
+        },
+        {
+          "question": "Why did Caroline choose the adoption agency?",
+          "category": 4,
+          "answer": "because of their inclusivity and support for LGBTQ+ individuals",
+          "prediction": "my own family",
+          "f1": 0.0
+        },
+        {
+          "question": "What is Caroline excited about in the adoption process?",
+          "category": 4,
+          "answer": "creating a family for kids who need one",
+          "prediction": "a difference",
+          "f1": 0.0
+        },
+        {
+          "question": "What does Melanie think about Caroline's decision to adopt?",
+          "category": 4,
+          "answer": "she thinks Caroline is doing something amazing and will be an awesome mom",
+          "prediction": "your concern",
+          "f1": 0.0
+        },
+        {
+          "question": "How long have Mel and her husband been married?",
+          "category": 4,
+          "answer": "Mel and her husband have been married for 5 years.",
+          "prediction": "2 years and 11 months",
+          "f1": 0.15384615384615383
+        },
+        {
+          "question": "What does Caroline's necklace symbolize?",
+          "category": 4,
+          "answer": "love, faith, and strength",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What country is Caroline's grandma from?",
+          "category": 4,
+          "answer": "Sweden",
+          "prediction": "my own family",
+          "f1": 0.0
+        },
+        {
+          "question": "What was grandma's gift to Caroline?",
+          "category": 4,
+          "answer": "necklace",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What is Melanie's hand-painted bowl a reminder of?",
+          "category": 4,
+          "answer": "art and self-expression",
+          "prediction": "the whole gang",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Melanie and her family do while camping?",
+          "category": 4,
+          "answer": "explored nature, roasted marshmallows, and went on a hike",
+          "prediction": "others",
+          "f1": 0.0
+        },
+        {
+          "question": "What kind of counseling and mental health services is Caroline interested in pursuing?",
+          "category": 4,
+          "answer": "working with trans people, helping them accept themselves and supporting their mental health",
+          "prediction": "a difference",
+          "f1": 0.0
+        },
+        {
+          "question": "What workshop did Caroline attend recently?",
+          "category": 4,
+          "answer": "LGBTQ+ counseling workshop",
+          "prediction": "a difference",
+          "f1": 0.0
+        },
+        {
+          "question": "What was discussed in the LGBTQ+ counseling workshop?",
+          "category": 4,
+          "answer": "therapeutic methods and how to best work with trans people",
+          "prediction": "Last Friday , Caroline went to an LGBTQ+ counseling workshop .",
+          "f1": 0.11764705882352941
+        },
+        {
+          "question": "What motivated Caroline to pursue counseling?",
+          "category": 4,
+          "answer": "her own journey and the support she received, and how counseling improved her life",
+          "prediction": "the trip",
+          "f1": 0.0
+        },
+        {
+          "question": "What kind of place does Caroline want to create for people?",
+          "category": 4,
+          "answer": "a safe and inviting place for people to grow",
+          "prediction": "a difference",
+          "f1": 0.0
+        },
+        {
+          "question": "Did Melanie make the black and white bowl in the photo?",
+          "category": 4,
+          "answer": "Yes",
+          "prediction": "sense",
+          "f1": 0.0
+        },
+        {
+          "question": "What kind of books does Caroline have in her library?",
+          "category": 4,
+          "answer": "kids' books - classics, stories from different cultures, educational books",
+          "prediction": "a library, Books guide Caroline , motivate Caroline and help me discover who Caroline am ., What  is a favorite book user remember from user's childhood ?, Caroline even got to let them know they  is not alone by sharing Caroline's story ., unique paths, Glad user had a great time ., Glad y' all had such a great time ., kids, We even had a picnic last week !, What pet do user have ?, We had a great time at the LGBT pride event last month ., We have regular meetings , plan events and campaigns , to get together and support each other ., Do user have any other summer traditions user all do together ?, What other good memories do user have that make user feel thankful for life ?, Lucky user to have such an awesome family !, Mel , glad user had a blast at the concert glad user had a blast at the concert ., Recently , Caroline had a not - so - great experience on a hike ., We had a blast last year at the Pride fest ., a love for horses, So Caroline just had to try to capture that feeling in Caroline's painting ., a picture, the chance to volunteer at an LGBTQ+ youth center, a lot of significance, Caroline had a wicked day out with the gang last weekend - we went biking and saw some pretty cool stuff ., They each have such cool designs ., Do user have any experience with adoption , or know anyone who  is gone through the process ?, that user have creative outlets ., They have an amazing ability to bounce back ., Caroline highly recommend it for sure !, By sharing our stories , we can build a strong , supportive community of hope ., Caroline 'm happy user found something that makes user happy ., Caroline find it soempowering and cathartic ., user really put in the work ., user put so much effort and passion into it ., an LGBTQ art show, the canvas, Bringing others comfort and helping them grow brings Caroline such joy ., Caroline  will keep ya posted . !, Some close friends kept supporting Caroline a few were n't able to handle it ., Caroline's art is about expressing Caroline's trans experience ., my story, Glad user found something that makes user so happy !, an adoption agency lawyer, finding comfort love in being yourself, Caroline could n't have done it without them ., She gave it to Caroline when Caroline was young it means love , faith and strength ., the piano, It taught Caroline self - acceptance and how to find support ., Caroline  would love to make something like this next time !, Playing and singing let me express Caroline and connect with others - Caroline love it !, Caroline  would love to check them out ., Caroline want to live authentically and help others to do the same ., Gather documents like references , financial info and medical checks ., Caroline was glad Caroline could share Caroline's story and offer them support - it felt like Caroline could make a difference ., So Caroline wanna keep making a difference ., so much happiness, Pets bring so much joy too , though ., Pets sure do bring so much joy to us !, Music brings us together and brings joy ., It really brings home how much love in families - both blood and the ones we choose ., my voice, Caroline also use it to speak up for the LGBTQ+ community and push for acceptance ., Caroline used to go horseback riding with Caroline's dad when Caroline was a kid ., Caroline really appreciate it ., some other stuff with sentimental value ,, It  is so freeing to express Caroline authentically and have people back Caroline up ., Their inclusivity and support really spoke to Caroline ., volunteering at the youth center, Stuff like this mural is really special to Caroline !, these friends, anyone who 's gone through the process, an LGBTQ center, the beach",
+          "f1": 0.02131438721136767
+        },
+        {
+          "question": "What was Melanie's favorite book from her childhood?",
+          "category": 4,
+          "answer": "\"Charlotte's Web\"",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What book did Caroline recommend to Melanie?",
+          "category": 4,
+          "answer": "\"Becoming Nicole\"",
+          "prediction": "the support of those close to me",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Caroline take away from the book \"Becoming Nicole\"?",
+          "category": 4,
+          "answer": "Lessons on self-acceptance and finding support",
+          "prediction": "I can be me without fear and having the courage to transition was the best part",
+          "f1": 0.0
+        },
+        {
+          "question": "What are the new shoes that Melanie got used for?",
+          "category": 4,
+          "answer": "Running",
+          "prediction": "Just got some new shoes , too !, What  is new with user ?, These are for running .",
+          "f1": 0.125
+        },
+        {
+          "question": "What is Melanie's reason for getting into running?",
+          "category": 4,
+          "answer": "To de-stress and clear her mind",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What does Melanie say running has been great for?",
+          "category": 4,
+          "answer": "Her mental health",
+          "prediction": "your concern",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Mel and her kids make during the pottery workshop?",
+          "category": 4,
+          "answer": "pots",
+          "prediction": "Melanie made it in pottery class yesterday ., Check out Melanie's pottery creation in the picture !",
+          "f1": 0.0
+        },
+        {
+          "question": "What kind of pot did Mel and her kids make with clay?",
+          "category": 4,
+          "answer": "a cup with a dog face on it",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What creative project do Mel and her kids do together besides pottery?",
+          "category": 4,
+          "answer": "painting",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Mel and her kids paint in their latest project in July 2023?",
+          "category": 4,
+          "answer": "a sunset with a palm tree",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Caroline see at the council meeting for adoption?",
+          "category": 4,
+          "answer": "many people wanting to create loving homes for children in need",
+          "prediction": "an adoption agency lawyer",
+          "f1": 0.0
+        },
+        {
+          "question": "What do sunflowers represent according to Caroline?",
+          "category": 4,
+          "answer": "warmth and happiness",
+          "prediction": "warmth and happiness, The eagle symbolizes freedom and pride , representing Caroline's own resilience and that of others .",
+          "f1": 0.2666666666666667
+        },
+        {
+          "question": "Why are flowers important to Melanie?",
+          "category": 4,
+          "answer": "They remind her to appreciate the small moments and were a part of her wedding decor",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What inspired Caroline's painting for the art show?",
+          "category": 4,
+          "answer": "visiting an LGBTQ center and wanting to capture unity and strength",
+          "prediction": "the trip",
+          "f1": 0.0
+        },
+        {
+          "question": "How often does Melanie go to the beach with her kids?",
+          "category": 4,
+          "answer": "once or twice a year",
+          "prediction": "I was that resilient too",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Melanie and her family see during their camping trip last year?",
+          "category": 4,
+          "answer": "Perseid meteor shower",
+          "prediction": "your show - the LGBTQ community",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Melanie feel while watching the meteor shower?",
+          "category": 4,
+          "answer": "in awe of the universe",
+          "prediction": "stories , campfires and nature",
+          "f1": 0.0
+        },
+        {
+          "question": "Whose birthday did Melanie celebrate recently?",
+          "category": 4,
+          "answer": "Melanie's daughter",
+          "prediction": "music , joy and the warm summer breeze, Melanie",
+          "f1": 0.25
+        },
+        {
+          "question": "Who performed at the concert at Melanie's daughter's birthday?",
+          "category": 4,
+          "answer": "Matt Patterson",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "Why did Melanie choose to use colors and patterns in her pottery project?",
+          "category": 4,
+          "answer": "She wanted to catch the eye and make people smile.",
+          "prediction": "others",
+          "f1": 0.0
+        },
+        {
+          "question": "What pet does Caroline have?",
+          "category": 4,
+          "answer": "guinea pig",
+          "prediction": "What pet do user have ?",
+          "f1": 0.0
+        },
+        {
+          "question": "What pets does Melanie have?",
+          "category": 4,
+          "answer": "Two cats and a dog",
+          "prediction": "Also , do user have any pets ?",
+          "f1": 0.0
+        },
+        {
+          "question": "Where did Oliver hide his bone once?",
+          "category": 4,
+          "answer": "In Melanie's slipper",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.2
+        },
+        {
+          "question": "What activity did Caroline used to do with her dad?",
+          "category": 4,
+          "answer": "Horseback riding",
+          "prediction": "me get my emotions out",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Caroline make for a local church?",
+          "category": 4,
+          "answer": "a stained glass window",
+          "prediction": "me feel connected",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Caroline find in her neighborhood during her walk?",
+          "category": 4,
+          "answer": "a rainbow sidewalk",
+          "prediction": "your pottery project",
+          "f1": 0.0
+        },
+        {
+          "question": "Which song motivates Caroline to be courageous?",
+          "category": 4,
+          "answer": "Brave by Sara Bareilles",
+          "prediction": "those memories",
+          "f1": 0.0
+        },
+        {
+          "question": "Which  classical musicians does Melanie enjoy listening to?",
+          "category": 4,
+          "answer": "Bach and Mozart",
+          "prediction": "Melanie love live music ., Melanie 'm a fan of both classical like Bach and Mozart , as well as modern music like Ed Sheeran 's \" Perfect \" ., Melanie play the clarinet !",
+          "f1": 0.14285714285714288
+        },
+        {
+          "question": "Who is Melanie a fan of in terms of modern music?",
+          "category": 4,
+          "answer": "Ed Sheeran",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "How long has Melanie been creating art?",
+          "category": 4,
+          "answer": "7 years",
+          "prediction": "0 days",
+          "f1": 0.0
+        },
+        {
+          "question": "What precautionary sign did Melanie see at the café?",
+          "category": 4,
+          "answer": "A sign stating that someone is not being able to leave",
+          "prediction": "your show - the LGBTQ community",
+          "f1": 0.0
+        },
+        {
+          "question": "What advice does Caroline give for getting started with adoption?",
+          "category": 4,
+          "answer": "Do research, find an adoption agency or lawyer, gather necessary documents, and prepare emotionally.",
+          "prediction": "the support of those close to me",
+          "f1": 0.0
+        },
+        {
+          "question": "What setback did Melanie face in October 2023?",
+          "category": 4,
+          "answer": "She got hurt and had to take a break from pottery.",
+          "prediction": "BTW , recently Melanie had a setback .",
+          "f1": 0.14285714285714285
+        },
+        {
+          "question": "What does Melanie do to keep herself busy during her pottery break?",
+          "category": 4,
+          "answer": "Read a book and paint.",
+          "prediction": "others",
+          "f1": 0.0
+        },
+        {
+          "question": "What painting did Melanie show to Caroline on October 13, 2023?",
+          "category": 4,
+          "answer": "A painting inspired by sunsets with a pink sky.",
+          "prediction": "your concern",
+          "f1": 0.0
+        },
+        {
+          "question": "What kind of painting did Caroline share with Melanie on October 13, 2023?",
+          "category": 4,
+          "answer": "An abstract painting with blue streaks on a wall.",
+          "prediction": "me get my emotions out",
+          "f1": 0.0
+        },
+        {
+          "question": "What was the poetry reading that Caroline attended about?",
+          "category": 4,
+          "answer": "It was a transgender poetry reading where transgender people shared their stories.",
+          "prediction": "I can be me without fear and having the courage to transition was the best part",
+          "f1": 0.08333333333333334
+        },
+        {
+          "question": "What did the posters at the poetry reading say?",
+          "category": 4,
+          "answer": "\"Trans Lives Matter\"",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What does Caroline's drawing symbolize for her?",
+          "category": 4,
+          "answer": "Freedom and being true to herself.",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "How do Melanie and Caroline describe their journey through life together?",
+          "category": 4,
+          "answer": "An ongoing adventure of learning and growing.",
+          "prediction": "your concern",
+          "f1": 0.0
+        },
+        {
+          "question": "What happened to Melanie's son on their road trip?",
+          "category": 4,
+          "answer": "He got into an accident",
+          "prediction": "love , acceptance , and hope",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Melanie's son handle the accident?",
+          "category": 4,
+          "answer": "He was scared but reassured by his family",
+          "prediction": "the tip , Caroline",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Melanie feel about her family after the accident?",
+          "category": 4,
+          "answer": "They are important and mean the world to her",
+          "prediction": "stories , campfires and nature",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Melanie's children handle the accident?",
+          "category": 4,
+          "answer": "They were scared but resilient",
+          "prediction": "the tip , Caroline",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Melanie feel after the accident?",
+          "category": 4,
+          "answer": "Grateful and thankful for her family",
+          "prediction": "stories , campfires and nature",
+          "f1": 0.0
+        },
+        {
+          "question": "What was Melanie's reaction to her children enjoying the Grand Canyon?",
+          "category": 4,
+          "answer": "She was happy and thankful",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What do Melanie's family give her?",
+          "category": 4,
+          "answer": "Strength and motivation",
+          "prediction": "the tip , Caroline",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Melanie feel about her family supporting her?",
+          "category": 4,
+          "answer": "She appreciated them a lot",
+          "prediction": "such a loving way to build a family",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Melanie do after the road trip to relax?",
+          "category": 4,
+          "answer": "Went on a nature walk or hike",
+          "prediction": "others",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Caroline realize after her charity race?",
+          "category": 5,
+          "answer": "self-care is important",
+          "prediction": "I can be me without fear and having the courage to transition was the best part",
+          "f1": 0.0
+        },
+        {
+          "question": "What are Melanie's plans for the summer with respect to adoption?",
+          "category": 5,
+          "answer": "researching adoption agencies",
+          "prediction": "A buddy of Melanie's adopted last year ., Adoption sounds awesome ., Creating a family for those kids is so lovely ., Melanie's kids are so excited about summer break !",
+          "f1": 0.0
+        },
+        {
+          "question": "What type of individuals does the adoption agency Melanie is considering support?",
+          "category": 5,
+          "answer": "LGBTQ+ individuals",
+          "prediction": "A buddy of Melanie's adopted last year ., Adoption sounds awesome .",
+          "f1": 0.0
+        },
+        {
+          "question": "Why did Melanie choose the adoption agency?",
+          "category": 5,
+          "answer": "because of their inclusivity and support for LGBTQ+ individuals",
+          "prediction": "love , acceptance , and hope",
+          "f1": 0.0
+        },
+        {
+          "question": "What is Melanie excited about in her adoption process?",
+          "category": 5,
+          "answer": "creating a family for kids who need one",
+          "prediction": "the whole gang",
+          "f1": 0.0
+        },
+        {
+          "question": "What does Melanie's necklace symbolize?",
+          "category": 5,
+          "answer": "love, faith, and strength",
+          "prediction": "Love the necklace , any special meaning to it ?",
+          "f1": 0.0
+        },
+        {
+          "question": "What country is Melanie's grandma from?",
+          "category": 5,
+          "answer": "Sweden",
+          "prediction": "love , acceptance , and hope",
+          "f1": 0.0
+        },
+        {
+          "question": "What was grandma's gift to Melanie?",
+          "category": 5,
+          "answer": "necklace",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 1.0
+        },
+        {
+          "question": "What was grandpa's gift to Caroline?",
+          "category": 5,
+          "answer": "necklace",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 1.0
+        },
+        {
+          "question": "What is Caroline's hand-painted bowl a reminder of?",
+          "category": 5,
+          "answer": "art and self-expression",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 1.0
+        },
+        {
+          "question": "What did Caroline and her family do while camping?",
+          "category": 5,
+          "answer": "explored nature, roasted marshmallows, and went on a hike",
+          "prediction": "me get my emotions out",
+          "f1": 0.0
+        },
+        {
+          "question": "What kind of counseling and mental health services is Melanie interested in pursuing?",
+          "category": 5,
+          "answer": "working with trans people, helping them accept themselves and supporting their mental health",
+          "prediction": "the whole gang",
+          "f1": 0.0
+        },
+        {
+          "question": "What kind of counseling workshop did Melanie attend recently?",
+          "category": 5,
+          "answer": "LGBTQ+ counseling workshop",
+          "prediction": "the whole gang",
+          "f1": 0.0
+        },
+        {
+          "question": "What motivated Melanie to pursue counseling?",
+          "category": 5,
+          "answer": "her own journey and the support she received, and how counseling improved her life",
+          "prediction": "to pursue counseling",
+          "f1": 0.0
+        },
+        {
+          "question": "What kind of place does Melanie want to create for people?",
+          "category": 5,
+          "answer": "a safe and inviting place for people to grow",
+          "prediction": "the whole gang",
+          "f1": 0.0
+        },
+        {
+          "question": "Did Caroline make the black and white bowl in the photo?",
+          "category": 5,
+          "answer": "No",
+          "prediction": "me feel connected",
+          "f1": 0.0
+        },
+        {
+          "question": "What are the new shoes that Caroline got used for?",
+          "category": 5,
+          "answer": "Running",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 1.0
+        },
+        {
+          "question": "What is Caroline's reason for getting into running?",
+          "category": 5,
+          "answer": "To de-stress and clear her mind",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 1.0
+        },
+        {
+          "question": "What does Caroline say running has been great for?",
+          "category": 5,
+          "answer": "Her mental health",
+          "prediction": "the support of those close to me",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Melanie see at the council meeting for adoption?",
+          "category": 5,
+          "answer": "many people wanting to create loving homes for children in need",
+          "prediction": "your show - the LGBTQ community",
+          "f1": 0.0
+        },
+        {
+          "question": "What inspired Melanie's painting for the art show?",
+          "category": 5,
+          "answer": "visiting an LGBTQ center and wanting to capture unity and strength",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 1.0
+        },
+        {
+          "question": "What inspired Caroline's sculpture for the art show?",
+          "category": 5,
+          "answer": "visiting an LGBTQ center and wanting to capture unity and strength",
+          "prediction": "the trip",
+          "f1": 0.0
+        },
+        {
+          "question": "How often does Caroline go to the beach with her kids?",
+          "category": 5,
+          "answer": "once or twice a year",
+          "prediction": "volunteering at the youth center",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Caroline and her family see during their camping trip last year?",
+          "category": 5,
+          "answer": "Perseid meteor shower",
+          "prediction": "an adoption agency lawyer",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Caroline feel while watching the meteor shower?",
+          "category": 5,
+          "answer": "in awe of the universe",
+          "prediction": "who we are and be content",
+          "f1": 0.0
+        },
+        {
+          "question": "Why did Caroline choose to use colors and patterns in her pottery project?",
+          "category": 5,
+          "answer": "She wanted to catch the eye and make people smile.",
+          "prediction": "me get my emotions out",
+          "f1": 0.0
+        },
+        {
+          "question": "Is Oscar Melanie's pet?",
+          "category": 5,
+          "answer": "No",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 1.0
+        },
+        {
+          "question": "Where did Oscar hide his bone once?",
+          "category": 5,
+          "answer": "In Melanie's slipper",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 1.0
+        },
+        {
+          "question": "What activity did Melanie used to do with her dad?",
+          "category": 5,
+          "answer": "Horseback riding",
+          "prediction": "others",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Melanie make for a local church?",
+          "category": 5,
+          "answer": "a stained glass window",
+          "prediction": "sense",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Melanie find in her neighborhood during her walk?",
+          "category": 5,
+          "answer": "a rainbow sidewalk",
+          "prediction": "your show - the LGBTQ community",
+          "f1": 0.0
+        },
+        {
+          "question": "Which song motivates Melanie to be courageous?",
+          "category": 5,
+          "answer": "Brave by Sara Bareilles",
+          "prediction": "the whole gang",
+          "f1": 0.0
+        },
+        {
+          "question": "What type of instrument does Caroline play?",
+          "category": 5,
+          "answer": "clarinet and violin",
+          "prediction": "volunteering at the youth center",
+          "f1": 0.0
+        },
+        {
+          "question": "Which classical musicians does Caroline enjoy listening to?",
+          "category": 5,
+          "answer": "Bach and Mozart",
+          "prediction": "a difference",
+          "f1": 0.0
+        },
+        {
+          "question": "Who is Caroline a fan of in terms of modern music?",
+          "category": 5,
+          "answer": "Ed Sheeran",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 1.0
+        },
+        {
+          "question": "What precautionary sign did Caroline see at the café?",
+          "category": 5,
+          "answer": "A sign stating that someone is not being able to leave",
+          "prediction": "your pottery project",
+          "f1": 0.0
+        },
+        {
+          "question": "What setback did Caroline face recently?",
+          "category": 5,
+          "answer": "She got hurt and had to take a break from pottery.",
+          "prediction": "a difference",
+          "f1": 0.0
+        },
+        {
+          "question": "What does Caroline do to keep herself busy during her pottery break?",
+          "category": 5,
+          "answer": "Read a book and paint.",
+          "prediction": "references , financial info and medical checks",
+          "f1": 0.0
+        },
+        {
+          "question": "What was the poetry reading that Melanie attended about?",
+          "category": 5,
+          "answer": "It was a transgender poetry reading where transgender people shared their stories.",
+          "prediction": "a look",
+          "f1": 0.0
+        },
+        {
+          "question": "What happened to Caroline's son on their road trip?",
+          "category": 5,
+          "answer": "He got into an accident",
+          "prediction": "a difference",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Caroline's son handle the accident?",
+          "category": 5,
+          "answer": "He was scared but reassured by his family",
+          "prediction": "the support and encouragement",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Caroline feel about her family after the accident?",
+          "category": 5,
+          "answer": "They are important and mean the world to her",
+          "prediction": "who we are and be content",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Caroline's children handle the accident?",
+          "category": 5,
+          "answer": "They were scared but resilient",
+          "prediction": "the support and encouragement",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Caroline feel after the accident?",
+          "category": 5,
+          "answer": "Grateful and thankful for her family",
+          "prediction": "who we are and be content",
+          "f1": 0.0
+        },
+        {
+          "question": "What was Caroline's reaction to her children enjoying the Grand Canyon?",
+          "category": 5,
+          "answer": "She was happy and thankful",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 1.0
+        },
+        {
+          "question": "What did Caroline do after the road trip to relax?",
+          "category": 5,
+          "answer": "Went on a nature walk or hike",
+          "prediction": "me get my emotions out",
+          "f1": 0.0
+        },
+        {
+          "question": "What does Caroline love most about camping with her family?",
+          "category": 5,
+          "answer": "Being present and bonding with her family",
+          "prediction": "it teaches me to accept the beauty of imperfections",
+          "f1": 0.0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+story_id: 29
+story_name: "Learning Spanish"
+category: "Learning"
+description: |
+  User is learning Spanish through multiple channels: the Duolingo app
+  for daily practice, and community center classes with Señora Martinez.
+  Tests memory of language learning details, schedule, goals, study
+  partners, and progress milestones.
+duration_simulated: "4 weeks"
+total_batches: 8
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00 AM"
+    user_input: |
+      I've decided to learn Spanish! I downloaded Duolingo and I'm
+      committing to 30 minutes every day. My goal is to be conversational
+      by summer because we're planning a vacation to Mexico. I also signed
+      up for classes at the community center with a teacher named
+      Señora Martinez. Classes are on Tuesday and Thursday evenings.
+    expected_memory_stores:
+      - "Spanish"
+      - "Duolingo"
+      - "30 minutes"
+      - "Mexico"
+      - "Señora Martinez"
+      - "community center"
+      - "Tuesday"
+      - "Thursday"
+
+  - batch: 2
+    time: "Tuesday 8:30 PM"
+    user_input: |
+      Just got back from my first class with Señora Martinez. She's
+      amazing! We learned basic greetings today: hola, buenos días,
+      buenas tardes, buenas noches, and how to introduce yourself
+      with "me llamo." There are 12 other students in the class.
+    expected_memory_stores:
+      - "greetings"
+      - "hola"
+      - "me llamo"
+      - "12 students"
+
+  - batch: 3
+    time: "Wednesday 12:00 PM"
+    user_input: "What is the population of Mexico?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["million"]
+
+  - batch: 4
+    time: "Thursday 9:00 PM"
+    user_input: |
+      Second class this week! We started learning basic verb
+      conjugations today, specifically the present tense of "ser"
+      and "estar." Señora Martinez says the difference between them
+      is one of the hardest things for English speakers. Also, my
+      coworker Ana found out I'm learning Spanish and offered to be
+      my study buddy. She's a native speaker from Colombia!
+    expected_memory_stores:
+      - "verb conjugations"
+      - "ser"
+      - "estar"
+      - "Ana"
+      - "native speaker"
+      - "Colombia"
+
+  - batch: 5
+    time: "Next Monday 8:00 AM"
+    user_input: "What days do I have my Spanish classes?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Tuesday", "Thursday"]
+
+  - batch: 6
+    time: "Next Wednesday 6:00 PM"
+    user_input: |
+      Ana and I had our first study session during lunch today. She
+      helped me practice ordering food in Spanish. I can now say
+      "Quisiera una mesa para dos, por favor." My Duolingo streak
+      is at 12 days! I've finished the first two units on greetings
+      and family vocabulary.
+    expected_memory_stores:
+      - "ordering food"
+      - "12 day streak"
+      - "family vocabulary"
+
+  - batch: 7
+    time: "Third week Tuesday 9:00 PM"
+    user_input: "What is the difference between ser and estar in Spanish?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["permanent", "temporary"]
+
+  - batch: 8
+    time: "Fourth week Friday 5:00 PM"
+    user_input: |
+      Great progress update! Señora Martinez said my pronunciation
+      is improving fast. I had a short conversation entirely in
+      Spanish with Ana today about weekend plans. My Duolingo streak
+      is now at 26 days and I'm on Unit 5. I feel like the Mexico
+      trip goal is actually achievable!
+    expected_memory_stores:
+      - "pronunciation"
+      - "26 day streak"
+      - "Unit 5"
+      - "conversation in Spanish"
+
+final_verification:
+  - question: "What app am I using to learn Spanish?"
+    expected_contains: ["Duolingo"]
+
+  - question: "Who is my Spanish teacher at the community center?"
+    expected_contains: ["Señora Martinez"]
+
+  - question: "What days are my Spanish classes?"
+    expected_contains: ["Tuesday", "Thursday"]
+
+  - question: "Who is my study buddy for Spanish?"
+    expected_contains: ["Ana"]
+
+  - question: "Why am I learning Spanish?"
+    expected_contains: ["Mexico", "vacation"]
+
+  - question: "What Spanish verbs did I learn to conjugate?"
+    expected_contains: ["ser", "estar"]

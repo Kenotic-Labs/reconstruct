@@ -1,0 +1,77 @@
+story_id: 235
+story_name: Mystery Leak in the Basement
+category: Daily Life
+description: User tracks down a mysterious basement leak.
+duration_simulated: 3 weeks
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: Water in my basement. No obvious source. Called a plumber named Yehuda Ben-Levi.
+  expected_stores:
+  - basement
+  - Yehuda Ben-Levi
+  - plumber
+- batch: 2
+  time: Week 1 Thursday
+  user_input: Yehuda said the pipes are NOT leaking. Must be external. Called my home inspector Tatiana
+    Korzhavin for another look.
+  expected_stores:
+  - Yehuda
+  - not leaking
+  - Tatiana Korzhavin
+- batch: 3
+  time: Week 2
+  user_input: Who wrote The Count of Monte Cristo?
+- batch: 4
+  time: Week 2 Friday
+  user_input: Tatiana found it — poor drainage on the east side of the foundation. Water is seeping in
+    during heavy rains.
+  expected_stores:
+  - Tatiana
+  - poor drainage
+  - east side
+- batch: 5
+  time: Week 3
+  user_input: Hired a landscape drainage specialist named Kora Holberg. She installed a French drain for
+    3800 dollars.
+  expected_stores:
+  - Kora Holberg
+  - French drain
+  - '3800'
+  expected_adaptation:
+    emotion_detected: resolved
+    warmth_direction: increase
+questions:
+- question_id: 235_q1
+  question: Who was the plumber?
+  expected_contains:
+  - Yehuda Ben-Levi
+- question_id: 235_q2
+  question: Who is my home inspector?
+  expected_contains:
+  - Tatiana Korzhavin
+- question_id: 235_q3
+  question: Who installed the drain?
+  expected_contains:
+  - Kora Holberg
+- question_id: 235_q4
+  question: What did she install?
+  expected_contains:
+  - French drain
+- question_id: 235_q5
+  question: Did I mention basement?
+  expected_contains:
+  - basement
+- question_id: 235_q6
+  question: Did I mention plumber?
+  expected_contains:
+  - plumber
+- question_id: 235_q7
+  question: Do I know someone named Yehuda?
+  expected_contains:
+  - Yehuda
+- question_id: 235_q8
+  question: Did I mention not leaking?
+  expected_contains:
+  - not leaking

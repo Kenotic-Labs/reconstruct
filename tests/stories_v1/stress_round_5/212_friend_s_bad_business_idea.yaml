@@ -1,0 +1,78 @@
+story_id: 212
+story_name: Friend's Bad Business Idea
+category: Relationships
+description: User navigates investment pressure from a friend with a bad business idea.
+duration_simulated: 6 weeks
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My friend Corbin pitched me his new idea — a subscription box for fermented foods. He wants
+    me to invest 25000 dollars.
+  expected_stores:
+  - Corbin
+  - subscription box
+  - fermented foods
+  - 25000 dollars
+- batch: 2
+  time: Week 2
+  user_input: Talked to my partner Evelyn. She said the business plan has major gaps — no unit economics,
+    no market research. She is NOT a fan.
+  expected_stores:
+  - Evelyn
+  - partner
+  - not a fan
+- batch: 3
+  time: Week 3
+  user_input: What's the fastest bird?
+- batch: 4
+  time: Week 4
+  user_input: Corbin kept pressing. I told him I wasn't investing but I'd help him refine the business
+    plan. He was disappointed but NOT angry.
+  expected_stores:
+  - Corbin
+  - not angry
+- batch: 5
+  time: Week 6
+  user_input: Corbin pivoted the idea to a fermented foods consulting service. Much better. I'm helping
+    him with his website and Evelyn gave him supply chain tips.
+  expected_stores:
+  - Corbin
+  - consulting service
+  - Evelyn
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+questions:
+- question_id: 212_q1
+  question: Who is my friend?
+  expected_contains:
+  - Corbin
+- question_id: 212_q2
+  question: Who is my partner?
+  expected_contains:
+  - Evelyn
+- question_id: 212_q3
+  question: How much did he want me to invest?
+  expected_contains:
+  - '25000'
+- question_id: 212_q4
+  question: Did I invest?
+  expected_contains:
+  - not
+- question_id: 212_q5
+  question: Did I mention subscription box?
+  expected_contains:
+  - subscription box
+- question_id: 212_q6
+  question: Did I mention fermented foods?
+  expected_contains:
+  - fermented foods
+- question_id: 212_q7
+  question: How much money is 25000 dollars?
+  expected_contains:
+  - 25000 dollars
+- question_id: 212_q8
+  question: Did I mention partner?
+  expected_contains:
+  - partner

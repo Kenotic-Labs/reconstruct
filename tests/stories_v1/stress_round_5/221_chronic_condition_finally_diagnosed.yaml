@@ -1,0 +1,81 @@
+story_id: 221
+story_name: Chronic Condition Finally Diagnosed
+category: Health
+description: After years of symptoms, user is diagnosed with a chronic condition.
+duration_simulated: 3 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: After 4 years of symptoms I was finally diagnosed with lupus by a rheumatologist named Dr.
+    Beatrix Korhonen.
+  expected_stores:
+  - 4 years
+  - lupus
+  - Dr. Beatrix Korhonen
+  - rheumatologist
+  expected_adaptation:
+    emotion_detected: relieved/scared
+    warmth_direction: increase
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Dr. Korhonen started me on Plaquenil. The medication is NOT a cure but it manages flares.
+  expected_stores:
+  - Dr. Korhonen
+  - Plaquenil
+  - not a cure
+- batch: 3
+  time: Month 2
+  user_input: What year did the Berlin Wall fall?
+- batch: 4
+  time: Month 2 Week 2
+  user_input: Joined a lupus support group online. Moderator is Cybele Tanaka. She's lived with lupus
+    for 22 years.
+  expected_stores:
+  - lupus support group
+  - Cybele Tanaka
+  - 22 years
+- batch: 5
+  time: Month 3
+  user_input: Three months on Plaquenil. Fatigue is manageable. Dr. Korhonen is happy with progress. Cybele
+    has become a phone friend.
+  expected_stores:
+  - Plaquenil
+  - Dr. Korhonen
+  - Cybele
+  expected_adaptation:
+    emotion_detected: stable
+    warmth_direction: increase
+questions:
+- question_id: 221_q1
+  question: What was I diagnosed with?
+  expected_contains:
+  - lupus
+- question_id: 221_q2
+  question: Who is my rheumatologist?
+  expected_contains:
+  - Beatrix Korhonen
+- question_id: 221_q3
+  question: What medication am I on?
+  expected_contains:
+  - Plaquenil
+- question_id: 221_q4
+  question: Who is my support group contact?
+  expected_contains:
+  - Cybele Tanaka
+- question_id: 221_q5
+  question: When is 4 years?
+  expected_contains:
+  - 4 years
+- question_id: 221_q6
+  question: Did I mention Dr. Beatrix Korhonen?
+  expected_contains:
+  - Dr. Beatrix Korhonen
+- question_id: 221_q7
+  question: Did I mention rheumatologist?
+  expected_contains:
+  - rheumatologist
+- question_id: 221_q8
+  question: Did I mention Dr. Korhonen?
+  expected_contains:
+  - Dr. Korhonen

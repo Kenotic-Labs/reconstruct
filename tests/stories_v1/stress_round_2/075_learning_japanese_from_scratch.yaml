@@ -1,0 +1,102 @@
+story_id: 75
+story_name: Learning Japanese From Scratch
+category: Learning
+description: User begins studying Japanese with a tutor and structured plan.
+duration_simulated: 4 months
+total_batches: 7
+batches:
+- batch: 1
+  time: Month 1 Week 1
+  user_input: I started learning Japanese. I'm using an app called Bunpro for grammar and I hired a tutor
+    on iTalki named Yumi Tanaka — she's from Osaka.
+  expected_stores:
+  - Japanese
+  - Bunpro
+  - iTalki
+  - Yumi Tanaka
+  - Osaka
+  expected_adaptation:
+    emotion_detected: excited
+    warmth_direction: increase
+- batch: 2
+  time: Month 1 Week 2
+  user_input: Yumi and I meet twice a week on Tuesdays and Fridays at 7 PM for 45 minutes. 30 dollars
+    per session.
+  expected_stores:
+  - Yumi
+  - twice a week
+  - Tuesdays
+  - Fridays 7 PM
+  - 45 minutes
+  - 30 dollars
+- batch: 3
+  time: Month 1 Week 4
+  user_input: Learned hiragana. All 46 characters in two weeks. Katakana is next — Yumi said it should
+    be easier now that my brain is used to the patterns.
+  expected_stores:
+  - hiragana
+  - 46 characters
+  - katakana
+- batch: 4
+  time: Month 2 Week 2
+  user_input: What's the tallest mountain in the world?
+- batch: 5
+  time: Month 2 Week 3
+  user_input: Started on basic kanji, 50 most common ones. Using an SRS app called Anki with 10 new cards
+    a day.
+  expected_stores:
+  - kanji
+  - 50 most common
+  - Anki
+  - SRS
+  - 10 new cards
+- batch: 6
+  time: Month 3 Week 1
+  user_input: Yumi said my pronunciation has improved a lot. We're going to start doing the last 10 minutes
+    of each lesson entirely in Japanese.
+  expected_stores:
+  - Yumi
+  - pronunciation
+  - 10 minutes
+  expected_adaptation:
+    emotion_detected: proud
+    warmth_direction: increase
+- batch: 7
+  time: Month 4 Week 2
+  user_input: Had my first conversation in Japanese at a restaurant — ordered food, asked where the bathroom
+    was. Yumi was thrilled when I told her.
+  expected_stores:
+  - first conversation
+  - Yumi
+  expected_adaptation:
+    emotion_detected: accomplished
+    warmth_direction: increase
+questions:
+- question_id: 75_q1
+  question: What language am I learning?
+  expected_contains:
+  - Japanese
+- question_id: 75_q2
+  question: Who is my tutor?
+  expected_contains:
+  - Yumi Tanaka
+- question_id: 75_q3
+  question: What platform did I find her on?
+  expected_contains:
+  - iTalki
+- question_id: 75_q4
+  question: When are our lessons?
+  expected_contains:
+  - Tuesdays
+- question_id: 75_q5
+  question: What grammar app am I using?
+  expected_contains:
+  - Bunpro
+- question_id: 75_q6
+  question: What SRS app am I using for kanji?
+  expected_contains:
+  - Anki
+- question_id: 75_q7
+  question: How much do I pay per session?
+  expected_contains:
+  - 30 dollars

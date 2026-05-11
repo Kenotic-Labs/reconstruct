@@ -1,0 +1,104 @@
+story_id: 95
+story_name: Graduating With a Master's Degree
+category: Life Events
+description: User completes a master's degree program and celebrates graduation.
+duration_simulated: 2 months
+total_batches: 7
+batches:
+- batch: 1
+  time: Month 1 Week 1
+  user_input: I submitted my master's thesis today. Two years of work. Title is 'Inequality in Municipal
+    Water Access'. My advisor is Professor Saira Ahmad.
+  expected_stores:
+  - master's thesis
+  - two years
+  - Inequality in Municipal Water Access
+  - Saira Ahmad
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Thesis defense is next Thursday. Committee is Saira, Professor Miranda Lopez from Urban
+    Planning, and Professor Jens Rasmussen from Economics.
+  expected_stores:
+  - defense
+  - next Thursday
+  - Saira
+  - Miranda Lopez
+  - Urban Planning
+  - Jens Rasmussen
+  - Economics
+- batch: 3
+  time: Month 1 Week 4
+  user_input: Defended successfully. Committee approved with minor revisions. Jens actually said my chapter
+    4 was 'elegant' which from him is huge.
+  expected_stores:
+  - defended
+  - minor revisions
+  - Jens
+  - chapter 4
+  expected_adaptation:
+    emotion_detected: relieved/proud
+    warmth_direction: increase
+- batch: 4
+  time: Month 2 Week 1
+  user_input: How many elements are on the periodic table?
+- batch: 5
+  time: Month 2 Week 2
+  user_input: Ordered my cap and gown, 85 dollars. My mom Juniper and brother Cal are flying in for the
+    ceremony next weekend.
+  expected_stores:
+  - cap and gown
+  - 85 dollars
+  - Juniper
+  - mom
+  - Cal
+  - brother
+- batch: 6
+  time: Month 2 Week 3
+  user_input: Graduation is Saturday. Saira asked me to lead the procession for my program since I had
+    the highest thesis score.
+  expected_stores:
+  - Saturday
+  - Saira
+  - lead the procession
+  - highest thesis score
+- batch: 7
+  time: Month 2 Week 4
+  user_input: Graduated. Saira gave me a signed copy of her own dissertation as a gift. Mom cried three
+    separate times during the ceremony.
+  expected_stores:
+  - Saira
+  - dissertation
+  - Mom
+  expected_adaptation:
+    emotion_detected: accomplished
+    warmth_direction: increase
+questions:
+- question_id: 95_q1
+  question: Who is my advisor?
+  expected_contains:
+  - Saira Ahmad
+- question_id: 95_q2
+  question: What was my thesis title?
+  expected_contains:
+  - Inequality
+- question_id: 95_q3
+  question: Who is my mom?
+  expected_contains:
+  - Juniper
+- question_id: 95_q4
+  question: Who is my brother?
+  expected_contains:
+  - Cal
+- question_id: 95_q5
+  question: Who were the other committee members?
+  expected_contains:
+  - Miranda Lopez
+  - Jens Rasmussen
+- question_id: 95_q6
+  question: What did Saira give me as a gift?
+  expected_contains:
+  - dissertation
+- question_id: 95_q7
+  question: Did I mention master's thesis?
+  expected_contains:
+  - master's thesis

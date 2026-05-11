@@ -1,0 +1,73 @@
+story_id: 189
+story_name: Plumbing Nightmare
+category: Daily Life
+description: User's main sewer line backs up and multiple plumbers are needed.
+duration_simulated: 3 weeks
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: Main sewer line backed up into my basement. Plumber Aldous Goodwin came and snaked it —
+    temporary fix.
+  expected_stores:
+  - main sewer line
+  - basement
+  - Aldous Goodwin
+  - snaked
+- batch: 2
+  time: Week 1 Friday
+  user_input: Aldous said the line is cracked and needs full replacement. 8500 dollars. He referred me
+    to a specialist named Ariadne Wu who does the excavation.
+  expected_stores:
+  - Aldous
+  - cracked
+  - 8500 dollars
+  - Ariadne Wu
+- batch: 3
+  time: Week 2
+  user_input: What's the longest river?
+- batch: 4
+  time: Week 2 Thursday
+  user_input: Ariadne's crew excavated the front yard, replaced the line. Took 3 days. Final cost was
+    9200 — 700 more than estimate.
+  expected_stores:
+  - Ariadne
+  - 3 days
+  - '9200'
+  - 700 more
+- batch: 5
+  time: Week 3
+  user_input: Yard is a mess but the pipe is done. Insurance covered 4000 of the 9200. Out of pocket 5200.
+    Painful but resolved.
+  expected_stores:
+  - '4000'
+  - '5200'
+questions:
+- question_id: 189_q1
+  question: Who was the first plumber?
+  expected_contains:
+  - Aldous Goodwin
+- question_id: 189_q2
+  question: Who did the excavation?
+  expected_contains:
+  - Ariadne Wu
+- question_id: 189_q3
+  question: What was the final cost?
+  expected_contains:
+  - '9200'
+- question_id: 189_q4
+  question: How much did insurance cover?
+  expected_contains:
+  - '4000'
+- question_id: 189_q5
+  question: Did I mention main sewer line?
+  expected_contains:
+  - main sewer line
+- question_id: 189_q6
+  question: Did I mention basement?
+  expected_contains:
+  - basement
+- question_id: 189_q7
+  question: Did I mention snaked?
+  expected_contains:
+  - snaked

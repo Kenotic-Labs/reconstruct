@@ -1,0 +1,80 @@
+story_id: 178
+story_name: Imposter Syndrome in Grad School
+category: Learning
+description: User struggles with imposter syndrome in her Master's program.
+duration_simulated: 2 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: I'm in my second semester of a Master's in Public Policy. I feel like everyone is smarter
+    than me. My advisor Dr. Iliana Voss is kind but intimidating.
+  expected_stores:
+  - second semester
+  - Master's
+  - Public Policy
+  - Dr. Iliana Voss
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Got a B- on my first paper from Professor Rafael Ninov. He said my framing was weak but
+    my writing was NOT the problem.
+  expected_stores:
+  - B-
+  - Rafael Ninov
+  - not the problem
+- batch: 3
+  time: Month 2
+  user_input: Who wrote The Stranger?
+- batch: 4
+  time: Month 2 Week 1
+  user_input: Talked to Dr. Voss about the imposter feeling. She said half her advisees feel that way
+    and to make a list of my wins from the semester.
+  expected_stores:
+  - Dr. Voss
+  - half her advisees
+  - list of my wins
+- batch: 5
+  time: Month 2 Week 3
+  user_input: Made the list. I had 7 things on it — conference acceptance, a TA position, a passing qualifying
+    exam. It helped a lot.
+  expected_stores:
+  - 7 things
+  - conference acceptance
+  - TA position
+  - qualifying exam
+  expected_adaptation:
+    emotion_detected: steadier
+    warmth_direction: increase
+questions:
+- question_id: 178_q1
+  question: What degree am I pursuing?
+  expected_contains:
+  - Public Policy
+- question_id: 178_q2
+  question: Who is my advisor?
+  expected_contains:
+  - Iliana Voss
+- question_id: 178_q3
+  question: Who is the professor who graded my paper?
+  expected_contains:
+  - Rafael Ninov
+- question_id: 178_q4
+  question: What grade did I get?
+  expected_contains:
+  - B-
+- question_id: 178_q5
+  question: Did I mention second semester?
+  expected_contains:
+  - second semester
+- question_id: 178_q6
+  question: Did I mention Master's?
+  expected_contains:
+  - Master's
+- question_id: 178_q7
+  question: Did I mention Dr. Iliana Voss?
+  expected_contains:
+  - Dr. Iliana Voss
+- question_id: 178_q8
+  question: Did I mention not the problem?
+  expected_contains:
+  - not the problem

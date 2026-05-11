@@ -1,0 +1,78 @@
+story_id: 199
+story_name: Survival of a Natural Disaster
+category: Life Events
+description: User and neighbors survive a major earthquake.
+duration_simulated: 2 weeks
+total_batches: 5
+batches:
+- batch: 1
+  time: Day 1
+  user_input: Magnitude 6.4 earthquake hit at 4 AM. My house sustained minor damage. Neighbors Pearl and
+    Amadeo checked on me.
+  expected_stores:
+  - Magnitude 6.4
+  - 4 AM
+  - Pearl
+  - Amadeo
+  - neighbors
+  expected_adaptation:
+    emotion_detected: shaken
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Day 2
+  user_input: Power is out. My friend Orion brought a generator over. We set it up for fridges on the
+    block.
+  expected_stores:
+  - Orion
+  - generator
+  - fridges
+- batch: 3
+  time: Week 1
+  user_input: What's the deepest part of the ocean?
+- batch: 4
+  time: Week 2
+  user_input: Power back. Insurance adjuster Kimiko Saito came out and estimated 11000 dollars in damage
+    to my chimney and foundation.
+  expected_stores:
+  - Kimiko Saito
+  - insurance adjuster
+  - '11000'
+- batch: 5
+  time: Week 2 Friday
+  user_input: Contractor Elias Gorman will start repairs next month. Pearl and Amadeo invited me to dinner.
+    The earthquake made neighbors feel like family.
+  expected_stores:
+  - Elias Gorman
+  - Pearl
+  - Amadeo
+questions:
+- question_id: 199_q1
+  question: How big was the earthquake?
+  expected_contains:
+  - '6.4'
+- question_id: 199_q2
+  question: Who are my neighbors?
+  expected_contains:
+  - Pearl
+  - Amadeo
+- question_id: 199_q3
+  question: Who brought a generator?
+  expected_contains:
+  - Orion
+- question_id: 199_q4
+  question: Who is my insurance adjuster?
+  expected_contains:
+  - Kimiko Saito
+- question_id: 199_q5
+  question: How much damage?
+  expected_contains:
+  - '11000'
+- question_id: 199_q6
+  question: Did I mention Magnitude 6.4?
+  expected_contains:
+  - Magnitude 6.4
+- question_id: 199_q7
+  question: Did I mention 4 AM?
+  expected_contains:
+  - 4 AM

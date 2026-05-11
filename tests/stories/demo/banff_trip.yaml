@@ -1,0 +1,123 @@
+story_id: 900
+story_name: "Banff Trip - Demo"
+category: "Demo"
+description: |
+  Five-turn conversation about a weekend trip to Banff with friends.
+  Hand-authored triples bypass T5 extraction. Demonstrates the
+  reconstruction moat: structural understanding from decomposed traces,
+  deterministic reconstruction at read time, no LLM required.
+duration_simulated: "3 days"
+total_batches: 5
+
+batches:
+  - batch: 1
+    time: "Friday 6:00 PM"
+    user_input: |
+      So Arjun and I just got to Banff! We drove up from Calgary this
+      morning. Helen couldn't make it because of work but she said to
+      bring her back something. We checked into the Fairmont and the
+      mountains are just unreal.
+    expected_triples:
+      - ["user", "went_to", "Banff"]
+      - ["Arjun", "came_with", "user"]
+      - ["user", "drove_from", "Calgary"]
+      - ["Helen", "missed", "Banff trip due to work"]
+      - ["Helen", "requested", "souvenir from Banff"]
+      - ["user", "checked_into", "Fairmont hotel"]
+      - ["user", "has_emotion", "excited"]
+    trace_overrides:
+      edge_temporal_context: "past"
+      edge_emotional_label: "excited"
+      edge_episodic_significance: "milestone"
+
+  - batch: 2
+    time: "Saturday 8:00 AM"
+    user_input: |
+      We hiked up Sulphur Mountain this morning. Arjun twisted his
+      ankle on the way down but he says he's fine. The views from the
+      top were incredible, you could see the whole valley.
+    expected_triples:
+      - ["user", "hiked_up", "Sulphur Mountain"]
+      - ["Arjun", "hiked_up", "Sulphur Mountain"]
+      - ["Arjun", "twisted_ankle", "on the descent"]
+      - ["Arjun", "said", "he is fine"]
+      - ["user", "took_in", "valley views from summit"]
+      - ["user", "has_emotion", "awe"]
+    trace_overrides:
+      edge_temporal_context: "past"
+      edge_emotional_label: "awe"
+      edge_episodic_significance: "pivotal"
+
+  - batch: 3
+    time: "Saturday 7:00 PM"
+    user_input: |
+      Priya called while we were at dinner and said she's been
+      experimenting with a new butter chicken recipe. She wants to
+      cook it for everyone when we get back. Arjun's ankle is
+      swelling so we're taking it easy tonight.
+    expected_triples:
+      - ["Priya", "called", "user during dinner"]
+      - ["Priya", "experimenting_with", "butter chicken recipe"]
+      - ["Priya", "wants_to_cook_for", "everyone when we get back"]
+      - ["Arjun", "has", "swollen ankle"]
+      - ["user", "decided_to", "take it easy tonight"]
+    trace_overrides:
+      edge_temporal_context: "past"
+      edge_emotional_label: "caring"
+      edge_episodic_significance: "routine"
+
+  - batch: 4
+    time: "Sunday 10:00 AM"
+    user_input: |
+      Arjun and I went to the Banff hot springs this morning. His
+      ankle felt better after soaking. We ran into this couple from
+      Montreal who told us about a trail we should try next time.
+      I'm really glad we came even though Helen couldn't be here.
+    expected_triples:
+      - ["user", "visited", "Banff hot springs"]
+      - ["Arjun", "visited", "Banff hot springs"]
+      - ["Arjun", "improved_after", "hot springs soak"]
+      - ["user", "met", "couple from Montreal"]
+      - ["user", "heard_about", "a trail to try next visit"]
+      - ["user", "has_emotion", "grateful"]
+    trace_overrides:
+      edge_temporal_context: "past"
+      edge_emotional_label: "grateful"
+      edge_episodic_significance: "routine"
+
+  - batch: 5
+    time: "Sunday 5:00 PM"
+    user_input: |
+      Driving back to Calgary now. Arjun is sleeping in the passenger
+      seat. I picked up a little carved bear for Helen from one of the
+      shops in town. This was exactly the kind of weekend I needed.
+    expected_triples:
+      - ["user", "drove_back_to", "Calgary"]
+      - ["Arjun", "slept_in", "passenger seat"]
+      - ["user", "bought", "carved bear souvenir for Helen"]
+      - ["user", "has_emotion", "content"]
+    trace_overrides:
+      edge_temporal_context: "past"
+      edge_emotional_label: "content"
+      edge_episodic_significance: "resolution"
+
+final_verification:
+  - question: "Tell me about the Banff trip"
+    type: "reconstruct"
+    expected_contains: ["Banff", "Arjun", "Sulphur Mountain", "ankle"]
+
+  - question: "What happened to Arjun's ankle?"
+    type: "reconstruct"
+    expected_contains: ["twisted", "ankle", "swelling", "hot springs"]
+
+  - question: "Who couldn't come on the trip?"
+    type: "lookup"
+    expected_contains: ["Helen"]
+
+  - question: "What is Priya cooking?"
+    type: "lookup"
+    expected_contains: ["butter chicken"]
+
+  - question: "What did you get for Helen?"
+    type: "lookup"
+    expected_contains: ["carved bear"]

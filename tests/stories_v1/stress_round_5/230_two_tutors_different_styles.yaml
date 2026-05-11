@@ -1,0 +1,80 @@
+story_id: 230
+story_name: Two Tutors, Different Styles
+category: Learning
+description: User switches between two math tutors for their kid.
+duration_simulated: 2 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: My daughter Alma is struggling with 7th grade algebra. Hired a tutor named Balthazar Ince.
+    He is NOT the right fit for her learning style.
+  expected_stores:
+  - Alma
+  - daughter
+  - 7th grade algebra
+  - Balthazar Ince
+  - not the right fit
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Switched tutors. New one is a grad student named Henrietta Calderone who specializes in
+    teaching girls in STEM.
+  expected_stores:
+  - Henrietta Calderone
+  - girls in STEM
+- batch: 3
+  time: Month 2
+  user_input: What year did the Titanic sink?
+- batch: 4
+  time: Month 2 Week 2
+  user_input: Alma's confidence is up dramatically with Henrietta. Got a B+ on her last quiz — previously
+    failing.
+  expected_stores:
+  - Alma
+  - Henrietta
+  - B+
+- batch: 5
+  time: Month 2 Week 4
+  user_input: Alma and Henrietta have a great rapport. Henrietta is coming 3 times a week. Balthazar was
+    a nice guy but wrong for Alma.
+  expected_stores:
+  - Alma
+  - Henrietta
+  - 3 times a week
+  - Balthazar
+  expected_adaptation:
+    emotion_detected: proud
+    warmth_direction: increase
+questions:
+- question_id: 230_q1
+  question: Who is my daughter?
+  expected_contains:
+  - Alma
+- question_id: 230_q2
+  question: Who was the first tutor?
+  expected_contains:
+  - Balthazar Ince
+- question_id: 230_q3
+  question: Who is the new tutor?
+  expected_contains:
+  - Henrietta Calderone
+- question_id: 230_q4
+  question: Was Balthazar the right fit?
+  expected_contains:
+  - not
+- question_id: 230_q5
+  question: Did I mention daughter?
+  expected_contains:
+  - daughter
+- question_id: 230_q6
+  question: Did I mention 7th grade algebra?
+  expected_contains:
+  - 7th grade algebra
+- question_id: 230_q7
+  question: Did I mention not the right fit?
+  expected_contains:
+  - not the right fit
+- question_id: 230_q8
+  question: Did I mention girls in STEM?
+  expected_contains:
+  - girls in STEM

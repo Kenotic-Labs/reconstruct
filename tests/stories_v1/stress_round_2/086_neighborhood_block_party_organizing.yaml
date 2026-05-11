@@ -1,0 +1,99 @@
+story_id: 86
+story_name: Neighborhood Block Party Organizing
+category: Daily Life
+description: User organizes a neighborhood block party for the first time.
+duration_simulated: 6 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My neighbors and I decided to have a block party on Saturday the 17th. I volunteered to
+    organize because nobody else wanted to.
+  expected_stores:
+  - block party
+  - Saturday the 17th
+- batch: 2
+  time: Week 2
+  user_input: Filed the street closure permit with the city. 150 dollars plus I had to get 60 percent
+    of neighbors to sign. My neighbor Priya helped me door knock.
+  expected_stores:
+  - street closure permit
+  - 150 dollars
+  - 60 percent
+  - Priya
+- batch: 3
+  time: Week 3
+  user_input: Got 14 signatures so far. Need 18 to hit 60 percent. Another neighbor Gabriel offered to
+    grill for everyone — he used to run a food truck.
+  expected_stores:
+  - 14 signatures
+  - '18'
+  - Gabriel
+  - food truck
+- batch: 4
+  time: Week 4
+  user_input: How many countries are in Africa?
+- batch: 5
+  time: Week 4 Thursday
+  user_input: Hit 22 signatures. Permit approved. Gabriel is doing tri-tip and chicken, Priya is making
+    drinks, and a couple named the Schwartzes said they'll bring desserts.
+  expected_stores:
+  - 22 signatures
+  - Gabriel
+  - tri-tip
+  - chicken
+  - Priya
+  - drinks
+  - Schwartzes
+  - desserts
+- batch: 6
+  time: Week 5
+  user_input: Rented tables and chairs from Party Pronto, 180 dollars. I hired a bluegrass trio called
+    the Brick Ovens to play from 3 to 6 PM.
+  expected_stores:
+  - Party Pronto
+  - 180 dollars
+  - Brick Ovens
+  - bluegrass trio
+  - 3 to 6 PM
+- batch: 7
+  time: Week 6 Sunday
+  user_input: The block party was yesterday. 80 people showed up from 19 households. Gabriel grilled for
+    four hours straight. Best neighborhood day in years.
+  expected_stores:
+  - 80 people
+  - 19 households
+  - Gabriel
+  - four hours
+  expected_adaptation:
+    emotion_detected: fulfilled
+    warmth_direction: increase
+questions:
+- question_id: 86_q1
+  question: Who helped me door knock?
+  expected_contains:
+  - Priya
+- question_id: 86_q2
+  question: Who grilled for the party?
+  expected_contains:
+  - Gabriel
+- question_id: 86_q3
+  question: What was the permit cost?
+  expected_contains:
+  - '150'
+- question_id: 86_q4
+  question: Who played music?
+  expected_contains:
+  - Brick Ovens
+- question_id: 86_q5
+  question: How many people came?
+  expected_contains:
+  - '80'
+- question_id: 86_q6
+  question: Where did I rent tables from?
+  expected_contains:
+  - Party Pronto
+- question_id: 86_q7
+  question: Did I mention block party?
+  expected_contains:
+  - block party

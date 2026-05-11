@@ -1,0 +1,99 @@
+story_id: 79
+story_name: Pottery Class at a Community Center
+category: Learning
+description: User takes a beginner pottery class and produces their first pieces.
+duration_simulated: 8 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1
+  user_input: Signed up for beginner pottery at the Richmond Arts Center. 8 weeks, 280 dollars. Meets
+    Wednesdays 6:30 to 9 PM.
+  expected_stores:
+  - beginner pottery
+  - Richmond Arts Center
+  - 8 weeks
+  - 280 dollars
+  - Wednesdays 6:30
+- batch: 2
+  time: Week 2
+  user_input: My teacher is Mrs. Deb Carlson, she's been teaching here for 20 years. First night we just
+    watched demos and centered clay on the wheel.
+  expected_stores:
+  - Deb Carlson
+  - 20 years
+  - centered clay
+  - wheel
+- batch: 3
+  time: Week 3
+  user_input: Threw my first bowl tonight. It's lopsided but it's mine. Deb said it's a great first bowl.
+    My clay partner is Theo Mikkelsen.
+  expected_stores:
+  - first bowl
+  - Deb
+  - Theo Mikkelsen
+  - clay partner
+  expected_adaptation:
+    emotion_detected: proud
+    warmth_direction: increase
+- batch: 4
+  time: Week 4
+  user_input: Do dolphins sleep?
+- batch: 5
+  time: Week 5
+  user_input: Trimmed my bowls and started glazing. I picked a celadon glaze — pale blue green. Theo went
+    with a tenmoku which is dark and dramatic.
+  expected_stores:
+  - celadon
+  - pale blue green
+  - Theo
+  - tenmoku
+- batch: 6
+  time: Week 7
+  user_input: Kiln opening night. Five of my pieces survived the firing. One cracked. Deb gave me a tiny
+    speech about how every potter loses pieces.
+  expected_stores:
+  - kiln opening
+  - five pieces
+  - one cracked
+  - Deb
+- batch: 7
+  time: Week 8
+  user_input: Last class. I signed up for intermediate next session. Mrs. Carlson said yes you're ready.
+    I brought pastries to share with the class.
+  expected_stores:
+  - intermediate
+  - next session
+  - Mrs. Carlson
+  expected_adaptation:
+    emotion_detected: satisfied
+    warmth_direction: increase
+questions:
+- question_id: 79_q1
+  question: Where is my pottery class?
+  expected_contains:
+  - Richmond Arts Center
+- question_id: 79_q2
+  question: Who is my teacher?
+  expected_contains:
+  - Deb Carlson
+- question_id: 79_q3
+  question: When does the class meet?
+  expected_contains:
+  - Wednesdays
+- question_id: 79_q4
+  question: Who is my clay partner?
+  expected_contains:
+  - Theo Mikkelsen
+- question_id: 79_q5
+  question: What glaze did I pick?
+  expected_contains:
+  - celadon
+- question_id: 79_q6
+  question: How much did the class cost?
+  expected_contains:
+  - '280'
+- question_id: 79_q7
+  question: How long has Deb been teaching there?
+  expected_contains:
+  - 20 years

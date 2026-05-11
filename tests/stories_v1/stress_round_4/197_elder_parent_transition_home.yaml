@@ -1,0 +1,75 @@
+story_id: 197
+story_name: Elder Parent Transition Home
+category: Life Events
+description: User moves their elderly parent into their own home for care.
+duration_simulated: 2 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: Moving my dad Gideon into our spare room. He's 81 and can't live alone anymore. My husband
+    Torsten is supportive.
+  expected_stores:
+  - Gideon
+  - dad
+  - '81'
+  - Torsten
+  - husband
+- batch: 2
+  time: Week 2
+  user_input: Hired a part time caregiver named Pelayo Rios to come 20 hours a week while I'm at work.
+  expected_stores:
+  - Pelayo Rios
+  - caregiver
+  - 20 hours
+- batch: 3
+  time: Week 3
+  user_input: What's the oldest language still spoken?
+- batch: 4
+  time: Month 2
+  user_input: Dad and Pelayo have a real rapport. Gideon is NOT easy to please but he actually likes Pelayo.
+    He plays chess with him.
+  expected_stores:
+  - Pelayo
+  - Gideon
+  - not easy to please
+  - chess
+- batch: 5
+  time: Month 2 Week 3
+  user_input: Torsten said Gideon told him the move was the best thing in years. My dad isn't one for
+    compliments. It hit me hard.
+  expected_stores:
+  - Torsten
+  - Gideon
+  expected_adaptation:
+    emotion_detected: moved
+    warmth_direction: increase
+questions:
+- question_id: 197_q1
+  question: Who is my dad?
+  expected_contains:
+  - Gideon
+- question_id: 197_q2
+  question: Who is my husband?
+  expected_contains:
+  - Torsten
+- question_id: 197_q3
+  question: Who is the caregiver?
+  expected_contains:
+  - Pelayo Rios
+- question_id: 197_q4
+  question: How old is Dad?
+  expected_contains:
+  - '81'
+- question_id: 197_q5
+  question: What do Pelayo and Dad do together?
+  expected_contains:
+  - chess
+- question_id: 197_q6
+  question: Did I mention dad?
+  expected_contains:
+  - dad
+- question_id: 197_q7
+  question: Did I mention husband?
+  expected_contains:
+  - husband

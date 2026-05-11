@@ -1,0 +1,88 @@
+story_id: 222
+story_name: Family Member Overdose
+category: Health
+description: User's brother overdoses and survives, prompting family intervention.
+duration_simulated: 2 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My brother Soren overdosed on Tuesday. He's alive. ICU at St. Anthony's. ER doctor Dr. Keyana
+    Okoroafor saved his life.
+  expected_stores:
+  - Soren
+  - brother
+  - overdosed
+  - St. Anthony's
+  - Dr. Keyana Okoroafor
+  expected_adaptation:
+    emotion_detected: terrified
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Week 2
+  user_input: Soren is out of ICU. Mom Fernanda flew in from Phoenix. We had a family meeting and Soren
+    agreed to rehab.
+  expected_stores:
+  - Soren
+  - Fernanda
+  - Phoenix
+  - rehab
+- batch: 3
+  time: Week 3
+  user_input: What's the chemical symbol for silver?
+- batch: 4
+  time: Month 2
+  user_input: Soren is at a 60 day residential program in Tucson called Sierra Tucson. His counselor is
+    Ilse Karmann.
+  expected_stores:
+  - Soren
+  - 60 day
+  - Tucson
+  - Sierra Tucson
+  - Ilse Karmann
+- batch: 5
+  time: Month 2 Week 3
+  user_input: Visited Soren at Sierra. He looked healthier than he has in years. Ilse said he's doing
+    the hard work. Mom cried in the parking lot.
+  expected_stores:
+  - Soren
+  - Sierra
+  - Ilse
+  - Mom
+  expected_adaptation:
+    emotion_detected: cautious hope
+    warmth_direction: increase
+questions:
+- question_id: 222_q1
+  question: Who overdosed?
+  expected_contains:
+  - Soren
+- question_id: 222_q2
+  question: Who saved him?
+  expected_contains:
+  - Keyana Okoroafor
+- question_id: 222_q3
+  question: Where is he in rehab?
+  expected_contains:
+  - Sierra Tucson
+- question_id: 222_q4
+  question: Who is his counselor?
+  expected_contains:
+  - Ilse Karmann
+- question_id: 222_q5
+  question: Who is my mom?
+  expected_contains:
+  - Fernanda
+- question_id: 222_q6
+  question: Did I mention brother?
+  expected_contains:
+  - brother
+- question_id: 222_q7
+  question: Did I mention overdosed?
+  expected_contains:
+  - overdosed
+- question_id: 222_q8
+  question: Did I mention St. Anthony's?
+  expected_contains:
+  - St. Anthony's

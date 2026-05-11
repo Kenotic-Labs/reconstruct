@@ -1,0 +1,143 @@
+story_id: 46
+story_name: "Car Accident Recovery"
+category: "Life Events"
+description: |
+  User was in a minor car accident (not at fault). The other driver ran a red
+  light. The user's car is a Honda Accord being repaired at AutoCare Plus on
+  Route 9. Insurance is Progressive with claim number 4829. They have a rental
+  from Enterprise and are seeing chiropractor Dr. Blake for neck pain. Tests
+  memory of insurance details, medical care, and event specifics.
+duration_simulated: "4 weeks"
+total_batches: 9
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 3:00 PM"
+    user_input: |
+      I got into a car accident today. Someone ran a red light and hit my
+      car on the driver side. Thankfully I'm okay, just shaken up. It was
+      definitely not my fault - there were witnesses and the traffic camera
+      caught everything. My car is a Honda Accord and it's pretty banged up.
+    expected_memory_stores:
+      - "car accident"
+      - "red light"
+      - "Honda Accord"
+      - "not at fault"
+      - "witnesses"
+      - "traffic camera"
+
+  - batch: 2
+    time: "Tuesday 10:00 AM"
+    user_input: |
+      I filed a claim with my insurance - Progressive. The claim number is
+      4829. They said they'll cover the rental car while mine is being
+      repaired. I picked up a rental from Enterprise this morning. My Honda
+      is at AutoCare Plus on Route 9 for repairs.
+    expected_memory_stores:
+      - "Progressive"
+      - "4829"
+      - "Enterprise"
+      - "rental"
+      - "AutoCare Plus"
+      - "Route 9"
+
+  - batch: 3
+    time: "Tuesday 4:00 PM"
+    user_input: "What should I do after a car accident for insurance purposes?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["police report", "document", "photos"]
+
+  - batch: 4
+    time: "Wednesday 9:00 AM"
+    user_input: |
+      I woke up with terrible neck pain today. Must be whiplash from the
+      accident. I called my doctor and they recommended a chiropractor.
+      I made an appointment with Dr. Blake for this afternoon. I hope this
+      doesn't turn into a long-term issue.
+    expected_memory_stores:
+      - "neck pain"
+      - "whiplash"
+      - "Dr. Blake"
+      - "chiropractor"
+
+  - batch: 5
+    time: "Thursday 11:00 AM"
+    user_input: "What is my insurance claim number and where is my car being repaired?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["4829", "AutoCare Plus"]
+
+  - batch: 6
+    time: "Friday 2:00 PM"
+    user_input: |
+      Dr. Blake said I have mild whiplash and I need to come in twice a
+      week for adjustments for the next 4-6 weeks. He said I should also
+      do ice therapy at home. Progressive is going to cover the chiropractic
+      visits under the accident claim. The repair shop said my car will
+      need about 2 weeks.
+    expected_memory_stores:
+      - "mild whiplash"
+      - "twice a week"
+      - "4-6 weeks"
+      - "ice therapy"
+      - "2 weeks repair"
+
+  - batch: 7
+    time: "Week 2 Monday 10:00 AM"
+    user_input: "What is whiplash and how is it typically treated?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["neck", "injury"]
+
+  - batch: 8
+    time: "Week 2 Thursday 3:00 PM"
+    user_input: |
+      Good news from AutoCare Plus - the repairs are going well. They had to
+      replace the driver side door and fix some frame damage. The estimate is
+      $4,200 but Progressive is covering it since the other driver was at
+      fault. The Enterprise rental is a Nissan Altima, it drives fine but
+      I miss my Honda.
+    expected_memory_stores:
+      - "driver side door"
+      - "frame damage"
+      - "4,200"
+      - "Nissan Altima"
+
+  - batch: 9
+    time: "Week 3 Monday 11:00 AM"
+    user_input: "Who is treating my neck pain and what car am I driving as a rental?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Dr. Blake", "Enterprise"]
+
+final_verification:
+  - question: "What kind of car do I drive?"
+    expected_contains: ["Honda Accord"]
+  - question: "What is my insurance company and claim number?"
+    expected_contains: ["Progressive", "4829"]
+  - question: "Where is my car being repaired?"
+    expected_contains: ["AutoCare Plus", "Route 9"]
+  - question: "Where did I get a rental car?"
+    expected_contains: ["Enterprise"]
+  - question: "Who is my chiropractor?"
+    expected_contains: ["Dr. Blake"]
+  - question: "What caused the accident?"
+    expected_contains: ["red light"]
+  - question: "What injury did I sustain?"
+    expected_contains: ["whiplash", "neck"]

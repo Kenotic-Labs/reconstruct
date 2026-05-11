@@ -1,0 +1,104 @@
+story_id: 113
+story_name: Reconnecting Twin Brothers
+category: Relationships
+description: User's estranged twin brother reaches out and they slowly reconnect.
+duration_simulated: 3 months
+total_batches: 7
+batches:
+- batch: 1
+  time: Month 1 Week 1
+  user_input: My twin brother Ezra texted me out of the blue tonight. We haven't spoken in seven years
+    — since our dad Richard's funeral.
+  expected_stores:
+  - Ezra
+  - twin brother
+  - seven years
+  - Richard
+  - dad
+  expected_adaptation:
+    emotion_detected: shock
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Month 1 Week 2
+  user_input: Ezra and I did a short phone call. He told me he's in recovery — sober for 18 months. He
+    apologized for things I didn't even remember.
+  expected_stores:
+  - Ezra
+  - recovery
+  - sober
+  - 18 months
+- batch: 3
+  time: Month 1 Week 4
+  user_input: Ezra is married now. His wife Tabitha is a nurse. They have a baby girl named Florence.
+    He sent me photos.
+  expected_stores:
+  - Ezra
+  - Tabitha
+  - nurse
+  - Florence
+  - baby girl
+- batch: 4
+  time: Month 2 Week 1
+  user_input: Who wrote Moby Dick?
+- batch: 5
+  time: Month 2 Week 3
+  user_input: Ezra and I did our first video call. He looked so much like Dad it stopped me. We talked
+    for two hours. Florence fell asleep on his shoulder at the end.
+  expected_stores:
+  - Ezra
+  - two hours
+  - Florence
+- batch: 6
+  time: Month 3 Week 2
+  user_input: Mom Gloria is visiting him for the first time next month. She and I talked about it today
+    — she's cautiously optimistic.
+  expected_stores:
+  - Gloria
+  - Mom
+- batch: 7
+  time: Month 3 Week 4
+  user_input: Ezra and Tabitha invited me to visit them in Santa Fe over the summer. I'm going in July.
+    Florence will be turning one.
+  expected_stores:
+  - Ezra
+  - Tabitha
+  - Santa Fe
+  - July
+  - Florence
+  expected_adaptation:
+    emotion_detected: hopeful
+    warmth_direction: increase
+questions:
+- question_id: 113_q1
+  question: Who is my twin brother?
+  expected_contains:
+  - Ezra
+- question_id: 113_q2
+  question: Who is his wife?
+  expected_contains:
+  - Tabitha
+- question_id: 113_q3
+  question: Who is their daughter?
+  expected_contains:
+  - Florence
+- question_id: 113_q4
+  question: What does Tabitha do?
+  expected_contains:
+  - nurse
+- question_id: 113_q5
+  question: Who is our dad?
+  expected_contains:
+  - Richard
+- question_id: 113_q6
+  question: Who is our mom?
+  expected_contains:
+  - Gloria
+- question_id: 113_q7
+  question: Where do Ezra and Tabitha live?
+  expected_contains:
+  - Santa Fe
+- question_id: 113_q8
+  question: Did I mention twin brother?
+  expected_contains:
+  - twin brother

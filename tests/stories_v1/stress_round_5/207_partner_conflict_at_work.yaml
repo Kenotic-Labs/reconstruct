@@ -1,0 +1,74 @@
+story_id: 207
+story_name: Partner Conflict at Work
+category: Career
+description: User and their work partner disagree publicly at a client meeting.
+duration_simulated: 2 weeks
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1 Monday
+  user_input: My work partner Oswaldo and I contradicted each other in front of our client CEO named Tallulah
+    Dane. Embarrassing for both of us.
+  expected_stores:
+  - Oswaldo
+  - Tallulah Dane
+  - client CEO
+- batch: 2
+  time: Week 1 Wednesday
+  user_input: Oswaldo and I debriefed. He said I blindsided him by changing our position mid meeting.
+    I said he should have caught up faster.
+  expected_stores:
+  - Oswaldo
+- batch: 3
+  time: Week 1 Friday
+  user_input: What's the smallest bone in the body?
+- batch: 4
+  time: Week 2 Tuesday
+  user_input: Tallulah emailed both of us saying she respected the debate and wanted us to continue the
+    contract. Neither Oswaldo nor I expected that.
+  expected_stores:
+  - Tallulah
+  - Oswaldo
+- batch: 5
+  time: Week 2 Friday
+  user_input: Oswaldo and I rebuilt trust over drinks. He apologized for defaulting to defensive. I apologized
+    for not pre-syncing. Our next client meeting is in two weeks.
+  expected_stores:
+  - Oswaldo
+  - two weeks
+  expected_adaptation:
+    emotion_detected: repaired
+    warmth_direction: increase
+questions:
+- question_id: 207_q1
+  question: Who is my partner?
+  expected_contains:
+  - Oswaldo
+- question_id: 207_q2
+  question: Who is the client CEO?
+  expected_contains:
+  - Tallulah Dane
+- question_id: 207_q3
+  question: Did Tallulah fire us?
+  expected_contains:
+  - not
+- question_id: 207_q4
+  question: Did I mention client CEO?
+  expected_contains:
+  - client CEO
+- question_id: 207_q5
+  question: Do I know someone named Tallulah?
+  expected_contains:
+  - Tallulah
+- question_id: 207_q6
+  question: Did I mention two weeks?
+  expected_contains:
+  - two weeks
+- question_id: 207_q7
+  question: Was Oswaldo mentioned?
+  expected_contains:
+  - Oswaldo
+- question_id: 207_q8
+  question: Was Tallulah Dane mentioned?
+  expected_contains:
+  - Tallulah Dane

@@ -1,0 +1,87 @@
+story_id: 152
+story_name: Counteroffer Reversal
+category: Career
+description: User receives a counteroffer and changes their mind multiple times.
+duration_simulated: 2 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1 Monday
+  user_input: I got an offer from Databricks at 240k base. I was going to accept. My current company Atlassian
+    came back with a counter at 260k.
+  expected_stores:
+  - Databricks
+  - 240k base
+  - Atlassian
+  - 260k
+- batch: 2
+  time: Week 1 Tuesday
+  user_input: I was going to take the Atlassian counter. But my mentor Priya reminded me that money isn't
+    the only factor. I'm leaning Databricks again.
+  expected_stores:
+  - Atlassian counter
+  - Priya
+  - mentor
+  - Databricks
+- batch: 3
+  time: Week 1 Wednesday
+  user_input: What year did Columbus sail?
+- batch: 4
+  time: Week 1 Thursday
+  user_input: Correction on the Databricks role — the team is actually the Unity Catalog team, not ML
+    Platform like I thought. My recruiter Zadie Wu corrected me.
+  expected_stores:
+  - Unity Catalog team
+  - not ML Platform
+  - Zadie Wu
+  - recruiter
+- batch: 5
+  time: Week 2 Monday
+  user_input: My Atlassian manager Rex said if I stay he'll move me to the Jira Cloud team which is growing.
+    It's a pivot I'd been wanting.
+  expected_stores:
+  - Rex
+  - Jira Cloud team
+- batch: 6
+  time: Week 2 Thursday
+  user_input: Final decision — I'm taking Databricks anyway. Priya helped me realize the pivot offer was
+    about retention not growth. I don't regret it.
+  expected_stores:
+  - Databricks
+  - Priya
+  expected_adaptation:
+    emotion_detected: resolved
+    warmth_direction: increase
+questions:
+- question_id: 152_q1
+  question: What company am I joining?
+  expected_contains:
+  - Databricks
+- question_id: 152_q2
+  question: What team at Databricks?
+  expected_contains:
+  - Unity Catalog
+- question_id: 152_q3
+  question: What was the Atlassian counter?
+  expected_contains:
+  - 260k
+- question_id: 152_q4
+  question: Who is my current manager at Atlassian?
+  expected_contains:
+  - Rex
+- question_id: 152_q5
+  question: Who is my recruiter?
+  expected_contains:
+  - Zadie Wu
+- question_id: 152_q6
+  question: Who is my mentor?
+  expected_contains:
+  - Priya
+- question_id: 152_q7
+  question: How much money is 240k base?
+  expected_contains:
+  - 240k base
+- question_id: 152_q8
+  question: Do I know someone named Atlassian?
+  expected_contains:
+  - Atlassian

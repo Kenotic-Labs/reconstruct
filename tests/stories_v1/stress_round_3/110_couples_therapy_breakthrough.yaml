@@ -1,0 +1,98 @@
+story_id: 110
+story_name: Couples Therapy Breakthrough
+category: Relationships
+description: User and partner attend couples therapy and have a breakthrough session.
+duration_simulated: 10 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My wife Yara and I started couples therapy with Dr. Lionel Barrett. We meet biweekly on
+    Thursdays at 6 PM.
+  expected_stores:
+  - Yara
+  - wife
+  - couples therapy
+  - Dr. Lionel Barrett
+  - biweekly Thursdays 6 PM
+- batch: 2
+  time: Week 3
+  user_input: Dr. Barrett asked Yara and me to each write down three things we appreciate and three things
+    that frustrate us. Mine was hard to write.
+  expected_stores:
+  - Dr. Barrett
+  - Yara
+  - three things
+- batch: 3
+  time: Week 5
+  user_input: Session today was rough. Yara told me about resentment she's been holding for a year. I
+    hadn't realized.
+  expected_stores:
+  - Yara
+  expected_adaptation:
+    emotion_detected: vulnerable
+    warmth_direction: increase
+    vulnerability: true
+- batch: 4
+  time: Week 6
+  user_input: What's the atomic number of carbon?
+- batch: 5
+  time: Week 7
+  user_input: Dr. Barrett gave Yara and me a communication exercise. Every night we do a 10 minute check-in
+    — no phones, no interruptions.
+  expected_stores:
+  - Dr. Barrett
+  - Yara
+  - 10 minute check-in
+  - no phones
+- batch: 6
+  time: Week 9
+  user_input: Huge breakthrough today. Yara said something that cracked the old resentment open and we
+    both cried. Dr. Barrett let the silence sit.
+  expected_stores:
+  - Yara
+  - Dr. Barrett
+  expected_adaptation:
+    emotion_detected: emotional
+    warmth_direction: increase
+- batch: 7
+  time: Week 10
+  user_input: Yara and I are moving to monthly sessions now. Dr. Barrett said he's proud of the work we've
+    done.
+  expected_stores:
+  - Yara
+  - monthly sessions
+  - Dr. Barrett
+questions:
+- question_id: 110_q1
+  question: Who is my wife?
+  expected_contains:
+  - Yara
+- question_id: 110_q2
+  question: Who is our therapist?
+  expected_contains:
+  - Lionel Barrett
+- question_id: 110_q3
+  question: When are our sessions?
+  expected_contains:
+  - Thursday
+- question_id: 110_q4
+  question: What communication exercise did we start?
+  expected_contains:
+  - check-in
+- question_id: 110_q5
+  question: How long is the check-in?
+  expected_contains:
+  - 10 minute
+- question_id: 110_q6
+  question: How often are we meeting now?
+  expected_contains:
+  - monthly
+- question_id: 110_q7
+  question: Did I mention wife?
+  expected_contains:
+  - wife
+- question_id: 110_q8
+  question: Did I mention couples therapy?
+  expected_contains:
+  - couples therapy

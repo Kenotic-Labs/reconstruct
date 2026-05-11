@@ -1,0 +1,89 @@
+story_id: 139
+story_name: Getting a Second Dog
+category: Daily Life
+description: User and family add a second dog to their household.
+duration_simulated: 2 months
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My partner Cora and I are adding a second dog. Our current dog Biscuit is 5 years old. We
+    found a puppy at the shelter — a lab mix we're calling Hopper.
+  expected_stores:
+  - Cora
+  - partner
+  - Biscuit
+  - 5 years old
+  - Hopper
+  - lab mix
+- batch: 2
+  time: Week 2
+  user_input: First week home. Biscuit is not thrilled. Cora and I are working on slow introductions.
+    Our trainer Kwame recommends giving them separate spaces.
+  expected_stores:
+  - Biscuit
+  - Cora
+  - Kwame
+  - trainer
+  - separate spaces
+- batch: 3
+  time: Week 3
+  user_input: What's the fastest sea creature?
+- batch: 4
+  time: Week 4
+  user_input: Kwame came over for a private session. He showed Cora and me how to reward Biscuit for ignoring
+    Hopper. Progress.
+  expected_stores:
+  - Kwame
+  - Cora
+  - Biscuit
+  - Hopper
+- batch: 5
+  time: Month 2 Week 1
+  user_input: Biscuit and Hopper played together for the first time yesterday — proper play, not just
+    tolerating. Cora cried happy tears.
+  expected_stores:
+  - Biscuit
+  - Hopper
+  - Cora
+  expected_adaptation:
+    emotion_detected: happy
+    warmth_direction: increase
+- batch: 6
+  time: Month 2 Week 3
+  user_input: Kwame said we graduated from his program. Biscuit and Hopper are inseparable now. Our neighbor
+    Theo laughs watching them play in the yard.
+  expected_stores:
+  - Kwame
+  - Biscuit
+  - Hopper
+  - Theo
+questions:
+- question_id: 139_q1
+  question: What is my current dog's name?
+  expected_contains:
+  - Biscuit
+- question_id: 139_q2
+  question: What is the new puppy's name?
+  expected_contains:
+  - Hopper
+- question_id: 139_q3
+  question: Who is my partner?
+  expected_contains:
+  - Cora
+- question_id: 139_q4
+  question: Who is our trainer?
+  expected_contains:
+  - Kwame
+- question_id: 139_q5
+  question: Who is our neighbor?
+  expected_contains:
+  - Theo
+- question_id: 139_q6
+  question: Did I mention partner?
+  expected_contains:
+  - partner
+- question_id: 139_q7
+  question: When is 5 years old?
+  expected_contains:
+  - 5 years old

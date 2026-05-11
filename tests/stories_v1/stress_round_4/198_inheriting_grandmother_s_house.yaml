@@ -1,0 +1,76 @@
+story_id: 198
+story_name: Inheriting Grandmother's House
+category: Life Events
+description: User inherits her grandmother's house and decides what to do with it.
+duration_simulated: 3 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: My grandmother Adelina passed and left me her house in Santa Rosa. Her lawyer Niall Ferguson
+    is handling the probate.
+  expected_stores:
+  - Adelina
+  - grandmother
+  - Santa Rosa
+  - Niall Ferguson
+  - lawyer
+  - probate
+- batch: 2
+  time: Month 2
+  user_input: The house is worth about 780000. My brother Urien thinks we should sell. I am NOT sure yet.
+  expected_stores:
+  - '780000'
+  - Urien
+  - brother
+  - not sure
+- batch: 3
+  time: Month 2 Week 3
+  user_input: What year did World War I start?
+- batch: 4
+  time: Month 3
+  user_input: Decided to keep the house and rent it out. Urien gets half the cash flow. Niall drafted
+    the agreement.
+  expected_stores:
+  - rent it out
+  - Urien
+  - Niall
+- batch: 5
+  time: Month 3 Week 3
+  user_input: Got a property manager named Saoirse Donovan. Rental is ready in 3 weeks.
+  expected_stores:
+  - Saoirse Donovan
+  - property manager
+  - 3 weeks
+  expected_adaptation:
+    emotion_detected: settled
+    warmth_direction: increase
+questions:
+- question_id: 198_q1
+  question: Who is my grandmother?
+  expected_contains:
+  - Adelina
+- question_id: 198_q2
+  question: Where is the house?
+  expected_contains:
+  - Santa Rosa
+- question_id: 198_q3
+  question: Who is the lawyer?
+  expected_contains:
+  - Niall Ferguson
+- question_id: 198_q4
+  question: Who is my brother?
+  expected_contains:
+  - Urien
+- question_id: 198_q5
+  question: Who is the property manager?
+  expected_contains:
+  - Saoirse Donovan
+- question_id: 198_q6
+  question: Did I mention grandmother?
+  expected_contains:
+  - grandmother
+- question_id: 198_q7
+  question: Did I mention lawyer?
+  expected_contains:
+  - lawyer

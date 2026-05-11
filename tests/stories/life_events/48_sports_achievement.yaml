@@ -1,0 +1,141 @@
+story_id: 48
+story_name: "Training for First Marathon"
+category: "Life Events"
+description: |
+  User is training for their first marathon, the Chicago Marathon. Their running
+  coach is Dave. The training plan is 16 weeks. They belong to the Lakeside
+  Runners club. Current pace is 9 min/mile with a goal of finishing under 4
+  hours. Running shoes are Brooks Ghost. Tests memory of fitness goals, training
+  specifics, and progress details.
+duration_simulated: "6 weeks"
+total_batches: 9
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 6:00 AM"
+    user_input: |
+      I officially signed up for the Chicago Marathon! This is going to be
+      my first marathon ever. I'm both terrified and thrilled. I found a
+      running coach named Dave who specializes in first-time marathoners.
+      He put together a 16-week training plan for me.
+    expected_memory_stores:
+      - "Chicago Marathon"
+      - "first marathon"
+      - "Dave"
+      - "coach"
+      - "16-week"
+      - "training plan"
+
+  - batch: 2
+    time: "Tuesday 7:00 PM"
+    user_input: |
+      I joined a local running group called the Lakeside Runners club. They
+      meet three times a week for group runs. Everyone is super supportive.
+      Dave said group training is important for motivation. My current pace
+      is about 9 minutes per mile, and my goal is to finish the marathon
+      under 4 hours.
+    expected_memory_stores:
+      - "Lakeside Runners"
+      - "three times a week"
+      - "9 minutes per mile"
+      - "under 4 hours"
+
+  - batch: 3
+    time: "Wednesday 12:00 PM"
+    user_input: "What is the official distance of a marathon in miles?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["26.2"]
+
+  - batch: 4
+    time: "Thursday 5:00 PM"
+    user_input: |
+      Bought new running shoes today - Brooks Ghost 15. Dave recommended
+      them specifically for long distance running. They feel amazing. Also
+      got some compression socks and a hydration belt for the long runs.
+      Training officially starts this Saturday with a 5-mile run.
+    expected_memory_stores:
+      - "Brooks Ghost"
+      - "compression socks"
+      - "hydration belt"
+      - "5-mile"
+      - "Saturday"
+
+  - batch: 5
+    time: "Week 2 Monday 7:00 AM"
+    user_input: "What is my current running pace and what's my marathon goal time?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["9 min", "4 hours"]
+
+  - batch: 6
+    time: "Week 3 Saturday 10:00 AM"
+    user_input: |
+      Just finished my longest run yet - 10 miles! Dave had me run it at a
+      conversational pace. The Lakeside Runners group ran together through
+      the park trail. My time was 1 hour 32 minutes. I'm sore but feeling
+      accomplished. Dave says I'm right on track.
+    expected_memory_stores:
+      - "10 miles"
+      - "1 hour 32 minutes"
+      - "park trail"
+      - "on track"
+
+  - batch: 7
+    time: "Week 3 Monday 9:00 AM"
+    user_input: "What are the health benefits of running?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["cardiovascular", "health"]
+
+  - batch: 8
+    time: "Week 4 Wednesday 6:00 PM"
+    user_input: |
+      Had a tough training day. Dave had me do hill repeats and speed work.
+      My legs were screaming. But he said my pace has improved to 8:40 per
+      mile on shorter distances. If I keep this up I could beat my 4-hour
+      goal. The marathon is 10 weeks away now.
+    expected_memory_stores:
+      - "hill repeats"
+      - "speed work"
+      - "8:40"
+      - "improved"
+      - "10 weeks away"
+
+  - batch: 9
+    time: "Week 5 Saturday 11:00 AM"
+    user_input: "What running shoes am I using and what club do I belong to?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Brooks Ghost", "Lakeside Runners"]
+
+final_verification:
+  - question: "What marathon am I training for?"
+    expected_contains: ["Chicago Marathon"]
+  - question: "Who is my running coach?"
+    expected_contains: ["Dave"]
+  - question: "How long is the training plan?"
+    expected_contains: ["16"]
+  - question: "What running club do I belong to?"
+    expected_contains: ["Lakeside Runners"]
+  - question: "What is my goal finish time?"
+    expected_contains: ["4 hours"]
+  - question: "What running shoes am I using?"
+    expected_contains: ["Brooks Ghost"]
+  - question: "What is my current pace?"
+    expected_contains: ["9 min"]

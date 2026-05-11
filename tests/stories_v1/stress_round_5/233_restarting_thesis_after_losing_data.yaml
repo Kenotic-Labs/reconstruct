@@ -1,0 +1,79 @@
+story_id: 233
+story_name: Restarting Thesis After Losing Data
+category: Learning
+description: User loses their thesis data and has to restart research.
+duration_simulated: 3 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: My thesis data was on an external drive that failed. Two years of interviews gone. My advisor
+    Dr. Phaedra Malik is helping me strategize.
+  expected_stores:
+  - external drive
+  - two years
+  - Dr. Phaedra Malik
+  expected_adaptation:
+    emotion_detected: devastated
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Dr. Malik said I can use my field notes to reconstruct 60 percent of the interviews. It
+    is NOT a total loss.
+  expected_stores:
+  - Dr. Malik
+  - field notes
+  - 60 percent
+  - not a total loss
+- batch: 3
+  time: Month 2
+  user_input: What is the capital of Finland?
+- batch: 4
+  time: Month 2 Week 2
+  user_input: Started reaching back out to interviewees for follow ups. 12 out of 15 agreed. Dr. Malik
+    is impressed with my recovery.
+  expected_stores:
+  - 12 out of 15
+  - Dr. Malik
+- batch: 5
+  time: Month 3
+  user_input: Thesis defense pushed from spring to fall. Dr. Malik said this actually results in a stronger
+    paper. I'm not going to argue.
+  expected_stores:
+  - thesis defense
+  - spring to fall
+  - Dr. Malik
+questions:
+- question_id: 233_q1
+  question: Who is my advisor?
+  expected_contains:
+  - Phaedra Malik
+- question_id: 233_q2
+  question: How much data did I reconstruct?
+  expected_contains:
+  - 60 percent
+- question_id: 233_q3
+  question: When is my defense now?
+  expected_contains:
+  - fall
+- question_id: 233_q4
+  question: Did I mention external drive?
+  expected_contains:
+  - external drive
+- question_id: 233_q5
+  question: Did I mention two years?
+  expected_contains:
+  - two years
+- question_id: 233_q6
+  question: Did I mention Dr. Phaedra Malik?
+  expected_contains:
+  - Dr. Phaedra Malik
+- question_id: 233_q7
+  question: Did I mention Dr. Malik?
+  expected_contains:
+  - Dr. Malik
+- question_id: 233_q8
+  question: Did I mention field notes?
+  expected_contains:
+  - field notes

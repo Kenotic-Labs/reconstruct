@@ -1,0 +1,85 @@
+story_id: 210
+story_name: Kids Custody Negotiation
+category: Relationships
+description: User renegotiates custody with her ex-husband.
+duration_simulated: 3 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: My ex Tarek and I need to renegotiate custody of our kids Sofia (8) and Milo (5). Our mediator
+    is Quentin Hayes.
+  expected_stores:
+  - Tarek
+  - ex
+  - Sofia
+  - '8'
+  - Milo
+  - '5'
+  - Quentin Hayes
+  - mediator
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Tarek wants 50/50. I am NOT opposed to it but I'm worried about the kids' school logistics.
+    Quentin is helping us think it through.
+  expected_stores:
+  - Tarek
+  - 50/50
+  - not opposed
+  - Quentin
+- batch: 3
+  time: Month 2
+  user_input: Who wrote War and Peace?
+- batch: 4
+  time: Month 2 Week 2
+  user_input: 'We agreed: weeks alternate, not days. Sofia and Milo will have one consistent school from
+    each parent''s address. Sofia''s teacher Mrs. Inez Galvez is supportive.'
+  expected_stores:
+  - weeks alternate
+  - not days
+  - Sofia
+  - Milo
+  - Mrs. Inez Galvez
+- batch: 5
+  time: Month 3
+  user_input: New custody arrangement is working. Tarek and I are more civil than before. Sofia told me
+    last night she likes 'having two houses.'
+  expected_stores:
+  - Tarek
+  - Sofia
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+questions:
+- question_id: 210_q1
+  question: Who is my ex?
+  expected_contains:
+  - Tarek
+- question_id: 210_q2
+  question: Who is our mediator?
+  expected_contains:
+  - Quentin Hayes
+- question_id: 210_q3
+  question: How old is Sofia?
+  expected_contains:
+  - '8'
+- question_id: 210_q4
+  question: How old is Milo?
+  expected_contains:
+  - '5'
+- question_id: 210_q5
+  question: Who is Sofia's teacher?
+  expected_contains:
+  - Inez Galvez
+- question_id: 210_q6
+  question: Did I mention ex?
+  expected_contains:
+  - ex
+- question_id: 210_q7
+  question: Do I know someone named Sofia?
+  expected_contains:
+  - Sofia
+- question_id: 210_q8
+  question: Do I know someone named Milo?
+  expected_contains:
+  - Milo

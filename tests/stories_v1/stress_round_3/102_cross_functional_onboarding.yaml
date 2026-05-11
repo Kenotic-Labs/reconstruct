@@ -1,0 +1,108 @@
+story_id: 102
+story_name: Cross-Functional Onboarding
+category: Career
+description: User onboards a new cross-functional team with shared ownership.
+duration_simulated: 5 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My design partner Bastian and I were told by our director Imani that we're getting two new
+    hires — one engineer and one researcher, both starting Monday.
+  expected_stores:
+  - Bastian
+  - design partner
+  - Imani
+  - director
+  - engineer
+  - researcher
+  - Monday
+- batch: 2
+  time: Week 1 Friday
+  user_input: I met the new engineer. Her name is Tallulah Burke, she's coming from Palantir. Bastian
+    met the researcher Hayden Pak earlier today and said he seems sharp.
+  expected_stores:
+  - Tallulah Burke
+  - Palantir
+  - Bastian
+  - Hayden Pak
+- batch: 3
+  time: Week 2
+  user_input: Bastian and I split the onboarding — I'm pairing with Tallulah on the API work, he's pairing
+    with Hayden on user research methodology. We sync every afternoon.
+  expected_stores:
+  - Bastian
+  - Tallulah
+  - API
+  - Hayden
+  - user research methodology
+  - sync every afternoon
+- batch: 4
+  time: Week 3
+  user_input: What year was the Great Depression?
+- batch: 5
+  time: Week 3 Thursday
+  user_input: Tallulah shipped her first PR this afternoon. Hayden presented his first research plan to
+    Imani and us — she approved it on the spot.
+  expected_stores:
+  - Tallulah
+  - first PR
+  - Hayden
+  - research plan
+  - Imani
+  - approved
+- batch: 6
+  time: Week 4 Tuesday
+  user_input: Bastian and I took Tallulah and Hayden out to lunch at Tallulah's favorite ramen place called
+    Daikokuya. They told us stories from their old jobs.
+  expected_stores:
+  - Bastian
+  - Tallulah
+  - Hayden
+  - Daikokuya
+  - ramen
+- batch: 7
+  time: Week 5
+  user_input: Imani gave Bastian and me positive feedback on the onboarding. She said Tallulah and Hayden
+    both told her they feel fully settled.
+  expected_stores:
+  - Imani
+  - Bastian
+  - Tallulah
+  - Hayden
+  expected_adaptation:
+    emotion_detected: satisfied
+    warmth_direction: increase
+questions:
+- question_id: 102_q1
+  question: Who is my design partner?
+  expected_contains:
+  - Bastian
+- question_id: 102_q2
+  question: Who is our director?
+  expected_contains:
+  - Imani
+- question_id: 102_q3
+  question: Who is the new engineer?
+  expected_contains:
+  - Tallulah Burke
+- question_id: 102_q4
+  question: Where is Tallulah coming from?
+  expected_contains:
+  - Palantir
+- question_id: 102_q5
+  question: Who is the new researcher?
+  expected_contains:
+  - Hayden Pak
+- question_id: 102_q6
+  question: Where did we go for lunch?
+  expected_contains:
+  - Daikokuya
+- question_id: 102_q7
+  question: Who presented a research plan to Imani?
+  expected_contains:
+  - Hayden
+- question_id: 102_q8
+  question: Who did I pair with on API work?
+  expected_contains:
+  - Tallulah

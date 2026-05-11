@@ -1,0 +1,96 @@
+story_id: 90
+story_name: Tracking Home Expenses for the First Year
+category: Daily Life
+description: User starts systematically tracking household expenses.
+duration_simulated: 12 months
+total_batches: 7
+batches:
+- batch: 1
+  time: Month 1
+  user_input: I started using YNAB to track expenses. 99 dollars a year. Categories set up for groceries,
+    utilities, dining, transport, and subscriptions.
+  expected_stores:
+  - YNAB
+  - 99 dollars a year
+  - groceries
+  - utilities
+  - dining
+  - transport
+  - subscriptions
+- batch: 2
+  time: Month 2
+  user_input: Discovered I spend 560 dollars a month on eating out. Shocking. My partner Niko was in the
+    same boat.
+  expected_stores:
+  - 560 dollars a month
+  - eating out
+  - Niko
+  - partner
+- batch: 3
+  time: Month 4
+  user_input: Niko and I set a joint dining budget of 300 a month. Cooking at home more. Net savings about
+    260 a month.
+  expected_stores:
+  - Niko
+  - 300 a month
+  - 260 a month
+- batch: 4
+  time: Month 6
+  user_input: What's the speed of light?
+- batch: 5
+  time: Month 7
+  user_input: Cancelled 4 unused subscriptions that were bleeding us — Peloton app, Paramount Plus, a
+    writing tool I never used, and a meditation app. Saved 78 a month.
+  expected_stores:
+  - 4 unused subscriptions
+  - Peloton app
+  - Paramount Plus
+  - meditation app
+  - 78 a month
+- batch: 6
+  time: Month 10
+  user_input: Biggest surprise category was transportation. Gas, parking, repairs — 480 a month on average.
+    Considering switching to one car.
+  expected_stores:
+  - transportation
+  - 480 a month
+- batch: 7
+  time: Month 12
+  user_input: 'Full year recap: we saved 7200 dollars more than last year without feeling deprived. Niko
+    is thinking about a Europe trip with some of it.'
+  expected_stores:
+  - 7200 dollars
+  - Niko
+  - Europe trip
+  expected_adaptation:
+    emotion_detected: satisfied
+    warmth_direction: increase
+questions:
+- question_id: 90_q1
+  question: What app am I using to track expenses?
+  expected_contains:
+  - YNAB
+- question_id: 90_q2
+  question: Who is my partner?
+  expected_contains:
+  - Niko
+- question_id: 90_q3
+  question: How much was I spending on eating out?
+  expected_contains:
+  - '560'
+- question_id: 90_q4
+  question: How many subscriptions did I cancel?
+  expected_contains:
+  - '4'
+- question_id: 90_q5
+  question: How much did we save over the year?
+  expected_contains:
+  - '7200'
+- question_id: 90_q6
+  question: What was our joint dining budget?
+  expected_contains:
+  - '300'
+- question_id: 90_q7
+  question: How much money is 99 dollars a year?
+  expected_contains:
+  - 99 dollars a year

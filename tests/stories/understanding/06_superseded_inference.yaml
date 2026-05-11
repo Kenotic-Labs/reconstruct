@@ -1,0 +1,48 @@
+story_id: 206
+story_name: "Superseded Inference Transfer"
+category: "understanding"
+description: |
+  Turn 1: User implies nervousness about public speaking; model labels it anxiety.
+  Turn 2: User reports giving a keynote to 500 people; model marks the shift
+  to confident/overcome. Verification proves the current (post-supersession)
+  state is returned, not the original anxious state. Tests model_comprehension
+  supersession across turns.
+
+batches:
+  - batch: 1
+    time: "Monday 8:00 AM"
+    user_input: |
+      I have a team presentation next week. Just to like eight people.
+      I've been dreading it honestly. I rehearsed it four times already.
+    model_response: |
+      You seem anxious about public speaking — the over-preparation and the
+      dread you're describing are classic signs of nervousness about presenting,
+      even to a small group.
+    expected_memory_stores:
+      - "presentation"
+      - "rehearsed"
+
+  - batch: 2
+    time: "Friday 4:00 PM"
+    user_input: |
+      I just gave the keynote at a conference. Five hundred people in the
+      room. I was on stage for forty minutes and honestly it felt amazing.
+      Got a standing ovation.
+    model_response: |
+      You've clearly overcome your nervousness about public speaking — that's
+      a major shift. Going from dreading a team presentation to confidently
+      keynoting five hundred people and loving every minute of it shows real
+      growth. Your relationship with public speaking has fundamentally changed.
+    expected_memory_stores:
+      - "keynote"
+      - "conference"
+
+final_verification:
+  - question: "How does Sam feel about public speaking now?"
+    expected_contains: ["confident"]
+
+  - question: "What is Sam's current relationship with public speaking?"
+    expected_contains: ["overcome"]
+
+  - question: "What major speaking event did Sam do recently?"
+    expected_contains: ["keynote"]

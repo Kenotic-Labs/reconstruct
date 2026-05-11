@@ -1,0 +1,1427 @@
+{
+  "timestamp": "20260507_135150",
+  "grand_mean_f1": 0.1264,
+  "total_questions": 199,
+  "total_time_s": 1799.77,
+  "category_f1": {
+    "1": 0.1191,
+    "2": 0.2124,
+    "3": 0.1269,
+    "4": 0.0262,
+    "5": 0.2128
+  },
+  "conversations": [
+    {
+      "conv_idx": 0,
+      "speaker_a": "Caroline",
+      "speaker_b": "Melanie",
+      "turn_count": 419,
+      "qa_count": 199,
+      "ingest_time_s": 1722.31,
+      "query_time_s": 77.39,
+      "overall_f1": 0.1264,
+      "category_f1": {
+        "1": 0.1191,
+        "2": 0.2124,
+        "3": 0.1269,
+        "4": 0.0262,
+        "5": 0.2128
+      },
+      "per_question": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "category": 2,
+          "answer": "7 May 2023",
+          "prediction": "7 May 2023",
+          "f1": 1.0
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "category": 2,
+          "answer": "2022",
+          "prediction": "8 May 2022",
+          "f1": 0.5
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "category": 3,
+          "answer": "Psychology, counseling certification",
+          "prediction": "awesome, great news ,, great - self - acceptance and finding support, great, all 's good, tough dealing with those changes, an awesome job of inspiring others with your journey, letting me join your journey, you found a supportive community, an awesome time, our friendship, some of my fave memories, that roadtrip this past weekend, the hike, a gorgeous song , Caroline, you two are getting along, a lot of things happening to me, the tip , Caroline, you got the support, a gorgeous photo , Caroline, their love and support really",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Caroline research?",
+          "category": 1,
+          "answer": "Adoption agencies",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "category": 1,
+          "answer": "Transgender woman",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "category": 2,
+          "answer": "The sunday before 25 May 2023",
+          "prediction": "20 May 2023",
+          "f1": 0.5
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "category": 2,
+          "answer": "June 2023",
+          "prediction": "25 June 2023",
+          "f1": 0.8
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "category": 1,
+          "answer": "Single",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "category": 2,
+          "answer": "The week before 9 June 2023",
+          "prediction": "2 June 2023",
+          "f1": 0.5
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "category": 2,
+          "answer": "The week before 9 June 2023",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "category": 2,
+          "answer": "4 years",
+          "prediction": "2 years and 9 months",
+          "f1": 0.3333333333333333
+        },
+        {
+          "question": "Where did Caroline move from 4 years ago?",
+          "category": 1,
+          "answer": "Sweden",
+          "prediction": "volunteering at the youth center",
+          "f1": 0.0
+        },
+        {
+          "question": "How long ago was Caroline's 18th birthday?",
+          "category": 2,
+          "answer": "10 years ago",
+          "prediction": "12 years and 10 months",
+          "f1": 0.5714285714285715
+        },
+        {
+          "question": "What career path has Caroline decided to persue?",
+          "category": 1,
+          "answer": "counseling or mental health for Transgender people",
+          "prediction": "your research",
+          "f1": 0.0
+        },
+        {
+          "question": "Would Caroline still want to pursue counseling as a career if she hadn't received support growing up?",
+          "category": 3,
+          "answer": "Likely no",
+          "prediction": "Yes",
+          "f1": 0.0
+        },
+        {
+          "question": "What activities does Melanie partake in?",
+          "category": 1,
+          "answer": "pottery, camping, painting, swimming",
+          "prediction": "what a beautiful moment, people to lean on , Melanie, a great picture, so peaceful and calming, that photo, your love for your family, it helped ya , Melanie",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie sign up for a pottery class?",
+          "category": 2,
+          "answer": "2 July 2023",
+          "prediction": "2 July 2023",
+          "f1": 1.0
+        },
+        {
+          "question": "When is Caroline going to the transgender conference?",
+          "category": 2,
+          "answer": "July 2023",
+          "prediction": "8 May 2023",
+          "f1": 0.4
+        },
+        {
+          "question": "Where has Melanie camped?",
+          "category": 1,
+          "answer": "beach, mountains, forest",
+          "prediction": "I was that resilient too",
+          "f1": 0.0
+        },
+        {
+          "question": "What do Melanie's kids like?",
+          "category": 1,
+          "answer": "dinosaurs, nature",
+          "prediction": "what a beautiful moment, your son is okay, your love for your family, people to lean on , Melanie, a great picture, so peaceful and calming, the house, that photo, super happy with their new kid, so sweet and playful, such a blast, tough kids, nature",
+          "f1": 0.5
+        },
+        {
+          "question": "When did Melanie go to the museum?",
+          "category": 2,
+          "answer": "5 July 2023",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline have a picnic?",
+          "category": 2,
+          "answer": "The week before 6 July 2023",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "Would Caroline likely have Dr. Seuss books on her bookshelf?",
+          "category": 3,
+          "answer": "Yes, since she collects classic children's books",
+          "prediction": "Yes",
+          "f1": 0.25
+        },
+        {
+          "question": "What books has Melanie read?",
+          "category": 1,
+          "answer": "\"Nothing is Impossible\", \"Charlotte's Web\"",
+          "prediction": "what a beautiful moment, Charlotte 's Web, a great picture, people to lean on , Melanie, so peaceful and calming, such an awesome power, that book you recommended a while ago and",
+          "f1": 0.4
+        },
+        {
+          "question": "What does Melanie do to destress?",
+          "category": 1,
+          "answer": "Running, pottery",
+          "prediction": "others",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline go to the LGBTQ conference?",
+          "category": 2,
+          "answer": "10 July 2023",
+          "prediction": "7 May 2023",
+          "f1": 0.3333333333333333
+        },
+        {
+          "question": "When did Melanie read the book \"nothing is impossible\"?",
+          "category": 2,
+          "answer": "2022",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "Would Caroline pursue writing as a career option?",
+          "category": 3,
+          "answer": "LIkely no; though she likes reading, she wants to be a counselor",
+          "prediction": "Yes",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline go to the adoption meeting?",
+          "category": 2,
+          "answer": "The friday before 15 July 2023",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie go to the pottery workshop?",
+          "category": 2,
+          "answer": "The Friday before 15 July 2023",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "Would Melanie be considered a member of the LGBTQ community?",
+          "category": 3,
+          "answer": "Likely no, she does not refer to herself as part of it",
+          "prediction": "Yes, the LGBTQ community",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie go camping in June?",
+          "category": 2,
+          "answer": "The week before 27 June 2023",
+          "prediction": "13 September 2023",
+          "f1": 0.25
+        },
+        {
+          "question": "What LGBTQ+ events has Caroline participated in?",
+          "category": 1,
+          "answer": "Pride parade, school speech, support group",
+          "prediction": "great news ,, a great time, you found a supportive community, an awesome time, an LGBTQ center, you two are getting along, awesome, the chance to volunteer at an LGBTQ+ youth center, you got the support, Connected LGBTQ Activists ', an LGBTQ conference, great, all 's good, a transgender conference, my transgender journey and encouraged students, an LGBTQ+ pride parade, the hike, some of my fave memories, tough dealing with those changes, an awesome job of inspiring others with your journey, that roadtrip this past weekend, an LGBTQ support group, an LGBTQ art show, a new LGBTQ activist group last Tues, an LGBTQ+ counseling workshop, their love and support really, seeing my work make a difference for the LGBTQ+ community, my support , Caroline, a lot of things happening to me, LGBTQ rights, my ambitions, the LGBTQ+ community, others share and celebrate their identities, letting me join your journey, all kinds of people investing in positive changes, a gorgeous photo , Caroline, our friendship, a gorgeous song , Caroline, how far LGBTQ rights have come, The transgender stories, me think how much work we still have to do for LGBTQ rights, The pride event, a mentorship program for LGBTQ youth, supportive people, that painting, a cool experience - so much love and support , amazing, a great night featuring LGBTQ artists and their awesome talents, Conversations about gender identity and inclusion, the tip , Caroline, great - self - acceptance and finding support",
+          "f1": 0.5333333333333333
+        },
+        {
+          "question": "When did Caroline go to a pride parade during the summer?",
+          "category": 2,
+          "answer": "The week before 3 July 2023",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What events has Caroline participated in to help children?",
+          "category": 1,
+          "answer": "Mentoring program, school speech",
+          "prediction": "great news ,, an awesome time, you found a supportive community, awesome, you got the support, all 's good, an awesome job of inspiring others with your journey, great, their love and support really, some of my fave memories, the hike, you two are getting along, my support , Caroline, tough dealing with those changes, letting me join your journey, that roadtrip this past weekend, a lot of things happening to me, a gorgeous song , Caroline, a gorgeous photo , Caroline, our friendship, the tip , Caroline, great - self - acceptance and finding support, that painting, a talent show for the kids, Your art, It was inspiring and emotional, a cool experience - so much love and support , amazing",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie go camping in July?",
+          "category": 2,
+          "answer": "two weekends before 17 July 2023",
+          "prediction": "13 September 2023",
+          "f1": 0.2222222222222222
+        },
+        {
+          "question": "When did Caroline join a mentorship program?",
+          "category": 2,
+          "answer": "The weekend before 17 July 2023",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Melanie paint recently?",
+          "category": 1,
+          "answer": "sunset",
+          "prediction": "the whole gang",
+          "f1": 0.0
+        },
+        {
+          "question": "What activities has Melanie done with her family?",
+          "category": 1,
+          "answer": "Pottery, painting, camping, museum, swimming, hiking",
+          "prediction": "what a beautiful moment, your love for your family, people to lean on , Melanie, a great picture, so peaceful and calming, these moments, that photo, your son is okay, it helped ya , Melanie",
+          "f1": 0.0
+        },
+        {
+          "question": "In what ways is Caroline participating in the LGBTQ community?",
+          "category": 1,
+          "answer": "Joining activist group, going to pride parades, participating in an art show, mentoring program",
+          "prediction": "you found a supportive community, great news ,, Connected LGBTQ Activists ', the LGBTQ+ community, the chance to volunteer at an LGBTQ+ youth center, an LGBTQ center, seeing my work make a difference for the LGBTQ+ community, you two are getting along, my transgender journey and encouraged students, all kinds of people investing in positive changes, awesome, LGBTQ rights, an LGBTQ support group, a great time, all 's good, you got the support, tough dealing with those changes, an LGBTQ conference, my ambitions, great, supportive people, a transgender conference, how far LGBTQ rights have come, an LGBTQ art show, the hike, my support , Caroline, an LGBTQ+ counseling workshop, letting me join your journey, an awesome job of inspiring others with your journey, Conversations about gender identity and inclusion, a new LGBTQ activist group last Tues, the courage and strength of the trans community, a gorgeous song , Caroline, an awesome time, me think how much work we still have to do for LGBTQ rights, an LGBTQ+ pride parade, a lot of things happening to me, our friendship, their love and support really, great - self - acceptance and finding support, a gorgeous photo , Caroline, a mentorship program for LGBTQ youth, that roadtrip this past weekend, the tip , Caroline, different therapeutic methods and how to best work with trans people, community, trans rights, some of my fave memories",
+          "f1": 0.4682539682539683
+        },
+        {
+          "question": "How many times has Melanie gone to the beach in 2023?",
+          "category": 1,
+          "answer": "2",
+          "prediction": "19",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline join a new activist group?",
+          "category": 2,
+          "answer": "The Tuesday before 20 July 2023",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "Would Melanie be more interested in going to a national park or a theme park?",
+          "category": 3,
+          "answer": "National park; she likes the outdoors",
+          "prediction": "Yes",
+          "f1": 0.0
+        },
+        {
+          "question": "What kind of art does Caroline make?",
+          "category": 1,
+          "answer": "abstract art",
+          "prediction": "me want to use my story to help others too",
+          "f1": 0.0
+        },
+        {
+          "question": "When is Melanie's daughter's birthday?",
+          "category": 2,
+          "answer": "13 August",
+          "prediction": "14 August 2023",
+          "f1": 0.4
+        },
+        {
+          "question": "When did Caroline attend a pride parade in August?",
+          "category": 2,
+          "answer": "The Friday before 14 August 2023",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "Would Melanie be considered an ally to the transgender community?",
+          "category": 3,
+          "answer": "Yes, she is supportive",
+          "prediction": "Yes",
+          "f1": 0.4
+        },
+        {
+          "question": "Who supports Caroline when she has a negative experience?",
+          "category": 1,
+          "answer": "Her mentors, family, and friends",
+          "prediction": "Caroline, Melanie",
+          "f1": 0.0
+        },
+        {
+          "question": "What types of pottery have Melanie and her kids made?",
+          "category": 1,
+          "answer": "bowls, cup",
+          "prediction": "a big fan of pottery - the creativity and skills, a picture, so relaxing and creative, my pottery creation in the picture, I ' m a big fan of pottery - the creativity and skills, a break, a huge part of my life , not just a hobby, my kids, a pottery class, those bowls, so excited about get their hands dirty and make something with clay, our own pots, what a beautiful moment, my real muse : painting and pottery, a great picture",
+          "f1": 0.3333333333333333
+        },
+        {
+          "question": "When did Caroline and Melanie go to a pride fesetival together?",
+          "category": 2,
+          "answer": "2022",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What would Caroline's political leaning likely be?",
+          "category": 3,
+          "answer": "Liberal",
+          "prediction": "Yes",
+          "f1": 0.0
+        },
+        {
+          "question": "What has Melanie painted?",
+          "category": 1,
+          "answer": "Horse, sunset, sunrise",
+          "prediction": "what a beautiful moment, a great picture, that photo, the painting to have a serene vibe while still having lots of vibrant colors, the blue vase, especially nature - inspired ones, that painting, This painting, people to lean on , Melanie, a fun way to express my feelings and get creative, so peaceful and calming, an abstract painting, another painting like our last one, another painting of yours, so cool like that, Caroline, the painting, me express my feelings and be creative, a picture",
+          "f1": 0.0
+        },
+        {
+          "question": "What are Melanie's pets' names?",
+          "category": 1,
+          "answer": "Oliver, Luna, Bailey",
+          "prediction": "what a beautiful moment, a great picture, so peaceful and calming, that photo, people to lean on , Melanie, another cat named Bailey too, your love for your family, it helped ya , Melanie, your son is okay, the house",
+          "f1": 0.11111111111111112
+        },
+        {
+          "question": "When did Caroline apply to adoption agencies?",
+          "category": 2,
+          "answer": "The week of 23 August 2023",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline draw a self-portrait?",
+          "category": 2,
+          "answer": "The week before 23 August 2023",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What subject have Caroline and Melanie both painted?",
+          "category": 1,
+          "answer": "Sunsets",
+          "prediction": "Your art, a gorgeous photo , Caroline, some of my fave memories, that painting, awesome, what a beautiful moment, great, great news ,, the journey of acceptance, a great picture, a gorgeous song , Caroline, all 's good, some art, me express my feelings and explore my gender identity, you two are getting along, a great outlet for expressing yourself, an awesome time, this painting, great for expressing myself, someone drawing on the ground, tough dealing with those changes, pottery, such cool designs, that photo, how kids show their personalities through art, art, me explore my identity and be true to myself, that roadtrip this past weekend",
+          "f1": 0.0
+        },
+        {
+          "question": "What symbols are important to Caroline?",
+          "category": 1,
+          "answer": "Rainbow flag, transgender symbol",
+          "prediction": "great news ,, awesome, an awesome time, all 's good, my support , Caroline, some of my fave memories, you got the support, great, our friendship, tough dealing with those changes, you found a supportive community, an awesome job of inspiring others with your journey, the tip , Caroline, you two are getting along, a gorgeous photo , Caroline, their love and support really, the hike, that painting, a symbol of togetherness, Your art, a gorgeous song , Caroline, letting me join your journey, a lot of things happening to me, freedom and pride, that roadtrip this past weekend",
+          "f1": 0.2
+        },
+        {
+          "question": "When did Caroline encounter people on a hike and have a negative experience?",
+          "category": 2,
+          "answer": "The week before 25 August 2023",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie make a plate in pottery class?",
+          "category": 2,
+          "answer": "24 August 2023",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "Would Caroline be considered religious?",
+          "category": 3,
+          "answer": "Somewhat, but not extremely religious",
+          "prediction": "Yes",
+          "f1": 0.0
+        },
+        {
+          "question": "What instruments does Melanie play?",
+          "category": 1,
+          "answer": "clarinet and violin",
+          "prediction": "what a beautiful moment, a great picture, the clarinet, so peaceful and calming, people to lean on , Melanie, that photo",
+          "f1": 0.6666666666666666
+        },
+        {
+          "question": "What musical artists/bands has Melanie seen?",
+          "category": 1,
+          "answer": "Summer Sounds, Matt Patterson",
+          "prediction": "what a beautiful moment, a great picture, that photo, people to lean on , Melanie",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie go to the park?",
+          "category": 2,
+          "answer": "27 August 2023",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "When is Caroline's youth center putting on a talent show?",
+          "category": 2,
+          "answer": "September 2023",
+          "prediction": "28 August 2023",
+          "f1": 0.4
+        },
+        {
+          "question": "Would Melanie likely enjoy the song \"The Four Seasons\" by Vivaldi?",
+          "category": 3,
+          "answer": "Yes; it's classical music",
+          "prediction": "Yes",
+          "f1": 1.0
+        },
+        {
+          "question": "What are some changes Caroline has faced during her transition journey?",
+          "category": 1,
+          "answer": "Changes to her body, losing unsupportive friends",
+          "prediction": "tough dealing with those changes, great news ,, an awesome time, awesome, letting me join your journey, you found a supportive community, all 's good, an awesome job of inspiring others with your journey, you two are getting along, great, the hike, a lot of things happening to me, you got the support, that roadtrip this past weekend, a gorgeous song , Caroline, their love and support really, some of my fave memories, great - self - acceptance and finding support, our friendship, a gorgeous photo , Caroline, the tip , Caroline, my support , Caroline, that painting, Your art",
+          "f1": 0.11111111111111112
+        },
+        {
+          "question": "What does Melanie do with her family on hikes?",
+          "category": 1,
+          "answer": "Roast marshmallows, tell stories",
+          "prediction": "others",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline go biking with friends?",
+          "category": 2,
+          "answer": "The weekend before 13 September 2023",
+          "prediction": "23 August 2023",
+          "f1": 0.25
+        },
+        {
+          "question": "How long has Melanie been practicing art?",
+          "category": 2,
+          "answer": "Since 2016",
+          "prediction": "3 years",
+          "f1": 0.0
+        },
+        {
+          "question": "What personality traits might Melanie say Caroline has?",
+          "category": 3,
+          "answer": "Thoughtful, authentic, driven",
+          "prediction": "great news ,, Caroline, what a beautiful moment, you two are getting along, tough dealing with those changes, a gorgeous photo , Caroline, a gorgeous song , Caroline, awesome, a lot of things happening to me, great, all 's good, you found a supportive community, our friendship, people to lean on , Melanie, some of my fave memories, you got the support, the hike, that painting, their love and support really, an awesome job of inspiring others with your journey, a great picture, so peaceful and calming, my support , Caroline, great - self - acceptance and finding support, Your art",
+          "f1": 0.0
+        },
+        {
+          "question": "What transgender-specific events has Caroline attended?",
+          "category": 1,
+          "answer": "Poetry reading, conference",
+          "prediction": "great news ,, a transgender conference, an awesome time, you found a supportive community, you two are getting along, all 's good, The transgender stories, awesome, my transgender journey and encouraged students, you got the support, the hike, an LGBTQ center, a great time, tough dealing with those changes, great, that roadtrip this past weekend, a lot of things happening to me, some of my fave memories, the chance to volunteer at an LGBTQ+ youth center, different therapeutic methods and how to best work with trans people, Conversations about gender identity and inclusion, a transgender poetry reading where transgender people shared their stories through poetry, a really inspiring true story about a trans girl and her family, an LGBTQ conference, an awesome job of inspiring others with your journey, their love and support really, letting me join your journey, my support , Caroline, our friendship, a gorgeous photo , Caroline, an LGBTQ+ pride parade, a gorgeous song , Caroline, that painting, it to show my own journey as a transgender woman and how we should accept growth and change, an LGBTQ+ counseling workshop, others share and celebrate their identities, a new LGBTQ activist group last Tues, an LGBTQ support group, the tip , Caroline",
+          "f1": 0.48717948717948717
+        },
+        {
+          "question": "What book did Melanie read from Caroline's suggestion?",
+          "category": 1,
+          "answer": "\"Becoming Nicole\"",
+          "prediction": "what a beautiful moment, a gorgeous song , Caroline, great news ,, great, awesome, some of my fave memories, all 's good, your childhood, you two are getting along, tough dealing with those changes, our friendship, the tip , Caroline, 's spread love and understanding, a great picture, people to lean on , Melanie, great - self - acceptance and finding support, that roadtrip this past weekend, an awesome time, that painting, a gorgeous photo , Caroline, letting me join your journey, so peaceful and calming, the hike, you got the support, a lot of things happening to me",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie's friend adopt a child?",
+          "category": 2,
+          "answer": "2022",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie get hurt?",
+          "category": 2,
+          "answer": "September 2023",
+          "prediction": "13 October 2023",
+          "f1": 0.4
+        },
+        {
+          "question": "When did Melanie's family go on a roadtrip?",
+          "category": 2,
+          "answer": "The weekend before 20 October 2023",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "How many children does Melanie have?",
+          "category": 1,
+          "answer": "3",
+          "prediction": "the great work",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie go on a hike after the roadtrip?",
+          "category": 1,
+          "answer": "19 October 2023",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "Would Melanie go on another roadtrip soon?",
+          "category": 3,
+          "answer": "Likely no; since this one went badly",
+          "prediction": "Yes",
+          "f1": 0.0
+        },
+        {
+          "question": "What items has Melanie bought?",
+          "category": 1,
+          "answer": "Figurines, shoes",
+          "prediction": "what a beautiful moment, a great picture, that photo, people to lean on , Melanie, those bowls",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Caroline pass the adoption interview?",
+          "category": 2,
+          "answer": "The Friday before 22 October 2023",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "When did Melanie buy the figurines?",
+          "category": 2,
+          "answer": "21 October 2023",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "Would Caroline want to move back to her home country soon?",
+          "category": 3,
+          "answer": "No; she's in the process of adopting children.",
+          "prediction": "Yes, great news ,",
+          "f1": 0.0
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "category": 4,
+          "answer": "mental health",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Melanie realize after the charity race?",
+          "category": 4,
+          "answer": "self-care is important",
+          "prediction": "self - care is really important",
+          "f1": 0.5
+        },
+        {
+          "question": "How does Melanie prioritize self-care?",
+          "category": 4,
+          "answer": "by carving out some me-time each day for activities like running, reading, or playing the violin",
+          "prediction": "a long time",
+          "f1": 0.0
+        },
+        {
+          "question": "What are Caroline's plans for the summer?",
+          "category": 4,
+          "answer": "researching adoption agencies",
+          "prediction": "great news ,, awesome, an awesome time, great, all 's good, that roadtrip this past weekend, this summer, a gorgeous song , Caroline, tough dealing with those changes, the hike, you two are getting along, some of my fave memories, a gorgeous photo , Caroline, letting me join your journey, you found a supportive community, an awesome job of inspiring others with your journey, my support , Caroline, their love and support really, you got the support, the tip , Caroline, a lot of things happening to me, our friendship, that painting, Your art",
+          "f1": 0.0
+        },
+        {
+          "question": "What type of individuals does the adoption agency Caroline is considering support?",
+          "category": 4,
+          "answer": "LGBTQ+ individuals",
+          "prediction": "adoption agencies, an adoption agency lawyer, a dream to have a family and give a loving home to kids who need it, lots of help from this adoption advice / assistance group I attended, your research, you found a supportive community, great news ,, the adoption agency interviews, adoption advice, their love and support really, you got the support, a council meeting about adoption, all 's good, a dream to adopt and provide a safe , loving home for kids who need one, my support , Caroline, one, a way of giving back and showing love and acceptance, you two are getting along, tough dealing with those changes, an adoption agency, great - self - acceptance and finding support, awesome, me even more determined to adopt",
+          "f1": 0.0
+        },
+        {
+          "question": "Why did Caroline choose the adoption agency?",
+          "category": 4,
+          "answer": "because of their inclusivity and support for LGBTQ+ individuals",
+          "prediction": "my own family",
+          "f1": 0.0
+        },
+        {
+          "question": "What is Caroline excited about in the adoption process?",
+          "category": 4,
+          "answer": "creating a family for kids who need one",
+          "prediction": "your research",
+          "f1": 0.0
+        },
+        {
+          "question": "What does Melanie think about Caroline's decision to adopt?",
+          "category": 4,
+          "answer": "she thinks Caroline is doing something amazing and will be an awesome mom",
+          "prediction": "the support of those close to me",
+          "f1": 0.0
+        },
+        {
+          "question": "How long have Mel and her husband been married?",
+          "category": 4,
+          "answer": "Mel and her husband have been married for 5 years.",
+          "prediction": "2 years and 11 months",
+          "f1": 0.15384615384615383
+        },
+        {
+          "question": "What does Caroline's necklace symbolize?",
+          "category": 4,
+          "answer": "love, faith, and strength",
+          "prediction": "a gift from my grandma in my home country , Sweden, freedom and pride",
+          "f1": 0.0
+        },
+        {
+          "question": "What country is Caroline's grandma from?",
+          "category": 4,
+          "answer": "Sweden",
+          "prediction": "my own family",
+          "f1": 0.0
+        },
+        {
+          "question": "What was grandma's gift to Caroline?",
+          "category": 4,
+          "answer": "necklace",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What is Melanie's hand-painted bowl a reminder of?",
+          "category": 4,
+          "answer": "art and self-expression",
+          "prediction": "the whole gang",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Melanie and her family do while camping?",
+          "category": 4,
+          "answer": "explored nature, roasted marshmallows, and went on a hike",
+          "prediction": "others",
+          "f1": 0.0
+        },
+        {
+          "question": "What kind of counseling and mental health services is Caroline interested in pursuing?",
+          "category": 4,
+          "answer": "working with trans people, helping them accept themselves and supporting their mental health",
+          "prediction": "your research",
+          "f1": 0.0
+        },
+        {
+          "question": "What workshop did Caroline attend recently?",
+          "category": 4,
+          "answer": "LGBTQ+ counseling workshop",
+          "prediction": "your research",
+          "f1": 0.0
+        },
+        {
+          "question": "What was discussed in the LGBTQ+ counseling workshop?",
+          "category": 4,
+          "answer": "therapeutic methods and how to best work with trans people",
+          "prediction": "Caroline, I",
+          "f1": 0.0
+        },
+        {
+          "question": "What motivated Caroline to pursue counseling?",
+          "category": 4,
+          "answer": "her own journey and the support she received, and how counseling improved her life",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What kind of place does Caroline want to create for people?",
+          "category": 4,
+          "answer": "a safe and inviting place for people to grow",
+          "prediction": "a great night featuring LGBTQ artists and their awesome talents",
+          "f1": 0.0
+        },
+        {
+          "question": "Did Melanie make the black and white bowl in the photo?",
+          "category": 4,
+          "answer": "Yes",
+          "prediction": "No",
+          "f1": 0.0
+        },
+        {
+          "question": "What kind of books does Caroline have in her library?",
+          "category": 4,
+          "answer": "kids' books - classics, stories from different cultures, educational books",
+          "prediction": "awesome, great, great news ,, some of my fave memories, a library, a gorgeous song , Caroline, all 's good, your childhood, a gorgeous photo , Caroline, that painting, an awesome time, our friendship, you two are getting along, lots of kids ' books , classics , stories from different cultures , educational books , all of that, a lot of things happening to me, the hike, you found a supportive community, the tip , Caroline, Your art, tough dealing with those changes, great - self - acceptance and finding support, that roadtrip this past weekend, their love and support really",
+          "f1": 0.20224719101123595
+        },
+        {
+          "question": "What was Melanie's favorite book from her childhood?",
+          "category": 4,
+          "answer": "\"Charlotte's Web\"",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What book did Caroline recommend to Melanie?",
+          "category": 4,
+          "answer": "\"Becoming Nicole\"",
+          "prediction": "the support of those close to me",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Caroline take away from the book \"Becoming Nicole\"?",
+          "category": 4,
+          "answer": "Lessons on self-acceptance and finding support",
+          "prediction": "I can be me without fear and having the courage to transition was the best part",
+          "f1": 0.0
+        },
+        {
+          "question": "What are the new shoes that Melanie got used for?",
+          "category": 4,
+          "answer": "Running",
+          "prediction": "what a beautiful moment, a great picture, some new shoes, that photo, people to lean on , Melanie",
+          "f1": 0.0
+        },
+        {
+          "question": "What is Melanie's reason for getting into running?",
+          "category": 4,
+          "answer": "To de-stress and clear her mind",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What does Melanie say running has been great for?",
+          "category": 4,
+          "answer": "Her mental health",
+          "prediction": "your concern",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Mel and her kids make during the pottery workshop?",
+          "category": 4,
+          "answer": "pots",
+          "prediction": "a picture, a break, my kids, a big fan of pottery - the creativity and skills, so relaxing and creative, my pottery creation in the picture, I ' m a big fan of pottery - the creativity and skills, so excited about get their hands dirty and make something with clay, a pottery class, a huge part of my life , not just a hobby, our own pots, that painting, The kids, my real muse : painting and pottery",
+          "f1": 0.03389830508474576
+        },
+        {
+          "question": "What kind of pot did Mel and her kids make with clay?",
+          "category": 4,
+          "answer": "a cup with a dog face on it",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What creative project do Mel and her kids do together besides pottery?",
+          "category": 4,
+          "answer": "painting",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Mel and her kids paint in their latest project in July 2023?",
+          "category": 4,
+          "answer": "a sunset with a palm tree",
+          "prediction": "that painting, The kids, another painting like our last one, that sign, Caroline, especially nature - inspired ones, the painting, so excited about get their hands dirty and make something with clay",
+          "f1": 0.0625
+        },
+        {
+          "question": "What did Caroline see at the council meeting for adoption?",
+          "category": 4,
+          "answer": "many people wanting to create loving homes for children in need",
+          "prediction": "an adoption agency lawyer",
+          "f1": 0.0
+        },
+        {
+          "question": "What do sunflowers represent according to Caroline?",
+          "category": 4,
+          "answer": "warmth and happiness",
+          "prediction": "warmth and happiness, a gorgeous photo , Caroline, a symbol of togetherness, great news ,, awesome, a gorgeous song , Caroline, an awesome time, some of my fave memories",
+          "f1": 0.17391304347826084
+        },
+        {
+          "question": "Why are flowers important to Melanie?",
+          "category": 4,
+          "answer": "They remind her to appreciate the small moments and were a part of her wedding decor",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What inspired Caroline's painting for the art show?",
+          "category": 4,
+          "answer": "visiting an LGBTQ center and wanting to capture unity and strength",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "How often does Melanie go to the beach with her kids?",
+          "category": 4,
+          "answer": "once or twice a year",
+          "prediction": "I was that resilient too",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Melanie and her family see during their camping trip last year?",
+          "category": 4,
+          "answer": "Perseid meteor shower",
+          "prediction": "your show - the LGBTQ community",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Melanie feel while watching the meteor shower?",
+          "category": 4,
+          "answer": "in awe of the universe",
+          "prediction": "great",
+          "f1": 0.0
+        },
+        {
+          "question": "Whose birthday did Melanie celebrate recently?",
+          "category": 4,
+          "answer": "Melanie's daughter",
+          "prediction": "music , joy and the warm summer breeze, Melanie",
+          "f1": 0.25
+        },
+        {
+          "question": "Who performed at the concert at Melanie's daughter's birthday?",
+          "category": 4,
+          "answer": "Matt Patterson",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "Why did Melanie choose to use colors and patterns in her pottery project?",
+          "category": 4,
+          "answer": "She wanted to catch the eye and make people smile.",
+          "prediction": "the whole gang",
+          "f1": 0.0
+        },
+        {
+          "question": "What pet does Caroline have?",
+          "category": 4,
+          "answer": "guinea pig",
+          "prediction": "references , financial info and medical checks",
+          "f1": 0.0
+        },
+        {
+          "question": "What pets does Melanie have?",
+          "category": 4,
+          "answer": "Two cats and a dog",
+          "prediction": "what a beautiful moment, a great picture, so peaceful and calming, that photo, people to lean on , Melanie, awesome for joy and comfort, another cat named Bailey too, the house, a pup and a kitten, your love for your family, it helped ya , Melanie",
+          "f1": 0.05128205128205128
+        },
+        {
+          "question": "Where did Oliver hide his bone once?",
+          "category": 4,
+          "answer": "In Melanie's slipper",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.2
+        },
+        {
+          "question": "What activity did Caroline used to do with her dad?",
+          "category": 4,
+          "answer": "Horseback riding",
+          "prediction": "me get my emotions out",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Caroline make for a local church?",
+          "category": 4,
+          "answer": "a stained glass window",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Caroline find in her neighborhood during her walk?",
+          "category": 4,
+          "answer": "a rainbow sidewalk",
+          "prediction": "your pottery project",
+          "f1": 0.0
+        },
+        {
+          "question": "Which song motivates Caroline to be courageous?",
+          "category": 4,
+          "answer": "Brave by Sara Bareilles",
+          "prediction": "those memories",
+          "f1": 0.0
+        },
+        {
+          "question": "Which  classical musicians does Melanie enjoy listening to?",
+          "category": 4,
+          "answer": "Bach and Mozart",
+          "prediction": "a fan of both classical like Bach and Mozart , as well as modern music like Ed Sheeran 's \" Perfect, what a beautiful moment, the clarinet, my daughter 's birthday, so peaceful and calming, some time",
+          "f1": 0.125
+        },
+        {
+          "question": "Who is Melanie a fan of in terms of modern music?",
+          "category": 4,
+          "answer": "Ed Sheeran",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "How long has Melanie been creating art?",
+          "category": 4,
+          "answer": "7 years",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What precautionary sign did Melanie see at the café?",
+          "category": 4,
+          "answer": "A sign stating that someone is not being able to leave",
+          "prediction": "your show - the LGBTQ community",
+          "f1": 0.0
+        },
+        {
+          "question": "What advice does Caroline give for getting started with adoption?",
+          "category": 4,
+          "answer": "Do research, find an adoption agency or lawyer, gather necessary documents, and prepare emotionally.",
+          "prediction": "the support of those close to me",
+          "f1": 0.0
+        },
+        {
+          "question": "What setback did Melanie face in October 2023?",
+          "category": 4,
+          "answer": "She got hurt and had to take a break from pottery.",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What does Melanie do to keep herself busy during her pottery break?",
+          "category": 4,
+          "answer": "Read a book and paint.",
+          "prediction": "others",
+          "f1": 0.0
+        },
+        {
+          "question": "What painting did Melanie show to Caroline on October 13, 2023?",
+          "category": 4,
+          "answer": "A painting inspired by sunsets with a pink sky.",
+          "prediction": "your concern",
+          "f1": 0.0
+        },
+        {
+          "question": "What kind of painting did Caroline share with Melanie on October 13, 2023?",
+          "category": 4,
+          "answer": "An abstract painting with blue streaks on a wall.",
+          "prediction": "me get my emotions out",
+          "f1": 0.0
+        },
+        {
+          "question": "What was the poetry reading that Caroline attended about?",
+          "category": 4,
+          "answer": "It was a transgender poetry reading where transgender people shared their stories.",
+          "prediction": "I can be me without fear and having the courage to transition was the best part",
+          "f1": 0.08333333333333334
+        },
+        {
+          "question": "What did the posters at the poetry reading say?",
+          "category": 4,
+          "answer": "\"Trans Lives Matter\"",
+          "prediction": "a transgender poetry reading where transgender people shared their stories through poetry, The posters, a poetry reading last Friday, Those posters, my love of reading even more, things that are hard to put into words, my paintings",
+          "f1": 0.0
+        },
+        {
+          "question": "What does Caroline's drawing symbolize for her?",
+          "category": 4,
+          "answer": "Freedom and being true to herself.",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "How do Melanie and Caroline describe their journey through life together?",
+          "category": 4,
+          "answer": "An ongoing adventure of learning and growing.",
+          "prediction": "your concern",
+          "f1": 0.0
+        },
+        {
+          "question": "What happened to Melanie's son on their road trip?",
+          "category": 4,
+          "answer": "He got into an accident",
+          "prediction": "Melanie, Caroline, your son",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Melanie's son handle the accident?",
+          "category": 4,
+          "answer": "He was scared but reassured by his family",
+          "prediction": "the tip , Caroline",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Melanie feel about her family after the accident?",
+          "category": 4,
+          "answer": "They are important and mean the world to her",
+          "prediction": "great",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Melanie's children handle the accident?",
+          "category": 4,
+          "answer": "They were scared but resilient",
+          "prediction": "the tip , Caroline",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Melanie feel after the accident?",
+          "category": 4,
+          "answer": "Grateful and thankful for her family",
+          "prediction": "great",
+          "f1": 0.0
+        },
+        {
+          "question": "What was Melanie's reaction to her children enjoying the Grand Canyon?",
+          "category": 4,
+          "answer": "She was happy and thankful",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 0.0
+        },
+        {
+          "question": "What do Melanie's family give her?",
+          "category": 4,
+          "answer": "Strength and motivation",
+          "prediction": "the tip , Caroline",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Melanie feel about her family supporting her?",
+          "category": 4,
+          "answer": "She appreciated them a lot",
+          "prediction": "such a loving way to build a family",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Melanie do after the road trip to relax?",
+          "category": 4,
+          "answer": "Went on a nature walk or hike",
+          "prediction": "others",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Caroline realize after her charity race?",
+          "category": 5,
+          "answer": "self-care is important",
+          "prediction": "I can be me without fear and having the courage to transition was the best part",
+          "f1": 0.0
+        },
+        {
+          "question": "What are Melanie's plans for the summer with respect to adoption?",
+          "category": 5,
+          "answer": "researching adoption agencies",
+          "prediction": "Adoption, excited about in the adoption process, what a beautiful moment, your love for your family, your son is okay, so peaceful and calming",
+          "f1": 0.0
+        },
+        {
+          "question": "What type of individuals does the adoption agency Melanie is considering support?",
+          "category": 5,
+          "answer": "LGBTQ+ individuals",
+          "prediction": "Adoption, excited about in the adoption process, your love for your family",
+          "f1": 0.0
+        },
+        {
+          "question": "Why did Melanie choose the adoption agency?",
+          "category": 5,
+          "answer": "because of their inclusivity and support for LGBTQ+ individuals",
+          "prediction": "love , acceptance , and hope",
+          "f1": 0.0
+        },
+        {
+          "question": "What is Melanie excited about in her adoption process?",
+          "category": 5,
+          "answer": "creating a family for kids who need one",
+          "prediction": "the whole gang",
+          "f1": 0.0
+        },
+        {
+          "question": "What does Melanie's necklace symbolize?",
+          "category": 5,
+          "answer": "love, faith, and strength",
+          "prediction": "necklace",
+          "f1": 0.0
+        },
+        {
+          "question": "What country is Melanie's grandma from?",
+          "category": 5,
+          "answer": "Sweden",
+          "prediction": "love , acceptance , and hope",
+          "f1": 0.0
+        },
+        {
+          "question": "What was grandma's gift to Melanie?",
+          "category": 5,
+          "answer": "necklace",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 1.0
+        },
+        {
+          "question": "What was grandpa's gift to Caroline?",
+          "category": 5,
+          "answer": "necklace",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 1.0
+        },
+        {
+          "question": "What is Caroline's hand-painted bowl a reminder of?",
+          "category": 5,
+          "answer": "art and self-expression",
+          "prediction": "some other stuff with sentimental value ,, a reminder to love my authentic self, That bowl, those bowls",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Caroline and her family do while camping?",
+          "category": 5,
+          "answer": "explored nature, roasted marshmallows, and went on a hike",
+          "prediction": "me get my emotions out",
+          "f1": 0.0
+        },
+        {
+          "question": "What kind of counseling and mental health services is Melanie interested in pursuing?",
+          "category": 5,
+          "answer": "working with trans people, helping them accept themselves and supporting their mental health",
+          "prediction": "the whole gang",
+          "f1": 0.0
+        },
+        {
+          "question": "What kind of counseling workshop did Melanie attend recently?",
+          "category": 5,
+          "answer": "LGBTQ+ counseling workshop",
+          "prediction": "the whole gang",
+          "f1": 0.0
+        },
+        {
+          "question": "What motivated Melanie to pursue counseling?",
+          "category": 5,
+          "answer": "her own journey and the support she received, and how counseling improved her life",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 1.0
+        },
+        {
+          "question": "What kind of place does Melanie want to create for people?",
+          "category": 5,
+          "answer": "a safe and inviting place for people to grow",
+          "prediction": "great",
+          "f1": 0.0
+        },
+        {
+          "question": "Did Caroline make the black and white bowl in the photo?",
+          "category": 5,
+          "answer": "No",
+          "prediction": "me want to use my story to help others too",
+          "f1": 0.0
+        },
+        {
+          "question": "What are the new shoes that Caroline got used for?",
+          "category": 5,
+          "answer": "Running",
+          "prediction": "great news ,, some of my fave memories, awesome, you got the support, all 's good, an awesome time, tough dealing with those changes, great, a gorgeous photo , Caroline, the hike, that roadtrip this past weekend, the tip , Caroline",
+          "f1": 0.0
+        },
+        {
+          "question": "What is Caroline's reason for getting into running?",
+          "category": 5,
+          "answer": "To de-stress and clear her mind",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 1.0
+        },
+        {
+          "question": "What does Caroline say running has been great for?",
+          "category": 5,
+          "answer": "Her mental health",
+          "prediction": "the support of those close to me",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Melanie see at the council meeting for adoption?",
+          "category": 5,
+          "answer": "many people wanting to create loving homes for children in need",
+          "prediction": "your show - the LGBTQ community",
+          "f1": 0.0
+        },
+        {
+          "question": "What inspired Melanie's painting for the art show?",
+          "category": 5,
+          "answer": "visiting an LGBTQ center and wanting to capture unity and strength",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 1.0
+        },
+        {
+          "question": "What inspired Caroline's sculpture for the art show?",
+          "category": 5,
+          "answer": "visiting an LGBTQ center and wanting to capture unity and strength",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 1.0
+        },
+        {
+          "question": "How often does Caroline go to the beach with her kids?",
+          "category": 5,
+          "answer": "once or twice a year",
+          "prediction": "volunteering at the youth center",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Caroline and her family see during their camping trip last year?",
+          "category": 5,
+          "answer": "Perseid meteor shower",
+          "prediction": "an adoption agency lawyer",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Caroline feel while watching the meteor shower?",
+          "category": 5,
+          "answer": "in awe of the universe",
+          "prediction": "who we are and be content",
+          "f1": 0.0
+        },
+        {
+          "question": "Why did Caroline choose to use colors and patterns in her pottery project?",
+          "category": 5,
+          "answer": "She wanted to catch the eye and make people smile.",
+          "prediction": "those memories",
+          "f1": 0.0
+        },
+        {
+          "question": "Is Oscar Melanie's pet?",
+          "category": 5,
+          "answer": "No",
+          "prediction": "the whole gang",
+          "f1": 0.0
+        },
+        {
+          "question": "Where did Oscar hide his bone once?",
+          "category": 5,
+          "answer": "In Melanie's slipper",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 1.0
+        },
+        {
+          "question": "What activity did Melanie used to do with her dad?",
+          "category": 5,
+          "answer": "Horseback riding",
+          "prediction": "others",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Melanie make for a local church?",
+          "category": 5,
+          "answer": "a stained glass window",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 1.0
+        },
+        {
+          "question": "What did Melanie find in her neighborhood during her walk?",
+          "category": 5,
+          "answer": "a rainbow sidewalk",
+          "prediction": "your show - the LGBTQ community",
+          "f1": 0.0
+        },
+        {
+          "question": "Which song motivates Melanie to be courageous?",
+          "category": 5,
+          "answer": "Brave by Sara Bareilles",
+          "prediction": "the whole gang",
+          "f1": 0.0
+        },
+        {
+          "question": "What type of instrument does Caroline play?",
+          "category": 5,
+          "answer": "clarinet and violin",
+          "prediction": "volunteering at the youth center",
+          "f1": 0.0
+        },
+        {
+          "question": "Which classical musicians does Caroline enjoy listening to?",
+          "category": 5,
+          "answer": "Bach and Mozart",
+          "prediction": "awesome, great, some of my fave memories, a gorgeous song , Caroline, all 's good, their love and support really, that painting, great news ,, you two are getting along, an awesome time, our friendship, a lot of things happening to me, you got the support, letting me join your journey, that roadtrip this past weekend, an awesome job of inspiring others with your journey, you found a supportive community, Your art, my support , Caroline, the hike, a gorgeous photo , Caroline, tough dealing with those changes",
+          "f1": 0.0
+        },
+        {
+          "question": "Who is Caroline a fan of in terms of modern music?",
+          "category": 5,
+          "answer": "Ed Sheeran",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 1.0
+        },
+        {
+          "question": "What precautionary sign did Caroline see at the café?",
+          "category": 5,
+          "answer": "A sign stating that someone is not being able to leave",
+          "prediction": "your pottery project",
+          "f1": 0.0
+        },
+        {
+          "question": "What setback did Caroline face recently?",
+          "category": 5,
+          "answer": "She got hurt and had to take a break from pottery.",
+          "prediction": "your research",
+          "f1": 0.0
+        },
+        {
+          "question": "What does Caroline do to keep herself busy during her pottery break?",
+          "category": 5,
+          "answer": "Read a book and paint.",
+          "prediction": "me get my emotions out",
+          "f1": 0.0
+        },
+        {
+          "question": "What was the poetry reading that Melanie attended about?",
+          "category": 5,
+          "answer": "It was a transgender poetry reading where transgender people shared their stories.",
+          "prediction": "self - care is really important",
+          "f1": 0.0
+        },
+        {
+          "question": "What happened to Caroline's son on their road trip?",
+          "category": 5,
+          "answer": "He got into an accident",
+          "prediction": "Caroline, Melanie, that roadtrip this past weekend",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Caroline's son handle the accident?",
+          "category": 5,
+          "answer": "He was scared but reassured by his family",
+          "prediction": "the support and encouragement",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Caroline feel about her family after the accident?",
+          "category": 5,
+          "answer": "They are important and mean the world to her",
+          "prediction": "This information is not mentioned in the conversation.",
+          "f1": 1.0
+        },
+        {
+          "question": "How did Caroline's children handle the accident?",
+          "category": 5,
+          "answer": "They were scared but resilient",
+          "prediction": "the support and encouragement",
+          "f1": 0.0
+        },
+        {
+          "question": "How did Caroline feel after the accident?",
+          "category": 5,
+          "answer": "Grateful and thankful for her family",
+          "prediction": "who we are and be content",
+          "f1": 0.0
+        },
+        {
+          "question": "What was Caroline's reaction to her children enjoying the Grand Canyon?",
+          "category": 5,
+          "answer": "She was happy and thankful",
+          "prediction": "their reactions",
+          "f1": 0.0
+        },
+        {
+          "question": "What did Caroline do after the road trip to relax?",
+          "category": 5,
+          "answer": "Went on a nature walk or hike",
+          "prediction": "me get my emotions out",
+          "f1": 0.0
+        },
+        {
+          "question": "What does Caroline love most about camping with her family?",
+          "category": 5,
+          "answer": "Being present and bonding with her family",
+          "prediction": "it teaches me to accept the beauty of imperfections",
+          "f1": 0.0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+story_id: 134
+story_name: Car Dying in the Middle of Winter
+category: Daily Life
+description: User's car dies and they navigate buying a used replacement.
+duration_simulated: 2 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1 Monday
+  user_input: My 2009 Honda Civic finally died this morning. Transmission. My mechanic Dario at Park Auto
+    said repair would cost more than the car is worth.
+  expected_stores:
+  - 2009 Honda Civic
+  - transmission
+  - Dario
+  - Park Auto
+  expected_adaptation:
+    emotion_detected: stressed
+    warmth_direction: increase
+- batch: 2
+  time: Week 1 Wednesday
+  user_input: My brother Miguel and I spent the day looking at used cars. Found a 2018 Toyota Corolla
+    for 14800 at a dealer called Valley Motors.
+  expected_stores:
+  - Miguel
+  - brother
+  - 2018 Toyota Corolla
+  - '14800'
+  - Valley Motors
+- batch: 3
+  time: Week 1 Friday
+  user_input: What's the tallest land animal?
+- batch: 4
+  time: Week 2 Monday
+  user_input: Miguel and I test drove the Corolla. It's clean — 38k miles, one previous owner. Dario inspected
+    it and gave it a thumbs up.
+  expected_stores:
+  - Miguel
+  - Corolla
+  - 38k miles
+  - one previous owner
+  - Dario
+- batch: 5
+  time: Week 2 Thursday
+  user_input: Bought the Corolla. Dealer's finance manager Raven Kozlov got me a 5.2 percent loan through
+    USAA. Monthly payment 285 dollars.
+  expected_stores:
+  - Raven Kozlov
+  - 5.2 percent
+  - USAA
+  - 285 dollars
+- batch: 6
+  time: Week 2 Saturday
+  user_input: First full day with the new car. Miguel and I drove to Point Reyes to celebrate. Even Dario
+    said it's the best deal he's seen all year.
+  expected_stores:
+  - Miguel
+  - Point Reyes
+  - Dario
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+questions:
+- question_id: 134_q1
+  question: Who is my mechanic?
+  expected_contains:
+  - Dario
+- question_id: 134_q2
+  question: Where is his shop?
+  expected_contains:
+  - Park Auto
+- question_id: 134_q3
+  question: Who helped me car shop?
+  expected_contains:
+  - Miguel
+- question_id: 134_q4
+  question: What car did I buy?
+  expected_contains:
+  - Corolla
+- question_id: 134_q5
+  question: Who is my finance manager?
+  expected_contains:
+  - Raven Kozlov
+- question_id: 134_q6
+  question: What is my monthly payment?
+  expected_contains:
+  - '285'
+- question_id: 134_q7
+  question: Did I mention 2009 Honda Civic?
+  expected_contains:
+  - 2009 Honda Civic
+- question_id: 134_q8
+  question: Did I mention transmission?
+  expected_contains:
+  - transmission

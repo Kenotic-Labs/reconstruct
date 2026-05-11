@@ -1,0 +1,82 @@
+story_id: 249
+story_name: Cross-Country Move With Kids
+category: Life Events
+description: User moves her family of five across the country.
+duration_simulated: 2 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: We're moving from LA to Charlotte. My husband Teodor got a job at Bank of America. Our three
+    kids Aneta, Petra, and Miko are upset about leaving their schools.
+  expected_stores:
+  - LA
+  - Charlotte
+  - Teodor
+  - husband
+  - Bank of America
+  - Aneta
+  - Petra
+  - Miko
+- batch: 2
+  time: Week 2
+  user_input: Hired movers — Atlas Van Lines for 14500 dollars. My mom Simone is flying in to help pack.
+  expected_stores:
+  - Atlas Van Lines
+  - '14500'
+  - Simone
+  - mom
+- batch: 3
+  time: Week 4
+  user_input: What year did the Civil War end?
+- batch: 4
+  time: Week 6
+  user_input: Drove cross country in 5 days. Teodor and I split driving. The kids fought in the backseat
+    for a thousand miles straight.
+  expected_stores:
+  - 5 days
+  - Teodor
+- batch: 5
+  time: Week 8
+  user_input: Settled in Charlotte. Aneta is enrolled at Providence High, Petra at Carmel Middle, Miko
+    in first grade at Elon Park Elementary. Simone stayed two weeks to help.
+  expected_stores:
+  - Charlotte
+  - Aneta
+  - Providence High
+  - Petra
+  - Carmel Middle
+  - Miko
+  - Elon Park Elementary
+  - Simone
+questions:
+- question_id: 249_q1
+  question: Who is my husband?
+  expected_contains:
+  - Teodor
+- question_id: 249_q2
+  question: Where did we move to?
+  expected_contains:
+  - Charlotte
+- question_id: 249_q3
+  question: Who are my kids?
+  expected_contains:
+  - Aneta
+  - Petra
+  - Miko
+- question_id: 249_q4
+  question: Who is my mom?
+  expected_contains:
+  - Simone
+- question_id: 249_q5
+  question: Where does Aneta go to school?
+  expected_contains:
+  - Providence
+- question_id: 249_q6
+  question: Did I mention LA?
+  expected_contains:
+  - LA
+- question_id: 249_q7
+  question: Did I mention husband?
+  expected_contains:
+  - husband

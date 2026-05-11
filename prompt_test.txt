@@ -1,0 +1,25 @@
+Fix grammatical errors in this sentence:      -> It's been such a journey you know like honestly.
+Rewrite to be formal:                         -> It's been such a journey you know like honestly.
+Paraphrase this sentence:                     -> It's been such a journey you know like honestly.
+Write this more clearly:                      -> It's been such a journey you know like honestly.
+Simplify this sentence:                       -> It was such a journey you know like honestly.
+Make this text coherent:                      -> It's been such a journey you know like honestly.
+Neutralize this sentence:                     -> It's been such a journey you know like honestly.
+Rewrite this sentence:                        -> It's been such a journey you know like honestly.
+
+--- messy dialogue test ---
+IN:  yeah she ended up taking that job in Portland
+OUT: yeah, she went to Portland to take that job.
+
+IN:  Oh wow that's amazing good for you
+OUT: Oh wow, that's great for you.
+
+IN:  I like pottery and oh I also went swimming
+OUT: I like pottery, and I also went swimming.
+
+IN:  My grandma lives there too you know
+OUT: My grandma lives there too, you know.
+
+IN:  So I've been thinking about maybe going back to school or something
+OUT: So I've been thinking about going back to school or something.
+

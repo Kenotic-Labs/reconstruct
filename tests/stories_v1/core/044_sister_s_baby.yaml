@@ -1,0 +1,105 @@
+story_id: 44
+story_name: Sister's Baby
+category: Relationships
+description: 'User''s sister Emily is expecting a baby. Tracks the pregnancy journey
+
+  from announcement to birth. Tests memory of family members, dates,
+
+  and emotional milestones.
+
+  '
+duration_simulated: 3 months
+total_batches: 8
+batches:
+- batch: 1
+  time: Monday 6:00 PM
+  user_input: 'Nura, I just got the most amazing news! My sister Emily is pregnant!
+
+    She''s due in March. This will be my first time being an aunt.
+
+    '
+  expected_stores:
+  - Emily
+  - pregnant
+  - March
+  - aunt
+- batch: 2
+  time: Tuesday 10:00 AM
+  user_input: What year did World War 2 end?
+- batch: 3
+  time: Wednesday 7:00 PM
+  user_input: 'Emily had her ultrasound today. It''s a girl! They''re going to name
+
+    her Lily. My brother-in-law Marcus is so excited.
+
+    '
+  expected_stores:
+  - ultrasound
+  - girl
+  - Lily
+  - Marcus
+- batch: 4
+  time: Thursday 11:00 AM
+  user_input: What's my sister's name again?
+- batch: 5
+  time: Friday 3:00 PM
+  user_input: 'I''m planning Emily''s baby shower for next month. Going with a
+
+    garden theme since the baby''s name is Lily. Inviting about 20 people.
+
+    '
+  expected_stores:
+  - baby shower
+  - garden theme
+  - 20 people
+- batch: 6
+  time: Saturday 9:00 AM
+  user_input: What's the square root of 144?
+- batch: 7
+  time: Sunday 8:00 PM
+  user_input: 'The baby shower was a huge success! Emily loved the decorations.
+
+    Marcus gave a really sweet speech about becoming a father.
+
+    '
+  expected_stores:
+  - success
+  - decorations
+  - speech
+- batch: 8
+  time: Next Monday 6:00 AM
+  user_input: 'LILY IS HERE! Emily had the baby last night at 11:47 PM.
+
+    7 pounds 3 ounces. Everyone is healthy and I''m officially an aunt!
+
+    '
+  expected_stores:
+  - 11:47 PM
+  - 7 pounds 3 ounces
+  - healthy
+questions:
+- question_id: 44_q1
+  question: What is my sister's name?
+  expected_contains:
+  - Emily
+- question_id: 44_q2
+  question: What is my niece's name?
+  expected_contains:
+  - Lily
+- question_id: 44_q3
+  question: Who is Emily's husband?
+  expected_contains:
+  - Marcus
+- question_id: 44_q4
+  question: When was the baby due?
+  expected_contains:
+  - March
+- question_id: 44_q5
+  question: How much did the baby weigh?
+  expected_contains:
+  - 7 pounds
+  - 3 ounces
+- question_id: 44_q6
+  question: What theme was the baby shower?
+  expected_contains:
+  - garden

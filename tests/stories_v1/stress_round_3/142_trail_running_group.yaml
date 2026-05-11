@@ -1,0 +1,85 @@
+story_id: 142
+story_name: Trail Running Group
+category: Daily Life
+description: User joins a weekly trail running group.
+duration_simulated: 2 months
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1
+  user_input: Joined a trail running group called Rim Runners. We meet Thursday evenings at 6 PM at the
+    Tilden Park trailhead. Led by a guy named Harvey Tomlinson.
+  expected_stores:
+  - Rim Runners
+  - Thursday evenings 6 PM
+  - Tilden Park
+  - Harvey Tomlinson
+- batch: 2
+  time: Week 2
+  user_input: Group has about 15 regulars. Met a woman named Amaya Reyes who is training for the Lake
+    Sonoma 50 mile ultra. She and I ran the last mile together.
+  expected_stores:
+  - 15 regulars
+  - Amaya Reyes
+  - Lake Sonoma 50
+- batch: 3
+  time: Week 4
+  user_input: What's the lightest element?
+- batch: 4
+  time: Week 5
+  user_input: Harvey's partner Imelda started joining us too. She teaches me downhill technique, which
+    I was scared of. Amaya and Imelda and I are becoming a subgroup.
+  expected_stores:
+  - Harvey
+  - Imelda
+  - Amaya
+  - downhill technique
+- batch: 5
+  time: Week 7
+  user_input: Group ran a 10 mile route tonight. My fastest trail 10 miler ever. Amaya finished 15 minutes
+    ahead of me.
+  expected_stores:
+  - 10 mile route
+  - Amaya
+  - 15 minutes
+- batch: 6
+  time: Week 8
+  user_input: Harvey organized a post-run barbecue at his place. Met everyone's dogs. Imelda gave me a
+    book called 'Born to Run' to borrow.
+  expected_stores:
+  - Harvey
+  - barbecue
+  - Imelda
+  - Born to Run
+  expected_adaptation:
+    emotion_detected: content
+    warmth_direction: increase
+questions:
+- question_id: 142_q1
+  question: What is the group called?
+  expected_contains:
+  - Rim Runners
+- question_id: 142_q2
+  question: Who leads the group?
+  expected_contains:
+  - Harvey Tomlinson
+- question_id: 142_q3
+  question: Who is Harvey's partner?
+  expected_contains:
+  - Imelda
+- question_id: 142_q4
+  question: Who is training for an ultra?
+  expected_contains:
+  - Amaya Reyes
+- question_id: 142_q5
+  question: Where do we meet?
+  expected_contains:
+  - Tilden
+- question_id: 142_q6
+  question: What book did Imelda lend me?
+  expected_contains:
+  - Born to Run
+- question_id: 142_q7
+  question: When is Thursday evenings 6 PM?
+  expected_contains:
+  - Thursday evenings 6 PM

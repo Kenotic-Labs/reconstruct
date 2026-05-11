@@ -1,0 +1,87 @@
+story_id: 140
+story_name: Solo Camping Trip in the Sierras
+category: Daily Life
+description: User takes their first solo multi-day camping trip.
+duration_simulated: 2 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1
+  user_input: I'm planning my first solo camping trip. Four days at a backcountry site in the Desolation
+    Wilderness near Lake Tahoe. Permit number is 7742.
+  expected_stores:
+  - solo camping
+  - four days
+  - Desolation Wilderness
+  - Lake Tahoe
+  - '7742'
+- batch: 2
+  time: Week 1 Wednesday
+  user_input: Went to REI to finalize my gear list. Bought a Garmin inReach Mini for emergencies — 400
+    dollars. My friend Jude helped me pack.
+  expected_stores:
+  - REI
+  - Garmin inReach Mini
+  - 400 dollars
+  - Jude
+- batch: 3
+  time: Week 1 Thursday
+  user_input: Who wrote The Great Gatsby?
+- batch: 4
+  time: Week 2 Day 1
+  user_input: Made it to the trailhead. Hiked 8 miles to my first campsite at a lake called Aloha. Saw
+    two deer and zero people.
+  expected_stores:
+  - trailhead
+  - 8 miles
+  - Aloha
+  - two deer
+- batch: 5
+  time: Week 2 Day 3
+  user_input: Second site at Fontanillis Lake. Higher elevation, colder nights. I woke up at 3 AM to the
+    wildest stars I've ever seen.
+  expected_stores:
+  - Fontanillis Lake
+  - 3 AM
+  - stars
+- batch: 6
+  time: Week 2 Day 5
+  user_input: Out of the wilderness. 32 miles total over four days. Jude met me at the trailhead for pizza.
+    My legs are wrecked but my head is clearer than it's been in years.
+  expected_stores:
+  - 32 miles
+  - four days
+  - Jude
+  - pizza
+  expected_adaptation:
+    emotion_detected: peaceful
+    warmth_direction: increase
+questions:
+- question_id: 140_q1
+  question: Where did I camp?
+  expected_contains:
+  - Desolation Wilderness
+- question_id: 140_q2
+  question: What is my permit number?
+  expected_contains:
+  - '7742'
+- question_id: 140_q3
+  question: What emergency device did I buy?
+  expected_contains:
+  - Garmin inReach
+- question_id: 140_q4
+  question: Who helped me pack?
+  expected_contains:
+  - Jude
+- question_id: 140_q5
+  question: What lake was my first site at?
+  expected_contains:
+  - Aloha
+- question_id: 140_q6
+  question: How many miles total?
+  expected_contains:
+  - '32'
+- question_id: 140_q7
+  question: Did I mention solo camping?
+  expected_contains:
+  - solo camping

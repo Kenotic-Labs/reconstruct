@@ -1,0 +1,97 @@
+story_id: 72
+story_name: Switching to a Plant-Based Diet
+category: Health
+description: User transitions to a plant-based diet over several weeks.
+duration_simulated: 6 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1
+  user_input: I'm transitioning to a plant-based diet after watching a documentary called 'The Game Changers'.
+    My partner Aria is joining me.
+  expected_stores:
+  - plant-based diet
+  - Game Changers
+  - Aria
+  - partner
+- batch: 2
+  time: Week 2
+  user_input: Aria and I restocked the pantry. Got beans, lentils, tofu, tempeh, quinoa, five different
+    vegetables. Total grocery bill was 180.
+  expected_stores:
+  - Aria
+  - beans
+  - lentils
+  - tofu
+  - tempeh
+  - '180'
+- batch: 3
+  time: Week 3
+  user_input: Finding it harder than expected to cook interesting meals. My mom Sofia gave me her Italian
+    grandmother's minestrone recipe.
+  expected_stores:
+  - Sofia
+  - mom
+  - minestrone recipe
+- batch: 4
+  time: Week 4
+  user_input: What's the boiling point of water at sea level?
+- batch: 5
+  time: Week 4 Thursday
+  user_input: Had a slip at a birthday party — had two slices of pepperoni pizza. Not going to beat myself
+    up.
+  expected_stores:
+  - birthday party
+  - two slices
+  - pepperoni pizza
+  expected_adaptation:
+    emotion_detected: guilty
+    warmth_direction: neutral
+- batch: 6
+  time: Week 5
+  user_input: Feeling better than I have in months. Down 4 pounds, sleeping deeper, less afternoon fog.
+    Aria says the same.
+  expected_stores:
+  - 4 pounds
+  - Aria
+  expected_adaptation:
+    emotion_detected: energized
+    warmth_direction: increase
+- batch: 7
+  time: Week 6
+  user_input: Got my six week blood work back. LDL cholesterol dropped 32 points. Dr. Henry Cho said to
+    keep going.
+  expected_stores:
+  - six week blood work
+  - LDL
+  - 32 points
+  - Dr. Henry Cho
+questions:
+- question_id: 72_q1
+  question: What diet am I on?
+  expected_contains:
+  - plant-based
+- question_id: 72_q2
+  question: Who is my partner?
+  expected_contains:
+  - Aria
+- question_id: 72_q3
+  question: Who is my mom?
+  expected_contains:
+  - Sofia
+- question_id: 72_q4
+  question: Who is my doctor?
+  expected_contains:
+  - Henry Cho
+- question_id: 72_q5
+  question: How much did my LDL drop?
+  expected_contains:
+  - '32'
+- question_id: 72_q6
+  question: What documentary inspired the switch?
+  expected_contains:
+  - Game Changers
+- question_id: 72_q7
+  question: How much weight did I lose?
+  expected_contains:
+  - 4 pounds

@@ -1,0 +1,133 @@
+story_id: 32
+story_name: Expecting a Baby
+category: Life Events
+description: 'User and partner Taylor are expecting their first baby. Their OB-GYN is
+
+  Dr. Simmons. The nursery color is sage green. They have a baby registry at
+
+  Target and chose the name Oliver for a boy. Birthing class is at Community
+
+  Hospital on Wednesdays. Tests memory of health details, planning decisions,
+
+  and personal milestones.
+
+  '
+duration_simulated: 6 weeks
+total_batches: 9
+batches:
+- batch: 1
+  time: Monday 9:00 AM
+  user_input: 'Taylor and I just found out we''re expecting our first baby! We went to
+
+    the doctor today and confirmed it. Our OB-GYN is Dr. Simmons and she
+
+    said everything looks great. We''re due in July. I can''t believe I''m
+
+    going to be a parent.
+
+    '
+  expected_stores:
+  - Taylor
+  - baby
+  - expecting
+  - Dr. Simmons
+  - July
+  - first
+- batch: 2
+  time: Wednesday 2:00 PM
+  user_input: 'We started planning the nursery. Taylor wants to paint it sage green.
+
+    We looked at cribs this weekend and started a baby registry at Target.
+
+    There''s so much stuff you need for a baby, it''s overwhelming.
+
+    '
+  expected_stores:
+  - sage green
+  - nursery
+  - Target
+  - registry
+  - crib
+- batch: 3
+  time: Thursday 10:00 AM
+  user_input: At what week is a pregnancy considered full term?
+- batch: 4
+  time: Friday 4:00 PM
+  user_input: 'We found out the gender today - it''s a boy! Taylor and I have been
+
+    discussing names for weeks. We finally decided on Oliver. It was
+
+    Taylor''s grandfather''s name. We''re both so excited.
+
+    '
+  expected_stores:
+  - boy
+  - Oliver
+  - grandfather's name
+- batch: 5
+  time: Week 2 Monday 11:00 AM
+  user_input: What name did we choose for our baby?
+- batch: 6
+  time: Week 2 Wednesday 6:00 PM
+  user_input: 'We started our birthing class today at Community Hospital. It''s every
+
+    Wednesday evening. There are six other couples in the class. The
+
+    instructor is a midwife named Karen. Taylor was a little nervous but
+
+    it was really informative.
+
+    '
+  expected_stores:
+  - birthing class
+  - Community Hospital
+  - Wednesday
+  - Karen
+  - midwife
+- batch: 7
+  time: Week 3 Tuesday 9:00 AM
+  user_input: What is the largest organ in the human body?
+- batch: 8
+  time: Week 4 Monday 10:00 AM
+  user_input: 'The nursery is coming together! We painted the walls sage green this
+
+    weekend. The crib arrived from the registry. Taylor''s parents sent us
+
+    a beautiful handmade blanket. Dr. Simmons says the baby is developing
+
+    perfectly.
+
+    '
+  expected_stores:
+  - painted
+  - blanket
+  - developing
+- batch: 9
+  time: Week 5 Wednesday 3:00 PM
+  user_input: What color did we paint the nursery and where is our baby registry?
+questions:
+- question_id: 32_q1
+  question: Who is my partner?
+  expected_contains:
+  - Taylor
+- question_id: 32_q2
+  question: Who is our OB-GYN?
+  expected_contains:
+  - Dr. Simmons
+- question_id: 32_q3
+  question: What color is the nursery?
+  expected_contains:
+  - sage green
+- question_id: 32_q4
+  question: Where is our baby registry?
+  expected_contains:
+  - Target
+- question_id: 32_q5
+  question: What name did we choose for our baby boy?
+  expected_contains:
+  - Oliver
+- question_id: 32_q6
+  question: Where is the birthing class and what day?
+  expected_contains:
+  - Community Hospital
+  - Wednesday

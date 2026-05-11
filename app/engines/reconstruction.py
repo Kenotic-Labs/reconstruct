@@ -82,34 +82,13 @@ def _check_entry():
     _ENTRY_CHECKED = True
 
 
-def check_exit(result) -> bool:
-    """Validate reconstruction result is grounded or a proper refusal."""
-    if result is None:
-        return False
-    if hasattr(result, 'refusal') and result.refusal:
-        return True  # refusal is valid
-    if hasattr(result, 'answer') and result.answer:
-        return True  # has answer
-    return False
 
 
 # ---------------------------------------------------------------------------
 # Constants
 # ---------------------------------------------------------------------------
 REFUSAL_TEXT = "This information is not mentioned in the conversation."
-LOW_COVERAGE_TEXT = "This information is not mentioned in the conversation."
-RERANK_TOP_N = 20
-# ms-marco-MiniLM-L-6-v2 outputs raw logits, not 0-1 probabilities.
-# PQ short-circuit handles Cat 1-4 before the gate fires.
-# The gate only sees queries that PQ didn't match — adversarial (Cat 5).
-# Strict threshold blocks Cat 5 garbage while PQ bypasses it for Cat 1-4.
-RELEVANCE_GATE_THRESHOLD = -1.0  # Disabled — let verification loop do the filtering
-RRF_K = 60
-FTS_LIMIT = 60
-COSINE_LIMIT = 60
 TIER1_LIMIT = 40
-PQ_LIMIT = 40
-CWA_MENTION_THRESHOLD = 5
 
 # Causal predicates — now detected via WordNet (_verb_in_wordnet_domain)
 # Speech-act verbs — now detected via grammar_engine.VerbClass.SPEECH
@@ -207,14 +186,6 @@ def _query_wh_token(doc):
             return tok
     return None
 
-
-def _query_nouns(doc) -> list:
-    """Extract content noun lemmas from query doc."""
-    if doc is None:
-        return []
-    return [tok.lemma_.lower() for tok in doc
-            if tok.pos_ in ("NOUN", "PROPN")
-            and tok.dep_ not in ("det", "punct")]
 
 
 def _noun_in_wordnet_domain(noun_lemma: str, anchor_synset: str) -> bool:
@@ -331,48 +302,6 @@ _FTS_STOP = frozenset({
     "go", "get", "got", "take", "make", "say", "tell", "give",
 })
 
-# Cross-encoder singleton
-_reranker = None
-_gte_model = None
-
-
-def _gte_embed(text: str) -> np.ndarray:
-    """Embed using gte-small (70MB, MTEB clustering 44.89).
-
-    Lazy-loaded. Used ONLY for inference topic-to-object matching where
-    category awareness matters (Vivaldi↔Bach=0.82 vs MiniLM's 0.45).
-    NOT used for stored embeddings — those remain MiniLM for compatibility.
-    """
-    global _gte_model
-    if _gte_model is None:
-        try:
-            from sentence_transformers import SentenceTransformer
-            _gte_model = SentenceTransformer(
-                "thenlper/gte-small",
-                device="cpu",  # Small enough for CPU, keeps GPU for main model
-            )
-            log.info("gte-small loaded for inference topic matching")
-        except Exception as e:
-            log.warning("gte-small unavailable: %s", e)
-            # Fallback to MiniLM
-            return embed_text(text)
-    return _gte_model.encode(text, normalize_embeddings=True)
-
-
-def _get_reranker():
-    """Load cross-encoder reranker (22MB, <10ms per pair)."""
-    global _reranker
-    if _reranker is None:
-        try:
-            from sentence_transformers import CrossEncoder
-            _reranker = CrossEncoder(
-                "cross-encoder/ms-marco-MiniLM-L-6-v2",
-                device="cuda:0",
-            )
-            log.info("Cross-encoder reranker loaded on cuda:0")
-        except Exception as e:
-            log.warning("Cross-encoder unavailable: %s — relevance gate disabled", e)
-    return _reranker
 
 
 # ---------------------------------------------------------------------------
@@ -385,85 +314,6 @@ _STOPWORDS = {
     "the", "a", "an", "this", "that", "these", "those",
     "i", "you", "me", "my", "your", "we", "us", "our",
 }
-
-
-def _extract_candidates(query: str) -> List[str]:
-    try:
-        import spacy
-        nlp = spacy.load("en_core_web_sm")
-    except Exception:
-        nlp = None
-
-    if nlp is None:
-        # Fallback: title-cased multi-char tokens.
-        return [w for w in query.split()
-                if w and w[:1].isupper() and w.lower() not in _STOPWORDS]
-
-    doc = nlp(query)
-    out: List[str] = []
-    for ent in doc.ents:
-        t = ent.text.strip()
-        if t and t.lower() not in _STOPWORDS:
-            out.append(t)
-    for nc in doc.noun_chunks:
-        t = nc.text.strip()
-        if len(t) > 1 and t.lower() not in _STOPWORDS:
-            out.append(t)
-
-    seen = set()
-    deduped = []
-    for t in out:
-        k = t.lower()
-        if k not in seen:
-            deduped.append(t)
-            seen.add(k)
-    return deduped
-
-
-def _cosine(a: np.ndarray, b: np.ndarray) -> float:
-    if a.size != b.size:
-        return 0.0
-    denom = float(np.linalg.norm(a) * np.linalg.norm(b))
-    if denom == 0.0:
-        return 0.0
-    return float(np.dot(a, b) / denom)
-
-
-def resolve_query_entities(
-    user_id: int, query_text: str, top_k: int = 10,
-) -> List[Dict[str, Any]]:
-    """Return the top-K entities ranked by cosine to query noun-phrases.
-    No threshold gating — return ranked results and let downstream
-    structural stages (Expand, Relate) decide who survives."""
-    candidates = _extract_candidates(query_text)
-    if not candidates:
-        return []
-
-    phrase_embs = [(c, embed_text(c)) for c in candidates]
-
-    sql = ("SELECT id, name, entity_type, embedding FROM entities "
-           "WHERE user_id = ?")
-    with get_db_context() as conn:
-        rows = conn.execute(sql, (user_id,)).fetchall()
-
-    scored: List[Dict[str, Any]] = []
-    for r in rows:
-        if not r["embedding"]:
-            continue
-        ev = np.frombuffer(r["embedding"], dtype=np.float32)
-        top = 0.0
-        for _, pe in phrase_embs:
-            c = _cosine(ev, pe)
-            if c > top:
-                top = c
-        if top > 0.0:
-            scored.append({
-                "id": r["id"], "name": r["name"],
-                "entity_type": r["entity_type"], "score": top,
-            })
-
-    scored.sort(key=lambda x: -x["score"])
-    return scored[:top_k]
 
 
 # ---------------------------------------------------------------------------
@@ -519,7 +369,6 @@ class Candidate:
     edge_temporal_context: str = "present"
     is_historical: int = 0
     # Scoring
-    score: float = 0.0
     tier: str = ""
 
 
@@ -1099,7 +948,6 @@ def _tier1_structural(conn: sqlite3.Connection, user_id: int,
 # TIER 2: PREDICTED QUERIES — EMBEDDING COSINE (doc lines 2098-2099)
 # ===========================================================================
 
-PQ_HIGH_CONFIDENCE = 0.70  # PQ cosine above this → trust PQ answer directly
 
 
 def _tier2_predicted_queries(conn: sqlite3.Connection, user_id: int,
@@ -1111,138 +959,10 @@ def _tier2_predicted_queries(conn: sqlite3.Connection, user_id: int,
     table, no stored embeddings). We embed each PQ at query time and
     compare against the query embedding.
 
-    Returns:
-        (candidates, best_pq_hit)
-        best_pq_hit = (source_text, edge_id, cosine) when cos > PQ_HIGH_CONFIDENCE,
-        else None.
+    This function is no longer used — _find_pq_match handles PQ matching.
     """
-    query_emb = embed_text(query)
+    return [], None
 
-    pq_rows = conn.execute(
-        f"""SELECT id, source_text, pq_1, pq_2, pq_3, pq_4
-            FROM edges
-            WHERE {_BASE_WHERE}
-              AND (pq_1 IS NOT NULL OR pq_2 IS NOT NULL
-                   OR pq_3 IS NOT NULL OR pq_4 IS NOT NULL)""",
-        (user_id,),
-    ).fetchall()
-
-    if not pq_rows:
-        return [], None
-
-    scored = []
-    best_pq = None  # (source_text, edge_id, cosine)
-    for row in pq_rows:
-        best_cos = 0.0
-        for col in ("pq_1", "pq_2", "pq_3", "pq_4"):
-            pq_text = row[col]
-            if not pq_text:
-                continue
-            try:
-                pq_emb = embed_text(pq_text)
-                cos = float(np.dot(query_emb, pq_emb))
-                if cos > best_cos:
-                    best_cos = cos
-            except Exception:
-                continue
-        if best_cos > 0.3:
-            scored.append((row["id"], best_cos))
-        if best_cos > PQ_HIGH_CONFIDENCE:
-            if best_pq is None or best_cos > best_pq[2]:
-                best_pq = (row["source_text"], row["id"], best_cos)
-
-    if not scored:
-        return [], best_pq
-
-    scored.sort(key=lambda x: x[1], reverse=True)
-    top_ids = [s[0] for s in scored[:PQ_LIMIT]]
-
-    placeholders = ",".join("?" * len(top_ids))
-    rows = conn.execute(
-        f"""SELECT {_CANDIDATE_COLS} FROM edges
-            WHERE id IN ({placeholders}) AND {_BASE_WHERE}""",
-        top_ids + [user_id],
-    ).fetchall()
-
-    id_to_score = {s[0]: s[1] for s in scored[:PQ_LIMIT]}
-    candidates = []
-    for r in rows:
-        c = _row_to_candidate(r, "tier2")
-        c.score = id_to_score.get(r["id"], 0.0)
-        candidates.append(c)
-    return candidates, best_pq
-
-
-# ===========================================================================
-# TIER 3: RRF HYBRID (FTS5 + COSINE) (doc lines 2100-2101)
-# ===========================================================================
-
-def _tier3_rrf(conn: sqlite3.Connection, user_id: int,
-               query: str) -> List[Candidate]:
-    """Reciprocal Rank Fusion of FTS5 + cosine."""
-    # --- FTS5 ---
-    fts_ids = []
-    try:
-        fts_query = " ".join(
-            w for w in query.split()
-            if w.isalnum() or "'" in w
-        )
-        if fts_query.strip():
-            fts_rows = conn.execute(
-                """SELECT rowid, rank FROM edges_fts
-                   WHERE edges_fts MATCH ?
-                   ORDER BY rank
-                   LIMIT ?""",
-                (fts_query, FTS_LIMIT),
-            ).fetchall()
-            fts_ids = [r["rowid"] for r in fts_rows]
-    except Exception:
-        pass
-
-    # --- Cosine ---
-    query_emb = embed_text(query)
-    all_edges = conn.execute(
-        f"""SELECT id, edge_embedding FROM edges
-            WHERE {_BASE_WHERE} AND edge_embedding IS NOT NULL""",
-        (user_id,),
-    ).fetchall()
-
-    cosine_scored = []
-    for edge in all_edges:
-        emb = np.frombuffer(edge["edge_embedding"], dtype=np.float32)
-        if emb.shape[0] != query_emb.shape[0]:
-            continue
-        cos = float(np.dot(query_emb, emb))
-        cosine_scored.append((edge["id"], cos))
-
-    cosine_scored.sort(key=lambda x: x[1], reverse=True)
-    cosine_ids = [s[0] for s in cosine_scored[:COSINE_LIMIT]]
-
-    # --- RRF fusion ---
-    rrf_scores: Dict[int, float] = {}
-    for rank, eid in enumerate(fts_ids):
-        rrf_scores[eid] = rrf_scores.get(eid, 0.0) + 1.0 / (RRF_K + rank + 1)
-    for rank, eid in enumerate(cosine_ids):
-        rrf_scores[eid] = rrf_scores.get(eid, 0.0) + 1.0 / (RRF_K + rank + 1)
-
-    if not rrf_scores:
-        return []
-
-    sorted_ids = sorted(rrf_scores, key=rrf_scores.get, reverse=True)[:RERANK_TOP_N * 2]
-    placeholders = ",".join("?" * len(sorted_ids))
-    rows = conn.execute(
-        f"""SELECT {_CANDIDATE_COLS} FROM edges
-            WHERE id IN ({placeholders}) AND {_BASE_WHERE}""",
-        sorted_ids + [user_id],
-    ).fetchall()
-
-    candidates = []
-    for r in rows:
-        c = _row_to_candidate(r, "tier3")
-        c.score = rrf_scores.get(r["id"], 0.0)
-        candidates.append(c)
-    candidates.sort(key=lambda c: c.score, reverse=True)
-    return candidates
 
 
 # ===========================================================================
@@ -1369,249 +1089,8 @@ def _expand_arc(conn: sqlite3.Connection, user_id: int,
 # CROSS-ENCODER RERANKING (doc lines 471-483)
 # ===========================================================================
 
-def _rerank(query: str, candidates: List[Candidate]) -> List[Candidate]:
-    """Cross-encoder reranking of top candidates. Returns reranked list."""
-    if not candidates:
-        return candidates
-    reranker = _get_reranker()
-    if reranker is None:
-        return candidates
-
-    top = candidates[:RERANK_TOP_N]
-    rest = candidates[RERANK_TOP_N:]
-
-    pairs = [(query, c.source_text) for c in top]
-    try:
-        scores = reranker.predict(pairs)
-        for c, s in zip(top, scores):
-            c.score = float(s)
-        top.sort(key=lambda c: c.score, reverse=True)
-    except Exception as e:
-        log.warning("Cross-encoder reranking failed: %s", e)
-
-    return top + rest
 
 
-# ===========================================================================
-# PLAN #8: RANKING SIGNAL STACK (doc lines 1916-1965)
-# ===========================================================================
-
-def _apply_ranking_signals(candidates: List[Candidate], query: str,
-                           qd) -> List[Candidate]:
-    """Apply weighted ranking signals after cross-encoder scoring.
-
-    final_score = 0.65 × cross_encoder + 0.10 × predicate_cosine
-                + 0.05 × significance + 0.05 × confidence
-                + 0.05 × recency + 0.05 × affiliation + 0.05 × schema
-    """
-    if not candidates:
-        return candidates
-
-    query_pred_emb = None
-    if qd.match_predicate:
-        query_pred_emb = embed_text(qd.match_predicate.lower())
-
-
-    for c in candidates:
-        ce_score = c.score  # Cross-encoder score (already set by _rerank)
-
-        # Predicate cosine
-        pred_cosine = 0.0
-        if query_pred_emb is not None and c.predicate_embedding:
-            pred_emb = np.frombuffer(c.predicate_embedding, dtype=np.float32)
-            if pred_emb.shape == query_pred_emb.shape:
-                pred_cosine = max(0.0, float(np.dot(pred_emb, query_pred_emb)))
-
-        # Significance score
-        sig_map = {"milestone": 1.0, "emphatic": 0.7, "routine": 0.3}
-        sig_score = sig_map.get(c.edge_episodic_significance, 0.3)
-
-        # Confidence
-        conf_score = c.confidence
-
-        # Recency (from last_confirmed_at — more recent = higher)
-        recency_score = 0.5
-        if c.last_confirmed_at:
-            try:
-                confirmed = datetime.fromisoformat(c.last_confirmed_at)
-            except ValueError:
-                confirmed = None
-            if confirmed:
-                delta_days = (datetime.now() - confirmed).days
-                recency_score = max(0.1, 1.0 - delta_days / 365.0)
-
-        # Affiliation
-        aff_score = c.edge_affiliation if c.edge_affiliation else 0.5
-
-        # Schema match bonus (soft signal, not hard filter)
-        schema_bonus = 0.0
-        if qd.match_schema and c.edge_schematic_category == qd.match_schema:
-            schema_bonus = 1.0
-
-        # Combined score
-        c.score = (
-            0.65 * ce_score
-            + 0.10 * pred_cosine
-            + 0.05 * sig_score
-            + 0.05 * conf_score
-            + 0.05 * recency_score
-            + 0.05 * aff_score
-            + 0.05 * schema_bonus
-        )
-
-        # Type consistency hard filter (doc line 1946-1947)
-        # If query expects ORG answer and candidate object is PERSON → demote
-        if qd.return_field == "episodic" and qd.wh_word == "where":
-            if c.object_type and c.object_type.upper() == "PERSON":
-                c.score *= 0.5
-
-    candidates.sort(key=lambda c: c.score, reverse=True)
-    return candidates
-
-
-# ===========================================================================
-# VERIFICATION LOOP — COHERENCE + EXISTENCE (design doc)
-# ===========================================================================
-
-def _check_coherence(c: Candidate, qd, query: str) -> bool:
-    """Check 1: Does this candidate's fact answer the query?
-    Subject must match. Source text must be topically relevant."""
-    query_entity = qd.match_entity or qd.match_subject or ""
-
-    # Subject/entity check — skip for long descriptive phrases that
-    # aren't real entities ("the dancers in the photo", "the general
-    # sentiment"). These are topic descriptions, not person names.
-    _skip_entity_check = (
-        not qd.match_entity
-        and query_entity
-        and len(query_entity.split()) >= 4
-    )
-    if query_entity and query_entity != "user" and not _skip_entity_check:
-        subj_lower = c.subject.lower()
-        entity_lower = query_entity.lower()
-        # Strip leading articles for flexible matching
-        _strip_art = _strip_determiners(entity_lower)
-        if (entity_lower not in subj_lower and subj_lower not in entity_lower
-                and _strip_art not in subj_lower):
-            rel_lower = c.relational_entities.lower()
-            if entity_lower not in rel_lower and _strip_art not in rel_lower:
-                if qd.match_entity:
-                    return False
-                # match_entity is None — the "entity" is a thing/event.
-                # Check object and source_text too.
-                obj_lower = c.object.lower()
-                src_lower = c.source_text.lower()
-                if (entity_lower not in obj_lower and _strip_art not in obj_lower
-                        and entity_lower not in src_lower and _strip_art not in src_lower):
-                    return False
-
-    # Topical relevance: query embedding vs edge embedding
-    # This catches Cat 5 adversarial (wrong topic) and general wrong-answer
-    if c.edge_embedding:
-        try:
-            query_emb = embed_text(query)
-            edge_emb = np.frombuffer(c.edge_embedding, dtype=np.float32)
-            if edge_emb.shape[0] == query_emb.shape[0]:
-                cos = float(np.dot(query_emb, edge_emb))
-                if cos < 0.30:
-                    return False  # topically unrelated
-        except Exception:
-            pass
-
-    # Predicate check (soft — pass if predicate or schema matches)
-    if qd.match_predicate and c.predicate:
-        qp = qd.match_predicate.lower()
-        cp = c.predicate.lower().replace("_", " ")
-        if qp in cp or cp in qp:
-            return True
-        if qd.match_schema and c.edge_schematic_category == qd.match_schema:
-            return True
-        if c.predicate_embedding:
-            pred_emb = np.frombuffer(c.predicate_embedding, dtype=np.float32)
-            query_pred_emb = embed_text(qp)
-            if pred_emb.shape == query_pred_emb.shape:
-                cos = float(np.dot(pred_emb, query_pred_emb))
-                if cos > 0.3:
-                    return True
-        if qp in c.source_text.lower():
-            return True
-        # If the overall query-edge cosine is high (> 0.45), the edge is
-        # topically relevant even if predicates don't match lexically.
-        # "Which song motivates X?" vs edge with predicate "love_song" —
-        # different verbs but same topic.
-        if c.edge_embedding:
-            try:
-                query_emb = embed_text(query)
-                edge_emb = np.frombuffer(c.edge_embedding, dtype=np.float32)
-                if edge_emb.shape[0] == query_emb.shape[0]:
-                    cos = float(np.dot(query_emb, edge_emb))
-                    if cos > 0.50:
-                        return True
-            except Exception:
-                pass
-        return False
-
-    return True
-
-
-def _check_existence(c: Candidate, qd, query: str,
-                     conn: sqlite3.Connection, user_id: int) -> bool:
-    """Check 2: Does this fact exist as current in the DB?
-    For stative facts: does the facts table value match?
-
-    Plan #1 fix: passes actual query for still-query detection.
-    """
-    # For "still" queries — must be current
-    if _is_still_query(query) and c.is_current == 0:
-        return False
-
-    # Check facts table for stative verification
-    if qd.match_schema and (qd.match_entity or qd.match_subject):
-        entity = qd.match_entity or qd.match_subject or ""
-        rows = conn.execute(
-            "SELECT value FROM facts WHERE user_id = ? AND key LIKE ?",
-            (user_id, f"%{entity}%"),
-        ).fetchall()
-        if rows:
-            for row in rows:
-                fact_val = (row["value"] or "").lower()
-                cand_obj = c.object.lower()
-                if fact_val and cand_obj and (fact_val in cand_obj or cand_obj in fact_val):
-                    return True
-            if c.is_current == 0:
-                return False
-
-    return True
-
-
-def _verify_candidates(candidates: List[Candidate], qd,
-                       query: str, conn: sqlite3.Connection,
-                       user_id: int) -> List[Candidate]:
-    """Run verification loop on candidates. Returns verified list."""
-    verified = []
-    for c in candidates:
-        if not _check_coherence(c, qd, query):
-            continue
-        if not _check_existence(c, qd, query, conn, user_id):
-            continue
-        verified.append(c)
-    return verified
-
-
-# ===========================================================================
-# RELEVANCE GATE — CROSS-ENCODER HARD THRESHOLD (doc lines 1096-1107)
-# ===========================================================================
-
-def _relevance_gate(query: str, candidate: Candidate) -> float:
-    """Score how well the best candidate actually answers the question.
-    Returns relevance score. Below RELEVANCE_GATE_THRESHOLD → refuse."""
-    reranker = _get_reranker()
-    if reranker is None:
-        # No cross-encoder available — cannot gate. Log and pass through.
-        log.warning("Relevance gate: no reranker loaded, cannot score")
-        return 1.0
-    score = float(reranker.predict([(query, candidate.source_text)])[0])
-    return score
 
 
 # ===========================================================================
@@ -3390,37 +2869,6 @@ def _step2_fts_pq(conn: sqlite3.Connection, user_id: int,
     return candidates
 
 
-def _step3_embed_rerank(candidates: List[Candidate], query: str) -> List[Candidate]:
-    """Step 3: Embedding rerank on small candidate set.
-
-    Only runs if > 20 candidates. Computes cosine between query embedding
-    and each candidate's edge_embedding. Sorts by cosine. Keeps top 20.
-    Replaces Tier 3's full-table scan with targeted reranking.
-    """
-    if len(candidates) <= RERANK_TOP_N:
-        return candidates
-
-    query_emb = embed_text(query)
-
-    scored = []
-    for c in candidates:
-        if c.edge_embedding:
-            emb = np.frombuffer(c.edge_embedding, dtype=np.float32)
-            if emb.shape[0] == query_emb.shape[0]:
-                cos = float(np.dot(query_emb, emb))
-                scored.append((c, cos))
-            else:
-                scored.append((c, 0.0))
-        else:
-            scored.append((c, 0.0))
-
-    scored.sort(key=lambda x: x[1], reverse=True)
-
-    result = []
-    for c, cos in scored[:RERANK_TOP_N]:
-        c.score = cos
-        result.append(c)
-    return result
 
 
 # ===========================================================================

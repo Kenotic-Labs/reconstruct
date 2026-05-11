@@ -1,0 +1,73 @@
+story_id: 187
+story_name: Car Accident — Minor
+category: Daily Life
+description: User has a minor fender bender and navigates insurance.
+duration_simulated: 3 weeks
+total_batches: 5
+batches:
+- batch: 1
+  time: Day 1
+  user_input: Someone rear ended me at a red light. Minor damage to my bumper. The other driver Norton
+    Chevalier was polite and admitted fault.
+  expected_stores:
+  - rear ended
+  - Norton Chevalier
+  - admitted fault
+- batch: 2
+  time: Day 2
+  user_input: Filed with State Farm. Adjuster Caledonia Bly is handling the claim. Estimate is 1400 dollars.
+  expected_stores:
+  - State Farm
+  - Caledonia Bly
+  - adjuster
+  - 1400 dollars
+- batch: 3
+  time: Week 2
+  user_input: What's the tallest waterfall?
+- batch: 4
+  time: Week 2 Friday
+  user_input: Body shop Precision Auto Body in Berkeley did the repair. Caledonia approved the payment
+    directly. I'm not out of pocket.
+  expected_stores:
+  - Precision Auto Body
+  - Berkeley
+  - Caledonia
+- batch: 5
+  time: Week 3
+  user_input: Car is back. Caledonia was great. Norton's insurance covered everything. Nothing like I
+    feared.
+  expected_stores:
+  - Caledonia
+  - Norton
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+questions:
+- question_id: 187_q1
+  question: Who hit me?
+  expected_contains:
+  - Norton Chevalier
+- question_id: 187_q2
+  question: Who is my adjuster?
+  expected_contains:
+  - Caledonia Bly
+- question_id: 187_q3
+  question: What body shop did the repair?
+  expected_contains:
+  - Precision Auto Body
+- question_id: 187_q4
+  question: Did I mention rear ended?
+  expected_contains:
+  - rear ended
+- question_id: 187_q5
+  question: Did I mention admitted fault?
+  expected_contains:
+  - admitted fault
+- question_id: 187_q6
+  question: Where is State Farm?
+  expected_contains:
+  - State Farm
+- question_id: 187_q7
+  question: Did I mention adjuster?
+  expected_contains:
+  - adjuster

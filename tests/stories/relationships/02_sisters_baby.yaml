@@ -1,0 +1,116 @@
+story_id: 2
+story_name: "Sister's Baby"
+category: "Relationships"
+description: |
+  User's sister Emily is expecting a baby. Tracks the pregnancy journey
+  from announcement to birth. Tests memory of family members, dates,
+  and emotional milestones.
+duration_simulated: "3 months"
+total_batches: 8
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 6:00 PM"
+    user_input: |
+      Nura, I just got the most amazing news! My sister Emily is pregnant!
+      She's due in March. This will be my first time being an aunt.
+    expected_memory_stores:
+      - "Emily"
+      - "pregnant"
+      - "March"
+      - "aunt"
+
+  - batch: 2
+    time: "Tuesday 10:00 AM"
+    user_input: "What year did World War 2 end?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["1945"]
+
+  - batch: 3
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      Emily had her ultrasound today. It's a girl! They're going to name
+      her Lily. My brother-in-law Marcus is so excited.
+    expected_memory_stores:
+      - "ultrasound"
+      - "girl"
+      - "Lily"
+      - "Marcus"
+
+  - batch: 4
+    time: "Thursday 11:00 AM"
+    user_input: "What's my sister's name again?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Emily"]
+
+  - batch: 5
+    time: "Friday 3:00 PM"
+    user_input: |
+      I'm planning Emily's baby shower for next month. Going with a
+      garden theme since the baby's name is Lily. Inviting about 20 people.
+    expected_memory_stores:
+      - "baby shower"
+      - "garden theme"
+      - "20 people"
+
+  - batch: 6
+    time: "Saturday 9:00 AM"
+    user_input: "What's the square root of 144?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["12"]
+
+  - batch: 7
+    time: "Sunday 8:00 PM"
+    user_input: |
+      The baby shower was a huge success! Emily loved the decorations.
+      Marcus gave a really sweet speech about becoming a father.
+    expected_memory_stores:
+      - "success"
+      - "decorations"
+      - "speech"
+
+  - batch: 8
+    time: "Next Monday 6:00 AM"
+    user_input: |
+      LILY IS HERE! Emily had the baby last night at 11:47 PM.
+      7 pounds 3 ounces. Everyone is healthy and I'm officially an aunt!
+    expected_memory_stores:
+      - "11:47 PM"
+      - "7 pounds 3 ounces"
+      - "healthy"
+
+final_verification:
+  - question: "What is my sister's name?"
+    expected_contains: ["Emily"]
+
+  - question: "What is my niece's name?"
+    expected_contains: ["Lily"]
+
+  - question: "Who is Emily's husband?"
+    expected_contains: ["Marcus"]
+
+  - question: "When was the baby due?"
+    expected_contains: ["March"]
+
+  - question: "How much did the baby weigh?"
+    expected_contains: ["7 pounds", "3 ounces"]
+
+  - question: "What theme was the baby shower?"
+    expected_contains: ["garden"]

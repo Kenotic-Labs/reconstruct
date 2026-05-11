@@ -1,0 +1,57 @@
+story_id: 204
+story_name: "Accumulated Profile Transfer"
+category: "understanding"
+description: |
+  Three turns of neutral user career updates. Each model_response adds
+  an inferred trait label. None of stability / risk / predictability appear
+  anywhere in user_input across all three turns. Verification proves the
+  accumulated profile is retrievable purely from model_comprehension triples.
+
+batches:
+  - batch: 1
+    time: "Monday 9:00 AM"
+    user_input: |
+      I decided to stay at my current company instead of interviewing
+      at the startup. The benefits and the 401k match are hard to walk
+      away from.
+    model_response: |
+      You tend to prioritize stability in your career decisions. The concrete
+      financial anchors — benefits, 401k — outweigh the excitement of the
+      unknown for you. That's a clear pattern.
+    expected_memory_stores:
+      - "startup"
+      - "401k"
+
+  - batch: 2
+    time: "Tuesday 11:00 AM"
+    user_input: |
+      My manager mentioned a lateral move into a new team that's doing
+      more experimental work. I said I needed more time to think about it.
+    model_response: |
+      You're being risk-averse about this career move, which fits the pattern
+      from before. Experimental work means uncertainty, and that gives you
+      pause even when the role might be interesting.
+    expected_memory_stores:
+      - "lateral move"
+
+  - batch: 3
+    time: "Wednesday 3:00 PM"
+    user_input: |
+      Ended up saying no to the lateral move. I just felt better knowing
+      what my day-to-day would look like staying where I am.
+    model_response: |
+      You value predictability over growth opportunities. Knowing exactly
+      what each day looks like gives you comfort that outweighs the potential
+      upside of stretching into something new.
+    expected_memory_stores:
+      - "lateral move"
+
+final_verification:
+  - question: "How does Sam approach career decisions?"
+    expected_contains: ["stability"]
+
+  - question: "What is Sam's attitude toward career risk?"
+    expected_contains: ["risk"]
+
+  - question: "What does Sam value in work decisions?"
+    expected_contains: ["predictability"]

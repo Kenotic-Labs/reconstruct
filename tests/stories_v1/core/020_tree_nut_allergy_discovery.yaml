@@ -1,0 +1,115 @@
+story_id: 20
+story_name: Tree Nut Allergy Discovery
+category: Health
+description: 'User discovered they are allergic to tree nuts (but not peanuts) after
+
+  visiting allergist Dr. Foster at the Allergy & Asthma Center. They were
+
+  prescribed an EpiPen which they carry in their backpack, and are also mildly
+
+  lactose intolerant and use Lactaid pills. They had an allergic reaction at
+
+  Sakura Sushi restaurant due to walnut hidden in a sauce, and have ordered
+
+  a medic alert bracelet.
+
+  '
+duration_simulated: 3 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Monday 4:00 PM
+  user_input: 'So I finally went to see an allergist — Dr. Foster at the Allergy &
+
+    Asthma Center. Turns out I''m allergic to tree nuts. Walnuts, almonds,
+
+    cashews, that kind of thing. But not peanuts, which is good because I
+
+    love peanut butter. She prescribed me an EpiPen just in case and I keep
+
+    it in my backpack at all times.
+
+    '
+  expected_stores:
+  - tree nuts
+  - not peanuts
+  - Dr. Foster
+  - Allergy & Asthma Center
+  - EpiPen
+  - backpack
+- batch: 2
+  time: Monday 4:15 PM
+  user_input: 'Dr. Foster also confirmed I''m mildly lactose intolerant, which I''ve
+
+    suspected for a while. She said it''s not severe though — I just need to
+
+    take Lactaid pills before dairy and I should be fine.
+
+    '
+  expected_stores:
+  - lactose intolerant
+  - Lactaid pills
+- batch: 3
+  time: Tuesday 12:00 PM
+  user_input: What is the difference between a tree nut allergy and a peanut allergy?
+- batch: 4
+  time: Friday 8:30 PM
+  user_input: 'Had a scary experience tonight. We went to Sakura Sushi for dinner and I
+
+    had an allergic reaction — turns out one of the sauces had crushed walnut
+
+    in it. My throat started to swell up. I used the EpiPen and went to the
+
+    ER. I''m okay now but that was terrifying.
+
+    '
+  expected_stores:
+  - Sakura Sushi
+  - walnut in sauce
+  - allergic reaction
+  - used EpiPen
+- batch: 5
+  time: Saturday 10:00 AM
+  user_input: 'After last night I ordered a medic alert bracelet online. It lists the
+
+    tree nut allergy and that I carry an EpiPen. Should arrive in a few days.
+
+    I''m not taking any more chances.
+
+    '
+  expected_stores:
+  - medic alert bracelet
+- batch: 6
+  time: Week 2 - Monday 9:00 AM
+  user_input: What am I allergic to and what am I NOT allergic to?
+- batch: 7
+  time: Week 2 - Wednesday 3:00 PM
+  user_input: What are common hidden sources of tree nuts in restaurant food?
+questions:
+- question_id: 20_q1
+  question: Who is my allergist and where is their office?
+  expected_contains:
+  - Dr. Foster
+  - Allergy & Asthma Center
+- question_id: 20_q2
+  question: What am I allergic to?
+  expected_contains:
+  - tree nuts
+- question_id: 20_q3
+  question: Where do I keep my EpiPen?
+  expected_contains:
+  - backpack
+- question_id: 20_q4
+  question: What happened at Sakura Sushi?
+  expected_contains:
+  - allergic reaction
+  - walnut
+  - sauce
+- question_id: 20_q5
+  question: What do I take for my lactose intolerance?
+  expected_contains:
+  - Lactaid
+- question_id: 20_q6
+  question: What safety item did I order after the restaurant incident?
+  expected_contains:
+  - medic alert bracelet

@@ -1,0 +1,100 @@
+story_id: 92
+story_name: Buying a First House
+category: Life Events
+description: User navigates the full process of buying their first home.
+duration_simulated: 4 months
+total_batches: 7
+batches:
+- batch: 1
+  time: Month 1 Week 1
+  user_input: My wife Tasha and I got pre-approved for a 650000 dollar mortgage through Pennywise Lending.
+    Our loan officer is Darius Hampton.
+  expected_stores:
+  - Tasha
+  - wife
+  - '650000'
+  - Pennywise Lending
+  - Darius Hampton
+  - loan officer
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Our realtor Vanessa Kwok showed us five houses this weekend. The one we loved is in El Cerrito,
+    asking 720 but we think it's negotiable.
+  expected_stores:
+  - Vanessa Kwok
+  - realtor
+  - El Cerrito
+  - '720'
+- batch: 3
+  time: Month 2 Week 1
+  user_input: We made an offer at 695 with 20 percent down. The seller is an estate — the previous owner
+    was a woman named Ruth who passed last year.
+  expected_stores:
+  - '695'
+  - 20 percent down
+  - Ruth
+- batch: 4
+  time: Month 2 Week 2
+  user_input: Our offer was accepted! Home inspection tomorrow, appraisal next week. Tasha is already
+    picking paint colors.
+  expected_stores:
+  - accepted
+  - home inspection tomorrow
+  - appraisal next week
+  - Tasha
+  expected_adaptation:
+    emotion_detected: excited
+    warmth_direction: increase
+- batch: 5
+  time: Month 3 Week 1
+  user_input: What year did the Berlin Wall fall?
+- batch: 6
+  time: Month 3 Week 3
+  user_input: Inspection found some issues — old water heater, a chimney that needs repointing, estimated
+    8000 dollars in work. Seller agreed to credit us 5000 at close.
+  expected_stores:
+  - old water heater
+  - chimney
+  - repointing
+  - 8000 dollars
+  - '5000'
+- batch: 7
+  time: Month 4 Week 2
+  user_input: We closed today. Keys in hand. First night in the new house was on an air mattress because
+    our furniture won't arrive until Thursday.
+  expected_stores:
+  - closed
+  - air mattress
+  - Thursday
+  expected_adaptation:
+    emotion_detected: joyful
+    warmth_direction: increase
+questions:
+- question_id: 92_q1
+  question: Who is my wife?
+  expected_contains:
+  - Tasha
+- question_id: 92_q2
+  question: Who is our realtor?
+  expected_contains:
+  - Vanessa Kwok
+- question_id: 92_q3
+  question: Who is our loan officer?
+  expected_contains:
+  - Darius Hampton
+- question_id: 92_q4
+  question: Where is the house?
+  expected_contains:
+  - El Cerrito
+- question_id: 92_q5
+  question: What was our final offer?
+  expected_contains:
+  - '695'
+- question_id: 92_q6
+  question: How much credit did the seller give us at close?
+  expected_contains:
+  - '5000'
+- question_id: 92_q7
+  question: Who owned the house before us?
+  expected_contains:
+  - Ruth

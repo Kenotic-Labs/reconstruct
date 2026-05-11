@@ -1,0 +1,74 @@
+story_id: 243
+story_name: Twin Pregnancy Surprise
+category: Life Events
+description: User learns she's having twins during her first trimester.
+duration_simulated: 2 weeks
+total_batches: 4
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My OB Dr. Astrid Lindqvist did our 8 week ultrasound today. There are TWO heartbeats. My
+    husband Viggo went pale.
+  expected_stores:
+  - Dr. Astrid Lindqvist
+  - 8 week ultrasound
+  - two heartbeats
+  - Viggo
+  - husband
+  expected_adaptation:
+    emotion_detected: shock/joy
+    warmth_direction: increase
+- batch: 2
+  time: Week 1 Thursday
+  user_input: Dr. Lindqvist confirmed fraternal twins. Viggo and I need a bigger car and probably a bigger
+    house. Our current place is NOT big enough.
+  expected_stores:
+  - Dr. Lindqvist
+  - fraternal twins
+  - Viggo
+  - not big enough
+- batch: 3
+  time: Week 2
+  user_input: What's the longest river in Africa?
+- batch: 4
+  time: Week 2 Wednesday
+  user_input: Told our parents. Viggo's mom Beatrix already knitted one set of booties — we told her to
+    double it. My dad Stefan cried.
+  expected_stores:
+  - Beatrix
+  - Viggo's mom
+  - Stefan
+  - dad
+questions:
+- question_id: 243_q1
+  question: Who is my OB?
+  expected_contains:
+  - Astrid Lindqvist
+- question_id: 243_q2
+  question: Who is my husband?
+  expected_contains:
+  - Viggo
+- question_id: 243_q3
+  question: Who is Viggo's mom?
+  expected_contains:
+  - Beatrix
+- question_id: 243_q4
+  question: Who is my dad?
+  expected_contains:
+  - Stefan
+- question_id: 243_q5
+  question: Did I mention Dr. Astrid Lindqvist?
+  expected_contains:
+  - Dr. Astrid Lindqvist
+- question_id: 243_q6
+  question: When is 8 week ultrasound?
+  expected_contains:
+  - 8 week ultrasound
+- question_id: 243_q7
+  question: Did I mention two heartbeats?
+  expected_contains:
+  - two heartbeats
+- question_id: 243_q8
+  question: Did I mention husband?
+  expected_contains:
+  - husband

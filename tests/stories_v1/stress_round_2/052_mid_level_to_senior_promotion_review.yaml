@@ -1,0 +1,104 @@
+story_id: 52
+story_name: Mid-Level to Senior Promotion Review
+category: Career
+description: User goes through formal promotion review, calibration, and announcement.
+duration_simulated: 3 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1 Monday 9:00 AM
+  user_input: My manager Priya told me today that she's nominating me for Senior Engineer in this cycle.
+    The calibration meeting is in two weeks.
+  expected_stores:
+  - Priya
+  - manager
+  - Senior Engineer
+  - calibration
+  - two weeks
+  expected_adaptation:
+    emotion_detected: excited
+    warmth_direction: increase
+- batch: 2
+  time: Week 1 Wednesday 3:00 PM
+  user_input: I need to prepare a promo packet with three projects. My main one is the payment reconciliation
+    system I shipped last quarter with Alex and Jordan.
+  expected_stores:
+  - promo packet
+  - three projects
+  - payment reconciliation
+  - Alex
+  - Jordan
+- batch: 3
+  time: Week 1 Friday 5:30 PM
+  user_input: Do you know how chlorophyll works?
+- batch: 4
+  time: Week 2 Tuesday 11:00 AM
+  user_input: Priya introduced me to my promo buddy — her name is Sarah Chen, she's a Staff Engineer on
+    the platform team. She'll review my packet.
+  expected_stores:
+  - Sarah Chen
+  - Staff Engineer
+  - platform team
+  - promo buddy
+- batch: 5
+  time: Week 2 Thursday 2:00 PM
+  user_input: Sarah gave me feedback on the packet. She said the impact section needs more metrics, like
+    specific latency numbers and revenue impact.
+  expected_stores:
+  - Sarah
+  - feedback
+  - impact section
+  - metrics
+- batch: 6
+  time: Week 3 Monday 9:45 AM
+  user_input: The calibration meeting got pushed from tomorrow to Thursday because the director is traveling.
+  expected_stores:
+  - calibration meeting
+  - Thursday
+  - pushed from tomorrow
+  - director traveling
+- batch: 7
+  time: Week 3 Thursday 4:00 PM
+  user_input: I got the promotion! Priya just texted me. The promo becomes official on the first of next
+    month.
+  expected_stores:
+  - promotion
+  - first of next month
+  expected_adaptation:
+    emotion_detected: joy
+    warmth_direction: increase
+questions:
+- question_id: 52_q1
+  question: Who is my manager?
+  expected_contains:
+  - Priya
+- question_id: 52_q2
+  question: What role am I being promoted to?
+  expected_contains:
+  - Senior Engineer
+- question_id: 52_q3
+  question: Who is my promo buddy and what is her role?
+  expected_contains:
+  - Sarah Chen
+  - Staff Engineer
+- question_id: 52_q4
+  question: Who did I ship the payment reconciliation system with?
+  expected_contains:
+  - Alex
+  - Jordan
+- question_id: 52_q5
+  question: When is the calibration meeting now?
+  expected_contains:
+  - Thursday
+- question_id: 52_q6
+  question: When does the promotion become official?
+  expected_contains:
+  - first of next month
+- question_id: 52_q7
+  question: What did Sarah say the impact section needs?
+  expected_contains:
+  - metrics
+- question_id: 52_q8
+  question: What team is Sarah on?
+  expected_contains:
+  - platform

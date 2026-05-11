@@ -1,0 +1,103 @@
+story_id: 67
+story_name: Diagnosed With Type 2 Diabetes
+category: Health
+description: User receives a T2D diagnosis and begins lifestyle changes.
+duration_simulated: 3 months
+total_batches: 7
+batches:
+- batch: 1
+  time: Month 1 Week 1
+  user_input: My annual physical came back with an A1C of 7.2 — my doctor Dr. Marcus Li said that's Type
+    2 diabetes. I'm in shock.
+  expected_stores:
+  - A1C
+  - '7.2'
+  - Dr. Marcus Li
+  - Type 2 diabetes
+  expected_adaptation:
+    emotion_detected: shock/worry
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Month 1 Week 2
+  user_input: Started on metformin 500mg twice a day. Dr. Li referred me to a dietician named Hana Yoshida
+    at the same clinic.
+  expected_stores:
+  - metformin
+  - 500mg twice a day
+  - Hana Yoshida
+  - dietician
+- batch: 3
+  time: Month 1 Week 3
+  user_input: Hana had me log everything I eat for a week. Big surprise — I was drinking about 600 calories
+    a day in sweetened coffee drinks.
+  expected_stores:
+  - Hana
+  - 600 calories
+  - sweetened coffee
+- batch: 4
+  time: Month 2 Week 1
+  user_input: What's the freezing point of water in Fahrenheit?
+- batch: 5
+  time: Month 2 Week 2
+  user_input: I've cut out sugary drinks entirely, reduced carbs, walking 30 minutes every day. My wife
+    Keiko is doing it with me — solidarity.
+  expected_stores:
+  - sugary drinks
+  - carbs
+  - 30 minutes
+  - Keiko
+  - wife
+- batch: 6
+  time: Month 2 Week 4
+  user_input: Lost 12 pounds in the first month. Fasting glucose dropped from 168 to 132. Dr. Li was really
+    pleased.
+  expected_stores:
+  - 12 pounds
+  - fasting glucose
+  - '168'
+  - '132'
+  expected_adaptation:
+    emotion_detected: proud
+    warmth_direction: increase
+- batch: 7
+  time: Month 3 Week 2
+  user_input: Three month A1C came back at 6.4. Still technically diabetic but in the controlled range.
+    Dr. Li said keep going.
+  expected_stores:
+  - three month A1C
+  - '6.4'
+  - controlled range
+questions:
+- question_id: 67_q1
+  question: Who is my doctor?
+  expected_contains:
+  - Marcus Li
+- question_id: 67_q2
+  question: What was my initial A1C?
+  expected_contains:
+  - '7.2'
+- question_id: 67_q3
+  question: What medication am I on?
+  expected_contains:
+  - metformin
+- question_id: 67_q4
+  question: Who is my dietician?
+  expected_contains:
+  - Hana Yoshida
+- question_id: 67_q5
+  question: Who is my wife?
+  expected_contains:
+  - Keiko
+- question_id: 67_q6
+  question: What is my current A1C?
+  expected_contains:
+  - '6.4'
+- question_id: 67_q7
+  question: How much weight did I lose in the first month?
+  expected_contains:
+  - '12'
+- question_id: 67_q8
+  question: Did I mention A1C?
+  expected_contains:
+  - A1C

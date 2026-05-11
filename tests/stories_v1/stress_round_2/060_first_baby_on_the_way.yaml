@@ -1,0 +1,109 @@
+story_id: 60
+story_name: First Baby on the Way
+category: Relationships
+description: User and partner learn they're pregnant and navigate first trimester.
+duration_simulated: 4 months
+total_batches: 8
+batches:
+- batch: 1
+  time: Month 1 Day 1
+  user_input: We just got the positive pregnancy test. I'm 5 weeks along. My partner Noa is freaking out
+    in a good way.
+  expected_stores:
+  - 5 weeks
+  - Noa
+  - partner
+  expected_adaptation:
+    emotion_detected: excited/nervous
+    warmth_direction: increase
+- batch: 2
+  time: Month 1 Week 3
+  user_input: We picked an OB — Dr. Rina Sharma at Marin General. First appointment is on the 14th.
+  expected_stores:
+  - Dr. Rina Sharma
+  - Marin General
+  - 14th
+- batch: 3
+  time: Month 2 Week 1
+  user_input: The first ultrasound showed a strong heartbeat. Dr. Sharma confirmed we're 8 weeks along.
+    Due date is mid October.
+  expected_stores:
+  - heartbeat
+  - 8 weeks
+  - mid October
+- batch: 4
+  time: Month 2 Week 3
+  user_input: Morning sickness is brutal. I lost 6 pounds this week. Noa has been incredible — making
+    me plain toast and keeping ginger candies around.
+  expected_stores:
+  - morning sickness
+  - 6 pounds
+  - Noa
+  - toast
+  - ginger candies
+  expected_adaptation:
+    emotion_detected: unwell
+    warmth_direction: increase
+- batch: 5
+  time: Month 3 Week 1
+  user_input: Who wrote Pride and Prejudice?
+- batch: 6
+  time: Month 3 Week 2
+  user_input: We told our parents this weekend. My mom Helen cried. Noa's dad Arjun wants to start building
+    a crib by hand.
+  expected_stores:
+  - Helen
+  - mom
+  - Arjun
+  - dad
+  - crib
+- batch: 7
+  time: Month 4 Week 1
+  user_input: We're past the 12 week mark and we told our friends. Anju and Dev are over the moon because
+    they had a baby last year.
+  expected_stores:
+  - 12 week mark
+  - Anju
+  - Dev
+- batch: 8
+  time: Month 4 Week 3
+  user_input: The anatomy scan is scheduled for next month. We're choosing not to find out the sex — want
+    it to be a surprise.
+  expected_stores:
+  - anatomy scan
+  - next month
+  - surprise
+questions:
+- question_id: 60_q1
+  question: Who is my partner?
+  expected_contains:
+  - Noa
+- question_id: 60_q2
+  question: Who is my OB?
+  expected_contains:
+  - Rina Sharma
+- question_id: 60_q3
+  question: Where is she practicing?
+  expected_contains:
+  - Marin General
+- question_id: 60_q4
+  question: When is my due date?
+  expected_contains:
+  - October
+- question_id: 60_q5
+  question: Who is my mom?
+  expected_contains:
+  - Helen
+- question_id: 60_q6
+  question: Who is Noa's dad?
+  expected_contains:
+  - Arjun
+- question_id: 60_q7
+  question: Who are the friends who had a baby last year?
+  expected_contains:
+  - Anju
+  - Dev
+- question_id: 60_q8
+  question: When is 5 weeks?
+  expected_contains:
+  - 5 weeks

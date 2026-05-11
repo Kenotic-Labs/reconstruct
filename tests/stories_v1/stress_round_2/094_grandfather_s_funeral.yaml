@@ -1,0 +1,106 @@
+story_id: 94
+story_name: Grandfather's Funeral
+category: Life Events
+description: User navigates losing their grandfather and attending the funeral.
+duration_simulated: 2 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1 Monday
+  user_input: My grandfather Abelardo passed away this morning. He was 89. My mom Graciela called me at
+    6 AM.
+  expected_stores:
+  - Abelardo
+  - grandfather
+  - '89'
+  - Graciela
+  - mom
+  - 6 AM
+  expected_adaptation:
+    emotion_detected: grief
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Week 1 Tuesday
+  user_input: Flying to Miami tomorrow for the funeral. It's at the church where Abelardo was baptized
+    89 years ago — Our Lady of Charity.
+  expected_stores:
+  - Miami
+  - funeral
+  - Our Lady of Charity
+- batch: 3
+  time: Week 1 Thursday
+  user_input: The wake was last night. My cousins Ricardo and Camila drove up from Key West. I hadn't
+    seen them in four years.
+  expected_stores:
+  - wake
+  - Ricardo
+  - Camila
+  - cousins
+  - Key West
+  - four years
+- batch: 4
+  time: Week 1 Friday
+  user_input: Funeral was beautiful. I gave a eulogy about Abelardo teaching me to play dominos when I
+    was eight. Uncle Tomas conducted the service.
+  expected_stores:
+  - eulogy
+  - Abelardo
+  - dominos
+  - eight
+  - Tomas
+  - uncle
+  expected_adaptation:
+    emotion_detected: grief
+    warmth_direction: increase
+- batch: 5
+  time: Week 2 Monday
+  user_input: Who wrote Romeo and Juliet?
+- batch: 6
+  time: Week 2 Wednesday
+  user_input: Back home. Mom is staying in Miami for a week to help Grandma Josefina with the paperwork.
+    Abelardo's pension is complicated.
+  expected_stores:
+  - Mom
+  - Miami
+  - Josefina
+  - grandma
+  - pension
+- batch: 7
+  time: Week 2 Saturday
+  user_input: Called Mom to check in. She said Grandma is holding up but is having a hard time sleeping.
+    She'll fly back Tuesday.
+  expected_stores:
+  - Mom
+  - Grandma
+  - Tuesday
+questions:
+- question_id: 94_q1
+  question: Who passed away?
+  expected_contains:
+  - Abelardo
+- question_id: 94_q2
+  question: How old was he?
+  expected_contains:
+  - '89'
+- question_id: 94_q3
+  question: Who is my mom?
+  expected_contains:
+  - Graciela
+- question_id: 94_q4
+  question: What church was the funeral at?
+  expected_contains:
+  - Our Lady of Charity
+- question_id: 94_q5
+  question: Who is my grandma?
+  expected_contains:
+  - Josefina
+- question_id: 94_q6
+  question: Who are my cousins from Key West?
+  expected_contains:
+  - Ricardo
+  - Camila
+- question_id: 94_q7
+  question: Did I mention grandfather?
+  expected_contains:
+  - grandfather

@@ -1,0 +1,73 @@
+story_id: 186
+story_name: Pet Emergency
+category: Daily Life
+description: User's cat has a urinary blockage and needs emergency surgery.
+duration_simulated: 2 weeks
+total_batches: 4
+batches:
+- batch: 1
+  time: Day 1
+  user_input: My cat Binky stopped peeing. Emergency vet visit at BluePearl — Dr. Sanjay Menon said it's
+    a urinary blockage and she needs surgery.
+  expected_stores:
+  - Binky
+  - BluePearl
+  - Dr. Sanjay Menon
+  - urinary blockage
+  expected_adaptation:
+    emotion_detected: panic
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Day 2
+  user_input: Surgery went well. Dr. Menon said Binky will need a special diet long term. Total cost is
+    4200 dollars.
+  expected_stores:
+  - Dr. Menon
+  - Binky
+  - special diet
+  - 4200 dollars
+- batch: 3
+  time: Week 1
+  user_input: What's the chemical symbol for sodium?
+- batch: 4
+  time: Week 2
+  user_input: Binky is home and eating her new prescription food. Dr. Menon said she's NOT likely to have
+    another episode if we manage her diet.
+  expected_stores:
+  - Binky
+  - prescription food
+  - Dr. Menon
+  - not likely
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+questions:
+- question_id: 186_q1
+  question: What is my cat's name?
+  expected_contains:
+  - Binky
+- question_id: 186_q2
+  question: Where was the emergency vet?
+  expected_contains:
+  - BluePearl
+- question_id: 186_q3
+  question: Who was the vet?
+  expected_contains:
+  - Sanjay Menon
+- question_id: 186_q4
+  question: How much did it cost?
+  expected_contains:
+  - '4200'
+- question_id: 186_q5
+  question: Did I mention Dr. Sanjay Menon?
+  expected_contains:
+  - Dr. Sanjay Menon
+- question_id: 186_q6
+  question: Did I mention urinary blockage?
+  expected_contains:
+  - urinary blockage
+- question_id: 186_q7
+  question: Did I mention Dr. Menon?
+  expected_contains:
+  - Dr. Menon

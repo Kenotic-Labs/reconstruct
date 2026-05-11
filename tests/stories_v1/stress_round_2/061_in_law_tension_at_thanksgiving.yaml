@@ -1,0 +1,100 @@
+story_id: 61
+story_name: In-Law Tension at Thanksgiving
+category: Relationships
+description: User navigates in-law conflict during a holiday visit.
+duration_simulated: 1 week
+total_batches: 7
+batches:
+- batch: 1
+  time: Monday
+  user_input: We're hosting Thanksgiving this year for the first time. My husband Dev's parents are flying
+    in on Wednesday.
+  expected_stores:
+  - Thanksgiving
+  - first time
+  - Dev
+  - husband
+  - Wednesday
+- batch: 2
+  time: Tuesday
+  user_input: Dev's mom Aruna texted that she's bringing her own cookware because she's particular about
+    nonstick quality. I'm trying not to take it personally.
+  expected_stores:
+  - Aruna
+  - cookware
+  - nonstick
+  expected_adaptation:
+    emotion_detected: annoyed
+    warmth_direction: neutral
+- batch: 3
+  time: Wednesday evening
+  user_input: Aruna arrived and immediately rearranged my spice rack. Dev asked me not to say anything
+    yet.
+  expected_stores:
+  - Aruna
+  - spice rack
+  - Dev
+- batch: 4
+  time: Thursday morning
+  user_input: How tall is the Eiffel Tower?
+- batch: 5
+  time: Thursday dinner
+  user_input: The turkey came out great. Aruna said she was surprised it wasn't dry. Dev kicked me under
+    the table.
+  expected_stores:
+  - turkey
+  - Aruna
+- batch: 6
+  time: Friday evening
+  user_input: Dev and I had a real conversation after Aruna went to bed. He agrees she was being passive
+    aggressive but asked me to try to see where she's coming from — first time visiting.
+  expected_stores:
+  - Dev
+  - Aruna
+  - passive aggressive
+  expected_adaptation:
+    emotion_detected: reflective
+    warmth_direction: increase
+- batch: 7
+  time: Sunday
+  user_input: They flew back this afternoon. Aruna actually hugged me at the airport and said the pecan
+    pie was the best she's had. I think we're okay.
+  expected_stores:
+  - Aruna
+  - pecan pie
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+questions:
+- question_id: 61_q1
+  question: Who is my husband?
+  expected_contains:
+  - Dev
+- question_id: 61_q2
+  question: Who is my mother-in-law?
+  expected_contains:
+  - Aruna
+- question_id: 61_q3
+  question: What holiday did I host?
+  expected_contains:
+  - Thanksgiving
+- question_id: 61_q4
+  question: What did Aruna bring with her?
+  expected_contains:
+  - cookware
+- question_id: 61_q5
+  question: What did she say about the pecan pie?
+  expected_contains:
+  - best
+- question_id: 61_q6
+  question: What day did Dev's parents arrive?
+  expected_contains:
+  - Wednesday
+- question_id: 61_q7
+  question: What did Aruna rearrange when she arrived?
+  expected_contains:
+  - spice
+- question_id: 61_q8
+  question: Did I mention first time?
+  expected_contains:
+  - first time

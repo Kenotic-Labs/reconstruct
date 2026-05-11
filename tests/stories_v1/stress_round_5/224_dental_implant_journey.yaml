@@ -1,0 +1,75 @@
+story_id: 224
+story_name: Dental Implant Journey
+category: Health
+description: User gets a dental implant over multiple stages.
+duration_simulated: 5 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: Cracked tooth beyond repair. My dentist Dr. Iliad Marshall referred me to an oral surgeon
+    Dr. Ramona Dolfi for an implant.
+  expected_stores:
+  - Dr. Iliad Marshall
+  - Dr. Ramona Dolfi
+  - oral surgeon
+  - implant
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Extraction and bone graft today. Dr. Dolfi said healing takes 4 months before the implant
+    can be placed.
+  expected_stores:
+  - extraction
+  - bone graft
+  - Dr. Dolfi
+  - 4 months
+- batch: 3
+  time: Month 3
+  user_input: What's the boiling point of gold?
+- batch: 4
+  time: Month 5
+  user_input: Implant placed. Dr. Dolfi said it went well. Crown will be placed by Dr. Marshall in 3 months.
+  expected_stores:
+  - Dr. Dolfi
+  - Dr. Marshall
+  - crown
+  - 3 months
+- batch: 5
+  time: Month 5 Week 3
+  user_input: Total cost is 6800 dollars out of pocket. Insurance covered 20 percent. Not cheap but necessary.
+  expected_stores:
+  - 6800 dollars
+  - 20 percent
+questions:
+- question_id: 224_q1
+  question: Who is my dentist?
+  expected_contains:
+  - Iliad Marshall
+- question_id: 224_q2
+  question: Who is my oral surgeon?
+  expected_contains:
+  - Ramona Dolfi
+- question_id: 224_q3
+  question: What was the total cost?
+  expected_contains:
+  - '6800'
+- question_id: 224_q4
+  question: Did I mention Dr. Iliad Marshall?
+  expected_contains:
+  - Dr. Iliad Marshall
+- question_id: 224_q5
+  question: Did I mention Dr. Ramona Dolfi?
+  expected_contains:
+  - Dr. Ramona Dolfi
+- question_id: 224_q6
+  question: Did I mention oral surgeon?
+  expected_contains:
+  - oral surgeon
+- question_id: 224_q7
+  question: Did I mention implant?
+  expected_contains:
+  - implant
+- question_id: 224_q8
+  question: Did I mention extraction?
+  expected_contains:
+  - extraction

@@ -1,0 +1,79 @@
+story_id: 208
+story_name: Competing Promotion Candidates
+category: Career
+description: User and their teammate are both up for the same promotion.
+duration_simulated: 4 weeks
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My teammate Anouk and I are both up for the same Senior role. Only one slot. Our manager
+    Drago is running the calibration.
+  expected_stores:
+  - Anouk
+  - Senior role
+  - Drago
+  - manager
+- batch: 2
+  time: Week 2
+  user_input: Anouk and I agreed to not compete in public. Behind the scenes we're both preparing our
+    packets.
+  expected_stores:
+  - Anouk
+  - packets
+- batch: 3
+  time: Week 3
+  user_input: What's the oldest city in the world?
+- batch: 4
+  time: Week 3 Thursday
+  user_input: 'Drago told us both the decision: Anouk got it. She and I had a real talk afterward and
+    she told me Drago said I was extremely close.'
+  expected_stores:
+  - Drago
+  - Anouk
+  - extremely close
+  expected_adaptation:
+    emotion_detected: disappointed
+    warmth_direction: neutral
+- batch: 5
+  time: Week 4
+  user_input: Drago promised I'd be up for the NEXT Senior slot which opens in Q3. Anouk is already coaching
+    me. I'm NOT resentful.
+  expected_stores:
+  - Drago
+  - Q3
+  - Anouk
+  - not resentful
+questions:
+- question_id: 208_q1
+  question: Who is my teammate?
+  expected_contains:
+  - Anouk
+- question_id: 208_q2
+  question: Who is my manager?
+  expected_contains:
+  - Drago
+- question_id: 208_q3
+  question: Who got the promotion?
+  expected_contains:
+  - Anouk
+- question_id: 208_q4
+  question: When is the next slot?
+  expected_contains:
+  - Q3
+- question_id: 208_q5
+  question: Did I mention Senior role?
+  expected_contains:
+  - Senior role
+- question_id: 208_q6
+  question: Did I mention manager?
+  expected_contains:
+  - manager
+- question_id: 208_q7
+  question: Did I mention packets?
+  expected_contains:
+  - packets
+- question_id: 208_q8
+  question: Did I mention extremely close?
+  expected_contains:
+  - extremely close

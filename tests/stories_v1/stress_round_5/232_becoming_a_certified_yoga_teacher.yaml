@@ -1,0 +1,78 @@
+story_id: 232
+story_name: Becoming a Certified Yoga Teacher
+category: Learning
+description: User completes a 200 hour yoga teacher training.
+duration_simulated: 5 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: Started a 200 hour yoga teacher training at Laughing Lotus Yoga in SF. My lead teacher is
+    Sita Rajagopal.
+  expected_stores:
+  - 200 hour
+  - Laughing Lotus Yoga
+  - Sita Rajagopal
+- batch: 2
+  time: Month 2
+  user_input: Training is Saturdays and Sundays 9 to 5 for 20 weeks. My anatomy teacher Konrad Voss is
+    brilliant.
+  expected_stores:
+  - Saturdays Sundays
+  - 9 to 5
+  - 20 weeks
+  - Konrad Voss
+- batch: 3
+  time: Month 3
+  user_input: What's the longest bone in the human body?
+- batch: 4
+  time: Month 4
+  user_input: Started teaching practice classes. My first volunteer student was my friend Priscilla. She
+    said I did well.
+  expected_stores:
+  - Priscilla
+- batch: 5
+  time: Month 5
+  user_input: Graduated. Sita and Konrad both signed my certificate. Teaching my first public class at
+    Laughing Lotus next Sunday.
+  expected_stores:
+  - Sita
+  - Konrad
+  - Laughing Lotus
+  - Sunday
+  expected_adaptation:
+    emotion_detected: proud
+    warmth_direction: increase
+questions:
+- question_id: 232_q1
+  question: Where is my training?
+  expected_contains:
+  - Laughing Lotus
+- question_id: 232_q2
+  question: Who is my lead teacher?
+  expected_contains:
+  - Sita Rajagopal
+- question_id: 232_q3
+  question: Who is my anatomy teacher?
+  expected_contains:
+  - Konrad Voss
+- question_id: 232_q4
+  question: When is 200 hour?
+  expected_contains:
+  - 200 hour
+- question_id: 232_q5
+  question: Do I know someone named Laughing Lotus Yoga?
+  expected_contains:
+  - Laughing Lotus Yoga
+- question_id: 232_q6
+  question: Do I know someone named Saturdays Sundays?
+  expected_contains:
+  - Saturdays Sundays
+- question_id: 232_q7
+  question: Did I mention 9 to 5?
+  expected_contains:
+  - 9 to 5
+- question_id: 232_q8
+  question: When is 20 weeks?
+  expected_contains:
+  - 20 weeks

@@ -1,0 +1,76 @@
+story_id: 192
+story_name: Uber Driver Became a Friend
+category: Daily Life
+description: User unexpectedly befriends an Uber driver during a long ride.
+duration_simulated: 1 month
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: Took an Uber from SFO to Berkeley with a driver named Tayo Abiona. He's Nigerian, drives
+    full time. We talked the entire ride.
+  expected_stores:
+  - Uber
+  - SFO
+  - Berkeley
+  - Tayo Abiona
+  - Nigerian
+- batch: 2
+  time: Week 2
+  user_input: Ran into Tayo at a coffee shop by chance. Turns out he lives 5 blocks from me. We exchanged
+    numbers.
+  expected_stores:
+  - Tayo
+  - 5 blocks
+- batch: 3
+  time: Week 3
+  user_input: What's the tallest mammal?
+- batch: 4
+  time: Week 3 Friday
+  user_input: Had dinner with Tayo and his wife Zainab at their place. She cooked jollof rice. Their son
+    Ade is 7.
+  expected_stores:
+  - Tayo
+  - Zainab
+  - wife
+  - jollof rice
+  - Ade
+  - '7'
+- batch: 5
+  time: Month 2
+  user_input: Tayo and I hiked Redwood Regional on Saturday. It's a real friendship now, not just a coincidence.
+  expected_stores:
+  - Tayo
+  - Redwood Regional
+  expected_adaptation:
+    emotion_detected: surprised/warm
+    warmth_direction: increase
+questions:
+- question_id: 192_q1
+  question: Who is the Uber driver?
+  expected_contains:
+  - Tayo Abiona
+- question_id: 192_q2
+  question: Who is his wife?
+  expected_contains:
+  - Zainab
+- question_id: 192_q3
+  question: Who is their son?
+  expected_contains:
+  - Ade
+- question_id: 192_q4
+  question: What is he cooking?
+  expected_contains:
+  - jollof
+- question_id: 192_q5
+  question: Do I know someone named Uber?
+  expected_contains:
+  - Uber
+- question_id: 192_q6
+  question: Did I mention SFO?
+  expected_contains:
+  - SFO
+- question_id: 192_q7
+  question: Do I know someone named Berkeley?
+  expected_contains:
+  - Berkeley

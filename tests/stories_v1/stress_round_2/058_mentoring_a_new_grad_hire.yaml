@@ -1,0 +1,106 @@
+story_id: 58
+story_name: Mentoring a New Grad Hire
+category: Career
+description: User takes on a mentorship role for a new grad joining their team.
+duration_simulated: 8 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1 Monday
+  user_input: My manager Chen asked me to mentor a new grad joining our team next Monday. Her name is
+    Zoe Nakamura and she's coming from Carnegie Mellon.
+  expected_stores:
+  - Chen
+  - manager
+  - mentor
+  - Zoe Nakamura
+  - Carnegie Mellon
+  - next Monday
+- batch: 2
+  time: Week 2 Tuesday
+  user_input: Zoe's first week is going well. I set up a one-on-one every Wednesday at 2 PM and paired
+    her with our senior Yan Liu for code review.
+  expected_stores:
+  - Zoe
+  - one-on-one
+  - Wednesday 2 PM
+  - Yan Liu
+  - code review
+- batch: 3
+  time: Week 3 Thursday
+  user_input: What is the square root of 144?
+- batch: 4
+  time: Week 4 Friday
+  user_input: Zoe shipped her first PR today — a small bug fix in the rate limiter. She was super nervous
+    but it went through without incident.
+  expected_stores:
+  - Zoe
+  - first PR
+  - bug fix
+  - rate limiter
+  expected_adaptation:
+    emotion_detected: proud
+    warmth_direction: increase
+- batch: 5
+  time: Week 5 Wednesday
+  user_input: In our one-on-one Zoe told me she's feeling overwhelmed by the codebase and second-guessing
+    whether she's cut out for this. I reminded her everyone feels that way early on.
+  expected_stores:
+  - Zoe
+  - overwhelmed
+  - codebase
+  - second-guessing
+  expected_adaptation:
+    emotion_detected: supportive
+    warmth_direction: increase
+- batch: 6
+  time: Week 7 Friday
+  user_input: Zoe delivered her first medium-sized feature — the new filtering logic in the search API.
+    Took her four weeks which is about right.
+  expected_stores:
+  - Zoe
+  - filtering logic
+  - search API
+  - four weeks
+- batch: 7
+  time: Week 8 Tuesday
+  user_input: Chen said he wants to formalize my mentorship role across the team. Extra 5k bump and new
+    title of Tech Lead starting next quarter.
+  expected_stores:
+  - Chen
+  - 5k bump
+  - Tech Lead
+  - next quarter
+questions:
+- question_id: 58_q1
+  question: Who is my mentee?
+  expected_contains:
+  - Zoe Nakamura
+- question_id: 58_q2
+  question: Where did Zoe go to school?
+  expected_contains:
+  - Carnegie Mellon
+- question_id: 58_q3
+  question: Who is my manager?
+  expected_contains:
+  - Chen
+- question_id: 58_q4
+  question: When are my one-on-ones with Zoe?
+  expected_contains:
+  - Wednesday
+- question_id: 58_q5
+  question: What was Zoe's first PR?
+  expected_contains:
+  - rate limiter
+- question_id: 58_q6
+  question: What new title am I getting?
+  expected_contains:
+  - Tech Lead
+- question_id: 58_q7
+  question: Who did I pair Zoe with for code review?
+  expected_contains:
+  - Yan Liu
+- question_id: 58_q8
+  question: What feature did Zoe ship after four weeks?
+  expected_contains:
+  - filtering

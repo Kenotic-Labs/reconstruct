@@ -1,0 +1,119 @@
+story_id: 33
+story_name: Buying First Home
+category: Life Events
+description: 'User is buying their first home with realtor Vanessa Cruz. It is a 2-bedroom
+
+  condo in the Lakewood neighborhood priced at $320k with a 20% down payment.
+
+  Closing date is January 30th. The home inspector found a minor roof issue.
+
+  Tests memory of financial details, property specifics, and process milestones.
+
+  '
+duration_simulated: 4 weeks
+total_batches: 8
+batches:
+- batch: 1
+  time: Monday 10:00 AM
+  user_input: 'I''m officially in the process of buying my first home! My realtor
+
+    Vanessa Cruz found me a great place - a 2-bedroom condo in the Lakewood
+
+    neighborhood. It''s listed at $320,000. I''ve been saving for years and
+
+    I''m putting down 20% as a down payment.
+
+    '
+  expected_stores:
+  - Vanessa Cruz
+  - realtor
+  - 2-bedroom
+  - condo
+  - Lakewood
+  - 320,000
+  - 20%
+- batch: 2
+  time: Wednesday 2:00 PM
+  user_input: 'The home inspection happened today. The inspector found a minor issue
+
+    with the roof - some shingles need replacing. Vanessa said we can
+
+    negotiate with the seller to fix it before closing. Other than that,
+
+    the place is in great shape. I love the open floor plan.
+
+    '
+  expected_stores:
+  - roof issue
+  - shingles
+  - inspection
+  - open floor plan
+- batch: 3
+  time: Thursday 9:00 AM
+  user_input: What is the difference between a fixed-rate and adjustable-rate mortgage?
+- batch: 4
+  time: Friday 3:00 PM
+  user_input: 'Great news - the seller agreed to fix the roof before closing! Vanessa
+
+    negotiated it perfectly. Closing date is set for January 30th. I need
+
+    to get my mortgage paperwork finalized. My lender is First National Bank.
+
+    '
+  expected_stores:
+  - January 30th
+  - closing date
+  - First National Bank
+  - roof fix
+- batch: 5
+  time: Week 2 Monday 11:00 AM
+  user_input: What was the issue the home inspector found with my condo?
+- batch: 6
+  time: Week 2 Thursday 4:00 PM
+  user_input: 'I''m starting to plan the move. The condo has a beautiful view of the
+
+    lake from the living room. I''m going to need new furniture - the
+
+    current apartment stuff won''t fit right. My friend offered to help me
+
+    move on the weekend after closing.
+
+    '
+  expected_stores:
+  - lake view
+  - new furniture
+  - move
+- batch: 7
+  time: Week 3 Tuesday 9:00 AM
+  user_input: What is escrow in real estate?
+- batch: 8
+  time: Week 3 Friday 2:00 PM
+  user_input: What is the price of my condo and when is the closing date?
+questions:
+- question_id: 33_q1
+  question: Who is my realtor?
+  expected_contains:
+  - Vanessa Cruz
+- question_id: 33_q2
+  question: What type of property am I buying and where?
+  expected_contains:
+  - 2-bedroom
+  - condo
+  - Lakewood
+- question_id: 33_q3
+  question: What is the price and down payment percentage?
+  expected_contains:
+  - '320'
+  - 20%
+- question_id: 33_q4
+  question: When is the closing date?
+  expected_contains:
+  - January 30
+- question_id: 33_q5
+  question: What issue did the home inspector find?
+  expected_contains:
+  - roof
+- question_id: 33_q6
+  question: Who is my mortgage lender?
+  expected_contains:
+  - First National Bank

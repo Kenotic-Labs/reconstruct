@@ -1,0 +1,80 @@
+story_id: 173
+story_name: Anxiety About an Elective Procedure
+category: Health
+description: User navigates anxiety around elective cosmetic surgery.
+duration_simulated: 6 weeks
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: I'm getting rhinoplasty in 6 weeks with Dr. Celeste Park at Beverly Hills Plastic Surgery.
+    12000 dollars.
+  expected_stores:
+  - rhinoplasty
+  - 6 weeks
+  - Dr. Celeste Park
+  - Beverly Hills Plastic Surgery
+  - '12000'
+- batch: 2
+  time: Week 3
+  user_input: I am NOT telling my parents about it. They wouldn't understand. My best friend Lior knows
+    and she's the only one.
+  expected_stores:
+  - not telling parents
+  - Lior
+  - best friend
+- batch: 3
+  time: Week 4
+  user_input: What's the smallest country?
+- batch: 4
+  time: Week 5
+  user_input: Pre-op visit with Dr. Park. She talked me through recovery — bruising peaks day 3, cast
+    comes off at week 1.
+  expected_stores:
+  - Dr. Park
+  - day 3
+  - week 1
+- batch: 5
+  time: Week 6
+  user_input: Surgery done. Lior picked me up and is staying two nights. I look like a raccoon but Dr.
+    Park said it's exactly as expected.
+  expected_stores:
+  - Lior
+  - two nights
+  - Dr. Park
+  expected_adaptation:
+    emotion_detected: anxious/relieved
+    warmth_direction: increase
+questions:
+- question_id: 173_q1
+  question: Who is my surgeon?
+  expected_contains:
+  - Celeste Park
+- question_id: 173_q2
+  question: Where is the practice?
+  expected_contains:
+  - Beverly Hills
+- question_id: 173_q3
+  question: How much did it cost?
+  expected_contains:
+  - '12000'
+- question_id: 173_q4
+  question: Who picked me up?
+  expected_contains:
+  - Lior
+- question_id: 173_q5
+  question: Did I tell my parents?
+  expected_contains:
+  - not
+- question_id: 173_q6
+  question: Did I mention rhinoplasty?
+  expected_contains:
+  - rhinoplasty
+- question_id: 173_q7
+  question: When is 6 weeks?
+  expected_contains:
+  - 6 weeks
+- question_id: 173_q8
+  question: Where is Dr. Celeste Park?
+  expected_contains:
+  - Dr. Celeste Park

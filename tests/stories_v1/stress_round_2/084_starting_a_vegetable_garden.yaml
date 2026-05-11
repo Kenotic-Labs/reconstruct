@@ -1,0 +1,105 @@
+story_id: 84
+story_name: Starting a Vegetable Garden
+category: Daily Life
+description: User plans and plants their first backyard vegetable garden.
+duration_simulated: 4 months
+total_batches: 7
+batches:
+- batch: 1
+  time: Month 1 Week 1
+  user_input: I'm starting a vegetable garden in my backyard. I picked a 10 by 12 foot plot that gets
+    full sun. Soil test kit is on the way.
+  expected_stores:
+  - vegetable garden
+  - backyard
+  - 10 by 12
+  - full sun
+  - soil test
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Soil test came back — pH of 6.8, slightly low in nitrogen. Got advice at my local nursery
+    from a guy named Marco Delgado. He recommended compost and worm castings.
+  expected_stores:
+  - pH
+  - '6.8'
+  - nitrogen
+  - Marco Delgado
+  - nursery
+  - compost
+  - worm castings
+- batch: 3
+  time: Month 1 Week 4
+  user_input: Built two raised beds from cedar, 4x8 each. Total cost for lumber and soil was 340 dollars.
+    Tomatoes, peppers, basil going in the south bed.
+  expected_stores:
+  - raised beds
+  - cedar
+  - 4x8
+  - 340 dollars
+  - tomatoes
+  - peppers
+  - basil
+  - south bed
+- batch: 4
+  time: Month 2 Week 2
+  user_input: How many planets are in our solar system?
+- batch: 5
+  time: Month 2 Week 4
+  user_input: Plants are in the ground. I'm watering every morning at 7 AM. The basil is already thriving,
+    but the peppers look stressed.
+  expected_stores:
+  - 7 AM
+  - basil
+  - peppers
+- batch: 6
+  time: Month 3 Week 2
+  user_input: My first tomato ripened today. It's a Cherokee Purple — Marco at the nursery recommended
+    that variety. Ate it still warm from the sun.
+  expected_stores:
+  - Cherokee Purple
+  - Marco
+  - nursery
+  expected_adaptation:
+    emotion_detected: joy
+    warmth_direction: increase
+- batch: 7
+  time: Month 4
+  user_input: Harvested 15 tomatoes, 8 peppers, and a massive amount of basil this month. Made pesto and
+    canned sauce with my mom Ingrid.
+  expected_stores:
+  - 15 tomatoes
+  - 8 peppers
+  - basil
+  - pesto
+  - canned sauce
+  - Ingrid
+  - mom
+questions:
+- question_id: 84_q1
+  question: What am I growing?
+  expected_contains:
+  - vegetables
+- question_id: 84_q2
+  question: What variety of tomato is producing?
+  expected_contains:
+  - Cherokee Purple
+- question_id: 84_q3
+  question: Who at the nursery helped me?
+  expected_contains:
+  - Marco Delgado
+- question_id: 84_q4
+  question: What was the soil pH?
+  expected_contains:
+  - '6.8'
+- question_id: 84_q5
+  question: Who is my mom?
+  expected_contains:
+  - Ingrid
+- question_id: 84_q6
+  question: How much did the lumber and soil cost?
+  expected_contains:
+  - '340'
+- question_id: 84_q7
+  question: Did I mention vegetable garden?
+  expected_contains:
+  - vegetable garden

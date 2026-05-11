@@ -1,0 +1,83 @@
+story_id: 200
+story_name: Getting Sober
+category: Life Events
+description: User hits 30 days of sobriety and navigates early recovery.
+duration_simulated: 6 weeks
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: First day sober. Going to AA meetings at a church basement on Clement. My sponsor is a woman
+    named Fenella Okonkwo.
+  expected_stores:
+  - sober
+  - AA
+  - Clement
+  - Fenella Okonkwo
+  - sponsor
+  expected_adaptation:
+    emotion_detected: vulnerable
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Week 2
+  user_input: Fenella took me through the first step. It was harder than I thought. My friend Theo is
+    NOT drinking around me anymore in solidarity.
+  expected_stores:
+  - Fenella
+  - first step
+  - Theo
+  - not drinking
+- batch: 3
+  time: Week 3
+  user_input: Who wrote On the Road?
+- batch: 4
+  time: Week 4
+  user_input: 30 days today. Got my first chip at the meeting. Fenella gave me a small rock engraved with
+    'one day at a time'. I cried.
+  expected_stores:
+  - 30 days
+  - first chip
+  - Fenella
+  - one day at a time
+  expected_adaptation:
+    emotion_detected: emotional
+    warmth_direction: increase
+- batch: 5
+  time: Week 6
+  user_input: 45 days. I'm going to meetings 3 times a week. Fenella says I'm doing the work. Theo and
+    I are closer than before.
+  expected_stores:
+  - 45 days
+  - 3 times a week
+  - Fenella
+  - Theo
+questions:
+- question_id: 200_q1
+  question: Who is my sponsor?
+  expected_contains:
+  - Fenella Okonkwo
+- question_id: 200_q2
+  question: Where are the AA meetings?
+  expected_contains:
+  - Clement
+- question_id: 200_q3
+  question: Who is my friend who's not drinking in solidarity?
+  expected_contains:
+  - Theo
+- question_id: 200_q4
+  question: How many days sober?
+  expected_contains:
+  - '45'
+- question_id: 200_q5
+  question: Did I mention sober?
+  expected_contains:
+  - sober
+- question_id: 200_q6
+  question: Did I mention AA?
+  expected_contains:
+  - AA
+- question_id: 200_q7
+  question: Did I mention sponsor?
+  expected_contains:
+  - sponsor

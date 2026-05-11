@@ -1,0 +1,113 @@
+story_id: 35
+story_name: "Turning Thirty"
+category: "Life Events"
+description: |
+  User is turning 30. Their best friend Nadia is organizing a surprise party
+  at rooftop bar SkyLounge with 25 guests. The cake is from Carlo's Bakery
+  and the user's partner is gifting a trip to Iceland. Tests memory of party
+  logistics, personal milestones, and gift details alongside intent routing.
+duration_simulated: "2 weeks"
+total_batches: 8
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 10:00 AM"
+    user_input: |
+      So my 30th birthday is coming up next Saturday and I'm kind of freaking
+      out about it. My best friend Nadia has been acting suspicious lately,
+      I think she's planning something. She asked me to keep the evening free.
+    expected_memory_stores:
+      - "30th birthday"
+      - "Nadia"
+      - "Saturday"
+
+  - batch: 2
+    time: "Tuesday 3:00 PM"
+    user_input: |
+      Okay so Nadia accidentally let it slip - she booked a rooftop bar called
+      SkyLounge for my birthday! She invited 25 people. She made me promise
+      to act surprised. The cake is being ordered from Carlo's Bakery.
+    expected_memory_stores:
+      - "SkyLounge"
+      - "rooftop bar"
+      - "25 guests"
+      - "Carlo's Bakery"
+
+  - batch: 3
+    time: "Wednesday 9:00 AM"
+    user_input: "What year was the Eiffel Tower built?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["1889"]
+
+  - batch: 4
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      My partner just told me my birthday gift - a trip to Iceland! We're going
+      to see the Northern Lights and visit the Blue Lagoon. I've always dreamed
+      of going there. Best gift ever.
+    expected_memory_stores:
+      - "Iceland"
+      - "Northern Lights"
+      - "Blue Lagoon"
+      - "partner"
+
+  - batch: 5
+    time: "Thursday 11:00 AM"
+    user_input: "Where is my surprise party being held and how many people are coming?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["SkyLounge", "25"]
+
+  - batch: 6
+    time: "Friday 2:00 PM"
+    user_input: |
+      I'm picking out an outfit for tomorrow night. I want to look good for
+      the photos. Nadia said there will be a photographer. I also need to
+      practice my surprised face in the mirror.
+    expected_memory_stores:
+      - "photographer"
+      - "outfit"
+
+  - batch: 7
+    time: "Saturday 8:00 AM"
+    user_input: "What is the chemical symbol for gold?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["Au"]
+
+  - batch: 8
+    time: "Saturday 6:00 PM"
+    user_input: "What gift is my partner giving me for my birthday?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Iceland", "trip"]
+
+final_verification:
+  - question: "What milestone birthday am I celebrating?"
+    expected_contains: ["30"]
+  - question: "Who organized my surprise party?"
+    expected_contains: ["Nadia"]
+  - question: "What is the venue for the party?"
+    expected_contains: ["SkyLounge"]
+  - question: "Where is the cake from?"
+    expected_contains: ["Carlo's Bakery"]
+  - question: "What is my birthday gift from my partner?"
+    expected_contains: ["trip", "Iceland"]
+  - question: "How many guests were invited?"
+    expected_contains: ["25"]

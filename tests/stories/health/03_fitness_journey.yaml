@@ -1,0 +1,118 @@
+story_id: 3
+story_name: "Fitness Journey"
+category: "Health"
+description: |
+  User starts a new fitness routine with a personal trainer.
+  Tests memory of health goals, trainer info, workout details,
+  and progress tracking over time.
+duration_simulated: "2 weeks"
+total_batches: 8
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 AM"
+    user_input: |
+      I finally signed up for a gym membership at FitLife. My trainer's
+      name is Jake and we're meeting three times a week. My goal is to
+      lose 20 pounds by summer.
+    expected_memory_stores:
+      - "FitLife"
+      - "Jake"
+      - "three times a week"
+      - "20 pounds"
+
+  - batch: 2
+    time: "Monday 6:00 PM"
+    user_input: |
+      First session with Jake was tough! We did squats, lunges, and
+      deadlifts. He said my form needs work but I have potential.
+      Feeling sore already.
+    expected_memory_stores:
+      - "squats"
+      - "lunges"
+      - "deadlifts"
+      - "sore"
+
+  - batch: 3
+    time: "Tuesday 10:00 AM"
+    user_input: "How many calories are in a banana?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["calorie"]  # ~100-110 calories in a banana
+
+  - batch: 4
+    time: "Wednesday 8:00 AM"
+    user_input: "What's my trainer's name?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Jake"]
+
+  - batch: 5
+    time: "Friday 7:00 PM"
+    user_input: |
+      Finished my third session! Jake introduced me to the rowing
+      machine today. My weight is down 2 pounds already. Starting
+      to feel more energetic.
+    expected_memory_stores:
+      - "rowing machine"
+      - "2 pounds"
+      - "energetic"
+
+  - batch: 6
+    time: "Next Monday 9:00 AM"
+    user_input: "What's 15 percent of 200?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["30"]
+
+  - batch: 7
+    time: "Next Wednesday 6:00 PM"
+    user_input: |
+      Two weeks in and I've lost 5 pounds total! Jake is really proud.
+      He's adding HIIT training to my routine starting next week.
+      I can already do 10 proper pushups.
+    expected_memory_stores:
+      - "5 pounds"
+      - "HIIT"
+      - "10 pushups"
+
+  - batch: 8
+    time: "Next Friday 8:00 PM"
+    user_input: "How much weight have I lost so far?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["5 pounds"]
+
+final_verification:
+  - question: "What gym did I join?"
+    expected_contains: ["FitLife"]
+
+  - question: "Who is my personal trainer?"
+    expected_contains: ["Jake"]
+
+  - question: "What is my weight loss goal?"
+    expected_contains: ["20 pounds"]
+
+  - question: "How often do I train with Jake?"
+    expected_contains: ["three times"]
+
+  - question: "What new equipment did Jake introduce me to?"
+    expected_contains: ["rowing"]
+
+  - question: "What type of training is being added to my routine?"
+    expected_contains: ["HIIT"]

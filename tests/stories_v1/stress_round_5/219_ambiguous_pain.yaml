@@ -1,0 +1,78 @@
+story_id: 219
+story_name: Ambiguous Pain
+category: Health
+description: User experiences mysterious back pain that takes multiple specialists.
+duration_simulated: 2 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: Lower back pain for 6 weeks. Saw my PCP Dr. Ravi Iyer who referred me to an orthopedist
+    Dr. Lina Soldanski.
+  expected_stores:
+  - back pain
+  - 6 weeks
+  - Dr. Ravi Iyer
+  - Dr. Lina Soldanski
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Dr. Soldanski ordered an MRI. Results showed minor disc issues but NOT enough to explain
+    the pain.
+  expected_stores:
+  - Dr. Soldanski
+  - MRI
+  - not enough
+- batch: 3
+  time: Month 2
+  user_input: What is the tallest waterfall in the world?
+- batch: 4
+  time: Month 2 Week 1
+  user_input: Dr. Iyer referred me to a pain specialist Dr. Joaquin Vera. He said it might be nerve pain
+    — started gabapentin.
+  expected_stores:
+  - Dr. Iyer
+  - Dr. Joaquin Vera
+  - nerve pain
+  - gabapentin
+- batch: 5
+  time: Month 2 Week 3
+  user_input: Gabapentin helping. Dr. Vera and Dr. Soldanski together think it's a combination of nerve
+    and disc. Physical therapy starts next week with Hugh Xia.
+  expected_stores:
+  - Gabapentin
+  - Dr. Vera
+  - Dr. Soldanski
+  - Hugh Xia
+questions:
+- question_id: 219_q1
+  question: Who is my PCP?
+  expected_contains:
+  - Ravi Iyer
+- question_id: 219_q2
+  question: Who is the orthopedist?
+  expected_contains:
+  - Lina Soldanski
+- question_id: 219_q3
+  question: Who is the pain specialist?
+  expected_contains:
+  - Joaquin Vera
+- question_id: 219_q4
+  question: Who is my physical therapist?
+  expected_contains:
+  - Hugh Xia
+- question_id: 219_q5
+  question: Did I mention back pain?
+  expected_contains:
+  - back pain
+- question_id: 219_q6
+  question: When is 6 weeks?
+  expected_contains:
+  - 6 weeks
+- question_id: 219_q7
+  question: Did I mention Dr. Ravi Iyer?
+  expected_contains:
+  - Dr. Ravi Iyer
+- question_id: 219_q8
+  question: Did I mention Dr. Lina Soldanski?
+  expected_contains:
+  - Dr. Lina Soldanski

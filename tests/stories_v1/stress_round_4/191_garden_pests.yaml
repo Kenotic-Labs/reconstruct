@@ -1,0 +1,74 @@
+story_id: 191
+story_name: Garden Pests
+category: Daily Life
+description: User battles aphids on their new garden with help from a local expert.
+duration_simulated: 3 weeks
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My tomatoes and basil are covered in aphids. Went to my local nursery and talked to Balthazar
+    Vance who's been there 20 years.
+  expected_stores:
+  - tomatoes
+  - basil
+  - aphids
+  - Balthazar Vance
+  - nursery
+  - 20 years
+- batch: 2
+  time: Week 1 Thursday
+  user_input: Balthazar recommended ladybugs — actual live ones. 25 dollars for 1500 of them. He said
+    NOT to spray pesticides.
+  expected_stores:
+  - Balthazar
+  - ladybugs
+  - '1500'
+  - not to spray
+- batch: 3
+  time: Week 2
+  user_input: Who wrote Hamlet?
+- batch: 4
+  time: Week 2 Friday
+  user_input: Released the ladybugs at dusk. They're still here a week later. Aphid population is noticeably
+    dropping.
+  expected_stores:
+  - ladybugs
+  - aphid
+- batch: 5
+  time: Week 3
+  user_input: Garden is thriving. Balthazar said I did it right. First tomato harvest coming next week.
+  expected_stores:
+  - Balthazar
+  expected_adaptation:
+    emotion_detected: proud
+    warmth_direction: increase
+questions:
+- question_id: 191_q1
+  question: Who helped me at the nursery?
+  expected_contains:
+  - Balthazar Vance
+- question_id: 191_q2
+  question: What pest was I dealing with?
+  expected_contains:
+  - aphids
+- question_id: 191_q3
+  question: How did I solve it?
+  expected_contains:
+  - ladybugs
+- question_id: 191_q4
+  question: How many ladybugs?
+  expected_contains:
+  - '1500'
+- question_id: 191_q5
+  question: Did I mention tomatoes?
+  expected_contains:
+  - tomatoes
+- question_id: 191_q6
+  question: Did I mention basil?
+  expected_contains:
+  - basil
+- question_id: 191_q7
+  question: Did I mention nursery?
+  expected_contains:
+  - nursery

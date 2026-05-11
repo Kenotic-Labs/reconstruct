@@ -1,0 +1,123 @@
+story_id: 13
+story_name: Home Renovation
+category: Daily Life
+description: 'User is renovating their kitchen with contractor Mike''s Custom Builds.
+
+  Tracks the full renovation including materials, appliances, budget,
+
+  timeline, and design choices with help from designer friend Olivia.
+
+  '
+duration_simulated: 6 weeks
+total_batches: 8
+batches:
+- batch: 1
+  time: Monday 9:00 AM
+  user_input: 'We''re finally renovating the kitchen! I hired Mike''s Custom Builds as the
+
+    contractor. The total budget is $35,000. Work started on November 1st and
+
+    the timeline is 6 weeks. It''s going to be a big project but it''ll be
+
+    worth it.
+
+    '
+  expected_stores:
+  - Mike's Custom Builds
+  - contractor
+  - $35,000
+  - budget
+  - November 1st
+  - 6 weeks
+  - kitchen
+- batch: 2
+  time: Tuesday 11:00 AM
+  user_input: 'Picked out the countertops today - going with quartz, specifically the
+
+    Calacatta Gold color. It looks just like marble but way more durable.
+
+    For the cabinets, we chose white shaker style from IKEA. Clean and modern.
+
+    '
+  expected_stores:
+  - quartz
+  - Calacatta Gold
+  - countertops
+  - white shaker
+  - IKEA
+  - cabinets
+- batch: 3
+  time: Wednesday 2:00 PM
+  user_input: What is the difference between quartz and granite countertops?
+- batch: 4
+  time: Thursday 10:00 AM
+  user_input: 'Ordered the appliances! Getting a Samsung fridge - the French door model
+
+    with the flex zone. And a Bosch dishwasher, the 800 series. Both should
+
+    arrive in two weeks.
+
+    '
+  expected_stores:
+  - Samsung
+  - fridge
+  - Bosch
+  - dishwasher
+- batch: 5
+  time: Saturday 3:00 PM
+  user_input: 'My designer friend Olivia came over today and helped me pick the
+
+    backsplash. We went with a white subway tile in a herringbone pattern.
+
+    She has such a great eye for design. The whole kitchen is really
+
+    coming together.
+
+    '
+  expected_stores:
+  - Olivia
+  - designer
+  - backsplash
+  - subway tile
+  - herringbone
+- batch: 6
+  time: Monday 9:00 AM
+  user_input: What color countertops did I choose for my kitchen renovation?
+- batch: 7
+  time: Wednesday 4:00 PM
+  user_input: How long does it typically take for IKEA cabinets to be delivered?
+- batch: 8
+  time: Friday 6:00 PM
+  user_input: Who helped me pick the backsplash and what style did we choose?
+questions:
+- question_id: 13_q1
+  question: Who is my kitchen renovation contractor and what is the budget?
+  expected_contains:
+  - Mike's Custom Builds
+  - $35,000
+- question_id: 13_q2
+  question: What countertops did I pick for the kitchen?
+  expected_contains:
+  - quartz
+  - Calacatta Gold
+- question_id: 13_q3
+  question: Where are my cabinets from and what style?
+  expected_contains:
+  - IKEA
+  - white shaker
+- question_id: 13_q4
+  question: What appliances did I order?
+  expected_contains:
+  - Samsung
+  - Bosch
+- question_id: 13_q5
+  question: When did the renovation start and how long is it supposed to take?
+  expected_contains:
+  - November 1st
+  - 6 weeks
+- question_id: 13_q6
+  question: Who helped pick the backsplash and what was the design?
+  expected_contains:
+  - Olivia
+  - herringbone
+  - subway tile

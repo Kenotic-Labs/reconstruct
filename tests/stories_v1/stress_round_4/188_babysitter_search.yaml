@@ -1,0 +1,70 @@
+story_id: 188
+story_name: Babysitter Search
+category: Daily Life
+description: User searches for a regular babysitter for her 4 year old.
+duration_simulated: 3 weeks
+total_batches: 4
+batches:
+- batch: 1
+  time: Week 1
+  user_input: I need a regular babysitter for my 4 year old Theo. Looking on Care.com. First candidate
+    is Sumaya, a college student at UCSF.
+  expected_stores:
+  - Theo
+  - 4 year old
+  - Care.com
+  - Sumaya
+  - UCSF
+- batch: 2
+  time: Week 2
+  user_input: Sumaya did a trial sit with Theo for 2 hours. Theo loved her. Background check came back
+    clean.
+  expected_stores:
+  - Sumaya
+  - Theo
+  - 2 hours
+- batch: 3
+  time: Week 2 Friday
+  user_input: What year did the Titanic sink?
+- batch: 4
+  time: Week 3
+  user_input: Hired Sumaya. She'll come Tuesdays and Thursdays 5 to 9 PM at 25 dollars an hour. Theo is
+    already calling her his 'big cousin'.
+  expected_stores:
+  - Sumaya
+  - Tuesdays and Thursdays
+  - 5 to 9 PM
+  - 25 dollars an hour
+  - Theo
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+questions:
+- question_id: 188_q1
+  question: Who is my son?
+  expected_contains:
+  - Theo
+- question_id: 188_q2
+  question: Who is our babysitter?
+  expected_contains:
+  - Sumaya
+- question_id: 188_q3
+  question: Where does she go to school?
+  expected_contains:
+  - UCSF
+- question_id: 188_q4
+  question: What are her hours?
+  expected_contains:
+  - 5 to 9
+- question_id: 188_q5
+  question: When is 4 year old?
+  expected_contains:
+  - 4 year old
+- question_id: 188_q6
+  question: Did I mention Care.com?
+  expected_contains:
+  - Care.com
+- question_id: 188_q7
+  question: When is 2 hours?
+  expected_contains:
+  - 2 hours

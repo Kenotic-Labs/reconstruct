@@ -1,0 +1,96 @@
+story_id: 70
+story_name: Starting Therapy for Anxiety
+category: Health
+description: User begins weekly therapy sessions to address anxiety.
+duration_simulated: 10 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1
+  user_input: I've been having panic attacks at work for about three months. My primary care doctor Sonia
+    Hassan referred me to a therapist named Dr. Emma Walsh.
+  expected_stores:
+  - panic attacks
+  - three months
+  - Sonia Hassan
+  - Dr. Emma Walsh
+  - therapist
+  expected_adaptation:
+    emotion_detected: anxious
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Week 2
+  user_input: First session with Dr. Walsh went well. She practices CBT. We're meeting weekly on Mondays
+    at 6 PM for 50 minutes.
+  expected_stores:
+  - Dr. Walsh
+  - CBT
+  - Mondays 6 PM
+  - 50 minutes
+- batch: 3
+  time: Week 4
+  user_input: Dr. Walsh taught me a grounding technique called 5-4-3-2-1 — five things you see, four you
+    feel, three you hear, two you smell, one you taste.
+  expected_stores:
+  - Dr. Walsh
+  - 5-4-3-2-1
+  - grounding
+- batch: 4
+  time: Week 5
+  user_input: Who painted the ceiling of the Sistine Chapel?
+- batch: 5
+  time: Week 6
+  user_input: Had three panic attacks this week. Used the technique on two of them and it helped. Starting
+    to believe this works.
+  expected_stores:
+  - three panic attacks
+  - technique
+- batch: 6
+  time: Week 8
+  user_input: Dr. Walsh suggested I try journaling about specific trigger situations. Started with the
+    Monday morning meeting dread.
+  expected_stores:
+  - Dr. Walsh
+  - journaling
+  - Monday morning meeting
+- batch: 7
+  time: Week 10
+  user_input: Down to about one panic episode per week. Dr. Walsh is really happy with my progress. We're
+    moving to biweekly sessions.
+  expected_stores:
+  - one panic episode
+  - Dr. Walsh
+  - biweekly
+  expected_adaptation:
+    emotion_detected: hopeful
+    warmth_direction: increase
+questions:
+- question_id: 70_q1
+  question: Who is my primary care doctor?
+  expected_contains:
+  - Sonia Hassan
+- question_id: 70_q2
+  question: Who is my therapist?
+  expected_contains:
+  - Emma Walsh
+- question_id: 70_q3
+  question: What therapy modality does she use?
+  expected_contains:
+  - CBT
+- question_id: 70_q4
+  question: When are my sessions?
+  expected_contains:
+  - Monday
+- question_id: 70_q5
+  question: What grounding technique did I learn?
+  expected_contains:
+  - 5-4-3-2-1
+- question_id: 70_q6
+  question: How long is each session?
+  expected_contains:
+  - 50 minutes
+- question_id: 70_q7
+  question: How often are we meeting now?
+  expected_contains:
+  - biweekly

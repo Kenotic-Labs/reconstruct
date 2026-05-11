@@ -1,0 +1,131 @@
+story_id: 29
+story_name: Loss and Grief
+category: Life Events
+description: 'User''s grandmother Helen passed away at age 89. A memorial service is held
+
+  at Grace Church. Grandfather Arthur is struggling with the loss. The family
+
+  gathers at grandmother''s house on Willow Drive. The user inherited their
+
+  grandmother''s piano. Tests empathetic memory and retrieval of sensitive
+
+  personal details.
+
+  '
+duration_simulated: 4 weeks
+total_batches: 9
+batches:
+- batch: 1
+  time: Monday 7:00 AM
+  user_input: 'I got the call this morning. My grandmother Helen passed away. She was
+
+    89 years old. I can''t stop crying. She was the kindest person I ever
+
+    knew. The family is all in shock.
+
+    '
+  expected_stores:
+  - grandmother
+  - Helen
+  - '89'
+  - passed away
+- batch: 2
+  time: Tuesday 10:00 AM
+  user_input: 'The memorial service is going to be at Grace Church this Thursday. My
+
+    grandfather Arthur is really struggling. They were married for 62 years.
+
+    I don''t know how to help him through this.
+
+    '
+  expected_stores:
+  - Grace Church
+  - memorial service
+  - Thursday
+  - grandfather
+  - Arthur
+  - 62 years
+- batch: 3
+  time: Tuesday 4:00 PM
+  user_input: What are the five stages of grief?
+- batch: 4
+  time: Thursday 6:00 PM
+  user_input: 'The memorial was beautiful. So many people came. My cousin played
+
+    Amazing Grace on the violin. I read a poem that grandma loved. After
+
+    the service we all went to grandma''s house on Willow Drive to share
+
+    memories.
+
+    '
+  expected_stores:
+  - Amazing Grace
+  - violin
+  - poem
+  - Willow Drive
+- batch: 5
+  time: Friday 9:00 AM
+  user_input: Where was the memorial service held for my grandmother?
+- batch: 6
+  time: Saturday 2:00 PM
+  user_input: 'We''re going through grandma''s things today. She left me her piano in
+
+    her will. She taught me to play on that piano when I was six years old.
+
+    I''m going to have it moved to my apartment. It means the world to me.
+
+    '
+  expected_stores:
+  - piano
+  - inherited
+  - will
+  - six years old
+- batch: 7
+  time: Sunday 11:00 AM
+  user_input: Who was the first person to walk on the moon?
+- batch: 8
+  time: Week 2 Monday 10:00 AM
+  user_input: 'Grandpa Arthur called me today. He sounds so lost without grandma.
+
+    He said the house feels empty. I''m going to visit him this weekend
+
+    and bring him some of the soup grandma used to make. I found her
+
+    recipe in her kitchen.
+
+    '
+  expected_stores:
+  - Arthur
+  - recipe
+  - soup
+  - visit
+- batch: 9
+  time: Week 3 Wednesday 3:00 PM
+  user_input: What did I inherit from my grandmother?
+questions:
+- question_id: 29_q1
+  question: What was my grandmother's name and how old was she?
+  expected_contains:
+  - Helen
+  - '89'
+- question_id: 29_q2
+  question: Where was the memorial service held?
+  expected_contains:
+  - Grace Church
+- question_id: 29_q3
+  question: What is my grandfather's name?
+  expected_contains:
+  - Arthur
+- question_id: 29_q4
+  question: Where is my grandmother's house located?
+  expected_contains:
+  - Willow Drive
+- question_id: 29_q5
+  question: What did I inherit from my grandmother?
+  expected_contains:
+  - piano
+- question_id: 29_q6
+  question: How long were my grandparents married?
+  expected_contains:
+  - '62'

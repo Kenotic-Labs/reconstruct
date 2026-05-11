@@ -1,0 +1,113 @@
+story_id: 26
+story_name: "Gardening"
+category: "Daily Life"
+description: |
+  User started a vegetable garden in the backyard with raised beds. Tracks
+  the plants being grown, supplies purchased, garden bed dimensions, and
+  advice from neighbor Paul on pest control.
+duration_simulated: "3 weeks"
+total_batches: 7
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00 AM"
+    user_input: |
+      I finally started my vegetable garden! I built 3 raised beds in the
+      backyard - each one is 4 feet by 8 feet. I'm growing tomatoes, basil,
+      peppers, and zucchini. Really looking forward to having fresh vegetables
+      this summer.
+    expected_memory_stores:
+      - "vegetable garden"
+      - "raised beds"
+      - "4 feet by 8 feet"
+      - "3 beds"
+      - "tomatoes"
+      - "basil"
+      - "peppers"
+      - "zucchini"
+
+  - batch: 2
+    time: "Saturday 2:00 PM"
+    user_input: |
+      Went to Green Thumb on Main Street for all my garden supplies. Great
+      little store. I also picked up a compost bin from Home Depot and got
+      some organic fertilizer - Dr. Earth brand. The guy at Green Thumb said
+      it's the best for vegetables.
+    expected_memory_stores:
+      - "Green Thumb"
+      - "Main Street"
+      - "compost bin"
+      - "Home Depot"
+      - "Dr. Earth"
+      - "organic fertilizer"
+
+  - batch: 3
+    time: "Monday 6:00 PM"
+    user_input: "How often should you water tomato plants in raised beds?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["water", "tomato"]
+
+  - batch: 4
+    time: "Wednesday 5:30 PM"
+    user_input: |
+      My neighbor Paul came over and saw the garden. He's been gardening for
+      20 years and gave me great tips on pest control. He said to use neem oil
+      spray for aphids and to plant marigolds around the border to repel insects
+      naturally.
+    expected_memory_stores:
+      - "Paul"
+      - "neighbor"
+      - "pest control"
+      - "neem oil"
+      - "marigolds"
+
+  - batch: 5
+    time: "Friday 7:00 PM"
+    user_input: "What were the dimensions of the raised beds I built?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["4 feet", "8 feet"]
+
+  - batch: 6
+    time: "Saturday 9:00 AM"
+    user_input: "What is companion planting and which plants grow well together?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["companion planting", "together"]
+
+  - batch: 7
+    time: "Sunday 11:00 AM"
+    user_input: "What pest control advice did my neighbor give me?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Paul", "neem oil", "marigolds"]
+
+final_verification:
+  - question: "What vegetables am I growing in my garden?"
+    expected_contains: ["tomatoes", "basil", "peppers", "zucchini"]
+  - question: "How many raised beds did I build and what size are they?"
+    expected_contains: ["3", "4 feet", "8 feet"]
+  - question: "Where did I buy my garden supplies?"
+    expected_contains: ["Green Thumb", "Main Street"]
+  - question: "What brand of fertilizer am I using?"
+    expected_contains: ["Dr. Earth"]
+  - question: "What pest control tips did my neighbor Paul share?"
+    expected_contains: ["neem oil", "marigolds"]
+  - question: "Where did I get my compost bin?"
+    expected_contains: ["Home Depot"]

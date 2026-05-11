@@ -1,0 +1,93 @@
+story_id: 147
+story_name: Sabbatical Year in Argentina
+category: Life Events
+description: User takes a one year sabbatical in Buenos Aires.
+duration_simulated: 12 months
+total_batches: 7
+batches:
+- batch: 1
+  time: Month 1
+  user_input: I'm taking a one year sabbatical from my job at Genentech. Moving to Buenos Aires tomorrow.
+    My company granted me unpaid leave for 12 months.
+  expected_stores:
+  - Genentech
+  - Buenos Aires
+  - 12 months
+  - unpaid leave
+- batch: 2
+  time: Month 2
+  user_input: Found an apartment in the Palermo neighborhood. My landlord is a kind older man named Don
+    Tomas Lippi. Rent is 950 USD per month.
+  expected_stores:
+  - Palermo
+  - Don Tomas Lippi
+  - landlord
+  - 950 USD
+- batch: 3
+  time: Month 3
+  user_input: What's the capital of Argentina?
+- batch: 4
+  time: Month 4
+  user_input: Started intensive Spanish classes at the University of Buenos Aires. My teacher Professor
+    Aurelia Monforte is patient with my accent.
+  expected_stores:
+  - intensive Spanish
+  - University of Buenos Aires
+  - Aurelia Monforte
+- batch: 5
+  time: Month 6
+  user_input: Making friends. A local journalist named Ignacio invited me to a weekly parrilla at his
+    brother's place in San Telmo.
+  expected_stores:
+  - Ignacio
+  - journalist
+  - parrilla
+  - San Telmo
+- batch: 6
+  time: Month 9
+  user_input: Volunteering at a literacy program teaching English twice a week. My coordinator Luciana
+    Cortez runs the program out of a church in La Boca.
+  expected_stores:
+  - literacy program
+  - Luciana Cortez
+  - La Boca
+- batch: 7
+  time: Month 12
+  user_input: Last month in BA. Don Tomas gave me a bottle of his homemade wine as a goodbye gift. Ignacio
+    is promising to visit me in California.
+  expected_stores:
+  - Don Tomas
+  - homemade wine
+  - Ignacio
+  expected_adaptation:
+    emotion_detected: bittersweet
+    warmth_direction: increase
+questions:
+- question_id: 147_q1
+  question: Where am I spending my sabbatical?
+  expected_contains:
+  - Buenos Aires
+- question_id: 147_q2
+  question: Where do I work?
+  expected_contains:
+  - Genentech
+- question_id: 147_q3
+  question: What neighborhood am I in?
+  expected_contains:
+  - Palermo
+- question_id: 147_q4
+  question: Who is my landlord?
+  expected_contains:
+  - Tomas Lippi
+- question_id: 147_q5
+  question: Who is my Spanish teacher?
+  expected_contains:
+  - Aurelia Monforte
+- question_id: 147_q6
+  question: Who runs the literacy program?
+  expected_contains:
+  - Luciana Cortez
+- question_id: 147_q7
+  question: When is 12 months?
+  expected_contains:
+  - 12 months

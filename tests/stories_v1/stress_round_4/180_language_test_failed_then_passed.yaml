@@ -1,0 +1,75 @@
+story_id: 180
+story_name: Language Test Failed Then Passed
+category: Learning
+description: User fails a Spanish DELE B2 test, retakes and passes.
+duration_simulated: 4 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: Took the DELE B2 Spanish test today at Instituto Cervantes. I'm 80 percent sure I failed
+    the oral section.
+  expected_stores:
+  - DELE B2
+  - Instituto Cervantes
+  - oral section
+- batch: 2
+  time: Month 2
+  user_input: Results came. Failed by 3 points. Registered for the next sitting in 2 months.
+  expected_stores:
+  - Failed
+  - 3 points
+  - 2 months
+- batch: 3
+  time: Month 3
+  user_input: What's the tallest volcano?
+- batch: 4
+  time: Month 3 Week 2
+  user_input: Hired a private tutor named Magdalena Zamora. She and I meet twice a week for oral practice.
+  expected_stores:
+  - Magdalena Zamora
+  - twice a week
+  - oral practice
+- batch: 5
+  time: Month 4
+  user_input: Retook the test. Passed. Magdalena was the difference. DELE certificate arrives in 6 weeks.
+  expected_stores:
+  - Passed
+  - Magdalena
+  - 6 weeks
+  expected_adaptation:
+    emotion_detected: triumphant
+    warmth_direction: increase
+questions:
+- question_id: 180_q1
+  question: What test did I take?
+  expected_contains:
+  - DELE B2
+- question_id: 180_q2
+  question: Where did I take it?
+  expected_contains:
+  - Instituto Cervantes
+- question_id: 180_q3
+  question: Who tutored me?
+  expected_contains:
+  - Magdalena Zamora
+- question_id: 180_q4
+  question: Did I pass on the second try?
+  expected_contains:
+  - Passed
+- question_id: 180_q5
+  question: Did I mention oral section?
+  expected_contains:
+  - oral section
+- question_id: 180_q6
+  question: Do I know someone named Failed?
+  expected_contains:
+  - Failed
+- question_id: 180_q7
+  question: Did I mention 3 points?
+  expected_contains:
+  - 3 points
+- question_id: 180_q8
+  question: When is 2 months?
+  expected_contains:
+  - 2 months

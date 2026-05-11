@@ -1,0 +1,98 @@
+story_id: 105
+story_name: Taking Over a Team Mid-Project
+category: Career
+description: User takes over a team mid-project after the previous manager left.
+duration_simulated: 4 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1 Monday
+  user_input: My skip-level Gianna told me I'm taking over Abel's team effective today. He left for a
+    competitor last Friday. They're halfway through a migration project.
+  expected_stores:
+  - Gianna
+  - skip-level
+  - Abel
+  - competitor
+  - migration project
+- batch: 2
+  time: Week 1 Wednesday
+  user_input: Met one-on-one with each of the four team members. They are — Preston, Zola, Tim, and Uma.
+    Preston told me Abel was a great manager, Zola said he was checked out the last two months.
+  expected_stores:
+  - four team members
+  - Preston
+  - Zola
+  - Tim
+  - Uma
+  - Abel
+- batch: 3
+  time: Week 2 Monday
+  user_input: Who wrote A Tale of Two Cities?
+- batch: 4
+  time: Week 2 Wednesday
+  user_input: Reviewed the migration plan with the team. Preston and Uma walked me through the database
+    layer; Zola and Tim covered the application code. It's behind but not disastrously.
+  expected_stores:
+  - migration plan
+  - Preston
+  - Uma
+  - database layer
+  - Zola
+  - Tim
+  - application code
+- batch: 5
+  time: Week 3 Thursday
+  user_input: Preston raised a concern about the timeline. He and I re-scoped the project together — cut
+    two of the five integration targets. Gianna approved.
+  expected_stores:
+  - Preston
+  - timeline
+  - two of the five
+  - Gianna
+- batch: 6
+  time: Week 4
+  user_input: Team is back on track. Zola told me this morning that she's happier than she's been in months.
+    I told Gianna the team is solid.
+  expected_stores:
+  - Zola
+  - Gianna
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+questions:
+- question_id: 105_q1
+  question: Who is my skip-level?
+  expected_contains:
+  - Gianna
+- question_id: 105_q2
+  question: Who left the team?
+  expected_contains:
+  - Abel
+- question_id: 105_q3
+  question: Who are my team members?
+  expected_contains:
+  - Preston
+  - Zola
+  - Tim
+  - Uma
+- question_id: 105_q4
+  question: Who helped me re-scope the project?
+  expected_contains:
+  - Preston
+- question_id: 105_q5
+  question: How many integration targets did we cut?
+  expected_contains:
+  - two
+- question_id: 105_q6
+  question: What project is the team on?
+  expected_contains:
+  - migration
+- question_id: 105_q7
+  question: Did I mention skip-level?
+  expected_contains:
+  - skip-level
+- question_id: 105_q8
+  question: Did I mention competitor?
+  expected_contains:
+  - competitor

@@ -1,0 +1,95 @@
+story_id: 161
+story_name: Sibling's Addiction Relapse
+category: Relationships
+description: User's brother relapses and the family navigates support.
+duration_simulated: 3 months
+total_batches: 6
+batches:
+- batch: 1
+  time: Month 1
+  user_input: My brother Jalen called Mom from a hotel room. He relapsed. He'd been sober for two years.
+    Mom called me crying.
+  expected_stores:
+  - Jalen
+  - brother
+  - relapsed
+  - two years
+  - Mom
+  expected_adaptation:
+    emotion_detected: grief
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Month 1 Week 2
+  user_input: Got Jalen into a detox program at a facility called Clearwater Recovery. His counselor is
+    a woman named Marcelline Dupuis.
+  expected_stores:
+  - Jalen
+  - Clearwater Recovery
+  - Marcelline Dupuis
+  - counselor
+- batch: 3
+  time: Month 1 Week 4
+  user_input: Who invented the lightbulb?
+- batch: 4
+  time: Month 2
+  user_input: Jalen is in a 90 day residential program now, not outpatient like last time. He chose it
+    himself. Marcelline said the 90 day model has a better track record.
+  expected_stores:
+  - Jalen
+  - 90 day residential
+  - not outpatient
+  - Marcelline
+- batch: 5
+  time: Month 2 Week 3
+  user_input: Family therapy session with Jalen and Marcelline. Mom and I flew out to Arizona for it.
+    Painful but necessary.
+  expected_stores:
+  - Jalen
+  - Marcelline
+  - Mom
+  - Arizona
+- batch: 6
+  time: Month 3
+  user_input: Jalen is 60 days in. Marcelline said he's engaged differently than last time. Not fully
+    optimistic but not despairing either.
+  expected_stores:
+  - Jalen
+  - 60 days
+  - Marcelline
+  expected_adaptation:
+    emotion_detected: cautious hope
+    warmth_direction: increase
+questions:
+- question_id: 161_q1
+  question: Who is my brother?
+  expected_contains:
+  - Jalen
+- question_id: 161_q2
+  question: Where is he in recovery?
+  expected_contains:
+  - Clearwater Recovery
+- question_id: 161_q3
+  question: Who is his counselor?
+  expected_contains:
+  - Marcelline Dupuis
+- question_id: 161_q4
+  question: What program is he in?
+  expected_contains:
+  - 90 day
+- question_id: 161_q5
+  question: Is it outpatient?
+  expected_contains:
+  - not
+- question_id: 161_q6
+  question: Did I mention brother?
+  expected_contains:
+  - brother
+- question_id: 161_q7
+  question: Did I mention relapsed?
+  expected_contains:
+  - relapsed
+- question_id: 161_q8
+  question: Did I mention two years?
+  expected_contains:
+  - two years

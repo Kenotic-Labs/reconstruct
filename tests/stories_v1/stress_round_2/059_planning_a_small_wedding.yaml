@@ -1,0 +1,108 @@
+story_id: 59
+story_name: Planning a Small Wedding
+category: Relationships
+description: User and partner plan a small wedding with family logistics.
+duration_simulated: 3 months
+total_batches: 7
+batches:
+- batch: 1
+  time: Month 1 Week 1
+  user_input: Milo and I are getting married in September. We want a small ceremony, about 40 people,
+    at my parents' place in Sonoma.
+  expected_stores:
+  - Milo
+  - getting married
+  - September
+  - 40 people
+  - parents
+  - Sonoma
+  expected_adaptation:
+    emotion_detected: happy
+    warmth_direction: increase
+- batch: 2
+  time: Month 1 Week 2
+  user_input: We booked a caterer — a local farm-to-table outfit called Valley Provisions. Their contact
+    is Annabel Mendez. Cost is 85 per person.
+  expected_stores:
+  - Valley Provisions
+  - Annabel Mendez
+  - caterer
+  - 85 per person
+- batch: 3
+  time: Month 1 Week 3
+  user_input: Milo's best man is going to be his younger brother Theo. I'm asking my sister Maya to be
+    my maid of honor.
+  expected_stores:
+  - Milo
+  - Theo
+  - best man
+  - Maya
+  - sister
+  - maid of honor
+- batch: 4
+  time: Month 2 Week 1
+  user_input: Is water wet technically speaking?
+- batch: 5
+  time: Month 2 Week 3
+  user_input: Our photographer is Chloe Park from Berkeley. She shot my friend's wedding last year and
+    her style is perfect for us. 3200 dollars for 8 hours.
+  expected_stores:
+  - Chloe Park
+  - Berkeley
+  - photographer
+  - 3200 dollars
+  - 8 hours
+- batch: 6
+  time: Month 3 Week 1
+  user_input: Small crisis — the date clashes with Maya's new job orientation. We moved the ceremony from
+    the 12th to the 19th so she can make it.
+  expected_stores:
+  - Maya
+  - job orientation
+  - moved
+  - 12th
+  - 19th
+- batch: 7
+  time: Month 3 Week 4
+  user_input: Wedding is in two weeks. Final headcount is 38. Milo is more relaxed about it than I am
+    right now.
+  expected_stores:
+  - two weeks
+  - '38'
+  - Milo
+  expected_adaptation:
+    emotion_detected: anxious but excited
+    warmth_direction: increase
+questions:
+- question_id: 59_q1
+  question: Who am I marrying?
+  expected_contains:
+  - Milo
+- question_id: 59_q2
+  question: Where is the wedding?
+  expected_contains:
+  - Sonoma
+- question_id: 59_q3
+  question: Who is our caterer?
+  expected_contains:
+  - Valley Provisions
+- question_id: 59_q4
+  question: Who is our photographer?
+  expected_contains:
+  - Chloe Park
+- question_id: 59_q5
+  question: Who is my maid of honor?
+  expected_contains:
+  - Maya
+- question_id: 59_q6
+  question: Who is Milo's best man?
+  expected_contains:
+  - Theo
+- question_id: 59_q7
+  question: What is the new wedding date?
+  expected_contains:
+  - 19th
+- question_id: 59_q8
+  question: What is the final headcount?
+  expected_contains:
+  - '38'

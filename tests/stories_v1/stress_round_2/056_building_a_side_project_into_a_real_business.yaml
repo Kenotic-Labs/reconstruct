@@ -1,0 +1,101 @@
+story_id: 56
+story_name: Building a Side Project Into a Real Business
+category: Career
+description: User grows their side project into incorporation and early revenue.
+duration_simulated: 4 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1 Saturday
+  user_input: My recipe planning app hit 500 paying users this week. I think it's time to incorporate.
+    My friend Noor said she'll help with the legal.
+  expected_stores:
+  - recipe planning app
+  - 500 paying users
+  - incorporate
+  - Noor
+  - legal
+  expected_adaptation:
+    emotion_detected: excited
+    warmth_direction: increase
+- batch: 2
+  time: Week 1 Sunday
+  user_input: Noor recommended we use Stripe Atlas to form a Delaware C-corp. The cost is 500 dollars
+    one time and it includes the EIN and the registered agent.
+  expected_stores:
+  - Stripe Atlas
+  - Delaware C-corp
+  - 500 dollars
+  - EIN
+  - registered agent
+- batch: 3
+  time: Week 2 Wednesday
+  user_input: Incorporation is done. I named the company MealForge. Noor is on as a 2 percent advisor.
+  expected_stores:
+  - MealForge
+  - Noor
+  - 2 percent advisor
+- batch: 4
+  time: Week 3 Tuesday
+  user_input: I hit 680 paying users and 4100 dollars in MRR. I quit my day job at Shopify last Friday.
+  expected_stores:
+  - 680 paying users
+  - 4100 dollars MRR
+  - quit day job
+  - Shopify
+  expected_adaptation:
+    emotion_detected: scared but committed
+    warmth_direction: increase
+- batch: 5
+  time: Week 3 Thursday
+  user_input: Is a tomato a fruit?
+- batch: 6
+  time: Week 4 Monday
+  user_input: Hired my first contractor, a designer named Riya Patel, 60 dollars an hour, part-time on
+    branding and email templates.
+  expected_stores:
+  - Riya Patel
+  - designer
+  - 60 dollars an hour
+  - part-time
+- batch: 7
+  time: Week 4 Friday
+  user_input: Just closed the month at 5200 MRR and 720 active subscribers. Growing about 12 percent week
+    over week.
+  expected_stores:
+  - 5200 MRR
+  - 720 active subscribers
+  - 12 percent
+questions:
+- question_id: 56_q1
+  question: What is the name of my company?
+  expected_contains:
+  - MealForge
+- question_id: 56_q2
+  question: What is my product?
+  expected_contains:
+  - recipe planning app
+- question_id: 56_q3
+  question: Where did I quit from to do this full-time?
+  expected_contains:
+  - Shopify
+- question_id: 56_q4
+  question: What is my current MRR?
+  expected_contains:
+  - '5200'
+- question_id: 56_q5
+  question: Who is my designer contractor?
+  expected_contains:
+  - Riya Patel
+- question_id: 56_q6
+  question: Who helped me with the legal setup?
+  expected_contains:
+  - Noor
+- question_id: 56_q7
+  question: What legal structure did I form?
+  expected_contains:
+  - Delaware
+- question_id: 56_q8
+  question: What is my week-over-week growth rate?
+  expected_contains:
+  - 12 percent

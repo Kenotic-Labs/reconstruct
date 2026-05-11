@@ -1,0 +1,80 @@
+story_id: 215
+story_name: Mother in Law Moving In
+category: Relationships
+description: User's mother-in-law moves in temporarily and it becomes permanent.
+duration_simulated: 3 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: My mother-in-law Kirsten is moving in for two months while her house is being renovated.
+    My husband Gio is excited; I'm NOT thrilled.
+  expected_stores:
+  - Kirsten
+  - mother-in-law
+  - two months
+  - Gio
+  - husband
+  - not thrilled
+- batch: 2
+  time: Month 2
+  user_input: Kirsten is surprisingly easy. She cooks dinner twice a week. Gio and I are eating better
+    than ever.
+  expected_stores:
+  - Kirsten
+  - twice a week
+  - Gio
+- batch: 3
+  time: Month 2 Week 3
+  user_input: What's the coldest place on Earth?
+- batch: 4
+  time: Month 3
+  user_input: The renovation is delayed 3 more months. Kirsten asked if she could stay longer. Gio said
+    yes immediately. I agreed.
+  expected_stores:
+  - 3 more months
+  - Kirsten
+  - Gio
+- batch: 5
+  time: Month 3 Week 3
+  user_input: Actually we decided Kirsten should stay permanently. She's going to sell her house. She
+    and I have become close.
+  expected_stores:
+  - Kirsten
+  - permanently
+  expected_adaptation:
+    emotion_detected: warm
+    warmth_direction: increase
+questions:
+- question_id: 215_q1
+  question: Who is my mother-in-law?
+  expected_contains:
+  - Kirsten
+- question_id: 215_q2
+  question: Who is my husband?
+  expected_contains:
+  - Gio
+- question_id: 215_q3
+  question: Is she staying temporarily?
+  expected_contains:
+  - permanently
+- question_id: 215_q4
+  question: Did I mention mother-in-law?
+  expected_contains:
+  - mother-in-law
+- question_id: 215_q5
+  question: Did I mention two months?
+  expected_contains:
+  - two months
+- question_id: 215_q6
+  question: Did I mention husband?
+  expected_contains:
+  - husband
+- question_id: 215_q7
+  question: Did I mention not thrilled?
+  expected_contains:
+  - not thrilled
+- question_id: 215_q8
+  question: Did I mention twice a week?
+  expected_contains:
+  - twice a week

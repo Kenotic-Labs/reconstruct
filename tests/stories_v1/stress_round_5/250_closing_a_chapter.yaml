@@ -1,0 +1,82 @@
+story_id: 250
+story_name: Closing a Chapter
+category: Life Events
+description: User sells her childhood home after her parents pass and processes the end of a chapter.
+duration_simulated: 2 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: Listing my childhood home in Phoenix after Mom Gabriella and Dad Mateus both passed last
+    year. Realtor is Idara Okafor.
+  expected_stores:
+  - Phoenix
+  - Gabriella
+  - Mom
+  - Mateus
+  - Dad
+  - Idara Okafor
+  expected_adaptation:
+    emotion_detected: grief
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Idara priced the house at 475000. My sister Dorinda and I are splitting everything. I flew
+    to Phoenix for 2 weeks to clear it out.
+  expected_stores:
+  - Idara
+  - '475000'
+  - Dorinda
+  - sister
+  - 2 weeks
+- batch: 3
+  time: Month 2
+  user_input: What's the largest lake in Africa?
+- batch: 4
+  time: Month 2 Week 2
+  user_input: Sold the house for 465000. Idara was great. Dorinda and I split 220000 each after costs.
+  expected_stores:
+  - '465000'
+  - Idara
+  - Dorinda
+  - '220000'
+- batch: 5
+  time: Month 2 Week 4
+  user_input: Last visit before closing. Walked through empty rooms. Took a photo of the kitchen where
+    Mom made me pancakes every Sunday. A chapter is closed.
+  expected_stores:
+  - Mom
+  - pancakes
+  expected_adaptation:
+    emotion_detected: bittersweet
+    warmth_direction: increase
+questions:
+- question_id: 250_q1
+  question: Who is my mom?
+  expected_contains:
+  - Gabriella
+- question_id: 250_q2
+  question: Who is my dad?
+  expected_contains:
+  - Mateus
+- question_id: 250_q3
+  question: Who is my sister?
+  expected_contains:
+  - Dorinda
+- question_id: 250_q4
+  question: Who is my realtor?
+  expected_contains:
+  - Idara Okafor
+- question_id: 250_q5
+  question: What was the final sale price?
+  expected_contains:
+  - '465000'
+- question_id: 250_q6
+  question: Do I know someone named Phoenix?
+  expected_contains:
+  - Phoenix
+- question_id: 250_q7
+  question: Do I know someone named Mom?
+  expected_contains:
+  - Mom

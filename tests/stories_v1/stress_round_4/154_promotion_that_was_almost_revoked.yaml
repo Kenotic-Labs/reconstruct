@@ -1,0 +1,95 @@
+story_id: 154
+story_name: Promotion That Was Almost Revoked
+category: Career
+description: User's promotion is announced then put on hold then reinstated.
+duration_simulated: 4 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1
+  user_input: I got promoted to Director last Friday. My manager Kenji announced it at the team meeting.
+    Effective the first of next month.
+  expected_stores:
+  - promoted
+  - Director
+  - Kenji
+  - manager
+  - first of next month
+  expected_adaptation:
+    emotion_detected: elated
+    warmth_direction: increase
+- batch: 2
+  time: Week 2 Monday
+  user_input: HR called — there's a process error and the promotion is on hold pending a budget review.
+    Kenji is furious on my behalf.
+  expected_stores:
+  - HR
+  - process error
+  - on hold
+  - budget review
+  - Kenji
+  expected_adaptation:
+    emotion_detected: anxious
+    warmth_direction: neutral
+- batch: 3
+  time: Week 2 Wednesday
+  user_input: What's the tallest structure in the world?
+- batch: 4
+  time: Week 3
+  user_input: Kenji escalated to the SVP Deanna Wolff. Deanna said the promotion will be honored but the
+    effective date moved from the 1st to the 15th.
+  expected_stores:
+  - Kenji
+  - Deanna Wolff
+  - SVP
+  - 15th
+- batch: 5
+  time: Week 4
+  user_input: Promotion officially back on. Deanna called me personally to apologize for the chaos. Kenji
+    said I handled it better than most would have.
+  expected_stores:
+  - Deanna
+  - Kenji
+- batch: 6
+  time: Week 4 Friday
+  user_input: First day as Director. The raise is NOT retroactive to the original date. I'm letting it
+    go.
+  expected_stores:
+  - Director
+  - not retroactive
+  expected_adaptation:
+    emotion_detected: satisfied
+    warmth_direction: increase
+questions:
+- question_id: 154_q1
+  question: What role am I promoted to?
+  expected_contains:
+  - Director
+- question_id: 154_q2
+  question: Who is my manager?
+  expected_contains:
+  - Kenji
+- question_id: 154_q3
+  question: Who is the SVP?
+  expected_contains:
+  - Deanna Wolff
+- question_id: 154_q4
+  question: What is the new effective date?
+  expected_contains:
+  - 15th
+- question_id: 154_q5
+  question: Is the raise retroactive?
+  expected_contains:
+  - not
+- question_id: 154_q6
+  question: Did I mention promoted?
+  expected_contains:
+  - promoted
+- question_id: 154_q7
+  question: Did I mention manager?
+  expected_contains:
+  - manager
+- question_id: 154_q8
+  question: Did I mention first of next month?
+  expected_contains:
+  - first of next month

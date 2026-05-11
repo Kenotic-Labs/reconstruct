@@ -1,0 +1,95 @@
+story_id: 146
+story_name: Starting a Family Through Adoption
+category: Life Events
+description: User and partner pursue domestic adoption and welcome a child.
+duration_simulated: 16 months
+total_batches: 7
+batches:
+- batch: 1
+  time: Month 1
+  user_input: My wife Rania and I started the domestic adoption process. Our agency is Open Hearts Adoption
+    and our case worker is Delphine Bouchard.
+  expected_stores:
+  - Rania
+  - wife
+  - Open Hearts Adoption
+  - Delphine Bouchard
+- batch: 2
+  time: Month 3
+  user_input: Home study is complete. Delphine said our profile will go live next week. Rania and I took
+    photos for the profile book with a photographer named Siena Martell.
+  expected_stores:
+  - home study
+  - Delphine
+  - Rania
+  - Siena Martell
+- batch: 3
+  time: Month 6
+  user_input: No match yet but Delphine said the average wait is 12 months. Rania and I are trying to
+    stay patient.
+  expected_stores:
+  - Delphine
+  - 12 months
+  - Rania
+- batch: 4
+  time: Month 9
+  user_input: What's the longest bone in the body?
+- batch: 5
+  time: Month 12
+  user_input: We matched with a birth mother named Juniper who's 7 months along. She chose us from 15
+    profiles. She's due in March.
+  expected_stores:
+  - Juniper
+  - 7 months along
+  - 15 profiles
+  - March
+  expected_adaptation:
+    emotion_detected: emotional
+    warmth_direction: increase
+- batch: 6
+  time: Month 15
+  user_input: Juniper gave birth yesterday. Her name is Maren. She's healthy. Rania and I drove 7 hours
+    to be there when Juniper placed her with us.
+  expected_stores:
+  - Juniper
+  - Maren
+  - Rania
+  - 7 hours
+- batch: 7
+  time: Month 16
+  user_input: Adoption is final. Delphine attended the court ceremony. Maren slept through the whole thing.
+  expected_stores:
+  - Delphine
+  - Maren
+  expected_adaptation:
+    emotion_detected: joyful
+    warmth_direction: increase
+questions:
+- question_id: 146_q1
+  question: Who is my wife?
+  expected_contains:
+  - Rania
+- question_id: 146_q2
+  question: What agency did we use?
+  expected_contains:
+  - Open Hearts
+- question_id: 146_q3
+  question: Who is our case worker?
+  expected_contains:
+  - Delphine Bouchard
+- question_id: 146_q4
+  question: Who is the birth mother?
+  expected_contains:
+  - Juniper
+- question_id: 146_q5
+  question: What is our daughter's name?
+  expected_contains:
+  - Maren
+- question_id: 146_q6
+  question: How long was the wait before matching?
+  expected_contains:
+  - 12 months
+- question_id: 146_q7
+  question: Did I mention wife?
+  expected_contains:
+  - wife

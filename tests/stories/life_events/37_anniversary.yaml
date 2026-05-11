@@ -1,0 +1,118 @@
+story_id: 37
+story_name: "Fifth Wedding Anniversary"
+category: "Life Events"
+description: |
+  User is celebrating their 5th wedding anniversary with spouse Jordan. They
+  originally wed at Pine Ridge Resort. A celebration dinner is planned at Le
+  Petit Bistro, with matching Tissot watches as gifts, and they plan to recreate
+  their first date at Cafe Luna. Tests memory of relationship milestones, venues,
+  and sentimental details.
+duration_simulated: "2 weeks"
+total_batches: 8
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00 AM"
+    user_input: |
+      Our 5th wedding anniversary is this Friday! Jordan and I got married
+      at Pine Ridge Resort five years ago. I still remember every detail of
+      that day. Time flies. I want to make this anniversary really special.
+    expected_memory_stores:
+      - "5th anniversary"
+      - "Jordan"
+      - "Pine Ridge Resort"
+      - "Friday"
+
+  - batch: 2
+    time: "Tuesday 11:00 AM"
+    user_input: |
+      I booked a dinner at Le Petit Bistro for Friday night. Jordan loves
+      French food. I also ordered matching watches from Tissot as our
+      anniversary gift. They're getting engraved with our wedding date.
+    expected_memory_stores:
+      - "Le Petit Bistro"
+      - "Tissot"
+      - "matching watches"
+      - "engraved"
+
+  - batch: 3
+    time: "Tuesday 3:00 PM"
+    user_input: "What is the traditional gift for a 5th wedding anniversary?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["wood"]
+
+  - batch: 4
+    time: "Wednesday 10:00 AM"
+    user_input: |
+      I have another idea for the anniversary weekend. Jordan and I had our
+      very first date at Cafe Luna. I'm going to take us back there on
+      Saturday to recreate that first date. Same corner booth, same order
+      if I can remember it.
+    expected_memory_stores:
+      - "Cafe Luna"
+      - "first date"
+      - "corner booth"
+      - "Saturday"
+
+  - batch: 5
+    time: "Wednesday 5:00 PM"
+    user_input: "Where did Jordan and I get married?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Pine Ridge Resort"]
+
+  - batch: 6
+    time: "Thursday 12:00 PM"
+    user_input: |
+      The Tissot watches arrived today and the engraving looks perfect. I'm
+      going to wrap them in a box with a letter I wrote for Jordan about
+      our five years together. Also picked up flowers - white peonies,
+      Jordan's favorite.
+    expected_memory_stores:
+      - "white peonies"
+      - "letter"
+      - "flowers"
+
+  - batch: 7
+    time: "Friday 8:00 AM"
+    user_input: "How many bones are in the human body?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["206"]
+
+  - batch: 8
+    time: "Saturday 10:00 AM"
+    user_input: "Where are Jordan and I recreating our first date this weekend?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Cafe Luna"]
+
+final_verification:
+  - question: "What anniversary are we celebrating?"
+    expected_contains: ["5th"]
+  - question: "What is my spouse's name?"
+    expected_contains: ["Jordan"]
+  - question: "Where was our wedding?"
+    expected_contains: ["Pine Ridge Resort"]
+  - question: "Where is the anniversary dinner?"
+    expected_contains: ["Le Petit Bistro"]
+  - question: "What are the anniversary gifts?"
+    expected_contains: ["watches", "Tissot"]
+  - question: "Where was our first date?"
+    expected_contains: ["Cafe Luna"]

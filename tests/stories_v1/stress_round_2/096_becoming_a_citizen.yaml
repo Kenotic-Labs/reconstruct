@@ -1,0 +1,102 @@
+story_id: 96
+story_name: Becoming a Citizen
+category: Life Events
+description: User completes their US citizenship application and takes the oath.
+duration_simulated: 14 months
+total_batches: 7
+batches:
+- batch: 1
+  time: Month 1
+  user_input: Filed my N-400 citizenship application. The fee is 760 dollars. I've been a green card holder
+    for 6 years.
+  expected_stores:
+  - N-400
+  - citizenship application
+  - 760 dollars
+  - green card
+  - 6 years
+- batch: 2
+  time: Month 3
+  user_input: Biometrics appointment today at the USCIS field office in San Francisco. Fingerprints took
+    about 20 minutes.
+  expected_stores:
+  - biometrics
+  - USCIS
+  - San Francisco
+  - 20 minutes
+- batch: 3
+  time: Month 6
+  user_input: Started studying for the civics test. 100 possible questions, they ask 10, need 6 correct.
+    My friend Analisa passed hers last year and is quizzing me.
+  expected_stores:
+  - civics test
+  - 100 possible questions
+  - '10'
+  - 6 correct
+  - Analisa
+- batch: 4
+  time: Month 8
+  user_input: Who wrote the Declaration of Independence?
+- batch: 5
+  time: Month 11
+  user_input: Interview scheduled for next month. I'm anxious. Re-reading the entire 100 questions list
+    every day.
+  expected_stores:
+  - interview
+  - next month
+  - 100 questions
+  expected_adaptation:
+    emotion_detected: anxious
+    warmth_direction: increase
+- batch: 6
+  time: Month 12
+  user_input: Passed the interview and civics test. Got 6 out of 6 on the civics. The interviewing officer
+    was named Aisha Thompson and she was kind.
+  expected_stores:
+  - passed
+  - 6 out of 6
+  - Aisha Thompson
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+- batch: 7
+  time: Month 14
+  user_input: Oath ceremony was today at the Paramount Theater in Oakland. 1200 new citizens. I'm officially
+    American.
+  expected_stores:
+  - oath ceremony
+  - Paramount Theater
+  - Oakland
+  - 1200 new citizens
+  expected_adaptation:
+    emotion_detected: emotional/joyful
+    warmth_direction: increase
+questions:
+- question_id: 96_q1
+  question: What form did I file?
+  expected_contains:
+  - N-400
+- question_id: 96_q2
+  question: Who helped me study?
+  expected_contains:
+  - Analisa
+- question_id: 96_q3
+  question: Who was my interviewing officer?
+  expected_contains:
+  - Aisha Thompson
+- question_id: 96_q4
+  question: Where was the oath ceremony?
+  expected_contains:
+  - Paramount Theater
+- question_id: 96_q5
+  question: How long had I been a green card holder?
+  expected_contains:
+  - 6 years
+- question_id: 96_q6
+  question: How many people were at the ceremony?
+  expected_contains:
+  - '1200'
+- question_id: 96_q7
+  question: Did I mention citizenship application?
+  expected_contains:
+  - citizenship application

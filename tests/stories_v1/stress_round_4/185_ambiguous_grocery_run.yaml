@@ -1,0 +1,66 @@
+story_id: 185
+story_name: Ambiguous Grocery Run
+category: Daily Life
+description: User argues with partner over whose turn it is to grocery shop.
+duration_simulated: 1 week
+total_batches: 4
+batches:
+- batch: 1
+  time: Monday
+  user_input: My wife Oksana told me it was her turn to do groceries but she meant NEXT week, not this
+    week. I thought she meant this week.
+  expected_stores:
+  - Oksana
+  - wife
+  - next week
+  - not this week
+- batch: 2
+  time: Wednesday
+  user_input: Oksana and I ended up fighting over a silly miscommunication. She went to Whole Foods and
+    bought 240 dollars of groceries.
+  expected_stores:
+  - Oksana
+  - Whole Foods
+  - 240 dollars
+  expected_adaptation:
+    emotion_detected: frustrated
+    warmth_direction: neutral
+- batch: 3
+  time: Thursday
+  user_input: What is the smallest planet in our solar system?
+- batch: 4
+  time: Saturday
+  user_input: Oksana and I made up. We bought a shared Google Calendar event called 'Groceries' to NOT
+    repeat the mix up.
+  expected_stores:
+  - Oksana
+  - Google Calendar
+questions:
+- question_id: 185_q1
+  question: Who is my wife?
+  expected_contains:
+  - Oksana
+- question_id: 185_q2
+  question: Where did she go?
+  expected_contains:
+  - Whole Foods
+- question_id: 185_q3
+  question: How much did she spend?
+  expected_contains:
+  - '240'
+- question_id: 185_q4
+  question: What did we set up to avoid repeating?
+  expected_contains:
+  - Google Calendar
+- question_id: 185_q5
+  question: Did I mention wife?
+  expected_contains:
+  - wife
+- question_id: 185_q6
+  question: When is next week?
+  expected_contains:
+  - next week
+- question_id: 185_q7
+  question: When is not this week?
+  expected_contains:
+  - not this week

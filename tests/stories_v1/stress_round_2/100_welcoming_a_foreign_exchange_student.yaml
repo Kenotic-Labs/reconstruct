@@ -1,0 +1,107 @@
+story_id: 100
+story_name: Welcoming a Foreign Exchange Student
+category: Life Events
+description: User hosts a foreign exchange student for a school year.
+duration_simulated: 6 months
+total_batches: 7
+batches:
+- batch: 1
+  time: Month 1
+  user_input: Our exchange student arrived yesterday. Her name is Saskia Brandt, she's 16, from Freiburg
+    in Germany. She'll be with us for a full school year.
+  expected_stores:
+  - Saskia Brandt
+  - '16'
+  - Freiburg
+  - Germany
+  - school year
+- batch: 2
+  time: Month 1 Week 2
+  user_input: Saskia enrolled at Hillsdale High as a junior. She's taking English, Pre-Calc, US History,
+    and Art. Her English is better than expected.
+  expected_stores:
+  - Saskia
+  - Hillsdale High
+  - junior
+  - English
+  - Pre-Calc
+  - US History
+  - Art
+- batch: 3
+  time: Month 2
+  user_input: My daughter Eva and Saskia are getting along really well. They go running together in the
+    mornings. Saskia made us schnitzel for dinner on Sunday.
+  expected_stores:
+  - Eva
+  - daughter
+  - Saskia
+  - running
+  - schnitzel
+- batch: 4
+  time: Month 3
+  user_input: What are the primary colors?
+- batch: 5
+  time: Month 3 Week 3
+  user_input: Saskia got homesick around Halloween. Her mom Ingrid sent her a care package with German
+    chocolate and her favorite scarf.
+  expected_stores:
+  - Saskia
+  - homesick
+  - Halloween
+  - Ingrid
+  - German chocolate
+  - scarf
+  expected_adaptation:
+    emotion_detected: tender
+    warmth_direction: increase
+- batch: 6
+  time: Month 5
+  user_input: Saskia made varsity soccer. Her coach Mr. Rodrigo Navarro said she's one of the strongest
+    players this season. Game schedule is Fridays.
+  expected_stores:
+  - Saskia
+  - varsity soccer
+  - Rodrigo Navarro
+  - Fridays
+- batch: 7
+  time: Month 6
+  user_input: Saskia goes home in 8 weeks. Eva is already dreading it. They're planning a road trip to
+    Yosemite over spring break before she leaves.
+  expected_stores:
+  - Saskia
+  - 8 weeks
+  - Eva
+  - Yosemite
+  - spring break
+  expected_adaptation:
+    emotion_detected: bittersweet
+    warmth_direction: increase
+questions:
+- question_id: 100_q1
+  question: What is my exchange student's name?
+  expected_contains:
+  - Saskia Brandt
+- question_id: 100_q2
+  question: Where is she from?
+  expected_contains:
+  - Freiburg
+- question_id: 100_q3
+  question: Who is my daughter?
+  expected_contains:
+  - Eva
+- question_id: 100_q4
+  question: What high school does she go to?
+  expected_contains:
+  - Hillsdale
+- question_id: 100_q5
+  question: Who is her mom?
+  expected_contains:
+  - Ingrid
+- question_id: 100_q6
+  question: What sport did she make varsity in?
+  expected_contains:
+  - soccer
+- question_id: 100_q7
+  question: Where are they going over spring break?
+  expected_contains:
+  - Yosemite

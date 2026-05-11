@@ -1,0 +1,121 @@
+story_id: 21
+story_name: Learning Guitar
+category: Learning
+description: 'User starts learning to play guitar with online lessons.
+
+  Tests memory of musical concepts, practice progress,
+
+  and learning milestones.
+
+  '
+duration_simulated: 1 month
+total_batches: 8
+batches:
+- batch: 1
+  time: Saturday 10:00 AM
+  user_input: 'I just bought my first guitar! It''s a Fender acoustic in sunburst
+
+    color. I signed up for lessons with an app called GuitarMaster.
+
+    My goal is to play Wonderwall by my birthday in June.
+
+    '
+  expected_stores:
+  - Fender
+  - acoustic
+  - sunburst
+  - GuitarMaster
+  - Wonderwall
+  - June
+- batch: 2
+  time: Sunday 3:00 PM
+  user_input: 'First practice session done. Learned the basic chords G, C, and D.
+
+    My fingers hurt so much! The instructor in the app is named Maria
+
+    and she''s really patient.
+
+    '
+  expected_stores:
+  - G
+  - C
+  - D
+  - Maria
+  - fingers hurt
+- batch: 3
+  time: Monday 12:00 PM
+  user_input: Who wrote the song Wonderwall?
+- batch: 4
+  time: Tuesday 7:00 PM
+  user_input: What chords have I learned so far?
+- batch: 5
+  time: Next Saturday 11:00 AM
+  user_input: 'Week 2 of guitar! I can now transition between G and C smoothly.
+
+    Learned the Em and Am chords today. Maria says I''m making great
+
+    progress. Practiced for 45 minutes today.
+
+    '
+  expected_stores:
+  - Em
+  - Am
+  - 45 minutes
+  - progress
+- batch: 6
+  time: Next Sunday 2:00 PM
+  user_input: What's the capital of Portugal?
+- batch: 7
+  time: Third Saturday 10:00 AM
+  user_input: 'Three weeks in and I can play the intro to Wonderwall! Still
+
+    working on the strumming pattern. My calluses are finally
+
+    forming so my fingers don''t hurt as much.
+
+    '
+  expected_stores:
+  - intro
+  - strumming pattern
+  - calluses
+- batch: 8
+  time: Fourth Saturday 6:00 PM
+  user_input: 'I DID IT! I played Wonderwall all the way through for my family!
+
+    They loved it. Maria sent me a certificate of completion for
+
+    the beginner course. Next up is learning fingerpicking.
+
+    '
+  expected_stores:
+  - family
+  - certificate
+  - fingerpicking
+questions:
+- question_id: 21_q1
+  question: What kind of guitar did I buy?
+  expected_contains:
+  - Fender
+  - acoustic
+- question_id: 21_q2
+  question: What song am I learning to play?
+  expected_contains:
+  - Wonderwall
+- question_id: 21_q3
+  question: Who is my guitar instructor?
+  expected_contains:
+  - Maria
+- question_id: 21_q4
+  question: What app am I using for lessons?
+  expected_contains:
+  - GuitarMaster
+- question_id: 21_q5
+  question: What basic chords did I learn first?
+  expected_contains:
+  - G
+  - C
+  - D
+- question_id: 21_q6
+  question: What technique am I learning next?
+  expected_contains:
+  - fingerpicking

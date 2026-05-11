@@ -1,0 +1,87 @@
+story_id: 107
+story_name: Mentoring Each Other as Peers
+category: Career
+description: User and another manager agree to be peer mentors.
+duration_simulated: 6 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1
+  user_input: Another manager at my company, Vihaan, and I agreed to be peer mentors to each other. We
+    meet every other Monday at 4 PM for an hour.
+  expected_stores:
+  - Vihaan
+  - peer mentors
+  - every other Monday
+  - 4 PM
+  - an hour
+- batch: 2
+  time: Week 2
+  user_input: First session was about the conflict Vihaan is having with his skip-level Rohit. I listened
+    and asked him questions and he figured out his own next step.
+  expected_stores:
+  - Vihaan
+  - Rohit
+  - skip-level
+- batch: 3
+  time: Week 3
+  user_input: Second session was about my performance review anxiety. Vihaan told me his own system —
+    he keeps a weekly brag doc and he showed me his template.
+  expected_stores:
+  - Vihaan
+  - performance review
+  - brag doc
+- batch: 4
+  time: Week 4
+  user_input: What's the largest ocean?
+- batch: 5
+  time: Week 4 Monday
+  user_input: Vihaan and I talked about a contentious meeting I had with my peer Sara. He made me see
+    that Sara wasn't actually attacking me — she was anxious.
+  expected_stores:
+  - Vihaan
+  - Sara
+  - peer
+- batch: 6
+  time: Week 6
+  user_input: Vihaan told me this format has helped him more than any coach. I said the same — our next
+    session is on career goals.
+  expected_stores:
+  - Vihaan
+  - career goals
+  expected_adaptation:
+    emotion_detected: grateful
+    warmth_direction: increase
+questions:
+- question_id: 107_q1
+  question: Who is my peer mentor?
+  expected_contains:
+  - Vihaan
+- question_id: 107_q2
+  question: When do we meet?
+  expected_contains:
+  - Monday
+- question_id: 107_q3
+  question: Who is Vihaan's skip-level?
+  expected_contains:
+  - Rohit
+- question_id: 107_q4
+  question: What template did Vihaan share with me?
+  expected_contains:
+  - brag doc
+- question_id: 107_q5
+  question: Who is the peer I had a contentious meeting with?
+  expected_contains:
+  - Sara
+- question_id: 107_q6
+  question: How long are our sessions?
+  expected_contains:
+  - an hour
+- question_id: 107_q7
+  question: Did I mention peer mentors?
+  expected_contains:
+  - peer mentors
+- question_id: 107_q8
+  question: When is every other Monday?
+  expected_contains:
+  - every other Monday

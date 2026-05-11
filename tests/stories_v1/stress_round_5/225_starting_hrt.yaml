@@ -1,0 +1,83 @@
+story_id: 225
+story_name: Starting HRT
+category: Health
+description: User starts hormone replacement therapy as part of her transition.
+duration_simulated: 4 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: I started hormone replacement therapy today. My endocrinologist Dr. Elodie Thorne prescribed
+    estradiol and spironolactone.
+  expected_stores:
+  - HRT
+  - Dr. Elodie Thorne
+  - endocrinologist
+  - estradiol
+  - spironolactone
+  expected_adaptation:
+    emotion_detected: emotional
+    warmth_direction: increase
+- batch: 2
+  time: Month 2
+  user_input: Dr. Thorne ordered monthly bloodwork for the first 6 months. My support group facilitator
+    is Marisol Ferrante.
+  expected_stores:
+  - Dr. Thorne
+  - monthly bloodwork
+  - 6 months
+  - Marisol Ferrante
+- batch: 3
+  time: Month 3
+  user_input: What's the capital of Peru?
+- batch: 4
+  time: Month 3 Week 2
+  user_input: Second set of labs. Dr. Thorne said my estradiol is in target range. Mood is more stable
+    than ever.
+  expected_stores:
+  - Dr. Thorne
+  - estradiol
+  - target range
+- batch: 5
+  time: Month 4
+  user_input: Four months in. Physical changes starting. My mom Lucinda was supportive on our call last
+    night. I cried and she cried.
+  expected_stores:
+  - Lucinda
+  - mom
+  expected_adaptation:
+    emotion_detected: emotional/peaceful
+    warmth_direction: increase
+questions:
+- question_id: 225_q1
+  question: Who is my endocrinologist?
+  expected_contains:
+  - Elodie Thorne
+- question_id: 225_q2
+  question: What medications am I on?
+  expected_contains:
+  - estradiol
+- question_id: 225_q3
+  question: Who is my support group facilitator?
+  expected_contains:
+  - Marisol Ferrante
+- question_id: 225_q4
+  question: Who is my mom?
+  expected_contains:
+  - Lucinda
+- question_id: 225_q5
+  question: Did I mention HRT?
+  expected_contains:
+  - HRT
+- question_id: 225_q6
+  question: Did I mention Dr. Elodie Thorne?
+  expected_contains:
+  - Dr. Elodie Thorne
+- question_id: 225_q7
+  question: Did I mention endocrinologist?
+  expected_contains:
+  - endocrinologist
+- question_id: 225_q8
+  question: Did I mention spironolactone?
+  expected_contains:
+  - spironolactone

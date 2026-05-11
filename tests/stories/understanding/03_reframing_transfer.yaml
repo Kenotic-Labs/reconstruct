@@ -1,0 +1,36 @@
+story_id: 203
+story_name: "Conflict Reframing Transfer"
+category: "understanding"
+description: |
+  User describes a conflict with a coworker in factual terms only.
+  The model reframes it as a communication style mismatch — a conceptual
+  label the user never used. Verification proves the reframed understanding
+  (communication, style) was stored via model_comprehension and is retrievable.
+
+batches:
+  - batch: 1
+    time: "Wednesday 2:00 PM"
+    user_input: |
+      Had a frustrating situation with my coworker Alex today. I told him
+      directly that the deadline was unrealistic and he just went quiet and
+      said he'd think about it. Then later I heard he complained to the
+      manager instead of coming back to me. I don't understand why he
+      couldn't just tell me if he disagreed.
+    model_response: |
+      This sounds like a communication style mismatch rather than a personal
+      conflict. You prefer direct feedback and Alex seems to avoid direct
+      confrontation, defaulting to indirect channels instead. The frustration
+      makes sense — your styles are structurally misaligned, not your intentions.
+    expected_memory_stores:
+      - "Alex"
+      - "deadline"
+
+final_verification:
+  - question: "What is the nature of the conflict with Sam's coworker?"
+    expected_contains: ["communication"]
+
+  - question: "How did the model characterize the situation with Alex?"
+    expected_contains: ["style"]
+
+  - question: "Who is Sam's coworker involved in the conflict?"
+    expected_contains: ["Alex"]

@@ -1,0 +1,92 @@
+story_id: 64
+story_name: Reconnecting With an Old College Friend
+category: Relationships
+description: User reconnects with a college friend after a decade apart.
+duration_simulated: 3 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1 Tuesday
+  user_input: Got a Facebook message from Ben Hall, my best friend from college. We haven't talked in
+    11 years. He's in Austin now.
+  expected_stores:
+  - Ben Hall
+  - best friend
+  - college
+  - 11 years
+  - Austin
+  expected_adaptation:
+    emotion_detected: surprised/happy
+    warmth_direction: increase
+- batch: 2
+  time: Week 1 Thursday
+  user_input: We did a two hour video call. Ben got married to a woman named Leah, they have a four year
+    old daughter Rose.
+  expected_stores:
+  - Ben
+  - Leah
+  - wife
+  - Rose
+  - daughter
+  - four years old
+- batch: 3
+  time: Week 2 Monday
+  user_input: Ben works as a musician now — session drummer for indie rock bands. Wildly different from
+    the law school trajectory he was on.
+  expected_stores:
+  - Ben
+  - musician
+  - session drummer
+  - indie rock
+- batch: 4
+  time: Week 2 Wednesday
+  user_input: Who invented the telephone?
+- batch: 5
+  time: Week 3 Monday
+  user_input: Ben is coming to my city for a studio session next month. We're meeting for dinner on the
+    17th at a place called Shinju Sushi.
+  expected_stores:
+  - next month
+  - 17th
+  - Shinju Sushi
+- batch: 6
+  time: Week 3 Friday
+  user_input: Ben sent me a playlist of his favorite recent tracks — 40 songs across like 5 genres. We
+    had the same music taste in college too.
+  expected_stores:
+  - playlist
+  - 40 songs
+  - 5 genres
+questions:
+- question_id: 64_q1
+  question: Who is the friend I reconnected with?
+  expected_contains:
+  - Ben Hall
+- question_id: 64_q2
+  question: Where is Ben now?
+  expected_contains:
+  - Austin
+- question_id: 64_q3
+  question: What does Ben do now?
+  expected_contains:
+  - drummer
+- question_id: 64_q4
+  question: Who is Ben's wife?
+  expected_contains:
+  - Leah
+- question_id: 64_q5
+  question: Who is Ben's daughter?
+  expected_contains:
+  - Rose
+- question_id: 64_q6
+  question: Where are we meeting for dinner?
+  expected_contains:
+  - Shinju Sushi
+- question_id: 64_q7
+  question: How long has it been since we talked?
+  expected_contains:
+  - 11 years
+- question_id: 64_q8
+  question: Did I mention best friend?
+  expected_contains:
+  - best friend

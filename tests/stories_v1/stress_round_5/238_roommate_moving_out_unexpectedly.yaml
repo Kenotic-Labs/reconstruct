@@ -1,0 +1,79 @@
+story_id: 238
+story_name: Roommate Moving Out Unexpectedly
+category: Daily Life
+description: User's roommate gives sudden notice and she has to find a replacement.
+duration_simulated: 5 weeks
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My roommate Octavio gave 30 days notice today. He's moving in with his partner Elsinore.
+    Rent here is 1400 dollars for his half.
+  expected_stores:
+  - Octavio
+  - 30 days notice
+  - Elsinore
+  - 1400 dollars
+- batch: 2
+  time: Week 2
+  user_input: Posted the room on Craigslist and Roomster. My landlady Ms. Junko Hirano approved listing
+    it.
+  expected_stores:
+  - Craigslist
+  - Roomster
+  - Junko Hirano
+  - landlady
+- batch: 3
+  time: Week 3
+  user_input: Who wrote Frankenstein?
+- batch: 4
+  time: Week 3 Thursday
+  user_input: Had 4 showings. Best candidate is a grad student named Bidisha Ghosh. She's quiet and clean
+    and NOT a partier.
+  expected_stores:
+  - 4 showings
+  - Bidisha Ghosh
+  - not a partier
+- batch: 5
+  time: Week 5
+  user_input: Bidisha moved in yesterday. Octavio moved out Saturday. Junko approved the new lease addendum.
+  expected_stores:
+  - Bidisha
+  - Octavio
+  - Junko
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+questions:
+- question_id: 238_q1
+  question: Who is my old roommate?
+  expected_contains:
+  - Octavio
+- question_id: 238_q2
+  question: Who is Octavio's partner?
+  expected_contains:
+  - Elsinore
+- question_id: 238_q3
+  question: Who is my new roommate?
+  expected_contains:
+  - Bidisha Ghosh
+- question_id: 238_q4
+  question: Who is my landlady?
+  expected_contains:
+  - Junko Hirano
+- question_id: 238_q5
+  question: When is 30 days notice?
+  expected_contains:
+  - 30 days notice
+- question_id: 238_q6
+  question: How much money is 1400 dollars?
+  expected_contains:
+  - 1400 dollars
+- question_id: 238_q7
+  question: Do I know someone named Craigslist?
+  expected_contains:
+  - Craigslist
+- question_id: 238_q8
+  question: Do I know someone named Roomster?
+  expected_contains:
+  - Roomster

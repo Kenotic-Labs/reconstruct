@@ -1,0 +1,70 @@
+story_id: 175
+story_name: Dentist Finds a Cavity I Felt Nothing About
+category: Health
+description: User has unexpected dental work for a silent cavity.
+duration_simulated: 2 weeks
+total_batches: 4
+batches:
+- batch: 1
+  time: Week 1
+  user_input: Regular cleaning with my hygienist Mariana today. Dentist Dr. Henrik Boelens said I have
+    a cavity between molars 14 and 15. No pain at all.
+  expected_stores:
+  - Mariana
+  - hygienist
+  - Dr. Henrik Boelens
+  - cavity
+  - 14 and 15
+- batch: 2
+  time: Week 1 Wednesday
+  user_input: Dr. Boelens scheduled the filling for Monday morning. Not a crown — composite filling. Should
+    take 45 minutes.
+  expected_stores:
+  - Dr. Boelens
+  - Monday morning
+  - composite filling
+  - not a crown
+  - 45 minutes
+- batch: 3
+  time: Week 2
+  user_input: What is the boiling point of ethanol?
+- batch: 4
+  time: Week 2 Monday
+  user_input: Filling done. Took 40 minutes. Dr. Boelens said the decay was deeper than the x-ray showed
+    but he got it all.
+  expected_stores:
+  - 40 minutes
+  - Dr. Boelens
+questions:
+- question_id: 175_q1
+  question: Who is my dentist?
+  expected_contains:
+  - Henrik Boelens
+- question_id: 175_q2
+  question: Who is my hygienist?
+  expected_contains:
+  - Mariana
+- question_id: 175_q3
+  question: Which teeth had the cavity?
+  expected_contains:
+  - 14 and 15
+- question_id: 175_q4
+  question: What type of filling did I get?
+  expected_contains:
+  - composite
+- question_id: 175_q5
+  question: Did I mention hygienist?
+  expected_contains:
+  - hygienist
+- question_id: 175_q6
+  question: Did I mention Dr. Henrik Boelens?
+  expected_contains:
+  - Dr. Henrik Boelens
+- question_id: 175_q7
+  question: Did I mention cavity?
+  expected_contains:
+  - cavity
+- question_id: 175_q8
+  question: Did I mention Dr. Boelens?
+  expected_contains:
+  - Dr. Boelens

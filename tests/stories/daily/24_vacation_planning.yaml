@@ -1,0 +1,125 @@
+story_id: 24
+story_name: "Vacation Planning"
+category: "Daily Life"
+description: |
+  User is planning a two-week vacation to Japan with their partner Lee.
+  Covers flight booking, hotel reservations, itinerary across three cities,
+  budget tracking, and must-see destinations.
+duration_simulated: "4 weeks"
+total_batches: 8
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      Lee and I are planning a trip to Japan! We're going for 2 weeks in April.
+      We booked our flights on Delta Airlines already. I've been dreaming about
+      this trip for years.
+    expected_memory_stores:
+      - "Japan"
+      - "Lee"
+      - "2 weeks"
+      - "April"
+      - "Delta Airlines"
+
+  - batch: 2
+    time: "Tuesday 8:00 PM"
+    user_input: |
+      We mapped out the itinerary tonight. We'll spend 5 days in Tokyo, then
+      4 days in Kyoto, and finish with 3 days in Osaka. I think that gives us
+      a great mix of modern city life and traditional culture.
+    expected_memory_stores:
+      - "Tokyo"
+      - "5 days"
+      - "Kyoto"
+      - "4 days"
+      - "Osaka"
+      - "3 days"
+
+  - batch: 3
+    time: "Wednesday 12:00 PM"
+    user_input: "What is the best time of year to see cherry blossoms in Japan?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["cherry blossom", "spring"]
+
+  - batch: 4
+    time: "Thursday 9:00 PM"
+    user_input: |
+      Booked our hotels! In Tokyo we're staying at the Sakura Inn - it had
+      amazing reviews. For Kyoto we found a traditional ryokan called Zen Garden.
+      I can't wait to sleep on tatami mats.
+    expected_memory_stores:
+      - "Sakura Inn"
+      - "Tokyo"
+      - "Zen Garden"
+      - "ryokan"
+      - "Kyoto"
+
+  - batch: 5
+    time: "Saturday 10:00 AM"
+    user_input: |
+      We set our budget at $6000 for the whole trip. We're putting everything
+      on the Chase Sapphire card to rack up travel points. Should help with
+      future trips too.
+    expected_memory_stores:
+      - "$6000"
+      - "budget"
+      - "Chase Sapphire"
+      - "points"
+
+  - batch: 6
+    time: "Saturday 3:00 PM"
+    user_input: "How many days are we spending in Kyoto and what's the hotel called?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["4 days", "Zen Garden"]
+
+  - batch: 7
+    time: "Sunday 11:00 AM"
+    user_input: |
+      Made our must-see list. The Fushimi Inari shrine in Kyoto is at the top -
+      those thousands of torii gates look incredible in photos. And we definitely
+      want to hit the Tsukiji fish market in Tokyo for fresh sushi.
+    expected_memory_stores:
+      - "Fushimi Inari"
+      - "shrine"
+      - "Tsukiji"
+      - "fish market"
+
+  - batch: 8
+    time: "Sunday 6:00 PM"
+    user_input: "Do you need a Japan Rail Pass to travel between Tokyo, Kyoto, and Osaka?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["Japan Rail Pass", "shinkansen"]
+
+final_verification:
+  - question: "Who am I going to Japan with and how long is the trip?"
+    expected_contains: ["Lee", "2 weeks"]
+  - question: "What airline did I book for the Japan trip?"
+    expected_contains: ["Delta"]
+  - question: "What hotel am I staying at in Tokyo?"
+    expected_contains: ["Sakura Inn"]
+  - question: "What is the name of the ryokan in Kyoto?"
+    expected_contains: ["Zen Garden"]
+  - question: "What is our trip budget and which credit card are we using?"
+    expected_contains: ["$6000", "Chase Sapphire"]
+  - question: "What shrine do I want to visit in Kyoto?"
+    expected_contains: ["Fushimi Inari"]
+  - question: "How many days are we spending in each city?"
+    expected_contains: ["5", "4", "3"]

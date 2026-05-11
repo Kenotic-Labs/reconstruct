@@ -1,0 +1,82 @@
+story_id: 244
+story_name: Marriage After a Courthouse Wedding
+category: Life Events
+description: User has a courthouse wedding followed by a larger celebration later.
+duration_simulated: 3 months
+total_batches: 4
+batches:
+- batch: 1
+  time: Month 1
+  user_input: My partner Indira and I got married at the courthouse yesterday. Just us and two witnesses
+    — her brother Arjun and my friend Levi.
+  expected_stores:
+  - Indira
+  - partner
+  - courthouse
+  - Arjun
+  - brother
+  - Levi
+  - friend
+  expected_adaptation:
+    emotion_detected: happy
+    warmth_direction: increase
+- batch: 2
+  time: Month 2
+  user_input: Planning a larger celebration at a restaurant called Acquerello in 2 months. Indira's parents
+    Rohit and Kavya are flying in.
+  expected_stores:
+  - Acquerello
+  - 2 months
+  - Rohit
+  - Kavya
+  - Indira's parents
+- batch: 3
+  time: Month 2 Week 3
+  user_input: What's the smallest continent?
+- batch: 4
+  time: Month 3
+  user_input: Celebration tonight. 45 people at Acquerello. Indira gave a speech that made everyone cry.
+    Arjun flew in from Mumbai.
+  expected_stores:
+  - 45 people
+  - Acquerello
+  - Indira
+  - Arjun
+  - Mumbai
+  expected_adaptation:
+    emotion_detected: joyful
+    warmth_direction: increase
+questions:
+- question_id: 244_q1
+  question: Who did I marry?
+  expected_contains:
+  - Indira
+- question_id: 244_q2
+  question: Where was our celebration?
+  expected_contains:
+  - Acquerello
+- question_id: 244_q3
+  question: Who is her brother?
+  expected_contains:
+  - Arjun
+- question_id: 244_q4
+  question: Who are her parents?
+  expected_contains:
+  - Rohit
+  - Kavya
+- question_id: 244_q5
+  question: Did I mention partner?
+  expected_contains:
+  - partner
+- question_id: 244_q6
+  question: Did I mention courthouse?
+  expected_contains:
+  - courthouse
+- question_id: 244_q7
+  question: Did I mention brother?
+  expected_contains:
+  - brother
+- question_id: 244_q8
+  question: Do I know someone named Levi?
+  expected_contains:
+  - Levi

@@ -1,0 +1,88 @@
+story_id: 2
+story_name: Promotion to Tech Lead
+category: Career
+description: 'User receives a promotion from Software Engineer to Tech Lead at Nexus Corp.
+
+  They share details about their new salary, reporting structure, team composition,
+
+  biggest project, and a mentor colleague. Tests memory storage of role changes,
+
+  salary figures, team details, and retrieval of career progression facts.
+
+  '
+duration_simulated: 2 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Monday 9:00 AM
+  user_input: 'I just got some amazing news — I''ve been promoted! I''m moving from Software Engineer
+
+    to Tech Lead at Nexus Corp. My new salary is $145k. I''ll be reporting directly to
+
+    our VP, Sarah Mitchell.
+
+    '
+  expected_stores:
+  - promotion
+  - Tech Lead
+  - Nexus Corp
+  - $145k
+  - Sarah Mitchell
+  - VP
+- batch: 2
+  time: Monday 2:00 PM
+  user_input: 'I''m going to be leading a team of 6 engineers. The biggest project I''ll be owning
+
+    is called Project Mercury — it''s a platform migration that''s been in the works for
+
+    months.
+
+    '
+  expected_stores:
+  - 6 engineers
+  - Project Mercury
+  - platform migration
+- batch: 3
+  time: Tuesday 10:00 AM
+  user_input: What are some common challenges new tech leads face in their first 90 days?
+- batch: 4
+  time: Wednesday 11:00 AM
+  user_input: 'My colleague James has been a tech lead for 3 years now. He''s agreed to be my
+
+    mentor through this transition. We''re going to meet weekly to talk through
+
+    leadership challenges.
+
+    '
+  expected_stores:
+  - James
+  - mentor
+  - 3 years
+  - weekly
+- batch: 5
+  time: Thursday 9:30 AM
+  user_input: Who am I reporting to in my new role?
+- batch: 6
+  time: Friday 3:00 PM
+  user_input: What is the RACI framework used for in project management?
+- batch: 7
+  time: Monday 10:00 AM
+  user_input: Can you remind me what my biggest project is and how many people are on my team?
+questions:
+- question_id: 2_q1
+  question: What role was I promoted to and at which company?
+  expected_contains:
+  - Tech Lead
+  - Nexus Corp
+- question_id: 2_q2
+  question: What is my new salary?
+  expected_contains:
+  - '145'
+- question_id: 2_q3
+  question: Who is mentoring me in my new role?
+  expected_contains:
+  - James
+- question_id: 2_q4
+  question: What is the name of the big project I'm leading?
+  expected_contains:
+  - Project Mercury

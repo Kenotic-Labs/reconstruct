@@ -1,0 +1,86 @@
+story_id: 211
+story_name: Partner's Anxiety Spiral
+category: Relationships
+description: User supports their partner through a severe anxiety spiral.
+duration_simulated: 6 weeks
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My partner Niamh had a panic attack at work on Monday. Her therapist Dr. Ezra Voltaire said
+    it's her worst episode in years.
+  expected_stores:
+  - Niamh
+  - partner
+  - panic attack
+  - Dr. Ezra Voltaire
+  expected_adaptation:
+    emotion_detected: scared
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Week 2
+  user_input: Niamh is taking FMLA leave for 4 weeks. Her HR contact Ida Pennington was understanding.
+    She NOT going to be treated as sick leave.
+  expected_stores:
+  - Niamh
+  - FMLA
+  - 4 weeks
+  - Ida Pennington
+  - not sick leave
+- batch: 3
+  time: Week 3
+  user_input: What is the capital of Iceland?
+- batch: 4
+  time: Week 4
+  user_input: Dr. Voltaire adjusted Niamh's medication. Added a low-dose SSRI. It's been 10 days and she's
+    sleeping better.
+  expected_stores:
+  - Dr. Voltaire
+  - Niamh
+  - SSRI
+  - 10 days
+- batch: 5
+  time: Week 6
+  user_input: Niamh is back at work. Dr. Voltaire said she's recovering well. She told me thank you for
+    NOT trying to fix me.
+  expected_stores:
+  - Niamh
+  - Dr. Voltaire
+  - not trying to fix me
+  expected_adaptation:
+    emotion_detected: tender
+    warmth_direction: increase
+questions:
+- question_id: 211_q1
+  question: Who is my partner?
+  expected_contains:
+  - Niamh
+- question_id: 211_q2
+  question: Who is her therapist?
+  expected_contains:
+  - Ezra Voltaire
+- question_id: 211_q3
+  question: Who is her HR contact?
+  expected_contains:
+  - Ida Pennington
+- question_id: 211_q4
+  question: How long is her leave?
+  expected_contains:
+  - 4 weeks
+- question_id: 211_q5
+  question: Did I mention partner?
+  expected_contains:
+  - partner
+- question_id: 211_q6
+  question: Did I mention panic attack?
+  expected_contains:
+  - panic attack
+- question_id: 211_q7
+  question: Did I mention Dr. Ezra Voltaire?
+  expected_contains:
+  - Dr. Ezra Voltaire
+- question_id: 211_q8
+  question: Did I mention FMLA?
+  expected_contains:
+  - FMLA

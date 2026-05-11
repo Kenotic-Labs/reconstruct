@@ -1,0 +1,95 @@
+story_id: 115
+story_name: Godparent Role for a Friend's Baby
+category: Relationships
+description: User is asked to be godparent to a friend's child.
+duration_simulated: 5 months
+total_batches: 6
+batches:
+- batch: 1
+  time: Month 1
+  user_input: My friends Matteo and his husband Kaito asked me to be their baby's godparent. Their daughter
+    is due in May. I said yes immediately.
+  expected_stores:
+  - Matteo
+  - Kaito
+  - husband
+  - godparent
+  - May
+  expected_adaptation:
+    emotion_detected: honored
+    warmth_direction: increase
+- batch: 2
+  time: Month 2
+  user_input: Matteo and I went shopping for baby stuff. He wanted me to help pick out a crib. We settled
+    on an Ubbi in oak.
+  expected_stores:
+  - Matteo
+  - crib
+  - Ubbi
+  - oak
+- batch: 3
+  time: Month 3
+  user_input: Kaito sent me the registry. Matteo and Kaito and I went out to celebrate Matteo's birthday
+    at a place called Shizen.
+  expected_stores:
+  - Kaito
+  - registry
+  - Matteo
+  - Shizen
+- batch: 4
+  time: Month 4
+  user_input: Who was the first person on the moon?
+- batch: 5
+  time: Month 4 Week 3
+  user_input: The baby came early — 3 weeks early. Her name is Nori Lucia. She's healthy, 5 pounds 8 ounces.
+    I drove straight to the hospital.
+  expected_stores:
+  - 3 weeks early
+  - Nori Lucia
+  - 5 pounds 8 ounces
+  expected_adaptation:
+    emotion_detected: emotional
+    warmth_direction: increase
+- batch: 6
+  time: Month 5
+  user_input: Nori's naming ceremony was yesterday. Matteo read a poem he wrote for her. Kaito introduced
+    me to everyone as Auntie. I held her for an hour.
+  expected_stores:
+  - Nori
+  - naming ceremony
+  - Matteo
+  - Kaito
+  - Auntie
+questions:
+- question_id: 115_q1
+  question: Who is my friend?
+  expected_contains:
+  - Matteo
+- question_id: 115_q2
+  question: Who is Matteo's husband?
+  expected_contains:
+  - Kaito
+- question_id: 115_q3
+  question: What is the baby's name?
+  expected_contains:
+  - Nori Lucia
+- question_id: 115_q4
+  question: How much did she weigh?
+  expected_contains:
+  - 5 pounds
+- question_id: 115_q5
+  question: What crib did we pick?
+  expected_contains:
+  - Ubbi
+- question_id: 115_q6
+  question: Where did we celebrate Matteo's birthday?
+  expected_contains:
+  - Shizen
+- question_id: 115_q7
+  question: Did I mention husband?
+  expected_contains:
+  - husband
+- question_id: 115_q8
+  question: Did I mention godparent?
+  expected_contains:
+  - godparent

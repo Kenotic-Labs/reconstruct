@@ -1,0 +1,98 @@
+story_id: 114
+story_name: Navigating Dating in Your 40s
+category: Relationships
+description: User returns to dating after a long relationship ended.
+duration_simulated: 3 months
+total_batches: 7
+batches:
+- batch: 1
+  time: Month 1 Week 1
+  user_input: I signed up for Hinge. First time dating in 14 years. My friend Mayumi helped me set up
+    the profile — she and I took new photos in her backyard.
+  expected_stores:
+  - Hinge
+  - 14 years
+  - Mayumi
+  - friend
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Went on my first date — a coffee with a woman named Olena. She and I had a good hour together
+    but she didn't want a second date.
+  expected_stores:
+  - Olena
+  - coffee
+  - good hour
+- batch: 3
+  time: Month 2 Week 1
+  user_input: Second date was a dinner with a man named Rafi. He's a veterinarian. Good conversation but
+    our values on kids were different.
+  expected_stores:
+  - Rafi
+  - veterinarian
+  - kids
+- batch: 4
+  time: Month 2 Week 3
+  user_input: What's the formula for the area of a circle?
+- batch: 5
+  time: Month 2 Week 4
+  user_input: Third date was with a guy named Terrence. He and I went to a museum exhibit on Kandinsky
+    and then got pho afterwards. We both laughed a lot.
+  expected_stores:
+  - Terrence
+  - Kandinsky
+  - pho
+  expected_adaptation:
+    emotion_detected: hopeful
+    warmth_direction: increase
+- batch: 6
+  time: Month 3 Week 2
+  user_input: Terrence and I are on our fifth date. Mayumi has been cheering me on through every step.
+  expected_stores:
+  - Terrence
+  - fifth date
+  - Mayumi
+- batch: 7
+  time: Month 3 Week 4
+  user_input: Terrence asked me to meet his sister Cindy this weekend. I said yes. I called Mayumi to
+    freak out about it in a good way.
+  expected_stores:
+  - Terrence
+  - Cindy
+  - sister
+  - Mayumi
+  expected_adaptation:
+    emotion_detected: excited/nervous
+    warmth_direction: increase
+questions:
+- question_id: 114_q1
+  question: What app am I using?
+  expected_contains:
+  - Hinge
+- question_id: 114_q2
+  question: Who is my best friend?
+  expected_contains:
+  - Mayumi
+- question_id: 114_q3
+  question: Who is the guy I'm dating now?
+  expected_contains:
+  - Terrence
+- question_id: 114_q4
+  question: Who was my second date?
+  expected_contains:
+  - Rafi
+- question_id: 114_q5
+  question: Who is Terrence's sister?
+  expected_contains:
+  - Cindy
+- question_id: 114_q6
+  question: What artist exhibit did Terrence and I see?
+  expected_contains:
+  - Kandinsky
+- question_id: 114_q7
+  question: When is 14 years?
+  expected_contains:
+  - 14 years
+- question_id: 114_q8
+  question: Did I mention friend?
+  expected_contains:
+  - friend

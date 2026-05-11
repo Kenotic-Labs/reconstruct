@@ -1,0 +1,10 @@
+[OK] What did Caroline research?              -> adoption agencies
+[MISS] What is Caroline's identity?             -> REFUSED
+[OK] Where did Caroline move from 4 years ago -> Sweden
+[MISS] What career path has Caroline decided to -> REFUSED
+[OK] When did Melanie paint a sunrise?        -> Saturday, 07 May 2022
+[OK] What did the charity race raise awarenes -> a charity race for mental health awareness
+[OK] What type of individuals does the adopti -> Ones that support LGBTQ+ individuals
+[OK] What are Melanie's adoption plans?       -> REFUSED
+[OK] What did Melanie research?               -> REFUSED
+Score: 7/9 (78%)

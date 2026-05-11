@@ -1,0 +1,142 @@
+story_id: 41
+story_name: "Adopting a Child"
+category: "Life Events"
+description: |
+  User and partner Robin are adopting a child through Bright Futures agency.
+  Their social worker is Ms. Chen. The home study is completed. They have been
+  matched with a 4-year-old girl named Ellie from foster care. The court date
+  is in February. Tests memory of adoption process details, emotional journey,
+  and key participants.
+duration_simulated: "5 weeks"
+total_batches: 9
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00 AM"
+    user_input: |
+      Robin and I have been working with the Bright Futures adoption agency
+      for over a year now. Our social worker Ms. Chen has been incredible
+      through this whole process. She called today to say we've officially
+      completed the home study. We passed with flying colors.
+    expected_memory_stores:
+      - "Robin"
+      - "Bright Futures"
+      - "Ms. Chen"
+      - "home study"
+      - "completed"
+
+  - batch: 2
+    time: "Wednesday 3:00 PM"
+    user_input: |
+      The most amazing thing happened. Ms. Chen called us. They found a match
+      for us - a 4-year-old girl named Ellie from foster care. She loves
+      drawing and playing with dolls. We get to meet her next week. Robin
+      cried when we heard the news. I did too.
+    expected_memory_stores:
+      - "Ellie"
+      - "4-year-old"
+      - "foster care"
+      - "drawing"
+      - "dolls"
+      - "match"
+
+  - batch: 3
+    time: "Thursday 10:00 AM"
+    user_input: "What is the average length of the adoption process in the United States?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["year", "months"]
+
+  - batch: 4
+    time: "Week 2 Monday 11:00 AM"
+    user_input: |
+      We met Ellie today. She was shy at first but then she showed us her
+      drawings. She drew a picture of a house with a family and said she
+      wants to live somewhere with a dog. Robin promised we'd think about
+      getting a puppy. My heart is completely melted.
+    expected_memory_stores:
+      - "met Ellie"
+      - "drawings"
+      - "house"
+      - "dog"
+      - "puppy"
+
+  - batch: 5
+    time: "Week 2 Thursday 2:00 PM"
+    user_input: "What is the name of the child we're adopting and how old is she?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Ellie", "4"]
+
+  - batch: 6
+    time: "Week 3 Monday 9:00 AM"
+    user_input: |
+      Ms. Chen told us that the court date for the finalization of the
+      adoption is set for February. We're preparing all our documents. Robin
+      and I are setting up Ellie's room - she loves the color purple so
+      we're painting it lavender. We bought her a small easel for drawing.
+    expected_memory_stores:
+      - "court date"
+      - "February"
+      - "purple"
+      - "lavender"
+      - "easel"
+      - "documents"
+
+  - batch: 7
+    time: "Week 3 Wednesday 4:00 PM"
+    user_input: "What is the tallest mountain in the world?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["Everest"]
+
+  - batch: 8
+    time: "Week 4 Tuesday 10:00 AM"
+    user_input: |
+      Ellie spent the weekend with us for the first time as part of the
+      transition plan. She loved her room. She kept saying the easel was
+      her favorite thing. She called Robin "Roro" which made us laugh.
+      She's already starting to feel like family.
+    expected_memory_stores:
+      - "weekend"
+      - "transition"
+      - "Roro"
+      - "favorite"
+
+  - batch: 9
+    time: "Week 5 Monday 11:00 AM"
+    user_input: "When is our court date for the adoption and what agency are we working with?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["February", "Bright Futures"]
+
+final_verification:
+  - question: "Who is my partner in the adoption?"
+    expected_contains: ["Robin"]
+  - question: "What adoption agency are we using?"
+    expected_contains: ["Bright Futures"]
+  - question: "Who is our social worker?"
+    expected_contains: ["Ms. Chen"]
+  - question: "What is the child's name and age?"
+    expected_contains: ["Ellie", "4"]
+  - question: "Where is Ellie from?"
+    expected_contains: ["foster care"]
+  - question: "When is the court date?"
+    expected_contains: ["February"]
+  - question: "What does Ellie love to do?"
+    expected_contains: ["drawing"]

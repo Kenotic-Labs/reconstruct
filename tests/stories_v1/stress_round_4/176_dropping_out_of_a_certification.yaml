@@ -1,0 +1,81 @@
+story_id: 176
+story_name: Dropping Out of a Certification
+category: Learning
+description: User starts a PMP certification, reconsiders, and drops out mid-program.
+duration_simulated: 2 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: I enrolled in a PMP certification course through Simplilearn. 12 weeks, 1800 dollars. My
+    instructor is Sergio Ballesteros.
+  expected_stores:
+  - PMP
+  - Simplilearn
+  - 12 weeks
+  - 1800 dollars
+  - Sergio Ballesteros
+- batch: 2
+  time: Week 4
+  user_input: The curriculum is boring and I realize I don't actually want to be a project manager. I
+    was pursuing this for the wrong reasons.
+  expected_stores:
+  - project manager
+  - wrong reasons
+- batch: 3
+  time: Week 5
+  user_input: What is the closest star to Earth?
+- batch: 4
+  time: Week 6
+  user_input: Talked to my mentor Yulia. She said dropping out is NOT failure — it's self-knowledge. I
+    requested a partial refund from Simplilearn.
+  expected_stores:
+  - Yulia
+  - mentor
+  - not failure
+  - partial refund
+- batch: 5
+  time: Week 8
+  user_input: Got 900 back from Simplilearn. Sergio was gracious about it. Signed up for a UX research
+    course instead — Nielsen Norman Group.
+  expected_stores:
+  - '900'
+  - Sergio
+  - UX research
+  - Nielsen Norman Group
+  expected_adaptation:
+    emotion_detected: clearer
+    warmth_direction: increase
+questions:
+- question_id: 176_q1
+  question: What certification did I drop?
+  expected_contains:
+  - PMP
+- question_id: 176_q2
+  question: Who was my instructor?
+  expected_contains:
+  - Sergio Ballesteros
+- question_id: 176_q3
+  question: Who is my mentor?
+  expected_contains:
+  - Yulia
+- question_id: 176_q4
+  question: What am I studying now?
+  expected_contains:
+  - UX research
+- question_id: 176_q5
+  question: How much did I get refunded?
+  expected_contains:
+  - '900'
+- question_id: 176_q6
+  question: Do I know someone named Simplilearn?
+  expected_contains:
+  - Simplilearn
+- question_id: 176_q7
+  question: When is 12 weeks?
+  expected_contains:
+  - 12 weeks
+- question_id: 176_q8
+  question: How much money is 1800 dollars?
+  expected_contains:
+  - 1800 dollars

@@ -1,0 +1,110 @@
+story_id: 109
+story_name: Siblings Coordinating Mom's Care
+category: Relationships
+description: Three siblings coordinate elder care for their aging mother.
+duration_simulated: 2 months
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My brother Omar and my sister Renata and I had a call last night about Mom. She's 82 and
+    increasingly forgetful. We agreed we need a plan.
+  expected_stores:
+  - Omar
+  - brother
+  - Renata
+  - sister
+  - Mom
+  - '82'
+  - forgetful
+- batch: 2
+  time: Week 2
+  user_input: Omar offered to take on doctor appointments since he lives closest. Renata is handling finances.
+    I'm taking on insurance and medications.
+  expected_stores:
+  - Omar
+  - doctor appointments
+  - Renata
+  - finances
+  - insurance
+  - medications
+- batch: 3
+  time: Week 3
+  user_input: What's the capital of Canada?
+- batch: 4
+  time: Week 4
+  user_input: Mom's doctor Dr. Hae-Won Cho told Omar that her scores on the cognitive assessment dropped.
+    Omar called me and we three-wayed Renata in.
+  expected_stores:
+  - Mom
+  - Dr. Hae-Won Cho
+  - Omar
+  - Renata
+  - cognitive assessment
+- batch: 5
+  time: Month 2 Week 1
+  user_input: Renata found a geriatric care manager named Simone Petrov. Renata and I met with her on
+    Zoom while Omar was with Mom.
+  expected_stores:
+  - Renata
+  - geriatric care manager
+  - Simone Petrov
+  - Omar
+  - Mom
+- batch: 6
+  time: Month 2 Week 3
+  user_input: Simone made her recommendations — memory assessment, day program three days a week, caregiver
+    for bathing help. Omar, Renata, and I approved it.
+  expected_stores:
+  - Simone
+  - memory assessment
+  - day program
+  - three days a week
+  - Omar
+  - Renata
+  expected_adaptation:
+    emotion_detected: sad
+    warmth_direction: increase
+    vulnerability: true
+- batch: 7
+  time: Month 2 Week 4
+  user_input: The caregiver started this week. Her name is Margarita. Mom likes her. Omar said Mom is
+    more relaxed than she's been in months.
+  expected_stores:
+  - Margarita
+  - caregiver
+  - Mom
+  - Omar
+questions:
+- question_id: 109_q1
+  question: Who is my brother?
+  expected_contains:
+  - Omar
+- question_id: 109_q2
+  question: Who is my sister?
+  expected_contains:
+  - Renata
+- question_id: 109_q3
+  question: How old is Mom?
+  expected_contains:
+  - '82'
+- question_id: 109_q4
+  question: Who is Mom's doctor?
+  expected_contains:
+  - Hae-Won Cho
+- question_id: 109_q5
+  question: Who is the geriatric care manager?
+  expected_contains:
+  - Simone Petrov
+- question_id: 109_q6
+  question: Who is Mom's caregiver?
+  expected_contains:
+  - Margarita
+- question_id: 109_q7
+  question: How many days a week is the day program?
+  expected_contains:
+  - three
+- question_id: 109_q8
+  question: Who is handling finances?
+  expected_contains:
+  - Renata

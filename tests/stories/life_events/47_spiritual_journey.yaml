@@ -1,0 +1,143 @@
+story_id: 47
+story_name: "Spiritual Journey"
+category: "Life Events"
+description: |
+  User is exploring meditation and Buddhism. They attend the Zen Mind Center
+  with teacher Sensei Yuki. The meditation group meets Sundays at 9am. The user
+  is reading "The Art of Happiness" by the Dalai Lama and completed a 10-day
+  silent retreat at Spirit Rock. Tests memory of spiritual practices, schedules,
+  and personal growth details.
+duration_simulated: "6 weeks"
+total_batches: 9
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Sunday 10:00 AM"
+    user_input: |
+      I went to the Zen Mind Center for the first time today. I've been
+      wanting to explore meditation and Buddhism for a while. The teacher,
+      Sensei Yuki, was incredibly welcoming. He led a guided meditation
+      that lasted 30 minutes. I felt calmer than I have in months.
+    expected_memory_stores:
+      - "Zen Mind Center"
+      - "Sensei Yuki"
+      - "meditation"
+      - "Buddhism"
+      - "guided meditation"
+      - "30 minutes"
+
+  - batch: 2
+    time: "Monday 7:00 PM"
+    user_input: |
+      The meditation group at the Zen Mind Center meets every Sunday at
+      9am. I'm going to make it a regular thing. Sensei Yuki recommended
+      I start reading "The Art of Happiness" by the Dalai Lama. I picked
+      it up from the bookstore today. Already 20 pages in and it's
+      resonating deeply.
+    expected_memory_stores:
+      - "Sunday"
+      - "9am"
+      - "The Art of Happiness"
+      - "Dalai Lama"
+      - "reading"
+
+  - batch: 3
+    time: "Wednesday 11:00 AM"
+    user_input: "What are the Four Noble Truths in Buddhism?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["suffering", "truth"]
+
+  - batch: 4
+    time: "Week 2 Sunday 11:00 AM"
+    user_input: |
+      Second session at the Zen Mind Center. Sensei Yuki talked about
+      mindfulness in daily life. He suggested I try walking meditation
+      during my lunch break at work. There were 15 people in the group
+      today. I'm starting to feel like part of a community.
+    expected_memory_stores:
+      - "mindfulness"
+      - "walking meditation"
+      - "lunch break"
+      - "15 people"
+      - "community"
+
+  - batch: 5
+    time: "Week 2 Tuesday 3:00 PM"
+    user_input: "What book am I reading and who recommended it?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Art of Happiness", "Sensei Yuki"]
+
+  - batch: 6
+    time: "Week 3 Monday 8:00 AM"
+    user_input: |
+      Sensei Yuki told me about a 10-day silent retreat at Spirit Rock. It
+      sounds intense but transformative. No talking, no phones, just
+      meditation from 5am to 9pm every day. I signed up for next month.
+      I'm nervous but excited.
+    expected_memory_stores:
+      - "10-day"
+      - "silent retreat"
+      - "Spirit Rock"
+      - "no talking"
+      - "no phones"
+      - "5am"
+      - "9pm"
+
+  - batch: 7
+    time: "Week 3 Thursday 12:00 PM"
+    user_input: "What is the Eightfold Path in Buddhism?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["right", "path"]
+
+  - batch: 8
+    time: "Week 5 Monday 9:00 AM"
+    user_input: |
+      I just completed the 10-day silent retreat at Spirit Rock. It was the
+      hardest and most rewarding thing I've ever done. Days 3 and 4 were
+      brutal - I wanted to leave. But by day 7 I felt a peace I've never
+      experienced. Sensei Yuki said I've made remarkable progress.
+    expected_memory_stores:
+      - "completed"
+      - "retreat"
+      - "peace"
+      - "remarkable progress"
+      - "hardest"
+
+  - batch: 9
+    time: "Week 6 Sunday 10:00 AM"
+    user_input: "Where did I do my silent retreat and how long was it?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Spirit Rock", "10"]
+
+final_verification:
+  - question: "What temple do I attend?"
+    expected_contains: ["Zen Mind Center"]
+  - question: "Who is my meditation teacher?"
+    expected_contains: ["Sensei Yuki"]
+  - question: "When does the meditation group meet?"
+    expected_contains: ["Sunday", "9am"]
+  - question: "What book am I reading?"
+    expected_contains: ["Art of Happiness", "Dalai Lama"]
+  - question: "Where did I do my silent retreat?"
+    expected_contains: ["Spirit Rock"]
+  - question: "How long was the retreat?"
+    expected_contains: ["10"]

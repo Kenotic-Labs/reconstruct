@@ -1,0 +1,101 @@
+story_id: 89
+story_name: Home Renovation Project
+category: Daily Life
+description: User undertakes a kitchen remodel with a contractor.
+duration_simulated: 10 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1
+  user_input: Signed the contract with Ridgeline Construction today for my kitchen remodel. Total budget
+    is 68000 dollars. Project start date is next Monday.
+  expected_stores:
+  - Ridgeline Construction
+  - kitchen remodel
+  - 68000 dollars
+  - next Monday
+- batch: 2
+  time: Week 2
+  user_input: Demolition week. Contractor is Omar Kaddouri, project manager is Jillian Park. They're tearing
+    out the old cabinets and tile.
+  expected_stores:
+  - Omar Kaddouri
+  - Jillian Park
+  - project manager
+  - cabinets
+  - tile
+- batch: 3
+  time: Week 4
+  user_input: Plumbing and electrical rough-in done. Jillian said we're on schedule but the custom cabinets
+    are delayed — shipping from North Carolina pushed from week 6 to week 8.
+  expected_stores:
+  - Jillian
+  - custom cabinets
+  - North Carolina
+  - week 6 to week 8
+- batch: 4
+  time: Week 5
+  user_input: Who was the first president of the United States?
+- batch: 5
+  time: Week 6
+  user_input: My husband Pavel and I are living on takeout. Microwave and a hot plate in the garage. Spent
+    380 dollars on DoorDash this week.
+  expected_stores:
+  - Pavel
+  - husband
+  - microwave
+  - hot plate
+  - 380 dollars
+  - DoorDash
+  expected_adaptation:
+    emotion_detected: tired
+    warmth_direction: neutral
+- batch: 6
+  time: Week 8
+  user_input: Cabinets arrived and install started. Color is called Sea Salt, a soft off-white. They look
+    gorgeous in the space.
+  expected_stores:
+  - cabinets
+  - Sea Salt
+  - off-white
+  expected_adaptation:
+    emotion_detected: excited
+    warmth_direction: increase
+- batch: 7
+  time: Week 10
+  user_input: Kitchen is done. Final walkthrough with Omar and Jillian this morning. Minor punch list
+    — two cabinet hinges need adjustment, one outlet needs trim.
+  expected_stores:
+  - Omar
+  - Jillian
+  - two cabinet hinges
+  - one outlet
+questions:
+- question_id: 89_q1
+  question: What contractor am I using?
+  expected_contains:
+  - Ridgeline
+- question_id: 89_q2
+  question: Who is my contractor?
+  expected_contains:
+  - Omar Kaddouri
+- question_id: 89_q3
+  question: Who is the project manager?
+  expected_contains:
+  - Jillian Park
+- question_id: 89_q4
+  question: Who is my husband?
+  expected_contains:
+  - Pavel
+- question_id: 89_q5
+  question: What color are the cabinets?
+  expected_contains:
+  - Sea Salt
+- question_id: 89_q6
+  question: What was the total budget?
+  expected_contains:
+  - '68000'
+- question_id: 89_q7
+  question: Do I know someone named Ridgeline Construction?
+  expected_contains:
+  - Ridgeline Construction

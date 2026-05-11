@@ -1,0 +1,93 @@
+story_id: 126
+story_name: Starting a PhD
+category: Learning
+description: User begins a PhD program and adjusts to graduate research life.
+duration_simulated: 4 months
+total_batches: 6
+batches:
+- batch: 1
+  time: Month 1
+  user_input: I started my PhD in Computational Neuroscience at UC Berkeley. My advisor is Professor Satomi
+    Kurosawa.
+  expected_stores:
+  - PhD
+  - Computational Neuroscience
+  - UC Berkeley
+  - Satomi Kurosawa
+- batch: 2
+  time: Month 1 Week 3
+  user_input: First rotation is in Satomi's lab. My fellow rotation student is a guy named Elias Whitaker
+    from Utah. He and I share an office.
+  expected_stores:
+  - Satomi
+  - Elias Whitaker
+  - Utah
+- batch: 3
+  time: Month 2
+  user_input: Satomi paired Elias and me on a pilot study about theta oscillations in hippocampal slices.
+    We meet Friday afternoons to review progress.
+  expected_stores:
+  - Satomi
+  - Elias
+  - theta oscillations
+  - hippocampal slices
+  - Friday afternoons
+- batch: 4
+  time: Month 2 Week 3
+  user_input: What's the atomic number of oxygen?
+- batch: 5
+  time: Month 3
+  user_input: 'Taking three classes: statistical methods taught by Dr. Malia Ford, computational modeling
+    with Dr. Jun Sato, and a seminar with Satomi.'
+  expected_stores:
+  - three classes
+  - statistical methods
+  - Dr. Malia Ford
+  - computational modeling
+  - Dr. Jun Sato
+  - Satomi
+- batch: 6
+  time: Month 4
+  user_input: First poster submission to the Cognitive Neuroscience Society conference. Elias and I co-first
+    authored. Satomi reviewed three drafts before we submitted.
+  expected_stores:
+  - Cognitive Neuroscience Society
+  - Elias
+  - co-first authored
+  - Satomi
+  expected_adaptation:
+    emotion_detected: proud
+    warmth_direction: increase
+questions:
+- question_id: 126_q1
+  question: What program am I in?
+  expected_contains:
+  - Computational Neuroscience
+- question_id: 126_q2
+  question: Who is my advisor?
+  expected_contains:
+  - Satomi Kurosawa
+- question_id: 126_q3
+  question: Who is my rotation partner?
+  expected_contains:
+  - Elias Whitaker
+- question_id: 126_q4
+  question: Where is Elias from?
+  expected_contains:
+  - Utah
+- question_id: 126_q5
+  question: Who teaches statistical methods?
+  expected_contains:
+  - Malia Ford
+- question_id: 126_q6
+  question: What are we researching?
+  expected_contains:
+  - theta
+- question_id: 126_q7
+  question: What conference did we submit to?
+  expected_contains:
+  - Cognitive Neuroscience
+- question_id: 126_q8
+  question: Did I mention PhD?
+  expected_contains:
+  - PhD

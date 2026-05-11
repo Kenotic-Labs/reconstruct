@@ -1,0 +1,81 @@
+story_id: 205
+story_name: Sabbatical Denied Then Granted
+category: Career
+description: User asks for a sabbatical, is denied, then granted on different terms.
+duration_simulated: 2 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: I asked my manager Carys for a 3 month unpaid sabbatical to travel. She said no — the team
+    can't absorb the gap.
+  expected_stores:
+  - Carys
+  - 3 month sabbatical
+  - 'no'
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Appealed to Carys's director Juno. Juno said yes but only 6 weeks, not 3 months. Carys is
+    NOT happy about being overruled.
+  expected_stores:
+  - Juno
+  - 6 weeks
+  - not 3 months
+  - Carys
+  - not happy
+- batch: 3
+  time: Month 2
+  user_input: What's the smallest ocean?
+- batch: 4
+  time: Month 2 Week 2
+  user_input: Carys came around once she realized my teammate Maren could cover in my absence. Maren offered
+    without me asking.
+  expected_stores:
+  - Carys
+  - Maren
+  - teammate
+- batch: 5
+  time: Month 2 Week 4
+  user_input: Sabbatical starts Friday. Going to Vietnam and Thailand. Carys gave me a handwritten note
+    wishing me well. Juno approved my return date.
+  expected_stores:
+  - Vietnam
+  - Thailand
+  - Carys
+  - Juno
+  expected_adaptation:
+    emotion_detected: grateful
+    warmth_direction: increase
+questions:
+- question_id: 205_q1
+  question: Who is my manager?
+  expected_contains:
+  - Carys
+- question_id: 205_q2
+  question: Who is her director?
+  expected_contains:
+  - Juno
+- question_id: 205_q3
+  question: How long is the sabbatical?
+  expected_contains:
+  - 6 weeks
+- question_id: 205_q4
+  question: Was it 3 months?
+  expected_contains:
+  - not
+- question_id: 205_q5
+  question: Who is covering for me?
+  expected_contains:
+  - Maren
+- question_id: 205_q6
+  question: When is 3 month sabbatical?
+  expected_contains:
+  - 3 month sabbatical
+- question_id: 205_q7
+  question: Did I mention no?
+  expected_contains:
+  - 'no'
+- question_id: 205_q8
+  question: When is not 3 months?
+  expected_contains:
+  - not 3 months

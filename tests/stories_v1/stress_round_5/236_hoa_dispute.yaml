@@ -1,0 +1,76 @@
+story_id: 236
+story_name: HOA Dispute
+category: Daily Life
+description: User gets into a dispute with the HOA over their fence.
+duration_simulated: 2 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: HOA sent me a notice saying my new fence violates the community guidelines. HOA president
+    is Delphine Vance.
+  expected_stores:
+  - HOA
+  - fence
+  - Delphine Vance
+  - president
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Delphine and I had a heated call. My contractor Valentin Maier said the fence was built
+    to code — NOT the issue Delphine claimed.
+  expected_stores:
+  - Delphine
+  - Valentin Maier
+  - not the issue
+- batch: 3
+  time: Month 2
+  user_input: What's the largest lake in North America?
+- batch: 4
+  time: Month 2 Week 1
+  user_input: Hired an attorney named Hadley Park to review the HOA bylaws. Hadley found that the fence
+    is actually compliant — Delphine misread the rules.
+  expected_stores:
+  - Hadley Park
+  - attorney
+  - Delphine
+  - misread
+- batch: 5
+  time: Month 2 Week 3
+  user_input: HOA board meeting — Hadley attended with me. Delphine apologized publicly. The fine was
+    rescinded.
+  expected_stores:
+  - Hadley
+  - Delphine
+questions:
+- question_id: 236_q1
+  question: Who is the HOA president?
+  expected_contains:
+  - Delphine Vance
+- question_id: 236_q2
+  question: Who is my contractor?
+  expected_contains:
+  - Valentin Maier
+- question_id: 236_q3
+  question: Who is my attorney?
+  expected_contains:
+  - Hadley Park
+- question_id: 236_q4
+  question: Did I mention HOA?
+  expected_contains:
+  - HOA
+- question_id: 236_q5
+  question: Did I mention fence?
+  expected_contains:
+  - fence
+- question_id: 236_q6
+  question: Did I mention president?
+  expected_contains:
+  - president
+- question_id: 236_q7
+  question: Do I know someone named Delphine?
+  expected_contains:
+  - Delphine
+- question_id: 236_q8
+  question: Did I mention not the issue?
+  expected_contains:
+  - not the issue

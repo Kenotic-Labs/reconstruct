@@ -1,0 +1,80 @@
+story_id: 241
+story_name: Smart Home Setup
+category: Daily Life
+description: User sets up a whole home smart system over a weekend.
+duration_simulated: 2 weekends
+total_batches: 5
+batches:
+- batch: 1
+  time: Saturday 1
+  user_input: Starting my smart home setup today. Base hub is a Hubitat. My friend Kenji came over to
+    help — he has 3 hubs already.
+  expected_stores:
+  - smart home
+  - Hubitat
+  - Kenji
+  - 3 hubs
+- batch: 2
+  time: Saturday 1 afternoon
+  user_input: Installed 8 Zigbee bulbs and 2 motion sensors. Total cost for hardware is 450 dollars.
+  expected_stores:
+  - 8 Zigbee bulbs
+  - 2 motion sensors
+  - 450 dollars
+- batch: 3
+  time: Sunday 1
+  user_input: What's the deepest cave in the world?
+- batch: 4
+  time: Saturday 2
+  user_input: Added 4 more bulbs and a smart thermostat. Kenji helped me automate the living room — lights
+    come on at sunset.
+  expected_stores:
+  - 4 more bulbs
+  - smart thermostat
+  - Kenji
+  - sunset
+- batch: 5
+  time: Sunday 2
+  user_input: Everything working. My husband Ansel was skeptical but now he loves it. Kenji is coming
+    back next weekend to help with the Hue integration.
+  expected_stores:
+  - Ansel
+  - husband
+  - Kenji
+  - Hue
+  expected_adaptation:
+    emotion_detected: satisfied
+    warmth_direction: increase
+questions:
+- question_id: 241_q1
+  question: What hub did I buy?
+  expected_contains:
+  - Hubitat
+- question_id: 241_q2
+  question: Who helped me?
+  expected_contains:
+  - Kenji
+- question_id: 241_q3
+  question: Who is my husband?
+  expected_contains:
+  - Ansel
+- question_id: 241_q4
+  question: Did I mention smart home?
+  expected_contains:
+  - smart home
+- question_id: 241_q5
+  question: Did I mention 3 hubs?
+  expected_contains:
+  - 3 hubs
+- question_id: 241_q6
+  question: Did I mention 8 Zigbee bulbs?
+  expected_contains:
+  - 8 Zigbee bulbs
+- question_id: 241_q7
+  question: Did I mention 2 motion sensors?
+  expected_contains:
+  - 2 motion sensors
+- question_id: 241_q8
+  question: How much money is 450 dollars?
+  expected_contains:
+  - 450 dollars

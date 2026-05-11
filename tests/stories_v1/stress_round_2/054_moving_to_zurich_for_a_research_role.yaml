@@ -1,0 +1,103 @@
+story_id: 54
+story_name: Moving to Zurich for a Research Role
+category: Career
+description: User accepts a research position abroad and navigates relocation logistics.
+duration_simulated: 6 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1 Wednesday
+  user_input: I accepted the research scientist position at ETH Zurich. I'll be working with Professor
+    Anders Berg on reinforcement learning theory.
+  expected_stores:
+  - research scientist
+  - ETH Zurich
+  - Professor Anders Berg
+  - reinforcement learning
+  expected_adaptation:
+    emotion_detected: excited
+    warmth_direction: increase
+- batch: 2
+  time: Week 2 Monday
+  user_input: The relocation package is 25000 CHF and the company provides six weeks of temporary housing.
+    Start date is the fifteenth of next month.
+  expected_stores:
+  - 25000 CHF
+  - six weeks
+  - temporary housing
+  - fifteenth of next month
+- batch: 3
+  time: Week 3 Friday
+  user_input: Filed for my work permit through the Swiss immigration portal. My case worker is Lena Hauser
+    and the processing time is four weeks.
+  expected_stores:
+  - work permit
+  - Swiss immigration
+  - Lena Hauser
+  - four weeks
+- batch: 4
+  time: Week 4 Thursday
+  user_input: Who painted the Mona Lisa?
+- batch: 5
+  time: Week 5 Tuesday
+  user_input: Found an apartment in Oerlikon district through a broker named Fabian Weber. Rent is 2400
+    CHF per month, three bedroom, close to the S-Bahn.
+  expected_stores:
+  - Oerlikon
+  - Fabian Weber
+  - broker
+  - 2400 CHF
+  - three bedroom
+- batch: 6
+  time: Week 5 Friday
+  user_input: I'm anxious about the language barrier. I only speak basic German. My lab partner Katarina
+    said most of the group works in English though.
+  expected_stores:
+  - basic German
+  - Katarina
+  - lab partner
+  - English
+  expected_adaptation:
+    emotion_detected: anxious
+    warmth_direction: increase
+- batch: 7
+  time: Week 6 Monday
+  user_input: Work permit approved, apartment signed, flight booked for the tenth. I feel like this is
+    actually happening.
+  expected_stores:
+  - approved
+  - flight booked
+  - the tenth
+questions:
+- question_id: 54_q1
+  question: Where am I moving to?
+  expected_contains:
+  - Zurich
+- question_id: 54_q2
+  question: What institution am I joining?
+  expected_contains:
+  - ETH
+- question_id: 54_q3
+  question: Who will I be working with?
+  expected_contains:
+  - Anders Berg
+- question_id: 54_q4
+  question: How much is the relocation package?
+  expected_contains:
+  - '25000'
+- question_id: 54_q5
+  question: Who is my broker?
+  expected_contains:
+  - Fabian Weber
+- question_id: 54_q6
+  question: How much is my rent per month?
+  expected_contains:
+  - '2400'
+- question_id: 54_q7
+  question: Who is my lab partner?
+  expected_contains:
+  - Katarina
+- question_id: 54_q8
+  question: What neighborhood is my apartment in?
+  expected_contains:
+  - Oerlikon

@@ -1,0 +1,92 @@
+story_id: 123
+story_name: Food Allergy Discovery
+category: Health
+description: User discovers a severe shellfish allergy after a reaction.
+duration_simulated: 2 months
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1 Saturday
+  user_input: I had an allergic reaction at a restaurant called Saltyard last night. Throat started closing.
+    My wife Priyanka rushed me to the ER.
+  expected_stores:
+  - Saltyard
+  - allergic reaction
+  - Priyanka
+  - wife
+  expected_adaptation:
+    emotion_detected: scared
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Week 1 Sunday
+  user_input: ER doctor Dr. Marcus Fisher said it was anaphylaxis. I got IV antihistamines and an epinephrine
+    shot. Priyanka stayed with me all night.
+  expected_stores:
+  - Dr. Marcus Fisher
+  - anaphylaxis
+  - epinephrine
+  - Priyanka
+- batch: 3
+  time: Week 2
+  user_input: Saw an allergist named Dr. Hina Deshmukh. Skin test confirmed severe shellfish allergy —
+    shrimp and crab specifically. I had shrimp pasta at Saltyard.
+  expected_stores:
+  - Dr. Hina Deshmukh
+  - allergist
+  - shellfish allergy
+  - shrimp
+  - crab
+- batch: 4
+  time: Week 3
+  user_input: Who invented the printing press?
+- batch: 5
+  time: Week 4
+  user_input: Got my EpiPen prescription filled at CVS. Two pens, 250 dollars with my insurance. Priyanka
+    got trained on how to use it.
+  expected_stores:
+  - EpiPen
+  - CVS
+  - two pens
+  - 250 dollars
+  - Priyanka
+- batch: 6
+  time: Month 2
+  user_input: Adjusting to reading every label. Dr. Deshmukh said I might have it for life but also might
+    grow out of it. Priyanka has become my safety net at restaurants.
+  expected_stores:
+  - Dr. Deshmukh
+  - Priyanka
+questions:
+- question_id: 123_q1
+  question: Who is my wife?
+  expected_contains:
+  - Priyanka
+- question_id: 123_q2
+  question: Where did the reaction happen?
+  expected_contains:
+  - Saltyard
+- question_id: 123_q3
+  question: Who is my allergist?
+  expected_contains:
+  - Hina Deshmukh
+- question_id: 123_q4
+  question: What am I allergic to?
+  expected_contains:
+  - shellfish
+- question_id: 123_q5
+  question: What device did I get?
+  expected_contains:
+  - EpiPen
+- question_id: 123_q6
+  question: Who was the ER doctor?
+  expected_contains:
+  - Marcus Fisher
+- question_id: 123_q7
+  question: Did I mention allergic reaction?
+  expected_contains:
+  - allergic reaction
+- question_id: 123_q8
+  question: Did I mention wife?
+  expected_contains:
+  - wife

@@ -1,0 +1,94 @@
+story_id: 85
+story_name: Switching to a New Commute by Bike
+category: Daily Life
+description: User transitions their daily commute from car to bicycle.
+duration_simulated: 6 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1
+  user_input: I'm switching my commute to bike. Bought a used Surly Long Haul Trucker for 620 dollars
+    from a guy on Craigslist named Dmitri.
+  expected_stores:
+  - bike commute
+  - Surly Long Haul Trucker
+  - 620 dollars
+  - Craigslist
+  - Dmitri
+- batch: 2
+  time: Week 2
+  user_input: First week of biking. 8 miles each way, about 35 minutes. I'm exhausted but I saved 40 dollars
+    in gas already.
+  expected_stores:
+  - 8 miles
+  - 35 minutes
+  - 40 dollars
+  expected_adaptation:
+    emotion_detected: tired/proud
+    warmth_direction: increase
+- batch: 3
+  time: Week 3
+  user_input: Had my first mechanical issue — flat tire on the way home. My coworker Chris walked me through
+    patching it on the side of the road.
+  expected_stores:
+  - flat tire
+  - Chris
+  - coworker
+- batch: 4
+  time: Week 4
+  user_input: Who invented the World Wide Web?
+- batch: 5
+  time: Week 4 Saturday
+  user_input: Got a pannier rack and rear panniers at REI, 140 dollars total. Now I can carry my laptop
+    and gym clothes without a backpack.
+  expected_stores:
+  - pannier rack
+  - panniers
+  - REI
+  - 140 dollars
+- batch: 6
+  time: Week 5
+  user_input: Commute is down to 28 minutes as I've gotten fitter. Chris is going to start biking too
+    — we'll do it together some days.
+  expected_stores:
+  - 28 minutes
+  - Chris
+- batch: 7
+  time: Week 6
+  user_input: Six weeks in. I've biked 96 percent of workdays, saved about 240 dollars in gas, and lost
+    4 pounds. Chris and I split up halfway because our routes diverge.
+  expected_stores:
+  - six weeks
+  - 96 percent
+  - 240 dollars
+  - 4 pounds
+  - Chris
+questions:
+- question_id: 85_q1
+  question: What bike did I buy?
+  expected_contains:
+  - Surly
+- question_id: 85_q2
+  question: How much was the bike?
+  expected_contains:
+  - '620'
+- question_id: 85_q3
+  question: Who is my biking coworker?
+  expected_contains:
+  - Chris
+- question_id: 85_q4
+  question: How long is the commute?
+  expected_contains:
+  - 8 miles
+- question_id: 85_q5
+  question: Who did I buy the bike from?
+  expected_contains:
+  - Dmitri
+- question_id: 85_q6
+  question: How much have I saved on gas?
+  expected_contains:
+  - '240'
+- question_id: 85_q7
+  question: Did I mention bike commute?
+  expected_contains:
+  - bike commute

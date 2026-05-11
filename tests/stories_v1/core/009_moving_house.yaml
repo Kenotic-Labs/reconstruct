@@ -1,0 +1,110 @@
+story_id: 9
+story_name: Moving House
+category: Daily Life
+description: 'User is moving from an apartment on Oak Street to a new house on Cedar Lane
+
+  in the Greenfield neighborhood. Tracks the full moving process including
+
+  the moving company, realtor, mortgage details, and meeting a new neighbor.
+
+  '
+duration_simulated: 3 weeks
+total_batches: 8
+batches:
+- batch: 1
+  time: Monday 9:00 AM
+  user_input: 'Big news - I''m finally moving! I''ve been living in my apartment on Oak Street
+
+    for four years, but I just closed on a house on Cedar Lane in the Greenfield
+
+    neighborhood. It''s got 3 bedrooms and a big backyard. I''m so excited.
+
+    '
+  expected_stores:
+  - Oak Street
+  - Cedar Lane
+  - Greenfield
+  - 3 bedrooms
+  - backyard
+- batch: 2
+  time: Monday 2:00 PM
+  user_input: 'My realtor Nancy Brooks was amazing through the whole process. She found the
+
+    Cedar Lane house after I''d been searching for months. I got my mortgage through
+
+    Wells Fargo - the rate was really good.
+
+    '
+  expected_stores:
+  - Nancy Brooks
+  - realtor
+  - Wells Fargo
+  - mortgage
+- batch: 3
+  time: Wednesday 10:00 AM
+  user_input: What is the typical timeline for closing on a house after an offer is accepted?
+- batch: 4
+  time: Thursday 11:00 AM
+  user_input: 'I booked the moving company - SwiftMove. They''re coming on March 1st.
+
+    They quoted me a pretty reasonable price for a full-service move. They''ll
+
+    pack everything and handle the heavy furniture.
+
+    '
+  expected_stores:
+  - SwiftMove
+  - March 1st
+  - moving company
+- batch: 5
+  time: Friday 3:00 PM
+  user_input: Which street am I moving away from again? I need to update my address with the post office.
+- batch: 6
+  time: Saturday 9:00 AM
+  user_input: What are some tips for packing fragile items when moving?
+- batch: 7
+  time: March 1st, Saturday 6:00 PM
+  user_input: 'Move is done! SwiftMove did a great job. I''m sitting in the new house on
+
+    Cedar Lane now. A neighbor came over and introduced herself - her name is
+
+    Clara. She has a golden retriever named Buddy. Seems like a really
+
+    friendly neighborhood.
+
+    '
+  expected_stores:
+  - Clara
+  - neighbor
+  - Buddy
+  - golden retriever
+- batch: 8
+  time: March 3rd, Monday 10:00 AM
+  user_input: What was the name of my new neighbor and what kind of dog does she have?
+questions:
+- question_id: 9_q1
+  question: Where did I move from and where did I move to?
+  expected_contains:
+  - Oak Street
+  - Cedar Lane
+- question_id: 9_q2
+  question: Who was my realtor?
+  expected_contains:
+  - Nancy Brooks
+- question_id: 9_q3
+  question: What moving company did I use and when was the move?
+  expected_contains:
+  - SwiftMove
+  - March 1st
+- question_id: 9_q4
+  question: How many bedrooms does my new house have?
+  expected_contains:
+  - '3'
+- question_id: 9_q5
+  question: What is my neighbor Clara's dog's name?
+  expected_contains:
+  - Buddy
+- question_id: 9_q6
+  question: Who handled my mortgage?
+  expected_contains:
+  - Wells Fargo

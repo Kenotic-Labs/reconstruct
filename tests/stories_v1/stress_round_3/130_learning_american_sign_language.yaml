@@ -1,0 +1,88 @@
+story_id: 130
+story_name: Learning American Sign Language
+category: Learning
+description: User learns ASL to communicate with a deaf family member.
+duration_simulated: 6 months
+total_batches: 6
+batches:
+- batch: 1
+  time: Month 1
+  user_input: My cousin Isla is deaf and I'm finally learning ASL so I can communicate with her directly.
+    I signed up for weekly lessons with a deaf instructor named Beau Ferry.
+  expected_stores:
+  - Isla
+  - cousin
+  - deaf
+  - ASL
+  - Beau Ferry
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Beau teaches in person at the Deaf Community Center on Tuesdays at 6 PM. No voices during
+    class — full immersion. It's intense.
+  expected_stores:
+  - Beau
+  - Deaf Community Center
+  - Tuesdays 6 PM
+- batch: 3
+  time: Month 2
+  user_input: Learning the manual alphabet and basic greetings. Isla and I exchanged a few signed sentences
+    on video chat — she said my hand shapes are clean.
+  expected_stores:
+  - manual alphabet
+  - Isla
+- batch: 4
+  time: Month 3
+  user_input: Who invented the radio?
+- batch: 5
+  time: Month 4
+  user_input: Beau's wife Sage, who is also deaf, joined our class as a conversation partner. She and
+    I did our first 5 minute conversation.
+  expected_stores:
+  - Beau
+  - Sage
+  - 5 minute conversation
+- batch: 6
+  time: Month 6
+  user_input: Had a real conversation with Isla today — 30 minutes entirely in ASL. She said she's been
+    waiting for this for 20 years.
+  expected_stores:
+  - Isla
+  - 30 minutes
+  - ASL
+  - 20 years
+  expected_adaptation:
+    emotion_detected: moved
+    warmth_direction: increase
+questions:
+- question_id: 130_q1
+  question: Who is my deaf cousin?
+  expected_contains:
+  - Isla
+- question_id: 130_q2
+  question: Who is my ASL instructor?
+  expected_contains:
+  - Beau Ferry
+- question_id: 130_q3
+  question: Where does he teach?
+  expected_contains:
+  - Deaf Community Center
+- question_id: 130_q4
+  question: Who is Beau's wife?
+  expected_contains:
+  - Sage
+- question_id: 130_q5
+  question: How long was my real conversation with Isla?
+  expected_contains:
+  - 30 minutes
+- question_id: 130_q6
+  question: Did I mention cousin?
+  expected_contains:
+  - cousin
+- question_id: 130_q7
+  question: Did I mention deaf?
+  expected_contains:
+  - deaf
+- question_id: 130_q8
+  question: Did I mention ASL?
+  expected_contains:
+  - ASL

@@ -1,0 +1,80 @@
+story_id: 196
+story_name: Kid Going to College
+category: Life Events
+description: User helps their daughter move into college.
+duration_simulated: 1 month
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My daughter Maren is starting at Pomona College in 3 weeks. Her roommate is a girl from
+    Boulder named Gretchen.
+  expected_stores:
+  - Maren
+  - daughter
+  - Pomona College
+  - 3 weeks
+  - Gretchen
+  - Boulder
+- batch: 2
+  time: Week 2
+  user_input: Maren and I went to Target together and bought 380 dollars of dorm supplies. She picked
+    out everything herself.
+  expected_stores:
+  - Maren
+  - Target
+  - 380 dollars
+- batch: 3
+  time: Week 3
+  user_input: What year did the Berlin Wall fall?
+- batch: 4
+  time: Week 4
+  user_input: Drove Maren to Claremont. Helped her move into Walker Hall, room 214. Met Gretchen and her
+    moms Simone and Jada.
+  expected_stores:
+  - Claremont
+  - Walker Hall
+  - '214'
+  - Gretchen
+  - Simone
+  - Jada
+- batch: 5
+  time: Week 4 Evening
+  user_input: Said goodbye. Maren hugged me hard. I cried the whole drive home. She texted that night
+    saying she loved her room.
+  expected_stores:
+  - Maren
+  expected_adaptation:
+    emotion_detected: bittersweet
+    warmth_direction: increase
+questions:
+- question_id: 196_q1
+  question: Who is my daughter?
+  expected_contains:
+  - Maren
+- question_id: 196_q2
+  question: What college?
+  expected_contains:
+  - Pomona
+- question_id: 196_q3
+  question: Who is her roommate?
+  expected_contains:
+  - Gretchen
+- question_id: 196_q4
+  question: What building and room?
+  expected_contains:
+  - Walker Hall
+  - '214'
+- question_id: 196_q5
+  question: Who are Gretchen's moms?
+  expected_contains:
+  - Simone
+  - Jada
+- question_id: 196_q6
+  question: Did I mention daughter?
+  expected_contains:
+  - daughter
+- question_id: 196_q7
+  question: Where is Pomona College?
+  expected_contains:
+  - Pomona College

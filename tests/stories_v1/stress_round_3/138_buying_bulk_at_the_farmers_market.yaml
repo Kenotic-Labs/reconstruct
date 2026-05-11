@@ -1,0 +1,85 @@
+story_id: 138
+story_name: Buying Bulk at the Farmers Market
+category: Daily Life
+description: User and partner switch to buying bulk produce directly from farmers.
+duration_simulated: 3 months
+total_batches: 6
+batches:
+- batch: 1
+  time: Month 1 Week 1
+  user_input: My wife Annika and I decided to switch to buying bulk produce directly from farmers. Started
+    with a weekly CSA from Pine Ridge Farm.
+  expected_stores:
+  - Annika
+  - wife
+  - CSA
+  - Pine Ridge Farm
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Our farmer contact is Jemima Cruz. She drops the CSA box off every Tuesday. Each week is
+    45 dollars and holds a huge variety.
+  expected_stores:
+  - Jemima Cruz
+  - Tuesday
+  - 45 dollars
+- batch: 3
+  time: Month 2
+  user_input: Annika and I are now preserving — learned canning from a YouTube channel called Canning
+    Granny. Made 14 jars of tomato sauce last weekend.
+  expected_stores:
+  - Annika
+  - Canning Granny
+  - 14 jars
+  - tomato sauce
+- batch: 4
+  time: Month 2 Week 3
+  user_input: What's the highest waterfall in the world?
+- batch: 5
+  time: Month 3
+  user_input: Jemima offered Annika and me a bulk discount on winter squash — 80 pounds for 60 dollars.
+    We agreed. Our garage smells like pumpkin.
+  expected_stores:
+  - Jemima
+  - Annika
+  - 80 pounds
+  - 60 dollars
+- batch: 6
+  time: Month 3 Week 3
+  user_input: Made 30 jars of butternut squash soup this weekend. Annika said if we keep this up we'll
+    never buy soup again.
+  expected_stores:
+  - 30 jars
+  - butternut squash soup
+  - Annika
+  expected_adaptation:
+    emotion_detected: accomplished
+    warmth_direction: increase
+questions:
+- question_id: 138_q1
+  question: Who is my wife?
+  expected_contains:
+  - Annika
+- question_id: 138_q2
+  question: What farm is our CSA from?
+  expected_contains:
+  - Pine Ridge
+- question_id: 138_q3
+  question: Who is our farmer?
+  expected_contains:
+  - Jemima Cruz
+- question_id: 138_q4
+  question: What day does the box arrive?
+  expected_contains:
+  - Tuesday
+- question_id: 138_q5
+  question: How many jars of tomato sauce did we make?
+  expected_contains:
+  - '14'
+- question_id: 138_q6
+  question: How much did the winter squash cost?
+  expected_contains:
+  - '60'
+- question_id: 138_q7
+  question: Did I mention wife?
+  expected_contains:
+  - wife

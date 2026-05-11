@@ -1,0 +1,84 @@
+story_id: 156
+story_name: A Manager Who Won't Commit
+category: Career
+description: User's manager is vague about a project ownership decision.
+duration_simulated: 5 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My manager Laila told me I might own the data warehouse migration but it's NOT decided yet.
+    Another candidate is Felix.
+  expected_stores:
+  - Laila
+  - manager
+  - data warehouse migration
+  - not decided
+  - Felix
+- batch: 2
+  time: Week 2
+  user_input: Laila hasn't mentioned it since. Felix asked me if I'd heard anything and I told him no.
+  expected_stores:
+  - Laila
+  - Felix
+- batch: 3
+  time: Week 3
+  user_input: What is the largest desert in the world?
+- batch: 4
+  time: Week 3 Thursday
+  user_input: Laila announced that Felix would own the migration, not me. She had decided two weeks ago
+    but hadn't told me.
+  expected_stores:
+  - Laila
+  - Felix
+  expected_adaptation:
+    emotion_detected: frustrated
+    warmth_direction: neutral
+- batch: 5
+  time: Week 4
+  user_input: Asked for a 1:1 with Laila's boss Marta. Marta said this is a pattern with Laila and she'd
+    address it.
+  expected_stores:
+  - Laila
+  - Marta
+  - pattern
+- batch: 6
+  time: Week 5
+  user_input: Laila apologized to me Monday morning and said she'd be clearer going forward. I believe
+    her 60 percent. Felix is doing fine with the migration.
+  expected_stores:
+  - Laila
+  - Felix
+questions:
+- question_id: 156_q1
+  question: Who is my manager?
+  expected_contains:
+  - Laila
+- question_id: 156_q2
+  question: Who got the project?
+  expected_contains:
+  - Felix
+- question_id: 156_q3
+  question: Who is Laila's boss?
+  expected_contains:
+  - Marta
+- question_id: 156_q4
+  question: What project is it?
+  expected_contains:
+  - data warehouse
+- question_id: 156_q5
+  question: Did I mention manager?
+  expected_contains:
+  - manager
+- question_id: 156_q6
+  question: Did I mention data warehouse migration?
+  expected_contains:
+  - data warehouse migration
+- question_id: 156_q7
+  question: Did I mention not decided?
+  expected_contains:
+  - not decided
+- question_id: 156_q8
+  question: Did I mention pattern?
+  expected_contains:
+  - pattern

@@ -1,0 +1,104 @@
+story_id: 5
+story_name: Mentoring Junior Developer Zara
+category: Career
+description: 'User is mentoring a junior developer named Zara who recently joined the team from
+
+  a coding bootcamp. They discuss the technologies being taught, Zara''s first project,
+
+  her struggles, and their meeting schedule. Tests memory of people, teaching topics,
+
+  project details, challenges, and recurring schedules.
+
+  '
+duration_simulated: 3 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Monday 10:00 AM
+  user_input: 'I''ve started mentoring a junior developer on my team named Zara. She joined us about
+
+    3 months ago straight from a coding bootcamp called CodePath. She''s eager to learn
+
+    and really motivated.
+
+    '
+  expected_stores:
+  - Zara
+  - junior developer
+  - mentoring
+  - 3 months
+  - CodePath
+  - bootcamp
+- batch: 2
+  time: Tuesday 11:00 AM
+  user_input: 'I''m teaching Zara Python and SQL right now. Those are the main skills she needs
+
+    to be effective on our team. She picked up basic Python pretty quickly but SQL
+
+    joins are still tripping her up.
+
+    '
+  expected_stores:
+  - Python
+  - SQL
+  - teaching
+  - SQL joins
+- batch: 3
+  time: Wednesday 3:00 PM
+  user_input: What are the best resources for teaching SQL joins to beginners?
+- batch: 4
+  time: Thursday 9:00 AM
+  user_input: 'Zara''s first project is building an internal dashboard for the team. It''ll show
+
+    key metrics and project status. She''s really excited about it — it''s her first
+
+    real feature that''ll go into production.
+
+    '
+  expected_stores:
+  - internal dashboard
+  - first project
+  - metrics
+  - production
+- batch: 5
+  time: Friday 2:00 PM
+  user_input: 'We have weekly 1-on-1 meetings every Friday at 2pm. Today Zara mentioned she''s
+
+    been struggling with async programming — callbacks and promises confuse her. I''m
+
+    going to put together some exercises to help her work through it.
+
+    '
+  expected_stores:
+  - Friday
+  - 2pm
+  - 1-on-1
+  - async programming
+  - callbacks
+  - promises
+- batch: 6
+  time: Monday 10:00 AM
+  user_input: What is Zara's first project and what bootcamp did she come from?
+- batch: 7
+  time: Tuesday 4:00 PM
+  user_input: What concepts is Zara struggling with right now?
+questions:
+- question_id: 5_q1
+  question: Who am I mentoring and when did she join the team?
+  expected_contains:
+  - Zara
+  - 3 months
+- question_id: 5_q2
+  question: What languages am I teaching Zara?
+  expected_contains:
+  - Python
+  - SQL
+- question_id: 5_q3
+  question: When are our 1-on-1 meetings?
+  expected_contains:
+  - Friday
+  - 2pm
+- question_id: 5_q4
+  question: What is Zara building as her first project?
+  expected_contains:
+  - internal dashboard

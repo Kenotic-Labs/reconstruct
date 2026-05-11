@@ -1,0 +1,104 @@
+story_id: 128
+story_name: Reading Goal — 50 Books a Year
+category: Learning
+description: User commits to reading 50 books in a year and tracks progress.
+duration_simulated: 12 months
+total_batches: 7
+batches:
+- batch: 1
+  time: Month 1
+  user_input: My New Year goal is 50 books this year. My friend Rashida and I are doing it together —
+    we joined a Goodreads challenge and a local book club.
+  expected_stores:
+  - 50 books
+  - Rashida
+  - friend
+  - Goodreads
+  - book club
+- batch: 2
+  time: Month 2
+  user_input: Finished 5 books so far. Best one was 'Piranesi' by Susanna Clarke. Rashida loved 'All the
+    Light We Cannot See' — that's her pick for book club next month.
+  expected_stores:
+  - 5 books
+  - Piranesi
+  - Susanna Clarke
+  - Rashida
+  - All the Light We Cannot See
+- batch: 3
+  time: Month 4
+  user_input: Book club moderator Elena Vidarte recommended 'The Overstory' by Richard Powers. Rashida
+    and I both finished it in a week.
+  expected_stores:
+  - Elena Vidarte
+  - moderator
+  - The Overstory
+  - Richard Powers
+  - Rashida
+- batch: 4
+  time: Month 6
+  user_input: How many continents are there?
+- batch: 5
+  time: Month 6 Week 3
+  user_input: At 25 books halfway through the year. Rashida is at 23. On pace for 50 but need to avoid
+    the summer slump.
+  expected_stores:
+  - 25 books
+  - Rashida
+  - '23'
+- batch: 6
+  time: Month 9
+  user_input: Reading slowed in July but picked up in September. Rashida gave me 'Pachinko' by Min Jin
+    Lee — I'm halfway through and it's astonishing.
+  expected_stores:
+  - July
+  - September
+  - Rashida
+  - Pachinko
+  - Min Jin Lee
+- batch: 7
+  time: Month 12
+  user_input: Finished book 51 on December 29th. Rashida hit exactly 50. Elena hosted a year-end dinner
+    for the book club — everyone brought their favorite read.
+  expected_stores:
+  - book 51
+  - December 29th
+  - Rashida
+  - '50'
+  - Elena
+  expected_adaptation:
+    emotion_detected: accomplished
+    warmth_direction: increase
+questions:
+- question_id: 128_q1
+  question: Who is my reading partner?
+  expected_contains:
+  - Rashida
+- question_id: 128_q2
+  question: Who moderates the book club?
+  expected_contains:
+  - Elena Vidarte
+- question_id: 128_q3
+  question: What was my favorite book early on?
+  expected_contains:
+  - Piranesi
+- question_id: 128_q4
+  question: Who wrote Pachinko?
+  expected_contains:
+  - Min Jin Lee
+- question_id: 128_q5
+  question: How many books did I finish?
+  expected_contains:
+  - '51'
+- question_id: 128_q6
+  question: How many did Rashida finish?
+  expected_contains:
+  - '50'
+- question_id: 128_q7
+  question: Did I mention 50 books?
+  expected_contains:
+  - 50 books
+- question_id: 128_q8
+  question: Did I mention friend?
+  expected_contains:
+  - friend

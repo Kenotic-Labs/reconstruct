@@ -1,0 +1,77 @@
+story_id: 229
+story_name: Music Theory Intensive
+category: Learning
+description: User takes a music theory intensive and struggles.
+duration_simulated: 8 weeks
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: Enrolled in an 8 week music theory intensive at Berklee online. Instructor is Professor
+    Soren Aaltonen.
+  expected_stores:
+  - 8 week
+  - music theory
+  - Berklee online
+  - Soren Aaltonen
+- batch: 2
+  time: Week 2
+  user_input: Struggling with key signatures already. Professor Aaltonen's office hours are Mondays at
+    5 PM.
+  expected_stores:
+  - Professor Aaltonen
+  - Mondays 5 PM
+- batch: 3
+  time: Week 4
+  user_input: What's the oldest musical instrument?
+- batch: 4
+  time: Week 5
+  user_input: First exam. Got a C. Not the end of the world but not great. Professor Aaltonen said I'm
+    not alone — half the class was under 75.
+  expected_stores:
+  - C
+  - Professor Aaltonen
+  - half the class
+- batch: 5
+  time: Week 8
+  user_input: Final exam was better — 86. Final grade is a B. Going to continue with Level 2 next semester.
+  expected_stores:
+  - '86'
+  - B
+  - Level 2
+  expected_adaptation:
+    emotion_detected: determined
+    warmth_direction: increase
+questions:
+- question_id: 229_q1
+  question: Where am I taking the course?
+  expected_contains:
+  - Berklee
+- question_id: 229_q2
+  question: Who is my instructor?
+  expected_contains:
+  - Soren Aaltonen
+- question_id: 229_q3
+  question: What was my final grade?
+  expected_contains:
+  - B
+- question_id: 229_q4
+  question: When is 8 week?
+  expected_contains:
+  - 8 week
+- question_id: 229_q5
+  question: Did I mention music theory?
+  expected_contains:
+  - music theory
+- question_id: 229_q6
+  question: Did I mention Berklee online?
+  expected_contains:
+  - Berklee online
+- question_id: 229_q7
+  question: Do I know someone named Professor Aaltonen?
+  expected_contains:
+  - Professor Aaltonen
+- question_id: 229_q8
+  question: Did I mention Mondays 5 PM?
+  expected_contains:
+  - Mondays 5 PM

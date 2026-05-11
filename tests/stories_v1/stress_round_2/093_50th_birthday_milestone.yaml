@@ -1,0 +1,92 @@
+story_id: 93
+story_name: 50th Birthday Milestone
+category: Life Events
+description: User plans and celebrates a 50th birthday with family.
+duration_simulated: 2 months
+total_batches: 6
+batches:
+- batch: 1
+  time: Month 1 Week 1
+  user_input: My 50th birthday is in two months. My partner Tam is planning something but is being secretive.
+    My sister Fatima is in on it.
+  expected_stores:
+  - 50th birthday
+  - two months
+  - Tam
+  - partner
+  - Fatima
+  - sister
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Tam finally told me the plan — a long weekend in Santa Fe for just the family. Flying out
+    the Thursday before my birthday.
+  expected_stores:
+  - Tam
+  - Santa Fe
+  - long weekend
+  - Thursday
+- batch: 3
+  time: Month 2 Week 1
+  user_input: Fatima is flying in from Boston with her husband Andre and their kids. My parents Hakim
+    and Dania are driving up from Phoenix.
+  expected_stores:
+  - Fatima
+  - Boston
+  - Andre
+  - Hakim
+  - Dania
+  - Phoenix
+- batch: 4
+  time: Month 2 Week 2
+  user_input: What year did World War II end?
+- batch: 5
+  time: Month 2 Week 3
+  user_input: The airbnb is a five bedroom adobe near the plaza. Costs 4200 for four nights. Tam reserved
+    a dinner at Coyote Cafe for my actual birthday.
+  expected_stores:
+  - five bedroom adobe
+  - plaza
+  - '4200'
+  - four nights
+  - Coyote Cafe
+- batch: 6
+  time: Month 2 Week 4
+  user_input: The weekend was perfect. Dinner at Coyote Cafe was wild — chef David Cardenas came out and
+    sang happy birthday. Everyone cried a little.
+  expected_stores:
+  - Coyote Cafe
+  - David Cardenas
+  - chef
+  expected_adaptation:
+    emotion_detected: overjoyed
+    warmth_direction: increase
+questions:
+- question_id: 93_q1
+  question: Who is my partner?
+  expected_contains:
+  - Tam
+- question_id: 93_q2
+  question: Who is my sister?
+  expected_contains:
+  - Fatima
+- question_id: 93_q3
+  question: Where is Fatima flying in from?
+  expected_contains:
+  - Boston
+- question_id: 93_q4
+  question: Who are my parents?
+  expected_contains:
+  - Hakim
+  - Dania
+- question_id: 93_q5
+  question: Where was the celebration?
+  expected_contains:
+  - Santa Fe
+- question_id: 93_q6
+  question: Where was my birthday dinner?
+  expected_contains:
+  - Coyote Cafe
+- question_id: 93_q7
+  question: Did I mention 50th birthday?
+  expected_contains:
+  - 50th birthday

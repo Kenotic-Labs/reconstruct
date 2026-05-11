@@ -1,0 +1,94 @@
+story_id: 73
+story_name: Dealing With Insomnia
+category: Health
+description: User works with a sleep specialist on chronic insomnia.
+duration_simulated: 8 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1
+  user_input: I've been averaging 4 hours of sleep a night for two months. Dr. Michael Patel, a sleep
+    specialist at UCSF, did an intake with me today.
+  expected_stores:
+  - 4 hours
+  - two months
+  - Dr. Michael Patel
+  - UCSF
+  - sleep specialist
+  expected_adaptation:
+    emotion_detected: exhausted
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Week 2
+  user_input: Dr. Patel ordered a home sleep study. I wore a device for two nights tracking oxygen, heart
+    rate, movement.
+  expected_stores:
+  - home sleep study
+  - two nights
+- batch: 3
+  time: Week 3
+  user_input: Results came back — no sleep apnea. Dr. Patel thinks it's behavioral insomnia and is starting
+    me on CBT-I.
+  expected_stores:
+  - no sleep apnea
+  - behavioral insomnia
+  - CBT-I
+- batch: 4
+  time: Week 4
+  user_input: What's the capital of Australia?
+- batch: 5
+  time: Week 5
+  user_input: The CBT-I program is intense. No naps. Out of bed after 20 minutes if I can't sleep. Wake
+    time is locked at 6 AM.
+  expected_stores:
+  - no naps
+  - 20 minutes
+  - 6 AM
+- batch: 6
+  time: Week 7
+  user_input: Week 7 of CBT-I. Averaging 6.5 hours now. Dr. Patel said that's about where most people
+    plateau. I'm thrilled.
+  expected_stores:
+  - 6.5 hours
+  - Dr. Patel
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+- batch: 7
+  time: Week 8
+  user_input: Final session with Dr. Patel. He gave me a maintenance plan and said to come back if I slip.
+    Seven hours last night.
+  expected_stores:
+  - Dr. Patel
+  - maintenance plan
+  - seven hours
+questions:
+- question_id: 73_q1
+  question: Who is my sleep specialist?
+  expected_contains:
+  - Michael Patel
+- question_id: 73_q2
+  question: What sleep program am I doing?
+  expected_contains:
+  - CBT-I
+- question_id: 73_q3
+  question: Where does Dr. Patel practice?
+  expected_contains:
+  - UCSF
+- question_id: 73_q4
+  question: How much am I sleeping now?
+  expected_contains:
+  - seven
+- question_id: 73_q5
+  question: Do I have sleep apnea?
+  expected_contains:
+  - 'no'
+- question_id: 73_q6
+  question: How many hours was I sleeping initially?
+  expected_contains:
+  - '4'
+- question_id: 73_q7
+  question: What wake time is locked in the program?
+  expected_contains:
+  - 6 AM

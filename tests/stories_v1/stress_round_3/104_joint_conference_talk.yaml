@@ -1,0 +1,97 @@
+story_id: 104
+story_name: Joint Conference Talk
+category: Career
+description: User and a coworker jointly prepare and deliver a conference talk.
+duration_simulated: 8 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My coworker Dashiell and I got accepted to speak at PyCon on our open source profiling tool
+    called Flamewatch. The conference is in eight weeks in Pittsburgh.
+  expected_stores:
+  - Dashiell
+  - PyCon
+  - Flamewatch
+  - profiling tool
+  - eight weeks
+  - Pittsburgh
+  expected_adaptation:
+    emotion_detected: excited
+    warmth_direction: increase
+- batch: 2
+  time: Week 2
+  user_input: Dashiell and I carved up the slides. He's doing the technical deep dive; I'm doing the history
+    and motivation. Our talk is 30 minutes on the Wednesday track.
+  expected_stores:
+  - Dashiell
+  - technical deep dive
+  - history
+  - motivation
+  - 30 minutes
+  - Wednesday track
+- batch: 3
+  time: Week 4
+  user_input: Who wrote the Iliad?
+- batch: 4
+  time: Week 5
+  user_input: Practiced the talk together three times this week. Dashiell said my opening is strong but
+    I run long on the motivation section. I cut 90 seconds.
+  expected_stores:
+  - Dashiell
+  - three times
+  - 90 seconds
+- batch: 5
+  time: Week 7
+  user_input: Our director Henrietta Chen heard that Dashiell and I were speaking and she offered to cover
+    our travel costs. She said it was 'rare good news' this quarter.
+  expected_stores:
+  - Henrietta Chen
+  - director
+  - Dashiell
+  - travel costs
+- batch: 6
+  time: Week 8 Wednesday
+  user_input: Talk went really well. 120 people in the room. Dashiell and I got 15 questions after which
+    we tag-teamed. Henrietta was watching remotely.
+  expected_stores:
+  - 120 people
+  - Dashiell
+  - 15 questions
+  - Henrietta
+  expected_adaptation:
+    emotion_detected: proud
+    warmth_direction: increase
+questions:
+- question_id: 104_q1
+  question: Who am I co-speaking with?
+  expected_contains:
+  - Dashiell
+- question_id: 104_q2
+  question: What is our open source tool called?
+  expected_contains:
+  - Flamewatch
+- question_id: 104_q3
+  question: What conference are we at?
+  expected_contains:
+  - PyCon
+- question_id: 104_q4
+  question: Where is PyCon?
+  expected_contains:
+  - Pittsburgh
+- question_id: 104_q5
+  question: Who is our director?
+  expected_contains:
+  - Henrietta Chen
+- question_id: 104_q6
+  question: How long is our talk?
+  expected_contains:
+  - 30 minutes
+- question_id: 104_q7
+  question: How many people watched?
+  expected_contains:
+  - '120'
+- question_id: 104_q8
+  question: Did I mention profiling tool?
+  expected_contains:
+  - profiling tool

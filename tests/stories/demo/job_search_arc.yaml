@@ -1,0 +1,164 @@
+story_id: 901
+title: "Job Search Arc"
+domain: "career"
+description: |
+  Five-session career arc: comfortable at job → new VP disrupts →
+  quiet job search → interview + offer → negotiation + departure.
+  Tests temporal ordering, emotional arc (comfortable → stressed →
+  hopeful → conflicted), supersession (old job → new job), and
+  entity relationships (manager, VP, recruiter, new company).
+duration_simulated: "3 months"
+total_batches: 5
+
+batches:
+  - batch: 1
+    time: "January 10"
+    user_input: |
+      Work's been pretty solid lately honestly. My manager Dena is
+      great, she really goes to bat for us. I'm making 115k which
+      is decent for the area. The team is small, just me, Tariq,
+      and Yuna, but we ship fast. I actually like going in most days
+      which I know is kind of rare.
+    expected_triples:
+      - ["user", "works_at", "current company"]
+      - ["user", "has_manager", "Dena"]
+      - ["Dena", "advocates_for", "her team"]
+      - ["user", "earns_salary", "115k"]
+      - ["user", "works_with", "Tariq"]
+      - ["user", "works_with", "Yuna"]
+      - ["user", "has_team_size", "3 people"]
+      - ["user", "has_emotion", "satisfied"]
+    trace_overrides:
+      edge_temporal_context: "present"
+      edge_emotional_label: "satisfied"
+      edge_episodic_significance: "routine"
+      edge_schematic_category: "career"
+
+  - batch: 2
+    time: "February 15"
+    user_input: |
+      Ugh so this new VP Marcus started two weeks ago and he's already
+      reorganizing everything. He pulled Tariq onto a different project
+      without even asking Dena. She looked pretty blindsided in the
+      meeting. Now there's talk about restructuring our whole team
+      under his org. I'm trying not to stress but like, it's hard
+      not to read the writing on the wall you know?
+    expected_triples:
+      - ["Marcus", "joined_as", "VP"]
+      - ["Marcus", "reorganized", "team structure"]
+      - ["Marcus", "reassigned", "Tariq to different project"]
+      - ["Dena", "was_blindsided_by", "Marcus reorganization"]
+      - ["user", "worried_about", "team restructuring"]
+      - ["user", "has_emotion", "anxious"]
+    trace_overrides:
+      edge_temporal_context: "present"
+      edge_emotional_label: "anxious"
+      edge_episodic_significance: "pivotal"
+      edge_schematic_category: "career"
+
+  - batch: 3
+    time: "March 5"
+    user_input: |
+      Ok so I've been quietly looking. Don't tell anyone at work
+      obviously. I updated my LinkedIn but set it to that open-to-work
+      thing that only recruiters can see. A recruiter named Jess from
+      a company called Meridian Labs reached out yesterday. They're
+      doing some cool stuff with distributed systems. She wants to set
+      up a call for next week. I feel kind of guilty about it but also
+      like, Marcus has basically made it clear our team isn't his priority.
+    expected_triples:
+      - ["user", "started", "job search"]
+      - ["user", "updated", "LinkedIn to open-to-work"]
+      - ["Jess", "is_recruiter_at", "Meridian Labs"]
+      - ["Jess", "contacted", "user about opportunity"]
+      - ["Meridian Labs", "works_on", "distributed systems"]
+      - ["user", "scheduled", "call with Jess next week"]
+      - ["user", "has_emotion", "guilty"]
+      - ["user", "keeping_secret", "job search from coworkers"]
+    trace_overrides:
+      edge_temporal_context: "present"
+      edge_emotional_label: "guilty"
+      edge_episodic_significance: "pivotal"
+      edge_schematic_category: "career"
+
+  - batch: 4
+    time: "March 22"
+    user_input: |
+      So I did the interview loop at Meridian last week. Four rounds,
+      pretty intense. The hiring manager is this guy named Raj and he
+      was super sharp, asked really good architecture questions. The
+      team seems legit. They just called today with an offer — 140k
+      base plus equity. It's a senior role which would be a step up.
+      I'm honestly kind of shocked it moved this fast.
+    expected_triples:
+      - ["user", "interviewed_at", "Meridian Labs"]
+      - ["user", "completed", "four interview rounds"]
+      - ["Raj", "is_hiring_manager_at", "Meridian Labs"]
+      - ["Raj", "asked", "architecture questions"]
+      - ["Meridian Labs", "offered", "140k base plus equity"]
+      - ["Meridian Labs", "offered_role", "senior position"]
+      - ["user", "has_emotion", "surprised"]
+    trace_overrides:
+      edge_temporal_context: "present"
+      edge_emotional_label: "surprised"
+      edge_episodic_significance: "milestone"
+      edge_schematic_category: "career"
+
+  - batch: 5
+    time: "April 2"
+    user_input: |
+      I accepted the Meridian offer. Gave my two weeks yesterday.
+      Dena was really understanding about it, she said she could see
+      the writing on the wall too with Marcus. Tariq texted me congrats
+      which was nice. I feel weirdly sad about leaving even though I
+      know it's the right move. Yuna asked if Meridian is hiring
+      because she's thinking about leaving too. Starting April 16.
+    expected_triples:
+      - ["user", "accepted_offer_at", "Meridian Labs"]
+      - ["user", "resigned_from", "current company"]
+      - ["user", "gave", "two weeks notice"]
+      - ["Dena", "was_understanding_about", "user leaving"]
+      - ["Dena", "agreed_about", "Marcus situation"]
+      - ["Tariq", "congratulated", "user"]
+      - ["user", "has_emotion", "bittersweet"]
+      - ["Yuna", "considering", "leaving current company"]
+      - ["Yuna", "asked_about", "openings at Meridian Labs"]
+      - ["user", "starts_at_meridian", "April 16"]
+    trace_overrides:
+      edge_temporal_context: "present"
+      edge_emotional_label: "bittersweet"
+      edge_episodic_significance: "milestone"
+      edge_schematic_category: "career"
+
+final_verification:
+  - question: "Tell me about my job situation"
+    type: "reconstruct"
+    expected_contains: ["Meridian", "accept", "Dena"]
+
+  - question: "Why did I leave my job?"
+    type: "reconstruct"
+    expected_contains: ["Marcus", "reorganiz"]
+
+  - question: "What salary do I earn and what did Meridian offer?"
+    type: "reconstruct"
+    expected_contains: ["115", "140"]
+
+  - question: "Who is Dena?"
+    type: "lookup"
+    expected_contains: ["manager"]
+
+  - question: "What does Meridian Labs do?"
+    type: "lookup"
+    expected_contains: ["distributed systems"]
+
+  - question: "How did Dena, Tariq, and Yuna react to me leaving?"
+    type: "reconstruct"
+    expected_contains: ["Tariq", "Yuna", "Dena"]
+
+  - question: "Who recruited me?"
+    type: "lookup"
+    expected_contains: ["Jess"]
+
+  - question: "When do I start at Meridian?"
+    type: "lookup"
+    expected_contains: ["April 16"]

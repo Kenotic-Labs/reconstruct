@@ -1,0 +1,93 @@
+story_id: 136
+story_name: Weekend Pickleball Obsession
+category: Daily Life
+description: User discovers pickleball and joins a local league.
+duration_simulated: 2 months
+total_batches: 6
+batches:
+- batch: 1
+  time: Month 1 Week 1
+  user_input: My friend Gabriel dragged me to play pickleball at the Rainbow Rec Center courts. I'm hooked
+    after one session. Bought a paddle — a Selkirk Invikta.
+  expected_stores:
+  - Gabriel
+  - pickleball
+  - Rainbow Rec Center
+  - Selkirk Invikta
+- batch: 2
+  time: Month 1 Week 2
+  user_input: Gabriel and I played 10 games in one Saturday. My knees are destroyed. We met another regular
+    named Naila Hassan who has been playing for 5 years.
+  expected_stores:
+  - Gabriel
+  - 10 games
+  - Naila Hassan
+  - 5 years
+- batch: 3
+  time: Month 1 Week 3
+  user_input: Naila invited Gabriel and me to join a recreational doubles league at the same rec center.
+    League runs for 8 weeks, 60 dollars per person.
+  expected_stores:
+  - Naila
+  - Gabriel
+  - doubles league
+  - 8 weeks
+  - 60 dollars
+- batch: 4
+  time: Month 1 Week 4
+  user_input: What year did World War I start?
+- batch: 5
+  time: Month 2 Week 1
+  user_input: First league match. Gabriel and I played against a father-son pair named Stefan and Nicholas
+    Voss. We lost 11-7 but it was close.
+  expected_stores:
+  - Gabriel
+  - Stefan
+  - Nicholas Voss
+  - 11-7
+- batch: 6
+  time: Month 2 Week 3
+  user_input: Naila gave Gabriel and me some coaching on court positioning. Our next match we won 11-5.
+    She was beaming.
+  expected_stores:
+  - Naila
+  - Gabriel
+  - court positioning
+  - 11-5
+  expected_adaptation:
+    emotion_detected: proud
+    warmth_direction: increase
+questions:
+- question_id: 136_q1
+  question: Who got me into pickleball?
+  expected_contains:
+  - Gabriel
+- question_id: 136_q2
+  question: Where do we play?
+  expected_contains:
+  - Rainbow Rec Center
+- question_id: 136_q3
+  question: Who is the regular who's played for 5 years?
+  expected_contains:
+  - Naila Hassan
+- question_id: 136_q4
+  question: Who are the father-son pair we played?
+  expected_contains:
+  - Stefan
+  - Nicholas Voss
+- question_id: 136_q5
+  question: What paddle did I buy?
+  expected_contains:
+  - Selkirk
+- question_id: 136_q6
+  question: Did I mention pickleball?
+  expected_contains:
+  - pickleball
+- question_id: 136_q7
+  question: Do I know someone named Selkirk Invikta?
+  expected_contains:
+  - Selkirk Invikta
+- question_id: 136_q8
+  question: Did I mention 10 games?
+  expected_contains:
+  - 10 games

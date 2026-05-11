@@ -1,0 +1,95 @@
+story_id: 125
+story_name: Emergency Appendectomy
+category: Health
+description: User has emergency appendectomy surgery and recovery.
+duration_simulated: 3 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Day 1 4 PM
+  user_input: Sharp abdominal pain started at noon. My roommate Delia drove me to urgent care and they
+    sent us to the ER at St. Francis.
+  expected_stores:
+  - abdominal pain
+  - Delia
+  - roommate
+  - urgent care
+  - St. Francis
+- batch: 2
+  time: Day 1 8 PM
+  user_input: CT confirmed appendicitis. Dr. Anya Petrov, the surgeon, said I need emergency laparoscopic
+    appendectomy tonight. Delia called my parents.
+  expected_stores:
+  - appendicitis
+  - Dr. Anya Petrov
+  - surgeon
+  - laparoscopic
+  - Delia
+  expected_adaptation:
+    emotion_detected: scared
+    warmth_direction: increase
+    vulnerability: true
+- batch: 3
+  time: Day 2 morning
+  user_input: Surgery went well. Dr. Petrov said they caught it before rupture. I'm on pain meds and Delia
+    slept in the chair next to me.
+  expected_stores:
+  - Dr. Petrov
+  - rupture
+  - Delia
+- batch: 4
+  time: Day 4
+  user_input: What year was the Declaration of Independence signed?
+- batch: 5
+  time: Day 5
+  user_input: Discharged today. My mom Olivia drove up from Sacramento to stay with me for a week. Dr.
+    Petrov said no lifting for three weeks.
+  expected_stores:
+  - Olivia
+  - mom
+  - Sacramento
+  - Dr. Petrov
+  - three weeks
+- batch: 6
+  time: Week 3
+  user_input: Back to normal life. Follow-up with Dr. Petrov today was fine — incisions healed clean.
+    Mom flew home Saturday.
+  expected_stores:
+  - Dr. Petrov
+  - Mom
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+questions:
+- question_id: 125_q1
+  question: Who is my roommate?
+  expected_contains:
+  - Delia
+- question_id: 125_q2
+  question: What hospital was I at?
+  expected_contains:
+  - St. Francis
+- question_id: 125_q3
+  question: Who was my surgeon?
+  expected_contains:
+  - Anya Petrov
+- question_id: 125_q4
+  question: What kind of surgery did I have?
+  expected_contains:
+  - appendectomy
+- question_id: 125_q5
+  question: Who is my mom?
+  expected_contains:
+  - Olivia
+- question_id: 125_q6
+  question: Where did Mom fly in from?
+  expected_contains:
+  - Sacramento
+- question_id: 125_q7
+  question: Did I mention abdominal pain?
+  expected_contains:
+  - abdominal pain
+- question_id: 125_q8
+  question: Did I mention roommate?
+  expected_contains:
+  - roommate

@@ -1,0 +1,75 @@
+story_id: 183
+story_name: Unfinished Novel
+category: Learning
+description: User struggles to finish their NaNoWriMo novel draft.
+duration_simulated: 4 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: Started NaNoWriMo last month. My target is 50000 words in 30 days. My writing accountability
+    partner is Nikolai Szabo.
+  expected_stores:
+  - NaNoWriMo
+  - 50000 words
+  - 30 days
+  - Nikolai Szabo
+- batch: 2
+  time: Month 1 Week 4
+  user_input: Ended NaNoWriMo at 42000 words. Short of 50k. Nikolai got to 38000. Neither of us 'won'
+    but we both have real drafts.
+  expected_stores:
+  - '42000'
+  - Nikolai
+  - '38000'
+- batch: 3
+  time: Month 2
+  user_input: What's the longest country name?
+- batch: 4
+  time: Month 3
+  user_input: Hit a block at 47000. Not sure how to end the novel. Nikolai suggested working backwards
+    from the ending.
+  expected_stores:
+  - '47000'
+  - Nikolai
+  - working backwards
+- batch: 5
+  time: Month 4
+  user_input: Finished at 63000 words. Nikolai finished his at 55000. We're going to swap drafts and do
+    first round feedback.
+  expected_stores:
+  - '63000'
+  - Nikolai
+  - '55000'
+  expected_adaptation:
+    emotion_detected: accomplished
+    warmth_direction: increase
+questions:
+- question_id: 183_q1
+  question: Who is my accountability partner?
+  expected_contains:
+  - Nikolai Szabo
+- question_id: 183_q2
+  question: What was my target word count?
+  expected_contains:
+  - '50000'
+- question_id: 183_q3
+  question: What did I finish at?
+  expected_contains:
+  - '63000'
+- question_id: 183_q4
+  question: Where did Nikolai finish?
+  expected_contains:
+  - '55000'
+- question_id: 183_q5
+  question: Did I mention NaNoWriMo?
+  expected_contains:
+  - NaNoWriMo
+- question_id: 183_q6
+  question: Did I mention 50000 words?
+  expected_contains:
+  - 50000 words
+- question_id: 183_q7
+  question: When is 30 days?
+  expected_contains:
+  - 30 days

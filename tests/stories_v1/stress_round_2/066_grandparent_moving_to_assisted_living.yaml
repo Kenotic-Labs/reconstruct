@@ -1,0 +1,102 @@
+story_id: 66
+story_name: Grandparent Moving to Assisted Living
+category: Relationships
+description: User helps coordinate their grandmother's move to an assisted living facility.
+duration_simulated: 2 months
+total_batches: 7
+batches:
+- batch: 1
+  time: Month 1 Week 1
+  user_input: My grandmother Opal had a small fall last week. My mom Delia and I are talking about assisted
+    living options.
+  expected_stores:
+  - Opal
+  - grandmother
+  - fall
+  - Delia
+  - mom
+  - assisted living
+  expected_adaptation:
+    emotion_detected: worried
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Month 1 Week 2
+  user_input: Toured three places this weekend. Mom liked The Arbors in Pasadena best. It's about 6500
+    a month for independent living.
+  expected_stores:
+  - three places
+  - Arbors
+  - Pasadena
+  - 6500 a month
+- batch: 3
+  time: Month 1 Week 3
+  user_input: Opal is resistant. She's lived in her house for 52 years. Mom is handling the emotional
+    side, I'm handling the logistics.
+  expected_stores:
+  - Opal
+  - 52 years
+  - Mom
+- batch: 4
+  time: Month 2 Week 1
+  user_input: Opal agreed to move after a second fall last Tuesday. Move-in date is the 23rd.
+  expected_stores:
+  - Opal
+  - second fall
+  - last Tuesday
+  - 23rd
+- batch: 5
+  time: Month 2 Week 2
+  user_input: When was the internet invented?
+- batch: 6
+  time: Month 2 Week 3
+  user_input: Packing up the house is emotional. Mom is keeping Grandpa Walter's letters from WWII — a
+    box of maybe 80 letters.
+  expected_stores:
+  - Mom
+  - Walter
+  - grandpa
+  - WWII
+  - 80 letters
+- batch: 7
+  time: Month 2 Week 4
+  user_input: Opal is settled at The Arbors. She has a studio on the second floor with a view of the garden.
+    Mom visits every day this week.
+  expected_stores:
+  - Opal
+  - Arbors
+  - second floor
+  - Mom
+questions:
+- question_id: 66_q1
+  question: Who is my grandmother?
+  expected_contains:
+  - Opal
+- question_id: 66_q2
+  question: Who is my mom?
+  expected_contains:
+  - Delia
+- question_id: 66_q3
+  question: Where did we move her to?
+  expected_contains:
+  - Arbors
+- question_id: 66_q4
+  question: How much per month?
+  expected_contains:
+  - '6500'
+- question_id: 66_q5
+  question: What did Mom keep from the house?
+  expected_contains:
+  - Walter
+- question_id: 66_q6
+  question: How long had Opal lived in her house?
+  expected_contains:
+  - 52 years
+- question_id: 66_q7
+  question: Who is my grandfather?
+  expected_contains:
+  - Walter
+- question_id: 66_q8
+  question: Did I mention grandmother?
+  expected_contains:
+  - grandmother

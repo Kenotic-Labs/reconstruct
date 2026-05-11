@@ -1,0 +1,87 @@
+story_id: 157
+story_name: Contradicting Feedback from Two Directors
+category: Career
+description: User receives contradictory performance feedback and navigates it.
+duration_simulated: 3 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1 Tuesday
+  user_input: Director Abdullah told me in my 1:1 that I need to be more assertive in cross-functional
+    meetings. Director Evangelina told me on Friday that I should pull back and listen more.
+  expected_stores:
+  - Abdullah
+  - director
+  - more assertive
+  - Evangelina
+  - pull back
+- batch: 2
+  time: Week 2 Monday
+  user_input: I was confused. Both pieces of feedback came from the same 360 review. I asked my manager
+    Priti for context.
+  expected_stores:
+  - Priti
+  - manager
+  - 360 review
+- batch: 3
+  time: Week 2 Wednesday
+  user_input: Who wrote 1984?
+- batch: 4
+  time: Week 2 Thursday
+  user_input: Priti explained — Abdullah and Evangelina watched me in different meetings. She said I should
+    take BOTH pieces of feedback contextually, not as contradictions.
+  expected_stores:
+  - Priti
+  - Abdullah
+  - Evangelina
+  - not as contradictions
+- batch: 5
+  time: Week 3
+  user_input: Tried both strategies this week. Felt better in the platform meeting where I spoke up earlier.
+    Evangelina's note applied to a product meeting with senior stakeholders.
+  expected_stores:
+  - platform meeting
+  - Evangelina
+  - product meeting
+- batch: 6
+  time: Week 3 Friday
+  user_input: Priti said my adjustment this week was exactly what she hoped for. She and I are going to
+    keep tracking it.
+  expected_stores:
+  - Priti
+  expected_adaptation:
+    emotion_detected: focused
+    warmth_direction: increase
+questions:
+- question_id: 157_q1
+  question: Who gave the assertive feedback?
+  expected_contains:
+  - Abdullah
+- question_id: 157_q2
+  question: Who said to pull back?
+  expected_contains:
+  - Evangelina
+- question_id: 157_q3
+  question: Who is my manager?
+  expected_contains:
+  - Priti
+- question_id: 157_q4
+  question: What kind of review was it?
+  expected_contains:
+  - '360'
+- question_id: 157_q5
+  question: Did I mention director?
+  expected_contains:
+  - director
+- question_id: 157_q6
+  question: Did I mention more assertive?
+  expected_contains:
+  - more assertive
+- question_id: 157_q7
+  question: Did I mention pull back?
+  expected_contains:
+  - pull back
+- question_id: 157_q8
+  question: Did I mention manager?
+  expected_contains:
+  - manager

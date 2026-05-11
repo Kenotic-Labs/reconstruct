@@ -1,0 +1,110 @@
+story_id: 51
+story_name: Series A Funding Round
+category: Career
+description: Founder prepares for investor pitch, manages co-founder and board dynamics.
+duration_simulated: 2 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Monday 8:00 AM
+  user_input: Okay so our Series A pitch is in ten days. We're raising 12 million from Greylock. My co-founder
+    Diego thinks we should ask for 15 but I'm nervous about dilution.
+  expected_stores:
+  - Series A
+  - ten days
+  - 12 million
+  - Greylock
+  - Diego
+  - co-founder
+  - dilution
+  expected_adaptation:
+    emotion_detected: nervous
+    warmth_direction: increase
+- batch: 2
+  time: Monday 2:30 PM
+  user_input: Just met with our lawyer Rachel Kim from Wilson Sonsini. She said the term sheet looks clean,
+    no liquidation preference surprises.
+  expected_stores:
+  - Rachel Kim
+  - lawyer
+  - Wilson Sonsini
+  - term sheet
+- batch: 3
+  time: Tuesday 11:00 AM
+  user_input: What's the capital of Portugal?
+- batch: 4
+  time: Wednesday 9:15 AM
+  user_input: Diego and I practiced the pitch deck for three hours last night. He's much better at the
+    product demo than I am.
+  expected_stores:
+  - Diego
+  - pitch deck
+  - three hours
+  - product demo
+- batch: 5
+  time: Thursday 4:00 PM
+  user_input: Just heard from Greylock — the partner meeting moved from next Tuesday to next Friday. Two
+    extra days to prep.
+  expected_stores:
+  - Greylock
+  - partner meeting
+  - next Friday
+  - moved from Tuesday
+- batch: 6
+  time: Friday 6:00 PM
+  user_input: I'm exhausted but energized. Our CFO Marcus just finalized the financial model showing 18
+    month runway post-close.
+  expected_stores:
+  - Marcus
+  - CFO
+  - financial model
+  - 18 month runway
+  expected_adaptation:
+    emotion_detected: tired/excited
+    warmth_direction: increase
+- batch: 7
+  time: Monday following 10:00 AM
+  user_input: The pitch went well. Greylock wants to lead at 12 million at a 48 million pre-money. Closing
+    target is end of month.
+  expected_stores:
+  - 12 million
+  - 48 million pre-money
+  - end of month
+  - closing
+  expected_adaptation:
+    emotion_detected: relief/excitement
+    warmth_direction: increase
+questions:
+- question_id: 51_q1
+  question: How much are we raising in the Series A?
+  expected_contains:
+  - 12 million
+- question_id: 51_q2
+  question: Who is leading our round?
+  expected_contains:
+  - Greylock
+- question_id: 51_q3
+  question: Who is my co-founder?
+  expected_contains:
+  - Diego
+- question_id: 51_q4
+  question: Who is our lawyer and what firm is she at?
+  expected_contains:
+  - Rachel Kim
+  - Wilson Sonsini
+- question_id: 51_q5
+  question: When is the Greylock partner meeting now?
+  expected_contains:
+  - Friday
+- question_id: 51_q6
+  question: Who is our CFO?
+  expected_contains:
+  - Marcus
+- question_id: 51_q7
+  question: What was the pre-money valuation?
+  expected_contains:
+  - 48 million
+- question_id: 51_q8
+  question: How many months of runway will we have post-close?
+  expected_contains:
+  - '18'

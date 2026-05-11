@@ -1,0 +1,153 @@
+story_id: 31
+story_name: "Online Data Science Course"
+category: "Learning"
+description: |
+  User is taking an online Data Science course on Coursera taught by
+  Stanford professor Dr. Andrew Lee. Tests memory of course details,
+  tools used, study group members, assignment scores, and career
+  transition goals.
+duration_simulated: "4 weeks"
+total_batches: 8
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      I just enrolled in a Data Science course on Coursera! It's taught
+      by Dr. Andrew Lee, a professor at Stanford. The course is 12 weeks
+      long and I started in January. We'll be using Python and Jupyter
+      notebooks for all the hands-on work. I'm doing this because I want
+      to transition my career into data science.
+    expected_memory_stores:
+      - "Data Science"
+      - "Coursera"
+      - "Dr. Andrew Lee"
+      - "Stanford"
+      - "12 weeks"
+      - "January"
+      - "Python"
+      - "Jupyter notebooks"
+      - "career transition"
+
+  - batch: 2
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      Found some classmates to form a study group! Their names are Raj
+      and Emma. Raj is a software engineer looking to move into data
+      science like me, and Emma is a statistics major who wants practical
+      coding skills. We're going to meet on Zoom every Sunday evening
+      to review the week's material.
+    expected_memory_stores:
+      - "Raj"
+      - "Emma"
+      - "study group"
+      - "software engineer"
+      - "statistics major"
+      - "Sunday evening"
+      - "Zoom"
+
+  - batch: 3
+    time: "Thursday 12:30 PM"
+    user_input: "What is the difference between supervised and unsupervised learning?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["labeled", "unlabeled"]
+
+  - batch: 4
+    time: "Next Monday 10:00 PM"
+    user_input: |
+      Just submitted my first assignment! We had to analyze the Titanic
+      dataset using pandas and create visualizations of survival rates.
+      I built a logistic regression model and got a score of 95%! Dr. Lee
+      left feedback saying my feature engineering was particularly strong.
+      Raj scored 88% and Emma got 97% since she's already great with stats.
+    expected_memory_stores:
+      - "Titanic dataset"
+      - "pandas"
+      - "logistic regression"
+      - "95%"
+      - "feature engineering"
+      - "Raj 88%"
+      - "Emma 97%"
+
+  - batch: 5
+    time: "Next Wednesday 6:00 PM"
+    user_input: "What score did I get on my first data science assignment?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["95%"]
+
+  - batch: 6
+    time: "Third week Monday 9:00 PM"
+    user_input: |
+      Week 3 of the course is about data cleaning and preprocessing.
+      Dr. Lee introduced us to scikit-learn this week. The amount of
+      work involved in cleaning real-world data is crazy. I spent 4 hours
+      just handling missing values and outliers in this week's dataset.
+      Our study group session on Sunday was really helpful though,
+      Emma explained StandardScaler vs MinMaxScaler perfectly.
+    expected_memory_stores:
+      - "data cleaning"
+      - "preprocessing"
+      - "scikit-learn"
+      - "missing values"
+      - "outliers"
+      - "StandardScaler"
+      - "MinMaxScaler"
+
+  - batch: 7
+    time: "Third week Thursday 1:00 PM"
+    user_input: "What is the pandas library in Python used for?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["data", "analysis"]
+
+  - batch: 8
+    time: "Fourth week Monday 8:30 PM"
+    user_input: |
+      Just finished the week 4 assignment on classification algorithms.
+      We built a random forest model this time and I scored 91%. The
+      course is getting more challenging but I love it. Dr. Lee announced
+      there will be a capstone project at the end where we choose our own
+      dataset. Raj suggested we could collaborate on something related to
+      healthcare data. I'm feeling more confident about the career switch!
+    expected_memory_stores:
+      - "classification"
+      - "random forest"
+      - "91%"
+      - "capstone project"
+      - "healthcare data"
+      - "career switch"
+
+final_verification:
+  - question: "What platform is my Data Science course on?"
+    expected_contains: ["Coursera"]
+
+  - question: "Who teaches my Data Science course?"
+    expected_contains: ["Dr. Andrew Lee"]
+
+  - question: "Who are my study group members?"
+    expected_contains: ["Raj", "Emma"]
+
+  - question: "What did I score on my first assignment?"
+    expected_contains: ["95%"]
+
+  - question: "What dataset did my first assignment use?"
+    expected_contains: ["Titanic"]
+
+  - question: "Why am I taking the Data Science course?"
+    expected_contains: ["career transition", "data science"]

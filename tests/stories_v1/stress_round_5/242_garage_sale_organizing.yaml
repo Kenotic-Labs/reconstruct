@@ -1,0 +1,74 @@
+story_id: 242
+story_name: Garage Sale Organizing
+category: Daily Life
+description: User hosts a garage sale to declutter.
+duration_simulated: 2 weeks
+total_batches: 4
+batches:
+- batch: 1
+  time: Week 1
+  user_input: Hosting my first garage sale next Saturday. Goal is to clear 6 years of accumulated stuff.
+    My sister Pearl is helping.
+  expected_stores:
+  - garage sale
+  - next Saturday
+  - 6 years
+  - Pearl
+  - sister
+- batch: 2
+  time: Week 2 Thursday
+  user_input: Pearl and I priced everything yesterday. Advertised on Craigslist and local Facebook group.
+    Starting at 8 AM Saturday.
+  expected_stores:
+  - Pearl
+  - Craigslist
+  - Facebook group
+  - 8 AM Saturday
+- batch: 3
+  time: Week 2 Friday
+  user_input: What's the smallest bird?
+- batch: 4
+  time: Week 2 Saturday
+  user_input: Garage sale day. Made 680 dollars by 2 PM. Donated the rest to Out of the Closet. Pearl
+    and I celebrated with tacos.
+  expected_stores:
+  - 680 dollars
+  - Out of the Closet
+  - Pearl
+  - tacos
+  expected_adaptation:
+    emotion_detected: accomplished
+    warmth_direction: increase
+questions:
+- question_id: 242_q1
+  question: Who helped me?
+  expected_contains:
+  - Pearl
+- question_id: 242_q2
+  question: How much did I make?
+  expected_contains:
+  - '680'
+- question_id: 242_q3
+  question: Where did the leftovers go?
+  expected_contains:
+  - Out of the Closet
+- question_id: 242_q4
+  question: Did I mention garage sale?
+  expected_contains:
+  - garage sale
+- question_id: 242_q5
+  question: When is next Saturday?
+  expected_contains:
+  - next Saturday
+- question_id: 242_q6
+  question: When is 6 years?
+  expected_contains:
+  - 6 years
+- question_id: 242_q7
+  question: Did I mention sister?
+  expected_contains:
+  - sister
+- question_id: 242_q8
+  question: Do I know someone named Craigslist?
+  expected_contains:
+  - Craigslist

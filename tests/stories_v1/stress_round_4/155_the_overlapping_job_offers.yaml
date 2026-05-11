@@ -1,0 +1,91 @@
+story_id: 155
+story_name: The Overlapping Job Offers
+category: Career
+description: User juggles overlapping offers with conflicting deadlines and corrections.
+duration_simulated: 3 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1 Monday
+  user_input: I have offers from three companies — Cruise, Waymo, and a startup called Road Atlas. All
+    three deadlines are within 10 days of each other.
+  expected_stores:
+  - Cruise
+  - Waymo
+  - Road Atlas
+  - three companies
+  - 10 days
+- batch: 2
+  time: Week 1 Wednesday
+  user_input: Waymo's recruiter Lyla Okafor extended my deadline by a week. Road Atlas wouldn't extend.
+    Cruise gave me two extra days.
+  expected_stores:
+  - Waymo
+  - Lyla Okafor
+  - Road Atlas
+  - Cruise
+  - two extra days
+- batch: 3
+  time: Week 2 Monday
+  user_input: Road Atlas called and said they WILL extend after all — their HR person Jamar got the new
+    info. Deadline moved from today to Friday.
+  expected_stores:
+  - Road Atlas
+  - Jamar
+  - HR
+  - Friday
+- batch: 4
+  time: Week 2 Wednesday
+  user_input: Who invented the phonograph?
+- batch: 5
+  time: Week 2 Friday
+  user_input: Rejected Road Atlas. Not a fit. Still choosing between Cruise and Waymo.
+  expected_stores:
+  - Rejected Road Atlas
+  - Cruise
+  - Waymo
+- batch: 6
+  time: Week 3 Wednesday
+  user_input: Accepted Waymo. Start date is in four weeks. Cruise was a close second but Lyla was more
+    responsive and the role is more senior.
+  expected_stores:
+  - Waymo
+  - four weeks
+  - Cruise
+  - Lyla
+  expected_adaptation:
+    emotion_detected: resolved
+    warmth_direction: increase
+questions:
+- question_id: 155_q1
+  question: What company did I accept?
+  expected_contains:
+  - Waymo
+- question_id: 155_q2
+  question: Who is my Waymo recruiter?
+  expected_contains:
+  - Lyla Okafor
+- question_id: 155_q3
+  question: Who did I reject?
+  expected_contains:
+  - Road Atlas
+- question_id: 155_q4
+  question: Who is Jamar?
+  expected_contains:
+  - HR
+- question_id: 155_q5
+  question: When do I start?
+  expected_contains:
+  - four weeks
+- question_id: 155_q6
+  question: Do I know someone named Cruise?
+  expected_contains:
+  - Cruise
+- question_id: 155_q7
+  question: Did I mention three companies?
+  expected_contains:
+  - three companies
+- question_id: 155_q8
+  question: When is 10 days?
+  expected_contains:
+  - 10 days

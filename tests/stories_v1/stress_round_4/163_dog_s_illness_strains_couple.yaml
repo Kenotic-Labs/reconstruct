@@ -1,0 +1,100 @@
+story_id: 163
+story_name: Dog's Illness Strains Couple
+category: Relationships
+description: User and partner strain over dog's terminal illness decisions.
+duration_simulated: 6 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1
+  user_input: Our dog Pepperoni was diagnosed with bone cancer. He's 11. My husband Ansel and I are heartbroken.
+  expected_stores:
+  - Pepperoni
+  - bone cancer
+  - '11'
+  - Ansel
+  - husband
+  expected_adaptation:
+    emotion_detected: grief
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Week 2
+  user_input: Ansel wants to pursue aggressive treatment — chemo, amputation. Our vet Dr. Carmen Otieno
+    laid out options. I'm NOT sure chemo is the kindest choice.
+  expected_stores:
+  - Ansel
+  - chemo
+  - amputation
+  - Dr. Carmen Otieno
+  - not sure
+- batch: 3
+  time: Week 3
+  user_input: Ansel and I argued for an hour last night. He said I was giving up. I said he was projecting
+    his fear of loss.
+  expected_stores:
+  - Ansel
+- batch: 4
+  time: Week 4
+  user_input: Who painted the Sistine Chapel?
+- batch: 5
+  time: Week 4 Friday
+  user_input: Dr. Otieno met with Ansel and me together. She said chemo would extend his life 4 to 6 months
+    but the quality would be poor. Ansel listened.
+  expected_stores:
+  - Dr. Otieno
+  - Ansel
+  - 4 to 6 months
+- batch: 6
+  time: Week 5
+  user_input: Ansel and I decided on palliative care, NOT chemo. Pepperoni is on pain meds and having
+    good days. We're grateful for each one.
+  expected_stores:
+  - Ansel
+  - palliative care
+  - not chemo
+  - Pepperoni
+- batch: 7
+  time: Week 6
+  user_input: Pepperoni passed peacefully on Tuesday. Ansel and I were both with him. Dr. Otieno came
+    to the house.
+  expected_stores:
+  - Pepperoni
+  - Ansel
+  - Dr. Otieno
+  expected_adaptation:
+    emotion_detected: grief
+    warmth_direction: increase
+questions:
+- question_id: 163_q1
+  question: What is my dog's name?
+  expected_contains:
+  - Pepperoni
+- question_id: 163_q2
+  question: Who is my husband?
+  expected_contains:
+  - Ansel
+- question_id: 163_q3
+  question: Who is our vet?
+  expected_contains:
+  - Carmen Otieno
+- question_id: 163_q4
+  question: Did we pursue chemo?
+  expected_contains:
+  - not
+- question_id: 163_q5
+  question: What treatment did we choose?
+  expected_contains:
+  - palliative
+- question_id: 163_q6
+  question: Did I mention bone cancer?
+  expected_contains:
+  - bone cancer
+- question_id: 163_q7
+  question: What number is 11?
+  expected_contains:
+  - '11'
+- question_id: 163_q8
+  question: Did I mention husband?
+  expected_contains:
+  - husband

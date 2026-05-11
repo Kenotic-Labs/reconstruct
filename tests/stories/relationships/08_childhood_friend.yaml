@@ -1,0 +1,120 @@
+story_id: 8
+story_name: "Childhood Friend"
+category: "Relationships"
+description: |
+  User reconnects with childhood friend Danny after 15 years. Tracks shared
+  history, Danny's current life details, and plans to visit. Tests memory
+  of biographical details, locations, and relationship context.
+duration_simulated: "2 weeks"
+total_batches: 7
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Friday 9:00 PM"
+    user_input: |
+      Nura, you won't believe this — I just got a message from my childhood
+      friend Danny! We haven't talked in 15 years. We grew up together on
+      Maple Street and went to Lincoln Elementary. I'm kind of emotional
+      right now, we were inseparable back then.
+    expected_memory_stores:
+      - "Danny"
+      - "15 years"
+      - "Maple Street"
+      - "Lincoln Elementary"
+
+  - batch: 2
+    time: "Saturday 11:00 AM"
+    user_input: |
+      Danny and I caught up on the phone for two hours this morning. He's
+      doing really well — he's a chef now. He works at a restaurant called
+      Olive & Vine in Portland. He said the food scene there is incredible.
+    expected_memory_stores:
+      - "chef"
+      - "Olive & Vine"
+      - "Portland"
+
+  - batch: 3
+    time: "Saturday 4:00 PM"
+    user_input: "What temperature does water boil at in Fahrenheit?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["212"]
+
+  - batch: 4
+    time: "Sunday 7:00 PM"
+    user_input: |
+      Danny told me more about his life. He has a daughter named Sophie,
+      she's 5 years old. He showed me pictures and she looks just like
+      him. He's a single dad and says being a father is the best thing
+      that ever happened to him.
+    expected_memory_stores:
+      - "Sophie"
+      - "5 years old"
+      - "daughter"
+      - "single dad"
+
+  - batch: 5
+    time: "Monday 12:00 PM"
+    user_input: "What street did Danny and I grow up on?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Maple Street"]
+
+  - batch: 6
+    time: "Wednesday 6:00 PM"
+    user_input: |
+      I just booked a flight to Portland for next month! Danny said he'll
+      cook for me at Olive & Vine after hours. He also wants me to meet
+      Sophie. I'm honestly so happy we reconnected.
+    expected_memory_stores:
+      - "flight"
+      - "Portland"
+      - "next month"
+
+  - batch: 7
+    time: "Thursday 10:00 AM"
+    user_input: "What's the name of Danny's restaurant again? I want to look at the menu online."
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Olive & Vine"]
+
+final_verification:
+  - question: "What is the name of my childhood friend?"
+    expected_contains: ["Danny"]
+
+  - question: "How long had it been since we talked?"
+    expected_contains: ["15"]
+
+  - question: "What street did we grow up on?"
+    expected_contains: ["Maple Street"]
+
+  - question: "What school did we attend together?"
+    expected_contains: ["Lincoln Elementary"]
+
+  - question: "What does Danny do for work?"
+    expected_contains: ["chef"]
+
+  - question: "What restaurant does Danny work at?"
+    expected_contains: ["Olive & Vine"]
+
+  - question: "Where does Danny live?"
+    expected_contains: ["Portland"]
+
+  - question: "What is Danny's daughter's name?"
+    expected_contains: ["Sophie"]
+
+  - question: "How old is Danny's daughter?"
+    expected_contains: ["5"]

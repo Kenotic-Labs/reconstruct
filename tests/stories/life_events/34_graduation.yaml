@@ -1,0 +1,118 @@
+story_id: 34
+story_name: "Graduation Day"
+category: "Life Events"
+description: |
+  User is graduating with a Master's in Computer Science from MIT. Their advisor
+  is Dr. Hammond, and their thesis focused on machine learning. The ceremony is
+  on May 20th. Parents are flying in from Denver and a celebration dinner is
+  planned at Oleana restaurant. Tests memory of academic details, family logistics,
+  and celebration plans, plus intent routing for general knowledge queries.
+duration_simulated: "3 weeks"
+total_batches: 8
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 9:00 AM"
+    user_input: |
+      I just got confirmation that I passed my thesis defense! I'm officially
+      graduating with my Master's in Computer Science from MIT. My advisor
+      Dr. Hammond said my thesis on machine learning was one of the strongest
+      he's seen in years. The ceremony is May 20th.
+    expected_memory_stores:
+      - "graduation"
+      - "Master's"
+      - "Computer Science"
+      - "MIT"
+      - "Dr. Hammond"
+      - "machine learning"
+      - "May 20th"
+
+  - batch: 2
+    time: "Monday 2:00 PM"
+    user_input: |
+      My parents are flying in from Denver for the ceremony. They're so proud.
+      My mom keeps calling me every hour to talk about it. I need to book them
+      a hotel near campus.
+    expected_memory_stores:
+      - "parents"
+      - "Denver"
+      - "hotel"
+
+  - batch: 3
+    time: "Tuesday 10:00 AM"
+    user_input: "What is the capital of Portugal?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["Lisbon"]
+
+  - batch: 4
+    time: "Wednesday 11:00 AM"
+    user_input: |
+      I booked a celebration dinner at Oleana restaurant for after the ceremony.
+      It's going to be me, my parents, Dr. Hammond and his wife, and a few
+      close friends from my cohort. I reserved a table for 10.
+    expected_memory_stores:
+      - "Oleana"
+      - "celebration dinner"
+      - "table for 10"
+
+  - batch: 5
+    time: "Thursday 3:00 PM"
+    user_input: "Remind me, what was my thesis topic again and who was my advisor?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["machine learning", "Dr. Hammond"]
+
+  - batch: 6
+    time: "Friday 9:00 AM"
+    user_input: "How does photosynthesis work?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["sunlight", "carbon dioxide"]
+
+  - batch: 7
+    time: "Saturday 1:00 PM"
+    user_input: |
+      I'm picking up my cap and gown today. Also ordered a special sash for
+      computer science graduates. I can't believe this is really happening.
+      Two years of hard work paying off.
+    expected_memory_stores:
+      - "cap and gown"
+      - "sash"
+      - "two years"
+
+  - batch: 8
+    time: "Sunday 6:00 PM"
+    user_input: "Where are my parents coming from for my graduation?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Denver"]
+
+final_verification:
+  - question: "What degree am I graduating with and from which university?"
+    expected_contains: ["Master's", "Computer Science", "MIT"]
+  - question: "Who was my thesis advisor?"
+    expected_contains: ["Dr. Hammond"]
+  - question: "What was my thesis about?"
+    expected_contains: ["machine learning"]
+  - question: "When is the graduation ceremony?"
+    expected_contains: ["May 20th"]
+  - question: "Where are my parents flying in from?"
+    expected_contains: ["Denver"]
+  - question: "Where is the celebration dinner?"
+    expected_contains: ["Oleana"]

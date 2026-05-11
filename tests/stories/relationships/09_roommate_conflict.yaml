@@ -1,0 +1,136 @@
+story_id: 9
+story_name: "Roommate Conflict"
+category: "Relationships"
+description: |
+  User is having issues with roommate Kevin over his dog Biscuit. Tracks
+  the conflict, apartment details, landlord interactions, and eventual
+  resolution. Tests memory of interpersonal dynamics, addresses, and
+  financial details.
+duration_simulated: "2 weeks"
+total_batches: 8
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:00 PM"
+    user_input: |
+      Nura, I'm really frustrated. My roommate Kevin got a dog named
+      Biscuit two weeks ago without even asking me. We share an apartment
+      on 5th Avenue and our rent is $1,800 a month. I don't think we're
+      even allowed to have pets here.
+    expected_memory_stores:
+      - "Kevin"
+      - "Biscuit"
+      - "dog"
+      - "5th Avenue"
+      - "$1,800"
+
+  - batch: 2
+    time: "Tuesday 7:00 AM"
+    user_input: |
+      Biscuit chewed up my favorite pair of running shoes last night. That's
+      the third pair of shoes he's destroyed. Kevin just laughed it off
+      and said puppies do that. I'm losing my patience.
+    expected_memory_stores:
+      - "chewed"
+      - "running shoes"
+      - "third pair"
+
+  - batch: 3
+    time: "Tuesday 12:00 PM"
+    user_input: "Who wrote the novel 1984?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["George Orwell"]
+
+  - batch: 4
+    time: "Wednesday 5:00 PM"
+    user_input: |
+      I checked our lease today and pets are definitely not allowed. I told
+      Kevin and he got defensive. I'm thinking about talking to our landlord
+      Mr. Gomez about it. I don't want to be a snitch but this is getting
+      out of hand.
+    expected_memory_stores:
+      - "lease"
+      - "pets not allowed"
+      - "Mr. Gomez"
+      - "landlord"
+
+  - batch: 5
+    time: "Thursday 3:00 PM"
+    user_input: "What's my roommate's dog's name? I want to look up training classes for that breed."
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Biscuit"]
+
+  - batch: 6
+    time: "Friday 6:00 PM"
+    user_input: |
+      Mr. Gomez stopped by today for a routine inspection and saw Biscuit.
+      He wasn't happy. He told Kevin the dog has to go or he'll start
+      eviction proceedings. Kevin looked devastated — I actually felt
+      bad for him.
+    expected_memory_stores:
+      - "inspection"
+      - "eviction"
+      - "devastated"
+
+  - batch: 7
+    time: "Saturday 10:00 AM"
+    user_input: "What is the boiling point of water in Celsius?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["100"]
+
+  - batch: 8
+    time: "Sunday 4:00 PM"
+    user_input: |
+      Kevin and I had a long talk and we actually worked it out. He spoke
+      to Mr. Gomez and agreed to pay a $500 pet deposit. Kevin also signed
+      up for obedience training for Biscuit and promised to replace all my
+      shoes. I think we're good now. He's going to split the pet deposit
+      with me since I agreed to let Biscuit stay.
+    expected_memory_stores:
+      - "$500"
+      - "pet deposit"
+      - "obedience training"
+      - "replace shoes"
+      - "split"
+
+final_verification:
+  - question: "What is my roommate's name?"
+    expected_contains: ["Kevin"]
+
+  - question: "What is the dog's name?"
+    expected_contains: ["Biscuit"]
+
+  - question: "Where is the apartment?"
+    expected_contains: ["5th Avenue"]
+
+  - question: "How much is the rent?"
+    expected_contains: ["1,800"]
+
+  - question: "Who is the landlord?"
+    expected_contains: ["Mr. Gomez"]
+
+  - question: "What was the pet deposit amount?"
+    expected_contains: ["500"]
+
+  - question: "What did Kevin sign up for to train the dog?"
+    expected_contains: ["obedience training"]
+
+  - question: "What did Biscuit keep chewing?"
+    expected_contains: ["shoes"]

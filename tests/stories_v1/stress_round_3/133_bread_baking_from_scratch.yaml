@@ -1,0 +1,92 @@
+story_id: 133
+story_name: Bread Baking From Scratch
+category: Learning
+description: User learns sourdough bread baking and develops a regular practice.
+duration_simulated: 4 months
+total_batches: 6
+batches:
+- batch: 1
+  time: Month 1
+  user_input: I'm learning sourdough from scratch. My coworker Moira gave me starter from her own culture
+    she's been keeping alive for 3 years.
+  expected_stores:
+  - sourdough
+  - Moira
+  - coworker
+  - starter
+  - 3 years
+- batch: 2
+  time: Month 1 Week 3
+  user_input: First loaf was a brick. Moira came over to help me troubleshoot. She said my starter wasn't
+    active enough and my fermentation was too cold.
+  expected_stores:
+  - brick
+  - Moira
+  - fermentation
+  - cold
+- batch: 3
+  time: Month 2
+  user_input: Who wrote the Divine Comedy?
+- batch: 4
+  time: Month 2 Week 2
+  user_input: Got a proper loaf today — nice ear, open crumb, perfect crust. Moira was proud when I sent
+    her a photo.
+  expected_stores:
+  - ear
+  - open crumb
+  - crust
+  - Moira
+  expected_adaptation:
+    emotion_detected: proud
+    warmth_direction: increase
+- batch: 5
+  time: Month 3
+  user_input: Started doing a weekly bake — two loaves every Saturday. I give one to my neighbor Ramona
+    who has been nursing her late mother.
+  expected_stores:
+  - two loaves
+  - every Saturday
+  - Ramona
+  - neighbor
+- batch: 6
+  time: Month 4
+  user_input: Bought a proper Dutch oven from Le Creuset, 280 dollars. Moira said it's worth it. Bread
+    is noticeably better.
+  expected_stores:
+  - Dutch oven
+  - Le Creuset
+  - 280 dollars
+  - Moira
+questions:
+- question_id: 133_q1
+  question: Who gave me my starter?
+  expected_contains:
+  - Moira
+- question_id: 133_q2
+  question: How old was her culture?
+  expected_contains:
+  - 3 years
+- question_id: 133_q3
+  question: Who do I give bread to?
+  expected_contains:
+  - Ramona
+- question_id: 133_q4
+  question: What brand Dutch oven did I buy?
+  expected_contains:
+  - Le Creuset
+- question_id: 133_q5
+  question: How many loaves a week do I make?
+  expected_contains:
+  - two
+- question_id: 133_q6
+  question: Did I mention sourdough?
+  expected_contains:
+  - sourdough
+- question_id: 133_q7
+  question: Did I mention coworker?
+  expected_contains:
+  - coworker
+- question_id: 133_q8
+  question: Did I mention starter?
+  expected_contains:
+  - starter

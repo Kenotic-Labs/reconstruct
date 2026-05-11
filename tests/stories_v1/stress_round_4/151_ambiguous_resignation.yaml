@@ -1,0 +1,93 @@
+story_id: 151
+story_name: Ambiguous Resignation
+category: Career
+description: User's boss ambiguously announces she's 'leaving the company'.
+duration_simulated: 3 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1 Monday
+  user_input: My boss Hiroko told us she's leaving the company. Then 10 minutes later she clarified —
+    she meant leaving the building for a coffee break, not resigning.
+  expected_stores:
+  - Hiroko
+  - boss
+  - leaving the company
+  - coffee break
+- batch: 2
+  time: Week 1 Wednesday
+  user_input: Actually Hiroko IS resigning. She told me one-on-one today. Her last day is four weeks from
+    now.
+  expected_stores:
+  - Hiroko
+  - resigning
+  - four weeks
+- batch: 3
+  time: Week 2
+  user_input: What's the chemical symbol for iron?
+- batch: 4
+  time: Week 2 Tuesday
+  user_input: Hiroko is NOT going to a competitor — she's going to her family's ranch in Montana. Everyone
+    assumed competitor, including me.
+  expected_stores:
+  - Hiroko
+  - not going to a competitor
+  - ranch
+  - Montana
+- batch: 5
+  time: Week 2 Thursday
+  user_input: My new boss will be a transfer from the Tokyo office, a guy named Kenta Arakawa. He starts
+    one week after Hiroko's last day.
+  expected_stores:
+  - Kenta Arakawa
+  - Tokyo office
+  - one week
+- batch: 6
+  time: Week 3
+  user_input: Correction — Kenta starts two weeks after Hiroko leaves, not one. HR emailed the update
+    yesterday.
+  expected_stores:
+  - Kenta
+  - two weeks
+  - Hiroko
+- batch: 7
+  time: Week 3 Friday
+  user_input: Hiroko left today. Her farewell speech was understated. She doesn't like goodbyes.
+  expected_stores:
+  - Hiroko
+  expected_adaptation:
+    emotion_detected: bittersweet
+    warmth_direction: increase
+questions:
+- question_id: 151_q1
+  question: Who is resigning?
+  expected_contains:
+  - Hiroko
+- question_id: 151_q2
+  question: Where is she going?
+  expected_contains:
+  - Montana
+- question_id: 151_q3
+  question: Is she going to a competitor?
+  expected_contains:
+  - 'no'
+- question_id: 151_q4
+  question: Who is my new boss?
+  expected_contains:
+  - Kenta Arakawa
+- question_id: 151_q5
+  question: When does Kenta start?
+  expected_contains:
+  - two weeks
+- question_id: 151_q6
+  question: Where is Kenta transferring from?
+  expected_contains:
+  - Tokyo
+- question_id: 151_q7
+  question: Did I mention boss?
+  expected_contains:
+  - boss
+- question_id: 151_q8
+  question: Did I mention leaving the company?
+  expected_contains:
+  - leaving the company

@@ -1,0 +1,25 @@
+IN:     I went to Portland to take that job
+CLEAN:  I went to Portland to take that job.
+OBJECT: Portland
+SCHEMA: career
+
+IN:     I want to pursue counseling or mental health for transgender people
+CLEAN:  I want to pursue counseling or mental health for transgender people.
+OBJECT: counseling or mental health
+SCHEMA: career
+
+IN:     I have been researching adoption agencies lately
+CLEAN:  I have been researching adoption agencies lately.
+OBJECT: adoption agencies
+SCHEMA: family
+
+IN:     I painted a sunrise back in 2022
+CLEAN:  Back in 2022, I painted a sunrise.
+OBJECT: a sunrise
+SCHEMA: hobby
+
+IN:     My grandma lives in Sweden too
+CLEAN:  My grandma lives in Sweden too.
+OBJECT: Sweden
+SCHEMA: family
+

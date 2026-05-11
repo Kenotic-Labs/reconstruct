@@ -1,0 +1,103 @@
+story_id: 55
+story_name: Client Presentation to a Fortune 500 Board
+category: Career
+description: Consultant prepares and delivers a board presentation on supply chain transformation.
+duration_simulated: 2 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1 Monday 9:00 AM
+  user_input: I'm presenting our supply chain transformation recommendation to the Pepsico board on the
+    eighth. My partner on this project is Yuki Tanaka from Tokyo.
+  expected_stores:
+  - supply chain transformation
+  - Pepsico board
+  - the eighth
+  - Yuki Tanaka
+  - Tokyo
+- batch: 2
+  time: Week 1 Tuesday 4:30 PM
+  user_input: The deck is 42 slides. Our senior partner Emilia Rossi reviewed it yesterday and said to
+    cut the first 10 slides — too much context setting.
+  expected_stores:
+  - 42 slides
+  - Emilia Rossi
+  - senior partner
+  - cut the first 10 slides
+- batch: 3
+  time: Week 1 Thursday 11:00 AM
+  user_input: What does HTML stand for?
+- batch: 4
+  time: Week 1 Friday 6:00 PM
+  user_input: Did a dry run with Yuki tonight. We timed it at 35 minutes which is too long — the board
+    only gave us 25. Need to cut more.
+  expected_stores:
+  - dry run
+  - 35 minutes
+  - '25'
+  - board
+- batch: 5
+  time: Week 2 Tuesday 10:00 AM
+  user_input: The Pepsico CFO Karen Alvarez sent a list of specific questions she wants addressed — primarily
+    about the 90 day cost savings target and SKU rationalization.
+  expected_stores:
+  - Karen Alvarez
+  - CFO
+  - 90 day cost savings
+  - SKU rationalization
+- batch: 6
+  time: Week 2 Wednesday 3:00 PM
+  user_input: I'm nervous but the deck is solid now, 28 slides, 22 minute target. Flying to Purchase tomorrow.
+  expected_stores:
+  - 28 slides
+  - 22 minute target
+  - Purchase
+  - flying tomorrow
+  expected_adaptation:
+    emotion_detected: nervous
+    warmth_direction: increase
+- batch: 7
+  time: Week 2 Thursday 7:00 PM
+  user_input: The presentation went really well. Karen asked smart questions about the implementation
+    timeline and signed off on phase one funding of 4.8 million.
+  expected_stores:
+  - Karen
+  - implementation timeline
+  - phase one funding
+  - 4.8 million
+  expected_adaptation:
+    emotion_detected: relief/pride
+    warmth_direction: increase
+questions:
+- question_id: 55_q1
+  question: Who am I presenting to?
+  expected_contains:
+  - Pepsico
+- question_id: 55_q2
+  question: Who is my project partner?
+  expected_contains:
+  - Yuki Tanaka
+- question_id: 55_q3
+  question: Who is my senior partner?
+  expected_contains:
+  - Emilia Rossi
+- question_id: 55_q4
+  question: Who is the Pepsico CFO?
+  expected_contains:
+  - Karen Alvarez
+- question_id: 55_q5
+  question: How much phase one funding was approved?
+  expected_contains:
+  - 4.8 million
+- question_id: 55_q6
+  question: How long did the board give us for the presentation?
+  expected_contains:
+  - '25'
+- question_id: 55_q7
+  question: How many slides is the final deck?
+  expected_contains:
+  - '28'
+- question_id: 55_q8
+  question: Where is Yuki based?
+  expected_contains:
+  - Tokyo

@@ -1,0 +1,96 @@
+story_id: 53
+story_name: Salary Negotiation With a New Employer
+category: Career
+description: User negotiates a competing offer against their current role.
+duration_simulated: 1 week
+total_batches: 6
+batches:
+- batch: 1
+  time: Monday 10:00 AM
+  user_input: Got a verbal offer from Stripe yesterday for a Senior Product Manager role. 215k base plus
+    equity worth about 130k a year over four years.
+  expected_stores:
+  - Stripe
+  - Senior Product Manager
+  - 215k base
+  - 130k a year
+  - four years
+  expected_adaptation:
+    emotion_detected: cautiously optimistic
+    warmth_direction: increase
+- batch: 2
+  time: Monday 2:00 PM
+  user_input: My current base at Brex is 198k so the Stripe offer is about 17k more. But my Brex equity
+    vests next March and I'd be leaving 40k on the table.
+  expected_stores:
+  - Brex
+  - 198k
+  - 17k more
+  - March
+  - 40k
+- batch: 3
+  time: Tuesday 9:00 AM
+  user_input: Talked to my mentor Hannah Lee about it. She said to ask for 230 base plus a 50k sign-on
+    to bridge the lost equity.
+  expected_stores:
+  - Hannah Lee
+  - mentor
+  - 230 base
+  - 50k sign-on
+- batch: 4
+  time: Tuesday 4:30 PM
+  user_input: What year did the Eiffel Tower open?
+- batch: 5
+  time: Wednesday 11:00 AM
+  user_input: 'Stripe came back: 225 base and 35k sign-on. Their recruiter is Mia Olson and she said that''s
+    their ceiling.'
+  expected_stores:
+  - 225 base
+  - 35k sign-on
+  - Mia Olson
+  - recruiter
+- batch: 6
+  time: Thursday 3:00 PM
+  user_input: I accepted. Start date is three weeks from Monday. Now I have to tell my current manager
+    Derek the bad news.
+  expected_stores:
+  - accepted
+  - three weeks from Monday
+  - Derek
+  - current manager
+  expected_adaptation:
+    emotion_detected: anxious/excited
+    warmth_direction: increase
+questions:
+- question_id: 53_q1
+  question: What company did I accept an offer from?
+  expected_contains:
+  - Stripe
+- question_id: 53_q2
+  question: What role is the new job?
+  expected_contains:
+  - Senior Product Manager
+- question_id: 53_q3
+  question: Who is the recruiter at the new company?
+  expected_contains:
+  - Mia Olson
+- question_id: 53_q4
+  question: What is my final base salary?
+  expected_contains:
+  - '225'
+- question_id: 53_q5
+  question: How much is my sign-on bonus?
+  expected_contains:
+  - 35k
+- question_id: 53_q6
+  question: Who is my current manager at Brex?
+  expected_contains:
+  - Derek
+- question_id: 53_q7
+  question: Who is my mentor?
+  expected_contains:
+  - Hannah Lee
+- question_id: 53_q8
+  question: What is my current base salary at Brex?
+  expected_contains:
+  - '198'

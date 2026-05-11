@@ -1,0 +1,84 @@
+story_id: 248
+story_name: Reconciliation After 15 Years
+category: Life Events
+description: User reconciles with their estranged mother after 15 years of no contact.
+duration_simulated: 4 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: My estranged mom Ingeborg called me out of the blue. We haven't spoken in 15 years. I was
+    shaking.
+  expected_stores:
+  - Ingeborg
+  - mom
+  - 15 years
+  expected_adaptation:
+    emotion_detected: shock
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Month 2
+  user_input: Started slow. Weekly phone calls on Sundays. My therapist Dr. Arne Lindqvist is helping
+    me process.
+  expected_stores:
+  - Sundays
+  - Dr. Arne Lindqvist
+  - therapist
+- batch: 3
+  time: Month 3
+  user_input: What is the oldest pyramid?
+- batch: 4
+  time: Month 3 Week 2
+  user_input: Met Ingeborg in person at a park in San Jose. Two hours. We cried. Dr. Lindqvist said to
+    NOT expect healing in one meeting.
+  expected_stores:
+  - Ingeborg
+  - San Jose
+  - Dr. Lindqvist
+  - not expect healing
+- batch: 5
+  time: Month 4
+  user_input: Dr. Lindqvist and I agreed I should invite Ingeborg to dinner at my place. My husband Rainer
+    will be there. Nothing pushed — just offered.
+  expected_stores:
+  - Dr. Lindqvist
+  - Ingeborg
+  - Rainer
+  - husband
+  expected_adaptation:
+    emotion_detected: cautious
+    warmth_direction: increase
+questions:
+- question_id: 248_q1
+  question: Who is my mom?
+  expected_contains:
+  - Ingeborg
+- question_id: 248_q2
+  question: How long were we estranged?
+  expected_contains:
+  - 15 years
+- question_id: 248_q3
+  question: Who is my therapist?
+  expected_contains:
+  - Arne Lindqvist
+- question_id: 248_q4
+  question: Who is my husband?
+  expected_contains:
+  - Rainer
+- question_id: 248_q5
+  question: Did I mention mom?
+  expected_contains:
+  - mom
+- question_id: 248_q6
+  question: Do I know someone named Sundays?
+  expected_contains:
+  - Sundays
+- question_id: 248_q7
+  question: Did I mention Dr. Arne Lindqvist?
+  expected_contains:
+  - Dr. Arne Lindqvist
+- question_id: 248_q8
+  question: Did I mention therapist?
+  expected_contains:
+  - therapist

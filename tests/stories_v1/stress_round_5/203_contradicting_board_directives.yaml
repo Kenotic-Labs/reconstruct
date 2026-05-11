@@ -1,0 +1,83 @@
+story_id: 203
+story_name: Contradicting Board Directives
+category: Career
+description: User as CEO gets contradicting directives from two board members.
+duration_simulated: 3 weeks
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My board chair Renata told me the company should focus on enterprise. My biggest investor
+    Hideki told me to pivot to consumer. Contradicting.
+  expected_stores:
+  - Renata
+  - board chair
+  - enterprise
+  - Hideki
+  - investor
+  - consumer
+- batch: 2
+  time: Week 2
+  user_input: Convened a board meeting. Renata and Hideki argued for 40 minutes. My COO Pelayo stayed
+    quiet. Eventually Renata conceded.
+  expected_stores:
+  - Renata
+  - Hideki
+  - 40 minutes
+  - Pelayo
+  - COO
+- batch: 3
+  time: Week 2 Thursday
+  user_input: What's the tallest building in Asia?
+- batch: 4
+  time: Week 3 Monday
+  user_input: Correction on Renata's concession — she said she'd support consumer temporarily but NOT
+    long term. Hideki accepted. Pelayo thinks this is unstable.
+  expected_stores:
+  - Renata
+  - Hideki
+  - not long term
+  - Pelayo
+- batch: 5
+  time: Week 3 Friday
+  user_input: Pulled Pelayo and Renata and Hideki into a call. We agreed on a 6 month consumer pilot.
+    I am NOT killing enterprise yet.
+  expected_stores:
+  - Pelayo
+  - Renata
+  - Hideki
+  - 6 month pilot
+  - not killing enterprise
+questions:
+- question_id: 203_q1
+  question: Who is my board chair?
+  expected_contains:
+  - Renata
+- question_id: 203_q2
+  question: Who is my biggest investor?
+  expected_contains:
+  - Hideki
+- question_id: 203_q3
+  question: Who is my COO?
+  expected_contains:
+  - Pelayo
+- question_id: 203_q4
+  question: What pilot did we agree on?
+  expected_contains:
+  - consumer
+- question_id: 203_q5
+  question: Am I killing enterprise?
+  expected_contains:
+  - not
+- question_id: 203_q6
+  question: Did I mention board chair?
+  expected_contains:
+  - board chair
+- question_id: 203_q7
+  question: Did I mention enterprise?
+  expected_contains:
+  - enterprise
+- question_id: 203_q8
+  question: Did I mention investor?
+  expected_contains:
+  - investor

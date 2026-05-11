@@ -1,0 +1,107 @@
+story_id: 28
+story_name: "Daily Commute"
+category: "Daily Life"
+description: |
+  User changed their commute from driving to taking the train on the Blue Line.
+  Tracks the route, cost, commute time, reading habits on the train, and
+  carpool arrangement with coworker Ben for rainy days.
+duration_simulated: "3 weeks"
+total_batches: 7
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:00 AM"
+    user_input: |
+      I switched up my commute! Instead of driving, I'm taking the train now.
+      I ride the Blue Line from Riverside Station to Downtown. The commute is
+      about 45 minutes each way. It's actually way less stressful than sitting
+      in traffic.
+    expected_memory_stores:
+      - "Blue Line"
+      - "Riverside Station"
+      - "Downtown"
+      - "45 minutes"
+      - "train"
+
+  - batch: 2
+    time: "Monday 12:00 PM"
+    user_input: |
+      The monthly train pass is $95, which isn't bad at all. Plus my company
+      reimburses 50% of it through the commuter benefit program. So I'm really
+      only paying about $47.50 a month. Way cheaper than gas and parking.
+    expected_memory_stores:
+      - "$95"
+      - "monthly pass"
+      - "50%"
+      - "reimburses"
+      - "commuter benefit"
+
+  - batch: 3
+    time: "Tuesday 7:30 AM"
+    user_input: |
+      Started reading on the train this morning. I'm going through "Atomic Habits"
+      by James Clear. Perfect commute reading - each chapter is just the right
+      length for the ride. Already learning a lot about building better habits.
+    expected_memory_stores:
+      - "Atomic Habits"
+      - "James Clear"
+      - "reading"
+
+  - batch: 4
+    time: "Wednesday 9:00 AM"
+    user_input: "What are the main ideas in Atomic Habits by James Clear?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["habits", "atomic"]
+
+  - batch: 5
+    time: "Thursday 8:00 AM"
+    user_input: |
+      It rained today so my coworker Ben gave me a ride to work. We decided
+      to make it a regular thing - whenever it rains, we'll carpool. Ben drives
+      a Honda Civic and lives just a few blocks from me. Works out perfectly.
+    expected_memory_stores:
+      - "Ben"
+      - "coworker"
+      - "carpool"
+      - "Honda Civic"
+      - "rainy days"
+
+  - batch: 6
+    time: "Friday 5:00 PM"
+    user_input: "How much does my monthly train pass cost and how much does my company cover?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["$95", "50%"]
+
+  - batch: 7
+    time: "Monday 8:30 AM"
+    user_input: "What's the name of my coworker I carpool with and what does he drive?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Ben", "Honda Civic"]
+
+final_verification:
+  - question: "What train line do I take and between which stations?"
+    expected_contains: ["Blue Line", "Riverside Station", "Downtown"]
+  - question: "How long is my commute each way?"
+    expected_contains: ["45 minutes"]
+  - question: "How much is my monthly train pass and what does my company reimburse?"
+    expected_contains: ["$95", "50%"]
+  - question: "What book am I reading on the train?"
+    expected_contains: ["Atomic Habits", "James Clear"]
+  - question: "Who do I carpool with on rainy days and what car does he drive?"
+    expected_contains: ["Ben", "Honda Civic"]

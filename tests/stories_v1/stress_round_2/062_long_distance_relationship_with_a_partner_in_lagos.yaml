@@ -1,0 +1,100 @@
+story_id: 62
+story_name: Long Distance Relationship With a Partner in Lagos
+category: Relationships
+description: User navigates a long-distance relationship across time zones.
+duration_simulated: 3 months
+total_batches: 7
+batches:
+- batch: 1
+  time: Month 1 Week 1
+  user_input: My partner Adaeze just moved to Lagos for her new consulting job. It's an 8 hour time difference
+    from me in Seattle.
+  expected_stores:
+  - Adaeze
+  - partner
+  - Lagos
+  - consulting job
+  - 8 hour
+  - Seattle
+- batch: 2
+  time: Month 1 Week 3
+  user_input: 'We set up a standing video call schedule: Tuesdays at 9 PM my time, Saturdays at 8 AM.
+    It works out to being reasonable for both of us.'
+  expected_stores:
+  - Tuesdays 9 PM
+  - Saturdays 8 AM
+- batch: 3
+  time: Month 2 Week 1
+  user_input: I'm flying to Lagos in six weeks to visit. She booked the Eko Hotel for my first three nights.
+  expected_stores:
+  - Lagos
+  - six weeks
+  - Eko Hotel
+  - three nights
+- batch: 4
+  time: Month 2 Week 2
+  user_input: Adaeze's mentor at her new firm is Funmi Adebayo, a partner there. Adaeze says she's been
+    incredibly generous with her time.
+  expected_stores:
+  - Adaeze
+  - Funmi Adebayo
+  - partner
+  - mentor
+- batch: 5
+  time: Month 2 Week 3
+  user_input: What's the capital of Nigeria?
+- batch: 6
+  time: Month 3 Week 1
+  user_input: The time difference is hard. Adaeze is exhausted from work and we've been short with each
+    other on calls. Agreed to cut to one call a week until my visit.
+  expected_stores:
+  - time difference
+  - Adaeze
+  - one call a week
+  expected_adaptation:
+    emotion_detected: frustrated
+    warmth_direction: increase
+- batch: 7
+  time: Month 3 Week 3
+  user_input: Visit is in four days. I'm bringing her favorite coffee beans from Victrola Coffee and three
+    books she asked for.
+  expected_stores:
+  - four days
+  - Victrola Coffee
+  - three books
+  expected_adaptation:
+    emotion_detected: excited
+    warmth_direction: increase
+questions:
+- question_id: 62_q1
+  question: Who is my partner?
+  expected_contains:
+  - Adaeze
+- question_id: 62_q2
+  question: Where did she move to?
+  expected_contains:
+  - Lagos
+- question_id: 62_q3
+  question: When are our standing video calls?
+  expected_contains:
+  - Tuesdays
+- question_id: 62_q4
+  question: Where am I staying when I visit?
+  expected_contains:
+  - Eko Hotel
+- question_id: 62_q5
+  question: Who is Adaeze's mentor at her new firm?
+  expected_contains:
+  - Funmi Adebayo
+- question_id: 62_q6
+  question: What coffee am I bringing?
+  expected_contains:
+  - Victrola
+- question_id: 62_q7
+  question: How many hours is the time difference?
+  expected_contains:
+  - '8'
+- question_id: 62_q8
+  question: Where am I based?
+  expected_contains:
+  - Seattle

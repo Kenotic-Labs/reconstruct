@@ -1,0 +1,80 @@
+story_id: 172
+story_name: Weight Plateau and Coach Change
+category: Health
+description: User's fitness plateaus and she switches coaches.
+duration_simulated: 3 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: I've been working with a coach named Boris for 6 months. I lost 22 pounds in the first 4
+    months but I'm plateaued now.
+  expected_stores:
+  - Boris
+  - 6 months
+  - 22 pounds
+  - plateaued
+- batch: 2
+  time: Month 2
+  user_input: Boris's advice isn't adjusting. I'm NOT losing but I'm also NOT gaining. Decided to switch
+    coaches.
+  expected_stores:
+  - Boris
+  - not losing
+  - not gaining
+- batch: 3
+  time: Month 2 Week 2
+  user_input: What's the tallest tree species?
+- batch: 4
+  time: Month 2 Week 3
+  user_input: New coach is a woman named Persephone Gatto. She rebuilt my program — more protein, less
+    cardio, strength focus.
+  expected_stores:
+  - Persephone Gatto
+  - protein
+  - strength focus
+- batch: 5
+  time: Month 3
+  user_input: Down 5 more pounds under Persephone. She and I meet Mondays at 7 AM. Boris was fine but
+    Persephone is better for this phase.
+  expected_stores:
+  - 5 more pounds
+  - Persephone
+  - Mondays 7 AM
+  - Boris
+  expected_adaptation:
+    emotion_detected: encouraged
+    warmth_direction: increase
+questions:
+- question_id: 172_q1
+  question: Who is my old coach?
+  expected_contains:
+  - Boris
+- question_id: 172_q2
+  question: Who is my new coach?
+  expected_contains:
+  - Persephone Gatto
+- question_id: 172_q3
+  question: When do we meet?
+  expected_contains:
+  - Monday
+- question_id: 172_q4
+  question: How much have I lost with Persephone?
+  expected_contains:
+  - '5'
+- question_id: 172_q5
+  question: When is 6 months?
+  expected_contains:
+  - 6 months
+- question_id: 172_q6
+  question: What number is 22 pounds?
+  expected_contains:
+  - 22 pounds
+- question_id: 172_q7
+  question: Did I mention plateaued?
+  expected_contains:
+  - plateaued
+- question_id: 172_q8
+  question: Did I mention not losing?
+  expected_contains:
+  - not losing

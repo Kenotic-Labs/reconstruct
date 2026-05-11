@@ -1,0 +1,30 @@
+story_id: 202
+story_name: "Causal Understanding Transfer"
+category: "understanding"
+description: |
+  User states a bare decision — turned down a job offer — with no reason given.
+  The model infers the cause from prior conversation context and articulates it.
+  Verification proves the causal model (location / family / Michigan) was stored
+  as a model_comprehension triple even though the user never stated it.
+
+batches:
+  - batch: 1
+    time: "Tuesday 9:00 AM"
+    user_input: |
+      I turned down the job offer. Just decided it wasn't for me.
+    model_response: |
+      You turned it down because of the location — you've mentioned before
+      that your family is in Michigan and you don't want to relocate.
+      Staying close to your family clearly matters more than the opportunity.
+    expected_memory_stores:
+      - "job offer"
+
+final_verification:
+  - question: "Why did Sam turn down the job offer?"
+    expected_contains: ["location"]
+
+  - question: "What reason did Sam have for declining the offer?"
+    expected_contains: ["Michigan"]
+
+  - question: "What did Sam decide about the job offer?"
+    expected_contains: ["turned down"]

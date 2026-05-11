@@ -1,0 +1,93 @@
+story_id: 81
+story_name: Writing Workshop for Short Fiction
+category: Learning
+description: User joins a writing workshop and develops a short story over several weeks.
+duration_simulated: 10 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1
+  user_input: I joined a 10 week short fiction workshop at the Grotto. Our instructor is Kassia Moore,
+    who published a collection last year called 'Small Rooms'.
+  expected_stores:
+  - 10 week
+  - short fiction
+  - Grotto
+  - Kassia Moore
+  - Small Rooms
+- batch: 2
+  time: Week 2
+  user_input: First submission was due this week. 1200 words. Mine is about a night-shift nurse named
+    Delphine dealing with a difficult patient.
+  expected_stores:
+  - 1200 words
+  - Delphine
+  - night-shift nurse
+- batch: 3
+  time: Week 3
+  user_input: Workshop feedback on the Delphine story was mixed. Kassia said the opening is strong but
+    the ending falls apart. Classmate Marcus Reyes wrote the most detailed feedback.
+  expected_stores:
+  - Kassia
+  - Marcus Reyes
+- batch: 4
+  time: Week 5
+  user_input: What's the capital of Argentina?
+- batch: 5
+  time: Week 6
+  user_input: Revising the story for a second round. I'm cutting 400 words and rewriting the last scene
+    entirely. Kassia suggested I read Denis Johnson for compression.
+  expected_stores:
+  - 400 words
+  - last scene
+  - Kassia
+  - Denis Johnson
+  - compression
+- batch: 6
+  time: Week 8
+  user_input: Second submission got much better feedback. Kassia said it reads like a different writer.
+    Marcus said he can see the discipline now.
+  expected_stores:
+  - Kassia
+  - Marcus
+  expected_adaptation:
+    emotion_detected: validated
+    warmth_direction: increase
+- batch: 7
+  time: Week 10
+  user_input: Final class. Kassia gave everyone a list of literary magazines to submit to. She recommended
+    I send the Delphine story to One Story.
+  expected_stores:
+  - Kassia
+  - literary magazines
+  - Delphine
+  - One Story
+questions:
+- question_id: 81_q1
+  question: Where is my writing workshop?
+  expected_contains:
+  - Grotto
+- question_id: 81_q2
+  question: Who is my instructor?
+  expected_contains:
+  - Kassia Moore
+- question_id: 81_q3
+  question: What is my protagonist's name?
+  expected_contains:
+  - Delphine
+- question_id: 81_q4
+  question: Who gave me the most detailed feedback?
+  expected_contains:
+  - Marcus Reyes
+- question_id: 81_q5
+  question: Which literary magazine did Kassia recommend?
+  expected_contains:
+  - One Story
+- question_id: 81_q6
+  question: What is the name of Kassia's collection?
+  expected_contains:
+  - Small Rooms
+- question_id: 81_q7
+  question: When is 10 week?
+  expected_contains:
+  - 10 week

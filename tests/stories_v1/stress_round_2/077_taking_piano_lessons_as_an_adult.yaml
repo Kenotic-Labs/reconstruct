@@ -1,0 +1,98 @@
+story_id: 77
+story_name: Taking Piano Lessons as an Adult
+category: Learning
+description: User starts piano lessons and works through beginner pieces.
+duration_simulated: 6 months
+total_batches: 7
+batches:
+- batch: 1
+  time: Month 1
+  user_input: I bought a digital piano, a Yamaha P-125, 650 dollars. Starting weekly lessons with an instructor
+    named Oliver Bennett.
+  expected_stores:
+  - Yamaha P-125
+  - 650 dollars
+  - weekly lessons
+  - Oliver Bennett
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Oliver starts every student with Hanon exercises and basic scales. We meet Thursdays at
+    6 PM at his studio in Berkeley.
+  expected_stores:
+  - Oliver
+  - Hanon
+  - scales
+  - Thursdays 6 PM
+  - Berkeley
+- batch: 3
+  time: Month 2
+  user_input: Working on my first real piece — Debussy's Clair de Lune, simplified arrangement. Oliver
+    said it's ambitious but doable.
+  expected_stores:
+  - Clair de Lune
+  - Debussy
+  - Oliver
+- batch: 4
+  time: Month 3
+  user_input: Who wrote Hamlet?
+- batch: 5
+  time: Month 4
+  user_input: Finally played Clair de Lune through without stopping. Took me three months. Oliver clapped
+    which was embarrassing and sweet.
+  expected_stores:
+  - Clair de Lune
+  - three months
+  - Oliver
+  expected_adaptation:
+    emotion_detected: proud
+    warmth_direction: increase
+- batch: 6
+  time: Month 5
+  user_input: Oliver signed me up for the studio recital in June. I have to play one piece in front of
+    30 other students and parents.
+  expected_stores:
+  - Oliver
+  - studio recital
+  - June
+  - one piece
+  - 30 other students
+- batch: 7
+  time: Month 6
+  user_input: Recital done. Played Clair de Lune. Hands were shaking but I didn't mess up. Oliver said
+    that's the best kind of first recital.
+  expected_stores:
+  - recital
+  - Clair de Lune
+  - Oliver
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+questions:
+- question_id: 77_q1
+  question: What piano did I buy?
+  expected_contains:
+  - Yamaha
+- question_id: 77_q2
+  question: Who is my instructor?
+  expected_contains:
+  - Oliver Bennett
+- question_id: 77_q3
+  question: When are our lessons?
+  expected_contains:
+  - Thursdays
+- question_id: 77_q4
+  question: Where is Oliver's studio?
+  expected_contains:
+  - Berkeley
+- question_id: 77_q5
+  question: What piece have I been working on?
+  expected_contains:
+  - Clair de Lune
+- question_id: 77_q6
+  question: How much did the piano cost?
+  expected_contains:
+  - '650'
+- question_id: 77_q7
+  question: When was the recital?
+  expected_contains:
+  - June

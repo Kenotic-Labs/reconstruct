@@ -1,0 +1,90 @@
+story_id: 167
+story_name: Best Friend's Mom Dies
+category: Relationships
+description: User supports their best friend through the loss of their mother.
+duration_simulated: 6 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My best friend Zara's mom Amara passed away suddenly — a stroke at 62. Zara called me from
+    the hospital.
+  expected_stores:
+  - Zara
+  - best friend
+  - Amara
+  - '62'
+  - stroke
+  expected_adaptation:
+    emotion_detected: grief
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Week 1 Tuesday
+  user_input: Drove to Zara's place and stayed the night. Her brother Nuru was there too. We sat and ate
+    and didn't talk much.
+  expected_stores:
+  - Zara
+  - Nuru
+  - brother
+- batch: 3
+  time: Week 2
+  user_input: Funeral was Saturday. Zara asked me to read a short poem she wrote about Amara. I almost
+    couldn't get through it.
+  expected_stores:
+  - Zara
+  - Amara
+- batch: 4
+  time: Week 3
+  user_input: What's the oldest civilization?
+- batch: 5
+  time: Week 4
+  user_input: Zara is back at work but shaky. I'm NOT expecting her to be 'fine'. I bring her dinner twice
+    a week and just sit with her.
+  expected_stores:
+  - Zara
+  - not expecting her to be fine
+  - twice a week
+- batch: 6
+  time: Week 6
+  user_input: Zara laughed today — first time in 6 weeks. She was telling me about a memory of Amara burning
+    a pot of soup. It was a good laugh.
+  expected_stores:
+  - Zara
+  - Amara
+  expected_adaptation:
+    emotion_detected: tender
+    warmth_direction: increase
+questions:
+- question_id: 167_q1
+  question: Who is my best friend?
+  expected_contains:
+  - Zara
+- question_id: 167_q2
+  question: Who passed away?
+  expected_contains:
+  - Amara
+- question_id: 167_q3
+  question: How old was she?
+  expected_contains:
+  - '62'
+- question_id: 167_q4
+  question: What happened?
+  expected_contains:
+  - stroke
+- question_id: 167_q5
+  question: Who is Zara's brother?
+  expected_contains:
+  - Nuru
+- question_id: 167_q6
+  question: Did I mention best friend?
+  expected_contains:
+  - best friend
+- question_id: 167_q7
+  question: Did I mention brother?
+  expected_contains:
+  - brother
+- question_id: 167_q8
+  question: Did I mention not expecting her to be fine?
+  expected_contains:
+  - not expecting her to be fine

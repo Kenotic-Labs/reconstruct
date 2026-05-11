@@ -1,0 +1,101 @@
+story_id: 83
+story_name: Adopting a Rescue Dog
+category: Daily Life
+description: User adopts a rescue dog and adjusts to dog ownership.
+duration_simulated: 3 months
+total_batches: 7
+batches:
+- batch: 1
+  time: Month 1 Week 1
+  user_input: I adopted a dog from Muttville — a six year old beagle mix named Scout. Adoption fee was
+    250 dollars.
+  expected_stores:
+  - Muttville
+  - six year old
+  - beagle mix
+  - Scout
+  - 250 dollars
+  expected_adaptation:
+    emotion_detected: excited/nervous
+    warmth_direction: increase
+- batch: 2
+  time: Month 1 Week 2
+  user_input: First vet visit at East Bay Animal Hospital. Dr. Lisa Park said Scout is in great shape
+    for his age. He needs a dental cleaning next month though.
+  expected_stores:
+  - East Bay Animal Hospital
+  - Dr. Lisa Park
+  - Scout
+  - dental cleaning
+  - next month
+- batch: 3
+  time: Month 1 Week 3
+  user_input: Scout has serious separation anxiety. Barks for hours when I leave. My neighbor Wendy said
+    she can take him during the day.
+  expected_stores:
+  - Scout
+  - separation anxiety
+  - Wendy
+  - neighbor
+- batch: 4
+  time: Month 2 Week 1
+  user_input: What's the highest mountain in Africa?
+- batch: 5
+  time: Month 2 Week 2
+  user_input: Started group training classes with a trainer named Leo Costanza at BarkBuster in Emeryville.
+    Tuesdays at 7 PM for 6 weeks.
+  expected_stores:
+  - Leo Costanza
+  - BarkBuster
+  - Emeryville
+  - Tuesdays 7 PM
+  - 6 weeks
+- batch: 6
+  time: Month 2 Week 4
+  user_input: Scout's separation anxiety is way better after two weeks of training with Leo. Wendy still
+    watches him twice a week but he's calm alone now.
+  expected_stores:
+  - Scout
+  - Leo
+  - Wendy
+  - twice a week
+- batch: 7
+  time: Month 3
+  user_input: Dental cleaning went well. Dr. Park pulled one bad molar but the rest were okay. Scout is
+    sleeping on my lap right now.
+  expected_stores:
+  - Dr. Park
+  - one bad molar
+  - Scout
+  expected_adaptation:
+    emotion_detected: content
+    warmth_direction: increase
+questions:
+- question_id: 83_q1
+  question: What is my dog's name?
+  expected_contains:
+  - Scout
+- question_id: 83_q2
+  question: What kind of dog is Scout?
+  expected_contains:
+  - beagle
+- question_id: 83_q3
+  question: Where did I adopt him from?
+  expected_contains:
+  - Muttville
+- question_id: 83_q4
+  question: Who is my vet?
+  expected_contains:
+  - Lisa Park
+- question_id: 83_q5
+  question: Who is my trainer?
+  expected_contains:
+  - Leo Costanza
+- question_id: 83_q6
+  question: Who helps with Scout during the day?
+  expected_contains:
+  - Wendy
+- question_id: 83_q7
+  question: Where is BarkBuster located?
+  expected_contains:
+  - Emeryville

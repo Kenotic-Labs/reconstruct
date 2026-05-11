@@ -1,0 +1,80 @@
+story_id: 206
+story_name: Performance Review Reversal
+category: Career
+description: User's review goes from great to poor after calibration.
+duration_simulated: 4 weeks
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My manager Fen gave me a 'Exceeds Expectations' in our draft review. I was thrilled.
+  expected_stores:
+  - Fen
+  - Exceeds Expectations
+  expected_adaptation:
+    emotion_detected: happy
+    warmth_direction: increase
+- batch: 2
+  time: Week 2
+  user_input: After calibration, Fen said my rating was dropped to 'Meets Expectations'. The director
+    Elio pushed it down. I'm NOT taking it well.
+  expected_stores:
+  - Fen
+  - Meets Expectations
+  - Elio
+  - director
+  expected_adaptation:
+    emotion_detected: angry
+    warmth_direction: neutral
+- batch: 3
+  time: Week 3
+  user_input: What year did the Wright Brothers fly?
+- batch: 4
+  time: Week 3 Thursday
+  user_input: Had a difficult meeting with Elio. He said my contributions were NOT visible enough to senior
+    leadership — not that they were poor.
+  expected_stores:
+  - Elio
+  - not visible enough
+- batch: 5
+  time: Week 4
+  user_input: Fen and I made a plan to increase my visibility — I'll present at the next quarterly all
+    hands. Elio agreed to revisit my rating mid year.
+  expected_stores:
+  - Fen
+  - quarterly all hands
+  - Elio
+  - mid year
+questions:
+- question_id: 206_q1
+  question: Who is my manager?
+  expected_contains:
+  - Fen
+- question_id: 206_q2
+  question: Who is the director?
+  expected_contains:
+  - Elio
+- question_id: 206_q3
+  question: What was my final rating?
+  expected_contains:
+  - Meets Expectations
+- question_id: 206_q4
+  question: Were my contributions poor?
+  expected_contains:
+  - not
+- question_id: 206_q5
+  question: Do I know someone named Exceeds Expectations?
+  expected_contains:
+  - Exceeds Expectations
+- question_id: 206_q6
+  question: Did I mention director?
+  expected_contains:
+  - director
+- question_id: 206_q7
+  question: Did I mention not visible enough?
+  expected_contains:
+  - not visible enough
+- question_id: 206_q8
+  question: Did I mention quarterly all hands?
+  expected_contains:
+  - quarterly all hands

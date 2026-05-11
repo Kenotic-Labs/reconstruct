@@ -1,0 +1,81 @@
+story_id: 182
+story_name: Book Club Falling Apart
+category: Learning
+description: User's book club struggles with attendance and morale.
+duration_simulated: 3 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: Our book club is shrinking. We were 8 people, now down to 4 regulars — me, Saskia, Othon,
+    and Mireille. This month's book is 'Klara and the Sun'.
+  expected_stores:
+  - 8 people
+  - 4 regulars
+  - Saskia
+  - Othon
+  - Mireille
+  - Klara and the Sun
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Only Saskia and I finished the book. Othon skimmed it. Mireille didn't start.
+  expected_stores:
+  - Saskia
+  - Othon
+  - Mireille
+- batch: 3
+  time: Month 2
+  user_input: Who discovered electricity?
+- batch: 4
+  time: Month 2 Week 2
+  user_input: Saskia suggested we switch to shorter books. Mireille said she'd come back if we did. We're
+    doing a novella next — 'Small Things Like These'.
+  expected_stores:
+  - Saskia
+  - Mireille
+  - Small Things Like These
+  - novella
+- batch: 5
+  time: Month 3
+  user_input: All 4 of us read the novella. Saskia loved it. Mireille said she's IN again. Bringing 2
+    new members — her coworkers Lev and Adya.
+  expected_stores:
+  - Saskia
+  - Mireille
+  - Lev
+  - Adya
+  expected_adaptation:
+    emotion_detected: hopeful
+    warmth_direction: increase
+questions:
+- question_id: 182_q1
+  question: Who are my book club regulars?
+  expected_contains:
+  - Saskia
+  - Othon
+  - Mireille
+- question_id: 182_q2
+  question: What novella are we reading?
+  expected_contains:
+  - Small Things Like These
+- question_id: 182_q3
+  question: Who are the new members?
+  expected_contains:
+  - Lev
+  - Adya
+- question_id: 182_q4
+  question: Did I mention 8 people?
+  expected_contains:
+  - 8 people
+- question_id: 182_q5
+  question: Did I mention 4 regulars?
+  expected_contains:
+  - 4 regulars
+- question_id: 182_q6
+  question: Did I mention Klara and the Sun?
+  expected_contains:
+  - Klara and the Sun
+- question_id: 182_q7
+  question: Did I mention novella?
+  expected_contains:
+  - novella

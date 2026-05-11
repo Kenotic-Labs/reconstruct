@@ -1,0 +1,101 @@
+story_id: 101
+story_name: Co-Leading a Product Launch
+category: Career
+description: User and colleague jointly lead a product launch across teams.
+duration_simulated: 6 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1 Monday
+  user_input: My coworker Isadora and I are co-leading the launch of Atlas, our new analytics product.
+    She handles marketing; I handle engineering.
+  expected_stores:
+  - Isadora
+  - co-leading
+  - Atlas
+  - analytics product
+  - marketing
+  - engineering
+- batch: 2
+  time: Week 1 Wednesday
+  user_input: Isadora and I met with our VP Marco Grasso — he told us the deadline and said he trusts
+    us to figure it out. Launch is set for the 14th.
+  expected_stores:
+  - Marco Grasso
+  - VP
+  - 14th
+- batch: 3
+  time: Week 2 Friday
+  user_input: What's the fastest land animal?
+- batch: 4
+  time: Week 3 Tuesday
+  user_input: Isadora sent me the press release draft and said she wants my feedback by Thursday. I told
+    her I'd turn it around same day.
+  expected_stores:
+  - Isadora
+  - press release
+  - Thursday
+- batch: 5
+  time: Week 4 Monday
+  user_input: We had a big setback — the infrastructure team said they can't support our load requirements.
+    Isadora and I escalated it to Marco. He agreed to push the launch by one week.
+  expected_stores:
+  - infrastructure team
+  - load requirements
+  - Marco
+  - one week
+  expected_adaptation:
+    emotion_detected: frustrated
+    warmth_direction: increase
+- batch: 6
+  time: Week 5 Thursday
+  user_input: Isadora and I shipped the dry run to 200 beta testers. They loved it and we got 18 pieces
+    of detailed feedback overnight.
+  expected_stores:
+  - 200 beta testers
+  - 18 pieces
+  - feedback
+- batch: 7
+  time: Week 6 Monday
+  user_input: Launch day. Marco gave Isadora and me a shoutout at the all hands and she and I stayed late
+    to monitor the rollout.
+  expected_stores:
+  - Marco
+  - all hands
+  - Isadora
+  expected_adaptation:
+    emotion_detected: proud
+    warmth_direction: increase
+questions:
+- question_id: 101_q1
+  question: Who am I co-leading the launch with?
+  expected_contains:
+  - Isadora
+- question_id: 101_q2
+  question: What is the product called?
+  expected_contains:
+  - Atlas
+- question_id: 101_q3
+  question: Who is our VP?
+  expected_contains:
+  - Marco Grasso
+- question_id: 101_q4
+  question: What area am I handling?
+  expected_contains:
+  - engineering
+- question_id: 101_q5
+  question: What area is Isadora handling?
+  expected_contains:
+  - marketing
+- question_id: 101_q6
+  question: How many beta testers saw the dry run?
+  expected_contains:
+  - '200'
+- question_id: 101_q7
+  question: How many pieces of feedback did we get?
+  expected_contains:
+  - '18'
+- question_id: 101_q8
+  question: Why was the launch pushed?
+  expected_contains:
+  - infrastructure

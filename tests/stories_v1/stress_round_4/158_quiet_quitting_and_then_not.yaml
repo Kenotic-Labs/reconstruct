@@ -1,0 +1,84 @@
+story_id: 158
+story_name: Quiet Quitting and Then Not
+category: Career
+description: User considers checking out at work and then reverses course.
+duration_simulated: 6 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1
+  user_input: I'm burnt out. I decided today I'm quiet quitting — no more work after 5 PM, no Slack on
+    weekends. Full stop.
+  expected_stores:
+  - burnt out
+  - quiet quitting
+  - no more work after 5 PM
+- batch: 2
+  time: Week 2
+  user_input: My friend Kayode asked how it was going. I told him my plan. He said it sounded like avoidance
+    not recovery.
+  expected_stores:
+  - Kayode
+- batch: 3
+  time: Week 3
+  user_input: Who discovered gravity?
+- batch: 4
+  time: Week 4
+  user_input: Talked to my manager Silvia. Told her I'm NOT considering quitting but I need a lighter
+    quarter. She agreed to pull me off the high-urgency Vandermeer account.
+  expected_stores:
+  - Silvia
+  - manager
+  - not considering quitting
+  - Vandermeer account
+- batch: 5
+  time: Week 5
+  user_input: Silvia reassigned the Vandermeer work to my peer Keanu. He's handling it fine. I feel lighter
+    already.
+  expected_stores:
+  - Silvia
+  - Vandermeer
+  - Keanu
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+- batch: 6
+  time: Week 6
+  user_input: Decided the 'quiet quitting' framing was wrong for me. I'm NOT checking out. I just needed
+    a better boundary system and some help from Silvia.
+  expected_stores:
+  - not checking out
+  - Silvia
+questions:
+- question_id: 158_q1
+  question: Who is my manager?
+  expected_contains:
+  - Silvia
+- question_id: 158_q2
+  question: What account was reassigned?
+  expected_contains:
+  - Vandermeer
+- question_id: 158_q3
+  question: Who did she reassign it to?
+  expected_contains:
+  - Keanu
+- question_id: 158_q4
+  question: Am I considering quitting?
+  expected_contains:
+  - not
+- question_id: 158_q5
+  question: Who told me my plan sounded like avoidance?
+  expected_contains:
+  - Kayode
+- question_id: 158_q6
+  question: Did I mention burnt out?
+  expected_contains:
+  - burnt out
+- question_id: 158_q7
+  question: Did I mention quiet quitting?
+  expected_contains:
+  - quiet quitting
+- question_id: 158_q8
+  question: Did I mention no more work after 5 PM?
+  expected_contains:
+  - no more work after 5 PM

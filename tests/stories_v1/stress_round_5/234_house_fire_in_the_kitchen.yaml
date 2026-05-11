@@ -1,0 +1,81 @@
+story_id: 234
+story_name: House Fire in the Kitchen
+category: Daily Life
+description: User's kitchen catches fire from a grease accident.
+duration_simulated: 3 weeks
+total_batches: 5
+batches:
+- batch: 1
+  time: Day 1
+  user_input: Grease fire in my kitchen tonight. My partner Vega got the extinguisher. Kitchen has significant
+    smoke damage but no structural issue.
+  expected_stores:
+  - grease fire
+  - Vega
+  - partner
+  - smoke damage
+  expected_adaptation:
+    emotion_detected: shaken
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Day 2
+  user_input: Insurance adjuster Patience Okoro came out. Estimate is 18000 dollars for cleaning and repainting.
+    Vega handled the call because I was too shaky.
+  expected_stores:
+  - Patience Okoro
+  - '18000'
+  - Vega
+- batch: 3
+  time: Week 1
+  user_input: What's the freezing point of mercury?
+- batch: 4
+  time: Week 2
+  user_input: Restoration team from Servpro is here. Foreman is Willem De Bruyn. They are NOT doing structural
+    work, just surface.
+  expected_stores:
+  - Servpro
+  - Willem De Bruyn
+  - not doing structural
+- batch: 5
+  time: Week 3
+  user_input: Kitchen done. Looks better than before actually. Vega joked we should start more fires.
+    I did NOT find it funny.
+  expected_stores:
+  - Vega
+  expected_adaptation:
+    emotion_detected: recovering
+    warmth_direction: increase
+questions:
+- question_id: 234_q1
+  question: Who is my partner?
+  expected_contains:
+  - Vega
+- question_id: 234_q2
+  question: Who is the adjuster?
+  expected_contains:
+  - Patience Okoro
+- question_id: 234_q3
+  question: Who is the restoration foreman?
+  expected_contains:
+  - Willem De Bruyn
+- question_id: 234_q4
+  question: What was the estimate?
+  expected_contains:
+  - '18000'
+- question_id: 234_q5
+  question: Did I mention grease fire?
+  expected_contains:
+  - grease fire
+- question_id: 234_q6
+  question: Did I mention partner?
+  expected_contains:
+  - partner
+- question_id: 234_q7
+  question: Did I mention smoke damage?
+  expected_contains:
+  - smoke damage
+- question_id: 234_q8
+  question: Do I know someone named Servpro?
+  expected_contains:
+  - Servpro

@@ -1,0 +1,100 @@
+story_id: 145
+story_name: Husband's Military Deployment
+category: Life Events
+description: User's husband deploys overseas and she navigates the months alone.
+duration_simulated: 9 months
+total_batches: 7
+batches:
+- batch: 1
+  time: Month 1
+  user_input: My husband Santiago deployed today. He'll be at a Navy base in Bahrain for 9 months. I drove
+    him to the airport at 5 AM.
+  expected_stores:
+  - Santiago
+  - husband
+  - Bahrain
+  - 9 months
+  - 5 AM
+  expected_adaptation:
+    emotion_detected: sad
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Month 2
+  user_input: Santiago and I video call twice a week — Sundays and Thursdays at 10 PM my time. The 11
+    hour time difference makes it hard.
+  expected_stores:
+  - Santiago
+  - Sundays Thursdays 10 PM
+  - 11 hour time difference
+- batch: 3
+  time: Month 3
+  user_input: What's the tallest mountain in Japan?
+- batch: 4
+  time: Month 4
+  user_input: Santiago's best friend Raimundo from his unit is deployed with him. They share a bunk and
+    Raimundo's wife Carla calls me weekly too.
+  expected_stores:
+  - Santiago
+  - Raimundo
+  - Carla
+- batch: 5
+  time: Month 5
+  user_input: Carla and I took a weekend trip to Monterey together. We needed the distraction. Santiago
+    and Raimundo are at a rough patch in their rotation.
+  expected_stores:
+  - Carla
+  - Monterey
+  - Santiago
+  - Raimundo
+- batch: 6
+  time: Month 8
+  user_input: Santiago is coming home in 3 weeks. Raimundo too. Carla and I are planning a joint welcome
+    home cookout.
+  expected_stores:
+  - Santiago
+  - 3 weeks
+  - Raimundo
+  - Carla
+  expected_adaptation:
+    emotion_detected: excited/anxious
+    warmth_direction: increase
+- batch: 7
+  time: Month 9
+  user_input: Santiago is home. He walked through the door and I just collapsed into him. Raimundo arrived
+    the same day. Our long chapter is over.
+  expected_stores:
+  - Santiago
+  - Raimundo
+  expected_adaptation:
+    emotion_detected: overwhelmed/joyful
+    warmth_direction: increase
+questions:
+- question_id: 145_q1
+  question: Who is my husband?
+  expected_contains:
+  - Santiago
+- question_id: 145_q2
+  question: Where was he deployed?
+  expected_contains:
+  - Bahrain
+- question_id: 145_q3
+  question: Who is his best friend in the unit?
+  expected_contains:
+  - Raimundo
+- question_id: 145_q4
+  question: Who is Raimundo's wife?
+  expected_contains:
+  - Carla
+- question_id: 145_q5
+  question: How long was the deployment?
+  expected_contains:
+  - 9 months
+- question_id: 145_q6
+  question: Where did Carla and I take a trip?
+  expected_contains:
+  - Monterey
+- question_id: 145_q7
+  question: Did I mention husband?
+  expected_contains:
+  - husband

@@ -1,0 +1,121 @@
+story_id: 7
+story_name: "Family Reunion"
+category: "Relationships"
+description: |
+  User is organizing a family reunion at Lake Tahoe. Tracks extended family
+  members, ages, travel details, accommodation, and planned activities.
+  Tests memory of multi-generational family relationships and event logistics.
+duration_simulated: "3 weeks"
+total_batches: 7
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Saturday 10:00 AM"
+    user_input: |
+      Nura, I'm so excited! I'm organizing a big family reunion at Lake
+      Tahoe this summer. I rented a cabin called Pine View Lodge — it
+      sleeps 18 people. Grandma Rose is turning 82 this year and this
+      whole thing is kind of in her honor.
+    expected_memory_stores:
+      - "Lake Tahoe"
+      - "Pine View Lodge"
+      - "Grandma Rose"
+      - "82"
+
+  - batch: 2
+    time: "Sunday 3:00 PM"
+    user_input: |
+      Uncle Frank and Aunt Diana confirmed they're coming! Uncle Frank
+      wants to organize a fishing trip on the lake, which is so him.
+      Aunt Diana said she'll handle the BBQ — she makes the best ribs
+      in the family.
+    expected_memory_stores:
+      - "Uncle Frank"
+      - "Aunt Diana"
+      - "fishing"
+      - "BBQ"
+      - "ribs"
+
+  - batch: 3
+    time: "Monday 11:00 AM"
+    user_input: "What is the capital of Japan?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["Tokyo"]
+
+  - batch: 4
+    time: "Wednesday 7:00 PM"
+    user_input: |
+      Great news — cousin Michael is flying in from Australia! He hasn't
+      been back in three years so everyone is thrilled. And cousin Lisa
+      is bringing her twins, so we'll need to make sure the cabin is
+      baby-proofed. Those two are a handful!
+    expected_memory_stores:
+      - "Michael"
+      - "Australia"
+      - "Lisa"
+      - "twins"
+
+  - batch: 5
+    time: "Thursday 2:00 PM"
+    user_input: "What's the name of the cabin I rented for the reunion?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Pine View Lodge"]
+
+  - batch: 6
+    time: "Saturday 6:00 PM"
+    user_input: |
+      Planning the evening activities — we're going to do a big bonfire
+      the first night. Grandma Rose said she wants to tell stories about
+      grandpa. Uncle Frank is bringing his guitar. It's going to be
+      really special.
+    expected_memory_stores:
+      - "bonfire"
+      - "stories"
+      - "guitar"
+
+  - batch: 7
+    time: "Next Monday 9:00 AM"
+    user_input: "Remind me, who is coming from overseas for the reunion?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Michael", "Australia"]
+
+final_verification:
+  - question: "Where is the family reunion?"
+    expected_contains: ["Lake Tahoe"]
+
+  - question: "What is the name of the cabin?"
+    expected_contains: ["Pine View Lodge"]
+
+  - question: "How old is Grandma Rose?"
+    expected_contains: ["82"]
+
+  - question: "Who is organizing the fishing trip?"
+    expected_contains: ["Uncle Frank"]
+
+  - question: "Who is handling the BBQ?"
+    expected_contains: ["Aunt Diana"]
+
+  - question: "Where is cousin Michael coming from?"
+    expected_contains: ["Australia"]
+
+  - question: "Who is bringing twins to the reunion?"
+    expected_contains: ["Lisa"]
+
+  - question: "What evening activity is planned?"
+    expected_contains: ["bonfire"]

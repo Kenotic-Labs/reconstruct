@@ -1,0 +1,92 @@
+story_id: 149
+story_name: Coming Out Later in Life
+category: Life Events
+description: User comes out to friends and family at age 47.
+duration_simulated: 4 months
+total_batches: 7
+batches:
+- batch: 1
+  time: Month 1 Week 1
+  user_input: I'm coming out as gay at 47. I've known since I was a teenager. My therapist Dr. Raymond
+    Holst has been walking me through it for a year.
+  expected_stores:
+  - gay
+  - '47'
+  - Dr. Raymond Holst
+  - therapist
+  expected_adaptation:
+    emotion_detected: vulnerable
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Told my sister Cecelia first. She hugged me and cried and said she wasn't surprised. I cried
+    too.
+  expected_stores:
+  - Cecelia
+  - sister
+- batch: 3
+  time: Month 2
+  user_input: Told my best friend Rajiv over dinner. He laughed and said he'd been waiting for me to say
+    it for 10 years.
+  expected_stores:
+  - Rajiv
+  - 10 years
+- batch: 4
+  time: Month 2 Week 3
+  user_input: Who wrote The Brothers Karamazov?
+- batch: 5
+  time: Month 3
+  user_input: Told my parents Franco and Lidia this weekend. Mom handled it better than Dad. Dr. Holst
+    warned me to give Franco time.
+  expected_stores:
+  - Franco
+  - Lidia
+  - Dr. Holst
+- batch: 6
+  time: Month 3 Week 3
+  user_input: Dad called me. He apologized for his initial reaction. He said he loves me and wants to
+    meet anyone I date. I cried all afternoon.
+  expected_stores:
+  - Dad
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+- batch: 7
+  time: Month 4
+  user_input: First date with a man in my life. His name is Tobias Schneider, he's an architect. Cecelia
+    demanded a photo.
+  expected_stores:
+  - Tobias Schneider
+  - architect
+  - Cecelia
+questions:
+- question_id: 149_q1
+  question: Who is my therapist?
+  expected_contains:
+  - Raymond Holst
+- question_id: 149_q2
+  question: Who is my sister?
+  expected_contains:
+  - Cecelia
+- question_id: 149_q3
+  question: Who is my best friend?
+  expected_contains:
+  - Rajiv
+- question_id: 149_q4
+  question: Who are my parents?
+  expected_contains:
+  - Franco
+  - Lidia
+- question_id: 149_q5
+  question: Who am I dating?
+  expected_contains:
+  - Tobias Schneider
+- question_id: 149_q6
+  question: Did I mention gay?
+  expected_contains:
+  - gay
+- question_id: 149_q7
+  question: What number is 47?
+  expected_contains:
+  - '47'

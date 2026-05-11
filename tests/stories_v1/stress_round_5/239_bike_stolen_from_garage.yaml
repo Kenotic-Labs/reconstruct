@@ -1,0 +1,75 @@
+story_id: 239
+story_name: Bike Stolen From Garage
+category: Daily Life
+description: User's bike is stolen and she replaces it.
+duration_simulated: 3 weeks
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: Someone stole my bike from my garage overnight. It was a Specialized Sirrus worth 1100 dollars.
+    Filed a police report with Officer Ronaldo Vega.
+  expected_stores:
+  - Specialized Sirrus
+  - 1100 dollars
+  - Officer Ronaldo Vega
+- batch: 2
+  time: Week 1 Wednesday
+  user_input: Filed an insurance claim. My State Farm agent Beatrix Levine said it'll take 2 weeks to
+    process.
+  expected_stores:
+  - State Farm
+  - Beatrix Levine
+  - 2 weeks
+- batch: 3
+  time: Week 2
+  user_input: What's the longest mammal?
+- batch: 4
+  time: Week 2 Friday
+  user_input: Insurance payout came through — 900 after deductible. Added 300 of my own to buy a used
+    Giant Talon from a shop called Pedal Revolution.
+  expected_stores:
+  - '900'
+  - Pedal Revolution
+  - Giant Talon
+- batch: 5
+  time: Week 3
+  user_input: New bike is great. Officer Vega called to tell me they found my old bike in a pawn shop
+    but it was NOT salvageable. I took the new one to the garage and installed a better lock.
+  expected_stores:
+  - Officer Vega
+  - pawn shop
+  - not salvageable
+questions:
+- question_id: 239_q1
+  question: What bike was stolen?
+  expected_contains:
+  - Specialized Sirrus
+- question_id: 239_q2
+  question: Who is the police officer?
+  expected_contains:
+  - Ronaldo Vega
+- question_id: 239_q3
+  question: Who is my insurance agent?
+  expected_contains:
+  - Beatrix Levine
+- question_id: 239_q4
+  question: Where did I buy the new bike?
+  expected_contains:
+  - Pedal Revolution
+- question_id: 239_q5
+  question: How much money is 1100 dollars?
+  expected_contains:
+  - 1100 dollars
+- question_id: 239_q6
+  question: Where is Officer Ronaldo Vega?
+  expected_contains:
+  - Officer Ronaldo Vega
+- question_id: 239_q7
+  question: Where is State Farm?
+  expected_contains:
+  - State Farm
+- question_id: 239_q8
+  question: When is 2 weeks?
+  expected_contains:
+  - 2 weeks

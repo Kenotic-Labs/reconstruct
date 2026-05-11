@@ -1,0 +1,142 @@
+story_id: 50
+story_name: "Painting Watercolors"
+category: "Life Events"
+description: |
+  User started painting watercolors. They take art classes at Creative Arts
+  Studio with instructor Helen Park on Wednesday evenings. Their first painting
+  is a sunset over the ocean. They entered a local art show at City Gallery,
+  use Winsor & Newton paints, and have an art mentor named Kenji who is a fellow
+  student. Tests memory of creative details, schedules, and relationships.
+duration_simulated: "5 weeks"
+total_batches: 9
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 9:00 PM"
+    user_input: |
+      I just came back from my first watercolor class at Creative Arts Studio!
+      The instructor Helen Park is an amazing teacher. She started us with
+      basic washes and color mixing. Classes are every Wednesday evening from
+      7 to 9. I've always wanted to learn to paint and I finally did it.
+    expected_memory_stores:
+      - "watercolor"
+      - "Creative Arts Studio"
+      - "Helen Park"
+      - "Wednesday"
+      - "7 to 9"
+      - "washes"
+      - "color mixing"
+
+  - batch: 2
+    time: "Thursday 12:00 PM"
+    user_input: |
+      I went to the art supply store today and bought Winsor & Newton
+      watercolor paints. Helen Park recommended them as the best quality for
+      beginners. I also got a set of brushes and watercolor paper. This
+      hobby is getting expensive but I love it already.
+    expected_memory_stores:
+      - "Winsor & Newton"
+      - "brushes"
+      - "watercolor paper"
+
+  - batch: 3
+    time: "Friday 10:00 AM"
+    user_input: "What is the difference between watercolor and acrylic paint?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["watercolor", "acrylic"]
+
+  - batch: 4
+    time: "Week 2 Wednesday 9:30 PM"
+    user_input: |
+      Finished my first real painting tonight - a sunset over the ocean!
+      Helen Park said my color blending was excellent for a beginner. I met
+      a fellow student named Kenji who has been painting for three years.
+      He's incredibly talented and offered to be my mentor outside of class.
+    expected_memory_stores:
+      - "sunset over the ocean"
+      - "first painting"
+      - "Kenji"
+      - "mentor"
+      - "three years"
+      - "color blending"
+
+  - batch: 5
+    time: "Week 2 Friday 3:00 PM"
+    user_input: "What was my first painting of and who is my art mentor?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["sunset", "ocean", "Kenji"]
+
+  - batch: 6
+    time: "Week 3 Monday 11:00 AM"
+    user_input: |
+      Kenji told me about a local art show at City Gallery next month. He
+      thinks I should enter my sunset painting. I'm nervous - it's my first
+      painting ever - but Helen Park encouraged me too. She said the show
+      is open to all skill levels. I submitted my entry today.
+    expected_memory_stores:
+      - "art show"
+      - "City Gallery"
+      - "entered"
+      - "sunset painting"
+      - "submitted"
+
+  - batch: 7
+    time: "Week 3 Thursday 2:00 PM"
+    user_input: "Who is considered the greatest watercolor painter in history?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["Turner", "painter"]
+
+  - batch: 8
+    time: "Week 4 Wednesday 9:00 PM"
+    user_input: |
+      Tonight I started my second painting - a landscape of the mountains
+      near the lake. Kenji sat next to me and gave me tips on perspective.
+      Helen Park taught us a new technique called wet-on-wet. My brushwork
+      is improving. I'm painting at home now too, every morning before work.
+    expected_memory_stores:
+      - "mountains"
+      - "lake"
+      - "perspective"
+      - "wet-on-wet"
+      - "morning"
+
+  - batch: 9
+    time: "Week 5 Monday 10:00 AM"
+    user_input: "What paints do I use and where is the art show I entered?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Winsor & Newton", "City Gallery"]
+
+final_verification:
+  - question: "Where do I take art classes?"
+    expected_contains: ["Creative Arts Studio"]
+  - question: "Who is my art instructor?"
+    expected_contains: ["Helen Park"]
+  - question: "What day are the classes?"
+    expected_contains: ["Wednesday"]
+  - question: "What was my first painting?"
+    expected_contains: ["sunset", "ocean"]
+  - question: "What art show did I enter?"
+    expected_contains: ["City Gallery"]
+  - question: "What brand of paints do I use?"
+    expected_contains: ["Winsor & Newton"]
+  - question: "Who is my art mentor?"
+    expected_contains: ["Kenji"]

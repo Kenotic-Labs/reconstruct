@@ -1,0 +1,80 @@
+story_id: 220
+story_name: Emergency Hospitalization
+category: Health
+description: User is rushed to the ER with an unexpected serious illness.
+duration_simulated: 2 weeks
+total_batches: 5
+batches:
+- batch: 1
+  time: Day 1
+  user_input: Collapsed at work. Coworker Pax called an ambulance. Admitted to Kaiser Oakland — preliminary
+    diagnosis is pulmonary embolism.
+  expected_stores:
+  - Pax
+  - Kaiser Oakland
+  - pulmonary embolism
+  expected_adaptation:
+    emotion_detected: scared
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Day 2
+  user_input: Confirmed pulmonary embolism. Started on blood thinners. My attending is Dr. Zora Plankov.
+    I am NOT out of the woods yet.
+  expected_stores:
+  - pulmonary embolism
+  - blood thinners
+  - Dr. Zora Plankov
+  - not out of the woods
+- batch: 3
+  time: Day 4
+  user_input: Who was the first US president?
+- batch: 4
+  time: Day 6
+  user_input: Dr. Plankov says I'm improving. Discharged to home care. My husband Dagon is taking off
+    work for a week. Pax brought my laptop and plants.
+  expected_stores:
+  - Dr. Plankov
+  - Dagon
+  - husband
+  - Pax
+- batch: 5
+  time: Week 2
+  user_input: Follow up with Dr. Plankov was positive. Still on blood thinners for 3 months. Back to desk
+    work only next week.
+  expected_stores:
+  - Dr. Plankov
+  - 3 months
+questions:
+- question_id: 220_q1
+  question: What happened to me?
+  expected_contains:
+  - pulmonary embolism
+- question_id: 220_q2
+  question: Who called the ambulance?
+  expected_contains:
+  - Pax
+- question_id: 220_q3
+  question: Who is my doctor?
+  expected_contains:
+  - Zora Plankov
+- question_id: 220_q4
+  question: Who is my husband?
+  expected_contains:
+  - Dagon
+- question_id: 220_q5
+  question: How long on blood thinners?
+  expected_contains:
+  - 3 months
+- question_id: 220_q6
+  question: Do I know someone named Kaiser Oakland?
+  expected_contains:
+  - Kaiser Oakland
+- question_id: 220_q7
+  question: Did I mention blood thinners?
+  expected_contains:
+  - blood thinners
+- question_id: 220_q8
+  question: Did I mention Dr. Zora Plankov?
+  expected_contains:
+  - Dr. Zora Plankov

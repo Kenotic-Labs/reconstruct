@@ -1,0 +1,103 @@
+story_id: 17
+story_name: "Starting Freelancing on the Side"
+category: "Career"
+description: |
+  User begins freelancing on the side through Upwork. They share their hourly rate,
+  first client details, the project they're working on, and their financial setup
+  with an accountant and invoicing tool. Tests memory of gig economy details,
+  client info, rates, tools, and professional relationships.
+duration_simulated: "2 weeks"
+total_batches: 7
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      I've decided to start freelancing on the side to earn some extra income. I set up
+      a profile on Upwork and I'm charging $85 per hour. I'm focusing on web development
+      projects.
+    expected_memory_stores:
+      - "freelancing"
+      - "Upwork"
+      - "$85"
+      - "hourly rate"
+      - "web development"
+
+  - batch: 2
+    time: "Wednesday 8:00 PM"
+    user_input: |
+      I landed my first client! It's a marketing agency called BrightSpark. They need
+      a complete website redesign. I'll be building it in Next.js — they want something
+      modern and fast.
+    expected_memory_stores:
+      - "BrightSpark"
+      - "marketing agency"
+      - "first client"
+      - "website redesign"
+      - "Next.js"
+
+  - batch: 3
+    time: "Thursday 9:00 AM"
+    user_input: "What are the best practices for SEO when building a Next.js website?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["meta tags", "server-side rendering", "performance"]
+
+  - batch: 4
+    time: "Friday 6:00 PM"
+    user_input: |
+      I hired an accountant named Helen to help me handle the tax side of freelancing.
+      She recommended I use QuickBooks for invoicing and tracking expenses. I got it
+      set up today.
+    expected_memory_stores:
+      - "Helen"
+      - "accountant"
+      - "QuickBooks"
+      - "invoicing"
+      - "taxes"
+
+  - batch: 5
+    time: "Saturday 10:00 AM"
+    user_input: "What platform am I freelancing on and what's my hourly rate?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Upwork", "$85"]
+
+  - batch: 6
+    time: "Monday 12:00 PM"
+    user_input: "What is the difference between a W-2 employee and a 1099 independent contractor for tax purposes?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["taxes", "self-employment", "contractor"]
+
+  - batch: 7
+    time: "Tuesday 7:00 PM"
+    user_input: "Who is my first freelance client and what am I building for them?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["BrightSpark", "website redesign", "Next.js"]
+
+final_verification:
+  - question: "What platform am I freelancing on and what do I charge per hour?"
+    expected_contains: ["Upwork", "$85"]
+  - question: "Who is my first client and what kind of company are they?"
+    expected_contains: ["BrightSpark", "marketing agency"]
+  - question: "What technology am I using for the website redesign?"
+    expected_contains: ["Next.js"]
+  - question: "Who is my accountant and what tool am I using for invoicing?"
+    expected_contains: ["Helen", "QuickBooks"]

@@ -1,0 +1,95 @@
+story_id: 137
+story_name: Hosting Weekly Dinner Parties
+category: Daily Life
+description: User and partner start a weekly Sunday dinner tradition with friends.
+duration_simulated: 2 months
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My husband Caspian and I decided to host Sunday dinners for our close friends every week.
+    Four core regulars — Beatriz, Hans, Nadia, and Oleg.
+  expected_stores:
+  - Caspian
+  - husband
+  - Sunday dinners
+  - Beatriz
+  - Hans
+  - Nadia
+  - Oleg
+- batch: 2
+  time: Week 3
+  user_input: Caspian and I made a braised short rib dish tonight. Beatriz brought a massive cheese board.
+    Hans brought a 2018 Pinot.
+  expected_stores:
+  - Caspian
+  - short rib
+  - Beatriz
+  - cheese board
+  - Hans
+  - 2018 Pinot
+- batch: 3
+  time: Week 4
+  user_input: What's the smallest country in the world?
+- batch: 4
+  time: Week 5
+  user_input: Nadia brought her new partner tonight — a woman named Prisha Goswami. Prisha is a cardiologist.
+    She and Caspian hit it off talking about climbing.
+  expected_stores:
+  - Nadia
+  - Prisha Goswami
+  - cardiologist
+  - Caspian
+  - climbing
+- batch: 5
+  time: Week 7
+  user_input: Oleg can't come anymore — his new job has weekend hours. Hans said he'll bring his brother
+    Lars in Oleg's spot.
+  expected_stores:
+  - Oleg
+  - Hans
+  - Lars
+  - brother
+- batch: 6
+  time: Week 8
+  user_input: Lars showed up and fit right in. Our core group is now six people. Caspian and I are calling
+    it the Sunday Club.
+  expected_stores:
+  - Lars
+  - six people
+  - Caspian
+  - Sunday Club
+  expected_adaptation:
+    emotion_detected: happy
+    warmth_direction: increase
+questions:
+- question_id: 137_q1
+  question: Who is my husband?
+  expected_contains:
+  - Caspian
+- question_id: 137_q2
+  question: Who are the core regulars?
+  expected_contains:
+  - Beatriz
+  - Hans
+  - Nadia
+- question_id: 137_q3
+  question: Who is Nadia's new partner?
+  expected_contains:
+  - Prisha Goswami
+- question_id: 137_q4
+  question: Who couldn't come anymore?
+  expected_contains:
+  - Oleg
+- question_id: 137_q5
+  question: Who replaced him?
+  expected_contains:
+  - Lars
+- question_id: 137_q6
+  question: Did I mention husband?
+  expected_contains:
+  - husband
+- question_id: 137_q7
+  question: When is Sunday dinners?
+  expected_contains:
+  - Sunday dinners

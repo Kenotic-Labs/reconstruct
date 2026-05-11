@@ -1,0 +1,92 @@
+story_id: 143
+story_name: Divorce After 11 Years
+category: Life Events
+description: User navigates their divorce with the help of friends and family.
+duration_simulated: 6 months
+total_batches: 7
+batches:
+- batch: 1
+  time: Month 1
+  user_input: My husband Nate and I are getting divorced after 11 years. We decided together last weekend.
+    Neither of us is angry, just done.
+  expected_stores:
+  - Nate
+  - husband
+  - divorced
+  - 11 years
+  expected_adaptation:
+    emotion_detected: grief
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Month 2
+  user_input: Hired a collaborative divorce attorney named Priscilla Hartmann. Nate is using one from
+    the same practice. No kids, no property dispute — should be simple.
+  expected_stores:
+  - Priscilla Hartmann
+  - Nate
+  - no kids
+- batch: 3
+  time: Month 3
+  user_input: Moved out of the house I shared with Nate. My friend Ingrid is letting me stay in her guest
+    room while I look for my own place.
+  expected_stores:
+  - Nate
+  - Ingrid
+  - guest room
+- batch: 4
+  time: Month 4
+  user_input: What year did the Titanic sink?
+- batch: 5
+  time: Month 4 Week 3
+  user_input: Signed the divorce papers today. Priscilla was kind. Nate and I went out for coffee afterward
+    — one last time as a married couple.
+  expected_stores:
+  - Priscilla
+  - Nate
+- batch: 6
+  time: Month 5
+  user_input: Found an apartment in Albany — small but has good light. My brother Amir is flying in to
+    help me move.
+  expected_stores:
+  - Albany
+  - Amir
+  - brother
+- batch: 7
+  time: Month 6
+  user_input: Three months since the papers were signed. Ingrid and I had dinner and she said I look more
+    like myself than I have in years.
+  expected_stores:
+  - Ingrid
+  expected_adaptation:
+    emotion_detected: peaceful
+    warmth_direction: increase
+questions:
+- question_id: 143_q1
+  question: Who was my husband?
+  expected_contains:
+  - Nate
+- question_id: 143_q2
+  question: How long were we married?
+  expected_contains:
+  - 11 years
+- question_id: 143_q3
+  question: Who is my attorney?
+  expected_contains:
+  - Priscilla Hartmann
+- question_id: 143_q4
+  question: Who let me stay with her?
+  expected_contains:
+  - Ingrid
+- question_id: 143_q5
+  question: Where did I move to?
+  expected_contains:
+  - Albany
+- question_id: 143_q6
+  question: Who is my brother?
+  expected_contains:
+  - Amir
+- question_id: 143_q7
+  question: Did I mention husband?
+  expected_contains:
+  - husband

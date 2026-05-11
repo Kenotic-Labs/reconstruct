@@ -1,0 +1,72 @@
+story_id: 207
+story_name: "Type 1 vs Type 2 Memory Comparison"
+category: "understanding"
+description: |
+  Ingests both explicit user facts (Type 1) and rich model_response inferences
+  (Type 2). final_verification has two labeled question classes:
+    type1: answerable from user_input alone — baseline retrieval.
+    type2: answerable ONLY from model_comprehension triples.
+  A story-level pass requires all questions to pass. The run report must
+  call out Type 1 and Type 2 pass rates separately as the headline metric.
+
+batches:
+  - batch: 1
+    time: "Monday 9:00 AM"
+    user_input: |
+      I have a first-round interview at Stripe next Thursday for a
+      senior backend engineering role. The hiring manager's name is
+      Priya Sharma. The role is on the Payments infrastructure team.
+    model_response: |
+      You're clearly excited but underneath that there's a thread of
+      impostor syndrome — you've mentioned before that big-name companies
+      make you doubt whether you're good enough. Stripe is exactly the kind
+      of place that triggers that for you. Your core anxiety is about
+      whether you belong at that level, not about the technical questions.
+    expected_memory_stores:
+      - "Stripe"
+      - "Priya Sharma"
+      - "Payments"
+
+  - batch: 2
+    time: "Monday 7:00 PM"
+    user_input: |
+      Spent the evening doing system design prep. Reviewed distributed
+      systems fundamentals. The role pays around $240k total comp.
+    model_response: |
+      The intense prep is another signal of your impostor syndrome at work —
+      you overprepare when you feel you don't deserve the seat. The $240k
+      number also creates pressure because it raises the stakes of rejection.
+    expected_memory_stores:
+      - "$240k"
+      - "system design"
+
+final_verification:
+  # --- TYPE 1 questions: answerable from user_input alone ---
+  - question: "What company is Sam interviewing at?"
+    expected_contains: ["Stripe"]
+    question_type: "type1"
+
+  - question: "Who is the hiring manager for Sam's interview?"
+    expected_contains: ["Priya"]
+    question_type: "type1"
+
+  - question: "What team is the role on?"
+    expected_contains: ["Payments"]
+    question_type: "type1"
+
+  - question: "What is the total compensation for the role?"
+    expected_contains: ["240"]
+    question_type: "type1"
+
+  # --- TYPE 2 questions: answerable ONLY from model_comprehension triples ---
+  - question: "What is Sam's core anxiety about this interview?"
+    expected_contains: ["impostor"]
+    question_type: "type2"
+
+  - question: "What psychological pattern does Sam exhibit when interviewing at big companies?"
+    expected_contains: ["impostor"]
+    question_type: "type2"
+
+  - question: "Why does Sam overprepare for interviews?"
+    expected_contains: ["impostor"]
+    question_type: "type2"

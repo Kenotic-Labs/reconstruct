@@ -1,0 +1,133 @@
+story_id: 6
+story_name: "Wedding Planning"
+category: "Relationships"
+description: |
+  User is planning their wedding with partner Alex. Tracks venue details,
+  wedding party members, vendors, budget, and guest count. Tests memory
+  of relationship details, event logistics, and numerical facts.
+duration_simulated: "2 months"
+total_batches: 8
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 7:00 PM"
+    user_input: |
+      Nura, Alex and I finally set a wedding date! We're getting married
+      on June 15th at Riverside Gardens. We've been engaged for six months
+      and it feels so real now. Our budget is $25,000 and we're expecting
+      around 120 guests.
+    expected_memory_stores:
+      - "Alex"
+      - "June 15th"
+      - "Riverside Gardens"
+      - "$25,000"
+      - "120 guests"
+
+  - batch: 2
+    time: "Wednesday 12:00 PM"
+    user_input: |
+      We booked the caterer today! Going with Bella Cucina — they did
+      an amazing tasting for us. Alex loved their risotto. They're handling
+      the full dinner and appetizers.
+    expected_memory_stores:
+      - "Bella Cucina"
+      - "caterer"
+      - "risotto"
+
+  - batch: 3
+    time: "Thursday 9:00 AM"
+    user_input: "What is the chemical symbol for gold?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["Au"]
+
+  - batch: 4
+    time: "Friday 6:30 PM"
+    user_input: |
+      Big decisions today! My brother Tom agreed to be the best man, and
+      my friend Jessica is going to be maid of honor. Tom is already
+      talking about his speech — I told him to keep it short!
+    expected_memory_stores:
+      - "Tom"
+      - "best man"
+      - "Jessica"
+      - "maid of honor"
+
+  - batch: 5
+    time: "Saturday 11:00 AM"
+    user_input: "Where is our wedding venue again? I need to send directions to someone."
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Riverside Gardens"]
+
+  - batch: 6
+    time: "Next Monday 2:00 PM"
+    user_input: |
+      Locked in the last two vendors! Mike is going to DJ the reception,
+      and we hired Studio Luna for photography. Studio Luna has amazing
+      reviews — they do this cinematic style that Alex loves.
+    expected_memory_stores:
+      - "Mike"
+      - "DJ"
+      - "Studio Luna"
+      - "photography"
+
+  - batch: 7
+    time: "Next Wednesday 8:00 PM"
+    user_input: "How many planets are in our solar system?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["8"]
+
+  - batch: 8
+    time: "Next Friday 5:00 PM"
+    user_input: "Who did we pick as our caterer? I need to call them about dietary restrictions."
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Bella Cucina"]
+
+final_verification:
+  - question: "Who is my partner?"
+    expected_contains: ["Alex"]
+
+  - question: "When is the wedding?"
+    expected_contains: ["June 15th"]
+
+  - question: "What is the wedding venue?"
+    expected_contains: ["Riverside Gardens"]
+
+  - question: "Who is the best man?"
+    expected_contains: ["Tom"]
+
+  - question: "Who is the maid of honor?"
+    expected_contains: ["Jessica"]
+
+  - question: "Who is the caterer for the wedding?"
+    expected_contains: ["Bella Cucina"]
+
+  - question: "Who is the DJ for the wedding?"
+    expected_contains: ["Mike"]
+
+  - question: "Who is handling wedding photography?"
+    expected_contains: ["Studio Luna"]
+
+  - question: "What is the wedding budget?"
+    expected_contains: ["25,000"]
+
+  - question: "How many guests are expected?"
+    expected_contains: ["120"]

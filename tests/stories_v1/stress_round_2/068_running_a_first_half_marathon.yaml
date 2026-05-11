@@ -1,0 +1,97 @@
+story_id: 68
+story_name: Running a First Half Marathon
+category: Health
+description: User trains for and runs their first half marathon.
+duration_simulated: 12 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1
+  user_input: I signed up for the San Francisco Half Marathon in 12 weeks. My longest run to date is only
+    5 miles. I bought a training plan from Runkeeper.
+  expected_stores:
+  - San Francisco Half Marathon
+  - 12 weeks
+  - 5 miles
+  - Runkeeper
+- batch: 2
+  time: Week 3
+  user_input: Got new shoes today at Fleet Feet — Hoka Clifton 9s, 155 dollars. The salesperson Marissa
+    had me run on a treadmill to check my gait.
+  expected_stores:
+  - Fleet Feet
+  - Hoka Clifton 9
+  - 155 dollars
+  - Marissa
+- batch: 3
+  time: Week 5
+  user_input: Ran 8 miles today, longest ever. Tired but not destroyed. Running partner Felix met me at
+    the halfway point.
+  expected_stores:
+  - 8 miles
+  - Felix
+  - running partner
+  expected_adaptation:
+    emotion_detected: accomplished
+    warmth_direction: increase
+- batch: 4
+  time: Week 7
+  user_input: Rolled my ankle on a trail run. Nothing torn but I need to rest for a week. My training
+    plan got pushed back.
+  expected_stores:
+  - ankle
+  - rest
+  - a week
+  expected_adaptation:
+    emotion_detected: frustrated
+    warmth_direction: neutral
+- batch: 5
+  time: Week 9
+  user_input: Completed my first 11 mile run. Had to push through a mental wall around mile 9. Felix said
+    that's normal.
+  expected_stores:
+  - 11 mile
+  - mile 9
+  - Felix
+- batch: 6
+  time: Week 11
+  user_input: What year did man land on the moon?
+- batch: 7
+  time: Week 12 Saturday
+  user_input: Race day. Finished in 2 hours and 14 minutes. Felix was at the finish line with a sign.
+  expected_stores:
+  - 2 hours
+  - 14 minutes
+  - Felix
+  expected_adaptation:
+    emotion_detected: elated
+    warmth_direction: increase
+questions:
+- question_id: 68_q1
+  question: What race did I run?
+  expected_contains:
+  - San Francisco
+- question_id: 68_q2
+  question: What shoes did I buy?
+  expected_contains:
+  - Hoka
+- question_id: 68_q3
+  question: Who is my running partner?
+  expected_contains:
+  - Felix
+- question_id: 68_q4
+  question: What was my finishing time?
+  expected_contains:
+  - 2 hours
+- question_id: 68_q5
+  question: Where did I buy my shoes?
+  expected_contains:
+  - Fleet Feet
+- question_id: 68_q6
+  question: How much did the shoes cost?
+  expected_contains:
+  - '155'
+- question_id: 68_q7
+  question: What was my longest run before training?
+  expected_contains:
+  - 5 miles

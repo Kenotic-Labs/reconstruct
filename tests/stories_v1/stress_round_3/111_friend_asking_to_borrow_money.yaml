@@ -1,0 +1,94 @@
+story_id: 111
+story_name: Friend Asking to Borrow Money
+category: Relationships
+description: A close friend asks to borrow money and the user navigates the request.
+duration_simulated: 2 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1 Monday
+  user_input: My friend Declan called me tonight and asked to borrow 4000 dollars. He's behind on rent
+    and his landlord Mrs. Vogel is threatening eviction.
+  expected_stores:
+  - Declan
+  - 4000 dollars
+  - rent
+  - Mrs. Vogel
+  - landlord
+  - eviction
+  expected_adaptation:
+    emotion_detected: conflicted
+    warmth_direction: increase
+- batch: 2
+  time: Week 1 Tuesday
+  user_input: I talked to my partner Linh about it. She and I agreed we can lend it but only with a written
+    agreement, no interest, repayment over 12 months.
+  expected_stores:
+  - Linh
+  - partner
+  - written agreement
+  - no interest
+  - 12 months
+- batch: 3
+  time: Week 1 Wednesday
+  user_input: Declan cried when I told him yes. He and I signed the agreement that afternoon and Linh
+    witnessed it.
+  expected_stores:
+  - Declan
+  - Linh
+- batch: 4
+  time: Week 1 Friday
+  user_input: What's the population of Australia?
+- batch: 5
+  time: Week 2 Monday
+  user_input: Declan paid Mrs. Vogel and she called off the eviction. He sent Linh and me a long thank
+    you text that I'm going to print and keep.
+  expected_stores:
+  - Declan
+  - Mrs. Vogel
+  - Linh
+- batch: 6
+  time: Week 2 Friday
+  user_input: Declan landed a new job at a carpentry shop called Hardwood & Co run by a guy named Gio
+    Bellini. He and I celebrated over drinks.
+  expected_stores:
+  - Declan
+  - Hardwood & Co
+  - Gio Bellini
+  - carpentry
+  expected_adaptation:
+    emotion_detected: relieved/happy
+    warmth_direction: increase
+questions:
+- question_id: 111_q1
+  question: Who asked to borrow money?
+  expected_contains:
+  - Declan
+- question_id: 111_q2
+  question: How much did he borrow?
+  expected_contains:
+  - '4000'
+- question_id: 111_q3
+  question: Who is my partner?
+  expected_contains:
+  - Linh
+- question_id: 111_q4
+  question: Who is Declan's landlord?
+  expected_contains:
+  - Vogel
+- question_id: 111_q5
+  question: Where did Declan get a new job?
+  expected_contains:
+  - Hardwood
+- question_id: 111_q6
+  question: Who runs Hardwood & Co?
+  expected_contains:
+  - Gio Bellini
+- question_id: 111_q7
+  question: What are the repayment terms?
+  expected_contains:
+  - 12 months
+- question_id: 111_q8
+  question: How much money is 4000 dollars?
+  expected_contains:
+  - 4000 dollars

@@ -1,0 +1,136 @@
+story_id: 33
+story_name: "AWS Certification Prep"
+category: "Learning"
+description: |
+  User is preparing for the AWS Solutions Architect certification exam.
+  Tests memory of study materials, schedule, study partner, exam details,
+  difficult topics, and preparation progress.
+duration_simulated: "3 weeks"
+total_batches: 7
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Monday 8:00 PM"
+    user_input: |
+      I'm going all in on getting my AWS Solutions Architect certification!
+      I'm using Adrian Cantrill's course on learn.cantrill.io as my main
+      study material. For practice exams I'm using Tutorial Dojo. My study
+      schedule is 2 hours every evening after work. My colleague Deepak is
+      also studying for the same cert so we're going to be study partners.
+      The exam is on March 15th at a Pearson VUE testing center.
+    expected_memory_stores:
+      - "AWS Solutions Architect"
+      - "Adrian Cantrill"
+      - "learn.cantrill.io"
+      - "Tutorial Dojo"
+      - "2 hours"
+      - "every evening"
+      - "Deepak"
+      - "March 15th"
+      - "Pearson VUE"
+
+  - batch: 2
+    time: "Thursday 10:00 PM"
+    user_input: |
+      Just finished the IAM and S3 sections of Adrian's course. IAM
+      policies make a lot of sense now. S3 storage classes are tricky
+      though, there are so many tiers. Deepak and I quiz each other
+      during lunch breaks at work. He's a bit ahead of me since he
+      already had some AWS experience from a previous project.
+    expected_memory_stores:
+      - "IAM"
+      - "S3"
+      - "storage classes"
+      - "quiz each other"
+      - "lunch breaks"
+
+  - batch: 3
+    time: "Next Monday 12:00 PM"
+    user_input: "What is the maximum size of a single object in Amazon S3?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["5", "terabytes"]
+
+  - batch: 4
+    time: "Next Wednesday 9:30 PM"
+    user_input: |
+      Networking is killing me. VPCs, subnets, route tables, NACLs,
+      security groups, NAT gateways... it's the hardest topic so far
+      by a mile. I spent the entire evening on VPC peering and still
+      don't feel confident. Deepak agrees that networking is the
+      toughest section. I took my first Tutorial Dojo practice exam
+      and scored 62%, which is below passing. Most of my wrong answers
+      were in the networking section.
+    expected_memory_stores:
+      - "networking"
+      - "VPCs"
+      - "subnets"
+      - "hardest topic"
+      - "62%"
+      - "below passing"
+      - "practice exam"
+
+  - batch: 5
+    time: "Next Friday 6:00 PM"
+    user_input: "What topic am I struggling with most in my AWS studies?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["networking", "VPC"]
+
+  - batch: 6
+    time: "Third week Monday 9:00 PM"
+    user_input: |
+      Big improvement! I rewatched Adrian's networking section twice
+      and created my own VPC from scratch in a free tier account. That
+      hands-on practice made everything click. Took another Tutorial
+      Dojo practice exam and scored 78%! Deepak scored 81% on his.
+      We both need 72% to pass the real exam so we're getting close.
+      Two more weeks until exam day. I'm going to focus on serverless
+      and database services this week.
+    expected_memory_stores:
+      - "rewatched networking"
+      - "hands-on practice"
+      - "78%"
+      - "Deepak 81%"
+      - "72% to pass"
+      - "serverless"
+      - "database services"
+
+  - batch: 7
+    time: "Third week Thursday 8:00 PM"
+    user_input: "When is my AWS exam and where am I taking it?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["March 15th", "Pearson VUE"]
+
+final_verification:
+  - question: "What AWS certification am I studying for?"
+    expected_contains: ["Solutions Architect"]
+
+  - question: "What course am I using to study?"
+    expected_contains: ["Adrian Cantrill", "learn.cantrill.io"]
+
+  - question: "Where do I get practice exams?"
+    expected_contains: ["Tutorial Dojo"]
+
+  - question: "Who is my study partner?"
+    expected_contains: ["Deepak"]
+
+  - question: "What is the hardest topic for me?"
+    expected_contains: ["networking", "VPC"]
+
+  - question: "When and where is my exam?"
+    expected_contains: ["March 15th", "Pearson VUE"]

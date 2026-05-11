@@ -1,0 +1,3 @@
+(Caroline, helpful, really helpful) mood=indicative
+(Caroline, accept_as, a transgender woman) mood=indicative
+(Caroline, want, counseling or mental health fo) mood=indicative

@@ -1,0 +1,124 @@
+story_id: 38
+story_name: Volunteering with Habitat for Humanity
+category: Life Events
+description: 'User started volunteering at Habitat for Humanity. The team leader is Sandra.
+
+  They are building houses in the Eastside neighborhood every Saturday morning
+
+  from 8am to 12pm. The user met fellow volunteer Carlos who is an architect.
+
+  The project involves building 3 houses. Tests memory of schedule details,
+
+  people, and project scope.
+
+  '
+duration_simulated: 4 weeks
+total_batches: 8
+batches:
+- batch: 1
+  time: Saturday 8:00 AM
+  user_input: 'Today was my first day volunteering at Habitat for Humanity! Our team
+
+    leader Sandra introduced us to the project. We''re building houses in
+
+    the Eastside neighborhood for families in need. The schedule is every
+
+    Saturday morning from 8am to 12pm.
+
+    '
+  expected_stores:
+  - Habitat for Humanity
+  - Sandra
+  - Eastside
+  - Saturday
+  - 8am
+  - 12pm
+- batch: 2
+  time: Saturday 1:00 PM
+  user_input: 'I met an awesome fellow volunteer named Carlos. Turns out he''s an
+
+    architect by profession and he''s volunteering his design expertise.
+
+    He showed me how to properly frame a wall. The whole team is about
+
+    12 people and everyone is super friendly.
+
+    '
+  expected_stores:
+  - Carlos
+  - architect
+  - frame a wall
+  - 12 people
+- batch: 3
+  time: Monday 10:00 AM
+  user_input: When was Habitat for Humanity founded?
+- batch: 4
+  time: Week 2 Saturday 12:30 PM
+  user_input: 'Second Saturday of volunteering done! The project scope is building
+
+    3 houses total. We finished the foundation of the first house today.
+
+    Sandra said we''re ahead of schedule. Carlos brought donuts for the
+
+    whole team. I''m getting better at using a nail gun.
+
+    '
+  expected_stores:
+  - 3 houses
+  - foundation
+  - first house
+  - ahead of schedule
+  - nail gun
+- batch: 5
+  time: Week 2 Monday 3:00 PM
+  user_input: Who is the team leader at my volunteer project and what day do we meet?
+- batch: 6
+  time: Week 3 Saturday 12:00 PM
+  user_input: 'Amazing progress today! We put up the walls for the first house.
+
+    Carlos designed the layout and it''s really efficient - 3 bedrooms,
+
+    open kitchen. The family who will live here, the Garcias, came to
+
+    visit and they were in tears. Most meaningful thing I''ve done in years.
+
+    '
+  expected_stores:
+  - walls
+  - 3 bedrooms
+  - Garcias
+  - open kitchen
+- batch: 7
+  time: Week 3 Tuesday 9:00 AM
+  user_input: How many homes has Habitat for Humanity built worldwide?
+- batch: 8
+  time: Week 4 Saturday 1:00 PM
+  user_input: What is Carlos's profession and how many houses are we building?
+questions:
+- question_id: 38_q1
+  question: What organization am I volunteering with?
+  expected_contains:
+  - Habitat for Humanity
+- question_id: 38_q2
+  question: Who is the team leader?
+  expected_contains:
+  - Sandra
+- question_id: 38_q3
+  question: Where are the houses being built?
+  expected_contains:
+  - Eastside
+- question_id: 38_q4
+  question: What is the volunteer schedule?
+  expected_contains:
+  - Saturday
+  - 8am
+  - 12pm
+- question_id: 38_q5
+  question: Who is Carlos and what does he do?
+  expected_contains:
+  - Carlos
+  - architect
+- question_id: 38_q6
+  question: How many houses are we building?
+  expected_contains:
+  - '3'

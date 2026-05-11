@@ -1,0 +1,214 @@
+story_id: 902
+title: "Relationship Web"
+domain: "relationships"
+description: |
+  Complex social dynamics with interconnected people: user's partner
+  (Mika), best friend (Leon), coworker (Asha) who is also Leon's ex,
+  and Mika's colleague (Rohan) who interviewed user for a role.
+  Tests entity disambiguation, relational reasoning, secret-keeping,
+  and reconstruction of "who knows what about whom."
+duration_simulated: "2 weeks"
+total_batches: 7
+
+batches:
+  - batch: 1
+    time: "Monday week 1"
+    user_input: |
+      So Mika and I have been together almost two years now. She works
+      at Vantage doing product management. My best friend Leon has been
+      around since college, he's the person I tell everything to basically.
+      Oh and there's Asha at work — she's on my team, we eat lunch
+      together most days. She's really funny honestly.
+    expected_triples:
+      - ["user", "in_relationship_with", "Mika"]
+      - ["user", "together_for", "almost two years with Mika"]
+      - ["Mika", "works_at", "Vantage"]
+      - ["Mika", "role_is", "product manager"]
+      - ["Leon", "is_best_friend_of", "user"]
+      - ["Leon", "known_since", "college"]
+      - ["Asha", "is_coworker_of", "user"]
+      - ["Asha", "is_on", "user team"]
+      - ["user", "eats_lunch_with", "Asha most days"]
+    trace_overrides:
+      edge_temporal_context: "present"
+      edge_emotional_label: "neutral"
+      edge_episodic_significance: "routine"
+      edge_schematic_category: "relationship"
+
+  - batch: 2
+    time: "Wednesday week 1"
+    user_input: |
+      Ok so here's the thing I found out today — Asha used to date
+      Leon. Like they were together for a year and it ended badly.
+      Leon mentioned her once a while back but I didn't put two and
+      two together until Asha showed me an old photo and I was like
+      wait, I KNOW that guy. She doesn't know Leon and I are close
+      and I kind of don't want to bring it up. It's awkward.
+    expected_triples:
+      - ["Asha", "previously_dated", "Leon"]
+      - ["Asha", "dated_for", "one year with Leon"]
+      - ["Asha", "breakup_was", "bad with Leon"]
+      - ["user", "discovered", "Asha and Leon connection"]
+      - ["Asha", "does_not_know", "user and Leon are close friends"]
+      - ["user", "keeping_secret", "Asha-Leon connection from both"]
+      - ["user", "has_emotion", "uncomfortable"]
+    trace_overrides:
+      edge_temporal_context: "past"
+      edge_emotional_label: "uncomfortable"
+      edge_episodic_significance: "pivotal"
+      edge_schematic_category: "relationship"
+
+  - batch: 3
+    time: "Friday week 1"
+    user_input: |
+      Mika told me her colleague Rohan is on the hiring panel for
+      a senior role at Vantage. She wants me to apply and said she'd
+      put in a good word. I'm interested but it's weird because like,
+      what if I don't get it and then Rohan and Mika still work together
+      every day? I told Leon about it and he thinks I should go for it.
+      Please don't tell Mika that Leon knows, she thinks I'm still
+      thinking it over and she'd be annoyed I told someone before deciding.
+    expected_triples:
+      - ["Rohan", "is_colleague_of", "Mika"]
+      - ["Rohan", "works_at", "Vantage"]
+      - ["Rohan", "is_on", "hiring panel at Vantage"]
+      - ["Mika", "encouraged", "user to apply at Vantage"]
+      - ["Mika", "offered_to", "put in good word for user"]
+      - ["user", "interested_in", "senior role at Vantage"]
+      - ["user", "worried_about", "awkwardness if rejected"]
+      - ["Leon", "advised", "user to apply at Vantage"]
+      - ["user", "keeping_secret", "Leon knows about Vantage opportunity"]
+      - ["Mika", "does_not_know", "Leon knows about Vantage role"]
+    trace_overrides:
+      edge_temporal_context: "present"
+      edge_emotional_label: "conflicted"
+      edge_episodic_significance: "pivotal"
+      edge_schematic_category: "relationship"
+
+  - batch: 4
+    time: "Monday week 2"
+    user_input: |
+      Asha brought up at lunch that she ran into someone from her past
+      this weekend and it really rattled her. She didn't say who but
+      I'm pretty sure it was Leon based on what she described. She said
+      the guy was with a group at a bar downtown. She seemed really
+      upset. I wanted to say something but I just couldn't, you know?
+      I feel like I'm holding all these threads and one wrong move
+      tangles everything.
+    expected_triples:
+      - ["Asha", "ran_into", "someone from her past this weekend"]
+      - ["user", "suspects", "Asha ran into Leon"]
+      - ["Asha", "was_upset_about", "encounter with ex"]
+      - ["Leon", "was_at", "bar downtown this weekend"]
+      - ["user", "has_emotion", "conflicted"]
+      - ["user", "chose_not_to", "tell Asha about Leon connection"]
+    trace_overrides:
+      edge_temporal_context: "past"
+      edge_emotional_label: "conflicted"
+      edge_episodic_significance: "notable"
+      edge_schematic_category: "relationship"
+
+  - batch: 5
+    time: "Wednesday week 2"
+    user_input: |
+      I applied to the Vantage role. Rohan is going to be one of my
+      interviewers which is kind of nerve-wracking since he and Mika
+      are close at work. She promised she wouldn't say anything to
+      influence him though. Leon asked me to grab coffee and he started
+      asking about my coworker Asha — he figured out we work together
+      because I mentioned her name a while back. He asked me not to
+      tell her he asked about her. So now I've got secrets going both
+      directions. Awesome.
+    expected_triples:
+      - ["user", "applied_to", "senior role at Vantage"]
+      - ["Rohan", "will_interview", "user"]
+      - ["Mika", "promised_not_to", "influence Rohan"]
+      - ["Leon", "asked_about", "Asha"]
+      - ["Leon", "recognized", "Asha is user coworker"]
+      - ["Leon", "keeping_secret", "asked user about Asha"]
+      - ["user", "has_secrets_from", "both Leon and Asha"]
+      - ["user", "has_emotion", "stressed"]
+    trace_overrides:
+      edge_temporal_context: "present"
+      edge_emotional_label: "stressed"
+      edge_episodic_significance: "pivotal"
+      edge_schematic_category: "relationship"
+
+  - batch: 6
+    time: "Friday week 2"
+    user_input: |
+      The interview with Rohan went well I think. He was professional
+      about it, didn't bring up Mika at all. Separately, Leon texted
+      me asking if I could set up a casual group hangout so he could
+      see Asha without it being weird. I said absolutely not, that's
+      a terrible idea. He got a little defensive but he backed off.
+      I'm not getting in the middle of that.
+    expected_triples:
+      - ["user", "interviewed_with", "Rohan at Vantage"]
+      - ["Rohan", "was_professional_about", "interview despite Mika connection"]
+      - ["Leon", "asked_user_to", "arrange group hangout with Asha"]
+      - ["user", "refused", "Leon request to set up Asha meeting"]
+      - ["Leon", "was_defensive_then", "backed off"]
+      - ["user", "has_emotion", "firm"]
+    trace_overrides:
+      edge_temporal_context: "past"
+      edge_emotional_label: "firm"
+      edge_episodic_significance: "notable"
+      edge_schematic_category: "relationship"
+
+  - batch: 7
+    time: "Saturday week 2"
+    user_input: |
+      Mika asked me tonight how the interview went and I told her I
+      think it went fine. She said Rohan told her I did well but wouldn't
+      share details which she respects. She's excited about us possibly
+      working at the same company. Leon called to apologize for the
+      group hangout thing, said he was being dumb about it. Asha texted
+      me a meme about Monday already being terrible. Normal Asha.
+      Everything's sort of in this holding pattern right now.
+    expected_triples:
+      - ["Mika", "asked_about", "user interview performance"]
+      - ["Rohan", "told_Mika", "user did well in interview"]
+      - ["Rohan", "maintained", "confidentiality about interview details"]
+      - ["Mika", "excited_about", "possibly working with user"]
+      - ["Leon", "apologized_for", "group hangout request"]
+      - ["Asha", "texted", "user a meme about Monday"]
+      - ["user", "has_emotion", "cautiously_hopeful"]
+    trace_overrides:
+      edge_temporal_context: "present"
+      edge_emotional_label: "cautiously_hopeful"
+      edge_episodic_significance: "routine"
+      edge_schematic_category: "relationship"
+
+final_verification:
+  - question: "What's the connection between Asha and Leon?"
+    type: "reconstruct"
+    expected_contains: ["dated", "breakup"]
+
+  - question: "Who knows about who in this situation?"
+    type: "reconstruct"
+    expected_contains: ["secret", "Asha", "Leon"]
+
+  - question: "What's happening with the Vantage job?"
+    type: "reconstruct"
+    expected_contains: ["Rohan", "Mika", "interview"]
+
+  - question: "Who is Rohan?"
+    type: "lookup"
+    expected_contains: ["Mika", "colleague"]
+
+  - question: "What secrets am I keeping?"
+    type: "reconstruct"
+    expected_contains: ["Leon", "Asha"]
+
+  - question: "How does Mika feel about me applying at Vantage?"
+    type: "lookup"
+    expected_contains: ["excited"]
+
+  - question: "What did Leon ask me to do that I refused?"
+    type: "lookup"
+    expected_contains: ["hangout", "Asha"]
+
+  - question: "Who is Mika?"
+    type: "lookup"
+    expected_contains: ["relationship", "Vantage"]

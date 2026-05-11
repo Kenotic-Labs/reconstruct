@@ -1,0 +1,84 @@
+story_id: 148
+story_name: Winning a Short Story Prize
+category: Life Events
+description: User's short story wins a national competition.
+duration_simulated: 4 months
+total_batches: 6
+batches:
+- batch: 1
+  time: Month 1
+  user_input: I submitted a short story called 'The Night Ferry' to the Boulder Review's annual prize.
+    First time I've submitted anywhere.
+  expected_stores:
+  - The Night Ferry
+  - Boulder Review
+  - annual prize
+- batch: 2
+  time: Month 2
+  user_input: Got an email today — I'm on the long list of 30 stories. My writing group friend Talia screamed
+    when I told her.
+  expected_stores:
+  - long list
+  - 30 stories
+  - Talia
+- batch: 3
+  time: Month 3
+  user_input: Short-listed. Top 8. The judge this year is the novelist Pavel Okonkwo. Winners announced
+    in two weeks.
+  expected_stores:
+  - short-listed
+  - top 8
+  - Pavel Okonkwo
+- batch: 4
+  time: Month 3 Week 2
+  user_input: What's the population of New York City?
+- batch: 5
+  time: Month 3 Week 3
+  user_input: I won. I won. First place, 5000 dollar prize, publication in the fall issue. Pavel wrote
+    a short citation about my story.
+  expected_stores:
+  - won
+  - First place
+  - 5000 dollar prize
+  - fall issue
+  - Pavel
+  expected_adaptation:
+    emotion_detected: elated
+    warmth_direction: increase
+- batch: 6
+  time: Month 4
+  user_input: Boulder Review flew me out to Colorado for the reading. My writing group friend Talia came
+    along. Met Pavel in person — he was warm and encouraging.
+  expected_stores:
+  - Colorado
+  - Talia
+  - Pavel
+questions:
+- question_id: 148_q1
+  question: What was my story called?
+  expected_contains:
+  - Night Ferry
+- question_id: 148_q2
+  question: What prize did I win?
+  expected_contains:
+  - Boulder Review
+- question_id: 148_q3
+  question: Who was the judge?
+  expected_contains:
+  - Pavel Okonkwo
+- question_id: 148_q4
+  question: How much was the prize?
+  expected_contains:
+  - '5000'
+- question_id: 148_q5
+  question: Who is my writing group friend?
+  expected_contains:
+  - Talia
+- question_id: 148_q6
+  question: Do I know someone named The Night Ferry?
+  expected_contains:
+  - The Night Ferry
+- question_id: 148_q7
+  question: Did I mention annual prize?
+  expected_contains:
+  - annual prize

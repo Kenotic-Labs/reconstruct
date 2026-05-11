@@ -1,0 +1,73 @@
+story_id: 171
+story_name: Migraine Specialist Consultation
+category: Health
+description: User consults a neurologist for chronic migraines.
+duration_simulated: 2 months
+total_batches: 4
+batches:
+- batch: 1
+  time: Week 1
+  user_input: Went to see Dr. Tobias Weiss, a headache specialist at Cedars-Sinai. Chronic migraines for
+    8 years. He ordered an MRI.
+  expected_stores:
+  - Dr. Tobias Weiss
+  - Cedars-Sinai
+  - 8 years
+  - MRI
+- batch: 2
+  time: Week 3
+  user_input: MRI was clean. Dr. Weiss said it's NOT a tumor, NOT vascular. He's starting me on a CGRP
+    inhibitor called Aimovig.
+  expected_stores:
+  - clean
+  - not a tumor
+  - not vascular
+  - CGRP
+  - Aimovig
+- batch: 3
+  time: Week 4
+  user_input: How many moons does Jupiter have?
+- batch: 4
+  time: Month 2
+  user_input: Aimovig is working. Migraine days dropped from 14 to 5 a month. Dr. Weiss is pleased.
+  expected_stores:
+  - Aimovig
+  - '14'
+  - 5 a month
+  - Dr. Weiss
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+questions:
+- question_id: 171_q1
+  question: Who is my specialist?
+  expected_contains:
+  - Tobias Weiss
+- question_id: 171_q2
+  question: Where does he practice?
+  expected_contains:
+  - Cedars-Sinai
+- question_id: 171_q3
+  question: What medication am I on?
+  expected_contains:
+  - Aimovig
+- question_id: 171_q4
+  question: How many migraine days now?
+  expected_contains:
+  - '5'
+- question_id: 171_q5
+  question: Did I mention Dr. Tobias Weiss?
+  expected_contains:
+  - Dr. Tobias Weiss
+- question_id: 171_q6
+  question: When is 8 years?
+  expected_contains:
+  - 8 years
+- question_id: 171_q7
+  question: Did I mention MRI?
+  expected_contains:
+  - MRI
+- question_id: 171_q8
+  question: Did I mention clean?
+  expected_contains:
+  - clean

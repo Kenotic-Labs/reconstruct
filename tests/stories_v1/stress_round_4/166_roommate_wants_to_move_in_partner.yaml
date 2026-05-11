@@ -1,0 +1,85 @@
+story_id: 166
+story_name: Roommate Wants to Move In Partner
+category: Relationships
+description: User navigates a roommate wanting her partner to move into the shared apartment.
+duration_simulated: 6 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My roommate Delphine told me she wants her boyfriend Zane to move into our 2 bedroom apartment.
+    I'm NOT excited about it.
+  expected_stores:
+  - Delphine
+  - Zane
+  - boyfriend
+  - 2 bedroom
+  - not excited
+- batch: 2
+  time: Week 2
+  user_input: Talked to our landlord Mrs. Astoria Fairchild about it. She said it's allowed as long as
+    the lease stays in Delphine's and my names.
+  expected_stores:
+  - Mrs. Astoria Fairchild
+  - landlord
+- batch: 3
+  time: Week 3
+  user_input: Had a long talk with Delphine about logistics. Rent split — she and Zane would take the
+    bigger room and pay 65 percent. I'd keep my room and pay 35 percent.
+  expected_stores:
+  - Delphine
+  - Zane
+  - 65 percent
+  - 35 percent
+- batch: 4
+  time: Week 4
+  user_input: What's the formula for speed?
+- batch: 5
+  time: Week 4 Friday
+  user_input: Zane moved in. He's actually nicer than I expected. He makes coffee every morning and leaves
+    some for me.
+  expected_stores:
+  - Zane
+  expected_adaptation:
+    emotion_detected: surprised
+    warmth_direction: increase
+- batch: 6
+  time: Week 6
+  user_input: Delphine and Zane and I are in a good rhythm now. My worries didn't come true. Delphine
+    is less home but happier.
+  expected_stores:
+  - Delphine
+  - Zane
+questions:
+- question_id: 166_q1
+  question: Who is my roommate?
+  expected_contains:
+  - Delphine
+- question_id: 166_q2
+  question: Who is her boyfriend?
+  expected_contains:
+  - Zane
+- question_id: 166_q3
+  question: Who is our landlord?
+  expected_contains:
+  - Astoria Fairchild
+- question_id: 166_q4
+  question: What is my rent percentage?
+  expected_contains:
+  - '35'
+- question_id: 166_q5
+  question: Did I mention boyfriend?
+  expected_contains:
+  - boyfriend
+- question_id: 166_q6
+  question: Did I mention 2 bedroom?
+  expected_contains:
+  - 2 bedroom
+- question_id: 166_q7
+  question: Did I mention not excited?
+  expected_contains:
+  - not excited
+- question_id: 166_q8
+  question: Did I mention Mrs. Astoria Fairchild?
+  expected_contains:
+  - Mrs. Astoria Fairchild

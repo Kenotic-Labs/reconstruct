@@ -1,0 +1,79 @@
+story_id: 227
+story_name: Coding Bootcamp Graduation Then No Job
+category: Learning
+description: User graduates from a coding bootcamp but struggles to find a job.
+duration_simulated: 4 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: Graduated from Hack Reactor today. 19 weeks. My career coach is Miranda Tierney.
+  expected_stores:
+  - Hack Reactor
+  - 19 weeks
+  - Miranda Tierney
+- batch: 2
+  time: Month 2
+  user_input: Applied to 80 jobs. 3 phone screens so far. Miranda says the market is tough right now.
+  expected_stores:
+  - 80 jobs
+  - 3 phone screens
+  - Miranda
+- batch: 3
+  time: Month 3
+  user_input: What's the heaviest land animal?
+- batch: 4
+  time: Month 3 Week 3
+  user_input: Final round at a startup called Flux. Their CTO is Arvid Nyberg. I am NOT hopeful but still
+    prepping.
+  expected_stores:
+  - Flux
+  - Arvid Nyberg
+  - CTO
+  - not hopeful
+- batch: 5
+  time: Month 4
+  user_input: Got the job at Flux. Junior engineer, 95k base. Miranda said it's a good foot in the door.
+    Starting in 3 weeks.
+  expected_stores:
+  - Flux
+  - Junior engineer
+  - 95k
+  - Miranda
+  - 3 weeks
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+questions:
+- question_id: 227_q1
+  question: What bootcamp did I do?
+  expected_contains:
+  - Hack Reactor
+- question_id: 227_q2
+  question: Who is my career coach?
+  expected_contains:
+  - Miranda Tierney
+- question_id: 227_q3
+  question: Where did I get the job?
+  expected_contains:
+  - Flux
+- question_id: 227_q4
+  question: Who is Flux's CTO?
+  expected_contains:
+  - Arvid Nyberg
+- question_id: 227_q5
+  question: When is 19 weeks?
+  expected_contains:
+  - 19 weeks
+- question_id: 227_q6
+  question: Did I mention 80 jobs?
+  expected_contains:
+  - 80 jobs
+- question_id: 227_q7
+  question: Did I mention 3 phone screens?
+  expected_contains:
+  - 3 phone screens
+- question_id: 227_q8
+  question: Do I know someone named Miranda?
+  expected_contains:
+  - Miranda

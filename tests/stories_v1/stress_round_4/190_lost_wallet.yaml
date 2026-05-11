@@ -1,0 +1,67 @@
+story_id: 190
+story_name: Lost Wallet
+category: Daily Life
+description: User loses her wallet and navigates replacing everything.
+duration_simulated: 1 week
+total_batches: 4
+batches:
+- batch: 1
+  time: Monday
+  user_input: I lost my wallet at Whole Foods in Berkeley. Called them — nobody turned it in. Cancelled
+    all my cards.
+  expected_stores:
+  - Whole Foods
+  - Berkeley
+  expected_adaptation:
+    emotion_detected: frustrated
+    warmth_direction: neutral
+- batch: 2
+  time: Tuesday
+  user_input: Went to the DMV in Oakland to replace my license. 38 dollars. Took 2 hours. The clerk Eulalia
+    was nice.
+  expected_stores:
+  - DMV
+  - Oakland
+  - 38 dollars
+  - Eulalia
+- batch: 3
+  time: Wednesday
+  user_input: What's the tallest tree?
+- batch: 4
+  time: Friday
+  user_input: Got a call from Whole Foods — someone turned my wallet in. All the cards were in it. Cash
+    was gone but I didn't care.
+  expected_stores:
+  - Whole Foods
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+questions:
+- question_id: 190_q1
+  question: Where did I lose the wallet?
+  expected_contains:
+  - Whole Foods
+- question_id: 190_q2
+  question: Who was the DMV clerk?
+  expected_contains:
+  - Eulalia
+- question_id: 190_q3
+  question: How much did the license replacement cost?
+  expected_contains:
+  - '38'
+- question_id: 190_q4
+  question: Do I know someone named Berkeley?
+  expected_contains:
+  - Berkeley
+- question_id: 190_q5
+  question: Did I mention DMV?
+  expected_contains:
+  - DMV
+- question_id: 190_q6
+  question: Do I know someone named Oakland?
+  expected_contains:
+  - Oakland
+- question_id: 190_q7
+  question: How much money is 38 dollars?
+  expected_contains:
+  - 38 dollars

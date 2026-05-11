@@ -1,0 +1,124 @@
+story_id: 11
+story_name: "Long Distance"
+category: "Relationships"
+description: |
+  User is in a long-distance relationship with partner Mia who lives in
+  London. Tracks relationship routines, Mia's job and pet details, and
+  plans to visit for her birthday. Tests memory of schedules, personal
+  details, and future plans.
+duration_simulated: "3 weeks"
+total_batches: 7
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Wednesday 9:00 PM"
+    user_input: |
+      Nura, I just got off a video call with Mia. I miss her so much.
+      She lives in London and works at Barclays bank. We do video calls
+      every Wednesday and Sunday — it's the only thing keeping us sane
+      with the distance.
+    expected_memory_stores:
+      - "Mia"
+      - "London"
+      - "Barclays"
+      - "video call"
+      - "Wednesday"
+      - "Sunday"
+
+  - batch: 2
+    time: "Thursday 3:00 PM"
+    user_input: |
+      Mia sent me the cutest video of her cat Oliver today. He was
+      chasing a laser pointer around her flat and knocked over a lamp.
+      She says Oliver keeps her company when she's missing me. That
+      little guy is basically our unofficial child.
+    expected_memory_stores:
+      - "Oliver"
+      - "cat"
+      - "laser pointer"
+
+  - batch: 3
+    time: "Friday 10:00 AM"
+    user_input: "What is the speed of light in meters per second?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["299"]
+
+  - batch: 4
+    time: "Sunday 8:00 PM"
+    user_input: |
+      Had our Sunday call with Mia. She told me her birthday is coming
+      up in April and hinted that she'd love it if I could visit. I'm
+      already looking at flights to London. I want to surprise her even
+      though she kind of knows I'm planning something.
+    expected_memory_stores:
+      - "birthday"
+      - "April"
+      - "visit"
+      - "flights"
+      - "surprise"
+
+  - batch: 5
+    time: "Monday 12:00 PM"
+    user_input: "Where does Mia work again? I want to send flowers to her office."
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Barclays"]
+
+  - batch: 6
+    time: "Wednesday 10:00 PM"
+    user_input: |
+      I booked the flights! I'm going to London for ten days in April.
+      Mia doesn't know the exact dates yet. I also ordered her a gold
+      bracelet from this jeweler she loves. I'm going to give it to her
+      on her actual birthday. I can't wait to see Oliver too — Mia says
+      he's gotten so big.
+    expected_memory_stores:
+      - "ten days"
+      - "gold bracelet"
+      - "jeweler"
+
+  - batch: 7
+    time: "Thursday 4:00 PM"
+    user_input: "What's Mia's cat's name? I want to bring him a toy from here."
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Oliver"]
+
+final_verification:
+  - question: "What is my partner's name?"
+    expected_contains: ["Mia"]
+
+  - question: "Where does Mia live?"
+    expected_contains: ["London"]
+
+  - question: "Where does Mia work?"
+    expected_contains: ["Barclays"]
+
+  - question: "When do we video call?"
+    expected_contains: ["Wednesday", "Sunday"]
+
+  - question: "What is Mia's cat's name?"
+    expected_contains: ["Oliver"]
+
+  - question: "When is Mia's birthday?"
+    expected_contains: ["April"]
+
+  - question: "What gift did I buy for Mia?"
+    expected_contains: ["bracelet"]
+
+  - question: "How long is my visit to London?"
+    expected_contains: ["ten days"]

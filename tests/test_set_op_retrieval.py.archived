@@ -1,0 +1,185 @@
+"""
+Set-op retrieval tests for the 9-axis pipeline.
+
+Covers:
+  - Router signals in isolation (POS/WordNet structural, no word lists)
+  - StructuralRefusal on empty / unresolved
+  - Sequence_number tie-break
+  - Graph traversal 1-hop UNION
+  - Coherence at ingest (axis 7)
+
+Uses a hand-crafted mini-DB seeded via MemoryEngine.store().
+"""
+from __future__ import annotations
+
+import os
+import sys
+import tempfile
+from pathlib import Path
+
+import pytest
+
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+
+@pytest.fixture
+def fresh_engines(tmp_path, monkeypatch):
+    """Fresh DB + fresh engine singletons for each test."""
+    db = tmp_path / "setop.db"
+    from config.settings import settings
+    monkeypatch.setattr(settings, "sqlite_path", str(db))
+
+    # Reset singletons that cache the DB path.
+    import app.engines.memory as mm
+    import app.engines.temporal as tt
+    import app.engines.retrieval as rr
+    mm._singleton = None
+    tt._singleton = None
+    rr._singleton = None
+
+    from app.db.session import get_db_context
+    from app.db.models import MIGRATIONS, run_schema_upgrades
+    with get_db_context() as conn:
+        conn.executescript(MIGRATIONS)
+        run_schema_upgrades(conn)
+        conn.commit()
+
+    mem = mm.get_memory_engine()
+    temp = tt.get_temporal_engine()
+    retr = rr.get_retrieval_engine(mem, temp)
+    return mem, temp, retr
+
+
+# ---- Router unit tests ---------------------------------------------------
+
+def test_router_temporal_axis_fires_on_time_noun(fresh_engines):
+    mem, _, _ = fresh_engines
+    from app.engines.retrieval_router import parse_query
+    mem.store(1, "user", "visited", "Paris")
+    axes = parse_query(mem, 1, "When did user visit Paris yesterday")
+    assert axes.temporal is True
+    assert axes.trace_temporal is True
+
+
+def test_router_trace_relational_fires_on_prp_nn(fresh_engines):
+    mem, _, _ = fresh_engines
+    from app.engines.retrieval_router import parse_query
+    mem.store(1, "user", "has_sister", "Emily")
+    axes = parse_query(mem, 1, "Tell me about my sister")
+    assert axes.trace_relational is True
+
+
+def test_router_trace_emotional_fires_on_emotion_adj(fresh_engines):
+    mem, _, _ = fresh_engines
+    from app.engines.retrieval_router import parse_query
+    mem.store(1, "user", "feels", "sad")
+    axes = parse_query(mem, 1, "Why does user feel sad lately")
+    assert axes.trace_emotional is True
+
+
+def test_router_entity_unresolved_returns_none(fresh_engines):
+    mem, _, _ = fresh_engines
+    from app.engines.retrieval_router import parse_query
+    # No entities stored -> entity_link returns None
+    axes = parse_query(mem, 1, "Who is Xyzzy Plugh")
+    assert axes.entity_name is None
+
+
+# ---- Set-op retrieve tests ----------------------------------------------
+
+def test_retrieve_structural_refusal_on_empty_query(fresh_engines):
+    _, _, retr = fresh_engines
+    from app.engines.retrieval import StructuralRefusal
+    out = retr.retrieve(1, "")
+    assert isinstance(out, StructuralRefusal)
+    assert out.reason == "empty_query"
+
+
+def test_retrieve_structural_refusal_when_entity_unresolved(fresh_engines):
+    _, _, retr = fresh_engines
+    from app.engines.retrieval import StructuralRefusal
+    out = retr.retrieve(1, "What about this nonsense")
+    assert isinstance(out, StructuralRefusal)
+    assert out.reason == "entity_unresolved"
+
+
+def test_retrieve_returns_answer_for_known_entity(fresh_engines):
+    mem, _, retr = fresh_engines
+    mem.store(1, "user", "works_at", "Vantage")
+    from app.engines.retrieval import Answer, StructuralRefusal
+    out = retr.retrieve(1, "Where does user work at Vantage")
+    # Either a successful answer about Vantage or a refusal (axes empty)
+    # -- the contract is never to fall back to similarity.
+    assert isinstance(out, (Answer, StructuralRefusal))
+    if isinstance(out, Answer):
+        assert "vantage" in (out.object or "").lower() or "vantage" in (out.subject or "").lower()
+
+
+def test_retrieve_tie_break_uses_sequence_number(fresh_engines):
+    mem, _, retr = fresh_engines
+    # Two facts same (subject, predicate) -- coherence axis 7 should
+    # supersede the older one at ingest, so retrieve returns the newer.
+    mem.store(1, "user", "lives_in", "Detroit")
+    mem.store(1, "user", "lives_in", "Chicago")
+    from app.engines.retrieval import Answer
+    out = retr.retrieve(1, "Where does user live now")
+    if isinstance(out, Answer):
+        # The newer one wins via axis 7 (coherence at ingest) +
+        # axis 8 (sequence_number DESC tie-break).
+        assert (out.object or "").lower() == "chicago"
+
+
+def test_retrieve_structural_refusal_is_first_class(fresh_engines):
+    _, _, retr = fresh_engines
+    from app.engines.retrieval import StructuralRefusal
+    out = retr.retrieve(1, "")
+    # First-class: has text=None, source=structural_refusal, and is a
+    # separate class from Answer (isinstance check succeeds).
+    assert out.text is None
+    assert out.source == "structural_refusal"
+
+
+# ---- Graph traversal / coherence integration ---------------------------
+
+def test_get_connected_entities_one_hop(fresh_engines):
+    mem, _, _ = fresh_engines
+    mem.store(1, "user", "has_sister", "Emily")
+    mem.store(1, "Emily", "lives_in", "Portland")
+    connected = mem.get_connected_entities(1, "Emily", hops=1)
+    names = {c.lower() for c in connected}
+    assert "user" in names
+    assert "portland" in names
+
+
+def test_coherence_at_ingest_supersedes_older(fresh_engines):
+    mem, _, _ = fresh_engines
+    rel_old = mem.store(1, "user", "works_at", "Acme")
+    rel_new = mem.store(1, "user", "works_at", "Beta")
+    from app.db.session import get_db_context
+    with get_db_context() as conn:
+        old_row = conn.execute(
+            "SELECT is_current, superseded_by FROM relationships WHERE id=?",
+            (rel_old,),
+        ).fetchone()
+        new_row = conn.execute(
+            "SELECT is_current FROM relationships WHERE id=?",
+            (rel_new,),
+        ).fetchone()
+    assert old_row["is_current"] == 0
+    assert old_row["superseded_by"] == rel_new
+    assert new_row["is_current"] == 1
+
+
+def test_cluster_id_is_persisted_on_write(fresh_engines):
+    mem, _, _ = fresh_engines
+    rel_id = mem.store(1, "user", "likes", "coffee")
+    from app.db.session import get_db_context
+    with get_db_context() as conn:
+        row = conn.execute(
+            "SELECT cluster_id FROM relationships WHERE id=?",
+            (rel_id,),
+        ).fetchone()
+    assert row["cluster_id"] is not None
+    assert row["cluster_id"].startswith("c_")

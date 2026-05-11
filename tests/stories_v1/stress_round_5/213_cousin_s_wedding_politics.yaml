@@ -1,0 +1,81 @@
+story_id: 213
+story_name: Cousin's Wedding Politics
+category: Relationships
+description: User navigates family drama around her cousin's wedding.
+duration_simulated: 2 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: My cousin Valentina is getting married to a man named Cyrus. Her mom Carla does not approve
+    of Cyrus.
+  expected_stores:
+  - Valentina
+  - cousin
+  - Cyrus
+  - Carla
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Carla told me privately she wants me to talk Valentina out of it. I told Carla I will NOT
+    do that.
+  expected_stores:
+  - Carla
+  - Valentina
+  - will not
+- batch: 3
+  time: Month 2
+  user_input: What's the capital of Mongolia?
+- batch: 4
+  time: Month 2 Week 2
+  user_input: Valentina and Cyrus are still getting married. Carla decided to attend after all. My own
+    mom Lorelai helped her come around.
+  expected_stores:
+  - Valentina
+  - Cyrus
+  - Carla
+  - Lorelai
+  - mom
+- batch: 5
+  time: Month 2 Week 4
+  user_input: Wedding was beautiful. Cyrus's dad Ibrahim gave a speech that made even Carla cry. Family
+    drama resolved.
+  expected_stores:
+  - Cyrus
+  - Ibrahim
+  - Carla
+  expected_adaptation:
+    emotion_detected: relieved
+    warmth_direction: increase
+questions:
+- question_id: 213_q1
+  question: Who is my cousin?
+  expected_contains:
+  - Valentina
+- question_id: 213_q2
+  question: Who is she marrying?
+  expected_contains:
+  - Cyrus
+- question_id: 213_q3
+  question: Who is Valentina's mom?
+  expected_contains:
+  - Carla
+- question_id: 213_q4
+  question: Who is my mom?
+  expected_contains:
+  - Lorelai
+- question_id: 213_q5
+  question: Who is Cyrus's dad?
+  expected_contains:
+  - Ibrahim
+- question_id: 213_q6
+  question: Did I mention cousin?
+  expected_contains:
+  - cousin
+- question_id: 213_q7
+  question: Did I mention will not?
+  expected_contains:
+  - will not
+- question_id: 213_q8
+  question: Did I mention mom?
+  expected_contains:
+  - mom

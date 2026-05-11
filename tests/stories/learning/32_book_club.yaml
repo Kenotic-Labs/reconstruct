@@ -1,0 +1,134 @@
+story_id: 32
+story_name: "Book Club"
+category: "Learning"
+description: |
+  User joined a monthly book club at Chapters Bookstore organized by
+  Patricia. Tests memory of book club details, reading schedule, member
+  names, book titles and authors, meeting logistics, and personal
+  preferences.
+duration_simulated: "6 weeks"
+total_batches: 7
+
+engines_tested:
+  memory: true
+  retrieval: true
+  temporal: true
+  adaptation: true
+  proactive: false
+  intent_gate: true
+  orchestrator: true
+
+batches:
+  - batch: 1
+    time: "Sunday 3:00 PM"
+    user_input: |
+      I just joined a book club! It meets monthly at Chapters Bookstore.
+      The organizer is Patricia and there are 8 members total including me.
+      Meetings are on the first Sunday of each month at 3pm. Our current
+      book is "The Midnight Library" by Matt Haig. Last month they read
+      "Educated" by Tara Westover, which I missed since I just joined.
+      Next month we're reading "Project Hail Mary" by Andy Weir.
+    expected_memory_stores:
+      - "Chapters Bookstore"
+      - "Patricia"
+      - "8 members"
+      - "first Sunday"
+      - "3pm"
+      - "The Midnight Library"
+      - "Matt Haig"
+      - "Educated"
+      - "Tara Westover"
+      - "Project Hail Mary"
+      - "Andy Weir"
+
+  - batch: 2
+    time: "Wednesday 9:00 PM"
+    user_input: |
+      I'm halfway through "The Midnight Library" and it's so good!
+      The concept of exploring alternate lives through a library is
+      fascinating. My favorite member so far is Marcus. He gave the
+      most incredible analysis of "Educated" during the recap for me
+      as a new member. He draws connections between books that nobody
+      else sees. Patricia told me he's an English professor.
+    expected_memory_stores:
+      - "halfway"
+      - "alternate lives"
+      - "Marcus"
+      - "analysis"
+      - "English professor"
+
+  - batch: 3
+    time: "Thursday 12:00 PM"
+    user_input: "Who wrote the book Project Hail Mary?"
+    verification:
+      type: "intent_routing"
+      expected_intent: "GENERAL_KNOWLEDGE"
+      expected_engines_blocked: ["memory", "retrieval"]
+      expected_response_contains: ["Andy Weir"]
+
+  - batch: 4
+    time: "Next Sunday 5:00 PM"
+    user_input: |
+      Just got back from the book club meeting! The discussion about
+      "The Midnight Library" was amazing. Marcus pointed out how the
+      book's message about regret connects to Buddhist philosophy.
+      Patricia brought homemade lemon bars which were incredible.
+      We voted and confirmed "Project Hail Mary" for next month.
+      I also met a member named Susan who recommended I go back
+      and read "Educated" on my own since it was life-changing.
+    expected_memory_stores:
+      - "regret"
+      - "Buddhist philosophy"
+      - "lemon bars"
+      - "Susan"
+      - "read Educated"
+
+  - batch: 5
+    time: "Next Tuesday 7:00 PM"
+    user_input: "What book is my book club currently reading?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Project Hail Mary"]
+
+  - batch: 6
+    time: "Third week Saturday 4:00 PM"
+    user_input: |
+      I finished reading "Educated" on Susan's recommendation and wow,
+      she was right. Tara Westover's story is incredible. I'm also
+      already a third of the way through "Project Hail Mary" and
+      I love the science humor in it. Marcus started a group chat
+      for our book club so we can share thoughts between meetings.
+      I'm really glad I joined this group.
+    expected_memory_stores:
+      - "finished Educated"
+      - "Project Hail Mary progress"
+      - "science humor"
+      - "group chat"
+
+  - batch: 7
+    time: "Fourth week Monday 8:00 PM"
+    user_input: "Who in my book club gives the best analysis?"
+    verification:
+      type: "retrieval"
+      expected_intent: "PAST_SELF_REFERENCE"
+      expected_response_contains: ["Marcus"]
+
+final_verification:
+  - question: "Where does my book club meet?"
+    expected_contains: ["Chapters Bookstore"]
+
+  - question: "Who organizes the book club?"
+    expected_contains: ["Patricia"]
+
+  - question: "When does the book club meet?"
+    expected_contains: ["first Sunday", "3pm"]
+
+  - question: "What was the current book when I joined?"
+    expected_contains: ["The Midnight Library", "Matt Haig"]
+
+  - question: "Who is my favorite book club member?"
+    expected_contains: ["Marcus"]
+
+  - question: "What book is the club reading next?"
+    expected_contains: ["Project Hail Mary"]

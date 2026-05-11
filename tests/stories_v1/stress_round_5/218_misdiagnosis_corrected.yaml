@@ -1,0 +1,79 @@
+story_id: 218
+story_name: Misdiagnosis Corrected
+category: Health
+description: User is misdiagnosed and then correctly diagnosed by another doctor.
+duration_simulated: 2 months
+total_batches: 5
+batches:
+- batch: 1
+  time: Month 1
+  user_input: My doctor Dr. Ferris Malone said my symptoms are thyroid. Started levothyroxine. Symptoms
+    got WORSE, not better.
+  expected_stores:
+  - Dr. Ferris Malone
+  - thyroid
+  - levothyroxine
+  - worse
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Got a second opinion from Dr. Vyvyan Auerbach. She said it is NOT thyroid — it's a vitamin
+    B12 deficiency.
+  expected_stores:
+  - Dr. Vyvyan Auerbach
+  - not thyroid
+  - B12 deficiency
+- batch: 3
+  time: Month 2
+  user_input: Who painted Starry Night?
+- batch: 4
+  time: Month 2 Week 1
+  user_input: Started B12 shots with Dr. Auerbach. Weekly for 4 weeks, then monthly. Symptoms already
+    improving.
+  expected_stores:
+  - Dr. Auerbach
+  - B12 shots
+  - weekly
+  - monthly
+- batch: 5
+  time: Month 2 Week 4
+  user_input: Stopped levothyroxine per Dr. Auerbach. Feeling much better. Never went back to Dr. Malone.
+  expected_stores:
+  - levothyroxine
+  - Dr. Auerbach
+  - Dr. Malone
+  expected_adaptation:
+    emotion_detected: frustrated/relieved
+    warmth_direction: increase
+questions:
+- question_id: 218_q1
+  question: Who misdiagnosed me?
+  expected_contains:
+  - Ferris Malone
+- question_id: 218_q2
+  question: Who correctly diagnosed me?
+  expected_contains:
+  - Vyvyan Auerbach
+- question_id: 218_q3
+  question: What did I actually have?
+  expected_contains:
+  - B12
+- question_id: 218_q4
+  question: Was it thyroid?
+  expected_contains:
+  - not
+- question_id: 218_q5
+  question: Did I mention Dr. Ferris Malone?
+  expected_contains:
+  - Dr. Ferris Malone
+- question_id: 218_q6
+  question: Did I mention thyroid?
+  expected_contains:
+  - thyroid
+- question_id: 218_q7
+  question: Did I mention levothyroxine?
+  expected_contains:
+  - levothyroxine
+- question_id: 218_q8
+  question: Did I mention worse?
+  expected_contains:
+  - worse

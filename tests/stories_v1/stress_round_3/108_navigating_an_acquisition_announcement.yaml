@@ -1,0 +1,104 @@
+story_id: 108
+story_name: Navigating an Acquisition Announcement
+category: Career
+description: User's company is acquired and she navigates the uncertainty.
+duration_simulated: 4 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1 Monday
+  user_input: Our CEO Yara Bashir announced today that we're being acquired by Oracle for 1.4 billion
+    dollars. Everyone is freaking out.
+  expected_stores:
+  - Yara Bashir
+  - CEO
+  - acquired
+  - Oracle
+  - 1.4 billion
+  expected_adaptation:
+    emotion_detected: shock
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Week 1 Tuesday
+  user_input: HR contact Nadim Raza sent out an FAQ doc. Key points — our equity vests immediately, 9
+    month retention bonuses, layoffs possible in engineering.
+  expected_stores:
+  - Nadim Raza
+  - HR
+  - equity vests immediately
+  - 9 month retention bonuses
+  - layoffs
+- batch: 3
+  time: Week 2
+  user_input: My manager Peyton and I had a long talk. He said the Oracle team reached out to him already
+    — he thinks our group is safe but he can't guarantee.
+  expected_stores:
+  - Peyton
+  - manager
+  - Oracle team
+- batch: 4
+  time: Week 2 Friday
+  user_input: What element has atomic number 1?
+- batch: 5
+  time: Week 3
+  user_input: Retention bonus agreement arrived. 140k over 9 months. I forwarded it to my lawyer Marguerite
+    for review before I sign.
+  expected_stores:
+  - retention bonus
+  - 140k
+  - 9 months
+  - Marguerite
+  - lawyer
+- batch: 6
+  time: Week 4 Monday
+  user_input: Marguerite said the agreement is fair. I signed it this morning. Peyton said the Oracle
+    integration lead is a woman named Beatrix Fenn.
+  expected_stores:
+  - Marguerite
+  - signed
+  - Peyton
+  - Beatrix Fenn
+  - Oracle integration lead
+- batch: 7
+  time: Week 4 Friday
+  user_input: First meeting with Beatrix today. She seemed thoughtful and asked good questions. My mood
+    is stabilizing.
+  expected_stores:
+  - Beatrix
+  expected_adaptation:
+    emotion_detected: calmer
+    warmth_direction: increase
+questions:
+- question_id: 108_q1
+  question: Who is our CEO?
+  expected_contains:
+  - Yara Bashir
+- question_id: 108_q2
+  question: Who is acquiring us?
+  expected_contains:
+  - Oracle
+- question_id: 108_q3
+  question: For how much?
+  expected_contains:
+  - 1.4 billion
+- question_id: 108_q4
+  question: Who is my HR contact?
+  expected_contains:
+  - Nadim Raza
+- question_id: 108_q5
+  question: Who is my manager?
+  expected_contains:
+  - Peyton
+- question_id: 108_q6
+  question: How much is my retention bonus?
+  expected_contains:
+  - 140k
+- question_id: 108_q7
+  question: Who is my lawyer?
+  expected_contains:
+  - Marguerite
+- question_id: 108_q8
+  question: Who is the Oracle integration lead?
+  expected_contains:
+  - Beatrix Fenn

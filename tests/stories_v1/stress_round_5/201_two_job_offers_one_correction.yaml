@@ -1,0 +1,86 @@
+story_id: 201
+story_name: Two Job Offers, One Correction
+category: Career
+description: User juggles two offers with contradicting details and a correction.
+duration_simulated: 2 weeks
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1 Monday
+  user_input: I have two offers — one from Stripe at 240k and one from Square at 235k. My recruiter Giuliana
+    said Square also has a 50k sign-on bonus.
+  expected_stores:
+  - Stripe
+  - 240k
+  - Square
+  - 235k
+  - Giuliana
+  - 50k sign-on
+- batch: 2
+  time: Week 1 Tuesday
+  user_input: Correction on Square — Giuliana miscommunicated. The sign-on is NOT 50k, it's 30k. My contact
+    at Square is actually Hamish Yates, not Giuliana.
+  expected_stores:
+  - Giuliana
+  - not 50k
+  - 30k
+  - Hamish Yates
+- batch: 3
+  time: Week 1 Thursday
+  user_input: What's the chemical formula for sugar?
+- batch: 4
+  time: Week 2 Monday
+  user_input: Hamish and I finalized. Square offer is 235 base, 30k sign-on, equity of 150k over 4 years.
+    Stripe's recruiter Aina Belov sent a matching package.
+  expected_stores:
+  - Hamish
+  - '235'
+  - 30k
+  - 150k
+  - 4 years
+  - Aina Belov
+  - Stripe
+- batch: 5
+  time: Week 2 Thursday
+  user_input: Stripe and I agreed on terms. I'm going with Stripe. Aina was easier to work with than Hamish.
+    My start date is in 6 weeks.
+  expected_stores:
+  - Stripe
+  - Aina
+  - 6 weeks
+  expected_adaptation:
+    emotion_detected: resolved
+    warmth_direction: increase
+questions:
+- question_id: 201_q1
+  question: What company did I choose?
+  expected_contains:
+  - Stripe
+- question_id: 201_q2
+  question: Who is my Stripe recruiter?
+  expected_contains:
+  - Aina Belov
+- question_id: 201_q3
+  question: Who is my Square contact?
+  expected_contains:
+  - Hamish Yates
+- question_id: 201_q4
+  question: What is Square's sign-on bonus?
+  expected_contains:
+  - 30k
+- question_id: 201_q5
+  question: Was the sign-on 50k?
+  expected_contains:
+  - not
+- question_id: 201_q6
+  question: What is Stripe's equity?
+  expected_contains:
+  - 150k
+- question_id: 201_q7
+  question: How much money is 240k?
+  expected_contains:
+  - 240k
+- question_id: 201_q8
+  question: Do I know someone named Square?
+  expected_contains:
+  - Square

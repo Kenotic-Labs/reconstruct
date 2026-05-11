@@ -1,0 +1,92 @@
+story_id: 132
+story_name: Studying Philosophy in Night Classes
+category: Learning
+description: User takes night classes in philosophy at a local university.
+duration_simulated: 15 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1
+  user_input: Enrolled in Intro to Philosophy at City College. Night class, Tuesdays and Thursdays 6 to
+    8 PM. My professor is Dr. Magnus Holt.
+  expected_stores:
+  - Intro to Philosophy
+  - City College
+  - Tuesdays and Thursdays 6 to 8 PM
+  - Dr. Magnus Holt
+- batch: 2
+  time: Week 3
+  user_input: First unit is on Plato. My classmate Vera Greco and I partnered for the dialogue analysis.
+    She's retired and has read more than me.
+  expected_stores:
+  - Plato
+  - Vera Greco
+  - retired
+- batch: 3
+  time: Week 5
+  user_input: What's the tallest mammal?
+- batch: 4
+  time: Week 6
+  user_input: Writing a 10 page paper on Nietzsche's concept of amor fati. Dr. Holt said my thesis is
+    ambitious. Vera is writing hers on Heidegger.
+  expected_stores:
+  - 10 page paper
+  - Nietzsche
+  - amor fati
+  - Dr. Holt
+  - Vera
+  - Heidegger
+- batch: 5
+  time: Week 10
+  user_input: Got my paper back. A minus. Dr. Holt wrote 'clear voice, keep writing'. Vera got an A and
+    was annoyingly modest about it.
+  expected_stores:
+  - A minus
+  - Dr. Holt
+  - Vera
+  - A
+  expected_adaptation:
+    emotion_detected: pleased
+    warmth_direction: increase
+- batch: 6
+  time: Week 15
+  user_input: Final exam done. Vera and I are taking Intro to Ethics together next semester. Dr. Holt
+    teaches it too.
+  expected_stores:
+  - Vera
+  - Intro to Ethics
+  - next semester
+  - Dr. Holt
+questions:
+- question_id: 132_q1
+  question: What class am I taking?
+  expected_contains:
+  - Philosophy
+- question_id: 132_q2
+  question: Who is my professor?
+  expected_contains:
+  - Magnus Holt
+- question_id: 132_q3
+  question: Who is my classmate?
+  expected_contains:
+  - Vera Greco
+- question_id: 132_q4
+  question: What philosopher did I write about?
+  expected_contains:
+  - Nietzsche
+- question_id: 132_q5
+  question: What grade did I get on my paper?
+  expected_contains:
+  - A minus
+- question_id: 132_q6
+  question: What class are we taking next semester?
+  expected_contains:
+  - Ethics
+- question_id: 132_q7
+  question: Did I mention Intro to Philosophy?
+  expected_contains:
+  - Intro to Philosophy
+- question_id: 132_q8
+  question: Where is City College?
+  expected_contains:
+  - City College

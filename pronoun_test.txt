@@ -1,0 +1,18 @@
+IN:  I'm keen on counseling
+OUT: Caroline is keen on counseling
+
+IN:  I painted that lake sunrise last year
+OUT: Melanie painted that lake sunrise last year
+
+IN:  I've been researching adoption agencies
+OUT: Caroline has been researching adoption agencies
+
+IN:  I'd love to support those with similar issues
+OUT: Caroline would love to support those with similar issues
+
+IN:  I'll move to Portland next month
+OUT: Caroline will move to Portland next month
+
+IN:  I went to a LGBTQ support group
+OUT: Caroline went to a LGBTQ support group
+

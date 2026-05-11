@@ -1,0 +1,88 @@
+story_id: 162
+story_name: Friend Group Drama
+category: Relationships
+description: Two friends in the user's group had a fight and she navigates the fallout.
+duration_simulated: 6 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My friends Mila and Callum had a huge fight over something Mila said about Callum's girlfriend
+    Estelle. Our whole group is affected.
+  expected_stores:
+  - Mila
+  - Callum
+  - Estelle
+  - girlfriend
+- batch: 2
+  time: Week 2
+  user_input: I'm trying to stay neutral. Mila called me to vent. Callum texted me the same day. I told
+    each of them I wasn't taking sides.
+  expected_stores:
+  - Mila
+  - Callum
+- batch: 3
+  time: Week 3
+  user_input: Our mutual friend Owen said he's DONE trying to mediate. He's stepping back. Mila took it
+    as a betrayal.
+  expected_stores:
+  - Owen
+  - done trying to mediate
+  - Mila
+- batch: 4
+  time: Week 4
+  user_input: What's the boiling point of mercury?
+- batch: 5
+  time: Week 5
+  user_input: Mila apologized to Estelle directly. Callum said it wasn't enough. Owen is NOT coming to
+    our next group dinner.
+  expected_stores:
+  - Mila
+  - Estelle
+  - Callum
+  - not coming
+- batch: 6
+  time: Week 6
+  user_input: Group dinner happened without Owen. Mila and Callum were polite but distant. Progress is
+    slow. I'm learning when to step back.
+  expected_stores:
+  - Owen
+  - Mila
+  - Callum
+  expected_adaptation:
+    emotion_detected: drained
+    warmth_direction: neutral
+questions:
+- question_id: 162_q1
+  question: Who had the fight?
+  expected_contains:
+  - Mila
+  - Callum
+- question_id: 162_q2
+  question: Who is Callum's girlfriend?
+  expected_contains:
+  - Estelle
+- question_id: 162_q3
+  question: Who stopped trying to mediate?
+  expected_contains:
+  - Owen
+- question_id: 162_q4
+  question: Did Owen come to the dinner?
+  expected_contains:
+  - not
+- question_id: 162_q5
+  question: Did I mention girlfriend?
+  expected_contains:
+  - girlfriend
+- question_id: 162_q6
+  question: Did I mention done trying to mediate?
+  expected_contains:
+  - done trying to mediate
+- question_id: 162_q7
+  question: Did I mention not coming?
+  expected_contains:
+  - not coming
+- question_id: 162_q8
+  question: Was Mila mentioned?
+  expected_contains:
+  - Mila

@@ -1,0 +1,101 @@
+story_id: 65
+story_name: Friend Going Through a Tough Breakup
+category: Relationships
+description: User supports a close friend through a painful breakup.
+duration_simulated: 6 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1 Friday 11 PM
+  user_input: My friend Naima just texted me that her partner Victor broke up with her. They were together
+    four years. I drove over.
+  expected_stores:
+  - Naima
+  - friend
+  - Victor
+  - partner
+  - broke up
+  - four years
+  expected_adaptation:
+    emotion_detected: sad
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Week 1 Saturday
+  user_input: Stayed with Naima overnight. She's devastated but holding it together. Victor is moving
+    out next weekend.
+  expected_stores:
+  - Naima
+  - Victor
+  - next weekend
+- batch: 3
+  time: Week 2 Tuesday
+  user_input: Naima called her therapist Dr. Priya Roy for an emergency session. She has an appointment
+    Thursday at 4 PM.
+  expected_stores:
+  - Dr. Priya Roy
+  - therapist
+  - Thursday 4 PM
+- batch: 4
+  time: Week 3 Wednesday
+  user_input: Did Abraham Lincoln invent the light bulb?
+- batch: 5
+  time: Week 4 Saturday
+  user_input: Took Naima out for dinner at a Ethiopian place called Meskerem. She laughed for the first
+    time in weeks.
+  expected_stores:
+  - Naima
+  - Meskerem
+  - Ethiopian
+- batch: 6
+  time: Week 5 Thursday
+  user_input: Naima is moving in with her sister Kezia temporarily. Her old apartment has too many memories
+    with Victor. Move is next Saturday.
+  expected_stores:
+  - Naima
+  - Kezia
+  - sister
+  - next Saturday
+- batch: 7
+  time: Week 6 Sunday
+  user_input: Naima is doing better. She told me today she's starting to feel relief underneath the grief.
+    Dr. Roy helped her reframe things.
+  expected_stores:
+  - Naima
+  - Dr. Roy
+  expected_adaptation:
+    emotion_detected: hopeful
+    warmth_direction: increase
+questions:
+- question_id: 65_q1
+  question: Who went through the breakup?
+  expected_contains:
+  - Naima
+- question_id: 65_q2
+  question: Who broke up with her?
+  expected_contains:
+  - Victor
+- question_id: 65_q3
+  question: How long were they together?
+  expected_contains:
+  - four years
+- question_id: 65_q4
+  question: Who is her therapist?
+  expected_contains:
+  - Priya Roy
+- question_id: 65_q5
+  question: Where is Naima moving to?
+  expected_contains:
+  - Kezia
+- question_id: 65_q6
+  question: Where did we go for dinner?
+  expected_contains:
+  - Meskerem
+- question_id: 65_q7
+  question: Who is Naima's sister?
+  expected_contains:
+  - Kezia
+- question_id: 65_q8
+  question: Did I mention friend?
+  expected_contains:
+  - friend

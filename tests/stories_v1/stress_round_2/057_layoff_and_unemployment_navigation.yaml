@@ -1,0 +1,106 @@
+story_id: 57
+story_name: Layoff and Unemployment Navigation
+category: Career
+description: User is laid off, navigates severance, and starts job searching.
+duration_simulated: 5 weeks
+total_batches: 7
+batches:
+- batch: 1
+  time: Week 1 Tuesday 10:30 AM
+  user_input: I was laid off this morning along with about 400 other people at Zendesk. My last day is
+    the end of next week.
+  expected_stores:
+  - laid off
+  - 400 other people
+  - Zendesk
+  - end of next week
+  expected_adaptation:
+    emotion_detected: shock/sad
+    warmth_direction: increase
+    vulnerability: true
+- batch: 2
+  time: Week 1 Wednesday
+  user_input: The severance is 12 weeks base plus COBRA for three months. HR contact is Diane Park for
+    any questions.
+  expected_stores:
+  - severance
+  - 12 weeks base
+  - COBRA
+  - three months
+  - Diane Park
+  - HR
+- batch: 3
+  time: Week 2 Monday
+  user_input: I filed for unemployment through the Washington State ESD portal. Weekly benefit is 929
+    dollars up to 26 weeks.
+  expected_stores:
+  - unemployment
+  - Washington State ESD
+  - 929 dollars
+  - 26 weeks
+- batch: 4
+  time: Week 2 Thursday
+  user_input: Updated my LinkedIn and reached out to 15 people in my network. My friend Peter Okafor offered
+    to introduce me to the hiring manager at Datadog.
+  expected_stores:
+  - LinkedIn
+  - 15 people
+  - Peter Okafor
+  - Datadog
+  - hiring manager
+- batch: 5
+  time: Week 3 Wednesday
+  user_input: Do you know the population of Japan?
+- batch: 6
+  time: Week 4 Tuesday
+  user_input: I have two first-round interviews this week, one at Datadog and one at HashiCorp. The Datadog
+    hiring manager is Priya Bhattacharya.
+  expected_stores:
+  - two first-round interviews
+  - Datadog
+  - HashiCorp
+  - Priya Bhattacharya
+- batch: 7
+  time: Week 5 Friday
+  user_input: The Datadog interviews went well and I got moved to the onsite round next Tuesday. Feeling
+    more hopeful.
+  expected_stores:
+  - Datadog
+  - onsite round
+  - next Tuesday
+  expected_adaptation:
+    emotion_detected: hope
+    warmth_direction: increase
+questions:
+- question_id: 57_q1
+  question: Where did I get laid off from?
+  expected_contains:
+  - Zendesk
+- question_id: 57_q2
+  question: How many weeks of severance did I get?
+  expected_contains:
+  - '12'
+- question_id: 57_q3
+  question: Who is my HR contact?
+  expected_contains:
+  - Diane Park
+- question_id: 57_q4
+  question: How much is my weekly unemployment benefit?
+  expected_contains:
+  - '929'
+- question_id: 57_q5
+  question: Who introduced me to the Datadog hiring manager?
+  expected_contains:
+  - Peter Okafor
+- question_id: 57_q6
+  question: Who is the Datadog hiring manager?
+  expected_contains:
+  - Priya Bhattacharya
+- question_id: 57_q7
+  question: What round of Datadog interview is next?
+  expected_contains:
+  - onsite
+- question_id: 57_q8
+  question: How many weeks of COBRA coverage?
+  expected_contains:
+  - three months

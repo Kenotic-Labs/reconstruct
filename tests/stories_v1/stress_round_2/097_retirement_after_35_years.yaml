@@ -1,0 +1,92 @@
+story_id: 97
+story_name: Retirement After 35 Years
+category: Life Events
+description: User retires from their career after 35 years at the same company.
+duration_simulated: 3 months
+total_batches: 6
+batches:
+- batch: 1
+  time: Month 1 Week 1
+  user_input: I gave my notice today at Boeing after 35 years. My manager Elena Vasquez cried a little
+    — she's been my manager for 12 of those years.
+  expected_stores:
+  - notice
+  - Boeing
+  - 35 years
+  - Elena Vasquez
+  - '12'
+  expected_adaptation:
+    emotion_detected: bittersweet
+    warmth_direction: increase
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Met with HR to finalize retirement paperwork. Pension starts October 1. Health care transitions
+    to Medicare supplement.
+  expected_stores:
+  - HR
+  - pension
+  - October 1
+  - Medicare supplement
+- batch: 3
+  time: Month 2 Week 1
+  user_input: My team threw a retirement lunch at Ruby's Diner. 22 people came. Elena presented me with
+    a framed photo of my first project back in 1989 — a 747 landing gear redesign.
+  expected_stores:
+  - Ruby's Diner
+  - 22 people
+  - Elena
+  - '1989'
+  - 747 landing gear
+- batch: 4
+  time: Month 2 Week 2
+  user_input: What year did the Titanic sink?
+- batch: 5
+  time: Month 2 Week 4
+  user_input: Last day. Turned in my badge, packed my cube. My wife Linnea picked me up and we went straight
+    to the airport for a trip to Vancouver.
+  expected_stores:
+  - badge
+  - Linnea
+  - wife
+  - Vancouver
+  expected_adaptation:
+    emotion_detected: emotional
+    warmth_direction: increase
+- batch: 6
+  time: Month 3 Week 2
+  user_input: First month of retirement. Taking a woodworking class at the community college. Signed up
+    for a cooking intensive in Italy in the fall.
+  expected_stores:
+  - woodworking class
+  - cooking intensive
+  - Italy
+  - fall
+questions:
+- question_id: 97_q1
+  question: What company did I work at?
+  expected_contains:
+  - Boeing
+- question_id: 97_q2
+  question: How many years?
+  expected_contains:
+  - '35'
+- question_id: 97_q3
+  question: Who was my manager?
+  expected_contains:
+  - Elena Vasquez
+- question_id: 97_q4
+  question: Who is my wife?
+  expected_contains:
+  - Linnea
+- question_id: 97_q5
+  question: Where did we go after my last day?
+  expected_contains:
+  - Vancouver
+- question_id: 97_q6
+  question: What project was in the photo Elena gave me?
+  expected_contains:
+  - 747 landing gear
+- question_id: 97_q7
+  question: Did I mention notice?
+  expected_contains:
+  - notice

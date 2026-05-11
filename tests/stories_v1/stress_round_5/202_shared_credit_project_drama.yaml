@@ -1,0 +1,79 @@
+story_id: 202
+story_name: Shared Credit Project Drama
+category: Career
+description: User and teammate co-lead a project and a third person tries to claim credit.
+duration_simulated: 5 weeks
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My coworker Ignatius and I shipped the pricing overhaul together. My director Celia gave
+    us joint credit at the all hands.
+  expected_stores:
+  - Ignatius
+  - pricing overhaul
+  - Celia
+  - director
+- batch: 2
+  time: Week 2
+  user_input: Another manager Derek claimed the project was his team's idea originally. He is NOT on our
+    team. Ignatius and I pushed back.
+  expected_stores:
+  - Derek
+  - not on our team
+  - Ignatius
+- batch: 3
+  time: Week 3
+  user_input: What's the heaviest element?
+- batch: 4
+  time: Week 4
+  user_input: Celia investigated. She confirmed Ignatius and I initiated the project, NOT Derek. She sent
+    an email clarifying ownership.
+  expected_stores:
+  - Celia
+  - Ignatius
+  - not Derek
+- batch: 5
+  time: Week 5
+  user_input: Derek apologized at Celia's suggestion. Ignatius and I accepted it but aren't trusting him
+    again soon. Celia said she and I should have lunch.
+  expected_stores:
+  - Derek
+  - Ignatius
+  - Celia
+  expected_adaptation:
+    emotion_detected: vindicated
+    warmth_direction: increase
+questions:
+- question_id: 202_q1
+  question: Who is my coworker?
+  expected_contains:
+  - Ignatius
+- question_id: 202_q2
+  question: Who is my director?
+  expected_contains:
+  - Celia
+- question_id: 202_q3
+  question: Who tried to claim credit?
+  expected_contains:
+  - Derek
+- question_id: 202_q4
+  question: Was Derek on our team?
+  expected_contains:
+  - not
+- question_id: 202_q5
+  question: What was the project?
+  expected_contains:
+  - pricing overhaul
+- question_id: 202_q6
+  question: Did I mention director?
+  expected_contains:
+  - director
+- question_id: 202_q7
+  question: Did I mention not on our team?
+  expected_contains:
+  - not on our team
+- question_id: 202_q8
+  question: Did I mention not Derek?
+  expected_contains:
+  - not Derek

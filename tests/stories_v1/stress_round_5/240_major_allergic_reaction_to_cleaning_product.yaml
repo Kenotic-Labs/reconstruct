@@ -1,0 +1,75 @@
+story_id: 240
+story_name: Major Allergic Reaction to Cleaning Product
+category: Daily Life
+description: User has a severe skin reaction to a cleaning product.
+duration_simulated: 2 weeks
+total_batches: 5
+batches:
+- batch: 1
+  time: Day 1
+  user_input: Broke out in a rash after cleaning with a new product called Ecozap. My dermatologist Dr.
+    Xiomara Lin said it's contact dermatitis.
+  expected_stores:
+  - Ecozap
+  - Dr. Xiomara Lin
+  - dermatologist
+  - contact dermatitis
+- batch: 2
+  time: Day 3
+  user_input: Dr. Lin prescribed a steroid cream called clobetasol. Twice a day for 2 weeks.
+  expected_stores:
+  - Dr. Lin
+  - clobetasol
+  - twice a day
+  - 2 weeks
+- batch: 3
+  time: Week 1
+  user_input: What's the fastest animal in water?
+- batch: 4
+  time: Week 1 Friday
+  user_input: Rash is 70 percent gone. Dr. Lin said to keep applying. I am NOT using Ecozap again.
+  expected_stores:
+  - Dr. Lin
+  - 70 percent
+  - not using Ecozap
+- batch: 5
+  time: Week 2
+  user_input: All clear. Dr. Lin also referred me to an allergist Dr. Barnabas Kunkel to confirm the trigger
+    chemical.
+  expected_stores:
+  - Dr. Lin
+  - Dr. Barnabas Kunkel
+  - allergist
+questions:
+- question_id: 240_q1
+  question: What product caused the reaction?
+  expected_contains:
+  - Ecozap
+- question_id: 240_q2
+  question: Who is my dermatologist?
+  expected_contains:
+  - Xiomara Lin
+- question_id: 240_q3
+  question: What medication am I on?
+  expected_contains:
+  - clobetasol
+- question_id: 240_q4
+  question: Who is the allergist?
+  expected_contains:
+  - Barnabas Kunkel
+- question_id: 240_q5
+  question: Did I mention Dr. Xiomara Lin?
+  expected_contains:
+  - Dr. Xiomara Lin
+- question_id: 240_q6
+  question: Did I mention dermatologist?
+  expected_contains:
+  - dermatologist
+- question_id: 240_q7
+  question: Did I mention contact dermatitis?
+  expected_contains:
+  - contact dermatitis
+- question_id: 240_q8
+  question: Did I mention Dr. Lin?
+  expected_contains:
+  - Dr. Lin

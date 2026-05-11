@@ -1,0 +1,92 @@
+story_id: 124
+story_name: Preparing for LASIK Surgery
+category: Health
+description: User gets LASIK eye surgery and navigates recovery.
+duration_simulated: 6 weeks
+total_batches: 6
+batches:
+- batch: 1
+  time: Week 1
+  user_input: My optometrist Dr. Camille Leung referred me to LASIK surgeon Dr. Vincent Moreau. Consultation
+    is Friday.
+  expected_stores:
+  - Dr. Camille Leung
+  - optometrist
+  - Dr. Vincent Moreau
+  - LASIK
+  - Friday
+- batch: 2
+  time: Week 2
+  user_input: Dr. Moreau confirmed I'm a good candidate. Procedure scheduled for the 19th. Total cost
+    is 4600 dollars for both eyes.
+  expected_stores:
+  - Dr. Moreau
+  - 19th
+  - 4600 dollars
+- batch: 3
+  time: Week 3
+  user_input: What's the speed of sound?
+- batch: 4
+  time: Week 4 Day 19
+  user_input: Surgery done. Took about 20 minutes for both eyes. My brother Jamal drove me home. I can
+    already see better than with my glasses.
+  expected_stores:
+  - 20 minutes
+  - Jamal
+  - brother
+  expected_adaptation:
+    emotion_detected: amazed
+    warmth_direction: increase
+- batch: 5
+  time: Week 4 Day 20
+  user_input: Post-op check with Dr. Moreau. 20/20 in both eyes. Dry eyes are the main side effect for
+    now — using Refresh drops every hour.
+  expected_stores:
+  - Dr. Moreau
+  - 20/20
+  - Refresh drops
+  - every hour
+- batch: 6
+  time: Week 6
+  user_input: Final follow-up with Dr. Leung and Dr. Moreau. Vision is stable at 20/15 actually. First
+    time ever without glasses since first grade.
+  expected_stores:
+  - Dr. Leung
+  - Dr. Moreau
+  - 20/15
+  expected_adaptation:
+    emotion_detected: elated
+    warmth_direction: increase
+questions:
+- question_id: 124_q1
+  question: Who is my optometrist?
+  expected_contains:
+  - Camille Leung
+- question_id: 124_q2
+  question: Who performed the LASIK?
+  expected_contains:
+  - Vincent Moreau
+- question_id: 124_q3
+  question: Who drove me home?
+  expected_contains:
+  - Jamal
+- question_id: 124_q4
+  question: How much did LASIK cost?
+  expected_contains:
+  - '4600'
+- question_id: 124_q5
+  question: What is my final vision?
+  expected_contains:
+  - 20/15
+- question_id: 124_q6
+  question: How long did the surgery take?
+  expected_contains:
+  - 20 minutes
+- question_id: 124_q7
+  question: Did I mention Dr. Camille Leung?
+  expected_contains:
+  - Dr. Camille Leung
+- question_id: 124_q8
+  question: Did I mention optometrist?
+  expected_contains:
+  - optometrist

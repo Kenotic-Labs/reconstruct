@@ -1,0 +1,86 @@
+story_id: 160
+story_name: A Friend Who Keeps Canceling
+category: Relationships
+description: User processes a friend's repeated cancellations and has an honest conversation.
+duration_simulated: 2 months
+total_batches: 6
+batches:
+- batch: 1
+  time: Month 1 Week 1
+  user_input: My friend Bowen canceled our dinner plans again last night. Third time in six weeks. I'm
+    not furious yet but I'm noticing.
+  expected_stores:
+  - Bowen
+  - canceled
+  - third time
+  - six weeks
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Bowen texted apologizing. He said he's dealing with a lot with his partner Odalys. I told
+    him I appreciate the honesty and we'll reschedule.
+  expected_stores:
+  - Bowen
+  - Odalys
+  - partner
+- batch: 3
+  time: Month 1 Week 4
+  user_input: What's the largest organ in the human body?
+- batch: 4
+  time: Month 2 Week 1
+  user_input: Dinner with Bowen happened. He told me he and Odalys are in couples therapy. He was NOT
+    flaking out of disinterest — he was exhausted.
+  expected_stores:
+  - Bowen
+  - Odalys
+  - couples therapy
+  - not flaking out
+- batch: 5
+  time: Month 2 Week 2
+  user_input: I was relieved. I told Bowen I'm always around. He and I are going to try monthly dinners
+    until things calm down.
+  expected_stores:
+  - Bowen
+  - monthly dinners
+  expected_adaptation:
+    emotion_detected: caring
+    warmth_direction: increase
+- batch: 6
+  time: Month 2 Week 4
+  user_input: Bowen texted that couples therapy has been helping. He and Odalys are in a better place.
+    He also said thank you for not giving up on him.
+  expected_stores:
+  - Bowen
+  - Odalys
+questions:
+- question_id: 160_q1
+  question: Who is the friend who kept canceling?
+  expected_contains:
+  - Bowen
+- question_id: 160_q2
+  question: Who is his partner?
+  expected_contains:
+  - Odalys
+- question_id: 160_q3
+  question: What are they doing together?
+  expected_contains:
+  - couples therapy
+- question_id: 160_q4
+  question: What cadence are we trying?
+  expected_contains:
+  - monthly
+- question_id: 160_q5
+  question: Did I mention canceled?
+  expected_contains:
+  - canceled
+- question_id: 160_q6
+  question: Did I mention third time?
+  expected_contains:
+  - third time
+- question_id: 160_q7
+  question: Did I mention six weeks?
+  expected_contains:
+  - six weeks
+- question_id: 160_q8
+  question: Did I mention partner?
+  expected_contains:
+  - partner

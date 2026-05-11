@@ -1,0 +1,80 @@
+story_id: 174
+story_name: Pet Allergy Discovery
+category: Health
+description: User finds out their new allergy is to their cat.
+duration_simulated: 1 month
+total_batches: 5
+batches:
+- batch: 1
+  time: Week 1
+  user_input: I've been congested for three weeks. My allergist Dr. Bianca Ortiz ran a panel and the results
+    came back today.
+  expected_stores:
+  - three weeks
+  - Dr. Bianca Ortiz
+  - allergist
+- batch: 2
+  time: Week 2
+  user_input: I'm allergic to my own cat Misty. Dr. Ortiz said it's a moderate Fel d 1 reaction. I am
+    NOT giving her up.
+  expected_stores:
+  - Misty
+  - Dr. Ortiz
+  - Fel d 1
+  - not giving her up
+  expected_adaptation:
+    emotion_detected: sad but determined
+    warmth_direction: increase
+- batch: 3
+  time: Week 3
+  user_input: What's the fastest fish?
+- batch: 4
+  time: Week 3 Thursday
+  user_input: Started daily Zyrtec, HEPA filter for the bedroom, bathing Misty weekly. Dr. Ortiz said
+    these should help.
+  expected_stores:
+  - Zyrtec
+  - HEPA filter
+  - weekly
+  - Dr. Ortiz
+- batch: 5
+  time: Week 4
+  user_input: Congestion is 80 percent better. Misty is NOT a fan of weekly baths but she's tolerating
+    them. Our friendship survives.
+  expected_stores:
+  - 80 percent
+  - Misty
+  - not a fan
+questions:
+- question_id: 174_q1
+  question: Who is my allergist?
+  expected_contains:
+  - Bianca Ortiz
+- question_id: 174_q2
+  question: What is my cat's name?
+  expected_contains:
+  - Misty
+- question_id: 174_q3
+  question: Am I giving her up?
+  expected_contains:
+  - not
+- question_id: 174_q4
+  question: What medication am I taking?
+  expected_contains:
+  - Zyrtec
+- question_id: 174_q5
+  question: Did I mention three weeks?
+  expected_contains:
+  - three weeks
+- question_id: 174_q6
+  question: Did I mention Dr. Bianca Ortiz?
+  expected_contains:
+  - Dr. Bianca Ortiz
+- question_id: 174_q7
+  question: Did I mention allergist?
+  expected_contains:
+  - allergist
+- question_id: 174_q8
+  question: Did I mention Dr. Ortiz?
+  expected_contains:
+  - Dr. Ortiz

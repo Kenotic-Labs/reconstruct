@@ -1,0 +1,102 @@
+story_id: 78
+story_name: Studying for the Bar Exam
+category: Learning
+description: User prepares for the California Bar Exam in three months.
+duration_simulated: 3 months
+total_batches: 7
+batches:
+- batch: 1
+  time: Month 1 Week 1
+  user_input: Bar exam is in 12 weeks. I signed up for BarBri's full prep course. 3500 dollars. My study
+    partner is Noelle Aguirre from my law school.
+  expected_stores:
+  - Bar exam
+  - 12 weeks
+  - BarBri
+  - 3500 dollars
+  - Noelle Aguirre
+  - law school
+  expected_adaptation:
+    emotion_detected: nervous
+    warmth_direction: increase
+- batch: 2
+  time: Month 1 Week 3
+  user_input: Studying 8 hours a day, six days a week. Noelle and I quiz each other every Friday evening
+    on the week's subjects.
+  expected_stores:
+  - 8 hours a day
+  - six days a week
+  - Noelle
+  - Friday evening
+- batch: 3
+  time: Month 2 Week 1
+  user_input: Did my first full practice MBE — 200 multiple choice questions. Scored 140. Passing is around
+    138 so barely.
+  expected_stores:
+  - practice MBE
+  - 200 multiple choice
+  - '140'
+  - '138'
+- batch: 4
+  time: Month 2 Week 3
+  user_input: What's 15 percent of 200?
+- batch: 5
+  time: Month 3 Week 1
+  user_input: Wrote 6 practice essays this week. The one on corporations was weak — need to review agency
+    and piercing the veil.
+  expected_stores:
+  - 6 practice essays
+  - corporations
+  - agency
+  - piercing the veil
+- batch: 6
+  time: Month 3 Week 3
+  user_input: Final mock exam tomorrow. Then the real exam is in 10 days. Noelle and I are trading last
+    minute outlines.
+  expected_stores:
+  - final mock exam
+  - real exam
+  - 10 days
+  - Noelle
+- batch: 7
+  time: Month 3 Week 4
+  user_input: Exam done. Three days of essays, MBE, and performance test. I feel okay. Results come out
+    in November. Trying not to obsess.
+  expected_stores:
+  - three days
+  - essays
+  - MBE
+  - performance test
+  - November
+  expected_adaptation:
+    emotion_detected: exhausted/relieved
+    warmth_direction: increase
+questions:
+- question_id: 78_q1
+  question: What exam am I studying for?
+  expected_contains:
+  - Bar
+- question_id: 78_q2
+  question: What prep course am I using?
+  expected_contains:
+  - BarBri
+- question_id: 78_q3
+  question: Who is my study partner?
+  expected_contains:
+  - Noelle Aguirre
+- question_id: 78_q4
+  question: When do results come out?
+  expected_contains:
+  - November
+- question_id: 78_q5
+  question: How many hours a day am I studying?
+  expected_contains:
+  - '8'
+- question_id: 78_q6
+  question: What was my practice MBE score?
+  expected_contains:
+  - '140'
+- question_id: 78_q7
+  question: How much did the prep course cost?
+  expected_contains:
+  - '3500'
