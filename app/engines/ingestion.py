@@ -423,10 +423,19 @@ def cleanup(text: str, speaker: str = None) -> str:
         _CACHE[key] = ""
         return ""
 
-    # Pass 2: simplify / rewrite
-    result = _simplify(stripped)
-    if not result or not result.strip():
-        result = text.strip()
+    # Pass 2: grammar correction — skip if text is already clean.
+    # Clean text = spaCy didn't strip anything (no noise) and text has
+    # proper capitalization + punctuation. No point running a 250ms model
+    # on text that's already correct.
+    _text_changed = (stripped != text.strip())
+    _has_capitalization = stripped[0].isupper() if stripped else False
+    _has_punctuation = stripped[-1] in ".!?" if stripped else False
+    if not _text_changed and _has_capitalization and _has_punctuation:
+        result = stripped  # already clean — skip coedit
+    else:
+        result = _simplify(stripped)
+        if not result or not result.strip():
+            result = text.strip()
 
     _CACHE[key] = result
     return result

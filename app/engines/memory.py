@@ -305,6 +305,8 @@ class MemoryEngine:
         if not cleaned:
             return 0
 
+        from app.engines.grammar_engine import _get_nlp
+
         # -- Speaker resolution --
         def _resolve(tok: str) -> str:
             if not tok:
@@ -442,6 +444,7 @@ class MemoryEngine:
         """
         _check_entry()
         td = trace_decomposition
+        from app.engines.grammar_engine import _get_nlp
 
         # Fill S/P/O from decomposition if not provided directly
         if td is not None:
