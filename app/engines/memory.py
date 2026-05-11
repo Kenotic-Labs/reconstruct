@@ -139,20 +139,52 @@ class MemoryEngine:
     # Singular ingestion path
     # ------------------------------------------------------------------
 
+    @dataclass
+    class IngestionResult:
+        """Output of _run_ingestion_path — everything both engines produce."""
+        cleaned_text: str = ""
+        rows: list = field(default_factory=list)
+        grammar_result: Any = None
+        # Temporal engine outputs (None = NA, engine had nothing to say)
+        resolved_event_date: Optional[str] = None
+        temporal_expression: Optional[str] = None
+
     def _run_ingestion_path(
         self,
         text: str,
         speaker: Optional[str] = None,
-    ) -> Tuple[str, List[Tuple[str, str, str, Any]], Any]:
-        """The one write-path entry: cleanup -> grammar -> SPO/decomp rows."""
+        source_timestamp: Optional[str] = None,
+    ) -> "MemoryEngine.IngestionResult":
+        """The one write-path entry.
+
+        ingestion.cleanup() → clean text
+                                ↓           ↓
+                          grammar_engine   temporal_engine
+                           (traces/SPO)    (event date)
+                                ↓           ↓
+                          IngestionResult (merged)
+
+        Both engines receive the same clean text.
+        If an engine has nothing to return, its fields are None (NA).
+        Memory engine waits for both before writing.
+        """
+        result = self.IngestionResult()
+
         if not text or not text.strip():
-            return "", [], None
+            return result
 
         from app.engines.ingestion import cleanup as _cleanup
         from app.engines import grammar_engine as _grammar_eng
 
+        # ── Ingestion: messy text → clean English ──
         cleaned = _cleanup(text.strip(), speaker=speaker)
+        if not cleaned:
+            return result
+        result.cleaned_text = cleaned
+
+        # ── Grammar engine: clean text → traces, SPO, decompositions ──
         grammar_result = _grammar_eng.process(cleaned, speaker=speaker)
+        result.grammar_result = grammar_result
 
         rows: List[Tuple[str, str, str, Any]] = []
         decomps = grammar_result.trace_decompositions or []
@@ -170,9 +202,48 @@ class MemoryEngine:
                     decomp,
                 )
             )
+        result.rows = rows
 
-        final_text = grammar_result.resolved_text or cleaned
-        return final_text, rows, grammar_result
+        # ── Temporal engine: clean text → event date, temporal expression ──
+        try:
+            from app.engines.temporal import get_temporal_engine
+            _te = get_temporal_engine()
+
+            # Resolve event date from clean text
+            _resolved = _te.resolve_event_date(cleaned, source_timestamp)
+
+            # Fallback: grammar engine's temporal_expression
+            if not _resolved and decomps:
+                for d in decomps:
+                    _temp_expr = getattr(d, 'temporal_expression', None)
+                    if _temp_expr:
+                        _resolved = _te.resolve_event_date(
+                            _temp_expr, source_timestamp
+                        )
+                        if _resolved:
+                            break
+                    _temp_resolved = getattr(d, 'temporal_resolved', None)
+                    if _temp_resolved:
+                        _resolved = _temp_resolved
+                        break
+
+            # Final fallback: source_timestamp (session time)
+            if not _resolved and source_timestamp:
+                _resolved = source_timestamp
+
+            result.resolved_event_date = _resolved
+
+            # Grab temporal_expression from first decomp that has one
+            for d in decomps:
+                _te_expr = getattr(d, 'temporal_expression', None)
+                if _te_expr:
+                    result.temporal_expression = _te_expr
+                    break
+        except Exception as e:
+            log.warning("temporal engine failed during ingestion: %s", e)
+            # NA — temporal has nothing, memory writes without it
+
+        return result
 
     def clean(self, text: str) -> str:
         """Run the singular cleanup path used by live ingestion."""
@@ -183,9 +254,9 @@ class MemoryEngine:
 
     def extract(self, text: str) -> List[Tuple[str, str, str, bool]]:
         """Run the singular extraction path used by live ingestion."""
-        _, rows, _ = self._run_ingestion_path(text)
+        result = self._run_ingestion_path(text)
         extracted: List[Tuple[str, str, str, bool]] = []
-        for s, p, o, decomp in rows:
+        for s, p, o, decomp in result.rows:
             extracted.append(
                 (
                     s,
@@ -222,10 +293,17 @@ class MemoryEngine:
         if not text or not text.strip():
             return 0
 
-        cleaned, triples_with_decomp, _grammar_result = self._run_ingestion_path(
+        ingestion = self._run_ingestion_path(
             text,
             speaker=speaker,
+            source_timestamp=source_timestamp,
         )
+        cleaned = ingestion.cleaned_text
+        triples_with_decomp = ingestion.rows
+        _grammar_result = ingestion.grammar_result
+
+        if not cleaned:
+            return 0
 
         # -- Speaker resolution --
         def _resolve(tok: str) -> str:
@@ -260,10 +338,10 @@ class MemoryEngine:
                     _doc = _get_nlp()(obj_to_check.strip())
                     _CONTENT_POS = frozenset({"NOUN", "PROPN", "NUM", "ADJ", "VERB"})
                     _obj_lower = obj_to_check.strip().lower()
-                    # Skip indefinite pronouns
-                    if _obj_lower in ("everything", "something", "nothing",
-                                      "anything", "everyone", "someone",
-                                      "a lot", "a bit", "a while"):
+                    # Skip indefinite pronouns — spaCy POS=PRON or DET
+                    if len(_doc) <= 2 and all(
+                        tok.pos_ in ("PRON", "DET", "ADV", "ADP") for tok in _doc
+                    ):
                         continue
                     # Skip very short objects (< 3 chars)
                     if len(_obj_lower) < 3:
@@ -291,13 +369,15 @@ class MemoryEngine:
             if decomp is not None and speaker:
                 _rs = getattr(decomp, 'relational_subject', None) or ''
                 _rs_low = _rs.lower()
-                _pronoun_subjects = frozenset({
-                    "it", "this", "that", "there", "here",
-                    "user", "", "something", "everything",
-                    "what", "how", "why", "who", "where", "when",
-                    "which",
-                })
-                if not _rs or _rs_low in _pronoun_subjects:
+                # Check if relational_subject is a pronoun/placeholder via spaCy
+                _rs_is_placeholder = False
+                if not _rs or _rs_low == "" or _rs_low == "user":
+                    _rs_is_placeholder = True
+                else:
+                    _rs_doc = _get_nlp()(_rs_low)
+                    if _rs_doc and len(_rs_doc) == 1 and _rs_doc[0].pos_ in ("PRON", "DET", "ADV"):
+                        _rs_is_placeholder = True
+                if _rs_is_placeholder:
                     decomp.relational_subject = speaker
                 _ents = getattr(decomp, 'relational_entities', None) or []
                 if isinstance(_ents, list) and speaker not in _ents:
@@ -333,6 +413,7 @@ class MemoryEngine:
                 subject=resolved_s if has_spo else None,
                 predicate=p if has_spo else None,
                 object=resolved_o if has_spo else None,
+                resolved_event_date=ingestion.resolved_event_date,
             )
             if rel_id:
                 count += 1
@@ -353,6 +434,7 @@ class MemoryEngine:
         source_timestamp: Optional[str] = None,
         source_tag: Optional[str] = None,
         trace_decomposition: Any = None,
+        resolved_event_date: Optional[str] = None,
     ) -> int:
         """Three-phase store: PREPARE -> WRITE -> SIDE-EFFECTS.
 
@@ -387,25 +469,30 @@ class MemoryEngine:
         # ── Edge quality gate: filter garbage triples before storage ──
         # Reject edges with pronoun/determiner subjects, None objects,
         # or subject==object (grammar engine artifacts).
+        # Reject subjects that are pronouns/placeholders — via spaCy POS
         _subj_low = subject.lower()
-        _garbage_subjects = frozenset({
-            "it", "this", "that", "there", "here", "last",
-            "something", "everything", "nothing", "anyone",
-            "what", "how", "why", "who", "where", "when",
-            "which",
-        })
-        if _subj_low in _garbage_subjects:
+        _subj_is_garbage = False
+        if _subj_low:
+            _subj_doc = _get_nlp()(_subj_low)
+            if _subj_doc and len(_subj_doc) == 1:
+                _subj_is_garbage = _subj_doc[0].pos_ in ("PRON", "DET", "ADV", "SCONJ")
+        if _subj_is_garbage:
             # Resolve to speaker name from trace decomposition
             _speaker = getattr(td, 'relational_subject', None) if td else None
-            # The relational_subject might also be garbage ("It") —
-            # fall back to the speaker name from ingest_text.
-            if _speaker and _speaker.lower() not in _garbage_subjects and _speaker.lower() != 'user':
+            _speaker_ok = False
+            if _speaker and _speaker.lower() != 'user':
+                _sp_doc = _get_nlp()(_speaker.lower())
+                _speaker_ok = not (_sp_doc and len(_sp_doc) == 1
+                                   and _sp_doc[0].pos_ in ("PRON", "DET", "ADV"))
+            if _speaker_ok:
                 subject = _speaker
             else:
                 subject = ""  # will fail has_triple check below
-        # Clean "This X" / "That X" subjects → just "X"
-        if subject.lower().startswith(("this ", "that ", "the ")):
-            subject = subject.split(" ", 1)[1] if " " in subject else subject
+        # Strip leading determiners from subject via spaCy POS
+        if subject:
+            _subj_doc2 = _get_nlp()(subject)
+            if _subj_doc2 and len(_subj_doc2) > 1 and _subj_doc2[0].pos_ == "DET":
+                subject = "".join(tok.text_with_ws for tok in _subj_doc2[1:]).strip()
         # Reject subject==object
         if subject and object and subject.lower() == object.lower():
             object = ""
@@ -431,6 +518,7 @@ class MemoryEngine:
         edge_row, extraction_row = self._prepare_rows(
             user_id, td, subject, predicate, object, source_text,
             source_timestamp, source_tag, source_text_hash,
+            resolved_event_date=resolved_event_date,
         )
 
         try:
@@ -510,11 +598,8 @@ class MemoryEngine:
                 elif tier == "milestone" and td is not None:
                     self._append_milestone(conn, user_id, edge_id, td)
 
-                # 3f: Event date resolution (temporal engine)
-                self._resolve_event_date(
-                    conn, edge_id, source_text,
-                    source_timestamp, trace_decomposition,
-                )
+                # 3f: Event date — already resolved in _run_ingestion_path,
+                # written in Phase 1 PREPARE. No side-effect needed.
 
                 # 3g: Supersession detection (temporal engine)
                 try:
@@ -568,6 +653,7 @@ class MemoryEngine:
         source_timestamp: Optional[str],
         source_tag: Optional[str],
         source_text_hash: str,
+        resolved_event_date: Optional[str] = None,
     ) -> Tuple[Dict[str, Any], Dict[str, Any]]:
         """Prepare column values for edges + edge_extraction.
 
@@ -585,6 +671,8 @@ class MemoryEngine:
         edge["source_text"] = source_text
         edge["source_text_hash"] = source_text_hash
         edge["source_timestamp"] = source_timestamp
+        if resolved_event_date:
+            edge["resolved_event_date"] = resolved_event_date
 
         # ── edges: Five Traces (from grammar engine) ──
         if td is not None:

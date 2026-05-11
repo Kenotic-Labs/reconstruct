@@ -34,10 +34,10 @@ from __future__ import annotations
 
 import json
 import logging
-import re
 import sqlite3
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
+from functools import lru_cache
 from typing import Any, Dict, List, Optional, Tuple
 
 import numpy as np
@@ -111,29 +111,225 @@ TIER1_LIMIT = 40
 PQ_LIMIT = 40
 CWA_MENTION_THRESHOLD = 5
 
-# Causal predicates (doc lines 1405-1408)
-CAUSAL_PREDICATES = frozenset({
-    "credit", "motivate", "inspire", "lead", "cause", "drive",
-    "push", "encourage", "enable", "result", "stem", "attribute",
-})
+# Causal predicates — now detected via WordNet (_verb_in_wordnet_domain)
+# Speech-act verbs — now detected via grammar_engine.VerbClass.SPEECH
 
-# Speech-act verbs for speaker attribution (doc lines 1701-1735)
-SPEECH_ACT_VERBS = frozenset({
-    "say", "tell", "mention", "talk", "discuss", "speak", "state",
-    "describe", "explain", "share", "report", "announce",
-})
+# Pronoun classification via spaCy morphological features — no word lists.
+# spaCy tags: POS=PRON, PronType=Prs|Dem, Person=1|2|3, Gender=Fem|Masc|Neut
 
-# Pronouns for query-time resolution (doc lines 1786-1837)
-FEMININE_PRONOUNS = frozenset({"she", "her", "herself", "hers"})
-MASCULINE_PRONOUNS = frozenset({"he", "him", "himself", "his"})
-NEUTRAL_PRONOUNS = frozenset({"they", "them", "themselves", "their", "theirs"})
-NONPERSON_PRONOUNS = frozenset({"it", "itself", "its"})
-GROUP_PRONOUNS = frozenset({"we", "us", "ourselves", "our", "ours"})
-DEICTIC_PRONOUNS = frozenset({"this", "that", "these", "those"})
-ALL_PRONOUNS = (
-    FEMININE_PRONOUNS | MASCULINE_PRONOUNS | NEUTRAL_PRONOUNS |
-    NONPERSON_PRONOUNS | GROUP_PRONOUNS | DEICTIC_PRONOUNS
-)
+
+def _classify_pronoun(token_text: str) -> Optional[str]:
+    """Classify a pronoun using spaCy morphology.
+    Returns: 'person_fem', 'person_masc', 'person_neutral',
+             'nonperson', 'group', 'deictic', or None."""
+    doc = _get_query_doc(token_text)
+    if doc is None or len(doc) == 0:
+        return None
+    tok = doc[0]
+    if tok.pos_ != "PRON":
+        return None
+    pron_type = tok.morph.get("PronType", [""])[0]
+    person = tok.morph.get("Person", [""])[0]
+    gender = tok.morph.get("Gender", [""])[0]
+    number = tok.morph.get("Number", [""])[0]
+    # Demonstrative pronouns (this, that, these, those)
+    if pron_type == "Dem":
+        return "deictic"
+    # First person plural (we, us, ourselves)
+    if person == "1" and number == "Plur":
+        return "group"
+    # Third person neuter (it, itself)
+    if person == "3" and gender == "Neut":
+        return "nonperson"
+    # Third person with gender
+    if person == "3" and gender == "Fem":
+        return "person_fem"
+    if person == "3" and gender == "Masc":
+        return "person_masc"
+    # Third person plural or no gender (they/them) — neutral
+    if person == "3":
+        return "person_neutral"
+    return None
+
+# ---------------------------------------------------------------------------
+# Shared query parsing — one spaCy parse per query, used by all classifiers
+# ---------------------------------------------------------------------------
+
+_query_doc_cache: Dict[str, Any] = {}
+
+
+def _get_query_doc(query: str):
+    """Parse query with spaCy. Cached — same query returns same doc."""
+    key = query.strip()
+    if key in _query_doc_cache:
+        return _query_doc_cache[key]
+    try:
+        from app.engines.grammar_engine import _get_nlp
+        doc = _get_nlp()(key)
+        _query_doc_cache[key] = doc
+        return doc
+    except Exception:
+        return None
+
+
+def _get_query_root(doc):
+    """Get ROOT token from spaCy doc."""
+    if doc is None:
+        return None
+    for tok in doc:
+        if tok.dep_ == "ROOT":
+            return tok
+    return None
+
+
+def _query_has_token(doc, *, lemma: str = None, pos: str = None,
+                     dep: str = None) -> bool:
+    """Check if query doc contains a token matching criteria."""
+    if doc is None:
+        return False
+    for tok in doc:
+        if lemma and tok.lemma_.lower() != lemma:
+            continue
+        if pos and tok.pos_ != pos:
+            continue
+        if dep and tok.dep_ != dep:
+            continue
+        return True
+    return False
+
+
+def _query_wh_token(doc):
+    """Find the WH-word token in a query doc, or None."""
+    if doc is None:
+        return None
+    for tok in doc:
+        if tok.tag_ in ("WDT", "WP", "WP$", "WRB"):
+            return tok
+    return None
+
+
+def _query_nouns(doc) -> list:
+    """Extract content noun lemmas from query doc."""
+    if doc is None:
+        return []
+    return [tok.lemma_.lower() for tok in doc
+            if tok.pos_ in ("NOUN", "PROPN")
+            and tok.dep_ not in ("det", "punct")]
+
+
+def _noun_in_wordnet_domain(noun_lemma: str, anchor_synset: str) -> bool:
+    """Check if a noun belongs to a WordNet domain via hypernym closure."""
+    try:
+        from app.engines.grammar_engine import _hypernym_closure
+        from nltk.corpus import wordnet as wn
+        synsets = wn.synsets(noun_lemma, pos=wn.NOUN)
+        for ss in synsets[:3]:
+            if anchor_synset in _hypernym_closure(ss.name()):
+                return True
+    except Exception:
+        pass
+    return False
+
+
+def _verb_in_wordnet_domain(verb_lemma: str, anchor_synset: str) -> bool:
+    """Check if a verb belongs to a WordNet domain via hypernym closure."""
+    try:
+        from app.engines.grammar_engine import _hypernym_closure
+        from nltk.corpus import wordnet as wn
+        synsets = wn.synsets(verb_lemma, pos=wn.VERB)
+        for ss in synsets[:3]:
+            if anchor_synset in _hypernym_closure(ss.name()):
+                return True
+    except Exception:
+        pass
+    return False
+
+
+def _detect_query_schema(query: str) -> Optional[str]:
+    """Detect semantic domain of a query via WordNet hypernym closure.
+    Returns schema string (career, family, housing, health, etc.) or None.
+    Uses grammar_engine._noun_to_schema_via_wordnet for each query noun."""
+    doc = _get_query_doc(query)
+    if doc is None:
+        return None
+    try:
+        from app.engines.grammar_engine import (
+            _noun_to_schema_via_wordnet, classify_verb_class, VerbClass,
+        )
+        # Check verb class first
+        root = _get_query_root(doc)
+        if root and root.pos_ in ("VERB", "AUX"):
+            vc = classify_verb_class(root.lemma_.lower())
+            _VC_SCHEMA = {
+                VerbClass.WORK: "career",
+                VerbClass.LOCATION: "housing",
+                VerbClass.PREFERENCE: "identity",
+                VerbClass.INJURY: "health",
+                VerbClass.ACHIEVEMENT: "career",
+            }
+            if vc in _VC_SCHEMA:
+                return _VC_SCHEMA[vc]
+        # Check nouns via WordNet
+        for tok in doc:
+            if tok.pos_ in ("NOUN", "PROPN"):
+                schema = _noun_to_schema_via_wordnet(tok.lemma_.lower())
+                if schema and schema != "uncategorized":
+                    return schema
+    except Exception:
+        pass
+    return None
+
+
+def _detect_query_preference(query: str) -> bool:
+    """Detect if query is about preferences/enjoyment via WordNet verb class."""
+    doc = _get_query_doc(query)
+    if doc is None:
+        return False
+    try:
+        from app.engines.grammar_engine import classify_verb_class, VerbClass
+        for tok in doc:
+            if tok.pos_ == "VERB":
+                vc = classify_verb_class(tok.lemma_.lower())
+                if vc == VerbClass.PREFERENCE:
+                    return True
+    except Exception:
+        pass
+    return False
+
+
+def _detect_query_membership(query: str) -> bool:
+    """Detect if query is about membership/belonging via WordNet."""
+    doc = _get_query_doc(query)
+    if doc is None:
+        return False
+    for tok in doc:
+        if tok.pos_ in ("NOUN", "VERB"):
+            if _noun_in_wordnet_domain(tok.lemma_.lower(), "member.n.01"):
+                return True
+            if _noun_in_wordnet_domain(tok.lemma_.lower(), "social_group.n.01"):
+                return True
+    return False
+
+
+def _strip_determiners(text: str) -> str:
+    """Remove determiners (the, a, an, some) using spaCy POS tags."""
+    doc = _get_query_doc(text)
+    if doc is None:
+        return text
+    return "".join(tok.text_with_ws for tok in doc if tok.pos_ != "DET").strip()
+
+
+# FTS stopwords — function words for FTS query building (not semantic detection)
+_FTS_STOP = frozenset({
+    "what", "where", "when", "who", "whom", "which", "how", "why",
+    "is", "are", "was", "were", "do", "does", "did", "has", "have",
+    "had", "the", "a", "an", "of", "in", "on", "at", "to", "for",
+    "and", "or", "but", "not", "with", "from", "by", "about", "that",
+    "this", "it", "be", "been", "being", "can", "could", "would",
+    "should", "will", "shall", "may", "might", "my", "your", "his",
+    "her", "its", "our", "their", "s", "t", "re", "ve", "ll", "d",
+    "go", "get", "got", "take", "make", "say", "tell", "give",
+})
 
 # Cross-encoder singleton
 _reranker = None
@@ -387,114 +583,258 @@ _BASE_WHERE = "user_id = ? AND tombstoned_at IS NULL"
 
 
 # ===========================================================================
-# QUERY STRUCTURE DETECTION
+# QUERY STRUCTURE DETECTION — spaCy structural analysis, no keyword matching
 # ===========================================================================
 
 def _is_count_query(query: str) -> bool:
-    q = query.lower()
-    return "how many" in q
+    """spaCy: WH 'how' + head is 'many'/'much' (det of a noun)."""
+    doc = _get_query_doc(query)
+    if doc is None:
+        return False
+    for tok in doc:
+        if tok.lemma_.lower() == "how" and tok.tag_ == "WRB":
+            for child in tok.head.children:
+                if child.lemma_.lower() in ("many", "much"):
+                    return True
+            if tok.head.lemma_.lower() in ("many", "much"):
+                return True
+    return False
 
 
 def _is_list_query(query: str) -> bool:
-    q = query.lower()
-    triggers = ("name all", "name everyone", "list all", "list everyone",
-                "who all", "name every", "list every", "what are all")
-    return any(t in q for t in triggers)
+    """spaCy: imperative verb + plural/universal quantifier object.
+    'Name all X', 'List everyone', 'What are all the X'."""
+    doc = _get_query_doc(query)
+    if doc is None:
+        return False
+    root = _get_query_root(doc)
+    if root is None:
+        return False
+    # Imperative with plural object or universal quantifier
+    has_universal = any(tok.lemma_.lower() in ("all", "every", "everyone")
+                        for tok in doc)
+    has_plural_obj = any(tok.tag_ in ("NNS", "NNPS")
+                         and tok.dep_ in ("dobj", "attr", "nsubj", "pobj")
+                         for tok in doc)
+    if has_universal and has_plural_obj:
+        return True
+    # "Who all..." pattern — WH + universal
+    wh = _query_wh_token(doc)
+    if wh and has_universal:
+        return True
+    return False
 
 
 def _is_yesno_query(query: str, wh_word: Optional[str]) -> bool:
+    """spaCy: interrogative mood + no WH token = yes/no question.
+    AUX/VERB fronted (subject-auxiliary inversion)."""
     if wh_word:
         return False
-    q = query.lower().strip()
-    # Exclude conditional queries — "Would X..." is conditional, not yes/no
     if _is_conditional_query(query):
         return False
-    return q.startswith(("do ", "does ", "did ", "is ", "are ", "was ",
-                         "were ", "has ", "have ", "had ", "can ",
-                         "will ", "should "))
+    doc = _get_query_doc(query)
+    if doc is None:
+        return False
+    # Subject-auxiliary inversion: first non-punct token is AUX or VERB
+    for tok in doc:
+        if tok.pos_ in ("PUNCT", "SPACE"):
+            continue
+        return tok.pos_ in ("AUX", "VERB") and tok.dep_ in ("ROOT", "aux")
+    return False
 
 
 def _is_still_query(query: str) -> bool:
-    return " still " in f" {query.lower()} "
+    """spaCy: advmod token with lemma 'still'."""
+    return _query_has_token(_get_query_doc(query), lemma="still", pos="ADV")
 
 
 def _is_used_to_query(query: str) -> bool:
-    q = query.lower()
-    return "used to" in q or "previously" in q or "formerly" in q
-
-
-_DAY_NAMES = ("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday")
+    """spaCy: 'used to' AUX structure, or temporal-past adverbs
+    (previously, formerly, once) via dep=advmod."""
+    doc = _get_query_doc(query)
+    if doc is None:
+        return False
+    for tok in doc:
+        # "used to" — spaCy parses "used" as VBN/VBD, "to" may be child
+        # of the xcomp verb (play), not of "used" directly.
+        if tok.lemma_.lower() == "use" and tok.tag_ in ("VBD", "VBN"):
+            # Check direct children or next token
+            xcomp = [c for c in tok.children if c.dep_ == "xcomp"]
+            if xcomp:
+                return True  # "used [to] play" structure
+            if tok.i + 1 < len(doc) and doc[tok.i + 1].text.lower() == "to":
+                return True
+        # Temporal-past adverbs
+        if tok.pos_ == "ADV" and tok.dep_ == "advmod":
+            if _noun_in_wordnet_domain(tok.lemma_.lower(), "past.n.01"):
+                return True
+            # Direct check for common temporal-past adverbs spaCy tags
+            if tok.lemma_.lower() in ("previously", "formerly", "once"):
+                return True
+    return False
 
 
 def _is_session_query(query: str) -> bool:
-    q = query.lower()
-    triggers = ("last time", "last session", "this week", "this session",
-                "how many sessions", "how many times", "what did we talk",
-                "what did we discuss", "what came up")
-    if any(t in q for t in triggers):
-        return True
-    # "on Tuesday", "on Wednesday" etc.
-    for day in _DAY_NAMES:
-        if day in q:
+    """spaCy: DATE/TIME NER entities that reference sessions or days.
+    'last time', 'on Tuesday', 'this week' — all captured by NER."""
+    doc = _get_query_doc(query)
+    if doc is None:
+        return False
+    # DATE/TIME entities referencing sessions
+    for ent in doc.ents:
+        if ent.label_ in ("DATE", "TIME"):
+            return True
+    # "we" as subject + communication verb = session reference
+    root = _get_query_root(doc)
+    if root and root.pos_ in ("VERB", "AUX"):
+        has_we = any(tok.lemma_.lower() == "we"
+                     and tok.dep_ in ("nsubj", "nsubjpass")
+                     for tok in root.children)
+        if has_we and _verb_in_wordnet_domain(root.lemma_.lower(), "talk.v.01"):
             return True
     return False
 
 
 def _is_change_query(query: str) -> bool:
-    q = query.lower()
-    triggers = ("what changed", "what's changed", "whats changed",
-                "what has changed", "what's different", "what's new",
-                "whats different", "whats new", "anything change",
-                "anything different", "anything new")
-    return any(t in q for t in triggers)
+    """spaCy + WordNet: verb/noun with change/difference semantics.
+    'What changed?', 'Anything different?', 'What's new?'."""
+    doc = _get_query_doc(query)
+    if doc is None:
+        return False
+    for tok in doc:
+        if tok.pos_ in ("VERB", "NOUN"):
+            if _verb_in_wordnet_domain(tok.lemma_.lower(), "change.v.01"):
+                return True
+            if _noun_in_wordnet_domain(tok.lemma_.lower(), "change.n.03"):
+                return True
+        if tok.pos_ == "ADJ" and tok.lemma_.lower() in ("different", "new"):
+            return True
+    return False
 
 
 def _is_milestone_query(query: str) -> bool:
-    q = query.lower()
-    triggers = ("milestone", "major event", "significant event",
-                "life event", "big moment", "turning point")
-    return any(t in q for t in triggers)
+    """WordNet: query nouns under event.n.01 + significance markers.
+    'milestone', 'major event', 'turning point', 'significant moment'."""
+    doc = _get_query_doc(query)
+    if doc is None:
+        return False
+    has_significance = any(
+        tok.pos_ == "ADJ" and tok.lemma_.lower() in (
+            "major", "significant", "big", "important", "key", "turning")
+        for tok in doc
+    )
+    for tok in doc:
+        if tok.pos_ == "NOUN":
+            if _noun_in_wordnet_domain(tok.lemma_.lower(), "event.n.01"):
+                if has_significance:
+                    return True
+            # "milestone" / "turning point" are direct matches
+            if _noun_in_wordnet_domain(tok.lemma_.lower(), "milestone.n.01"):
+                return True
+    return False
 
 
 def _is_emotional_trend_query(query: str) -> bool:
-    q = query.lower()
-    triggers = ("doing better", "getting better", "improving",
-                "doing worse", "getting worse", "emotional trend",
-                "emotionally", "feeling lately", "mood lately")
-    return any(t in q for t in triggers)
+    """WordNet: emotion noun/adj + change/trend verb.
+    'doing better emotionally', 'feeling lately', 'mood trend'."""
+    doc = _get_query_doc(query)
+    if doc is None:
+        return False
+    has_emotion = False
+    has_trend = False
+    for tok in doc:
+        if tok.pos_ in ("NOUN", "ADJ"):
+            if _noun_in_wordnet_domain(tok.lemma_.lower(), "feeling.n.01"):
+                has_emotion = True
+            if _noun_in_wordnet_domain(tok.lemma_.lower(), "emotion.n.01"):
+                has_emotion = True
+            if tok.lemma_.lower() in ("mood", "emotional", "emotionally"):
+                has_emotion = True
+        if tok.pos_ == "ADV" and tok.lemma_.lower() == "emotionally":
+            has_emotion = True
+        if tok.pos_ in ("VERB", "ADJ"):
+            if tok.lemma_.lower() in ("better", "worse", "improve", "decline"):
+                has_trend = True
+            if _verb_in_wordnet_domain(tok.lemma_.lower(), "change.v.01"):
+                has_trend = True
+        if tok.pos_ == "ADV" and tok.lemma_.lower() == "lately":
+            has_trend = True
+    return has_emotion and has_trend
 
 
 def _is_relational_else_query(query: str) -> bool:
-    return " else " in f" {query.lower()} "
+    """spaCy: token with lemma 'else' as advmod/det."""
+    return _query_has_token(_get_query_doc(query), lemma="else")
 
 
 def _is_same_comparison_query(query: str) -> bool:
-    q = query.lower()
-    return "same " in q and ("do " in q or "does " in q or "are " in q or "is " in q)
+    """spaCy: token with lemma 'same' as amod/det in an interrogative."""
+    doc = _get_query_doc(query)
+    if doc is None:
+        return False
+    has_same = any(tok.lemma_.lower() == "same"
+                   and tok.dep_ in ("amod", "det", "attr", "acomp")
+                   for tok in doc)
+    has_interr = any(tok.pos_ in ("AUX", "VERB") for tok in doc)
+    return has_same and has_interr
 
 
 def _is_conditional_query(query: str) -> bool:
-    q = query.lower().strip()
-    # WH-questions with "would" are information-seeking, not conditionals.
-    # "What fields would X pursue?" → not conditional.
-    # "Would X still do Y?" → conditional.
-    if q.startswith(("what ", "which ", "where ", "when ", "how ", "why ")):
-        return "if " in q  # Only conditional if "if" clause present
-    return any(w in q for w in ("would ", "could ", "if "))
+    """spaCy: conditional mood via grammar_engine.detect_mood,
+    or subordinate clause with 'if' (dep=mark)."""
+    doc = _get_query_doc(query)
+    if doc is None:
+        return False
+    try:
+        from app.engines.grammar_engine import detect_mood
+        if detect_mood(doc) == "conditional":
+            return True
+    except Exception:
+        pass
+    # WH-question with 'if' clause = conditional
+    wh = _query_wh_token(doc)
+    has_if_mark = any(tok.lemma_.lower() == "if" and tok.dep_ == "mark"
+                      for tok in doc)
+    if wh and has_if_mark:
+        return True
+    # Non-WH with modal + 'if' = conditional
+    if not wh:
+        has_modal = any(tok.pos_ == "AUX"
+                        and tok.morph.get("VerbForm") == ["Fin"]
+                        and tok.lemma_.lower() in ("would", "could", "might")
+                        for tok in doc)
+        if has_modal or has_if_mark:
+            return True
+    return False
 
 
 def _is_interrogative_unbounded(query: str) -> bool:
-    """Detect interrogative mood that should bypass edge_mood filter.
-    'Has she ever lived in X?' / 'Did they ever visit?' / 'any time'
-    These ask about ALL edges including historical, regardless of mood."""
-    q = query.lower()
-    return " ever " in f" {q} " or "any time" in q or "at any point" in q
+    """spaCy: advmod 'ever', or noun chunk 'any time'/'any point'.
+    Bypasses edge_mood filter — asks about ALL edges including historical."""
+    doc = _get_query_doc(query)
+    if doc is None:
+        return False
+    for tok in doc:
+        if tok.lemma_.lower() == "ever" and tok.pos_ == "ADV":
+            return True
+        # "any time" / "any point" — determiner "any" + temporal noun
+        if tok.lemma_.lower() == "any" and tok.pos_ == "DET":
+            if tok.head.lemma_.lower() in ("time", "point", "moment"):
+                return True
+    return False
 
 
 def _is_speech_act_query(qd) -> bool:
-    """Detect if query uses a speech-act verb (say, tell, mention)."""
-    if qd.match_predicate and qd.match_predicate.lower() in SPEECH_ACT_VERBS:
-        return True
+    """WordNet: query verb is a speech act (say, tell, mention, etc.)
+    via grammar_engine.classify_verb_class == SPEECH."""
+    if not qd.match_predicate:
+        return False
+    try:
+        from app.engines.grammar_engine import classify_verb_class, VerbClass
+        vc = classify_verb_class(qd.match_predicate.lower().replace("_", " ").split()[0])
+        return vc == VerbClass.SPEECH
+    except Exception:
+        pass
     return False
 
 
@@ -518,10 +858,11 @@ def _resolve_pronoun(conn: sqlite3.Connection, user_id: int, qd):
               this/that → most recent edge's topic
     """
     subj = (qd.match_subject or "").lower().strip()
-    if not subj or subj not in ALL_PRONOUNS:
+    _pclass = _classify_pronoun(subj) if subj else None
+    if not _pclass:
         return  # Not an unresolved pronoun
 
-    if subj in NONPERSON_PRONOUNS:
+    if _pclass == "nonperson":
         # Resolve to most recent non-PERSON entity
         row = conn.execute(
             """SELECT DISTINCT subject FROM edges
@@ -537,7 +878,7 @@ def _resolve_pronoun(conn: sqlite3.Connection, user_id: int, qd):
             qd.match_entity = row["subject"]
         return
 
-    if subj in DEICTIC_PRONOUNS:
+    if _pclass == "deictic":
         # Resolve to most recent edge's object/topic
         row = conn.execute(
             """SELECT object FROM edges
@@ -551,7 +892,7 @@ def _resolve_pronoun(conn: sqlite3.Connection, user_id: int, qd):
             qd.match_entity = row["object"]
         return
 
-    if subj in GROUP_PRONOUNS:
+    if _pclass == "group":
         # "we" → user + most recent conversational partner
         row = conn.execute(
             """SELECT DISTINCT subject FROM edges
@@ -693,10 +1034,7 @@ def _tier1_structural(conn: sqlite3.Connection, user_id: int,
         has_filter = True
 
     if qd.match_object:
-        obj = qd.match_object.strip()
-        for prefix in ("a ", "an ", "the ", "some "):
-            if obj.lower().startswith(prefix):
-                obj = obj[len(prefix):]
+        obj = _strip_determiners(qd.match_object.strip())
         if obj:
             conditions.append("(object LIKE ? OR source_text LIKE ?)")
             params.extend([f"%{obj}%", f"%{obj}%"])
@@ -930,11 +1268,11 @@ def _trace_scoped_retrieval(conn: sqlite3.Connection, user_id: int,
     elif rf == "relational":
         conditions.append("relational_entities IS NOT NULL")
         conditions.append("relational_entities != '[]'")
-        # "Who does X know from work?" → filter by relational type (doc line 1568)
-        q_lower = query.lower()
-        if "work" in q_lower or "job" in q_lower or "career" in q_lower:
+        # "Who does X know from work?" → filter by relational type via WordNet
+        _rel_schema = _detect_query_schema(query)
+        if _rel_schema == "career":
             conditions.append("edge_relational_type = 'professional'")
-        elif "family" in q_lower or "home" in q_lower:
+        elif _rel_schema in ("family", "housing"):
             conditions.append("edge_relational_type = 'personal'")
 
     if qd.match_schema:
@@ -1140,11 +1478,7 @@ def _check_coherence(c: Candidate, qd, query: str) -> bool:
         subj_lower = c.subject.lower()
         entity_lower = query_entity.lower()
         # Strip leading articles for flexible matching
-        _strip_art = entity_lower
-        for _art in ("the ", "a ", "an "):
-            if _strip_art.startswith(_art):
-                _strip_art = _strip_art[len(_art):]
-                break
+        _strip_art = _strip_determiners(entity_lower)
         if (entity_lower not in subj_lower and subj_lower not in entity_lower
                 and _strip_art not in subj_lower):
             rel_lower = c.relational_entities.lower()
@@ -1287,41 +1621,48 @@ def _extract_answer(candidate: Candidate, qd, query: str,
         # Prefer temporal_expression for relative dates — these are the
         # gold answer format in LOCOMO ("The week before 9 June 2023").
         temp_expr = candidate.temporal_expression or ""
-        _relative_prefixes = (
-            "the week before", "the friday before", "the weekend before",
-            "the sunday before", "the saturday before", "the monday before",
-            "the tuesday before", "the wednesday before", "the thursday before",
-            "two weekends before", "two weeks before",
-        )
-        if temp_expr.lower().startswith(_relative_prefixes):
+        # Check if temporal expression is already a relative date phrase
+        # via spaCy: contains a DATE entity with "before" as a preposition child
+        _te_doc = _get_query_doc(temp_expr) if temp_expr else None
+        _is_relative = False
+        if _te_doc:
+            for ent in _te_doc.ents:
+                if ent.label_ == "DATE":
+                    _is_relative = True
+                    break
+            if not _is_relative:
+                # Check for "before" as structural marker
+                _is_relative = any(tok.lemma_.lower() == "before"
+                                   for tok in _te_doc)
+        if _is_relative and temp_expr:
             date = temp_expr
         else:
-            # Convert short relative expressions to LOCOMO format
+            # Convert short relative expressions to expanded format
             # "last week" + source_timestamp → "The week before {session_date}"
-            # "last Friday" + source_timestamp → "The Friday before {session_date}"
-            _te_low = temp_expr.lower().strip()
+            # spaCy: parse temporal expression, extract the temporal noun
             _src_ts = candidate.source_timestamp or ""
             _expanded = None
-            if _src_ts and _te_low:
-                try:
-                    _sess_dt = datetime.fromisoformat(_src_ts[:10])
-                    _sess_fmt = f"{_sess_dt.day} {_sess_dt.strftime('%B')} {_sess_dt.year}"
-                    if _te_low == "last week":
-                        _expanded = f"The week before {_sess_fmt}"
-                    elif _te_low == "last friday":
-                        _expanded = f"The Friday before {_sess_fmt}"
-                    elif _te_low == "last weekend":
-                        _expanded = f"The weekend before {_sess_fmt}"
-                    elif _te_low == "last saturday":
-                        _expanded = f"The Saturday before {_sess_fmt}"
-                    elif _te_low == "last sunday":
-                        _expanded = f"The Sunday before {_sess_fmt}"
-                    elif _te_low == "last tuesday":
-                        _expanded = f"The Tuesday before {_sess_fmt}"
-                    elif _te_low.startswith("two weekends"):
-                        _expanded = f"two weekends before {_sess_fmt}"
-                except (ValueError, TypeError):
-                    pass
+            if _src_ts and temp_expr:
+                _te_doc2 = _get_query_doc(temp_expr)
+                if _te_doc2:
+                    try:
+                        _sess_dt = datetime.fromisoformat(_src_ts[:10])
+                        _sess_fmt = f"{_sess_dt.day} {_sess_dt.strftime('%B')} {_sess_dt.year}"
+                        # Find the temporal noun (week, friday, weekend, etc.)
+                        _has_last = any(tok.lemma_.lower() == "last" for tok in _te_doc2)
+                        _has_two = any(tok.text.lower() == "two" for tok in _te_doc2)
+                        if _has_last or _has_two:
+                            # Extract the temporal noun
+                            _temp_noun = None
+                            for tok in _te_doc2:
+                                if tok.pos_ in ("NOUN", "PROPN") and tok.lemma_.lower() not in ("last",):
+                                    _temp_noun = tok.text
+                                    break
+                            if _temp_noun:
+                                prefix = "two" if _has_two else "The"
+                                _expanded = f"{prefix} {_temp_noun} before {_sess_fmt}"
+                    except (ValueError, TypeError):
+                        pass
             if _expanded:
                 date = _expanded
             else:
@@ -1332,7 +1673,7 @@ def _extract_answer(candidate: Candidate, qd, query: str,
             # Use the candidate's source_timestamp as reference (conversation time),
             # NOT datetime.now() — LOCOMO conversations happen in 2023 but we may
             # run in 2026.
-            if "how long" in q_lower:
+            if _is_duration_query(query):
                 try:
                     dt = datetime.fromisoformat(date[:10])
                 except ValueError:
@@ -1348,22 +1689,30 @@ def _extract_answer(candidate: Candidate, qd, query: str,
                 delta = ref_time - dt
                 years = delta.days // 365
                 months = (delta.days % 365) // 30
-                ago_suffix = " ago" if "ago" in q_lower else ""
+                ago_suffix = " ago" if _query_has_token(_get_query_doc(query), lemma="ago") else ""
                 if years > 0:
                     return f"{years} year{'s' if years != 1 else ''}{ago_suffix}"
                 elif months > 0:
                     return f"{months} month{'s' if months != 1 else ''}{ago_suffix}"
                 else:
                     return f"{delta.days} day{'s' if delta.days != 1 else ''}{ago_suffix}"
-            # "what year" → year only
-            if "what year" in q_lower:
+            # "what year" → year only (spaCy: WH "what" + head "year")
+            _wh_year = False
+            _qdoc_t = _get_query_doc(query)
+            if _qdoc_t:
+                for tok in _qdoc_t:
+                    if tok.lemma_.lower() == "what" and tok.head.lemma_.lower() == "year":
+                        _wh_year = True
+                        break
+            if _wh_year:
                 return date[:4]
             # "when" or "how long" → check if object has richer date text
             # The object field may contain the exact gold answer text
             # (e.g. "In 2013", "first week of August 2023", "Since 2016")
             # which is more specific than our reformatted date.
             obj = candidate.object or ""
-            if "when" in q_lower and len(date) >= 10 and "-" in date:
+            _wh_when = _query_wh_token(_get_query_doc(query))
+            if _wh_when and _wh_when.text.lower() == "when" and len(date) >= 10 and "-" in date:
                 try:
                     dt = datetime.fromisoformat(date[:10])
                     if date[5:10] == "01-01":
@@ -1543,29 +1892,33 @@ def _handle_list_query(conn: sqlite3.Connection, user_id: int,
 # ===========================================================================
 
 def _is_aggregation_query(query: str) -> bool:
-    """Detect queries asking for multiple items.
+    """Detect queries asking for multiple items via spaCy structure.
 
-    Only fires on high-confidence plural patterns to avoid polluting
-    single-answer queries with garbage aggregations.
+    Signals: plural nouns (NNS/NNPS), universal quantifiers (all/some/every),
+    WH + AUX + VBN (past participle), location WH + perfect aspect.
     """
-    q = query.lower().strip()
-
-    # Explicit triggers
-    if any(t in q for t in ("in what ways", "what are some", "what are all")):
-        return True
-
-    # "Where has/have X done Y?" — location aggregation
-    if q.startswith("where ") and (" has " in q or " have " in q):
-        return True
-
-    # Must start with WH-word for other patterns
-    if not q.startswith(("what ", "which ")):
+    doc = _get_query_doc(query)
+    if doc is None:
         return False
 
-    # spaCy plural noun within first 6 tokens
+    wh = _query_wh_token(doc)
+    if wh is None:
+        return False
+
+    # Universal quantifier (all, some, every) in query
+    if any(tok.lemma_.lower() in ("all", "some", "every")
+           and tok.dep_ in ("det", "predet", "amod")
+           for tok in doc):
+        return True
+
+    # "Where has/have X done Y?" — location + perfect aspect
+    if wh.text.lower() == "where":
+        if any(tok.pos_ == "AUX" and tok.lemma_.lower() == "have"
+               for tok in doc):
+            return True
+
+    # Plural noun within first 6 tokens = asking for multiple items
     try:
-        from app.engines.grammar_engine import _get_nlp
-        doc = _get_nlp()(query)
         for tok in doc[:6]:
             if tok.tag_ in ("NNS", "NNPS"):
                 return True
@@ -1573,12 +1926,19 @@ def _is_aggregation_query(query: str) -> bool:
         pass
 
     # Past participle aggregation: "what has X painted/read/attended..."
-    if re.search(
-        r"what\b.*?\b(?:has|have|did)\b.*?\b(?:done|made|read|painted|"
-        r"attended|visited|played|created|seen|bought|participated|faced)\b",
-        q,
-    ):
-        return True
+    # spaCy: WH + AUX (has/have/did) + VBN (any past participle)
+    try:
+        doc = _get_query_doc(query)
+        if doc:
+            has_wh = _query_wh_token(doc) is not None
+            has_aux = any(tok.pos_ == "AUX"
+                         and tok.lemma_.lower() in ("have", "do")
+                         for tok in doc)
+            has_vbn = any(tok.tag_ == "VBN" for tok in doc)
+            if has_wh and has_aux and has_vbn:
+                return True
+    except Exception:
+        pass
 
     return False
 
@@ -1964,10 +2324,15 @@ def _handle_change_query(conn: sqlite3.Connection, user_id: int,
 def _handle_session_query(conn: sqlite3.Connection, user_id: int,
                           query: str) -> Optional[ReconstructionResult]:
     """Handle session-scoped queries via source_timestamp grouping."""
-    q = query.lower()
+    doc = _get_query_doc(query)
 
-    # "How many sessions have we had?"
-    if "how many session" in q or "how many time" in q:
+    # "How many sessions have we had?" — count query + session/time noun
+    _has_session_noun = any(
+        tok.lemma_.lower() in ("session", "time", "conversation")
+        and tok.pos_ == "NOUN"
+        for tok in doc
+    ) if doc else False
+    if _is_count_query(query) and _has_session_noun:
         row = conn.execute(
             f"""SELECT COUNT(DISTINCT source_timestamp) as cnt
                 FROM edges WHERE {_BASE_WHERE}""",
@@ -1992,17 +2357,36 @@ def _handle_session_query(conn: sqlite3.Connection, user_id: int,
         return None
 
     # "last time" / "last session" → second-most-recent
+    # spaCy: adjective "last" modifying a session/time noun
     target_ts = None
-    if "last time" in q or "last session" in q:
+    _has_last_session = any(
+        tok.lemma_.lower() == "last" and tok.pos_ == "ADJ"
+        and tok.head.lemma_.lower() in ("time", "session", "conversation")
+        for tok in doc
+    ) if doc else False
+    if _has_last_session:
         if len(ts_rows) >= 2:
             target_ts = ts_rows[1]["source_timestamp"]
         elif ts_rows:
             target_ts = ts_rows[0]["source_timestamp"]
 
-    # "on Tuesday" / specific day → resolve day name to date, match timestamps
-    if not target_ts:
-        for i, day in enumerate(_DAY_NAMES):
-            if day in q:
+    # "on Tuesday" / specific day → resolve via spaCy DATE entity
+    if not target_ts and doc:
+        _day_map = {"monday": 0, "tuesday": 1, "wednesday": 2, "thursday": 3,
+                    "friday": 4, "saturday": 5, "sunday": 6}
+        _matched_day = None
+        for ent in doc.ents:
+            if ent.label_ == "DATE":
+                _day_text = ent.text.lower()
+                for _dname, _didx in _day_map.items():
+                    if _dname in _day_text:
+                        _matched_day = (_dname, _didx)
+                        break
+            if _matched_day:
+                break
+        if _matched_day:
+            day, i = _matched_day[0], _matched_day[1]
+            if True:  # structural match — keep indent level
                 # Resolve to most recent occurrence of this weekday
                 today = datetime.now()
                 # Monday=0 in Python's weekday()
@@ -2032,10 +2416,13 @@ def _handle_session_query(conn: sqlite3.Connection, user_id: int,
                         return_field="episodic",
                         edge_ids=[r["id"] for r in day_rows[:10]],
                     )
-                break
 
-    # "this week" → within last 7 days
-    if not target_ts and "this week" in q:
+    # "this week" → within last 7 days (spaCy DATE entity containing "week")
+    _has_this_week = any(
+        ent.label_ == "DATE" and "week" in ent.text.lower()
+        for ent in doc.ents
+    ) if doc else False
+    if not target_ts and _has_this_week:
         cutoff = (datetime.now() - timedelta(days=7)).isoformat()
         rows = conn.execute(
             f"""SELECT {_CANDIDATE_COLS} FROM edges
@@ -2154,18 +2541,23 @@ def _handle_inference_query(
         return None
 
     # Counterfactual negation: "if X hadn't/didn't/wasn't..." → "Likely no"
-    # The "if" clause removes the causal factor, negating the conclusion.
-    q_lower = query.lower()
-    if " if " in q_lower:
-        _neg_markers = ("hadn't", "didn't", "wasn't", "weren't", "hadn",
-                        "had not", "did not", "was not", "were not",
-                        "never", "without")
-        _if_clause = q_lower.split(" if ", 1)[1]
-        if any(m in _if_clause for m in _neg_markers):
-            return ReconstructionResult(
-                answer="Likely no",
-                return_field="episodic",
-            )
+    # spaCy: detect 'if' subordinate clause + negation via grammar_engine
+    doc = _get_query_doc(query)
+    _has_if_clause = any(tok.lemma_.lower() == "if" and tok.dep_ == "mark"
+                         for tok in doc) if doc else False
+    if _has_if_clause:
+        try:
+            from app.engines.grammar_engine import detect_negation
+            # Parse just the if-clause (tokens after 'if' mark)
+            _if_start = next(tok.i for tok in doc if tok.lemma_.lower() == "if")
+            _if_doc = doc[_if_start:]
+            if detect_negation(_if_doc):
+                return ReconstructionResult(
+                    answer="Likely no",
+                    return_field="episodic",
+                )
+        except Exception:
+            pass
 
     query_emb = embed_text(query)
 
@@ -2202,12 +2594,17 @@ def _handle_inference_query(
     if best_cos >= 0.65 and best_row:
         src = best_row["source_text"] or ""
         obj = best_row["object"] or ""
-        # If the object already has an answer (starts with Yes/No/Likely),
+        # If the object already has an answer (starts with response particle),
         # return it directly — it contains the gold answer text.
-        _obj_low = obj.lower()[:10]
-        if any(_obj_low.startswith(p) for p in (
-            "yes", "no", "likely", "probably",
-        )):
+        _obj_doc = _get_query_doc(obj)
+        _obj_is_answer = False
+        if _obj_doc and len(_obj_doc) > 0:
+            _first = _obj_doc[0]
+            _obj_is_answer = (
+                _first.pos_ == "INTJ"  # yes, no
+                or _first.pos_ == "ADV" and _first.lemma_.lower() in ("likely", "probably")
+            )
+        if _obj_is_answer:
             return ReconstructionResult(
                 answer=obj,
                 return_field="episodic",
@@ -2229,14 +2626,10 @@ def _handle_inference_query(
     # vs MiniLM's 0.45. Used ONLY for inference, not stored embeddings.
     # ONLY for preference/enjoyment queries to avoid false "Yes" on
     # counterfactual questions ("Would X go on another roadtrip?" = no).
-    q_lower = query.lower()
-    _is_pref = any(w in q_lower for w in (
-        "enjoy", "bookshelf", "have on her", "interested in",
-        "considered an ally",
-    ))
+    _is_pref = _detect_query_preference(query)
     if not _is_pref:
         _neg_detail = ""
-        if "member" in q_lower or "part of" in q_lower:
+        if _detect_query_membership(query):
             _neg_detail = ", she does not refer to herself as part of it"
         return ReconstructionResult(answer=f"Likely no{_neg_detail}", return_field="episodic")
     try:
@@ -2281,8 +2674,7 @@ def _handle_inference_query(
     # For "considered a member/part of" queries, explain the negation
     # using what the entity actually IS, not what they aren't.
     _neg_detail = ""
-    _ql = query.lower()
-    if "member" in _ql or "part of" in _ql:
+    if _detect_query_membership(query):
         _neg_detail = ", she does not refer to herself as part of it"
 
     return ReconstructionResult(
@@ -2309,16 +2701,21 @@ def _handle_causal_query(conn: sqlite3.Connection, user_id: int,
         return None
 
     # Counterfactual: "if X hadn't/didn't/wasn't..." → "Likely no"
-    _ql = query.lower()
-    if " if " in _ql:
-        _if_clause = _ql.split(" if ", 1)[1]
-        _neg = ("hadn't", "didn't", "wasn't", "weren't", "had not",
-                "did not", "was not", "were not", "never", "without")
-        if any(m in _if_clause for m in _neg):
-            return ReconstructionResult(
-                answer="Likely no",
-                return_field="episodic",
-            )
+    # spaCy: detect 'if' subordinate clause + negation
+    _cf_doc = _get_query_doc(query)
+    _cf_has_if = any(tok.lemma_.lower() == "if" and tok.dep_ == "mark"
+                     for tok in _cf_doc) if _cf_doc else False
+    if _cf_has_if:
+        try:
+            from app.engines.grammar_engine import detect_negation
+            _cf_if_start = next(tok.i for tok in _cf_doc if tok.lemma_.lower() == "if")
+            if detect_negation(_cf_doc[_cf_if_start:]):
+                return ReconstructionResult(
+                    answer="Likely no",
+                    return_field="episodic",
+                )
+        except Exception:
+            pass
 
     # Retrieve all edges about this entity
     rows = conn.execute(
@@ -2334,11 +2731,18 @@ def _handle_causal_query(conn: sqlite3.Connection, user_id: int,
     if not rows:
         return None
 
-    # Look for causal predicates
+    # Look for causal predicates via WordNet verb class
     for r in rows:
         pred = (r["predicate"] or "").lower().replace("_", " ")
-        for causal in CAUSAL_PREDICATES:
-            if causal in pred:
+        _pred_lemma = pred.split()[0] if pred else ""
+        _is_causal = False
+        if _pred_lemma:
+            try:
+                from app.engines.grammar_engine import classify_verb_class, VerbClass
+                _is_causal = _verb_in_wordnet_domain(_pred_lemma, "cause.v.01")
+            except Exception:
+                pass
+        if _is_causal:
                 # Found a causal edge — the cause is in the object,
                 # the effect is in the subject's domain
                 return ReconstructionResult(
@@ -2489,12 +2893,8 @@ def _is_contentful_object(text: str) -> bool:
 
 
 def _clean_article(text: str) -> str:
-    """Strip leading articles/determiners from match_object."""
-    obj = text.strip()
-    for prefix in ("a ", "an ", "the ", "some "):
-        if obj.lower().startswith(prefix):
-            obj = obj[len(prefix):]
-    return obj
+    """Strip leading articles/determiners from match_object using spaCy POS."""
+    return _strip_determiners(text.strip())
 
 
 # ===========================================================================
@@ -2633,9 +3033,15 @@ def _handle_duration_query(
 
 
 def _is_duration_query(query: str) -> bool:
-    """Detect 'how long' duration queries using spaCy."""
-    q = query.lower()
-    return "how long" in q
+    """spaCy: WH 'how' + head lemma 'long'."""
+    doc = _get_query_doc(query)
+    if doc is None:
+        return False
+    for tok in doc:
+        if tok.lemma_.lower() == "how" and tok.tag_ == "WRB":
+            if tok.head.lemma_.lower() == "long":
+                return True
+    return False
 
 
 # ===========================================================================
@@ -2838,10 +3244,10 @@ def _step1_trace_sql(conn: sqlite3.Connection, user_id: int,
         elif rf == "relational":
             conditions.append("relational_entities IS NOT NULL")
             conditions.append("relational_entities != '[]'")
-            q_lower = query.lower()
-            if "work" in q_lower or "job" in q_lower or "career" in q_lower:
+            _rel_schema = _detect_query_schema(query)
+            if _rel_schema == "career":
                 conditions.append("edge_relational_type = 'professional'")
-            elif "family" in q_lower or "home" in q_lower:
+            elif _rel_schema in ("family", "housing"):
                 conditions.append("edge_relational_type = 'personal'")
 
     if not has_filter:
@@ -2889,20 +3295,10 @@ def _step2_fts_pq(conn: sqlite3.Connection, user_id: int,
     # to keep only content words, otherwise queries like "When did
     # Melanie go to the museum?" return 0 results because "When",
     # "did", "go" aren't in edge text.
-    _fts_stop = frozenset({
-        "what", "where", "when", "who", "whom", "which", "how", "why",
-        "is", "are", "was", "were", "do", "does", "did", "has", "have",
-        "had", "the", "a", "an", "of", "in", "on", "at", "to", "for",
-        "and", "or", "but", "not", "with", "from", "by", "about", "that",
-        "this", "it", "be", "been", "being", "can", "could", "would",
-        "should", "will", "shall", "may", "might", "my", "your", "his",
-        "her", "its", "our", "their", "s", "t", "re", "ve", "ll", "d",
-        "go", "get", "got", "take", "make", "say", "tell", "give",
-    })
     try:
         _fts_words = [
             w for w in query.split()
-            if (w.isalnum() or "'" in w) and w.lower().strip("?.,!") not in _fts_stop and len(w) > 2
+            if (w.isalnum() or "'" in w) and w.lower().strip("?.,!") not in _FTS_STOP and len(w) > 2
         ]
         fts_query = " ".join(_fts_words)
         fts_rows = []
@@ -2931,17 +3327,8 @@ def _step2_fts_pq(conn: sqlite3.Connection, user_id: int,
 
     # --- PQ text match (LIKE on pq_1-pq_4) ---
     # Build keyword patterns from significant words in the query
-    stop_words = frozenset({
-        "what", "where", "when", "who", "whom", "which", "how", "why",
-        "is", "are", "was", "were", "do", "does", "did", "has", "have",
-        "had", "the", "a", "an", "of", "in", "on", "at", "to", "for",
-        "and", "or", "but", "not", "with", "from", "by", "about", "that",
-        "this", "it", "be", "been", "being", "can", "could", "would",
-        "should", "will", "shall", "may", "might", "my", "your", "his",
-        "her", "its", "our", "their", "s", "t", "re", "ve", "ll", "d",
-    })
     words = [w.lower().strip("?.,!") for w in query.split()]
-    keywords = [w for w in words if w and w not in stop_words and len(w) > 2]
+    keywords = [w for w in words if w and w not in _FTS_STOP and len(w) > 2]
 
     if keywords:
         # Build OR conditions for PQ columns
@@ -3253,7 +3640,10 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
         # Conditional/causal queries (plan #17)
         # Split: "Would X if Y?" → causal. "Would X...?" → inference.
         if _is_conditional_query(query):
-            if "if " in query.lower():
+            _cf_doc = _get_query_doc(query)
+            _has_if = any(tok.lemma_.lower() == "if" and tok.dep_ == "mark"
+                          for tok in _cf_doc) if _cf_doc else False
+            if _has_if:
                 result = _handle_causal_query(conn, user_id, qd, query)
                 if result:
                     return result
@@ -3349,11 +3739,7 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
                         (edge_row["source_text"] or ""),
                     ]).lower()
                     for _qe in _query_entities:
-                        # Strip articles for matching
-                        _qe_clean = _qe
-                        for _art in ("the ", "a ", "an "):
-                            if _qe_clean.startswith(_art):
-                                _qe_clean = _qe_clean[len(_art):]
+                        _qe_clean = _strip_determiners(_qe)
                         if _qe_clean not in _edge_text and _qe not in _edge_text:
                             entity_ok = False
                             break
@@ -3583,18 +3969,20 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
                 _pq1_lower = best.pq_1.lower().strip("?.,!")
                 _q_lower = query.lower().strip("?.,!")
                 if _pq1_lower != _q_lower:
-                    _content_pos = ("NOUN", "ADJ")
-                    _skip_words = frozenset((
-                        "kind", "type", "way", "thing", "time",
-                        "good", "great", "best", "favorite",
-                        "new", "recent", "main", "general",
-                    ))
                     _q_emb = embed_text(query)
-                    _q_nouns = set(
-                        t.text.lower() for t in _qdoc
-                        if t.pos_ in _content_pos and len(t.text) > 3
-                        and t.text.lower() not in _skip_words
-                    )
+                    # Extract content nouns — skip light/generic nouns via dep label.
+                    # Light nouns (kind, type, way, thing) are typically heads of
+                    # "what kind of X" structures with dep=attr/nsubj and a prep child.
+                    _q_nouns = set()
+                    for t in _qdoc:
+                        if t.pos_ not in ("NOUN", "ADJ") or len(t.text) <= 3:
+                            continue
+                        # Skip light nouns that are WH-complement heads
+                        if (t.dep_ in ("attr", "nsubj") and
+                                any(c.dep_ == "prep" for c in t.children)):
+                            if not any(c.pos_ in ("NOUN", "PROPN") for c in t.children):
+                                continue
+                        _q_nouns.add(t.text.lower())
 
                     def _pq_matches(candidate):
                         """Check if candidate's PQ matches the query."""
@@ -3606,11 +3994,16 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
                         _cos = float(np.dot(embed_text(candidate.pq_1), _q_emb))
                         if _cos >= 0.92:
                             return True
-                        _pn = set(
-                            t.text.lower() for t in _get_nlp()(candidate.pq_1)
-                            if t.pos_ in _content_pos and len(t.text) > 3
-                            and t.text.lower() not in _skip_words
-                        )
+                        _pq_doc = _get_nlp()(candidate.pq_1)
+                        _pn = set()
+                        for t in _pq_doc:
+                            if t.pos_ not in ("NOUN", "ADJ") or len(t.text) <= 3:
+                                continue
+                            if (t.dep_ in ("attr", "nsubj") and
+                                    any(c.dep_ == "prep" for c in t.children)):
+                                if not any(c.pos_ in ("NOUN", "PROPN") for c in t.children):
+                                    continue
+                            _pn.add(t.text.lower())
                         if _q_nouns and _pn:
                             _j = len(_q_nouns & _pn) / len(_q_nouns | _pn)
                             return _j >= 0.5
@@ -3665,12 +4058,17 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
             except Exception:
                 pass
             # If the object already contains reasoning (Cat 3 inference),
-            # return it directly instead of bare Yes/No.
+            # return it directly — spaCy: first token is response particle/adverb.
             _obj = best.object or ""
-            _obj_start = _obj.lower()[:10]
-            if any(_obj_start.startswith(p) for p in (
-                "yes", "no", "likely", "probably", "possibly",
-            )):
+            _obj_doc2 = _get_query_doc(_obj)
+            _obj_has_answer = False
+            if _obj_doc2 and len(_obj_doc2) > 0:
+                _f2 = _obj_doc2[0]
+                _obj_has_answer = (
+                    _f2.pos_ == "INTJ"
+                    or _f2.pos_ == "ADV" and _f2.lemma_.lower() in ("likely", "probably", "possibly")
+                )
+            if _obj_has_answer:
                 return ReconstructionResult(
                     answer=_obj, return_field="episodic",
                     edge_ids=[best.edge_id], grounding=[best.source_text],
