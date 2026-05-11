@@ -233,12 +233,17 @@ class MemoryEngine:
 
             result.resolved_event_date = _resolved
 
-            # Grab temporal_expression from first decomp that has one
-            for d in decomps:
-                _te_expr = getattr(d, 'temporal_expression', None)
-                if _te_expr:
-                    result.temporal_expression = _te_expr
-                    break
+            # Extract temporal_expression from clean text via spaCy NER.
+            # This is temporal engine's job, not grammar engine's.
+            try:
+                from app.engines.grammar_engine import _get_nlp
+                _te_doc = _get_nlp()(cleaned)
+                for ent in _te_doc.ents:
+                    if ent.label_ in ("DATE", "TIME"):
+                        result.temporal_expression = ent.text
+                        break
+            except Exception:
+                pass
         except Exception as e:
             log.warning("temporal engine failed during ingestion: %s", e)
             # NA — temporal has nothing, memory writes without it
@@ -407,6 +412,7 @@ class MemoryEngine:
                 predicate=p if has_spo else None,
                 object=resolved_o if has_spo else None,
                 resolved_event_date=ingestion.resolved_event_date,
+                temporal_expression=ingestion.temporal_expression,
             )
             if rel_id:
                 count += 1
@@ -428,6 +434,7 @@ class MemoryEngine:
         source_tag: Optional[str] = None,
         trace_decomposition: Any = None,
         resolved_event_date: Optional[str] = None,
+        temporal_expression: Optional[str] = None,
     ) -> int:
         """Three-phase store: PREPARE -> WRITE -> SIDE-EFFECTS.
 
@@ -503,6 +510,7 @@ class MemoryEngine:
             user_id, td, subject, predicate, object, source_text,
             source_timestamp, source_tag, source_text_hash,
             resolved_event_date=resolved_event_date,
+            temporal_expression=temporal_expression,
         )
 
         try:
@@ -638,6 +646,7 @@ class MemoryEngine:
         source_tag: Optional[str],
         source_text_hash: str,
         resolved_event_date: Optional[str] = None,
+        temporal_expression: Optional[str] = None,
     ) -> Tuple[Dict[str, Any], Dict[str, Any]]:
         """Prepare column values for edges + edge_extraction.
 
@@ -700,8 +709,8 @@ class MemoryEngine:
             # Temporal state
             edge["is_historical"] = 1 if getattr(td, 'is_historical', False) else 0
 
-            # Temporal expression + relational entities
-            edge["temporal_expression"] = getattr(td, 'temporal_expression', None)
+            # Temporal expression from temporal engine (not grammar engine)
+            edge["temporal_expression"] = temporal_expression or getattr(td, 'temporal_expression', None)
             edge["episodic_fact"] = getattr(td, 'episodic_fact', None) or None
             _rel_subj = getattr(td, 'relational_subject', None)
             _rel_ents = getattr(td, 'relational_entities', None) or []
@@ -1008,7 +1017,7 @@ class MemoryEngine:
         for name in names:
             try:
                 existing = conn.execute(
-                    "SELECT id, mention_count FROM entities WHERE user_id = ? AND name = ?",
+                    "SELECT id, mention_count, entity_type FROM entities WHERE user_id = ? AND name = ?",
                     (user_id, name),
                 ).fetchone()
                 if existing:
@@ -1016,10 +1025,29 @@ class MemoryEngine:
                         "UPDATE entities SET mention_count = mention_count + 1 WHERE id = ?",
                         (existing["id"],),
                     )
+                    # Resolve type if not yet set
+                    if not existing["entity_type"]:
+                        try:
+                            from app.engines.type_resolver import resolve_entity_type
+                            _etype = resolve_entity_type(name)
+                            if _etype and _etype != "GENERIC":
+                                conn.execute(
+                                    "UPDATE entities SET entity_type = ? WHERE id = ?",
+                                    (_etype, existing["id"]),
+                                )
+                        except Exception:
+                            pass
                 else:
+                    # Resolve entity type at first insert
+                    _etype = None
+                    try:
+                        from app.engines.type_resolver import resolve_entity_type
+                        _etype = resolve_entity_type(name)
+                    except Exception:
+                        pass
                     conn.execute(
-                        "INSERT INTO entities (user_id, name, mention_count) VALUES (?, ?, 1)",
-                        (user_id, name),
+                        "INSERT INTO entities (user_id, name, mention_count, entity_type) VALUES (?, ?, 1, ?)",
+                        (user_id, name, _etype),
                     )
             except Exception:
                 pass
