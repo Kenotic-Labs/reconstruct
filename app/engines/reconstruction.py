@@ -2759,9 +2759,13 @@ def _handle_causal_query(conn: sqlite3.Connection, user_id: int,
         _pred_lemma = pred.split()[0] if pred else ""
         _is_causal = False
         if _pred_lemma:
-            # Causal verbs span multiple WordNet hypernym paths —
-            # no single anchor covers them. Use multiple anchors.
-            _CAUSAL_ANCHORS = ("cause.v.01", "induce.v.02", "change.v.01", "act.v.01")
+            # Causal verbs span multiple WordNet hypernym paths.
+            # 8 anchors cover the full semantic field: causation,
+            # attribution, production, motion, origination.
+            _CAUSAL_ANCHORS = (
+                "cause.v.01", "induce.v.02", "change.v.01", "act.v.01",
+                "impute.v.01", "produce.v.03", "move.v.02", "originate_in.v.01",
+            )
             for _ca in _CAUSAL_ANCHORS:
                 if _verb_in_wordnet_domain(_pred_lemma, _ca):
                     _is_causal = True
