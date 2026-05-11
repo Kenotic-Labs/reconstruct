@@ -1451,29 +1451,22 @@ def _extract_answer(candidate: Candidate, qd, query: str,
             return obj
         return candidate.subject or ""
 
-    # Default: episodic
-    # Object field may contain pronouns ("them"), determiners ("this"),
-    # or empty fragments from grammar engine extraction. When the object
-    # isn't a contentful noun phrase, fall back to source_text.
-    # Use spaCy POS tagging to detect — no word lists.
+    # Default: episodic — use the richest trace field.
     obj = candidate.object or ""
+    ef = candidate.episodic_fact or ""
     src = candidate.source_text or ""
 
+    # Episodic_fact is the verb-phrase trace — richer than object
+    # for short objects. "ran a charity race for mental health"
+    # vs "a charity race for mental health".
+    if ef and len(ef) < 80 and len(obj.split()) <= 5:
+        return ef
+
     if obj.strip() and _is_contentful_object(obj):
-        # For short objects (≤2 tokens), prefer episodic_fact if it's richer.
-        # episodic_fact includes the verb phrase: "got into an accident"
-        # vs object "an accident". Better F1 against gold answers.
-        # Safe for hand-populated DB because hand-crafted objects are already
-        # multi-token and won't trigger this.
-        ef = candidate.episodic_fact or ""
-        if (prefer_source and ef and len(obj.split()) <= 3
-                and len(ef.split()) > len(obj.split()) + 1
-                and len(ef) < 80):
-            return ef
         return obj
 
-    if candidate.episodic_fact:
-        return candidate.episodic_fact
+    if ef:
+        return ef
 
     return src
 
