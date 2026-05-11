@@ -1061,6 +1061,7 @@ def _apply_ranking_signals(candidates: List[Candidate], query: str,
     if qd.match_predicate:
         query_pred_emb = embed_text(qd.match_predicate.lower())
 
+
     for c in candidates:
         ce_score = c.score  # Cross-encoder score (already set by _rerank)
 
