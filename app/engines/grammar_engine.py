@@ -1717,14 +1717,8 @@ def _extract_temporal(doc, tense_aspect: TenseAspect) -> Tuple[str, Optional[str
 
     # Frequency adverbs: detected via WordNet or primitive quantifiers.
     # WordNet: if adverb stem (strip -ly) is noun.time → frequency (daily, weekly, monthly)
-    # Primitive quantifiers: always, never, usually, rarely, seldom, occasionally
-    # — these 6 are the complete set of non-derived English frequency quantifiers.
-    _PRIMITIVE_FREQ = frozenset({"always", "never", "usually", "rarely", "seldom", "occasionally"})
-
     def _is_frequency_adverb(tok):
-        if tok.lemma_.lower() in _PRIMITIVE_FREQ:
-            return True
-        # Check if stem is a time noun in WordNet
+        # Check if stem is a time noun in WordNet (daily→day, weekly→week)
         stem = tok.lemma_.lower().rstrip("ly")
         if stem != tok.lemma_.lower():
             try:
@@ -2521,14 +2515,21 @@ def _extract_traces_from_sentence(
 
     # Gap 4: Light verb predicate delegation.
     # "took a shower" -> pred=shower instead of pred=take.
-    # Light verbs: 6 English verbs whose meaning comes from their dobj, not themselves.
-    # "take a shower" = shower. "make a decision" = decide. Closed class — unchanged for centuries.
-    _LIGHT_VERB_PRED = frozenset({"do", "have", "take", "make", "give", "get"})
-    if (_pred_root and root_lemma.lower() in _LIGHT_VERB_PRED
-            and not particle):
+    # Light verb delegation: if dobj is a noun.act (action noun) in WordNet,
+    # the dobj carries the meaning, not the verb. "take a shower" → predicate=shower.
+    # Structural check — no verb list needed.
+    if _pred_root and not particle:
         for child in _pred_root.children:
-            if child.dep_ == "dobj":
-                root_lemma = child.lemma_
+            if child.dep_ == "dobj" and child.pos_ == "NOUN":
+                try:
+                    _ensure_wordnet()
+                    from nltk.corpus import wordnet as _wn_light
+                    for _ss in _wn_light.synsets(child.lemma_, pos=_wn_light.NOUN)[:2]:
+                        if _ss.lexname() == "noun.act":
+                            root_lemma = child.lemma_
+                            break
+                except Exception:
+                    pass
                 break
 
     # Particle already computed from content_root (line above)
