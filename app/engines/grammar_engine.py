@@ -1335,6 +1335,20 @@ def _is_3p(tok): return tok.pos_ == "PRON" and "3" in tok.morph.get("Person", []
 def _is_reflex(tok): return tok.pos_ == "PRON" and "Yes" in tok.morph.get("Reflex", [])
 def _is_subordinator(tok): return tok.pos_ == "SCONJ" and tok.dep_ == "mark"
 
+def _is_frequency_adverb(tok):
+    """Frequency adverb: stem (strip -ly) is noun.time in WordNet."""
+    stem = tok.lemma_.lower().rstrip("ly")
+    if stem != tok.lemma_.lower():
+        try:
+            _ensure_wordnet()
+            from nltk.corpus import wordnet as _wn_freq
+            for ss in _wn_freq.synsets(stem, pos=_wn_freq.NOUN)[:2]:
+                if ss.lexname() == "noun.time":
+                    return True
+        except Exception:
+            pass
+    return False
+
 
 def _extract_episodic(doc, root) -> str:
     """Extract episodic trace: sentence text with subject stripped.
@@ -1714,22 +1728,6 @@ def _extract_temporal(doc, tense_aspect: TenseAspect) -> Tuple[str, Optional[str
                         expression = " ".join(expr_tokens)
                         direction = "past"
                     break
-
-    # Frequency adverbs: detected via WordNet or primitive quantifiers.
-    # WordNet: if adverb stem (strip -ly) is noun.time → frequency (daily, weekly, monthly)
-    def _is_frequency_adverb(tok):
-        # Check if stem is a time noun in WordNet (daily→day, weekly→week)
-        stem = tok.lemma_.lower().rstrip("ly")
-        if stem != tok.lemma_.lower():
-            try:
-                _ensure_wordnet()
-                from nltk.corpus import wordnet as _wn_freq
-                for ss in _wn_freq.synsets(stem, pos=_wn_freq.NOUN)[:2]:
-                    if ss.lexname() == "noun.time":
-                        return True
-            except Exception:
-                pass
-        return False
 
     for tok in doc:
         if tok.dep_ == "advmod" and _is_frequency_adverb(tok):
