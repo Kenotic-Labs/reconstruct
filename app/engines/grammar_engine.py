@@ -2443,9 +2443,28 @@ def _extract_traces_from_sentence(
         _extract_temporal(sent_doc, tense_aspect)
     )
 
-    relational_type = _VERB_CLASS_TO_RELTYPE.get(
-        verb_class, relational_type_base,
-    )
+    # Relational type from WordNet: check if any entity noun is a person/kin
+    # person.n.01 → social. relative.n.01 → familial. No person → personal.
+    relational_type = "personal"
+    _speaker_lower = (speaker or "").lower()
+    try:
+        _ensure_wordnet()
+        from nltk.corpus import wordnet as _wn_rel
+        for tok in sent_doc:
+            # Check all nouns except the speaker's name and pronouns
+            if tok.pos_ == "NOUN" and not tok.is_stop and tok.lemma_.lower() != _speaker_lower:
+                for ss in _wn_rel.synsets(tok.lemma_, pos=_wn_rel.NOUN)[:2]:
+                    hyps = {h.name() for h in ss.closure(lambda s: s.hypernyms())}
+                    if "relative.n.01" in hyps:
+                        relational_type = "familial"
+                        break
+                    if "person.n.01" in hyps:
+                        relational_type = "social"
+                        break
+                if relational_type != "personal":
+                    break
+    except Exception:
+        pass
 
     # 5. Schematic trace — from content verb, not frame
     schematic_category = _extract_schematic(sent_doc, content_root, verb_class)
