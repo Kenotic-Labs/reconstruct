@@ -2577,13 +2577,6 @@ def generate_predicted_questions(sent_doc, root, subject_name):
             _add({t.i for t in sent_doc if ent.start <= t.i < ent.end})
             break
 
-    # Pass each question through coedit-small to fix grammar
-    try:
-        from app.engines.ingestion import _simplify
-        questions = [_simplify(q) for q in questions[:4]]
-    except Exception:
-        pass
-
     return questions[:4]
 
 
