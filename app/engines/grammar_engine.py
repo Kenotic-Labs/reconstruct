@@ -73,23 +73,6 @@ def _check_entry():
     _ENTRY_CHECKED = True
 
 
-def check_exit(result) -> bool:
-    """Validate GrammarResult has valid trace decompositions."""
-    if result is None:
-        return False
-    decomps = getattr(result, 'trace_decompositions', None)
-    if not decomps:
-        return True  # no decomps is valid (backchannel etc.)
-    for td in decomps:
-        # Every trace decomposition must have the 5 trace fields
-        for field_name in ('episodic_fact', 'emotional_valence',
-                           'temporal_direction', 'relational_subject',
-                           'schematic_category'):
-            if not hasattr(td, field_name):
-                logger.error("grammar exit check: TraceDecomposition missing %s", field_name)
-                return False
-    return True
-
 
 # ---------------------------------------------------------------------------
 # Lazy-loaded singletons
@@ -2025,27 +2008,6 @@ def _is_kinship_noun(lemma: str) -> bool:
 
 
 @functools.lru_cache(maxsize=4096)
-def _noun_to_schema_via_wordnet(lemma: str) -> Optional[str]:
-    """Map a noun lemma to a schema via WordNet hypernym closure.
-    Spec Part 1, Field: schematic_category (step 6).
-    Grammar reference Section 8.1: structural noun detection."""
-    try:
-        _ensure_wordnet()
-        from nltk.corpus import wordnet as _wn
-        noun_synsets = _wn.synsets(lemma, pos="n")
-        if not noun_synsets:
-            return None
-
-        for ss in noun_synsets:
-            hypernyms = {h.name() for h in ss.closure(lambda s: s.hypernyms())}
-            hypernyms.add(ss.name())
-            for anchors, schema in _NOUN_SCHEMA_ANCHORS:
-                if hypernyms & anchors:
-                    return schema
-        return None
-    except Exception:
-        return None
-
 
 def _extract_schematic(doc, root, verb_class: VerbClass) -> str:
     """Extract schematic trace: verb supersense + syntactic frame = schema.
