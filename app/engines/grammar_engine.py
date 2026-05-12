@@ -19,7 +19,7 @@ Public names (imported by retrieval, memory, tests, SDK):
     _reclassify_location_by_object, _extract_schematic
     TraceDecomposition, GrammarResult, UtteranceClassification
     TenseAspect, QueryDecomposition, VerbClass
-    _VERB_CLASS_TO_SCHEMA, _VERB_CLASS_TO_RELTYPE
+    (deleted: _VERB_CLASS_TO_SCHEMA, _VERB_CLASS_TO_RELTYPE)
     _build_trace_decomposition
     detect_mood, detect_negation, detect_tense_aspect, detect_voice, resolve_pronouns
     classify_utterance, extract_typed_triple
@@ -212,7 +212,7 @@ class GrammarResult:
 # ---------------------------------------------------------------------------
 
 class VerbClass(str, Enum):
-    """16 verb classes.  Each maps to a schema via _VERB_CLASS_TO_SCHEMA."""
+    """16 verb classes. Used by classify_verb_class for WordNet hypernym matching."""
     BE = "BE_VERBS"
     HAVE = "HAVE_VERBS"
     LOCATION = "LOCATION_VERBS"
@@ -231,36 +231,10 @@ class VerbClass(str, Enum):
     UNKNOWN = "UNKNOWN"
 
 
-_VERB_CLASS_TO_SCHEMA: Dict[VerbClass, str] = {
-    VerbClass.WORK: "career",
-    VerbClass.LOCATION: "housing",
-    VerbClass.PREFERENCE: "identity",
-    VerbClass.INJURY: "health",
-    VerbClass.PROBLEM: "health",
-    VerbClass.ACHIEVEMENT: "career",
-    VerbClass.EXPERIENCE: "experience",
-    VerbClass.PLANNING: "planning",
-    VerbClass.HABIT: "hobby",
-    VerbClass.MEASUREMENT: "finance",
-    VerbClass.STATUS: "identity",
-    VerbClass.SPEECH: "social",
-    VerbClass.ABILITY: "education",
-    VerbClass.BE: "identity",
-    VerbClass.HAVE: "uncategorized",
-}
 
-_VERB_CLASS_TO_RELTYPE: Dict[VerbClass, str] = {
-    VerbClass.WORK: "professional",
-    VerbClass.LOCATION: "personal",
-    VerbClass.PREFERENCE: "personal",
-    VerbClass.INJURY: "personal",
-    VerbClass.ACHIEVEMENT: "professional",
-    VerbClass.EXPERIENCE: "personal",
-    VerbClass.PLANNING: "personal",
-    VerbClass.SPEECH: "social",
-    VerbClass.HABIT: "personal",
-    VerbClass.ABILITY: "personal",
-}
+# _VERB_CLASS_TO_SCHEMA and _VERB_CLASS_TO_RELTYPE deleted.
+# Schema uses verb supersense + frame (Levin 1993).
+# Relational type uses WordNet person.n.01 / relative.n.01.
 
 # Stative verb classes: describe states rather than events/actions.
 # When aspect is "simple", these produce ongoing states (not one-time events).
@@ -518,13 +492,10 @@ def _extract_grammatical_object(doc, root, _is_recursive: bool = False) -> str:
             dobj_text = _span_text(child)
             # Only at top level: append purpose preps
             if not _is_recursive:
-                _PURPOSE_PREPS = frozenset({
-                    "for", "about", "on", "toward", "towards",
-                })
+                # Any prep after dobj with a non-temporal pobj = purpose modifier
                 for sibling in root.children:
                     if (sibling.dep_ == "prep"
                             and sibling.pos_ == "ADP"
-                            and sibling.lemma_ in _PURPOSE_PREPS
                             and sibling.i > child.i):
                         pobj_tok = None
                         for gc in sibling.children:
@@ -565,7 +536,7 @@ def _extract_grammatical_object(doc, root, _is_recursive: bool = False) -> str:
             # full acomp span (has prepositional content beyond the ADJ).
             acomp_span = _span_text(child)
             if (child.pos_ == "ADJ"
-                    and root.lemma_ in _COPULAR_LEMMAS
+                    and root.pos_ == "AUX"
                     and len(list(child.subtree)) <= 2):
                 # Single ADJ complement → return subject NP instead
                 for sib in root.children:
@@ -1182,13 +1153,6 @@ def _is_backchannel_structure(doc) -> bool:
     return False
 
 
-_COPULAR_LEMMAS = frozenset({
-    "be", "feel", "seem", "appear", "become",
-    "get", "grow", "turn", "remain", "stay",
-    "look", "sound", "taste", "smell", "prove",
-})
-
-
 def _is_emotion_structure(doc) -> bool:
     """Detect: 1st-person subject + copular verb + adj complement."""
     root = _get_root(doc)
@@ -1206,7 +1170,8 @@ def _is_emotion_structure(doc) -> bool:
         c.dep_ in ("acomp", "oprd") and c.pos_ == "ADJ"
         for c in root.children
     )
-    return has_adj and root.lemma_ in _COPULAR_LEMMAS
+    # Copular = has acomp/attr child. No word list needed — dep parse tells us.
+    return has_adj
 
 
 def _has_exclamation_mark(doc) -> bool:
@@ -1713,14 +1678,23 @@ def _extract_temporal(doc, tense_aspect: TenseAspect) -> Tuple[str, Optional[str
     # Structural fallback: NUM + time_noun + "ago" pattern
     # spaCy may miss these as NER.  Structural: nummod->NOUN->ADV(ago).
     if expression is None:
-        _TIME_NOUNS = frozenset({
-            "year", "month", "week", "day", "hour", "minute",
-            "decade", "century", "semester", "quarter", "fortnight",
-        })
+        # Structural pattern: NUM + NOUN + "ago" where NOUN is a time unit
+        # WordNet noun.time supersense covers all time nouns
         for tok in doc:
             if tok.lemma_.lower() == "ago" and tok.pos_ == "ADV":
                 head = tok.head
-                if head.pos_ == "NOUN" and head.lemma_.lower() in _TIME_NOUNS:
+                _is_time_noun = False
+                if head.pos_ == "NOUN":
+                    try:
+                        _ensure_wordnet()
+                        from nltk.corpus import wordnet as _wn_time
+                        for _ss in _wn_time.synsets(head.lemma_, pos=_wn_time.NOUN)[:2]:
+                            if _ss.lexname() == "noun.time":
+                                _is_time_noun = True
+                                break
+                    except Exception:
+                        pass
+                if _is_time_noun:
                     num_tok = None
                     for child in head.children:
                         if child.dep_ == "nummod" or child.pos_ == "NUM":
@@ -1736,7 +1710,9 @@ def _extract_temporal(doc, tense_aspect: TenseAspect) -> Tuple[str, Optional[str
                         direction = "past"
                     break
 
-    # Gap 15: Frequency adverbs — closed grammatical class, enriches temporal trace
+    # Frequency adverbs — English has a closed set of frequency quantifiers.
+    # Unlike content adverbs (quickly, slowly), these are grammatical function words.
+    # Kept as set because they ARE the complete class — no new ones enter English.
     _FREQUENCY_ADVERBS = frozenset({
         "always", "never", "often", "usually", "sometimes", "rarely",
         "daily", "weekly", "monthly", "yearly", "annually",
@@ -1787,14 +1763,23 @@ def _extract_relational(
             relational_subject = speaker
         elif nsubj_tok.pos_ == "PRON" and nsubj_lower in _THIRD_PERSON_PRONOUNS:
             # Third-person pronoun -> keep as-is, do NOT default to speaker
-            # Gap 8: Dummy "it" — weather/impersonal verbs produce a
-            # meaningless "it" subject. Detect and set to empty string.
-            _DUMMY_IT_LEMMAS = frozenset({
-                "rain", "snow", "hail", "sleet", "drizzle", "thunder",
-                "pour", "seem", "appear",
-            })
+            # Gap 8: Dummy "it" — expletive/weather subjects.
+            # spaCy tags weather verbs' ROOT with verb.weather supersense.
+            # Also check dep_=expl for expletive "it".
             _root = _get_root(doc)
-            if nsubj_lower == "it" and _root is not None and _root.lemma_.lower() in _DUMMY_IT_LEMMAS:
+            _is_dummy = nsubj_tok.dep_ == "expl"
+            if not _is_dummy and nsubj_lower == "it" and _root is not None:
+                # Check WordNet: verb.weather supersense
+                try:
+                    _ensure_wordnet()
+                    from nltk.corpus import wordnet as _wn_dummy
+                    for _ss in _wn_dummy.synsets(_root.lemma_, pos=_wn_dummy.VERB)[:2]:
+                        if _ss.lexname() == "verb.weather":
+                            _is_dummy = True
+                            break
+                except Exception:
+                    pass
+            if _is_dummy:
                 relational_subject = ""
             else:
                 relational_subject = nsubj_tok.text
