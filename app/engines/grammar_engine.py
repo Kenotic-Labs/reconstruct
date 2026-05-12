@@ -2523,18 +2523,22 @@ def generate_predicted_questions(sent_doc, root, subject_name):
                 parts.append(strand_prep)
             return " ".join(parts) + "?"
 
-        # Do-support: root verb is replaced by do + base form
+        # Do-support: only subject moves (after inserted do). Root stays
+        # in place but changes to base form. Everything else untouched.
         do = "did" if root.tag_ == "VBD" else ("does" if root.tag_ == "VBZ" else "do")
-        moved_i = subject_indices | {root.i} | effective_target | exclude
+        moved_i = subject_indices | effective_target | exclude
         if neg_i >= 0:
             moved_i.add(neg_i)
         parts = [wh, do, subject_name]
         if neg_i >= 0:
             parts.append(neg_tok.text)
-        parts.append(root.lemma_)
-        # Everything else in document order (particles, adverbs, preps — all in place)
+        # Document order — root outputs as base form, everything else as-is
         for i in range(len(sent_doc)):
-            if i not in moved_i and i != root.i:
+            if i in moved_i:
+                continue
+            if i == root.i:
+                parts.append(root.lemma_)
+            else:
                 parts.append(sent_doc[i].text)
         if strand_prep:
             parts.append(strand_prep)
