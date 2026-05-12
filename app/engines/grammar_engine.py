@@ -1423,10 +1423,10 @@ def _extract_episodic(doc, root) -> str:
     result = result.strip()
 
     # Strip leading auxiliaries: "have been researching" -> "researching"
-    # Use original doc's token POS tags instead of re-parsing the fragment
+    # Only strip AUX that are NOT the ROOT (keep copular ROOT: "is happy" -> "is happy")
     strip_count = 0
     for tok in remaining_tokens:
-        if tok.pos_ == "AUX":
+        if tok.pos_ == "AUX" and tok.dep_ != "ROOT":
             strip_count += 1
         else:
             break
@@ -1486,12 +1486,16 @@ def _extract_emotional(doc, root) -> Tuple[Optional[str], Optional[float], Optio
     emotion_adj = None
     emotion_tok = None
 
-    # 1. ADJ tokens in acomp/attr/oprd
-    for tok in doc:
-        if tok.pos_ == "ADJ" and tok.dep_ in ("acomp", "attr", "oprd"):
-            emotion_adj = tok.text.lower()
-            emotion_tok = tok
-            break
+    # 1. ADJ tokens in acomp/attr/oprd — ONLY in copular constructions
+    # Copular = ROOT has acomp/attr child AND no auxpass (not passive)
+    # The dep parse tells us if the verb is acting as copular right now.
+    is_passive = any(ch.dep_ == "auxpass" for ch in root.children) if root else False
+    if root is not None and not is_passive:
+        for tok in doc:
+            if tok.pos_ == "ADJ" and tok.dep_ in ("acomp", "attr", "oprd"):
+                emotion_adj = tok.text.lower()
+                emotion_tok = tok
+                break
 
     # 2. Passive past participles as emotional states
     # Guard: only extract emotion when nsubj is animate (PRON or PERSON NER).
@@ -2320,6 +2324,8 @@ def generate_predicted_questions(sent_doc, root, subject_name):
             _add({t.i for t in ch.subtree})
         elif ch.dep_ == "attr":
             _add({t.i for t in ch.subtree})
+        elif ch.dep_ == "acomp":
+            _add({t.i for t in ch.subtree})
         elif ch.dep_ in ("prep", "agent"):
             for gc in ch.children:
                 if gc.dep_ == "pobj":
@@ -2646,7 +2652,10 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
         elif sent_cls.subcategory == "tag_question":
             decomp.mood = "indicative"
 
-        if not sent_cls.is_question:
+        # Skip questions and backchannels (ROOT not a verb = not a real sentence)
+        root_tok = _get_root(sent_doc)
+        is_backchannel = root_tok is not None and root_tok.pos_ not in ("VERB", "AUX")
+        if not sent_cls.is_question and not sent_cls.is_backchannel and not is_backchannel:
             decompositions.append(decomp)
 
     if primary_classification is None:
