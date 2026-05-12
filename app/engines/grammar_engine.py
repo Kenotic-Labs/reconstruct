@@ -1710,16 +1710,30 @@ def _extract_temporal(doc, tense_aspect: TenseAspect) -> Tuple[str, Optional[str
                         direction = "past"
                     break
 
-    # Frequency adverbs — English has a closed set of frequency quantifiers.
-    # Unlike content adverbs (quickly, slowly), these are grammatical function words.
-    # Kept as set because they ARE the complete class — no new ones enter English.
-    _FREQUENCY_ADVERBS = frozenset({
-        "always", "never", "often", "usually", "sometimes", "rarely",
-        "daily", "weekly", "monthly", "yearly", "annually",
-        "frequently", "seldom", "occasionally", "regularly",
-    })
+    # Frequency adverbs: detected via WordNet or primitive quantifiers.
+    # WordNet: if adverb stem (strip -ly) is noun.time → frequency (daily, weekly, monthly)
+    # Primitive quantifiers: always, never, usually, rarely, seldom, occasionally
+    # — these 6 are the complete set of non-derived English frequency quantifiers.
+    _PRIMITIVE_FREQ = frozenset({"always", "never", "usually", "rarely", "seldom", "occasionally"})
+
+    def _is_frequency_adverb(tok):
+        if tok.lemma_.lower() in _PRIMITIVE_FREQ:
+            return True
+        # Check if stem is a time noun in WordNet
+        stem = tok.lemma_.lower().rstrip("ly")
+        if stem != tok.lemma_.lower():
+            try:
+                _ensure_wordnet()
+                from nltk.corpus import wordnet as _wn_freq
+                for ss in _wn_freq.synsets(stem, pos=_wn_freq.NOUN)[:2]:
+                    if ss.lexname() == "noun.time":
+                        return True
+            except Exception:
+                pass
+        return False
+
     for tok in doc:
-        if tok.dep_ == "advmod" and tok.lemma_.lower() in _FREQUENCY_ADVERBS:
+        if tok.dep_ == "advmod" and _is_frequency_adverb(tok):
             freq = tok.text.lower()
             if expression:
                 # Prepend frequency to a real temporal expression
