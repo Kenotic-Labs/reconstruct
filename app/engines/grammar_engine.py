@@ -2366,53 +2366,36 @@ def _find_content_verb(verb, _depth=0):
 # question = WH + VERB_CHAIN[0] + SUBJECT + VERB_CHAIN[1:] + REMAINDER + ?
 # ---------------------------------------------------------------------------
 
-def _pq_do_form(tag):
-    if tag == "VBD": return "did"
-    if tag == "VBZ": return "does"
-    return "do"
+def generate_predicted_questions(sent_doc, root, subject_name):
+    """Generate predicted questions from a live spaCy parse.
 
+    Formula (Chomsky 1957, 41/41 verified):
+      tokens = SUBJECT ∪ VERB_CHAIN ∪ TARGET ∪ REMAINDER
+      question = WH + VERB_CHAIN[0] + SUBJECT + VERB_CHAIN[1:] + REMAINDER + ?
+      If TARGET = SUBJECT: WH + VERB_CHAIN + REMAINDER + ?
+      If no aux and ROOT != be: do-support, ROOT → base form
 
-def _pq_wh_word(target_tok, prep_parent):
-    """Select WH-word from the target token's semantics."""
-    if prep_parent and prep_parent.lemma_ in ("at", "in", "on", "to", "from", "near"):
-        if target_tok.ent_type_ in ("DATE", "TIME"):
-            return "When", True
-        return "Where", True
-    if prep_parent and prep_parent.lemma_ == "for":
-        if any(t.pos_ == "NUM" for t in target_tok.subtree):
-            return "How long", True
-    if target_tok.ent_type_ in ("DATE", "TIME"):
-        return "When", True
-    if target_tok.text.lower() in ("yesterday", "today", "tomorrow"):
-        return "When", True
-    if target_tok.pos_ == "ADJ" and target_tok.dep_ in ("acomp", "dobj", "attr"):
-        head = target_tok.head
-        if head.lemma_ in ("be", "taste", "feel", "seem", "look", "sound", "smell", "appear", "become", "remain", "get"):
-            return "How", False
-    if prep_parent and prep_parent.dep_ == "agent":
-        return "By whom", True
-    if target_tok.ent_type_ == "PERSON":
-        return "Who", False
-    if target_tok.text.lower() in ("him", "her", "them"):
-        return "Whom", False
-    if target_tok.text.lower() in ("someone", "somebody"):
-        return "Who", False
-    return "What", False
+    One function. Gates → collect targets → form questions.
+    """
+    if not root or root.pos_ not in ("VERB", "AUX"):
+        return []
 
-
-def _pq_form_question(doc, target_indices, subject_name):
-    """Pure set-decomposition question formation. 41/41 verified."""
-    root = _get_root(doc)
-    if not root:
-        return ""
-
-    subject_indices = set()
+    # === GATES ===
+    subj_tok = None
     for ch in root.children:
-        if ch.dep_ in ("nsubj", "nsubjpass", "expl"):
-            subject_indices.update(t.i for t in ch.subtree)
+        if ch.dep_ in ("nsubj", "nsubjpass"):
+            subj_tok = ch
+            break
+    if not subj_tok:
+        return []
+    if subj_tok.pos_ == "PRON" and subj_tok.lemma_ in ("it", "this", "that"):
+        return []
+    if sum(1 for t in sent_doc if t.pos_ not in ("PUNCT", "INTJ", "X")) < 3:
+        return []
 
-    vc_indices = set()
-    vc_indices.add(root.i)
+    # === DECOMPOSE (once, shared by all questions) ===
+    subject_indices = {t.i for t in subj_tok.subtree}
+    vc_indices = {root.i}
     for ch in root.children:
         if ch.dep_ in ("aux", "auxpass"):
             vc_indices.add(ch.i)
@@ -2420,43 +2403,8 @@ def _pq_form_question(doc, target_indices, subject_name):
             vc_indices.add(ch.i)
     verb_chain = sorted(vc_indices)
 
-    prep_parent = None
-    for i in target_indices:
-        tok = doc[i]
-        if tok.dep_ == "pobj":
-            if tok.head.dep_ in ("prep", "agent"):
-                prep_parent = tok.head
-            break
-
-    target_first = doc[min(target_indices)]
-    wh, absorb_prep = _pq_wh_word(target_first, prep_parent)
-
-    effective_target = set(target_indices)
-    strand_prep = None
-    if prep_parent:
-        if absorb_prep:
-            effective_target.update(t.i for t in prep_parent.subtree)
-        else:
-            effective_target.update(t.i for t in target_first.subtree)
-            strand_prep = prep_parent.text
-            effective_target.add(prep_parent.i)
-
-    # Exclude: punctuation, interjections, compound clause tails, vocatives
-    exclude = {tok.i for tok in doc if tok.pos_ in ("PUNCT", "INTJ")}
-    for ch in root.children:
-        if ch.dep_ == "cc":
-            exclude.add(ch.i)
-        if ch.dep_ in ("conj", "advcl"):
-            exclude.update(t.i for t in ch.subtree)
-    # Sentence-initial adverbs ("Hopefully,", "Oh,")
-    if len(doc) > 0 and doc[0].pos_ in ("ADV", "INTJ") and doc[0].dep_ == "advmod":
-        exclude.add(0)
-        if len(doc) > 1 and doc[1].text == ",":
-            exclude.add(1)
-
-    remainder_indices = sorted(
-        set(range(len(doc))) - subject_indices - set(verb_chain) - effective_target - exclude
-    )
+    is_be_main = root.lemma_ == "be" and len(verb_chain) == 1
+    has_aux = any(sent_doc[i].dep_ in ("aux", "auxpass") for i in verb_chain if i != root.i)
 
     neg_tok = None
     for ch in root.children:
@@ -2464,103 +2412,122 @@ def _pq_form_question(doc, target_indices, subject_name):
             neg_tok = ch
             break
 
-    is_subject_q = bool(target_indices & subject_indices)
-
-    if is_subject_q:
-        parts = [wh]
-        for i in sorted(set(verb_chain) | set(remainder_indices)):
-            parts.append(doc[i].text)
-        if strand_prep:
-            parts.append(strand_prep)
-        return " ".join(parts) + "?"
-
-    is_be_main = root.lemma_ == "be" and len(verb_chain) == 1
-    has_aux = any(doc[i].dep_ in ("aux", "auxpass") for i in verb_chain if i != root.i)
-
-    neg_text = ""
-    remainder_clean = remainder_indices
-    if neg_tok:
-        neg_text = neg_tok.text
-        remainder_clean = [i for i in remainder_indices if i != neg_tok.i]
-
-    if has_aux:
-        first_aux_i = verb_chain[0]
-        if doc[first_aux_i].dep_ not in ("aux", "auxpass"):
-            for vi in verb_chain:
-                if doc[vi].dep_ in ("aux", "auxpass"):
-                    first_aux_i = vi
-                    break
-        first_aux_text = doc[first_aux_i].text
-        rest_vc = [doc[i].text for i in verb_chain if i != first_aux_i]
-        parts = [wh, first_aux_text, subject_name]
-        if neg_text:
-            parts.append(neg_text)
-        parts.extend(rest_vc)
-        parts.extend(doc[i].text for i in remainder_clean)
-        if strand_prep:
-            parts.append(strand_prep)
-        return " ".join(parts) + "?"
-
-    if is_be_main:
-        be_text = root.text
-        parts = [wh, be_text, subject_name]
-        if neg_text:
-            parts.append(neg_text)
-        parts.extend(doc[i].text for i in remainder_clean)
-        if strand_prep:
-            parts.append(strand_prep)
-        return " ".join(parts) + "?"
-
-    do = _pq_do_form(root.tag_)
-    base = root.lemma_
-    particles = [doc[i].text for i in verb_chain if i != root.i]
-    parts = [wh, do, subject_name]
-    if neg_text:
-        parts.append(neg_text)
-    parts.append(base)
-    parts.extend(particles)
-    parts.extend(doc[i].text for i in remainder_clean)
-    if strand_prep:
-        parts.append(strand_prep)
-    return " ".join(parts) + "?"
-
-
-def generate_predicted_questions(sent_doc, root, subject_name):
-    """Generate predicted questions from a live spaCy parse.
-
-    One pass over root.children. Each real answer constituent
-    gets one question via the 4-branch formula. No target searching.
-    """
-    if not root or root.pos_ not in ("VERB", "AUX"):
-        return []
-
-    # Must have a real subject
-    has_subj = False
-    subj_tok = None
+    # Exclude: punct, interjections, compound clause tails
+    exclude = {tok.i for tok in sent_doc if tok.pos_ in ("PUNCT", "INTJ")}
     for ch in root.children:
-        if ch.dep_ in ("nsubj", "nsubjpass"):
-            subj_tok = ch
-            has_subj = True
-            break
-    if not has_subj:
-        return []
-    # Skip pronoun-only subjects (it/this/that → garbage)
-    if subj_tok.pos_ == "PRON" and subj_tok.lemma_ in ("it", "this", "that"):
-        return []
+        if ch.dep_ == "cc":
+            exclude.add(ch.i)
+        if ch.dep_ in ("conj", "advcl"):
+            exclude.update(t.i for t in ch.subtree)
+    if len(sent_doc) > 0 and sent_doc[0].pos_ in ("ADV", "INTJ") and sent_doc[0].dep_ == "advmod":
+        exclude.add(0)
+        if len(sent_doc) > 1 and sent_doc[1].text == ",":
+            exclude.add(1)
 
-    # Must have 3+ content tokens
-    if sum(1 for t in sent_doc if t.pos_ not in ("PUNCT", "INTJ", "X")) < 3:
-        return []
+    # === FORM ONE QUESTION from target indices ===
+    def _form(target_indices):
+        target_toks = [sent_doc[i] for i in target_indices]
+        if all(t.pos_ in ("PRON", "DET", "PART", "PUNCT") for t in target_toks):
+            return None
 
-    # Single pass: collect targets that exist on root's children
+        # WH-word selection (from target semantics)
+        target_first = sent_doc[min(target_indices)]
+        prep_parent = None
+        for i in target_indices:
+            tok = sent_doc[i]
+            if tok.dep_ == "pobj" and tok.head.dep_ in ("prep", "agent"):
+                prep_parent = tok.head
+                break
+
+        wh, absorb = "What", False
+        if target_first.ent_type_ in ("DATE", "TIME"):
+            wh, absorb = "When", True
+        elif prep_parent and prep_parent.lemma_ in ("at", "in", "on", "to", "from", "near"):
+            if target_first.ent_type_ in ("DATE", "TIME"):
+                wh, absorb = "When", True
+            else:
+                wh, absorb = "Where", True
+        elif prep_parent and prep_parent.lemma_ == "for" and any(t.pos_ == "NUM" for t in target_first.subtree):
+            wh, absorb = "How long", True
+        elif target_first.pos_ == "ADJ" and target_first.dep_ in ("acomp", "dobj", "attr"):
+            wh = "How"
+        elif prep_parent and prep_parent.dep_ == "agent":
+            wh, absorb = "By whom", True
+        elif target_first.ent_type_ == "PERSON":
+            wh = "Who"
+
+        # Prep handling
+        effective_target = set(target_indices)
+        strand_prep = None
+        if prep_parent:
+            if absorb:
+                effective_target.update(t.i for t in prep_parent.subtree)
+            else:
+                effective_target.update(t.i for t in target_first.subtree)
+                strand_prep = prep_parent.text
+                effective_target.add(prep_parent.i)
+
+        # Remainder
+        remainder = sorted(
+            set(range(len(sent_doc))) - subject_indices - set(verb_chain) - effective_target - exclude
+        )
+
+        # Subject question?
+        if target_indices & subject_indices:
+            parts = [wh]
+            for i in sorted(set(verb_chain) | set(remainder)):
+                parts.append(sent_doc[i].text)
+            if strand_prep:
+                parts.append(strand_prep)
+            return " ".join(parts) + "?"
+
+        # Non-subject: inversion
+        neg_text = neg_tok.text if neg_tok else ""
+        remainder_clean = [i for i in remainder if neg_tok is None or i != neg_tok.i]
+
+        if has_aux:
+            first_aux_i = verb_chain[0]
+            if sent_doc[first_aux_i].dep_ not in ("aux", "auxpass"):
+                for vi in verb_chain:
+                    if sent_doc[vi].dep_ in ("aux", "auxpass"):
+                        first_aux_i = vi
+                        break
+            parts = [wh, sent_doc[first_aux_i].text, subject_name]
+            if neg_text:
+                parts.append(neg_text)
+            parts.extend(sent_doc[i].text for i in verb_chain if i != first_aux_i)
+            parts.extend(sent_doc[i].text for i in remainder_clean)
+            if strand_prep:
+                parts.append(strand_prep)
+            return " ".join(parts) + "?"
+
+        if is_be_main:
+            parts = [wh, root.text, subject_name]
+            if neg_text:
+                parts.append(neg_text)
+            parts.extend(sent_doc[i].text for i in remainder_clean)
+            if strand_prep:
+                parts.append(strand_prep)
+            return " ".join(parts) + "?"
+
+        # Do-support
+        do = "did" if root.tag_ == "VBD" else ("does" if root.tag_ == "VBZ" else "do")
+        parts = [wh, do, subject_name]
+        if neg_text:
+            parts.append(neg_text)
+        parts.append(root.lemma_)
+        parts.extend(sent_doc[i].text for i in verb_chain if i != root.i)
+        parts.extend(sent_doc[i].text for i in remainder_clean)
+        if strand_prep:
+            parts.append(strand_prep)
+        return " ".join(parts) + "?"
+
+    # === COLLECT TARGETS (single pass over root.children) ===
     questions = []
     seen = set()
 
-    def _add(target_indices):
-        # Skip pronoun/det-only targets
-        if all(sent_doc[i].pos_ in ("PRON", "DET", "PART", "PUNCT") for i in target_indices):
-            return
-        q = _pq_form_question(sent_doc, target_indices, subject_name)
+    def _add(indices):
+        q = _form(indices)
         if q and q.lower() not in seen:
             seen.add(q.lower())
             questions.append(q)
@@ -2578,13 +2545,11 @@ def generate_predicted_questions(sent_doc, root, subject_name):
         elif ch.dep_ == "ccomp":
             _add({t.i for t in ch.subtree})
         elif ch.dep_ == "xcomp":
-            # Check xcomp's dobj
             for gc in ch.children:
                 if gc.dep_ == "dobj":
                     _add({t.i for t in gc.subtree})
                     break
 
-    # Temporal from NER
     for ent in sent_doc.ents:
         if ent.label_ in ("DATE", "TIME"):
             _add({t.i for t in sent_doc if ent.start <= t.i < ent.end})
