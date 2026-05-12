@@ -2048,173 +2048,64 @@ def _noun_to_schema_via_wordnet(lemma: str) -> Optional[str]:
 
 
 def _extract_schematic(doc, root, verb_class: VerbClass) -> str:
-    """Extract schematic trace: category from verb class + NER + WordNet refinement.
+    """Extract schematic trace: verb supersense + syntactic frame = schema.
 
-    Spec Part 1, Field: edge_schematic_category.  Priority order:
-        1. Xcomp/ccomp override for intent/preference/location verbs
-        2. Light verb delegation (do/have/take/make/give/get -> use dobj)
-        3. Verb class -> schema map
-        4. Kinship noun override (WordNet hypernym closure)
-        5. NER refinement (ORG->career, GPE->housing, etc.)
-        6. Noun hypernym fallback for uncategorized/experience
-        7. Creative/recreational verb check (WordNet)
+    Levin 1993: verbs sharing syntactic behavior share meaning.
+    The dep frame (transitive vs intransitive) selects the verb sense.
+    WordNet supersense of the selected sense maps to life domain.
     """
-    # Step 1: xcomp/ccomp override for intent/preference/location verbs
-    _LIGHT_VERB_LEMMAS = frozenset({"do", "have", "take", "make", "give", "get"})
-    if (root is not None
-            and verb_class in (
-                VerbClass.PREFERENCE, VerbClass.UNKNOWN,
-                VerbClass.BE, VerbClass.HAVE, VerbClass.LOCATION,
-            )
-            and root.pos_ in ("VERB", "AUX")):
-        for child in root.children:
-            if child.dep_ in ("xcomp", "ccomp") and child.pos_ == "VERB":
-                # Step 2: light verb delegation
-                if child.lemma_ in _LIGHT_VERB_LEMMAS:
-                    for gc in child.children:
-                        if gc.dep_ == "dobj":
-                            dobj_schema = _noun_to_schema_via_wordnet(gc.lemma_)
-                            if dobj_schema is not None:
-                                return dobj_schema
-                else:
-                    # Non-light complement verb: trust its verb class
-                    comp_vc = classify_verb_class(child.lemma_)
-                    comp_schema = _VERB_CLASS_TO_SCHEMA.get(
-                        comp_vc, "uncategorized",
-                    )
-                    if comp_schema not in ("uncategorized", "identity"):
-                        return comp_schema
-                    for gc in child.children:
-                        if gc.dep_ == "dobj":
-                            dobj_schema = _noun_to_schema_via_wordnet(gc.lemma_)
-                            if dobj_schema is not None:
-                                return dobj_schema
+    if root is None or root.pos_ not in ("VERB", "AUX"):
+        return "uncategorized"
 
-    # Step 2b: root-level light verb delegation
-    # "She got a promotion" -> root=got, dobj=promotion -> delegate to "promotion"
-    if (root is not None
-            and root.pos_ in ("VERB", "AUX")
-            and root.lemma_ in _LIGHT_VERB_LEMMAS):
-        for child in root.children:
-            if child.dep_ == "dobj":
-                dobj_schema = _noun_to_schema_via_wordnet(child.lemma_)
-                if dobj_schema is not None:
-                    return dobj_schema
+    _ensure_wordnet()
+    from nltk.corpus import wordnet as _wn
 
-    # Step 3: verb class -> schema
-    schema = _VERB_CLASS_TO_SCHEMA.get(verb_class, "uncategorized")
+    # Syntactic frame from dep parse
+    has_dobj = any(ch.dep_ == "dobj" for ch in root.children)
 
-    # Step 4: kinship noun override (Grammar reference Section 2.1/7.1)
-    # Do not override strong verb-class signals (career, health, finance, housing)
-    if schema not in ("career", "health", "finance", "housing"):
-        try:
-            _ensure_wordnet()
-            from nltk.corpus import wordnet as _wn
-            _kinship_anchors = frozenset({
-                "relative.n.01", "parent.n.01", "grandparent.n.01",
-                "sibling.n.01", "child.n.02", "spouse.n.01",
-                "kinsman.n.01", "ancestor.n.01",
-            })
-            # Only check kinship nouns in subject or direct object position,
-            # not in prepositional phrases. "Celebrate with my family" is
-            # about celebration, not family relationships.
-            _kinship_deps = frozenset({"nsubj", "nsubjpass", "dobj", "attr"})
-            for tok in doc:
-                if (tok.pos_ == "NOUN" and not tok.is_stop
-                        and tok.dep_ in _kinship_deps):
-                    for ss in _wn.synsets(tok.lemma_, pos="n"):
-                        hypernyms = {
-                            h.name()
-                            for h in ss.closure(lambda s: s.hypernyms())
-                        }
-                        if hypernyms & _kinship_anchors:
-                            schema = "family"
-                            break
-                    if schema == "family":
-                        break
-        except Exception:
-            pass
+    # Get verb senses, filter by frame
+    synsets = _wn.synsets(root.lemma_, pos=_wn.VERB)
+    if not synsets:
+        return "uncategorized"
 
-    if schema == "family":
-        return schema
+    # Frame filtering: transitive frame (8,9,11) vs intransitive (1,2)
+    best = synsets[0]
+    if has_dobj:
+        for ss in synsets:
+            if 8 in ss.frame_ids() or 9 in ss.frame_ids() or 11 in ss.frame_ids():
+                best = ss
+                break
+    else:
+        for ss in synsets:
+            if 1 in ss.frame_ids() or 2 in ss.frame_ids():
+                best = ss
+                break
 
-    # Step 5: NER refinement for generic schemas
-    # Guard: only trust NER when entity root POS is PROPN. spaCy mis-tags
-    # common nouns as GPE/ORG on re-parsed fragments (e.g., "interview" → GPE).
-    if schema in ("uncategorized", "identity", "planning"):
-        doc_ner_labels = frozenset(
-            ent.label_ for ent in doc.ents
-            if ent.root.pos_ == "PROPN"
-        )
-        if "ORG" in doc_ner_labels:
-            schema = "career"
-        elif doc_ner_labels & frozenset({"GPE", "FAC"}):
-            schema = "housing"
-        elif "EVENT" in doc_ner_labels:
-            schema = "experience"
-        elif "MONEY" in doc_ner_labels:
-            schema = "finance"
-        elif "NORP" in doc_ner_labels:
-            schema = "social"
-        elif "LAW" in doc_ner_labels:
-            schema = "legal"
-        elif "WORK_OF_ART" in doc_ner_labels:
-            schema = "culture"
-        elif "PRODUCT" in doc_ner_labels:
-            schema = "commercial"
-        elif "QUANTITY" in doc_ner_labels:
-            schema = "measurement"
+    # Verb supersense → schema
+    _VERB_SS_TO_SCHEMA = {
+        "verb.social": "career",
+        "verb.possession": "finance",
+        "verb.creation": "hobby",
+        "verb.cognition": "education",
+        "verb.emotion": "emotional",
+        "verb.motion": "experience",
+        "verb.communication": "social",
+        "verb.consumption": "health",
+        "verb.body": "health",
+        "verb.competition": "hobby",
+        "verb.perception": "experience",
+        "verb.stative": "identity",
+        "verb.contact": "experience",
+        "verb.change": "experience",
+    }
 
-    # Step 6: noun hypernym fallback (Grammar reference Section 8.1/3.5)
-    if schema in ("uncategorized", "experience"):
-        for tok in doc:
-            if tok.pos_ == "NOUN" and not tok.is_stop:
-                noun_schema = _noun_to_schema_via_wordnet(tok.lemma_)
-                if noun_schema is not None:
-                    schema = noun_schema
-                    break
+    schema = _VERB_SS_TO_SCHEMA.get(best.lexname(), "uncategorized")
 
-        # Step 7: creative/recreational verb check
-        if (schema in ("uncategorized", "experience")
-                and root is not None
-                and root.pos_ == "VERB"):
-            try:
-                _ensure_wordnet()
-                from nltk.corpus import wordnet as _wn
-                _creative_verb_anchors = frozenset({
-                    "create.v.03", "create.v.05",
-                })
-                _recreational_verb_anchors = frozenset({
-                    "play.v.01", "play.v.03",
-                    "swim.v.01", "camp.v.01",
-                })
-                for ss in _wn.synsets(root.lemma_, pos=_wn.VERB):
-                    hypernyms = {
-                        h.name() for h in ss.closure(lambda s: s.hypernyms())
-                    }
-                    hypernyms.add(ss.name())
-                    if hypernyms & _creative_verb_anchors:
-                        schema = "hobby"
-                        break
-                    if hypernyms & _recreational_verb_anchors:
-                        schema = "hobby"
-                        break
-            except Exception:
-                pass
-
-    # Possessive-subject family detection
-    # Only triggers when the head noun of the subject is a kinship term
-    # (validated via WordNet hypernym closure).
-    if schema in ("uncategorized", "identity", "planning"):
-        if root is not None:
-            for child in root.children:
-                if child.dep_ in ("nsubj", "nsubjpass"):
-                    for gc in child.children:
-                        if gc.dep_ == "poss":
-                            # Validate that the subject head noun is kinship
-                            if _is_kinship_noun(child.lemma_):
-                                schema = "family"
-                            break
+    # Kinship noun in subject/object → family (overrides verb signal)
+    for ch in root.children:
+        if ch.dep_ in ("nsubj", "nsubjpass", "dobj", "attr") and ch.pos_ == "NOUN":
+            if _is_kinship_noun(ch.lemma_):
+                return "family"
 
     return schema
 
