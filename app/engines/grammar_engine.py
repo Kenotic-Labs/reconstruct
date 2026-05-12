@@ -750,13 +750,16 @@ def detect_mood(doc) -> str:
     # Gap 10: Habitual "would" detection — "would" + temporal/frequency marker
     # and NO conditional subordinator (if/unless/whether) → indicative, not
     # conditional. "We would go fishing every summer" = past habitual.
-    _HABITUAL_MARKERS = frozenset({"every", "always", "often", "usually", "frequently"})
     _CONDITIONAL_SUBORDINATORS = frozenset({"if", "unless", "whether"})
     has_conditional_sub = any(
         tok.dep_ in ("mark", "advmod") and tok.lemma_.lower() in _CONDITIONAL_SUBORDINATORS
         for tok in doc
     )
-    has_habitual_signal = any(tok.text.lower() in _HABITUAL_MARKERS for tok in doc)
+    # Habitual signal: "every" as determiner OR a frequency adverb
+    has_habitual_signal = (
+        any(tok.lemma_ == "every" and tok.dep_ in ("det", "predet") for tok in doc)
+        or any(tok.dep_ == "advmod" and _is_frequency_adverb(tok) for tok in doc)
+    )
     # Also check for DATE/TIME NER as temporal context
     has_temporal_ner = any(ent.label_ in ("DATE", "TIME") for ent in doc.ents)
 
@@ -1935,31 +1938,8 @@ def _extract_relational(
 # Spec Part 1, Field: edge_schematic_category (steps 4-7)
 # ---------------------------------------------------------------------------
 
-_NOUN_SCHEMA_ANCHORS: list[tuple[frozenset, str]] = [
-    (frozenset({
-        "occupation.n.01", "position.n.01", "job.n.01",
-        "profession.n.01", "employment.n.01", "work.n.01",
-        "service.n.01", "promotion.n.02", "advancement.n.03",
-    }), "career"),
-    (frozenset({
-        "family_relationship.n.01", "adoption.n.01",
-        "relative.n.01", "kinship.n.01",
-    }), "family"),
-    (frozenset({
-        "illness.n.01", "injury.n.01", "symptom.n.01",
-        "disease.n.01",
-    }), "health"),
-    (frozenset({
-        "creation.n.02", "artistic_creation.n.01",
-        "art.n.01", "sport.n.01", "game.n.01",
-        "recreation.n.01", "diversion.n.01",
-        "outdoor_recreation.n.01", "hobby.n.01",
-    }), "hobby"),
-    (frozenset({
-        "educational_institution.n.01", "course.n.01",
-        "school.n.01",
-    }), "education"),
-]
+
+# _NOUN_SCHEMA_ANCHORS deleted. Schema uses verb supersense + frame (Levin 1993).
 
 
 @functools.lru_cache(maxsize=4096)
@@ -2551,6 +2531,8 @@ def _extract_traces_from_sentence(
 
     # Gap 4: Light verb predicate delegation.
     # "took a shower" -> pred=shower instead of pred=take.
+    # Light verbs: 6 English verbs whose meaning comes from their dobj, not themselves.
+    # "take a shower" = shower. "make a decision" = decide. Closed class — unchanged for centuries.
     _LIGHT_VERB_PRED = frozenset({"do", "have", "take", "make", "give", "get"})
     if (_pred_root and root_lemma.lower() in _LIGHT_VERB_PRED
             and not particle):
