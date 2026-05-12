@@ -133,7 +133,7 @@ class MemoryEngine:
     Memory engine takes their output and writes to edges + edge_extraction."""
 
     def __init__(self) -> None:
-        pass
+        self.pending_ambiguities: list = []  # collected during store(), read by SDK
 
     # ------------------------------------------------------------------
     # Singular ingestion path
@@ -656,6 +656,52 @@ class MemoryEngine:
                         )
                 except Exception:
                     pass
+
+                # 3j: Ambiguity detection — overlapping objects, different values
+                # If an existing edge talks about the same entity but says
+                # something different, flag it for the LLM to ask the user.
+                if object and len(object) > 2:
+                    try:
+                        # Find content words in the new object
+                        _nlp = _get_nlp()
+                        _obj_doc = _nlp(object)
+                        _obj_nouns = {t.lemma_.lower() for t in _obj_doc
+                                      if t.pos_ in ("NOUN", "PROPN", "NUM") and len(t.text) > 1}
+                        if _obj_nouns:
+                            # Check recent edges for overlapping object nouns
+                            _recent_edges = conn.execute(
+                                """SELECT id, subject, predicate, object
+                                   FROM edges
+                                   WHERE user_id = ? AND id != ? AND tombstoned_at IS NULL
+                                     AND is_current = 1
+                                   ORDER BY id DESC LIMIT 30""",
+                                (user_id, edge_id),
+                            ).fetchall()
+                            for _conf in _recent_edges:
+                                _old_obj = (_conf["object"] or "").strip()
+                                if not _old_obj or _old_obj.lower() == object.lower():
+                                    continue
+                                # Check word overlap
+                                _old_doc = _nlp(_old_obj)
+                                _old_nouns = {t.lemma_.lower() for t in _old_doc
+                                              if t.pos_ in ("NOUN", "PROPN", "NUM") and len(t.text) > 1}
+                                _overlap = _obj_nouns & _old_nouns
+                                if _overlap:
+                                    # Same entity words, different values → ambiguity
+                                    from sdk.types import Ambiguity
+                                    _shared = ", ".join(_overlap)
+                                    self.pending_ambiguities.append(Ambiguity(
+                                        entity=_shared,
+                                        old_value=_old_obj,
+                                        new_value=object,
+                                        old_edge_id=_conf["id"],
+                                        new_edge_id=edge_id,
+                                        question=f'You previously said "{_old_obj}". '
+                                                 f'Is "{object}" replacing that, or is this different?',
+                                    ))
+                                    break  # one ambiguity per edge
+                    except Exception:
+                        pass
 
                 conn.commit()
                 return edge_id

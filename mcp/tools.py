@@ -327,12 +327,15 @@ def tool_process(args: Dict[str, Any]) -> Dict[str, Any]:
         model_response=args.get("model_response"),
         check_proactive=bool(args.get("check_proactive", False)),
     )
-    return {
+    response = {
         "action": result.action,
         "result": _serialize(result.result),
         "proactive": [_serialize(i) for i in result.proactive],
         "triples_stored": result.triples_stored,
     }
+    if result.ambiguities:
+        response["ambiguities"] = [_serialize(a) for a in result.ambiguities]
+    return response
 
 
 def tool_architecture_status(args: Dict[str, Any]) -> Dict[str, Any]:
