@@ -1473,96 +1473,86 @@ def _extract_episodic(doc, root) -> str:
     return result if result else sent_text
 
 
-def _extract_emotional(doc, root) -> Tuple[Optional[str], Optional[float], Optional[str]]:
-    """Extract emotional trace: emotion adjective, valence, target.
-    Spec Part 1, Fields: emotional_state / emotional_valence / emotional_target.
-    Grammar reference Section 6: Emotional/Sentiment Markers.
+@functools.lru_cache(maxsize=2048)
+def _is_emotion_word(lemma: str, pos: str) -> bool:
+    """Check if a word is an emotion word using WordNet classes.
 
-    Detection order:
-        1. ADJ tokens in acomp/attr/oprd position
-        2. Passive past participles with copular auxpass
-        3. WordNet noun hypernym closure through feeling.n.01/emotion.n.01
+    - ADJ: check if derivationally related noun is in noun.feeling
+    - NOUN: check if supersense is noun.feeling
+    - VERB: check if supersense is verb.emotion
+    No word lists. WordNet IS the list.
     """
-    emotion_adj = None
+    _ensure_wordnet()
+    from nltk.corpus import wordnet as _wn
+
+    if pos == "ADJ":
+        for ss in _wn.synsets(lemma, pos=_wn.ADJ)[:3]:
+            for lem in ss.lemmas():
+                for form in lem.derivationally_related_forms():
+                    if form.synset().lexname() == "noun.feeling":
+                        return True
+        return False
+    elif pos == "NOUN":
+        for ss in _wn.synsets(lemma, pos=_wn.NOUN)[:3]:
+            if ss.lexname() == "noun.feeling":
+                return True
+        return False
+    elif pos == "VERB":
+        for ss in _wn.synsets(lemma, pos=_wn.VERB)[:3]:
+            if ss.lexname() == "verb.emotion":
+                return True
+        return False
+    return False
+
+
+def _extract_emotional(doc, root) -> Tuple[Optional[str], Optional[float], Optional[str]]:
+    """Extract emotional trace using WordNet emotion classes.
+
+    Three checks:
+    1. ROOT verb in verb.emotion → emotion verb ("I love X", "I fear X")
+    2. ADJ in acomp/attr/oprd whose related noun is in noun.feeling → emotion adj
+    3. NOUN in sentence in noun.feeling → emotion noun
+
+    No word lists. WordNet noun.feeling and verb.emotion cover all English emotions.
+    """
+    emotion_word = None
     emotion_tok = None
 
-    # 1. ADJ tokens in acomp/attr/oprd — ONLY in copular constructions
-    # Copular = ROOT has acomp/attr child AND no auxpass (not passive)
-    # The dep parse tells us if the verb is acting as copular right now.
-    is_passive = any(ch.dep_ == "auxpass" for ch in root.children) if root else False
-    if root is not None and not is_passive:
+    # 1. ADJ complement whose related noun is in noun.feeling (most specific)
+    if emotion_word is None:
         for tok in doc:
             if tok.pos_ == "ADJ" and tok.dep_ in ("acomp", "attr", "oprd"):
-                emotion_adj = tok.text.lower()
-                emotion_tok = tok
-                break
-
-    # 2. Passive past participles as emotional states
-    # Guard: only extract emotion when nsubj is animate (PRON or PERSON NER).
-    # "I felt broken" → emotional. "The window was broken" → physical, not emotional.
-    if emotion_adj is None:
-        for tok in doc:
-            if (tok.tag_ == "VBN" and tok.dep_ == "ROOT"
-                    and any(c.dep_ == "auxpass" for c in tok.children)):
-                # Animacy check on nsubj
-                nsubj_tok = next(
-                    (c for c in tok.children
-                     if c.dep_ in ("nsubj", "nsubjpass")), None
-                )
-                if nsubj_tok is not None:
-                    is_animate = (
-                        nsubj_tok.pos_ == "PRON"
-                        or nsubj_tok.ent_type_ == "PERSON"
-                    )
-                    if not is_animate:
-                        break  # inanimate subject → physical state, not emotion
-                auxpass_tok = next(
-                    (c for c in tok.children if c.dep_ == "auxpass"), None
-                )
-                if auxpass_tok and (
-                    auxpass_tok.lemma_ in _COPULAR_LEMMAS
-                    or auxpass_tok.text.lower() in (
-                        "felt", "feels", "seemed", "looked", "sounded",
-                    )
-                ):
-                    emotion_adj = tok.text.lower()
+                if _is_emotion_word(tok.lemma_, "ADJ"):
+                    emotion_word = tok.text.lower()
                     emotion_tok = tok
                     break
 
-    # 3. Emotion nouns via WordNet hypernym closure
-    if emotion_adj is None:
-        try:
-            from nltk.corpus import wordnet as _wn
-            _emotion_synsets = {"feeling.n.01", "emotion.n.01", "state.n.04"}
-            for tok in doc:
-                if tok.pos_ == "NOUN" and not tok.is_stop:
-                    for ss in _wn.synsets(tok.lemma_, pos="n"):
-                        hypernyms = {
-                            h.name() for h in ss.closure(lambda s: s.hypernyms())
-                        }
-                        if hypernyms & _emotion_synsets:
-                            emotion_adj = tok.lemma_.lower()
-                            emotion_tok = tok
-                            break
-                    if emotion_adj:
-                        break
-        except Exception:
-            pass
+    # 2. ROOT verb in verb.emotion (fallback when no ADJ found)
+    if emotion_word is None and root is not None and root.pos_ == "VERB":
+        if _is_emotion_word(root.lemma_, "VERB"):
+            emotion_word = root.lemma_
+            emotion_tok = root
 
-    if emotion_adj is None:
+    # 3. Emotion noun in sentence
+    if emotion_word is None:
+        for tok in doc:
+            if tok.pos_ == "NOUN" and not tok.is_stop:
+                if _is_emotion_word(tok.lemma_, "NOUN"):
+                    emotion_word = tok.lemma_.lower()
+                    emotion_tok = tok
+                    break
+
+    if emotion_word is None:
         return (None, None, None)
 
-    # Valence: SentiWordNet average across synsets for the token's POS,
-    # then flip sign if syntactic negation is present.
-    # Maps spaCy POS to WordNet POS for synset lookup.
-    _SPACY_TO_WN_POS = {"ADJ": "a", "NOUN": "n", "VERB": "v", "ADV": "r"}
-    wn_pos = _SPACY_TO_WN_POS.get(emotion_tok.pos_, "a")
+    # Valence from SentiWordNet
+    _POS_MAP = {"ADJ": "a", "NOUN": "n", "VERB": "v", "ADV": "r"}
+    wn_pos = _POS_MAP.get(emotion_tok.pos_, "a")
     valence = 0.0
     try:
         from nltk.corpus import sentiwordnet as _swn
         ss = list(_swn.senti_synsets(emotion_tok.lemma_.lower(), wn_pos))
         if not ss:
-            # Fallback: try adjective POS if primary POS missed
             ss = list(_swn.senti_synsets(emotion_tok.lemma_.lower(), "a"))
         if ss:
             vals = [s.pos_score() - s.neg_score() for s in ss]
@@ -1570,32 +1560,25 @@ def _extract_emotional(doc, root) -> Tuple[Optional[str], Optional[float], Optio
     except Exception:
         pass
 
-    # Negation flips the sign: "not happy" → negative
-    has_negation = any(child.dep_ == "neg" for child in emotion_tok.children)
-    if not has_negation and emotion_tok.head is not None:
-        has_negation = any(
-            child.dep_ == "neg" for child in emotion_tok.head.children
-        )
-    if has_negation:
+    # Negation flips valence
+    has_neg = any(ch.dep_ == "neg" for ch in emotion_tok.children)
+    if not has_neg and emotion_tok.head is not None:
+        has_neg = any(ch.dep_ == "neg" for ch in emotion_tok.head.children)
+    if has_neg:
         valence = -valence
 
-    # Target: pobj of prep child, or nsubj of head verb
+    # Target: prep object of emotion word
     target = None
-    for child in emotion_tok.children:
-        if child.dep_ == "prep":
-            for gc in child.children:
+    for ch in emotion_tok.children:
+        if ch.dep_ == "prep":
+            for gc in ch.children:
                 if gc.dep_ == "pobj":
                     target = gc.text
                     break
-            if target is not None:
-                break
-    if target is None and emotion_tok.head is not None:
-        for sibling in emotion_tok.head.children:
-            if sibling.dep_ == "nsubj":
-                target = sibling.text
+            if target:
                 break
 
-    return (emotion_adj, valence, target)
+    return (emotion_word, valence, target)
 
 
 def _extract_temporal(doc, tense_aspect: TenseAspect) -> Tuple[str, Optional[str]]:
