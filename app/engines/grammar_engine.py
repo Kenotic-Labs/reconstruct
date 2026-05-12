@@ -2525,147 +2525,70 @@ def _pq_form_question(doc, target_indices, subject_name):
     return " ".join(parts) + "?"
 
 
-def _pq_find_target(doc, root, target_dep):
-    """Find target constituent's token indices by dep label."""
-    if target_dep == "nsubj":
-        for ch in root.children:
-            if ch.dep_ in ("nsubj", "nsubjpass", "expl"):
-                return {t.i for t in ch.subtree}
-    elif target_dep == "dobj":
-        for ch in root.children:
-            if ch.dep_ == "dobj":
-                return {t.i for t in ch.subtree}
-        for ch in root.children:
-            if ch.dep_ == "xcomp":
-                for gc in ch.children:
-                    if gc.dep_ == "dobj":
-                        return {t.i for t in gc.subtree}
-    elif target_dep == "attr":
-        for ch in root.children:
-            if ch.dep_ == "attr":
-                return {t.i for t in ch.subtree}
-    elif target_dep == "acomp":
-        for ch in root.children:
-            if ch.dep_ == "acomp":
-                return {t.i for t in ch.subtree}
-        for ch in root.children:
-            if ch.dep_ == "dobj" and ch.pos_ == "ADJ":
-                return {t.i for t in ch.subtree}
-    elif target_dep == "pobj":
-        for ch in root.children:
-            if ch.dep_ in ("prep", "agent"):
-                for gc in ch.children:
-                    if gc.dep_ == "pobj":
-                        return {t.i for t in gc.subtree}
-    elif target_dep == "ccomp":
-        for ch in root.children:
-            if ch.dep_ == "ccomp":
-                return {t.i for t in ch.subtree}
-    elif target_dep == "xcomp":
-        for ch in root.children:
-            if ch.dep_ == "xcomp":
-                return {t.i for t in ch.subtree}
-    elif target_dep == "advmod":
-        for ch in root.children:
-            if ch.dep_ in ("advmod", "npadvmod"):
-                return {t.i for t in ch.subtree}
-    elif target_dep == "agent":
-        for ch in root.children:
-            if ch.dep_ == "agent":
-                for gc in ch.children:
-                    if gc.dep_ == "pobj":
-                        return {t.i for t in gc.subtree}
-    elif target_dep == "dative":
-        for ch in root.children:
-            if ch.dep_ == "dative":
-                return {t.i for t in ch.subtree}
-    return None
-
-
 def generate_predicted_questions(sent_doc, root, subject_name):
     """Generate predicted questions from a live spaCy parse.
 
-    Only generates questions for factual statements with real answer
-    constituents. Returns empty list for backchannels, commands,
-    exclamations, fragments, and sentences with no meaningful object.
+    One pass over root.children. Each real answer constituent
+    gets one question via the 4-branch formula. No target searching.
     """
-    if not root:
+    if not root or root.pos_ not in ("VERB", "AUX"):
         return []
 
-    # Gate 1: must have a proper subject (not expletive-only, not missing)
-    has_subj = any(ch.dep_ in ("nsubj", "nsubjpass") for ch in root.children)
-    if not has_subj:
-        return []
-
-    # Gate 2: must have a real verb (not interjection, not fragment)
-    if root.pos_ not in ("VERB", "AUX"):
-        return []
-
-    # Gate 3: must have at least one answer constituent
-    # (something worth asking about)
-    has_dobj = any(ch.dep_ == "dobj" for ch in root.children)
-    has_attr = any(ch.dep_ == "attr" for ch in root.children)
-    has_pobj = False
-    for ch in root.children:
-        if ch.dep_ in ("prep", "agent"):
-            if any(gc.dep_ == "pobj" for gc in ch.children):
-                has_pobj = True
-                break
-    has_ccomp = any(ch.dep_ == "ccomp" for ch in root.children)
-    has_xcomp_obj = False
-    for ch in root.children:
-        if ch.dep_ == "xcomp":
-            if any(gc.dep_ == "dobj" for gc in ch.children):
-                has_xcomp_obj = True
-            break
-    has_temporal = any(ent.label_ in ("DATE", "TIME") for ent in sent_doc.ents)
-
-    if not (has_dobj or has_attr or has_pobj or has_ccomp or has_xcomp_obj or has_temporal):
-        return []
-
-    # Gate 4: sentence must be long enough to be a fact (not "Thanks!" or "Great!")
-    content_tokens = [t for t in sent_doc if t.pos_ not in ("PUNCT", "INTJ", "X")]
-    if len(content_tokens) < 3:
-        return []
-
-    # Gate 5: subject must not be a pronoun-only ("it", "this", "that")
-    # These produce garbage questions ("What is it?")
+    # Must have a real subject
+    has_subj = False
     subj_tok = None
     for ch in root.children:
         if ch.dep_ in ("nsubj", "nsubjpass"):
             subj_tok = ch
+            has_subj = True
             break
-    if subj_tok and subj_tok.pos_ == "PRON" and subj_tok.lemma_ in ("it", "this", "that"):
+    if not has_subj:
+        return []
+    # Skip pronoun-only subjects (it/this/that → garbage)
+    if subj_tok.pos_ == "PRON" and subj_tok.lemma_ in ("it", "this", "that"):
         return []
 
-    # Generate questions only for constituents that exist
+    # Must have 3+ content tokens
+    if sum(1 for t in sent_doc if t.pos_ not in ("PUNCT", "INTJ", "X")) < 3:
+        return []
+
+    # Single pass: collect targets that exist on root's children
     questions = []
     seen = set()
 
-    def _try(dep):
-        target = _pq_find_target(sent_doc, root, dep)
-        if not target:
+    def _add(target_indices):
+        # Skip pronoun/det-only targets
+        if all(sent_doc[i].pos_ in ("PRON", "DET", "PART", "PUNCT") for i in target_indices):
             return
-        # Validate target has content (not just a pronoun or det)
-        target_tokens = [sent_doc[i] for i in target]
-        if all(t.pos_ in ("PRON", "DET", "PART", "PUNCT") for t in target_tokens):
-            return
-        q = _pq_form_question(sent_doc, target, subject_name)
-        if q and q.lower() not in seen and not q.startswith("("):
+        q = _pq_form_question(sent_doc, target_indices, subject_name)
+        if q and q.lower() not in seen:
             seen.add(q.lower())
             questions.append(q)
 
-    # Only try constituents that actually exist
-    if has_dobj or has_xcomp_obj:
-        _try("dobj")
-    if has_attr:
-        _try("attr")
-    if has_pobj:
-        _try("pobj")
-    if has_ccomp:
-        _try("ccomp")
-    if has_temporal:
-        _try("advmod")
+    for ch in root.children:
+        if ch.dep_ == "dobj":
+            _add({t.i for t in ch.subtree})
+        elif ch.dep_ == "attr":
+            _add({t.i for t in ch.subtree})
+        elif ch.dep_ in ("prep", "agent"):
+            for gc in ch.children:
+                if gc.dep_ == "pobj":
+                    _add({t.i for t in gc.subtree})
+                    break
+        elif ch.dep_ == "ccomp":
+            _add({t.i for t in ch.subtree})
+        elif ch.dep_ == "xcomp":
+            # Check xcomp's dobj
+            for gc in ch.children:
+                if gc.dep_ == "dobj":
+                    _add({t.i for t in gc.subtree})
+                    break
+
+    # Temporal from NER
+    for ent in sent_doc.ents:
+        if ent.label_ in ("DATE", "TIME"):
+            _add({t.i for t in sent_doc if ent.start <= t.i < ent.end})
+            break
 
     return questions[:4]
 
