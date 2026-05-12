@@ -2741,6 +2741,81 @@ def _extract_traces_from_sentence(
 # Spec: classify_query parses questions the same way process() parses statements
 # ---------------------------------------------------------------------------
 
+def process(text: str, speaker: Optional[str] = None, listener: str = "user") -> GrammarResult:
+    """Grammar engine entry point. Clean text in, 5 traces out.
+
+    For each sentence in the text:
+      1. Classify (statement/question/command/backchannel)
+      2. Extract 5 traces via _extract_traces_from_sentence
+      3. Generate predicted questions
+      4. Append to decompositions if storable (not a question)
+    """
+    _check_entry()
+    nlp = _get_nlp()
+
+    if speaker:
+        resolved_text_pre = resolve_pronouns(nlp(text), speaker, listener=listener)
+        doc = nlp(resolved_text_pre)
+    else:
+        doc = nlp(text)
+
+    decompositions: List[TraceDecomposition] = []
+    resolved_parts: List[str] = []
+    primary_classification: Optional[UtteranceClassification] = None
+    primary_sent_doc = None
+
+    for sent in doc.sents:
+        sent_doc = sent.as_doc()
+        sent_cls = classify_utterance(sent_doc, speaker)
+
+        if primary_classification is None or (
+            not primary_classification.is_storable and sent_cls.is_storable
+        ):
+            primary_classification = sent_cls
+            primary_sent_doc = sent_doc
+
+        resolved_parts.append(str(sent_doc).strip())
+        sent_tense = detect_tense_aspect(sent_doc)
+
+        if sent_cls.subcategory == "tag_question":
+            sent_doc = _strip_tag_question(sent_doc)
+            sent_tense = detect_tense_aspect(sent_doc)
+
+        decomp = _extract_traces_from_sentence(
+            sent_doc, speaker, sent_tense, listener=listener,
+        )
+        decomp.utterance_type = sent_cls.utterance_type_id
+
+        if sent_cls.is_question:
+            decomp.mood = "interrogative"
+        elif sent_cls.is_command:
+            decomp.mood = "imperative"
+        elif sent_cls.subcategory == "tag_question":
+            decomp.mood = "indicative"
+
+        if not sent_cls.is_question:
+            decompositions.append(decomp)
+
+    if primary_classification is None:
+        primary_classification = classify_utterance(doc, speaker)
+        primary_sent_doc = doc
+
+    if primary_classification.subcategory == "tag_question":
+        mood = "indicative"
+    else:
+        mood = detect_mood(primary_sent_doc)
+
+    return GrammarResult(
+        trace_decompositions=decompositions,
+        classification=primary_classification,
+        mood=mood,
+        negated=detect_negation(primary_sent_doc),
+        tense_aspect=detect_tense_aspect(primary_sent_doc),
+        voice=detect_voice(primary_sent_doc),
+        resolved_text=" ".join(resolved_parts),
+    )
+
+
 @dataclass
 class QueryDecomposition:
     """Structural decomposition of a query for direct SQL lookup."""
