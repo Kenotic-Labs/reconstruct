@@ -89,10 +89,10 @@ _ge._filter_unresolved_pronoun_subjects = _counting_filter
 def _counting_process(text, speaker=None):
     global grammar_triple_count, sentence_no_triples
     result = _orig_process(text, speaker=speaker)
-    grammar_triple_count += len(result.triples)
+    grammar_triple_count += len(result.trace_decompositions)
     if result.classification:
         classification_counts[result.classification.category] += 1
-    if not result.triples:
+    if not result.trace_decompositions:
         sentence_no_triples += 1
     return result
 

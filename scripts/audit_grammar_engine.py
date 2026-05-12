@@ -177,8 +177,8 @@ def audit_conversation(conv_idx: int, conv_data: dict) -> dict:
             else:
                 grammar_statement_turns += 1
 
-            grammar_triples_before_validate += len(result.triples)
-            if not result.triples:
+            grammar_triples_before_validate += len(result.trace_decompositions)
+            if not result.trace_decompositions:
                 grammar_no_triple_turns += 1
             return result
 

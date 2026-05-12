@@ -189,23 +189,11 @@ class MemoryEngine:
         )
         result.grammar_result = grammar_result
 
-        rows: List[Tuple[str, str, str, Any]] = []
         decomps = grammar_result.trace_decompositions or []
-        for idx, triple in enumerate(grammar_result.triples):
-            decomp = decomps[idx] if idx < len(decomps) else None
-            rows.append((triple.subject, triple.predicate, triple.object, decomp))
-
-        for idx in range(len(grammar_result.triples), len(decomps)):
-            decomp = decomps[idx]
-            rows.append(
-                (
-                    getattr(decomp, "subject", ""),
-                    getattr(decomp, "predicate", ""),
-                    getattr(decomp, "object", ""),
-                    decomp,
-                )
-            )
-        result.rows = rows
+        result.rows = [
+            (d.subject or d.relational_subject, d.predicate, d.object, d)
+            for d in decomps
+        ]
 
         # ── Temporal engine: clean text → event date, temporal expression ──
         try:

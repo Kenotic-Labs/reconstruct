@@ -17,7 +17,7 @@ Design principles (from spec + pattern analysis):
 Public names (imported by retrieval, memory, tests, SDK):
     process, classify_query, classify_verb_class, _get_nlp, _get_root
     _reclassify_location_by_object, _extract_schematic
-    TraceDecomposition, GrammarResult, Triple, UtteranceClassification
+    TraceDecomposition, GrammarResult, UtteranceClassification
     TenseAspect, QueryDecomposition, VerbClass
     _VERB_CLASS_TO_SCHEMA, _VERB_CLASS_TO_RELTYPE
     _build_trace_decomposition
@@ -179,19 +179,6 @@ class TenseAspect:
     aspect: str  # simple | continuous | perfect | perfect_continuous
 
 
-@dataclass(frozen=True)
-class Triple:
-    """Extracted (subject, predicate, object) -- DERIVED from traces.
-    Exists for backward compatibility only."""
-    subject: str
-    predicate: str
-    object: str
-    is_historical: bool
-    utterance_type: int
-    negated: bool
-    mood: str  # indicative | subjunctive | imperative | conditional
-    extraction_rule: str = ""
-
 
 @dataclass
 class TraceDecomposition:
@@ -225,9 +212,8 @@ class TraceDecomposition:
 @dataclass
 class GrammarResult:
     """Aggregate output of process().  One per input turn.
-    trace_decompositions is PRIMARY; triples is DERIVED."""
+    trace_decompositions is the sole output."""
     trace_decompositions: List[TraceDecomposition]
-    triples: List[Triple]
     classification: UtteranceClassification
     mood: str
     negated: bool
