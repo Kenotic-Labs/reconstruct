@@ -2481,9 +2481,12 @@ def generate_predicted_questions(sent_doc, root, subject_name):
                 parts.append(strand_prep)
             return " ".join(parts) + "?"
 
-        # Non-subject: inversion
-        neg_text = neg_tok.text if neg_tok else ""
-        remainder_clean = [i for i in remainder if neg_tok is None or i != neg_tok.i]
+        # Non-subject: only 2 things move. First aux (or do) before subject,
+        # WH to front. Everything else stays in original document order.
+        neg_i = neg_tok.i if neg_tok else -1
+        # Tokens that stay in place: verb chain (minus moved aux) + remainder
+        # Output them in document order after [WH, moved-aux, subject, neg]
+        moved_i = set()  # indices of tokens we place manually
 
         if has_aux:
             first_aux_i = verb_chain[0]
@@ -2492,32 +2495,47 @@ def generate_predicted_questions(sent_doc, root, subject_name):
                     if sent_doc[vi].dep_ in ("aux", "auxpass"):
                         first_aux_i = vi
                         break
+            moved_i = subject_indices | {first_aux_i} | effective_target | exclude
+            if neg_i >= 0:
+                moved_i.add(neg_i)
             parts = [wh, sent_doc[first_aux_i].text, subject_name]
-            if neg_text:
-                parts.append(neg_text)
-            parts.extend(sent_doc[i].text for i in verb_chain if i != first_aux_i)
-            parts.extend(sent_doc[i].text for i in remainder_clean)
+            if neg_i >= 0:
+                parts.append(neg_tok.text)
+            # Everything else in document order
+            for i in range(len(sent_doc)):
+                if i not in moved_i:
+                    parts.append(sent_doc[i].text)
             if strand_prep:
                 parts.append(strand_prep)
             return " ".join(parts) + "?"
 
         if is_be_main:
+            moved_i = subject_indices | {root.i} | effective_target | exclude
+            if neg_i >= 0:
+                moved_i.add(neg_i)
             parts = [wh, root.text, subject_name]
-            if neg_text:
-                parts.append(neg_text)
-            parts.extend(sent_doc[i].text for i in remainder_clean)
+            if neg_i >= 0:
+                parts.append(neg_tok.text)
+            for i in range(len(sent_doc)):
+                if i not in moved_i:
+                    parts.append(sent_doc[i].text)
             if strand_prep:
                 parts.append(strand_prep)
             return " ".join(parts) + "?"
 
-        # Do-support
+        # Do-support: root verb is replaced by do + base form
         do = "did" if root.tag_ == "VBD" else ("does" if root.tag_ == "VBZ" else "do")
+        moved_i = subject_indices | {root.i} | effective_target | exclude
+        if neg_i >= 0:
+            moved_i.add(neg_i)
         parts = [wh, do, subject_name]
-        if neg_text:
-            parts.append(neg_text)
+        if neg_i >= 0:
+            parts.append(neg_tok.text)
         parts.append(root.lemma_)
-        parts.extend(sent_doc[i].text for i in verb_chain if i != root.i)
-        parts.extend(sent_doc[i].text for i in remainder_clean)
+        # Everything else in document order (particles, adverbs, preps — all in place)
+        for i in range(len(sent_doc)):
+            if i not in moved_i and i != root.i:
+                parts.append(sent_doc[i].text)
         if strand_prep:
             parts.append(strand_prep)
         return " ".join(parts) + "?"
