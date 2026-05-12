@@ -1441,20 +1441,16 @@ def _extract_episodic(doc, root) -> str:
             result = result.strip()
             remaining_tokens = kept_tokens
 
-    # Copular/linking verb: the complement (acomp/attr) IS the episodic fact.
-    # Use the complement span directly instead of position-based stripping.
-    # Handles: "The sunday before 25 May 2023 was lovely" -> "lovely"
-    #          "What a beautiful painting that was!" -> "beautiful painting"
-    #          "I felt accepted as a transgender woman" -> "accepted as a transgender woman"
-    if root is not None and root.pos_ in ("AUX", "VERB"):
+    # Copular construction: ROOT pos determines what to keep.
+    # AUX ROOT (be/am/is/are) → complement only: "am a doctor" → "a doctor"
+    # VERB ROOT with complement → keep verb: "feel happy" → "feel happy"
+    if root is not None and root.pos_ == "AUX":
         comp_tok = None
         for child in root.children:
             if child.dep_ in ("acomp", "attr"):
                 comp_tok = child
                 break
-        if comp_tok is not None and (
-            root.lemma_ in _COPULAR_LEMMAS or root.pos_ == "AUX"
-        ):
+        if comp_tok is not None:
             comp_span = sorted(comp_tok.subtree, key=lambda t: t.i)
             comp_text = ""
             for tok in comp_span:
