@@ -456,8 +456,9 @@ class Kenotic:
         )
         insights = self.check_proactive() if check_proactive else []
         # Collect ambiguities detected during store
-        ambiguities = list(memory.pending_ambiguities)
-        memory.pending_ambiguities.clear()
+        _mem, _ = self._engines()
+        ambiguities = list(_mem.pending_ambiguities)
+        _mem.pending_ambiguities.clear()
         return ProcessResult(
             action="stored",
             result=count,
