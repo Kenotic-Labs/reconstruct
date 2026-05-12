@@ -576,23 +576,15 @@ class MemoryEngine:
                 except Exception:
                     pass
 
-                # 3d: Predicted queries (onto the edge row)
-                # pq_1..pq_2: triple-based (precise, narrow)
-                # pq_3..pq_4: trace-based (broad coverage)
-                if has_triple:
+                # 3d: Predicted queries (from grammar engine's parse)
+                # Grammar engine generates questions using Chomsky's
+                # 2 operations (WH-movement + subject-aux inversion)
+                # directly from the live spaCy parse. Stored on td.predicted_questions.
+                if td is not None and hasattr(td, 'predicted_questions') and td.predicted_questions:
                     try:
-                        from app.engines.predicted_queries import generate_predicted_queries as _gen_pqs
-                        _triple_pqs = _gen_pqs(subject, predicate, object)
-                        _trace_pqs = []
-                        if td is not None:
-                            from app.engines.predicted_queries import generate_predicted_queries_from_trace as _gen_pqs_v2
-                            _trace_pqs = _gen_pqs_v2(td)
-                        # Merge: first 2 from triple (precise), next 2 from trace (broad)
                         _pq_updates: Dict[str, str] = {}
-                        for i, (q_text, _q_emb) in enumerate(_triple_pqs[:2]):
+                        for i, q_text in enumerate(td.predicted_questions[:4]):
                             _pq_updates[f"pq_{i+1}"] = q_text
-                        for i, (q_text, _q_emb) in enumerate(_trace_pqs[:2]):
-                            _pq_updates[f"pq_{i+3}"] = q_text
                         if _pq_updates:
                             _cols = ", ".join(f"{k} = ?" for k in _pq_updates)
                             _vals = list(_pq_updates.values()) + [edge_id]
