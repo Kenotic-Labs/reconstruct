@@ -97,10 +97,11 @@ _spacy_nlp = None
 
 
 def _get_spacy():
+    """Use the same spaCy model as the grammar engine (en_core_web_md)."""
     global _spacy_nlp
     if _spacy_nlp is None:
-        import spacy
-        _spacy_nlp = spacy.load("en_core_web_sm")
+        from app.engines.grammar_engine import _get_nlp
+        _spacy_nlp = _get_nlp()
     return _spacy_nlp
 
 
