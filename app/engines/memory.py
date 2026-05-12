@@ -577,18 +577,22 @@ class MemoryEngine:
                     pass
 
                 # 3d: Predicted queries (onto the edge row)
-                # Prefer trace-aware PQs when decomposition is available.
+                # pq_1..pq_2: triple-based (precise, narrow)
+                # pq_3..pq_4: trace-based (broad coverage)
                 if has_triple:
                     try:
+                        from app.engines.predicted_queries import generate_predicted_queries as _gen_pqs
+                        _triple_pqs = _gen_pqs(subject, predicate, object)
+                        _trace_pqs = []
                         if td is not None:
                             from app.engines.predicted_queries import generate_predicted_queries_from_trace as _gen_pqs_v2
-                            _pqs = _gen_pqs_v2(td)
-                        else:
-                            from app.engines.predicted_queries import generate_predicted_queries as _gen_pqs
-                            _pqs = _gen_pqs(subject, predicate, object)
+                            _trace_pqs = _gen_pqs_v2(td)
+                        # Merge: first 2 from triple (precise), next 2 from trace (broad)
                         _pq_updates: Dict[str, str] = {}
-                        for i, (q_text, _q_emb) in enumerate(_pqs[:4]):
+                        for i, (q_text, _q_emb) in enumerate(_triple_pqs[:2]):
                             _pq_updates[f"pq_{i+1}"] = q_text
+                        for i, (q_text, _q_emb) in enumerate(_trace_pqs[:2]):
+                            _pq_updates[f"pq_{i+3}"] = q_text
                         if _pq_updates:
                             _cols = ", ".join(f"{k} = ?" for k in _pq_updates)
                             _vals = list(_pq_updates.values()) + [edge_id]

@@ -805,42 +805,55 @@ def run_schema_upgrades(conn) -> None:
     except Exception:
         pass
 
+    # FTS5 must match the MIGRATIONS definition: 10 columns including PQs.
+    # Detect stale 4-column FTS and rebuild if needed.
+    try:
+        _fts_cols = {
+            row[1]
+            for row in conn.execute("PRAGMA table_info(edges_fts)").fetchall()
+        }
+        if _fts_cols and "pq_1" not in _fts_cols:
+            conn.execute("DROP TABLE IF EXISTS edges_fts")
+            conn.commit()
+            _fts_needs_rebuild = True
+            print("[DB] Dropped old edges_fts (missing PQ columns)")
+    except Exception:
+        pass
+
     try:
         conn.execute("""
             CREATE VIRTUAL TABLE IF NOT EXISTS edges_fts
             USING fts5(
                 subject, predicate, object, source_text,
+                pq_1, pq_2, pq_3, pq_4, vq_1, vq_2,
                 content='edges',
                 content_rowid='id'
             )
         """)
         conn.commit()
-        print("[DB] Applied: CREATE VIRTUAL TABLE edges_fts (FTS5, 4-col)")
     except Exception:
         pass
 
-    # Populate FTS5 index for any existing rows not yet indexed.
-    # This is idempotent: INSERT OR IGNORE semantics via FTS5's
-    # content-sync mechanism. For content-sync tables, we rebuild
-    # if the table is empty (fresh migration) or after a schema rebuild.
+    # Backfill FTS5 with all columns including PQs.
     try:
         fts_count = conn.execute(
             "SELECT COUNT(*) FROM edges_fts"
         ).fetchone()[0]
         if fts_count == 0 or _fts_needs_rebuild:
-            # Clear any stale rows from a partial state before full backfill.
             if _fts_needs_rebuild and fts_count > 0:
                 conn.execute(
                     "INSERT INTO edges_fts(edges_fts) VALUES('delete-all')"
                 )
             conn.execute("""
-                INSERT INTO edges_fts(rowid, subject, predicate, object, source_text)
+                INSERT INTO edges_fts(rowid, subject, predicate, object, source_text,
+                                      pq_1, pq_2, pq_3, pq_4, vq_1, vq_2)
                 SELECT id, subject, REPLACE(predicate, '_', ' '), object,
-                       COALESCE(source_text, '')
+                       COALESCE(source_text, ''),
+                       pq_1, pq_2, pq_3, pq_4, vq_1, vq_2
                 FROM edges
                 WHERE tombstoned_at IS NULL
             """)
             conn.commit()
-            print("[DB] Applied: backfill edges_fts from existing rows")
+            print("[DB] Applied: backfill edges_fts (10-col with PQs)")
     except Exception:
         pass
