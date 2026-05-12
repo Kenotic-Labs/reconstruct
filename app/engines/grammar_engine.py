@@ -750,9 +750,11 @@ def detect_mood(doc) -> str:
     # Gap 10: Habitual "would" detection — "would" + temporal/frequency marker
     # and NO conditional subordinator (if/unless/whether) → indicative, not
     # conditional. "We would go fishing every summer" = past habitual.
-    _CONDITIONAL_SUBORDINATORS = frozenset({"if", "unless", "whether"})
+    # Conditional subordinators: spaCy pos_=SCONJ, dep_=mark.
+    # "if/unless/whether" = conditional. "because" = causal. "while" = temporal.
+    # The conditional ones specifically introduce advcl with hypothetical meaning.
     has_conditional_sub = any(
-        tok.dep_ in ("mark", "advmod") and tok.lemma_.lower() in _CONDITIONAL_SUBORDINATORS
+        _is_subordinator(tok) and tok.lemma_ in ("if", "unless", "whether")
         for tok in doc
     )
     # Habitual signal: "every" as determiner OR a frequency adverb
@@ -948,17 +950,13 @@ def detect_voice(doc) -> str:
     has_passive_subj = False
     has_auxpass = False
     has_reflexive_obj = False
-    _reflexives = frozenset({
-        "myself", "yourself", "himself", "herself",
-        "itself", "ourselves", "yourselves", "themselves",
-    })
 
     for tok in doc:
         if tok.dep_ == "nsubjpass":
             has_passive_subj = True
         if tok.dep_ == "auxpass":
             has_auxpass = True
-        if tok.dep_ in ("dobj", "pobj") and tok.text.lower() in _reflexives:
+        if tok.dep_ in ("dobj", "pobj") and _is_reflex(tok):
             has_reflexive_obj = True
 
     if has_passive_subj or has_auxpass:
@@ -1329,9 +1327,13 @@ def classify_utterance(
 # Spec Part 1: every field defined here
 # ---------------------------------------------------------------------------
 
-_FIRST_PERSON = frozenset({
-    "i", "me", "my", "mine", "myself", "we", "us", "our", "ours", "ourselves",
-})
+# Pronoun/function word classification via spaCy morph.
+# spaCy trained on UD treebanks — classifies every token.
+def _is_1p(tok): return tok.pos_ == "PRON" and "1" in tok.morph.get("Person", [])
+def _is_2p(tok): return tok.pos_ == "PRON" and "2" in tok.morph.get("Person", [])
+def _is_3p(tok): return tok.pos_ == "PRON" and "3" in tok.morph.get("Person", [])
+def _is_reflex(tok): return tok.pos_ == "PRON" and "Yes" in tok.morph.get("Reflex", [])
+def _is_subordinator(tok): return tok.pos_ == "SCONJ" and tok.dep_ == "mark"
 
 
 def _extract_episodic(doc, root) -> str:
@@ -1764,9 +1766,6 @@ def _extract_relational(
     relational_subject = speaker or "user"
 
     # Find the nsubj token to determine person
-    _THIRD_PERSON_PRONOUNS = frozenset({
-        "she", "he", "they", "it", "her", "him", "them",
-    })
     nsubj_tok = None
     for tok in doc:
         if tok.dep_ in ("nsubj", "nsubjpass"):
@@ -1775,10 +1774,10 @@ def _extract_relational(
 
     if nsubj_tok is not None:
         nsubj_lower = nsubj_tok.text.lower()
-        if nsubj_lower in _FIRST_PERSON and speaker:
+        if _is_1p(nsubj_tok) and speaker:
             # First-person -> resolve to speaker
             relational_subject = speaker
-        elif nsubj_tok.pos_ == "PRON" and nsubj_lower in _THIRD_PERSON_PRONOUNS:
+        elif _is_3p(nsubj_tok):
             # Third-person pronoun -> keep as-is, do NOT default to speaker
             # Gap 8: Dummy "it" — expletive/weather subjects.
             # spaCy tags weather verbs' ROOT with verb.weather supersense.
@@ -1823,17 +1822,13 @@ def _extract_relational(
         # else: no nsubj match above -> keep default (speaker)
     else:
         # No nsubj at all -> keep default (speaker)
-        has_first_person = any(
-            tok.text.lower() in _FIRST_PERSON for tok in doc
-        )
+        has_first_person = any(_is_1p(tok) for tok in doc)
         if has_first_person and speaker:
             relational_subject = speaker
 
     # Second-person subject detection: "You moved to Portland" -> listener
-    _SECOND_PERSON_SUBJ = frozenset({"you"})
     has_second_person_subj = any(
-        tok.text.lower() in _SECOND_PERSON_SUBJ
-        and tok.dep_ in ("nsubj", "nsubjpass")
+        _is_2p(tok) and tok.dep_ in ("nsubj", "nsubjpass")
         for tok in doc
     )
     if has_second_person_subj:
@@ -2398,26 +2393,21 @@ def _extract_traces_from_sentence(
         _root_vc = classify_verb_class(root.lemma_)
         if _root_vc == VerbClass.SPEECH:
             # Find embedded clause's nsubj
-            embedded_subj = None
+            embedded_subj_tok = None
             for child in root.children:
                 if child.dep_ in ("ccomp", "xcomp") and child.pos_ in ("VERB", "AUX"):
                     for gc in child.children:
                         if gc.dep_ in ("nsubj", "nsubjpass"):
-                            embedded_subj = gc.text
+                            embedded_subj_tok = gc
                             break
                     break
-            if embedded_subj:
+            if embedded_subj_tok:
+                embedded_subj = embedded_subj_tok.text
                 if embedded_subj not in relational_entities:
                     relational_entities.append(embedded_subj)
-                # Set relational_subject to the embedded subject:
-                # "Caroline said SHE moved" → subj = "Caroline" (reporter
-                #   is the referent of "she" in reported speech)
-                # "Caroline said I need help" → subj = speaker (first person)
-                if embedded_subj.lower() in _FIRST_PERSON:
+                if _is_1p(embedded_subj_tok):
                     relational_subject = speaker or "user"
-                elif embedded_subj.lower() in (
-                    "she", "he", "they", "it", "her", "him", "them",
-                ):
+                elif _is_3p(embedded_subj_tok):
                     # Third-person pronoun in reported speech → reporter
                     # is the likely referent ("Caroline said SHE moved")
                     main_nsubj_tok = None
