@@ -393,12 +393,31 @@ class TemporalEngine:
                 pass
 
         # Step 1: Extract DATE/TIME spans via spaCy NER
+        # Filter out DURATIONS (NUM + time unit without date anchor)
+        # Rule: "for X weeks/months" = duration. "X ago" = date. "June 1" = date.
         try:
             nlp = _get_spacy()
             doc = nlp(text)
-            temporal_spans = [
-                ent.text for ent in doc.ents if ent.label_ in ("DATE", "TIME")
-            ]
+            temporal_spans = []
+            for ent in doc.ents:
+                if ent.label_ not in ("DATE", "TIME"):
+                    continue
+                span_lower = ent.text.lower().strip()
+                # Duration filter: NUM + time unit without "ago"/"last"/"next" = duration, skip
+                tokens = span_lower.split()
+                _TIME_UNITS = {"second", "seconds", "minute", "minutes", "hour", "hours",
+                               "day", "days", "week", "weeks", "month", "months",
+                               "year", "years", "decade", "decades"}
+                is_duration = (
+                    len(tokens) >= 2
+                    and tokens[-1] in _TIME_UNITS
+                    and not any(w in span_lower for w in ("ago", "last", "next", "this"))
+                )
+                # Check if governed by "for" prep (strong duration signal)
+                if ent.start > 0 and doc[ent.start - 1].lemma_ == "for":
+                    is_duration = True
+                if not is_duration:
+                    temporal_spans.append(ent.text)
         except Exception:
             temporal_spans = []
 
@@ -454,7 +473,23 @@ class TemporalEngine:
                         if days_fwd == 0:
                             days_fwd = 7
                         return ref_naive + timedelta(days=days_fwd)
-                    # Bare day name — assume past
+                    # Bare day name — direction from context
+                    # "on Wednesday" / "this Wednesday" → future (next occurrence)
+                    # "Wednesday" with past-tense verb → past (most recent)
+                    text_lower = text.lower()
+                    is_future = (
+                        f"on {day_name}" in text_lower
+                        or f"this {day_name}" in text_lower
+                        or f"coming {day_name}" in text_lower
+                        or "will " in text_lower
+                        or "going to " in text_lower
+                    )
+                    if is_future:
+                        days_fwd = (day_num - ref_naive.weekday()) % 7
+                        if days_fwd == 0:
+                            days_fwd = 7
+                        return ref_naive + timedelta(days=days_fwd)
+                    # Default: past (most recent occurrence)
                     days_back = (ref_naive.weekday() - day_num) % 7
                     if days_back == 0:
                         days_back = 7
@@ -543,7 +578,19 @@ class TemporalEngine:
         if not candidates:
             return None
 
-        best_text, best_dt = max(candidates, key=lambda c: len(c[0]))
+        # Pick the most SPECIFIC date — one with day+month > month-only > year-only
+        # Specificity = how many components are non-default (not Jan 1, not day 1)
+        def _specificity(dt):
+            score = 0
+            if dt.month != 1 or dt.day != 1:
+                score += 1  # has month
+            if dt.day != 1:
+                score += 1  # has day
+            if dt.hour != 0 or dt.minute != 0:
+                score += 1  # has time
+            return score
+
+        best_text, best_dt = max(candidates, key=lambda c: _specificity(c[1]))
         return best_dt.isoformat()
 
     # ── Parse ─────────────────────────────────────────────────────
