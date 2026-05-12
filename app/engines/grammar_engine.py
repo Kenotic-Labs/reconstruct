@@ -2125,6 +2125,7 @@ def generate_predicted_questions(sent_doc, root, subject_name):
         return []
 
     # === GATES ===
+    # Must have a real subject
     subj_tok = None
     for ch in root.children:
         if ch.dep_ in ("nsubj", "nsubjpass"):
@@ -2132,9 +2133,40 @@ def generate_predicted_questions(sent_doc, root, subject_name):
             break
     if not subj_tok:
         return []
-    if subj_tok.pos_ == "PRON" and subj_tok.lemma_ in ("it", "this", "that"):
+
+    # Subject must be a named entity or proper noun — not "it", "that", "they", "this"
+    subj_is_real = (
+        subj_tok.pos_ == "PROPN"
+        or subj_tok.ent_type_ in ("PERSON", "ORG", "GPE")
+        or any(t.pos_ == "PROPN" for t in subj_tok.subtree)
+        or any(t.ent_type_ == "PERSON" for t in subj_tok.subtree)
+    )
+    if not subj_is_real:
         return []
-    if sum(1 for t in sent_doc if t.pos_ not in ("PUNCT", "INTJ", "X")) < 3:
+
+    # Must have 4+ content tokens (skip fragments like "Sounds great!")
+    if sum(1 for t in sent_doc if t.pos_ not in ("PUNCT", "INTJ", "X")) < 4:
+        return []
+
+    # Must have a real answer constituent (something to ask about)
+    has_answer = any(
+        ch.dep_ in ("dobj", "attr", "acomp", "ccomp") for ch in root.children
+    )
+    if not has_answer:
+        # Check prep objects and xcomp dobjs
+        for ch in root.children:
+            if ch.dep_ in ("prep", "agent"):
+                if any(gc.dep_ == "pobj" for gc in ch.children):
+                    has_answer = True
+                    break
+            if ch.dep_ == "xcomp":
+                if any(gc.dep_ == "dobj" for gc in ch.children):
+                    has_answer = True
+                    break
+        # Check temporal NER
+        if not has_answer:
+            has_answer = any(ent.label_ in ("DATE", "TIME") for ent in sent_doc.ents)
+    if not has_answer:
         return []
 
     # === DECOMPOSE (once, shared by all questions) ===
