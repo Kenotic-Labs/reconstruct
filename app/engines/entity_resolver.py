@@ -6,7 +6,7 @@ embedding cosine-matches a noun-phrase from the query above tau_entity.
 
 No curated word lists. NP extraction uses spaCy en_core_web_sm; stopwords
 are the closed WH/auxiliary grammatical class already used by
-predicted_queries.
+edges.
 """
 from __future__ import annotations
 

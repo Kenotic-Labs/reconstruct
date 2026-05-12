@@ -13,7 +13,7 @@ def _get_sentence_transformer():
         from sentence_transformers import SentenceTransformer
         import torch
 
-        device = os.environ.get('RAYA_EMBED_DEVICE', 'cuda')
+        device = os.environ.get('RAYA_EMBED_DEVICE', 'cuda:0')
         _model_cache = SentenceTransformer(settings.embedding_model, device=device)
         print(f"[EmbeddingService] Loaded {settings.embedding_model} on GPU (CUDA)")
 
