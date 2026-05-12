@@ -1301,24 +1301,17 @@ def _extract_answer(candidate: Candidate, qd, query: str,
             return obj
         return candidate.subject or ""
 
-    # Default: episodic — use the richest trace field.
+    # Default: episodic — object is the SHORT NOUN PHRASE answer.
+    # LOCOMO gold answers are 3-4 words median. Return object first.
     obj = candidate.object or ""
-    ef = candidate.episodic_fact or ""
-    src = candidate.source_text or ""
-
-    # Episodic_fact is the verb-phrase trace — richer than object
-    # for short objects. "ran a charity race for mental health"
-    # vs "a charity race for mental health".
-    if ef and len(ef) < 80 and len(obj.split()) <= 5:
-        return ef
-
     if obj.strip() and _is_contentful_object(obj):
         return obj
 
-    if ef:
+    ef = candidate.episodic_fact or ""
+    if ef and len(ef) < 80:
         return ef
 
-    return src
+    return obj or ""
 
 
 # ===========================================================================
@@ -1510,6 +1503,9 @@ def _handle_aggregation_query(
                 break
 
         if pq_matched:
+            # Skip non-contentful objects via _is_contentful_object
+            if not _is_contentful_object(obj):
+                continue
             matched_objects.append((obj, row["id"]))
             seen_objs.add(obj_lower)
             all_edge_ids.append(row["id"])
@@ -2004,7 +2000,7 @@ def _handle_inference_query(
     query_emb = embed_text(query)
 
     rows = conn.execute(
-        f"""SELECT id, object, source_text, edge_embedding
+        f"""SELECT id, object, source_text, edge_embedding, pq_1
             FROM edges
             WHERE {_BASE_WHERE}
               AND (subject LIKE ? OR relational_entities LIKE ?)
@@ -2023,7 +2019,7 @@ def _handle_inference_query(
     best_row = None
     for r in rows:
         for col in ("pq_1",):
-            pq_text = r.get(col)
+            pq_text = r[col] if col in r.keys() else None
             if pq_text:
                 pq_emb = embed_text(pq_text)
                 cos = float(np.dot(query_emb, pq_emb))
@@ -2124,25 +2120,7 @@ def _handle_causal_query(conn: sqlite3.Connection, user_id: int,
                     grounding=[r["source_text"] or ""],
                 )
 
-    # No causal edge — fall through to list synthesis
-    # Open-domain: aggregate objects by schema
-    if qd.match_schema:
-        schema_edges = [r for r in rows
-                        if (r["edge_schematic_category"] or "") == qd.match_schema]
-    else:
-        schema_edges = rows
-
-    if schema_edges:
-        objects = list(dict.fromkeys(
-            r["object"] for r in schema_edges if r["object"]
-        ))
-        if objects:
-            return ReconstructionResult(
-                answer=", ".join(objects[:5]),
-                return_field="episodic",
-                edge_ids=[r["id"] for r in schema_edges[:5]],
-            )
-
+    # No causal/inference match — return None, let main path handle it.
     return None
 
 
@@ -2718,7 +2696,7 @@ def _step2_fts_pq(conn: sqlite3.Connection, user_id: int,
                 SELECT {_CANDIDATE_COLS} FROM edges
                 WHERE {_BASE_WHERE}
                   AND ({' OR '.join(pq_conditions)})
-                LIMIT {PQ_LIMIT}
+                LIMIT 50
             """
             try:
                 pq_rows = conn.execute(pq_sql, pq_params).fetchall()

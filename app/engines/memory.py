@@ -577,10 +577,15 @@ class MemoryEngine:
                     pass
 
                 # 3d: Predicted queries (onto the edge row)
+                # Prefer trace-aware PQs when decomposition is available.
                 if has_triple:
                     try:
-                        from app.engines.grammar_engine import generate_predicted_queries as _gen_pqs
-                        _pqs = _gen_pqs(subject, predicate, object)
+                        if td is not None:
+                            from app.engines.predicted_queries import generate_predicted_queries_from_trace as _gen_pqs_v2
+                            _pqs = _gen_pqs_v2(td)
+                        else:
+                            from app.engines.predicted_queries import generate_predicted_queries as _gen_pqs
+                            _pqs = _gen_pqs(subject, predicate, object)
                         _pq_updates: Dict[str, str] = {}
                         for i, (q_text, _q_emb) in enumerate(_pqs[:4]):
                             _pq_updates[f"pq_{i+1}"] = q_text
@@ -631,6 +636,43 @@ class MemoryEngine:
                 except Exception as e:
                     log.warning("arc assignment failed for edge_id=%s: %s", edge_id, e)
 
+                # 3i: Context entity — what the conversation is about
+                try:
+                    _speaker_name = (
+                        getattr(td, 'relational_subject', '') or subject or ''
+                    ).lower()
+                    _recent = conn.execute(
+                        """SELECT subject, object, relational_entities
+                           FROM edges
+                           WHERE user_id = ? AND tombstoned_at IS NULL
+                                 AND id != ?
+                           ORDER BY id DESC LIMIT 5""",
+                        (user_id, edge_id),
+                    ).fetchall()
+                    _entity_counts: Dict[str, int] = {}
+                    for _r in _recent:
+                        for _field in ("subject", "object"):
+                            _val = (_r[_field] or "").strip()
+                            if _val and _val.lower() != _speaker_name and len(_val) > 1:
+                                _entity_counts[_val] = _entity_counts.get(_val, 0) + 1
+                        _re_json = _r["relational_entities"]
+                        if _re_json:
+                            try:
+                                for _ent in json.loads(_re_json):
+                                    _ent_s = (_ent or "").strip()
+                                    if _ent_s and _ent_s.lower() != _speaker_name and len(_ent_s) > 1:
+                                        _entity_counts[_ent_s] = _entity_counts.get(_ent_s, 0) + 1
+                            except Exception:
+                                pass
+                    if _entity_counts:
+                        _ctx = max(_entity_counts, key=_entity_counts.get)  # type: ignore
+                        conn.execute(
+                            "UPDATE edges SET context_entity = ? WHERE id = ?",
+                            (_ctx, edge_id),
+                        )
+                except Exception:
+                    pass
+
                 conn.commit()
                 return edge_id
         except Exception as e:
@@ -675,6 +717,12 @@ class MemoryEngine:
         edge["source_text"] = source_text
         edge["source_text_hash"] = source_text_hash
         edge["source_timestamp"] = source_timestamp
+
+        # object_full: full complement chain from grammar engine
+        if td is not None:
+            _obj_full = getattr(td, 'object_full', '') or ''
+            if _obj_full and _obj_full != object:
+                edge["object_full"] = _obj_full
         if resolved_event_date:
             edge["resolved_event_date"] = resolved_event_date
 
@@ -828,6 +876,7 @@ class MemoryEngine:
                 "edge_relational_type", "edge_temporal_context",
                 "is_historical", "temporal_expression", "relational_entities",
                 "edge_embedding", "predicate_embedding",
+                "object_full", "context_entity",
             )
             for col in _trace_cols:
                 if col in row and row[col] is not None:

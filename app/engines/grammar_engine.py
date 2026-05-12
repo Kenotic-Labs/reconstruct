@@ -217,6 +217,7 @@ class TraceDecomposition:
     subject: str = ""
     predicate: str = ""
     object: str = ""
+    object_full: str = ""
     extraction_rule: str = ""
 
 
@@ -475,6 +476,34 @@ def _span_text(tok) -> str:
     Spec Part 1, Field: object -- subtree extraction for noun phrases."""
     subtree = sorted(tok.subtree, key=lambda t: t.i)
     return " ".join(t.text for t in subtree)
+
+
+def _extract_object_full(doc, root) -> str:
+    """Extract the FULL object complement including all prep phrases and clauses.
+
+    Where _extract_grammatical_object returns the shortest answer NP,
+    this returns everything the verb governs on the object side.
+    """
+    if root is None:
+        return ""
+    _OBJ_DEPS = frozenset({
+        "dobj", "attr", "acomp", "prep", "xcomp", "ccomp", "oprd",
+        "pobj", "pcomp", "advcl",
+    })
+    subj_indices: set = set()
+    for child in root.children:
+        if child.dep_ in ("nsubj", "nsubjpass"):
+            subj_indices.update(t.i for t in child.subtree)
+    obj_tokens: set = set()
+    for child in root.children:
+        if child.dep_ in _OBJ_DEPS:
+            for t in child.subtree:
+                if t.i not in subj_indices:
+                    obj_tokens.add(t.i)
+    if not obj_tokens:
+        return ""
+    ordered = sorted(obj_tokens)
+    return " ".join(doc[i].text for i in ordered).strip()
 
 
 def _extract_grammatical_object(doc, root, _is_recursive: bool = False) -> str:
@@ -2371,6 +2400,7 @@ def _extract_traces_from_sentence(
 
     # Grammatical object — from content verb
     gram_object = _extract_grammatical_object(sent_doc, content_root)
+    gram_object_full = _extract_object_full(sent_doc, content_root)
 
     # 4. Relational trace
     relational_subject, relational_entities, relational_type_base = (
@@ -2567,6 +2597,7 @@ def _extract_traces_from_sentence(
         subject=relational_subject,
         predicate=predicate,
         object=gram_object,
+        object_full=gram_object_full if gram_object_full != gram_object else "",
         extraction_rule="trace",
     )
 

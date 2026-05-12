@@ -36,6 +36,7 @@ from sdk.types import Answer, Situation  # noqa: E402
 
 DATA_PATH = _PROJECT / "locomo_bench" / "locomo" / "data" / "locomo10.json"
 REPORT_DIR = _PROJECT / "test_reports"
+LOCOMO_DB_DIR = _PROJECT / "Memory Storage" / "locomo"
 
 CATEGORY_NAMES = {
     1: "multi-hop",
@@ -104,11 +105,13 @@ def run_conversation(conv_idx: int, conv_data: dict) -> dict:
     speaker_a = conversation.get("speaker_a", "Speaker A")
     speaker_b = conversation.get("speaker_b", "Speaker B")
 
-    tmp = tempfile.NamedTemporaryFile(
-        suffix=".db", prefix=f"locomo_conv{conv_idx}_", delete=False,
-    )
-    db_path = tmp.name
-    tmp.close()
+    LOCOMO_DB_DIR.mkdir(parents=True, exist_ok=True)
+    db_path = str(LOCOMO_DB_DIR / f"conv{conv_idx}.db")
+    # Wipe for fresh run
+    try:
+        Path(db_path).unlink(missing_ok=True)
+    except Exception:
+        pass
 
     sep = "=" * 60
     print()

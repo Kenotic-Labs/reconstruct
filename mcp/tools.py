@@ -138,6 +138,7 @@ def _run_ingest_job(job: _IngestJob) -> None:
             speaker=job.args.get("speaker"),
             confidence=job.args.get("confidence", 0.9),
             model_response=job.args.get("model_response"),
+            llm_id=job.args.get("llm_id"),
         )
         log.debug("async ingest done job_id=%s user_id=%d", job.job_id, job.user_id)
     except Exception as exc:
@@ -366,6 +367,11 @@ TOOLS: Dict[str, Dict[str, Any]] = {
                 "speaker": {"type": "string"},
                 "confidence": {"type": "number", "minimum": 0, "maximum": 1},
                 "model_response": {"type": "string"},
+                "llm_id": {
+                    "type": "string",
+                    "description": "Which LLM is calling (e.g. 'claude', 'gpt', 'cursor', 'grok'). "
+                                   "Stored as source_tag='llm:{llm_id}' for provenance.",
+                },
             },
             "additionalProperties": False,
         },

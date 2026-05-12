@@ -225,7 +225,7 @@ def run_story(
                 user_id=user_id,
                 text=text,
                 source_timestamp=batch.get("time"),
-                speaker=None,
+                speaker="Maya",
                 confidence=0.85,
             )
             triple_count += n

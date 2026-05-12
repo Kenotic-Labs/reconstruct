@@ -473,6 +473,146 @@ def generate_predicted_queries(
     return results
 
 
+def _syntactic_questions_from_source(source_text: str, subject: str) -> List[str]:
+    """Generate WH questions from source_text via spaCy dep parse."""
+    nlp = _get_nlp()
+    doc = nlp(source_text)
+    questions: List[str] = []
+
+    root = None
+    for tok in doc:
+        if tok.dep_ == "ROOT":
+            root = tok
+            break
+    if root is None:
+        return []
+
+    content = root
+    for _ in range(3):
+        child_comp = None
+        for ch in content.children:
+            if ch.dep_ in ("xcomp", "ccomp", "pcomp") and ch.pos_ in ("VERB", "AUX"):
+                child_comp = ch
+                break
+        if child_comp is None:
+            break
+        content = child_comp
+
+    verb_lemma = content.lemma_
+
+    for ch in content.children:
+        if ch.dep_ == "dobj":
+            questions.append(f"What does {subject} {verb_lemma}?")
+            if ch.pos_ in ("NOUN", "PROPN"):
+                questions.append(f"What {ch.lemma_} does {subject} {verb_lemma}?")
+            break
+
+    for ch in content.children:
+        if ch.dep_ == "prep" and ch.pos_ == "ADP":
+            prep = ch.lemma_
+            for gc in ch.children:
+                if gc.dep_ in ("pobj", "pcomp"):
+                    if prep in ("about", "into", "of"):
+                        questions.append(f"What is {subject} {verb_lemma} {prep}?")
+                    elif prep in ("from", "to", "in", "at"):
+                        questions.append(f"Where does {subject} {verb_lemma} {prep}?")
+                    else:
+                        questions.append(f"What does {subject} {verb_lemma} {prep}?")
+                    break
+
+    for ch in content.children:
+        if ch.dep_ == "ccomp":
+            questions.append(f"What did {subject} {verb_lemma}?")
+            comp_text = " ".join(
+                t.text for t in sorted(ch.subtree, key=lambda t: t.i)
+                if not (t.dep_ == "mark" and t.lemma_ == "that")
+            )
+            if comp_text and len(comp_text) > 5:
+                questions.append(comp_text)
+            break
+
+    for ch in content.children:
+        if ch.dep_ in ("acomp", "attr"):
+            questions.append(f"What is {subject}?")
+            break
+
+    for ent in doc.ents:
+        if ent.label_ in ("DATE", "TIME"):
+            questions.append(f"When did {subject} {verb_lemma}?")
+            break
+
+    return questions
+
+
+def generate_predicted_queries_from_trace(
+    td: object,
+) -> List[Tuple[str, np.ndarray]]:
+    """Source-text-driven PQ generation from TraceDecomposition."""
+    subject = getattr(td, 'subject', '') or ''
+    predicate = getattr(td, 'predicate', '') or ''
+    obj = getattr(td, 'object', '') or ''
+    if not subject or not predicate or not obj:
+        return []
+
+    results: List[Tuple[str, np.ndarray]] = []
+
+    real_subject = getattr(td, 'relational_subject', '') or subject
+    if real_subject.lower() in ("user", "i", "me", "myself"):
+        real_subject = subject if subject.lower() not in ("user", "i", "me", "myself") else real_subject
+
+    # Layer 1: Source-text syntactic questions
+    source_text = getattr(td, 'source_text', '') or ''
+    if source_text and len(source_text) > 10:
+        for q in _syntactic_questions_from_source(source_text, real_subject):
+            try:
+                results.append((q, embed_text(q)))
+            except Exception:
+                pass
+
+    # Layer 2: Episodic fact as cosine anchor
+    episodic_fact = getattr(td, 'episodic_fact', '') or ''
+    if episodic_fact and len(episodic_fact) > 5:
+        try:
+            results.append((episodic_fact, embed_text(episodic_fact)))
+        except Exception:
+            pass
+
+    # Layer 3: Trace-aware supplements
+    emotional_state = getattr(td, 'emotional_state', None)
+    emotional_target = getattr(td, 'emotional_target', None)
+    schematic_category = getattr(td, 'schematic_category', '') or ''
+
+    if emotional_state:
+        try:
+            results.append((f"How is {real_subject} feeling?", embed_text(f"How is {real_subject} feeling?")))
+        except Exception:
+            pass
+
+    if emotional_state and emotional_target:
+        q = f"Why is {real_subject} {emotional_state} about {emotional_target}?"
+        try:
+            results.append((q, embed_text(q)))
+        except Exception:
+            pass
+
+    if schematic_category and schematic_category != "uncategorized":
+        q = f"How is {real_subject}'s {schematic_category} going?"
+        try:
+            results.append((q, embed_text(q)))
+        except Exception:
+            pass
+
+    # Dedup
+    seen: set = set()
+    deduped: List[Tuple[str, np.ndarray]] = []
+    for q_text, q_emb in results:
+        key = q_text.lower().strip()
+        if key not in seen:
+            seen.add(key)
+            deduped.append((q_text, q_emb))
+    return deduped
+
+
 def active_model_name() -> Optional[str]:
     """Return which QG model is currently active ('raya', 'flan', or None)."""
     return _model_name
