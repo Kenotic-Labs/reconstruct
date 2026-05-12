@@ -2441,9 +2441,21 @@ def _pq_form_question(doc, target_indices, subject_name):
             strand_prep = prep_parent.text
             effective_target.add(prep_parent.i)
 
-    punct = {tok.i for tok in doc if tok.pos_ == "PUNCT"}
+    # Exclude: punctuation, interjections, compound clause tails, vocatives
+    exclude = {tok.i for tok in doc if tok.pos_ in ("PUNCT", "INTJ")}
+    for ch in root.children:
+        if ch.dep_ == "cc":
+            exclude.add(ch.i)
+        if ch.dep_ in ("conj", "advcl"):
+            exclude.update(t.i for t in ch.subtree)
+    # Sentence-initial adverbs ("Hopefully,", "Oh,")
+    if len(doc) > 0 and doc[0].pos_ in ("ADV", "INTJ") and doc[0].dep_ == "advmod":
+        exclude.add(0)
+        if len(doc) > 1 and doc[1].text == ",":
+            exclude.add(1)
+
     remainder_indices = sorted(
-        set(range(len(doc))) - subject_indices - set(verb_chain) - effective_target - punct
+        set(range(len(doc))) - subject_indices - set(verb_chain) - effective_target - exclude
     )
 
     neg_tok = None
@@ -2573,20 +2585,88 @@ def _pq_find_target(doc, root, target_dep):
 def generate_predicted_questions(sent_doc, root, subject_name):
     """Generate predicted questions from a live spaCy parse.
 
-    Tries each answer constituent type and generates one question per type.
-    Returns list of question strings (up to 4).
+    Only generates questions for factual statements with real answer
+    constituents. Returns empty list for backchannels, commands,
+    exclamations, fragments, and sentences with no meaningful object.
     """
     if not root:
         return []
+
+    # Gate 1: must have a proper subject (not expletive-only, not missing)
+    has_subj = any(ch.dep_ in ("nsubj", "nsubjpass") for ch in root.children)
+    if not has_subj:
+        return []
+
+    # Gate 2: must have a real verb (not interjection, not fragment)
+    if root.pos_ not in ("VERB", "AUX"):
+        return []
+
+    # Gate 3: must have at least one answer constituent
+    # (something worth asking about)
+    has_dobj = any(ch.dep_ == "dobj" for ch in root.children)
+    has_attr = any(ch.dep_ == "attr" for ch in root.children)
+    has_pobj = False
+    for ch in root.children:
+        if ch.dep_ in ("prep", "agent"):
+            if any(gc.dep_ == "pobj" for gc in ch.children):
+                has_pobj = True
+                break
+    has_ccomp = any(ch.dep_ == "ccomp" for ch in root.children)
+    has_xcomp_obj = False
+    for ch in root.children:
+        if ch.dep_ == "xcomp":
+            if any(gc.dep_ == "dobj" for gc in ch.children):
+                has_xcomp_obj = True
+            break
+    has_temporal = any(ent.label_ in ("DATE", "TIME") for ent in sent_doc.ents)
+
+    if not (has_dobj or has_attr or has_pobj or has_ccomp or has_xcomp_obj or has_temporal):
+        return []
+
+    # Gate 4: sentence must be long enough to be a fact (not "Thanks!" or "Great!")
+    content_tokens = [t for t in sent_doc if t.pos_ not in ("PUNCT", "INTJ", "X")]
+    if len(content_tokens) < 3:
+        return []
+
+    # Gate 5: subject must not be a pronoun-only ("it", "this", "that")
+    # These produce garbage questions ("What is it?")
+    subj_tok = None
+    for ch in root.children:
+        if ch.dep_ in ("nsubj", "nsubjpass"):
+            subj_tok = ch
+            break
+    if subj_tok and subj_tok.pos_ == "PRON" and subj_tok.lemma_ in ("it", "this", "that"):
+        return []
+
+    # Generate questions only for constituents that exist
     questions = []
     seen = set()
-    for dep in ("dobj", "attr", "acomp", "pobj", "ccomp", "advmod", "nsubj"):
+
+    def _try(dep):
         target = _pq_find_target(sent_doc, root, dep)
-        if target:
-            q = _pq_form_question(sent_doc, target, subject_name)
-            if q and q.lower() not in seen and not q.startswith("("):
-                seen.add(q.lower())
-                questions.append(q)
+        if not target:
+            return
+        # Validate target has content (not just a pronoun or det)
+        target_tokens = [sent_doc[i] for i in target]
+        if all(t.pos_ in ("PRON", "DET", "PART", "PUNCT") for t in target_tokens):
+            return
+        q = _pq_form_question(sent_doc, target, subject_name)
+        if q and q.lower() not in seen and not q.startswith("("):
+            seen.add(q.lower())
+            questions.append(q)
+
+    # Only try constituents that actually exist
+    if has_dobj or has_xcomp_obj:
+        _try("dobj")
+    if has_attr:
+        _try("attr")
+    if has_pobj:
+        _try("pobj")
+    if has_ccomp:
+        _try("ccomp")
+    if has_temporal:
+        _try("advmod")
+
     return questions[:4]
 
 
