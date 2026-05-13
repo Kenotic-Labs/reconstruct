@@ -2069,23 +2069,68 @@ def _find_content_verb(verb, _depth=0):
 
 
 # ---------------------------------------------------------------------------
-# Predicted Question Generation — 41/41 verified
-# Chomsky 1957: WH-movement + subject-auxiliary inversion
-#
-# tokens = SUBJECT ∪ VERB_CHAIN ∪ TARGET ∪ REMAINDER
-# question = WH + VERB_CHAIN[0] + SUBJECT + VERB_CHAIN[1:] + REMAINDER + ?
+# Predicted Question Generation
+# 5 rules, each structurally derived from English question formation:
+#   Rule 1: Full WH-replacement (Chomsky 1957)
+#   Rule 2: Yes/No inversion (SAI without WH)
+#   Rule 3: Subject WH (subject → Who/What, object stays)
+#   Rule 4: Modifier-driven partial WH (dep tag → question form)
+#   Rule 5: Hypernym question (WordNet category of object)
 # ---------------------------------------------------------------------------
 
-def generate_predicted_questions(sent_doc, root, subject_name):
-    """Generate predicted questions from a live spaCy parse.
 
-    Formula (Chomsky 1957, 41/41 verified):
-      tokens = SUBJECT ∪ VERB_CHAIN ∪ TARGET ∪ REMAINDER
-      question = WH + VERB_CHAIN[0] + SUBJECT + VERB_CHAIN[1:] + REMAINDER + ?
-      If TARGET = SUBJECT: WH + VERB_CHAIN + REMAINDER + ?
-      If no aux and ROOT != be: do-support, ROOT → base form
+def _pq_has_kinds(lemma: str) -> bool:
+    """WordNet reverse check: does this noun have hyponyms (sub-kinds)?"""
+    _ensure_wordnet()
+    from nltk.corpus import wordnet as wn  # type: ignore
+    synsets = wn.synsets(lemma, pos=wn.NOUN)
+    if not synsets:
+        return False
+    return len(synsets[0].hyponyms()) > 0
 
-    One function. Gates → collect targets → form questions.
+
+def _pq_is_ordinal(lemma: str) -> bool:
+    """WordNet check: is this adjective an ordinal (first, second, third...)?
+    Ordinals → 'Which X?' not 'What X?'"""
+    _ensure_wordnet()
+    from nltk.corpus import wordnet as wn  # type: ignore
+    ordinal_head = wn.synset('ordinal.a.02')
+    for s in wn.synsets(lemma, pos=wn.ADJ):
+        if s == ordinal_head:
+            return True
+    for s in wn.synsets(lemma, pos=wn.ADJ_SAT):
+        if ordinal_head in s.similar_tos():
+            return True
+    return False
+
+
+def _pq_wordnet_category(word: str, is_proper: bool) -> Optional[str]:
+    """Pure WordNet category lookup.
+    Proper nouns: prefer instance_hypernyms (Paris → capital, Louvre → museum).
+    Common nouns: use regular hypernyms (biryani → dish, parrot → bird).
+    """
+    _ensure_wordnet()
+    from nltk.corpus import wordnet as wn  # type: ignore
+    syns = wn.synsets(word.lower(), pos=wn.NOUN)
+    if not syns:
+        return None
+    if is_proper:
+        for s in syns:
+            ih = s.instance_hypernyms()
+            if ih:
+                return ih[0].lemmas()[0].name().replace("_", " ")
+    h = syns[0].hypernyms()
+    if h:
+        lemma = h[0].lemmas()[0].name().replace("_", " ")
+        if lemma != word.lower() and len(lemma.split()) <= 2:
+            return lemma
+    return None
+
+
+def _generate_pq_wh_replacement(sent_doc, root, subject_name):
+    """Rule 1: Full WH-replacement (Chomsky 1957).
+    Replaces target constituent entirely with WH-word.
+    Called by generate_predicted_questions as one of 5 rules.
     """
     if not root or root.pos_ not in ("VERB", "AUX"):
         return []
@@ -2322,6 +2367,252 @@ def generate_predicted_questions(sent_doc, root, subject_name):
             break
 
     return questions[:4]
+
+
+def generate_predicted_questions(sent_doc, root, subject_name):
+    """Generate predicted questions from 5 English question formation rules.
+
+    Each rule preserves different content words:
+      Rule 1: Full WH-replacement — target → WH word
+      Rule 2: Yes/No inversion — keep everything, move aux/do to front
+      Rule 3: Subject WH — subject → Who/What, object stays
+      Rule 4: Modifier partial WH — dep tag drives WH-phrase:
+              poss → Whose, nummod → How many, amod(ordinal) → Which,
+              amod(quality) → What, compound → What kind of
+      Rule 5: Hypernym — WordNet category of object noun
+    """
+    if not root or root.pos_ not in ("VERB", "AUX"):
+        return []
+
+    # === GATES ===
+    subj_tok = None
+    for ch in root.children:
+        if ch.dep_ in ("nsubj", "nsubjpass"):
+            subj_tok = ch
+            break
+    if not subj_tok:
+        return []
+
+    subj_is_real = (
+        subj_tok.pos_ == "PROPN"
+        or subj_tok.ent_type_ in ("PERSON", "ORG", "GPE")
+        or any(t.pos_ == "PROPN" for t in subj_tok.subtree)
+        or any(t.ent_type_ == "PERSON" for t in subj_tok.subtree)
+    )
+    if not subj_is_real:
+        return []
+
+    if sum(1 for t in sent_doc if t.pos_ not in ("PUNCT", "INTJ", "X")) < 4:
+        return []
+
+    # === DECOMPOSE ===
+    subject_indices = {t.i for t in subj_tok.subtree}
+    vc_indices = {root.i}
+    for ch in root.children:
+        if ch.dep_ in ("aux", "auxpass"):
+            vc_indices.add(ch.i)
+        if ch.dep_ == "prt":
+            vc_indices.add(ch.i)
+    verb_chain = sorted(vc_indices)
+
+    is_be_main = root.lemma_ == "be" and len(verb_chain) == 1
+    has_aux = any(sent_doc[i].dep_ in ("aux", "auxpass") for i in verb_chain if i != root.i)
+
+    neg_tok = None
+    for ch in root.children:
+        if ch.dep_ == "neg":
+            neg_tok = ch
+            break
+
+    exclude = {tok.i for tok in sent_doc if tok.pos_ in ("PUNCT", "INTJ")}
+    for ch in root.children:
+        if ch.dep_ == "cc":
+            exclude.add(ch.i)
+        if ch.dep_ in ("conj", "advcl"):
+            exclude.update(t.i for t in ch.subtree)
+    if len(sent_doc) > 0 and sent_doc[0].pos_ in ("ADV", "INTJ") and sent_doc[0].dep_ == "advmod":
+        exclude.add(0)
+        if len(sent_doc) > 1 and sent_doc[1].text == ",":
+            exclude.add(1)
+
+    content_indices = sorted(set(range(len(sent_doc))) - exclude)
+
+    questions = []
+    seen = set()
+
+    def _add(q):
+        if q and q.lower() not in seen:
+            seen.add(q.lower())
+            questions.append(q)
+
+    # ------------------------------------------------------------------
+    # RULE 2: Yes/No inversion
+    # ------------------------------------------------------------------
+    neg_i = neg_tok.i if neg_tok else -1
+
+    def _yes_no():
+        parts = []
+        if has_aux:
+            first_aux_i = verb_chain[0]
+            if sent_doc[first_aux_i].dep_ not in ("aux", "auxpass"):
+                for vi in verb_chain:
+                    if sent_doc[vi].dep_ in ("aux", "auxpass"):
+                        first_aux_i = vi
+                        break
+            parts.append(sent_doc[first_aux_i].text.capitalize())
+            for i in sorted(subject_indices):
+                parts.append(sent_doc[i].text)
+            if neg_i >= 0:
+                parts.append(neg_tok.text)
+            moved = subject_indices | {first_aux_i} | exclude
+            if neg_i >= 0:
+                moved.add(neg_i)
+            for i in content_indices:
+                if i not in moved:
+                    parts.append(sent_doc[i].text)
+        elif is_be_main:
+            parts.append(root.text.capitalize())
+            for i in sorted(subject_indices):
+                parts.append(sent_doc[i].text)
+            if neg_i >= 0:
+                parts.append(neg_tok.text)
+            moved = subject_indices | {root.i} | exclude
+            if neg_i >= 0:
+                moved.add(neg_i)
+            for i in content_indices:
+                if i not in moved:
+                    parts.append(sent_doc[i].text)
+        else:
+            do = "Did" if root.tag_ == "VBD" else ("Does" if root.tag_ == "VBZ" else "Do")
+            parts.append(do)
+            for i in sorted(subject_indices):
+                parts.append(sent_doc[i].text)
+            if neg_i >= 0:
+                parts.append(neg_tok.text)
+            moved = subject_indices | exclude
+            if neg_i >= 0:
+                moved.add(neg_i)
+            for i in content_indices:
+                if i not in moved:
+                    if i == root.i:
+                        parts.append(root.lemma_)
+                    else:
+                        parts.append(sent_doc[i].text)
+        return " ".join(parts) + "?" if parts else None
+
+    _add(_yes_no())
+
+    # ------------------------------------------------------------------
+    # RULE 3: Subject WH
+    # ------------------------------------------------------------------
+    def _subject_wh():
+        wh = "Who" if (
+            subj_tok.ent_type_ in ("PERSON",) or subj_tok.pos_ == "PROPN"
+        ) else "What"
+        parts = [wh]
+        for i in content_indices:
+            if i not in subject_indices and i not in exclude:
+                parts.append(sent_doc[i].text)
+        return " ".join(parts) + "?" if len(parts) > 1 else None
+
+    _add(_subject_wh())
+
+    # ------------------------------------------------------------------
+    # RULE 4: Modifier-driven partial WH
+    # ------------------------------------------------------------------
+    def _form_partial(ch, wh_phrase):
+        """Form a question replacing the target NP with wh_phrase."""
+        if has_aux:
+            first_aux_i = verb_chain[0]
+            if sent_doc[first_aux_i].dep_ not in ("aux", "auxpass"):
+                for vi in verb_chain:
+                    if sent_doc[vi].dep_ in ("aux", "auxpass"):
+                        first_aux_i = vi
+                        break
+            parts = [wh_phrase, sent_doc[first_aux_i].text, subject_name]
+            if neg_i >= 0:
+                parts.append(neg_tok.text)
+            target_all = {t.i for t in ch.subtree}
+            moved = subject_indices | {first_aux_i} | target_all | exclude
+            if neg_i >= 0:
+                moved.add(neg_i)
+            for i in range(len(sent_doc)):
+                if i not in moved:
+                    parts.append(sent_doc[i].text)
+        elif is_be_main:
+            parts = [wh_phrase, root.text, subject_name]
+            if neg_i >= 0:
+                parts.append(neg_tok.text)
+            target_all = {t.i for t in ch.subtree}
+            moved = subject_indices | {root.i} | target_all | exclude
+            if neg_i >= 0:
+                moved.add(neg_i)
+            for i in range(len(sent_doc)):
+                if i not in moved:
+                    parts.append(sent_doc[i].text)
+        else:
+            do = "did" if root.tag_ == "VBD" else ("does" if root.tag_ == "VBZ" else "do")
+            parts = [wh_phrase, do, subject_name]
+            if neg_i >= 0:
+                parts.append(neg_tok.text)
+            target_all = {t.i for t in ch.subtree}
+            moved = subject_indices | target_all | exclude
+            if neg_i >= 0:
+                moved.add(neg_i)
+            for i in range(len(sent_doc)):
+                if i in moved:
+                    continue
+                if i == root.i:
+                    parts.append(root.lemma_)
+                else:
+                    parts.append(sent_doc[i].text)
+        return " ".join(parts) + "?"
+
+    for ch in root.children:
+        if ch.dep_ not in ("dobj", "attr"):
+            continue
+        head = ch
+        children_deps = {t.dep_ for t in ch.children}
+        has_poss = "poss" in children_deps
+        has_nummod = "nummod" in children_deps
+        has_amod = "amod" in children_deps
+        has_compound = "compound" in children_deps
+
+        if not (has_poss or has_nummod or has_amod or has_compound):
+            continue
+
+        head_text = head.text
+        if has_poss:
+            _add(_form_partial(ch, f"Whose {head_text}"))
+        if has_nummod:
+            _add(_form_partial(ch, f"How many {head_text}"))
+        if has_amod:
+            amod_toks = [t for t in ch.children if t.dep_ == "amod"]
+            if any(_pq_is_ordinal(t.lemma_) for t in amod_toks):
+                _add(_form_partial(ch, f"Which {head_text}"))
+            else:
+                _add(_form_partial(ch, f"What {head_text}"))
+        if has_compound:
+            _add(_form_partial(ch, f"What kind of {head_text}"))
+
+    # ------------------------------------------------------------------
+    # RULE 5: Hypernym question
+    # ------------------------------------------------------------------
+    for ch in root.children:
+        if ch.dep_ not in ("dobj", "attr"):
+            continue
+        is_proper = ch.pos_ == "PROPN" or ch.ent_type_ != ""
+        category = _pq_wordnet_category(ch.text, is_proper)
+        if category:
+            _add(_form_partial(ch, f"What {category}"))
+
+    # ------------------------------------------------------------------
+    # RULE 1: Full WH-replacement (original Chomsky transformation)
+    # ------------------------------------------------------------------
+    for q in _generate_pq_wh_replacement(sent_doc, root, subject_name):
+        _add(q)
+
+    return questions[:8]
 
 
 def _extract_traces_from_sentence(
