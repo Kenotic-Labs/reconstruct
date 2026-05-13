@@ -85,7 +85,7 @@ class Kenotic:
         exception — never crashes init.
         """
         try:
-            from app.engines.architecture_verifier import (
+            from scripts.architecture_verifier import (
                 verify_kenotic_architecture_v1,
             )
             results = verify_kenotic_architecture_v1(db_path=self.db_path)
@@ -361,23 +361,12 @@ class Kenotic:
         check_proactive: bool = False,
         llm_id: Optional[str] = None,
     ) -> ProcessResult:
-        """Unified entry point. The architecture decides everything.
+        """Thin wrapper — all routing lives in backbone.process().
 
-        Classifies intent via the grammar engine, routes to the correct
-        internal capability, and returns a ProcessResult.
-
-        Args:
-          text: raw user utterance. Empty string with check_proactive=True
-                triggers proactive-only mode.
-          speaker: identity for pronoun resolution in extraction.
-          source_timestamp: ISO datetime of the utterance.
-          model_response: assistant reply text for model_comprehension storage.
-          check_proactive: if True and text is empty, return proactive insights
-                           only. If True and text is non-empty, proactive
-                           insights are appended to store results.
-
-        Returns:
-          ProcessResult with action discriminator and typed result.
+        This method only handles SDK-specific concerns (proactive checks,
+        model_response storage, llm_id tagging). The architectural
+        decisions (question vs statement, retrieval vs conversational,
+        situational vs factual) are all in app.engines.backbone.
         """
         # Proactive-only mode: no text, just check for due arcs.
         if check_proactive and not text.strip():
@@ -388,84 +377,31 @@ class Kenotic:
                 proactive=insights,
             )
 
-        # Classify intent via one spaCy parse — no full grammar_process call.
-        # detect_mood + classify_utterance on a single doc = ~5ms.
-        is_question = False
-        is_command = False
-        is_backchannel = False
-
-        try:
-            from app.engines.grammar_engine import _get_nlp, classify_utterance
-            _doc = _get_nlp()(text)
-            _utt = classify_utterance(_doc)
-            is_question = _utt.is_question
-            is_command = _utt.is_command
-            is_backchannel = _utt.is_backchannel
-        except ImportError:
-            stripped = text.strip()
-            if stripped.endswith("?"):
-                is_question = True
-            elif stripped.lower().split()[0] in ("forget", "delete", "remove") if stripped else False:
-                is_command = True
-
-        # BACKCHANNEL — skip entirely
-        if is_backchannel:
-            return ProcessResult(action="skipped")
-
-        # COMMAND — route to forget
-        if is_command:
-            target = self._parse_forget_target(text)
-            if target:
-                count = self.forget(by="entity", scope=target)
-                return ProcessResult(action="forgot", result=count)
-            return ProcessResult(action="skipped")
-
-        # QUESTION — sub-route: situational vs factual
-        # Respects explicit_reconstruct_only setting (same logic as retrieve())
-        if is_question:
-            try:
-                if settings.explicit_reconstruct_only:
-                    _lower = text.lower()
-                    _triggers = ("reconstruct", "what's going on", "whats going on",
-                                 "summarize", "tell me about", "what is going on",
-                                 "what's happening", "whats happening",
-                                 "how is everything", "catch me up",
-                                 "give me a summary", "overview")
-                    if any(t in _lower for t in _triggers):
-                        situation = self.reconstruct(text)
-                        return ProcessResult(action="reconstructed", result=situation)
-                else:
-                    from app.engines.wh_type import is_situational
-                    if is_situational(text):
-                        situation = self.reconstruct(text)
-                        return ProcessResult(action="reconstructed", result=situation)
-            except Exception:
-                pass
-            answer = self.retrieve(text)
-            return ProcessResult(action="answered", result=answer)
-
-        # STATEMENT — write path + optional proactive check
-        count = self.ingest(
+        # Architecture handles everything
+        from app.engines.backbone import process as arch_process
+        result = arch_process(
             text,
+            user_id=self.user_id,
             speaker=speaker,
             listener=listener,
             speaker_is_user=speaker_is_user,
             source_timestamp=source_timestamp,
-            model_response=model_response,
-            llm_id=llm_id,
         )
-        insights = self.check_proactive() if check_proactive else []
-        # Collect ambiguities detected during store
-        _mem, _ = self._engines()
-        ambiguities = list(_mem.pending_ambiguities)
-        _mem.pending_ambiguities.clear()
-        return ProcessResult(
-            action="stored",
-            result=count,
-            proactive=insights,
-            triples_stored=count,
-            ambiguities=ambiguities,
+
+        # SDK wrapping: convert backbone.ProcessResult → sdk.ProcessResult
+        sdk_result = ProcessResult(
+            action=result.action,
+            result=result.answer if result.action == "answered" else result.edges_stored,
+            triples_stored=result.edges_stored,
+            ambiguities=result.ambiguities,
         )
+
+        # SDK-specific: proactive check after store
+        if check_proactive and result.action == "stored":
+            insights = self.check_proactive()
+            sdk_result.proactive = insights
+
+        return sdk_result
 
     @staticmethod
     def _parse_forget_target(text: str) -> Optional[str]:

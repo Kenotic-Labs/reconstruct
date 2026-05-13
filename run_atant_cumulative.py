@@ -40,7 +40,7 @@ import yaml
 PROJECT_ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-TEST_DB = str(PROJECT_ROOT / "Memory Storage" / "atant_cumulative.db")
+TEST_DB = str(PROJECT_ROOT / "Memory Storage" / "locomo" / "atant_cumulative.db")
 REPORT_DIR = PROJECT_ROOT / "test_reports"
 
 from config.settings import settings

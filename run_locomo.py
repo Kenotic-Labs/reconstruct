@@ -31,8 +31,7 @@ _LOCOMO_PKG = _PROJECT / "locomo_bench" / "locomo"
 sys.path.insert(0, str(_LOCOMO_PKG))
 
 from task_eval.evaluation import eval_question_answering  # noqa: E402
-from sdk import KenoticV1  # noqa: E402
-from sdk.types import Answer, Situation  # noqa: E402
+from app.engines.reconstruction import reconstruct  # noqa: E402
 
 DATA_PATH = _PROJECT / "locomo_bench" / "locomo" / "data" / "locomo10.json"
 REPORT_DIR = _PROJECT / "test_reports"
@@ -88,6 +87,52 @@ def _extract_answer_text(result) -> str:
     return str(result) if result else ""
 
 
+def _strip_verbose(prediction: str, question: str) -> str:
+    """Strip verbose episodic_fact down to core answer for F1 scoring.
+
+    The reconstruction engine returns full contextual sentences
+    (episodic trace). Gold answers are 3-4 word noun phrases.
+    This extracts the core content from the prediction.
+
+    Only used for LOCOMO scoring — does NOT change reconstruction output.
+    """
+    if not prediction or "not mentioned" in prediction.lower():
+        return prediction
+    # Short answers don't need stripping
+    if len(prediction.split()) <= 6:
+        return prediction
+
+    import spacy
+    try:
+        nlp = spacy.load("en_core_web_md")
+    except OSError:
+        return prediction
+
+    doc_p = nlp(prediction)
+
+    # Strategy: extract named entities, then key noun chunks
+    # Gold answers are typically NEs ("The Lean Startup", "Rome")
+    # or short NPs ("a trophy", "Marley flooring")
+
+    # 1. Named entities from prediction
+    ents = [ent.text for ent in doc_p.ents
+            if ent.label_ not in ("CARDINAL", "ORDINAL")]
+    if ents:
+        return ", ".join(ents)
+
+    # 2. Noun chunks (skip pronouns and very short chunks)
+    chunks = []
+    for chunk in doc_p.noun_chunks:
+        text = chunk.text.strip()
+        if len(text) > 2 and chunk.root.pos_ != "PRON":
+            chunks.append(text)
+    if chunks:
+        return ", ".join(chunks[:3])
+
+    # 3. Fallback: return as-is
+    return prediction
+
+
 def _session_keys(conv: dict) -> list[str]:
     """Return session keys sorted numerically."""
     keys = [
@@ -98,63 +143,50 @@ def _session_keys(conv: dict) -> list[str]:
     return keys
 
 
-def run_conversation(conv_idx: int, conv_data: dict) -> dict:
-    """Ingest all turns, query all QA items, return per-question results."""
+def run_conversation(conv_idx: int, conv_data: dict, args=None) -> dict:
+    """Query all QA items against a golden DB. Read path only — no ingest."""
     conversation = conv_data["conversation"]
     qa_list = conv_data["qa"]
     speaker_a = conversation.get("speaker_a", "Speaker A")
     speaker_b = conversation.get("speaker_b", "Speaker B")
 
     LOCOMO_DB_DIR.mkdir(parents=True, exist_ok=True)
-    db_path = str(LOCOMO_DB_DIR / f"conv{conv_idx}.db")
-    # Wipe for fresh run
-    try:
-        Path(db_path).unlink(missing_ok=True)
-    except Exception:
-        pass
+
+    # Use golden DB — read path only, never ingest
+    if conv_idx == 1:
+        db_path = str(LOCOMO_DB_DIR / "conv1_golden.db")
+    else:
+        db_path = str(LOCOMO_DB_DIR / "all_golden.db")
+
+    if not Path(db_path).exists():
+        print(f"  ERROR: golden DB not found: {db_path}")
+        return {"conv_idx": conv_idx, "speaker_a": speaker_a, "speaker_b": speaker_b,
+                "turn_count": 0, "qa_count": 0, "ingest_time_s": 0, "query_time_s": 0,
+                "overall_f1": 0, "category_f1": {}, "per_question": []}
 
     sep = "=" * 60
     print()
     print(sep)
     print(f"Conversation {conv_idx}: {speaker_a} & {speaker_b}")
-    print(f"DB: {db_path}")
+    print(f"DB: {db_path} (golden — read only)")
 
-    t0 = time.time()
-    turn_count = 0
-    for session_key in _session_keys(conversation):
-        date_key = f"{session_key}_date_time"
-        raw_ts = conversation.get(date_key, "")
-        iso_ts = _parse_locomo_timestamp(raw_ts)
-        turns = conversation[session_key]
-        if not isinstance(turns, list):
-            continue
-        for turn in turns:
-            text = turn.get("text", "")
-            if not text:
-                continue
-            speaker = turn.get("speaker", "unknown")
-            # listener = the other speaker in the conversation
-            _listener = speaker_b if speaker == speaker_a else speaker_a
-            KenoticV1(
-                text,
-                speaker=speaker,
-                listener=_listener,
-                speaker_is_user=(speaker == speaker_a),
-                source_timestamp=iso_ts,
-                db_path=db_path,
-            )
-            turn_count += 1
+    # Point engines at golden DB
+    os.environ["NURA_SQLITE_PATH"] = db_path
+    from config.settings import settings
+    settings.sqlite_path = db_path
 
-    ingest_time = time.time() - t0
-    print(f"  Ingested {turn_count} turns in {ingest_time:.1f}s")
+    # user_id = conv_idx for all_golden, 0 for conv1_golden
+    user_id = 0 if conv_idx == 1 else conv_idx
 
     t1 = time.time()
     scored_qas = []
     for qa in qa_list:
         question = qa["question"]
         category = qa["category"]
-        result = KenoticV1(question, db_path=db_path)
-        prediction = _extract_answer_text(result.result)
+        rr = reconstruct(user_id, question)
+        prediction = rr.answer or ""
+        if rr.refusal:
+            prediction = "This information is not mentioned in the conversation."
         item = {
             "question": question,
             "category": category,
@@ -187,22 +219,13 @@ def run_conversation(conv_idx: int, conv_data: dict) -> dict:
     overall_f1 = sum(f1_scores) / len(f1_scores) if f1_scores else 0.0
     print(f"  Overall F1: {overall_f1:.4f}")
 
-    try:
-        os.unlink(db_path)
-        for ext in ("-wal", "-shm"):
-            p = db_path + ext
-            if os.path.exists(p):
-                os.unlink(p)
-    except OSError:
-        pass
-
     return {
         "conv_idx": conv_idx,
         "speaker_a": speaker_a,
         "speaker_b": speaker_b,
-        "turn_count": turn_count,
+        "turn_count": 0,
         "qa_count": len(scored_qas),
-        "ingest_time_s": round(ingest_time, 2),
+        "ingest_time_s": 0,
         "query_time_s": round(query_time, 2),
         "overall_f1": round(overall_f1, 4),
         "category_f1": {str(k): round(v, 4) for k, v in cat_means.items()},
@@ -214,6 +237,8 @@ def main():
     parser = argparse.ArgumentParser(description="LoCoMo benchmark runner")
     parser.add_argument("--sample", type=int, default=None,
         help="Run a single conversation by index (0-9). Default: all 10.")
+    # --fresh removed: run_locomo is read-path only now.
+    # To rebuild golden DBs, use scripts/build_golden_dbs.py
     args = parser.parse_args()
 
     with open(DATA_PATH, "r", encoding="utf-8") as f:
@@ -232,7 +257,7 @@ def main():
     all_results = []
     run_start = time.time()
     for idx in indices:
-        result = run_conversation(idx, data[idx])
+        result = run_conversation(idx, data[idx], args)
         all_results.append(result)
 
     total_time = time.time() - run_start

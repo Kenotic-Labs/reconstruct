@@ -134,6 +134,26 @@ class MemoryEngine:
 
     def __init__(self) -> None:
         self.pending_ambiguities: list = []  # collected during store(), read by SDK
+        self._context_buffer: Dict[int, list] = {}  # user_id → last N (text, speaker) tuples
+
+    def is_retrieval_mode(self, user_id: int, current_speaker: str) -> bool:
+        """Use sliding context window to differentiate question types.
+
+        Retrieval mode (answer the question):
+          - Context is cold (no recent conversation)
+          - Current speaker is not in recent context (new session / different person)
+
+        Conversational mode (store imposed facts, don't answer):
+          - Context is warm AND current speaker appears in recent context
+          - This means the speaker has been part of an active dialogue
+        """
+        ctx = self._context_buffer.get(user_id, [])
+        if not ctx:
+            return True  # cold context → retrieval
+
+        # Check if current speaker appears in recent context
+        recent_speakers = {spk for _, spk in ctx[-5:]}
+        return current_speaker not in recent_speakers
 
     # ------------------------------------------------------------------
     # Singular ingestion path
@@ -290,6 +310,10 @@ class MemoryEngine:
         if not text or not text.strip():
             return 0
 
+        # Sliding context window — last 10 (text, speaker) tuples.
+        # Used for: entity enrichment + question type differentiation.
+        ctx = self._context_buffer.setdefault(user_id, [])
+
         ingestion = self._run_ingestion_path(
             text,
             speaker=speaker,
@@ -303,23 +327,67 @@ class MemoryEngine:
         if not cleaned:
             return 0
 
+        # Enrich relational traces from context window
+        # If subject is not a person, find the recent person from context
+        if _grammar_result and ctx:
+            from app.engines.grammar_engine import _get_nlp
+            _nlp = _get_nlp()
+            # Find most recent person from context
+            _recent_person = None
+            for prev_text, prev_speaker in reversed(ctx):
+                _prev_doc = _nlp(prev_text)
+                for tok in _prev_doc:
+                    if tok.pos_ == "PROPN" and tok.dep_ in ("nsubj", "nsubjpass"):
+                        _recent_person = tok.text
+                        break
+                if _recent_person:
+                    break
+
+            # Enrich decompositions with context
+            for _s, _p, _o, decomp in triples_with_decomp:
+                if decomp is None:
+                    continue
+                # Add possessive PROPNs to relational_entities
+                _nlp_inst = _get_nlp()
+                _src_doc = _nlp_inst(decomp.source_text or "")
+                for tok in _src_doc:
+                    if tok.dep_ == "poss" and tok.pos_ == "PROPN":
+                        if tok.text not in decomp.relational_entities:
+                            decomp.relational_entities.append(tok.text)
+                # If subject is not a real person, add recent person to entities
+                _subj_doc = _nlp_inst(decomp.subject or "")
+                _subj_is_person = any(t.pos_ == "PROPN" for t in _subj_doc)
+                if not _subj_is_person and _recent_person:
+                    if _recent_person not in decomp.relational_entities:
+                        decomp.relational_entities.append(_recent_person)
+
+        # Update context buffer (keep last 10)
+        ctx.append((cleaned, speaker or "user"))
+        if len(ctx) > 10:
+            ctx.pop(0)
+
         from app.engines.grammar_engine import _get_nlp
 
         # Pronouns already resolved by grammar_engine.process().
         # No manual _resolve() needed.
 
-        # Gate: skip non-storable decompositions.
-        # Backchannels, questions → keep only imposed facts.
-        # Commands/imperatives → skip entirely (not facts).
+        # Gate: per-decomposition mood filtering.
+        # Commands → skip entirely (not facts).
+        # Backchannels → skip (no content).
+        # Questions → keep indicative decompositions (imposed facts from
+        #   all 27 construction types survive). Only drop decompositions
+        #   whose mood is interrogative (the question itself, not its facts).
         if _grammar_result is not None and hasattr(_grammar_result, 'classification'):
             _cls = _grammar_result.classification
             if _cls.is_command:
                 triples_with_decomp = []  # "take a look", "keep up" — not facts
-            elif _cls.is_backchannel or _cls.is_question:
+            elif _cls.is_backchannel:
+                triples_with_decomp = []  # "yeah", "mmhmm" — no content
+            elif _cls.is_question:
+                # Per-decomposition: keep everything except interrogative-mood TDs
                 triples_with_decomp = [
                     (s, p, o, d) for s, p, o, d in triples_with_decomp
-                    if d is not None and getattr(d, 'extraction_rule', '') and
-                    'imposed' in getattr(d, 'extraction_rule', '')
+                    if d is not None and getattr(d, 'mood', 'indicative') != 'interrogative'
                 ]
 
         count = 0
@@ -688,7 +756,7 @@ class MemoryEngine:
                                 _overlap = _obj_nouns & _old_nouns
                                 if _overlap:
                                     # Same entity words, different values → ambiguity
-                                    from sdk.types import Ambiguity
+                                    from app.types import Ambiguity
                                     _shared = ", ".join(_overlap)
                                     self.pending_ambiguities.append(Ambiguity(
                                         entity=_shared,

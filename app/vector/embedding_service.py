@@ -2,7 +2,7 @@ from __future__ import annotations
 import numpy as np
 from app.vector.embedder import embed_text
 from app.vector.vector_index import FAISSVectorIndex
-from config.settings import settings
+from app.config.settings import settings
 
 class EmbeddingService:
     """

@@ -1,7 +1,7 @@
 import sqlite3
 from contextlib import contextmanager
 from pathlib import Path
-from config.settings import settings
+from app.config.settings import settings
 from app.db.models import MIGRATIONS, run_schema_upgrades
 
 

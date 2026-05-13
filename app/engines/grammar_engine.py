@@ -2652,10 +2652,35 @@ def process(text: str, speaker: Optional[str] = None, listener: str = "user") ->
         elif sent_cls.subcategory == "tag_question":
             decomp.mood = "indicative"
 
-        # Skip questions and backchannels (ROOT not a verb = not a real sentence)
+        # Skip: questions, backchannels, non-factual sentences
         root_tok = _get_root(sent_doc)
         is_backchannel = root_tok is not None and root_tok.pos_ not in ("VERB", "AUX")
-        if not sent_cls.is_question and not sent_cls.is_backchannel and not is_backchannel:
+
+        # Subject must be a real entity — not "it", "that", "this", "'s"
+        # spaCy: PROPN = named entity, NOUN = common noun (with possible name in subtree)
+        subj_tok = None
+        for ch in (root_tok.children if root_tok else []):
+            if ch.dep_ in ("nsubj", "nsubjpass"):
+                subj_tok = ch
+                break
+        has_real_subject = (
+            subj_tok is not None
+            and (subj_tok.pos_ == "PROPN"
+                 or any(t.pos_ == "PROPN" for t in subj_tok.subtree)
+                 or (subj_tok.pos_ == "NOUN" and not subj_tok.is_stop))
+        )
+
+        is_storable = (
+            not sent_cls.is_backchannel
+            and not is_backchannel
+            and has_real_subject
+        )
+        if is_storable:
+            if sent_cls.is_question:
+                # Imposed fact: the question itself isn't a fact, but the
+                # NPs/PPs/clauses within it presuppose factual content.
+                # Tag as imposed so the memory engine can distinguish.
+                decomp.extraction_rule = "imposed"
             decompositions.append(decomp)
 
     if primary_classification is None:

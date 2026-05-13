@@ -1,7 +1,7 @@
 import hashlib
 import os
 import numpy as np
-from config.settings import settings
+from app.config.settings import settings
 
 # Global model cache for sentence-transformers
 _model_cache = None

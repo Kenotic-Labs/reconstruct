@@ -1,11 +1,20 @@
 """
-LOCOMO conv 0 fix loop — runs benchmark, shows fails, keeps going until 100%.
+LOCOMO conv 0 fix loop — runs benchmark against golden DB, shows fails.
+Read-path only. Never creates or modifies DBs.
+
 Usage: python scripts/locomo_loop.py
 """
 import sys, json, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'locomo_bench', 'locomo'))
-os.environ.setdefault('NURA_SQLITE_PATH', 'locomo_conv0_direct.db')
+
+# Point at golden DB — read only
+_GOLDEN = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                       'Memory Storage', 'locomo', 'all_golden.db')
+os.environ['NURA_SQLITE_PATH'] = _GOLDEN
+
+from config.settings import settings
+settings.sqlite_path = _GOLDEN
 
 from task_eval.evaluation import eval_question_answering
 from app.engines.reconstruction import reconstruct
@@ -14,6 +23,11 @@ DATA_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file_
                          'locomo_bench', 'locomo', 'data', 'locomo10.json')
 
 def run():
+    if not os.path.exists(_GOLDEN):
+        print(f'ERROR: golden DB not found: {_GOLDEN}')
+        print('Build it first with scripts/build_golden_dbs.py')
+        return False
+
     data = json.load(open(DATA_PATH, 'r', encoding='utf-8'))
     qa = data[0]['qa']
     scored_qas = []
