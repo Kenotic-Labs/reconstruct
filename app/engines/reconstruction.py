@@ -510,21 +510,35 @@ def _verification_loop(candidates, query_entity: str,
 # fact (query + answer = full claim) is actually stored in the DB.
 # If not → refuse. No fallback after this.
 
-def _verify_implied_fact(conn, user_id: int, query: str, answer: str) -> bool:
-    """Build implied fact from query + answer, check DB for matching edge."""
+def _verify_implied_fact(conn, user_id: int, query: str, entity: str) -> bool:
+    """Reverse-PQ verification: question + entity → implied statement → DB check.
+
+    Uses reverse_pq.reverse_pq() to reconstruct the implied statement
+    from the question and candidate entity. Same structural rules as the
+    PQ generator, reversed direction. Then checks if that statement's
+    subject+predicate+object exists as a stored edge.
+    """
     try:
-        from scripts.verify_implied_fact import (
-            build_implied_fact, find_matching_edge,
-        )
+        from reverse_pq import reverse_pq
+        from scripts.verify_implied_fact import find_matching_edge, ImpliedFact
     except ImportError:
-        # If verifier not available, pass through (don't block)
         return True
 
     try:
-        fact = build_implied_fact(query, answer)
-    except (ValueError, Exception):
-        # Can't parse query → can't verify → pass through
+        reversed_fact = reverse_pq(query, entity)
+    except Exception:
         return True
+
+    if not reversed_fact:
+        return True  # Can't reverse → can't verify → pass through
+
+    # Convert ReversedFact to ImpliedFact for find_matching_edge
+    fact = ImpliedFact(
+        subject=reversed_fact.subject,
+        predicate=reversed_fact.predicate,
+        object=reversed_fact.object,
+        statement=reversed_fact.statement,
+    )
 
     row = find_matching_edge(conn, user_id, fact)
     return row is not None
@@ -663,8 +677,9 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
 
         # ── LAST GATE: implied fact verification ────────────────
         # Every answer must pass. No fallback after this.
+        # Pass the ENTITY (subject) to build_implied_fact, not the answer text.
         if result and not result.refusal and result.answer:
-            if not _verify_implied_fact(conn, user_id, query, result.answer):
+            if not _verify_implied_fact(conn, user_id, query, entity or ""):
                 return _refuse("implied_fact_not_verified")
             return result
 
