@@ -351,9 +351,43 @@ def _query_matches_pqs(row: sqlite3.Row, fact: ImpliedFact) -> bool:
     """PQ trace check: does the implied fact's content overlap with stored PQs?
     The PQs were generated at write time with content-rich question forms.
     They contain the surface verbs and object nouns that bridge vocabulary gaps.
+
+    Entity names are EXCLUDED from overlap — they appear in every PQ for that
+    entity and don't discriminate between claims. Only predicate/object content
+    words count.
     """
+    # Build entity exclusion set — entity names are not content
+    entity_words = set(normalize_text(fact.subject).split())
+
+    # Exclude function words structurally via spaCy POS tags.
+    # Content POS: NOUN, VERB, ADJ, ADV. Everything else is function.
+    try:
+        from app.engines.grammar_engine import _get_nlp
+        _nlp = _get_nlp()
+    except ImportError:
+        _nlp = None
+
+    _CONTENT_POS = {"NOUN", "VERB", "ADJ", "ADV"}
+
+    def _is_content_word(w):
+        """Content word = spaCy tags it as NOUN/VERB/ADJ/ADV in isolation.
+        PROPN excluded (entity names handled separately).
+        AUX, DET, ADP, PRON, CCONJ, SCONJ, PART = function words."""
+        if not _nlp:
+            return len(w) > 2
+        doc = _nlp(w)
+        if not doc:
+            return False
+        # Tag in isolation: spaCy tags "did"→VERB, "was"→AUX, "will"→AUX
+        # Parse in a frame to get better POS: "I [word] it"
+        frame = _nlp(f"I {w} it")
+        if len(frame) >= 2:
+            return frame[1].pos_ in _CONTENT_POS
+        return doc[0].pos_ in _CONTENT_POS
+
     fact_words = set(normalize_text(fact.statement).split())
-    fact_content = {w for w in fact_words if len(w) > 2}
+    fact_content = {w for w in fact_words
+                    if len(w) > 2 and w not in entity_words and _is_content_word(w)}
     if not fact_content:
         return False
 

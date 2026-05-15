@@ -510,13 +510,17 @@ def _verification_loop(candidates, query_entity: str,
 # fact (query + answer = full claim) is actually stored in the DB.
 # If not → refuse. No fallback after this.
 
-def _verify_implied_fact(conn, user_id: int, query: str, entity: str) -> bool:
-    """Reverse-PQ verification: question + entity → implied statement → DB check.
+def _verify_implied_fact(conn, user_id: int, query: str,
+                         answer: str, entity: str) -> bool:
+    """Last gate: verify the query's claim exists in the DB.
 
-    Uses reverse_pq.reverse_pq() to reconstruct the implied statement
-    from the question and candidate entity. Same structural rules as the
-    PQ generator, reversed direction. Then checks if that statement's
-    subject+predicate+object exists as a stored edge.
+    Uses reverse_pq for SLOT DETECTION only — determines what role
+    the answer fills (subject, object, time, location, etc.).
+
+    Entity + predicate always come from the QUERY.
+    For Who-questions: override entity with the answer (it IS the entity).
+    For everything else: answer doesn't enter the fact — it came from
+    a verified edge already. The gate checks entity + predicate.
     """
     try:
         from reverse_pq import reverse_pq
@@ -524,20 +528,34 @@ def _verify_implied_fact(conn, user_id: int, query: str, entity: str) -> bool:
     except ImportError:
         return True
 
+    # Step 1: use reverse_pq with a DUMMY candidate to extract
+    # slot, subject, predicate, object from the QUERY itself.
     try:
-        reversed_fact = reverse_pq(query, entity)
+        query_fact = reverse_pq(query, "_DUMMY_")
     except Exception:
         return True
 
-    if not reversed_fact:
-        return True  # Can't reverse → can't verify → pass through
+    if not query_fact:
+        return True
 
-    # Convert ReversedFact to ImpliedFact for find_matching_edge
+    # Step 2: determine the real entity to verify.
+    # Who-questions: the answer IS the entity (candidate fills subject slot).
+    # Everything else: entity comes from the query.
+    if query_fact.slot == "subject":
+        verify_entity = answer
+    else:
+        verify_entity = query_fact.subject or entity
+
+    if not verify_entity or verify_entity == "_DUMMY_":
+        return True  # Can't determine entity → pass through
+
+    # Step 3: build the fact to verify — entity + predicate + object from query.
+    # The answer text is NOT parsed. Only the query structure matters.
     fact = ImpliedFact(
-        subject=reversed_fact.subject,
-        predicate=reversed_fact.predicate,
-        object=reversed_fact.object,
-        statement=reversed_fact.statement,
+        subject=verify_entity,
+        predicate=query_fact.predicate,
+        object=query_fact.object if query_fact.slot != "subject" else query_fact.object,
+        statement=f"{verify_entity} {query_fact.predicate} {query_fact.object}".strip(),
     )
 
     row = find_matching_edge(conn, user_id, fact)
@@ -677,9 +695,11 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
 
         # ── LAST GATE: implied fact verification ────────────────
         # Every answer must pass. No fallback after this.
-        # Pass the ANSWER — reverse_pq places it in the WH-slot.
+        # reverse_pq detects slot from query. Who → answer is entity.
+        # Everything else → entity from query, answer not parsed.
         if result and not result.refusal and result.answer:
-            if not _verify_implied_fact(conn, user_id, query, result.answer):
+            if not _verify_implied_fact(conn, user_id, query,
+                                        result.answer, entity or ""):
                 return _refuse("implied_fact_not_verified")
             return result
 
