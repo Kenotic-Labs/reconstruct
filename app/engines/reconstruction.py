@@ -677,9 +677,9 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
 
         # ── LAST GATE: implied fact verification ────────────────
         # Every answer must pass. No fallback after this.
-        # Pass the ENTITY (subject) to build_implied_fact, not the answer text.
+        # Pass the ANSWER — reverse_pq places it in the WH-slot.
         if result and not result.refusal and result.answer:
-            if not _verify_implied_fact(conn, user_id, query, entity or ""):
+            if not _verify_implied_fact(conn, user_id, query, result.answer):
                 return _refuse("implied_fact_not_verified")
             return result
 
