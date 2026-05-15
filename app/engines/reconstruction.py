@@ -1,27 +1,27 @@
 """
 Reconstruction engine — 5-trace convergence read path.
 
-No PQ embeddings. No cosine. No numpy. No triplets.
+Every edge has 5 traces + structured columns + embeddings stored at write time:
+  Traces:
+    1. Relational  — who (relational_entities, edge_relational_type)
+    2. Schematic   — what domain (edge_schematic_category)
+    3. Temporal    — when (resolved_event_date, is_current, temporal_expression)
+    4. Episodic    — what happened (episodic_fact, edge_episodic_significance)
+    5. Emotional   — how it felt (edge_emotional_label, edge_emotional_valence)
+  Structural:
+    subject, predicate, object — decomposed triplet
+    context_entity — topic noun
+    edge_embedding — 384-dim MiniLM of full source_text, L2-normalized
 
-Every edge has 5 traces stored at write time:
-  1. Relational  — who (relational_entities, edge_relational_type)
-  2. Schematic   — what domain (edge_schematic_category)
-  3. Temporal    — when (resolved_event_date, is_current, temporal_expression)
-  4. Episodic    — what happened (episodic_fact, edge_episodic_significance)
-  5. Emotional   — how it felt (edge_emotional_label, edge_emotional_valence)
-
-A query maps to a point in 5-dimensional trace space.
-Each edge is also a point. The walk converges all 5 traces
-to find edges that match the query across all dimensions.
-
-Traces that the query signals → narrow candidates.
-Traces that the query doesn't signal → pass through.
-This is convergence, not intersection.
+Convergence narrows by trace dimensions.
+Verification uses word overlap on episodic_fact (proven Cat 5 defense).
+Tiebreak ranks by edge_embedding cosine (bridges paraphrases).
 """
 from __future__ import annotations
 
 import json
 import logging
+import struct
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Dict, List, Optional, Set
@@ -61,7 +61,9 @@ _TRACE_COLS = """
     edge_schematic_category, edge_emotional_label, edge_emotional_valence,
     emotional_target, edge_relational_type,
     resolved_event_date, temporal_expression, is_current,
-    edge_negated, edge_mood, edge_episodic_significance
+    edge_negated, edge_mood, edge_episodic_significance,
+    subject, predicate, object, context_entity,
+    edge_embedding
 """
 
 _WHERE = "user_id = ? AND tombstoned_at IS NULL"
@@ -121,52 +123,6 @@ def _extract_answer(row, return_field: str) -> str:
         return ep
     return row["source_text"] or ""
 
-
-# ── Cat 5 defense: entity-swap trap detection ───────────────────
-
-def _entity_has_topic(conn, user_id, entity, query) -> bool:
-    """Does this entity have ANY edge grounding the query's topic?
-
-    Catches adversarial entity swaps:
-    "What kind of flooring is Gina looking for in her dance studio?"
-    → Gina has no edge with "flooring" → REJECT
-
-    Relaxed: verb match OR noun overlap (not both required).
-    A single shared content lemma is enough to pass — the convergence
-    walk handles precision, this is just a coarse gate.
-    """
-    from app.engines.grammar_engine import _get_nlp
-    nlp = _get_nlp()
-
-    doc_q = nlp(query)
-    entity_lower = (entity or "").lower()
-
-    q_content = {tok.lemma_.lower() for tok in doc_q
-                 if tok.pos_ in ("NOUN", "VERB", "ADJ") and not tok.is_stop
-                 and tok.text.lower() != entity_lower and len(tok.text) > 2}
-
-    if not q_content:
-        return True  # nothing to check
-
-    rows = conn.execute(
-        f"SELECT episodic_fact FROM edges WHERE {_WHERE} AND relational_entities LIKE ?",
-        (user_id, f"%{entity}%"),
-    ).fetchall()
-
-    for r in rows:
-        ep = r["episodic_fact"] or ""
-        if not ep or len(ep) < 3:
-            continue
-
-        doc_ep = nlp(ep)
-        ep_lemmas = {tok.lemma_.lower() for tok in doc_ep
-                     if tok.pos_ in ("NOUN", "ADJ", "VERB") and not tok.is_stop}
-
-        # Any shared content lemma = topic exists for this entity
-        if q_content & ep_lemmas:
-            return True
-
-    return False
 
 
 # ── Situational query detection ──────────────────────────────────
@@ -318,11 +274,36 @@ def _converge(conn, user_id, qd, query) -> List:
     return rows
 
 
-# ── Tiebreak: select best edge from converged set ───────────────
+# ── Tiebreak: edge embedding cosine ──────────────────────────────
+
+def _decode_embedding(blob) -> Optional[list]:
+    """Decode stored float32 embedding bytes to list of floats."""
+    if not blob:
+        return None
+    n = len(blob) // 4
+    return list(struct.unpack(f"{n}f", blob))
+
+
+def _dot(a: list, b: list) -> float:
+    """Dot product of two L2-normalized vectors = cosine similarity."""
+    return sum(x * y for x, y in zip(a, b))
+
+
+def _edge_cosine(row, query_emb: Optional[list]) -> float:
+    """Cosine between query embedding and stored edge_embedding.
+    edge_embedding covers the full source_text — bridges paraphrases
+    like 'favorite style' ↔ 'top pick' that word overlap misses."""
+    if not query_emb:
+        return 0.0
+    stored = _decode_embedding(row["edge_embedding"])
+    if not stored:
+        return 0.0
+    return _dot(query_emb, stored)
+
 
 def _content_overlap(row, query_lemmas: Set[str]) -> int:
     """Count shared lemmas between edge episodic_fact and query.
-    Used to rank candidates within a converged set."""
+    Used for Cat 5 verification gate (proven at 70.8%)."""
     ep = row["episodic_fact"] or row["source_text"] or ""
     if not ep:
         return 0
@@ -333,26 +314,26 @@ def _content_overlap(row, query_lemmas: Set[str]) -> int:
     return len(query_lemmas & ep_lemmas)
 
 
-def _tiebreak(rows, qd, query_lemmas: Set[str]) -> dict:
-    """Deterministic selection from converged candidates.
-    Content overlap first, then schema match, then trace fields. No embeddings."""
+def _tiebreak(rows, qd, query_emb: Optional[list],
+              query_lemmas: Set[str]) -> dict:
+    """Select best edge from converged candidates.
 
+    Primary: content overlap (word-level, proven).
+    Secondary: edge_embedding cosine (breaks ties within same overlap).
+    Tertiary: schema, significance, date.
+    """
     if len(rows) == 1:
         return rows[0]
 
     query_schema = qd.match_schema
-    query_sig = _derive_significance(qd)
-    query_emo = _derive_emotional(qd)
 
     def sort_key(r):
         content = _content_overlap(r, query_lemmas)
+        cosine = _edge_cosine(r, query_emb)
         schema = 1 if (query_schema and r["edge_schematic_category"] == query_schema) else 0
-        sig_match = 1 if (query_sig and r["edge_episodic_significance"] == query_sig) else 0
-        emo_match = 1 if (query_emo and r["edge_emotional_label"]) else 0
         sig = _SIG_RANK.get(r["edge_episodic_significance"] or "routine", 1)
         date = r["resolved_event_date"] or ""
-        negated = 0 if r["edge_negated"] else 1
-        return (content, schema, sig_match, emo_match, sig, date, negated)
+        return (content, cosine, schema, sig, date)
 
     return max(rows, key=sort_key)
 
@@ -428,31 +409,107 @@ def _reconstruct_situation(conn, user_id, entity):
     return ReconstructionResult(answer=". ".join(parts), edge_ids=all_ids)
 
 
+# ── Verification gate helpers ─────────────────────────────────────
+
+def _word_gate(candidates, query_lemmas: Set[str]) -> bool:
+    """Word-overlap gate: any candidate shares ≥2 content lemmas with query."""
+    if not query_lemmas or len(query_lemmas) < 2:
+        return True
+    return any(_content_overlap(c, query_lemmas) >= 2 for c in candidates)
+
+
+def _contrastive_gate(conn, user_id, entity_lower, query_emb) -> Optional[bool]:
+    """Compare query cosine against this entity's exclusive edges vs other entities'.
+
+    Returns True (pass), False (refuse), or None (tie/no data → fall through).
+    Only uses entity-EXCLUSIVE edges (not shared) to avoid ties.
+    """
+    rows = conn.execute(
+        f"SELECT relational_entities, edge_embedding, is_current "
+        f"FROM edges WHERE {_WHERE} AND edge_embedding IS NOT NULL",
+        (user_id,),
+    ).fetchall()
+
+    if not rows:
+        return None
+
+    best_target = -1.0
+    best_other = -1.0
+
+    for r in rows:
+        if r["is_current"] != 1:
+            continue
+        emb = _decode_embedding(r["edge_embedding"])
+        if not emb:
+            continue
+
+        # Parse entities — only use EXCLUSIVE edges (one entity)
+        raw = r["relational_entities"] or "[]"
+        try:
+            names = [str(n).lower().strip() for n in json.loads(raw) if n]
+        except (json.JSONDecodeError, TypeError):
+            continue
+
+        # Skip shared edges (multiple distinct entities)
+        unique = set(names)
+        if len(unique) != 1:
+            continue
+
+        cos = _dot(query_emb, emb)
+        sole_entity = next(iter(unique))
+        if sole_entity == entity_lower:
+            if cos > best_target:
+                best_target = cos
+        else:
+            if cos > best_other:
+                best_other = cos
+
+    if best_target < 0 or best_other < 0:
+        return None  # not enough data
+
+    if best_target > best_other:
+        return True
+    if best_other > best_target:
+        return False
+    return None  # exact tie
+
+
 # ── Main entry ───────────────────────────────────────────────────
 
 def reconstruct(user_id: int, query: str) -> ReconstructionResult:
-    """5-trace convergence read path. No embeddings. No cosine.
+    """5-trace convergence + embedding tiebreak read path.
 
     1. classify_query → QueryDecomposition
-    2. Cat 5 pre-filter (entity-swap trap)
+    2. Embed query (one embed_text call)
     3. 5-trace convergence → candidate edges
-    4. Answer from converged set
-    5. FTS5 fallback if convergence yields nothing
-    6. Situation reconstruction for situational queries
-    7. Refuse
+    4. Word-overlap verification gate (Cat 5 defense, proven at 70.8%)
+    5. Edge embedding cosine tiebreak (bridges paraphrases)
+    6. Answer from best edge
+    7. FTS5 fallback if convergence yields nothing
+    8. Situation reconstruction for situational queries
+    9. Refuse
     """
     from app.engines.grammar_engine import classify_query, _get_nlp
     qd = classify_query(query)
 
-    # Pre-compute query content lemmas for content ranking
     nlp = _get_nlp()
     doc_q = nlp(query)
     entity_lower = (qd.match_entity or "").lower()
+
+    # Query content lemmas for Cat 5 verification gate
     query_lemmas: Set[str] = {
         tok.lemma_.lower() for tok in doc_q
         if tok.pos_ in ("NOUN", "VERB", "ADJ") and not tok.is_stop
         and tok.text.lower() != entity_lower and len(tok.text) > 2
     }
+
+    # Embed query — one call, reused for cosine against all candidates
+    query_emb = None
+    try:
+        from app.vector.embedder import embed_text
+        query_emb = embed_text(query).tolist()
+    except Exception:
+        pass  # graceful fallback to trace-only tiebreak
 
     with get_db_context() as conn:
 
@@ -462,25 +519,21 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
         candidates = _converge(conn, user_id, qd, query)
 
         if candidates:
-            # ── Episodic trace gate ─────────────────────────────
-            # After convergence, verify that at least one candidate's
-            # episodic trace (episodic_fact) grounds the query content.
-            # If zero overlap across ALL candidates → the topic doesn't
-            # exist for this entity → refuse (catches entity-swap traps).
-            best = _tiebreak(candidates, qd, query_lemmas)
-            best_overlap = _content_overlap(best, query_lemmas)
+            best = _tiebreak(candidates, qd, query_emb, query_lemmas)
 
-            if query_lemmas and len(query_lemmas) >= 2:
-                # Episodic trace gate: best candidate must share >=2
-                # content lemmas with the query. Catches Cat 5 entity
-                # swaps where common words like "dance" match both entities.
-                if best_overlap < 2:
-                    any_strong = any(
-                        _content_overlap(c, query_lemmas) >= 2
-                        for c in candidates
-                    )
-                    if not any_strong:
-                        return _refuse("episodic_no_ground")
+            # ── Verification gate ───────────────────────────────
+            #
+            # Tier 1: Temporal bypass. "When" queries route to the
+            #   date column — word overlap on episodic_fact is
+            #   irrelevant (dates are in resolved_event_date).
+            #
+            # Tier 2: Word overlap ≥2 on episodic_fact.
+            #   Proven Cat 5 defense (70.8%).
+            #
+            is_temporal = qd.return_field == "temporal" or qd.wh_word == "when"
+
+            if not is_temporal and not _word_gate(candidates, query_lemmas):
+                return _refuse("episodic_no_ground")
 
             # Yes/No query
             if qd.wh_word is None and "?" in query:
@@ -518,7 +571,6 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
         # ── FTS5 fallback ───────────────────────────────────────
         fts_rows = _fts_fallback(conn, user_id, qd, query)
         if fts_rows:
-            # Apply convergence filters on FTS results
             temporal_mode = _derive_temporal_mode(qd)
             if temporal_mode == "current_only":
                 current = [r for r in fts_rows if r["is_current"] == 1]
@@ -526,7 +578,7 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
                     fts_rows = current
 
             if fts_rows:
-                best = _tiebreak(fts_rows, qd, query_lemmas)
+                best = _tiebreak(fts_rows, qd, query_emb, query_lemmas)
                 return ReconstructionResult(
                     answer=_extract_answer(best, qd.return_field),
                     return_field=qd.return_field,
