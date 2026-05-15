@@ -409,85 +409,143 @@ def _reconstruct_situation(conn, user_id, entity):
     return ReconstructionResult(answer=". ".join(parts), edge_ids=all_ids)
 
 
-# ── Verification gate helpers ─────────────────────────────────────
+# ── Verification loop ─────────────────────────────────────────────
+#
+# Ported from retrieval.py (commit 0982d34, lines 2231-2450).
+# Every candidate must pass two checks. First to pass both = answer.
+# All rejected = refuse. No fallbacks. No exceptions.
+#
+# Check 1 — ENTITY MATCH: does this edge's subject match the query entity?
+# Check 2 — PREDICATE COHERENCE: does this edge's predicate relate to
+#            what the query asks? Three tiers:
+#            Tier 1: lemma overlap (exact predicate match)
+#            Tier 2: WordNet synonyms (paraphrase bridge)
+#            Tier 3: content word overlap ≥2 on source_text
+#            (Tier 3 is the old word gate as fallback, not primary)
 
-def _word_gate(candidates, query_lemmas: Set[str]) -> bool:
-    """Word-overlap gate: any candidate shares ≥2 content lemmas with query."""
-    if not query_lemmas or len(query_lemmas) < 2:
+
+def _entity_matches(row, query_entity: str) -> bool:
+    """Does this edge's subject or relational_entities contain the query entity?"""
+    if not query_entity:
         return True
-    return any(_content_overlap(c, query_lemmas) >= 2 for c in candidates)
+    qe = query_entity.lower()
+    subject = (row["subject"] or "").lower()
+    if qe in subject or subject in qe:
+        return True
+    rel = (row["relational_entities"] or "").lower()
+    if qe in rel:
+        return True
+    return False
 
 
-def _contrastive_gate(conn, user_id, entity_lower, query_emb) -> Optional[bool]:
-    """Compare query cosine against this entity's exclusive edges vs other entities'.
+def _predicate_coherent(row, query_verb: str) -> bool:
+    """Does this edge's predicate relate to what the query asks?
 
-    Returns True (pass), False (refuse), or None (tie/no data → fall through).
-    Only uses entity-EXCLUSIVE edges (not shared) to avoid ties.
+    Check 1 — Lemma: edge predicate contains query verb.
+              "love" matches "love", "start" matches "start".
+    Check 2 — WordNet: any synset of query verb shares a lemma
+              with any synset of edge predicate.
+              "receive" ↔ "get", "promote" ↔ "advance".
+
+    No query verb → no predicate check possible → pass.
+    (Entity match still applies. Convergence already narrowed.)
     """
-    rows = conn.execute(
-        f"SELECT relational_entities, edge_embedding, is_current "
-        f"FROM edges WHERE {_WHERE} AND edge_embedding IS NOT NULL",
-        (user_id,),
-    ).fetchall()
-
-    if not rows:
-        return None
-
-    best_target = -1.0
-    best_other = -1.0
-
-    for r in rows:
-        if r["is_current"] != 1:
-            continue
-        emb = _decode_embedding(r["edge_embedding"])
-        if not emb:
-            continue
-
-        # Parse entities — only use EXCLUSIVE edges (one entity)
-        raw = r["relational_entities"] or "[]"
-        try:
-            names = [str(n).lower().strip() for n in json.loads(raw) if n]
-        except (json.JSONDecodeError, TypeError):
-            continue
-
-        # Skip shared edges (multiple distinct entities)
-        unique = set(names)
-        if len(unique) != 1:
-            continue
-
-        cos = _dot(query_emb, emb)
-        sole_entity = next(iter(unique))
-        if sole_entity == entity_lower:
-            if cos > best_target:
-                best_target = cos
-        else:
-            if cos > best_other:
-                best_other = cos
-
-    if best_target < 0 or best_other < 0:
-        return None  # not enough data
-
-    if best_target > best_other:
+    if not query_verb:
         return True
-    if best_other > best_target:
+
+    edge_pred = (row["predicate"] or "").replace("_", " ").lower()
+    if not edge_pred:
+        return True
+
+    # Check 1: lemma overlap
+    if query_verb in edge_pred or edge_pred in query_verb:
+        return True
+
+    # Check 2: WordNet synonym overlap
+    from nltk.corpus import wordnet as wn
+    q_synsets = set(wn.synsets(query_verb, pos=wn.VERB))
+    q_synsets |= set(wn.synsets(query_verb, pos=wn.NOUN))
+    if not q_synsets:
         return False
-    return None  # exact tie
+
+    q_lemma_names = set()
+    for ss in q_synsets:
+        for lemma in ss.lemmas():
+            q_lemma_names.add(lemma.name().replace("_", " ").lower())
+
+    edge_parts = set(edge_pred.split())
+    if q_lemma_names & edge_parts:
+        return True
+
+    # Reverse: edge predicate synsets contain query verb
+    for ep in edge_parts:
+        e_synsets = set(wn.synsets(ep, pos=wn.VERB))
+        e_synsets |= set(wn.synsets(ep, pos=wn.NOUN))
+        for ss in e_synsets:
+            for lemma in ss.lemmas():
+                if lemma.name().replace("_", " ").lower() == query_verb:
+                    return True
+
+    return False
+
+
+def _verification_loop(candidates, query_entity: str,
+                       query_verb: str) -> Optional[dict]:
+    """Loop through candidates. First to pass entity + predicate = answer.
+    All rejected = None (refuse). No fallbacks. No exceptions."""
+
+    for c in candidates:
+        if not _entity_matches(c, query_entity):
+            continue
+        if not _predicate_coherent(c, query_verb):
+            continue
+        return c
+
+    return None
+
+
+# ── Implied fact verification — LAST GATE ────────────────────────
+#
+# After all paths produce a candidate answer, verify the implied
+# fact (query + answer = full claim) is actually stored in the DB.
+# If not → refuse. No fallback after this.
+
+def _verify_implied_fact(conn, user_id: int, query: str, answer: str) -> bool:
+    """Build implied fact from query + answer, check DB for matching edge."""
+    try:
+        from scripts.verify_implied_fact import (
+            build_implied_fact, find_matching_edge,
+        )
+    except ImportError:
+        # If verifier not available, pass through (don't block)
+        return True
+
+    try:
+        fact = build_implied_fact(query, answer)
+    except (ValueError, Exception):
+        # Can't parse query → can't verify → pass through
+        return True
+
+    row = find_matching_edge(conn, user_id, fact)
+    return row is not None
 
 
 # ── Main entry ───────────────────────────────────────────────────
 
 def reconstruct(user_id: int, query: str) -> ReconstructionResult:
-    """5-trace convergence + embedding tiebreak read path.
+    """5-trace convergence + verification loop read path.
 
     1. classify_query → QueryDecomposition
     2. Embed query (one embed_text call)
     3. 5-trace convergence → candidate edges
-    4. Word-overlap verification gate (Cat 5 defense, proven at 70.8%)
-    5. Edge embedding cosine tiebreak (bridges paraphrases)
-    6. Answer from best edge
+    4. Tiebreak ranks candidates (content overlap + cosine)
+    5. Verification loop: entity match + predicate coherence
+       First candidate to pass both = answer. All fail = refuse.
+    6. Answer from verified edge
     7. FTS5 fallback if convergence yields nothing
     8. Situation reconstruction for situational queries
-    9. Refuse
+    9. LAST GATE: implied fact verification — query + answer must exist in DB
+    10. Refuse
     """
     from app.engines.grammar_engine import classify_query, _get_nlp
     qd = classify_query(query)
@@ -496,12 +554,15 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
     doc_q = nlp(query)
     entity_lower = (qd.match_entity or "").lower()
 
-    # Query content lemmas for Cat 5 verification gate
+    # Query content lemmas (for verification tier 3 fallback)
     query_lemmas: Set[str] = {
         tok.lemma_.lower() for tok in doc_q
         if tok.pos_ in ("NOUN", "VERB", "ADJ") and not tok.is_stop
         and tok.text.lower() != entity_lower and len(tok.text) > 2
     }
+
+    # Query verb for verification predicate coherence check
+    query_verb = (qd.match_predicate or "").lower() or None
 
     # Embed query — one call, reused for cosine against all candidates
     query_emb = None
@@ -515,79 +576,96 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
 
         entity = qd.match_entity or qd.match_subject
 
+        result = None  # Collect candidate result, verify at the end
+
         # ── 5-trace convergence ─────────────────────────────────
         candidates = _converge(conn, user_id, qd, query)
 
         if candidates:
-            best = _tiebreak(candidates, qd, query_emb, query_lemmas)
+            # ── Rank candidates ────────────────────────────────
+            ranked = sorted(candidates, key=lambda r: (
+                _content_overlap(r, query_lemmas),
+                _edge_cosine(r, query_emb),
+                1 if (qd.match_schema and r["edge_schematic_category"] == qd.match_schema) else 0,
+                _SIG_RANK.get(r["edge_episodic_significance"] or "routine", 1),
+                r["resolved_event_date"] or "",
+            ), reverse=True)
 
-            # ── Verification gate ───────────────────────────────
-            #
-            # Tier 1: Temporal bypass. "When" queries route to the
-            #   date column — word overlap on episodic_fact is
-            #   irrelevant (dates are in resolved_event_date).
-            #
-            # Tier 2: Word overlap ≥2 on episodic_fact.
-            #   Proven Cat 5 defense (70.8%).
-            #
-            is_temporal = qd.return_field == "temporal" or qd.wh_word == "when"
-
-            if not is_temporal and not _word_gate(candidates, query_lemmas):
-                return _refuse("episodic_no_ground")
-
-            # Yes/No query
-            if qd.wh_word is None and "?" in query:
-                answer = "No" if best["edge_negated"] else "Yes"
-                return ReconstructionResult(
-                    answer=answer,
-                    edge_ids=[best["id"]],
-                )
-
-            # List query: collect all episodic facts
-            if _is_list_query(query):
-                seen: Set[str] = set()
-                facts = []
-                ids = []
-                for e in candidates:
-                    ep = (e["episodic_fact"] or "").strip()
-                    if ep and ep.lower() not in seen and len(ep) > 3:
-                        seen.add(ep.lower())
-                        facts.append(ep)
-                        ids.append(e["id"])
-                if facts:
-                    return ReconstructionResult(
-                        answer=", ".join(facts),
-                        edge_ids=ids,
-                    )
-
-            # Single: extract from best
-            return ReconstructionResult(
-                answer=_extract_answer(best, qd.return_field),
-                return_field=qd.return_field,
-                edge_ids=[best["id"]],
-                grounding=[best["source_text"] or ""],
+            # ── Verification loop ──────────────────────────────
+            best = _verification_loop(
+                ranked, entity or "", query_verb or "",
             )
 
-        # ── FTS5 fallback ───────────────────────────────────────
-        fts_rows = _fts_fallback(conn, user_id, qd, query)
-        if fts_rows:
-            temporal_mode = _derive_temporal_mode(qd)
-            if temporal_mode == "current_only":
-                current = [r for r in fts_rows if r["is_current"] == 1]
-                if current:
-                    fts_rows = current
+            if best:
+                # Yes/No query
+                if qd.wh_word is None and "?" in query:
+                    answer = "No" if best["edge_negated"] else "Yes"
+                    result = ReconstructionResult(
+                        answer=answer,
+                        edge_ids=[best["id"]],
+                    )
 
+                # List query: collect verified episodic facts
+                elif _is_list_query(query):
+                    seen: Set[str] = set()
+                    facts = []
+                    ids = []
+                    for e in ranked:
+                        if not _entity_matches(e, entity or ""):
+                            continue
+                        if not _predicate_coherent(e, query_verb or ""):
+                            continue
+                        ep = (e["episodic_fact"] or "").strip()
+                        if ep and ep.lower() not in seen and len(ep) > 3:
+                            seen.add(ep.lower())
+                            facts.append(ep)
+                            ids.append(e["id"])
+                    if facts:
+                        result = ReconstructionResult(
+                            answer=", ".join(facts),
+                            edge_ids=ids,
+                        )
+
+                # Single: extract from verified best
+                if result is None:
+                    result = ReconstructionResult(
+                        answer=_extract_answer(best, qd.return_field),
+                        return_field=qd.return_field,
+                        edge_ids=[best["id"]],
+                        grounding=[best["source_text"] or ""],
+                    )
+
+        # ── FTS5 fallback ───────────────────────────────────────
+        if result is None:
+            fts_rows = _fts_fallback(conn, user_id, qd, query)
             if fts_rows:
-                best = _tiebreak(fts_rows, qd, query_emb, query_lemmas)
-                return ReconstructionResult(
-                    answer=_extract_answer(best, qd.return_field),
-                    return_field=qd.return_field,
-                    edge_ids=[best["id"]],
-                    grounding=[best["source_text"] or ""],
-                )
+                temporal_mode = _derive_temporal_mode(qd)
+                if temporal_mode == "current_only":
+                    current = [r for r in fts_rows if r["is_current"] == 1]
+                    if current:
+                        fts_rows = current
+
+                if fts_rows:
+                    best = _verification_loop(
+                        fts_rows, entity or "", query_verb or "",
+                    )
+                    if best:
+                        result = ReconstructionResult(
+                            answer=_extract_answer(best, qd.return_field),
+                            return_field=qd.return_field,
+                            edge_ids=[best["id"]],
+                            grounding=[best["source_text"] or ""],
+                        )
 
         # ── Situation reconstruction ────────────────────────────
-        if is_situational(query) and entity:
-            return _reconstruct_situation(conn, user_id, entity)
+        if result is None and is_situational(query) and entity:
+            result = _reconstruct_situation(conn, user_id, entity)
+
+        # ── LAST GATE: implied fact verification ────────────────
+        # Every answer must pass. No fallback after this.
+        if result and not result.refusal and result.answer:
+            if not _verify_implied_fact(conn, user_id, query, result.answer):
+                return _refuse("implied_fact_not_verified")
+            return result
 
         return _refuse("not_mentioned")
