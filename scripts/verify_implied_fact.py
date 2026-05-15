@@ -236,27 +236,6 @@ def _row_value(row: sqlite3.Row, column: str) -> str:
         return ""
 
 
-def _predicate_matches(stored_predicate: str, wanted_predicate: str) -> bool:
-    stored = normalize_text(stored_predicate)
-    wanted = normalize_text(wanted_predicate)
-    if not stored or not wanted:
-        return False
-    stored_head = stored.split(" ")[0]
-    wanted_head = wanted.split(" ")[0]
-    return stored_head == wanted_head
-
-
-def _object_matches(row: sqlite3.Row, wanted_object: str) -> bool:
-    wanted = normalize_text(wanted_object)
-    if not wanted:
-        return False
-    for column in ("object", "object_full"):
-        stored = normalize_text(_row_value(row, column))
-        if stored and (stored == wanted or stored.endswith(f" {wanted}")):
-            return True
-    return False
-
-
 def _split_compound_subject(subject: str) -> list[str]:
     """Split compound subjects into individual entities via spaCy conj dep.
     'Jon and Gina' → ['jon and gina', 'jon', 'gina']
@@ -271,7 +250,6 @@ def _split_compound_subject(subject: str) -> list[str]:
             if tok.dep_ == "conj" and tok.pos_ in ("PROPN", "NOUN"):
                 subjects.append(normalize_text(tok.text))
             if tok.dep_ in ("nsubj", "ROOT", "compound") and tok.pos_ in ("PROPN", "NOUN"):
-                # The head entity (before "and")
                 if tok.dep_ != "conj":
                     name = normalize_text(tok.text)
                     if name and name != subjects[0]:
@@ -281,11 +259,139 @@ def _split_compound_subject(subject: str) -> list[str]:
     return subjects
 
 
+def _entity_in_relational(row: sqlite3.Row, entity: str) -> bool:
+    """Relational trace check: does the entity appear in relational_entities?"""
+    raw = _row_value(row, "relational_entities")
+    if not raw:
+        return False
+    try:
+        import json
+        entities = json.loads(raw)
+        entity_lower = entity.lower()
+        for e in entities:
+            if str(e).lower() == entity_lower or entity_lower in str(e).lower():
+                return True
+    except (json.JSONDecodeError, TypeError):
+        pass
+    # Fallback: substring on raw string
+    return entity.lower() in raw.lower()
+
+
+def _content_in_episodic(row: sqlite3.Row, fact: ImpliedFact) -> bool:
+    """Episodic trace check: does the episodic_fact or source_text contain
+    the content words from the implied fact?
+
+    Uses WordNet lemma matching — 'hosted' matches 'host', 'ran' matches 'run'.
+    Content match: predicate lemma + at least one object content word must appear
+    in the episodic_fact or source_text.
+    """
+    try:
+        from nltk.corpus import wordnet as wn
+    except ImportError:
+        wn = None
+
+    ep = normalize_text(_row_value(row, "episodic_fact"))
+    src = normalize_text(_row_value(row, "source_text"))
+    combined = f"{ep} {src}"
+    if not combined.strip():
+        return False
+
+    combined_words = set(combined.split())
+
+    # Build lemma set from combined text
+    combined_lemmas = set(combined_words)
+    if wn:
+        for w in combined_words:
+            for pos in (wn.VERB, wn.NOUN):
+                lemma = wn.morphy(w, pos)
+                if lemma:
+                    combined_lemmas.add(lemma)
+
+    # Check 1: predicate lemma appears in the trace
+    pred = normalize_text(fact.predicate)
+    pred_found = False
+    if pred:
+        pred_lemma = pred.split()[0] if pred else ""
+        if pred_lemma in combined_lemmas:
+            pred_found = True
+        # WordNet synonym bridge: query verb ↔ trace verb
+        if not pred_found and wn:
+            pred_synsets = set(wn.synsets(pred_lemma, pos=wn.VERB))
+            pred_lemma_names = set()
+            for ss in pred_synsets:
+                for lemma in ss.lemmas():
+                    pred_lemma_names.add(lemma.name().replace("_", " ").lower())
+            if pred_lemma_names & combined_lemmas:
+                pred_found = True
+    else:
+        pred_found = True  # No predicate to check → pass
+
+    if not pred_found:
+        return False
+
+    # Check 2: at least one object content word appears in the trace
+    obj = normalize_text(fact.object)
+    if not obj:
+        return True  # No object to check → predicate match is enough
+
+    obj_words = set(obj.split())
+    # Remove stopwords/function words
+    obj_content = {w for w in obj_words if len(w) > 2}
+    if not obj_content:
+        return True
+
+    # Add lemmas of object words
+    obj_lemmas = set(obj_content)
+    if wn:
+        for w in obj_content:
+            for pos in (wn.VERB, wn.NOUN):
+                lemma = wn.morphy(w, pos)
+                if lemma:
+                    obj_lemmas.add(lemma)
+
+    # At least one content word or its lemma must appear
+    if obj_lemmas & combined_lemmas:
+        return True
+
+    return False
+
+
+def _query_matches_pqs(row: sqlite3.Row, fact: ImpliedFact) -> bool:
+    """PQ trace check: does the implied fact's content overlap with stored PQs?
+    The PQs were generated at write time with content-rich question forms.
+    They contain the surface verbs and object nouns that bridge vocabulary gaps.
+    """
+    fact_words = set(normalize_text(fact.statement).split())
+    fact_content = {w for w in fact_words if len(w) > 2}
+    if not fact_content:
+        return False
+
+    for col in ("pq_1", "pq_2", "pq_3", "pq_4", "vq_1", "vq_2"):
+        pq = normalize_text(_row_value(row, col))
+        if not pq:
+            continue
+        pq_words = set(pq.split())
+        overlap = fact_content & pq_words
+        if len(overlap) >= 2:
+            return True
+
+    return False
+
+
 def find_matching_edge(
     conn: sqlite3.Connection,
     user_id: int,
     fact: ImpliedFact,
 ) -> Optional[sqlite3.Row]:
+    """Trace-based verification: find an edge that matches the implied fact.
+
+    Three trace checks (any combination can pass):
+      1. Relational trace: entity appears in relational_entities
+      2. Episodic trace: predicate + object content words in episodic_fact/source_text
+      3. PQ trace: statement content overlaps with stored predicted questions
+
+    Entity must match (relational trace). Then episodic OR PQ must match.
+    """
     subject = normalize_text(fact.subject)
     if not subject:
         return None
@@ -297,24 +403,34 @@ def find_matching_edge(
         if not subj:
             continue
 
+        # Query by relational trace: entity in relational_entities
+        # Also check subject column for backward compat with older edges
         rows = conn.execute(
             """SELECT id, subject, predicate, object, object_full, source_text,
+                      relational_entities, episodic_fact,
                       pq_1, pq_2, pq_3, pq_4, vq_1, vq_2
                FROM edges
                WHERE user_id = ?
                  AND tombstoned_at IS NULL
                  AND COALESCE(is_current, 1) = 1
-                 AND lower(COALESCE(subject, '')) = ?
+                 AND (lower(COALESCE(subject, '')) = ?
+                      OR relational_entities LIKE ?)
                ORDER BY COALESCE(sequence_number, id) DESC, id DESC""",
-            (user_id, subj),
+            (user_id, subj, f"%{subj}%"),
         ).fetchall()
 
         for row in rows:
-            if not _predicate_matches(_row_value(row, "predicate"), fact.predicate):
-                continue
-            if not _object_matches(row, fact.object):
-                continue
-            return row
+            # Must pass relational trace (entity present)
+            if not _entity_in_relational(row, subj):
+                # Fall back to subject column match
+                if normalize_text(_row_value(row, "subject")) != subj:
+                    continue
+
+            # Must pass episodic trace OR PQ trace
+            if _content_in_episodic(row, fact):
+                return row
+            if _query_matches_pqs(row, fact):
+                return row
 
     return None
 
