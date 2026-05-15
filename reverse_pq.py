@@ -164,15 +164,33 @@ def _detect_wh_and_slot(doc):
 # ---------------------------------------------------------------------------
 
 def _find_subject(doc, wh_indices) -> str:
-    """Find subject outside WH-phrase. Handles misparsed compounds via WordNet."""
-    # Direct nsubj
+    """Find subject outside WH-phrase. Handles misparsed compounds via WordNet.
+
+    Copula pattern: "What is Gina's favorite style of dance?"
+    nsubj = "style" with PROPN child "Gina" (nmod/poss).
+    For verification, the entity is "Gina", not "Gina favorite style of dance".
+    When ROOT is copula and nsubj has a PROPN child → return just the PROPN.
+    """
     for tok in doc:
         if tok.i in wh_indices:
             continue
         if tok.dep_ in ("nsubj", "nsubjpass"):
+            # Copula pattern: ROOT is "be", nsubj is a noun with a PROPN inside
+            root = tok.head
+            if root and root.lemma_ == "be" and root.pos_ == "AUX":
+                # Look for the PROPN entity inside the nsubj subtree
+                for child in tok.subtree:
+                    if child.pos_ == "PROPN" and child.i not in wh_indices:
+                        return child.text
+                # No PROPN found — check poss
+                for child in tok.children:
+                    if child.dep_ in ("poss", "nmod") and child.pos_ == "PROPN":
+                        return child.text
+
+            # Non-copula: return trimmed subtree
             skip = set(wh_indices)
             for child in tok.children:
-                if child.dep_ in ("npadvmod", "advmod", "advcl"):
+                if child.dep_ in ("npadvmod", "advmod", "advcl", "prep"):
                     skip.update(t.i for t in child.subtree)
             toks = [t for t in tok.subtree if t.i not in skip]
             if toks:
@@ -246,6 +264,7 @@ def _find_object(verb_tok, wh_indices, doc) -> str:
     """Find object/complement outside WH-phrase."""
     if not verb_tok:
         return ""
+    # Direct children of verb: dobj, attr, acomp, etc.
     for child in verb_tok.children:
         if child.i in wh_indices:
             continue
@@ -253,6 +272,7 @@ def _find_object(verb_tok, wh_indices, doc) -> str:
             toks = [t for t in child.subtree if t.i not in wh_indices]
             if toks:
                 return " ".join(t.text for t in toks).strip()
+    # Prep children of verb
     for child in verb_tok.children:
         if child.i in wh_indices:
             continue
@@ -263,6 +283,19 @@ def _find_object(verb_tok, wh_indices, doc) -> str:
                     pobj_toks = [t for t in gc.subtree if t.i not in wh_indices]
                     pobj = " ".join(t.text for t in pobj_toks).strip()
                     return f"{prep} {pobj}"
+    # Copula fallback: prep attached to nsubj instead of verb
+    # "When was Jon in Paris?" — "in Paris" is prep of "Jon", not of "was"
+    if verb_tok.lemma_ == "be":
+        for child in verb_tok.children:
+            if child.dep_ in ("nsubj", "nsubjpass"):
+                for prep_child in child.children:
+                    if prep_child.dep_ == "prep":
+                        for gc in prep_child.children:
+                            if gc.dep_ == "pobj" and gc.i not in wh_indices:
+                                prep = prep_child.text
+                                pobj_toks = [t for t in gc.subtree if t.i not in wh_indices]
+                                pobj = " ".join(t.text for t in pobj_toks).strip()
+                                return f"{prep} {pobj}"
     return ""
 
 
