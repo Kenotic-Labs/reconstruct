@@ -283,6 +283,22 @@ def _find_object(verb_tok, wh_indices, doc) -> str:
                     pobj_toks = [t for t in gc.subtree if t.i not in wh_indices]
                     pobj = " ".join(t.text for t in pobj_toks).strip()
                     return f"{prep} {pobj}"
+    # xcomp children: "start reading The Lean Startup" — "reading" is xcomp
+    # of "start", and "The Lean Startup" is dobj of "reading".
+    # Also handles advcl: "go to a fair to get exposure" — "get" is advcl.
+    for child in verb_tok.children:
+        if child.i in wh_indices:
+            continue
+        if child.dep_ in ("xcomp", "advcl", "ccomp"):
+            # Collect the entire xcomp subtree as the object
+            toks = [t for t in child.subtree
+                    if t.i not in wh_indices and t.i != child.i
+                    and t.dep_ not in ("aux", "auxpass", "mark")]
+            if toks:
+                return " ".join(t.text for t in toks).strip()
+            # If xcomp has no meaningful subtree, use the xcomp verb itself
+            return child.text
+
     # Copula fallback: prep attached to nsubj instead of verb
     # "When was Jon in Paris?" — "in Paris" is prep of "Jon", not of "was"
     if verb_tok.lemma_ == "be":

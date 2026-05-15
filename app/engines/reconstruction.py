@@ -486,6 +486,22 @@ def _predicate_coherent(row, query_verb: str) -> bool:
                 if lemma.name().replace("_", " ").lower() == query_verb:
                     return True
 
+    # Check 3: query verb lemma appears in episodic_fact or source_text.
+    # The predicate column stores compounds ("campaign_in", "shot_at")
+    # that won't match "launch" or "shoot". But the episodic_fact has
+    # the original text: "just launched an ad campaign" contains "launch".
+    ep = (row["episodic_fact"] or "").lower()
+    src = (row["source_text"] or "").lower()
+    combined = f"{ep} {src}"
+    combined_words = set(combined.split())
+    combined_lemmas = set(combined_words)
+    for w in combined_words:
+        vl = wn.morphy(w, wn.VERB)
+        if vl:
+            combined_lemmas.add(vl)
+    if query_verb in combined_lemmas:
+        return True
+
     return False
 
 
