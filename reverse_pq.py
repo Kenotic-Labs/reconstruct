@@ -347,20 +347,26 @@ def reverse_pq(query: str, candidate: str) -> Optional[ReversedFact]:
         )
 
     elif slot == "location":
-        # PQ Rule 1 reversed: candidate was a locative pobj
-        # "Where does Jon live?" + "Portland" → "Jon lives in Portland"
-        statement = f"{subject} {verb_surface} in {candidate}".strip()
+        # PQ generator only removed the location — S, V, O are still in the query.
+        # "Where did Jon host a dance competition?" → obj = "a dance competition"
+        # The candidate (location) was what was removed — not part of the S-P-O fact.
+        # For verification: check S+P+O from query. Candidate is metadata.
+        real_obj = obj if obj else candidate
+        statement = f"{subject} {verb_surface} {real_obj}".strip()
         return ReversedFact(
-            subject=subject, predicate=verb_lemma, object=candidate,
+            subject=subject, predicate=verb_lemma, object=real_obj,
             statement=statement, slot="location", confidence="structural",
         )
 
     elif slot == "time":
-        # PQ Rule 1 reversed: candidate was a temporal target
-        # "When did Sarah move?" + "last month" → "Sarah moved last month"
-        statement = f"{subject} {verb_surface} {candidate}".strip()
+        # PQ generator only removed the time — S, V, O are still in the query.
+        # "When did Jon host a dance competition?" → obj = "a dance competition"
+        # The candidate (date) was what was removed — not part of the S-P-O fact.
+        # For verification: check S+P+O from query. Candidate is metadata.
+        real_obj = obj if obj else candidate
+        statement = f"{subject} {verb_surface} {real_obj}".strip()
         return ReversedFact(
-            subject=subject, predicate=verb_lemma, object=candidate,
+            subject=subject, predicate=verb_lemma, object=real_obj,
             statement=statement, slot="time", confidence="structural",
         )
 
