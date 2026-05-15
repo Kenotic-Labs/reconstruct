@@ -279,11 +279,14 @@ def _entity_in_relational(row: sqlite3.Row, entity: str) -> bool:
 
 def _content_in_episodic(row: sqlite3.Row, fact: ImpliedFact) -> bool:
     """Episodic trace check: does the episodic_fact or source_text contain
-    the content words from the implied fact?
+    the claimed predicate AND object?
 
-    Uses WordNet lemma matching — 'hosted' matches 'host', 'ran' matches 'run'.
-    Content match: predicate lemma + at least one object content word must appear
-    in the episodic_fact or source_text.
+    Predicate check is STRICT — exact lemma must appear in the text.
+    No synonym bridging. "research" must be in the text as "research/researched/researching".
+    This is the Cat 5 discriminator: "Melanie worked" ≠ "Melanie researched".
+
+    Object check uses WordNet lemma matching — flexible because objects
+    can be paraphrased ("a dance competition" ↔ "dance competition").
     """
     try:
         from nltk.corpus import wordnet as wn
@@ -298,7 +301,7 @@ def _content_in_episodic(row: sqlite3.Row, fact: ImpliedFact) -> bool:
 
     combined_words = set(combined.split())
 
-    # Build lemma set from combined text
+    # Build lemma set from combined text (for object matching only)
     combined_lemmas = set(combined_words)
     if wn:
         for w in combined_words:
@@ -307,26 +310,16 @@ def _content_in_episodic(row: sqlite3.Row, fact: ImpliedFact) -> bool:
                 if lemma:
                     combined_lemmas.add(lemma)
 
-    # Check 1: predicate lemma appears in the trace
+    # Check 1: predicate lemma STRICTLY appears in the trace text.
+    # No WordNet synonym bridge. The exact verb lemma must be present.
+    # "research" matches "researched" (via morphy) but NOT "work", "study", etc.
     pred = normalize_text(fact.predicate)
-    pred_found = False
     if pred:
         pred_lemma = pred.split()[0] if pred else ""
-        if pred_lemma in combined_lemmas:
-            pred_found = True
-        # WordNet synonym bridge: query verb ↔ trace verb
-        if not pred_found and wn:
-            pred_synsets = set(wn.synsets(pred_lemma, pos=wn.VERB))
-            pred_lemma_names = set()
-            for ss in pred_synsets:
-                for lemma in ss.lemmas():
-                    pred_lemma_names.add(lemma.name().replace("_", " ").lower())
-            if pred_lemma_names & combined_lemmas:
-                pred_found = True
-    else:
-        pred_found = True  # No predicate to check → pass
-
-    if not pred_found:
+        if pred_lemma not in combined_lemmas:
+            return False
+    # No predicate → can't discriminate → fail (strict for Cat 5 defense)
+    elif fact.subject:
         return False
 
     # Check 2: at least one object content word appears in the trace
@@ -335,12 +328,11 @@ def _content_in_episodic(row: sqlite3.Row, fact: ImpliedFact) -> bool:
         return True  # No object to check → predicate match is enough
 
     obj_words = set(obj.split())
-    # Remove stopwords/function words
     obj_content = {w for w in obj_words if len(w) > 2}
     if not obj_content:
         return True
 
-    # Add lemmas of object words
+    # Add lemmas of object words (flexible matching for objects)
     obj_lemmas = set(obj_content)
     if wn:
         for w in obj_content:
@@ -349,7 +341,6 @@ def _content_in_episodic(row: sqlite3.Row, fact: ImpliedFact) -> bool:
                 if lemma:
                     obj_lemmas.add(lemma)
 
-    # At least one content word or its lemma must appear
     if obj_lemmas & combined_lemmas:
         return True
 
