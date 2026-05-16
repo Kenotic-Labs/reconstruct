@@ -711,9 +711,14 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
 
         # ── LAST GATE: implied fact verification ────────────────
         # Every answer must pass. No fallback after this.
-        # reverse_pq detects slot from query. Who → answer is entity.
-        # Everything else → entity from query, answer not parsed.
+        # Temporal bypass: "when" questions route to the date column.
+        # The gate verifies entity+predicate against episodic_fact —
+        # dates live in resolved_event_date, not episodic_fact.
+        is_temporal = qd.return_field == "temporal" or qd.wh_word == "when"
+
         if result and not result.refusal and result.answer:
+            if is_temporal:
+                return result  # temporal bypass — date answers skip gate
             if not _verify_implied_fact(conn, user_id, query,
                                         result.answer, entity or ""):
                 return _refuse("implied_fact_not_verified")
