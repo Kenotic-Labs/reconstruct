@@ -187,6 +187,8 @@ def run_conversation(conv_idx: int, conv_data: dict, args=None) -> dict:
         prediction = rr.answer or ""
         if rr.refusal:
             prediction = "This information is not mentioned in the conversation."
+        else:
+            prediction = _strip_verbose(prediction, question)
         item = {
             "question": question,
             "category": category,
