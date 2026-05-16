@@ -2104,27 +2104,78 @@ def _pq_is_ordinal(lemma: str) -> bool:
     return False
 
 
-def _pq_wordnet_category(word: str, is_proper: bool) -> Optional[str]:
-    """Pure WordNet category lookup.
-    Proper nouns: prefer instance_hypernyms (Paris → capital, Louvre → museum).
-    Common nouns: use regular hypernyms (biryani → dish, parrot → bird).
+def _pq_all_categories(verb_lemma: str, obj_text: str, obj_ent_type: str, is_proper: bool) -> set:
+    """Collect ALL category candidates from 4 structural sources.
+
+    No priority, no threshold, no hardcoding. Generate all candidates.
+    The reconstruction engine decides which PQ matches the query.
+
+    4 sources:
+      1. Verb definition — nouns from verb's WordNet definition
+      2. Verb adjective hop — if definition uses participle, follow one hop
+      3. spaCy NER label description — parse spaCy.explain() output
+      4. Object WordNet hypernym — instance/regular hypernyms
     """
     _ensure_wordnet()
     from nltk.corpus import wordnet as wn  # type: ignore
-    syns = wn.synsets(word.lower(), pos=wn.NOUN)
-    if not syns:
-        return None
-    if is_proper:
-        for s in syns:
-            ih = s.instance_hypernyms()
-            if ih:
-                return ih[0].lemmas()[0].name().replace("_", " ")
-    h = syns[0].hypernyms()
-    if h:
-        lemma = h[0].lemmas()[0].name().replace("_", " ")
-        if lemma != word.lower() and len(lemma.split()) <= 2:
-            return lemma
-    return None
+    nlp = _get_nlp()
+    cats = set()
+
+    # Source 1: Verb definition nouns
+    for s in wn.synsets(verb_lemma, pos=wn.VERB)[:3]:
+        try:
+            defn_doc = nlp(s.definition())
+            for tok in defn_doc:
+                if tok.pos_ == "NOUN" and tok.dep_ in ("dobj", "pobj", "attr", "conj"):
+                    cats.add(tok.text.lower())
+                    break  # one per sense
+        except Exception:
+            pass
+
+    # Source 2: Verb adjective hop
+    for s in wn.synsets(verb_lemma, pos=wn.VERB)[:2]:
+        try:
+            defn_doc = nlp(s.definition())
+            for tok in defn_doc:
+                if tok.dep_ in ("relcl", "acomp", "amod", "attr") and tok.pos_ in ("ADJ", "VERB"):
+                    for vs in wn.synsets(tok.lemma_, pos=wn.VERB)[:2]:
+                        inner_doc = nlp(vs.definition())
+                        for itok in inner_doc:
+                            if itok.pos_ == "NOUN" and itok.dep_ in ("dobj", "pobj", "attr", "conj"):
+                                cats.add(itok.text.lower())
+                                break
+        except Exception:
+            pass
+
+    # Source 3: spaCy NER label description
+    if obj_ent_type:
+        try:
+            import spacy as _spacy_mod
+            desc = _spacy_mod.explain(obj_ent_type)
+            if desc:
+                desc_doc = nlp(desc)
+                for tok in desc_doc:
+                    if tok.pos_ == "NOUN":
+                        cats.add(tok.lemma_.lower())
+        except Exception:
+            pass
+
+    # Source 4: Object WordNet hypernym
+    syns = wn.synsets(obj_text.lower(), pos=wn.NOUN)
+    if syns:
+        if is_proper:
+            for s in syns:
+                ih = s.instance_hypernyms()
+                if ih:
+                    cats.add(ih[0].lemmas()[0].name().replace("_", " ").lower())
+                    break
+        h = syns[0].hypernyms()
+        if h:
+            lemma = h[0].lemmas()[0].name().replace("_", " ").lower()
+            if lemma != obj_text.lower() and len(lemma.split()) <= 2:
+                cats.add(lemma)
+
+    return cats
 
 
 def _generate_pq_wh_replacement(sent_doc, root, subject_name):
@@ -2596,14 +2647,18 @@ def generate_predicted_questions(sent_doc, root, subject_name):
             _add(_form_partial(ch, f"What kind of {head_text}"))
 
     # ------------------------------------------------------------------
-    # RULE 5: Hypernym question
+    # RULE 5: Category question — 4 structural sources, no hardcoding
+    # Verb definition + verb adj hop + NER label + object hypernym.
+    # Generate ALL candidates. Reconstruction picks the matching one.
     # ------------------------------------------------------------------
     for ch in root.children:
         if ch.dep_ not in ("dobj", "attr"):
             continue
         is_proper = ch.pos_ == "PROPN" or ch.ent_type_ != ""
-        category = _pq_wordnet_category(ch.text, is_proper)
-        if category:
+        all_cats = _pq_all_categories(
+            root.lemma_, ch.text, ch.ent_type_ or "", is_proper
+        )
+        for category in all_cats:
             _add(_form_partial(ch, f"What {category}"))
 
     # ------------------------------------------------------------------

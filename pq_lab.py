@@ -551,27 +551,89 @@ def generate_predicted_questions_NEW(sent_doc, root, subject_name):
     # "Jon visited Paris" → "What city did Jon visit?"
     # "Jon is reading The Lean Startup" → "What work did Jon read?"
     # ------------------------------------------------------------------
-    def _wordnet_category(word, is_proper):
-        """Pure WordNet category lookup.
-        Proper nouns: prefer instance_hypernyms (Paris → capital, Louvre → museum).
-        Common nouns: use regular hypernyms (biryani → dish, parrot → bird).
+    def _verb_definition_categories(verb_lemma):
+        """Step 1: Extract object category nouns from verb's WordNet definitions.
+        Tries first 3 senses. Returns all unique nouns found.
+        visit -> {'place'}, cook -> {'meal'}, drive -> {'vehicle'}.
         """
+        cats = []
+        seen = set()
+        for s in wn.synsets(verb_lemma, pos=wn.VERB)[:3]:
+            defn_doc = nlp(s.definition())
+            for tok in defn_doc:
+                if tok.pos_ == "NOUN" and tok.dep_ in ("dobj", "pobj", "attr", "conj"):
+                    w = tok.text.lower()
+                    if w not in seen:
+                        seen.add(w)
+                        cats.append(tok.text)
+                    break  # one per sense
+        return cats
+
+    def _verb_adj_hop_categories(verb_lemma):
+        """Step 2: If verb definition uses adjective/participle instead of noun,
+        follow it to its related verb, then extract noun from THAT definition.
+        read -> 'something written' -> write -> 'work'.
+        """
+        cats = []
+        seen = set()
+        for s in wn.synsets(verb_lemma, pos=wn.VERB)[:2]:
+            defn_doc = nlp(s.definition())
+            for tok in defn_doc:
+                if tok.dep_ in ("relcl", "acomp", "amod", "attr") and tok.pos_ in ("ADJ", "VERB"):
+                    for vs in wn.synsets(tok.lemma_, pos=wn.VERB)[:2]:
+                        inner_doc = nlp(vs.definition())
+                        for itok in inner_doc:
+                            if itok.pos_ == "NOUN" and itok.dep_ in ("dobj", "pobj", "attr", "conj"):
+                                w = itok.text.lower()
+                                if w not in seen:
+                                    seen.add(w)
+                                    cats.append(itok.text)
+                                break
+        return cats
+
+    def _ner_explain_categories(ent_type):
+        """Step 3: Parse spaCy's own NER label description to extract category.
+        Not our hardcoding -- spaCy's metadata.
+        WORK_OF_ART -> ['book'], GPE -> ['country'].
+        """
+        import spacy as _spacy_mod
+        desc = _spacy_mod.explain(ent_type)
+        if not desc:
+            return []
+        desc_doc = nlp(desc)
+        cats = []
+        seen = set()
+        for tok in desc_doc:
+            if tok.pos_ == "NOUN":
+                w = tok.lemma_.lower()
+                if w not in seen:
+                    seen.add(w)
+                    cats.append(w)
+        return cats
+
+    def _object_hypernym_categories(word, is_proper):
+        """Step 4: WordNet hypernym of the object noun itself.
+        Proper nouns use instance_hypernyms (Paris -> capital).
+        Common nouns use regular hypernyms (biryani -> dish).
+        """
+        cats = []
         syns = wn.synsets(word.lower(), pos=wn.NOUN)
         if not syns:
-            return None
+            return cats
         if is_proper:
-            # Instance hypernyms = WordNet's proper noun senses
             for s in syns:
                 ih = s.instance_hypernyms()
                 if ih:
-                    return ih[0].lemmas()[0].name().replace("_", " ")
-        # Regular hypernym on first synset
-        h = syns[0].hypernyms()
-        if h:
-            lemma = h[0].lemmas()[0].name().replace("_", " ")
-            if lemma != word.lower() and len(lemma.split()) <= 2:
-                return lemma
-        return None
+                    lemma = ih[0].lemmas()[0].name().replace("_", " ")
+                    cats.append(lemma)
+                    break
+        if not cats:
+            h = syns[0].hypernyms()
+            if h:
+                lemma = h[0].lemmas()[0].name().replace("_", " ")
+                if lemma != word.lower() and len(lemma.split()) <= 2:
+                    cats.append(lemma)
+        return cats
 
     def _hypernym_wh():
         results = []
@@ -580,62 +642,72 @@ def generate_predicted_questions_NEW(sent_doc, root, subject_name):
                 continue
 
             is_proper = ch.pos_ == "PROPN" or ch.ent_type_ != ""
-            category = _wordnet_category(ch.text, is_proper)
 
-            if not category:
-                continue
+            # Collect ALL candidates from all 4 steps. No priority, no threshold.
+            # Reconstruction engine decides which PQ matches the query.
+            all_cats = set()
+            for c in _verb_definition_categories(root.lemma_):
+                all_cats.add(c)
+            for c in _verb_adj_hop_categories(root.lemma_):
+                all_cats.add(c)
+            if ch.ent_type_:
+                for c in _ner_explain_categories(ch.ent_type_):
+                    all_cats.add(c)
+            for c in _object_hypernym_categories(ch.text, is_proper):
+                all_cats.add(c)
 
-            wh_phrase = f"What {category}"
-            neg_i = neg_tok.i if neg_tok else -1
+            for category in all_cats:
+                wh_phrase = f"What {category}"
+                neg_i = neg_tok.i if neg_tok else -1
 
-            if has_aux:
-                first_aux_i = verb_chain[0]
-                if sent_doc[first_aux_i].dep_ not in ("aux", "auxpass"):
-                    for vi in verb_chain:
-                        if sent_doc[vi].dep_ in ("aux", "auxpass"):
-                            first_aux_i = vi
-                            break
-                parts = [wh_phrase, sent_doc[first_aux_i].text, subject_name]
-                if neg_i >= 0:
-                    parts.append(neg_tok.text)
-                target_all = {t.i for t in ch.subtree}
-                moved = subject_indices | {first_aux_i} | target_all | exclude
-                if neg_i >= 0:
-                    moved.add(neg_i)
-                for i in range(len(sent_doc)):
-                    if i not in moved:
-                        parts.append(sent_doc[i].text)
+                if has_aux:
+                    first_aux_i = verb_chain[0]
+                    if sent_doc[first_aux_i].dep_ not in ("aux", "auxpass"):
+                        for vi in verb_chain:
+                            if sent_doc[vi].dep_ in ("aux", "auxpass"):
+                                first_aux_i = vi
+                                break
+                    parts = [wh_phrase, sent_doc[first_aux_i].text, subject_name]
+                    if neg_i >= 0:
+                        parts.append(neg_tok.text)
+                    target_all = {t.i for t in ch.subtree}
+                    moved = subject_indices | {first_aux_i} | target_all | exclude
+                    if neg_i >= 0:
+                        moved.add(neg_i)
+                    for i in range(len(sent_doc)):
+                        if i not in moved:
+                            parts.append(sent_doc[i].text)
 
-            elif is_be_main:
-                parts = [wh_phrase, root.text, subject_name]
-                if neg_i >= 0:
-                    parts.append(neg_tok.text)
-                target_all = {t.i for t in ch.subtree}
-                moved = subject_indices | {root.i} | target_all | exclude
-                if neg_i >= 0:
-                    moved.add(neg_i)
-                for i in range(len(sent_doc)):
-                    if i not in moved:
-                        parts.append(sent_doc[i].text)
+                elif is_be_main:
+                    parts = [wh_phrase, root.text, subject_name]
+                    if neg_i >= 0:
+                        parts.append(neg_tok.text)
+                    target_all = {t.i for t in ch.subtree}
+                    moved = subject_indices | {root.i} | target_all | exclude
+                    if neg_i >= 0:
+                        moved.add(neg_i)
+                    for i in range(len(sent_doc)):
+                        if i not in moved:
+                            parts.append(sent_doc[i].text)
 
-            else:
-                do = "did" if root.tag_ == "VBD" else ("does" if root.tag_ == "VBZ" else "do")
-                parts = [wh_phrase, do, subject_name]
-                if neg_i >= 0:
-                    parts.append(neg_tok.text)
-                target_all = {t.i for t in ch.subtree}
-                moved = subject_indices | target_all | exclude
-                if neg_i >= 0:
-                    moved.add(neg_i)
-                for i in range(len(sent_doc)):
-                    if i in moved:
-                        continue
-                    if i == root.i:
-                        parts.append(root.lemma_)
-                    else:
-                        parts.append(sent_doc[i].text)
+                else:
+                    do = "did" if root.tag_ == "VBD" else ("does" if root.tag_ == "VBZ" else "do")
+                    parts = [wh_phrase, do, subject_name]
+                    if neg_i >= 0:
+                        parts.append(neg_tok.text)
+                    target_all = {t.i for t in ch.subtree}
+                    moved = subject_indices | target_all | exclude
+                    if neg_i >= 0:
+                        moved.add(neg_i)
+                    for i in range(len(sent_doc)):
+                        if i in moved:
+                            continue
+                        if i == root.i:
+                            parts.append(root.lemma_)
+                        else:
+                            parts.append(sent_doc[i].text)
 
-            results.append(" ".join(parts) + "?")
+                results.append(" ".join(parts) + "?")
         return results
 
     for q in _hypernym_wh():
