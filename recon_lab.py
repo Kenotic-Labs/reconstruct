@@ -59,7 +59,8 @@ _TRACE_COLS = """
     resolved_event_date, temporal_expression, is_current,
     edge_negated, edge_mood, edge_episodic_significance,
     context_entity, edge_embedding,
-    pq_1, pq_2, pq_3, pq_4
+    pq_1, pq_2, pq_3, pq_4,
+    pq_1_embedding, pq_2_embedding, pq_3_embedding, pq_4_embedding
 """
 
 _WHERE = "user_id = ? AND tombstoned_at IS NULL"
@@ -143,7 +144,16 @@ def _analyze_query(query: str):
 
     nlp = _get_nlp()
     doc = nlp(query)
-    entity = (qd.match_entity or qd.match_subject or "").lower()
+    raw_entity = (qd.match_entity or qd.match_subject or "").lower()
+
+    # Copula fix: classify_query may return full NP ("jon favorite style of dance")
+    # for "What is X's Y?" questions. Extract just the PROPN entity.
+    entity = raw_entity
+    if entity and " " in entity:
+        entity_doc = nlp(entity)
+        propns = [tok.text.lower() for tok in entity_doc if tok.pos_ == "PROPN"]
+        if propns:
+            entity = propns[0]
 
     lemmas = {
         tok.lemma_.lower() for tok in doc
@@ -270,45 +280,47 @@ def _content_overlap(row, query_lemmas: Set[str]) -> int:
     return len(query_lemmas & ep_lemmas)
 
 
-def _pq_overlap(row, query_lemmas: Set[str], entity: str) -> int:
-    """PQ trace: best question-to-question lemma overlap.
-    Entity words excluded — they appear in every PQ."""
-    nlp = _get_nlp()
-    best = 0
-    for col in ("pq_1", "pq_2", "pq_3", "pq_4"):
-        pq = row[col] if col in row.keys() else None
-        if not pq or len(pq) < 4:
+def _pq_cosine(row, query_emb: Optional[list]) -> float:
+    """PQ trace: best cosine between query embedding and stored PQ embeddings.
+    PQ embeddings are pre-computed at write time — same as edge_embedding.
+    Returns the highest cosine across all 4 PQs."""
+    if not query_emb:
+        return 0.0
+    best = 0.0
+    for col in ("pq_1_embedding", "pq_2_embedding", "pq_3_embedding", "pq_4_embedding"):
+        blob = row[col] if col in row.keys() else None
+        stored = _decode_embedding(blob)
+        if not stored:
             continue
-        pq_lemmas = {tok.lemma_.lower() for tok in nlp(pq)
-                     if tok.pos_ in ("NOUN", "VERB", "ADJ")
-                     and not tok.is_stop and len(tok.text) > 2
-                     and tok.text.lower() != entity}
-        overlap = len(query_lemmas & pq_lemmas)
-        if overlap > best:
-            best = overlap
+        cosine = _dot(query_emb, stored)
+        if cosine > best:
+            best = cosine
     return best
 
 
 def _score_edge(row, qa: dict) -> int:
     """Score an edge using ALL traces. No gates — traces add up.
 
-    PQ overlap ≥ 2   → +3 (question matches stored question — strongest)
-    PQ overlap = 1   → +2
+    PQ cosine > 0.85 → +4 (question semantically matches stored PQ — strongest)
+    PQ cosine > 0.7  → +3
+    PQ cosine > 0.5  → +1
     Content ≥ 2      → +2 (query words in episodic_fact)
     Content = 1      → +1
     Schema match      → +1
     Context entity    → +1
-    Cosine > 0.7      → +1
+    Edge cosine > 0.7 → +1
     Notable/milestone → +1
     """
     score = 0
 
-    # PQ trace
-    pq = _pq_overlap(row, qa["lemmas"], qa["entity"])
-    if pq >= 2:
+    # PQ trace — embedding cosine (not word overlap)
+    pq_cos = _pq_cosine(row, qa["query_emb"])
+    if pq_cos > 0.85:
+        score += 4
+    elif pq_cos > 0.7:
         score += 3
-    elif pq == 1:
-        score += 2
+    elif pq_cos > 0.5:
+        score += 1
 
     # Episodic trace
     content = _content_overlap(row, qa["lemmas"])
@@ -340,16 +352,42 @@ def _score_edge(row, qa: dict) -> int:
 
 # ── Step 4: Verification gate — embedding cosine ────────────────
 
-def _verify_edge(row, query_emb: Optional[list]) -> bool:
-    """Last gate: does the query semantically match the picked edge?
-    Embedding cosine between query and edge source_text.
-    Cat 5 defense: entity-swap queries have low cosine with wrong-topic edges."""
-    if not query_emb:
-        return True
-    stored = _decode_embedding(row["edge_embedding"])
-    if not stored:
-        return True
-    return _dot(query_emb, stored) > 0.5
+def _verify_edge(row, query_emb: Optional[list], query_lemmas: Set[str],
+                  entity: str) -> bool:
+    """Last gate: does the picked edge actually answer THIS question?
+
+    Two checks — both must pass:
+      1. PQ cosine > 0.65 — the query semantically matches a stored PQ.
+         This catches topic-level mismatches.
+      2. PQ word overlap ≥ 1 content word — at least one non-entity content
+         word from the query appears in a PQ. "ballet" must be in a PQ
+         for a ballet question to pass. This catches Cat 5 entity-swaps
+         where the topic matches but the specific claim doesn't.
+
+    Temporal bypass: date queries don't need this check.
+    """
+    # Check 1: PQ cosine
+    best_cosine = _pq_cosine(row, query_emb)
+    if best_cosine < 0.65:
+        return False
+
+    # Check 2: PQ content word overlap (Cat 5 defense)
+    nlp = _get_nlp()
+    entity_words = set(entity.lower().split())
+
+    for col in ("pq_1", "pq_2", "pq_3", "pq_4"):
+        pq = row[col] if col in row.keys() else None
+        if not pq or len(pq) < 4:
+            continue
+        pq_lemmas = {tok.lemma_.lower() for tok in nlp(pq)
+                     if tok.pos_ in ("NOUN", "VERB", "ADJ")
+                     and not tok.is_stop and len(tok.text) > 2
+                     and tok.text.lower() not in entity_words}
+        overlap = query_lemmas & pq_lemmas
+        if len(overlap) >= 1:
+            return True
+
+    return False
 
 
 # ── Step 5: Situation reconstruction ────────────────────────────
@@ -441,6 +479,7 @@ def reconstruct(conn, user_id: int, query: str) -> ReconResult:
         # ── Step 3: score and rank ──────────────────────────
         ranked = sorted(candidates, key=lambda r: (
             _score_edge(r, qa),
+            _pq_cosine(r, qa["query_emb"]),
             _cosine(r, qa["query_emb"]),
         ), reverse=True)
 
@@ -493,6 +532,7 @@ def reconstruct(conn, user_id: int, query: str) -> ReconResult:
             if fts_rows:
                 fts_ranked = sorted(fts_rows, key=lambda r: (
                     _score_edge(r, qa),
+                    _pq_cosine(r, qa["query_emb"]),
                     _cosine(r, qa["query_emb"]),
                 ), reverse=True)
                 best = fts_ranked[0]
@@ -520,7 +560,8 @@ def reconstruct(conn, user_id: int, query: str) -> ReconResult:
                 (c for c in (candidates or []) if c["id"] == result.edge_ids[0]),
                 None,
             )
-            if picked and not _verify_edge(picked, qa["query_emb"]):
+            if picked and not _verify_edge(picked, qa["query_emb"],
+                                                qa["lemmas"], qa["entity"]):
                 return _refuse("embedding_no_match")
         return result
 
