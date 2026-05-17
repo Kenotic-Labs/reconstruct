@@ -416,10 +416,7 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
 
             # Content verification (refusal gate) — skip for temporal
             if not is_temporal:
-                content_ok = _content_matches(
-                    edge, query_content, entity_lower, nlp,
-                )
-                if not content_ok:
+                if not _content_matches(edge, query_content, entity_lower, nlp):
                     continue
 
             # Yes/No query
