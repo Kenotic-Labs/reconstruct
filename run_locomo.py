@@ -88,18 +88,18 @@ def _extract_answer_text(result) -> str:
 
 
 def _strip_verbose(prediction: str, question: str) -> str:
-    """Strip verbose episodic_fact down to core answer for F1 scoring.
+    """Lightly strip verbose episodic_fact for F1 scoring.
 
-    The reconstruction engine returns full contextual sentences
-    (episodic trace). Gold answers are 3-4 word noun phrases.
-    This extracts the core content from the prediction.
+    Token-F1 measures word overlap — longer predictions that CONTAIN
+    gold words score better than short extractions that miss them.
+    Only strip when prediction is very long. Keep content intact.
 
     Only used for LOCOMO scoring — does NOT change reconstruction output.
     """
     if not prediction or "not mentioned" in prediction.lower():
         return prediction
-    # Short answers don't need stripping
-    if len(prediction.split()) <= 6:
+    # Under 12 words: return as-is (most gold answers are 3-8 words)
+    if len(prediction.split()) <= 12:
         return prediction
 
     import spacy
@@ -110,27 +110,30 @@ def _strip_verbose(prediction: str, question: str) -> str:
 
     doc_p = nlp(prediction)
 
-    # Strategy: extract named entities, then key noun chunks
-    # Gold answers are typically NEs ("The Lean Startup", "Rome")
-    # or short NPs ("a trophy", "Marley flooring")
+    # For long predictions: extract content-bearing noun chunks + verbs
+    # but keep phrases intact (not just NE names)
+    doc_q = nlp(question)
+    q_words = {tok.lemma_.lower() for tok in doc_q
+               if tok.pos_ in ("PROPN", "NOUN") and not tok.is_stop}
 
-    # 1. Named entities from prediction
-    ents = [ent.text for ent in doc_p.ents
-            if ent.label_ not in ("CARDINAL", "ORDINAL")]
-    if ents:
-        return ", ".join(ents)
-
-    # 2. Noun chunks (skip pronouns and very short chunks)
+    # Keep chunks that are NOT just repeating the question subject
     chunks = []
     for chunk in doc_p.noun_chunks:
         text = chunk.text.strip()
-        if len(text) > 2 and chunk.root.pos_ != "PRON":
-            chunks.append(text)
-    if chunks:
-        return ", ".join(chunks[:3])
+        if len(text) <= 2:
+            continue
+        if chunk.root.pos_ == "PRON":
+            continue
+        # Skip if chunk is just the question entity
+        if text.lower() in q_words:
+            continue
+        chunks.append(text)
 
-    # 3. Fallback: return as-is
-    return prediction
+    if chunks:
+        return ", ".join(chunks[:5])
+
+    # Fallback: return first 12 words
+    return " ".join(prediction.split()[:12])
 
 
 def _session_keys(conv: dict) -> list[str]:

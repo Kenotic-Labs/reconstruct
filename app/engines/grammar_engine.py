@@ -2420,6 +2420,163 @@ def _generate_pq_wh_replacement(sent_doc, root, subject_name):
     return questions[:4]
 
 
+def generate_predicted_questions_trace(
+    episodic_fact: str,
+    subject: str,
+    predicate: str,
+    obj: str,
+    schema: str = "",
+    emotion: str = None,
+    temporal: str = None,
+) -> List[str]:
+    """Generate predicted questions from TRACE MEANING, not surface syntax.
+
+    The episodic_fact is the semantic core. PQs are questions a human
+    would ask to GET this fact as an answer. They bridge the vocabulary
+    gap between how facts are stored and how humans ask questions.
+
+    Key insight: a questioner uses FRAME words (favorite, style, kind,
+    type, attitude, reason) that never appear in the stored fact.
+    PQs must include these frame words to bridge the gap.
+    """
+    nlp = _get_nlp()
+    if not episodic_fact or len(episodic_fact) < 4:
+        return []
+
+    doc = nlp(episodic_fact)
+    questions = []
+    seen = set()
+
+    def _add(q):
+        if q and q.lower() not in seen and len(q) > 8:
+            seen.add(q.lower())
+            questions.append(q)
+
+    # Find root verb and key constituents of the fact
+    fact_root = None
+    for tok in doc:
+        if tok.dep_ == "ROOT":
+            fact_root = tok
+            break
+
+    # Extract the COMPLEMENT (what's being asserted — the answer)
+    complement = ""
+    if fact_root:
+        for ch in fact_root.children:
+            if ch.dep_ in ("attr", "acomp", "dobj", "oprd"):
+                complement = " ".join(t.text for t in ch.subtree)
+                break
+        if not complement:
+            for ch in fact_root.children:
+                if ch.dep_ in ("prep",):
+                    complement = " ".join(t.text for t in ch.subtree)
+                    break
+
+    # ── PQ Type 1: Object-specific verb question ─────────────────
+    # NOT "What did X do?" — TOO GENERIC.
+    # Instead: "What [OBJECT] did X [VERB]?" — includes domain noun.
+    if predicate and predicate not in ("be", "have") and obj:
+        # Include the object type in the question
+        obj_head = obj.split()[0] if obj else ""
+        obj_doc = nlp(obj)
+        obj_noun = ""
+        for tok in obj_doc:
+            if tok.pos_ == "NOUN" and not tok.is_stop and len(tok.text) > 2:
+                obj_noun = tok.text
+                break
+        if obj_noun:
+            _add(f"What {obj_noun} did {subject} {predicate}?")
+            _add(f"What {obj_noun} does {subject} {predicate}?")
+        else:
+            _add(f"What did {subject} {predicate}?")
+
+    # Use the episodic_fact's own ROOT verb for natural phrasing
+    if fact_root and fact_root.pos_ == "VERB" and fact_root.lemma_ not in ("be", "have"):
+        # Find the direct object noun from the fact
+        for ch in fact_root.children:
+            if ch.dep_ in ("dobj", "attr"):
+                obj_text = ch.text
+                _add(f"What {obj_text} did {subject} {fact_root.lemma_}?")
+                break
+
+    # ── PQ Type 2: Frame-word questions ────────────────────────────
+    # These use vocabulary a questioner would use to ask for this fact.
+    # Detected from the fact's semantic content:
+
+    # Preference/superlative detection: "top pick", "love", "favorite", "best"
+    fact_lower = episodic_fact.lower()
+    _PREFERENCE_MARKERS = ("top pick", "love", "prefer", "favorite", "fave",
+                           "best", "goto", "go-to", "go to", "passionate")
+    if any(m in fact_lower for m in _PREFERENCE_MARKERS):
+        # Find what the preference is ABOUT (domain nouns from the fact)
+        domain_nouns = [t.text for t in doc
+                        if t.pos_ == "NOUN" and not t.is_stop
+                        and t.text.lower() != subject.lower()
+                        and len(t.text) > 2]
+        # Also check obj for domain info
+        if not domain_nouns and obj:
+            obj_doc = nlp(obj)
+            domain_nouns = [t.text for t in obj_doc
+                           if t.pos_ == "NOUN" and not t.is_stop
+                           and len(t.text) > 2]
+        if domain_nouns:
+            dn = domain_nouns[0]
+            _add(f"What is {subject}'s favorite {dn}?")
+            _add(f"What kind of {dn} does {subject} like?")
+            _add(f"What {dn} does {subject} prefer?")
+            _add(f"How does {subject} like to {dn}?")
+        else:
+            _add(f"What is {subject}'s favorite?")
+            _add(f"What does {subject} prefer?")
+            _add(f"What does {subject} like to do?")
+
+    # Activity/hobby detection: schema or verb indicates activity
+    _ACTIVITY_PREDICATES = ("do", "start", "open", "launch", "play", "practice",
+                            "dance", "perform", "teach", "study", "work")
+    if predicate in _ACTIVITY_PREDICATES or schema in ("hobby", "career"):
+        if obj and len(obj) > 1:
+            _add(f"What kind of {obj} does {subject} do?")
+
+    # Reason/motivation detection
+    _REASON_MARKERS = ("because", "since", "so that", "in order to", "want to",
+                       "decided to", "chose to")
+    if any(m in fact_lower for m in _REASON_MARKERS):
+        _add(f"Why did {subject} {predicate or 'do this'}?")
+        _add(f"What is {subject}'s reason for this?")
+
+    # State/feeling detection
+    _STATE_MARKERS = ("glad", "happy", "excited", "nervous", "stressed",
+                      "worried", "proud", "passionate", "love")
+    if any(m in fact_lower for m in _STATE_MARKERS):
+        _add(f"How does {subject} feel about this?")
+        _add(f"What is {subject}'s attitude?")
+
+    # Location detection
+    if any(t.ent_type_ in ("GPE", "LOC", "FAC") for t in doc):
+        _add(f"Where did {subject} {predicate or 'go'}?")
+
+    # ── PQ Type 3: Complement-as-answer question ──────────────────
+    # Keep the frame, replace the answer with WH
+    if complement and len(complement) > 2:
+        # Remove the complement from the fact to get the frame
+        frame = episodic_fact.replace(complement, "").strip(" ,.-")
+        if frame and len(frame) > 3:
+            _add(f"What {frame}?")
+
+    # ── PQ Type 4: Schema questions ────────────────────────────────
+    _SCHEMA_QS = {
+        "hobby": f"What does {subject} do for fun?",
+        "career": f"What does {subject} do for work?",
+        "health": f"How is {subject}'s health?",
+        "travel": f"Where has {subject} been?",
+        "education": f"What is {subject} learning?",
+    }
+    if schema in _SCHEMA_QS:
+        _add(_SCHEMA_QS[schema])
+
+    return questions[:4]
+
+
 def generate_predicted_questions(sent_doc, root, subject_name):
     """Generate predicted questions from 5 English question formation rules.
 
@@ -2934,7 +3091,15 @@ def _extract_traces_from_sentence(
         predicate=predicate,
         object=gram_object,
         object_full=gram_object_full if gram_object_full != gram_object else "",
-        predicted_questions=generate_predicted_questions(sent_doc, content_root, relational_subject),
+        predicted_questions=generate_predicted_questions_trace(
+            episodic_fact=episodic_fact,
+            subject=relational_subject,
+            predicate=predicate,
+            obj=gram_object,
+            schema=schematic_category,
+            emotion=emotional_state,
+            temporal=temporal_expression,
+        ),
         extraction_rule="trace",
     )
 
@@ -3109,12 +3274,15 @@ def _wh_to_return_field(wh_tok) -> str:
         # "how long" / "how long ago" -> temporal
         if head.pos_ == "ADV" and head.lemma_.lower() == "long":
             return "temporal"
-        # "how" + ADJ complement (e.g. "how did she feel") -> emotional
+        # "how" + ADJ complement (e.g. "how happy is she") -> emotional
         has_adj_complement = any(
             c.dep_ in ("acomp", "oprd") and c.pos_ == "ADJ"
             for c in head.children
         )
         if has_adj_complement:
+            return "emotional"
+        # "how does X feel/describe" — emotional verbs always seek emotion
+        if head.lemma_ in ("feel", "describe"):
             return "emotional"
         return "episodic"
 
@@ -3157,6 +3325,15 @@ def classify_query(query_text: str) -> QueryDecomposition:
         break
 
     result.return_field = _wh_to_return_field(wh_tok)
+
+    # Post-fix: "What is X's attitude/mood/sentiment?" → emotional
+    # These WH=what queries ask for emotional state, not episodic facts.
+    if result.return_field == "episodic":
+        _EMOTION_NOUNS = {"attitude", "mood", "sentiment", "feeling", "vibe"}
+        doc_nouns = {tok.lemma_.lower() for tok in doc
+                     if tok.pos_ == "NOUN" and not tok.is_stop}
+        if doc_nouns & _EMOTION_NOUNS:
+            result.return_field = "emotional"
 
     root = _get_root(doc)
     if root is None:
