@@ -135,15 +135,16 @@ def _content_matches(edge, query_content: set, entity_lower: str, nlp,
         if len(query_content & pq_words) >= min_overlap:
             return True
 
-    # Check episodic_fact
-    ep = edge["episodic_fact"] or edge["source_text"] or ""
-    if ep:
-        ep_words = {
-            tok.lemma_.lower() for tok in nlp(ep)
+    # Check episodic_fact AND source_text (source has more vocabulary)
+    for text in (edge["episodic_fact"] or "", edge["source_text"] or ""):
+        if not text or len(text) < 4:
+            continue
+        text_words = {
+            tok.lemma_.lower() for tok in nlp(text)
             if tok.pos_ in ("NOUN", "PROPN", "VERB", "ADJ") and not tok.is_stop
             and len(tok.text) > 2 and tok.text.lower() != entity_lower
         }
-        if len(query_content & ep_words) >= min_overlap:
+        if len(query_content & text_words) >= min_overlap:
             return True
 
     return False
