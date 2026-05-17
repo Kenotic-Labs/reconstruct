@@ -2555,15 +2555,29 @@ def generate_predicted_questions_trace(
     if any(t.ent_type_ in ("GPE", "LOC", "FAC") for t in doc):
         _add(f"Where did {subject} {predicate or 'go'}?")
 
-    # ── PQ Type 3: Complement-as-answer question ──────────────────
-    # Keep the frame, replace the answer with WH
+    # ── PQ Type 3: NER category questions (BEFORE complement) ─────
+    # Named entities → use category as frame word.
+    # "The Lean Startup" (WORK_OF_ART) → "What book is X reading?"
+    _NER_FRAMES = {
+        "WORK_OF_ART": "book",
+        "ORG": "company",
+        "PRODUCT": "product",
+        "EVENT": "event",
+        "FAC": "place",
+    }
+    for ent in doc.ents:
+        frame = _NER_FRAMES.get(ent.label_)
+        if frame and predicate:
+            _add(f"What {frame} did {subject} {predicate}?")
+            _add(f"What {frame} does {subject} {predicate}?")
+
+    # ── PQ Type 4: Complement-as-answer question ──────────────────
     if complement and len(complement) > 2:
-        # Remove the complement from the fact to get the frame
         frame = episodic_fact.replace(complement, "").strip(" ,.-")
         if frame and len(frame) > 3:
             _add(f"What {frame}?")
 
-    # ── PQ Type 4: Schema questions ────────────────────────────────
+    # ── PQ Type 5: Schema questions ────────────────────────────────
     _SCHEMA_QS = {
         "hobby": f"What does {subject} do for fun?",
         "career": f"What does {subject} do for work?",
