@@ -88,52 +88,9 @@ def _extract_answer_text(result) -> str:
 
 
 def _strip_verbose(prediction: str, question: str) -> str:
-    """Lightly strip verbose episodic_fact for F1 scoring.
-
-    Token-F1 measures word overlap — longer predictions that CONTAIN
-    gold words score better than short extractions that miss them.
-    Only strip when prediction is very long. Keep content intact.
-
-    Only used for LOCOMO scoring — does NOT change reconstruction output.
-    """
-    if not prediction or "not mentioned" in prediction.lower():
-        return prediction
-    # Under 12 words: return as-is (most gold answers are 3-8 words)
-    if len(prediction.split()) <= 12:
-        return prediction
-
-    import spacy
-    try:
-        nlp = spacy.load("en_core_web_md")
-    except OSError:
-        return prediction
-
-    doc_p = nlp(prediction)
-
-    # For long predictions: extract content-bearing noun chunks + verbs
-    # but keep phrases intact (not just NE names)
-    doc_q = nlp(question)
-    q_words = {tok.lemma_.lower() for tok in doc_q
-               if tok.pos_ in ("PROPN", "NOUN") and not tok.is_stop}
-
-    # Keep chunks that are NOT just repeating the question subject
-    chunks = []
-    for chunk in doc_p.noun_chunks:
-        text = chunk.text.strip()
-        if len(text) <= 2:
-            continue
-        if chunk.root.pos_ == "PRON":
-            continue
-        # Skip if chunk is just the question entity
-        if text.lower() in q_words:
-            continue
-        chunks.append(text)
-
-    if chunks:
-        return ", ".join(chunks[:5])
-
-    # Fallback: return first 12 words
-    return " ".join(prediction.split()[:12])
+    """Return prediction as-is. Token F1 handles length naturally.
+    Only used for LOCOMO scoring — does NOT change reconstruction output."""
+    return prediction or ""
 
 
 def _session_keys(conv: dict) -> list[str]:
