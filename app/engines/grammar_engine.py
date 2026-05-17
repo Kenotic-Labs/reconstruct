@@ -3327,7 +3327,9 @@ def classify_query(query_text: str) -> QueryDecomposition:
     doc = nlp(query_text)
     result = QueryDecomposition()
 
-    # WH-word extraction
+    # WH-word extraction — scan up to first comma or main verb
+    # Handles "According to X, what..." but stops before relative clauses
+    # like "what they love" in "Do they start businesses out of what they love?"
     wh_tok = None
     for tok in doc:
         if tok.pos_ == "SPACE":
@@ -3336,7 +3338,9 @@ def classify_query(query_text: str) -> QueryDecomposition:
             wh_tok = tok
             result.wh_word = tok.text.lower()
             break
-        break
+        # Stop at first main verb (WH-words precede the verb in questions)
+        if tok.pos_ in ("VERB", "AUX") and tok.dep_ in ("ROOT", "aux"):
+            break
 
     result.return_field = _wh_to_return_field(wh_tok)
 

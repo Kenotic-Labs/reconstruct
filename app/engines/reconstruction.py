@@ -120,8 +120,7 @@ def _predicate_coherent(row, query_verb: str) -> bool:
 
 
 def _content_matches(edge, query_content: set, entity_lower: str, nlp) -> bool:
-    """Does PQ or episodic_fact share ≥2 content lemmas with query?
-    Uses spaCy lemmatization only — no synonym expansion."""
+    """Does PQ or episodic_fact share ≥2 content lemmas with query?"""
     # Check PQs
     for col in ("pq_1", "pq_2", "pq_3", "pq_4"):
         pq = edge[col] if col in edge.keys() else None
