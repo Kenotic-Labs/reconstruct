@@ -119,24 +119,9 @@ def _predicate_coherent(row, query_verb: str) -> bool:
     return False
 
 
-def _expand_with_synonyms(words: set) -> set:
-    """Expand a set of lemmas with their WordNet synonyms."""
-    from nltk.corpus import wordnet as wn
-    expanded = set(words)
-    for w in words:
-        for pos in (wn.NOUN, wn.VERB, wn.ADJ):
-            for ss in wn.synsets(w, pos=pos)[:2]:
-                for lemma in ss.lemmas()[:3]:
-                    name = lemma.name().replace("_", " ").lower()
-                    if len(name) > 2:
-                        expanded.add(name)
-    return expanded
-
-
 def _content_matches(edge, query_content: set, entity_lower: str, nlp) -> bool:
-    """Does PQ or episodic_fact share ≥2 content words with query?
-    Uses WordNet synonym expansion so 'destress' matches 'stress relief',
-    'favorite' matches 'preferred', 'design' matches 'create'."""
+    """Does PQ or episodic_fact share ≥2 content lemmas with query?
+    Uses spaCy lemmatization only — no synonym expansion."""
     # Check PQs
     for col in ("pq_1", "pq_2", "pq_3", "pq_4"):
         pq = edge[col] if col in edge.keys() else None
@@ -144,7 +129,7 @@ def _content_matches(edge, query_content: set, entity_lower: str, nlp) -> bool:
             continue
         pq_words = {
             tok.lemma_.lower() for tok in nlp(pq)
-            if tok.pos_ in ("NOUN", "VERB", "ADJ") and not tok.is_stop
+            if tok.pos_ in ("NOUN", "PROPN", "VERB", "ADJ") and not tok.is_stop
             and len(tok.text) > 2 and tok.text.lower() != entity_lower
         }
         if len(query_content & pq_words) >= 2:
@@ -155,7 +140,7 @@ def _content_matches(edge, query_content: set, entity_lower: str, nlp) -> bool:
     if ep:
         ep_words = {
             tok.lemma_.lower() for tok in nlp(ep)
-            if tok.pos_ in ("NOUN", "VERB", "ADJ") and not tok.is_stop
+            if tok.pos_ in ("NOUN", "PROPN", "VERB", "ADJ") and not tok.is_stop
             and len(tok.text) > 2 and tok.text.lower() != entity_lower
         }
         if len(query_content & ep_words) >= 2:
@@ -362,9 +347,14 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
         if not rows:
             return _refuse("no_edges")
 
+        # ── Filter: for emotional queries, only edges with emotional data ──
+        is_emotional = qd.return_field == "emotional"
+        if is_emotional:
+            emo_rows = [r for r in rows if r["edge_emotional_label"]]
+            if emo_rows:
+                rows = emo_rows
+
         # ── Rank by PQ embedding cosine ────────────────────────
-        # The PQ embedding captures "what question does this edge answer?"
-        # Closest PQ to the query = best match. No word overlap. No scores.
         scored = []
         for row in rows:
             pq_emb = _decode_embedding(
@@ -391,7 +381,7 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
         nlp = _get_nlp()
         query_content = {
             tok.lemma_.lower() for tok in nlp(query)
-            if tok.pos_ in ("NOUN", "VERB", "ADJ") and not tok.is_stop
+            if tok.pos_ in ("NOUN", "PROPN", "VERB", "ADJ") and not tok.is_stop
             and len(tok.text) > 2 and tok.text.lower() != entity_lower
         }
 
