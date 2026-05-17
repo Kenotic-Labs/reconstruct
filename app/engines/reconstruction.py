@@ -388,8 +388,11 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
         for cos, edge in scored:
             if not _entity_matches(edge, entity or ""):
                 continue
-            if not _predicate_coherent(edge, query_verb or ""):
-                continue
+            # Skip predicate check for yes/no — just checking existence
+            is_yesno = qd.wh_word is None and "?" in query
+            if not is_yesno:
+                if not _predicate_coherent(edge, query_verb or ""):
+                    continue
 
             # Content verification (refusal gate) — skip for temporal
             if not is_temporal:
