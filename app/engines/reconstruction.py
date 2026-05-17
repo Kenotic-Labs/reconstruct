@@ -348,12 +348,9 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
         if not rows:
             return _refuse("no_edges")
 
-        # ── Filter: for emotional queries, only edges with emotional data ──
-        is_emotional = qd.return_field == "emotional"
-        if is_emotional:
-            emo_rows = [r for r in rows if r["edge_emotional_label"]]
-            if emo_rows:
-                rows = emo_rows
+        # No emotional filter — let PQ cosine ranking find the best match.
+        # Filtering to emotional-label-only edges drops valid edges like
+        # "dancers are so excited" (has "excited" in text but no emotional label).
 
         # ── Rank by PQ embedding cosine ────────────────────────
         scored = []
@@ -404,9 +401,12 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
         for cos, edge in scored:
             if not _entity_matches(edge, entity or ""):
                 continue
-            # Skip predicate check for yes/no — just checking existence
+            # Skip predicate check for:
+            # - yes/no (checking existence, not specific action)
+            # - emotional (asking about feelings, not actions)
             is_yesno = qd.wh_word is None and "?" in query
-            if not is_yesno:
+            is_emotional = qd.return_field == "emotional"
+            if not is_yesno and not is_emotional:
                 if not _predicate_coherent(edge, query_verb or ""):
                     continue
 
