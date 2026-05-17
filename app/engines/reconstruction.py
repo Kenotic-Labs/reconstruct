@@ -119,8 +119,9 @@ def _predicate_coherent(row, query_verb: str) -> bool:
     return False
 
 
-def _content_matches(edge, query_content: set, entity_lower: str, nlp) -> bool:
-    """Does PQ or episodic_fact share ≥2 content lemmas with query?"""
+def _content_matches(edge, query_content: set, entity_lower: str, nlp,
+                     min_overlap: int = 2) -> bool:
+    """Does PQ or episodic_fact share ≥min_overlap content lemmas with query?"""
     # Check PQs
     for col in ("pq_1", "pq_2", "pq_3", "pq_4"):
         pq = edge[col] if col in edge.keys() else None
@@ -131,7 +132,7 @@ def _content_matches(edge, query_content: set, entity_lower: str, nlp) -> bool:
             if tok.pos_ in ("NOUN", "PROPN", "VERB", "ADJ") and not tok.is_stop
             and len(tok.text) > 2 and tok.text.lower() != entity_lower
         }
-        if len(query_content & pq_words) >= 2:
+        if len(query_content & pq_words) >= min_overlap:
             return True
 
     # Check episodic_fact
@@ -142,7 +143,7 @@ def _content_matches(edge, query_content: set, entity_lower: str, nlp) -> bool:
             if tok.pos_ in ("NOUN", "PROPN", "VERB", "ADJ") and not tok.is_stop
             and len(tok.text) > 2 and tok.text.lower() != entity_lower
         }
-        if len(query_content & ep_words) >= 2:
+        if len(query_content & ep_words) >= min_overlap:
             return True
 
     return False
