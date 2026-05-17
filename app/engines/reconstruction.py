@@ -240,7 +240,7 @@ _TRACE_COLS = """
     resolved_event_date, temporal_expression, is_current,
     edge_negated, edge_mood, edge_episodic_significance,
     subject, predicate, object, context_entity,
-    edge_embedding, pq_1_embedding,
+    edge_embedding, pq_1_embedding, pq_2_embedding, pq_3_embedding, pq_4_embedding,
     pq_1, pq_2, pq_3, pq_4
 """
 
@@ -355,15 +355,19 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
         # ── Rank by PQ embedding cosine ────────────────────────
         scored = []
         for row in rows:
-            pq_emb = _decode_embedding(
-                row["pq_1_embedding"] if "pq_1_embedding" in row.keys() else None
-            )
+            # Best cosine across ALL 4 PQ embeddings + edge embedding
+            cosines = []
+            for col in ("pq_1_embedding", "pq_2_embedding",
+                         "pq_3_embedding", "pq_4_embedding"):
+                emb = _decode_embedding(
+                    row[col] if col in row.keys() else None
+                )
+                if emb:
+                    cosines.append(_dot(query_emb, emb))
             edge_emb = _decode_embedding(row["edge_embedding"])
-
-            # Best of PQ cosine and edge cosine
-            pq_cos = _dot(query_emb, pq_emb) if pq_emb else 0.0
-            edge_cos = _dot(query_emb, edge_emb) if edge_emb else 0.0
-            best_cos = max(pq_cos, edge_cos)
+            if edge_emb:
+                cosines.append(_dot(query_emb, edge_emb))
+            best_cos = max(cosines) if cosines else 0.0
 
             scored.append((best_cos, row))
 
