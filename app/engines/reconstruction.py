@@ -376,7 +376,22 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
         #   1. Entity matches
         #   2. PQ shares ≥ 2 content words with query (binary: matches or doesn't)
         # All fail → refuse.
-        query_verb = (qd.match_predicate or "").lower() or None
+        # Verify extracted predicate is actually a verb — classify_query
+        # sometimes extracts nouns ("book" from "What book is Jon reading?")
+        raw_verb = (qd.match_predicate or "").lower() or None
+        query_verb = None
+        if raw_verb:
+            from nltk.corpus import wordnet as wn
+            # Accept if WordNet has verb senses for this word
+            if wn.synsets(raw_verb, pos=wn.VERB):
+                query_verb = raw_verb
+            # Reject nouns-only ("book" has verb senses too, so check
+            # if NOUN senses dominate — if more noun than verb senses, skip)
+            if query_verb:
+                n_verb = len(wn.synsets(raw_verb, pos=wn.VERB))
+                n_noun = len(wn.synsets(raw_verb, pos=wn.NOUN))
+                if n_noun > n_verb * 2:
+                    query_verb = None  # primarily a noun, not a verb
 
         nlp = _get_nlp()
         query_content = {

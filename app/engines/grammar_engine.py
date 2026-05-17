@@ -2505,8 +2505,8 @@ def generate_predicted_questions_trace(
 
     # Preference/superlative detection: "top pick", "love", "favorite", "best"
     fact_lower = episodic_fact.lower()
-    _PREFERENCE_MARKERS = ("top pick", "love", "prefer", "favorite", "fave",
-                           "best", "goto", "go-to", "go to", "passionate")
+    _PREFERENCE_MARKERS = ("top pick", "prefer", "favorite", "fave",
+                           "best", "goto", "go-to", "go to")
     if any(m in fact_lower for m in _PREFERENCE_MARKERS):
         # Find what the preference is ABOUT (domain nouns from the fact)
         domain_nouns = [t.text for t in doc
