@@ -356,13 +356,14 @@ def _verify_edge(row, query_emb: Optional[list], query_lemmas: Set[str],
                   entity: str) -> bool:
     """Last gate: does the picked edge actually answer THIS question?
 
-    Two checks — both must pass:
-      1. PQ cosine > 0.65 — the query semantically matches a stored PQ.
-         This catches topic-level mismatches.
-      2. PQ word overlap ≥ 1 content word — at least one non-entity content
-         word from the query appears in a PQ. "ballet" must be in a PQ
-         for a ballet question to pass. This catches Cat 5 entity-swaps
-         where the topic matches but the specific claim doesn't.
+    Three checks:
+      1. PQ cosine > 0.65 — semantic match between query and stored PQ.
+      2. PQ content word overlap >= 1 — at least one non-entity content
+         word from the query appears in a PQ.
+      3. Entity-aware PQ check — the query's entity must appear in the PQ
+         that passes overlap. Cat 5 defense: "Does Jon love dance?" PQ
+         on a Jon edge has "Jon". "Does Gina love dance?" query has "Gina".
+         Gina ≠ Jon → refuse even though content words match.
 
     Temporal bypass: date queries don't need this check.
     """
@@ -371,7 +372,7 @@ def _verify_edge(row, query_emb: Optional[list], query_lemmas: Set[str],
     if best_cosine < 0.65:
         return False
 
-    # Check 2: PQ content word overlap (Cat 5 defense)
+    # Check 2 + 3: PQ content overlap AND entity match
     nlp = _get_nlp()
     entity_words = set(entity.lower().split())
 
@@ -379,6 +380,21 @@ def _verify_edge(row, query_emb: Optional[list], query_lemmas: Set[str],
         pq = row[col] if col in row.keys() else None
         if not pq or len(pq) < 4:
             continue
+
+        pq_lower = pq.lower()
+
+        # Entity check: the query entity must appear in this PQ.
+        # PQs are generated with the entity name ("Does Jon love...").
+        # If query asks about Gina but PQ says Jon → wrong entity → skip.
+        entity_in_pq = False
+        for ew in entity_words:
+            if ew in pq_lower:
+                entity_in_pq = True
+                break
+        if not entity_in_pq:
+            continue
+
+        # Content word overlap (excluding entity words)
         pq_lemmas = {tok.lemma_.lower() for tok in nlp(pq)
                      if tok.pos_ in ("NOUN", "VERB", "ADJ")
                      and not tok.is_stop and len(tok.text) > 2
@@ -448,121 +464,255 @@ def _fts_fallback(conn, user_id: int, qa: dict, query: str) -> List:
         return []
 
 
-# ── Main: reconstruct ──────────────────────────────────────────
+# ── Branch: temporal_retrieve ──────────────────────────────────
+
+def _temporal_retrieve(candidates, qa) -> Optional[ReconResult]:
+    """Temporal questions: rank by date clarity, entity-only verification."""
+    # Prefer edges with resolved_event_date
+    dated = [r for r in candidates if r["resolved_event_date"]]
+    pool = dated if dated else candidates
+
+    ranked = sorted(pool, key=lambda r: (
+        _pq_cosine(r, qa["query_emb"]),
+        _cosine(r, qa["query_emb"]),
+    ), reverse=True)
+
+    for edge in ranked:
+        # Entity-only verification — no predicate check needed
+        entities = _parse_entities(edge)
+        if qa["entity"] and qa["entity"] not in entities:
+            if not any(qa["entity"] in e for e in entities):
+                continue
+        return ReconResult(
+            answer=_extract_answer(edge, "temporal"),
+            return_field="temporal",
+            edge_ids=[edge["id"]],
+            trace_score=_score_edge(edge, qa),
+        )
+    return None
+
+
+# ── Branch: strict_retrieve (Cat 5 defense) ───────────────────
+
+def _is_adversarial(qa, candidates) -> bool:
+    """Detect likely adversarial entity-swap questions.
+    Yes/No questions about specific claims are the main Cat 5 pattern."""
+    if qa["wh_word"] is None and "?" in (qa.get("raw_query") or ""):
+        return True
+    return False
+
+
+def _strict_retrieve(candidates, qa) -> Optional[ReconResult]:
+    """Adversarial questions: strict entity + PQ word overlap gate."""
+    ranked = sorted(candidates, key=lambda r: (
+        _pq_cosine(r, qa["query_emb"]),
+        _score_edge(r, qa),
+    ), reverse=True)
+
+    entity_words = set(qa["entity"].lower().split())
+    nlp = _get_nlp()
+
+    for edge in ranked:
+        # Must pass PQ cosine
+        if _pq_cosine(edge, qa["query_emb"]) < 0.65:
+            continue
+
+        # Must pass entity-aware PQ word overlap
+        passed = False
+        for col in ("pq_1", "pq_2", "pq_3", "pq_4"):
+            pq = edge[col] if col in edge.keys() else None
+            if not pq or len(pq) < 4:
+                continue
+            pq_lower = pq.lower()
+            # Entity must be in this PQ
+            if not any(ew in pq_lower for ew in entity_words):
+                continue
+            pq_lemmas = {tok.lemma_.lower() for tok in nlp(pq)
+                         if tok.pos_ in ("NOUN", "VERB", "ADJ")
+                         and not tok.is_stop and len(tok.text) > 2
+                         and tok.text.lower() not in entity_words}
+            if len(qa["lemmas"] & pq_lemmas) >= 1:
+                passed = True
+                break
+        if not passed:
+            continue
+
+        answer = "No" if edge["edge_negated"] else "Yes"
+        return ReconResult(
+            answer=answer,
+            edge_ids=[edge["id"]],
+            trace_score=_score_edge(edge, qa),
+        )
+    return _refuse("strict_no_match")
+
+
+# ── Branch: multi_retrieve (list queries) ─────────────────────
+
+def _multi_retrieve(candidates, qa) -> Optional[ReconResult]:
+    """List queries: collect ALL passing edges, don't stop at first."""
+    ranked = sorted(candidates, key=lambda r: (
+        _cosine(r, qa["query_emb"]),
+        _pq_cosine(r, qa["query_emb"]),
+    ), reverse=True)
+
+    seen: Set[str] = set()
+    facts = []
+    ids = []
+
+    for edge in ranked:
+        # Entity check
+        entities = _parse_entities(edge)
+        if qa["entity"] and qa["entity"] not in entities:
+            if not any(qa["entity"] in e for e in entities):
+                continue
+        ep = (edge["episodic_fact"] or "").strip()
+        if ep and ep.lower() not in seen and len(ep) > 3:
+            seen.add(ep.lower())
+            facts.append(ep)
+            ids.append(edge["id"])
+        if len(facts) >= 10:
+            break
+
+    if facts:
+        return ReconResult(answer=", ".join(facts), edge_ids=ids)
+    return None
+
+
+# ── Branch: factual_retrieve (single-hop) ─────────────────────
+
+def _factual_retrieve(candidates, qa, query) -> Optional[ReconResult]:
+    """Factual single-hop: try candidates in order, verify each.
+
+    For each candidate:
+      1. Entity must be in relational_entities
+      2. Content overlap — at least 1 query lemma in episodic_fact
+      3. Entity-aware PQ check — the PQ must mention the query entity
+         AND share content words. This catches Cat 5 entity-swaps:
+         query about Gina hits Jon's edge → Jon's PQ says "Jon" not "Gina" → skip.
+
+    Try next on fail. Exhaust list before refusing."""
+    ranked = sorted(candidates, key=lambda r: (
+        _cosine(r, qa["query_emb"]),
+        _pq_cosine(r, qa["query_emb"]),
+        _score_edge(r, qa),
+    ), reverse=True)
+
+    nlp = _get_nlp()
+    entity_words = set(qa["entity"].lower().split()) if qa["entity"] else set()
+
+    for edge in ranked:
+        # Entity check
+        entities = _parse_entities(edge)
+        entity_ok = not qa["entity"]
+        if qa["entity"]:
+            for e in entities:
+                if qa["entity"] in e or e in qa["entity"]:
+                    entity_ok = True
+                    break
+        if not entity_ok:
+            continue
+
+        # Content overlap in episodic_fact
+        ep = (edge["episodic_fact"] or edge["source_text"] or "").lower()
+        if ep:
+            ep_doc = nlp(ep)
+            ep_lemmas = {tok.lemma_.lower() for tok in ep_doc
+                         if tok.pos_ in ("NOUN", "VERB", "ADJ")
+                         and not tok.is_stop}
+            if not (qa["lemmas"] & ep_lemmas):
+                continue
+
+        # Entity-aware PQ verification (Cat 5 defense)
+        # The PQ must mention the query's entity AND share content words.
+        pq_verified = False
+        for col in ("pq_1", "pq_2", "pq_3", "pq_4"):
+            pq = edge[col] if col in edge.keys() else None
+            if not pq or len(pq) < 4:
+                continue
+            pq_lower = pq.lower()
+            # Entity must be in PQ
+            if entity_words and not any(ew in pq_lower for ew in entity_words):
+                continue
+            # Content word overlap
+            pq_lemmas = {tok.lemma_.lower() for tok in nlp(pq)
+                         if tok.pos_ in ("NOUN", "VERB", "ADJ")
+                         and not tok.is_stop and len(tok.text) > 2
+                         and tok.text.lower() not in entity_words}
+            if len(qa["lemmas"] & pq_lemmas) >= 1:
+                pq_verified = True
+                break
+
+        if not pq_verified:
+            continue  # Try next candidate, don't refuse
+
+        # Yes/No detection
+        if qa["wh_word"] is None and "?" in query:
+            answer = "No" if edge["edge_negated"] else "Yes"
+        else:
+            answer = _extract_answer(edge, qa["return_field"])
+
+        return ReconResult(
+            answer=answer,
+            return_field=qa["return_field"],
+            edge_ids=[edge["id"]],
+            trace_score=_score_edge(edge, qa),
+        )
+
+    return None
+
+
+# ── Main: reconstruct (branched router) ───────────────────────
 
 def reconstruct(conn, user_id: int, query: str) -> ReconResult:
-    """Trace-only reconstruction. No SPO.
+    """Branched reconstruction. 5 paths, shared candidate pool.
 
-    1. Analyze query → entity, lemmas, wh_word, return_field, embedding
-    2. Find edges by relational trace (entity)
-    3. Filter by temporal trace (is_current)
-    4. Score ALL edges by all traces (PQ + episodic + schema + cosine + context)
-    5. Best edge → extract answer from trace column
-    6. Verify via embedding cosine (Cat 5 defense)
-    7. FTS5 fallback if no trace candidates
-    8. Situation reconstruction for situational queries
-    9. Refuse
+    Route:
+      temporal    → rank by date, entity-only verify, no gate
+      adversarial → strict PQ overlap + entity-aware gate
+      list        → collect all passing, don't stop at first
+      situational → schema convergence, 1 per domain
+      factual     → permissive verify, try next on fail
     """
     qa = _analyze_query(query)
+    qa["raw_query"] = query
     entity = qa["entity"]
 
-    result = None
-
-    # ── Step 1: relational trace → candidate edges ──────────
+    # ── Shared: get candidates ─────────────────────────────
     candidates = _find_by_entity(conn, user_id, entity)
+    if not candidates:
+        # FTS5 fallback
+        candidates = _fts_fallback(conn, user_id, qa, query)
+    if not candidates:
+        if _is_situational(query) and entity:
+            return _reconstruct_situation(conn, user_id, entity)
+        return _refuse("no_candidates")
 
-    if candidates:
-        # ── Step 2: temporal filter ──────────────────────────
-        mode = _temporal_mode(qa)
-        candidates = _filter_temporal(candidates, mode)
-
-        # ── Step 3: score and rank ──────────────────────────
-        ranked = sorted(candidates, key=lambda r: (
-            _score_edge(r, qa),
-            _pq_cosine(r, qa["query_emb"]),
-            _cosine(r, qa["query_emb"]),
-        ), reverse=True)
-
-        # Take best
-        best = ranked[0] if ranked else None
-
-        if best and _score_edge(best, qa) > 0:
-            # Yes/No query
-            if qa["wh_word"] is None and "?" in query:
-                answer = "No" if best["edge_negated"] else "Yes"
-                result = ReconResult(
-                    answer=answer,
-                    edge_ids=[best["id"]],
-                    trace_score=_score_edge(best, qa),
-                )
-
-            # List query
-            elif _is_list_query(query):
-                seen: Set[str] = set()
-                facts = []
-                ids = []
-                for e in ranked:
-                    if _score_edge(e, qa) == 0:
-                        break
-                    ep = (e["episodic_fact"] or "").strip()
-                    if ep and ep.lower() not in seen and len(ep) > 3:
-                        seen.add(ep.lower())
-                        facts.append(ep)
-                        ids.append(e["id"])
-                if facts:
-                    result = ReconResult(
-                        answer=", ".join(facts),
-                        edge_ids=ids,
-                    )
-
-            # Single answer
-            if result is None:
-                result = ReconResult(
-                    answer=_extract_answer(best, qa["return_field"]),
-                    return_field=qa["return_field"],
-                    edge_ids=[best["id"]],
-                    trace_score=_score_edge(best, qa),
-                )
-
-    # ── FTS5 fallback ──────────────────────────────────────
-    if result is None:
-        fts_rows = _fts_fallback(conn, user_id, qa, query)
-        if fts_rows:
-            fts_rows = _filter_temporal(fts_rows, _temporal_mode(qa))
-            if fts_rows:
-                fts_ranked = sorted(fts_rows, key=lambda r: (
-                    _score_edge(r, qa),
-                    _pq_cosine(r, qa["query_emb"]),
-                    _cosine(r, qa["query_emb"]),
-                ), reverse=True)
-                best = fts_ranked[0]
-                if _score_edge(best, qa) > 0:
-                    result = ReconResult(
-                        answer=_extract_answer(best, qa["return_field"]),
-                        return_field=qa["return_field"],
-                        edge_ids=[best["id"]],
-                        trace_score=_score_edge(best, qa),
-                    )
-
-    # ── Situation reconstruction ────────────────────────────
-    if result is None and _is_situational(query) and entity:
-        result = _reconstruct_situation(conn, user_id, entity)
-
-    # ── LAST GATE: embedding verification ───────────────────
-    # Temporal bypass: dates verified by temporal trace, not embedding.
+    # Temporal filter (shared — but temporal branch uses "any")
     is_temporal = qa["return_field"] == "temporal" or qa["wh_word"] == "when"
+    if not is_temporal:
+        candidates = _filter_temporal(candidates, "current_only")
 
-    if result and not result.refusal and result.answer:
-        if is_temporal:
+    # ── Route ──────────────────────────────────────────────
+
+    # 1. Situational
+    if _is_situational(query) and entity:
+        return _reconstruct_situation(conn, user_id, entity)
+
+    # 2. Temporal
+    if is_temporal:
+        result = _temporal_retrieve(candidates, qa)
+        if result:
             return result
-        if result.edge_ids:
-            picked = next(
-                (c for c in (candidates or []) if c["id"] == result.edge_ids[0]),
-                None,
-            )
-            if picked and not _verify_edge(picked, qa["query_emb"],
-                                                qa["lemmas"], qa["entity"]):
-                return _refuse("embedding_no_match")
+
+    # 3. List
+    if _is_list_query(query):
+        result = _multi_retrieve(candidates, qa)
+        if result:
+            return result
+
+    # 4. Factual (default — handles Cat 5 via entity-aware PQ gate)
+    result = _factual_retrieve(candidates, qa, query)
+    if result:
         return result
 
     return _refuse("not_mentioned")
