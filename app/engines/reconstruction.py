@@ -352,6 +352,14 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
         # Filtering to emotional-label-only edges drops valid edges like
         # "dancers are so excited" (has "excited" in text but no emotional label).
 
+        # ── Extract query content words (needed for ranking + verification) ──
+        nlp = _get_nlp()
+        query_content = {
+            tok.lemma_.lower() for tok in nlp(query)
+            if tok.pos_ in ("NOUN", "PROPN", "VERB", "ADJ") and not tok.is_stop
+            and len(tok.text) > 2 and tok.text.lower() != entity_lower
+        }
+
         # ── Rank by PQ embedding cosine ────────────────────────
         scored = []
         for row in rows:
@@ -369,7 +377,19 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
                 cosines.append(_dot(query_emb, edge_emb))
             best_cos = max(cosines) if cosines else 0.0
 
-            scored.append((best_cos, row))
+            # For temporal: boost edges that match EVENT words from query
+            # This discriminates "fair" edge from "gym" edge for temporal queries
+            if is_temporal and query_content:
+                event_overlap = 0
+                ep_text = (row["episodic_fact"] or "") + " " + (row["source_text"] or "")
+                ep_words = {tok.lemma_.lower() for tok in nlp(ep_text)
+                    if tok.pos_ in ("NOUN", "PROPN", "VERB", "ADJ") and not tok.is_stop
+                    and len(tok.text) > 2 and tok.text.lower() != entity_lower}
+                event_overlap = len(query_content & ep_words)
+                # Event match trumps cosine: (event_words, cosine)
+                scored.append(((event_overlap, best_cos), row))
+            else:
+                scored.append(((0, best_cos), row))
 
         scored.sort(key=lambda x: x[0], reverse=True)
 
@@ -395,14 +415,8 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
                 if n_noun > n_verb * 2:
                     query_verb = None  # primarily a noun, not a verb
 
-        nlp = _get_nlp()
-        query_content = {
-            tok.lemma_.lower() for tok in nlp(query)
-            if tok.pos_ in ("NOUN", "PROPN", "VERB", "ADJ") and not tok.is_stop
-            and len(tok.text) > 2 and tok.text.lower() != entity_lower
-        }
-
-        for cos, edge in scored:
+        for sort_key, edge in scored:
+            cos = sort_key[1] if isinstance(sort_key, tuple) else sort_key
             if not _entity_matches(edge, entity or ""):
                 continue
             # Skip predicate check for:
