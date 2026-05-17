@@ -120,8 +120,20 @@ def _predicate_coherent(row, query_verb: str) -> bool:
 
 
 def _content_matches(edge, query_content: set, entity_lower: str, nlp,
-                     min_overlap: int = 2) -> bool:
-    """Does PQ or episodic_fact share ≥min_overlap content lemmas with query?"""
+                     min_overlap: int = 2, generic_words: set = None) -> bool:
+    """Does PQ or episodic_fact share ≥min_overlap content lemmas with query?
+    If generic_words provided, at least 1 match must be non-generic."""
+    def _check(text_words):
+        shared = query_content & text_words
+        if len(shared) < min_overlap:
+            return False
+        if generic_words:
+            # At least 1 shared word must be discriminating (not generic)
+            if shared - generic_words:
+                return True
+            return False  # All shared words are generic
+        return True
+
     # Check PQs
     for col in ("pq_1", "pq_2", "pq_3", "pq_4"):
         pq = edge[col] if col in edge.keys() else None
@@ -132,10 +144,10 @@ def _content_matches(edge, query_content: set, entity_lower: str, nlp,
             if tok.pos_ in ("NOUN", "PROPN", "VERB", "ADJ") and not tok.is_stop
             and len(tok.text) > 2 and tok.text.lower() != entity_lower
         }
-        if len(query_content & pq_words) >= min_overlap:
+        if _check(pq_words):
             return True
 
-    # Check episodic_fact AND source_text (source has more vocabulary)
+    # Check episodic_fact AND source_text
     for text in (edge["episodic_fact"] or "", edge["source_text"] or ""):
         if not text or len(text) < 4:
             continue
@@ -144,7 +156,7 @@ def _content_matches(edge, query_content: set, entity_lower: str, nlp,
             if tok.pos_ in ("NOUN", "PROPN", "VERB", "ADJ") and not tok.is_stop
             and len(tok.text) > 2 and tok.text.lower() != entity_lower
         }
-        if len(query_content & text_words) >= min_overlap:
+        if _check(text_words):
             return True
 
     return False
@@ -360,6 +372,18 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
             and len(tok.text) > 2 and tok.text.lower() != entity_lower
         }
 
+        # ── Compute generic words (appear in >30% of edges) ──────
+        # Generic words like "dance" in a dance conversation match everything.
+        # Content gate requires at least 1 NON-generic word to match.
+        generic_words = set()
+        if query_content and rows:
+            threshold = len(rows) * 0.3
+            for w in query_content:
+                count = sum(1 for r in rows
+                    if w in ((r["episodic_fact"] or "") + " " + (r["source_text"] or "")).lower())
+                if count > threshold:
+                    generic_words.add(w)
+
         # ── Rank by PQ embedding cosine ────────────────────────
         scored = []
         for row in rows:
@@ -430,7 +454,8 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
 
             # Content verification (refusal gate) — skip for temporal
             if not is_temporal:
-                if not _content_matches(edge, query_content, entity_lower, nlp):
+                if not _content_matches(edge, query_content, entity_lower, nlp,
+                                       generic_words=generic_words):
                     continue
 
             # Yes/No query

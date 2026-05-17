@@ -2443,6 +2443,12 @@ def generate_predicted_questions_trace(
     if not episodic_fact or len(episodic_fact) < 4:
         return []
 
+    # Clean predicate: "work_with" → "work", "be_into" → "like"
+    if predicate:
+        predicate = predicate.split("_")[0]
+        if predicate in ("be", "do"):
+            predicate = ""  # too generic, skip
+
     doc = nlp(episodic_fact)
     questions = []
     seen = set()
