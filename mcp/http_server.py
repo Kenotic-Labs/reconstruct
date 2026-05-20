@@ -213,6 +213,26 @@ def build_app(token: str) -> FastAPI:
     async def healthz():
         return {"status": "ok", "tools": len(TOOLS)}
 
+    # ── /api/timeline — LifeTimeline JSON for the viewer ───
+
+    @app.get("/api/timeline")
+    async def api_timeline(
+        _auth: None = Depends(require_bearer),
+    ):
+        """Return LifeTimeline JSON — the exact shape TimelineCanvas consumes.
+
+        This is the bridge between the local Reconstruct DB and the
+        website viewer at app.kenoticlabs.com. The browser fetches this
+        endpoint; data never leaves the user's machine.
+        """
+        from mcp.timeline_api import build_timeline
+        from fastapi.concurrency import run_in_threadpool
+        timeline = await run_in_threadpool(build_timeline, 0, DB_PATH)
+        return JSONResponse(
+            content=timeline,
+            headers={"Access-Control-Allow-Origin": "*"},
+        )
+
     # ── POST /mcp ───────────────────────────────────────────
 
     @app.post("/mcp")
