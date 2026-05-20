@@ -150,7 +150,7 @@ def main():
     os.environ["RAYA_DB_PATH"] = db_path
     os.environ["RAYA_EMBED_DEVICE"] = "cpu"
 
-    from sdk import KenoticV1
+    from sdk import Reconstruct
 
     turn_count = 0
 
@@ -166,7 +166,7 @@ def main():
             if not text:
                 continue
             speaker = turn.get("speaker", "unknown")
-            KenoticV1(text, speaker=speaker, source_timestamp=iso_ts, db_path=db_path)
+            Reconstruct(text, speaker=speaker, source_timestamp=iso_ts, db_path=db_path)
             turn_count += 1
 
     print()

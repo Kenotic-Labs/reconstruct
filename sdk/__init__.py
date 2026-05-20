@@ -1,5 +1,5 @@
 """
-kenotic-sdk — the continuity layer as a library.
+Reconstruct from Kenotic — the continuity layer as a library.
 
 Thin wrapper over app.engines.* with an opinionated contract:
   - Raw user text in, structured continuity out
@@ -8,18 +8,18 @@ Thin wrapper over app.engines.* with an opinionated contract:
   - No runtime levers, no env flags
 
 Public API:
-    Kenotic                 — main client
+    Reconstruct             — one-function entry point
+    Kenotic                 — class client (fine-grained control)
     Situation, Cluster, Answer — typed return shapes
 
 Usage:
-    from sdk import Kenotic
-    k = Kenotic(user_id=1, db_path="./my_memory.db")
-    k.ingest("Maya started at Vantage Systems in 2023.")
-    a = k.retrieve("Where does Maya work?")
-    s = k.reconstruct("Summarize Maya's situation.")
+    from sdk import Reconstruct
+    Reconstruct("Maya started at Vantage Systems in 2023.")
+    Reconstruct("Where does Maya work?")
+    Reconstruct("What's going on in Maya's life?")
 """
-from sdk.client import Kenotic, KenoticV1
+from sdk.client import Kenotic, Reconstruct
 from sdk.types import Situation, Cluster, Answer
 
 __version__ = "0.1.0"
-__all__ = ["Kenotic", "KenoticV1", "Situation", "Cluster", "Answer", "__version__"]
+__all__ = ["Kenotic", "Reconstruct", "Situation", "Cluster", "Answer", "__version__"]

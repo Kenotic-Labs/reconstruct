@@ -1,5 +1,5 @@
 """
-Kenotic MCP shared tool registry + JSON-RPC dispatch.
+Reconstruct MCP shared tool registry + JSON-RPC dispatch.
 
 This module is transport-agnostic. Both the stdio server (mcp.server)
 and the HTTP/Streamable-HTTP server (mcp.http_server) import from here.
@@ -14,18 +14,18 @@ Design:
 
 Async ingest architecture
 -------------------------
-memory.ingest queues work and returns immediately. A single background
-worker thread drains the queue and performs spaCy extraction + SQLite
-writes serially. Serial writes are correct for SQLite — only one writer
-is ever active at a time, even in WAL mode.
+reconstruct.ingest queues work and returns immediately. A single
+background worker thread drains the queue and performs spaCy extraction
++ SQLite writes serially. Serial writes are correct for SQLite — only
+one writer is ever active at a time, even in WAL mode.
 
 Flush-before-read guarantee
 ---------------------------
-memory.retrieve, memory.reconstruct, and memory.show call
-_flush_for_user() before executing. _flush_for_user() collects every
-pending job Event for the target user and blocks until each one signals
-done. This is deterministic — no timeouts, no magic numbers. Retrieve
-always sees the results of all prior ingests for the same user.
+reconstruct and reconstruct.benchmark call _flush_for_user() before
+executing. _flush_for_user() collects every pending job Event for the
+target user and blocks until each one signals done. This is
+deterministic — no timeouts, no magic numbers. Queries always see the
+results of all prior ingests for the same user.
 
 The queue, worker, and per-job Event objects are module-level singletons,
 shared by both the stdio and HTTP transports (one process = one queue).
@@ -42,7 +42,7 @@ from dataclasses import asdict, is_dataclass
 from typing import Any, Dict, List, Optional
 
 
-log = logging.getLogger("kenotic.mcp.tools")
+log = logging.getLogger("reconstruct.tools")
 
 
 # Default DB location — override via env
@@ -60,7 +60,7 @@ _SOLO_USER_ID = 0
 
 # MCP protocol version this server targets
 PROTOCOL_VERSION = "2025-03-26"
-SERVER_NAME = "kenotic"
+SERVER_NAME = "reconstruct"
 SERVER_VERSION = "0.1.0"
 
 
@@ -163,7 +163,7 @@ def _ingest_worker_loop() -> None:
 # daemon=True means it won't block process exit.
 _worker_thread = threading.Thread(
     target=_ingest_worker_loop,
-    name="kenotic-ingest-worker",
+    name="reconstruct-ingest-worker",
     daemon=True,
 )
 _worker_thread.start()
@@ -254,7 +254,19 @@ def tool_reconstruct(args: Dict[str, Any]) -> Dict[str, Any]:
     _flush_for_user(_SOLO_USER_ID)
     from sdk import Kenotic
     k = Kenotic(user_id=_SOLO_USER_ID, db_path=DB_PATH)
-    result = k.reconstruct(query=args["query"])
+    result = k.retrieve(query=args["query"])
+    return {"data": _serialize(result)}
+
+
+def tool_benchmark(args: Dict[str, Any]) -> Dict[str, Any]:
+    """LOCOMO-precise lookup. Forces short factual answers."""
+    _flush_for_user(_SOLO_USER_ID)
+    from sdk import Reconstruct
+    result = Reconstruct(
+        args["query"],
+        db_path=DB_PATH,
+        locomo_mode=True,
+    )
     return {"data": _serialize(result)}
 
 
@@ -272,7 +284,7 @@ def tool_forget(args: Dict[str, Any]) -> Dict[str, Any]:
     # Forensic audit line — non-sensitive: the `by` and scope shape
     # (not memory content) plus the tombstone count. Useful when the
     # server is publicly reachable via Tailscale Funnel.
-    log.info("memory.forget by=%s scope=%r tombstones=%d", by, scope, count)
+    log.info("reconstruct.forget by=%s scope=%r tombstones=%d", by, scope, count)
     return {"tombstones_emitted": count}
 
 
@@ -351,15 +363,12 @@ def tool_architecture_status(args: Dict[str, Any]) -> Dict[str, Any]:
 
 
 TOOLS: Dict[str, Dict[str, Any]] = {
-    "memory.ingest": {
+    "reconstruct.ingest": {
         "handler": tool_ingest,
         "description": (
-            "Extract triples from raw text and store them in continuity memory. "
-            "Returns immediately with a job_id; background worker performs spaCy "
-            "extraction + write. Follow-up retrieve/reconstruct/show calls "
-            "automatically flush the queue before reading — no polling needed. "
-            "Optionally pass `model_response` (the assistant's reply text) to also "
-            "extract and store the model's inferences, tagged `model_comprehension`."
+            "Store text into continuity memory. Extracts structured traces "
+            "and writes them locally. Returns immediately — follow-up queries "
+            "automatically wait for pending writes to complete."
         ),
         "inputSchema": {
             "type": "object",
@@ -368,35 +377,24 @@ TOOLS: Dict[str, Dict[str, Any]] = {
                 "text": {"type": "string"},
                 "source_timestamp": {"type": "string"},
                 "speaker": {"type": "string"},
-                "confidence": {"type": "number", "minimum": 0, "maximum": 1},
                 "model_response": {"type": "string"},
                 "llm_id": {
                     "type": "string",
-                    "description": "Which LLM is calling (e.g. 'claude', 'gpt', 'cursor', 'grok'). "
-                                   "Stored as source_tag='llm:{llm_id}' for provenance.",
+                    "description": "Which LLM is calling (e.g. 'claude', 'gpt', 'cursor', 'grok').",
                 },
             },
             "additionalProperties": False,
         },
     },
-    "memory.retrieve": {
-        "handler": tool_retrieve,
-        "description": "Query continuity memory. Returns an Answer for lookup "
-                       "queries or a Situation for situational queries.",
-        "inputSchema": {
-            "type": "object",
-            "required": ["query"],
-            "properties": {
-                "query": {"type": "string"},
-            },
-            "additionalProperties": False,
-        },
-    },
-    "memory.reconstruct": {
+    "reconstruct": {
         "handler": tool_reconstruct,
-        "description": "Force the reconstruction path. Returns a Situation "
-                       "with clusters, timeline, participants, and a grounded "
-                       "narrative for any query form.",
+        "description": (
+            "Reconstruct a situation or answer a question from continuity memory. "
+            "Ask anything — 'reconstruct the situation with my mom', "
+            "'where do I work?', 'how was I feeling last week?'. Returns a "
+            "verified answer grounded in what was stored, or refuses if the "
+            "information doesn't exist. Never guesses."
+        ),
         "inputSchema": {
             "type": "object",
             "required": ["query"],
@@ -406,140 +404,18 @@ TOOLS: Dict[str, Dict[str, Any]] = {
             "additionalProperties": False,
         },
     },
-    "memory.forget": {
-        "handler": tool_forget,
-        "description": "Delete memory by entity, time range, source, or "
-                       "triple id. Returns count of tombstones emitted.",
+    "reconstruct.benchmark": {
+        "handler": tool_benchmark,
+        "description": (
+            "LOCOMO-precise lookup mode. Short factual answers optimized for "
+            "benchmark scoring. Same engine, forces the factual retrieval path."
+        ),
         "inputSchema": {
             "type": "object",
-            "required": ["by", "scope"],
+            "required": ["query"],
             "properties": {
-                "by": {
-                    "type": "string",
-                    "enum": ["entity", "time_range", "source", "triple_id"],
-                },
-                "scope": {
-                    "oneOf": [
-                        {"type": "string"},
-                        {"type": "integer"},
-                        {
-                            "type": "array",
-                            "minItems": 2,
-                            "maxItems": 2,
-                            "items": {"type": "string"},
-                        },
-                    ],
-                },
+                "query": {"type": "string"},
             },
-            "additionalProperties": False,
-        },
-    },
-    "memory.show": {
-        "handler": tool_show,
-        "description": "Browse stored memory by time, entity, source, or "
-                       "trace. Raw user text optionally exported; internal "
-                       "trace structure never exposed.",
-        "inputSchema": {
-            "type": "object",
-            "required": ["facet"],
-            "properties": {
-                "facet": {
-                    "type": "string",
-                    "enum": ["time", "entity", "source", "trace"],
-                },
-                "value": {"type": ["string", "null"]},
-                "limit": {
-                    "type": "integer",
-                    "minimum": 1,
-                    "maximum": 1000,
-                    "default": 100,
-                },
-                "export_raw_text": {"type": "boolean", "default": False},
-            },
-            "additionalProperties": False,
-        },
-    },
-    "memory.trace": {
-        "handler": tool_trace,
-        "description": (
-            "Return the full supersession history for a (subject, predicate) pair. "
-            "Surfaces every object value ever stored for this combination — both "
-            "active and superseded — ordered oldest to newest. Each entry contains: "
-            "id, object, is_active, first_learned_at, source_timestamp, source_tag, "
-            "superseded_by, superseded_at, sequence_number. Useful for auditing how "
-            "a belief changed over time (e.g., tracing age corrections or location "
-            "updates across conversation turns)."
-        ),
-        "inputSchema": {
-            "type": "object",
-            "required": ["subject", "predicate"],
-            "properties": {
-                "subject": {"type": "string"},
-                "predicate": {"type": "string"},
-            },
-            "additionalProperties": False,
-        },
-    },
-    "memory.check_proactive": {
-        "handler": tool_check_proactive,
-        "description": (
-            "Check for proactive insights — story arcs due for surfacing. "
-            "Returns a list of open arcs that haven't been checked recently, "
-            "each with a suggested engagement message. Use this at the start "
-            "of a conversation to surface relevant follow-ups."
-        ),
-        "inputSchema": {
-            "type": "object",
-            "properties": {},
-            "additionalProperties": False,
-        },
-    },
-    "memory.profile": {
-        "handler": tool_profile,
-        "description": (
-            "Return the current adaptation profile for the user. "
-            "Contains four dimensions (0.0-1.0): warmth, formality, "
-            "initiative, and check_in_frequency. Use this to calibrate "
-            "tone and proactivity in responses."
-        ),
-        "inputSchema": {
-            "type": "object",
-            "properties": {},
-            "additionalProperties": False,
-        },
-    },
-    "memory.process": {
-        "handler": tool_process,
-        "description": (
-            "Unified entry point. Send any user utterance — the architecture "
-            "classifies intent (statement, question, command, backchannel) and "
-            "routes to the correct capability (ingest, retrieve, reconstruct, "
-            "forget). Returns a ProcessResult with action discriminator. "
-            "Set check_proactive=true with empty text for proactive-only mode."
-        ),
-        "inputSchema": {
-            "type": "object",
-            "properties": {
-                "text": {"type": "string", "default": ""},
-                "speaker": {"type": "string", "default": "user"},
-                "source_timestamp": {"type": "string"},
-                "model_response": {"type": "string"},
-                "check_proactive": {"type": "boolean", "default": False},
-            },
-            "additionalProperties": False,
-        },
-    },
-    "memory.architecture_status": {
-        "handler": tool_architecture_status,
-        "description": (
-            "Return the kenoticArchitectureV1 verifier results. Shows which of "
-            "the 14 engines are PRESENT, CONNECTED, and have DEPENDENCIES satisfied. "
-            "Each result has check, status (PASS/FAIL), and detail. Use this to "
-            "diagnose disconnected capabilities before running queries."
-        ),
-        "inputSchema": {
-            "type": "object",
-            "properties": {},
             "additionalProperties": False,
         },
     },

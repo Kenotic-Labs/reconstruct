@@ -1,16 +1,17 @@
 """
-kenotic-mcp — the continuity layer as an MCP server.
+Reconstruct from Kenotic — the continuity layer for AI.
 
-Exposes the SDK as MCP tools for host integrations (Claude Desktop,
-Claude Code, any MCP-compatible client). Each tool is a thin JSON-RPC
-wrapper over sdk.Kenotic.
+Cross-host memory and reconstruction via MCP. Any AI tool that
+supports MCP connects to one local server. Understanding carries
+across hosts, sessions, and time.
+
+    reconstruct serve           stdio transport (Claude Desktop, Code)
+    reconstruct serve --http    HTTP transport (web, custom apps)
 
 Tools registered:
-  memory.ingest       — "Add this text to continuity memory"
-  memory.retrieve     — "Answer a question from continuity memory"
-  memory.reconstruct  — "Produce a structured Situation for a query"
-
-Run with:
-    py -3.10 -m mcp.server
+  memory.ingest       — store text into continuity memory
+  memory.retrieve     — answer a question from memory
+  memory.reconstruct  — reconstruct a situation from memory
+  memory.process      — unified entry: classify intent, route internally
 """
 __version__ = "0.1.0"

@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reconstruct-kenotic"
+version = "0.1.0"
+description = "The continuity layer for AI. Cross-host memory and reconstruction via MCP."
+readme = "README.md"
+license = {text = "Proprietary"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Kenotic Labs", email = "sam@kenoticlabs.com"},
+]
+keywords = ["mcp", "memory", "continuity", "ai", "reconstruction"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "spacy>=3.7.0",
+    "numpy",
+    "sentence-transformers",
+    "torch",
+    "nltk",
+    "fastapi",
+    "uvicorn",
+    "sse-starlette",
+    "pydantic>=2.0.0",
+    "pydantic-settings",
+    "python-dotenv",
+]
+
+[project.optional-dependencies]
+voice = [
+    "kokoro>=0.9.4",
+    "kokoro-onnx>=0.4.0",
+    "faster-whisper",
+    "sounddevice>=0.4.6",
+    "pyaudio>=0.2.13",
+]
+dev = [
+    "pytest",
+]
+
+[project.scripts]
+reconstruct = "mcp.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["app*", "sdk*", "mcp*", "config*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.md"]

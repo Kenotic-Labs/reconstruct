@@ -2,7 +2,7 @@
 LoCoMo benchmark runner -- measures Kenotic continuity against the
 LoCoMo-10 benchmark (Snap Research).
 
-Uses KenoticV1() for all ingest and query operations. Each of the 10
+Uses Reconstruct() for all ingest and query operations. Each of the 10
 conversations runs against a fresh temporary SQLite database. Scoring
 delegates to the official eval_question_answering() from LoCoMo.
 

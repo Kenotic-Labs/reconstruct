@@ -443,7 +443,7 @@ class Kenotic:
 _singleton: Optional[Kenotic] = None
 
 
-def KenoticV1(
+def Reconstruct(
     text: str,
     *,
     speaker: str = "user",

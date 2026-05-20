@@ -35,7 +35,7 @@ _LOCOMO_PKG = _PROJECT / "locomo_bench" / "locomo"
 sys.path.insert(0, str(_LOCOMO_PKG))
 
 from task_eval.evaluation import eval_question_answering  # noqa: E402
-from sdk import KenoticV1                                 # noqa: E402
+from sdk import Reconstruct                                # noqa: E402
 from app.engines.retrieval import Answer, Situation, StructuralRefusal  # noqa: E402
 
 DATA_PATH = _PROJECT / "locomo_bench" / "locomo" / "data" / "locomo10.json"
@@ -330,7 +330,7 @@ def main():
     for raw_ts, turns in SELECTED_TURNS:
         iso_ts = _parse_locomo_timestamp(raw_ts)
         for speaker, text, is_user in turns:
-            KenoticV1(
+            Reconstruct(
                 text,
                 speaker=speaker,
                 speaker_is_user=is_user,
@@ -357,7 +357,7 @@ def main():
                 continue
             speaker = turn.get("speaker", "unknown")
             speaker_a = conv0.get("speaker_a", "Caroline")
-            KenoticV1(
+            Reconstruct(
                 text,
                 speaker=speaker,
                 speaker_is_user=(speaker == speaker_a),
@@ -377,7 +377,7 @@ def main():
     scored_qas = []
 
     for q in HARD_QUESTIONS:
-        result = KenoticV1(q["question"], db_path=db_path)
+        result = Reconstruct(q["question"], db_path=db_path)
         prediction = _extract_answer_text(result.result)
 
         item = {

@@ -1,5 +1,5 @@
 """
-Kenotic MCP server — HTTP / Streamable-HTTP transport.
+Reconstruct MCP server — HTTP / Streamable-HTTP transport.
 
 Implements the MCP Streamable HTTP transport (spec 2025-03-26):
 
@@ -40,7 +40,7 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from mcp.tools import DB_PATH, TOOLS, ToolError, dispatch
 
 
-log = logging.getLogger("kenotic.mcp.http")
+log = logging.getLogger("reconstruct.http")
 
 
 # ── Module-level auth / session state ────────────────────────────
@@ -190,12 +190,12 @@ def build_app(token: str) -> FastAPI:
             from sdk import Kenotic
             k = Kenotic(user_id=0, db_path=DB_PATH)
             k._engines()
-            log.info("[kenotic-mcp-http] engines pre-warmed")
+            log.info("[reconstruct] engines pre-warmed")
         except Exception as e:
-            log.warning("[kenotic-mcp-http] warmup skipped: %s", e)
+            log.warning("[reconstruct] warmup skipped: %s", e)
         yield
 
-    app = FastAPI(title="Kenotic MCP (HTTP)", version="0.1.0", lifespan=_lifespan)
+    app = FastAPI(title="Reconstruct MCP (HTTP)", version="0.1.0", lifespan=_lifespan)
     app.add_middleware(RedactedAccessLogMiddleware)
 
     # ── Exception handler to emit JSON body matching spec ──

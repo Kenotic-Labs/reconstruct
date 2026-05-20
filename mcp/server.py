@@ -1,5 +1,5 @@
 """
-Kenotic MCP server — stdio JSON-RPC transport.
+Reconstruct MCP server — stdio JSON-RPC transport.
 
 This module is a thin stdio loop over `mcp.tools.dispatch`. All tool
 handlers and the method-dispatch logic live in `mcp.tools` so the
@@ -9,10 +9,10 @@ Usage from an MCP host config (Claude Desktop mcp.json):
 
     {
       "mcpServers": {
-        "kenotic": {
-          "command": "py",
-          "args": ["-3.10", "-m", "mcp.server"],
-          "env": {"KENOTIC_DB_PATH": "C:/path/to/kenotic.db"}
+        "reconstruct": {
+          "command": "reconstruct",
+          "args": ["serve"],
+          "env": {"KENOTIC_DB_PATH": "~/.kenotic/memory.db"}
         }
       }
     }
@@ -39,8 +39,8 @@ def _envelope_error(id_, code, message):
 
 
 def main():
-    print(f"[kenotic-mcp] server started, db={DB_PATH}", file=sys.stderr)
-    print(f"[kenotic-mcp] registered tools: {list(TOOLS.keys())}", file=sys.stderr)
+    print(f"[reconstruct] server started, db={DB_PATH}", file=sys.stderr)
+    print(f"[reconstruct] registered tools: {list(TOOLS.keys())}", file=sys.stderr)
 
     for line in sys.stdin:
         line = line.strip()
