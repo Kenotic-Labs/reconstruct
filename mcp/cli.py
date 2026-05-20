@@ -12,6 +12,11 @@ import sys
 
 
 def _cmd_serve(args: argparse.Namespace) -> int:
+    from mcp.setup import ensure_ready
+    print("[reconstruct] Checking dependencies...", file=sys.stderr)
+    ensure_ready()
+    print("[reconstruct] All dependencies ready.", file=sys.stderr)
+
     if args.http:
         from mcp.http_server import main as http_main
         argv = ["--host", args.host, "--port", str(args.port)]
