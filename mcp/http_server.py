@@ -85,6 +85,8 @@ def _touch_session(sid: str) -> None:
 _ORIGIN_ALLOW_PREFIXES = (
     "http://127.0.0.1",
     "http://localhost",
+    "https://kenoticlabs.com",
+    "https://www.kenoticlabs.com",
 )
 _ORIGIN_ALLOW_EXACT = {"null"}
 
@@ -213,7 +215,22 @@ def build_app(token: str) -> FastAPI:
     async def healthz():
         return {"status": "ok", "tools": len(TOOLS)}
 
-    # ── /api/timeline — LifeTimeline JSON for the viewer ───
+    # ── /api/* — REST endpoints for the website viewer ──────
+    #
+    # CORS: the website at kenoticlabs.com fetches these endpoints
+    # from the user's local server. The browser sends a preflight
+    # OPTIONS request first — we must respond with the right headers.
+
+    _CORS_HEADERS = {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, OPTIONS",
+        "Access-Control-Allow-Headers": "Authorization, Content-Type",
+        "Access-Control-Max-Age": "86400",
+    }
+
+    @app.options("/api/{path:path}")
+    async def api_cors_preflight(path: str):
+        return Response(status_code=204, headers=_CORS_HEADERS)
 
     @app.get("/api/timeline")
     async def api_timeline(
@@ -222,16 +239,13 @@ def build_app(token: str) -> FastAPI:
         """Return LifeTimeline JSON — the exact shape TimelineCanvas consumes.
 
         This is the bridge between the local Reconstruct DB and the
-        website viewer at app.kenoticlabs.com. The browser fetches this
-        endpoint; data never leaves the user's machine.
+        website viewer at kenoticlabs.com/demo/live. The browser fetches
+        this endpoint directly — data never leaves the user's machine.
         """
         from mcp.timeline_api import build_timeline
         from fastapi.concurrency import run_in_threadpool
         timeline = await run_in_threadpool(build_timeline, 0, DB_PATH)
-        return JSONResponse(
-            content=timeline,
-            headers={"Access-Control-Allow-Origin": "*"},
-        )
+        return JSONResponse(content=timeline, headers=_CORS_HEADERS)
 
     # ── POST /mcp ───────────────────────────────────────────
 
