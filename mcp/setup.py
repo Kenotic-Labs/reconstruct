@@ -34,8 +34,16 @@ def _ensure_spacy_model() -> None:
         spacy.load(model)
     except OSError:
         print(f"[reconstruct] Downloading spaCy model '{model}'...", file=sys.stderr)
-        from spacy.cli import download
-        download(model)
+        # Redirect stdout during download — spaCy prints success
+        # messages to stdout which corrupts the MCP stdio protocol.
+        import io
+        _real_stdout = sys.stdout
+        sys.stdout = io.TextIOWrapper(sys.stderr.buffer, write_through=True)
+        try:
+            from spacy.cli import download
+            download(model)
+        finally:
+            sys.stdout = _real_stdout
         # Verify it loads after download
         spacy.load(model)
         print(f"[reconstruct] spaCy model '{model}' ready.", file=sys.stderr)
@@ -73,8 +81,15 @@ def _ensure_embedding_model() -> None:
 
     try:
         print(f"[reconstruct] Downloading embedding model '{model_name}'...", file=sys.stderr)
-        from sentence_transformers import SentenceTransformer
-        SentenceTransformer(model_name)
+        # Redirect stdout — HuggingFace/tqdm may print progress to stdout
+        import io
+        _real_stdout = sys.stdout
+        sys.stdout = io.TextIOWrapper(sys.stderr.buffer, write_through=True)
+        try:
+            from sentence_transformers import SentenceTransformer
+            SentenceTransformer(model_name)
+        finally:
+            sys.stdout = _real_stdout
         print(f"[reconstruct] Embedding model '{model_name}' ready.", file=sys.stderr)
     except Exception as e:
         print(f"[reconstruct] Warning: could not pre-load embedding model: {e}", file=sys.stderr)
