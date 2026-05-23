@@ -355,6 +355,16 @@ SCHEMA_UPGRADES = """
 -- These will fail silently if columns already exist
 """
 
+def _dblog(msg: str) -> None:
+    """Print DB migration messages to stderr (not stdout).
+
+    stdout is reserved for MCP JSON-RPC protocol in stdio transport.
+    Logging to stdout corrupts the protocol stream.
+    """
+    import sys
+    print(msg, file=sys.stderr)
+
+
 def run_schema_upgrades(conn) -> None:
     """Add missing columns to existing databases."""
     # Check facts table columns
@@ -372,7 +382,7 @@ def run_schema_upgrades(conn) -> None:
     for sql in upgrades:
         try:
             conn.execute(sql)
-            print(f"[DB] Applied: {sql[:50]}...")
+            _dblog(f"[DB] Applied: {sql[:50]}...")
         except Exception:
             pass
 
@@ -388,7 +398,7 @@ def run_schema_upgrades(conn) -> None:
             conn.execute("ALTER TABLE edges ADD COLUMN object_type TEXT DEFAULT 'unknown'")
             conn.execute("CREATE INDEX IF NOT EXISTS idx_rel_object_type ON edges(user_id, object_type)")
             conn.commit()
-            print("[DB] Applied: ALTER TABLE edges ADD COLUMN object_type")
+            _dblog("[DB] Applied: ALTER TABLE edges ADD COLUMN object_type")
         except Exception:
             pass
 
@@ -397,7 +407,7 @@ def run_schema_upgrades(conn) -> None:
         try:
             conn.execute("ALTER TABLE edges ADD COLUMN utterance_type_id INTEGER")
             conn.commit()
-            print("[DB] Applied: ALTER TABLE edges ADD COLUMN utterance_type_id")
+            _dblog("[DB] Applied: ALTER TABLE edges ADD COLUMN utterance_type_id")
         except Exception:
             pass
 
@@ -405,7 +415,7 @@ def run_schema_upgrades(conn) -> None:
         try:
             conn.execute("ALTER TABLE edges ADD COLUMN canonical_fields TEXT")
             conn.commit()
-            print("[DB] Applied: ALTER TABLE edges ADD COLUMN canonical_fields")
+            _dblog("[DB] Applied: ALTER TABLE edges ADD COLUMN canonical_fields")
         except Exception:
             pass
 
@@ -414,7 +424,7 @@ def run_schema_upgrades(conn) -> None:
         try:
             conn.execute("ALTER TABLE edges ADD COLUMN is_current INTEGER DEFAULT 1")
             conn.commit()
-            print("[DB] Applied: ALTER TABLE edges ADD COLUMN is_current")
+            _dblog("[DB] Applied: ALTER TABLE edges ADD COLUMN is_current")
         except Exception:
             pass
 
@@ -422,7 +432,7 @@ def run_schema_upgrades(conn) -> None:
         try:
             conn.execute("ALTER TABLE edges ADD COLUMN superseded_at TEXT")
             conn.commit()
-            print("[DB] Applied: ALTER TABLE edges ADD COLUMN superseded_at")
+            _dblog("[DB] Applied: ALTER TABLE edges ADD COLUMN superseded_at")
         except Exception:
             pass
 
@@ -430,7 +440,7 @@ def run_schema_upgrades(conn) -> None:
         try:
             conn.execute("ALTER TABLE edges ADD COLUMN superseded_by INTEGER")
             conn.commit()
-            print("[DB] Applied: ALTER TABLE edges ADD COLUMN superseded_by")
+            _dblog("[DB] Applied: ALTER TABLE edges ADD COLUMN superseded_by")
         except Exception:
             pass
 
@@ -447,7 +457,7 @@ def run_schema_upgrades(conn) -> None:
             conn.execute("ALTER TABLE edges ADD COLUMN source_timestamp TEXT")
             conn.execute("CREATE INDEX IF NOT EXISTS idx_rel_source_ts ON edges(user_id, source_timestamp)")
             conn.commit()
-            print("[DB] Applied: ALTER TABLE edges ADD COLUMN source_timestamp")
+            _dblog("[DB] Applied: ALTER TABLE edges ADD COLUMN source_timestamp")
         except Exception:
             pass
 
@@ -466,7 +476,7 @@ def run_schema_upgrades(conn) -> None:
     for sql in t5_upgrades:
         try:
             conn.execute(sql)
-            print(f"[DB] Applied: {sql[:60]}...")
+            _dblog(f"[DB] Applied: {sql[:60]}...")
         except Exception:
             pass
 
@@ -483,7 +493,7 @@ def run_schema_upgrades(conn) -> None:
                 ELSE 0.5 END
                 WHERE valence = 0.5 AND emotional_valence IS NOT NULL""")
             conn.commit()
-            print("[DB] Applied: backfill emotional_valence → valence")
+            _dblog("[DB] Applied: backfill emotional_valence → valence")
         except Exception:
             pass
 
@@ -500,7 +510,7 @@ def run_schema_upgrades(conn) -> None:
             try:
                 conn.execute(f"ALTER TABLE memory_traces ADD COLUMN {col} {col_type}")
                 conn.commit()
-                print(f"[DB] Applied: ALTER TABLE memory_traces ADD COLUMN {col}")
+                _dblog(f"[DB] Applied: ALTER TABLE memory_traces ADD COLUMN {col}")
             except Exception:
                 pass
 
@@ -524,7 +534,7 @@ def run_schema_upgrades(conn) -> None:
             try:
                 conn.execute(f"ALTER TABLE edges ADD COLUMN {col} {col_type}")
                 conn.commit()
-                print(f"[DB] Applied: ALTER TABLE edges ADD COLUMN {col}")
+                _dblog(f"[DB] Applied: ALTER TABLE edges ADD COLUMN {col}")
             except Exception:
                 pass
 
@@ -534,7 +544,7 @@ def run_schema_upgrades(conn) -> None:
         try:
             conn.execute("ALTER TABLE edges ADD COLUMN predicate_embedding BLOB")
             conn.commit()
-            print("[DB] Applied: ALTER TABLE edges ADD COLUMN predicate_embedding")
+            _dblog("[DB] Applied: ALTER TABLE edges ADD COLUMN predicate_embedding")
         except Exception:
             pass
 
@@ -552,7 +562,7 @@ def run_schema_upgrades(conn) -> None:
             try:
                 conn.execute(f"ALTER TABLE edges ADD COLUMN {col} {col_type}")
                 conn.commit()
-                print(f"[DB] Applied: ALTER TABLE edges ADD COLUMN {col}")
+                _dblog(f"[DB] Applied: ALTER TABLE edges ADD COLUMN {col}")
             except Exception:
                 pass
 
@@ -581,7 +591,7 @@ def run_schema_upgrades(conn) -> None:
             conn.execute("ALTER TABLE edges ADD COLUMN cluster_id TEXT")
             conn.execute("CREATE INDEX IF NOT EXISTS idx_rel_cluster ON edges(user_id, cluster_id)")
             conn.commit()
-            print("[DB] Applied: ALTER TABLE edges ADD COLUMN cluster_id")
+            _dblog("[DB] Applied: ALTER TABLE edges ADD COLUMN cluster_id")
         except Exception:
             pass
 
@@ -590,7 +600,7 @@ def run_schema_upgrades(conn) -> None:
             conn.execute("ALTER TABLE edges ADD COLUMN arc_id TEXT")
             conn.execute("CREATE INDEX IF NOT EXISTS idx_rel_arc ON edges(user_id, arc_id)")
             conn.commit()
-            print("[DB] Applied: ALTER TABLE edges ADD COLUMN arc_id")
+            _dblog("[DB] Applied: ALTER TABLE edges ADD COLUMN arc_id")
         except Exception:
             pass
 
@@ -604,7 +614,7 @@ def run_schema_upgrades(conn) -> None:
         try:
             conn.execute("ALTER TABLE edges ADD COLUMN subject_type TEXT")
             conn.commit()
-            print("[DB] Applied: ALTER TABLE edges ADD COLUMN subject_type")
+            _dblog("[DB] Applied: ALTER TABLE edges ADD COLUMN subject_type")
         except Exception:
             pass
 
@@ -619,7 +629,7 @@ def run_schema_upgrades(conn) -> None:
             conn.execute("ALTER TABLE edges ADD COLUMN resolved_event_date TEXT")
             conn.execute("CREATE INDEX IF NOT EXISTS idx_rel_event_date ON edges(user_id, resolved_event_date)")
             conn.commit()
-            print("[DB] Applied: ALTER TABLE edges ADD COLUMN resolved_event_date")
+            _dblog("[DB] Applied: ALTER TABLE edges ADD COLUMN resolved_event_date")
         except Exception:
             pass
 
@@ -629,7 +639,7 @@ def run_schema_upgrades(conn) -> None:
         try:
             conn.execute("ALTER TABLE edges ADD COLUMN temporal_expression TEXT")
             conn.commit()
-            print("[DB] Applied: ALTER TABLE edges ADD COLUMN temporal_expression")
+            _dblog("[DB] Applied: ALTER TABLE edges ADD COLUMN temporal_expression")
         except Exception:
             pass
 
@@ -637,7 +647,7 @@ def run_schema_upgrades(conn) -> None:
         try:
             conn.execute("ALTER TABLE edges ADD COLUMN relational_entities TEXT")
             conn.commit()
-            print("[DB] Applied: ALTER TABLE edges ADD COLUMN relational_entities")
+            _dblog("[DB] Applied: ALTER TABLE edges ADD COLUMN relational_entities")
         except Exception:
             pass
 
@@ -649,14 +659,14 @@ def run_schema_upgrades(conn) -> None:
         try:
             conn.execute("ALTER TABLE edges ADD COLUMN subject_type_confidence TEXT DEFAULT 'high'")
             conn.commit()
-            print("[DB] Applied: ALTER TABLE edges ADD COLUMN subject_type_confidence")
+            _dblog("[DB] Applied: ALTER TABLE edges ADD COLUMN subject_type_confidence")
         except Exception:
             pass
     if "object_type_confidence" not in rel_columns:
         try:
             conn.execute("ALTER TABLE edges ADD COLUMN object_type_confidence TEXT DEFAULT 'high'")
             conn.commit()
-            print("[DB] Applied: ALTER TABLE edges ADD COLUMN object_type_confidence")
+            _dblog("[DB] Applied: ALTER TABLE edges ADD COLUMN object_type_confidence")
         except Exception:
             pass
 
@@ -684,7 +694,7 @@ def run_schema_upgrades(conn) -> None:
         try:
             conn.execute("ALTER TABLE edges ADD COLUMN sequence_number INTEGER")
             conn.commit()
-            print("[DB] Applied: ALTER TABLE edges ADD COLUMN sequence_number")
+            _dblog("[DB] Applied: ALTER TABLE edges ADD COLUMN sequence_number")
         except Exception:
             pass
 
@@ -694,7 +704,7 @@ def run_schema_upgrades(conn) -> None:
         try:
             conn.execute("ALTER TABLE edges ADD COLUMN edge_negated INTEGER DEFAULT 0")
             conn.commit()
-            print("[DB] Applied: ALTER TABLE edges ADD COLUMN edge_negated")
+            _dblog("[DB] Applied: ALTER TABLE edges ADD COLUMN edge_negated")
         except Exception:
             pass
 
@@ -706,7 +716,7 @@ def run_schema_upgrades(conn) -> None:
         try:
             conn.execute("ALTER TABLE edges ADD COLUMN edge_mood TEXT DEFAULT 'indicative'")
             conn.commit()
-            print("[DB] Applied: ALTER TABLE edges ADD COLUMN edge_mood")
+            _dblog("[DB] Applied: ALTER TABLE edges ADD COLUMN edge_mood")
         except Exception:
             pass
 
@@ -717,7 +727,7 @@ def run_schema_upgrades(conn) -> None:
         try:
             conn.execute("ALTER TABLE edges ADD COLUMN is_historical INTEGER DEFAULT 0")
             conn.commit()
-            print("[DB] Applied: ALTER TABLE edges ADD COLUMN is_historical")
+            _dblog("[DB] Applied: ALTER TABLE edges ADD COLUMN is_historical")
         except Exception:
             pass
 
@@ -728,7 +738,7 @@ def run_schema_upgrades(conn) -> None:
         try:
             conn.execute("ALTER TABLE edges ADD COLUMN episodic_fact TEXT")
             conn.commit()
-            print("[DB] Applied: ALTER TABLE edges ADD COLUMN episodic_fact")
+            _dblog("[DB] Applied: ALTER TABLE edges ADD COLUMN episodic_fact")
         except Exception:
             pass
 
@@ -739,7 +749,7 @@ def run_schema_upgrades(conn) -> None:
         try:
             conn.execute("ALTER TABLE edges ADD COLUMN emotional_target TEXT")
             conn.commit()
-            print("[DB] Applied: ALTER TABLE edges ADD COLUMN emotional_target")
+            _dblog("[DB] Applied: ALTER TABLE edges ADD COLUMN emotional_target")
         except Exception:
             pass
 
@@ -750,7 +760,7 @@ def run_schema_upgrades(conn) -> None:
         try:
             conn.execute("ALTER TABLE edges ADD COLUMN extraction_rule TEXT")
             conn.commit()
-            print("[DB] Applied: ALTER TABLE edges ADD COLUMN extraction_rule")
+            _dblog("[DB] Applied: ALTER TABLE edges ADD COLUMN extraction_rule")
         except Exception:
             pass
 
@@ -765,7 +775,7 @@ def run_schema_upgrades(conn) -> None:
             conn.execute("ALTER TABLE edges ADD COLUMN source_text_hash TEXT")
             conn.execute("CREATE INDEX IF NOT EXISTS idx_rel_source_hash ON edges(user_id, source_text_hash)")
             conn.commit()
-            print("[DB] Applied: ALTER TABLE edges ADD COLUMN source_text_hash")
+            _dblog("[DB] Applied: ALTER TABLE edges ADD COLUMN source_text_hash")
         except Exception:
             pass
 
@@ -801,7 +811,7 @@ def run_schema_upgrades(conn) -> None:
             conn.execute("DROP TABLE IF EXISTS edges_fts")
             conn.commit()
             _fts_needs_rebuild = True
-            print("[DB] Dropped old 3-column edges_fts for source_text migration")
+            _dblog("[DB] Dropped old 3-column edges_fts for source_text migration")
     except Exception:
         pass
 
@@ -816,7 +826,7 @@ def run_schema_upgrades(conn) -> None:
             conn.execute("DROP TABLE IF EXISTS edges_fts")
             conn.commit()
             _fts_needs_rebuild = True
-            print("[DB] Dropped old edges_fts (missing PQ columns)")
+            _dblog("[DB] Dropped old edges_fts (missing PQ columns)")
     except Exception:
         pass
 
@@ -833,6 +843,19 @@ def run_schema_upgrades(conn) -> None:
         conn.commit()
     except Exception:
         pass
+
+    # --- PQ embedding columns (2026-05-23): store pre-computed MiniLM
+    # embeddings for predicted queries so reconstruction can rank by cosine
+    # at query time without recomputing.
+    for pq_col in ("pq_1_embedding", "pq_2_embedding",
+                    "pq_3_embedding", "pq_4_embedding"):
+        if pq_col not in rel_columns:
+            try:
+                conn.execute(f"ALTER TABLE edges ADD COLUMN {pq_col} BLOB")
+                conn.commit()
+                _dblog(f"[DB] Applied: ALTER TABLE edges ADD COLUMN {pq_col}")
+            except Exception:
+                pass
 
     # Backfill FTS5 with all columns including PQs.
     try:
@@ -854,6 +877,6 @@ def run_schema_upgrades(conn) -> None:
                 WHERE tombstoned_at IS NULL
             """)
             conn.commit()
-            print("[DB] Applied: backfill edges_fts (10-col with PQs)")
+            _dblog("[DB] Applied: backfill edges_fts (10-col with PQs)")
     except Exception:
         pass

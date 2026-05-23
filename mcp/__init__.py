@@ -8,10 +8,9 @@ across hosts, sessions, and time.
     reconstruct serve           stdio transport (Claude Desktop, Code)
     reconstruct serve --http    HTTP transport (web, custom apps)
 
-Tools registered:
-  memory.ingest       — store text into continuity memory
-  memory.retrieve     — answer a question from memory
-  memory.reconstruct  — reconstruct a situation from memory
-  memory.process      — unified entry: classify intent, route internally
+Tools:
+  reconstruct.ingest    — store text into continuity memory (every turn)
+  reconstruct.retrieve  — answer a question from stored memory
+  reconstruct.clear     — clear memories by entity or everything
 """
 __version__ = "0.1.0"

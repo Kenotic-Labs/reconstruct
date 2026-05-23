@@ -638,9 +638,20 @@ class MemoryEngine:
                 # directly from the live spaCy parse. Stored on td.predicted_questions.
                 if td is not None and hasattr(td, 'predicted_questions') and td.predicted_questions:
                     try:
-                        _pq_updates: Dict[str, str] = {}
+                        _pq_updates: Dict[str, Any] = {}
                         for i, q_text in enumerate(td.predicted_questions[:4]):
                             _pq_updates[f"pq_{i+1}"] = q_text
+                        # Compute PQ embeddings at write time so
+                        # reconstruction can rank by cosine at query time.
+                        try:
+                            from app.vector.embedder import embed_text as _pq_embed
+                            for i, q_text in enumerate(td.predicted_questions[:4]):
+                                if q_text and q_text.strip():
+                                    _pq_updates[f"pq_{i+1}_embedding"] = (
+                                        _pq_embed(q_text).tobytes()
+                                    )
+                        except Exception:
+                            pass  # PQ embeddings are best-effort
                         if _pq_updates:
                             _cols = ", ".join(f"{k} = ?" for k in _pq_updates)
                             _vals = list(_pq_updates.values()) + [edge_id]

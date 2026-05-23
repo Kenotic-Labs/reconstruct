@@ -281,11 +281,50 @@ def tool_forget(args: Dict[str, Any]) -> Dict[str, Any]:
         scope = (scope[0], scope[1])
     k = Kenotic(user_id=_SOLO_USER_ID, db_path=DB_PATH)
     count = k.forget(by=by, scope=scope)
-    # Forensic audit line — non-sensitive: the `by` and scope shape
-    # (not memory content) plus the tombstone count. Useful when the
-    # server is publicly reachable via Tailscale Funnel.
     log.info("reconstruct.forget by=%s scope=%r tombstones=%d", by, scope, count)
     return {"tombstones_emitted": count}
+
+
+def tool_clear(args: Dict[str, Any]) -> Dict[str, Any]:
+    """Clear memory — by entity, or everything."""
+    _flush_for_user(_SOLO_USER_ID)
+    entity = args.get("entity")
+
+    if entity:
+        # Clear a specific entity
+        from sdk import Kenotic
+        k = Kenotic(user_id=_SOLO_USER_ID, db_path=DB_PATH)
+        count = k.forget(by="entity", scope=entity)
+        log.info("reconstruct.clear entity=%r tombstones=%d", entity, count)
+        return {"cleared": count, "scope": entity}
+    else:
+        # Clear everything for this user
+        from app.db.session import get_db_context
+        from uuid import uuid4
+        op_id = uuid4().hex
+        try:
+            with get_db_context() as conn:
+                rows = conn.execute(
+                    """SELECT id FROM edges
+                       WHERE user_id = ? AND tombstoned_at IS NULL""",
+                    (_SOLO_USER_ID,),
+                ).fetchall()
+                ids = [r["id"] for r in rows]
+                if ids:
+                    now = __import__("datetime").datetime.utcnow().isoformat()
+                    conn.executemany(
+                        """UPDATE edges
+                           SET tombstoned_at = ?, tombstone_reason = ?,
+                               tombstone_op_id = ?
+                           WHERE id = ?""",
+                        [(now, "clear_all", op_id, eid) for eid in ids],
+                    )
+                    conn.commit()
+                count = len(ids)
+        except Exception as e:
+            raise ToolError(-32000, f"Clear failed: {e}")
+        log.info("reconstruct.clear ALL tombstones=%d", count)
+        return {"cleared": count, "scope": "all"}
 
 
 def tool_show(args: Dict[str, Any]) -> Dict[str, Any]:
@@ -363,58 +402,89 @@ def tool_architecture_status(args: Dict[str, Any]) -> Dict[str, Any]:
 
 
 TOOLS: Dict[str, Dict[str, Any]] = {
+    # ── 1. INGEST — always on, every turn ─────────────────────────
     "reconstruct.ingest": {
         "handler": tool_ingest,
         "description": (
-            "Store text into continuity memory. Extracts structured traces "
-            "and writes them locally. Returns immediately — follow-up queries "
-            "automatically wait for pending writes to complete."
+            "Store the user's message into continuity memory. Call this on "
+            "EVERY conversational turn — do not skip, do not wait for the "
+            "user to ask. Pass the user's text and your response together. "
+            "The system decomposes everything into structured traces "
+            "(episodic, emotional, temporal, relational, schematic) and "
+            "stores them locally. Returns immediately — queries automatically "
+            "wait for writes to complete."
         ),
         "inputSchema": {
             "type": "object",
             "required": ["text"],
             "properties": {
-                "text": {"type": "string"},
-                "source_timestamp": {"type": "string"},
-                "speaker": {"type": "string"},
-                "model_response": {"type": "string"},
+                "text": {
+                    "type": "string",
+                    "description": "The user's message to store.",
+                },
+                "speaker": {
+                    "type": "string",
+                    "description": "The user's name. 'I' in their text resolves to this name.",
+                },
+                "source_timestamp": {
+                    "type": "string",
+                    "description": "ISO 8601 datetime of the message.",
+                },
+                "model_response": {
+                    "type": "string",
+                    "description": "Your (the AI's) response. Stored with provenance so the system knows who said what.",
+                },
                 "llm_id": {
                     "type": "string",
-                    "description": "Which LLM is calling (e.g. 'claude', 'gpt', 'cursor', 'grok').",
+                    "description": "Which LLM is calling (e.g. 'claude').",
                 },
             },
             "additionalProperties": False,
         },
     },
-    "reconstruct": {
+
+    # ── 2. RETRIEVE — only when explicitly asked ──────────────────
+    "reconstruct.retrieve": {
         "handler": tool_reconstruct,
         "description": (
-            "Reconstruct a situation or answer a question from continuity memory. "
-            "Ask anything — 'reconstruct the situation with my mom', "
-            "'where do I work?', 'how was I feeling last week?'. Returns a "
-            "verified answer grounded in what was stored, or refuses if the "
-            "information doesn't exist. Never guesses."
+            "Answer a question from continuity memory. Only call this when "
+            "the user explicitly asks about something from their past or "
+            "stored context — 'where do I work?', 'how was I feeling last "
+            "week?', 'what's going on with my mom?', 'reconstruct my "
+            "situation'. Returns a verified answer grounded in what was "
+            "actually stored, or refuses if the information was never "
+            "stored. NEVER override a refusal — it means the fact does "
+            "not exist in memory."
         ),
         "inputSchema": {
             "type": "object",
             "required": ["query"],
             "properties": {
-                "query": {"type": "string"},
+                "query": {
+                    "type": "string",
+                    "description": "The question to answer from stored memory.",
+                },
             },
             "additionalProperties": False,
         },
     },
-    "reconstruct.benchmark": {
-        "handler": tool_benchmark,
+
+    # ── 3. CLEAR — delete memories ────────────────────────────────
+    "reconstruct.clear": {
+        "handler": tool_clear,
         "description": (
-            "LOCOMO-precise lookup mode. Short factual answers optimized for "
-            "benchmark scoring. Same engine, forces the factual retrieval path."
+            "Clear stored memories. Pass an entity name to clear everything "
+            "about that person or thing. Omit entity to clear ALL memory. "
+            "Use when the user says 'forget about X', 'clear my memory', "
+            "'start fresh', or 'delete everything'."
         ),
         "inputSchema": {
             "type": "object",
-            "required": ["query"],
             "properties": {
-                "query": {"type": "string"},
+                "entity": {
+                    "type": "string",
+                    "description": "Name of person/thing to clear. Omit to clear ALL memory.",
+                },
             },
             "additionalProperties": False,
         },
@@ -449,6 +519,26 @@ def dispatch(method: str, params: Optional[Dict[str, Any]]) -> Optional[Dict[str
             "protocolVersion": PROTOCOL_VERSION,
             "capabilities": {"tools": {}},
             "serverInfo": {"name": SERVER_NAME, "version": SERVER_VERSION},
+            "instructions": (
+                "You have a continuity memory system. It persists across "
+                "conversations. Three tools, three rules:\n\n"
+                "1. reconstruct.ingest — call on EVERY turn. Always. Pass "
+                "the user's message as 'text', your response as "
+                "'model_response', and the user's name as 'speaker'. Do not "
+                "skip turns. Do not wait for permission. Every turn builds "
+                "continuity.\n\n"
+                "2. reconstruct.retrieve — call ONLY when the user asks "
+                "about something from memory. 'Where do I work?', 'How was "
+                "I feeling?', 'What's going on with X?'. If it refuses, "
+                "that means the information was never stored. Do NOT "
+                "override the refusal with your own knowledge.\n\n"
+                "3. reconstruct.clear — call when the user says 'forget "
+                "about X' or 'clear my memory'. Pass entity name to clear "
+                "one thing, or omit to clear everything.\n\n"
+                "The system decomposes text into 5 structured traces "
+                "(episodic, emotional, temporal, relational, schematic) and "
+                "reconstructs verified answers from them. It never guesses."
+            ),
         }
 
     if method == "ping":

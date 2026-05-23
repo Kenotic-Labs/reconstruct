@@ -5,14 +5,13 @@ This module is a thin stdio loop over `mcp.tools.dispatch`. All tool
 handlers and the method-dispatch logic live in `mcp.tools` so the
 HTTP/Streamable-HTTP transport (`mcp.http_server`) can share them.
 
-Usage from an MCP host config (Claude Desktop mcp.json):
+Usage — add to Claude Desktop config (claude_desktop_config.json):
 
     {
       "mcpServers": {
         "reconstruct": {
           "command": "reconstruct",
-          "args": ["serve"],
-          "env": {"KENOTIC_DB_PATH": "~/.kenotic/memory.db"}
+          "args": ["serve"]
         }
       }
     }

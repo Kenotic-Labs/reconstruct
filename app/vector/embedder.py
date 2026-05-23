@@ -15,7 +15,8 @@ def _get_sentence_transformer():
 
         device = os.environ.get('RAYA_EMBED_DEVICE', 'cuda:0')
         _model_cache = SentenceTransformer(settings.embedding_model, device=device)
-        print(f"[EmbeddingService] Loaded {settings.embedding_model} on GPU (CUDA)")
+        import sys
+        print(f"[EmbeddingService] Loaded {settings.embedding_model} on {device}", file=sys.stderr)
 
     return _model_cache
 
