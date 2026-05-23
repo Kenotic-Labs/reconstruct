@@ -14,7 +14,7 @@ Design:
 
 Async ingest architecture
 -------------------------
-reconstruct.ingest queues work and returns immediately. A single
+reconstruct_ingest queues work and returns immediately. A single
 background worker thread drains the queue and performs spaCy extraction
 + SQLite writes serially. Serial writes are correct for SQLite — only
 one writer is ever active at a time, even in WAL mode.
@@ -295,7 +295,7 @@ def tool_clear(args: Dict[str, Any]) -> Dict[str, Any]:
         from sdk import Kenotic
         k = Kenotic(user_id=_SOLO_USER_ID, db_path=DB_PATH)
         count = k.forget(by="entity", scope=entity)
-        log.info("reconstruct.clear entity=%r tombstones=%d", entity, count)
+        log.info("reconstruct_clear entity=%r tombstones=%d", entity, count)
         return {"cleared": count, "scope": entity}
     else:
         # Clear everything for this user
@@ -323,7 +323,7 @@ def tool_clear(args: Dict[str, Any]) -> Dict[str, Any]:
                 count = len(ids)
         except Exception as e:
             raise ToolError(-32000, f"Clear failed: {e}")
-        log.info("reconstruct.clear ALL tombstones=%d", count)
+        log.info("reconstruct_clear ALL tombstones=%d", count)
         return {"cleared": count, "scope": "all"}
 
 
@@ -403,7 +403,7 @@ def tool_architecture_status(args: Dict[str, Any]) -> Dict[str, Any]:
 
 TOOLS: Dict[str, Dict[str, Any]] = {
     # ── 1. INGEST — always on, every turn ─────────────────────────
-    "reconstruct.ingest": {
+    "reconstruct_ingest": {
         "handler": tool_ingest,
         "description": (
             "Store the user's message into continuity memory. Call this on "
@@ -444,7 +444,7 @@ TOOLS: Dict[str, Dict[str, Any]] = {
     },
 
     # ── 2. RETRIEVE — only when explicitly asked ──────────────────
-    "reconstruct.retrieve": {
+    "reconstruct_retrieve": {
         "handler": tool_reconstruct,
         "description": (
             "Answer a question from continuity memory. Only call this when "
@@ -470,7 +470,7 @@ TOOLS: Dict[str, Dict[str, Any]] = {
     },
 
     # ── 3. CLEAR — delete memories ────────────────────────────────
-    "reconstruct.clear": {
+    "reconstruct_clear": {
         "handler": tool_clear,
         "description": (
             "Clear stored memories. Pass an entity name to clear everything "
@@ -522,17 +522,17 @@ def dispatch(method: str, params: Optional[Dict[str, Any]]) -> Optional[Dict[str
             "instructions": (
                 "You have a continuity memory system. It persists across "
                 "conversations. Three tools, three rules:\n\n"
-                "1. reconstruct.ingest — call on EVERY turn. Always. Pass "
+                "1. reconstruct_ingest — call on EVERY turn. Always. Pass "
                 "the user's message as 'text', your response as "
                 "'model_response', and the user's name as 'speaker'. Do not "
                 "skip turns. Do not wait for permission. Every turn builds "
                 "continuity.\n\n"
-                "2. reconstruct.retrieve — call ONLY when the user asks "
+                "2. reconstruct_retrieve — call ONLY when the user asks "
                 "about something from memory. 'Where do I work?', 'How was "
                 "I feeling?', 'What's going on with X?'. If it refuses, "
                 "that means the information was never stored. Do NOT "
                 "override the refusal with your own knowledge.\n\n"
-                "3. reconstruct.clear — call when the user says 'forget "
+                "3. reconstruct_clear — call when the user says 'forget "
                 "about X' or 'clear my memory'. Pass entity name to clear "
                 "one thing, or omit to clear everything.\n\n"
                 "The system decomposes text into 5 structured traces "

@@ -94,7 +94,7 @@ def main():
         # Intercept ingest calls — run synchronously instead of async.
         # On Windows, the async daemon thread is starved by pipe stdin.
         if (method == "tools/call"
-                and params.get("name") == "reconstruct.ingest"):
+                and params.get("name") == "reconstruct_ingest"):
             try:
                 tool_args = params.get("arguments", {}) or {}
                 result_data = _sync_ingest(tool_args)

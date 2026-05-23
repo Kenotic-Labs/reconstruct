@@ -9,8 +9,8 @@ across hosts, sessions, and time.
     reconstruct serve --http    HTTP transport (web, custom apps)
 
 Tools:
-  reconstruct.ingest    — store text into continuity memory (every turn)
-  reconstruct.retrieve  — answer a question from stored memory
-  reconstruct.clear     — clear memories by entity or everything
+  reconstruct_ingest    — store text into continuity memory (every turn)
+  reconstruct_retrieve  — answer a question from stored memory
+  reconstruct_clear     — clear memories by entity or everything
 """
 __version__ = "0.1.0"
