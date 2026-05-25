@@ -134,15 +134,17 @@ def _handle_one(msg: Dict[str, Any]) -> Optional[Dict[str, Any]]:
 # ── Auth dependency ──────────────────────────────────────────────
 
 def require_bearer(authorization: Optional[str] = Header(default=None)) -> None:
+    # When no token is configured, auth is disabled (localhost-only use).
+    if not _AUTH_TOKEN:
+        return
     if not authorization or not authorization.lower().startswith("bearer "):
         raise HTTPException(
             status_code=401,
             detail={"error": "missing_bearer"},
         )
     supplied = authorization.split(" ", 1)[1].strip()
-    expected = _AUTH_TOKEN or ""
     # Constant-time compare
-    if not hmac.compare_digest(supplied.encode("utf-8"), expected.encode("utf-8")):
+    if not hmac.compare_digest(supplied.encode("utf-8"), _AUTH_TOKEN.encode("utf-8")):
         raise HTTPException(
             status_code=401,
             detail={"error": "invalid_bearer"},
@@ -388,13 +390,12 @@ def main(argv: Optional[List[str]] = None) -> int:
         format="%(asctime)s [%(name)s] %(levelname)s %(message)s",
     )
     args = _parse_args(argv)
-    token = args.token or os.environ.get("KENOTIC_MCP_TOKEN")
+    token = args.token or os.environ.get("KENOTIC_MCP_TOKEN") or ""
     if not token:
         print(
-            "error: no bearer token provided. Use --token or set KENOTIC_MCP_TOKEN.",
+            "[reconstruct] No bearer token — auth disabled (localhost only).",
             file=sys.stderr,
         )
-        return 2
 
     import uvicorn
     app = build_app(token)
