@@ -450,7 +450,8 @@ def _extract_object_full(doc, root) -> str:
     return " ".join(doc[i].text for i in ordered).strip()
 
 
-def _extract_grammatical_object(doc, root, _is_recursive: bool = False) -> str:
+def _extract_grammatical_object(doc, root, _is_recursive: bool = False,
+                                content_root=None) -> str:
     """Extract the grammatical object as the SHORTEST noun phrase that IS the answer.
 
     Priority (Spec Part 1, Field: object):
@@ -469,6 +470,12 @@ def _extract_grammatical_object(doc, root, _is_recursive: bool = False) -> str:
     """
     if root is None:
         return ""
+
+    # When content_root is provided (frame-skipped verb), extract from it
+    # instead of the sentence root. "Sam said she researched adoption"
+    # → content_root = "researched", extract "adoption" not "she researched adoption"
+    if content_root is not None and content_root != root:
+        return _extract_grammatical_object(doc, content_root, _is_recursive=True)
 
     # 0. Fragment with relcl: ROOT is a NOUN with a relative clause verb.
     #    "Ones that support LGBTQ+ individuals" -- ROOT=Ones, relcl=support.
@@ -1956,8 +1963,6 @@ def _is_kinship_noun(lemma: str) -> bool:
         return False
 
 
-@functools.lru_cache(maxsize=4096)
-
 def _extract_schematic(doc, root, verb_class: VerbClass) -> str:
     """Extract schematic trace: verb supersense + syntactic frame = schema.
 
@@ -2509,11 +2514,26 @@ def generate_predicted_questions_trace(
     # These use vocabulary a questioner would use to ask for this fact.
     # Detected from the fact's semantic content:
 
-    # Preference/superlative detection: "top pick", "love", "favorite", "best"
+    # Preference/superlative detection via structural checks
     fact_lower = episodic_fact.lower()
-    _PREFERENCE_MARKERS = ("top pick", "prefer", "favorite", "fave",
-                           "best", "goto", "go-to", "go to")
-    if any(m in fact_lower for m in _PREFERENCE_MARKERS):
+
+    def _is_preference_context():
+        """Structural check: preference verb (WordNet verb.emotion + preference
+        lemma) OR superlative adjective in the fact."""
+        _ensure_wordnet()
+        from nltk.corpus import wordnet as _wn
+        _PREF_LEMMAS = {"like", "love", "prefer", "enjoy", "favor", "fancy", "adore"}
+        if predicate:
+            for ss in _wn.synsets(predicate, pos=_wn.VERB)[:3]:
+                if ss.lexname() == "verb.emotion":
+                    if any(l.name() in _PREF_LEMMAS for l in ss.lemmas()):
+                        return True
+        for tok in doc:
+            if tok.tag_ == "JJS" or tok.morph.get("Degree") == ["Sup"]:
+                return True
+        return False
+
+    if _is_preference_context():
         # Find what the preference is ABOUT (domain nouns from the fact)
         domain_nouns = [t.text for t in doc
                         if t.pos_ == "NOUN" and not t.is_stop
@@ -2536,24 +2556,48 @@ def generate_predicted_questions_trace(
             _add(f"What does {subject} prefer?")
             _add(f"What does {subject} like to do?")
 
-    # Activity/hobby detection: schema or verb indicates activity
-    _ACTIVITY_PREDICATES = ("do", "start", "open", "launch", "play", "practice",
-                            "dance", "perform", "teach", "study", "work")
-    if predicate in _ACTIVITY_PREDICATES or schema in ("hobby", "career"):
+    # Activity/hobby detection via WordNet supersense or schema
+    def _is_activity_verb(lemma):
+        if not lemma:
+            return False
+        _ensure_wordnet()
+        from nltk.corpus import wordnet as _wn
+        _ACTIVITY_SS = {"verb.social", "verb.creation", "verb.motion",
+                        "verb.body", "verb.competition"}
+        for ss in _wn.synsets(lemma, pos=_wn.VERB)[:3]:
+            if ss.lexname() in _ACTIVITY_SS:
+                return True
+        return False
+
+    if _is_activity_verb(predicate) or schema in ("hobby", "career"):
         if obj and len(obj) > 1:
             _add(f"What kind of {obj} does {subject} do?")
 
-    # Reason/motivation detection
-    _REASON_MARKERS = ("because", "since", "so that", "in order to", "want to",
-                       "decided to", "chose to")
-    if any(m in fact_lower for m in _REASON_MARKERS):
+    # Reason/motivation detection via dep parse structure
+    def _has_reason_clause():
+        for tok in doc:
+            if tok.dep_ == "advcl":
+                for ch in tok.children:
+                    if ch.dep_ == "mark" and ch.pos_ == "SCONJ":
+                        return True
+                if tok.tag_ == "VB":
+                    for ch in tok.children:
+                        if ch.dep_ == "aux" and ch.lemma_ == "to":
+                            return True
+            if tok.dep_ == "prep" and tok.lemma_ in ("due", "owing"):
+                return True
+        return False
+
+    if _has_reason_clause():
         _add(f"Why did {subject} {predicate or 'do this'}?")
         _add(f"What is {subject}'s reason for this?")
 
-    # State/feeling detection
-    _STATE_MARKERS = ("glad", "happy", "excited", "nervous", "stressed",
-                      "worried", "proud", "passionate", "love")
-    if any(m in fact_lower for m in _STATE_MARKERS):
+    # State/feeling detection via WordNet emotion check
+    _has_emotion_word = any(
+        _is_emotion_word(tok.lemma_, tok.pos_)
+        for tok in doc if tok.pos_ in ("ADJ", "NOUN", "VERB")
+    )
+    if _has_emotion_word:
         _add(f"How does {subject} feel about this?")
         _add(f"What is {subject}'s attitude?")
 
@@ -3352,12 +3396,13 @@ def classify_query(query_text: str) -> QueryDecomposition:
 
     # Post-fix: "What is X's attitude/mood/sentiment?" → emotional
     # These WH=what queries ask for emotional state, not episodic facts.
+    # Uses WordNet noun.feeling supersense instead of hardcoded word list.
     if result.return_field == "episodic":
-        _EMOTION_NOUNS = {"attitude", "mood", "sentiment", "feeling", "vibe"}
-        doc_nouns = {tok.lemma_.lower() for tok in doc
-                     if tok.pos_ == "NOUN" and not tok.is_stop}
-        if doc_nouns & _EMOTION_NOUNS:
-            result.return_field = "emotional"
+        for tok in doc:
+            if tok.pos_ == "NOUN" and not tok.is_stop:
+                if _is_emotion_word(tok.lemma_.lower(), "NOUN"):
+                    result.return_field = "emotional"
+                    break
 
     root = _get_root(doc)
     if root is None:
@@ -3379,7 +3424,9 @@ def classify_query(query_text: str) -> QueryDecomposition:
             else:
                 result.match_subject = _span_text(subj_tok).strip()
 
-    # Extract predicate
+    # Extract predicate — track the content verb for schema extraction
+    content_verb = None
+
     if root.pos_ == "VERB":
         # For light verbs with xcomp ("decided to pursue", "want to study"),
         # prefer the xcomp verb as predicate — it carries the real action.
@@ -3388,16 +3435,38 @@ def classify_query(query_text: str) -> QueryDecomposition:
             if child.dep_ == "xcomp" and child.pos_ == "VERB":
                 xcomp_verb = child
                 break
-        if xcomp_verb:
-            result.match_predicate = xcomp_verb.lemma_.lower()
-        else:
-            result.match_predicate = root.lemma_.lower()
+        content_verb = xcomp_verb or root
+        result.match_predicate = content_verb.lemma_.lower()
     elif root.pos_ == "AUX":
         for child in root.children:
             if child.dep_ in ("xcomp", "ccomp", "acomp", "attr"):
                 if child.pos_ in ("VERB", "NOUN", "ADJ"):
+                    content_verb = child
                     result.match_predicate = child.lemma_.lower()
                     break
+        # Fallback: any VERB child of the AUX — covers question constructions
+        # like "What did Melanie research?" where "research" is a direct child
+        if content_verb is None:
+            for child in root.children:
+                if child.pos_ == "VERB":
+                    content_verb = child
+                    result.match_predicate = child.lemma_.lower()
+                    break
+        # Fallback 2: any VERB in the entire sentence (complex structures)
+        if content_verb is None:
+            for tok in doc:
+                if tok.pos_ == "VERB" and tok != root:
+                    content_verb = tok
+                    result.match_predicate = tok.lemma_.lower()
+                    break
+    elif root.pos_ == "NOUN":
+        # spaCy sometimes tags ambiguous verb/noun words as NOUN ROOT
+        # in questions: "What did Melanie research?" → "research" = NOUN ROOT.
+        # Detect do-support pattern: NOUN ROOT with AUX child "did/does/do".
+        has_aux = any(c.pos_ == "AUX" and c.dep_ == "aux" for c in root.children)
+        if has_aux:
+            content_verb = root
+            result.match_predicate = root.lemma_.lower()
 
     # Extract object
     dobj_tok = None
@@ -3450,14 +3519,36 @@ def classify_query(query_text: str) -> QueryDecomposition:
     # without improving Cat 1-4.
     try:
         vc = VerbClass.UNKNOWN
-        if root.pos_ == "VERB":
+        if content_verb and content_verb.pos_ == "VERB":
+            vc = classify_verb_class(content_verb.lemma_.lower())
+        elif root.pos_ == "VERB":
             vc = classify_verb_class(root.lemma_.lower())
         elif root.pos_ == "AUX":
-            # For AUX roots (e.g. "is"), classify as BE so _extract_schematic
-            # Step 1 triggers xcomp/ccomp delegation correctly.
             vc = classify_verb_class(root.lemma_.lower())
 
-        schema = _extract_schematic(doc, root, vc)
+        schema_root = content_verb if (content_verb and content_verb.pos_ == "VERB") else root
+        schema = _extract_schematic(doc, schema_root, vc)
+
+        # Fallback: when content_verb is a mistagged NOUN (e.g., "research"
+        # in "What did Melanie research?"), _extract_schematic can't find
+        # verb supersenses on the token. Use WordNet directly.
+        if (schema == "uncategorized" and content_verb
+                and content_verb.pos_ == "NOUN"):
+            from nltk.corpus import wordnet as wn
+            _VERB_SS_MAP = {
+                "verb.social": "career", "verb.possession": "finance",
+                "verb.creation": "hobby", "verb.cognition": "education",
+                "verb.emotion": "emotional", "verb.motion": "experience",
+                "verb.communication": "social", "verb.consumption": "health",
+                "verb.body": "health", "verb.competition": "hobby",
+                "verb.perception": "experience", "verb.stative": "identity",
+                "verb.contact": "experience", "verb.change": "experience",
+            }
+            for ss in wn.synsets(content_verb.lemma_.lower(), pos=wn.VERB):
+                mapped = _VERB_SS_MAP.get(ss.lexname())
+                if mapped:
+                    schema = mapped
+                    break
 
         if schema and schema != "uncategorized":
             result.match_schema = schema

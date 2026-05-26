@@ -500,6 +500,7 @@ class MemoryEngine:
         trace_decomposition: Any = None,
         resolved_event_date: Optional[str] = None,
         temporal_expression: Optional[str] = None,
+        **kwargs,
     ) -> int:
         """Three-phase store: PREPARE -> WRITE -> SIDE-EFFECTS.
 
@@ -632,20 +633,45 @@ class MemoryEngine:
                 except Exception:
                     pass
 
-                # 3d: Predicted queries (from grammar engine's parse)
-                # Grammar engine generates questions using Chomsky's
-                # 2 operations (WH-movement + subject-aux inversion)
-                # directly from the live spaCy parse. Stored on td.predicted_questions.
-                if td is not None and hasattr(td, 'predicted_questions') and td.predicted_questions:
+                # 3d: Predicted queries — try pq_lab NEW first, fall back to
+                # grammar engine's parse-based PQs. pq_lab uses trace fields
+                # (subject, predicate, object) not source_text, keeping PQs
+                # speaker-specific and avoiding cross-speaker word leakage.
+                _pq_texts = []
+                if td is not None:
+                    try:
+                        from app.engines.reconstruction.pq_lab import generate_predicted_questions_NEW
+                        _pq_result = generate_predicted_questions_NEW(
+                            subject=getattr(td, 'relational_subject', '') or '',
+                            predicate=getattr(td, 'predicate', '') or '',
+                            obj=getattr(td, 'object', '') or '',
+                            episodic_fact=getattr(td, 'episodic_fact', '') or '',
+                            schema=getattr(td, 'schematic_category', '') or '',
+                            emotion=getattr(td, 'emotional_label', None),
+                            emotion_target=getattr(td, 'emotional_target', None),
+                            temporal=getattr(td, 'temporal_expression', None),
+                            entities=getattr(td, 'relational_entities', None),
+                            negated=getattr(td, 'negated', False),
+                        )
+                        if _pq_result and not _pq_result.get("skipped"):
+                            _pq_texts = [q for _, q in _pq_result.get("questions", [])[:4]]
+                    except Exception:
+                        pass  # pq_lab unavailable or failed
+
+                # Fallback: grammar engine's parse-based PQs
+                if not _pq_texts and td is not None and hasattr(td, 'predicted_questions') and td.predicted_questions:
+                    _pq_texts = list(td.predicted_questions[:4])
+
+                if _pq_texts:
                     try:
                         _pq_updates: Dict[str, Any] = {}
-                        for i, q_text in enumerate(td.predicted_questions[:4]):
+                        for i, q_text in enumerate(_pq_texts[:4]):
                             _pq_updates[f"pq_{i+1}"] = q_text
                         # Compute PQ embeddings at write time so
                         # reconstruction can rank by cosine at query time.
                         try:
                             from app.vector.embedder import embed_text as _pq_embed
-                            for i, q_text in enumerate(td.predicted_questions[:4]):
+                            for i, q_text in enumerate(_pq_texts[:4]):
                                 if q_text and q_text.strip():
                                     _pq_updates[f"pq_{i+1}_embedding"] = (
                                         _pq_embed(q_text).tobytes()
@@ -676,7 +702,7 @@ class MemoryEngine:
                 try:
                     from app.engines.temporal import get_temporal_engine
                     get_temporal_engine().detect_supersession(
-                        user_id, source_text or "", edge_id, None
+                        user_id, source_text or "", edge_id, None, conn=conn
                     )
                 except Exception:
                     pass
@@ -690,7 +716,7 @@ class MemoryEngine:
                     ).fetchone()
                     _cid = _cr["cluster_id"] if _cr else None
                     from app.engines.temporal import get_temporal_engine
-                    _arc_id = get_temporal_engine().detect_arcs(user_id, edge_id, _cid)
+                    _arc_id = get_temporal_engine().detect_arcs(user_id, edge_id, _cid, conn=conn)
                     if _arc_id:
                         conn.execute(
                             "UPDATE edges SET arc_id = ? WHERE id = ?",

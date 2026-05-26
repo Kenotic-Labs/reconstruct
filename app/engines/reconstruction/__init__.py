@@ -1,18 +1,13 @@
 """
-Reconstruction engine — trace + PQ + verification.
+Reconstruction engine — MINERVA 2 resonance model.
 
-No scores. No thresholds. No word overlap gates.
+Every edge responds simultaneously to the probe. Each edge computes
+5-dimensional activation (episodic, emotional, temporal, relational,
+schematic). Similarity is cubed. Dimensions are multiplied. The echo
+— weighted sum of all activations — IS the answer.
 
-How it works:
-  1. Embed the query
-  2. Pull all edges for this entity
-  3. Find the edge whose PQ embedding is closest to the query embedding
-  4. Verify: does the entity match?
-  5. Return the trace field that answers the question
-
-The PQ embedding IS the matching signal. It was computed at write time
-from the episodic trace. If it matches the query semantically, the edge
-answers the question. If no PQ matches, refuse — the information isn't there.
+No gates. No thresholds. No top-K. No BM25. No RRF.
+Refusal = echo magnitude below noise floor.
 """
 from __future__ import annotations
 
@@ -21,7 +16,7 @@ import logging
 import struct
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Dict, List, Optional, Set
+from typing import Dict, List, Optional, Set, Tuple
 
 from app.db.session import get_db_context
 
@@ -60,122 +55,6 @@ def _decode_embedding(blob) -> Optional[list]:
 def _dot(a: list, b: list) -> float:
     """Dot product of two L2-normalized vectors = cosine similarity."""
     return sum(x * y for x, y in zip(a, b))
-
-
-# ── Entity verification ─────────────────────────────────────────
-
-def _predicate_coherent(row, query_verb: str) -> bool:
-    """Does this edge's predicate relate to what the query asks?
-    No query verb → pass (can't check). Lemma or WordNet synonym match."""
-    if not query_verb:
-        return True
-
-    edge_pred = (row["predicate"] or "").replace("_", " ").lower()
-    if not edge_pred:
-        return True
-
-    # Lemma match
-    if query_verb in edge_pred or edge_pred in query_verb:
-        return True
-
-    # WordNet synonym match
-    from nltk.corpus import wordnet as wn
-    q_synsets = set(wn.synsets(query_verb, pos=wn.VERB))
-    q_synsets |= set(wn.synsets(query_verb, pos=wn.NOUN))
-    if not q_synsets:
-        return False
-
-    q_lemma_names = set()
-    for ss in q_synsets:
-        for lemma in ss.lemmas():
-            q_lemma_names.add(lemma.name().replace("_", " ").lower())
-
-    edge_parts = set(edge_pred.split())
-    if q_lemma_names & edge_parts:
-        return True
-
-    # Reverse: edge predicate synsets contain query verb
-    for ep in edge_parts:
-        e_synsets = set(wn.synsets(ep, pos=wn.VERB))
-        e_synsets |= set(wn.synsets(ep, pos=wn.NOUN))
-        for ss in e_synsets:
-            for lemma in ss.lemmas():
-                if lemma.name().replace("_", " ").lower() == query_verb:
-                    return True
-
-    # Content fallback: query verb in episodic_fact text
-    ep = (row["episodic_fact"] or "").lower()
-    src = (row["source_text"] or "").lower()
-    combined = f"{ep} {src}"
-    combined_words = set(combined.split())
-    combined_lemmas = set(combined_words)
-    for w in combined_words:
-        vl = wn.morphy(w, wn.VERB)
-        if vl:
-            combined_lemmas.add(vl)
-    if query_verb in combined_lemmas:
-        return True
-
-    return False
-
-
-def _content_matches(edge, query_content: set, entity_lower: str, nlp,
-                     min_overlap: int = 2, generic_words: set = None) -> bool:
-    """Does PQ or episodic_fact share ≥min_overlap content lemmas with query?
-    If generic_words provided, at least 1 match must be non-generic."""
-    def _check(text_words):
-        shared = query_content & text_words
-        if len(shared) < min_overlap:
-            return False
-        if generic_words:
-            # At least 1 shared word must be discriminating (not generic)
-            if shared - generic_words:
-                return True
-            return False  # All shared words are generic
-        return True
-
-    # Check PQs
-    for col in ("pq_1", "pq_2", "pq_3", "pq_4"):
-        pq = edge[col] if col in edge.keys() else None
-        if not pq or len(pq) < 4:
-            continue
-        pq_words = {
-            tok.lemma_.lower() for tok in nlp(pq)
-            if tok.pos_ in ("NOUN", "PROPN", "VERB", "ADJ") and not tok.is_stop
-            and len(tok.text) > 2 and tok.text.lower() != entity_lower
-        }
-        if _check(pq_words):
-            return True
-
-    # Check episodic_fact, source_text, object, and object_full
-    obj_full = edge["object_full"] if "object_full" in edge.keys() else ""
-    for text in (edge["episodic_fact"] or "", edge["source_text"] or "",
-                 edge["object"] or "", obj_full or ""):
-        if not text or len(text) < 4:
-            continue
-        text_words = {
-            tok.lemma_.lower() for tok in nlp(text)
-            if tok.pos_ in ("NOUN", "PROPN", "VERB", "ADJ") and not tok.is_stop
-            and len(tok.text) > 2 and tok.text.lower() != entity_lower
-        }
-        if _check(text_words):
-            return True
-
-    return False
-
-
-def _entity_matches(row, query_entity: str) -> bool:
-    """Does this edge involve the query entity?"""
-    if not query_entity:
-        return True
-    qe = query_entity.lower()
-    subject = (row["subject"] or "").lower()
-    if qe in subject or subject in qe:
-        return True
-    rel = (row["relational_entities"] or "").lower()
-    if qe in rel:
-        return True
-    return False
 
 
 # ── Answer extraction from traces ────────────────────────────────
@@ -303,18 +182,20 @@ def _reconstruct_situation(conn, user_id, entity):
 # ── Main entry ───────────────────────────────────────────────────
 
 def reconstruct(user_id: int, query: str) -> ReconstructionResult:
-    """Trace + PQ + verification. No scores.
+    """MINERVA 2 echo-based reconstruction.
 
-    1. Classify query (entity, return_field)
+    1. Classify query → probe dimensions
     2. Embed query
     3. Pull all edges for entity
-    4. Rank by PQ embedding cosine (semantic match)
-    5. First edge where entity matches → answer
-    6. No match → refuse
+    4. Every edge computes 5-dimensional activation (cubed, multiplied)
+    5. Echo magnitude = sum of all activations
+    6. If echo too weak → refuse (no trace resonates)
+    7. Dominant trace (highest activation) provides the answer text
     """
-    from app.engines.grammar_engine import classify_query, _get_nlp
-    qd = classify_query(query)
+    from app.engines.grammar_engine import classify_query
+    from app.engines.reconstruction.trace_convergence import score_edge
 
+    qd = classify_query(query)
     entity = qd.match_entity or qd.match_subject
     is_temporal = qd.return_field == "temporal" or qd.wh_word == "when"
 
@@ -349,7 +230,8 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
             conditions.append("is_current = 1")
 
         rows = conn.execute(
-            f"SELECT {_TRACE_COLS} FROM edges WHERE {' AND '.join(conditions)}",
+            f"SELECT {_TRACE_COLS}, edge_temporal_context FROM edges "
+            f"WHERE {' AND '.join(conditions)}",
             params,
         ).fetchall()
 
@@ -361,123 +243,56 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
                 conditions_all.append("relational_entities LIKE ?")
                 params_all.append(f"%{entity_lower}%")
             rows = conn.execute(
-                f"SELECT {_TRACE_COLS} FROM edges WHERE {' AND '.join(conditions_all)}",
+                f"SELECT {_TRACE_COLS}, edge_temporal_context FROM edges "
+                f"WHERE {' AND '.join(conditions_all)}",
                 params_all,
             ).fetchall()
 
         if not rows:
             return _refuse("no_edges")
 
-        # No emotional filter — let PQ cosine ranking find the best match.
-        # Filtering to emotional-label-only edges drops valid edges like
-        # "dancers are so excited" (has "excited" in text but no emotional label).
+        # ── Compute activation for ALL edges simultaneously ────
+        activations: List[Tuple[dict, float]] = []
+        for edge in rows:
+            a = score_edge(query_emb, qd, edge, _decode_embedding, _dot)
+            activations.append((edge, a))
 
-        # ── Extract query content words (needed for ranking + verification) ──
-        nlp = _get_nlp()
-        query_content = {
-            tok.lemma_.lower() for tok in nlp(query)
-            if tok.pos_ in ("NOUN", "PROPN", "VERB", "ADJ") and not tok.is_stop
-            and len(tok.text) > 2 and tok.text.lower() != entity_lower
-        }
+        # ── Sort by activation — dominant trace first ──────────
+        activations.sort(key=lambda x: x[1], reverse=True)
 
-        # ── Compute generic words (appear in >30% of edges) ──────
-        # Generic words like "dance" in a dance conversation match everything.
-        # Content gate requires at least 1 NON-generic word to match.
-        generic_words = set()
-        if query_content and rows:
-            threshold = len(rows) * 0.3
-            for w in query_content:
-                count = sum(1 for r in rows
-                    if w in ((r["episodic_fact"] or "") + " " + (r["source_text"] or "")).lower())
-                if count > threshold:
-                    generic_words.add(w)
+        dominant = activations[0][0]
+        dominant_activation = activations[0][1]
 
-        # ── Rank by PQ embedding cosine ────────────────────────
-        scored = []
-        for row in rows:
-            # Best cosine across ALL 4 PQ embeddings + edge embedding
-            cosines = []
-            for col in ("pq_1_embedding", "pq_2_embedding",
-                         "pq_3_embedding", "pq_4_embedding"):
-                emb = _decode_embedding(
-                    row[col] if col in row.keys() else None
-                )
-                if emb:
-                    cosines.append(_dot(query_emb, emb))
-            edge_emb = _decode_embedding(row["edge_embedding"])
-            if edge_emb:
-                cosines.append(_dot(query_emb, edge_emb))
-            best_cos = max(cosines) if cosines else 0.0
+        # ── Echo refusal: does ANY trace resonate strongly? ────
+        # The echo concentrates on the strongest-resonating trace.
+        # If even the peak is weak, the echo contains no signal.
+        #
+        # Noise calibration: a random edge with episodic cosine ~0.15
+        # and all other dimensions neutral (1.0) produces:
+        #   (0.15)^3 * 1^3 * 1^3 * 1^3 * 1^3 = 0.0034
+        # A good match with cosine ~0.5 produces:
+        #   (0.5)^3 = 0.125 — 37x stronger.
+        # Refuse when the peak is in the noise range.
+        #
+        # With 2+ active dimensions (e.g., episodic + schematic match):
+        #   (0.5)^3 * (0.7)^3 = 0.125 * 0.343 = 0.043
+        # Still well above noise. Multi-dimensional matches are safe.
+        noise_floor = 0.005
+        if dominant_activation < noise_floor:
+            return _refuse("echo_below_noise")
 
-            # For temporal: boost edges that match EVENT words from query
-            # This discriminates "fair" edge from "gym" edge for temporal queries
-            if is_temporal and query_content:
-                event_overlap = 0
-                ep_text = (row["episodic_fact"] or "") + " " + (row["source_text"] or "")
-                ep_words = {tok.lemma_.lower() for tok in nlp(ep_text)
-                    if tok.pos_ in ("NOUN", "PROPN", "VERB", "ADJ") and not tok.is_stop
-                    and len(tok.text) > 2 and tok.text.lower() != entity_lower}
-                event_overlap = len(query_content & ep_words)
-                # Event match trumps cosine: (event_words, cosine)
-                scored.append(((event_overlap, best_cos), row))
-            else:
-                scored.append(((0, best_cos), row))
+        # Yes/No questions
+        if qd.wh_word is None and "?" in query:
+            answer = "No" if dominant["edge_negated"] else "Yes"
+            return ReconstructionResult(answer=answer, edge_ids=[dominant["id"]])
 
-        scored.sort(key=lambda x: x[0], reverse=True)
+        # Collect all significantly-activated edge IDs for grounding
+        sig_ids = [eid for e, a in activations
+                   if (eid := e["id"]) and a > dominant_activation * 0.1]
 
-        # ── Verification: entity + PQ match ────────────────────
-        # Walk ranked list. First edge where:
-        #   1. Entity matches
-        #   2. PQ shares ≥ 2 content words with query (binary: matches or doesn't)
-        # All fail → refuse.
-        # Verify extracted predicate is actually a verb — classify_query
-        # sometimes extracts nouns ("book" from "What book is Jon reading?")
-        raw_verb = (qd.match_predicate or "").lower() or None
-        query_verb = None
-        if raw_verb:
-            from nltk.corpus import wordnet as wn
-            # Accept if WordNet has verb senses for this word
-            if wn.synsets(raw_verb, pos=wn.VERB):
-                query_verb = raw_verb
-            # Reject nouns-only ("book" has verb senses too, so check
-            # if NOUN senses dominate — if more noun than verb senses, skip)
-            if query_verb:
-                n_verb = len(wn.synsets(raw_verb, pos=wn.VERB))
-                n_noun = len(wn.synsets(raw_verb, pos=wn.NOUN))
-                if n_noun > n_verb * 2:
-                    query_verb = None  # primarily a noun, not a verb
-
-        # ── Walk cosine-ranked list ─────────────────────────────
-        # Predicate gate: skip for temporal, yes/no, emotional, and multi-entity.
-        # These categories gain +7% each without the predicate gate.
-        # Keep predicate gate for single-entity factual queries (protects Cat 5).
-        query_propns = {tok.text.lower() for tok in nlp(query) if tok.pos_ == "PROPN"}
-        is_multi_entity = len(query_propns) > 1
-        skip_predicate = is_temporal or is_multi_entity
-
-        for sort_key, edge in scored:
-            if not _entity_matches(edge, entity or ""):
-                continue
-            if not skip_predicate:
-                is_yesno = qd.wh_word is None and "?" in query
-                is_emotional = qd.return_field == "emotional"
-                if not is_yesno and not is_emotional:
-                    if not _predicate_coherent(edge, query_verb or ""):
-                        continue
-            if not is_temporal:
-                if not _content_matches(edge, query_content, entity_lower, nlp,
-                                       generic_words=generic_words):
-                    continue
-
-            if qd.wh_word is None and "?" in query:
-                answer = "No" if edge["edge_negated"] else "Yes"
-                return ReconstructionResult(answer=answer, edge_ids=[edge["id"]])
-
-            return ReconstructionResult(
-                answer=_extract_answer(edge, qd.return_field, wh_word=qd.wh_word),
-                return_field=qd.return_field,
-                edge_ids=[edge["id"]],
-                grounding=[edge["source_text"] or ""],
-            )
-
-        return _refuse("not_mentioned")
+        return ReconstructionResult(
+            answer=_extract_answer(dominant, qd.return_field, wh_word=qd.wh_word),
+            return_field=qd.return_field,
+            edge_ids=sig_ids[:10],
+            grounding=[dominant["source_text"] or ""],
+        )
