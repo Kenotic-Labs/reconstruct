@@ -9,8 +9,8 @@ stronger. No gates. No thresholds. No top-K.
 
 The 5 dimensions:
   1. Episodic   — semantic content match (embedding cosine)
-  2. Emotional  — affective resonance (label + valence)
-  3. Temporal   — time alignment (date proximity + context)
+  2. Emotional  — affective resonance (WordNet synonym match on labels)
+  3. Temporal   — time alignment (context direction + date presence)
   4. Relational — entity identity (subject + relational_entities)
   5. Schematic  — life domain relevance (category match)
 
@@ -21,14 +21,12 @@ from __future__ import annotations
 
 import json
 import logging
-import math
 from typing import Optional
 
 log = logging.getLogger("kenotic.trace_convergence")
 
 
 # ── Schema relatedness map ──────────────────────────────────────
-# Related categories score 0.7 instead of 0.3
 _SCHEMA_RELATED = {
     "career": {"finance", "education"},
     "finance": {"career"},
@@ -43,9 +41,10 @@ _SCHEMA_RELATED = {
 }
 
 
+# ── Dimension 1: Episodic ──────────────────────────────────────
+
 def _episodic(query_emb: list, edge, decode_embedding, dot) -> float:
-    """Dimension 1: Semantic content match.
-    Max cosine across PQ embeddings + edge embedding."""
+    """Semantic content match. Max cosine across PQ + edge embeddings."""
     cosines = []
     for col in ("pq_1_embedding", "pq_2_embedding",
                 "pq_3_embedding", "pq_4_embedding"):
@@ -60,97 +59,129 @@ def _episodic(query_emb: list, edge, decode_embedding, dot) -> float:
     return max(max(c, 0.0) for c in cosines)
 
 
-def _emotional(qd, edge) -> float:
-    """Dimension 2: Affective resonance.
-    If query doesn't probe emotion → 1.0 (neutral).
-    If query probes emotion → match label and valence."""
+# ── Dimension 2: Emotional ─────────────────────────────────────
+
+def _emotional(qd, edge, query_text: str = "") -> float:
+    """Affective resonance via WordNet synonym matching.
+    Not probed → 1.0. Probed → match query emotion words against edge label."""
     is_emotional = qd.return_field == "emotional" or qd.wh_word == "how"
     if not is_emotional:
-        return 1.0  # neutral — not probed
+        return 1.0
 
     label = (edge["edge_emotional_label"] or "").strip().lower()
     if not label:
-        return 0.3  # query asks for emotion, edge has none
+        return 0.3  # query asks for emotion, edge carries none
 
-    # Edge has an emotional label — it carries affective data.
-    # For now: 0.8 (present and plausibly relevant).
-    # Future: compare probe emotion word to label via WordNet synonyms.
-    return 0.8
+    if not query_text:
+        return 0.8  # has emotion, can't compare (no query text)
 
+    # Extract emotion words from query, compare against edge label
+    try:
+        from app.engines.grammar_engine import _is_emotion_word, _get_nlp
+        nlp = _get_nlp()
+        query_emotions = {
+            tok.lemma_.lower() for tok in nlp(query_text)
+            if tok.pos_ in ("ADJ", "NOUN", "VERB")
+            and _is_emotion_word(tok.lemma_.lower(), tok.pos_)
+        }
+        if not query_emotions:
+            return 0.8  # query probes emotion but no specific emotion word
+
+        # Direct match
+        if label in query_emotions:
+            return 1.0
+
+        # WordNet synonym match
+        from nltk.corpus import wordnet as wn
+        label_synsets = set()
+        for pos in (wn.ADJ, wn.NOUN, wn.VERB):
+            label_synsets.update(wn.synsets(label, pos=pos)[:2])
+        for qw in query_emotions:
+            for pos in (wn.ADJ, wn.NOUN, wn.VERB):
+                if set(wn.synsets(qw, pos=pos)[:2]) & label_synsets:
+                    return 0.9  # synonym match
+
+        return 0.5  # has emotion but doesn't match query's specific emotion
+    except Exception:
+        return 0.8  # fallback: has emotion, assume plausible
+
+
+# ── Dimension 3: Temporal ──────────────────────────────────────
 
 def _temporal(qd, edge) -> float:
-    """Dimension 3: Time alignment.
-    If query doesn't probe time → 1.0 (neutral).
-    If query probes time → score by data presence and context match."""
+    """Time alignment via context direction + date presence.
+    Not probed → 1.0. Probed → continuous scoring."""
     is_temporal = qd.return_field == "temporal" or qd.wh_word == "when"
     if not is_temporal:
-        return 1.0  # neutral — not probed
+        return 1.0
 
     date = (edge["resolved_event_date"] or "").strip()
     expr = (edge["temporal_expression"] or "").strip()
-
-    if not date and not expr:
-        return 0.1  # query asks for time, edge has no temporal data
-
-    # Edge has temporal data. Score by context alignment.
     edge_ctx = (edge["edge_temporal_context"] or "present").lower()
 
-    # "When" questions typically seek past events or specific dates.
-    # Edges with resolved dates are more valuable.
+    if not date and not expr:
+        return 0.1  # no temporal data at all
+
+    # Base score: has some temporal data
+    score = 0.5
+
+    # Resolved date is strongest temporal signal
     if date and len(date) >= 10:
-        return 1.0  # has a resolved date — strong temporal signal
-    if expr:
-        return 0.7  # has expression but no resolved date
+        score = 0.8
 
-    return 0.5
+    # Context alignment: "when" questions typically seek past events.
+    # Past-context edges are more likely to be the answer.
+    if edge_ctx == "past":
+        score = min(score + 0.2, 1.0)
+    elif edge_ctx == "future":
+        # Future events less likely for "when did" but valid for "when will"
+        score = max(score - 0.1, 0.3)
 
+    return score
+
+
+# ── Dimension 4: Relational ────────────────────────────────────
 
 def _relational(qd, edge) -> float:
-    """Dimension 4: Entity identity.
-    The WHO dimension. Wrong person → 0.0 → activation collapses."""
+    """Entity identity. Wrong person → 0.0 → activation collapses."""
     entity = (qd.match_entity or qd.match_subject or "").lower()
     if not entity or entity == "user":
-        return 1.0  # no specific entity probed — neutral
+        return 1.0
 
     subject = (edge["subject"] or "").lower()
-
-    # Exact subject match
     if entity in subject or subject in entity:
         return 1.0
 
-    # Entity in relational_entities (mentioned but not subject)
     rel = (edge["relational_entities"] or "").lower()
     if entity in rel:
         return 0.8
 
-    # No match → 0.0. Cubed = 0. Activation collapses. Correct.
-    return 0.0
+    return 0.0  # cubed = 0, activation collapses
 
+
+# ── Dimension 5: Schematic ─────────────────────────────────────
 
 def _schematic(qd, edge) -> float:
-    """Dimension 5: Life domain relevance.
-    If query domain unclear → 1.0 (neutral).
-    If query domain known → score by category match."""
+    """Life domain relevance. Unknown query domain → 1.0 (neutral)."""
     query_schema = (getattr(qd, "match_schema", None) or "").lower()
     if not query_schema:
-        return 1.0  # can't determine domain — neutral
+        return 1.0
 
     edge_schema = (edge["edge_schematic_category"] or "").lower()
     if not edge_schema or edge_schema == "uncategorized":
-        return 0.5  # edge has no category — neutral-ish
+        return 0.5
 
-    # Exact match
     if query_schema == edge_schema:
         return 1.0
 
-    # Related categories
     related = _SCHEMA_RELATED.get(query_schema, set())
     if edge_schema in related:
         return 0.7
 
-    # Unrelated
     return 0.3
 
+
+# ── MINERVA 2 activation ──────────────────────────────────────
 
 def score_edge(
     query_emb: list,
@@ -158,18 +189,14 @@ def score_edge(
     edge,
     decode_embedding,
     dot,
+    query_text: str = "",
 ) -> float:
     """MINERVA 2 activation for a single edge.
 
     activation = episodic³ × emotional³ × temporal³ × relational³ × schematic³
-
-    Each dimension returns [0.0, 1.0]. Cubed. Multiplied.
-    Multi-dimensional match = exponentially strong.
-    Any dimension at 0 = total collapse (wrong entity).
-    Irrelevant dimensions = 1.0 (neutral, no effect).
     """
     e = _episodic(query_emb, edge, decode_embedding, dot)
-    m = _emotional(qd, edge)
+    m = _emotional(qd, edge, query_text=query_text)
     t = _temporal(qd, edge)
     r = _relational(qd, edge)
     s = _schematic(qd, edge)

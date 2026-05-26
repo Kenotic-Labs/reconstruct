@@ -258,7 +258,8 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
         # ── Compute activation for ALL edges simultaneously ────
         activations: List[Tuple[dict, float]] = []
         for edge in rows:
-            a = score_edge(query_emb, qd, edge, _decode_embedding, _dot)
+            a = score_edge(query_emb, qd, edge, _decode_embedding, _dot,
+                          query_text=query)
             activations.append((edge, a))
 
         # ── Sort by activation — dominant trace first ──────────
@@ -277,9 +278,14 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
         # Echo noise = N * 0.0034. Signal: dominant at (0.5)^3 = 0.125.
         # Refuse when dominant < noise-per-edge (the echo doesn't
         # concentrate on any trace above the background).
-        echo_magnitude = sum(a for _, a in activations)
-        noise_per_edge = 0.004  # (0.15)^3 ≈ what random cosine produces
-        if dominant_activation < noise_per_edge:
+        # Relative refusal: dominant must stand out from the crowd.
+        # If the best trace isn't significantly above the median,
+        # nothing converged — the echo is uniform noise.
+        if len(activations) >= 3:
+            median_a = activations[len(activations) // 2][1]
+            if median_a > 0 and dominant_activation / median_a < 3.0:
+                return _refuse("echo_below_noise")
+        if dominant_activation < 1e-6:
             return _refuse("echo_below_noise")
 
         # ── Collect significantly-activated edges for grounding ──
