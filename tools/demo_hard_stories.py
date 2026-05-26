@@ -199,10 +199,7 @@ def run_verification(story_data: dict, retrieval, user_id: int) -> List[Dict[str
         print(f"  Mode: {mode}")
 
         try:
-            if mode == "reconstruct":
-                result = retrieval.reconstruct(user_id, question)
-            else:
-                result = retrieval.retrieve(user_id, question)
+            result = retrieval.answer(user_id, question)
         except Exception as e:
             print(f"  *** ERROR: {e}")
             results.append({
@@ -218,12 +215,9 @@ def run_verification(story_data: dict, retrieval, user_id: int) -> List[Dict[str
         # Extract text from result
         output_text = ""
         if isinstance(result, Situation):
-            output_text = result.narrative or ""
+            output_text = result.text or ""
             print(f"  Type: Situation")
-            print(f"  Survivors: {result.survivors}")
-            print(f"  Clusters: {len(result.clusters)}")
-            print(f"  Participants: {result.participants}")
-            print(f"  Mood: {result.dominant_mood}")
+            print(f"  Edges: {len(result.edge_ids)}")
             print()
             # Wrap narrative
             words = output_text.split()
@@ -244,7 +238,7 @@ def run_verification(story_data: dict, retrieval, user_id: int) -> List[Dict[str
             output_text = result.text or ""
             print(f"  Type: Answer")
             print(f"  Text: {output_text}")
-            print(f"  Source: {result.source}")
+            print(f"  Grounding: {result.grounding[:1]}")
         else:
             print(f"  Type: {type(result).__name__} (unexpected)")
 

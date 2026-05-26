@@ -242,7 +242,7 @@ class Kenotic:
                 if any(t in _lower for t in _triggers):
                     return self.reconstruct(query)
             else:
-                from app.engines.wh_type import is_situational
+                from app.engines.reconstruction import is_situational
                 if is_situational(query):
                     return self.reconstruct(query)
         except Exception:

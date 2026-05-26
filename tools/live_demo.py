@@ -102,7 +102,7 @@ for q in [
     "Any upcoming appointments?",
     "How is this person feeling right now?",
 ]:
-    r = engine_b.retrieve(user_id=1, query_text=q)
+    r = engine_b.retrieve(user_id=1, query=q)
     a = r.text if hasattr(r, 'text') else str(r)
     print(f'  Q: {q}')
     print(f'  A: {a}\n')
@@ -134,14 +134,12 @@ engine_c = RetrievalEngine()
 print('  Gemini has never interacted with this user.')
 print('  It reconstructs the full situation from memory alone.\n')
 
-sit = engine_c.reconstruct(user_id=1, query_text="What is going on with this person right now?")
+sit = engine_c.answer(user_id=1, query="What is going on with this person right now?")
 print(f'  Q: What is going on with this person right now?\n')
-print(f'  Survivors: {sit.survivors} edges')
-print(f'  Participants: {getattr(sit, "participants", "N/A")}')
-print(f'  Mood: {getattr(sit, "dominant_mood", "N/A")}')
+print(f'  Edges: {len(getattr(sit, "edge_ids", []))}')
 print()
 print(f'  RECONSTRUCTED NARRATIVE:')
-narrative = sit.narrative or ""
+narrative = sit.text or ""
 for sent in narrative.split(". "):
     s = sent.strip().rstrip(".")
     if s:
@@ -153,7 +151,7 @@ for q in [
     "What should I know about this person's emotional state?",
     "Is there anything I need to do for this person?",
 ]:
-    r = engine_c.retrieve(user_id=1, query_text=q)
+    r = engine_c.retrieve(user_id=1, query=q)
     a = r.text if hasattr(r, 'text') else str(r)
     print(f'  Q: {q}')
     print(f'  A: {a}\n')
@@ -174,7 +172,7 @@ for q in [
     "Any action items I should know about?",
     "What patterns have been noticed?",
 ]:
-    r = engine_a2.retrieve(user_id=1, query_text=q)
+    r = engine_a2.retrieve(user_id=1, query=q)
     a = r.text if hasattr(r, 'text') else str(r)
     print(f'  Q: {q}')
     print(f'  A: {a}\n')

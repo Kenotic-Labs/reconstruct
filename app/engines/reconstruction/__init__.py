@@ -136,7 +136,7 @@ _TRACE_COLS = """
     id, source_text, relational_entities, episodic_fact,
     edge_schematic_category, edge_emotional_label, edge_emotional_valence,
     emotional_target, edge_relational_type,
-    resolved_event_date, temporal_expression, is_current,
+    resolved_event_date, temporal_expression, edge_temporal_context, is_current,
     edge_negated, edge_mood, edge_episodic_significance,
     subject, predicate, object, context_entity,
     edge_embedding, pq_1_embedding, pq_2_embedding, pq_3_embedding, pq_4_embedding,
@@ -179,7 +179,7 @@ def _reconstruct_situation(conn, user_id, entity):
     grounding = [e["source_text"] or "" for e in edges if e["id"] in all_ids]
     return ReconstructionResult(
         answer=". ".join(parts), edge_ids=all_ids,
-        grounding=grounding[:5],
+        grounding=grounding[:5], return_field="episodic",
     )
 
 
@@ -234,7 +234,7 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
             conditions.append("is_current = 1")
 
         rows = conn.execute(
-            f"SELECT {_TRACE_COLS}, edge_temporal_context FROM edges "
+            f"SELECT {_TRACE_COLS} FROM edges "
             f"WHERE {' AND '.join(conditions)}",
             params,
         ).fetchall()
@@ -247,7 +247,7 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
                 conditions_all.append("relational_entities LIKE ?")
                 params_all.append(f"%{entity_lower}%")
             rows = conn.execute(
-                f"SELECT {_TRACE_COLS}, edge_temporal_context FROM edges "
+                f"SELECT {_TRACE_COLS} FROM edges "
                 f"WHERE {' AND '.join(conditions_all)}",
                 params_all,
             ).fetchall()
@@ -267,39 +267,39 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
         dominant = activations[0][0]
         dominant_activation = activations[0][1]
 
-        # ── Echo refusal: does ANY trace resonate strongly? ────
-        # The echo concentrates on the strongest-resonating trace.
-        # If even the peak is weak, the echo contains no signal.
+        # ── Echo refusal ───────────────────────────────────────
+        # The echo magnitude is the sum of all activations. When no
+        # trace resonates, the sum is dominated by noise. Refuse when
+        # the echo is indistinguishable from uniform low activation.
         #
-        # Noise calibration: a random edge with episodic cosine ~0.15
-        # and all other dimensions neutral (1.0) produces:
-        #   (0.15)^3 * 1^3 * 1^3 * 1^3 * 1^3 = 0.0034
-        # A good match with cosine ~0.5 produces:
-        #   (0.5)^3 = 0.125 — 37x stronger.
-        # Refuse when the peak is in the noise range.
-        #
-        # With 2+ active dimensions (e.g., episodic + schematic match):
-        #   (0.5)^3 * (0.7)^3 = 0.125 * 0.343 = 0.043
-        # Still well above noise. Multi-dimensional matches are safe.
-        noise_floor = 0.005
-        if dominant_activation < noise_floor:
+        # Noise baseline: N edges each with episodic ~0.15 and all
+        # other dimensions neutral (1.0): per-edge = (0.15)^3 = 0.0034.
+        # Echo noise = N * 0.0034. Signal: dominant at (0.5)^3 = 0.125.
+        # Refuse when dominant < noise-per-edge (the echo doesn't
+        # concentrate on any trace above the background).
+        echo_magnitude = sum(a for _, a in activations)
+        noise_per_edge = 0.004  # (0.15)^3 ≈ what random cosine produces
+        if dominant_activation < noise_per_edge:
             return _refuse("echo_below_noise")
+
+        # ── Collect significantly-activated edges for grounding ──
+        sig_edges = [(e, a) for e, a in activations
+                     if a > dominant_activation * 0.1]
+        sig_ids = [e["id"] for e, a in sig_edges if e["id"]]
+        sig_grounding = [e["source_text"] or "" for e, a in sig_edges
+                         if e["source_text"]]
 
         # Yes/No questions
         if qd.wh_word is None and "?" in query:
             answer = "No" if dominant["edge_negated"] else "Yes"
             return ReconstructionResult(
-                answer=answer, edge_ids=[dominant["id"]],
-                grounding=[dominant["source_text"] or ""],
+                answer=answer, edge_ids=sig_ids[:10],
+                grounding=sig_grounding[:5], return_field="episodic",
             )
-
-        # Collect all significantly-activated edge IDs for grounding
-        sig_ids = [eid for e, a in activations
-                   if (eid := e["id"]) and a > dominant_activation * 0.1]
 
         return ReconstructionResult(
             answer=_extract_answer(dominant, qd.return_field, wh_word=qd.wh_word),
             return_field=qd.return_field,
             edge_ids=sig_ids[:10],
-            grounding=[dominant["source_text"] or ""],
+            grounding=sig_grounding[:5],
         )

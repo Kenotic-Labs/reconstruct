@@ -120,13 +120,13 @@ def fresh_engines():
             mem = MemoryEngine()
             tmp = TemporalEngine()
             tmp.bind_memory(mem)
-            ret = RetrievalEngine(memory_engine=mem, temporal_engine=tmp)
+            ret = RetrievalEngine(memory=mem, temporal=tmp)
         _engines_initialized = True
     else:
         mem = MemoryEngine()
         tmp = TemporalEngine()
         tmp.bind_memory(mem)
-        ret = RetrievalEngine(memory_engine=mem, temporal_engine=tmp)
+        ret = RetrievalEngine(memory=mem, temporal=tmp)
     return mem, tmp, ret
 
 
@@ -152,15 +152,12 @@ def store_triples(memory, user_id, triples, label=""):
 
 def ask(retrieval, user_id, question, mode="lookup"):
     """Query and return (answer_text, raw_result)."""
-    if mode == "reconstruct":
-        result = retrieval.reconstruct(user_id, question)
-    else:
-        result = retrieval.retrieve(user_id, question)
+    result = retrieval.answer(user_id, question)
 
     if isinstance(result, Answer):
         return result.text or "(empty)", result
     elif isinstance(result, Situation):
-        return result.narrative or "(empty narrative)", result
+        return result.text or "(empty narrative)", result
     elif isinstance(result, StructuralRefusal):
         return f"(refusal: {result.reason})", result
     else:

@@ -248,9 +248,8 @@ def run_story(
             if answer.candidates:
                 cand_texts = []
                 for c in answer.candidates:
-                    cand_texts.append(retrieval._triple_to_sentence(
-                        c.get("subject", ""), c.get("predicate", ""), c.get("object", "")
-                    ))
+                    parts = [c.get("subject", ""), c.get("predicate", ""), c.get("object", "")]
+                    cand_texts.append(" ".join(p for p in parts if p))
                 answer_text = ". ".join(filter(None, [answer_text] + cand_texts))
         except Exception as e:
             answer_text = f"[error: {e}]"

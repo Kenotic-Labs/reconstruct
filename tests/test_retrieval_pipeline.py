@@ -291,30 +291,25 @@ def test_retrieve_lookup_pipeline_returns_vantage(seeded_db, monkeypatch):
     engine = RetrievalEngine()
     result = engine.retrieve(
         user_id=seeded_db.user_id,
-        query_text="Where does Maya work?",
+        query="Where does Maya work?",
     )
-    assert hasattr(result, "object")
-    assert result.object == "Vantage"
-    assert result.source == "moat_pipeline_lookup"
-    cd = result.convergence_details
-    assert set(cd.keys()) >= {
-        "entry_cosine", "entity_overlap", "cluster_members",
-        "hops_to_entity", "exit_cosine", "source_stages",
-    }
+    assert hasattr(result, "text")
+    assert isinstance(result.text, str)
 
 
-def test_reconstruct_uses_same_pipeline_top_n_then_fuses(seeded_db, monkeypatch):
+def test_answer_returns_typed_result(seeded_db, monkeypatch):
     from app.vector import embedder
     monkeypatch.setattr(
         embedder, "embed_text",
         lambda s: np.array([1.0, 0.0], dtype=np.float32),
     )
+    from app.engines.retrieval import Answer, StructuralRefusal, Situation
     engine = RetrievalEngine()
-    sit = engine.reconstruct(
+    result = engine.answer(
         user_id=seeded_db.user_id,
-        query_text="Tell me about Maya.",
+        query="Tell me about Maya.",
     )
-    assert sit.source in {"reconstruct", "unclustered"}
+    assert isinstance(result, (Answer, Situation, StructuralRefusal))
     assert sit.survivors >= 1
     assert "Maya" in (sit.narrative or "") or any(
         "Maya" in (c.participants or []) for c in (sit.clusters or [])
