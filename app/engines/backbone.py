@@ -137,6 +137,7 @@ def _reconstruct_situation(user_id: int, text: str, edges_stored: int) -> Proces
         answer=rr.answer,
         edge_ids=rr.edge_ids,
         grounding=rr.grounding,
+        return_field=rr.return_field,
         refusal=rr.refusal,
         refusal_reason=rr.refusal_reason,
         edges_stored=edges_stored,

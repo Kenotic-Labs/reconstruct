@@ -176,7 +176,11 @@ def _reconstruct_situation(conn, user_id, entity):
     if not parts:
         return _refuse("empty_situation")
 
-    return ReconstructionResult(answer=". ".join(parts), edge_ids=all_ids)
+    grounding = [e["source_text"] or "" for e in edges if e["id"] in all_ids]
+    return ReconstructionResult(
+        answer=". ".join(parts), edge_ids=all_ids,
+        grounding=grounding[:5],
+    )
 
 
 # ── Main entry ───────────────────────────────────────────────────
@@ -284,7 +288,10 @@ def reconstruct(user_id: int, query: str) -> ReconstructionResult:
         # Yes/No questions
         if qd.wh_word is None and "?" in query:
             answer = "No" if dominant["edge_negated"] else "Yes"
-            return ReconstructionResult(answer=answer, edge_ids=[dominant["id"]])
+            return ReconstructionResult(
+                answer=answer, edge_ids=[dominant["id"]],
+                grounding=[dominant["source_text"] or ""],
+            )
 
         # Collect all significantly-activated edge IDs for grounding
         sig_ids = [eid for e, a in activations
