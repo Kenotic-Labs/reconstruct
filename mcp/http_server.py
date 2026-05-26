@@ -151,15 +151,24 @@ def require_bearer(authorization: Optional[str] = Header(default=None)) -> None:
         )
 
 
+def _allowed_origin(origin: Optional[str]) -> Optional[str]:
+    """Return the origin string if it passes the allowlist, else None."""
+    if origin is None:
+        return None  # no Origin header = native app, no CORS needed
+    if origin in _ORIGIN_ALLOW_EXACT:
+        return origin
+    for prefix in _ORIGIN_ALLOW_PREFIXES:
+        if origin.startswith(prefix):
+            return origin
+    return None
+
+
 def _check_origin(request: Request) -> None:
     origin = request.headers.get("origin")
     if origin is None:
         return  # native apps — permitted
-    if origin in _ORIGIN_ALLOW_EXACT:
+    if _allowed_origin(origin) is not None:
         return
-    for prefix in _ORIGIN_ALLOW_PREFIXES:
-        if origin.startswith(prefix):
-            return
     raise HTTPException(
         status_code=400,
         detail={"error": "origin_rejected", "origin": origin},
@@ -178,6 +187,14 @@ class RedactedAccessLogMiddleware(BaseHTTPMiddleware):
             request.url.path,
             response.status_code,
         )
+        # Inject CORS headers on /api/* responses — same allowlist as /mcp
+        if request.url.path.startswith("/api/"):
+            origin = request.headers.get("origin")
+            allowed = _allowed_origin(origin)
+            if allowed:
+                response.headers["Access-Control-Allow-Origin"] = allowed
+                response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+                response.headers["Access-Control-Allow-Headers"] = "Authorization, Content-Type"
         return response
 
 
@@ -199,8 +216,25 @@ def build_app(token: str) -> FastAPI:
             log.warning("[reconstruct] warmup skipped: %s", e)
         yield
 
-    app = FastAPI(title="Reconstruct MCP (HTTP)", version="0.1.0", lifespan=_lifespan)
+    app = FastAPI(
+        title="Kenotic Continuity Memory API",
+        version="1.0.0",
+        description=(
+            "REST + MCP API for the Kenotic continuity memory system. "
+            "Store, retrieve, reconstruct, and manage persistent memory "
+            "that works across any AI model."
+        ),
+        lifespan=_lifespan,
+    )
     app.add_middleware(RedactedAccessLogMiddleware)
+
+    # ── Mount REST API at /api/v1 ──────────────────────────
+    from mcp.rest_api import rest_router
+    app.include_router(
+        rest_router,
+        prefix="/api/v1",
+        dependencies=[Depends(require_bearer)],
+    )
 
     # ── Exception handler to emit JSON body matching spec ──
 
@@ -211,9 +245,13 @@ def build_app(token: str) -> FastAPI:
         body = exc.detail if isinstance(exc.detail, dict) else {"error": str(exc.detail)}
         return JSONResponse(status_code=exc.status_code, content=body)
 
+    @app.exception_handler(RequestValidationError)
+    async def _validation_exc(request: Request, exc: RequestValidationError):
+        return JSONResponse(status_code=422, content={"error": "validation_error"})
+
     # ── /healthz (unauthenticated) ──────────────────────────
 
-    @app.get("/healthz")
+    @app.get("/healthz", include_in_schema=False)
     async def healthz():
         return {"status": "ok", "tools": len(TOOLS)}
 
@@ -225,16 +263,24 @@ def build_app(token: str) -> FastAPI:
 
     _CORS_HEADERS = {
         "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, OPTIONS",
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
         "Access-Control-Allow-Headers": "Authorization, Content-Type",
         "Access-Control-Max-Age": "86400",
     }
 
-    @app.options("/api/{path:path}")
-    async def api_cors_preflight(path: str):
-        return Response(status_code=204, headers=_CORS_HEADERS)
+    @app.options("/api/{path:path}", include_in_schema=False)
+    async def api_cors_preflight(path: str, request: Request = None):
+        origin = request.headers.get("origin") if request else None
+        allowed = _allowed_origin(origin)
+        headers = {
+            "Access-Control-Allow-Origin": allowed or "",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Authorization, Content-Type",
+            "Access-Control-Max-Age": "86400",
+        }
+        return Response(status_code=204, headers=headers)
 
-    @app.get("/api/timeline")
+    @app.get("/api/timeline", include_in_schema=False)
     async def api_timeline(
         _auth: None = Depends(require_bearer),
     ):
@@ -251,7 +297,7 @@ def build_app(token: str) -> FastAPI:
 
     # ── POST /mcp ───────────────────────────────────────────
 
-    @app.post("/mcp")
+    @app.post("/mcp", include_in_schema=False)
     async def mcp_post(
         request: Request,
         _auth: None = Depends(require_bearer),
@@ -263,6 +309,8 @@ def build_app(token: str) -> FastAPI:
         raw = await request.body()
         if not raw:
             raise HTTPException(status_code=400, detail={"error": "empty_body"})
+        if len(raw) > 1_000_000:  # 1 MB — generous for JSON-RPC
+            raise HTTPException(status_code=413, detail={"error": "payload_too_large"})
         try:
             payload = json.loads(raw)
         except json.JSONDecodeError as e:
@@ -324,7 +372,7 @@ def build_app(token: str) -> FastAPI:
 
     # ── GET /mcp — SSE heartbeat for server-initiated notifs ─
 
-    @app.get("/mcp")
+    @app.get("/mcp", include_in_schema=False)
     async def mcp_get(
         request: Request,
         _auth: None = Depends(require_bearer),
@@ -352,7 +400,7 @@ def build_app(token: str) -> FastAPI:
 
     # ── DELETE /mcp — terminate session ─────────────────────
 
-    @app.delete("/mcp")
+    @app.delete("/mcp", include_in_schema=False)
     async def mcp_delete(
         request: Request,
         _auth: None = Depends(require_bearer),
@@ -381,6 +429,8 @@ def _parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
         default=None,
         help="Static bearer token. Falls back to KENOTIC_MCP_TOKEN env.",
     )
+    p.add_argument("--ssl-certfile", default=None, help="Path to SSL certificate PEM.")
+    p.add_argument("--ssl-keyfile", default=None, help="Path to SSL private key PEM.")
     return p.parse_args(argv)
 
 
@@ -392,6 +442,14 @@ def main(argv: Optional[List[str]] = None) -> int:
     args = _parse_args(argv)
     token = args.token or os.environ.get("KENOTIC_MCP_TOKEN") or ""
     if not token:
+        if args.host not in ("127.0.0.1", "localhost", "::1"):
+            print(
+                "[reconstruct] SECURITY: No bearer token AND host is not "
+                f"localhost ({args.host}). Forcing host to 127.0.0.1 to "
+                "prevent unauthenticated network access.",
+                file=sys.stderr,
+            )
+            args.host = "127.0.0.1"
         print(
             "[reconstruct] No bearer token — auth disabled (localhost only).",
             file=sys.stderr,
@@ -399,6 +457,15 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     import uvicorn
     app = build_app(token)
+    ssl_kwargs = {}
+    if args.ssl_certfile and args.ssl_keyfile:
+        ssl_kwargs["ssl_certfile"] = args.ssl_certfile
+        ssl_kwargs["ssl_keyfile"] = args.ssl_keyfile
+        print(
+            f"[reconstruct] HTTPS enabled with cert={args.ssl_certfile}",
+            file=sys.stderr,
+        )
+
     uvicorn.run(
         app,
         host=args.host,
@@ -406,6 +473,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         workers=1,
         loop="asyncio",
         access_log=False,  # our middleware handles access logs, without headers
+        **ssl_kwargs,
     )
     return 0
 

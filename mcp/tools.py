@@ -89,7 +89,7 @@ class _IngestJob:
         self.error: Optional[Exception] = None
 
 
-_ingest_queue: queue.Queue[_IngestJob] = queue.Queue()
+_ingest_queue: queue.Queue[_IngestJob] = queue.Queue(maxsize=1000)
 _pending_lock: threading.Lock = threading.Lock()
 _pending_by_user: Dict[int, List[threading.Event]] = {}
 
@@ -232,7 +232,11 @@ def tool_ingest(args: Dict[str, Any]) -> Dict[str, Any]:
         args=args,
     )
     _register_pending(job)
-    _ingest_queue.put(job)
+    try:
+        _ingest_queue.put_nowait(job)
+    except queue.Full:
+        _deregister_pending(job)
+        raise ToolError(-32000, "Ingest queue full — try again later")
     log.debug("ingest queued job_id=%s", job.job_id)
     return {"job_id": job.job_id, "status": "queued"}
 
@@ -321,8 +325,9 @@ def tool_clear(args: Dict[str, Any]) -> Dict[str, Any]:
                     )
                     conn.commit()
                 count = len(ids)
-        except Exception as e:
-            raise ToolError(-32000, f"Clear failed: {e}")
+        except Exception:
+            log.exception("reconstruct_clear failed")
+            raise ToolError(-32000, "Clear failed")
         log.info("reconstruct_clear ALL tombstones=%d", count)
         return {"cleared": count, "scope": "all"}
 
@@ -561,8 +566,9 @@ def dispatch(method: str, params: Optional[Dict[str, Any]]) -> Optional[Dict[str
             result = spec["handler"](tool_args)
         except ToolError:
             raise
-        except Exception as e:
-            raise ToolError(-32000, f"Tool error: {e}")
+        except Exception:
+            log.exception("Tool %s raised", tool_name)
+            raise ToolError(-32000, "Internal tool error")
         return {
             "content": [{"type": "text", "text": json.dumps(result, default=_json_default)}],
         }
