@@ -13,6 +13,53 @@ Nura is a six-engine memory architecture designed for long-horizon conversationa
 - **Real-Time Voice** — Sub-second speech-to-speech latency (~800ms warm)
 - **Privacy-First** — Your conversations stay on your machine
 
+## Getting Started
+
+### Python SDK
+
+```python
+from sdk import Kenotic
+
+k = Kenotic(user_id=0)
+k.ingest(text="I adopted a golden retriever named Kobe. He loves swimming.", speaker="Sam")
+result = k.retrieve(query="What is Sam's dog's name?")
+print(result.text)  # "a golden retriever named Kobe"
+```
+
+See [docs/sdk-quickstart.md](docs/sdk-quickstart.md) for full guide, [docs/sdk-reference.md](docs/sdk-reference.md) for API reference.
+
+### Connect Any AI (MCP + REST)
+
+One server, two protocols. Claude/Cursor get MCP. Everything else gets REST.
+
+```bash
+# Start the server
+python -m mcp.http_server --port 7130
+
+# Store via REST
+curl -X POST http://localhost:7130/api/v1/store \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Sam lives in Detroit", "speaker": "Sam"}'
+
+# Retrieve via REST
+curl -X POST http://localhost:7130/api/v1/retrieve \
+  -H "Content-Type: application/json" \
+  -d '{"query": "Where does Sam live?"}'
+```
+
+See [mcp/README.md](mcp/README.md) for per-platform quickstart (Claude Desktop, ChatGPT, Cursor), [docs/api-quickstart.md](docs/api-quickstart.md) for full REST examples.
+
+### Documentation
+
+| Doc | For |
+|-----|-----|
+| [mcp/README.md](mcp/README.md) | Connect any AI client in 2 minutes |
+| [docs/sdk-quickstart.md](docs/sdk-quickstart.md) | Python SDK getting started |
+| [docs/sdk-reference.md](docs/sdk-reference.md) | Full API reference |
+| [docs/architecture.md](docs/architecture.md) | DTCM architecture for investors/researchers |
+| [docs/api-quickstart.md](docs/api-quickstart.md) | REST API curl examples |
+| [docs/benchmark-methodology.md](docs/benchmark-methodology.md) | ATANT benchmark methodology |
+
 ## Architecture
 
 ### Six-Engine Design

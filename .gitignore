@@ -55,6 +55,19 @@ installer/dist/
 # Claude Code session artifacts
 .claude/
 
+# SSL certs (generated locally, never commit)
+*.pem
+*.key
+
+# Generated specs (regenerate with scripts/export_openapi.py)
+mcp/openapi.json
+
+# Test database snapshots (may contain user data)
+mcp/testing/test_memory.db
+
+# User data that should never be in git
+~/.kenotic/
+
 # Large training data / model artifacts (keep scripts, skip data)
 raya-srl-training/data/
 raya-srl-training/models/
