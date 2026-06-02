@@ -1,7 +1,9 @@
 # RECONSTRUCTION ENGINE — AGENT REGULATIONS
-**Last Updated:** 2026-05-19
+**Last Updated:** 2026-05-26
 **Authority:** Founder (Sam)
 **Scope:** Any agent modifying reconstruction.py or any retrieval/read-path code MUST read this file first.
+
+> **MANDATORY PRE-READ:** Before touching ANY code in this directory, read `../../.claude/agents/DTCM_RETRIEVAL_COVENANT.md`. That document defines the architectural law. This document applies it to the codebase. If this document contradicts the Covenant, the Covenant wins.
 
 ---
 
@@ -118,59 +120,151 @@ Row = container
 
 Retrieval does NOT search by row. It decomposes the query into probe dimensions, matches each dimension against the corresponding trace columns, and the row whose traces match on the MOST dimensions is the answer.
 
-### Trace Convergence = The Answer
+### Trace Convergence = Resonance, Not Lookup
 
-Convergence is when multiple trace dimensions point to the same row. That row is the answer. The more dimensions that converge, the higher the confidence. If no row achieves convergence across multiple dimensions — refuse.
+**CRITICAL UPDATE (2026-05-26): The previous version of this section described convergence as "counting how many dimensions match" and picking the row with the most matches. That was wrong. That's still edge thinking — just with a multi-field filter instead of a single-field filter.**
 
-For LOCOMO precise answers: trace convergence identifies WHICH row contains the answer. The `object` field (or `resolved_event_date` for temporal, or `emotional_target` for emotional) of that row provides the precise text to return.
+Convergence is RESONANCE. Every edge responds to the probe simultaneously. Each edge's response is the PRODUCT of its cubed similarity across all 5 trace dimensions. The math (from MINERVA 2):
 
-**Traces find it. The row provides the text.**
+```
+activation_i = episodic_sim³ × emotional_sim³ × temporal_sim³ × relational_sim³ × schematic_sim³
+```
 
-The agent must stop trying to find the text through the row (edge thinking) and start finding the row through the traces (trace thinking).
+This is not counting matches. This is multiplicative amplification. An edge matching strongly on 4 dimensions is not "4 points better" — it is EXPONENTIALLY stronger. An edge matching weakly on all 5 is weaker than one matching strongly on 3 with neutrals on 2.
+
+**Dimensions irrelevant to the query score 1.0 (neutral, not penalizing).**
+- "What did Caroline research?" → emotional = 1.0, temporal = 1.0 (not probed)
+- "When did Caroline feel anxious?" → schematic = 1.0 (not probed), emotional and temporal ARE probed
+
+**The echo is the answer.** All edges contribute proportionally to their activation. The output is a COMPOSITE — a weighted sum of all responding traces. For precise LOCOMO answers, the edge with the highest activation dominates the echo, and its trace column (object, resolved_event_date, emotional_label) provides the text. But conceptually, the echo is a reconstruction, not an extraction from one row.
+
+**The system refuses when echo magnitude is below the noise floor** — when no edge resonates strongly enough on enough dimensions. This is natural — the cube suppresses weak matches so aggressively that if nothing matches well, the echo is essentially zero.
 
 ### What This Means For Every Decision
 
 When writing retrieval code, ask:
 
 1. "Am I searching by a single field?" → WRONG. Decompose into trace dimensions.
-2. "Am I using cosine on one embedding?" → WRONG. Match across multiple trace columns.
-3. "Am I checking subject, then predicate, then object sequentially?" → WRONG. Check all dimensions simultaneously and count how many converge.
-4. "Am I returning the first row that matches on ANY dimension?" → WRONG. Return the row that matches on the MOST dimensions.
-5. "Am I using a threshold to decide if a match is good enough?" → WRONG. Convergence is comparative — the row with the most matching dimensions wins, or if no row matches on enough dimensions, refuse.
+2. "Am I using cosine on one embedding?" → WRONG. Each dimension has its own similarity function.
+3. "Am I checking dimensions sequentially and killing candidates that fail one?" → WRONG. Compute ALL dimensions simultaneously, MULTIPLY them. The product handles suppression naturally.
+4. "Am I returning the first row that passes all checks?" → WRONG. Compute activation for ALL edges. The highest activation dominates the echo.
+5. "Am I using a hard gate, threshold, or binary pass/fail?" → WRONG. The cube is the gate. Trust the math.
+6. "Am I adding BM25, RRF, rank fusion, or multi-channel retrieval?" → WRONG. Those are search engine techniques. DTCM has one mechanism: 5-dimensional resonance.
 
-### The Anti-Pattern
+### The Anti-Patterns
 
-Every time the agent:
-- Writes `WHERE LOWER(subject) = LOWER(?)` as the primary retrieval mechanism → edge thinking
-- Uses `cosine_similarity(query_embedding, edge_embedding) > threshold` → edge thinking
-- Searches FTS5 with OR logic across text fields → edge thinking
-- Builds a "fact statement" from S/P/O and searches for it → edge thinking
+**Search engine patterns (FORBIDDEN):**
+- Hard gates that kill candidates on one dimension
+- Top-K selection
+- BM25 or FTS5 as a retrieval channel
+- RRF or rank fusion across multiple rankers
+- Cross-encoder reranking
+- Sequential tier cascade (try method A, if it fails try method B)
+- Thresholds on any score
 
-The agent should instead:
-- Decompose the query into 5 probe dimensions
-- For each dimension, find which rows have matching trace values
-- Count convergence: which row matches on the most dimensions?
-- The highest-convergence row is the answer
-- If no row converges on 2+ dimensions — refuse
+**DTCM patterns (CORRECT):**
+- Every edge gets an activation score (product of cubed dimension similarities)
+- All activations are computed for all edges
+- Echo = weighted sum of edges by activation
+- Highest-activation edge dominates (provides the answer text)
+- If no edge activates above noise floor → refuse
+- No gates, no thresholds, no tiers, no cascades
 
-This is DTCM. Decomposed Trace Convergence Memory. The name IS the algorithm. Decompose → match per trace → converge.
+This is DTCM. Decomposed Trace Convergence Memory. The name IS the algorithm. Decompose → resonate per trace → the echo reconstructs.
+
+---
+
+## THE COMPLEMENTARITY LAW
+
+**Added 2026-06-02. Authority: Founder. This section is BINDING. Any agent that contradicts it, second-guesses it, or drifts from it after agreeing with it will be corrected once. On the second violation, the conversation is terminated.**
+
+### Similar vs Complementary
+
+**Similar** asks: "does this answer LOOK LIKE the question?"
+That is what every RAG system does. It fails because the answer and the question live in different parts of the same experience.
+
+**Complementary** asks: "does this answer LIVE ON THE SAME TRACE as what the question matched?"
+The question matches on one dimension. The answer comes from a different dimension of the same trace. They don't need to look alike. They need to have been lived together.
+
+"Why am I anxious?" — the answer is "Google interview next Tuesday." Those words share NOTHING. No overlap. No similarity. "Anxious" and "Google interview" are not close in any embedding space.
+
+But they are two halves of the same experience. The nervousness and the interview were **lived together**. They exist on the same trace. The emotional dimension finds the trace. The episodic dimension provides the answer.
+
+### Dimensions as Key/Value — Roles Change Per Query
+
+Each dimension can be the **key** (what finds the trace) or the **value** (what provides the answer). Which is which changes with every query:
+
+| Query | Key dimension(s) | Value dimension |
+|-------|-------------------|-----------------|
+| "Why am I anxious?" | emotional (anxious→nervous) + relational (I→Sam) | episodic (→ Google interview) |
+| "When did I go to Banff?" | episodic (go to Banff) + relational (I→Sam) | temporal (→ last summer) |
+| "How did Arjun get hurt?" | relational (Arjun) + schematic (hurt→health) | episodic (→ twisted ankle) |
+| "What's my dog's name?" | relational (my→Sam) + schematic (dog→pet) | episodic (→ Kobe) |
+
+The system does not decide key vs value in advance. The multiplication handles it naturally. Whatever dimension matches the probe becomes the key. Whatever dimension has content but wasn't probed becomes the value.
+
+### Predicted Queries Are the Bridge
+
+At write time, the grammar engine generates predicted questions for each trace. "What did Caroline research?" is generated FROM the trace about adoption agencies.
+
+At read time, the user asks "What did Caroline research?" — that matches the PQ, which is **question-to-question** matching, not question-to-answer matching.
+
+The PQ is the system's way of pre-computing the bridge between complementary information. It turns "adoption agencies" (which looks nothing like the question) into "What did Caroline research?" (which looks exactly like the question).
+
+**PQ matching is NOT similarity thinking. It is the mechanism that makes complementarity findable.** The PQ lives in question-space. The answer lives in answer-space. The PQ bridges them.
+
+### The Five Similarity Functions
+
+Each dimension has its own comparison. They are NOT all cosine:
+
+| Dimension | Similarity function | What it compares |
+|-----------|-------------------|------------------|
+| Episodic | Cosine of PQ embedding vs query embedding | Question-to-question (via PQ bridge) |
+| Emotional | Valence distance on number line | -1 to +1, absolute distance |
+| Temporal | Date distance in days | Subtraction, normalized |
+| Relational | Set intersection of entity names | Binary: entity present or not |
+| Schematic | Category match | Exact string: career=career, hobby≠career |
+
+Only ONE dimension uses embeddings. The other four are subtraction, set membership, or string match. The power comes from multiplying them, not from any single one being smart.
+
+### The Refusal Mechanism
+
+No thresholds. No gates. No "is this score good enough?"
+
+```
+signal_to_noise = top_activation / second_activation
+```
+
+If the winner is 100x louder than the runner-up → clear answer.
+If the winner is 1.2x louder → ambiguous, refuse.
+
+This ratio works for every person, every device, every query. Because it measures **how much the winner stands out**, not how high the score is.
+
+### What This Law Prohibits
+
+1. **Never compare query embedding to answer/source_text embedding as the primary retrieval signal.** That is similarity thinking. The answer doesn't look like the question.
+2. **Never remove PQ matching.** PQs are the bridge between complementary information. Without them, the episodic dimension has no way to find traces whose answers don't resemble the question.
+3. **Never add a content-word overlap gate.** That is similarity thinking dressed up as verification. The word "anxious" will never overlap with "Google interview."
+4. **Never second-guess this after agreeing with it.** If you understood complementarity and then wrote code that checks word overlap, you drifted. Re-read this section.
 
 ---
 
 ## THE THESIS OF RECONSTRUCTION
 
-Reconstruction is NOT retrieval. Retrieval says: here are some related past things. Reconstruction says: here is the answer to your question, verified against what was stored, or a refusal because the answer doesn't exist.
+Reconstruction is NOT retrieval. Retrieval says: here are some related past things. Reconstruction says: here is what I remember, rebuilt from every trace that resonated with your question.
 
-The brain does not search a database. It completes a pattern. You give it a partial cue — a few features of a memory — and attractor dynamics settle into the nearest stored pattern that matches. If no pattern is close enough, the system doesn't guess. It fails to converge. That's the biological analog of refusal.
+The brain does not search a database. It does not locate a file. It RECONSTRUCTS. A partial cue activates every stored trace simultaneously. Each trace resonates in proportion to its multi-dimensional similarity to the cue. The resonances are summed into a composite — the echo. The echo IS the memory. It was never stored as a unit. It is rebuilt every time.
 
 **Our reconstruction engine must do the same thing:**
 1. Decompose the question into a 5-dimension trace probe
-2. Send the probe to all stored traces simultaneously
-3. Each stored trace responds proportionally to multi-dimensional overlap
-4. The trace with the highest convergence is the answer candidate
-5. Verify: does this candidate's full trace pattern match the probe on enough dimensions?
-6. If verified — return the precise answer from the appropriate trace column
-7. If no candidate converges — refuse. "This information is not mentioned in the conversation."
+2. The probe contacts ALL stored traces simultaneously
+3. Each trace computes activation = product of cubed similarities across all 5 dimensions
+4. Dimensions not probed by the query score 1.0 (neutral)
+5. The echo = sum of all traces weighted by their activation
+6. The highest-activation trace dominates the echo and provides the answer text
+7. If echo magnitude is below noise floor (no trace resonated strongly enough) — refuse
+
+**There is no "verify" step. There is no "candidate" that passes or fails.** The activation IS the verification. A wrong-entity edge gets relational_sim = 0, which zeros its entire activation. A topically irrelevant edge gets episodic_sim near 0, which cubes to near-zero and suppresses its contribution. The math does what the gates were trying to do, but continuously and without binary kills.
 
 ---
 
@@ -206,11 +300,13 @@ The brain segments continuous experience at prediction error spikes. Each segmen
 
 **Implication:** Session boundaries are natural event boundaries. But within a session, topic shifts also create implicit boundaries. Edges from different topics within the same session should not be treated as the same "episode" for retrieval purposes.
 
-### No Thresholds
+### No Thresholds, No Gates
 
 The brain uses competitive dynamics — highest activation wins. Not "is this above 0.7?" MINERVA 2 returns an echo whose intensity is relative to noise, not absolute. ACT-R uses power-law activation with competitive retrieval, not a cutoff.
 
-**Implication:** Our system is deterministic. It works or it doesn't. A candidate either verifies against the DB as a single row or it doesn't. No cosine thresholds. No evidence_strength scores. No "close enough." Binary verification.
+**Implication:** Our system is deterministic. The cube naturally suppresses weak matches (0.3³ = 0.027). The product naturally zeros out wrong-entity matches (0 × anything = 0). No cosine thresholds. No evidence_strength scores. No hard gates. No binary pass/fail checks. The math handles suppression. Trust the math.
+
+**The previous "binary verification" design was wrong.** Checking subject + predicate + object as a pass/fail gate is edge thinking dressed up as trace thinking. The activation product replaces it entirely.
 
 ---
 
@@ -218,217 +314,225 @@ The brain uses competitive dynamics — highest activation wins. Not "is this ab
 
 **Every decision about the reconstruction engine is a Jenga move. Before touching any code:**
 
-### Dependency Map for Reconstruction
+### Dependency Map for Reconstruction (Resonance Architecture)
 
 ```
-classify_query() ──→ affects ALL categories (query parsing)
+classify_query() ──→ Decomposes query into 5-dimension probe
 │
-├── Tier 1 (structural SQL) ──→ affects Cat 4, Cat 5 (subject+predicate match)
-├── Tier 2 (predicted query) ──→ affects Cat 4, Cat 1 (semantic match)
-├── Tier 3 (FTS5 BM25) ──→ affects Cat 4, Cat 5, Cat 1 (keyword match)
-├── Tier 4 (cosine) ──→ affects Cat 4, Cat 1 (embedding match)
-│
-├── Verification loop ──→ affects Cat 4 (accept) AND Cat 5 (reject)
-│   ├── Subject gate ──→ Cat 5 CRITICAL (wrong speaker = refuse)
-│   ├── Predicate gate ──→ Cat 4 accuracy (right verb class)
-│   └── Object gate ──→ Cat 4 accuracy (right fact)
-│
-├── Temporal bypass ──→ affects Cat 2 (date resolution)
-├── List aggregation ──→ affects Cat 1 (multi-hop)
-└── Refusal logic ──→ affects Cat 5 (must refuse correctly)
+├── episodic probe   ──→ query embedding (vs PQ + edge embeddings)
+├── emotional probe  ──→ detected emotion/valence (vs edge emotional trace)
+├── temporal probe   ──→ time expression/context (vs edge temporal trace)
+├── relational probe ──→ entity extraction (vs edge relational_entities)
+└── schematic probe  ──→ inferred domain (vs edge schematic_category)
+         │
+         ▼
+    ALL edges compute activation = product of 5 cubed similarities
+         │
+         ▼
+    Echo = weighted sum of edges by activation
+         │
+    ┌────┴────┐
+    ▼         ▼
+  ANSWER    REFUSE
+  (echo     (echo below
+  strong)    noise floor)
 ```
+
+**What protects Cat 5 (adversarial refusal):**
+- relational_sim = 0 for wrong-entity edges → activation = 0 → they contribute nothing to echo
+- This is mathematically guaranteed. 0 × anything = 0. Wrong person CANNOT activate.
+- This replaces the old "subject gate" — same protection, no hard gate needed.
+
+**What improves Cat 4 (finding the right fact):**
+- 5-dimensional activation discriminates between topically relevant and irrelevant edges for the same entity
+- The old system checked subject + predicate and stopped. The new system also factors in emotional, temporal, and schematic alignment.
 
 **Load-bearing pieces (DO NOT TOUCH without extreme care):**
-- Cat 5 refusal logic — 22.5% of benchmark weight, currently at 96%
-- Subject gate in verification — the Cat 5 defense
-- Temporal bypass — Cat 2 at 58%, working well
+- relational_sim function — Cat 5 depends on entity match = 0 for wrong entities
+- classify_query() — all 5 probe dimensions depend on correct query decomposition
+- Temporal routing — Cat 2 depends on temporal probe being correctly identified
 
-**Loose pieces (room to improve):**
-- Tier selection quality — Cat 4 at ~5%, biggest gap
-- Object matching in verification — Cat 4 accuracy
-- Query decomposition — `classify_query()` misses predicates on possessive/copular questions
+**Before Any Reconstruction Change:**
 
-### Before Any Reconstruction Change
-
-1. **Identify which tiers and gates the change affects**
+1. **Identify which dimension similarity function the change affects**
 2. **Predict all 5 category scores** — specifically, not vaguely
-3. **Simulate the code path mentally** — trace a Cat 4 question AND a Cat 5 question through the modified path
-4. **Only then write the code**
-5. **Run full LOCOMO benchmark — confirm prediction**
-6. **If Cat 5 dropped below 90% — REVERT IMMEDIATELY regardless of other gains**
+3. **Simulate: trace a Cat 4 question AND a Cat 5 question through the activation math**
+4. **Confirm: does the wrong-entity edge still get activation = 0?** (Cat 5 protection)
+5. **Only then write the code**
+6. **Run full LOCOMO benchmark — confirm prediction**
+7. **If Cat 5 dropped below 90% — REVERT IMMEDIATELY regardless of other gains**
 
 ---
 
-## THE VERIFICATION DESIGN — Sam's Architecture
+## THE OLD VERIFICATION DESIGN — SUPERSEDED
 
-This is the core of the reconstruction engine. It is correct in principle. It needs to be implemented exactly as specified.
+> **This section is kept for historical context. The verification gate design described here was the primary cause of the 27% ceiling. It has been replaced by resonance-based activation scoring.**
 
-### The Rule
+The old design used a binary verification loop: Subject from query + Predicate from query + Object from candidate → check if ONE ROW exists with all three. Pass = verified. Fail = rejected.
 
-**Subject = from QUERY. Predicate = from QUERY. Object = from CANDIDATE.**
+**Why it failed:**
+1. **Binary kill on any dimension mismatch.** An edge with the right entity, right topic, but wrong predicate lemma was killed. The math should have penalized it (P=0.1), not killed it.
+2. **Generic predicates passed everything.** "feel", "see", "go" exist for every speaker. Verification confirmed the fact existed but not that it was RELEVANT.
+3. **Content overlap gate required exact word matches.** "identity" vs "transgender woman" — no word overlap → killed. Embedding cosine knew they were related. The gate overrode the embedding.
+4. **No predicate from query.** Possessive/copular questions yielded no predicate. Without a predicate, verification had nothing to constrain.
 
-Check: does ONE ROW exist in the database with all three? Yes = verified. No = rejected.
+**The resonance architecture fixes all of these.** Predicate mismatch → P_sim = 0.1 → cubed = 0.001 → heavily suppressed but not killed. Generic predicate → episodic dimension (embedding cosine) discriminates by topic. No word overlap → episodic embedding still matches semantically. No predicate → P_sim = 1.0 (neutral, not probed) → other dimensions do the work.
 
-### Why This Works
-
-For Cat 4 (should answer): "What did Caroline research?" → Subject=Caroline, Predicate=research. Candidate has object="adoption agencies." The row subject=Caroline, predicate=research, object="adoption agencies" EXISTS. Verified. Return "adoption agencies."
-
-For Cat 5 (should refuse): "What did Melanie research?" → Subject=Melanie, Predicate=research. Candidate has object="adoption agencies." The row subject=Melanie, predicate=research, object="adoption agencies" does NOT exist. Only Caroline's row exists. Rejected. All candidates rejected. Refuse.
-
-### Why It Fails Currently
-
-1. **Generic predicates.** "feel", "see", "go", "do", "love" — every speaker has edges with these verbs. Caroline + feel + [something] exists for 6 different edges. The verification confirms Caroline felt something — but not the specific thing the question asks about.
-
-2. **No predicate from query.** Possessive questions ("What is Caroline's reason for...") and copular questions ("What does Melanie's necklace symbolize?") often yield no predicate from `classify_query()`. Without a predicate, the verification has nothing to constrain.
-
-3. **Tiers surface wrong candidates.** The tiers return edges based on partial matches — subject or keywords — without considering whether the candidate is topically relevant to the full question.
-
-### The Unsolved Problem
-
-The verification confirms that a fact EXISTS for a subject. It does not confirm that the fact is RELEVANT to the question's topic. "How did Caroline feel while watching the meteor shower?" — Caroline has "feel" edges about sharing her story, about being proud, about art. None are about the meteor shower. But they all verify because Caroline + feel + [their object] exists as a row.
-
-**The brain solves this with pattern completion over ALL features simultaneously.** The cue is not just "Caroline + feel" — it's "Caroline + feel + meteor + shower." The attractor only converges if a stored pattern matches on ALL those features. No stored pattern has Caroline + feel + meteor + shower → no convergence → refusal.
-
-**This is the gap that needs to be closed to break the 44% ceiling.**
+**The "unsolved problem" from the old design** — "How did Caroline feel while watching the meteor shower?" finding the wrong "feel" edge — is solved by the resonance architecture naturally. The probe includes episodic content (meteor shower), emotional state (feel), and relational identity (Caroline). An edge about Caroline + feel + sharing her story activates weakly on episodic (meteor ≠ story) even though relational and emotional match. An edge about Caroline + meteor shower + awe activates strongly on episodic AND relational AND emotional. The product math selects the right one without any explicit topic-word check.
 
 ---
 
-## CURRENT ARCHITECTURE — What Exists
+## CURRENT ARCHITECTURE — What Must Be Built
 
-### Tier Cascade with Verification-Driven Fallthrough
+### The Resonance Architecture (Target)
 
 ```
-Query → classify_query() → QueryDecomposition
+Query → classify_query() → 5-Dimension Probe
                               │
-                              ▼
-              ┌─── Tier 1: Structural SQL ───┐
-              │    subject + VerbClass        │
-              │    + schema                   │
-              └──────────────┬────────────────┘
-                             ▼
-              ┌─── Tier 2: Predicted Query ──┐
-              │    cosine on PQ embeddings   │
-              └──────────────┬────────────────┘
-                             ▼
-              ┌─── Tier 3: FTS5 BM25 ────────┐
-              │    entity-aware keywords     │
-              └──────────────┬────────────────┘
-                             ▼
-              ┌─── Tier 4: Cosine ───────────┐
-              │    edge_embedding similarity  │
-              └──────────────┬────────────────┘
-                             ▼
-              Verification Loop
-              (subject + predicate + object = one row?)
-                             │
-                    ┌────────┴────────┐
-                    ▼                 ▼
-                VERIFIED          ALL REJECTED
-                Return object     Refuse
+              ┌───────────────┼───────────────┐
+              │               │               │
+              ▼               ▼               ▼
+         episodic        emotional       temporal
+         probe           probe           probe
+              │               │               │
+              ▼               ▼               ▼
+         relational      schematic
+         probe           probe
+              │               │
+              └───────┬───────┘
+                      ▼
+         ALL edges compute activation simultaneously:
+         activation_i = Π (dim_similarity³) across all 5 dims
+                      │
+                      ▼
+         Echo = Σ (edge_i × activation_i)
+                      │
+              ┌───────┴───────┐
+              ▼               ▼
+         echo strong      echo weak
+         (answer from     (refuse —
+          dominant         noise floor)
+          trace)
 ```
 
-**After your fixes:** if verification rejects ALL candidates from one tier, the cascade falls through to the next tier. Only after ALL tiers are exhausted does the system refuse.
+**There are no tiers. There is no cascade. There is no fallthrough.** Every edge is scored once on all 5 dimensions simultaneously. The activation product determines contribution to the echo. The highest-activation edge dominates.
 
-### What Each Tier Does
+### What Exists In Code (Legacy — To Be Replaced)
 
-**Tier 1 — Structural SQL:** Exact match on subject (case-insensitive) + VerbClass + schematic category. Fast. Precise when query has a clear subject and predicate. Fails when `classify_query()` can't extract subject or predicate.
+The current `reconstruction/__init__.py` implements the OLD tier cascade with hard gates. This code is WRONG and needs to be replaced with the resonance architecture. Key files:
 
-**Tier 2 — Predicted Queries:** At write time, the grammar engine generates predicted questions for each edge. At query time, embed the question and cosine-match against PQ embeddings. Good for paraphrase. Fails if PQs don't anticipate the actual question phrasing.
+- `reconstruction/__init__.py` lines 428-481 — the verification loop with hard gates. **REPLACE** with activation scoring.
+- `reconstruction/trace_convergence.py` lines 21-76 — `score_edge()` function. **This is CLOSEST to correct.** It already computes E × P × T × R with cubed cosines. Expand to all 5 dimensions and make it the primary path.
+- `reconstruction/__init__.py` lines 395-426 — PQ cosine ranking. **KEEP** as the episodic dimension similarity function. Remove it as a standalone ranker.
 
-**Tier 3 — FTS5 BM25:** Keyword search with entity-aware filtering. Broad recall. Noisy — returns many irrelevant hits, especially for common words.
+### What Else Exists (Keep)
 
-**Tier 4 — Cosine Similarity:** Embed the query, match against all edge embeddings. Good for semantic similarity. Fails on exact entity/number matching.
-
-### What Else Exists
-
-- **Temporal bypass:** Cat 2 questions route through temporal resolution directly
-- **List aggregation:** Cat 1 multi-hop questions aggregate across multiple edges
-- **Pronoun filter:** Skip candidates where object is a bare pronoun
-- **Rejection memory:** Persistent tracking of rejected candidates to prevent re-trying
+- **Temporal routing:** Cat 2 questions where temporal probe is the return target — keep this, it identifies WHAT to return from the dominant trace
+- **List aggregation:** Cat 1 multi-hop — keep, but apply over highest-activation edges, not tier results
+- **classify_query():** Probe decomposition — keep and improve
+- **Situational queries:** "Tell me about X" — keep the schema-grouped approach
 
 ---
 
-## APPROACHES TO EXPLORE — From Research
+## THE FIVE DIMENSION SIMILARITY FUNCTIONS
 
-The agent should understand these methods and apply Jenga thinking to decide which ones to try. Each approach must be evaluated against ALL 5 categories before adoption.
+Each probe dimension needs a similarity function that returns a continuous value in [0.0, 1.0]. This value is cubed and multiplied with the other dimensions.
 
-### Brain-Inspired Approaches (Highest Priority)
+### Episodic Similarity (semantic content match)
+- **Probe:** query embedding (384-dim)
+- **Trace:** max cosine across pq_1_embedding, pq_2_embedding, pq_3_embedding, pq_4_embedding, edge_embedding
+- **Formula:** `max(cosine(query_emb, pq_i_emb) for all i) clamped to [0, 1]`
+- **When not probed:** Always probed. Every query has semantic content.
+- **This is the WHAT dimension.**
 
-**Multi-dimensional pattern matching.** Instead of checking subject, then predicate, then object separately — create a unified feature vector from the query (subject + predicate + topic words + temporal cue) and compare against unified feature vectors of stored edges. The closest match wins. No sequential filtering. This mimics CA3 pattern completion.
+### Emotional Similarity (affective resonance)
+- **Probe:** detected emotion keyword + valence from query (if any)
+- **Trace:** edge_emotional_label, edge_emotional_valence, emotional_target
+- **Formula:** label match (exact=1.0, synonym=0.7, mismatch=0.2) × valence proximity (1 - |probe_valence - edge_valence|)
+- **When not probed:** query has no emotional content → return 1.0 (neutral)
+- **This is the HOW IT FELT dimension.**
 
-**Predicted query as pattern completion.** The PQ system already exists. It's the closest thing to "the brain generates what it expects and checks if it matches." Improve PQ quality at write time → Tier 2 becomes the primary retrieval path. PQs should cover the topic, not just the subject+predicate.
+### Temporal Similarity (time alignment)
+- **Probe:** temporal expression + temporal context (past/present/future) from query
+- **Trace:** resolved_event_date, temporal_expression, edge_temporal_context
+- **Formula:** date proximity (Gaussian decay from probe date) × context match (same context = 1.0, different = 0.5)
+- **When not probed:** query has no temporal content → return 1.0 (neutral)
+- **When probed but edge has no temporal data:** return 0.3 (penalized but not killed)
+- **This is the WHEN dimension.**
 
-**Context-vector retrieval.** Maintain a context embedding that drifts over the conversation. At query time, combine the query embedding with the estimated context window. This helps temporal and multi-hop questions.
+### Relational Similarity (entity identity)
+- **Probe:** extracted entity from query
+- **Trace:** subject, relational_entities
+- **Formula:** exact entity match in subject = 1.0, exact match in relational_entities = 0.8, partial/substring = 0.5, absent = 0.0
+- **When not probed:** query has no specific entity → return 1.0 (neutral)
+- **This is the WHO dimension. 0.0 means wrong person. 0³ = 0. The math kills wrong-entity edges.**
 
-### Proven Engineering Approaches
+### Schematic Similarity (life domain relevance)
+- **Probe:** inferred domain from query content
+- **Trace:** edge_schematic_category
+- **Formula:** exact category match = 1.0, related category = 0.6, unrelated = 0.3, uncategorized edge = 0.5
+- **When not probed:** query domain unclear → return 1.0 (neutral)
+- **This is the WHAT PART OF LIFE dimension.**
 
-**Hybrid BM25 + Dense with RRF.** Cognis uses this. 70% vector / 30% BM25 fused with Reciprocal Rank Fusion. Independently retrieve from both channels, fuse ranks. This compensates for BM25 missing paraphrase and dense retrieval missing exact entities.
+### Implementation Notes
 
-**Cross-encoder reranking.** After the tier cascade surfaces top-20 candidates, run a cross-encoder (e.g., bge-reranker) that takes (query, candidate_source_text) as concatenated input and produces a relevance score. This is the single highest-leverage addition for Cat 4 accuracy. BUT — it adds latency and model dependency. Evaluate against the deterministic constraint.
-
-**Entity-centric retrieval.** Extract named entities from the query. Retrieve ALL edges for those entities. Then filter by predicate and topic. This is how the brain's perirhinal cortex works — "what" first, then narrow.
-
-### Deterministic Approaches (Most Aligned with Thesis)
-
-**Predicate-argument template matching (QA-SRL style).** Parse the query into (who, did what, to whom, when, where). Parse each stored edge into the same template at write time. Match templates structurally. No embedding. No scoring. Templates match or they don't.
-
-**SQL-based fact verification (current design, needs fixing).** The verification loop checks subject + predicate + object as one row. The fix needed: incorporate query topic words into the check. Not as a threshold — as a structural requirement. If the query mentions "meteor shower" and no edge for that subject mentions "meteor" or "shower" in any field — reject. This is the DG-style separation check.
-
-**Retrieval by generation.** Generate the expected answer form from the query structure (e.g., "Caroline researched [BLANK]"), then search for rows where filling the blank produces a stored fact. This inverts the retrieval — instead of finding similar edges, you generate what the answer SHOULD look like and check if it exists.
+- Each function returns [0.0, 1.0]
+- Each return value is cubed before multiplication
+- All 5 products are multiplied: `activation = Π(sim_d³)` for d in {episodic, emotional, temporal, relational, schematic}
+- "Not probed" dimensions return 1.0 — they don't help, they don't hurt
+- "Probed but edge lacks data" returns a penalty (0.3-0.5) — it hurts but doesn't kill
 
 ### Methods That Must NOT Be Used
 
-**Threshold-based scoring.** No "cosine > 0.7" or "evidence_strength > 0.4." Binary verification only.
+**Search engine techniques (FORBIDDEN):**
+- BM25, TF-IDF, FTS5 as a retrieval channel
+- RRF, rank fusion, multi-channel retrieval
+- Cross-encoder reranking
+- Sequential tier cascade
+- Top-K selection
+- Hard gates or binary pass/fail
+- Thresholds on any score
 
-**Token overlap as verification.** Matching scattered tokens doesn't verify facts. "Caroline" + "meteor" matching separately doesn't mean Caroline saw a meteor.
+**Test contamination.** Never put LOCOMO questions into predicted queries, training data, or any cached index.
 
-**Self-verification loops.** A candidate cannot verify against its own row in a search. Verification must check the implied fact (query subject + query predicate + candidate object) as a distinct structural lookup.
-
-**Test contamination.** Never put LOCOMO questions into predicted queries, training data, or any cached index. An honest 44% beats a fraudulent 53%.
-
-**Greedy retrieval.** Never take the first match. Always retrieve k≥20 and let verification select.
+**LLM in the read path.** The echo is computed mathematically. No LLM interprets, judges, or generates the answer.
 
 ---
 
 ## THE SPECIFIC PROBLEMS TO SOLVE
 
-### Problem 1: Cat 4 Returns Wrong Facts (Biggest Gap)
+### Problem 1: Cat 1/4 — Wrong facts or missing facts (~5-7% F1)
 
-**Current state:** ~5% F1 on 841 questions.
+**Root cause in old architecture:** Hard gates killed correct edges because of word-mismatch on one dimension.
 
-**Root cause:** The tiers surface candidates that share the query's subject and a generic predicate but are about a completely different topic. Verification confirms them because the subject + predicate + object row exists — just not for the right topic.
+**How resonance fixes it:** The episodic dimension (PQ embedding cosine) provides semantic matching that survives word-level mismatches. "identity" and "transgender woman" have different words but related embeddings. The cosine is moderate (say 0.5), which cubes to 0.125 — weak but NOT zero. Combined with strong relational (1.0³ = 1.0) and schematic matches, the total activation still dominates over irrelevant edges.
 
-**What the brain does:** Pattern completion over ALL features. The cue includes the topic. If no stored pattern has Caroline + feel + meteor + shower, the system doesn't converge.
+**Remaining risk:** PQ quality. If PQs don't anticipate the query's phrasing, episodic_sim is low for the right edge. pq_lab.py's NEW generator (20 question types) should be wired into the write path to maximize PQ coverage.
 
-**What to try (in Jenga order):**
-1. Add query topic words as a structural requirement in verification — if the query mentions "meteor shower" and the candidate's source_text doesn't contain "meteor" or "shower," reject. This is a structural check, not a threshold. Simulate impact on Cat 5 first — Cat 5 questions also have topic words that won't match the wrong speaker's edges, so this should HELP Cat 5 too.
-2. Improve PQ generation to include topic-specific questions — so Tier 2 finds the right edge directly.
-3. Use source_text embedding similarity between query and candidate as a reranking signal within the verification loop — not as a threshold but as a preference: when multiple candidates verify, pick the one whose source_text is most similar to the query.
+### Problem 2: classify_query() Misses Predicates
 
-### Problem 2: classify_query() Misses Predicates (4 of the Remaining Cat 5 Failures)
+**Current state:** Possessive questions ("What is Caroline's reason for...") return no predicate.
 
-**Current state:** Possessive questions ("What is Caroline's reason for...") return match_predicate=None.
+**How resonance handles it:** No predicate extracted → predicate dimension not probed → schematic_sim = 1.0 (neutral). The other 4 dimensions do the work. This is a feature, not a bug. The system gracefully degrades when a dimension can't be probed.
 
-**Root cause:** spaCy parses "Caroline's reason" as a possessive NP, and the ROOT verb is "is" (copular) which doesn't map to a meaningful VerbClass.
+**Still worth fixing:** Better probe decomposition means more dimensions contribute, which means sharper discrimination. Extract content nouns as schematic probes even without a verb.
 
-**What to try:** Extract the content noun as a pseudo-predicate. "Caroline's reason for getting into running" → topic="reason", content="running." Use these as retrieval cues even without a traditional verb predicate.
+### Problem 3: Generic Predicates
 
-### Problem 3: Generic Predicates Match Everything (12 of the Remaining Cat 5 Failures)
+**Current state:** "feel", "see", "go" exist for every speaker.
 
-**Current state:** "feel", "see", "go", "do" exist for every speaker.
+**How resonance handles it:** Generic predicate → many edges have similar predicate similarity. But the episodic dimension (embedding cosine on topic content) discriminates. "How did Caroline feel about the meteor shower?" — edge about meteors has high episodic cosine, edge about art has low. The product math selects correctly even though predicate dimension is tied.
 
-**Root cause:** VerbClass grouping is too broad. All EXPERIENCE verbs match each other.
+### Problem 4: Data Quality (Upstream)
 
-**What to try:** When the predicate is generic AND the subject has many edges with that VerbClass — require topic word overlap in addition to predicate match. This narrows the candidate pool without changing the verification logic.
+**Current state:** 60-70% of edges have garbage objects. 65% of edges are "uncategorized" schema.
 
-### Problem 4: Data Quality (Upstream but Affects Everything)
+**Impact on resonance:** Garbage objects don't hurt resonance directly (activation is computed from embeddings and trace columns, not bare object text). But "uncategorized" schema means schematic_sim returns 0.5 (uncertain) instead of 1.0 (match) or 0.3 (mismatch), reducing discrimination on that dimension.
 
-**Current state:** 60-70% of edges have garbage objects (pronouns, adjectives, empty strings, speaker names).
-
-**What to try (write-path, not reconstruction):**
-- Check `is_storable` before calling `store()`
-- Filter objects that are bare pronouns, lone adjectives, or speaker names
-- These are ingestion fixes, not reconstruction fixes, but they reduce noise in the candidate pool
+**Fix in write path (not reconstruction):**
+- Wire pq_lab.py NEW generator into live PQ generation
+- Improve schema assignment for stative predicates (identity, emotion, relationship)
+- Filter garbage objects at ingestion
 
 ---
 
@@ -455,34 +559,36 @@ The agent should understand these methods and apply Jenga thinking to decide whi
 
 ## THE GOLDEN RULES
 
-1. **Cat 5 is sacred.** 96% adversarial refusal is the crown jewel. Any change that drops it below 90% is reverted. No exceptions. No "but Cat 4 improved." Cat 5 is the moat.
+1. **Cat 5 is sacred.** Adversarial refusal is the crown jewel. Any change that drops it below 90% is reverted. No exceptions. In the resonance architecture, Cat 5 is protected by relational_sim = 0 for wrong entities. 0 × anything = 0. Do not break this.
 
-2. **Think in traces, not edges.** Every retrieval decision operates on the 5 trace dimensions. If you find yourself writing `WHERE subject = ?` as the primary mechanism, you are thinking in edges. Decompose. Converge.
+2. **Think in resonance, not search.** Every edge responds simultaneously. Activation = product of cubed similarities across 5 dimensions. The echo is the answer. If you find yourself writing sequential gates, tier cascades, or top-K selection — you are building a search engine. Stop.
 
-3. **Verify from what IS stored.** The DB has trace dimensions as columns. Run the PRAGMA query. See what exists. Build from reality, not assumption.
+3. **The cube is the gate.** Do not add hard gates, thresholds, or binary pass/fail. The cube naturally suppresses weak matches (0.3³ = 0.027). The product naturally zeros wrong-entity matches (0 × anything = 0). Trust the math.
 
-4. **No thresholds. No scores.** Convergence is comparative — the trace matching on the most dimensions wins. No "cosine > 0.7." No "evidence_strength > 0.4." The traces converge or they don't.
+4. **No LLM in the reconstruction path.** spaCy for parsing. Embeddings for episodic similarity. Column comparisons for the other 4 dimensions. Multiplication for activation. Summation for the echo. That's the stack. That's the moat.
 
-5. **No LLM in the reconstruction path.** spaCy for parsing. SQL for lookup. Grammar rules for structure. Trace matching for retrieval. That's the stack. That's the moat.
+5. **Neutral when not probed.** Dimensions the query doesn't probe return 1.0. They don't help, they don't hurt. A "what" question doesn't penalize edges without temporal data. A "when" question doesn't penalize edges without emotional data.
 
 6. **The benchmark confirms. It does not discover.** Simulate first. Predict all 5 scores. Then run. If the prediction was wrong, fix your understanding before the next change.
 
 7. **Every change must answer: which continuity property does this serve?** If "none" — reject. If "it improves LOCOMO but doesn't serve a property" — reject.
 
-8. **Traces find it. The row provides the text.** The 5 trace dimensions identify WHICH row contains the answer. The object/date/entity field of that row provides the precise text for LOCOMO scoring. These are two separate steps. Never skip the first.
+8. **The echo, not the edge.** The answer is a reconstruction from all resonating traces, dominated by the highest-activation edge. You are not finding a row. You are rebuilding a memory.
+
+9. **Read the Covenant first.** `../../.claude/agents/DTCM_RETRIEVAL_COVENANT.md` is the architectural law. This file applies it. If they conflict, the Covenant wins.
 
 ---
 
 ## REMEMBER
 
-The brain doesn't search rows. It converges traces.
+The brain doesn't search. It resonates.
 
-The brain doesn't match one field at a time. It matches all dimensions simultaneously.
+The brain doesn't match one field at a time. It activates all dimensions simultaneously.
 
-The brain doesn't threshold. The trace with the most dimensional overlap wins.
+The brain doesn't threshold. The cube suppresses. The product amplifies.
 
-The brain doesn't guess. It either converges or it doesn't.
+The brain doesn't extract from a file. It reconstructs from traces.
 
-**Traces, not edges. Convergence, not search. Dimensions, not fields.**
+**Resonance, not search. Echo, not extraction. Traces, not edges. The math, not gates.**
 
 Build the reconstruction engine the same way.
