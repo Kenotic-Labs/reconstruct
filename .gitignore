@@ -45,6 +45,16 @@ Thumbs.db
 .pytest_cache/
 .coverage
 htmlcov/
+test_reports/
+
+# Debug dumps and scratch files
+*.txt
+!requirements.txt
+*_lab.py
+*_lab_*.py
+handoff.md
+_*.json
+_*.txt
 
 # Installer builds
 installer/build/
